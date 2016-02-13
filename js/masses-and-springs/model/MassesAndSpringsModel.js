@@ -10,49 +10,68 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var Range = require( 'DOT/Range' );
+  //var Range = require( 'DOT/Range' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var SpringSystem = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/SpringSystem' );
+  //var SpringMassSystem = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/SpringMassSystem' );
+  //var Spring = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Spring' );
+  var Mass = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Mass' );
+
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @constructor
    */
   function MassesAndSpringsModel() {
+    this.springs = [];
+    this.masses = [
+      new Mass( .250, new Vector2( .10, .5 ) ),
+      new Mass( .100, new Vector2( .15, .5 ) ),
+      new Mass( .500, new Vector2( .20, .5 ) ),
+      new Mass( .075, new Vector2( .25, .5 ) ),
+      new Mass( .050, new Vector2( .30, .5 ) ),
+      new Mass( .025, new Vector2( .35, .5 ) )
+    ];
+    this.floorY = 0; // Y position of floor in m
 
+    PropertySet.call( this, {
+      timeRate: 1.0,// {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
+      friction: 0, // {number} b - coefficient of friction
+      gravity: 9.8 // {number} a - gravitational acceleration (positive)
+    });
 
-    var springOptions = {
-      springConstantRange: new Range( 100, 1000, 200 ), // units = N/m
-      appliedForceRange: new Range( -100, 100, 0 ), // units = N
-    };
+    //var springOptions = {
+    //  springConstantRange: new Range( 1, 20, 10 ), // units = N/m
+    //  displacementRange: new Range( -1, 1, 0 ) // units = m
+    //};
 
-    this.system = new SpringSystem( springOptions );
-    this.springDirection = 1;
-    this.springVelocity = 0;
+    //Add a spring system to the model
+    //var spring1 = new Spring( springOptions );
+    //self.springs.push( new SpringMassSystem( spring1, {} ) );
+
+    //Attach the mass to the spring
+    //self.springs[0].addMass( self.masses[0] );
+    //self.springs[ 0 ].spring.displacementProperty.set(1);
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
 
-  return inherit( Object, MassesAndSpringsModel, {
+  return inherit( PropertySet, MassesAndSpringsModel, {
 
     // @public
     reset: function() {
-      //this.massList.forEach( function( mass ) {
-      //  mass.positionProperty.reset();
-      //  mass.rotationAngleProperty.reset();
-      //} );
-      //BalanceModel.prototype.reset.call( this );
-
-      this.system.reset();
+      this.masses.forEach( function(mass) { mass.reset(); });
+      this.springs.forEach( function( system ) { system.reset(); } );
     },
 
-    //TODO Called by the animation loop. Optional, so if your model has no animation, please delete this.
     // @public
     step: function( dt ) {
-      //TODO Handle model animation here.
-      if (this.system.spring.appliedForce === this.system.spring.appliedForceRange.max || this.system.spring.appliedForce === this.system.spring.appliedForceRange.min) {
-        this.springDirection = this.springDirection * -1;
+
+      for ( var i in this.masses ) {
+        var mass = this.masses[i];
+        if ( mass.spring === null && !mass.userControlled ) {
+          this.masses[i].fallWithGravity( this.gravity, this.floorY, dt );
+        }
       }
-      this.system.spring.appliedForce = this.system.spring.appliedForce + this.springDirection * this.springVelocity;
     }
   } );
 } );

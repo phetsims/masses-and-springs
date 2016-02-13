@@ -12,34 +12,26 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var SystemNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/SystemNode')
-
-  var ImageMassNode = require( 'BALANCING_ACT/common/view/ImageMassNode' );
+  var MassNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/MassNode' );
+  //var SpringNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/SpringNode' );
+  var Bounds2 = require( 'DOT/Bounds2' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
-  var FireExtinguisher = require( 'BALANCING_ACT/common/model/masses/FireExtinguisher' );
 
   /**
    * @param {MassesAndSpringsModel} massesAndSpringsModel
    * @constructor
    */
   function MassesAndSpringsScreenView( model ) {
+    var self = this;
+    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768 * 1.5, 504 * 1.5
+    ) } );
 
-    ScreenView.call( this );
-
-    var thisScreen = this;
-    // Create the model-view transform.  The primary units used in the model
-    // are meters, so significant zoom is used.  The multipliers for the 2nd
-    // parameter can be used to adjust where the point (0, 0) in the model,
-    // which is on the ground just below the center of the balance, is located
-    // in the view.
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( thisScreen.layoutBounds.width * 0.375, thisScreen.layoutBounds.height * 0.79 ),
-      105 );
-    thisScreen.mvt = mvt; // Make mvt available to descendant types.
-
-    this.addChild( new ImageMassNode(new FireExtinguisher( new Vector2( 5, 0), false ), thisScreen.mvt, false, null, true ) );
+      new Vector2( 0, this.layoutBounds.height * .9 ),
+      1000 );
+    this.mvt = mvt; // Make mvt available to descendant types.
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
@@ -51,17 +43,47 @@ define( function( require ) {
     } );
     this.addChild( resetAllButton );
 
-    //this.addChild( new SystemNode( model.system1, {
-    //  unitDisplacementLength: 8,
-    //  left: this.layoutBounds.left + 15,
-    //  centerY: 0.25 * this.layoutBounds.height
-    //} ) );
+//    var massNode = new MassNode( model.masses[0], mvt );
+    model.masses.forEach( function ( mass ) {
+      self.addChild( new MassNode( mass, mvt) );
+    } );
 
-    this.addChild( new SystemNode( model.system, {
-      unitDisplacementLength: 250,
-      left: this.layoutBounds.left + 309,
-      centerY: 0.5 * this.layoutBounds.height
-    } ) );
+
+
+    //
+    //console.log("self center at (" + self.centerX + ", " + self.centerY + ")");
+    //console.log("mass at (" + massNode.centerX + ", " + massNode.centerY + ")");
+    //console.log("spring at (" + springNode.centerX + ", " + springNode.centerY + ")");
+
+
+
+    // FROM BAIntroView TODO Apapt to MAS
+    //model.massList.forEach( function( mass ) {
+    //  // Add a listener for when the user drops the mass.  This is done here
+    //  // in this case, rather than in the model, because we need to check
+    //  // whether or not the user dropped it on the "stage" so that it isn't
+    //  // permanently dragged off of the screen.
+    //  mass.userControlledProperty.lazyLink( function( userControlled ) {
+    //    if ( !userControlled ) {
+    //      // The user has dropped this mass.
+    //      if ( !model.plank.addMassToSurface( mass ) ) {
+    //        // The attempt to add mass to surface of plank failed,
+    //        // probably because mass was dropped somewhere other
+    //        // than over the plank.
+    //        if ( thisScreen.mvt.modelToViewX( mass.position.x ) > thisScreen.layoutBounds.minX && thisScreen.mvt.modelToViewX( mass.position.x ) < thisScreen.layoutBounds.maxX ) {
+    //          // Mass is in the visible area, so just
+    //          // drop it on the ground.
+    //          mass.position = new Vector2( mass.position.x, 0 );
+    //        }
+    //        else {
+    //          // Mass is off stage.  Return it to its original position.
+    //          mass.positionProperty.reset();
+    //        }
+    //      }
+    //    }
+    //  } );
+    //} );
+
 
   }
 
@@ -70,10 +92,11 @@ define( function( require ) {
   return inherit( ScreenView, MassesAndSpringsScreenView, {
 
 
-    ////TODO Called by the animation loop. Optional, so if your view has no animation, please delete this.
-    //// @public
-    //step: function( dt ) {
-    //  //TODO Handle view animation here.
-    //}
+    //TODO Called by the animation loop. Optional, so if your view has no animation, please delete this.
+    // @public
+    step: function( dt ) {
+      //TODO Handle view animation here.
+      //model.step(dt);
+    }
   } );
 } );
