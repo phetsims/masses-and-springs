@@ -34,15 +34,16 @@ define( function( require ) {
     //assert && assert( options.displacementRange );
     //this.displacementRange = options.displacementRange; // @public read-only
 
-    this.position = position;
+
     this.springConstantRange = springConstantRange;
 
     //------------------------------------------------
     // Properties
     PropertySet.call( this, {
-      // @public (read-only)
-      springConstant: this.springConstantRange.defaultValue,  // {number} units N/m
       displacement: 0,  // {number} units: m
+      springConstant: this.springConstantRange.defaultValue,  // {number} units N/m
+      top: position.y,
+      position: position,
       equilibriumLength: equilibriumLength, // {number} units: m
       animating: false, // {boolean}
       mass: null // {Mass}
@@ -51,25 +52,21 @@ define( function( require ) {
     //------------------------------------------------
     // Derived properties
 
-    // @public equilibrium y location, units = m
-    this.equilibriumYProperty = new DerivedProperty( [ this.topProperty ],
-      function( top ) {
-        return top + self.equilibriumLength;
-      } );
-
     // @public x location of the bottom end of the spring, units = m
-    this.bottomProperty = new DerivedProperty( [ this.equilibriumYProperty, this.displacementProperty ],
-      function( equilibriumY, displacement ) {
+    this.bottomProperty = new DerivedProperty( [ this.equilibriumLengthProperty, this.displacementProperty ],
+      function( equilibriumLength, displacement ) {
         var top = self.topProperty.get();
-        var bottom = equilibriumY + displacement;
+        var bottom = top - equilibriumLength + displacement;
         assert && assert( bottom - top > 0, 'bottom must be > top, bottom=' + bottom + ', top=' + top );
         return bottom;
       } );
 
     // @public length of the spring, units = m
-    this.lengthProperty = new DerivedProperty( [ this.topProperty, this.bottomProperty ],
-      function( top, bottom ) {
-        return Math.abs( bottom - top );
+    this.lengthProperty = new DerivedProperty( [ this.equilibriumLengthProperty, this.displacementProperty ],
+      function( equilibriumLength, displacement ) {
+        var length = equilibriumLength - displacement;
+        console.log( 'Model length ' + length );
+        return length;
       } );
 
     //------------------------------------------------
@@ -81,16 +78,6 @@ define( function( require ) {
         // TODO: calculate displacement and/or period based on attached mass and new spring constant
         // self.displacement = self.appliedForce / springConstant; // x = F/k
     } );
-
-    // x: When displacement changes, maintain the spring constant, change applied force.
-    this.displacementProperty.link( function( displacement ) {
-      assert && assert( self.displacementRange.contains( displacement ), 'displacement is out of range: ' + displacement );
-      // TODO: Do we still need this?
-    } );
-
-    this.lengthProperty.link( function( length ) {
-      console.log( 'Model length ' + length );
-    } );
   }
 
   massesAndSprings.register( 'Spring', Spring );
@@ -98,23 +85,23 @@ define( function( require ) {
   return inherit( PropertySet, Spring, {
 
     removeMass: function() {
-      PropertySet.reset();
+      PropertySet.prototype.reset.call( this );
     },
 
     addMass: function ( mass, gravity ) {
-      this.removeMass();
+      //this.removeMass();
       this.mass = mass;
-      this.mass.spring = this;
-      this.equilibriumY += this.mass.mass * gravity / this.springConstant;
-      this.period = 2 * Math.PI * Math.sqrt( this.mass.mass / this.springConstant );
-      this.displacement = this.mass.postion.y - this.equilibriumY;
-      this.mass.verticalVelocity = 0;
+      //this.mass.spring = this;
+      //this.equilibriumLength += this.mass.mass * gravity / this.springConstant;
+      //this.period = 2 * Math.PI * Math.sqrt( this.mass.mass / this.springConstant );
+      //this.displacement = this.mass.position.y - this.equilibriumLength;
+      //this.mass.verticalVelocity = 0;
       this.animating = true;
     },
 
     oscillate: function( gravity, friction, dt ) {
       if ( this.animating ) {
-        //update postion
+        //update position
         //update velocity??
         //update acceleration??
       }

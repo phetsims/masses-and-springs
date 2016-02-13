@@ -13,7 +13,7 @@ define( function( require ) {
   //var Range = require( 'DOT/Range' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   //var SpringMassSystem = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/SpringMassSystem' );
-  //var Spring = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Spring' );
+  var Spring = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Spring' );
   var Mass = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Mass' );
 
   var Vector2 = require( 'DOT/Vector2' );
@@ -22,7 +22,9 @@ define( function( require ) {
    * @constructor
    */
   function MassesAndSpringsModel() {
-    this.springs = [];
+    this.springs = [
+      new Spring( new Vector2( .50, .6 ), .30, new Range( 10, 20, 15) )
+    ];
     this.masses = [
       new Mass( .250, new Vector2( .10, .5 ) ),
       new Mass( .100, new Vector2( .15, .5 ) ),
@@ -65,13 +67,48 @@ define( function( require ) {
 
     // @public
     step: function( dt ) {
+      var mass = null;
+      var spring = null;
+      var i = 0;
+      var j = 0;
+      var grabbingDistance = .1;
+      var droppingDistance = .2;
 
-      for ( var i in this.masses ) {
-        var mass = this.masses[i];
+      for ( i in this.masses ) {
+        mass = this.masses[i];
+
+        // Fall if not hung or grabbed
         if ( mass.spring === null && !mass.userControlled ) {
-          this.masses[i].fallWithGravity( this.gravity, this.floorY, dt );
+          mass.fallWithGravity( this.gravity, this.floorY, dt );
+        }
+
+        // If mass is close to the end of a spring hang it and update displacement
+        else if ( mass.userControlled ) {
+          for ( j in this.springs ) {
+            spring = this.springs[j];
+
+            if ( mass.spring === null && Math.abs( mass.position.y - spring.bottomProperty.get() ) <= grabbingDistance && Math.abs( mass.position.x - spring.position.x ) <= grabbingDistance ) {
+              spring.addMass( mass );
+              mass.spring = spring;
+            }
+            else if ( mass.spring === spring && Math.abs( mass.position.x - spring.position.x ) <= droppingDistance ) {
+              spring.displacement = mass.position.y - ( spring.top - spring.equilibriumLength );
+            }
+            else if ( mass.spring === spring && Math.abs( mass.position.x - spring.position.x ) > droppingDistance ) {
+              spring.removeMass();
+              mass.spring = null;
+            }
+          }
         }
       }
+
+      //// Oscillate springs
+      //for ( i in this.springs) {
+      //  spring = this.springs[i];
+      //  if ( spring.animating && !spring.mass.userControlled ) {
+      //    spring.oscillate( this.gravity, this.friction, dt );
+      //  }
+      //}
     }
   } );
 } );

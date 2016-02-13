@@ -13,7 +13,7 @@ define( function( require ) {
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/MassNode' );
-  //var SpringNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/SpringNode' );
+  var SpringNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/SpringNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -47,7 +47,9 @@ define( function( require ) {
     model.masses.forEach( function ( mass ) {
       self.addChild( new MassNode( mass, mvt) );
     } );
-
+    model.springs.forEach( function ( spring ) {
+      self.addChild( new SpringNode( spring, mvt) );
+    } );
 
 
     //

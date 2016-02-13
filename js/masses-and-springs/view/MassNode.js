@@ -28,6 +28,8 @@ define( function( require ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
+    this.mass = mass;
+
     var viewBounds = new Bounds2(
       mvt.modelToViewDeltaX( -mass.radius ),
       0,
@@ -37,7 +39,7 @@ define( function( require ) {
     var rect = Rectangle.bounds( viewBounds, { fill: 'red' } );
     this.addChild( rect );
 
-    mass.positionProperty.link( function( position ) {
+    this.mass.positionProperty.link( function( position ) {
       self.translation = mvt.modelToViewPosition( position );
     } );
 
