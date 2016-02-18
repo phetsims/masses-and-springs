@@ -10,7 +10,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
-  //var Range = require( 'DOT/Range' );
+  var Range = require( 'DOT/Range' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   //var SpringMassSystem = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/SpringMassSystem' );
   var Spring = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Spring' );
@@ -88,8 +88,16 @@ define( function( require ) {
             spring = this.springs[j];
 
             if ( mass.spring === null && Math.abs( mass.position.y - spring.bottomProperty.get() ) <= grabbingDistance && Math.abs( mass.position.x - spring.position.x ) <= grabbingDistance ) {
-              spring.addMass( mass );
-              mass.spring = spring;
+              if (spring.mass === null) {
+                spring.addMass( mass, this.gravity );
+                mass.spring = spring;
+              }
+              else {
+                spring.removeMass();
+                spring.addMass( mass, this.gravity );
+                mass.spring = spring;
+              }
+
             }
             else if ( mass.spring === spring && Math.abs( mass.position.x - spring.position.x ) <= droppingDistance ) {
               spring.displacement = mass.position.y - ( spring.top - spring.equilibriumLength );
@@ -102,13 +110,13 @@ define( function( require ) {
         }
       }
 
-      //// Oscillate springs
-      //for ( i in this.springs) {
-      //  spring = this.springs[i];
-      //  if ( spring.animating && !spring.mass.userControlled ) {
-      //    spring.oscillate( this.gravity, this.friction, dt );
-      //  }
-      //}
+      // Oscillate springs
+      for ( i in this.springs) {
+        spring = this.springs[i];
+        if ( spring.animating && !spring.mass.userControlled ) {
+          spring.oscillate( this.gravity, this.friction, dt );
+        }
+      }
     }
   } );
 } );

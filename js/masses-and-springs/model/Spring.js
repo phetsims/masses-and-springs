@@ -11,7 +11,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
-  //var Range = require( 'DOT/Range' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
@@ -41,12 +41,14 @@ define( function( require ) {
     // Properties
     PropertySet.call( this, {
       displacement: 0,  // {number} units: m
-      springConstant: this.springConstantRange.defaultValue,  // {number} units N/m
+      springConstant: springConstantRange.defaultValue,  // {number} units N/m
       top: position.y,
       position: position,
       equilibriumLength: equilibriumLength, // {number} units: m
       animating: false, // {boolean}
-      mass: null // {Mass}
+      mass: null, // {Mass}
+      frequency: 0,
+      t: 0
     } );
 
     //------------------------------------------------
@@ -85,25 +87,26 @@ define( function( require ) {
   return inherit( PropertySet, Spring, {
 
     removeMass: function() {
+      this.mass.spring = null;
       PropertySet.prototype.reset.call( this );
     },
 
     addMass: function ( mass, gravity ) {
-      //this.removeMass();
       this.mass = mass;
-      //this.mass.spring = this;
-      //this.equilibriumLength += this.mass.mass * gravity / this.springConstant;
-      //this.period = 2 * Math.PI * Math.sqrt( this.mass.mass / this.springConstant );
-      //this.displacement = this.mass.position.y - this.equilibriumLength;
-      //this.mass.verticalVelocity = 0;
+      console.log( '' + this.mass.mass + ' ' + gravity + ' ' + this.springConstant );
+      this.equilibriumLength = this.mass.mass * gravity / this.springConstant;
+      this.frequency = Math.sqrt( this.springConstant / this.mass.mass );
+
+      this.amplitude = this.mass.position.y - (this.top - this.equilibriumLength);
+      this.displacement =  this.amplitude;
       this.animating = true;
     },
 
     oscillate: function( gravity, friction, dt ) {
       if ( this.animating ) {
-        //update position
-        //update velocity??
-        //update acceleration??
+        this.t += dt;
+        this.displacement += this.amplitude * Math.cos( this.frequency * this.t );
+        this.mass.positionProperty.set( new Vector2( this.mass.position.x, this.bottomProperty.get() ) );
       }
     }
 
