@@ -1,8 +1,6 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- *
- *
  * @author Matt Pennington
  */
 
@@ -16,8 +14,6 @@ define( function( require ) {
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Bounds2 = require( 'DOT/Bounds2' );
-
-
 
   /**
    * @param {Mass} Mass model object

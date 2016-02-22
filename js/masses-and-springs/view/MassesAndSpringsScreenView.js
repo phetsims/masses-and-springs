@@ -2,7 +2,7 @@
 
 /**
  *
- * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Matt Pennington
  */
 define( function( require ) {
   'use strict';
@@ -17,14 +17,15 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
+  var MASRulerNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/MASRulerNode' );
 
   /**
-   * @param {MassesAndSpringsModel} massesAndSpringsModel
+   * @param {MassesAndSpringsModel} model
    * @constructor
    */
   function MassesAndSpringsScreenView( model ) {
     var self = this;
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768 * 1.5, 504 * 1.5
+    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768 * 2, 504 * 2
     ) } );
 
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
@@ -42,6 +43,7 @@ define( function( require ) {
       bottom: this.layoutBounds.maxY - 10
     } );
     this.addChild( resetAllButton );
+    this.addChild( new MASRulerNode( mvt, this.layoutBounds, model.ruler ) );
 
 //    var massNode = new MassNode( model.masses[0], mvt );
     model.masses.forEach( function ( mass ) {
@@ -51,15 +53,7 @@ define( function( require ) {
       self.addChild( new OscillatingSpringNode( spring, mvt ) );
     } );
 
-
-    //
-    //console.log("self center at (" + self.centerX + ", " + self.centerY + ")");
-    //console.log("mass at (" + massNode.centerX + ", " + massNode.centerY + ")");
-    //console.log("spring at (" + springNode.centerX + ", " + springNode.centerY + ")");
-
-
-
-    // FROM BAIntroView TODO Apapt to MAS
+    // FROM BAIntroView TODO Apapt to MAS???
     //model.massList.forEach( function( mass ) {
     //  // Add a listener for when the user drops the mass.  This is done here
     //  // in this case, rather than in the model, because we need to check
@@ -91,14 +85,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'MassesAndSpringsScreenView', MassesAndSpringsScreenView );
 
-  return inherit( ScreenView, MassesAndSpringsScreenView, {
-
-
-    //TODO Called by the animation loop. Optional, so if your view has no animation, please delete this.
-    // @public
-    step: function( dt ) {
-      //TODO Handle view animation here.
-      //model.step(dt);
-    }
-  } );
+  return inherit( ScreenView, MassesAndSpringsScreenView );
 } );

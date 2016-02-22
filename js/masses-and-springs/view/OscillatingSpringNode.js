@@ -1,8 +1,6 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- *
- *
  * @author Matt Pennington
  */
 define( function( require ) {
@@ -11,9 +9,7 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var ParametricSpringNode = require( 'SCENERY_PHET/ParametricSpringNode' );
-  //var Line = require( 'SCENERY/nodes/Line' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -24,7 +20,7 @@ define( function( require ) {
   function OscillatingSpringNode( spring, mvt, options ) {
 
     var self = this;
-    // ParametricSpringNodeOptions
+
     options = _.extend( {
       //phase: 0,
       deltaPhase: - 3 * Math.PI / 2,
@@ -49,7 +45,9 @@ define( function( require ) {
       // ParametricSpringNode calculations
       var coilLength = ( mvt.modelToViewDeltaY( length ) - ( options.leftEndLength + options.rightEndLength ) );
       var xScale = coilLength / ( self.model.loopsProperty.get() * self.model.radiusProperty.get() );
-      // Investigating additional processing from mvt
+
+      //The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
+      //TODO There is possibly a better solution by setting the phase and deltaPhase.
       self.model.xScaleProperty.set( xScale );
       self.translation =  mvt.modelToViewPosition( new Vector2 ( spring.position.x, spring.position.y - length ) );
     } );
@@ -64,6 +62,6 @@ define( function( require ) {
 
   massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );
 
-  return inherit( Node, OscillatingSpringNode );
+  return inherit( ParametricSpringNode, OscillatingSpringNode );
 
 } );

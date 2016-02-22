@@ -1,7 +1,6 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- *
  * @author Matt Pennington (PhET Interactive Simulations)
  */
 define( function( require ) {
@@ -12,9 +11,9 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Range = require( 'DOT/Range' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  //var SpringMassSystem = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/SpringMassSystem' );
   var Spring = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Spring' );
   var Mass = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Mass' );
+  var MASRuler = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/MASRuler' );
 
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -22,8 +21,9 @@ define( function( require ) {
    * @constructor
    */
   function MassesAndSpringsModel() {
+    this.ruler = new MASRuler( new Vector2( .4, .9 ) );
     this.springs = [
-      new Spring( new Vector2( .50, .6 ), .30, new Range( 0, 10, .3), new Range( 0, 5, 0 ) )
+      new Spring( new Vector2( .50, .9 ), .30, new Range( 0, 10, .3), new Range( 0, 5, 0 ) )
     ];
     this.masses = [
       new Mass( .250, new Vector2( .10, .5 ) ),
@@ -40,19 +40,6 @@ define( function( require ) {
       friction: 0, // {number} b - coefficient of friction
       gravity: 9.8 // {number} a - gravitational acceleration (positive)
     });
-
-    //var springOptions = {
-    //  springConstantRange: new Range( 1, 20, 10 ), // units = N/m
-    //  displacementRange: new Range( -1, 1, 0 ) // units = m
-    //};
-
-    //Add a spring system to the model
-    //var spring1 = new Spring( springOptions );
-    //self.springs.push( new SpringMassSystem( spring1, {} ) );
-
-    //Attach the mass to the spring
-    //self.springs[0].addMass( self.masses[0] );
-    //self.springs[ 0 ].spring.displacementProperty.set(1);
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );

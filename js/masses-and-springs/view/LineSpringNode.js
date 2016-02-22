@@ -1,7 +1,8 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- *
+ *  This is not currently used, it has beeen replaced by OscillatingSpringNode.
+ *  This file is retained for the moment for testing purposes.
  *
  * @author Matt Pennington
  */

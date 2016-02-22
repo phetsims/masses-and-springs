@@ -1,4 +1,4 @@
-// Copyright 2015-2016, University of Colorado Boulder
+// Copyright 2016, University of Colorado Boulder
 
 /**
  * @author Matt Pennington
@@ -13,6 +13,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
   var Util = require( 'DOT/Util' );
+
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} equilibriumLength - resting length of unweighted spring in m
@@ -24,17 +25,12 @@ define( function( require ) {
   function Spring( position, equilibriumLength, springConstantRange, dampingCoefficientRange ) {
     var self  = this;
 
-
     // validate and save options
     assert && assert( equilibriumLength > 0, 'equilibriumLength must be > 0 : ' + equilibriumLength );
     this.equilibriumLength = equilibriumLength; // @public read-only
 
     assert && assert( springConstantRange.min > 0, 'minimum spring constant must be positive : ' + springConstantRange.min );
     this.springConstantRange = springConstantRange; // @public read-only
-
-    //assert && assert( options.displacementRange );
-    //this.displacementRange = options.displacementRange; // @public read-only
-
 
     this.springConstantRange = springConstantRange;
     this.dampingCoefficientRange = dampingCoefficientRange;
@@ -131,8 +127,6 @@ define( function( require ) {
         this.mass.positionProperty.set( new Vector2( this.position.x, this.bottomProperty.get() ) );
       }
     }
-
-
   } );
 
 } );

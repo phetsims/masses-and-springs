@@ -7,23 +7,18 @@
 define( function( require ) {
   'use strict';
 
-  // modules
-  //var DerivedProperty = require( 'AXON/DerivedProperty' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
-  //var Range = require( 'DOT/Range' );
-  //var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var heightRatio = 2;
   var density = 8050; // density of steel in kg/m^3
 
-
   /**
-   * @param {Vector2} initialPosition: initial coordinates of the mass
    * @param {number} massValue:  mass in kg
+   * @param {Vector2} initialPosition: initial coordinates of the mass
    * @constructor
    */
   function Mass( massValue, initialPosition ) {
