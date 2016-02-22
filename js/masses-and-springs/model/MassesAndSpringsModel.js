@@ -23,7 +23,7 @@ define( function( require ) {
    */
   function MassesAndSpringsModel() {
     this.springs = [
-      new Spring( new Vector2( .50, .6 ), .30, new Range( 10, 20, 15) )
+      new Spring( new Vector2( .50, .6 ), .30, new Range( 0, 10, .3), new Range( 0, 5, 0 ) )
     ];
     this.masses = [
       new Mass( .250, new Vector2( .10, .5 ) ),

@@ -77,10 +77,12 @@ define( function( require ) {
      *  @param {Spring} spring
      */
     attach: function( spring ) {
+      this.verticalVelocity = 0;
       this.spring = spring;
     },
 
     detach: function() {
+      this.verticalVelocity = 0;
       this.spring = null;
     }
 
