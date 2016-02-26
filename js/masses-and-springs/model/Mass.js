@@ -14,7 +14,7 @@ define( function( require ) {
 
   // constants
   var heightRatio = 2;
-  var density = 8050; // density of steel in kg/m^3
+  var density = 1000; // density of water in kg/m^3
 
   /**
    * @param {number} massValue:  mass in kg

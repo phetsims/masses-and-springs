@@ -18,6 +18,12 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
   var MASRulerNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/MASRulerNode' );
+  //var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/ReferenceLineNode' );
+  var Shape = require( 'KITE/Shape' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var Line = require( 'SCENERY/nodes/Line' );
+
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -43,7 +49,38 @@ define( function( require ) {
       bottom: this.layoutBounds.maxY - 10
     } );
     this.addChild( resetAllButton );
+
     this.addChild( new MASRulerNode( mvt, this.layoutBounds, model.ruler ) );
+
+    this.referenceLine = new Line( 0, 0, mvt.modelToViewDeltaX( 0.52 ), 0, {
+      stroke: 'blue',
+      lineDash: [ 20, 15 ],
+      lineWidth: 4,
+      cursor: 'pointer',
+      boundsMethod: 'unstroked'
+    } );
+    this.referenceLine.mouseArea = this.referenceLine.localBounds.dilated( 10 );
+    this.referenceLine.touchArea = this.referenceLine.localBounds.dilated( 10 );
+    model.referenceLinePositionProperty.link( function( position ) {
+      var newPosition = mvt.modelToViewPosition( position );
+      self.referenceLine.translation = newPosition;
+      //self.referenceLine.p1 = newPosition;
+      //self.referenceLine.x2 = newPosition.x + mvt.modelToViewDeltaX( 0.52 );
+      //self.referenceLine.y2 = newPosition.y;
+    } );
+    this.referenceLine.addInputListener( new SimpleDragHandler( {
+      // Allow moving a finger (touch) across a node to pick it up.
+      allowTouchSnag: true,
+
+      // Handler that moves the line in model space.
+      translate: function( translationParams ) {
+        model.referenceLinePosition = model.referenceLinePosition.plus( mvt.viewToModelDelta( translationParams.delta ) );
+        return translationParams.position;
+      }
+    } ) );
+    this.addChild( this.referenceLine );
+
+
 
 //    var massNode = new MassNode( model.masses[0], mvt );
     model.masses.forEach( function ( mass ) {

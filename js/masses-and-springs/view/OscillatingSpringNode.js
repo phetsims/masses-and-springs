@@ -23,7 +23,7 @@ define( function( require ) {
 
     options = _.extend( {
       //phase: 0,
-      deltaPhase: - 3 * Math.PI / 2,
+      deltaPhase: 3 * Math.PI / 2,
       loops: 10, // {number} number of loops in the coil
       pointsPerLoop: 40, // {number} number of points per loop
       radius: 10, // {number} radius of a loop with aspect ratio of 1:1
@@ -34,7 +34,8 @@ define( function( require ) {
       leftEndLength: -15, // {number} length of the horizontal line added to the left end of the coil
       rightEndLength: -15, // {number} length of the horizontal line added to the right end of the coil
       //pathBoundsMethod: 'none', // {string} method used to compute bounds for scenery.Path components, see Path.boundsMethod
-      rotation: - 3 * Math.PI / 2  // {number} angle in radians of rotation of spring
+      rotation: -3 * Math.PI / 2,  // {number} angle in radians of rotation of spring
+      lineWidth: 10
     }, options );
     ParametricSpringNode.call( this, options );
 
@@ -54,10 +55,10 @@ define( function( require ) {
 
     // ParametricSpringNode width update
     // springConstant determines lineWidth
-    spring.springConstantProperty.link( function( springConstant ) {
-      var lineWidth = options.minLineWidth + options.deltaLineWidth * ( springConstant - spring.springConstantRange.min );
-      self.model.lineWidthProperty.set( lineWidth );
-    } );
+    //spring.springConstantProperty.link( function( springConstant ) {
+    //  var lineWidth = options.minLineWidth + options.deltaLineWidth * ( springConstant - spring.springConstantRange.min );
+    //  self.model.lineWidthProperty.set( lineWidth );
+    //} );
   }
 
   massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );

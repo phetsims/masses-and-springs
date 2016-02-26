@@ -23,7 +23,8 @@ define( function( require ) {
   function MassesAndSpringsModel() {
     this.ruler = new MASRuler( new Vector2( .4, .9 ) );
     this.springs = [
-      new Spring( new Vector2( .50, .9 ), .30, new Range( 0, 10, .3), new Range( 0, 5, 0 ) )
+      new Spring( new Vector2( .50, .9 ), .30, new Range( 0, 10, .3), new Range( 0, 5, 0 ) ),
+      new Spring( new Vector2( .80, .9 ), .30, new Range( 0, 10, .3), new Range( 0, 5, 0 ) )
     ];
     this.masses = [
       new Mass( .250, new Vector2( .10, .5 ) ),
@@ -38,7 +39,8 @@ define( function( require ) {
     PropertySet.call( this, {
       timeRate: 1.0,// {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
       friction: 0, // {number} b - coefficient of friction
-      gravity: 9.8 // {number} a - gravitational acceleration (positive)
+      gravity: 9.8, // {number} a - gravitational acceleration (positive)
+      referenceLinePosition: new Vector2( .35, .45 )
     });
   }
 

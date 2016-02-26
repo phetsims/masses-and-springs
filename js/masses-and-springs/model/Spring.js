@@ -68,7 +68,7 @@ define( function( require ) {
     this.lengthProperty = new DerivedProperty( [ this.equilibriumLengthProperty, this.displacementProperty ],
       function( equilibriumLength, displacement ) {
         var length = equilibriumLength - displacement;
-        console.log( 'Model length ' + length );
+        //console.log( 'Model length ' + length );
         return length;
       } );
 
@@ -95,7 +95,7 @@ define( function( require ) {
     addMass: function ( mass, gravity ) {
       this.mass = mass;
       this.mass.position.x = this.position.x;
-      console.log( '' + this.mass.mass + ' ' + gravity + ' ' + this.springConstant );
+      //console.log( '' + this.mass.mass + ' ' + gravity + ' ' + this.springConstant );
       //this.equilibriumLength = this.mass.mass * gravity / this.springConstant;
       this.angularFrequency = Math.sqrt( this.springConstant / this.mass.mass );
       this.dampingRatio = this.dampingCoefficient / ( 2 * Math.sqrt( this.mass.mass * this.springConstant ) );
@@ -109,7 +109,7 @@ define( function( require ) {
         var amplitude = Math.sqrt( Math.pow( gravity * this.mass.mass + this.springConstant * this.displacement, 2 )
                                    + this.springConstant * this.mass.mass * Math.pow( this.mass.verticalVelocity, 2 ) )
                         / this.springConstant;
-        console.log(( this.displacement + gravity / Math.pow( this.angularFrequency, 2 ) ) / amplitude );
+        //console.log(( this.displacement + gravity / Math.pow( this.angularFrequency, 2 ) ) / amplitude );
         var phi = Math.asin( Util.clamp( ( this.displacement + gravity / Math.pow( this.angularFrequency, 2 ) ) / amplitude, -1, 1 ) );
         phi = this.verticalVelocity <= 0 ? Math.PI - phi : phi;
 

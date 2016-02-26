@@ -23,7 +23,7 @@ define( function( require ) {
   function MASRulerNode( mvt, dragBounds, ruler ) {
     var self = this;
 
-    Node.call( this, { position: mvt.modelToViewPosition( new Vector2( .1, .9 )) } );
+    Node.call( this, { position: mvt.modelToViewPosition( new Vector2( .1, .9 )), cursor: 'pointer' } );
 
     var rulerLength = mvt.modelToViewDeltaY( -0.6 );
     var majorTickWidth = mvt.modelToViewDeltaY( -0.1 );
