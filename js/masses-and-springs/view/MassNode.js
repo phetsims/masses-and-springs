@@ -14,13 +14,19 @@ define( function( require ) {
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var Text = require( 'SCENERY/nodes/Text' );
+
+  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   /**
    * @param {Mass} Mass model object
    * @param {ModelViewTransform2} mvt
+   * @param {String} color
+   * @param {boolean} is
    * @constructor
    */
-  function MassNode( mass, mvt ) {
+  function MassNode( mass, mvt, color, isLabeled ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
@@ -32,8 +38,26 @@ define( function( require ) {
       mvt.modelToViewDeltaX( mass.radius ),
       mvt.modelToViewDeltaY( -mass.height )
     );
-    var rect = Rectangle.bounds( viewBounds, { fill: 'red' } );
+    var rect = Rectangle.bounds( viewBounds, {
+      fill: new LinearGradient( viewBounds.minX, 0, viewBounds.maxX, 0 ).
+        addColorStop( 0.3, color ).
+        addColorStop( 0.8, 'white' ).
+        addColorStop( 1, color )
+    } );
     this.addChild( rect );
+    if ( isLabeled ) {
+      var label = new Text( ( mass.mass * 1000 ).toString() + ' g', {
+        font: new PhetFont( { size: 22, weight: 'bold' } ),
+        fill: 'black',
+        centerY: ( viewBounds.maxY - viewBounds.minY ) / 2 + viewBounds.minY,
+        centerX: 0,
+        pickable: false
+      } );
+
+      var labelBackground = Rectangle.bounds( label.bounds, { fill: 	'#D3D3D3' } );
+      this.addChild( labelBackground );
+      this.addChild( label );
+    }
 
     this.mass.positionProperty.link( function( position ) {
       self.translation = mvt.modelToViewPosition( position );

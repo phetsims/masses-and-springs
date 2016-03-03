@@ -18,9 +18,6 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Vector2 = require( 'DOT/Vector2' );
   var MASRulerNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/MASRulerNode' );
-  //var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/ReferenceLineNode' );
-  var Shape = require( 'KITE/Shape' );
-  var Path = require( 'SCENERY/nodes/Path' );
   var Line = require( 'SCENERY/nodes/Line' );
 
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
@@ -31,7 +28,7 @@ define( function( require ) {
    */
   function MassesAndSpringsScreenView( model ) {
     var self = this;
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768 * 2, 504 * 2
+    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768 * 2, 504 * 3
     ) } );
 
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
@@ -45,8 +42,9 @@ define( function( require ) {
       listener: function() {
         model.reset();
       },
+      radius: 48,
       right:  this.layoutBounds.maxX - 10,
-      bottom: this.layoutBounds.maxY - 10
+      bottom: mvt.modelToViewY( model.floorY )
     } );
     this.addChild( resetAllButton );
 
@@ -61,13 +59,7 @@ define( function( require ) {
     } );
     this.referenceLine.mouseArea = this.referenceLine.localBounds.dilated( 10 );
     this.referenceLine.touchArea = this.referenceLine.localBounds.dilated( 10 );
-    model.referenceLinePositionProperty.link( function( position ) {
-      var newPosition = mvt.modelToViewPosition( position );
-      self.referenceLine.translation = newPosition;
-      //self.referenceLine.p1 = newPosition;
-      //self.referenceLine.x2 = newPosition.x + mvt.modelToViewDeltaX( 0.52 );
-      //self.referenceLine.y2 = newPosition.y;
-    } );
+
     this.referenceLine.addInputListener( new SimpleDragHandler( {
       // Allow moving a finger (touch) across a node to pick it up.
       allowTouchSnag: true,
@@ -78,14 +70,24 @@ define( function( require ) {
         return translationParams.position;
       }
     } ) );
+    model.referenceLinePositionProperty.link( function( position ) {
+      var newPosition = mvt.modelToViewPosition( position );
+      self.referenceLine.translation = newPosition;
+    } );
     this.addChild( this.referenceLine );
 
 
+    self.addChild( new MassNode( model.masses[0], mvt, 'grey', true ) );
+    self.addChild( new MassNode( model.masses[1], mvt, 'grey', true ) );
+    self.addChild( new MassNode( model.masses[2], mvt, 'grey', true ) );
+    self.addChild( new MassNode( model.masses[3], mvt, 'red', false ) );
+    self.addChild( new MassNode( model.masses[4], mvt, 'blue', false ) );
+    self.addChild( new MassNode( model.masses[5], mvt, 'green', false ) );
 
 //    var massNode = new MassNode( model.masses[0], mvt );
-    model.masses.forEach( function ( mass ) {
-      self.addChild( new MassNode( mass, mvt) );
-    } );
+//    model.masses.forEach( function ( mass ) {
+//      self.addChild( new MassNode( mass, mvt) );
+//    } );
     model.springs.forEach( function ( spring ) {
       self.addChild( new OscillatingSpringNode( spring, mvt ) );
     } );

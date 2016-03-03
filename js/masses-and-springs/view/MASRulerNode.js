@@ -12,6 +12,7 @@ define( function( require ) {
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Vector2 = require( 'DOT/Vector2' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
 
   /**
@@ -23,22 +24,23 @@ define( function( require ) {
   function MASRulerNode( mvt, dragBounds, ruler ) {
     var self = this;
 
-    Node.call( this, { position: mvt.modelToViewPosition( new Vector2( .1, .9 )), cursor: 'pointer' } );
+    Node.call( this, { position: mvt.modelToViewPosition( new Vector2( 0, 1.2 )), cursor: 'pointer' } );
 
-    var rulerLength = mvt.modelToViewDeltaY( -0.6 );
-    var majorTickWidth = mvt.modelToViewDeltaY( -0.1 );
+    var rulerLength = mvt.modelToViewDeltaY( -1 );
+    var majorTickWidth = mvt.modelToViewDeltaY( -.05 );
     var majorTickLabels = [];
     var numberOfTicks = Math.floor( rulerLength / majorTickWidth ) + 1;
-    for ( var i = 1; i < numberOfTicks - 1; i++ ) {
-      majorTickLabels[ i ] = '' + ( -mvt.viewToModelDeltaY( i ) * majorTickWidth * 100 );
+    for ( var i = 2; i < numberOfTicks - 1; i = i + 2 ) {
+      majorTickLabels[ i ] = '' + Math.floor( -mvt.viewToModelDeltaY( i ) * majorTickWidth * 100 );
     }
 
-    this.addChild( new RulerNode( rulerLength, 0.1 * rulerLength, majorTickWidth, majorTickLabels, 'cm', {
+    this.addChild( new RulerNode( rulerLength, 0.075 * rulerLength, majorTickWidth, majorTickLabels, 'cm', {
       insetsWidth: mvt.modelToViewDeltaY( -.01 ),
       minorTicksPerMajorTick: 4,
       top: ruler.positionProperty.get(),
-      unitsMajorTickIndex: 5,
+      unitsMajorTickIndex: 19,
       rotation: Math.PI / 2
+      //font: new PhetFont( { size: 62 } )
     } ) );
 
     ruler.positionProperty.link( function( position ) {

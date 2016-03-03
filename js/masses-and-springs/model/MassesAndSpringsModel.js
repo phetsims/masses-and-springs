@@ -21,26 +21,28 @@ define( function( require ) {
    * @constructor
    */
   function MassesAndSpringsModel() {
-    this.ruler = new MASRuler( new Vector2( .4, .9 ) );
-    this.springs = [
-      new Spring( new Vector2( .50, .9 ), .30, new Range( 0, 10, .3), new Range( 0, 5, 0 ) ),
-      new Spring( new Vector2( .80, .9 ), .30, new Range( 0, 10, .3), new Range( 0, 5, 0 ) )
-    ];
-    this.masses = [
-      new Mass( .250, new Vector2( .10, .5 ) ),
-      new Mass( .100, new Vector2( .15, .5 ) ),
-      new Mass( .500, new Vector2( .20, .5 ) ),
-      new Mass( .075, new Vector2( .25, .5 ) ),
-      new Mass( .050, new Vector2( .30, .5 ) ),
-      new Mass( .025, new Vector2( .35, .5 ) )
-    ];
     this.floorY = 0; // Y position of floor in m
+    this.ceilingY = 1.2; // Y position of floor in m
+    this.springs = [
+      new Spring( new Vector2( .50, this.ceilingY ), .50, new Range( 0, 10, .3), new Range( 0, 5, 0 ) ),
+      new Spring( new Vector2( .80, this.ceilingY ), .50, new Range( 0, 10, .3), new Range( 0, 5, 0 ) )
+    ];
+    this.ruler = new MASRuler( new Vector2( 0, this.ceilingY ) );
+    this.masses = [
+      new Mass( .250, new Vector2( .175, .5 ) ),
+      new Mass( .100, new Vector2(.3, .5 ) ),
+      new Mass( .050, new Vector2( .4, .5 ) ),
+      new Mass( .150, new Vector2( .675, .5 ) ),
+      new Mass( .075, new Vector2( .8, .5 ) ),
+      new Mass( .200, new Vector2( .925, .5 ) )
+    ];
+
 
     PropertySet.call( this, {
       timeRate: 1.0,// {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
       friction: 0, // {number} b - coefficient of friction
       gravity: 9.8, // {number} a - gravitational acceleration (positive)
-      referenceLinePosition: new Vector2( .35, .45 )
+      referenceLinePosition: new Vector2( .4, .7 )
     });
   }
 
