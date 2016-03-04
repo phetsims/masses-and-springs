@@ -47,7 +47,7 @@ define( function( require ) {
     this.addChild( rect );
     if ( isLabeled ) {
       var label = new Text( ( mass.mass * 1000 ).toString() + ' g', {
-        font: new PhetFont( { size: 22, weight: 'bold' } ),
+        font: new PhetFont( { size: 32, weight: 'bold' } ),
         fill: 'black',
         centerY: ( viewBounds.maxY - viewBounds.minY ) / 2 + viewBounds.minY,
         centerX: 0,

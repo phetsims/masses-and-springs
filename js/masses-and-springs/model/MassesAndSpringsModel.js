@@ -27,16 +27,16 @@ define( function( require ) {
       new Spring( new Vector2( .50, this.ceilingY ), .50, new Range( 0, 10, .3), new Range( 0, 5, 0 ) ),
       new Spring( new Vector2( .80, this.ceilingY ), .50, new Range( 0, 10, .3), new Range( 0, 5, 0 ) )
     ];
-    this.ruler = new MASRuler( new Vector2( 0, this.ceilingY ) );
+    this.ruler = new MASRuler( new Vector2( .15, this.ceilingY ) );
     this.masses = [
-      new Mass( .250, new Vector2( .175, .5 ) ),
-      new Mass( .100, new Vector2(.3, .5 ) ),
-      new Mass( .050, new Vector2( .4, .5 ) ),
-      new Mass( .150, new Vector2( .675, .5 ) ),
-      new Mass( .075, new Vector2( .8, .5 ) ),
-      new Mass( .200, new Vector2( .925, .5 ) )
+      new Mass( .250, new Vector2( .275, .5 ) ),
+      new Mass( .100, new Vector2(.4, .5 ) ),
+      new Mass( .050, new Vector2( .5, .5 ) ),
+      new Mass( .150, new Vector2( .775, .5 ) ),
+      new Mass( .075, new Vector2( .9, .5 ) ),
+      new Mass( .200, new Vector2( 1.025, .5 ) )
     ];
-
+    this.gravityRange = new Range( 0, 30, 9.8 );
 
     PropertySet.call( this, {
       timeRate: 1.0,// {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.

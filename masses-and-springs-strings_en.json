@@ -1,5 +1,57 @@
 {
   "masses-and-springs.title": {
     "value": "Masses and Springs"
+  },
+  "ruler": {
+    "value": "Ruler"
+  },
+  "referenceLine": {
+    "value": "Reference Line"
+  },
+  "stopwatch": {
+    "value": "Stopwatch"
+  },
+  "equilibriumPos": {
+    "value": "Equilibrium Position"
+  },
+  "custom": {
+    "value": "Custom"
+  },
+  "zeroG": {
+    "value": "0 g"
+  },
+  "earth": {
+    "value": "Earth"
+  },
+  "jupiter": {
+    "value": "Jupiter"
+  },
+  "moon": {
+    "value": "Moon"
+  },
+  "planetX": {
+    "value": "Planet X"
+  },
+  "gravity": {
+    "value": "Gravity"
+  },
+  "none": {
+    "value": "None"
+  },
+  "lots": {
+    "value": "Lots"
+  },
+  "small": {
+    "value": "Small"
+  },
+  "large": {
+    "value": "Large"
+  },
+  "springConstant": {
+    "value": "Spring Constant"
+  },
+  "cm": {
+    "value": "cm"
   }
+
 }
