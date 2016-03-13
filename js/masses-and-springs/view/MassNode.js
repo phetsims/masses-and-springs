@@ -10,23 +10,33 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var Node = require( 'SCENERY/nodes/Node' );
+
   var Bounds2 = require( 'DOT/Bounds2' );
-  var Text = require( 'SCENERY/nodes/Text' );
+
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var Text = require( 'SCENERY/nodes/Text' );
+
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
+  var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
+
+  var MASS_LABEL_FONT = new PhetFont( { size: 12, weight: 'bold' } );
+
   /**
-   * @param {Mass} Mass model object
+   * @param {Mass} mass -  model object
    * @param {ModelViewTransform2} mvt
-   * @param {String} color
-   * @param {boolean} is
+   * @param {String,<color>} color
+   * @param {boolean} isLabeled
+   * @param {MassesAndSpringsScreenView} screenView
+   * @param {MassesAndSpringsModel} model
    * @constructor
    */
-  function MassNode( mass, mvt, color, isLabeled ) {
+  function MassNode( mass, mvt, color, isLabeled, screenView, model ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
@@ -46,15 +56,16 @@ define( function( require ) {
     } );
     this.addChild( rect );
     if ( isLabeled ) {
-      var label = new Text( ( mass.mass * 1000 ).toString() + ' g', {
-        font: new PhetFont( { size: 32, weight: 'bold' } ),
+      var label = new Text( StringUtils.format( massValueString, mass.mass * 1000 ), {
+        font: MASS_LABEL_FONT,
         fill: 'black',
-        centerY: ( viewBounds.maxY - viewBounds.minY ) / 2 + viewBounds.minY,
+        centerY: viewBounds.centerY,
         centerX: 0,
         pickable: false
       } );
 
-      var labelBackground = Rectangle.bounds( label.bounds, { fill: 	'#D3D3D3' } );
+      // TODO: factor out color???
+      var labelBackground = Rectangle.bounds( label.bounds, { fill: '#D3D3D3' } );
       this.addChild( labelBackground );
       this.addChild( label );
     }
@@ -63,22 +74,29 @@ define( function( require ) {
       self.translation = mvt.modelToViewPosition( position );
     } );
 
+    var modelOffset;
+
     self.addInputListener( new SimpleDragHandler( {
       // Allow moving a finger (touch) across a node to pick it up.
       allowTouchSnag: true,
 
       // Handler that moves the particle in model space.
-      translate: function( translationParams ) {
-        //mass.position = mass.position.plus( mvt.viewToModelDelta( translationParams.delta ) );
-        mass.position = mass.position.plus( mvt.viewToModelDelta( translationParams.delta ) );
-        return translationParams.position;
+      drag: function( event ) {
+        var proposedMassPosition = mvt
+          .viewToModelPosition( screenView.globalToLocalPoint( event.pointer.point ) )
+          .minus( modelOffset );
+        model.adjustDraggedMassPosition( self.mass, proposedMassPosition );
       },
 
-      start: function( event, trail ) {
+      start: function( event ) {
+        modelOffset = mvt
+          .viewToModelPosition( screenView.globalToLocalPoint( event.pointer.point ) )
+          .minus( self.mass.position );
         mass.userControlled = true;
+        self.moveToFront();
       },
 
-      end: function( event, trail ) {
+      end: function() {
         mass.userControlled = false;
       }
     } ) );

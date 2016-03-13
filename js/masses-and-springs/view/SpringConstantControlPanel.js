@@ -18,14 +18,16 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
-  var smallString = require( 'string!MASSES_AND_SPRINGS/small' );
-  var largeString = require( 'string!MASSES_AND_SPRINGS/large' );
+  var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
+  var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
 
-  var FONT = new PhetFont( 32 );
+  var LABEL_FONT = new PhetFont( 12 );
+  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold' });
+
 
   /**
    *
-   * @param {Property} springConstantProperty
+   * @param {Property,<number>} springConstantProperty
    * @param {Range} springConstantPropertyRange
    * @param {String} title
    * @param {} options
@@ -34,36 +36,36 @@ define( function( require ) {
   function SpringConstantControlPanel( springConstantProperty, springConstantPropertyRange, title, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
-      xMargin: 50,
-      yMargin: 25
+      xMargin: 15,
+      yMargin: 5
     }, options );
 
     var hSlider = new HSlider( springConstantProperty, springConstantPropertyRange, {
-      majorTickLength: 20,
-      minorTickLength: 10,
-      trackSize: new Dimension2( 400, 5 ),
+      majorTickLength: 10,
+      minorTickLength: 5,
+      trackSize: new Dimension2( 150, 2 ),
       thumbNode: new HSlider.ThumbNode( new Property( true ), {
-        thumbSize: new Dimension2( 20, 40 ),
+        thumbSize: new Dimension2( 7.5, 15 ),
         thumbFillEnabled: '#00b3b3',
         thumbFillHighlighted: '#00e6e6'
       } )
     } );
-    for ( var i = 1; i < springConstantPropertyRange.max; i += springConstantPropertyRange.max / 10 ) {
+
+    hSlider.addMajorTick( springConstantPropertyRange.min, new Text( springConstantSmallString, { font: LABEL_FONT } ) );
+    hSlider.addMajorTick( ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 2 );
+    hSlider.addMajorTick( springConstantPropertyRange.max, new Text( springConstantLargeString, { font: LABEL_FONT } ) );
+    for ( var i = 1; i < 10; i++ ) {
       if ( i !== 5 ) {
-        hSlider.addMinorTick( i * springConstantPropertyRange.max / 10, new Text( '' ) );
+        hSlider.addMinorTick( i * ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 10 );
       }
     }
-    hSlider.addMajorTick( springConstantPropertyRange.min, new Text( smallString, { font: FONT, pickable: false } ) );
-    hSlider.addMajorTick( springConstantPropertyRange.max, new Text( largeString, { font: FONT, pickable: false } ) );
-    hSlider.addMajorTick( ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 2, new Text( '' ) );
 
-
-
-    var springConstantVBox = new VBox();
-    springConstantVBox.addChild( new Text( title , FONT ) );
-    springConstantVBox.addChild( hSlider );
-
-    Panel.call( this, springConstantVBox, options );
+    Panel.call( this, new VBox( {
+      children: [
+        new Text( title , TITLE_FONT ),
+        hSlider
+      ]
+    } ), options );
   }
 
   massesAndSprings.register( 'SpringConstantControlPanel', SpringConstantControlPanel );

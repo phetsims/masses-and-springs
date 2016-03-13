@@ -14,7 +14,7 @@ define( function( require ) {
 
   // constants
   var heightRatio = 2;
-  var density = 125; // density of ???
+  var density = 80; // density of ???
 
   /**
    * @param {number} massValue:  mass in kg
@@ -22,7 +22,7 @@ define( function( require ) {
    * @constructor
    */
   function Mass( massValue, initialPosition ) {
-
+    //var self = this;
 
     PropertySet.call( this, {
       // @public
@@ -35,47 +35,58 @@ define( function( require ) {
     // @public (read-only)
     this.mass = massValue;
 
-
     this.hookHeight = .03; // height in m
-    this.radius = Math.pow( this.mass / (density * heightRatio * Math.PI ), 1/3 );
+    this.radius = Math.pow( this.mass / (density * heightRatio * Math.PI ), 1 / 3 );
     this.cylinderHeight = this.radius * heightRatio;
     this.height = this.cylinderHeight + this.hookHeight;
+
+    //  TODO:  is this used or neccessary?
+    //this.yPositionListener = function( yPos ) {
+    //  self.position.y = yPos;
+    //};
   }
 
   massesAndSprings.register( 'Mass', Mass );
 
   return inherit( PropertySet, Mass, {
-    /*
+    /**
+     * @public
+     *
      * @param {number} gravity
      * @param {number} floorY
      * @param {number} dt
      */
     fallWithGravity: function( gravity, floorY, dt ) {
       var floorPosition = floorY + this.height;
-      if (this.position.y !== floorPosition) {
+      if ( this.position.y !== floorPosition ) {
         console.log( this.position.y );
         var newVerticalVelocity = this.verticalVelocity - gravity * dt;
         var newY = this.position.y + ( this.verticalVelocity + newVerticalVelocity) * dt / 2;
         if ( newY < floorPosition ) {
           // if we hit the ground stop falling
-          this.position = new Vector2( this.position.x, floorPosition);
+          this.position = new Vector2( this.position.x, floorPosition );
           this.verticalVelocity = 0;
         }
         else {
           this.verticalVelocity = newVerticalVelocity;
-          this.position = new Vector2( this.position.x, newY);
+          this.position = new Vector2( this.position.x, newY );
         }
       }
     },
 
-    /*
-     *  @param {Spring} spring
+    /**
+     * @public
+     *
+     * @param {Spring} spring
      */
     attach: function( spring ) {
       this.verticalVelocity = 0;
       this.spring = spring;
     },
 
+    /**
+     * @public
+     */
     detach: function() {
       this.verticalVelocity = 0;
       this.spring = null;

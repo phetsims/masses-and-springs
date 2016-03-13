@@ -11,44 +11,47 @@
   "stopwatch": {
     "value": "Stopwatch"
   },
-  "equilibriumPos": {
+  "equilibriumPosition": {
     "value": "Equilibrium Position"
   },
-  "custom": {
+  "body.custom": {
     "value": "Custom"
   },
-  "zeroG": {
+  "body.zeroG": {
     "value": "0 g"
   },
-  "earth": {
+  "body.earth": {
     "value": "Earth"
   },
-  "jupiter": {
+  "body.jupiter": {
     "value": "Jupiter"
   },
-  "moon": {
+  "body.moon": {
     "value": "Moon"
   },
-  "planetX": {
+  "body.planetX": {
     "value": "Planet X"
   },
   "gravity": {
     "value": "Gravity"
   },
-  "none": {
+  "gravity.none": {
     "value": "None"
   },
-  "lots": {
+  "gravity.lots": {
     "value": "Lots"
   },
-  "small": {
+  "springConstant.small": {
     "value": "Small"
   },
-  "large": {
+  "springConstant.large": {
     "value": "Large"
   },
   "springConstant": {
-    "value": "Spring Constant"
+    "value": "Spring Constant {0}"
+  },
+  "massValue": {
+    "value": "{0} g"
   },
   "cm": {
     "value": "cm"
