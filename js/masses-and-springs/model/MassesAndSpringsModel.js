@@ -29,7 +29,7 @@ define( function( require ) {
 
     PropertySet.call( this, {
       timeRate: 1.0,// {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
-      friction: 0, // {number} c - coefficient of friction
+      friction: 0.1, // {number} c - coefficient of friction
       gravity: 9.8 // {number} a - gravitational acceleration (positive)
       //body: Body.EARTH, //TODO Implement this
     } );
