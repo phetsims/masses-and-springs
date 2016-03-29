@@ -90,10 +90,6 @@ define( function( require ) {
     } );
     this.addChild( gravityControlPanel );
 
-    this.addChild( new DraggableRulerNode( this.layoutBounds, new Vector2( this.layoutBounds.left + 50, mvt.modelToViewY( model.ceilingY ) ), this.viewProperties.rulerVisibleProperty ) );
-
-    this.referenceLine = new ReferenceLine( this.layoutBounds.getCenter().minus( new Vector2( 110, 0 ) ), this.layoutBounds, 400, this.viewProperties.referenceLineVisibleProperty );
-    this.addChild( this.referenceLine );
 
     // Control Panel for display elements with varying visibility
     // TODO: Decouple the checkBoxGroup
@@ -131,7 +127,7 @@ define( function( require ) {
       {
         xMargin: 31,
         fill: 'rgb( 240, 240, 240 )',
-        top: 5,
+        top: mvt.modelToViewY( model.ceilingY ),
         right: this.layoutBounds.width - 10
       } );
     this.addChild( indicatorVisibilityControlPanel );
@@ -167,6 +163,12 @@ define( function( require ) {
 
     // This should always be after all nodes containing a ComboBox
     this.addChild( listParentNode );
+
+    this.addChild( new DraggableRulerNode( this.layoutBounds, new Vector2( this.layoutBounds.left + 50, mvt.modelToViewY( model.ceilingY ) ), this.viewProperties.rulerVisibleProperty ) );
+
+    this.referenceLine = new ReferenceLine( this.layoutBounds.getCenter().minus( new Vector2( 110, 0 ) ), this.layoutBounds, 400, this.viewProperties.referenceLineVisibleProperty );
+    this.addChild( this.referenceLine );
+
   }
 
   massesAndSprings.register( 'MassesAndSpringsScreenView', MassesAndSpringsScreenView );

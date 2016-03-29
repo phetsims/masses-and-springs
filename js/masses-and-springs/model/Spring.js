@@ -22,7 +22,7 @@ define( function( require ) {
    *
    * @constructor
    */
-  function Spring( position, naturalRestingLength, springConstantRange ) {
+  function Spring( position, naturalRestingLength, springConstantRange, defaultDampingCoefficient ) {
     //var self = this;
 
     // validate and save options
@@ -39,7 +39,7 @@ define( function( require ) {
       gravity: 9.8, // {number} units m/s^2
       displacement: 0,  // {number} units: m
       springConstant: springConstantRange.defaultValue,  // {number} units N/m
-      dampingCoefficient: 0, // {number} units N.s/m - viscous damping coefficient of the system
+      dampingCoefficient: defaultDampingCoefficient, // {number} units N.s/m - viscous damping coefficient of the system
       position: position, // {Vector2} units ( m, m )
       naturalRestingLength: naturalRestingLength, // {number} units: m
       animating: false, // {boolean}
@@ -53,7 +53,7 @@ define( function( require ) {
     // @public length of the spring, units = m
     this.lengthProperty = new DerivedProperty( [ this.naturalRestingLengthProperty, this.displacementProperty ],
       function( naturalRestingLength, displacement ) {
-        console.log( "length: " + ( naturalRestingLength - displacement ) );
+        ////console.log( 'length: ' + ( naturalRestingLength - displacement ) );
         return naturalRestingLength - displacement;
       }
     );
@@ -61,7 +61,7 @@ define( function( require ) {
     // @public y position of the bottom end of the spring, units = m
     this.bottomProperty = new DerivedProperty( [ this.positionProperty, this.lengthProperty ],
       function( position, length ) {
-        console.log( "bottom: " + ( position.y - length ) );
+        ////console.log( 'bottom: ' + ( position.y - length ) );
         return position.y - length;
       }
     );
@@ -87,6 +87,10 @@ define( function( require ) {
      */
     reset: function() {
       this.removeMass();
+      //ensures displacement will change on reset, otherwise springs will be upside down.
+      // TODO: find a better fix for this problem.
+      this.displacement = 1;
+      PropertySet.prototype.reset.call( this );
     },
 
     /**
@@ -96,10 +100,9 @@ define( function( require ) {
       if ( this.mass ) {
         this.mass.detach();
       }
-      //ensures displacement will change on reset, otherwise springs will be upside down.
-      // TODO: find a better fix for this problem.
-      this.displacement += 1;
-      PropertySet.prototype.reset.call( this );
+      this.displacement = 0;
+      this.mass = null;
+      this.animating = false;
     },
 
     /**
@@ -108,6 +111,9 @@ define( function( require ) {
      * @param {Mass} mass
      */
     addMass: function( mass ) {
+      if ( this.mass ) {
+        this.mass.detach();
+      }
       this.mass = mass;
       this.mass.spring = this;
       this.displacement = this.mass.position.y - ( this.position.y - this.naturalRestingLength );
@@ -130,54 +136,67 @@ define( function( require ) {
         var x = this.displacement;
         var g = this.gravity;
 
+        ////console.log( 'k,m,c,v,x,g = ' + k + ',' + m + ',' + c + ',' + v + ',' + x + ',' + g );
+
         // Underdamped and Overdamped case
         if ( ( c * c - 4 * k * m ) !== 0 ) {
           // TODO::  possibly decouple any constants or terms not dependent on t, x, or v as we don't need a new object
           //         k, c, and g may change, but not with every update.
 
-          /** Real Values **/
-          // mg + kx
-          var mgPluskx = m * g + k * x;
-          // 2kmv
-          var twokmv = 2 * k * m * v;
+          var km = k * m;
+          var gm = g * m;
+          var tDm = dt / m;
+          var kx = k * x;
+          var c2 = c * c;
+          var kR = Math.sqrt( k );
+          var k32 = k * kR;
 
-          /**  Complex values for displacement **/
-          // alpha = i sqrt( 4km - c^2 )
-          var xAlpha = Complex.real( Math.sqrt( 4 * k * m - c * c ) ).multiply( Complex.imaginary( 1 ) );
-          // beta = 1 + e^(alpha t / m )
-          var xBeta = xAlpha.times( Complex.real( dt / m ) ).exponentiate().add( Complex.real( 1 ) );
-          // zeta = 2e^( (c+alpha)(t/2m) )
-          var xEta = xAlpha.plus( Complex.real( c ) ).multiply( Complex.real( dt / ( 2 * m ) ) )
-            .exponentiate().multiply( Complex.real( 2 ) );
+          var alpha = Complex.real( 4 * km - c2 ).times( Complex.I );
+          var alphaI = Complex.real( c2 - 4 * km ).sqrtOf();
+          var beta = Complex.real( tDm ).times( alpha ).exponentiated();
+          var eta =  Complex.real( c ).plus( alpha ).times( Complex.real( tDm / 2 ) )
+            .exponentiated().times( Complex.real( 2 ) );
 
-          //TODO:: coef does not depend on dt, x or v.  Move this to a property?
-          var xCoef = Complex.real( 1 ).divide(
-            Complex.real( c * c - 4 * k * m ).sqrt().multiply( Complex.real( k ) ).multiply( xEta )
+          var coef = Complex.ONE.dividedBy(
+            Complex.real( 2 * k32 ).times( eta ).times( alphaI )
           );
-          var xTerm1 = xBeta.minus( Complex.real( 2 ) ).multiply( Complex.real( c * mgPluskx + twokmv ) );
-          var xTerm2 = xAlpha.times( xBeta.times( Complex.real( mgPluskx ) )
-            .subtract( xEta.times( Complex.real( m * g ) ) ) );
 
-          this.displacement = xTerm1.plus( xTerm2 ).multiply( xCoef ).real;
+          var A = ( beta.minus( Complex.ONE ) ).times( Complex.real( c * kR * ( gm + kx ) ) );
+          var B = Complex.real( gm * kR ).times( alpha ).times(
+            beta.minus( eta.times( Complex.real( 2 ) ) ).plus( Complex.ONE )
+          );
+          var C = Complex.real( 2 * k32 * m * v ).times( beta );
+          var D = Complex.real( k32 * x ).times( alpha ).times( beta );
+          var E = Complex.real( k32 * x ).times( alpha );
+          var F = Complex.real( -2 * k32 * m * v );
+
+
+          //var coef = Complex.real( 1 / k32 ).divide( eta ).divide( alphaI );
+          //var term1 = Complex.real( kR ).times( beta.minus( Complex.ONE ) ).times(
+          //  Complex.real( c * ( gm * kx ) + 2 * km * v )
+          //);
+          //var term2 = alpha.times(
+          //  Complex.real( gm + kx * kR ).times( beta.plus( Complex.ONE ) ).plus( Complex.real( gm ).times( eta ) )
+          //);
+
+
+
+          this.displacement = coef.times( A.plus( B ).plus( C ).plus( D ).plus( E ).plus( F ) ).real;
           assert && assert( !isNaN( this.displacement ), 'displacement must be a number' );
 
-          /**  Complex values for velocity **/
-          // sqrt( 4km - c^2 )
-          var vAlpha = Complex.real( 4 * k * m - c * c ).sqrt();
-          // alpha t/2m
-          var vBeta = vAlpha.times( Complex.real( dt / ( 2 * m ) ) );
+          var alphaP = Complex.real( 4 * km - c2 ).sqrtOf();
+          var atD2m = Complex.real( tDm / 2 ).times( alphaP );
+          var k32mvT2c = Complex.real( k32 * m * v * 2 * c );
 
-          var vCoef = Complex.imaginary( 1 ).multiply(
-            Complex.real( -Math.exp( -c * dt / (2 * m ) ) / ( 2 * k * m ) ).multiply(
-              Complex.real( 1 / ( c * c - 4 * k * m ) ).sqrt()
-            )
+          coef = Complex.real( -Math.exp( - c * dt / ( 2 * m ) ) / ( 2 * k32 * m) ).times( Complex.I )
+            .dividedBy( alphaI );
+          var term1 = atD2m.sin().times(
+            Complex.real( kR ).times( Complex.real( gm + kx ) ).times( alphaP.squared().plus( Complex.real( c2 ) ) )
+              .plus( k32mvT2c )
           );
-          var vTerm1 = Complex.real( -2 * k * m * v ).multiply( vBeta.cos() ).multiply( vAlpha );
-          var vTerm2 = Complex.real( 2 * c * k * m * v ).add(
-            Complex.real( mgPluskx ).multiply( Complex.real( c * c ).add( vAlpha.squared() ) )
-          ).multiply( vBeta.sin() );
+          var term2 = atD2m.cos().times( k32mvT2c ).times( alphaP ).times( Complex.real( -1 ) );
 
-          this.mass.verticalVelocity = vTerm1.plus( vTerm2 ).multiply( vCoef ).real;
+          this.mass.verticalVelocity = term1.plus( term2 ).times( coef ).real;
           assert && assert( !isNaN( this.mass.verticalVelocity ), 'velocity must be a number' );
 
         }

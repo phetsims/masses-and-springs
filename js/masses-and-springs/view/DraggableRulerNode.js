@@ -28,17 +28,22 @@ define( function( require ) {
     Node.call( this );
     Property.addProperty( this, 'position', initialPosition );
 
-    var rulerLength = 400;
-    var majorTickWidth = rulerLength / 20;
+    // define ruler params in pixels
+    var rulerWidth = 397; // 1 meter
+    var rulerLength = .1 * rulerWidth;
     var majorTickLabels = [];
     for ( var i = 1; i < 10; i++ ) {
       majorTickLabels[ i * 2 ] = '' + Math.floor( i * 10 );
     }
+    majorTickLabels.push('');
+    majorTickLabels.push('');
+    var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
 
-    this.addChild( new RulerNode( rulerLength, 0.1 * rulerLength, majorTickWidth, majorTickLabels, cmString, {
+    console.log( 'w, l, tw: ' + rulerWidth + ',' + rulerLength + ',' + majorTickWidth);
+    this.addChild( new RulerNode( rulerWidth,  rulerLength , majorTickWidth, majorTickLabels, cmString, {
       insetsWidth: 5,
       minorTicksPerMajorTick: 4,
-      top: self.position,
+      //top: self.position,
       unitsMajorTickIndex: 19,
       rotation: Math.PI / 2,
       backgroundFill: 'rgb( 237, 225, 121 )',

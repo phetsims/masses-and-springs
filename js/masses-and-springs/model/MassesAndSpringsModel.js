@@ -29,7 +29,7 @@ define( function( require ) {
 
     PropertySet.call( this, {
       timeRate: 1.0,// {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
-      friction: 0.1, // {number} c - coefficient of friction
+      friction: 0, // {number} c - coefficient of friction
       gravity: 9.8 // {number} a - gravitational acceleration (positive)
       //body: Body.EARTH, //TODO Implement this
     } );
@@ -37,16 +37,18 @@ define( function( require ) {
     this.floorY = 0; // Y position of floor in m
     this.ceilingY = 1.2; // Y position of ceiling in m
     this.springs = [
-      new Spring( new Vector2( .50, this.ceilingY ), .50, new Range( 0.1, 5, 1 ) ),
-      new Spring( new Vector2( .80, this.ceilingY ), .50, new Range( 0.1, 5, 1 ) )
+      new Spring( new Vector2( .50, this.ceilingY ), .50, new Range( 0.1, 5, 1.2 ), this.friction ),
+      new Spring( new Vector2( .80, this.ceilingY ), .50, new Range( 0.1, 5, 1.2 ), this.friction )
     ];
+
     this.masses = [
-      new Mass( .250, new Vector2( .25, .5 ) ),
-      new Mass( .100, new Vector2( .35, .5 ) ),
-      new Mass( .050, new Vector2( .45, .5 ) ),
-      new Mass( .150, new Vector2( .775, .5 ) ),
-      new Mass( .075, new Vector2( .9, .5 ) ),
-      new Mass( .200, new Vector2( 1.025, .5 ) )
+      new Mass( .250, new Vector2( .3, .5 ) ),
+      new Mass( .100, new Vector2( .4, .5 ) ),
+      new Mass( .050, new Vector2( .49, .5 ) ),
+      new Mass( .200, new Vector2( .8, .5 )),
+      new Mass( .150, new Vector2( .9, .5 ) ),
+      new Mass( .075, new Vector2(.98, .5 )  )
+
     ];
     this.bodies = [
       Body.MOON,
@@ -59,7 +61,7 @@ define( function( require ) {
     this.gravityRange = new Range( 0, 30, 9.8 );
 
     this.gravityProperty.link( function( newGravity ) {
-      assert && assert( newGravity > 0, 'gravity must be positive : ' + newGravity );
+      assert && assert( newGravity >= 0, 'gravity must be 0 or positive : ' + newGravity );
       self.springs.forEach( function( spring ) {
         spring.gravity = newGravity;
       } );
@@ -67,6 +69,7 @@ define( function( require ) {
 
     this.frictionProperty.link( function( newFriction ) {
       assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
+      console.log( 'friction changed, newFriction=' + newFriction );
       self.springs.forEach( function( spring ) {
         spring.dampingCoefficient = newFriction;
       } );
@@ -85,7 +88,7 @@ define( function( require ) {
     reset: function() {
       PropertySet.prototype.reset.call( this );
       this.masses.forEach( function( mass ) { mass.reset(); } );
-      this.springs.forEach( function( system ) { system.reset(); } );
+      this.springs.forEach( function( spring ) { spring.reset(); } );
     },
 
 
@@ -100,12 +103,15 @@ define( function( require ) {
     adjustDraggedMassPosition: function( mass, proposedPosition ){
       // Attempt to detach
       if ( mass.spring && Math.abs( proposedPosition.x - mass.position.x ) > DROPPING_DISTANCE ) {
+        console.log( 'removed' );
         mass.spring.removeMass();
+        mass.detach();
       }
       // Update mass position and spring length if attached
       if ( mass.spring ) {
         mass.spring.displacement =  - ( mass.spring.position.y - mass.spring.naturalRestingLength ) + proposedPosition.y;
         mass.position = new Vector2( mass.spring.position.x, proposedPosition.y );
+        console.log( 'snagged' );
       }
       // Update mass position if unattached
       else {
@@ -117,9 +123,11 @@ define( function( require ) {
                Math.abs( proposedPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE ) {
             spring.addMass( mass );
           }
+          console.log( spring.mass );
         }
         //Update position
         mass.position = proposedPosition;
+        console.log( 'dropped ' + mass.spring );
       }
     },
 
