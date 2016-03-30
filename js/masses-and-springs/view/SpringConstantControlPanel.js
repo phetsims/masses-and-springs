@@ -52,11 +52,11 @@ define( function( require ) {
     } );
 
     hSlider.addMajorTick( springConstantPropertyRange.min, new Text( springConstantSmallString, { font: LABEL_FONT } ) );
-    hSlider.addMajorTick( ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 2 );
+    hSlider.addMajorTick( springConstantPropertyRange.min + ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 2 );
     hSlider.addMajorTick( springConstantPropertyRange.max, new Text( springConstantLargeString, { font: LABEL_FONT } ) );
     for ( var i = 1; i < 10; i++ ) {
       if ( i !== 5 ) {
-        hSlider.addMinorTick( i * ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 10 );
+        hSlider.addMinorTick( springConstantPropertyRange.min + i * ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 10 );
       }
     }
 

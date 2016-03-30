@@ -29,16 +29,16 @@ define( function( require ) {
 
     PropertySet.call( this, {
       timeRate: 1.0,// {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
-      friction: 0, // {number} c - coefficient of friction
+      friction: .2, // {number} c - coefficient of friction
       gravity: 9.8 // {number} a - gravitational acceleration (positive)
-      //body: Body.EARTH, //TODO Implement this
+      //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
     } );
 
     this.floorY = 0; // Y position of floor in m
-    this.ceilingY = 1.2; // Y position of ceiling in m
+    this.ceilingY = 1.23; // Y position of ceiling in m
     this.springs = [
-      new Spring( new Vector2( .50, this.ceilingY ), .50, new Range( 0.1, 5, 1.2 ), this.friction ),
-      new Spring( new Vector2( .80, this.ceilingY ), .50, new Range( 0.1, 5, 1.2 ), this.friction )
+      new Spring( new Vector2( .50, this.ceilingY ), .50, new Range( 5, 15, 9 ), this.friction ),
+      new Spring( new Vector2( .80, this.ceilingY ), .50, new Range( 5, 15, 9 ), this.friction )
     ];
 
     this.masses = [
@@ -69,7 +69,7 @@ define( function( require ) {
 
     this.frictionProperty.link( function( newFriction ) {
       assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
-      console.log( 'friction changed, newFriction=' + newFriction );
+      //console.log( 'friction changed, newFriction=' + newFriction );
       self.springs.forEach( function( spring ) {
         spring.dampingCoefficient = newFriction;
       } );
@@ -103,7 +103,7 @@ define( function( require ) {
     adjustDraggedMassPosition: function( mass, proposedPosition ){
       // Attempt to detach
       if ( mass.spring && Math.abs( proposedPosition.x - mass.position.x ) > DROPPING_DISTANCE ) {
-        console.log( 'removed' );
+        //console.log( 'removed' );
         mass.spring.removeMass();
         mass.detach();
       }
@@ -111,7 +111,7 @@ define( function( require ) {
       if ( mass.spring ) {
         mass.spring.displacement =  - ( mass.spring.position.y - mass.spring.naturalRestingLength ) + proposedPosition.y;
         mass.position = new Vector2( mass.spring.position.x, proposedPosition.y );
-        console.log( 'snagged' );
+        //console.log( 'snagged' );
       }
       // Update mass position if unattached
       else {
@@ -123,11 +123,11 @@ define( function( require ) {
                Math.abs( proposedPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE ) {
             spring.addMass( mass );
           }
-          console.log( spring.mass );
+          //console.log( spring.mass );
         }
         //Update position
         mass.position = proposedPosition;
-        console.log( 'dropped ' + mass.spring );
+        //console.log( 'dropped ' + mass.spring );
       }
     },
 

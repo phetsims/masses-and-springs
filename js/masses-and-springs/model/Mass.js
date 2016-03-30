@@ -22,7 +22,11 @@ define( function( require ) {
    * @constructor
    */
   function Mass( massValue, initialPosition ) {
-    //var self = this;
+    var self = this;
+
+    assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
+    // @public (read-only)
+    this.mass = massValue;
 
     PropertySet.call( this, {
       // @public
@@ -32,18 +36,16 @@ define( function( require ) {
       verticalVelocity: 0 // {number} m/s
     } );
 
-    // @public (read-only)
-    this.mass = massValue;
-
     this.hookHeight = .03; // height in m
     this.radius = Math.pow( this.mass / (density * heightRatio * Math.PI ), 1 / 3 );
     this.cylinderHeight = this.radius * heightRatio;
     this.height = this.cylinderHeight + this.hookHeight;
 
-    //  TODO:  is this used or neccessary?
-    //this.yPositionListener = function( yPos ) {
-    //  self.position.y = yPos;
-    //};
+    this.userControlledProperty.link( function( userControlled ) {
+      if ( !userControlled && self.spring ) {
+        self.spring.animating = true;
+      }
+    } );
   }
 
   massesAndSprings.register( 'Mass', Mass );
@@ -59,7 +61,6 @@ define( function( require ) {
     fallWithGravity: function( gravity, floorY, dt ) {
       var floorPosition = floorY + this.height;
       if ( this.position.y !== floorPosition ) {
-        console.log( this.position.y );
         var newVerticalVelocity = this.verticalVelocity - gravity * dt;
         var newY = this.position.y + ( this.verticalVelocity + newVerticalVelocity) * dt / 2;
         if ( newY < floorPosition ) {

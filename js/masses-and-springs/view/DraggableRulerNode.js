@@ -39,7 +39,6 @@ define( function( require ) {
     majorTickLabels.push('');
     var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
 
-    console.log( 'w, l, tw: ' + rulerWidth + ',' + rulerLength + ',' + majorTickWidth);
     this.addChild( new RulerNode( rulerWidth,  rulerLength , majorTickWidth, majorTickLabels, cmString, {
       insetsWidth: 5,
       minorTicksPerMajorTick: 4,
