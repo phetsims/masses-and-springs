@@ -135,12 +135,14 @@ define( function( require ) {
 
     // TODO: move color and isLabeled to model
     // TODO: add massLayer
-    this.addChild( new MassNode( model.masses[ 0 ], mvt, 'grey', true, self, model ) );
-    this.addChild( new MassNode( model.masses[ 1 ], mvt, 'grey', true, self, model ) );
-    this.addChild( new MassNode( model.masses[ 2 ], mvt, 'grey', true, self, model ) );
-    this.addChild( new MassNode( model.masses[ 3 ], mvt, 'red', false, self, model ) );
-    this.addChild( new MassNode( model.masses[ 4 ], mvt, 'blue', false, self, model ) );
-    this.addChild( new MassNode( model.masses[ 5 ], mvt, 'green', false, self, model ) );
+    this.massLayer = new Node();
+    this.massLayer.addChild( new MassNode( model.masses[ 0 ], mvt, 'grey', true, self, model ) );
+    this.massLayer.addChild( new MassNode( model.masses[ 1 ], mvt, 'grey', true, self, model ) );
+    this.massLayer.addChild( new MassNode( model.masses[ 2 ], mvt, 'grey', true, self, model ) );
+    this.massLayer.addChild( new MassNode( model.masses[ 3 ], mvt, 'red', false, self, model ) );
+    this.massLayer.addChild( new MassNode( model.masses[ 4 ], mvt, 'blue', false, self, model ) );
+    this.massLayer.addChild( new MassNode( model.masses[ 5 ], mvt, 'green', false, self, model ) );
+
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
     this.addChild( new OscillatingSpringNode( model.springs[ 0 ], mvt ) );
@@ -168,6 +170,8 @@ define( function( require ) {
 
     this.referenceLine = new ReferenceLine( this.layoutBounds.getCenter().minus( new Vector2( 110, 0 ) ), this.layoutBounds, 400, this.viewProperties.referenceLineVisibleProperty );
     this.addChild( this.referenceLine );
+
+    this.addChild( this.massLayer );
 
   }
 

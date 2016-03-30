@@ -23,6 +23,7 @@ define( function( require ) {
    * @constructor
    */
   function Spring( position, naturalRestingLength, springConstantRange, defaultDampingCoefficient ) {
+    var self = this;
 
     // validate and save options
     assert && assert( naturalRestingLength > 0, 'naturalRestingLength must be > 0 : ' + naturalRestingLength );
@@ -64,6 +65,19 @@ define( function( require ) {
         return position.y - length;
       }
     );
+
+    //  Restart animation if it was squelched
+    this.gravityProperty.link( function() {
+      if ( self.mass ) {
+        self.animating = true;
+      }
+    } );
+    this.springConstantProperty.link( function() {
+      if ( self.mass ) {
+        self.animating = true;
+      }
+    } );
+
   }
 
   massesAndSprings.register( 'Spring', Spring );
@@ -131,9 +145,9 @@ define( function( require ) {
         if ( ( c * c - 4 * k * m ) !== 0 ) {
           // TODO::  possibly decouple any constants or terms not dependent on t, x, or v as we don't need a new object
           //         for example k, c, and g may change, but not with every update.
-          // TODO:: substitute mutability where appropriate
           // TODO:: improve readability of variables
 
+          // Precompute expressions used more than twice
           var km = k * m;
           var gm = g * m;
           var tDm = dt / m;
@@ -141,63 +155,55 @@ define( function( require ) {
           var c2 = c * c;
           var kR2 = Math.sqrt( k );
           var k3R2 = k * kR2;
+          var twok3R2mv = Complex.real( 2 * k3R2 * m * v );
+          var alpha = Complex.real( 4 * km - c2 ).sqrt();
+          var alphaI = alpha.times( Complex.I );
+          var alphaPrime = Complex.real( c2 - 4 * km ).sqrt();
+          var alphatD2m = Complex.real( tDm / 2 ).multiply( alpha );
+          var beta = Complex.real( tDm ).multiply( alphaI ).exponentiate();
+          var eta = Complex.real( c ).add( alphaI ).multiply( Complex.real( tDm / 2 ) ).exponentiate()
+            .multiply( Complex.real( 2 ) );
 
-          var alpha = Complex.real( 4 * km - c2 ).sqrtOf().times( Complex.I );
-          var alphaInv = Complex.real( c2 - 4 * km ).sqrtOf();
-          var beta = Complex.real( tDm ).times( alpha ).exponentiated();
-          var eta = Complex.real( c ).plus( alpha ).times( Complex.real( tDm / 2 ) ).exponentiated()
-            .times( Complex.real( 2 ) );
-
-          var coef = Complex.ONE.dividedBy( Complex.real( k3R2 ).times( alphaInv ).times( eta ) );
-
-          var A = ( beta.minus( Complex.ONE ) ).times( Complex.real( c * kR2 * ( gm + kx ) ) );
-          var B = Complex.real( gm * kR2 ).times( alpha ).times(
-            beta.minus( eta ).plus( Complex.ONE )
+          // Calculate new displacement
+          var coef = Complex.ONE.dividedBy( Complex.real( k3R2 ).multiply( alphaPrime ).multiply( eta ) );
+          var A = beta.minus( Complex.ONE ).multiply( Complex.real( c * kR2 * ( gm + kx ) ) );
+          var B = Complex.real( gm * kR2 ).multiply( alphaI ).multiply(
+            beta.minus( eta ).add( Complex.ONE )
           );
-          var C = Complex.real( 2 * k3R2 * m * v ).times( beta );
-          var D = Complex.real( k3R2 * x ).times( alpha ).times( beta );
-          var E = Complex.real( k3R2 * x ).times( alpha );
-          var F = Complex.real( -2 * k3R2 * m * v );
+          var C = twok3R2mv.times( beta );
+          var D = Complex.real( k3R2 * x ).multiply( alphaI );
+          var E = D.times( beta );
+          var newDisplacement = coef.multiply( A.add( B ).add( C ).add( D ).add( E ).subtract( twok3R2mv ) ).real;
 
-          var newDisplacement = coef.times( A.plus( B ).plus( C ).plus( D ).plus( E ).plus( F ) ).real;
+          // Calculate new velocity
+          coef = Complex.real( -( Math.exp( ( -c * dt ) / ( 2 * m ) ) ) / ( 2 * k3R2 * m ) ).divide( alphaPrime )
+            .multiply( Complex.I );
+          A = alphatD2m.sinOf().multiply(
+            Complex.real( kR2 * ( gm + kx ) )
+              .multiply( alpha.squared().add( Complex.real( c2 ) ) )
+              .add( twok3R2mv.times( Complex.real( c ) ) ) );
+          B = alphatD2m.cos().multiply( twok3R2mv ).multiply( alpha ).multiply( Complex.real( -1 ) );
+          var newVelocity = A.add( B ).multiply( coef ).real;
 
-          // Update overdamped displacement
-          // TODO:: this is probably a bug in the model equation.
+          //  Stop the alternation between +/- in overdamped displacement
+          // TODO:: This is probably a bug in the model equation. Are we missing an i somewhere?
           if ( ( c * c - 4 * k * m ) > 0 ) {
-            //  Stop the alternation between +/-.
-            if ( this.displacement > 0 ) {
-              this.displacement = Math.abs( newDisplacement );
-            }
-            else {
-              this.displacement = -Math.abs( newDisplacement );
-            }
-
-            //  Squelch the random perturbations after coming to rest with tolerance of 1 mm.
-            if ( Math.abs( this.displacement ) < .001 ) {
-              this.displacement = 0;
-            }
+            newDisplacement = ( this.displacement > 0 ) ? Math.abs( newDisplacement ) : -Math.abs( newDisplacement );
           }
-          // Update underdamped displacement
+
+          //Squelch noise after coming to rest with tolerance of 1 mm
+          if ( Math.abs( this.displacement - newDisplacement) < .0001 &&
+               Math.abs( this.mass.verticalVelocity) < .0001 ) {
+            this.displacement = -m * g / k;  //Equilibrium length
+            this.mass.verticalVelocity = 0;
+            this.animating = false;
+          }
           else {
             this.displacement = newDisplacement;
+            this.mass.verticalVelocity = newVelocity;
           }
-          //console.log( 'displacement = ' + this.displacement );
 
           assert && assert( !isNaN( this.displacement ), 'displacement must be a number' );
-
-          var alphaPrime = Complex.real( 4 * km - c2 ).sqrtOf();
-          var alphaPrimetD2m = Complex.real( tDm / 2 ).times( alphaPrime );
-          var twok3R2mv = 2 * k3R2 * m * v;
-
-          coef = Complex.real( -( Math.exp( ( -c * dt ) / ( 2 * m ) ) ) / ( 2 * k3R2 * m ) ).dividedBy( alphaInv )
-            .times( Complex.I );
-          A = alphaPrimetD2m.sinOf().times(
-            Complex.real( kR2 ).times( Complex.real( gm + kx ) )
-              .times( alphaPrime.squared().plus( Complex.real( c2 ) ) )
-              .plus( Complex.real( twok3R2mv * c ) ) );
-          B = alphaPrimetD2m.cosOf().times( Complex.real( -twok3R2mv ) ).times( alphaPrime );
-
-          this.mass.verticalVelocity = A.plus( B ).times( coef ).real;
           assert && assert( !isNaN( this.mass.verticalVelocity ), 'velocity must be a number' );
 
         }
