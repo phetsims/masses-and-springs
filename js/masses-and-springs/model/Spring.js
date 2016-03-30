@@ -35,7 +35,7 @@ define( function( require ) {
     //------------------------------------------------
     // Properties
     PropertySet.call( this, {
-      gravity: 9.8, // {number} units m/s^2
+      gravity: 9.8, // {number} units m/s^2  //TODO:: initialize with gravity of default body from Model
       displacement: 0,  // {number} units: m
       springConstant: springConstantRange.defaultValue,  // {number} units N/m
       dampingCoefficient: defaultDampingCoefficient, // {number} units N.s/m - viscous damping coefficient of the system
@@ -163,7 +163,7 @@ define( function( require ) {
 
           // Update overdamped displacement
           // TODO:: this is probably a bug in the model equation.
-          if  ( ( c * c - 4 * k * m ) > 0 ) {
+          if ( ( c * c - 4 * k * m ) > 0 ) {
             //  Stop the alternation between +/-.
             if ( this.displacement > 0 ) {
               this.displacement = Math.abs( newDisplacement );
@@ -207,12 +207,13 @@ define( function( require ) {
           var omega = Math.sqrt( k / m );
           var phi = Math.exp( dt * omega );
 
-          this.displacement = ( m * g / ( phi * k ) ) * ( -phi + dt * omega + 1) + dt * ( x * ( omega + 1 ) + v );
 
-          this.mass.verticalVelocity = ( ( g * ( ( omega * m / phi ) + Math.sqrt( k * m ) ) + k * ( v * omega * x ) )
-                                         - omega * ( g * ( m - phi * m + dt * Math.sqrt( k * m ) )
-                                                     + k * ( x + dt * ( v + omega * x ) ) ) )
-                                       / ( phi * k );
+          this.displacement = ( g * ( -m * phi + dt * Math.sqrt( k * m ) + m ) +
+                                k * (  dt * ( x * omega + v ) + x )
+                              ) / ( phi * k );
+          this.mass.verticalVelocity = ( g * m * ( Math.sqrt( k * m ) - omega * ( m + dt * Math.sqrt( k * m ) ) ) -
+                                         k * ( m * v * ( omega * dt - 1 ) + k * dt * x )
+                                       ) / ( phi * k * m);
         }
 
         this.mass.position = new Vector2( this.position.x, this.bottomProperty.get() );

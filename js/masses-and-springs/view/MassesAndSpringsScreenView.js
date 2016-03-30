@@ -175,6 +175,7 @@ define( function( require ) {
 
   return inherit( ScreenView, MassesAndSpringsScreenView, {
     reset: function() {
+      //TODO:: reset Ruler and ReferenceLine
       // make sure view is also reset
       this.model.reset();
       this.viewProperties.reset();

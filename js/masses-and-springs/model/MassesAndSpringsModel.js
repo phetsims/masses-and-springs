@@ -139,7 +139,6 @@ define( function( require ) {
     step: function( dt ) {
       for ( var i in this.masses ) {
         var mass = this.masses[ i ];
-
         // Fall if not hung or grabbed
         if ( mass.spring === null && !mass.userControlled ) {
           mass.fallWithGravity( this.gravity, this.floorY, dt );
