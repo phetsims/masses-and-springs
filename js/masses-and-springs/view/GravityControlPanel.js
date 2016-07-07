@@ -77,11 +77,9 @@ define( function( require ) {
     this.hSlider = new HSlider( gravityProperty, gravityPropertyRange, {
       majorTickLength: 10,
       trackSize: new Dimension2( 150, 2 ),
-      thumbNode: new HSlider.ThumbNode( new Property( true ), {
-        thumbSize: new Dimension2( 7.5, 15 ),
-        thumbFillEnabled: '#00b3b3',
-        thumbFillHighlighted: '#00e6e6'
-      } )
+      thumbSize: new Dimension2( 7.5, 15 ),
+      thumbFillEnabled: '#00b3b3',
+      thumbFillHighlighted: '#00e6e6'
     } );
     this.hSlider.addMajorTick( gravityPropertyRange.min, new Text( gravityNoneString, { font: LABEL_FONT } ) );
     this.hSlider.addMajorTick( gravityPropertyRange.max, new Text( gravityLotsString, { font: LABEL_FONT } ) );

@@ -44,11 +44,9 @@ define( function( require ) {
       majorTickLength: 10,
       minorTickLength: 5,
       trackSize: new Dimension2( 150, 2 ),
-      thumbNode: new HSlider.ThumbNode( new Property( true ), {
-        thumbSize: new Dimension2( 7.5, 15 ),
-        thumbFillEnabled: '#00b3b3',
-        thumbFillHighlighted: '#00e6e6'
-      } )
+      thumbSize: new Dimension2( 7.5, 15 ),
+      thumbFillEnabled: '#00b3b3',
+      thumbFillHighlighted: '#00e6e6'
     } );
 
     hSlider.addMajorTick( springConstantPropertyRange.min, new Text( springConstantSmallString, { font: LABEL_FONT } ) );
