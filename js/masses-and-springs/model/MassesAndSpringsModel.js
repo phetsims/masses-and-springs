@@ -9,7 +9,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Spring = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Spring' );
   var Mass = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Mass' );
@@ -37,8 +37,8 @@ define( function( require ) {
     this.floorY = 0; // Y position of floor in m
     this.ceilingY = 1.23; // Y position of ceiling in m
     this.springs = [
-      new Spring( new Vector2( .50, this.ceilingY ), .50, new Range( 5, 15, 9 ), this.friction ),
-      new Spring( new Vector2( .80, this.ceilingY ), .50, new Range( 5, 15, 9 ), this.friction )
+      new Spring( new Vector2( .50, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.friction ),
+      new Spring( new Vector2( .80, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.friction )
     ];
 
     this.masses = [
@@ -58,7 +58,7 @@ define( function( require ) {
       Body.ZERO_G,
       Body.CUSTOM
     ];
-    this.gravityRange = new Range( 0, 30, 9.8 );
+    this.gravityRange = new RangeWithValue( 0, 30, 9.8 );
 
     this.gravityProperty.link( function( newGravity ) {
       assert && assert( newGravity >= 0, 'gravity must be 0 or positive : ' + newGravity );
