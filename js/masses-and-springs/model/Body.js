@@ -33,12 +33,14 @@ define( function( require ) {
 
   massesAndSprings.register( 'Body', Body );
 
-  return inherit( Object, Body, {}, {
-    MOON: new Body( bodyMoonString, 1.62 ),
-    EARTH: new Body( bodyEarthString, 9.81 ),
-    JUPITER: new Body( bodyJupiterString, 24.79 ),
-    PLANET_X: new Body( bodyPlanetXString, 14.2 ),
-    ZERO_G: new Body( bodyZeroGString, 0 ),
-    CUSTOM: new Body( bodyCustomString, null )
-  } );
+  inherit( Object, Body );
+
+  Body.MOON = new Body( bodyMoonString, 1.62 );
+  Body.EARTH = new Body( bodyEarthString, 9.81 );
+  Body.JUPITER = new Body( bodyJupiterString, 24.79 );
+  Body.PLANET_X = new Body( bodyPlanetXString, 14.2 );
+  Body.ZERO_G = new Body( bodyZeroGString, 0 );
+  Body.CUSTOM = new Body( bodyCustomString, null );
+
+  return Body;
 } );
