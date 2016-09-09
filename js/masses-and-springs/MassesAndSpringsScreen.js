@@ -14,19 +14,11 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
 
-  // strings
-  var massesAndSpringsTitleString = require( 'string!MASSES_AND_SPRINGS/masses-and-springs.title' );
-
   /**
    * @constructor
    */
   function MassesAndSpringsScreen() {
-
-    //If this is a single-screen sim, then no icon is necessary.
-    //If there are multiple screens, then the icon must be provided here.
-    var icon = null;
-
-    Screen.call( this, massesAndSpringsTitleString, icon,
+    Screen.call( this,
       function() { return new MassesAndSpringsModel(); },
       function( model ) { return new MassesAndSpringsScreenView( model ); },
       { backgroundColor: 'white' }
