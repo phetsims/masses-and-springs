@@ -28,7 +28,7 @@ define( function( require ) {
    *
    * @param {Property,<number>} springConstantProperty
    * @param {Range} springConstantPropertyRange
-   * @param {String} title
+   * @param {string} title
    * @param {} options
    * @constructor
    */
