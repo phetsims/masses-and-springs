@@ -14,7 +14,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {Spring} Spring model object
+   * @param {spring} spring model object
    * @param {ModelViewTransform2} mvt
    * @param {Object} [options]
    * @constructor
@@ -47,11 +47,11 @@ define( function( require ) {
     spring.lengthProperty.link( function ( length ) {
       // ParametricSpringNode calculations
       var coilLength = ( mvt.modelToViewDeltaY( length ) - ( options.leftEndLength + options.rightEndLength ) );
-      var xScale = coilLength / ( self.model.loopsProperty.get() * self.model.radiusProperty.get() );
+      var xScale = coilLength / ( self.loopsProperty.get() * self.radiusProperty.get() );
 
       //The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
       //TODO There is possibly a better solution by setting the phase and deltaPhase.
-      self.model.xScaleProperty.set( xScale );
+      self.xScaleProperty.set( xScale );
       self.translation =  mvt.modelToViewPosition( new Vector2( spring.position.x, spring.position.y - length ) );
     } );
 
@@ -59,7 +59,7 @@ define( function( require ) {
      //springConstant determines lineWidth
     spring.springConstantProperty.link( function( springConstant ) {
       var lineWidth = options.minLineWidth + options.deltaLineWidth * ( springConstant - spring.springConstantRange.min ) / 2;
-      self.model.lineWidthProperty.set( lineWidth );
+      self.lineWidthProperty.set( lineWidth );
     } );
   }
 
@@ -67,7 +67,7 @@ define( function( require ) {
 
   return inherit( ParametricSpringNode, OscillatingSpringNode, {
     reset: function() {
-      this.model.reset();
+      ParametricSpringNode.prototype.reset.call( this );
       this.spring.reset();
     }
   } );
