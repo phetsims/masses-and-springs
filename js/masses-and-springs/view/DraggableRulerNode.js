@@ -31,9 +31,11 @@ define( function( require ) {
     // define ruler params in pixels
     var rulerWidth = 397; // 1 meter
     var rulerLength = .1 * rulerWidth;
-    var majorTickLabels = [];
+    var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
-      majorTickLabels[ i * 2 ] = '' + Math.floor( i * 10 );
+      majorTickLabels.push( '' );
+      majorTickLabels.push( '' + Math.floor( i * 10 ) );
+      assert && assert( majorTickLabels[ i * 2 ] === '' + Math.floor( i * 10 ) );
     }
     majorTickLabels.push('');
     majorTickLabels.push('');
