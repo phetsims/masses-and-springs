@@ -60,10 +60,10 @@ define( function( require ) {
       } );
     } );
 
-    this.gravityProperty = gravityProperty; // {number}
-    Property.addProperty( this, 'bodyTitle', Body.EARTH.title ); // {string}
-    Property.addProperty( this, 'previousBodyTitle', Body.EARTH.title ); // {string}
-    Property.addProperty( this, 'previousGravity', Body.EARTH.gravity ); // {number}
+    this.gravityProperty = gravityProperty; // {Property.<number>}
+    var previousGravityProperty = new Property( Body.EARTH.gravity ); // {Property.<number>}
+    this.bodyTitleProperty = new Property( Body.EARTH.title ); // @private {Property.<string>}
+    var previousBodyTitleProperty = new Property( Body.EARTH.title ); // {Property.<string>}
 
     var gravityComboBox = new ComboBox( bodyListItems, self.bodyTitleProperty, listNodeParent, {
       listPosition: 'below',
@@ -107,8 +107,8 @@ define( function( require ) {
         self.gravityProperty.set( body.gravity );
       }
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
-      else if ( self.previousBodyTitle === Body.PLANET_X.title && newBodyTitle === Body.CUSTOM.title ) {
-        self.gravityProperty.set( self.previousGravity );
+      else if ( previousBodyTitleProperty.get() === Body.PLANET_X.title && newBodyTitle === Body.CUSTOM.title ) {
+        self.gravityProperty.set( previousGravityProperty.get() );
       }
       // Update gravity
       else if ( body.gravity || body.title === Body.ZERO_G.title ) {
@@ -116,13 +116,13 @@ define( function( require ) {
       }
 
       //Store previous state so we can revert after leaving Planet X.
-      self.previousBodyTitle = newBodyTitle;
+      previousBodyTitleProperty.set( newBodyTitle );
     } );
 
     this.gravityProperty.link( function( newGravity ) {
       // Remember the last change to gravity if we are not on planetX
-      if ( self.bodyTitle !== Body.PLANET_X.title ) {
-        self.previousGravity = newGravity;
+      if ( self.bodyTitleProperty.get() !== Body.PLANET_X.title ) {
+        previousGravityProperty.set( newGravity );
       }
       // If we changed to a body, don't try to update the title
       for ( var i in self.bodies ) {
@@ -133,7 +133,7 @@ define( function( require ) {
         }
       }
       //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
-      self.bodyTitle = Body.CUSTOM.title;
+      self.bodyTitleProperty.set( Body.CUSTOM.title );
     } );
   }
 
@@ -146,7 +146,7 @@ define( function( require ) {
      */
     reset: function() {
       // On reset we need to manually set title to Earth or the gravityLink will change it to custom.
-      this.bodyTitle = Body.EARTH.title;
+      this.bodyTitleProperty.set( Body.EARTH.title );
     }
   } );
 
