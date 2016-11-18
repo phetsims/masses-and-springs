@@ -58,9 +58,10 @@ define( function( require ) {
       tickMarksOnBottom: false
     } ) );
 
-    var positionProperty = new Property( initialPosition );
-    positionProperty.linkAttribute( self, 'translation' );
-    this.addInputListener( new MovableDragHandler( positionProperty, {
+    // @private
+    this.positionProperty = new Property( initialPosition );
+    this.positionProperty.linkAttribute( self, 'translation' );
+    this.addInputListener( new MovableDragHandler( this.positionProperty, {
       dragBounds: dragBounds
     } ) );
 
@@ -69,6 +70,11 @@ define( function( require ) {
 
   massesAndSprings.register( 'DraggableRulerNode', DraggableRulerNode );
 
-  return inherit( Node, DraggableRulerNode );
+  return inherit( Node, DraggableRulerNode, {
+
+    reset: function() {
+      this.positionProperty.reset();
+    }
+  } );
 
 } );
