@@ -15,7 +15,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
-
+  // Erase me
   /**
    * @param {Vector2} initialPosition - of the center of line
    * @param {Bounds2} dragBounds
