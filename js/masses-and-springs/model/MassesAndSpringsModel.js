@@ -28,6 +28,7 @@ define( function( require ) {
   function MassesAndSpringsModel() {
     var self = this;
 
+    this.playingProperty = new Property( true ); // {boolean} determines whether the sim is in a play/pause state
     this.timeRateProperty = new Property( 1.0 ); // {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
     this.frictionProperty = new Property( .2 ); // {number} c - coefficient of friction
     this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)
@@ -88,6 +89,7 @@ define( function( require ) {
       this.timeRateProperty.reset();
       this.frictionProperty.reset();
       this.gravityProperty.reset();
+      this.playingProperty.reset();
       this.masses.forEach( function( mass ) { mass.reset(); } );
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
@@ -136,17 +138,19 @@ define( function( require ) {
      */
     step: function( dt ) {
       var self = this;
-      this.masses.forEach( function( mass ) {
-        // Fall if not hung or grabbed
-        if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
-          mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );
-        }
-      } );
+      if ( self.playingProperty.get() === true ) {
+        this.masses.forEach( function( mass ) {
+          // Fall if not hung or grabbed
+          if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
+            mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );
+          }
+        } );
 
-      // Oscillate springs
-      this.springs.forEach( function( spring ) {
-        spring.oscillate( dt );
-      } );
+        // Oscillate springs
+        this.springs.forEach( function( spring ) {
+          spring.oscillate( dt );
+        } );
+      }
     }
   } );
 } );

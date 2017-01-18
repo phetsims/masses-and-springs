@@ -22,6 +22,7 @@ define( function( require ) {
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/OscillatingSpringNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var PropertySet = require( 'AXON/PropertySet' );
   var ReferenceLine = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/ReferenceLine' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -82,6 +83,13 @@ define( function( require ) {
       bottom: mvt.modelToViewY( model.floorY )
     } );
     this.addChild( resetAllButton );
+
+    var playPauseButton = new PlayPauseButton( model.playingProperty, {
+      right: resetAllButton.left - 20,
+      centerY: resetAllButton.centerY,
+      radius: 18
+    } );
+    this.addChild( playPauseButton );
 
     var gravityControlPanel = new GravityControlPanel( model.gravityProperty, model.gravityRange, model.bodies, listParentNode, {
       right: this.layoutBounds.width - 10,
@@ -160,7 +168,7 @@ define( function( require ) {
       model.springs[ 1 ].springConstantRange,
       StringUtils.format( springConstantString, 2 ), {
         right: this.layoutBounds.width - 10,
-        top: mvt.modelToViewY(.95 )
+        top: mvt.modelToViewY( .95 )
       } ) );
 
     // This should always be after all nodes containing a ComboBox
