@@ -133,6 +133,15 @@ define( function( require ) {
 
     /**
      * @public
+     */
+    stepForward: function() {
+      this.playingProperty.set( true );
+      this.step( 1 / 60 );// steps the nominal amount used by step forward button listner
+      this.playingProperty.set( false );
+    },
+
+    /**
+     * @public
      *
      * @param {number} dt
      */
