@@ -2,6 +2,7 @@
 
 /**
  * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Denzell Barnett 
  */
 define( function( require ) {
   'use strict';
@@ -63,7 +64,7 @@ define( function( require ) {
     this.gravityProperty.link( function( newGravity ) {
       assert && assert( newGravity >= 0, 'gravity must be 0 or positive : ' + newGravity );
       self.springs.forEach( function( spring ) {
-        spring.gravity = newGravity;
+        spring.gravityProperty.set( newGravity );
       } );
     } );
 
@@ -71,7 +72,7 @@ define( function( require ) {
       assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
       //console.log( 'friction changed, newFriction=' + newFriction );
       self.springs.forEach( function( spring ) {
-        spring.dampingCoefficient = newFriction;
+        spring.dampingCoefficientProperty.set( newFriction );
       } );
     } );
 
@@ -108,8 +109,9 @@ define( function( require ) {
       }
       // Update mass position and spring length if attached
       if ( mass.springProperty.get() ) {
-        mass.springProperty.get().displacement = -( mass.springProperty.get().position.y - mass.springProperty.get().naturalRestingLength ) + proposedPosition.y;
-        mass.positionProperty.set( new Vector2( mass.springProperty.get().position.x, proposedPosition.y ) );
+        mass.springProperty.get().displacementProperty.set( -( mass.springProperty.get().positionProperty.get().y -
+                                                               mass.springProperty.get().naturalRestingLengthProperty.get() ) + proposedPosition.y );
+        mass.positionProperty.set( new Vector2( mass.springProperty.get().positionProperty.get().x, proposedPosition.y ) );
         //console.log( 'snagged' );
       }
       // Update mass position if unattached
@@ -118,7 +120,7 @@ define( function( require ) {
         //Attempt to attach
         for ( var i in this.springs ) {
           var spring = this.springs[ i ];
-          if ( Math.abs( proposedPosition.x - spring.position.x ) < GRABBING_DISTANCE &&
+          if ( Math.abs( proposedPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
                Math.abs( proposedPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE ) {
             spring.addMass( mass );
           }
@@ -136,18 +138,18 @@ define( function( require ) {
      * @param {number} dt
      */
     step: function( dt ) {
-      for ( var i in this.masses ) {
-        var mass = this.masses[ i ];
+      var self = this;
+      this.masses.forEach( function( mass ) {
         // Fall if not hung or grabbed
         if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
-          mass.fallWithGravity( this.gravity, this.floorY, dt );
+          mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );
         }
-      }
+      } );
 
       // Oscillate springs
-      for ( i in this.springs ) {
-        this.springs[ i ].oscillate( dt );
-      }
+      this.springs.forEach( function( spring ) {
+        spring.oscillate( dt );
+      } );
     }
   } );
 } );

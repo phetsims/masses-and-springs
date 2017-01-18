@@ -2,6 +2,7 @@
 
 /**
  * @author Matt Pennington
+ * @author Denzell Barnett
  */
 define( function( require ) {
   'use strict';
@@ -104,7 +105,7 @@ define( function( require ) {
       //  If PlanetX hide the slider and update gravity
       if ( newBodyTitle === Body.PLANET_X.title ) {
         self.hSlider.visible = false;
-        self.gravityProperty.set( body.gravity );
+        self.gravityProperty.set( body.gravityProperty.get );
       }
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
       else if ( previousBodyTitleProperty.get() === Body.PLANET_X.title && newBodyTitle === Body.CUSTOM.title ) {

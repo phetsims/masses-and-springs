@@ -2,6 +2,7 @@
 
 /**
  * @author Matt Pennington
+ * @author Denzell Barnett
  */
 
 define( function( require ) {
@@ -42,7 +43,7 @@ define( function( require ) {
 
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
-        self.springProperty.get().animating = true;
+        self.springProperty.get().animatingProperty.set( true );
       }
     } );
   }

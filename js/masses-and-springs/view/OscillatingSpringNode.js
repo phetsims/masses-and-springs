@@ -2,6 +2,7 @@
 
 /**
  * @author Matt Pennington
+ * @author Denzell Barnett
  */
 define( function( require ) {
   'use strict';
@@ -41,7 +42,7 @@ define( function( require ) {
 
     ParametricSpringNode.call( this, options );
     this.spring = spring;
-    this.translation =  mvt.modelToViewPosition(  new Vector2 ( spring.position.x, spring.position.y - length ) );
+    this.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );
     this.mvt = mvt;
 
     spring.lengthProperty.link( function ( length ) {
@@ -52,7 +53,7 @@ define( function( require ) {
       //The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
       //TODO There is possibly a better solution by setting the phase and deltaPhase.
       self.xScaleProperty.set( xScale );
-      self.translation =  mvt.modelToViewPosition( new Vector2( spring.position.x, spring.position.y - length ) );
+      self.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );
     } );
 
      //ParametricSpringNode width update
