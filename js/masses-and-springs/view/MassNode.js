@@ -49,10 +49,7 @@ define( function( require ) {
       mvt.modelToViewDeltaY( -mass.height )
     );
     var rect = Rectangle.bounds( viewBounds, {
-      fill: new LinearGradient( viewBounds.minX, 0, viewBounds.maxX, 0 ).
-        addColorStop( 0.3, color ).
-        addColorStop( 0.8, 'white' ).
-        addColorStop( 1, color )
+      fill: new LinearGradient( viewBounds.minX, 0, viewBounds.maxX, 0 ).addColorStop( 0.3, color ).addColorStop( 0.8, 'white' ).addColorStop( 1, color )
     } );
     this.addChild( rect );
     if ( isLabeled ) {
@@ -91,13 +88,13 @@ define( function( require ) {
       start: function( event ) {
         modelOffset = mvt
           .viewToModelPosition( screenView.globalToLocalPoint( event.pointer.point ) )
-          .minus( self.mass.position );
-        mass.userControlled = true;
+          .minus( self.mass.positionProperty.get() );
+        mass.userControlledProperty.set( true );
         self.moveToFront();
       },
 
       end: function() {
-        mass.userControlled = false;
+        mass.userControlledProperty.set( false );
       }
     } ) );
 

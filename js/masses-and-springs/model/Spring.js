@@ -118,9 +118,9 @@ define( function( require ) {
         this.mass.detach();
       }
       this.mass = mass;
-      this.mass.spring = this;
-      this.displacement = this.mass.position.y - ( this.position.y - this.naturalRestingLength );
-      this.mass.verticalVelocity = 0;
+      this.mass.springProperty.set( this );
+      this.displacement = this.mass.positionProperty.get().y - ( this.position.y - this.naturalRestingLength );
+      this.mass.verticalVelocityProperty.set( 0 );
       this.animating = true;
     },
 
@@ -130,12 +130,12 @@ define( function( require ) {
      * @param {number} dt - animation time step
      */
     oscillate: function( dt ) {
-      if ( this.mass && !this.mass.userControlled && this.animating ) {
+      if ( this.mass && !this.mass.userControlledProperty.get() && this.animating ) {
         //TODO:: implement upper limit for dt
         var k = this.springConstant;
         var m = this.mass.mass;
         var c = this.dampingCoefficient;
-        var v = this.mass.verticalVelocity;
+        var v = this.mass.verticalVelocityProperty.get();
         var x = this.displacement;
         var g = this.gravity;
 
@@ -192,19 +192,19 @@ define( function( require ) {
           }
 
           //Squelch noise after coming to rest with tolerance of 1 mm
-          if ( Math.abs( this.displacement - newDisplacement) < .0001 &&
-               Math.abs( this.mass.verticalVelocity) < .0001 ) {
+          if ( Math.abs( this.displacement - newDisplacement ) < .0001 &&
+               Math.abs( this.mass.verticalVelocityProperty.get() ) < .0001 ) {
             this.displacement = -m * g / k;  //Equilibrium length
-            this.mass.verticalVelocity = 0;
+            this.mass.verticalVelocityProperty.set( 0 );
             this.animating = false;
           }
           else {
             this.displacement = newDisplacement;
-            this.mass.verticalVelocity = newVelocity;
+            this.mass.verticalVelocityProperty.set( newVelocity );
           }
 
           assert && assert( !isNaN( this.displacement ), 'displacement must be a number' );
-          assert && assert( !isNaN( this.mass.verticalVelocity ), 'velocity must be a number' );
+          assert && assert( !isNaN( this.mass.verticalVelocityProperty.get() ), 'velocity must be a number' );
 
         }
         // Critically damped case
@@ -217,12 +217,12 @@ define( function( require ) {
           this.displacement = ( g * ( -m * phi + dt * Math.sqrt( k * m ) + m ) +
                                 k * (  dt * ( x * omega + v ) + x )
                               ) / ( phi * k );
-          this.mass.verticalVelocity = ( g * m * ( Math.sqrt( k * m ) - omega * ( m + dt * Math.sqrt( k * m ) ) ) -
-                                         k * ( m * v * ( omega * dt - 1 ) + k * dt * x )
-                                       ) / ( phi * k * m);
+          this.mass.verticalVelocityProperty.set( ( g * m * ( Math.sqrt( k * m ) - omega * ( m + dt * Math.sqrt( k * m ) ) ) -
+                                                    k * ( m * v * ( omega * dt - 1 ) + k * dt * x )
+                                                  ) / ( phi * k * m) );
         }
 
-        this.mass.position = new Vector2( this.position.x, this.bottomProperty.get() );
+        this.mass.positionProperty.set( new Vector2( this.position.x, this.bottomProperty.get() ) );
       }
     }
   } );

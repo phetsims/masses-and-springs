@@ -9,7 +9,7 @@ define( function( require ) {
 
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -28,29 +28,28 @@ define( function( require ) {
     // @public (read-only)
     this.mass = massValue;
 
-    PropertySet.call( this, {
-      // @public
-      userControlled: false, // {boolean} indicates whether this mass is currently user controlled
-      position: initialPosition, // {Vector2}  the position of a mass is the center top of the model object.
-      spring: null, // {Spring|null}   is the mass attached to a Spring?
-      verticalVelocity: 0 // {number} m/s
-    } );
+    // Main model properties
+    this.positionProperty = new Property( initialPosition ); // {Vector2}  the position of a mass is the center top of the model object.
+    this.userControlledProperty = new Property( false ); // {boolean} indicates whether this mass is currently user controlled
+    this.verticalVelocityProperty = new Property( 0 ); // {number} m/s
+    this.springProperty = new Property( null ); // {Spring|null}   is the mass attached to a Spring?
 
+    // Non property model attributes
     this.hookHeight = .03; // height in m
     this.radius = Math.pow( this.mass / (density * heightRatio * Math.PI ), 1 / 3 );
     this.cylinderHeight = this.radius * heightRatio;
     this.height = this.cylinderHeight + this.hookHeight;
 
     this.userControlledProperty.link( function( userControlled ) {
-      if ( !userControlled && self.spring ) {
-        self.spring.animating = true;
+      if ( !userControlled && self.springProperty.get() ) {
+        self.springProperty.get().animating = true;
       }
     } );
   }
 
   massesAndSprings.register( 'Mass', Mass );
 
-  return inherit( PropertySet, Mass, {
+  return inherit( Object, Mass, {
     /**
      * @public
      *
@@ -60,17 +59,18 @@ define( function( require ) {
      */
     fallWithGravity: function( gravity, floorY, dt ) {
       var floorPosition = floorY + this.height;
-      if ( this.position.y !== floorPosition ) {
-        var newVerticalVelocity = this.verticalVelocity - gravity * dt;
-        var newY = this.position.y + ( this.verticalVelocity + newVerticalVelocity) * dt / 2;
+      var oldY = this.positionProperty.get().y;
+      if ( oldY !== floorPosition ) {
+        var newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
+        var newY = oldY + ( this.verticalVelocityProperty.get() + newVerticalVelocity ) * dt / 2;
         if ( newY < floorPosition ) {
           // if we hit the ground stop falling
-          this.position = new Vector2( this.position.x, floorPosition );
-          this.verticalVelocity = 0;
+          this.positionProperty.set( new Vector2( this.positionProperty.get().x, floorPosition ) );
+          this.verticalVelocityProperty.set( 0 );
         }
         else {
-          this.verticalVelocity = newVerticalVelocity;
-          this.position = new Vector2( this.position.x, newY );
+          this.verticalVelocityProperty.set( newVerticalVelocity );
+          this.positionProperty.set( new Vector2( this.positionProperty.get().x, newY ) );
         }
       }
     },
@@ -81,16 +81,26 @@ define( function( require ) {
      * @param {Spring} spring
      */
     attach: function( spring ) {
-      this.verticalVelocity = 0;
-      this.spring = spring;
+      this.verticalVelocityProperty.set( 0 );
+      this.springProperty.set( spring );
     },
 
     /**
      * @public
      */
     detach: function() {
-      this.verticalVelocity = 0;
-      this.spring = null;
+      this.verticalVelocityProperty.set( 0 );
+      this.springProperty.set( null );
+    },
+
+    /**
+     * @public
+     */
+    reset: function() {
+      this.positionProperty.reset();
+      this.userControlledProperty.reset();
+      this.springProperty.reset();
+      this.verticalVelocityProperty.reset();
     }
 
   } );

@@ -45,9 +45,9 @@ define( function( require ) {
       new Mass( .250, new Vector2( .3, .5 ) ),
       new Mass( .100, new Vector2( .4, .5 ) ),
       new Mass( .050, new Vector2( .49, .5 ) ),
-      new Mass( .200, new Vector2( .8, .5 )),
+      new Mass( .200, new Vector2( .8, .5 ) ),
       new Mass( .150, new Vector2( .9, .5 ) ),
-      new Mass( .075, new Vector2(.98, .5 )  )
+      new Mass( .075, new Vector2( .98, .5 ) )
 
     ];
     this.bodies = [
@@ -91,7 +91,6 @@ define( function( require ) {
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
 
-
     /**
      *  Based on new dragged position of mass, try to attach or detach mass if eligible and then update position.
      *
@@ -100,17 +99,17 @@ define( function( require ) {
      * @param {Mass} mass
      * @param {Vector2} proposedPosition
      */
-    adjustDraggedMassPosition: function( mass, proposedPosition ){
+    adjustDraggedMassPosition: function( mass, proposedPosition ) {
       // Attempt to detach
-      if ( mass.spring && Math.abs( proposedPosition.x - mass.position.x ) > DROPPING_DISTANCE ) {
+      if ( mass.springProperty.get() && Math.abs( proposedPosition.x - mass.positionProperty.get().x ) > DROPPING_DISTANCE ) {
         //console.log( 'removed' );
-        mass.spring.removeMass();
+        mass.springProperty.get().removeMass();
         mass.detach();
       }
       // Update mass position and spring length if attached
-      if ( mass.spring ) {
-        mass.spring.displacement =  - ( mass.spring.position.y - mass.spring.naturalRestingLength ) + proposedPosition.y;
-        mass.position = new Vector2( mass.spring.position.x, proposedPosition.y );
+      if ( mass.springProperty.get() ) {
+        mass.springProperty.get().displacement = -( mass.springProperty.get().position.y - mass.springProperty.get().naturalRestingLength ) + proposedPosition.y;
+        mass.positionProperty.set( new Vector2( mass.springProperty.get().position.x, proposedPosition.y ) );
         //console.log( 'snagged' );
       }
       // Update mass position if unattached
@@ -126,7 +125,7 @@ define( function( require ) {
           //console.log( spring.mass );
         }
         //Update position
-        mass.position = proposedPosition;
+        mass.positionProperty.set( proposedPosition );
         //console.log( 'dropped ' + mass.spring );
       }
     },
@@ -140,7 +139,7 @@ define( function( require ) {
       for ( var i in this.masses ) {
         var mass = this.masses[ i ];
         // Fall if not hung or grabbed
-        if ( mass.spring === null && !mass.userControlled ) {
+        if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
           mass.fallWithGravity( this.gravity, this.floorY, dt );
         }
       }
