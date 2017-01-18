@@ -2,14 +2,14 @@
 
 /**
  * @author Matt Pennington (PhET Interactive Simulations)
- * @author Denzell Barnett 
+ * @author Denzell Barnett
  */
 define( function( require ) {
   'use strict';
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Spring = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Spring' );
@@ -28,18 +28,17 @@ define( function( require ) {
   function MassesAndSpringsModel() {
     var self = this;
 
-    PropertySet.call( this, {
-      timeRate: 1.0,// {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
-      friction: .2, // {number} c - coefficient of friction
-      gravity: 9.8 // {number} a - gravitational acceleration (positive)
-      //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
-    } );
+    this.timeRateProperty = new Property( 1.0 ); // {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
+    this.frictionProperty = new Property( .2 ); // {number} c - coefficient of friction
+    this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)
+    //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
+
 
     this.floorY = 0; // Y position of floor in m
     this.ceilingY = 1.23; // Y position of ceiling in m
     this.springs = [
-      new Spring( new Vector2( .50, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.friction ),
-      new Spring( new Vector2( .80, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.friction )
+      new Spring( new Vector2( .50, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() ),
+      new Spring( new Vector2( .80, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() )
     ];
 
     this.masses = [
@@ -70,7 +69,6 @@ define( function( require ) {
 
     this.frictionProperty.link( function( newFriction ) {
       assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
-      //console.log( 'friction changed, newFriction=' + newFriction );
       self.springs.forEach( function( spring ) {
         spring.dampingCoefficientProperty.set( newFriction );
       } );
@@ -80,14 +78,16 @@ define( function( require ) {
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
 
-  return inherit( PropertySet, MassesAndSpringsModel, {
+  return inherit( Object, MassesAndSpringsModel, {
 
     /**
      * @override
      * @public
      */
     reset: function() {
-      PropertySet.prototype.reset.call( this );
+      this.timeRateProperty.reset();
+      this.frictionProperty.reset();
+      this.gravityProperty.reset();
       this.masses.forEach( function( mass ) { mass.reset(); } );
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
@@ -103,7 +103,6 @@ define( function( require ) {
     adjustDraggedMassPosition: function( mass, proposedPosition ) {
       // Attempt to detach
       if ( mass.springProperty.get() && Math.abs( proposedPosition.x - mass.positionProperty.get().x ) > DROPPING_DISTANCE ) {
-        //console.log( 'removed' );
         mass.springProperty.get().removeMass();
         mass.detach();
       }
@@ -124,11 +123,9 @@ define( function( require ) {
                Math.abs( proposedPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE ) {
             spring.addMass( mass );
           }
-          //console.log( spring.mass );
         }
         //Update position
         mass.positionProperty.set( proposedPosition );
-        //console.log( 'dropped ' + mass.spring );
       }
     },
 
