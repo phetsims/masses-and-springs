@@ -40,11 +40,11 @@ define( function( require ) {
       majorTickLabels.push( '' + Math.floor( i * 10 ) );
       assert && assert( majorTickLabels[ i * 2 ] === '' + Math.floor( i * 10 ) );
     }
-    majorTickLabels.push('');
-    majorTickLabels.push('');
+    majorTickLabels.push( '' );
+    majorTickLabels.push( '' );
     var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
 
-    this.addChild( new RulerNode( rulerWidth,  rulerLength , majorTickWidth, majorTickLabels, cmString, {
+    this.addChild( new RulerNode( rulerWidth, rulerLength, majorTickWidth, majorTickLabels, cmString, {
       insetsWidth: 5,
       minorTicksPerMajorTick: 4,
       unitsMajorTickIndex: 19,

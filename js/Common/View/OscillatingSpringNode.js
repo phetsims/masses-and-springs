@@ -45,7 +45,7 @@ define( function( require ) {
     this.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );
     this.mvt = mvt;
 
-    spring.lengthProperty.link( function ( length ) {
+    spring.lengthProperty.link( function( length ) {
       // ParametricSpringNode calculations
       var coilLength = ( mvt.modelToViewDeltaY( length ) - ( options.leftEndLength + options.rightEndLength ) );
       var xScale = coilLength / ( self.loopsProperty.get() * self.radiusProperty.get() );
@@ -56,8 +56,8 @@ define( function( require ) {
       self.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );
     } );
 
-     //ParametricSpringNode width update
-     //springConstant determines lineWidth
+    //ParametricSpringNode width update
+    //springConstant determines lineWidth
     spring.springConstantProperty.link( function( springConstant ) {
       var lineWidth = options.minLineWidth + options.deltaLineWidth * ( springConstant - spring.springConstantRange.min ) / 2;
       self.lineWidthProperty.set( lineWidth );

@@ -13,19 +13,19 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
 
   var Bounds2 = require( 'DOT/Bounds2' );
-  var GravityControlPanel = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/GravityControlPanel' );
+  var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/DraggableRulerNode' );
-  var MassNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/MassNode' );
+  var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
+  var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/OscillatingSpringNode' );
+  var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var ReferenceLine = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/ReferenceLine' );
+  var ReferenceLine = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLine' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/SpringConstantControlPanel' );
