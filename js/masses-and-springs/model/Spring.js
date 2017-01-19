@@ -36,6 +36,16 @@ define( function( require ) {
     this.animatingProperty = new Property( false ); // {boolean}
     this.massProperty = new Property( null ); // {Mass}
 
+    // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
+    Property.preventGetSet( this, 'gravity' );
+    Property.preventGetSet( this, 'displacement' );
+    Property.preventGetSet( this, 'springConstant' );
+    Property.preventGetSet( this, 'dampingCoefficient' );
+    Property.preventGetSet( this, 'position' );
+    Property.preventGetSet( this, 'naturalRestingLength' );
+    Property.preventGetSet( this, 'animating' );
+    Property.preventGetSet( this, 'mass' );
+
     // validate and save options
     assert && assert( naturalRestingLength > 0, 'naturalRestingLength must be > 0 : ' + naturalRestingLength );
     this.naturalRestingLengthProperty.set( naturalRestingLength ); // @public read-only
@@ -219,8 +229,8 @@ define( function( require ) {
                                            k * (  dt * ( x * omega + v ) + x )
                                          ) / ( phi * k ) );
           this.massProperty.get().verticalVelocityProperty.set( ( g * m * ( Math.sqrt( k * m ) - omega * ( m + dt * Math.sqrt( k * m ) ) ) -
-                                                    k * ( m * v * ( omega * dt - 1 ) + k * dt * x )
-                                                  ) / ( phi * k * m) );
+                                                                  k * ( m * v * ( omega * dt - 1 ) + k * dt * x )
+                                                                ) / ( phi * k * m) );
         }
 
         this.massProperty.get().positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );

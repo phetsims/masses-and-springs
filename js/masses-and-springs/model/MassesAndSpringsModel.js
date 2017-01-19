@@ -34,6 +34,11 @@ define( function( require ) {
     this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)
     //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
 
+    // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
+    Property.preventGetSet( this, 'playing' );
+    Property.preventGetSet( this, 'timeRate' );
+    Property.preventGetSet( this, 'friction' );
+    Property.preventGetSet( this, 'gravity' );
 
     this.floorY = 0; // Y position of floor in m
     this.ceilingY = 1.23; // Y position of ceiling in m

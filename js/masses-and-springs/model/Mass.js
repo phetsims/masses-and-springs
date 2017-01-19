@@ -35,6 +35,13 @@ define( function( require ) {
     this.verticalVelocityProperty = new Property( 0 ); // {number} m/s
     this.springProperty = new Property( null ); // {Spring|null}   is the mass attached to a Spring?
 
+    // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
+    Property.preventGetSet( this, 'position' );
+    Property.preventGetSet( this, 'userControlled' );
+    Property.preventGetSet( this, 'verticalVelocity' );
+    Property.preventGetSet( this, 'spring' );
+    
+
     // Non property model attributes
     this.hookHeight = .03; // height in m
     this.radius = Math.pow( this.mass / (density * heightRatio * Math.PI ), 1 / 3 );
