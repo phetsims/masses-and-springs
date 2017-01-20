@@ -55,6 +55,7 @@ define( function( require ) {
       majorTickHeight: 10,
       minorTickHeight: 5,
       unitsFont: FONT,
+      opacity: .8,
       tickMarksOnBottom: false
     } ) );
 

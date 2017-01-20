@@ -150,11 +150,18 @@ define( function( require ) {
     var indicatorVisibilityControlsVBox = new VBox( {
       children: [
         new VStrut( titleToControlsVerticalSpace ),
-        new HBox( { children: [ new HStrut( 10 ), indicatorVisibilityCheckBoxGroup ] } )
+        new HBox(
+          {
+            children: [
+              new HStrut( 10 ),
+              indicatorVisibilityCheckBoxGroup
+            ]
+          } )
       ],
       align: 'left'
     } );
-    var indicatorVisibilityControlPanel = new Panel( indicatorVisibilityControlsVBox,
+    var indicatorVisibilityControlPanel = new Panel(
+      indicatorVisibilityControlsVBox,
       {
         xMargin: 31,
         fill: 'rgb( 240, 240, 240 )',
@@ -162,7 +169,6 @@ define( function( require ) {
         right: this.layoutBounds.width - 10
       } );
     this.addChild( indicatorVisibilityControlPanel );
-
 
     // TODO: move color and isLabeled to model
     // TODO: add massLayer
@@ -197,12 +203,22 @@ define( function( require ) {
     // This should always be after all nodes containing a ComboBox
     this.addChild( listParentNode );
 
-    this.addChild( new DraggableRulerNode( this.layoutBounds, new Vector2( this.layoutBounds.left + 50, mvt.modelToViewY( model.ceilingY ) ), this.viewProperties.rulerVisibleProperty ) );
+    this.referenceLine = new ReferenceLine(
+      this.layoutBounds.getCenter().minus( new Vector2( 110, 0 ) ),
+      this.layoutBounds,
+      400,
+      this.viewProperties.referenceLineVisibleProperty
+    );
 
-    this.referenceLine = new ReferenceLine( this.layoutBounds.getCenter().minus( new Vector2( 110, 0 ) ), this.layoutBounds, 400, this.viewProperties.referenceLineVisibleProperty );
     this.addChild( this.referenceLine );
 
     this.addChild( this.massLayer );
+
+    this.addChild( new DraggableRulerNode(
+      this.layoutBounds,
+      new Vector2( this.layoutBounds.left + 50, mvt.modelToViewY( model.ceilingY ) ),
+      this.viewProperties.rulerVisibleProperty
+    ) );
 
   }
 
