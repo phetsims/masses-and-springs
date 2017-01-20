@@ -9,7 +9,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var MassesAndSpringsScreen = require( 'MASSES_AND_SPRINGS/masses-and-springs/MassesAndSpringsScreen' );
+  var EnergyScreen = require( 'MASSES_AND_SPRINGS/energy/EnergyScreen' );
+  var IntroScreen = require( 'MASSES_AND_SPRINGS/intro/IntroScreen' );
+  var LabScreen = require( 'MASSES_AND_SPRINGS/lab/LabScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
@@ -25,11 +27,16 @@ define( function( require ) {
       qualityAssurance: '',
       graphicArts: '',
       thanks: ''
-    }
+    },
+    showSmallHomeScreenIconFrame: true
   };
 
   SimLauncher.launch( function() {
-    var sim = new Sim( massesAndSpringsTitleString, [ new MassesAndSpringsScreen() ], simOptions );
+    var sim = new Sim( massesAndSpringsTitleString, [
+      new IntroScreen(),
+      new EnergyScreen(),
+      new LabScreen()
+    ], simOptions );
     sim.start();
   } );
 } );

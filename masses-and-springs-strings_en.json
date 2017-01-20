@@ -5,11 +5,20 @@
   "ruler": {
     "value": "Ruler"
   },
+  "intro": {
+    "value": "Intro"
+  },
+  "lab": {
+    "value": "Lab"
+  },
   "referenceLine": {
     "value": "Reference Line"
   },
   "stopwatch": {
     "value": "Stopwatch"
+  },
+  "energy": {
+    "value": "Energy"
   },
   "equilibriumPosition": {
     "value": "Equilibrium Position"
