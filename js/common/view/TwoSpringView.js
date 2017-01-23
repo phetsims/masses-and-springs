@@ -25,6 +25,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PropertySet = require( 'AXON/PropertySet' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var ReturnButtonNode = require( 'MASSES_AND_SPRINGS/common/view/ReturnButtonNode' );
   var ReferenceLine = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLine' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -61,6 +62,13 @@ define( function( require ) {
     this.model = model; // Make model available for reset
     var self = this;
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+
+    // Needed for grey bar above springHangerNode
+    var mvtSpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+      Vector2.ZERO,
+      new Vector2( 0, this.layoutBounds.height * 1 ),
+      397 );
+    this.mvt = mvtSpringHeight; // Make mvt available to descendant types.
 
     var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
@@ -192,8 +200,23 @@ define( function( require ) {
 
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
-    this.addChild( new OscillatingSpringNode( model.springs[ 0 ], mvt ) );
-    this.addChild( new OscillatingSpringNode( model.springs[ 1 ], mvt ) );
+    this.addChild( new OscillatingSpringNode( model.springs[ 0 ], mvtSpringHeight ) );
+    this.addChild( new OscillatingSpringNode( model.springs[ 1 ], mvtSpringHeight ) );
+
+    // derived from x positions of springs. May be a better way of declaring.
+    var springsSeparation = model.springsSeparation * 860;
+
+    // A 200-unit vertical "wall", for comparison with the spring size
+    var springHangerNode = new Rectangle( 0, 0, springsSeparation, 25, 8, 8, {
+      fill: 'rgb( 180, 180, 180 )',
+      stroke: 'grey',
+      centerX: springsSeparation,
+      centerY: 10,
+      children: [ new Text( '1', { font: FONT, centerY: 12.5, centerX: springsSeparation * .25 } ),
+        new Text( '2', { font: FONT, centerY: 12.5, centerX: springsSeparation * .75 } )
+      ]
+    } );
+    this.addChild( springHangerNode );
 
     this.addChild( new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
