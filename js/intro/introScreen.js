@@ -9,7 +9,7 @@ define( function( require ) {
 
   // modules
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
+  var IntroScreenView = require( 'MASSES_AND_SPRINGS/intro/view/IntroScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -17,26 +17,26 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
 
   // strings
-  var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
+  var introString = require( 'string!MASSES_AND_SPRINGS/intro' );
+
 
   /**
    * @constructor
    */
-  function EnergyScreen() {
+  function IntroScreen() {
 
     var options = {
-      name: energyString,
+      name: introString,
       backgroundColorProperty: new Property( Color.toColor( 'white' ) )
     };
 
     Screen.call( this,
       function() { return new MassesAndSpringsModel(); },
-      function( model ) { return new EnergyScreenView( model ); },
+      function( model ) { return new IntroScreenView( model ); },
       options
     );
   }
 
-  massesAndSprings.register( 'EnergyScreen', EnergyScreen );
-
-  return inherit( Screen, EnergyScreen );
+  massesAndSprings.register( 'IntroScreen', IntroScreen );
+  return inherit( Screen, IntroScreen );
 } );

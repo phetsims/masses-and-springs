@@ -28,7 +28,7 @@ define( function( require ) {
   var ReferenceLine = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLine' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/SpringConstantControlPanel' );
+  var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );

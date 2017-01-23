@@ -13,7 +13,7 @@ define( function( require ) {
   //modules
   var Property = require( 'AXON/Property' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Body = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/Body' );
+  var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );

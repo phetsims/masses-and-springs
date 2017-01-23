@@ -8,7 +8,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/masses-and-springs/model/MassesAndSpringsModel' );
+  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var LabScreenView = require( 'MASSES_AND_SPRINGS/lab/view/LabScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
