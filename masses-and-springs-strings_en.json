@@ -64,6 +64,11 @@
   },
   "cm": {
     "value": "cm"
+  },
+  "normal": {
+    "value": "Normal"
+  },
+  "slowMotion": {
+    "value": "Slow Motion"
   }
-
 }

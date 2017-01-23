@@ -17,19 +17,18 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
+  var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var PropertySet = require( 'AXON/PropertySet' );
   var ReferenceLine = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLine' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/masses-and-springs/view/SpringConstantControlPanel' );
-  var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -37,6 +36,7 @@ define( function( require ) {
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
 
+  // strings
   var equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
   var referenceLineString = require( 'string!MASSES_AND_SPRINGS/referenceLine' );
   var rulerString = require( 'string!MASSES_AND_SPRINGS/ruler' );
@@ -44,11 +44,6 @@ define( function( require ) {
   var stopwatchString = require( 'string!MASSES_AND_SPRINGS/stopwatch' );
 
   var FONT = new PhetFont( 12 );
-
-  // constants
-  var TOUCH_AREA_DILATION = 4;
-  var STROKE = 'black';
-  var FILL = '#005566';
 
   /**
    * TODO::: Remove mvt transforms from view objects
@@ -91,27 +86,8 @@ define( function( require ) {
     } );
     this.addChild( resetAllButton );
 
-    // Play Pause Button
-    var playPauseButton = new PlayPauseButton( model.playingProperty, {
-      centerX: this.layoutBounds.width * 0.75,
-      centerY: resetAllButton.centerY,
-      radius: 18,
-      touchAreaDilation: TOUCH_AREA_DILATION
-    } );
-    this.addChild( playPauseButton );
-
-    // Step Forward Button
-    var stepForwardButton = new StepForwardButton( {
-      playingProperty: model.playingProperty,
-      listener: function() { model.stepForward(); },
-      radius: 12,
-      stroke: STROKE,
-      fill: FILL,
-      touchAreaDilation: TOUCH_AREA_DILATION,
-      y: playPauseButton.centerY,
-      left: playPauseButton.right + 10
-    } );
-    this.addChild( stepForwardButton );
+    // Play/Pause and Step Forward Button Control
+    this.addChild( new MASPlayPauseStepControl( model ) );
 
     // Gravity Control Panel
     var gravityControlPanel = new GravityControlPanel( model.gravityProperty, model.gravityRange, model.bodies, listParentNode, {
