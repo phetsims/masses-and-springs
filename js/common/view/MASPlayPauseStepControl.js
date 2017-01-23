@@ -17,11 +17,6 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   var Vector2 = require( 'DOT/Vector2' );
-  //var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-
-  // strings
-  //var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
-  //var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
 
   // constants
   var TOUCH_AREA_DILATION = 4;
@@ -49,7 +44,7 @@ define( function( require ) {
 
     // Play Pause Button
     var playPauseButton = new PlayPauseButton( model.playingProperty, {
-      right: layoutBounds.right * .75,
+      right: layoutBounds.right * .65,
       bottom: mvt.modelToViewY( model.floorY ),
       radius: 18,
       touchAreaDilation: TOUCH_AREA_DILATION
@@ -68,12 +63,6 @@ define( function( require ) {
       centerY: playPauseButton.centerY
     } );
     this.addChild( stepForwardButton );
-
-    // Speed Selection Buttons
-    // RadioButtonGroup.call( this, histogramModeProperty, [
-    //   { value: playingSpeedProperty, node: normalString },
-    //   { value: playingSpeedProperty, node: slowMotionString }
-    // ], options );
 
     // Blow up the play/pause button slightly when paused.  The PhET convention is to do this for sims where interaction
     // does NOT unpause the sim, which is true for all usages in this sim.

@@ -32,6 +32,7 @@ define( function( require ) {
     this.timeRateProperty = new Property( 1.0 ); // {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
     this.frictionProperty = new Property( .2 ); // {number} c - coefficient of friction
     this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)
+    this.simSpeedProperty = new Property( 'normal' ); // {string} determines the speed at which the sim plays
     //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
 
     // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
@@ -95,6 +96,7 @@ define( function( require ) {
       this.frictionProperty.reset();
       this.gravityProperty.reset();
       this.playingProperty.reset();
+      this.simSpeedProperty.reset();
       this.masses.forEach( function( mass ) { mass.reset(); } );
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
@@ -152,6 +154,29 @@ define( function( require ) {
      */
     step: function( dt ) {
       var self = this;
+
+      // If simulationTimeStep is excessively large, ignore it - it probably means the user returned to the tab after
+      // the tab or the browser was hidden for a while.
+      if ( dt > 1.0 ) {
+        return;
+      }
+
+      if ( this.playingProperty.get() ) {
+
+        // Using real world time for this results in the atoms moving a little slowly, so the time step is adjusted
+        // here.  The multipliers were empirically determined.
+
+        switch( this.simSpeedProperty.get() ) {
+          case 'normal':
+            break;
+          case 'slow':
+            dt = dt / 8;
+            break;
+          default:
+            assert( false, 'invalid setting for model speed' );
+        }
+      }
+
       if ( self.playingProperty.get() === true ) {
         this.masses.forEach( function( mass ) {
           // Fall if not hung or grabbed

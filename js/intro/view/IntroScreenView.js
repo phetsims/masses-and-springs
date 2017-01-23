@@ -11,7 +11,7 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-
+  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
   var HBox = require( 'SCENERY/nodes/HBox' );
@@ -42,8 +42,12 @@ define( function( require ) {
   var rulerString = require( 'string!MASSES_AND_SPRINGS/ruler' );
   var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
   var stopwatchString = require( 'string!MASSES_AND_SPRINGS/stopwatch' );
+  var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
+  var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
 
+  // constants
   var FONT = new PhetFont( 12 );
+  var MAX_TEXT_WIDTH = 80;
 
   /**
    * TODO::: Remove mvt transforms from view objects
@@ -88,6 +92,32 @@ define( function( require ) {
 
     // Play/Pause and Step Forward Button Control
     this.addChild( new MASPlayPauseStepControl( model ) );
+
+    // add sim speed controls
+    var speedSelectionButtonOptions = {
+      font: new PhetFont( 14 ),
+      maxWidth: MAX_TEXT_WIDTH
+    };
+    var speedSelectionButtonRadius = 8;
+    var normalText = new Text( normalString, speedSelectionButtonOptions );
+    var normalMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'normal', normalText, {
+      radius: speedSelectionButtonRadius
+    } );
+
+    var slowText = new Text( slowMotionString, speedSelectionButtonOptions );
+    var slowMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'slow', slowText, {
+      radius: speedSelectionButtonRadius
+    } );
+
+    var radioButtonSpacing = 4;
+    var speedControl = new VBox( {
+      align: 'left',
+      spacing: radioButtonSpacing,
+      children: [ normalMotionRadioBox, slowMotionRadioBox ],
+      right: resetAllButton.left - 30,
+      centerY: resetAllButton.centerY
+    } );
+    this.addChild( speedControl );
 
     // Gravity Control Panel
     var gravityControlPanel = new GravityControlPanel( model.gravityProperty, model.gravityRange, model.bodies, listParentNode, {
