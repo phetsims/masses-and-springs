@@ -91,20 +91,24 @@ define( function( require ) {
     /**
      * @public
      * @override
+     *
+     * @param {boolean} resetAllProperty used for return button to ignore reseting the springConstant
      */
-    reset: function() {
+    reset: function( resetAllProperty ) {
       this.removeMass();
       //ensures displacement will change on reset, otherwise springs will be upside down.
       // TODO: find a better fix for this problem.
       this.displacementProperty.set( 1 );
       this.gravityProperty.reset();
       this.displacementProperty.reset();
-      this.springConstantProperty.reset();
       this.dampingCoefficientProperty.reset();
       this.positionProperty.reset();
       this.naturalRestingLengthProperty.reset();
       this.animatingProperty.reset();
       this.massProperty.reset();
+      if ( !resetAllProperty ) {
+        this.springConstantProperty.reset();
+      }
     },
 
     /**

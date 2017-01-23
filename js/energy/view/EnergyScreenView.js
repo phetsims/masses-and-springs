@@ -25,6 +25,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PropertySet = require( 'AXON/PropertySet' );
+  var ReturnButtonNode = require( 'MASSES_AND_SPRINGS/common/view/ReturnButtonNode' );
   var ReferenceLine = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLine' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -88,6 +89,12 @@ define( function( require ) {
       bottom: mvt.modelToViewY( model.floorY )
     } );
     this.addChild( resetAllButton );
+
+    // Return Button
+    var returnButton = new ReturnButtonNode( {
+      listener: model.enableReturn.bind( model )
+    } );
+    this.addChild( returnButton );
 
     // Play/Pause and Step Forward Button Control
     this.addChild( new MASPlayPauseStepControl( model ) );
@@ -222,7 +229,7 @@ define( function( require ) {
 
     this.addChild( new DraggableRulerNode(
       this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 50, mvt.modelToViewY( model.ceilingY ) ),
+      new Vector2( this.layoutBounds.left + 50, mvt.modelToViewY( model.ceilingY ) + 35 ),
       this.viewProperties.rulerVisibleProperty
     ) );
 

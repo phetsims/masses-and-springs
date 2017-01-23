@@ -27,6 +27,7 @@ define( function( require ) {
    * @param {Property} visibleProperty
    * @constructor
    */
+  //TODO: Look into passing in toolbox bounds to compare with ruler bounds. If these two intersect then trigger "put away event"
   function DraggableRulerNode( dragBounds, initialPosition, visibleProperty ) {
     var self = this;
     Node.call( this );
