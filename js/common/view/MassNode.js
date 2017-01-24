@@ -30,13 +30,11 @@ define( function( require ) {
   /**
    * @param {Mass} mass -  model object
    * @param {ModelViewTransform2} mvt
-   * @param {String,<color>} color
-   * @param {boolean} isLabeled
    * @param {MassesAndSpringsScreenView} screenView
    * @param {MassesAndSpringsModel} model
    * @constructor
    */
-  function MassNode( mass, mvt, color, isLabeled, screenView, model ) {
+  function MassNode( mass, mvt, screenView, model ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
@@ -49,10 +47,13 @@ define( function( require ) {
       mvt.modelToViewDeltaY( -mass.height )
     );
     var rect = Rectangle.bounds( viewBounds, {
-      fill: new LinearGradient( viewBounds.minX, 0, viewBounds.maxX, 0 ).addColorStop( 0.3, color ).addColorStop( 0.8, 'rgb(194,195,197)' ).addColorStop( 1, color ),
+      fill: new LinearGradient( viewBounds.minX, 0, viewBounds.maxX, 0 )
+        .addColorStop( 0.3, mass.color )
+        .addColorStop( 0.8, 'rgb(194,195,197)' )
+        .addColorStop( 1, mass.color )
     } );
     this.addChild( rect );
-    if ( isLabeled ) {
+    if ( mass.isLabeled ) {
       var label = new Text( StringUtils.format( massValueString, mass.mass * 1000 ), {
         font: MASS_LABEL_FONT,
         fill: 'black',

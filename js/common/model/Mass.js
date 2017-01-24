@@ -20,16 +20,18 @@ define( function( require ) {
   /**
    * @param {number} massValue:  mass in kg
    * @param {Vector2} initialPosition: initial coordinates of the mass
+   * @param {boolean} isLabeled: determines if the mass is labeled in the view
+   * @param {string} color: color of shown mass
    * @constructor
    */
-  function Mass( massValue, initialPosition ) {
+  function Mass( massValue, initialPosition, isLabeled, color ) {
     var self = this;
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
     // @public (read-only)
     this.mass = massValue;
 
-    // Main model properties
+    // @public Main model properties
     this.positionProperty = new Property( initialPosition ); // {Vector2}  the position of a mass is the center top of the model object.
     this.userControlledProperty = new Property( false ); // {boolean} indicates whether this mass is currently user controlled
     this.verticalVelocityProperty = new Property( 0 ); // {number} m/s
@@ -42,7 +44,9 @@ define( function( require ) {
     Property.preventGetSet( this, 'spring' );
 
 
-    // Non property model attributes
+    // @public {read-only} Non property model attributes
+    this.isLabeled = isLabeled;
+    this.color = color;
     this.hookHeight = .03; // height in m
     this.radius = Math.pow( this.mass / (density * heightRatio * Math.PI ), 1 / 3 );
     this.cylinderHeight = this.radius * heightRatio;

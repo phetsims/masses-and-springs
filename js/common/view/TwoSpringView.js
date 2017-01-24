@@ -48,6 +48,7 @@ define( function( require ) {
   var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
 
   // constants
+  var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
   var FONT = new PhetFont( 12 );
   var MAX_TEXT_WIDTH = 80;
 
@@ -98,14 +99,16 @@ define( function( require ) {
 
     // Return Button
     var returnButton = new ReturnButtonNode( {
-      listener: model.enableReturn.bind( model )
+      listener: model.enableReturn.bind( model ),
+      top: mvt.modelToViewY( model.ceilingY ),
+      left: mvt.modelToViewY( model.ceilingY )
     } );
     this.addChild( returnButton );
 
     // Play/Pause and Step Forward Button Control
     this.addChild( new MASPlayPauseStepControl( model ) );
 
-    // add sim speed controls
+    // Sim speed controls
     var speedSelectionButtonOptions = {
       font: new PhetFont( 14 ),
       maxWidth: MAX_TEXT_WIDTH
@@ -188,60 +191,57 @@ define( function( require ) {
       } );
     this.addChild( indicatorVisibilityControlPanel );
 
-    // TODO: move color and isLabeled to model
-    // TODO: add massLayer
+    // Add masses
     this.massLayer = new Node();
-    this.massLayer.addChild( new MassNode( model.masses[ 0 ], mvt, 'grey', true, self, model ) );
-    this.massLayer.addChild( new MassNode( model.masses[ 1 ], mvt, 'grey', true, self, model ) );
-    this.massLayer.addChild( new MassNode( model.masses[ 2 ], mvt, 'grey', true, self, model ) );
-    this.massLayer.addChild( new MassNode( model.masses[ 3 ], mvt, 'grey', true, self, model ) );
-    this.massLayer.addChild( new MassNode( model.masses[ 4 ], mvt, 'blue', false, self, model ) );
-    this.massLayer.addChild( new MassNode( model.masses[ 5 ], mvt, 'green', false, self, model ) );
-    this.massLayer.addChild( new MassNode( model.masses[ 6 ], mvt, 'red', false, self, model ) );
-
+    model.masses.forEach( function( mass ) {
+      self.massLayer.addChild( new MassNode( mass, mvt, self, model ) );
+    } );
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
     this.addChild( new OscillatingSpringNode( model.springs[ 0 ], mvtSpringHeight ) );
     this.addChild( new OscillatingSpringNode( model.springs[ 1 ], mvtSpringHeight ) );
 
-    // derived from x positions of springs. May be a better way of declaring.
-    var springsSeparation = model.springsSeparation * 860;
-
-    // A 200-unit vertical "wall", for comparison with the spring size
-    var springHangerNode = new Rectangle( 0, 0, springsSeparation, 25, 8, 8, {
-      fill: 'rgb( 180, 180, 180 )',
-      stroke: 'grey',
-      centerX: springsSeparation,
-      centerY: 10,
-      children: [
-        new Text( '1', { font: FONT, centerY: 12.5, centerX: springsSeparation * .25 } ),
-        new Text( '2', { font: FONT, centerY: 12.5, centerX: springsSeparation * .75 } )
-      ]
-    } );
-    this.addChild( springHangerNode );
-
-    this.addChild( new SpringConstantControlPanel(
+    // Spring Constant Control Panels
+    var FirstSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
       model.springs[ 0 ].springConstantRange,
       StringUtils.format( springConstantString, 1 ), {
-        right: this.layoutBounds.width - 10,
-        top: mvt.modelToViewY( .75 )
-      } ) );
-    this.addChild( new SpringConstantControlPanel(
+        left: returnButton.right + 10,
+        top: mvt.modelToViewY( model.ceilingY )
+      } );
+    this.addChild( FirstSpringConstantControlPanel );
+
+    var SecondSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 1 ].springConstantProperty,
       model.springs[ 1 ].springConstantRange,
       StringUtils.format( springConstantString, 2 ), {
         right: this.layoutBounds.width - 10,
         top: mvt.modelToViewY( .95 )
-      } ) );
+      } );
+    this.addChild( SecondSpringConstantControlPanel );
+
+    // Spring Hanger Node
+    var springsSeparation = model.springsSeparation * 860; // derived from x positions of springs.
+    var springHangerNode = new Rectangle( 0, 0, springsSeparation * .7, 25, 8, 8, {
+      fill: 'rgb( 180, 180, 180 )',
+      stroke: 'grey',
+      left: FirstSpringConstantControlPanel.right + 7,
+      top: mvt.modelToViewY( model.ceilingY ),
+      children: [
+        new Text( '1', { font: SPRING_HANGER_FONT, centerY: 12.5, centerX: springsSeparation * .15 } ),
+        new Text( '2', { font: SPRING_HANGER_FONT, centerY: 12.5, centerX: springsSeparation * .60 } )
+      ]
+    } );
+    this.addChild( springHangerNode );
+
 
     // This should always be after all nodes containing a ComboBox
     this.addChild( listParentNode );
 
     this.referenceLine = new ReferenceLine(
-      this.layoutBounds.getCenter().minus( new Vector2( 110, 0 ) ),
+      this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
       this.layoutBounds,
-      400,
+      250,
       this.viewProperties.referenceLineVisibleProperty
     );
 

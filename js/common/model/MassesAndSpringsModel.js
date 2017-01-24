@@ -43,21 +43,20 @@ define( function( require ) {
 
     this.floorY = 0; // Y position of floor in m
     this.ceilingY = 1.23; // Y position of ceiling in m
-    this.springsSeparation = .80 - .50; // used for width of springHangerNode
+    this.springsSeparation = 1.13 - .80; // used for width of springHangerNode
     this.springs = [
-      new Spring( new Vector2( .50, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() ),
-      new Spring( new Vector2( .80, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() )
+      new Spring( new Vector2( .80, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() ),
+      new Spring( new Vector2( 1.13, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() )
     ];
 
     this.masses = [
-      new Mass( .250, new Vector2( .12, .5 ) ),
-      new Mass( .100, new Vector2( .20, .5 ) ),
-      new Mass( .100, new Vector2( .28, .5 ) ),
-      new Mass( .050, new Vector2( .33, .5 ) ),
-      new Mass( .200, new Vector2( .63, .5 ) ),
-      new Mass( .150, new Vector2( .56, .5 ) ),
-      new Mass( .075, new Vector2( .49, .5 ) )
-
+      new Mass( .250, new Vector2( .12, .5 ), true, 'grey' ),
+      new Mass( .100, new Vector2( .20, .5 ), true, 'grey' ),
+      new Mass( .100, new Vector2( .28, .5 ), true, 'grey' ),
+      new Mass( .050, new Vector2( .33, .5 ), true, 'grey' ),
+      new Mass( .200, new Vector2( .63, .5 ), false, 'red' ),
+      new Mass( .150, new Vector2( .56, .5 ), false, 'green' ),
+      new Mass( .075, new Vector2( .49, .5 ), false, 'blue' )
     ];
     this.bodies = [
       Body.MOON,
