@@ -83,6 +83,9 @@ define( function( require ) {
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
+        massNodes.forEach( function( massNode ) {
+          massNode.moveToFront();
+        } );
       },
       right: this.layoutBounds.right - 10,
       bottom: mvt.modelToViewY( model.floorY )
@@ -185,8 +188,12 @@ define( function( require ) {
 
     // Add masses
     this.massLayer = new Node();
+    var massNodes = [];
     model.masses.forEach( function( mass ) {
-      self.massLayer.addChild( new MassNode( mass, mvt, self, model ) );
+      var massNode = new MassNode( mass, mvt, self, model );
+      self.massLayer.addChild( massNode );
+      // Keeps track of the mass node to restore original Z order.
+      massNodes.push( massNode );
     } );
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
