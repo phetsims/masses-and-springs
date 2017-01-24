@@ -194,9 +194,10 @@ define( function( require ) {
     this.massLayer.addChild( new MassNode( model.masses[ 0 ], mvt, 'grey', true, self, model ) );
     this.massLayer.addChild( new MassNode( model.masses[ 1 ], mvt, 'grey', true, self, model ) );
     this.massLayer.addChild( new MassNode( model.masses[ 2 ], mvt, 'grey', true, self, model ) );
-    this.massLayer.addChild( new MassNode( model.masses[ 3 ], mvt, 'red', false, self, model ) );
-    this.massLayer.addChild( new MassNode( model.masses[ 4 ], mvt, 'blue', false, self, model ) );
-    this.massLayer.addChild( new MassNode( model.masses[ 5 ], mvt, 'green', false, self, model ) );
+    this.massLayer.addChild( new MassNode( model.masses[ 3 ], mvt, 'grey', true, self, model ) );
+    this.massLayer.addChild( new MassNode( model.masses[ 4 ], mvt, 'red', false, self, model ) );
+    this.massLayer.addChild( new MassNode( model.masses[ 5 ], mvt, 'blue', false, self, model ) );
+    this.massLayer.addChild( new MassNode( model.masses[ 6 ], mvt, 'green', false, self, model ) );
 
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
@@ -212,7 +213,8 @@ define( function( require ) {
       stroke: 'grey',
       centerX: springsSeparation,
       centerY: 10,
-      children: [ new Text( '1', { font: FONT, centerY: 12.5, centerX: springsSeparation * .25 } ),
+      children: [
+        new Text( '1', { font: FONT, centerY: 12.5, centerX: springsSeparation * .25 } ),
         new Text( '2', { font: FONT, centerY: 12.5, centerX: springsSeparation * .75 } )
       ]
     } );

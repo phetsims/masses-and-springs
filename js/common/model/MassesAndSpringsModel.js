@@ -52,6 +52,7 @@ define( function( require ) {
     this.masses = [
       new Mass( .250, new Vector2( .3, .5 ) ),
       new Mass( .100, new Vector2( .4, .5 ) ),
+      new Mass( .100, new Vector2( .4, .5 ) ),
       new Mass( .050, new Vector2( .49, .5 ) ),
       new Mass( .200, new Vector2( .8, .5 ) ),
       new Mass( .150, new Vector2( .9, .5 ) ),
