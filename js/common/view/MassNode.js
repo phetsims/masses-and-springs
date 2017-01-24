@@ -10,21 +10,15 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-
   var Bounds2 = require( 'DOT/Bounds2' );
-
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Text = require( 'SCENERY/nodes/Text' );
-
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
-
   var MASS_LABEL_FONT = new PhetFont( { size: 12, weight: 'bold' } );
 
   /**

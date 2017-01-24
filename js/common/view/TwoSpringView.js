@@ -24,11 +24,11 @@ define( function( require ) {
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var ReturnButtonNode = require( 'MASSES_AND_SPRINGS/common/view/ReturnButtonNode' );
   var ReferenceLine = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLine' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -47,7 +47,6 @@ define( function( require ) {
   var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
 
   // constants
-  var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
   var FONT = new PhetFont( 12 );
   var MAX_TEXT_WIDTH = 80;
 
@@ -220,24 +219,7 @@ define( function( require ) {
     this.addChild( SecondSpringConstantControlPanel );
 
     // Spring Hanger Node
-    // derived from x positions of springs.
-    var springsSeparation =
-      mvt.modelToViewDeltaX( Math.abs( model.springs[ 0 ].positionProperty.get().x - model.springs[ 1 ].positionProperty.get().x ) );
-    var springHangerNodeWidth = springsSeparation * 1.40;
-
-    // X coordinate of middle of springs
-    var middleOfSprings = mvt.modelToViewX( (model.springs[ 0 ].positionProperty.get().x + model.springs[ 1 ].positionProperty.get().x) / 2 );
-    var springHangerNode = new Rectangle( 0, 0, springHangerNodeWidth, 25, 8, 8, {
-      fill: 'rgb( 180, 180, 180 )',
-      stroke: 'grey',
-      centerX: middleOfSprings,
-      top: mvt.modelToViewY( model.ceilingY ),
-      children: [
-        new Text( '1', { font: SPRING_HANGER_FONT, centerY: 12.5, centerX: springsSeparation * .2 } ),
-        new Text( '2', { font: SPRING_HANGER_FONT, centerY: 12.5, centerX: springsSeparation * 1.2 } )
-      ]
-    } );
-    this.addChild( springHangerNode );
+    this.addChild( new SpringHangerNode( mvt, model ) );
 
     // This should always be after all nodes containing a ComboBox
     this.addChild( listParentNode );
