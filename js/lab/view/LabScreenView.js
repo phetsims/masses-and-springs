@@ -26,19 +26,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );
 
-  return inherit( TwoSpringView, LabScreenView, {
-    reset: function() {
-      //TODO:: reset Ruler and ReferenceLine
-      // make sure view is also reset
-      this.model.reset();
-      this.viewProperties.reset();
-
-      //TODO highly recommended not to reset view this way
-      this.children.forEach( function( child ) {
-        if ( child && child.reset ) {
-          child.reset();
-        }
-      } );
-    }
-  } );
+  return inherit( TwoSpringView, LabScreenView );
 } );

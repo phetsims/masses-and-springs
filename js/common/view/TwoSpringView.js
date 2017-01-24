@@ -24,7 +24,6 @@ define( function( require ) {
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var ReturnButtonNode = require( 'MASSES_AND_SPRINGS/common/view/ReturnButtonNode' );
   var ReferenceLine = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLine' );
@@ -77,20 +76,13 @@ define( function( require ) {
       397 );
     this.mvt = mvt; // Make mvt available to descendant types.
 
-    this.viewProperties = new PropertySet( {
-      rulerVisible: true,
-      stopwatchVisible: false,
-      referenceLineVisible: true,
-      equilibriumPositionVisible: false
-    } );
-
     //  Node for ComboBox menus.  Add this last.
     var listParentNode = new Node();
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
-        self.reset();
+        model.reset();
       },
       right: this.layoutBounds.right - 10,
       bottom: mvt.modelToViewY( model.floorY )
@@ -148,22 +140,22 @@ define( function( require ) {
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new Text( rulerString, FONT ),
-        property: this.viewProperties.rulerVisibleProperty,
+        property: model.rulerVisibleProperty,
         label: rulerString
       },
       {
         content: new Text( referenceLineString, FONT ),
-        property: this.viewProperties.referenceLineVisibleProperty,
+        property: model.referenceLineVisibleProperty,
         label: referenceLineString
       },
       {
         content: new Text( stopwatchString, FONT ),
-        property: this.viewProperties.stopwatchVisibleProperty,
+        property: model.stopwatchVisibleProperty,
         label: stopwatchString
       },
       {
         content: new Text( equilibriumPositionString, FONT ),
-        property: this.viewProperties.equilibriumPositionVisibleProperty,
+        property: model.equilibriumPositionVisibleProperty,
         label: equilibriumPositionString
       }
     ], { boxWidth: 15, spacing: 5 } );
@@ -242,7 +234,7 @@ define( function( require ) {
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
       this.layoutBounds,
       250,
-      this.viewProperties.referenceLineVisibleProperty
+      model.referenceLineVisibleProperty
     );
 
     this.addChild( this.referenceLine );
@@ -252,26 +244,12 @@ define( function( require ) {
     this.addChild( new DraggableRulerNode(
       this.layoutBounds,
       new Vector2( this.layoutBounds.left + 50, mvt.modelToViewY( model.ceilingY ) + 35 ),
-      this.viewProperties.rulerVisibleProperty
+      model.rulerVisibleProperty
     ) );
 
   }
 
   massesAndSprings.register( 'TwoSpringView', TwoSpringView );
 
-  return inherit( ScreenView, TwoSpringView, {
-    reset: function() {
-      //TODO:: reset Ruler and ReferenceLine
-      // make sure view is also reset
-      this.model.reset();
-      this.viewProperties.reset();
-
-      //TODO highly recommended not to reset view this way
-      this.children.forEach( function( child ) {
-        if ( child && child.reset ) {
-          child.reset();
-        }
-      } );
-    }
-  } );
+  return inherit( ScreenView, TwoSpringView );
 } );

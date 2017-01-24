@@ -33,6 +33,11 @@ define( function( require ) {
     this.frictionProperty = new Property( .2 ); // {number} c - coefficient of friction
     this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)
     this.simSpeedProperty = new Property( 'normal' ); // {string} determines the speed at which the sim plays
+    this.rulerVisibleProperty = new Property( true );
+    this.stopwatchVisibleProperty = new Property( false );
+    this.referenceLineVisibleProperty = new Property( true );
+    this.equilibriumPositionVisibleProperty = new Property( false );
+
     //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
 
     // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
@@ -40,6 +45,10 @@ define( function( require ) {
     Property.preventGetSet( this, 'timeRate' );
     Property.preventGetSet( this, 'friction' );
     Property.preventGetSet( this, 'gravity' );
+    Property.preventGetSet( this, 'rulerVisible' );
+    Property.preventGetSet( this, 'stopwatchVisible' );
+    Property.preventGetSet( this, 'referenceLineVisible' );
+    Property.preventGetSet( this, 'equilibriumPositionVisible' );
 
     this.floorY = 0; // Y position of floor in m
     this.ceilingY = 1.23; // Y position of ceiling in m
@@ -98,6 +107,10 @@ define( function( require ) {
       this.gravityProperty.reset();
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
+      this.rulerVisibleProperty.reset();
+      this.stopwatchVisibleProperty.reset();
+      this.referenceLineVisibleProperty.reset();
+      this.equilibriumPositionVisibleProperty.reset();
       this.masses.forEach( function( mass ) { mass.reset(); } );
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
