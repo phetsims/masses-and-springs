@@ -220,19 +220,24 @@ define( function( require ) {
     this.addChild( SecondSpringConstantControlPanel );
 
     // Spring Hanger Node
-    var springsSeparation = model.springsSeparation * 860; // derived from x positions of springs.
-    var springHangerNode = new Rectangle( 0, 0, springsSeparation * .7, 25, 8, 8, {
+    // derived from x positions of springs.
+    var springsSeparation =
+      mvt.modelToViewDeltaX( Math.abs( model.springs[ 0 ].positionProperty.get().x - model.springs[ 1 ].positionProperty.get().x ) );
+    var springHangerNodeWidth = springsSeparation * 1.40;
+
+    // X coordinate of middle of springs
+    var middleOfSprings = mvt.modelToViewX( (model.springs[ 0 ].positionProperty.get().x + model.springs[ 1 ].positionProperty.get().x) / 2 );
+    var springHangerNode = new Rectangle( 0, 0, springHangerNodeWidth, 25, 8, 8, {
       fill: 'rgb( 180, 180, 180 )',
       stroke: 'grey',
-      left: FirstSpringConstantControlPanel.right + 7,
+      centerX: middleOfSprings,
       top: mvt.modelToViewY( model.ceilingY ),
       children: [
-        new Text( '1', { font: SPRING_HANGER_FONT, centerY: 12.5, centerX: springsSeparation * .15 } ),
-        new Text( '2', { font: SPRING_HANGER_FONT, centerY: 12.5, centerX: springsSeparation * .60 } )
+        new Text( '1', { font: SPRING_HANGER_FONT, centerY: 12.5, centerX: springsSeparation * .2 } ),
+        new Text( '2', { font: SPRING_HANGER_FONT, centerY: 12.5, centerX: springsSeparation * 1.2 } )
       ]
     } );
     this.addChild( springHangerNode );
-
 
     // This should always be after all nodes containing a ComboBox
     this.addChild( listParentNode );
