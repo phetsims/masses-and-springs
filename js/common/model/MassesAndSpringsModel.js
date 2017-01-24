@@ -50,13 +50,13 @@ define( function( require ) {
     ];
 
     this.masses = [
-      new Mass( .250, new Vector2( .3, .5 ) ),
-      new Mass( .100, new Vector2( .4, .5 ) ),
-      new Mass( .100, new Vector2( .4, .5 ) ),
-      new Mass( .050, new Vector2( .49, .5 ) ),
-      new Mass( .200, new Vector2( .8, .5 ) ),
-      new Mass( .150, new Vector2( .9, .5 ) ),
-      new Mass( .075, new Vector2( .98, .5 ) )
+      new Mass( .250, new Vector2( .12, .5 ) ),
+      new Mass( .100, new Vector2( .20, .5 ) ),
+      new Mass( .100, new Vector2( .28, .5 ) ),
+      new Mass( .050, new Vector2( .33, .5 ) ),
+      new Mass( .200, new Vector2( .63, .5 ) ),
+      new Mass( .150, new Vector2( .56, .5 ) ),
+      new Mass( .075, new Vector2( .49, .5 ) )
 
     ];
     this.bodies = [
