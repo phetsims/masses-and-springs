@@ -3,6 +3,8 @@
 /**
  * @author Matt Pennington
  * @author Denzell Barnett
+ *
+ * Node for the gravity control panel and combo box for planet gravity options.
  */
 define( function( require ) {
   'use strict';
@@ -26,8 +28,8 @@ define( function( require ) {
   var gravityNoneString = require( 'string!MASSES_AND_SPRINGS/gravity.none' );
   var gravityLotsString = require( 'string!MASSES_AND_SPRINGS/gravity.lots' );
 
-  var LABEL_FONT = new PhetFont( 12 );
-  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold' } );
+  var LABEL_FONT = new PhetFont( 10 );
+  var TITLE_FONT = new PhetFont( { size: 20, weight: 'bold' } );
 
   /**
    *
@@ -35,7 +37,7 @@ define( function( require ) {
    * @param {Range} gravityPropertyRange
    * @param {[Body]} bodies
    * @param {Node} listNodeParent
-   * @param {} [options]
+   * @param {Object} [options]
    *
    * @constructor
    */
@@ -53,7 +55,7 @@ define( function( require ) {
     this.bodies = bodies;
     bodies.forEach( function( body ) {
       var bodyLabel = new Text( body.title, { font: LABEL_FONT } );
-      //bodyLabel.localBounds = bodyLabel.localBounds.withMaxX( Math.max( 50, bodyLabel.localBounds.maxX ) );
+      bodyLabel.localBounds = bodyLabel.localBounds.withMaxX( Math.max( 50, bodyLabel.localBounds.maxX ) );
 
       bodyListItems.push( {
         node: bodyLabel,
@@ -77,8 +79,8 @@ define( function( require ) {
     // Saving a reference to toggle visibility for Planet X
     this.hSlider = new HSlider( gravityProperty, gravityPropertyRange, {
       majorTickLength: 10,
-      trackSize: new Dimension2( 150, 2 ),
-      thumbSize: new Dimension2( 7.5, 15 ),
+      trackSize: new Dimension2( 130, 2 ),
+      thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00b3b3',
       thumbFillHighlighted: '#00e6e6'
     } );
@@ -105,7 +107,7 @@ define( function( require ) {
       //  If PlanetX hide the slider and update gravity
       if ( newBodyTitle === Body.PLANET_X.title ) {
         self.hSlider.visible = false;
-        self.gravityProperty.set( body.gravityProperty.get );
+        self.gravityProperty.set( body.gravityProperty.get() );
       }
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
       else if ( previousBodyTitleProperty.get() === Body.PLANET_X.title && newBodyTitle === Body.CUSTOM.title ) {
@@ -136,6 +138,7 @@ define( function( require ) {
       //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
       self.bodyTitleProperty.set( Body.CUSTOM.title );
     } );
+    this.mutate( options );
   }
 
   massesAndSprings.register( 'GravityControlPanel', GravityControlPanel );

@@ -3,7 +3,7 @@
 /**
  * @author Denzell Barnett
  *
- * Panel that gives manages options for
+ * Panel that gives manages options for visible tools.
  */
 define( function( require ) {
   'use strict';
@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -29,11 +30,10 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
-   * @param {ModelViewTransform2} mvt
-   * @param {SpringConstantPanelNode} springConstantPanelNode :used for view alignment
+   * @param {Object} options
    * @constructor
    */
-  function IndicatorVisibilityControlPanel( model, mvt, springConstantPanelNode ) {
+  function IndicatorVisibilityControlPanel( model, options ) {
     Node.call( this );
 
     // TODO: Decouple the checkBoxGroup
@@ -66,22 +66,24 @@ define( function( require ) {
         new HBox(
           {
             children: [
-
-              indicatorVisibilityCheckBoxGroup
+              indicatorVisibilityCheckBoxGroup,
+              new HStrut( 40 )
             ]
           } )
       ],
       align: 'left'
-    } );
+      }
+    );
     this.indicatorVisibilityControlPanel = new Panel(
       indicatorVisibilityControlsVBox,
       {
         xMargin: 10,
-        fill: 'rgb( 240, 240, 240 )',
-        top: mvt.modelToViewY( model.ceilingY ),
-        left: springConstantPanelNode.right + 10
-      } );
+        fill: 'rgb( 240, 240, 240 )'
+      }
+    );
     this.addChild( this.indicatorVisibilityControlPanel );
+    this.mutate( options );
+
   }
 
   massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );

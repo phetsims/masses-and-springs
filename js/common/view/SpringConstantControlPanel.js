@@ -42,7 +42,7 @@ define( function( require ) {
       majorTickLength: 10,
       minorTickLength: 5,
       trackSize: new Dimension2( 120, 2 ),
-      thumbSize: new Dimension2( 10, 20 ),
+      thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00b3b3',
       thumbFillHighlighted: '#00e6e6'
     } );

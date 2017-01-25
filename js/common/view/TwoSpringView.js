@@ -68,9 +68,6 @@ define( function( require ) {
       397 );
     this.mvt = mvt; // Make mvt available to descendant types.
 
-    //  Node for ComboBox menus.  Add this last.
-    var listParentNode = new Node();
-
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
@@ -121,15 +118,6 @@ define( function( require ) {
     } );
     this.addChild( speedControl );
 
-    // Gravity Control Panel
-    var gravityControlPanel = new GravityControlPanel( model.gravityProperty, model.gravityRange, model.bodies, listParentNode, {
-      right: this.layoutBounds.width - 10,
-      top: 280,
-      minWidth: 1
-    } );
-    this.addChild( gravityControlPanel );
-
-
     // Add masses
     this.massLayer = new Node();
     var massNodes = [];
@@ -149,26 +137,23 @@ define( function( require ) {
     this.addChild( springHangerNode );
 
     // Spring Constant Control Panels
-    var FirstSpringConstantControlPanel = new SpringConstantControlPanel(
+    var firstSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
       model.springs[ 0 ].springConstantRange,
       StringUtils.format( springConstantString, 1 ), {
         right: springHangerNode.springHangerNode.left - 10,
         top: mvt.modelToViewY( model.ceilingY )
       } );
-    this.addChild( FirstSpringConstantControlPanel );
+    this.addChild( firstSpringConstantControlPanel );
 
-    var SecondSpringConstantControlPanel = new SpringConstantControlPanel(
+    var secondSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 1 ].springConstantProperty,
       model.springs[ 1 ].springConstantRange,
       StringUtils.format( springConstantString, 2 ), {
         left: springHangerNode.springHangerNode.right + 10,
         top: mvt.modelToViewY( model.ceilingY )
       } );
-    this.addChild( SecondSpringConstantControlPanel );
-
-    // This should always be after all nodes containing a ComboBox
-    this.addChild( listParentNode );
+    this.addChild( secondSpringConstantControlPanel );
 
     this.referenceLine = new ReferenceLine(
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
@@ -177,9 +162,26 @@ define( function( require ) {
       model.referenceLineVisibleProperty
     );
     // Control Panel for display elements with varying visibility
-    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel( model, mvt, SecondSpringConstantControlPanel );
+    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel( model, {
+      top: mvt.modelToViewY( model.ceilingY ),
+      left: secondSpringConstantControlPanel.right + 10
+    } );
     this.addChild( indicatorVisibilityControlPanel );
 
+    // Gravity Control Panel
+    var gravityControlPanel = new GravityControlPanel(
+      model.gravityProperty,
+      model.gravityRange,
+      model.bodies,
+      this,
+      {
+        left: indicatorVisibilityControlPanel.left,
+        top: indicatorVisibilityControlPanel.bottom + 10,
+        minWidth: 1
+      }
+    );
+    this.addChild( gravityControlPanel );
+    
     this.addChild( this.referenceLine );
 
     this.addChild( this.massLayer );
