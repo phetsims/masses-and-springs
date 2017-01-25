@@ -72,6 +72,7 @@ define( function( require ) {
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
+        gravityControlPanel.reset();
         massNodes.forEach( function( massNode ) {
           massNode.moveToFront();
         } );
