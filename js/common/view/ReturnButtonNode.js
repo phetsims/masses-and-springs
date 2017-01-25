@@ -36,7 +36,7 @@ define( function( require ) {
     TextPushButton.call( this, returnString, _.extend( {
       font: FONT,
       baseColor: 'rgb( 231, 232, 233 )',
-      touchAreaXDilation: 10,
+      touchAreaXDilation: 6,
       touchAreaYDilation: 6
     }, options ) );
   }

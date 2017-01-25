@@ -162,7 +162,7 @@ define( function( require ) {
     this.referenceLine = new ReferenceLine(
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
       this.layoutBounds,
-      250,
+      235,
       model.referenceLineVisibleProperty
     );
     // Control Panel for display elements with varying visibility
