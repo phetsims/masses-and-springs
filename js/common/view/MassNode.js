@@ -2,6 +2,7 @@
 
 /**
  * @author Matt Pennington
+ * @author Denzell Barnett
  */
 
 define( function( require ) {
@@ -53,7 +54,8 @@ define( function( require ) {
         fill: 'black',
         centerY: viewBounds.centerY,
         centerX: 0,
-        pickable: false
+        pickable: false,
+        maxWidth: 50
       } );
 
       // TODO: factor out color???

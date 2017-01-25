@@ -2,6 +2,7 @@
 
 /**
  * @author Matt Pennington
+ * @author Denzell Barnett
  */
 define( function( require ) {
   'use strict';
@@ -18,7 +19,7 @@ define( function( require ) {
   var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
   var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
   var LABEL_FONT = new PhetFont( 10 );
-  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold', align: 'left' } );
+  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold' } );
 
   /**
    *
@@ -41,7 +42,8 @@ define( function( require ) {
       trackSize: new Dimension2( 120, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00b3b3',
-      thumbFillHighlighted: '#00e6e6'
+      thumbFillHighlighted: '#00e6e6',
+      align: 'center'
     } );
 
     hSlider.addMajorTick( springConstantPropertyRange.min, new Text( springConstantSmallString, { font: LABEL_FONT } ) );

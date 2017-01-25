@@ -85,7 +85,8 @@ define( function( require ) {
     var returnButton = new ReturnButtonNode( {
       listener: model.enableReturn.bind( model ),
       top: mvt.modelToViewY( model.ceilingY ),
-      left: mvt.modelToViewY( model.ceilingY )
+      left: mvt.modelToViewY( model.ceilingY ),
+      maxWidth: 55
     } );
     this.addChild( returnButton );
 
@@ -141,8 +142,9 @@ define( function( require ) {
       model.springs[ 0 ].springConstantProperty,
       model.springs[ 0 ].springConstantRange,
       StringUtils.format( springConstantString, 1 ), {
-        right: springHangerNode.springHangerNode.left - 10,
-        top: mvt.modelToViewY( model.ceilingY )
+        right: springHangerNode.springHangerNode.left - 40,
+        top: mvt.modelToViewY( model.ceilingY ),
+        maxWidth: 125
       } );
     this.addChild( firstSpringConstantControlPanel );
 
@@ -150,8 +152,9 @@ define( function( require ) {
       model.springs[ 1 ].springConstantProperty,
       model.springs[ 1 ].springConstantRange,
       StringUtils.format( springConstantString, 2 ), {
-        left: springHangerNode.springHangerNode.right + 10,
-        top: mvt.modelToViewY( model.ceilingY )
+        left: springHangerNode.springHangerNode.right + 40,
+        top: mvt.modelToViewY( model.ceilingY ),
+        maxWidth: 125
       } );
     this.addChild( secondSpringConstantControlPanel );
 
@@ -164,7 +167,8 @@ define( function( require ) {
     // Control Panel for display elements with varying visibility
     var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel( model, {
       top: mvt.modelToViewY( model.ceilingY ),
-      left: secondSpringConstantControlPanel.right + 10
+      left: secondSpringConstantControlPanel.right + 10,
+      maxWidth: 180
     } );
     this.addChild( indicatorVisibilityControlPanel );
 
@@ -177,7 +181,8 @@ define( function( require ) {
       {
         left: indicatorVisibilityControlPanel.left,
         top: indicatorVisibilityControlPanel.bottom + 10,
-        minWidth: 1
+        minWidth: 1,
+        maxWidth: 180
       }
     );
     this.addChild( gravityControlPanel );

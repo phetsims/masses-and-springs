@@ -29,7 +29,7 @@ define( function( require ) {
   var gravityLotsString = require( 'string!MASSES_AND_SPRINGS/gravity.lots' );
 
   var LABEL_FONT = new PhetFont( 10 );
-  var TITLE_FONT = new PhetFont( { size: 20, weight: 'bold' } );
+  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold' } );
 
   /**
    *
@@ -90,7 +90,7 @@ define( function( require ) {
     Panel.call( this, new VBox( {
       align: 'left',
       children: [
-        new Text( gravityString, TITLE_FONT ),
+        new Text( gravityString, { font: TITLE_FONT } ),
         gravityComboBox,
         self.hSlider
       ]
