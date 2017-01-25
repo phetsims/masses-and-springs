@@ -15,13 +15,10 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-
   var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
   var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
-
   var LABEL_FONT = new PhetFont( 10 );
   var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold', align: 'left' } );
-
 
   /**
    *
