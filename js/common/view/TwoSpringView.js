@@ -199,12 +199,16 @@ define( function( require ) {
     this.addChild( new OscillatingSpringNode( model.springs[ 0 ], mvtSpringHeight ) );
     this.addChild( new OscillatingSpringNode( model.springs[ 1 ], mvtSpringHeight ) );
 
+    // Spring Hanger Node
+    var springHangerNode = new SpringHangerNode( mvt, model );
+    this.addChild( springHangerNode );
+
     // Spring Constant Control Panels
     var FirstSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
       model.springs[ 0 ].springConstantRange,
       StringUtils.format( springConstantString, 1 ), {
-        left: returnButton.right + 10,
+        right: springHangerNode.springHangerNode.left - 10,
         top: mvt.modelToViewY( model.ceilingY )
       } );
     this.addChild( FirstSpringConstantControlPanel );
@@ -213,13 +217,10 @@ define( function( require ) {
       model.springs[ 1 ].springConstantProperty,
       model.springs[ 1 ].springConstantRange,
       StringUtils.format( springConstantString, 2 ), {
-        right: this.layoutBounds.width - 10,
-        top: mvt.modelToViewY( .95 )
+        left: springHangerNode.springHangerNode.right + 10,
+        top: mvt.modelToViewY( model.ceilingY )
       } );
     this.addChild( SecondSpringConstantControlPanel );
-
-    // Spring Hanger Node
-    this.addChild( new SpringHangerNode( mvt, model ) );
 
     // This should always be after all nodes containing a ComboBox
     this.addChild( listParentNode );

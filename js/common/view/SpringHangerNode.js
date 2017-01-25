@@ -30,7 +30,7 @@ define( function( require ) {
 
     var springsSeparation =
       mvt.modelToViewDeltaX( Math.abs( model.springs[ 0 ].positionProperty.get().x - model.springs[ 1 ].positionProperty.get().x ) );
-    var springHangerNodeWidth = springsSeparation * 2;
+    var springHangerNodeWidth = springsSeparation * 1.4;
 
     // X coordinate of middle of springs
     var middleOfSprings = mvt.modelToViewX( (model.springs[ 0 ].positionProperty.get().x + model.springs[ 1 ].positionProperty.get().x) / 2 );
@@ -39,16 +39,16 @@ define( function( require ) {
     var springHangerLabelNode = new Node();
     springHangerLabelNode.addChild( new Text( '1', { font: SPRING_HANGER_FONT } ) );
     springHangerLabelNode.addChild( new Text( '2', { font: SPRING_HANGER_FONT, centerX: springsSeparation } ) );
-    var springHangerNode = new Rectangle( 0, 0, springHangerNodeWidth, 20, 8, 8, {
+    this.springHangerNode = new Rectangle( 0, 0, springHangerNodeWidth, 20, 8, 8, {
       fill: 'rgb( 180, 180, 180 )',
       stroke: 'grey',
       centerX: middleOfSprings,
       top: mvt.modelToViewY( model.ceilingY )
     } );
-    springHangerLabelNode.centerX = springHangerNode.width / 2;
-    springHangerLabelNode.centerY = springHangerNode.height / 2;
-    springHangerNode.addChild( springHangerLabelNode );
-    this.addChild( springHangerNode );
+    springHangerLabelNode.centerX = this.springHangerNode.width / 2;
+    springHangerLabelNode.centerY = this.springHangerNode.height / 2;
+    this.springHangerNode.addChild( springHangerLabelNode );
+    this.addChild( this.springHangerNode );
   }
 
   massesAndSprings.register( 'SpringHangerNode', SpringHangerNode );
