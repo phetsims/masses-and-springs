@@ -3,6 +3,8 @@
 /**
  * @author Matt Pennington
  * @author Denzell Barnett
+ *
+ * Object that creates the grey bar that the springs hang from and their respective numerical label.
  */
 define( function( require ) {
   'use strict';
@@ -20,11 +22,11 @@ define( function( require ) {
   var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
 
   /**
-   * @param {ModelViewTransform2} mvt
    * @param {MassesAndSpringsModel} model
+   * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function SpringHangerNode( mvt, model ) {
+  function SpringHangerNode( model, mvt ) {
     // derived from x positions of springs.
     Node.call( this );
 

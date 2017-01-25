@@ -4,6 +4,8 @@
  *
  * @author Matt Pennington
  * @author Denzell Barnett
+ *
+ * Common view mode for a screen using two masses.
  */
 define( function( require ) {
   'use strict';
@@ -14,15 +16,13 @@ define( function( require ) {
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
+  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
-  var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ReturnButtonNode = require( 'MASSES_AND_SPRINGS/common/view/ReturnButtonNode' );
   var ReferenceLine = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLine' );
@@ -34,20 +34,13 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
-  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  var equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
-  var referenceLineString = require( 'string!MASSES_AND_SPRINGS/referenceLine' );
-  var rulerString = require( 'string!MASSES_AND_SPRINGS/ruler' );
   var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
-  var stopwatchString = require( 'string!MASSES_AND_SPRINGS/stopwatch' );
   var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
   var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
 
   // constants
-  var FONT = new PhetFont( 12 );
   var MAX_TEXT_WIDTH = 80;
 
   /**
@@ -137,54 +130,6 @@ define( function( require ) {
     this.addChild( gravityControlPanel );
 
 
-    // Control Panel for display elements with varying visibility
-    // TODO: Decouple the checkBoxGroup
-    var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
-      {
-        content: new Text( rulerString, FONT ),
-        property: model.rulerVisibleProperty,
-        label: rulerString
-      },
-      {
-        content: new Text( referenceLineString, FONT ),
-        property: model.referenceLineVisibleProperty,
-        label: referenceLineString
-      },
-      {
-        content: new Text( stopwatchString, FONT ),
-        property: model.stopwatchVisibleProperty,
-        label: stopwatchString
-      },
-      {
-        content: new Text( equilibriumPositionString, FONT ),
-        property: model.equilibriumPositionVisibleProperty,
-        label: equilibriumPositionString
-      }
-    ], { boxWidth: 15, spacing: 5 } );
-    var titleToControlsVerticalSpace = 7;
-    var indicatorVisibilityControlsVBox = new VBox( {
-      children: [
-        new VStrut( titleToControlsVerticalSpace ),
-        new HBox(
-          {
-            children: [
-              new HStrut( 10 ),
-              indicatorVisibilityCheckBoxGroup
-            ]
-          } )
-      ],
-      align: 'left'
-    } );
-    var indicatorVisibilityControlPanel = new Panel(
-      indicatorVisibilityControlsVBox,
-      {
-        xMargin: 31,
-        fill: 'rgb( 240, 240, 240 )',
-        top: mvt.modelToViewY( model.ceilingY ),
-        right: this.layoutBounds.width - 10
-      } );
-    this.addChild( indicatorVisibilityControlPanel );
-
     // Add masses
     this.massLayer = new Node();
     var massNodes = [];
@@ -200,7 +145,7 @@ define( function( require ) {
     this.addChild( new OscillatingSpringNode( model.springs[ 1 ], mvtSpringHeight ) );
 
     // Spring Hanger Node
-    var springHangerNode = new SpringHangerNode( mvt, model );
+    var springHangerNode = new SpringHangerNode( model, mvt );
     this.addChild( springHangerNode );
 
     // Spring Constant Control Panels
@@ -231,6 +176,9 @@ define( function( require ) {
       250,
       model.referenceLineVisibleProperty
     );
+    // Control Panel for display elements with varying visibility
+    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel( model, mvt, SecondSpringConstantControlPanel );
+    this.addChild( indicatorVisibilityControlPanel );
 
     this.addChild( this.referenceLine );
 
