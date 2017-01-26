@@ -1,15 +1,9 @@
 // Copyright 2014-2015, University of Colorado Boulder
 
 /**
+ * @author Denzell Barnett
+ *
  * Responsible for the return button, which resets the mass and spring positions.
- *
- * @author Denzell Barnett
- */
-
-/**
- * Return button node in 'Pendulum Lab' simulation.
- *
- * @author Denzell Barnett
  */
 define( function( require ) {
   'use strict';

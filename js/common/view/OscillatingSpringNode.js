@@ -25,7 +25,6 @@ define( function( require ) {
     var self = this;
 
     options = _.extend( {
-      //phase: 0,
       deltaPhase: 3 * Math.PI / 2,
       loops: 12, // {number} number of loops in the coil
       pointsPerLoop: 40, // {number} number of points per loop

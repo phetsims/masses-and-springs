@@ -33,7 +33,7 @@ define( function( require ) {
     this.frictionProperty = new Property( .2 ); // {number} c - coefficient of friction
     this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)
     this.simSpeedProperty = new Property( 'normal' ); // {string} determines the speed at which the sim plays
-    this.rulerVisibleProperty = new Property( true );
+    this.rulerVisibleProperty = new Property( false );
     this.stopwatchVisibleProperty = new Property( false );
     this.referenceLineVisibleProperty = new Property( true );
     this.equilibriumPositionVisibleProperty = new Property( false );
@@ -163,7 +163,7 @@ define( function( require ) {
      */
     stepForward: function() {
       this.playingProperty.set( true );
-      this.step( 1 / 60 );// steps the nominal amount used by step forward button listner
+      this.step( 1 / 60 );// steps the nominal amount used by step forward button listener
       this.playingProperty.set( false );
     },
 

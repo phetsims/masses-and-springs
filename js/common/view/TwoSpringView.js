@@ -30,6 +30,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
+  var SpringStopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/SpringStopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -68,6 +69,9 @@ define( function( require ) {
       397 );
     this.mvt = mvt; // Make mvt available to descendant types.
 
+    //Spacing for top margin of layoutbounds
+    var topSpacing = mvt.modelToViewY( model.ceilingY );
+
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
@@ -85,8 +89,8 @@ define( function( require ) {
     // Return Button
     var returnButton = new ReturnButtonNode( {
       listener: model.enableReturn.bind( model ),
-      top: mvt.modelToViewY( model.ceilingY ),
-      left: mvt.modelToViewY( model.ceilingY ),
+      top: topSpacing,
+      left: topSpacing, // done for convenience
       maxWidth: 55
     } );
     this.addChild( returnButton );
@@ -144,7 +148,7 @@ define( function( require ) {
       model.springs[ 0 ].springConstantRange,
       StringUtils.format( springConstantString, 1 ), {
         right: springHangerNode.springHangerNode.left - 40,
-        top: mvt.modelToViewY( model.ceilingY ),
+        top: topSpacing,
         maxWidth: 125
       } );
     this.addChild( firstSpringConstantControlPanel );
@@ -154,7 +158,7 @@ define( function( require ) {
       model.springs[ 1 ].springConstantRange,
       StringUtils.format( springConstantString, 2 ), {
         left: springHangerNode.springHangerNode.right + 40,
-        top: mvt.modelToViewY( model.ceilingY ),
+        top: topSpacing,
         maxWidth: 125
       } );
     this.addChild( secondSpringConstantControlPanel );
@@ -167,7 +171,7 @@ define( function( require ) {
     );
     // Control Panel for display elements with varying visibility
     var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel( model, {
-      top: mvt.modelToViewY( model.ceilingY ),
+      top: topSpacing,
       left: secondSpringConstantControlPanel.right + 10,
       maxWidth: 180
     } );
@@ -187,6 +191,21 @@ define( function( require ) {
       }
     );
     this.addChild( gravityControlPanel );
+
+    var firstSpringStopperButtonNode = new SpringStopperButtonNode( {
+        listener: model.enableReturn.bind( model ),
+        right: springHangerNode.springHangerNode.left - 5,
+        top: topSpacing
+      }
+    );
+    var secondSpringStopperButtonNode = new SpringStopperButtonNode( {
+        listener: model.enableReturn.bind( model ),
+        left: springHangerNode.springHangerNode.right + 5,
+        top: topSpacing
+      }
+    );
+    this.addChild( firstSpringStopperButtonNode );
+    this.addChild( secondSpringStopperButtonNode );
     
     this.addChild( this.referenceLine );
 
@@ -194,7 +213,7 @@ define( function( require ) {
 
     this.addChild( new DraggableRulerNode(
       this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 50, mvt.modelToViewY( model.ceilingY ) + 35 ),
+      new Vector2( this.layoutBounds.left + 50, topSpacing + 35 ),
       model.rulerVisibleProperty
     ) );
 
