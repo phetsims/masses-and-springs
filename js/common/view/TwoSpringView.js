@@ -206,7 +206,7 @@ define( function( require ) {
     );
     this.addChild( firstSpringStopperButtonNode );
     this.addChild( secondSpringStopperButtonNode );
-    
+
     this.addChild( this.referenceLine );
 
     this.addChild( this.massLayer );
