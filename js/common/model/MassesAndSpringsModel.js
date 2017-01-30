@@ -35,8 +35,9 @@ define( function( require ) {
     this.simSpeedProperty = new Property( 'normal' ); // {string} determines the speed at which the sim plays
     this.rulerVisibleProperty = new Property( false );
     this.stopwatchVisibleProperty = new Property( false );
-    this.referenceLineVisibleProperty = new Property( true );
+    this.movableLineVisibleProperty = new Property( true );
     this.equilibriumPositionVisibleProperty = new Property( false );
+    this.naturalLengthVisibleProperty = new Property( false );
 
     //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
 
@@ -47,7 +48,8 @@ define( function( require ) {
     Property.preventGetSet( this, 'gravity' );
     Property.preventGetSet( this, 'rulerVisible' );
     Property.preventGetSet( this, 'stopwatchVisible' );
-    Property.preventGetSet( this, 'referenceLineVisible' );
+    Property.preventGetSet( this, 'naturalLengthVisible' );
+    Property.preventGetSet( this, 'movableLineVisible' );
     Property.preventGetSet( this, 'equilibriumPositionVisible' );
 
     this.floorY = 0; // Y position of floor in m
@@ -108,7 +110,8 @@ define( function( require ) {
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();
       this.stopwatchVisibleProperty.reset();
-      this.referenceLineVisibleProperty.reset();
+      this.movableLineVisibleProperty.reset();
+      this.naturalLengthVisibleProperty.reset();
       this.equilibriumPositionVisibleProperty.reset();
       this.masses.forEach( function( mass ) { mass.reset(); } );
       this.springs.forEach( function( spring ) { spring.reset(); } );

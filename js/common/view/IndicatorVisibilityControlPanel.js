@@ -23,9 +23,8 @@ define( function( require ) {
 
   // constants
   var equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
-  var referenceLineString = require( 'string!MASSES_AND_SPRINGS/referenceLine' );
-  var rulerString = require( 'string!MASSES_AND_SPRINGS/ruler' );
-  var stopwatchString = require( 'string!MASSES_AND_SPRINGS/stopwatch' );
+  var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
+  var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
   var FONT = new PhetFont( 12 );
 
   /**
@@ -39,24 +38,19 @@ define( function( require ) {
     // TODO: Decouple the checkBoxGroup
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
-        content: new Text( rulerString, FONT ),
-        property: model.rulerVisibleProperty,
-        label: rulerString
-      },
-      {
-        content: new Text( referenceLineString, FONT ),
-        property: model.referenceLineVisibleProperty,
-        label: referenceLineString
-      },
-      {
-        content: new Text( stopwatchString, FONT ),
-        property: model.stopwatchVisibleProperty,
-        label: stopwatchString
+        content: new Text( naturalLengthString, FONT ),
+        property: model.naturalLengthVisibleProperty,
+        label: naturalLengthString
       },
       {
         content: new Text( equilibriumPositionString, FONT ),
         property: model.equilibriumPositionVisibleProperty,
         label: equilibriumPositionString
+      },
+      {
+        content: new Text( movableLineString, FONT ),
+        property: model.movableLineVisibleProperty,
+        label: movableLineString
       }
     ], { boxWidth: 15, spacing: 5 } );
     var titleToControlsVerticalSpace = 2;

@@ -2,23 +2,14 @@
   "masses-and-springs.title": {
     "value": "Masses and Springs"
   },
-  "ruler": {
-    "value": "Ruler"
-  },
   "intro": {
     "value": "Intro"
   },
   "lab": {
     "value": "Lab"
   },
-  "referenceLine": {
-    "value": "Reference Line"
-  },
   "return": {
     "value": "Return"
-  },
-  "stopwatch": {
-    "value": "Stopwatch"
   },
   "energy": {
     "value": "Energy"
@@ -73,5 +64,11 @@
   },
   "slowMotion": {
     "value": "Slow Motion"
+  },
+  "naturalLength": {
+    "value": "Natural Length"
+  },
+  "movableLine": {
+    "value": "Movable Line"
   }
 }

@@ -17,15 +17,17 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
+  var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
+  var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ReturnButtonNode = require( 'MASSES_AND_SPRINGS/common/view/ReturnButtonNode' );
-  var ReferenceLine = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLine' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
@@ -163,12 +165,49 @@ define( function( require ) {
       } );
     this.addChild( secondSpringConstantControlPanel );
 
-    this.referenceLine = new ReferenceLine(
+
+    // Initializes reference lines
+    this.movableLine = new MovableLineNode(
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
-      this.layoutBounds,
       235,
-      model.referenceLineVisibleProperty
+      model.movableLineVisibleProperty
     );
+
+    this.firstSpringEquilibriumLine = new EquilibriumLineNode(
+      model,
+      mvt,
+      this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
+      100,
+      0,
+      model.equilibriumPositionVisibleProperty
+    );
+
+    this.secondSpringEquilibriumLine = new EquilibriumLineNode(
+      model,
+      mvt,
+      this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
+      100,
+      1,
+      model.equilibriumPositionVisibleProperty
+    );
+
+    this.firstNaturalLengthLine = new NaturalLengthLineNode(
+      model,
+      mvt,
+      this.layoutBounds.getCenter().minus( new Vector2( 50, 0 ) ),
+      100,
+      0,
+      model.naturalLengthVisibleProperty
+    );
+    this.secondNaturalLengthLine = new NaturalLengthLineNode(
+      model,
+      mvt,
+      this.layoutBounds.getCenter().minus( new Vector2( 50, 0 ) ),
+      100,
+      1,
+      model.naturalLengthVisibleProperty
+    );
+
     // Control Panel for display elements with varying visibility
     var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel( model, {
       top: topSpacing,
@@ -207,7 +246,12 @@ define( function( require ) {
     this.addChild( firstSpringStopperButtonNode );
     this.addChild( secondSpringStopperButtonNode );
 
-    this.addChild( this.referenceLine );
+    //Reference lines from indicator visibility box
+    this.addChild( this.movableLine );
+    this.addChild( this.firstSpringEquilibriumLine );
+    this.addChild( this.secondSpringEquilibriumLine );
+    this.addChild( this.firstNaturalLengthLine );
+    this.addChild( this.secondNaturalLengthLine );
 
     this.addChild( this.massLayer );
 
