@@ -11,28 +11,26 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var CloseButton = require( 'SCENERY_PHET/buttons/CloseButton' );
-
-  // strings
-  var returnString = require( 'string!MASSES_AND_SPRINGS/return' );
-
+  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  var StopSignNode = require( 'MASSES_AND_SPRINGS/common/view/StopSignNode' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * Constructor for return button
-   * @param {massesAndSprings} model
-   * @param {number} springNumber
    * @param {Object} [options]
    * @constructor
    */
   function SpringStopperButtonNode( options ) {
-    CloseButton.call( this, returnString, _.extend( {
+    options = _.extend( {
       touchAreaXDilation: 6,
-      touchAreaYDilation: 6
-    }, options ) );
-    this.mutate( options );
+      touchAreaYDilation: 6,
+      baseColor: 'rgb( 240, 240, 240 )',
+      content: new StopSignNode( new Vector2( 200, 200 ), 9 )
+    }, options );
+    RectangularPushButton.call( this, options );
   }
 
   massesAndSprings.register( 'SpringStopperButtonNode', SpringStopperButtonNode );
 
-  return inherit( CloseButton, SpringStopperButtonNode );
+  return inherit( RectangularPushButton, SpringStopperButtonNode );
 } );

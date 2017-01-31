@@ -260,7 +260,6 @@ define( function( require ) {
       new Vector2( this.layoutBounds.left + 50, topSpacing + 35 ),
       model.rulerVisibleProperty
     ) );
-
   }
 
   massesAndSprings.register( 'TwoSpringView', TwoSpringView );

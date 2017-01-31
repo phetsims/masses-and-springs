@@ -128,6 +128,7 @@ define( function( require ) {
      *
      * @param {Mass} mass
      */
+    // TODO: Check if detaching is synonmous with attaching and correct as in Design Doc
     addMass: function( mass ) {
       if ( this.massProperty.get() ) {
         this.massProperty.get().detach();
