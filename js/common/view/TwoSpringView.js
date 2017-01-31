@@ -27,7 +27,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var ReturnButtonNode = require( 'MASSES_AND_SPRINGS/common/view/ReturnButtonNode' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
@@ -87,15 +86,6 @@ define( function( require ) {
       bottom: mvt.modelToViewY( model.floorY )
     } );
     this.addChild( resetAllButton );
-
-    // Return Button
-    var returnButton = new ReturnButtonNode( {
-      listener: model.enableReturn.bind( model ),
-      top: topSpacing,
-      left: topSpacing, // done for convenience
-      maxWidth: 55
-    } );
-    this.addChild( returnButton );
 
     // Play/Pause and Step Forward Button Control
     this.addChild( new MASPlayPauseStepControl( model ) );
