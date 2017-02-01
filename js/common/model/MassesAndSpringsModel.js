@@ -2,7 +2,7 @@
 
 /**
  * @author Matt Pennington (PhET Interactive Simulations)
- * @author Denzell Barnett
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';
@@ -140,15 +140,14 @@ define( function( require ) {
       }
       // Update mass position if unattached
       else {
-
         //Attempt to attach
-        for ( var i in this.springs ) {
-          var spring = this.springs[ i ];
+        this.springs.forEach( function( spring ) {
           if ( Math.abs( proposedPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
-               Math.abs( proposedPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE ) {
+               Math.abs( proposedPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE &&
+               spring.massProperty.get() === null ) {
             spring.addMass( mass );
           }
-        }
+        } );
         //Update position
         mass.positionProperty.set( proposedPosition );
       }
