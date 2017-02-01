@@ -42,7 +42,7 @@ define( function( require ) {
       397 );
     this.mvt = mvt; // Make mvt available to descendant types.
 
-    // Play Pause Button
+    // Play/Pause Button
     var playPauseButton = new PlayPauseButton( model.playingProperty, {
       right: layoutBounds.right * .65,
       bottom: mvt.modelToViewY( model.floorY ),

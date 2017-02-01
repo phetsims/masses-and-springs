@@ -70,7 +70,7 @@ define( function( require ) {
       397 );
     this.mvt = mvt; // Make mvt available to descendant types.
 
-    //Spacing for top margin of layoutbounds
+    //Spacing for top margin of layout bounds
     var topSpacing = mvt.modelToViewY( model.ceilingY );
 
     // Reset All button
@@ -220,15 +220,14 @@ define( function( require ) {
       }
     );
     this.addChild( gravityControlPanel );
-
     var firstSpringStopperButtonNode = new SpringStopperButtonNode( {
-        listener: model.enableReturn.bind( model ),
+      listener: model.enableReturn.bind( model, 0 ),
         right: springHangerNode.springHangerNode.left - 5,
         top: topSpacing
       }
     );
     var secondSpringStopperButtonNode = new SpringStopperButtonNode( {
-        listener: model.enableReturn.bind( model ),
+      listener: model.returnSpring.bind( model, 1 ),
         left: springHangerNode.springHangerNode.right + 5,
         top: topSpacing
       }

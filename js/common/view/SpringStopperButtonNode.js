@@ -25,7 +25,7 @@ define( function( require ) {
       touchAreaXDilation: 6,
       touchAreaYDilation: 6,
       baseColor: 'rgb( 240, 240, 240 )',
-      content: new StopSignNode( new Vector2( 200, 200 ), 9 )
+      content: new StopSignNode( new Vector2( 200, 200 ), 7 )
     }, options );
     RectangularPushButton.call( this, options );
   }

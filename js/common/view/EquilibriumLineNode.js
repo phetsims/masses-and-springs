@@ -15,6 +15,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
+  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -26,6 +27,7 @@ define( function( require ) {
    * @param {boolean} visibleProperty
    * @constructor
    */
+  // TODO: Pass in only minimum (spring, visibleProperty, mvt )
   function EquilibriumLineNode( model, mvt, initialPosition, length, springNumber, visibleProperty ) {
     var self = this;
     Node.call( this );
@@ -41,17 +43,17 @@ define( function( require ) {
     line.mouseArea = line.localBounds.dilated( 10 );
     line.touchArea = line.localBounds.dilated( 10 );
 
+    this.addChild( line );
+
     // @private
-    this.initialPosition.setX( mvt.modelToViewX( model.springs[ springNumber ].positionProperty.get().x ) );
-    this.initialPosition.setY( mvt.modelToViewY( model.springs[ springNumber ].bottomProperty.get() + model.springs[ springNumber ].displacementProperty.value ) );
-    this.positionProperty = new Property( initialPosition );
-    this.positionProperty.link( function( position ) {
-      self.translation = position.minus( new Vector2( length / 2, 0 ) );
+    //TODO: refactor equilibriumProperty -> equilibriumYPositionProperty
+    this.centerX = mvt.modelToViewX( model.springs[ springNumber ].positionProperty.get().x );
+    model.springs[ springNumber ].equilibriumProperty.link( function( equilibriumPosition ) {
+      self.centerY = mvt.modelToViewY( equilibriumPosition );
+      console.log( self.centerY );
     } );
 
     visibleProperty.linkAttribute( self, 'visible' );
-
-    this.addChild( line );
   }
 
   massesAndSprings.register( 'EquilibriumLineNode', EquilibriumLineNode );

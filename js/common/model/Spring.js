@@ -70,6 +70,16 @@ define( function( require ) {
       }
     );
 
+    // @public y position of the equilibrium position
+    this.equilibriumProperty = new DerivedProperty( [ this.springConstantProperty, this.gravityProperty, this.massProperty ],
+      function( springConstant, gravity, mass ) {
+        //TODO: Check if this formula is correct for all cases.
+        // springExtension = mg/k  can we use this function?
+        var springExtension = mass ? (mass.mass * gravity) / springConstant : 0;
+        return springExtension + self.naturalRestingLengthProperty.get();
+      }
+    );
+
     //  Restart animation if it was squelched
     this.gravityProperty.link( function() {
       if ( self.massProperty.get() ) {
@@ -81,7 +91,9 @@ define( function( require ) {
         self.animatingProperty.set( true );
       }
     } );
-
+    // this.equilibriumProperty.link( function(equilibriumPosition) {
+    //   console.log(equilibriumPosition);
+    // } );
   }
 
   massesAndSprings.register( 'Spring', Spring );
@@ -92,10 +104,9 @@ define( function( require ) {
      * @public
      * @override
      *
-     * @param {boolean} resetAllProperty used for return button to ignore reseting the springConstant
+     * @param {boolean} resetAllProperty used for stop buttons to ignore resetting every property
      */
     reset: function( resetAllProperty ) {
-      this.removeMass();
       //ensures displacement will change on reset, otherwise springs will be upside down.
       // TODO: find a better fix for this problem.
       this.displacementProperty.set( 1 );
@@ -128,7 +139,7 @@ define( function( require ) {
      *
      * @param {Mass} mass
      */
-    // TODO: Check if detaching is synonmous with attaching and correct as in Design Doc
+    // TODO: Check if detaching is synonymous with attaching and correct as in Design Doc
     addMass: function( mass ) {
       if ( this.massProperty.get() ) {
         this.massProperty.get().detach();
@@ -138,7 +149,6 @@ define( function( require ) {
       this.displacementProperty.set( this.massProperty.get().positionProperty.get().y -
                                      ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) );
       this.massProperty.get().verticalVelocityProperty.set( 0 );
-      this.animatingProperty.set( true );
     },
 
     /**

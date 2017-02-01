@@ -152,12 +152,12 @@ define( function( require ) {
         mass.positionProperty.set( proposedPosition );
       }
     },
+
     /**
      * @public
      */
-    enableReturn: function() {
-      this.masses.forEach( function( mass ) { mass.reset(); } );
-      this.springs.forEach( function( spring ) { spring.reset( true ); } );
+    returnSpring: function( springNumber ) {
+      this.springs[ springNumber ].reset( true );
     },
 
     /**
