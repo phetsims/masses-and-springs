@@ -4,6 +4,7 @@
  * Main entry point for the sim.
  *
  * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';
