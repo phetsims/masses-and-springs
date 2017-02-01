@@ -3,13 +3,14 @@
 /**
  *
  * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';
 
   // modules
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  var IntroScreenView = require( 'MASSES_AND_SPRINGS/intro/view/IntroScreenView' );
+  var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -17,26 +18,26 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
 
   // strings
-  var introString = require( 'string!MASSES_AND_SPRINGS/intro' );
-
+  var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
 
   /**
    * @constructor
    */
-  function IntroScreen() {
+  function EnergyScreen() {
 
     var options = {
-      name: introString,
+      name: energyString,
       backgroundColorProperty: new Property( Color.toColor( 'white' ) )
     };
 
     Screen.call( this,
       function() { return new MassesAndSpringsModel(); },
-      function( model ) { return new IntroScreenView( model ); },
+      function( model ) { return new EnergyScreenView( model ); },
       options
     );
   }
 
-  massesAndSprings.register( 'IntroScreen', IntroScreen );
-  return inherit( Screen, IntroScreen );
+  massesAndSprings.register( 'EnergyScreen', EnergyScreen );
+
+  return inherit( Screen, EnergyScreen );
 } );
