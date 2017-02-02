@@ -15,23 +15,19 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
 
+  // constants
+  var LINE_LENGTH = 100;
   /**
-   * @param {MassesAndSpringsModel} model
    * @param {ModelViewTransform2} mvt
-   * @param {Vector2} initialPosition - of the center of line
-   * @param {number} length - in view coordinates
-   * @param {number} springNumber - determines which spring is being referenced
+   * @param {Spring} spring - determines which spring
    * @param {boolean} visibleProperty
    * @constructor
    */
-  // TODO: Pass in only minimum (spring, visibleProperty, mvt )
-  function EquilibriumLineNode( model, mvt, initialPosition, length, springNumber, visibleProperty ) {
+  function EquilibriumLineNode( mvt, spring, visibleProperty ) {
     var self = this;
     Node.call( this );
 
-    this.initialPosition = initialPosition;
-
-    var line = new Line( 0, 0, length, 0, {
+    var line = new Line( 0, 0, LINE_LENGTH, 0, {
       stroke: 'rgb(93, 191, 142)',
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
@@ -43,9 +39,8 @@ define( function( require ) {
     this.addChild( line );
 
     // @private
-    //TODO: refactor equilibriumProperty -> equilibriumYPositionProperty
-    this.centerX = mvt.modelToViewX( model.springs[ springNumber ].positionProperty.get().x );
-    model.springs[ springNumber ].equilibriumProperty.link( function( equilibriumPosition ) {
+    this.centerX = mvt.modelToViewX( spring.positionProperty.get().x );
+    spring.equilibriumYPositionProperty.link( function( equilibriumPosition ) {
       self.centerY = mvt.modelToViewY( equilibriumPosition );
       console.log( self.centerY );
     } );

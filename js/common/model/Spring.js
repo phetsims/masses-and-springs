@@ -71,7 +71,7 @@ define( function( require ) {
     );
 
     // @public y position of the equilibrium position
-    this.equilibriumProperty = new DerivedProperty( [ this.springConstantProperty, this.gravityProperty, this.massProperty ],
+    this.equilibriumYPositionProperty = new DerivedProperty( [ this.springConstantProperty, this.gravityProperty, this.massProperty ],
       function( springConstant, gravity, mass ) {
         //TODO: Check if this formula is correct for all cases.
         // springExtension = mg/k  can we use this function?
@@ -91,7 +91,7 @@ define( function( require ) {
         self.animatingProperty.set( true );
       }
     } );
-    // this.equilibriumProperty.link( function(equilibriumPosition) {
+    // this.equilibriumYPositionProperty.link( function(equilibriumPosition) {
     //   console.log(equilibriumPosition);
     // } );
   }
@@ -139,7 +139,6 @@ define( function( require ) {
      *
      * @param {Mass} mass
      */
-    // TODO: Check if detaching is synonymous with attaching and correct as in Design Doc
     addMass: function( mass ) {
       if ( this.massProperty.get() ) {
         this.massProperty.get().detach();

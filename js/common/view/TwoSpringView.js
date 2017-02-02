@@ -164,20 +164,14 @@ define( function( require ) {
     );
 
     this.firstSpringEquilibriumLine = new EquilibriumLineNode(
-      model,
       mvt,
-      this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
-      100,
-      0,
+      model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty
     );
 
     this.secondSpringEquilibriumLine = new EquilibriumLineNode(
-      model,
       mvt,
-      this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
-      100,
-      1,
+      model.springs[ 1 ],
       model.equilibriumPositionVisibleProperty
     );
 
