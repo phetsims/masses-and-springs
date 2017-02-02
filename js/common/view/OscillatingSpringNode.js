@@ -34,10 +34,7 @@ define( function( require ) {
       deltaLineWidth: 1.5, // increase in line width per 1 unit of spring constant increase
       leftEndLength: -15, // {number} length of the horizontal line added to the left end of the coil
       rightEndLength: -15, // {number} length of the horizontal line added to the right end of the coil
-      rotation: -3 * Math.PI / 2,  // {number} angle in radians of rotation of spring
-      frontColor: 'rgb(163,160,255)',
-      middleColor: 'rgb(0,0,240)',
-      backColor: 'rgb(0,0,255)'
+      rotation: -3 * Math.PI / 2  // {number} angle in radians of rotation of spring
     }, options );
 
 
