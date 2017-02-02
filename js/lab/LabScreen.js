@@ -15,7 +15,6 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
-  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var labString = require( 'string!MASSES_AND_SPRINGS/lab' );
@@ -27,7 +26,7 @@ define( function( require ) {
 
     var options = {
       name: labString,
-      backgroundColorProperty: new Property( Color.toColor( 'white' ) )
+      backgroundColorProperty: new Property( 'white' )
     };
 
     Screen.call( this,
