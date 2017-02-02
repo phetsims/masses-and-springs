@@ -155,9 +155,12 @@ define( function( require ) {
 
     /**
      * @public
+     *
+     * @param {number} springNumber: Determimes which spring will be affected.
      */
-    returnSpring: function( springNumber ) {
-      this.springs[ springNumber ].reset( true );
+    //TODO: Feels hackish. Another approach involves setting the spring and mass values to equilibriumYPosition
+    stopSpring: function( springNumber ) {
+      this.springs[ springNumber ].oscillate( 100 );
     },
 
     /**
