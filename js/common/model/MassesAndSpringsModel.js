@@ -64,9 +64,9 @@ define( function( require ) {
       new Mass( .100, new Vector2( .20, .5 ), true, 'grey' ),
       new Mass( .100, new Vector2( .28, .5 ), true, 'grey' ),
       new Mass( .050, new Vector2( .33, .5 ), true, 'grey' ),
-      new Mass( .200, new Vector2( .63, .5 ), false, 'red' ),
+      new Mass( .200, new Vector2( .63, .5 ), false, 'blue' ),
       new Mass( .150, new Vector2( .56, .5 ), false, 'green' ),
-      new Mass( .075, new Vector2( .49, .5 ), false, 'blue' )
+      new Mass( .075, new Vector2( .49, .5 ), false, 'red' )
     ];
     this.bodies = [
       Body.MOON,

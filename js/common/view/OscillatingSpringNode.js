@@ -10,7 +10,6 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-
   var ParametricSpringNode = require( 'SCENERY_PHET/ParametricSpringNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -35,7 +34,10 @@ define( function( require ) {
       deltaLineWidth: 1.5, // increase in line width per 1 unit of spring constant increase
       leftEndLength: -15, // {number} length of the horizontal line added to the left end of the coil
       rightEndLength: -15, // {number} length of the horizontal line added to the right end of the coil
-      rotation: -3 * Math.PI / 2  // {number} angle in radians of rotation of spring
+      rotation: -3 * Math.PI / 2,  // {number} angle in radians of rotation of spring
+      frontColor: 'rgb(163,160,255)',
+      middleColor: 'rgb(0,0,240)',
+      backColor: 'rgb(0,0,255)'
     }, options );
 
 

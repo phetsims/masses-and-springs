@@ -42,10 +42,12 @@ define( function( require ) {
       mvt.modelToViewDeltaY( -mass.height )
     );
     var rect = Rectangle.bounds( viewBounds, {
+      stroke: 'black',
+      lineWidth: .5,
       fill: new LinearGradient( viewBounds.minX, 0, viewBounds.maxX, 0 )
-        .addColorStop( 0.3, mass.color )
-        .addColorStop( 0.8, 'rgb(194,195,197)' )
-        .addColorStop( 1, mass.color )
+        .addColorStop( 0.1, mass.color )
+        .addColorStop( 0.2, 'rgb(205,206,207)' )
+        .addColorStop( .7, mass.color )
     } );
     this.addChild( rect );
     if ( mass.isLabeled ) {
