@@ -14,9 +14,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
-  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {MassesAndSpringsModel} model
