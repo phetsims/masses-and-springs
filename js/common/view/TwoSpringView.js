@@ -221,7 +221,7 @@ define( function( require ) {
     );
     this.addChild( gravityControlPanel );
     var firstSpringStopperButtonNode = new SpringStopperButtonNode( {
-      listener: model.enableReturn.bind( model, 0 ),
+      listener: model.returnSpring.bind( model, 0 ),
         right: springHangerNode.springHangerNode.left - 5,
         top: topSpacing
       }
