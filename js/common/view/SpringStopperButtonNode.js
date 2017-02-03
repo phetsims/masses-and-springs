@@ -13,7 +13,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var StopSignNode = require( 'MASSES_AND_SPRINGS/common/view/StopSignNode' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * Constructor for return button
@@ -25,7 +24,7 @@ define( function( require ) {
       touchAreaXDilation: 6,
       touchAreaYDilation: 6,
       baseColor: 'rgb( 240, 240, 240 )',
-      content: new StopSignNode( new Vector2( 200, 200 ), 7 )
+      content: new StopSignNode( 7 )
     }, options );
     RectangularPushButton.call( this, options );
   }
