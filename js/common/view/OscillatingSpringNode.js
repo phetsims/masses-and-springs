@@ -3,6 +3,8 @@
 /**
  * @author Matt Pennington
  * @author Denzell Barnett
+ *
+ * Node for handling the representation of an oscillating spring.
  */
 define( function( require ) {
   'use strict';
