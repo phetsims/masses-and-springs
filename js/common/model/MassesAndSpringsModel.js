@@ -36,7 +36,7 @@ define( function( require ) {
     this.rulerVisibleProperty = new Property( false );
     this.stopwatchVisibleProperty = new Property( false );
     this.movableLineVisibleProperty = new Property( true );
-    this.equilibriumPositionVisibleProperty = new Property( false );
+    this.equilibriumPositionVisibleProperty = new Property( true );
     this.naturalLengthVisibleProperty = new Property( false );
 
     //body: Body.EARTH, //TODO:: use a default body instead of a default gravity

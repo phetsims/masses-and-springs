@@ -42,7 +42,6 @@ define( function( require ) {
     this.centerX = mvt.modelToViewX( spring.positionProperty.get().x );
     spring.equilibriumYPositionProperty.link( function( equilibriumPosition ) {
       self.centerY = mvt.modelToViewY( equilibriumPosition );
-      console.log( self.centerY );
     } );
 
     visibleProperty.linkAttribute( self, 'visible' );

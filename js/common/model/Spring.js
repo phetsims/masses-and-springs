@@ -73,10 +73,9 @@ define( function( require ) {
     // @public y position of the equilibrium position
     this.equilibriumYPositionProperty = new DerivedProperty( [ this.springConstantProperty, this.gravityProperty, this.massProperty ],
       function( springConstant, gravity, mass ) {
-        //TODO: Check if this formula is correct for all cases.
-        // springExtension = mg/k  can we use this function?
+        // springExtension = mg/k
         var springExtension = mass ? (mass.mass * gravity) / springConstant : 0;
-        return springExtension + self.naturalRestingLengthProperty.get();
+        return self.positionProperty.get().y - self.naturalRestingLengthProperty.get() - springExtension;
       }
     );
 
@@ -91,9 +90,6 @@ define( function( require ) {
         self.animatingProperty.set( true );
       }
     } );
-    // this.equilibriumYPositionProperty.link( function(equilibriumPosition) {
-    //   console.log(equilibriumPosition);
-    // } );
   }
 
   massesAndSprings.register( 'Spring', Spring );
