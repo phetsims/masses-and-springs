@@ -13,13 +13,10 @@ define( function( require ) {
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // strings
   var cmString = require( 'string!MASSES_AND_SPRINGS/cm' );
-
-  // constants
-  var FONT = new PhetFont( 12 );
 
   /**
    * @param {Bounds2} dragBounds
@@ -52,10 +49,10 @@ define( function( require ) {
       rotation: Math.PI / 2,
       backgroundFill: 'rgb( 237, 225, 121 )',
       cursor: 'pointer',
-      majorTickFont: FONT,
+      majorTickFont: MassesAndSpringsConstants.FONT,
       majorTickHeight: 10,
       minorTickHeight: 5,
-      unitsFont: FONT,
+      unitsFont: MassesAndSpringsConstants.FONT,
       opacity: .8,
       tickMarksOnBottom: false
     } ) );

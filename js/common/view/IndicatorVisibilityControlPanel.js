@@ -14,18 +14,17 @@ define( function( require ) {
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
-  // constants
+  // strings
   var equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
-  var FONT = new PhetFont( 12 );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -38,17 +37,17 @@ define( function( require ) {
     // TODO: Decouple the checkBoxGroup
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
-        content: new Text( naturalLengthString, FONT ),
+        content: new Text( naturalLengthString, MassesAndSpringsConstants.FONT ),
         property: model.naturalLengthVisibleProperty,
         label: naturalLengthString
       },
       {
-        content: new Text( equilibriumPositionString, FONT ),
+        content: new Text( equilibriumPositionString, MassesAndSpringsConstants.FONT ),
         property: model.equilibriumPositionVisibleProperty,
         label: equilibriumPositionString
       },
       {
-        content: new Text( movableLineString, FONT ),
+        content: new Text( movableLineString, MassesAndSpringsConstants.FONT ),
         property: model.movableLineVisibleProperty,
         label: movableLineString
       }

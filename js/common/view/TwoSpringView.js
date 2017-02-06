@@ -21,6 +21,7 @@ define( function( require ) {
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
@@ -45,7 +46,6 @@ define( function( require ) {
 
   // constants
   var MAX_TEXT_WIDTH = 80;
-  var PANEL_VERTICAL_SPACING = 10;
 
   /**
    * TODO::: Remove mvt transforms from view objects
@@ -203,7 +203,7 @@ define( function( require ) {
       this,
       {
         left: indicatorVisibilityControlPanel.left,
-        top: indicatorVisibilityControlPanel.bottom + PANEL_VERTICAL_SPACING,
+        top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         minWidth: 1,
         maxWidth: 180
       }
@@ -211,7 +211,7 @@ define( function( require ) {
     this.addChild( gravityControlPanel );
 
     this.addChild( new ToolBoxNode( {
-      top: gravityControlPanel.bottom + PANEL_VERTICAL_SPACING,
+      top: gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
       left: gravityControlPanel.left,
       minWidth: gravityControlPanel.width,
       maxWidth: 180

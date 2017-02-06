@@ -14,8 +14,8 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var heightRatio = 2;
-  var density = 80; // density of ???
+  var HEIGHT_RATIO = 2;
+  var DENSITY = 80; // density of ???
 
   /**
    * @param {number} massValue:  mass in kg
@@ -48,8 +48,8 @@ define( function( require ) {
     this.isLabeled = isLabeled;
     this.color = color;
     this.hookHeight = .03; // height in m
-    this.radius = Math.pow( this.mass / (density * heightRatio * Math.PI ), 1 / 3 );
-    this.cylinderHeight = this.radius * heightRatio;
+    this.radius = Math.pow( this.mass / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 3 );
+    this.cylinderHeight = this.radius * HEIGHT_RATIO;
     this.height = this.cylinderHeight + this.hookHeight;
 
     this.userControlledProperty.link( function( userControlled ) {

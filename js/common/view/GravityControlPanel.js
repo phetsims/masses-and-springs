@@ -18,18 +18,15 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ComboBox = require( 'SUN/ComboBox' );
   var HSlider = require( 'SUN/HSlider' );
   var Panel = require( 'SUN/Panel' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // strings
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
   var gravityNoneString = require( 'string!MASSES_AND_SPRINGS/gravity.none' );
   var gravityLotsString = require( 'string!MASSES_AND_SPRINGS/gravity.lots' );
-
-  var LABEL_FONT = new PhetFont( 10 );
-  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold' } );
 
   /**
    *
@@ -54,7 +51,7 @@ define( function( require ) {
     var bodyListItems = [];
     this.bodies = bodies;
     bodies.forEach( function( body ) {
-      var bodyLabel = new Text( body.title, { font: LABEL_FONT } );
+      var bodyLabel = new Text( body.title, { font: MassesAndSpringsConstants.LABEL_FONT } );
       bodyLabel.localBounds = bodyLabel.localBounds.withMaxX( Math.max( 50, bodyLabel.localBounds.maxX ) );
 
       bodyListItems.push( {
@@ -84,13 +81,13 @@ define( function( require ) {
       thumbFillEnabled: '#00b3b3',
       thumbFillHighlighted: '#00e6e6'
     } );
-    this.hSlider.addMajorTick( gravityPropertyRange.min, new Text( gravityNoneString, { font: LABEL_FONT } ) );
-    this.hSlider.addMajorTick( gravityPropertyRange.max, new Text( gravityLotsString, { font: LABEL_FONT } ) );
+    this.hSlider.addMajorTick( gravityPropertyRange.min, new Text( gravityNoneString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
+    this.hSlider.addMajorTick( gravityPropertyRange.max, new Text( gravityLotsString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
 
     Panel.call( this, new VBox( {
       align: 'left',
       children: [
-        new Text( gravityString, { font: TITLE_FONT } ),
+        new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
         gravityComboBox,
         self.hSlider
       ]
