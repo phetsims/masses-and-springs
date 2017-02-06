@@ -41,7 +41,7 @@ define( function( require ) {
     this.addChild( line );
 
     // @private
-    var xPos = mvt.modelToViewX( spring.positionProperty.get().x ) + 4; // prevents overlap with the equilibrium line
+    var xPos = mvt.modelToViewX( spring.positionProperty.get().x ) + 7.5; // prevents overlap with the equilibrium line
     var yPos = mvt.modelToViewY( spring.bottomProperty.get() );
     this.positionProperty = new Property( new Vector2( xPos, yPos ) );
     this.positionProperty.link( function( position ) {
