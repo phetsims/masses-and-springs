@@ -17,22 +17,19 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // constants
+  var LINE_LENGTH = 100;
   /**
-   * @param {MassesAndSpringsModel} model
    * @param {ModelViewTransform2} mvt
-   * @param {Vector2} initialPosition - of the center of line
-   * @param {number} length - in view coordinates
-   * @param {number} springNumber - determines which spring is being referenced
+   * @param {Spring} spring - determines which spring is being referenced
    * @param {boolean} visibleProperty
    * @constructor
    */
-  function NaturalLengthLineNode( model, mvt, initialPosition, length, springNumber, visibleProperty ) {
+  function NaturalLengthLineNode( mvt, spring, visibleProperty ) {
     var self = this;
     Node.call( this );
 
-    this.initialPosition = initialPosition;
-
-    var line = new Line( 0, 0, length, 0, {
+    var line = new Line( 0, 0, LINE_LENGTH, 0, {
       stroke: 'rgb(65,66,232)',
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
@@ -41,16 +38,17 @@ define( function( require ) {
     line.mouseArea = line.localBounds.dilated( 10 );
     line.touchArea = line.localBounds.dilated( 10 );
 
+    this.addChild( line );
+
     // @private
-    this.initialPosition.setX( mvt.modelToViewX( model.springs[ springNumber ].positionProperty.get().x ) - 5 );
-    this.initialPosition.setY( mvt.modelToViewY( model.springs[ springNumber ].bottomProperty.get() ) );
-    this.positionProperty = new Property( initialPosition );
+    var xPos = mvt.modelToViewX( spring.positionProperty.get().x ) + 4; // prevents overlap with the equilibrium line
+    var yPos = mvt.modelToViewY( spring.bottomProperty.get() );
+    this.positionProperty = new Property( new Vector2( xPos, yPos ) );
     this.positionProperty.link( function( position ) {
-      self.translation = position.minus( new Vector2( length / 2, 0 ) );
+      self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
     } );
 
     visibleProperty.linkAttribute( self, 'visible' );
-    this.addChild( line );
   }
 
   massesAndSprings.register( 'NaturalLengthLineNode', NaturalLengthLineNode );

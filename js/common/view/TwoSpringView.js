@@ -177,19 +177,13 @@ define( function( require ) {
     );
 
     this.firstNaturalLengthLine = new NaturalLengthLineNode(
-      model,
       mvt,
-      this.layoutBounds.getCenter().minus( new Vector2( 50, 0 ) ),
-      100,
-      0,
+      model.springs[ 0 ],
       model.naturalLengthVisibleProperty
     );
     this.secondNaturalLengthLine = new NaturalLengthLineNode(
-      model,
       mvt,
-      this.layoutBounds.getCenter().minus( new Vector2( 50, 0 ) ),
-      100,
-      1,
+      model.springs[ 1 ],
       model.naturalLengthVisibleProperty
     );
 
