@@ -216,10 +216,10 @@ define( function( require ) {
             newDisplacement = ( this.displacementProperty.get() > 0 ) ? Math.abs( newDisplacement ) : -Math.abs( newDisplacement );
           }
 
-          //Squelch noise after coming to rest with tolerance of 1 micron
-          if ( Math.abs( this.displacementProperty.get() - newDisplacement ) < .0000001 &&
-               Math.abs( this.massProperty.get().verticalVelocityProperty.get() ) < .0000001 ) {
-            this.displacementProperty.set( -m * g / k );  //Equilibrium length
+          // Squelch noise after coming to rest with tolerance of 1 micron
+          if ( Math.abs( this.displacementProperty.get() - newDisplacement ) < 1e-6 &&
+               Math.abs( this.massProperty.get().verticalVelocityProperty.get() ) < 1e-6 ) {
+            this.displacementProperty.set( -m * g / k );  // Equilibrium length
             this.massProperty.get().verticalVelocityProperty.set( 0 );
             this.animatingProperty.set( false );
           }
