@@ -34,6 +34,7 @@ define( function( require ) {
   var SpringStopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/SpringStopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var ToolBoxNode = require( 'MASSES_AND_SPRINGS/common/view/ToolBoxNode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -44,6 +45,7 @@ define( function( require ) {
 
   // constants
   var MAX_TEXT_WIDTH = 80;
+  var PANEL_VERTICAL_SPACING = 10;
 
   /**
    * TODO::: Remove mvt transforms from view objects
@@ -155,7 +157,6 @@ define( function( require ) {
       } );
     this.addChild( secondSpringConstantControlPanel );
 
-
     // Initializes reference lines
     this.movableLine = new MovableLineNode(
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
@@ -208,12 +209,19 @@ define( function( require ) {
       this,
       {
         left: indicatorVisibilityControlPanel.left,
-        top: indicatorVisibilityControlPanel.bottom + 10,
+        top: indicatorVisibilityControlPanel.bottom + PANEL_VERTICAL_SPACING,
         minWidth: 1,
         maxWidth: 180
       }
     );
     this.addChild( gravityControlPanel );
+
+    this.addChild( new ToolBoxNode( {
+      top: gravityControlPanel.bottom + PANEL_VERTICAL_SPACING,
+      left: gravityControlPanel.left,
+      minWidth: gravityControlPanel.width,
+      maxWidth: 180
+    } ) );
     var firstSpringStopperButtonNode = new SpringStopperButtonNode( {
       listener: model.stopSpring.bind( model, 0 ),
         right: springHangerNode.springHangerNode.left - 5,

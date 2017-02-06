@@ -156,7 +156,7 @@ define( function( require ) {
     /**
      * @public
      *
-     * @param {number} springNumber: Determimes which spring will be affected.
+     * @param {number} springNumber: Determines which spring will be affected.
      */
     //TODO: Feels hackish. Another approach involves setting the spring and mass values to equilibriumYPosition
     stopSpring: function( springNumber ) {
