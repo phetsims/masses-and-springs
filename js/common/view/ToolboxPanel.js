@@ -94,7 +94,7 @@ define( function( require ) {
           timerIcon.opacity = 0;
           timerVisibleProperty.set( true );
           var initialViewPosition = self.globalToParentPoint( event.pointer.point );
-          timerNode.setCenterBottom( initialViewPosition );
+          timerNode.setCenter( initialViewPosition );
         },
         up: function() {
           timerIcon.opacity = 1;
