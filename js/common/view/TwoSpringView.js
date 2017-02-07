@@ -35,7 +35,7 @@ define( function( require ) {
   var SpringStopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/SpringStopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var ToolBoxNode = require( 'MASSES_AND_SPRINGS/common/view/ToolBoxNode' );
+  var ToolBoxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolBoxPanel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -210,7 +210,7 @@ define( function( require ) {
     );
     this.addChild( gravityControlPanel );
 
-    this.addChild( new ToolBoxNode( {
+    this.addChild( new ToolBoxPanel( {
       top: gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
       left: gravityControlPanel.left,
       minWidth: gravityControlPanel.width,

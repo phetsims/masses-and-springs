@@ -14,6 +14,7 @@ define( function( require ) {
   var HSlider = require( 'SUN/HSlider' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
@@ -33,7 +34,8 @@ define( function( require ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
-      yMargin: 5
+      yMargin: 5,
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
 
     var hSlider = new HSlider( springConstantProperty, springConstantPropertyRange, {

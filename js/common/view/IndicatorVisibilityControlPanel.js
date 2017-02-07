@@ -71,7 +71,8 @@ define( function( require ) {
       indicatorVisibilityControlsVBox,
       {
         xMargin: 10,
-        fill: 'rgb( 240, 240, 240 )'
+        fill: 'rgb( 240, 240, 240 )',
+        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
       }
     );
     this.addChild( this.indicatorVisibilityControlPanel );

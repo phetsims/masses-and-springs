@@ -18,7 +18,8 @@ define( function( require ) {
     PANEL_VERTICAL_SPACING: 10,
     FONT: new PhetFont( 12 ),
     LABEL_FONT: new PhetFont( 10 ),
-    TITLE_FONT: new PhetFont( { size: 12, weight: 'bold' } )
+    TITLE_FONT: new PhetFont( { size: 12, weight: 'bold' } ),
+    PANEL_CORNER_RADIUS: 7
   };
 
   massesAndSprings.register( 'MassesAndSpringsConstants', MassesAndSpringsConstants );

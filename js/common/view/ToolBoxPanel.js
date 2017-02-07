@@ -12,7 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Timer = require( 'SCENERY_PHET/Timer' );
@@ -23,20 +23,18 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function ToolBoxNode( options ) {
+  function ToolBoxPanel( options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
       yMargin: 5,
-      align: 'center'
+      align: 'center',
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
 
     var toolbox = new HBox( {
       align: 'center',
-      spacing: 20,
-      children: [
-        new Text( 'Ruler', { font: MassesAndSpringsConstants.TITLE_FONT } )
-      ]
+      spacing: 30
     } );
     Panel.call( this, toolbox, options );
 
@@ -47,9 +45,44 @@ define( function( require ) {
     var isRunningProperty = new Property( false );
     var timer = new Timer( secondsProperty, isRunningProperty );
 
+    // Create ruler
+    var rulerWidth = 397; // 1 meter
+    var rulerLength = .175 * rulerWidth;
+    var majorTickLabels = [ '' ];
+    for ( var i = 1; i < 10; i++ ) { // create 10 empty strings for labels
+      majorTickLabels.push( '' );
+    }
+    var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
+    var ruler = new RulerNode( rulerWidth, rulerLength, majorTickWidth, majorTickLabels, '' );
+    ruler.rotate( 40, false );
+
+    // Create timer icon
+    ruler.toImage( function( image ) {
+      var rulerIcon = new Image( image, {
+        cursor: 'pointer',
+        pickable: true,
+        scale: .1
+      } );
+
+      // Input listeners for the ruler icon
+      rulerIcon.addInputListener( {
+        down: function() {
+          rulerIcon.opacity = 0;
+        },
+        up: function() {
+          rulerIcon.opacity = 1;
+        }
+      } );
+      toolbox.addChild( rulerIcon );
+    } );
+
     // Create timer icon
     timer.toImage( function( image ) {
-      var timerIcon = new Image( image, { cursor: 'pointer', pickable: true, scale: .4 } );
+      var timerIcon = new Image( image, {
+        cursor: 'pointer',
+        pickable: true,
+        scale: .4
+      } );
 
       // Input listeners for timer icon
       timerIcon.addInputListener( {
@@ -68,8 +101,8 @@ define( function( require ) {
     } );
   }
 
-  massesAndSprings.register( 'ToolBoxNode', ToolBoxNode );
+  massesAndSprings.register( 'ToolBoxPanel', ToolBoxPanel );
 
-  return inherit( Panel, ToolBoxNode );
+  return inherit( Panel, ToolBoxPanel );
 
 } );

@@ -44,7 +44,8 @@ define( function( require ) {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 16,
       yMargin: 10,
-      align: 'left'
+      align: 'left',
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
 
     //  Add gravity info for various planets
