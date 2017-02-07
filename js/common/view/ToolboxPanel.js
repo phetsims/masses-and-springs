@@ -23,7 +23,7 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function ToolboxPanel( mvt, rulerVisibleProperty, timerVisibleProperty, options ) {
+  function ToolboxPanel( rulerVisibleProperty, timerVisibleProperty, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
