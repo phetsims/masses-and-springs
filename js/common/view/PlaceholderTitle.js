@@ -23,7 +23,7 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function ToolBoxPanel( rulerVisibleProperty, timerVisibleProperty, options ) {
+  function ToolboxPanel( mvt, rulerVisibleProperty, timerVisibleProperty, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
@@ -67,6 +67,7 @@ define( function( require ) {
         down: function() {
           rulerIcon.opacity = 0;
           rulerVisibleProperty.set( true );
+          // ruler.
         },
         up: function() {
           rulerIcon.opacity = 1;
@@ -99,8 +100,8 @@ define( function( require ) {
     } );
   }
 
-  massesAndSprings.register( 'ToolBoxPanel', ToolBoxPanel );
+  massesAndSprings.register( 'ToolboxPanel', ToolboxPanel );
 
-  return inherit( Panel, ToolBoxPanel );
+  return inherit( Panel, ToolboxPanel );
 
 } );
