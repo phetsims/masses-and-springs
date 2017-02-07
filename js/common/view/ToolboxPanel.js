@@ -23,7 +23,7 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function ToolboxPanel( rulerVisibleProperty, timerVisibleProperty, options ) {
+  function ToolboxPanel( mvt, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
@@ -32,6 +32,8 @@ define( function( require ) {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
 
+    var self = this;
+    
     var toolbox = new HBox( {
       align: 'center',
       spacing: 30
@@ -64,10 +66,11 @@ define( function( require ) {
 
       // Input listeners for the ruler icon
       rulerIcon.addInputListener( {
-        down: function() {
+        down: function( event ) {
           rulerIcon.opacity = 0;
           rulerVisibleProperty.set( true );
-          // ruler.
+          var initialViewPosition = self.globalToParentPoint( event.pointer.point );
+          rulerNode.setCenter( initialViewPosition );
         },
         up: function() {
           rulerIcon.opacity = 1;
@@ -87,9 +90,11 @@ define( function( require ) {
 
       // Input listeners for timer icon
       timerIcon.addInputListener( {
-        down: function() {
+        down: function( event ) {
           timerIcon.opacity = 0;
           timerVisibleProperty.set( true );
+          var initialViewPosition = self.globalToParentPoint( event.pointer.point );
+          timerNode.setCenterBottom( initialViewPosition );
         },
         up: function() {
           timerIcon.opacity = 1;

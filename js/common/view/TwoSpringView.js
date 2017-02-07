@@ -211,13 +211,7 @@ define( function( require ) {
     );
     this.addChild( gravityControlPanel );
 
-    // Toolbox Panel
-    this.addChild( new ToolboxPanel( model.rulerVisibleProperty, model.timerVisibleProperty, {
-      top: gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-      left: gravityControlPanel.left,
-      minWidth: gravityControlPanel.width,
-      maxWidth: 180
-    } ) );
+
     var firstSpringStopperButtonNode = new SpringStopperButtonNode( {
       listener: model.stopSpring.bind( model, 0 ),
         right: springHangerNode.springHangerNode.left - 5,
@@ -242,14 +236,29 @@ define( function( require ) {
 
     this.addChild( this.massLayer );
 
-    var timer = new DraggableTimerNode( model.timerVisibleProperty );
-    this.addChild( timer );
+    // Timer and Ruler
+    var timerNode = new DraggableTimerNode(
+      this.layoutBounds,
+      new Vector2( this.layoutBounds.left + 80, topSpacing + 35 ),
+      model.timerVisibleProperty );
 
-    this.addChild( new DraggableRulerNode(
+    var rulerNode = new DraggableRulerNode(
       this.layoutBounds,
       new Vector2( this.layoutBounds.left + 50, topSpacing + 35 ),
       model.rulerVisibleProperty
-    ) );
+    );
+
+    // Toolbox Panel
+    var toolboxPanel = new ToolboxPanel( mvt, rulerNode, timerNode, model.rulerVisibleProperty, model.timerVisibleProperty, {
+      top: gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+      left: gravityControlPanel.left,
+      minWidth: gravityControlPanel.width,
+      maxWidth: 180
+    } );
+    this.addChild( toolboxPanel );
+    this.addChild( timerNode );
+    this.addChild( rulerNode );
+
   }
 
   massesAndSprings.register( 'TwoSpringView', TwoSpringView );
