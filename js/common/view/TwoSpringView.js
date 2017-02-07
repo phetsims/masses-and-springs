@@ -17,6 +17,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
+  var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
@@ -210,7 +211,7 @@ define( function( require ) {
     );
     this.addChild( gravityControlPanel );
 
-    this.addChild( new ToolBoxPanel( {
+    this.addChild( new ToolBoxPanel( model.rulerVisibleProperty, model.timerVisibleProperty, {
       top: gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
       left: gravityControlPanel.left,
       minWidth: gravityControlPanel.width,
@@ -239,6 +240,9 @@ define( function( require ) {
     this.addChild( this.movableLine );
 
     this.addChild( this.massLayer );
+
+    var timer = new DraggableTimerNode( model.timerVisibleProperty );
+    this.addChild( timer );
 
     this.addChild( new DraggableRulerNode(
       this.layoutBounds,

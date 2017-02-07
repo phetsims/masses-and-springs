@@ -2,6 +2,8 @@
 
 /**
  * @author Matt Pennington
+ *
+ * Node responsible for Ruler.
  */
 define( function( require ) {
   'use strict';

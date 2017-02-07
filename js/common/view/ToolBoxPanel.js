@@ -23,7 +23,7 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function ToolBoxPanel( options ) {
+  function ToolBoxPanel( rulerVisibleProperty, timerVisibleProperty, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
@@ -37,8 +37,6 @@ define( function( require ) {
       spacing: 30
     } );
     Panel.call( this, toolbox, options );
-
-    var isTimerVisible = new Property( false );
 
     // Create timer
     var secondsProperty = new Property( 0 );
@@ -68,9 +66,11 @@ define( function( require ) {
       rulerIcon.addInputListener( {
         down: function() {
           rulerIcon.opacity = 0;
+          rulerVisibleProperty.set( true );
         },
         up: function() {
           rulerIcon.opacity = 1;
+          rulerVisibleProperty.set( false );
         }
       } );
       toolbox.addChild( rulerIcon );
@@ -88,13 +88,11 @@ define( function( require ) {
       timerIcon.addInputListener( {
         down: function() {
           timerIcon.opacity = 0;
-          isTimerVisible.set( true );
-          console.log( 'isTimerVisible = ' + isTimerVisible.get() );
+          timerVisibleProperty.set( true );
         },
         up: function() {
           timerIcon.opacity = 1;
-          isTimerVisible.set( false );
-          console.log( 'isTimerVisible = ' + isTimerVisible.get() );
+          timerVisibleProperty.set( false );
         }
       } );
       toolbox.addChild( timerIcon );
