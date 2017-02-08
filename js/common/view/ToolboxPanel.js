@@ -70,6 +70,7 @@ define( function( require ) {
           rulerIcon.opacity = 0;
           rulerVisibleProperty.set( true );
           var initialViewPosition = self.globalToParentPoint( event.pointer.point );
+          rulerNode.positionProperty.set( initialViewPosition );
           rulerNode.setCenter( initialViewPosition );
         },
         up: function() {
@@ -94,7 +95,10 @@ define( function( require ) {
           timerIcon.opacity = 0;
           timerVisibleProperty.set( true );
           var initialViewPosition = self.globalToParentPoint( event.pointer.point );
+          timerNode.positionProperty.set( initialViewPosition );
           timerNode.setCenter( initialViewPosition );
+
+
         },
         up: function() {
           timerIcon.opacity = 1;
