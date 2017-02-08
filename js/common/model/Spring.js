@@ -36,6 +36,9 @@ define( function( require ) {
     this.animatingProperty = new Property( false ); // {boolean}
     this.massProperty = new Property( null ); // {Mass}
 
+    // @public (read-only) - distance from natural resting position to equilibrium position (units: m) 
+    this.springExtension = 0;
+
     // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
     Property.preventGetSet( this, 'gravity' );
     Property.preventGetSet( this, 'displacement' );
