@@ -69,7 +69,8 @@ define( function( require ) {
 
     // Create timer icon
     ruler.toImage( function( image ) {
-      var rulerIcon = new Image( image, {
+      // @private - visible option is used only for reset() in ToolboxPanel.js
+      self.rulerIcon = new Image( image, {
         cursor: 'pointer',
         pickable: true,
         scale: .1
@@ -80,7 +81,7 @@ define( function( require ) {
       var rulerUnboundedPosition = new Vector2();
 
       // Drag listener for event forwarding: rulerIcon ---> rulerNode 
-      rulerIcon.addInputListener( new SimpleDragHandler( {
+      self.rulerIcon.addInputListener( new SimpleDragHandler( {
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
 
@@ -99,13 +100,14 @@ define( function( require ) {
             assert && assert( rulerParentScreenView, 'unable to find parent screen view' );
           }
           rulerVisibleProperty.set( true );
-          rulerIcon.visible = ( !rulerVisibleProperty.get());
+          self.rulerIcon.visible = ( !rulerVisibleProperty.get());
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
           var initialPosition = rulerParentScreenView.globalToLocalPoint( event.pointer.point )
             .minus( new Vector2( -rulerNode.width * .5, rulerNode.height * .4 ) );
 
+          // Toggle visibility
           rulerNode.positionProperty.set( initialPosition );
           rulerUnboundedPosition.set( initialPosition );
 
@@ -122,12 +124,13 @@ define( function( require ) {
           rulerNode.positionProperty.set( rulerUnboundedPosition );
         }
       } ) );
-      toolbox.addChild( rulerIcon );
+      toolbox.addChild( self.rulerIcon );
     } );
 
     // Create timer icon
     timer.toImage( function( image ) {
-      var timerIcon = new Image( image, {
+      // @private - visible option is used only for reset() in ToolboxPanel.js
+      self.timerIcon = new Image( image, {
         cursor: 'pointer',
         pickable: true,
         scale: .4
@@ -137,7 +140,7 @@ define( function( require ) {
       var timerUnboundedPosition = new Vector2();
 
       // Drag listener for event forwarding: rulerIcon ---> rulerNode
-      timerIcon.addInputListener( new SimpleDragHandler( {
+      self.timerIcon.addInputListener( new SimpleDragHandler( {
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
 
@@ -156,8 +159,9 @@ define( function( require ) {
             assert && assert( timerParentScreenView2, 'unable to find parent screen view' );
           }
 
+          // Toggle visibility
           timerVisibleProperty.set( true );
-          timerIcon.visible = !timerVisibleProperty.get();
+          self.timerIcon.visible = !timerVisibleProperty.get();
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
@@ -179,7 +183,7 @@ define( function( require ) {
           timerNode.positionProperty.set( timerUnboundedPosition );
         }
       } ) );
-      toolbox.addChild( timerIcon );
+      toolbox.addChild( self.timerIcon );
     } );
   }
 
@@ -187,7 +191,8 @@ define( function( require ) {
 
   return inherit( Panel, ToolboxPanel, {
     reset: function() {
-      console.log( 'helloworld' );
+      this.timerIcon.visible = true;
+      this.rulerIcon.visible = true;
     }
   } );
 
