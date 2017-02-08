@@ -17,6 +17,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Timer = require( 'SCENERY_PHET/Timer' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    *
@@ -69,9 +70,10 @@ define( function( require ) {
         down: function( event ) {
           rulerIcon.opacity = 0;
           rulerVisibleProperty.set( true );
-          var initialViewPosition = self.globalToParentPoint( event.pointer.point );
+          var initialViewPosition = self.globalToParentPoint( event.pointer.point )
+            .minus( new Vector2( -rulerNode.width * .5, rulerNode.height * .4 ) );
           rulerNode.positionProperty.set( initialViewPosition );
-          rulerNode.setCenter( initialViewPosition );
+
         },
         up: function() {
           rulerIcon.opacity = 1;
@@ -94,11 +96,9 @@ define( function( require ) {
         down: function( event ) {
           timerIcon.opacity = 0;
           timerVisibleProperty.set( true );
-          var initialViewPosition = self.globalToParentPoint( event.pointer.point );
+          var initialViewPosition = self.globalToParentPoint( event.pointer.point )
+            .minus( new Vector2( timerNode.width / 2, timerNode.height * .4 ) );
           timerNode.positionProperty.set( initialViewPosition );
-          timerNode.setCenter( initialViewPosition );
-
-
         },
         up: function() {
           timerIcon.opacity = 1;

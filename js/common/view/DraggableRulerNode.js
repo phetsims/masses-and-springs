@@ -32,8 +32,8 @@ define( function( require ) {
     Node.call( this );
 
     // define ruler params in pixels
-    var rulerWidth = 397; // 1 meter
-    var rulerLength = .1 * rulerWidth;
+    this.rulerWidth = 397; // 1 meter
+    this.rulerLength = .1 * this.rulerWidth;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
       majorTickLabels.push( '' );
@@ -42,9 +42,9 @@ define( function( require ) {
     }
     majorTickLabels.push( '' );
     majorTickLabels.push( '' );
-    var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
+    var majorTickWidth = this.rulerWidth / ( majorTickLabels.length - 1 );
 
-    this.addChild( new RulerNode( rulerWidth, rulerLength, majorTickWidth, majorTickLabels, cmString, {
+    this.addChild( new RulerNode( this.rulerWidth, this.rulerLength, majorTickWidth, majorTickLabels, cmString, {
       insetsWidth: 5,
       minorTicksPerMajorTick: 4,
       unitsMajorTickIndex: 19,
