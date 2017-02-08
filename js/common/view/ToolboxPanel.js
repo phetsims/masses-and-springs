@@ -98,9 +98,8 @@ define( function( require ) {
             }
             assert && assert( rulerParentScreenView, 'unable to find parent screen view' );
           }
-
-          rulerIcon.visible = false;
-          rulerVisibleProperty.set( !rulerIcon.visible );
+          rulerVisibleProperty.set( true );
+          rulerIcon.visible = ( !rulerVisibleProperty.get());
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
@@ -117,8 +116,8 @@ define( function( require ) {
             rulerUnboundedPosition.y + translationParams.delta.y
           );
           rulerNode.positionProperty.set( new Vector2(
-            Util.clamp( rulerUnboundedPosition.x, options.dragBounds.minX, options.dragBounds.maxX ),
-            Util.clamp( rulerUnboundedPosition.y, options.dragBounds.minY, options.dragBounds.maxY )
+            Util.clamp( rulerUnboundedPosition.x, dragBounds.minX, dragBounds.maxX ),
+            Util.clamp( rulerUnboundedPosition.y, dragBounds.minY, dragBounds.maxY )
           ) );
           rulerNode.positionProperty.set( rulerUnboundedPosition );
         }
@@ -157,8 +156,8 @@ define( function( require ) {
             assert && assert( timerParentScreenView2, 'unable to find parent screen view' );
           }
 
-          timerIcon.visible = false;
-          timerVisibleProperty.set( !timerIcon.visible );
+          timerVisibleProperty.set( true );
+          timerIcon.visible = !timerVisibleProperty.get();
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
@@ -174,8 +173,8 @@ define( function( require ) {
             timerUnboundedPosition.y + translationParams.delta.y
           );
           timerNode.positionProperty.set( new Vector2(
-            Util.clamp( timerUnboundedPosition.x, options.dragBounds.minX, options.dragBounds.maxX ),
-            Util.clamp( timerUnboundedPosition.y, options.dragBounds.minY, options.dragBounds.maxY )
+            Util.clamp( timerUnboundedPosition.x, dragBounds.minX, dragBounds.maxX ),
+            Util.clamp( timerUnboundedPosition.y, dragBounds.minY, dragBounds.maxY )
           ) );
           timerNode.positionProperty.set( timerUnboundedPosition );
         }
@@ -186,6 +185,10 @@ define( function( require ) {
 
   massesAndSprings.register( 'ToolboxPanel', ToolboxPanel );
 
-  return inherit( Panel, ToolboxPanel );
+  return inherit( Panel, ToolboxPanel, {
+    reset: function() {
+      console.log( 'helloworld' );
+    }
+  } );
 
 } );

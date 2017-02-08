@@ -76,49 +76,6 @@ define( function( require ) {
     //Spacing for top margin of layout bounds
     var topSpacing = mvt.modelToViewY( model.ceilingY );
 
-    // Reset All button
-    var resetAllButton = new ResetAllButton( {
-      listener: function() {
-        model.reset();
-        gravityControlPanel.reset();
-        massNodes.forEach( function( massNode ) {
-          massNode.moveToFront();
-        } );
-      },
-      right: this.layoutBounds.right - 10,
-      bottom: mvt.modelToViewY( model.floorY )
-    } );
-    this.addChild( resetAllButton );
-
-    // Play/Pause and Step Forward Button Control
-    this.addChild( new MASPlayPauseStepControl( model ) );
-
-    // Sim speed controls
-    var speedSelectionButtonOptions = {
-      font: new PhetFont( 14 ),
-      maxWidth: MAX_TEXT_WIDTH
-    };
-    var speedSelectionButtonRadius = 8;
-    var normalText = new Text( normalString, speedSelectionButtonOptions );
-    var normalMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'normal', normalText, {
-      radius: speedSelectionButtonRadius
-    } );
-
-    var slowText = new Text( slowMotionString, speedSelectionButtonOptions );
-    var slowMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'slow', slowText, {
-      radius: speedSelectionButtonRadius
-    } );
-
-    var radioButtonSpacing = 4;
-    var speedControl = new VBox( {
-      align: 'left',
-      spacing: radioButtonSpacing,
-      children: [ normalMotionRadioBox, slowMotionRadioBox ],
-      right: resetAllButton.left - 30,
-      centerY: resetAllButton.centerY
-    } );
-    this.addChild( speedControl );
-
     // Add masses
     this.massLayer = new Node();
     var massNodes = [];
@@ -211,6 +168,71 @@ define( function( require ) {
     );
     this.addChild( gravityControlPanel );
 
+    // Timer and Ruler
+    var timerNode = new DraggableTimerNode(
+      this.layoutBounds,
+      new Vector2( this.layoutBounds.left + 80, topSpacing + 35 ),
+      model.timerVisibleProperty );
+
+    var rulerNode = new DraggableRulerNode(
+      this.layoutBounds,
+      new Vector2( this.layoutBounds.left + 50, topSpacing + 35 ),
+      model.rulerVisibleProperty
+    );
+
+    // Toolbox Panel
+    var toolboxPanel = new ToolboxPanel( this.layoutBounds, rulerNode, timerNode, model.rulerVisibleProperty, model.timerVisibleProperty, {
+      top: gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+      left: gravityControlPanel.left,
+      minWidth: gravityControlPanel.width,
+      maxWidth: 180
+    } );
+    this.addChild( toolboxPanel );
+    this.addChild( timerNode );
+    this.addChild( rulerNode );
+    // Reset All button
+    var resetAllButton = new ResetAllButton( {
+      listener: function() {
+        model.reset();
+        gravityControlPanel.reset();
+        massNodes.forEach( function( massNode ) {
+          massNode.moveToFront();
+        } );
+        toolboxPanel.reset();
+      },
+      right: this.layoutBounds.right - 10,
+      bottom: mvt.modelToViewY( model.floorY )
+    } );
+    this.addChild( resetAllButton );
+
+    // Play/Pause and Step Forward Button Control
+    this.addChild( new MASPlayPauseStepControl( model ) );
+
+    // Sim speed controls
+    var speedSelectionButtonOptions = {
+      font: new PhetFont( 14 ),
+      maxWidth: MAX_TEXT_WIDTH
+    };
+    var speedSelectionButtonRadius = 8;
+    var normalText = new Text( normalString, speedSelectionButtonOptions );
+    var normalMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'normal', normalText, {
+      radius: speedSelectionButtonRadius
+    } );
+
+    var slowText = new Text( slowMotionString, speedSelectionButtonOptions );
+    var slowMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'slow', slowText, {
+      radius: speedSelectionButtonRadius
+    } );
+
+    var radioButtonSpacing = 4;
+    var speedControl = new VBox( {
+      align: 'left',
+      spacing: radioButtonSpacing,
+      children: [ normalMotionRadioBox, slowMotionRadioBox ],
+      right: resetAllButton.left - 30,
+      centerY: resetAllButton.centerY
+    } );
+    this.addChild( speedControl );
 
     var firstSpringStopperButtonNode = new SpringStopperButtonNode( {
       listener: model.stopSpring.bind( model, 0 ),
@@ -235,29 +257,6 @@ define( function( require ) {
     this.addChild( this.movableLine );
 
     this.addChild( this.massLayer );
-
-    // Timer and Ruler
-    var timerNode = new DraggableTimerNode(
-      this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 80, topSpacing + 35 ),
-      model.timerVisibleProperty );
-
-    var rulerNode = new DraggableRulerNode(
-      this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 50, topSpacing + 35 ),
-      model.rulerVisibleProperty
-    );
-
-    // Toolbox Panel
-    var toolboxPanel = new ToolboxPanel( this.layoutBounds, rulerNode, timerNode, model.rulerVisibleProperty, model.timerVisibleProperty, {
-      top: gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-      left: gravityControlPanel.left,
-      minWidth: gravityControlPanel.width,
-      maxWidth: 180
-    } );
-    this.addChild( toolboxPanel );
-    this.addChild( timerNode );
-    this.addChild( rulerNode );
 
   }
 

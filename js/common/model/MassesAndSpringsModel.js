@@ -34,7 +34,9 @@ define( function( require ) {
     this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)
     this.simSpeedProperty = new Property( 'normal' ); // {string} determines the speed at which the sim plays
     this.rulerVisibleProperty = new Property( false );
+    this.rulerIconVisibleProperty = new Property( false );
     this.timerVisibleProperty = new Property( false );
+    this.timerIconVisibleProperty = new Property( false );
     this.movableLineVisibleProperty = new Property( true );
     this.equilibriumPositionVisibleProperty = new Property( true );
     this.naturalLengthVisibleProperty = new Property( false );
@@ -47,7 +49,9 @@ define( function( require ) {
     Property.preventGetSet( this, 'friction' );
     Property.preventGetSet( this, 'gravity' );
     Property.preventGetSet( this, 'rulerVisible' );
+    Property.preventGetSet( this, 'rulerIconVisible' );
     Property.preventGetSet( this, 'timerVisible' );
+    Property.preventGetSet( this, 'timerIconVisible' );
     Property.preventGetSet( this, 'naturalLengthVisible' );
     Property.preventGetSet( this, 'movableLineVisible' );
     Property.preventGetSet( this, 'equilibriumPositionVisible' );
@@ -109,7 +113,9 @@ define( function( require ) {
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();
+      this.rulerIconVisibleProperty.reset();
       this.timerVisibleProperty.reset();
+      this.timerIconVisibleProperty.reset();
       this.movableLineVisibleProperty.reset();
       this.naturalLengthVisibleProperty.reset();
       this.equilibriumPositionVisibleProperty.reset();
