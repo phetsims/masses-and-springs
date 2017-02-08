@@ -249,7 +249,7 @@ define( function( require ) {
     );
 
     // Toolbox Panel
-    var toolboxPanel = new ToolboxPanel( mvt, rulerNode, timerNode, model.rulerVisibleProperty, model.timerVisibleProperty, {
+    var toolboxPanel = new ToolboxPanel( this.layoutBounds, rulerNode, timerNode, model.rulerVisibleProperty, model.timerVisibleProperty, {
       top: gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
       left: gravityControlPanel.left,
       minWidth: gravityControlPanel.width,

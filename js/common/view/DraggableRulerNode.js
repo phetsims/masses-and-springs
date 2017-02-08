@@ -23,7 +23,7 @@ define( function( require ) {
   /**
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition
-   * @param {Property} visibleProperty
+   * @param {Property.<boolean>} visibleProperty
    * @constructor
    */
   //TODO: Look into passing in toolbox bounds to compare with ruler bounds. If these two intersect then trigger "put away event"
