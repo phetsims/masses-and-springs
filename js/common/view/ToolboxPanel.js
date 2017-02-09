@@ -86,7 +86,6 @@ define( function( require ) {
         allowTouchSnag: true,
 
         start: function( event ) {
-
           // find the parent screen if not already found by moving up the scene graph
           if ( !rulerParentScreenView ) {
             var testNode = self;
@@ -122,6 +121,14 @@ define( function( require ) {
             Util.clamp( rulerUnboundedPosition.y, dragBounds.minY, dragBounds.maxY )
           ) );
           rulerNode.positionProperty.set( rulerUnboundedPosition );
+        },
+        end: function( event ) {
+          // When a node is released, check if it is over the toolbox.  If so, drop it in.
+          var rulerNodeDropInBounds = rulerNode.getGlobalBounds().erodeXY( 5, 70 );
+          if ( rulerNodeDropInBounds.intersectsBounds( self.getGlobalBounds() ) ) {
+            rulerVisibleProperty.set( false );
+            self.rulerIcon.visible = !rulerVisibleProperty.get();
+          }
         }
       } ) );
       toolbox.addChild( self.rulerIcon );
@@ -145,7 +152,6 @@ define( function( require ) {
         allowTouchSnag: true,
 
         start: function( event ) {
-
           // find the parent screen if not already found by moving up the scene graph
           if ( !timerParentScreenView2 ) {
             var testNode = self;
@@ -181,6 +187,13 @@ define( function( require ) {
             Util.clamp( timerUnboundedPosition.y, dragBounds.minY, dragBounds.maxY )
           ) );
           timerNode.positionProperty.set( timerUnboundedPosition );
+        },
+        end: function( event ) {
+          // When a node is released, check if it is over the toolbox.  If so, drop it in.
+          if ( timerNode.getGlobalBounds().intersectsBounds( self.getGlobalBounds() ) ) {
+            timerVisibleProperty.set( false );
+            self.timerIcon.visible = !timerVisibleProperty.get();
+        }
         }
       } ) );
       toolbox.addChild( self.timerIcon );
