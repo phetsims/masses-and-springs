@@ -191,8 +191,7 @@ define( function( require ) {
       maxWidth: 180
     } );
     this.addChild( toolboxPanel );
-    this.addChild( timerNode );
-    this.addChild( rulerNode );
+
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
@@ -258,8 +257,9 @@ define( function( require ) {
     this.addChild( this.firstNaturalLengthLine );
     this.addChild( this.secondNaturalLengthLine );
     this.addChild( this.movableLine );
-
     this.addChild( this.massLayer );
+    this.addChild( timerNode );
+    this.addChild( rulerNode );
 
   }
 
