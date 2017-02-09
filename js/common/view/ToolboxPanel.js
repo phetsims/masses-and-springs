@@ -193,7 +193,7 @@ define( function( require ) {
           if ( timerNode.getGlobalBounds().intersectsBounds( self.getGlobalBounds() ) ) {
             timerVisibleProperty.set( false );
             self.timerIcon.visible = !timerVisibleProperty.get();
-        }
+          }
         }
       } ) );
       toolbox.addChild( self.timerIcon );
