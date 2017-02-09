@@ -172,7 +172,10 @@ define( function( require ) {
     var timerNode = new DraggableTimerNode(
       this.layoutBounds,
       new Vector2( this.layoutBounds.left + 80, topSpacing + 35 ),
-      model.timerVisibleProperty );
+      model.timerSecondProperty,
+      model.timerRunningProperty,
+      model.timerVisibleProperty
+    );
 
     var rulerNode = new DraggableRulerNode(
       this.layoutBounds,

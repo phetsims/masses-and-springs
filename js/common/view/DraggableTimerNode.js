@@ -17,12 +17,10 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Timer = require( 'SCENERY_PHET/Timer' );
 
-  function DraggableTimerNode( dragBounds, initialPosition, visibleProperty ) {
+  function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty ) {
     var self = this;
     Node.call( this );
-    var secondsProperty = new Property( 0 );
-    var runningProperty = new Property( false );
-    this.addChild( new Timer( secondsProperty, runningProperty ) );
+    this.addChild( new Timer( timerSecondsProperty, timerRunningProperty ) );
 
     // @private
     this.positionProperty = new Property( initialPosition );

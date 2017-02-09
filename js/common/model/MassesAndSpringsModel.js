@@ -36,6 +36,8 @@ define( function( require ) {
     this.rulerVisibleProperty = new Property( false );
     this.rulerIconVisibleProperty = new Property( false );
     this.timerVisibleProperty = new Property( false );
+    this.timerSecondProperty = new Property( 0 );
+    this.timerRunningProperty = new Property( false );
     this.movableLineVisibleProperty = new Property( true );
     this.equilibriumPositionVisibleProperty = new Property( true );
     this.naturalLengthVisibleProperty = new Property( false );
@@ -50,6 +52,8 @@ define( function( require ) {
     Property.preventGetSet( this, 'rulerVisible' );
     Property.preventGetSet( this, 'rulerIconVisible' );
     Property.preventGetSet( this, 'timerVisible' );
+    Property.preventGetSet( this, 'timerSecond' );
+    Property.preventGetSet( this, 'timerRunning' );
     Property.preventGetSet( this, 'naturalLengthVisible' );
     Property.preventGetSet( this, 'movableLineVisible' );
     Property.preventGetSet( this, 'equilibriumPositionVisible' );
@@ -113,6 +117,8 @@ define( function( require ) {
       this.rulerVisibleProperty.reset();
       this.rulerIconVisibleProperty.reset();
       this.timerVisibleProperty.reset();
+      this.timerSecondProperty.reset();
+      this.timerRunningProperty.reset();
       this.movableLineVisibleProperty.reset();
       this.naturalLengthVisibleProperty.reset();
       this.equilibriumPositionVisibleProperty.reset();
@@ -223,6 +229,10 @@ define( function( require ) {
             mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );
           }
         } );
+
+        if ( this.timerRunningProperty.get() ) {
+          this.timerSecondProperty.set( this.timerSecondProperty.get() + dt );
+        }
 
         // Oscillate springs
         this.springs.forEach( function( spring ) {
