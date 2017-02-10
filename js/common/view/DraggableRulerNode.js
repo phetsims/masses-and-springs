@@ -31,6 +31,9 @@ define( function( require ) {
     var self = this;
     Node.call( this );
 
+    // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
+    this.toolbox = null;
+
     // define ruler params in pixels
     this.rulerWidth = 397; // 1 meter
     this.rulerLength = .1 * this.rulerWidth;
@@ -61,11 +64,16 @@ define( function( require ) {
 
     // @private
     this.positionProperty = new Property( initialPosition );
-    this.positionProperty.linkAttribute( self, 'translation' );
+    this.positionProperty.linkAttribute( this, 'translation' );
     this.addInputListener( new MovableDragHandler( this.positionProperty, {
-      dragBounds: dragBounds
+      dragBounds: dragBounds,
+      endDrag: function( event ) {
+        // When a node is released, check if it is over the toolbox.  If so, drop it in.
+        if ( self.toolbox && self.getGlobalBounds().intersectsBounds( self.toolbox.getGlobalBounds() ) ) {
+          visibleProperty.set( false );
+        }
+      }
     } ) );
-
     visibleProperty.linkAttribute( self, 'visible' );
   }
 

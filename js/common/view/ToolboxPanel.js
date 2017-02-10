@@ -98,15 +98,17 @@ define( function( require ) {
             }
             assert && assert( rulerParentScreenView, 'unable to find parent screen view' );
           }
+
+          // Toggle visibility
           rulerVisibleProperty.set( true );
-          self.rulerIcon.visible = ( !rulerVisibleProperty.get());
+          rulerVisibleProperty.link( function( visible ) {
+            self.rulerIcon.visible = !visible;
+          } );
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
           var initialPosition = rulerParentScreenView.globalToLocalPoint( event.pointer.point )
             .minus( new Vector2( -rulerNode.width * .5, rulerNode.height * .4 ) );
-
-          // Toggle visibility
           rulerNode.positionProperty.set( initialPosition );
           rulerUnboundedPosition.set( initialPosition );
 
@@ -124,8 +126,7 @@ define( function( require ) {
         },
         end: function( event ) {
           // When a node is released, check if it is over the toolbox.  If so, drop it in.
-          var rulerNodeDropInBounds = rulerNode.getGlobalBounds().erodeXY( 5, 70 );
-          if ( rulerNodeDropInBounds.intersectsBounds( self.getGlobalBounds() ) ) {
+          if ( rulerNode.getGlobalBounds().intersectsBounds( self.getGlobalBounds() ) ) {
             rulerVisibleProperty.set( false );
             self.rulerIcon.visible = !rulerVisibleProperty.get();
           }
@@ -167,7 +168,9 @@ define( function( require ) {
 
           // Toggle visibility
           timerVisibleProperty.set( true );
-          self.timerIcon.visible = !timerVisibleProperty.get();
+          timerVisibleProperty.link( function( visible ) {
+            self.timerIcon.visible = !visible;
+          } );
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
@@ -202,11 +205,6 @@ define( function( require ) {
 
   massesAndSprings.register( 'ToolboxPanel', ToolboxPanel );
 
-  return inherit( Panel, ToolboxPanel, {
-    reset: function() {
-      this.timerIcon.visible = true;
-      this.rulerIcon.visible = true;
-    }
-  } );
+  return inherit( Panel, ToolboxPanel );
 
 } );

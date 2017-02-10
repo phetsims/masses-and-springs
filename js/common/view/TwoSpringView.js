@@ -176,7 +176,6 @@ define( function( require ) {
       model.timerRunningProperty,
       model.timerVisibleProperty
     );
-
     var rulerNode = new DraggableRulerNode(
       this.layoutBounds,
       new Vector2( this.layoutBounds.left + 50, topSpacing + 35 ),
@@ -191,6 +190,9 @@ define( function( require ) {
       maxWidth: 180
     } );
     this.addChild( toolboxPanel );
+    // Done to for moveableDragHandler handling intersecting bounds of panel and ruler
+    rulerNode.toolbox = toolboxPanel;
+    timerNode.toolbox = toolboxPanel;
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {
@@ -260,7 +262,6 @@ define( function( require ) {
     this.addChild( this.massLayer );
     this.addChild( timerNode );
     this.addChild( rulerNode );
-
   }
 
   massesAndSprings.register( 'TwoSpringView', TwoSpringView );
