@@ -17,8 +17,10 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // constants
   var GRABBING_DISTANCE = .1; // {number} horizontal distance from a mass where a spring will be snagged
   var DROPPING_DISTANCE = .1; // {number} horizontal distance from a mass where a spring will be released
+  var DEFAULT_SPRING_LENGTH = .5; // {number} default length of spring on sim start up
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -33,6 +35,8 @@ define( function( require ) {
     this.frictionProperty = new Property( .2 ); // {number} c - coefficient of friction
     this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)
     this.simSpeedProperty = new Property( 'normal' ); // {string} determines the speed at which the sim plays
+    this.springLengthModeProperty = new Property( 'same-length' ); // {string} valid values are "same-length" and "adjustable-length"
+    this.adjustableSpringNaturalLengthProperty = new Property( DEFAULT_SPRING_LENGTH / 2 );
     this.rulerVisibleProperty = new Property( false );
     this.rulerIconVisibleProperty = new Property( false );
     this.timerVisibleProperty = new Property( false );
@@ -51,6 +55,8 @@ define( function( require ) {
     Property.preventGetSet( this, 'gravity' );
     Property.preventGetSet( this, 'rulerVisible' );
     Property.preventGetSet( this, 'rulerIconVisible' );
+    Property.preventGetSet( this, 'springLengthView' );
+    Property.preventGetSet( this, 'adjustableSpringNaturalLength' );
     Property.preventGetSet( this, 'timerVisible' );
     Property.preventGetSet( this, 'timerSecond' );
     Property.preventGetSet( this, 'timerRunning' );
@@ -61,9 +67,18 @@ define( function( require ) {
     this.floorY = 0; // Y position of floor in m
     this.ceilingY = 1.23; // Y position of ceiling in m
     this.springs = [
-      new Spring( new Vector2( .65, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() ),
-      new Spring( new Vector2( .95, this.ceilingY ), .50, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() )
+      new Spring( new Vector2( .65, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() ),
+      new Spring( new Vector2( .95, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() )
     ];
+
+    this.springLengthModeProperty.link( function( mode ) {
+      if ( mode === 'same-length' ) {
+        self.springs[ 0 ].naturalRestingLengthProperty.set( DEFAULT_SPRING_LENGTH );
+      }
+      else if ( mode === 'adjustable-length' ) {
+        self.springs[ 0 ].naturalRestingLengthProperty.set( self.adjustableSpringNaturalLengthProperty.get() );
+      }
+    } );
 
     this.masses = [
       new Mass( .250, new Vector2( .12, .5 ), true, 'grey' ),
@@ -116,6 +131,8 @@ define( function( require ) {
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();
       this.rulerIconVisibleProperty.reset();
+      this.springLengthModeProperty.reset();
+      this.adjustableSpringNaturalLengthProperty.reset();
       this.timerVisibleProperty.reset();
       this.timerSecondProperty.reset();
       this.timerRunningProperty.reset();

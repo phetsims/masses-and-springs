@@ -20,6 +20,7 @@ define( function( require ) {
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} naturalRestingLength - resting length of unweighted spring in m
    * @param {Range} springConstantRange - k in N/m
+   * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
    *
    * @constructor
    */

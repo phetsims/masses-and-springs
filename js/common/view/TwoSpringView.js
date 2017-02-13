@@ -19,6 +19,7 @@ define( function( require ) {
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
@@ -29,6 +30,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
@@ -45,8 +47,13 @@ define( function( require ) {
   var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
   var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
 
+  // images
+  var twoSpringIcon = require( 'image!MASSES_AND_SPRINGS/two-spring-icon.png' );
+  var halfSpringIcon = require( 'image!MASSES_AND_SPRINGS/half-spring-icon.png' );
+
   // constants
   var MAX_TEXT_WIDTH = 80;
+  var IMAGE_SCALE = .6;
 
   /**
    * TODO::: Remove mvt transforms from view objects
@@ -249,6 +256,28 @@ define( function( require ) {
         top: topSpacing
       }
     );
+    var toggleButtonsContent = [ {
+      value: 'same-length',
+      node: new Image( twoSpringIcon, { scale: IMAGE_SCALE } )
+    }, {
+      value: 'adjustable-length',
+      node: new Image( halfSpringIcon, { scale: IMAGE_SCALE } )
+    } ];
+
+    var radioButtonGroup = new RadioButtonGroup( model.springLengthModeProperty, toggleButtonsContent, {
+      buttonContentXMargin: 4,
+      buttonContentYMargin: 4,
+      top: toolboxPanel.bottom + 55,
+      right: gravityControlPanel.right,
+      baseColor: 'black',
+      selectedStroke: 'yellow',
+      deselectedStroke: 'yellow',
+      selectedLineWidth: 1.3,
+      deselectedLineWidth: 0.6,
+      orientation: 'horizontal',
+      spacing: 13
+    } );
+    this.addChild( radioButtonGroup );
     this.addChild( firstSpringStopperButtonNode );
     this.addChild( secondSpringStopperButtonNode );
 
