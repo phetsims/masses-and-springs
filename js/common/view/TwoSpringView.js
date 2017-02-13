@@ -31,10 +31,12 @@ define( function( require ) {
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
+  var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringLengthControlPanel' );
   var SpringStopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/SpringStopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -48,12 +50,12 @@ define( function( require ) {
   var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
 
   // images
-  var twoSpringIcon = require( 'image!MASSES_AND_SPRINGS/two-spring-icon.png' );
-  var halfSpringIcon = require( 'image!MASSES_AND_SPRINGS/half-spring-icon.png' );
+  var differentLengthIcon = require( 'image!MASSES_AND_SPRINGS/different-length-scene.png' );
+  var sameLengthIcon = require( 'image!MASSES_AND_SPRINGS/same-length-scene.png' );
 
   // constants
   var MAX_TEXT_WIDTH = 80;
-  var IMAGE_SCALE = .6;
+  var IMAGE_SCALE = .3;
 
   /**
    * TODO::: Remove mvt transforms from view objects
@@ -105,7 +107,8 @@ define( function( require ) {
     var firstSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
       model.springs[ 0 ].springConstantRange,
-      StringUtils.format( springConstantString, 1 ), {
+      StringUtils.format( springConstantString, 1 ),
+      {
         right: springHangerNode.springHangerNode.left - 40,
         top: topSpacing,
         maxWidth: 125
@@ -115,12 +118,41 @@ define( function( require ) {
     var secondSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 1 ].springConstantProperty,
       model.springs[ 1 ].springConstantRange,
-      StringUtils.format( springConstantString, 2 ), {
+      StringUtils.format( springConstantString, 2 ),
+      {
         left: springHangerNode.springHangerNode.right + 40,
         top: topSpacing,
         maxWidth: 125
       } );
     this.addChild( secondSpringConstantControlPanel );
+
+    // Spring Constant Length Control Panel
+    var springLengthControlPanel = new SpringLengthControlPanel(
+      model.springs[ 0 ].naturalRestingLengthProperty,
+      new RangeWithValue( .1, .5, .3 ),
+      StringUtils.format( 'Length 1', 1 ),
+      true,
+      {
+        right: springHangerNode.springHangerNode.left - 40,
+        top: topSpacing,
+        maxWidth: 125
+      } );
+    this.addChild( springLengthControlPanel );
+
+    model.springLengthModeProperty.link( function( mode ) {
+      if ( mode === 'same-length' ) {
+        springLengthControlPanel.visible = false;
+        firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
+        secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
+      }
+      else if ( mode === 'adjustable-length' ) {
+        springLengthControlPanel.visible = true;
+        firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
+        secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
+        model.springs[ 0 ].springConstantProperty.reset();
+        model.springs[ 1 ].springConstantProperty.reset();
+      }
+    } );
 
     // Initializes reference lines
     this.movableLine = new MovableLineNode(
@@ -197,7 +229,7 @@ define( function( require ) {
       maxWidth: 180
     } );
     this.addChild( toolboxPanel );
-    // Done to for moveableDragHandler handling intersecting bounds of panel and ruler
+    // Done to for movableDragHandler handling intersecting bounds of panel and ruler
     rulerNode.toolbox = toolboxPanel;
     timerNode.toolbox = toolboxPanel;
 
@@ -256,12 +288,14 @@ define( function( require ) {
         top: topSpacing
       }
     );
+
+    //TODO: Create Icon node programmatically
     var toggleButtonsContent = [ {
       value: 'same-length',
-      node: new Image( twoSpringIcon, { scale: IMAGE_SCALE } )
+      node: new Image( sameLengthIcon, { scale: IMAGE_SCALE } )
     }, {
       value: 'adjustable-length',
-      node: new Image( halfSpringIcon, { scale: IMAGE_SCALE } )
+      node: new Image( differentLengthIcon, { scale: IMAGE_SCALE } )
     } ];
 
     var radioButtonGroup = new RadioButtonGroup( model.springLengthModeProperty, toggleButtonsContent, {
