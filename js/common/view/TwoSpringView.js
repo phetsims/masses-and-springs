@@ -202,7 +202,6 @@ define( function( require ) {
         massNodes.forEach( function( massNode ) {
           massNode.moveToFront();
         } );
-        toolboxPanel.reset();
       },
       right: this.layoutBounds.right - 10,
       bottom: mvt.modelToViewY( model.floorY )
