@@ -20,9 +20,11 @@ define( function( require ) {
   var labString = require( 'string!MASSES_AND_SPRINGS/lab' );
 
   /**
+   * @param {Tandem} tandem
+   *
    * @constructor
    */
-  function LabScreen() {
+  function LabScreen( tandem ) {
 
     var options = {
       name: labString,
@@ -30,8 +32,8 @@ define( function( require ) {
     };
 
     Screen.call( this,
-      function() { return new MassesAndSpringsModel(); },
-      function( model ) { return new LabScreenView( model ); },
+      function() { return new MassesAndSpringsModel( tandem.createTandem( 'model' ) ); },
+      function( model ) { return new LabScreenView( model, tandem.createTandem( 'view' ) ); },
       options
     );
   }

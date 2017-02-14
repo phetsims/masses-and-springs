@@ -20,9 +20,11 @@ define( function( require ) {
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
 
   /**
+   * @param {Tandem} tandem
+   * 
    * @constructor
    */
-  function EnergyScreen() {
+  function EnergyScreen( tandem ) {
 
     var options = {
       name: energyString,
@@ -30,8 +32,8 @@ define( function( require ) {
     };
 
     Screen.call( this,
-      function() { return new MassesAndSpringsModel(); },
-      function( model ) { return new EnergyScreenView( model ); },
+      function() { return new MassesAndSpringsModel( tandem.createTandem( 'model' ) ); },
+      function( model ) { return new EnergyScreenView( model, tandem.createTandem( 'view' ) ); },
       options
     );
   }

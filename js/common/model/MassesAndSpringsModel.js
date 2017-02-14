@@ -30,10 +30,10 @@ define( function( require ) {
    * TODO:: There has to be a better way to manage all of these properties as one entity (ask JB)
    * @constructor
    */
-  function MassesAndSpringsModel() {
+  function MassesAndSpringsModel( tandem ) {
     var self = this;
 
-    this.playingProperty = new Property( true ); // {boolean} determines whether the sim is in a play/pause state
+    this.playingProperty = new Property( true, { tandem: tandem.createTandem( 'playingProperty' ) } ); // {boolean} determines whether the sim is in a play/pause state
     this.timeRateProperty = new Property( 1.0 ); // {number} r - rate of time passed.  r < 0 is reverse, 0 < r < 1 is slow motion, r > 1 is fast forward.
     this.frictionProperty = new Property( .2 ); // {number} c - coefficient of friction
     this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)

@@ -20,9 +20,11 @@ define( function( require ) {
   var introString = require( 'string!MASSES_AND_SPRINGS/intro' );
 
   /**
+   * @param {Tandem} tandem
+   * 
    * @constructor
    */
-  function IntroScreen() {
+  function IntroScreen( tandem ) {
 
     var options = {
       name: introString,
@@ -30,8 +32,8 @@ define( function( require ) {
     };
 
     Screen.call( this,
-      function() { return new MassesAndSpringsModel(); },
-      function( model ) { return new IntroScreenView( model ); },
+      function() { return new MassesAndSpringsModel( tandem.createTandem( 'model' ) ); },
+      function( model ) { return new IntroScreenView( model, tandem.createTandem( 'view' ) ); },
       options
     );
   }

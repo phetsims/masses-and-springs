@@ -15,9 +15,13 @@ define( function( require ) {
   var LabScreen = require( 'MASSES_AND_SPRINGS/lab/LabScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
+  var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   var massesAndSpringsTitleString = require( 'string!MASSES_AND_SPRINGS/masses-and-springs.title' );
+
+  // constants
+  var tandem = Tandem.createRootTandem();
 
   var simOptions = {
     credits: {
@@ -34,9 +38,9 @@ define( function( require ) {
 
   SimLauncher.launch( function() {
     var sim = new Sim( massesAndSpringsTitleString, [
-      new IntroScreen(),
-      new EnergyScreen(),
-      new LabScreen()
+      new IntroScreen( tandem.createTandem( 'introScreen' ) ),
+      new EnergyScreen( tandem.createTandem( 'energyScreen' ) ),
+      new LabScreen( tandem.createTandem( 'labScreen' ) )
     ], simOptions );
     sim.start();
   } );
