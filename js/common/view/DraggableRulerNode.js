@@ -88,6 +88,12 @@ define( function( require ) {
       this.positionProperty.reset();
     },
 
+    /**
+     * Responsible for handling drag event for ruler node using event forwarding from ruler icon in toolbox
+     * @public
+     *
+     * @param {Event} event - Drag event that is forwarded from ruler icon in toolbox node
+     */
     startDrag: function( event ) {
       this.rulerNodeMovableDragHandler.startDrag( event );
     }

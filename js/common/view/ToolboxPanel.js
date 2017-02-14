@@ -110,6 +110,8 @@ define( function( require ) {
             .minus( new Vector2( -rulerNode.width * .5, rulerNode.height * .4 ) );
           rulerNode.positionProperty.set( initialPosition );
           rulerUnboundedPosition.set( initialPosition );
+
+          // Sending through the startDrag from icon to rulerNode causes it to receive all subsequent drag events.
           rulerNode.startDrag( event );
         }
       } ) );
@@ -160,6 +162,8 @@ define( function( require ) {
 
           timerNode.positionProperty.set( initialPosition );
           timerUnboundedPosition.set( initialPosition );
+
+          // Sending through the startDrag from icon to timerNode causes it to receive all subsequent drag events.
           timerNode.startDrag( event );
         }
       } ) );

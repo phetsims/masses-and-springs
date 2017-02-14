@@ -58,6 +58,13 @@ define( function( require ) {
   massesAndSprings.register( 'DraggableTimerNode', DraggableTimerNode );
 
   return inherit( Node, DraggableTimerNode, {
+
+    /**
+     * Responsible for handling drag event for timer node using event forwarding from timer icon in toolbox
+     * @public
+     *
+     * @param {Event} event - Drag event that is forwarded from timer icon in toolbox node
+     */
     startDrag: function( event ) {
       this.timerNodeMovableDragHandler.startDrag( event );
     }
