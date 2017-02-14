@@ -37,15 +37,14 @@ define( function( require ) {
     this.gravityProperty = new Property( 9.8 ); // {number} a - gravitational acceleration (positive)
     this.simSpeedProperty = new Property( 'normal' ); // {string} determines the speed at which the sim plays
     this.springLengthModeProperty = new Property( 'same-length' ); // {string} valid values are "same-length" and "adjustable-length"
-    this.adjustableSpringNaturalLengthProperty = new Property( DEFAULT_SPRING_LENGTH / 2 );
-    this.rulerVisibleProperty = new Property( false );
-    this.rulerIconVisibleProperty = new Property( false );
-    this.timerVisibleProperty = new Property( false );
-    this.timerSecondProperty = new Property( 0 );
-    this.timerRunningProperty = new Property( false );
-    this.movableLineVisibleProperty = new Property( true );
-    this.equilibriumPositionVisibleProperty = new Property( true );
-    this.naturalLengthVisibleProperty = new Property( false );
+    this.adjustableSpringNaturalLengthProperty = new Property( DEFAULT_SPRING_LENGTH / 2 ); // {number} adjustable length of spring on second scene
+    this.rulerVisibleProperty = new Property( false ); // {boolean} determines visibility of ruler node
+    this.timerVisibleProperty = new Property( false ); // {boolean} determines visibility of timer node
+    this.timerSecondProperty = new Property( 0 ); // {number} value attributed to seconds in timer node
+    this.timerRunningProperty = new Property( false ); // {boolean} determines whether timer is active or not
+    this.movableLineVisibleProperty = new Property( true ); // {boolean} determines visibility of movable line node
+    this.equilibriumPositionVisibleProperty = new Property( true ); // {boolean} determines visibility of equilibrium line node
+    this.naturalLengthVisibleProperty = new Property( false ); // {boolean} determines visibility of natural length line node
 
     //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
 
@@ -55,7 +54,6 @@ define( function( require ) {
     Property.preventGetSet( this, 'friction' );
     Property.preventGetSet( this, 'gravity' );
     Property.preventGetSet( this, 'rulerVisible' );
-    Property.preventGetSet( this, 'rulerIconVisible' );
     Property.preventGetSet( this, 'springLengthView' );
     Property.preventGetSet( this, 'adjustableSpringNaturalLength' );
     Property.preventGetSet( this, 'timerVisible' );
@@ -131,7 +129,6 @@ define( function( require ) {
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();
-      this.rulerIconVisibleProperty.reset();
       this.springLengthModeProperty.reset();
       this.adjustableSpringNaturalLengthProperty.reset();
       this.timerVisibleProperty.reset();

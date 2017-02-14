@@ -17,6 +17,15 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Timer = require( 'SCENERY_PHET/Timer' );
 
+  /**
+   *
+   * @param {Bounds2} dragBounds
+   * @param {Vector2} initialPosition
+   * @param {number} timerSecondsProperty
+   * @param {boolean} timerRunningProperty
+   * @param {boolean} visibleProperty
+   * @constructor
+   */
   function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty ) {
     var self = this;
     Node.call( this );
@@ -34,6 +43,8 @@ define( function( require ) {
         // When a node is released, check if it is over the toolbox.  If so, drop it in.
         if ( self.toolbox && self.getGlobalBounds().intersectsBounds( self.toolbox.getGlobalBounds() ) ) {
           visibleProperty.set( false );
+          timerSecondsProperty.reset();
+          timerRunningProperty.reset();
         }
       }
     } ) );
