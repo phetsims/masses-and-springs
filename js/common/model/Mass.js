@@ -1,6 +1,8 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
+ * Responsible for the attributes associated with each mass node.
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
  */

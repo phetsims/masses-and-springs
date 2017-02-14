@@ -1,6 +1,8 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
+ * Common model (base type) for Masses and Springs
+ *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -63,13 +65,16 @@ define( function( require ) {
     Property.preventGetSet( this, 'movableLineVisible' );
     Property.preventGetSet( this, 'equilibriumPositionVisible' );
 
-    this.floorY = 0; // Y position of floor in m
-    this.ceilingY = 1.23; // Y position of ceiling in m
+    this.floorY = 0; // @public {read-only} Y position of floor in m
+    this.ceilingY = 1.23; // @public {read-only} Y position of ceiling in m
+
+    // @public model of springs used throughout the sim
     this.springs = [
       new Spring( new Vector2( .65, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() ),
       new Spring( new Vector2( .95, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() )
     ];
 
+    // @public responsible for changing the default length
     this.springLengthModeProperty.link( function( mode ) {
       if ( mode === 'same-length' ) {
         self.springs[ 0 ].naturalRestingLengthProperty.set( DEFAULT_SPRING_LENGTH );
