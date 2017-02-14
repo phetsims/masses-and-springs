@@ -65,7 +65,9 @@ define( function( require ) {
     // @private
     this.positionProperty = new Property( initialPosition );
     this.positionProperty.linkAttribute( this, 'translation' );
-    this.addInputListener( new MovableDragHandler( this.positionProperty, {
+
+    // @private {read-only} handles ruler node drag events
+    this.rulerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
       dragBounds: dragBounds,
       endDrag: function( event ) {
         // When a node is released, check if it is over the toolbox.  If so, drop it in.
@@ -73,7 +75,8 @@ define( function( require ) {
           visibleProperty.set( false );
         }
       }
-    } ) );
+    } );
+    this.addInputListener( this.rulerNodeMovableDragHandler );
     visibleProperty.linkAttribute( self, 'visible' );
   }
 
@@ -83,6 +86,10 @@ define( function( require ) {
 
     reset: function() {
       this.positionProperty.reset();
+    },
+
+    startDrag: function( event ) {
+      this.rulerNodeMovableDragHandler.startDrag( event );
     }
   } );
 

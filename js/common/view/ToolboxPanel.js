@@ -21,7 +21,6 @@ define( function( require ) {
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Timer = require( 'SCENERY_PHET/Timer' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -111,25 +110,7 @@ define( function( require ) {
             .minus( new Vector2( -rulerNode.width * .5, rulerNode.height * .4 ) );
           rulerNode.positionProperty.set( initialPosition );
           rulerUnboundedPosition.set( initialPosition );
-
-        },
-        translate: function( translationParams ) {
-          rulerUnboundedPosition.setXY(
-            rulerUnboundedPosition.x + translationParams.delta.x,
-            rulerUnboundedPosition.y + translationParams.delta.y
-          );
-          rulerNode.positionProperty.set( new Vector2(
-            Util.clamp( rulerUnboundedPosition.x, dragBounds.minX, dragBounds.maxX ),
-            Util.clamp( rulerUnboundedPosition.y, dragBounds.minY, dragBounds.maxY )
-          ) );
-          rulerNode.positionProperty.set( rulerUnboundedPosition );
-        },
-        end: function( event ) {
-          // When a node is released, check if it is over the toolbox.  If so, drop it in.
-          if ( rulerNode.getGlobalBounds().intersectsBounds( self.getGlobalBounds() ) ) {
-            rulerVisibleProperty.set( false );
-            self.rulerIcon.visible = !rulerVisibleProperty.get();
-          }
+          rulerNode.startDrag( event );
         }
       } ) );
       toolbox.addChild( self.rulerIcon );
@@ -179,24 +160,7 @@ define( function( require ) {
 
           timerNode.positionProperty.set( initialPosition );
           timerUnboundedPosition.set( initialPosition );
-        },
-        translate: function( translationParams ) {
-          timerUnboundedPosition.setXY(
-            timerUnboundedPosition.x + translationParams.delta.x,
-            timerUnboundedPosition.y + translationParams.delta.y
-          );
-          timerNode.positionProperty.set( new Vector2(
-            Util.clamp( timerUnboundedPosition.x, dragBounds.minX, dragBounds.maxX ),
-            Util.clamp( timerUnboundedPosition.y, dragBounds.minY, dragBounds.maxY )
-          ) );
-          timerNode.positionProperty.set( timerUnboundedPosition );
-        },
-        end: function( event ) {
-          // When a node is released, check if it is over the toolbox.  If so, drop it in.
-          if ( timerNode.getGlobalBounds().intersectsBounds( self.getGlobalBounds() ) ) {
-            timerVisibleProperty.set( false );
-            self.timerIcon.visible = !timerVisibleProperty.get();
-          }
+          timerNode.startDrag( event );
         }
       } ) );
       toolbox.addChild( self.timerIcon );

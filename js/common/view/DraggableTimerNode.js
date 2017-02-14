@@ -37,7 +37,9 @@ define( function( require ) {
     // @private
     this.positionProperty = new Property( initialPosition );
     this.positionProperty.linkAttribute( self, 'translation' );
-    this.addInputListener( new MovableDragHandler( this.positionProperty, {
+
+    // @private {read-only} handles timer node drag events
+    this.timerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
       dragBounds: dragBounds,
       endDrag: function( event ) {
         // When a node is released, check if it is over the toolbox.  If so, drop it in.
@@ -47,12 +49,17 @@ define( function( require ) {
           timerRunningProperty.reset();
         }
       }
-    } ) );
+    } );
+    this.addInputListener( this.timerNodeMovableDragHandler );
 
     visibleProperty.linkAttribute( self, 'visible' );
   }
 
   massesAndSprings.register( 'DraggableTimerNode', DraggableTimerNode );
 
-  return inherit( Node, DraggableTimerNode, {} );
+  return inherit( Node, DraggableTimerNode, {
+    startDrag: function( event ) {
+      this.timerNodeMovableDragHandler.startDrag( event );
+    }
+  } );
 } );
