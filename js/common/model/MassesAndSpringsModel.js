@@ -185,17 +185,19 @@ define( function( require ) {
      * @param {number} springNumber: Determines which spring will be affected.
      */
     stopSpring: function( springNumber ) {
-
-      // for readability
       var spring = this.springs[ springNumber ];
       var mass = spring.massProperty.get();
 
-      // set displacement and stop further animation
-      spring.displacementProperty.set( -spring.springExtension );
-      spring.animatingProperty.reset();
+      // check if mass attached on spring
+      if ( mass ) {
+        // for readability
+        // set displacement and stop further animation
+        spring.displacementProperty.set( -spring.springExtension );
+        spring.animatingProperty.reset();
 
-      // place that mass at the correct location as well
-      mass.positionProperty.set( new Vector2( spring.positionProperty.get().x, spring.bottomProperty.get() ) );
+        // place that mass at the correct location as well
+        mass.positionProperty.set( new Vector2( spring.positionProperty.get().x, spring.bottomProperty.get() ) );
+      }
     },
 
     /**
