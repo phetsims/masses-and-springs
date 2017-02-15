@@ -1,7 +1,9 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- * @author Matt Pennington
+ * Panel responsible for adjusting the length of the spring.
+ * This panel should only be visible when in scene with adjustable spring length.
+ * 
  * @author Denzell Barnett
  */
 define( function( require ) {
@@ -13,33 +15,33 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
   var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
-  var LABEL_FONT = new PhetFont( 10 );
-  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold' } );
+
+  // constants
+  var LABEL_FONT = MassesAndSpringsConstants.LABEL_FONT;
+  var TITLE_FONT = MassesAndSpringsConstants.TITLE_FONT;
 
   /**
    *
-   * @param {Property,<number>} naturalRestingLengthProperty
-   * @param {Range} rangeLength
-   * @param {string} title
+   * @param {Property,<number>} naturalRestingLengthProperty: length of spring without mass attached
+   * @param {Range} rangeLength: range of values for length
+   * @param {string} title: string used to title the panel 
    * @param {Object} options
-   * @param {Boolean} visibleProperty
    * @constructor
    */
-  function SpringLengthControlPanel( naturalRestingLengthProperty, rangeLength, title, visibleProperty, options ) {
+  function SpringLengthControlPanel( naturalRestingLengthProperty, rangeLength, title, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
       yMargin: 5,
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      visible: visibleProperty
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
 
+    // @private slider used to adjust value of natural resting length of spring
     var hSlider = new HSlider( naturalRestingLengthProperty, rangeLength, {
       majorTickLength: 10,
       minorTickLength: 5,

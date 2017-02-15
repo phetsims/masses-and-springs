@@ -1,11 +1,11 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 /**
+ * Common view mode for a screen using two masses.
  *
  * @author Matt Pennington
  * @author Denzell Barnett
  *
- * Common view mode for a screen using two masses.
  */
 define( function( require ) {
   'use strict';
@@ -15,6 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/common/view/ConstantsControlPanel' );
   var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
@@ -45,8 +46,9 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
+  var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
   var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
+  var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
   var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
 
   // images
@@ -96,8 +98,11 @@ define( function( require ) {
     } );
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
-    this.addChild( new OscillatingSpringNode( model.springs[ 0 ], mvtSpringHeight ) );
-    this.addChild( new OscillatingSpringNode( model.springs[ 1 ], mvtSpringHeight ) );
+    // @private nodes responsible for the spring objects
+    var firstOscillatingSpringNode = new OscillatingSpringNode( model.springs[ 0 ], mvtSpringHeight );
+    var secondOscillatingSpringNode = new OscillatingSpringNode( model.springs[ 1 ], mvtSpringHeight );
+    this.addChild( firstOscillatingSpringNode );
+    this.addChild( secondOscillatingSpringNode );
 
     // Spring Hanger Node
     var springHangerNode = new SpringHangerNode( model, mvt );
@@ -126,12 +131,24 @@ define( function( require ) {
       } );
     this.addChild( secondSpringConstantControlPanel );
 
+    // @private panel that keeps thickness/spring constant at constant value
+    var constantsControlPanel = new ConstantsControlPanel(
+      firstOscillatingSpringNode.lineWidthProperty,
+      model.springs[ 0 ].springConstantProperty,
+      constantString,
+      {
+        minWidth: firstSpringConstantControlPanel.maxWidth,
+        left: firstSpringConstantControlPanel.left,
+        top: firstSpringConstantControlPanel.bottom + topSpacing
+      }
+    );
+    this.addChild( constantsControlPanel );
+
     // Spring Constant Length Control Panel
     var springLengthControlPanel = new SpringLengthControlPanel(
       model.springs[ 0 ].naturalRestingLengthProperty,
       new RangeWithValue( .1, .5, .3 ),
       StringUtils.format( 'Length 1', 1 ),
-      true,
       {
         right: springHangerNode.springHangerNode.left - 40,
         top: topSpacing,
@@ -139,14 +156,17 @@ define( function( require ) {
       } );
     this.addChild( springLengthControlPanel );
 
+    // Link that is responsible for switching the scenes
     model.springLengthModeProperty.link( function( mode ) {
       if ( mode === 'same-length' ) {
         springLengthControlPanel.visible = false;
+        constantsControlPanel.visible = springLengthControlPanel.visible;
         firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
         secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
       }
       else if ( mode === 'adjustable-length' ) {
         springLengthControlPanel.visible = true;
+        constantsControlPanel.visible = springLengthControlPanel.visible;
         firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
         secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
         model.springs[ 0 ].springConstantProperty.reset();
@@ -154,30 +174,35 @@ define( function( require ) {
       }
     } );
 
-    // Initializes reference lines
+    // @public Initializes movable line
     this.movableLine = new MovableLineNode(
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
       235,
       model.movableLineVisibleProperty
     );
 
+    // @public Initializes equilibrium line for first spring
     this.firstSpringEquilibriumLine = new EquilibriumLineNode(
       mvt,
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty
     );
 
+    // @public Initializes equilibrium line for second spring
     this.secondSpringEquilibriumLine = new EquilibriumLineNode(
       mvt,
       model.springs[ 1 ],
       model.equilibriumPositionVisibleProperty
     );
 
+    // @public Initializes natural line for first spring
     this.firstNaturalLengthLine = new NaturalLengthLineNode(
       mvt,
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty
     );
+
+    // @public Initializes natural line for second spring
     this.secondNaturalLengthLine = new NaturalLengthLineNode(
       mvt,
       model.springs[ 1 ],

@@ -8,6 +8,9 @@
   "lab": {
     "value": "Lab"
   },
+  "constant": {
+    "value": "Constant"
+  },
   "energy": {
     "value": "Energy"
   },
@@ -52,6 +55,9 @@
   },
   "massValue": {
     "value": "{0} g"
+  },
+  "thickness": {
+    "value": "Thickness"
   },
   "cm": {
     "value": "cm"

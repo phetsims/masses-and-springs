@@ -1,9 +1,9 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- * @author Denzell Barnett
- *
  * Constants used throughout this simulation.
+ *
+ * @author Denzell Barnett
  */
 define( function( require ) {
   'use strict';
@@ -19,7 +19,8 @@ define( function( require ) {
     FONT: new PhetFont( 12 ),
     LABEL_FONT: new PhetFont( 10 ),
     TITLE_FONT: new PhetFont( { size: 12, weight: 'bold' } ),
-    PANEL_CORNER_RADIUS: 7
+    PANEL_CORNER_RADIUS: 7,
+    MAX_TEXT_WIDTH: 80
   };
 
   massesAndSprings.register( 'MassesAndSpringsConstants', MassesAndSpringsConstants );
