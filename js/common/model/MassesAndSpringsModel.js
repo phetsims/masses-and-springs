@@ -81,6 +81,7 @@ define( function( require ) {
       }
       else if ( mode === 'adjustable-length' ) {
         self.springs[ 0 ].naturalRestingLengthProperty.set( self.adjustableSpringNaturalLengthProperty.get() );
+        //self.springs[ 0 ].loopsProperty;
       }
     } );
 

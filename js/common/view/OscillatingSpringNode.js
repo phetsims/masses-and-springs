@@ -39,7 +39,6 @@ define( function( require ) {
       rotation: -3 * Math.PI / 2  // {number} angle in radians of rotation of spring
     }, options );
 
-
     ParametricSpringNode.call( this, options );
     this.spring = spring;
     this.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );

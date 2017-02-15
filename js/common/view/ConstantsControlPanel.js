@@ -30,13 +30,13 @@ define( function( require ) {
 
   /**
    *
-   * @param {Property,<number>} springThickness: determines the line thickness used to draw the spring
-   * @param {Property,<number>} springConstant: determines the spring constant of the spring
+   * @param {Property.<number>} springThicknessProperty: determines the line thickness used to draw the spring
+   * @param {Property.<number>} springConstantProperty: determines the spring constant of the spring
    * @param {string} title: string used to title the panel
    * @param {Object} options
    * @constructor
    */
-  function ConstantsControlPanel( springThickness, springConstant, title, options ) {
+  function ConstantsControlPanel( springThicknessProperty, springConstantProperty, title, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
@@ -50,15 +50,16 @@ define( function( require ) {
     };
 
     // TODO: Add logic for setting values for each aqua button.
+    // TODO: Follow the logic of the scene selection radio button (not playspeed).
     // @private {read-only} radius of button
     var constantsSelectionButtonRadius = 6;
     var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
-    var thicknessRadioBox = new AquaRadioButton( springThickness, 10, thicknessText, {
+    var thicknessRadioBox = new AquaRadioButton( springThicknessProperty, 10, thicknessText, {
       radius: constantsSelectionButtonRadius
     } );
 
     var constantText = new Text( StringUtils.format( springConstantString, '' ), constantsSelectionButtonOptions );
-    var springConstantRadioBox = new AquaRadioButton( springConstant, 9, constantText, {
+    var springConstantRadioBox = new AquaRadioButton( springConstantProperty, 9, constantText, {
       radius: constantsSelectionButtonRadius
     } );
 

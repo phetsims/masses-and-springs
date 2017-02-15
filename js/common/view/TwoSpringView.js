@@ -16,11 +16,13 @@ define( function( require ) {
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/common/view/ConstantsControlPanel' );
+  var Util = require( 'DOT/Util' );
   var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
@@ -35,6 +37,7 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringLengthControlPanel' );
@@ -98,9 +101,12 @@ define( function( require ) {
     } );
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
-    // @private nodes responsible for the spring objects
     var firstOscillatingSpringNode = new OscillatingSpringNode( model.springs[ 0 ], mvtSpringHeight );
     var secondOscillatingSpringNode = new OscillatingSpringNode( model.springs[ 1 ], mvtSpringHeight );
+    // model.springs[ 0 ].naturalRestingLengthProperty.link(function (value){
+    //   firstOscillatingSpringNode.loopsProperty.set(Util.roundSymmetric(value*24));
+    //   console.log( 'model.springs[0].naturalRestingLengthProperty.get() = ' + model.springs[ 0 ].naturalRestingLengthProperty.get() );
+    // });
     this.addChild( firstOscillatingSpringNode );
     this.addChild( secondOscillatingSpringNode );
 
@@ -158,19 +164,14 @@ define( function( require ) {
 
     // Link that is responsible for switching the scenes
     model.springLengthModeProperty.link( function( mode ) {
+      springLengthControlPanel.visible = (mode === 'adjustable-length');
+        constantsControlPanel.visible = springLengthControlPanel.visible;
+        firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
+        secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
+
+      // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
-        springLengthControlPanel.visible = false;
-        constantsControlPanel.visible = springLengthControlPanel.visible;
-        firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
-        secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
-      }
-      else if ( mode === 'adjustable-length' ) {
-        springLengthControlPanel.visible = true;
-        constantsControlPanel.visible = springLengthControlPanel.visible;
-        firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
-        secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
-        model.springs[ 0 ].springConstantProperty.reset();
-        model.springs[ 1 ].springConstantProperty.reset();
+        model.springs[ 0 ].reset();
       }
     } );
 
@@ -313,6 +314,13 @@ define( function( require ) {
         top: topSpacing
       }
     );
+
+    // var springOne = new Spring ()
+    // sameLengthIcon = new HBox({
+    //   children:[new OscillatingSpringNode(,mvt),new OscillatingSpringNode(model.springs[1],mvt)],
+    //   pickable:false,
+    //   scale:IMAGE_SCALE
+    // });
 
     //TODO: Create Icon node programmatically
     var toggleButtonsContent = [ {
