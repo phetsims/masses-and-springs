@@ -165,9 +165,9 @@ define( function( require ) {
     // Link that is responsible for switching the scenes
     model.springLengthModeProperty.link( function( mode ) {
       springLengthControlPanel.visible = (mode === 'adjustable-length');
-        constantsControlPanel.visible = springLengthControlPanel.visible;
-        firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
-        secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
+      constantsControlPanel.visible = springLengthControlPanel.visible;
+      firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
+      secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
 
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
