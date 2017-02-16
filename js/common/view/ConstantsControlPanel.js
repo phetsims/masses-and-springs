@@ -41,7 +41,8 @@ define( function( require ) {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
       yMargin: 5,
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+      visible: false
     }, options );
 
     var constantsSelectionButtonOptions = {
@@ -54,12 +55,12 @@ define( function( require ) {
     // @private {read-only} radius of button
     var constantsSelectionButtonRadius = 6;
     var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
-    var thicknessRadioBox = new AquaRadioButton( springThicknessProperty, springThicknessProperty.get(), thicknessText, {
+    var thicknessRadioBox = new AquaRadioButton( springThicknessProperty, 2, thicknessText, {
       radius: constantsSelectionButtonRadius
     } );
 
     var constantText = new Text( StringUtils.format( springConstantString, '' ), constantsSelectionButtonOptions );
-    var springConstantRadioBox = new AquaRadioButton( springConstantProperty, springConstantProperty.get(), constantText, {
+    var springConstantRadioBox = new AquaRadioButton( springConstantProperty, 7, constantText, {
       radius: constantsSelectionButtonRadius
     } );
 

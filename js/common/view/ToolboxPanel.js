@@ -1,10 +1,11 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
+ * Responsible for the toolbox panel and the ruler/timer icons held within
+ * 
  * @author Matt Pennington
  * @author Denzell Barnett
  *
- * Responsible for the toolbox panel and the ruler/timer icons held within
  */
 define( function( require ) {
   'use strict';

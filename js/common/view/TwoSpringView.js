@@ -137,6 +137,18 @@ define( function( require ) {
       } );
     this.addChild( secondSpringConstantControlPanel );
 
+    // Spring Constant Length Control Panel
+    var springLengthControlPanel = new SpringLengthControlPanel(
+      model.springs[ 0 ].naturalRestingLengthProperty,
+      new RangeWithValue( .1, .5, .3 ),
+      StringUtils.format( 'Length 1', 1 ),
+      {
+        right: springHangerNode.springHangerNode.left - 40,
+        top: topSpacing,
+        maxWidth: 125
+      } );
+    this.addChild( springLengthControlPanel );
+
     // @private panel that keeps thickness/spring constant at constant value
     var constantsControlPanel = new ConstantsControlPanel(
       firstOscillatingSpringNode.lineWidthProperty,
@@ -150,30 +162,25 @@ define( function( require ) {
     );
     this.addChild( constantsControlPanel );
 
-    // Spring Constant Length Control Panel
-    var springLengthControlPanel = new SpringLengthControlPanel(
-      model.springs[ 0 ].naturalRestingLengthProperty,
-      new RangeWithValue( .1, .5, .3 ),
-      StringUtils.format( 'Length 1', 1 ),
-      {
-        right: springHangerNode.springHangerNode.left - 40,
-        top: topSpacing,
-        maxWidth: 125
-      } );
-    this.addChild( springLengthControlPanel );
-
     // Link that is responsible for switching the scenes
     model.springLengthModeProperty.link( function( mode ) {
       springLengthControlPanel.visible = (mode === 'adjustable-length');
       constantsControlPanel.visible = springLengthControlPanel.visible;
       firstSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
       secondSpringConstantControlPanel.visible = !springLengthControlPanel.visible;
+      model.springs[ 0 ].naturalRestingLengthProperty.link( function( lineLength ) {
+        // var lineWidth = options.minLineWidth + options.deltaLineWidth * ( springConstant - spring.springConstantRange.min ) / 2;
+        // self.lineWidthProperty.set( lineWidth );
+        firstOscillatingSpringNode.lineWidthProperty.set( 8 * lineLength );
 
+      } );
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
         model.springs[ 0 ].reset();
+        model.springs[ 1 ].reset();
       }
     } );
+
 
     // @public Initializes movable line
     this.movableLine = new MovableLineNode(

@@ -38,7 +38,8 @@ define( function( require ) {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
       yMargin: 5,
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+      visible: false
     }, options );
 
     // @private slider used to adjust value of natural resting length of spring

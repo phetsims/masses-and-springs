@@ -1,6 +1,8 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
+ * Responsible for the panel that controls the spring constant of a spring.
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
  */
@@ -24,7 +26,7 @@ define( function( require ) {
 
   /**
    *
-   * @param {Property,<number>} springConstantProperty
+   * @param {Property.<number>} springConstantProperty
    * @param {Range} springConstantPropertyRange
    * @param {string} title
    * @param {Object} options
