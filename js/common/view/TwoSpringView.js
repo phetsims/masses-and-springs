@@ -16,13 +16,13 @@ define( function( require ) {
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/common/view/ConstantsControlPanel' );
-  var Util = require( 'DOT/Util' );
+  // var Util = require( 'DOT/Util' );
   var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
+  // var HBox = require( 'SCENERY/nodes/HBox' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
@@ -37,7 +37,7 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
+  // var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringLengthControlPanel' );
