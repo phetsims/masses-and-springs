@@ -41,6 +41,7 @@ define( function( require ) {
     this.springLengthModeProperty = new Property( 'same-length' ); // {string} valid values are "same-length" and "adjustable-length"
     this.adjustableSpringNaturalLengthProperty = new Property( DEFAULT_SPRING_LENGTH / 2 ); // {number} adjustable length of spring on second scene
     this.rulerVisibleProperty = new Property( false ); // {boolean} determines visibility of ruler node
+    this.selectedConstantProperty = new Property( 'spring-constant' ); // {string} valid values are 'spring-constant' and 'spring-thickness'
     this.timerVisibleProperty = new Property( false ); // {boolean} determines visibility of timer node
     this.timerSecondProperty = new Property( 0 ); // {number} value attributed to seconds in timer node
     this.timerRunningProperty = new Property( false ); // {boolean} determines whether timer is active or not
@@ -56,6 +57,7 @@ define( function( require ) {
     Property.preventGetSet( this, 'friction' );
     Property.preventGetSet( this, 'gravity' );
     Property.preventGetSet( this, 'rulerVisible' );
+    Property.preventGetSet( this, 'selectedConstant' );
     Property.preventGetSet( this, 'springLengthView' );
     Property.preventGetSet( this, 'adjustableSpringNaturalLength' );
     Property.preventGetSet( this, 'timerVisible' );
@@ -81,7 +83,6 @@ define( function( require ) {
       }
       else if ( mode === 'adjustable-length' ) {
         self.springs[ 0 ].naturalRestingLengthProperty.set( self.adjustableSpringNaturalLengthProperty.get() );
-        //self.springs[ 0 ].loopsProperty;
       }
     } );
 
@@ -135,6 +136,7 @@ define( function( require ) {
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();
+      this.selectedConstantProperty.reset();
       this.springLengthModeProperty.reset();
       this.adjustableSpringNaturalLengthProperty.reset();
       this.timerVisibleProperty.reset();
@@ -166,7 +168,6 @@ define( function( require ) {
         mass.springProperty.get().displacementProperty.set( -( mass.springProperty.get().positionProperty.get().y -
                                                                mass.springProperty.get().naturalRestingLengthProperty.get() ) + proposedPosition.y );
         mass.positionProperty.set( new Vector2( mass.springProperty.get().positionProperty.get().x, proposedPosition.y ) );
-        //console.log( 'snagged' );
       }
       // Update mass position if unattached
       else {

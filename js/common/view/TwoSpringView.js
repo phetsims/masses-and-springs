@@ -213,8 +213,10 @@ define( function( require ) {
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
+        model.springs[ 0 ].reset();
+        model.springs[ 1 ].reset();
         model.reset();
-        this.gravityControlPanel.reset();
+        self.gravityControlPanel.reset();
         massNodes.forEach( function( massNode ) {
           massNode.moveToFront();
         } );

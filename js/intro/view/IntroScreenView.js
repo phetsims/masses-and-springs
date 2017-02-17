@@ -55,8 +55,7 @@ define( function( require ) {
 
     // @private panel that keeps thickness/spring constant at constant value
     this.constantsControlPanel = new ConstantsControlPanel(
-      this.firstOscillatingSpringNode.lineWidthProperty,
-      model.springs[ 0 ].springConstantProperty,
+      model.selectedConstantProperty,
       constantString,
       {
         minWidth: this.firstSpringConstantControlPanel.maxWidth,
@@ -68,15 +67,27 @@ define( function( require ) {
 
     // Link that is responsible for switching the scenes
     model.springLengthModeProperty.link( function( mode ) {
+
+      // Toggle visibility of panels
       self.springLengthControlPanel.visible = (mode === 'adjustable-length');
       self.constantsControlPanel.visible = self.springLengthControlPanel.visible;
       self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
-      model.springs[ 0 ].naturalRestingLengthProperty.link( function( lineLength ) {
-        // var lineWidth = options.minLineWidth + options.deltaLineWidth * ( springConstant - spring.springConstantRange.min ) / 2;
-        // self.lineWidthProperty.set( lineWidth );
-        self.firstOscillatingSpringNode.lineWidthProperty.set( 8 * lineLength );
 
+      // 
+      model.springs[ 0 ].naturalRestingLengthProperty.link( function( lineLength ) {
+        if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
+          console.log( 'thickness = ' + self.firstOscillatingSpringNode.lineWidthProperty.get() );
+          console.log( 'spring constant = ' + model.springs[ 0 ].springConstantProperty.get() );
+          self.firstOscillatingSpringNode.lineWidthProperty.set( self.firstOscillatingSpringNode.lineWidthProperty.get() );
+          self.firstOscillatingSpringNode.lineWidthProperty.set( 8 * lineLength );
+        }
+        if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
+          console.log( 'thickness = ' + self.firstOscillatingSpringNode.lineWidthProperty.get() );
+          console.log( 'spring constant = ' + model.springs[ 0 ].springConstantProperty.get() );
+          self.firstOscillatingSpringNode.lineWidthProperty.set( self.firstOscillatingSpringNode.lineWidthProperty.get() );
+          self.firstOscillatingSpringNode.lineWidthProperty.set( 8 * lineLength );
+        }
       } );
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
