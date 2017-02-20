@@ -15,12 +15,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  // var Util = require( 'DOT/Util' );
   var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
-  // var HBox = require( 'SCENERY/nodes/HBox' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
@@ -33,7 +31,6 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  // var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var SpringStopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/SpringStopperButtonNode' );
@@ -92,16 +89,9 @@ define( function( require ) {
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
     this.firstOscillatingSpringNode = new OscillatingSpringNode( model.springs[ 0 ], mvtSpringHeight );
     this.secondOscillatingSpringNode = new OscillatingSpringNode( model.springs[ 1 ], mvtSpringHeight );
-    // model.springs[ 0 ].naturalRestingLengthProperty.link(function (value){
-    //   firstOscillatingSpringNode.loopsProperty.set(Util.roundSymmetric(value*24));
-    //   console.log( 'model.springs[0].naturalRestingLengthProperty.get() = ' + model.springs[ 0 ].naturalRestingLengthProperty.get() );
-    // });
-    this.addChild( this.firstOscillatingSpringNode );
-    this.addChild( this.secondOscillatingSpringNode );
 
     // Spring Hanger Node
     this.springHangerNode = new SpringHangerNode( model, mvt );
-    this.addChild( this.springHangerNode );
 
     // Spring Constant Control Panels
     this.firstSpringConstantControlPanel = new SpringConstantControlPanel(
@@ -113,7 +103,6 @@ define( function( require ) {
         top: this.topSpacing,
         maxWidth: 125
       } );
-    this.addChild( this.firstSpringConstantControlPanel );
 
     this.secondSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 1 ].springConstantProperty,
@@ -124,7 +113,6 @@ define( function( require ) {
         top: this.topSpacing,
         maxWidth: 125
       } );
-    this.addChild( this.secondSpringConstantControlPanel );
 
     // @public Initializes movable line
     this.movableLine = new MovableLineNode(
@@ -167,7 +155,6 @@ define( function( require ) {
       left: this.secondSpringConstantControlPanel.right + 10,
       maxWidth: 180
     } );
-    this.addChild( indicatorVisibilityControlPanel );
 
     // Gravity Control Panel
     this.gravityControlPanel = new GravityControlPanel(
@@ -182,7 +169,6 @@ define( function( require ) {
         maxWidth: 180
       }
     );
-    this.addChild( this.gravityControlPanel );
 
     // Timer and Ruler
     var timerNode = new DraggableTimerNode(
@@ -205,7 +191,7 @@ define( function( require ) {
       minWidth: this.gravityControlPanel.width,
       maxWidth: 180
     } );
-    this.addChild( this.toolboxPanel );
+
     // Done to for movableDragHandler handling intersecting bounds of panel and ruler
     rulerNode.toolbox = this.toolboxPanel;
     timerNode.toolbox = this.toolboxPanel;
@@ -224,10 +210,9 @@ define( function( require ) {
       right: this.layoutBounds.right - 10,
       bottom: mvt.modelToViewY( model.floorY )
     } );
-    this.addChild( resetAllButton );
 
     // Play/Pause and Step Forward Button Control
-    this.addChild( new MASPlayPauseStepControl( model ) );
+    var MASPlayPauseStepConstrol = new MASPlayPauseStepControl( model );
 
     // Sim speed controls
     var speedSelectionButtonOptions = {
@@ -253,7 +238,6 @@ define( function( require ) {
       right: resetAllButton.left - 30,
       centerY: resetAllButton.centerY
     } );
-    this.addChild( speedControl );
 
     var firstSpringStopperButtonNode = new SpringStopperButtonNode( {
       listener: model.stopSpring.bind( model, 0 ),
@@ -268,10 +252,22 @@ define( function( require ) {
       }
     );
 
+    // TODO: Add respective layers to to make scene graph more accessible and uniform
+    // Adding all of the nodes to the scene graph
+    this.addChild( this.firstOscillatingSpringNode );
+    this.addChild( this.secondOscillatingSpringNode );
+    this.addChild( this.springHangerNode );
+    //Reference lines from indicator visibility box
+    this.addChild( this.firstSpringConstantControlPanel );
+    this.addChild( this.secondSpringConstantControlPanel );
+    this.addChild( indicatorVisibilityControlPanel );
+    this.addChild( this.gravityControlPanel );
+    this.addChild( this.toolboxPanel );
+    this.addChild( resetAllButton );
+    this.addChild( MASPlayPauseStepConstrol );
+    this.addChild( speedControl );
     this.addChild( firstSpringStopperButtonNode );
     this.addChild( secondSpringStopperButtonNode );
-
-    //Reference lines from indicator visibility box
     this.addChild( this.firstSpringEquilibriumLine );
     this.addChild( this.secondSpringEquilibriumLine );
     this.addChild( this.firstNaturalLengthLine );

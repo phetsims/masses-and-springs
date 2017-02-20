@@ -2,7 +2,7 @@
 
 /**
  * ScreenView for the 'Intro' screen
- * 
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
  */
@@ -12,10 +12,12 @@ define( function( require ) {
   // modules
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/common/view/ConstantsControlPanel' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringLengthControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
@@ -25,10 +27,6 @@ define( function( require ) {
 
   // strings
   var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
-
-  // images
-  var differentLengthIcon = require( 'image!MASSES_AND_SPRINGS/different-length-scene.png' );
-  var sameLengthIcon = require( 'image!MASSES_AND_SPRINGS/same-length-scene.png' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -96,15 +94,44 @@ define( function( require ) {
       }
     } );
 
-    //TODO: Create Icon node programmatically
+    // @private {read-only} Creation of springs for use in scene switching icons
+    var firstSpringIcon = new OscillatingSpringNode( model.springsIcon[ 0 ], this.mvt );
+    firstSpringIcon.loopsProperty.set( 10 );
+    firstSpringIcon.lineWidthProperty.set( 3 );
+
+    var secondSpringIcon = new OscillatingSpringNode( model.springsIcon[ 1 ], this.mvt );
+    secondSpringIcon.loopsProperty.set( 10 );
+    secondSpringIcon.lineWidthProperty.set( 3 );
+
+    var thirdSpringIcon = new OscillatingSpringNode( model.springsIcon[ 2 ], this.mvt );
+    thirdSpringIcon.loopsProperty.set( 5 );
+    thirdSpringIcon.lineWidthProperty.set( 3 );
+
+    // @private {read-only} White background for scene switching icons
+    var iconBackground = new Rectangle( firstSpringIcon.x - 40, 25, 160, 190, 2, 2, { fill: 'white' } );
+
+    // @private {read-only} Creation of same length icon node
+    var sameLengthIcon = new Node( { scale: IMAGE_SCALE } );
+    sameLengthIcon.addChild( iconBackground );
+    sameLengthIcon.addChild( firstSpringIcon );
+    sameLengthIcon.addChild( secondSpringIcon );
+
+    // @private {read-only} Creation of adjustable length icon node
+    var differentLengthIcon = new Node( { scale: IMAGE_SCALE } );
+    differentLengthIcon.addChild( iconBackground );
+    differentLengthIcon.addChild( thirdSpringIcon );
+    differentLengthIcon.addChild( secondSpringIcon );
+
+    // @private {read-only} Creation of toggled modes for scene selection
     var toggleButtonsContent = [ {
       value: 'same-length',
-      node: new Image( sameLengthIcon, { scale: IMAGE_SCALE } )
+      node: sameLengthIcon
     }, {
       value: 'adjustable-length',
-      node: new Image( differentLengthIcon, { scale: IMAGE_SCALE } )
+      node: differentLengthIcon
     } ];
 
+    // @private {read-only} Creation of icons for scene selection
     var sceneRadioButtonGroup = new RadioButtonGroup( model.springLengthModeProperty, toggleButtonsContent, {
       buttonContentXMargin: 4,
       buttonContentYMargin: 4,
@@ -119,6 +146,7 @@ define( function( require ) {
       spacing: 13
     } );
     this.addChild( sceneRadioButtonGroup );
+    sceneRadioButtonGroup.moveToBack();
   }
 
   massesAndSprings.register( 'IntroScreenView', IntroScreenView );

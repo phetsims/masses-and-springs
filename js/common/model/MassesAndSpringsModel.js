@@ -70,6 +70,13 @@ define( function( require ) {
     this.floorY = 0; // @public {read-only} Y position of floor in m
     this.ceilingY = 1.23; // @public {read-only} Y position of ceiling in m
 
+    // @public {read-only} Springs created to be used in the icons for the scene selection tabs
+    this.springsIcon = [
+      new Spring( new Vector2( .65, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0 ),
+      new Spring( new Vector2( .85, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0 ),
+      new Spring( new Vector2( .65, this.ceilingY + .17 ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0 )
+    ];
+
     // @public model of springs used throughout the sim
     this.springs = [
       new Spring( new Vector2( .65, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get() ),
