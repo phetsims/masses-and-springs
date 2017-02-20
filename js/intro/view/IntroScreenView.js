@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/common/view/ConstantsControlPanel' );
+  var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/ConstantsControlPanel' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -18,7 +18,7 @@ define( function( require ) {
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringLengthControlPanel' );
+  var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/SpringLengthControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
 
