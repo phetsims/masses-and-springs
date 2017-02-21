@@ -21,10 +21,11 @@ define( function( require ) {
    * @param {number} naturalRestingLength - resting length of unweighted spring in m
    * @param {Range} springConstantRange - k in N/m
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
+   * @param {Tandem} tandem
    *
    * @constructor
    */
-  function Spring( position, naturalRestingLength, springConstantRange, defaultDampingCoefficient ) {
+  function Spring( position, naturalRestingLength, springConstantRange, defaultDampingCoefficient, tandem ) {
     var self = this;
 
     // @public, Model Properties

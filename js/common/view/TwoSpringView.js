@@ -53,9 +53,10 @@ define( function( require ) {
    * TODO::: Factor out colors to a Constants object
    * TODO::: Factor out thumb size, track size, etc other slider properties
    * @param {MassesAndSpringsModel} model
+   * @param {Tandem} tandem
    * @constructor
    */
-  function TwoSpringView( model ) {
+  function TwoSpringView( model, tandem ) {
     this.model = model; // Make model available for reset
     var self = this;
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
@@ -162,6 +163,7 @@ define( function( require ) {
       model.gravityRange,
       model.bodies,
       this,
+      tandem,
       {
         left: indicatorVisibilityControlPanel.left,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,

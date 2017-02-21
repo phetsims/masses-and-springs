@@ -32,14 +32,15 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
+   * @param {Tandem} tandem
    * @constructor
    */
-  function IntroScreenView( model ) {
+  function IntroScreenView( model, tandem ) {
 
     var self = this;
 
     // Calls common two spring view
-    TwoSpringView.call( this, model );
+    TwoSpringView.call( this, model, tandem );
 
     // Spring Constant Length Control Panel
     this.springLengthControlPanel = new SpringLengthControlPanel(

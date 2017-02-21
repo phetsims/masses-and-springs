@@ -28,17 +28,21 @@ define( function( require ) {
   var gravityNoneString = require( 'string!MASSES_AND_SPRINGS/gravity.none' );
   var gravityLotsString = require( 'string!MASSES_AND_SPRINGS/gravity.lots' );
 
+  // phet-io modules
+  var TString = require( 'ifphetio!PHET_IO/types/TString' );
+
   /**
    *
    * @param {Property,<number>} gravityProperty
    * @param {Range} gravityPropertyRange
    * @param {[Body]} bodies
    * @param {Node} listNodeParent
+   * @param {Tandem} tandem
    * @param {Object} [options]
    *
    * @constructor
    */
-  function GravityControlPanel( gravityProperty, gravityPropertyRange, bodies, listNodeParent, options ) {
+  function GravityControlPanel( gravityProperty, gravityPropertyRange, bodies, listNodeParent, tandem, options ) {
     var self = this;
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
@@ -63,7 +67,12 @@ define( function( require ) {
 
     this.gravityProperty = gravityProperty; // {Property.<number>}
     var previousGravityProperty = new Property( Body.EARTH.gravity ); // {Property.<number>}
-    this.bodyTitleProperty = new Property( Body.EARTH.title ); // @private {Property.<string>}
+
+    // @private {Property.<string>}
+    this.bodyTitleProperty = new Property( Body.EARTH.title, {
+      tandem: tandem.createTandem( 'bodyTitleProperty' ),
+      phetioValueType: TString
+    } );
     var previousBodyTitleProperty = new Property( Body.EARTH.title ); // {Property.<string>}
 
     var gravityComboBox = new ComboBox( bodyListItems, self.bodyTitleProperty, listNodeParent, {
