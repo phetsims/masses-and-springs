@@ -19,6 +19,7 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var LinearFunction = require( 'DOT/LinearFunction' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Property = require( 'AXON/Property' );
   var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/SpringLengthControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
@@ -91,38 +92,23 @@ define( function( require ) {
       self.initialLength = model.springs[ 0 ].naturalRestingLengthProperty.get();
       self.firstOscillatingSpringNode.lineWidthProperty.set( self.firstOscillatingSpringNode.lineWidthProperty.get() );
 
-      // TODO: Is there a way to encapsulate these two links?
-      // Link called when constants are selected in radio button group
-      model.selectedConstantProperty.link( function( event ) {
-        if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
-          self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-        }
-        else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
-          model.springs[ 0 ].springConstantProperty.set( self.mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-          self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-        }
-        else if ( model.selectedConstantProperty.get() === null ) {
-          self.firstOscillatingSpringNode.lineWidthProperty.reset();
-          model.springs[ 0 ].springConstantProperty.reset();
-          model.springs[ 1 ].reset();
+      Property.multilink( [ model.selectedConstantProperty, model.springs[ 0 ].naturalRestingLengthProperty ], function() {
+        {
+          if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
+            self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+          }
+          else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
+            model.springs[ 0 ].springConstantProperty.set( self.mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+            self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+          }
+          else if ( model.selectedConstantProperty.get() === null ) {
+            self.firstOscillatingSpringNode.lineWidthProperty.reset();
+            model.springs[ 0 ].springConstantProperty.reset();
+            model.springs[ 1 ].reset();
+          }
         }
       } );
 
-      // Link called when spring length is changed using slider
-      model.springs[ 0 ].naturalRestingLengthProperty.link( function( lineLength ) {
-        if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
-          self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-        }
-        else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
-          model.springs[ 0 ].springConstantProperty.set( self.mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-          self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-        }
-        else if ( model.selectedConstantProperty.get() === null ) {
-          self.firstOscillatingSpringNode.lineWidthProperty.reset();
-          model.springs[ 0 ].springConstantProperty.reset();
-          model.springs[ 1 ].reset();
-        }
-      } );
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
         self.firstOscillatingSpringNode.lineWidthProperty.reset();
