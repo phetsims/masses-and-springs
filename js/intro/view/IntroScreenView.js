@@ -91,7 +91,24 @@ define( function( require ) {
       self.initialLength = model.springs[ 0 ].naturalRestingLengthProperty.get();
       self.firstOscillatingSpringNode.lineWidthProperty.set( self.firstOscillatingSpringNode.lineWidthProperty.get() );
 
-      // Link that handles which constant to constrain and which function to use for length to constant relation
+      // TODO: Is there a way to encapsulate these two links?
+      // Link called when constants are selected in radio button group
+      model.selectedConstantProperty.link( function( event ) {
+        if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
+          self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+        }
+        else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
+          model.springs[ 0 ].springConstantProperty.set( self.mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+          self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+        }
+        else if ( model.selectedConstantProperty.get() === null ) {
+          self.firstOscillatingSpringNode.lineWidthProperty.reset();
+          model.springs[ 0 ].springConstantProperty.reset();
+          model.springs[ 1 ].reset();
+        }
+      } );
+
+      // Link called when spring length is changed using slider
       model.springs[ 0 ].naturalRestingLengthProperty.link( function( lineLength ) {
         if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
           self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
