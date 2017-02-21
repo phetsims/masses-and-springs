@@ -41,7 +41,7 @@ define( function( require ) {
     this.springLengthModeProperty = new Property( 'same-length' ); // {string} valid values are "same-length" and "adjustable-length"
     this.adjustableSpringNaturalLengthProperty = new Property( DEFAULT_SPRING_LENGTH / 2 ); // {number} adjustable length of spring on second scene
     this.rulerVisibleProperty = new Property( false ); // {boolean} determines visibility of ruler node
-    this.selectedConstantProperty = new Property( 'spring-constant' ); // {string} valid values are 'spring-constant' and 'spring-thickness'
+    this.selectedConstantProperty = new Property( null ); // {string || null} valid values are 'spring-constant', 'spring-thickness', and null
     this.timerVisibleProperty = new Property( false ); // {boolean} determines visibility of timer node
     this.timerSecondProperty = new Property( 0 ); // {number} value attributed to seconds in timer node
     this.timerRunningProperty = new Property( false ); // {boolean} determines whether timer is active or not

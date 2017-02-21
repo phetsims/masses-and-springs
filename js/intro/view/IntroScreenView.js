@@ -17,6 +17,7 @@ define( function( require ) {
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var LinearFunction = require( 'DOT/LinearFunction' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/SpringLengthControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -51,6 +52,17 @@ define( function( require ) {
       } );
     this.addChild( this.springLengthControlPanel );
 
+    /** @private Functions used to determine the inverse relationship between the length and springConstant/thickness
+     Functions follow logic:
+     -SpringConstant = constant
+     As length increases, spring thickness decreases (and vice versa)
+     -Thickness = constant
+     As length increases, spring constant decreases  (and vice versa)
+     */
+    this.mapRestingLengthToSpringConstant = new LinearFunction( .1, .5, 7, 1 );
+    this.mapRestingLengthToThickness = new LinearFunction( .1, .5, 15, 5 );
+    this.mapRestingLengthToThickness2 = new LinearFunction( .1, .5, self.firstOscillatingSpringNode.lineWidthProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() );
+
     // @private panel that keeps thickness/spring constant at constant value
     this.constantsControlPanel = new ConstantsControlPanel(
       model.selectedConstantProperty,
@@ -72,23 +84,31 @@ define( function( require ) {
       self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
 
-      // 
+      // TODO: Remove these resets to preserve state.
+      self.firstOscillatingSpringNode.lineWidthProperty.reset();
+      model.springs[ 0 ].springConstantProperty.reset();
+      model.springs[ 1 ].reset();
+      self.initialLength = model.springs[ 0 ].naturalRestingLengthProperty.get();
+      self.firstOscillatingSpringNode.lineWidthProperty.set( self.firstOscillatingSpringNode.lineWidthProperty.get() );
+
+      // Link that handles which constant to constrain and which function to use for length to constant relation
       model.springs[ 0 ].naturalRestingLengthProperty.link( function( lineLength ) {
-        if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
-          console.log( 'thickness = ' + self.firstOscillatingSpringNode.lineWidthProperty.get() );
-          console.log( 'spring constant = ' + model.springs[ 0 ].springConstantProperty.get() );
-          self.firstOscillatingSpringNode.lineWidthProperty.set( self.firstOscillatingSpringNode.lineWidthProperty.get() );
-          self.firstOscillatingSpringNode.lineWidthProperty.set( 8 * lineLength );
-        }
         if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
-          console.log( 'thickness = ' + self.firstOscillatingSpringNode.lineWidthProperty.get() );
-          console.log( 'spring constant = ' + model.springs[ 0 ].springConstantProperty.get() );
-          self.firstOscillatingSpringNode.lineWidthProperty.set( self.firstOscillatingSpringNode.lineWidthProperty.get() );
-          self.firstOscillatingSpringNode.lineWidthProperty.set( 8 * lineLength );
+          self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+        }
+        else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
+          model.springs[ 0 ].springConstantProperty.set( self.mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+          self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+        }
+        else if ( model.selectedConstantProperty.get() === null ) {
+          self.firstOscillatingSpringNode.lineWidthProperty.reset();
+          model.springs[ 0 ].springConstantProperty.reset();
+          model.springs[ 1 ].reset();
         }
       } );
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
+        self.firstOscillatingSpringNode.lineWidthProperty.reset();
         model.springs[ 0 ].reset();
         model.springs[ 1 ].reset();
       }

@@ -54,12 +54,12 @@ define( function( require ) {
     // @private {read-only} radius of button
     var constantsSelectionButtonRadius = 6;
     var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
-    var thicknessRadioBox = new AquaRadioButton( selectedConstant, 'spring-constant', thicknessText, {
+    var thicknessRadioBox = new AquaRadioButton( selectedConstant, 'spring-thickness', thicknessText, {
       radius: constantsSelectionButtonRadius
     } );
 
     var constantText = new Text( StringUtils.format( springConstantString, '' ), constantsSelectionButtonOptions );
-    var springConstantRadioBox = new AquaRadioButton( selectedConstant, 'spring-thickness', constantText, {
+    var springConstantRadioBox = new AquaRadioButton( selectedConstant, 'spring-constant', constantText, {
       radius: constantsSelectionButtonRadius
     } );
 
