@@ -9,12 +9,18 @@ define( function( require ) {
 
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   // modules
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Property = require( 'AXON/Property' );
   var Complex = require( 'DOT/Complex' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // phet-io modules
+  var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
+  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
+  var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
@@ -28,15 +34,69 @@ define( function( require ) {
   function Spring( position, naturalRestingLength, springConstantRange, defaultDampingCoefficient, tandem ) {
     var self = this;
 
-    // @public, Model Properties
-    this.gravityProperty = new Property( 9.8 ); // {number} units m/s^2  //TODO:: initialize with gravity of default body from Model
-    this.displacementProperty = new Property( 0 ); // {number} units: m
-    this.springConstantProperty = new Property( springConstantRange.defaultValue ); // {number} units N/m
-    this.dampingCoefficientProperty = new Property( defaultDampingCoefficient ); // {number} units N.s/m - viscous damping coefficient of the system
-    this.positionProperty = new Property( position ); // {Vector2} units ( m, m )
-    this.naturalRestingLengthProperty = new Property( naturalRestingLength ); // {number} units: m
-    this.animatingProperty = new Property( false ); // {boolean}
-    this.massProperty = new Property( null ); // {Mass}
+    // @public {Property.<number>} gravitational acceleration
+    this.gravityProperty = new Property( massesAndSprings.Body.EARTH.gravity, {
+      tandem: tandem.createTandem( 'gravityProperty' ),
+      phetioValueType: TNumber( {
+        units: 'meters/second/second',
+        range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity )
+      } )
+    } );
+
+    //  @public {Property.<number>} displacement of the bottom of the spring from the natural resting position
+    this.displacementProperty = new Property( 0, {
+      tandem: tandem.createTandem( 'displacementProperty' ),
+      phetioValueType: TNumber( {
+        units: 'meters',
+        range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
+      } )
+    } );
+
+    // @public {Property.<number>} spring constant of spring
+    this.springConstantProperty = new Property( springConstantRange.defaultValue, {
+      tandem: tandem.createTandem( 'springConstantProperty' ),
+      phetioValueType: TNumber( {
+        units: 'newtons/meters',
+        range: new RangeWithValue( 5, 15, 9 )
+      } )
+    } );
+
+    // @public {Property.<number>} viscous damping coefficient of the system
+    this.dampingCoefficientProperty = new Property( defaultDampingCoefficient, {
+      tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
+      phetioValueType: TNumber( {
+        units: 'newtons-second/meters',
+        range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, defaultDampingCoefficient )
+      } )
+    } );
+
+    // TODO: Correct this TType
+    // @public {Property.<Vector2>} position of the spring
+    this.positionProperty = new Property( position, {
+      // tandem: tandem.createTandem( 'positionProperty' ),
+      // phetioValueType: null
+    } );
+
+    // @public {Proeprty.<number>} length of the spring without mass attached
+    this.naturalRestingLengthProperty = new Property( naturalRestingLength, {
+      tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
+      phetioValueType: TNumber( {
+        units: 'meters',
+        range: new RangeWithValue( .1, .5, naturalRestingLength )
+      } )
+    } );
+
+    // @public {Property.<boolean>} determines whether the animation for the spring is played or not
+    this.animatingProperty = new Property( false, {
+      tandem: tandem.createTandem( 'animatingProperty' ),
+      phetioValueType: TBoolean
+    } );
+
+    // @public {Property.<Mass>}
+    this.massProperty = new Property( null, {
+      // tandem: tandem.createTandem( 'massProperty' ),
+      // phetioValueType: Mass
+    } );
 
     // @public (read-only) - distance from natural resting position to equilibrium position (units: m) 
     this.springExtension = 0;
@@ -60,12 +120,14 @@ define( function( require ) {
     this.springConstantRange = springConstantRange; // @public read-only
 
     //------------------------------------------------
+    // TODO: Correct Tandems for Derived Properties
     // Derived properties
     // @public length of the spring, units = m
     this.lengthProperty = new DerivedProperty( [ this.naturalRestingLengthProperty, this.displacementProperty ],
       function( naturalRestingLength, displacement ) {
         return naturalRestingLength - displacement;
       }
+      // ,{tandem:tandem.createTandem('lengthProperty')}
     );
 
     // @public y position of the bottom end of the spring, units = m
@@ -73,6 +135,7 @@ define( function( require ) {
       function( position, length ) {
         return position.y - length;
       }
+      // ,{tandem:tandem.createTandem('bottomProperty')}
     );
 
     // @public y position of the equilibrium position
@@ -82,6 +145,7 @@ define( function( require ) {
         self.springExtension = mass ? (mass.mass * gravity) / springConstant : 0;
         return self.positionProperty.get().y - self.naturalRestingLengthProperty.get() - self.springExtension;
       }
+      // ,{tandem:tandem.createTandem('equilibriumYPositionProperty')}
     );
 
     //  Restart animation if it was squelched
