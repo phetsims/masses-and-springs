@@ -13,11 +13,16 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var HEIGHT_RATIO = 2;
   var DENSITY = 80; // density of ???
+
+  // phet-io modules
+  var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
+  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
 
   /**
    * @param {number} massValue:  mass in kg
@@ -26,7 +31,7 @@ define( function( require ) {
    * @param {string} color: color of shown mass
    * @constructor
    */
-  function Mass( massValue, initialPosition, isLabeled, color ) {
+  function Mass( massValue, initialPosition, isLabeled, color, tandem ) {
     var self = this;
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
@@ -34,10 +39,32 @@ define( function( require ) {
     this.mass = massValue;
 
     // @public Main model properties
-    this.positionProperty = new Property( initialPosition ); // {Vector2}  the position of a mass is the center top of the model object.
-    this.userControlledProperty = new Property( false ); // {boolean} indicates whether this mass is currently user controlled
-    this.verticalVelocityProperty = new Property( 0 ); // {number} m/s
-    this.springProperty = new Property( null ); // {Spring|null}   is the mass attached to a Spring?
+    // {Property.<Vector2>}  the position of a mass is the center top of the model object.
+    this.positionProperty = new Property( initialPosition, {
+      // tandem: tandem.createTandem( 'positionProperty' ),
+      // phetioValueType: TVector2()
+    } );
+
+    // @public {Property.<boolean>} indicates whether this mass is currently user controlled
+    this.userControlledProperty = new Property( false, {
+      tandem: tandem.createTandem( 'userControlledProperty' ),
+      phetioValueType: TBoolean
+    } );
+
+    // @public {Property.<number>} vertical velocity of mass
+    this.verticalVelocityProperty = new Property( 0, {
+      tandem: tandem.createTandem( 'verticalVelocityProperty' ),
+      phetioValueType: TNumber( {
+        units: 'meters',
+        range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 )
+      } )
+    } );
+
+    // @public {Property.<Spring>} {Spring|null} is the mass attached to a Spring?
+    this.springProperty = new Property( null, {
+      // tandem: tandem.createTandem( 'positionProperty' ),
+      // phetioValueType: Spring
+    } );
 
     // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
     Property.preventGetSet( this, 'position' );
