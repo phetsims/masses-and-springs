@@ -32,21 +32,24 @@ define( function( require ) {
    *
    * @param {Property.<string>} selectedConstant determines which value to hold constant, values are 'spring-constant' and 'spring-thickness'
    * @param {string} title: string used to title the panel
+   * @param {tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function ConstantsControlPanel( selectedConstant, title, options ) {
+  function ConstantsControlPanel( selectedConstant, title, tandem, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
       yMargin: 5,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      visible: false
+      visible: false,
+      tandem: tandem
     }, options );
 
     var constantsSelectionButtonOptions = {
       font: FONT,
-      maxWidth: MAX_TEXT_WIDTH
+      maxWidth: MAX_TEXT_WIDTH,
+      tandem: tandem
     };
 
     // TODO: Add logic for setting values for each aqua button.
@@ -55,12 +58,14 @@ define( function( require ) {
     var constantsSelectionButtonRadius = 6;
     var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
     var thicknessRadioBox = new AquaRadioButton( selectedConstant, 'spring-thickness', thicknessText, {
-      radius: constantsSelectionButtonRadius
+      radius: constantsSelectionButtonRadius,
+      tandem: tandem
     } );
 
     var constantText = new Text( StringUtils.format( springConstantString, '' ), constantsSelectionButtonOptions );
     var springConstantRadioBox = new AquaRadioButton( selectedConstant, 'spring-constant', constantText, {
-      radius: constantsSelectionButtonRadius
+      radius: constantsSelectionButtonRadius,
+      tandem: tandem
     } );
 
     // @private {read-only} spacing used for radio buttons
@@ -69,7 +74,7 @@ define( function( require ) {
       align: 'left',
       spacing: radioButtonSpacing,
       children: [
-        new Text( title, { font: TITLE_FONT } ),
+        new Text( title, { font: TITLE_FONT, tandem: tandem } ),
         springConstantRadioBox,
         thicknessRadioBox
       ]

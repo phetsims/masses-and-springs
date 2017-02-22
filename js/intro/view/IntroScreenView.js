@@ -69,6 +69,7 @@ define( function( require ) {
     this.constantsControlPanel = new ConstantsControlPanel(
       model.selectedConstantProperty,
       constantString,
+      tandem,
       {
         minWidth: this.firstSpringConstantControlPanel.maxWidth,
         left: this.firstSpringConstantControlPanel.left,
