@@ -17,9 +17,9 @@ define( function( require ) {
    * @param {MassesAndSpringsModel} model
    * @constructor
    */
-  function LabScreenView( model ) {
+  function LabScreenView( model, tandem ) {
     // Calls common two spring view
-    TwoSpringView.call( this, model );
+    TwoSpringView.call( this, model, tandem );
 
     // Unique attributes of screen added here...
   }
