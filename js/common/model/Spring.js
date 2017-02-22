@@ -20,7 +20,7 @@ define( function( require ) {
   // phet-io modules
   var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
-  var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
+  // var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
@@ -98,7 +98,7 @@ define( function( require ) {
       // phetioValueType: Mass
     } );
 
-    // @public (read-only) - distance from natural resting position to equilibrium position (units: m) 
+    // @public (read-only) - distance from natural resting position to equilibrium position (units: m)
     this.springExtension = 0;
 
     // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
