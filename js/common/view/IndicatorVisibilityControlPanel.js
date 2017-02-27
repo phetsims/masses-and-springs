@@ -1,9 +1,9 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * @author Denzell Barnett
+ * Panel that manages options for visibility for reference lines.
  *
- * Panel that gives manages options for visible tools.
+ * @author Denzell Barnett
  */
 define( function( require ) {
   'use strict';
@@ -12,6 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -26,6 +27,9 @@ define( function( require ) {
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
 
+  // constants
+  var LINE_LENGTH = 25;
+
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Object} options
@@ -34,20 +38,41 @@ define( function( require ) {
   function IndicatorVisibilityControlPanel( model, options ) {
     Node.call( this );
 
-    // TODO: Decouple the checkBoxGroup
+    // Lines added for reference in panel
+    var greenLine = new Line( 0, 0, LINE_LENGTH, 0, {
+      stroke: 'rgb(93, 191, 142)',
+      lineDash: [ 6, 2.5 ],
+      lineWidth: 2.0,
+      cursor: 'pointer'
+    } );
+
+    var blueLine = new Line( 0, 0, LINE_LENGTH, 0, {
+      stroke: 'rgb(65,66,232)',
+      lineDash: [ 6, 2.5 ],
+      lineWidth: 2.0,
+      cursor: 'pointer'
+    } );
+
+    var redLine = new Line( 0, 0, LINE_LENGTH, 0, {
+      stroke: 'red',
+      lineDash: [ 6, 2.5 ],
+      lineWidth: 2.0,
+      cursor: 'pointer'
+    } );
+    
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
-        content: new Text( naturalLengthString, MassesAndSpringsConstants.FONT ),
+        content: new HBox( { children: [ new Text( naturalLengthString, MassesAndSpringsConstants.FONT ), new HStrut( 31 ), blueLine ] } ),
         property: model.naturalLengthVisibleProperty,
         label: naturalLengthString
       },
       {
-        content: new Text( equilibriumPositionString, MassesAndSpringsConstants.FONT ),
+        content: new HBox( { children: [ new Text( equilibriumPositionString, MassesAndSpringsConstants.FONT ), new HStrut( 10 ), greenLine ] } ),
         property: model.equilibriumPositionVisibleProperty,
         label: equilibriumPositionString
       },
       {
-        content: new Text( movableLineString, MassesAndSpringsConstants.FONT ),
+        content: new HBox( { children: [ new Text( movableLineString, MassesAndSpringsConstants.FONT ), new HStrut( 38 ), redLine ] } ),
         property: model.movableLineVisibleProperty,
         label: movableLineString
       }
