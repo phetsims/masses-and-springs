@@ -1,10 +1,11 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
+ * Responsible for the attributes and drag handlers associated with the timer node.
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
  *
- * Node responsible for Timer.
  */
 define( function( require ) {
   'use strict';
@@ -18,7 +19,6 @@ define( function( require ) {
   var Timer = require( 'SCENERY_PHET/Timer' );
 
   /**
-   *
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition
    * @param {number} timerSecondsProperty

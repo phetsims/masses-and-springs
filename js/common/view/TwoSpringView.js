@@ -254,28 +254,34 @@ define( function( require ) {
       }
     );
 
-    // TODO: Add respective layers to to make scene graph more accessible and uniform
     // Adding all of the nodes to the scene graph
     this.addChild( this.firstOscillatingSpringNode );
     this.addChild( this.secondOscillatingSpringNode );
     this.addChild( this.springHangerNode );
-    //Reference lines from indicator visibility box
+
+    // Adding Panels to scene graph
     this.addChild( this.firstSpringConstantControlPanel );
     this.addChild( this.secondSpringConstantControlPanel );
     this.addChild( indicatorVisibilityControlPanel );
     this.addChild( this.gravityControlPanel );
     this.addChild( this.toolboxPanel );
+
+    // Adding Buttons to scene graph
     this.addChild( resetAllButton );
     this.addChild( MASPlayPauseStepConstrol );
     this.addChild( speedControl );
     this.addChild( firstSpringStopperButtonNode );
-    this.addChild( secondSpringStopperButtonNode );
+    this.addChild( secondSpringStopperButtonNode )
+    ;
+    //Reference lines from indicator visibility box
     this.addChild( this.firstSpringEquilibriumLine );
     this.addChild( this.secondSpringEquilibriumLine );
     this.addChild( this.firstNaturalLengthLine );
     this.addChild( this.secondNaturalLengthLine );
     this.addChild( this.movableLine );
     this.addChild( this.massLayer );
+
+    // Adding Nodes in tool box
     this.addChild( timerNode );
     this.addChild( rulerNode );
   }

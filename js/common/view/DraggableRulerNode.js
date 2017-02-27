@@ -1,9 +1,10 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * @author Matt Pennington
+ * Responsible for the attributes and drag handlers associated with the ruler node.
  *
- * Node responsible for Ruler.
+ * @author Denzell Barnett
+ * @author Matt Pennington
  */
 define( function( require ) {
   'use strict';
@@ -35,8 +36,8 @@ define( function( require ) {
     this.toolbox = null;
 
     // define ruler params in pixels
-    this.rulerWidth = 397; // 1 meter
-    this.rulerLength = .1 * this.rulerWidth;
+    var rulerWidth = 397; // 1 meter
+    var rulerLength = .1 * rulerWidth; //
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
       majorTickLabels.push( '' );
@@ -45,9 +46,9 @@ define( function( require ) {
     }
     majorTickLabels.push( '' );
     majorTickLabels.push( '' );
-    var majorTickWidth = this.rulerWidth / ( majorTickLabels.length - 1 );
+    var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
 
-    this.addChild( new RulerNode( this.rulerWidth, this.rulerLength, majorTickWidth, majorTickLabels, cmString, {
+    this.addChild( new RulerNode( rulerWidth, rulerLength, majorTickWidth, majorTickLabels, cmString, {
       insetsWidth: 5,
       minorTicksPerMajorTick: 4,
       unitsMajorTickIndex: 19,

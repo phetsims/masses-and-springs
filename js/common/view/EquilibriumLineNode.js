@@ -1,9 +1,10 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
+ * Responsible for the attributes associated with the equilibrium line node.
+ *
  * @author Denzell Barnett
  *
- * Node for the equilibrium line.
  */
 
 define( function( require ) {

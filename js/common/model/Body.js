@@ -1,8 +1,9 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
  * Responsible for the attributes associated with each planet.
- * 
+ *
+ * @author Denzell Barnett
  * @author Matt Pennington
  */
 define( function( require ) {

@@ -1,10 +1,11 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
+ * Node for the gravity control panel and combo box for planet gravity options.
+ * 
  * @author Matt Pennington
  * @author Denzell Barnett
  *
- * Node for the gravity control panel and combo box for planet gravity options.
  */
 define( function( require ) {
   'use strict';
@@ -64,16 +65,20 @@ define( function( require ) {
         value: body.title
       } );
     } );
+    // @public {Property.<number>}
+    this.gravityProperty = gravityProperty;
 
-    this.gravityProperty = gravityProperty; // {Property.<number>}
-    var previousGravityProperty = new Property( Body.EARTH.gravity ); // {Property.<number>}
+    // {Property.<number>}
+    var previousGravityProperty = new Property( Body.EARTH.gravity ); 
 
     // @private {Property.<string>}
     this.bodyTitleProperty = new Property( Body.EARTH.title, {
       tandem: tandem.createTandem( 'bodyTitleProperty' ),
       phetioValueType: TString
     } );
-    var previousBodyTitleProperty = new Property( Body.EARTH.title ); // {Property.<string>}
+
+    // {Property.<string>}
+    var previousBodyTitleProperty = new Property( Body.EARTH.title );
 
     var gravityComboBox = new ComboBox( bodyListItems, self.bodyTitleProperty, listNodeParent, {
       listPosition: 'below',

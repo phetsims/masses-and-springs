@@ -72,13 +72,6 @@ define( function( require ) {
       phetioValueType: TString
     } );
 
-    // TODO: May not need to be a Property(). Maybe a var instead?
-    // @public {Property.<number>} initial length of adjustable spring on second scene
-    this.initialAdjustableSpringNaturalLengthProperty = new Property( DEFAULT_SPRING_LENGTH / 2, {
-      tandem: tandem.createTandem( 'initialAdjustableSpringNaturalLengthProperty' ),
-      phetioValueType: TNumber( { units: 'meters' } )
-    } );
-
     // @public {Property.<boolean>} determines visibility of ruler node
     this.rulerVisibleProperty = new Property( false, {
       tandem: tandem.createTandem( 'rulerVisibleProperty' ),
@@ -166,7 +159,9 @@ define( function( require ) {
         self.springs[ 0 ].naturalRestingLengthProperty.set( DEFAULT_SPRING_LENGTH );
       }
       else if ( mode === 'adjustable-length' ) {
-        self.springs[ 0 ].naturalRestingLengthProperty.set( self.initialAdjustableSpringNaturalLengthProperty.get() );
+        // @private {read-only} initial length of adjustable spring on second scene
+        var initialAdjustableSpringNaturalLengthProperty = DEFAULT_SPRING_LENGTH / 2;
+        self.springs[ 0 ].naturalRestingLengthProperty.set( initialAdjustableSpringNaturalLengthProperty );
       }
     } );
 
@@ -221,7 +216,6 @@ define( function( require ) {
       this.rulerVisibleProperty.reset();
       this.selectedConstantProperty.reset();
       this.springLengthModeProperty.reset();
-      this.initialAdjustableSpringNaturalLengthProperty.reset();
       this.timerVisibleProperty.reset();
       this.timerSecondProperty.reset();
       this.timerRunningProperty.reset();
