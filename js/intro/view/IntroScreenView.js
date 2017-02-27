@@ -61,8 +61,8 @@ define( function( require ) {
      -Thickness = constant
      As length increases, spring constant decreases  (and vice versa)
      */
-    this.mapRestingLengthToSpringConstant = new LinearFunction( .1, .5, 7, 1 );
-    this.mapRestingLengthToThickness = new LinearFunction( .1, .5, 15, 5 );
+    this.mapRestingLengthToSpringConstant = new LinearFunction( .1, .5, 1, 7 );
+    this.mapRestingLengthToThickness = new LinearFunction( .1, .5, 5, 15 );
     this.mapRestingLengthToThickness2 = new LinearFunction( .1, .5, self.firstOscillatingSpringNode.lineWidthProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() );
 
     // @private panel that keeps thickness/spring constant at constant value
@@ -88,7 +88,7 @@ define( function( require ) {
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
 
       // TODO: Remove these resets to preserve state.
-      self.firstOscillatingSpringNode.lineWidthProperty.reset();
+      self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
       model.springs[ 0 ].springConstantProperty.reset();
       model.springs[ 1 ].reset();
       self.initialLength = model.springs[ 0 ].naturalRestingLengthProperty.get();
@@ -104,16 +104,19 @@ define( function( require ) {
             self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
           }
           else if ( model.selectedConstantProperty.get() === null ) {
-            self.firstOscillatingSpringNode.lineWidthProperty.reset();
+            self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
+            // debugger;
             model.springs[ 0 ].springConstantProperty.reset();
             model.springs[ 1 ].reset();
           }
         }
       } );
+      console.log( self.firstOscillatingSpringNode.lineWidthProperty.get() );
+      console.log( self.secondOscillatingSpringNode.lineWidthProperty.get() );
 
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
-        self.firstOscillatingSpringNode.lineWidthProperty.reset();
+        self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
         model.springs[ 0 ].reset();
         model.springs[ 1 ].reset();
       }
