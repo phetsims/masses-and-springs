@@ -12,7 +12,9 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LinearFunction = require( 'DOT/LinearFunction' );
   var ParametricSpringNode = require( 'SCENERY_PHET/ParametricSpringNode' );
+  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -43,6 +45,14 @@ define( function( require ) {
     this.spring = spring;
     this.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );
     this.mvt = mvt;
+
+    spring.naturalRestingLengthProperty.link( function() {
+      var mapNumberOfLoops = new LinearFunction( .1, .5, 1, 12 );
+      self.loopsProperty.set( Util.roundSymmetric( mapNumberOfLoops( spring.naturalRestingLengthProperty.get() ) ) );
+      console.log( 'value: ' + Util.roundSymmetric( mapNumberOfLoops( spring.naturalRestingLengthProperty.get() ) ) );
+      self.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - spring.lengthProperty.get() ) );
+      console.log( 'length: ' + spring.lengthProperty.get() );
+    } );
 
     spring.lengthProperty.link( function( length ) {
       // ParametricSpringNode calculations

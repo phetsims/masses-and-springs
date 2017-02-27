@@ -111,8 +111,6 @@ define( function( require ) {
           }
         }
       } );
-      console.log( self.firstOscillatingSpringNode.lineWidthProperty.get() );
-      console.log( self.secondOscillatingSpringNode.lineWidthProperty.get() );
 
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
