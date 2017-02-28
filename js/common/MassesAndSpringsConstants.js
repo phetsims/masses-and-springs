@@ -12,7 +12,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
-
   var MassesAndSpringsConstants = {
     //TODO: Insert constants here
     PANEL_VERTICAL_SPACING: 10,
@@ -20,7 +19,8 @@ define( function( require ) {
     LABEL_FONT: new PhetFont( 10 ),
     TITLE_FONT: new PhetFont( { size: 12, weight: 'bold' } ),
     PANEL_CORNER_RADIUS: 7,
-    MAX_TEXT_WIDTH: 80
+    MAX_TEXT_WIDTH: 80,
+    DEFAULT_SPRING_LENGTH: 0.5
   };
 
   massesAndSprings.register( 'MassesAndSpringsConstants', MassesAndSpringsConstants );

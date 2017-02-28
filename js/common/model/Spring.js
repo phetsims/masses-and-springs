@@ -74,7 +74,6 @@ define( function( require ) {
       } )
     } );
 
-    // TODO: Correct this TType
     // @public {Property.<Vector2>} position of the spring
     this.positionProperty = new Property( position, {
       tandem: tandem.createTandem( 'positionProperty' ),
@@ -105,16 +104,6 @@ define( function( require ) {
     // @public (read-only) - distance from natural resting position to equilibrium position (units: m)
     this.springExtension = 0;
 
-    // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
-    Property.preventGetSet( this, 'gravity' );
-    Property.preventGetSet( this, 'displacement' );
-    Property.preventGetSet( this, 'springConstant' );
-    Property.preventGetSet( this, 'dampingCoefficient' );
-    Property.preventGetSet( this, 'position' );
-    Property.preventGetSet( this, 'naturalRestingLength' );
-    Property.preventGetSet( this, 'animating' );
-    Property.preventGetSet( this, 'mass' );
-
     // validate and save options
     assert && assert( naturalRestingLength > 0, 'naturalRestingLength must be > 0 : ' + naturalRestingLength );
     this.naturalRestingLengthProperty.set( naturalRestingLength ); // @public read-only
@@ -124,7 +113,6 @@ define( function( require ) {
     this.springConstantRange = springConstantRange; // @public read-only
 
     //------------------------------------------------
-    // TODO: Correct Tandems for Derived Properties
     // Derived properties
     // @public length of the spring, units = m
     this.lengthProperty = new DerivedProperty( [ this.naturalRestingLengthProperty, this.displacementProperty ],
@@ -169,6 +157,7 @@ define( function( require ) {
         } )
       }
     );
+    //------------------------------------------------
 
     //  Restart animation if it was squelched
     this.gravityProperty.link( function() {

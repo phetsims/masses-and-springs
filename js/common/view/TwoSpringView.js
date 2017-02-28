@@ -214,7 +214,7 @@ define( function( require ) {
     } );
 
     // Play/Pause and Step Forward Button Control
-    var MASPlayPauseStepConstrol = new MASPlayPauseStepControl( model );
+    var MASPlayPauseStepControlNode = new MASPlayPauseStepControl( model );
 
     // Sim speed controls
     var speedSelectionButtonOptions = {
@@ -268,7 +268,7 @@ define( function( require ) {
 
     // Adding Buttons to scene graph
     this.addChild( resetAllButton );
-    this.addChild( MASPlayPauseStepConstrol );
+    this.addChild( MASPlayPauseStepControlNode );
     this.addChild( speedControl );
     this.addChild( firstSpringStopperButtonNode );
     this.addChild( secondSpringStopperButtonNode )

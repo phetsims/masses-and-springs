@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
@@ -21,7 +22,6 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
-  var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
 
@@ -47,13 +47,15 @@ define( function( require ) {
 
     // @public {Property.<number>} c - coefficient of friction
     // TODO: Once range is decided for frictionProperty, pass in as range property for TNumber()
-    this.frictionProperty = new Property( 0.2, {
+    this.frictionProperty = new NumberProperty( 0.2, {
+      range: null,
       tandem: tandem.createTandem( 'frictionProperty' ),
       phetioValueType: TNumber()
     } );
 
     // @public {Property.<number>} a - gravitational acceleration (positive)
-    this.gravityProperty = new Property( Body.EARTH.gravity, {
+    this.gravityProperty = new NumberProperty( Body.EARTH.gravity, {
+      range: new RangeWithValue( 0, 30, Body.EARTH.gravity ),
       tandem: tandem.createTandem( 'gravityProperty' ),
       phetioValueType: TNumber( {
         units: 'meters/second/second',
@@ -83,8 +85,8 @@ define( function( require ) {
     // @public {Property.<string || null>} valid values are 'spring-constant', 'spring-thickness', and null
     this.selectedConstantProperty = new Property( null, {
       tandem: tandem.createTandem( 'selectedConstantProperty' ),
-      phetioValueType: TString
-      // TODO: valid-values
+      phetioValueType: TString,
+      validValues: [ 'spring-constant', 'spring-thickness', 'null' ]
     } );
 
     // @public {Property.<boolean>} determines visibility of timer node
@@ -93,7 +95,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
-    this.timerSecondProperty = new Property( 0, {
+    this.timerSecondProperty = new NumberProperty( 0, {
+      range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
       tandem: tandem.createTandem( 'timerSecondProperty' ),
       phetioValueType: TNumber( { units: 'seconds', range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ) } )
     } );
@@ -120,35 +123,12 @@ define( function( require ) {
 
     //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
 
-    // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
-    Property.preventGetSet( this, 'playing' );
-    Property.preventGetSet( this, 'friction' );
-    Property.preventGetSet( this, 'gravity' );
-    Property.preventGetSet( this, 'rulerVisible' );
-    Property.preventGetSet( this, 'selectedConstant' );
-    Property.preventGetSet( this, 'springLengthView' );
-    Property.preventGetSet( this, 'initialAdjustableSpringNaturalLength' );
-    Property.preventGetSet( this, 'timerVisible' );
-    Property.preventGetSet( this, 'timerSecond' );
-    Property.preventGetSet( this, 'timerRunning' );
-    Property.preventGetSet( this, 'naturalLengthVisible' );
-    Property.preventGetSet( this, 'movableLineVisible' );
-    Property.preventGetSet( this, 'equilibriumPositionVisible' );
-
-    // @public {read-only} Y position of floor in m
+    // @public {read-only} Y position of floor in m. The floor is at the bottom bounds of the screen.
     this.floorY = 0;
 
     // @public {read-only} Y position of ceiling in m.  The ceiling is at the top of the SpringHangerNode,
     // just below the top of the dev view bounds
     this.ceilingY = 1.23;
-
-    // @public {read-only} Springs created to be used in the icons for the scene selection tabs
-    // TODO:: move this array into IntroScreenView
-    this.springsIcon = [
-      new Spring( new Vector2( .65, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'firstIconSpring' ) ),
-      new Spring( new Vector2( .85, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'secondIconSpring' ) ),
-      new Spring( new Vector2( .65, this.ceilingY + .17 ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'thirdIconSpring' ) )
-    ];
 
     // @public (read-only) model of springs used throughout the sim
     // TODO:: See if other places need (read-only) too

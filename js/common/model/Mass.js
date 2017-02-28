@@ -12,6 +12,7 @@ define( function( require ) {
 
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -21,7 +22,6 @@ define( function( require ) {
   var DENSITY = 80; // density of ???
 
   // phet-io modules
-  var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
   var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
   var TSpring = require( 'ifphetio!PHET_IO/simulations/masses-and-springs/TSpring' );
@@ -31,6 +31,7 @@ define( function( require ) {
    * @param {Vector2} initialPosition: initial coordinates of the mass
    * @param {boolean} isLabeled: determines if the mass is labeled in the view
    * @param {string} color: color of shown mass
+   * @param {Tandem} tandem
    * @constructor
    */
   function Mass( massValue, initialPosition, isLabeled, color, tandem ) {
@@ -49,9 +50,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<boolean>} indicates whether this mass is currently user controlled
-    this.userControlledProperty = new Property( false, {
-      tandem: tandem.createTandem( 'userControlledProperty' ),
-      phetioValueType: TBoolean
+    this.userControlledProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'userControlledProperty' )
     } );
 
     // @public {Property.<number>} vertical velocity of mass
@@ -68,13 +68,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TSpring
     } );
-
-    // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
-    Property.preventGetSet( this, 'position' );
-    Property.preventGetSet( this, 'userControlled' );
-    Property.preventGetSet( this, 'verticalVelocity' );
-    Property.preventGetSet( this, 'spring' );
-
 
     // @public {read-only} Non property model attributes
     this.isLabeled = isLabeled;
@@ -136,7 +129,6 @@ define( function( require ) {
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
     }
-
   } );
 
 } );

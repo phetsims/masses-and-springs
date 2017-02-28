@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/ConstantsControlPanel' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
@@ -20,10 +21,12 @@ define( function( require ) {
   var LinearFunction = require( 'DOT/LinearFunction' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Property = require( 'AXON/Property' );
+  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/SpringLengthControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
-
+  var Vector2 = require( 'DOT/Vector2' );
+  
   // constants
   var IMAGE_SCALE = .3;
 
@@ -112,15 +115,24 @@ define( function( require ) {
       }
     } );
 
-    // @private {read-only} Creation of springs for use in scene switching icons
+    // @public {read-only} Springs created to be used in the icons for the scene selection tabs
+    this.springsIcon = [
+      new Spring( new Vector2( .65, model.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'firstIconSpring' ) ),
+      new Spring( new Vector2( .85, model.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'secondIconSpring' ) ),
+      new Spring( new Vector2( .65, model.ceilingY + .17 ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'thirdIconSpring' ) )
+    ];
+
+    // @private {read-only} Creation of spring for use in scene switching icons
     var firstSpringIcon = new OscillatingSpringNode( model.springsIcon[ 0 ], this.mvt );
     firstSpringIcon.loopsProperty.set( 10 );
     firstSpringIcon.lineWidthProperty.set( 3 );
 
+    // @private {read-only} Creation of spring for use in scene switching icons
     var secondSpringIcon = new OscillatingSpringNode( model.springsIcon[ 1 ], this.mvt );
     secondSpringIcon.loopsProperty.set( 10 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
+    // @private {read-only} Creation of spring for use in scene switching icons
     var thirdSpringIcon = new OscillatingSpringNode( model.springsIcon[ 2 ], this.mvt );
     thirdSpringIcon.loopsProperty.set( 5 );
     thirdSpringIcon.lineWidthProperty.set( 3 );
