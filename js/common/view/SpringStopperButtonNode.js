@@ -1,9 +1,9 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
- * @author Denzell Barnett
- *
  * Spring stopper button that stops a specific spring from oscillating.
+ *
+ * @author Denzell Barnett
  */
 define( function( require ) {
   'use strict';

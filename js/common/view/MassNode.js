@@ -1,6 +1,8 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
+ * Node responsible for representing the mass object.
+ * 
  * @author Matt Pennington
  * @author Denzell Barnett
  */
@@ -14,13 +16,14 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
-  var MASS_LABEL_FONT = new PhetFont( { size: 12, weight: 'bold' } );
+
 
   /**
    * @param {Mass} mass -  model object
@@ -52,7 +55,7 @@ define( function( require ) {
     this.addChild( rect );
     if ( mass.isLabeled ) {
       var label = new Text( StringUtils.format( massValueString, mass.mass * 1000 ), {
-        font: MASS_LABEL_FONT,
+        font: MassesAndSpringsConstants.TITLE_FONT,
         fill: 'black',
         centerY: viewBounds.centerY,
         centerX: 0,
@@ -60,7 +63,6 @@ define( function( require ) {
         maxWidth: 50
       } );
 
-      // TODO: factor out color???
       var labelBackground = Rectangle.bounds( label.bounds, { fill: '#D3D3D3' } );
       this.addChild( labelBackground );
       this.addChild( label );

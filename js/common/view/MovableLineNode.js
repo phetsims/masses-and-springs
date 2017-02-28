@@ -1,10 +1,10 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
+ * Node for the reference line and laser pointer node.
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
- *
- * Node for the reference line and laser pointer node.
  */
 
 define( function( require ) {

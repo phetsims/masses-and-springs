@@ -1,9 +1,9 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * @author Denzell Barnett
- *
  * Node for the Natural line.
+ *
+ * @author Denzell Barnett
  */
 
 define( function( require ) {

@@ -1,10 +1,10 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
+ * Object that creates the grey bar that the springs hang from and their respective numerical label.
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
- *
- * Object that creates the grey bar that the springs hang from and their respective numerical label.
  */
 define( function( require ) {
   'use strict';
