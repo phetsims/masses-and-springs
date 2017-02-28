@@ -1,10 +1,10 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2016-2017, University of Colorado Boulder
 
 /**
+ * Node for handling the representation of an oscillating spring.
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
- *
- * Node for handling the representation of an oscillating spring.
  */
 define( function( require ) {
   'use strict';
@@ -38,7 +38,7 @@ define( function( require ) {
       deltaLineWidth: 1.5, // increase in line width per 1 unit of spring constant increase
       leftEndLength: -15, // {number} length of the horizontal line added to the left end of the coil
       rightEndLength: -15, // {number} length of the horizontal line added to the right end of the coil
-      rotation: -3 * Math.PI / 2  // {number} angle in radians of rotation of spring
+      rotation: Math.PI / 2 // {number} angle in radians of rotation of spring
     }, options );
 
     ParametricSpringNode.call( this, options );
@@ -46,23 +46,26 @@ define( function( require ) {
     this.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );
     this.mvt = mvt;
 
-    spring.naturalRestingLengthProperty.link( function() {
-      var mapNumberOfLoops = new LinearFunction( .1, .5, 1, 12 );
-      self.loopsProperty.set( Util.roundSymmetric( mapNumberOfLoops( spring.naturalRestingLengthProperty.get() ) ) );
-      console.log( 'value: ' + Util.roundSymmetric( mapNumberOfLoops( spring.naturalRestingLengthProperty.get() ) ) );
-      self.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - spring.lengthProperty.get() ) );
-      console.log( 'length: ' + spring.lengthProperty.get() );
-    } );
-
-    spring.lengthProperty.link( function( length ) {
+    function updateViewLength() {
       // ParametricSpringNode calculations
-      var coilLength = ( mvt.modelToViewDeltaY( length ) - ( options.leftEndLength + options.rightEndLength ) );
+      var coilLength = ( mvt.modelToViewDeltaY( spring.lengthProperty.get() ) - ( options.leftEndLength + options.rightEndLength ) );
       var xScale = coilLength / ( self.loopsProperty.get() * self.radiusProperty.get() );
 
       //The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
+      //Spring is rotated to be rotated so XScale relates to Y-direction in view
       //TODO There is possibly a better solution by setting the phase and deltaPhase.
       self.xScaleProperty.set( xScale );
-      self.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );
+      self.top = mvt.modelToViewY( spring.positionProperty.get().y );
+    }
+
+    spring.naturalRestingLengthProperty.link( function() {
+      var mapNumberOfLoops = new LinearFunction( .1, .5, 1, 12 );
+      self.loopsProperty.set( Util.roundSymmetric( mapNumberOfLoops( spring.naturalRestingLengthProperty.get() ) ) );
+      updateViewLength();
+    } );
+
+    spring.lengthProperty.link( function() {
+      updateViewLength();
     } );
 
     //ParametricSpringNode width update
