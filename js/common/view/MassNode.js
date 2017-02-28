@@ -2,7 +2,7 @@
 
 /**
  * Node responsible for representing the mass object.
- * 
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
  */
@@ -21,7 +21,6 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
 
