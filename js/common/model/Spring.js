@@ -12,6 +12,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
 
   // modules
   var DerivedProperty = require( 'AXON/DerivedProperty' );
@@ -22,7 +23,8 @@ define( function( require ) {
   // phet-io modules
   var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
-  // var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
+  var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
+  var TMass = require( 'ifphetio!PHET_IO/simulations/masses-and-springs/TMass' );
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
@@ -75,8 +77,8 @@ define( function( require ) {
     // TODO: Correct this TType
     // @public {Property.<Vector2>} position of the spring
     this.positionProperty = new Property( position, {
-      // tandem: tandem.createTandem( 'positionProperty' ),
-      // phetioValueType: null
+      tandem: tandem.createTandem( 'positionProperty' ),
+      phetioValueType: TVector2
     } );
 
     // @public {Proeprty.<number>} length of the spring without mass attached
@@ -96,8 +98,8 @@ define( function( require ) {
 
     // @public {Property.<Mass>}
     this.massProperty = new Property( null, {
-      // tandem: tandem.createTandem( 'massProperty' ),
-      // phetioValueType: Mass
+      tandem: tandem.createTandem( 'massProperty' ),
+      phetioValueType: TMass
     } );
 
     // @public (read-only) - distance from natural resting position to equilibrium position (units: m)
@@ -129,7 +131,13 @@ define( function( require ) {
       function( naturalRestingLength, displacement ) {
         return naturalRestingLength - displacement;
       }
-      // ,{tandem:tandem.createTandem('lengthProperty')}
+      , {
+        tandem: tandem.createTandem( 'lengthProperty' ),
+        phetioValueType: TNumber( {
+          units: 'meters',
+          range: new Range( 0, Number.POSITIVE_INFINITY )
+        } )
+      }
     );
 
     // @public y position of the bottom end of the spring, units = m
@@ -137,7 +145,13 @@ define( function( require ) {
       function( position, length ) {
         return position.y - length;
       }
-      // ,{tandem:tandem.createTandem('bottomProperty')}
+      , {
+        tandem: tandem.createTandem( 'bottomProperty' ),
+        phetioValueType: TNumber( {
+          units: 'meters',
+          range: new Range( 0, Number.POSITIVE_INFINITY )
+        } )
+      }
     );
 
     // @public y position of the equilibrium position
@@ -147,7 +161,13 @@ define( function( require ) {
         self.springExtension = mass ? (mass.mass * gravity) / springConstant : 0;
         return self.positionProperty.get().y - self.naturalRestingLengthProperty.get() - self.springExtension;
       }
-      // ,{tandem:tandem.createTandem('equilibriumYPositionProperty')}
+      , {
+        tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
+        phetioValueType: TNumber( {
+          units: 'meters',
+          range: new Range( 0, Number.POSITIVE_INFINITY )
+        } )
+      }
     );
 
     //  Restart animation if it was squelched

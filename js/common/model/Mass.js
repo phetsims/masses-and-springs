@@ -23,6 +23,8 @@ define( function( require ) {
   // phet-io modules
   var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
+  var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
+  var TSpring = require( 'ifphetio!PHET_IO/simulations/masses-and-springs/TSpring' );
 
   /**
    * @param {number} massValue:  mass in kg
@@ -42,8 +44,8 @@ define( function( require ) {
     // @public Main model properties
     // {Property.<Vector2>} the position of a mass is the center top of the model object.
     this.positionProperty = new Property( initialPosition, {
-      // tandem: tandem.createTandem( 'positionProperty' ),
-      // phetioValueType: TVector2()
+      tandem: tandem.createTandem( 'positionProperty' ),
+      phetioValueType: TVector2
     } );
 
     // @public {Property.<boolean>} indicates whether this mass is currently user controlled
@@ -63,8 +65,8 @@ define( function( require ) {
 
     // @public {Property.<Spring>} {Spring|null} is the mass attached to a Spring?
     this.springProperty = new Property( null, {
-      // tandem: tandem.createTandem( 'positionProperty' ),
-      // phetioValueType: Spring
+      tandem: tandem.createTandem( 'positionProperty' ),
+      phetioValueType: TSpring
     } );
 
     // TODO: Remove these statements. They are relevant for moving away from PropertyCall (https://github.com/phetsims/masses-and-springs/issues/18)
@@ -115,16 +117,6 @@ define( function( require ) {
           this.positionProperty.set( new Vector2( this.positionProperty.get().x, newY ) );
         }
       }
-    },
-
-    /**
-     * @public
-     *
-     * @param {Spring} spring
-     */
-    attach: function( spring ) {
-      this.verticalVelocityProperty.set( 0 );
-      this.springProperty.set( spring );
     },
 
     /**

@@ -28,7 +28,8 @@ define( function( require ) {
 
     var options = {
       name: introString,
-      backgroundColorProperty: new Property( 'white' )
+      backgroundColorProperty: new Property( 'white' ),
+      tandem: tandem
     };
 
     Screen.call( this,
