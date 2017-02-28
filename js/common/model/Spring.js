@@ -260,6 +260,7 @@ define( function( require ) {
           // TODO:: improve readability of variables
 
           // Precompute expressions used more than twice
+          // TODO:: document what algorithm is being used here
           var km = k * m;
           var gm = g * m;
           var tDm = dt / m;

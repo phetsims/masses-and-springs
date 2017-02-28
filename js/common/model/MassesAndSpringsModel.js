@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
@@ -19,15 +20,16 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // constants
-  var GRABBING_DISTANCE = .1; // {number} horizontal distance from a mass where a spring will be snagged
-  var DROPPING_DISTANCE = .1; // {number} horizontal distance from a mass where a spring will be released
-  var DEFAULT_SPRING_LENGTH = .5; // {number} default length of spring on sim start up
-
   // phet-io modules
   var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
+
+  // constants
+  var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected to
+                               // a spring
+  var DROPPING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
+  var DEFAULT_SPRING_LENGTH = 0.5; // {number} default length in meters of spring on sim start up
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -39,14 +41,13 @@ define( function( require ) {
     var self = this;
 
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
-    this.playingProperty = new Property( true, {
-      tandem: tandem.createTandem( 'playingProperty' ),
-      phetioValueType: TBoolean
+    this.playingProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'playingProperty' )
     } );
 
     // @public {Property.<number>} c - coefficient of friction
     // TODO: Once range is decided for frictionProperty, pass in as range property for TNumber()
-    this.frictionProperty = new Property( .2, {
+    this.frictionProperty = new Property( 0.2, {
       tandem: tandem.createTandem( 'frictionProperty' ),
       phetioValueType: TNumber()
     } );
@@ -60,64 +61,61 @@ define( function( require ) {
       } )
     } );
 
-    // @public {Property.<string>} determines the speed at which the sim plays
+    // @public {Property.<string>} determines the speed at which the sim plays.
     this.simSpeedProperty = new Property( 'normal', {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
-      phetioValueType: TString
+      phetioValueType: TString,
+      validValues: [ 'slow', 'normal' ]
     } );
 
     // @public {Property.<string>} valid values are "same-length" and "adjustable-length"
     this.springLengthModeProperty = new Property( 'same-length', {
       tandem: tandem.createTandem( 'springLengthModeProperty' ),
-      phetioValueType: TString
+      phetioValueType: TString,
+      validValues: [ 'same-length', 'adjustable-length' ]
     } );
 
     // @public {Property.<boolean>} determines visibility of ruler node
-    this.rulerVisibleProperty = new Property( false, {
-      tandem: tandem.createTandem( 'rulerVisibleProperty' ),
-      phetioValueType: TBoolean
+    this.rulerVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'rulerVisibleProperty' )
     } );
 
     // @public {Property.<string || null>} valid values are 'spring-constant', 'spring-thickness', and null
     this.selectedConstantProperty = new Property( null, {
       tandem: tandem.createTandem( 'selectedConstantProperty' ),
       phetioValueType: TString
+      // TODO: valid-values
     } );
 
     // @public {Property.<boolean>} determines visibility of timer node
-    this.timerVisibleProperty = new Property( false, {
-      tandem: tandem.createTandem( 'timerVisibleProperty' ),
-      phetioValueType: TBoolean
+    this.timerVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'timerVisibleProperty' )
     } );
 
-    // @public {Property.<number>} value attributed to seconds in timer node
+    // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
     this.timerSecondProperty = new Property( 0, {
       tandem: tandem.createTandem( 'timerSecondProperty' ),
       phetioValueType: TNumber( { units: 'seconds', range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ) } )
     } );
 
     // @public {Property.<boolean>} determines whether timer is active or not
-    this.timerRunningProperty = new Property( false, {
-      tandem: tandem.createTandem( 'timerRunningPropertyProperty' ),
-      phetioValueType: TBoolean
+    this.timerRunningProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'timerRunningPropertyProperty' )
     } );
 
     // @public {Property.<boolean>} determines visibility of movable line node
-    this.movableLineVisibleProperty = new Property( true, {
-      tandem: tandem.createTandem( 'movableLineVisibleProperty' ),
-      phetioValueType: TBoolean
+    this.movableLineVisibleProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'movableLineVisibleProperty' )
     } );
 
     // @public {Property.<boolean>} determines visibility of equilibrium line node
-    this.equilibriumPositionVisibleProperty = new Property( true, {
-      tandem: tandem.createTandem( 'equilibriumPositionVisibleProperty' ),
-      phetioValueType: TBoolean
+    this.equilibriumPositionVisibleProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'equilibriumPositionVisibleProperty' )
     } );
 
     // @public {Property.<boolean>} determines visibility of natural length line node
-    this.naturalLengthVisibleProperty = new Property( false, {
-      tandem: tandem.createTandem( 'naturalLengthVisibleProperty' ),
-      phetioValueType: TBoolean
+    this.naturalLengthVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
     } );
 
     //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
@@ -137,17 +135,23 @@ define( function( require ) {
     Property.preventGetSet( this, 'movableLineVisible' );
     Property.preventGetSet( this, 'equilibriumPositionVisible' );
 
-    this.floorY = 0; // @public {read-only} Y position of floor in m
-    this.ceilingY = 1.23; // @public {read-only} Y position of ceiling in m
+    // @public {read-only} Y position of floor in m
+    this.floorY = 0;
+
+    // @public {read-only} Y position of ceiling in m.  The ceiling is at the top of the SpringHangerNode,
+    // just below the top of the dev view bounds
+    this.ceilingY = 1.23;
 
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
+    // TODO:: move this array into IntroScreenView
     this.springsIcon = [
       new Spring( new Vector2( .65, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'firstIconSpring' ) ),
       new Spring( new Vector2( .85, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'secondIconSpring' ) ),
       new Spring( new Vector2( .65, this.ceilingY + .17 ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'thirdIconSpring' ) )
     ];
 
-    // @public model of springs used throughout the sim
+    // @public (read-only) model of springs used throughout the sim
+    // TODO:: See if other places need (read-only) too
     this.springs = [
       new Spring( new Vector2( .65, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'leftSpring' ) ),
       new Spring( new Vector2( .95, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'rightSpring' ) )

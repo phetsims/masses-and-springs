@@ -2,7 +2,7 @@
 
 /**
  * Node for the gravity control panel and combo box for planet gravity options.
- * 
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
  *
@@ -69,9 +69,11 @@ define( function( require ) {
     this.gravityProperty = gravityProperty;
 
     // {Property.<number>}
-    var previousGravityProperty = new Property( Body.EARTH.gravity ); 
+    var previousGravityProperty = new Property( Body.EARTH.gravity );
 
     // @private {Property.<string>}
+    // TODO: the selected body should be in the model, not the control panel.  Probably in MassesAndSpringsModel.
+    // TODO: consider making this a Property.<Body> instead of of Propery.<string>
     this.bodyTitleProperty = new Property( Body.EARTH.title, {
       tandem: tandem.createTandem( 'bodyTitleProperty' ),
       phetioValueType: TString
