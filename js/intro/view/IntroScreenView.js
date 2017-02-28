@@ -80,9 +80,10 @@ define( function( require ) {
 
     // Link that is responsible for switching the scenes
     model.springLengthModeProperty.link( function( mode ) {
-
       // Toggle visibility of panels
       self.springLengthControlPanel.visible = (mode === 'adjustable-length');
+      model.stashScene1SpringParameters( model.springs[ 0 ], mode );
+
       self.constantsControlPanel.visible = self.springLengthControlPanel.visible;
       self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
@@ -93,15 +94,18 @@ define( function( require ) {
       model.springs[ 1 ].reset();
       self.initialLength = model.springs[ 0 ].naturalRestingLengthProperty.get();
       self.firstOscillatingSpringNode.lineWidthProperty.set( self.firstOscillatingSpringNode.lineWidthProperty.get() );
-
+      console.log( 'parameters = ' + model.sceneSpring1Properties );
       Property.multilink( [ model.selectedConstantProperty, model.springs[ 0 ].naturalRestingLengthProperty ], function() {
         {
+
           if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
             self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
           }
           else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
             model.springs[ 0 ].springConstantProperty.set( self.mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
             self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+
+
           }
         }
       } );
@@ -111,6 +115,7 @@ define( function( require ) {
         self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
         model.springs[ 0 ].reset();
         model.springs[ 1 ].reset();
+        model.applyScene1SpringParameters( model.springs[ 0 ] );
       }
     } );
 

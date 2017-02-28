@@ -36,10 +36,11 @@ define( function( require ) {
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
     // @public (read-only)
+    // {Number} mass of mass object
     this.mass = massValue;
 
     // @public Main model properties
-    // {Property.<Vector2>}  the position of a mass is the center top of the model object.
+    // {Property.<Vector2>} the position of a mass is the center top of the model object.
     this.positionProperty = new Property( initialPosition, {
       // tandem: tandem.createTandem( 'positionProperty' ),
       // phetioValueType: TVector2()

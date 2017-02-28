@@ -184,6 +184,8 @@ define( function( require ) {
     ];
     this.gravityRange = new RangeWithValue( 0, 30, 9.8 );
 
+    this.sceneSpring1Properties = [];
+
     this.gravityProperty.link( function( newGravity ) {
       assert && assert( newGravity >= 0, 'gravity must be 0 or positive : ' + newGravity );
       self.springs.forEach( function( spring ) {
@@ -259,6 +261,33 @@ define( function( require ) {
         //Update position
         mass.positionProperty.set( proposedPosition );
       }
+    },
+    stashScene1SpringParameters: function( spring, mode ) {
+      // this.sceneProperties = [];
+      // this.sceneProperties.push(this.frictionProperty.get());
+      // this.sceneProperties.push(this.gravityProperty.get());
+      // if (mode !== 'same-length')
+      {
+        this.sceneSpring1Properties.push( spring.displacementProperty.get() );
+        this.sceneSpring1Properties.push( spring.gravityProperty.get() );
+        this.sceneSpring1Properties.push( spring.dampingCoefficientProperty.get() );
+        this.sceneSpring1Properties.push( spring.positionProperty.get() );
+        this.sceneSpring1Properties.push( spring.naturalRestingLengthProperty.get() );
+        this.sceneSpring1Properties.push( spring.animatingProperty.get() );
+        this.sceneSpring1Properties.push( spring.massProperty.get() );
+        this.sceneSpring1Properties.push( spring.springConstantProperty.get() );
+      }
+    },
+    applyScene1SpringParameters: function( spring ) {
+      spring.displacementProperty.set( this.sceneSpring1Properties[ 0 ] );
+      spring.gravityProperty.set( this.sceneSpring1Properties[ 1 ] );
+      spring.dampingCoefficientProperty.set( this.sceneSpring1Properties[ 2 ] );
+      spring.positionProperty.set( this.sceneSpring1Properties[ 3 ] );
+      spring.naturalRestingLengthProperty.set( this.sceneSpring1Properties[ 4 ] );
+      spring.animatingProperty.set( this.sceneSpring1Properties[ 5 ] );
+      spring.massProperty.set( this.sceneSpring1Properties[ 6 ] );
+      spring.springConstantProperty.set( this.sceneSpring1Properties[ 7 ] );
+      this.sceneSpring1Properties = [];
     },
 
     /**
