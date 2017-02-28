@@ -103,12 +103,6 @@ define( function( require ) {
             model.springs[ 0 ].springConstantProperty.set( self.mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
             self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
           }
-          else if ( model.selectedConstantProperty.get() === null ) {
-            self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
-            // debugger;
-            model.springs[ 0 ].springConstantProperty.reset();
-            model.springs[ 1 ].reset();
-          }
         }
       } );
 
