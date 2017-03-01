@@ -123,17 +123,17 @@ define( function( require ) {
     ];
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var firstSpringIcon = new OscillatingSpringNode( model.springsIcon[ 0 ], this.mvt );
+    var firstSpringIcon = new OscillatingSpringNode( this.springsIcon[ 0 ], this.mvt );
     firstSpringIcon.loopsProperty.set( 10 );
     firstSpringIcon.lineWidthProperty.set( 3 );
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var secondSpringIcon = new OscillatingSpringNode( model.springsIcon[ 1 ], this.mvt );
+    var secondSpringIcon = new OscillatingSpringNode( this.springsIcon[ 1 ], this.mvt );
     secondSpringIcon.loopsProperty.set( 10 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var thirdSpringIcon = new OscillatingSpringNode( model.springsIcon[ 2 ], this.mvt );
+    var thirdSpringIcon = new OscillatingSpringNode( this.springsIcon[ 2 ], this.mvt );
     thirdSpringIcon.loopsProperty.set( 5 );
     thirdSpringIcon.lineWidthProperty.set( 3 );
 
