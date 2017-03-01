@@ -55,7 +55,7 @@ define( function( require ) {
       //Spring is rotated to be rotated so XScale relates to Y-direction in view
       //TODO There is possibly a better solution by setting the phase and deltaPhase.
       self.xScaleProperty.set( xScale );
-      self.translation = mvt.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - spring.lengthProperty.get() ) );
+      self.y = mvt.modelToViewY( spring.positionProperty.get().y - spring.lengthProperty.get() );
     }
 
     spring.naturalRestingLengthProperty.link( function() {
