@@ -53,7 +53,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} a - gravitational acceleration (positive)
-    this.gravityProperty = new NumberProperty( Body.EARTH.gravity, {
+    this.gravityProperty = new Property( Body.EARTH.gravity, {
       range: new RangeWithValue( 0, 30, Body.EARTH.gravity ),
       tandem: tandem.createTandem( 'gravityProperty' ),
       phetioValueType: TNumber( {

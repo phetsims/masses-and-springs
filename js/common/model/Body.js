@@ -26,10 +26,10 @@ define( function( require ) {
    * @constructor
    */
   function Body( title, gravity ) {
-    // set title
+    // @public {read-write} set title
     this.title = title;
 
-    // set gravity acceleration
+    // @public {read-write} set gravity acceleration
     this.gravity = gravity;
   }
 
