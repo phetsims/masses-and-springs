@@ -39,7 +39,7 @@ define( function( require ) {
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
     // @public (read-only)
-    // {Number} mass of mass object
+    // {Number} mass of mass object in kg
     this.mass = massValue;
 
     // @public Main model properties

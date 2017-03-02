@@ -26,9 +26,10 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
   var Vector2 = require( 'DOT/Vector2' );
-  
+
   // constants
   var IMAGE_SCALE = .3;
+  var DEFAULT_SPRING_LENGTH = 0.5; // {number} default length in meters of spring on sim start up
 
   // strings
   var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
@@ -57,16 +58,6 @@ define( function( require ) {
       } );
     this.addChild( this.springLengthControlPanel );
 
-    /** @private Functions used to determine the inverse relationship between the length and springConstant/thickness
-     Functions follow logic:
-     -SpringConstant = constant
-     As length increases, spring thickness decreases (and vice versa)
-     -Thickness = constant
-     As length increases, spring constant decreases  (and vice versa)
-     */
-    this.mapRestingLengthToSpringConstant = new LinearFunction( .1, .5, 1, 7 );
-    this.mapRestingLengthToThickness = new LinearFunction( .1, .5, 5, 15 );
-    this.mapRestingLengthToThickness2 = new LinearFunction( .1, .5, self.firstOscillatingSpringNode.lineWidthProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() );
 
     // @private panel that keeps thickness/spring constant at constant value
     this.constantsControlPanel = new ConstantsControlPanel(
@@ -81,38 +72,61 @@ define( function( require ) {
     );
     this.addChild( this.constantsControlPanel );
 
+    // initial parameters set for both scenes
+    // @private {read-write} array of parameters for scene 1
+    var scene1Parameters = model.stashSceneParameters();
+
+    // @private {read-write} array of parameters for scene 2
+    model.springs[ 0 ].naturalRestingLengthProperty.set( DEFAULT_SPRING_LENGTH / 2 );
+    var scene2Parameters = model.stashSceneParameters();
+
+    model.springs[ 0 ].naturalRestingLengthProperty.set( DEFAULT_SPRING_LENGTH );
+
     // Link that is responsible for switching the scenes
-    model.springLengthModeProperty.link( function( mode ) {
-      // Toggle visibility of panels
-      self.springLengthControlPanel.visible = (mode === 'adjustable-length');
+    model.springLengthModeProperty.lazyLink( function( mode ) {
 
-      self.constantsControlPanel.visible = self.springLengthControlPanel.visible;
-      self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
-      self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
-
-      // TODO: Remove these resets to preserve state.
-      self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
-      model.springs[ 0 ].springConstantProperty.reset();
-      model.springs[ 1 ].reset();
-      self.firstOscillatingSpringNode.lineWidthProperty.set( self.firstOscillatingSpringNode.lineWidthProperty.get() );
-      Property.multilink( [ model.selectedConstantProperty, model.springs[ 0 ].naturalRestingLengthProperty ], function() {
-        {
-          if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
-            self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-          }
-          else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
-            model.springs[ 0 ].springConstantProperty.set( self.mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-            self.firstOscillatingSpringNode.lineWidthProperty.set( self.mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-          }
-        }
-      } );
+      /**@private Functions used to determine the inverse relationship between the length and springConstant/thickness
+       Functions follow logic:
+       -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
+       -Thickness = constant -->As length increases, spring constant decreases  (and vice versa)
+       */
+      var mapRestingLengthToSpringConstant = new LinearFunction( .1, .5, 1, 7 );
+      var mapRestingLengthToThickness = new LinearFunction( .1, .5, 5, 15 );
+      var mapRestingLengthToThickness2 = new LinearFunction( .1, .5, self.firstOscillatingSpringNode.lineWidthProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() );
 
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
-        self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
-        model.springs[ 0 ].reset();
-        model.springs[ 1 ].reset();
+        // Manages stashing and applying parameters to each scene
+        scene2Parameters = model.stashSceneParameters();
+        model.applySceneParameters( scene1Parameters );
+        self.springLengthControlPanel.visible = false;
       }
+
+      else if ( mode === 'adjustable-length' ) {
+        // Manages stashing and applying parameters to each scene
+        scene1Parameters = model.stashSceneParameters();
+        model.applySceneParameters( scene2Parameters );
+        self.springLengthControlPanel.visible = true;
+
+        // Manages logic for handling spring constants
+        self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
+        Property.multilink( [ model.selectedConstantProperty, model.springs[ 0 ].naturalRestingLengthProperty ], function() {
+          {
+            if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
+              self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+            }
+            else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
+              model.springs[ 0 ].springConstantProperty.set( mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+              self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+            }
+          }
+        } );
+      }
+
+      // Manages visibility of panels for spring length, spring constant, and thickness
+      self.constantsControlPanel.visible = self.springLengthControlPanel.visible;
+      self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
+      self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
     } );
 
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs

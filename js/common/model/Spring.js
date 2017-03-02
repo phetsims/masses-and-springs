@@ -157,7 +157,6 @@ define( function( require ) {
         } )
       }
     );
-    //------------------------------------------------
 
     //  Restart animation if it was squelched
     this.gravityProperty.link( function() {
