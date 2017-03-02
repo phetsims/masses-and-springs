@@ -69,7 +69,7 @@ define( function( require ) {
       validValues: [ 'slow', 'normal' ]
     } );
 
-    // @public {Property.<string>} valid values are "same-length" and "adjustable-length"
+    // @public {Property.<string>} determines the scene selection for the intro screen
     this.springLengthModeProperty = new Property( 'same-length', {
       tandem: tandem.createTandem( 'springLengthModeProperty' ),
       phetioValueType: TString,
@@ -81,11 +81,11 @@ define( function( require ) {
       tandem: tandem.createTandem( 'rulerVisibleProperty' )
     } );
 
-    // @public {Property.<string || null>} valid values are 'spring-constant', 'spring-thickness', and null
-    this.selectedConstantProperty = new Property( null, {
+    // @public {Property.<string>} determines which spring property to keep constant in the constants panel
+    this.selectedConstantProperty = new Property( 'spring-constant', {
       tandem: tandem.createTandem( 'selectedConstantProperty' ),
       phetioValueType: TString,
-      validValues: [ 'spring-constant', 'spring-thickness', null ]
+      validValues: [ 'spring-constant', 'spring-thickness' ]
     } );
 
     // @public {Property.<boolean>} determines visibility of timer node
