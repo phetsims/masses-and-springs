@@ -286,7 +286,8 @@ define( function( require ) {
         mass: this.masses[ 0 ].mass,
         position: this.masses[ 0 ].positionProperty.get(),
         userControlled: this.masses[ 0 ].userControlledProperty.get(),
-        verticalVelocity: this.masses[ 0 ].verticalVelocityProperty.get()
+        verticalVelocity: this.masses[ 0 ].verticalVelocityProperty.get(),
+        spring: this.masses[ 0 ].springProperty.get()
       };
 
       // @private {read-only} Stashing parameters for mass attached to first 100g grey mass
@@ -294,7 +295,8 @@ define( function( require ) {
         mass: this.masses[ 1 ].mass,
         position: this.masses[ 1 ].positionProperty.get(),
         userControlled: this.masses[ 1 ].userControlledProperty.get(),
-        verticalVelocity: this.masses[ 1 ].verticalVelocityProperty.get()
+        verticalVelocity: this.masses[ 1 ].verticalVelocityProperty.get(),
+        spring: this.masses[ 1 ].springProperty.get()
       };
 
       // @private {read-only} Stashing parameters for mass attached to second 100g grey mass
@@ -302,7 +304,8 @@ define( function( require ) {
         mass: this.masses[ 2 ].mass,
         position: this.masses[ 2 ].positionProperty.get(),
         userControlled: this.masses[ 2 ].userControlledProperty.get(),
-        verticalVelocity: this.masses[ 2 ].verticalVelocityProperty.get()
+        verticalVelocity: this.masses[ 2 ].verticalVelocityProperty.get(),
+        spring: this.masses[ 2 ].springProperty.get()
       };
 
       // @private {read-only} Stashing parameters for mass attached to 50g grey mass
@@ -310,7 +313,8 @@ define( function( require ) {
         mass: this.masses[ 3 ].mass,
         position: this.masses[ 3 ].positionProperty.get(),
         userControlled: this.masses[ 3 ].userControlledProperty.get(),
-        verticalVelocity: this.masses[ 3 ].verticalVelocityProperty.get()
+        verticalVelocity: this.masses[ 3 ].verticalVelocityProperty.get(),
+        spring: this.masses[ 3 ].springProperty.get()
       };
 
       // @private {read-only} Stashing parameters for mass attached to 200g blue mass
@@ -318,7 +322,8 @@ define( function( require ) {
         mass: this.masses[ 4 ].mass,
         position: this.masses[ 4 ].positionProperty.get(),
         userControlled: this.masses[ 4 ].userControlledProperty.get(),
-        verticalVelocity: this.masses[ 4 ].verticalVelocityProperty.get()
+        verticalVelocity: this.masses[ 4 ].verticalVelocityProperty.get(),
+        spring: this.masses[ 4 ].springProperty.get()
       };
 
       // @private {read-only} Stashing parameters for mass attached to 150g green mass
@@ -326,7 +331,8 @@ define( function( require ) {
         mass: this.masses[ 5 ].mass,
         position: this.masses[ 5 ].positionProperty.get(),
         userControlled: this.masses[ 5 ].userControlledProperty.get(),
-        verticalVelocity: this.masses[ 5 ].verticalVelocityProperty.get()
+        verticalVelocity: this.masses[ 5 ].verticalVelocityProperty.get(),
+        spring: this.masses[ 5 ].springProperty.get()
       };
 
       // @private {read-only} Stashing parameters for mass attached to 75g red mass
@@ -334,7 +340,8 @@ define( function( require ) {
         mass: this.masses[ 6 ].mass,
         position: this.masses[ 6 ].positionProperty.get(),
         userControlled: this.masses[ 6 ].userControlledProperty.get(),
-        verticalVelocity: this.masses[ 6 ].verticalVelocityProperty.get()
+        verticalVelocity: this.masses[ 6 ].verticalVelocityProperty.get(),
+        spring: this.masses[ 6 ].springProperty.get()
       };
 
       // @private {read-only} Stashing sceneMasses into one object
@@ -409,42 +416,49 @@ define( function( require ) {
       this.masses[ 0 ].positionProperty.set( parameters[ 2 ].sceneMass1.position );
       this.masses[ 0 ].userControlledProperty.set( parameters[ 2 ].sceneMass1.userControlled );
       this.masses[ 0 ].verticalVelocityProperty.set( parameters[ 2 ].sceneMass1.verticalVelocity );
+      this.masses[ 0 ].springProperty.set( parameters[ 2 ].sceneMass1.spring );
 
       // Applying stashed parameters of first 100g grey mass
       this.masses[ 1 ].mass = parameters[ 2 ].sceneMass2.mass;
       this.masses[ 1 ].positionProperty.set( parameters[ 2 ].sceneMass2.position );
       this.masses[ 1 ].userControlledProperty.set( parameters[ 2 ].sceneMass2.userControlled );
       this.masses[ 1 ].verticalVelocityProperty.set( parameters[ 2 ].sceneMass2.verticalVelocity );
+      this.masses[ 1 ].springProperty.set( parameters[ 2 ].sceneMass2.spring );
 
       // Applying stashed parameters of second 100g grey mass
       this.masses[ 2 ].mass = parameters[ 2 ].sceneMass3.mass;
       this.masses[ 2 ].positionProperty.set( parameters[ 2 ].sceneMass3.position );
       this.masses[ 2 ].userControlledProperty.set( parameters[ 2 ].sceneMass3.userControlled );
       this.masses[ 2 ].verticalVelocityProperty.set( parameters[ 2 ].sceneMass3.verticalVelocity );
+      this.masses[ 2 ].springProperty.set( parameters[ 2 ].sceneMass3.spring );
 
       // Applying stashed parameters of 50g grey mass
       this.masses[ 3 ].mass = parameters[ 2 ].sceneMass4.mass;
       this.masses[ 3 ].positionProperty.set( parameters[ 2 ].sceneMass4.position );
       this.masses[ 3 ].userControlledProperty.set( parameters[ 2 ].sceneMass4.userControlled );
       this.masses[ 3 ].verticalVelocityProperty.set( parameters[ 2 ].sceneMass4.verticalVelocity );
+      this.masses[ 3 ].springProperty.set( parameters[ 2 ].sceneMass4.spring );
 
       // Applying stashed parameters of 200g blue mass
       this.masses[ 4 ].mass = parameters[ 2 ].sceneMass5.mass;
       this.masses[ 4 ].positionProperty.set( parameters[ 2 ].sceneMass5.position );
       this.masses[ 4 ].userControlledProperty.set( parameters[ 2 ].sceneMass5.userControlled );
       this.masses[ 4 ].verticalVelocityProperty.set( parameters[ 2 ].sceneMass5.verticalVelocity );
+      this.masses[ 4 ].springProperty.set( parameters[ 2 ].sceneMass5.spring );
 
       // Applying stashed parameters of 150g green mass
       this.masses[ 5 ].mass = parameters[ 2 ].sceneMass6.mass;
       this.masses[ 5 ].positionProperty.set( parameters[ 2 ].sceneMass6.position );
       this.masses[ 5 ].userControlledProperty.set( parameters[ 2 ].sceneMass6.userControlled );
       this.masses[ 5 ].verticalVelocityProperty.set( parameters[ 2 ].sceneMass6.verticalVelocity );
+      this.masses[ 5 ].springProperty.set( parameters[ 2 ].sceneMass6.spring );
 
       // Applying stashed parameters of 75g red mass
       this.masses[ 6 ].mass = parameters[ 2 ].sceneMass7.mass;
       this.masses[ 6 ].positionProperty.set( parameters[ 2 ].sceneMass7.position );
       this.masses[ 6 ].userControlledProperty.set( parameters[ 2 ].sceneMass7.userControlled );
       this.masses[ 6 ].verticalVelocityProperty.set( parameters[ 2 ].sceneMass7.verticalVelocity );
+      this.masses[ 6 ].springProperty.set( parameters[ 2 ].sceneMass7.spring );
     },
 
     /**
