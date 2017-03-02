@@ -16,6 +16,7 @@ define( function( require ) {
   var NumberProperty = require( 'AXON/NumberProperty' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
@@ -29,7 +30,6 @@ define( function( require ) {
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected to
                                // a spring
   var DROPPING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
-  var DEFAULT_SPRING_LENGTH = 0.5; // {number} default length in meters of spring on sim start up
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -132,8 +132,8 @@ define( function( require ) {
     // @public (read-only) model of springs used throughout the sim
     // TODO:: See if other places need (read-only) too
     this.springs = [
-      new Spring( new Vector2( .65, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'leftSpring' ) ),
-      new Spring( new Vector2( .95, this.ceilingY ), DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'rightSpring' ) )
+      new Spring( new Vector2( .65, this.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'leftSpring' ) ),
+      new Spring( new Vector2( .95, this.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'rightSpring' ) )
     ];
 
     // @public responsible for changing the default length

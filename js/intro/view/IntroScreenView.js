@@ -29,7 +29,6 @@ define( function( require ) {
 
   // constants
   var IMAGE_SCALE = .3;
-  var DEFAULT_SPRING_LENGTH = 0.5; // {number} default length in meters of spring on sim start up
 
   // strings
   var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
@@ -77,10 +76,10 @@ define( function( require ) {
     var scene1Parameters = model.stashSceneParameters();
 
     // @private {read-write} array of parameters for scene 2
-    model.springs[ 0 ].naturalRestingLengthProperty.set( DEFAULT_SPRING_LENGTH / 2 );
+    model.springs[ 0 ].naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
     var scene2Parameters = model.stashSceneParameters();
 
-    model.springs[ 0 ].naturalRestingLengthProperty.set( DEFAULT_SPRING_LENGTH );
+    model.springs[ 0 ].naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
 
     // Link that is responsible for switching the scenes
     model.springLengthModeProperty.lazyLink( function( mode ) {
