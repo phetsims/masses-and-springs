@@ -11,6 +11,7 @@ define( function( require ) {
 
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LinearFunction = require( 'DOT/LinearFunction' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Range = require( 'DOT/Range' );
 
@@ -114,12 +115,12 @@ define( function( require ) {
 
     //------------------------------------------------
     // Derived properties
-    // @public length of the spring, units = m
+    // @public {read-only} length of the spring, units = m
     this.lengthProperty = new DerivedProperty( [ this.naturalRestingLengthProperty, this.displacementProperty ],
       function( naturalRestingLength, displacement ) {
         return naturalRestingLength - displacement;
-      }
-      , {
+      },
+      {
         tandem: tandem.createTandem( 'lengthProperty' ),
         phetioValueType: TNumber( {
           units: 'meters',
@@ -127,13 +128,26 @@ define( function( require ) {
         } )
       }
     );
+    // @public {read-only} length of the spring, units = null
+    this.thicknessProperty = new DerivedProperty( [ this.springConstantProperty ],
+      function( springConstant ) {
+        var mapThickness = new LinearFunction( 5, 15, 2.5, 5.5 );
+        return mapThickness( springConstant );
+      },
+      {
+        tandem: tandem.createTandem( 'thicknessProperty' ),
+        phetioValueType: TNumber( {
+          range: new Range( 2.5, 5.5 )
+        } )
+      }
+    );
 
-    // @public y position of the bottom end of the spring, units = m
+    // @public {read-only} y position of the bottom end of the spring, units = m
     this.bottomProperty = new DerivedProperty( [ this.positionProperty, this.lengthProperty ],
       function( position, length ) {
         return position.y - length;
-      }
-      , {
+      },
+      {
         tandem: tandem.createTandem( 'bottomProperty' ),
         phetioValueType: TNumber( {
           units: 'meters',
@@ -142,14 +156,14 @@ define( function( require ) {
       }
     );
 
-    // @public y position of the equilibrium position
+    // @public {read-only} y position of the equilibrium position
     this.equilibriumYPositionProperty = new DerivedProperty( [ this.springConstantProperty, this.gravityProperty, this.massProperty ],
       function( springConstant, gravity, mass ) {
         // springExtension = mg/k
         self.springExtension = mass ? (mass.mass * gravity) / springConstant : 0;
         return self.positionProperty.get().y - self.naturalRestingLengthProperty.get() - self.springExtension;
-      }
-      , {
+      },
+      {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         phetioValueType: TNumber( {
           units: 'meters',

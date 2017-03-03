@@ -89,7 +89,7 @@ define( function( require ) {
        -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
        -Thickness = constant -->As length increases, spring constant decreases  (and vice versa)
        */
-      var mapRestingLengthToSpringConstant = new LinearFunction( .1, .5, 1, 7 );
+      var mapRestingLengthToSpringConstant = new LinearFunction( .1, .5, 2.5, 5.5 );
       var mapRestingLengthToThickness = new LinearFunction( .1, .5, 5, 15 );
       var mapRestingLengthToThickness2 = new LinearFunction( .1, .5, self.firstOscillatingSpringNode.lineWidthProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() );
 
@@ -112,6 +112,10 @@ define( function( require ) {
         Property.multilink( [ model.selectedConstantProperty, model.springs[ 0 ].naturalRestingLengthProperty ], function() {
           {
             if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
+              // TODO: Sloppy implementation. See https://github.com/phetsims/masses-and-springs/issues/34
+              var tempSpringConstant = model.springs[ 0 ].springConstantProperty.get();
+              model.springs[ 0 ].springConstantProperty.set( model.springs[ 0 ].springConstantProperty.get() * .99 );
+              model.springs[ 0 ].springConstantProperty.set( tempSpringConstant );
               self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
             }
             else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
@@ -121,6 +125,11 @@ define( function( require ) {
           }
         } );
       }
+      // Property.multilink( [ model.selectedConstantProperty, self.firstOscillatingSpringNode.lineWidthProperty ], function() {
+      //
+      //   var property = [ model.springs[ 0 ].springConstantProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() ];
+      //   console.log( 'springConstant = ' + property[ 0 ] + '\t\t' + 'thickness = ' + self.firstOscillatingSpringNode.lineWidthProperty.get() );
+      // } );
 
       // Manages visibility of panels for spring length, spring constant, and thickness
       self.constantsControlPanel.visible = self.springLengthControlPanel.visible;

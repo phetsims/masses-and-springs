@@ -70,9 +70,8 @@ define( function( require ) {
 
     //ParametricSpringNode width update
     //springConstant determines lineWidth
-    spring.springConstantProperty.link( function( springConstant ) {
-      var lineWidth = options.minLineWidth + options.deltaLineWidth * ( springConstant - spring.springConstantRange.min ) / 2;
-      self.lineWidthProperty.set( lineWidth );
+    spring.springConstantProperty.link( function() {
+      self.lineWidthProperty.set( spring.thicknessProperty.get() );
     } );
   }
 
