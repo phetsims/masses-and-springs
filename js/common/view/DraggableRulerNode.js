@@ -23,8 +23,7 @@ define( function( require ) {
 
   // phet-io modules
   var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
-
-
+  
   /**
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition

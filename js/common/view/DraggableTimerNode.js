@@ -18,28 +18,38 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Timer = require( 'SCENERY_PHET/Timer' );
 
+  // phet-io modules
+  var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
+
   /**
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition
    * @param {number} timerSecondsProperty
    * @param {boolean} timerRunningProperty
    * @param {boolean} visibleProperty
+   * @param {Tandem} tandem
    * @constructor
    */
-  function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty ) {
+  function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty, tandem ) {
     var self = this;
     Node.call( this );
-    this.addChild( new Timer( timerSecondsProperty, timerRunningProperty ) );
+    this.addChild( new Timer( timerSecondsProperty, timerRunningProperty, {
+      tandem: tandem.createTandem( 'Timer' )
+    } ) );
 
     // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
 
     // @private
-    this.positionProperty = new Property( initialPosition );
+    this.positionProperty = new Property( initialPosition, {
+      tandem: tandem.createTandem( 'positionProperty' ),
+      phetioValueType: TVector2
+    } );
     this.positionProperty.linkAttribute( self, 'translation' );
 
     // @private {read-only} handles timer node drag events
     this.timerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
+      tandem: tandem.createTandem( 'timerNodeMovableDragHandler' ),
       dragBounds: dragBounds,
       endDrag: function( event ) {
         // When a node is released, check if it is over the toolbox.  If so, drop it in.

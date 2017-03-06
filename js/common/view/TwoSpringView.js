@@ -178,7 +178,8 @@ define( function( require ) {
       new Vector2( this.layoutBounds.left + 80, this.topSpacing + 35 ),
       model.timerSecondProperty,
       model.timerRunningProperty,
-      model.timerVisibleProperty
+      model.timerVisibleProperty,
+      tandem
     );
     var rulerNode = new DraggableRulerNode(
       this.layoutBounds,
