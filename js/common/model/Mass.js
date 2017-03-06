@@ -65,7 +65,7 @@ define( function( require ) {
 
     // @public {Property.<Spring>} {Spring|null} is the mass attached to a Spring?
     this.springProperty = new Property( null, {
-      tandem: tandem.createTandem( 'positionProperty' ),
+      tandem: tandem.createTandem( 'springProperty' ),
       phetioValueType: TSpring
     } );
 

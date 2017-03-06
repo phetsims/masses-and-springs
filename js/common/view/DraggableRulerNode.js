@@ -21,14 +21,20 @@ define( function( require ) {
   // strings
   var cmString = require( 'string!MASSES_AND_SPRINGS/cm' );
 
+  // phet-io modules
+  var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
+
+
   /**
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition
    * @param {Property.<boolean>} visibleProperty
+   * @param {Tandem} tandem
+
    * @constructor
    */
   //TODO: Look into passing in toolbox bounds to compare with ruler bounds. If these two intersect then trigger "put away event"
-  function DraggableRulerNode( dragBounds, initialPosition, visibleProperty ) {
+  function DraggableRulerNode( dragBounds, initialPosition, visibleProperty, tandem ) {
     var self = this;
     Node.call( this );
 
@@ -60,15 +66,20 @@ define( function( require ) {
       minorTickHeight: 5,
       unitsFont: MassesAndSpringsConstants.FONT,
       opacity: .8,
-      tickMarksOnBottom: false
+      tickMarksOnBottom: false,
+      tandem: tandem.createTandem( 'RulerNode' )
     } ) );
 
     // @private
-    this.positionProperty = new Property( initialPosition );
+    this.positionProperty = new Property( initialPosition, {
+      tandem: tandem.createTandem( 'positionProperty' ),
+      phetioValueType: TVector2
+    } );
     this.positionProperty.linkAttribute( this, 'translation' );
 
     // @private {read-only} handles ruler node drag events
     this.rulerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
+      tandem: tandem.createTandem( 'rulerNodeMovableDragHandler' ),
       dragBounds: dragBounds,
       endDrag: function( event ) {
         // When a node is released, check if it is over the toolbox.  If so, drop it in.

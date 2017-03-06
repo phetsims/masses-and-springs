@@ -183,7 +183,8 @@ define( function( require ) {
     var rulerNode = new DraggableRulerNode(
       this.layoutBounds,
       new Vector2( this.layoutBounds.left + 50, this.topSpacing + 35 ),
-      model.rulerVisibleProperty
+      model.rulerVisibleProperty,
+      tandem
     );
 
     // Toolbox Panel
