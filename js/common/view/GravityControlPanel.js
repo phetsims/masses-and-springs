@@ -21,6 +21,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ComboBox = require( 'SUN/ComboBox' );
   var HSlider = require( 'SUN/HSlider' );
+  var Range = require( 'DOT/Range' );
   var Panel = require( 'SUN/Panel' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
@@ -31,6 +32,8 @@ define( function( require ) {
 
   // phet-io modules
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
+  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
+  var TText = require( 'ifphetio!PHET_IO/types/scenery/nodes/TText' );
 
   /**
    *
@@ -57,7 +60,11 @@ define( function( require ) {
     var bodyListItems = [];
     this.bodies = bodies;
     bodies.forEach( function( body ) {
-      var bodyLabel = new Text( body.title, { font: MassesAndSpringsConstants.LABEL_FONT } );
+      var bodyLabel = new Text( body.title, {
+        font: MassesAndSpringsConstants.LABEL_FONT,
+        tandem: tandem.createTandem( 'bodyLabel' ),
+        phetioValueType: TText( body.title )
+      } );
       bodyLabel.localBounds = bodyLabel.localBounds.withMaxX( Math.max( 50, bodyLabel.localBounds.maxX ) );
 
       bodyListItems.push( {
@@ -69,7 +76,13 @@ define( function( require ) {
     this.gravityProperty = gravityProperty;
 
     // {Property.<number>}
-    var previousGravityProperty = new Property( Body.EARTH.gravity );
+    var previousGravityProperty = new Property( Body.EARTH.gravity, {
+      tandem: tandem.createTandem( 'previousGravityProperty' ),
+      phetioValueType: TNumber( {
+        units: 'meters/second/second',
+        range: new Range( 0, 30 )
+      } )
+    } );
 
     // @private {Property.<string>}
     // TODO: the selected body should be in the model, not the control panel.  Probably in MassesAndSpringsModel.
@@ -80,14 +93,18 @@ define( function( require ) {
     } );
 
     // {Property.<string>}
-    var previousBodyTitleProperty = new Property( Body.EARTH.title );
+    var previousBodyTitleProperty = new Property( Body.EARTH.title, {
+      tandem: tandem.createTandem( 'previousBodyTitleProperty' ),
+      phetioValueType: TString
+    } );
 
     var gravityComboBox = new ComboBox( bodyListItems, self.bodyTitleProperty, listNodeParent, {
       listPosition: 'below',
       buttonCornerRadius: 5,
       buttonYMargin: 0,
       itemYMargin: 3,
-      listYMargin: 8
+      listYMargin: 8,
+      tandem: tandem.createTandem( 'gravityComboBox' )
     } );
 
     // Saving a reference to toggle visibility for Planet X

@@ -22,9 +22,10 @@ define( function( require ) {
    * @param {ModelViewTransform2} mvt
    * @param {Spring} spring - determines which spring
    * @param {boolean} visibleProperty
+   * @param {Tandem} tandem
    * @constructor
    */
-  function EquilibriumLineNode( mvt, spring, visibleProperty ) {
+  function EquilibriumLineNode( mvt, spring, visibleProperty, tandem ) {
     var self = this;
     Node.call( this );
 
@@ -32,7 +33,8 @@ define( function( require ) {
       stroke: 'rgb(93, 191, 142)',
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      tandem: tandem.createTandem( 'equilibriumLineNode' )
     } );
     line.mouseArea = line.localBounds.dilated( 10 );
     line.touchArea = line.localBounds.dilated( 10 );

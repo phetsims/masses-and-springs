@@ -87,6 +87,13 @@ define( function( require ) {
       massNodes.push( massNode );
     } );
 
+    // @protected Helper function to restore initial layering of the masses to prevent them from stacking over each other.
+    this.resetMassLayer = function() {
+      massNodes.forEach( function( massNode ) {
+        massNode.moveToFront();
+      } );
+    };
+
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
     this.firstOscillatingSpringNode = new OscillatingSpringNode( model.springs[ 0 ], mvtSpringHeight );
     this.secondOscillatingSpringNode = new OscillatingSpringNode( model.springs[ 1 ], mvtSpringHeight );
@@ -126,14 +133,16 @@ define( function( require ) {
     this.firstSpringEquilibriumLine = new EquilibriumLineNode(
       mvt,
       model.springs[ 0 ],
-      model.equilibriumPositionVisibleProperty
+      model.equilibriumPositionVisibleProperty,
+      tandem
     );
 
     // @public Initializes equilibrium line for second spring
     this.secondSpringEquilibriumLine = new EquilibriumLineNode(
       mvt,
       model.springs[ 1 ],
-      model.equilibriumPositionVisibleProperty
+      model.equilibriumPositionVisibleProperty,
+      tandem
     );
 
     // @public Initializes natural line for first spring
@@ -207,9 +216,8 @@ define( function( require ) {
         model.springs[ 1 ].reset();
         model.reset();
         self.gravityControlPanel.reset();
-        massNodes.forEach( function( massNode ) {
-          massNode.moveToFront();
-        } );
+        // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
+        self.resetMassLayer();
       },
       right: this.layoutBounds.right - 10,
       bottom: mvt.modelToViewY( model.floorY )

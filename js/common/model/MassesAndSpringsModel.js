@@ -373,6 +373,21 @@ define( function( require ) {
       return parameters;
     },
 
+    springPropertyUpdate: function( springProperty ) {
+      if ( springProperty === this.springs[ 0 ].springConstantProperty ) {
+        this.springs[ 0 ].updateSpringConstantFromLength();
+        console.log( 'spring Constant from length' );
+      }
+      else if ( springProperty === this.springs[ 0 ].naturalRestingLengthProperty ) {
+        this.springs[ 0 ].updateThicknessFromLength();
+        console.log( 'Thickness from spring Length' );
+      }
+      else if ( springProperty === this.springs[ 0 ].thicknessProperty ) {
+        this.springs[ 0 ].updateThicknessFromSpringConstant();
+        console.log( 'Thickness from spring constant' );
+      }
+    },
+
     applySceneParameters: function( parameters ) {
       // Applying stashed parameters of first spring
       this.springs[ 0 ].displacementProperty.set( parameters[ 0 ].sceneSpring1.displacement );
