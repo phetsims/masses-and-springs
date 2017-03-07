@@ -11,7 +11,7 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Path = require( 'SCENERY/node\s/Path' );
+  var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
   var Tandem = require( 'TANDEM/Tandem' );
 
@@ -21,28 +21,17 @@ define( function( require ) {
    */
   function StopSignNode( options ) {
     options = _.extend( {
-      width: 7,
+      radius: 9,
       lineWidth: 1,
       stroke: '#999999',
       fill: 'red',
       lineJoin: 'round',
       lineColor: 'blue',
-      tandem: Tandem.tandemRequired()
+      tandem: Tandem.tandemRequired(),
+      rotation: Math.PI / 4 / 2
     }, options );
 
-    // TODO: All widths should be divided by 2 below
-    var width = options.width;
-    var initialXPosition = width / 4;
-    var signShape = new Shape()
-      .moveTo( initialXPosition, width )
-      .lineTo( initialXPosition + width, width )
-      .lineTo( initialXPosition + width * 1.5, width - width * .5 )
-      .lineTo( initialXPosition + width * 1.5, width - width * 1.5 )
-      .lineTo( initialXPosition + width, width - width * 2 )
-      .lineTo( initialXPosition, width - width * 2 )
-      .lineTo( initialXPosition - width * .5, width - width * 1.5 )
-      .lineTo( initialXPosition - width * .5, width - width * .5 )
-      .lineTo( initialXPosition, width );
+    var signShape = Shape.regularPolygon( 8, options.radius );
 
     Path.call( this, signShape, options );
   }

@@ -22,6 +22,8 @@ define( function( require ) {
    */
   function SpringStopperButtonNode( tandem, options ) {
     options = _.extend( {
+      xMargin: 3,
+      yMargin: 3,
       touchAreaXDilation: 6,
       touchAreaYDilation: 6,
       baseColor: 'rgb( 240, 240, 240 )',
