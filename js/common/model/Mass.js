@@ -37,6 +37,9 @@ define( function( require ) {
   function Mass( massValue, initialPosition, isLabeled, color, tandem ) {
     var self = this;
 
+    // @public {read-only} Used for constructing tandems for corresponding view nodes.
+    this.tandem = tandem;
+    
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
     // @public (read-only)
     // {Number} mass of mass object in kg

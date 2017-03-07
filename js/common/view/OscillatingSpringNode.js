@@ -20,10 +20,11 @@ define( function( require ) {
   /**
    * @param {spring} spring model object
    * @param {ModelViewTransform2} mvt
+   * @param {Tandem} tandem
    * @param {Object} [options]
    * @constructor
    */
-  function OscillatingSpringNode( spring, mvt, options ) {
+  function OscillatingSpringNode( spring, mvt, tandem, options ) {
 
     var self = this;
 

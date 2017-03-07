@@ -22,17 +22,19 @@ define( function( require ) {
   var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
   var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
   var LABEL_FONT = new PhetFont( 10 );
-  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold' } );
 
   /**
    *
    * @param {Property.<number>} springConstantProperty
    * @param {Range} springConstantPropertyRange
    * @param {string} title
+   * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function SpringConstantControlPanel( springConstantProperty, springConstantPropertyRange, title, options ) {
+  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold' } );
+
+  function SpringConstantControlPanel( springConstantProperty, springConstantPropertyRange, title, tandem, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,

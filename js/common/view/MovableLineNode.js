@@ -26,9 +26,10 @@ define( function( require ) {
    * @param {Vector2} initialPosition - of the center of line
    * @param {number} length - in view coordinates
    * @param {boolean} visibleProperty
+   * @param {Tandem} tandem
    * @constructor
    */
-  function MovableLineNode( initialPosition, length, visibleProperty ) {
+  function MovableLineNode( initialPosition, length, visibleProperty, tandem ) {
     var self = this;
     Node.call( this );
     // Creates laser pointer tip for reference line

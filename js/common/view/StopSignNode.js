@@ -13,12 +13,24 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
+  var Tandem = require( 'TANDEM/Tandem' );
 
   /**
-   * @param {number} width the distance the wire extends beyond the flashlight before turning up to the slider
+   * @param {Object} options
    * @constructor
    */
-  function StopSignNode( width ) {
+  function StopSignNode( options ) {
+    options = _.extend( {
+      width: 7,
+      lineWidth: 1,
+      stroke: '#999999',
+      fill: 'red',
+      lineJoin: 'round',
+      lineColor: 'blue',
+      tandem: Tandem.tandemRequired()
+    }, options );
+
+    var width = options.width;
     var initialXPosition = width / 4;
     var signShape = new Shape()
       .moveTo( initialXPosition, width )
@@ -31,13 +43,7 @@ define( function( require ) {
       .lineTo( initialXPosition - width * .5, width - width * .5 )
       .lineTo( initialXPosition, width );
 
-    Path.call( this, signShape, {
-      lineWidth: 1,
-      stroke: '#999999',
-      fill: 'red',
-      lineJoin: 'round',
-      lineColor: 'blue'
-    } );
+    Path.call( this, signShape, options );
   }
 
   massesAndSprings.register( 'StopSignNode', StopSignNode );

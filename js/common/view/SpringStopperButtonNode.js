@@ -16,15 +16,17 @@ define( function( require ) {
 
   /**
    * Constructor for return button
+   * @param {Tandem} tandem
    * @param {Object} [options]
    * @constructor
    */
-  function SpringStopperButtonNode( options ) {
+  function SpringStopperButtonNode( tandem, options ) {
     options = _.extend( {
       touchAreaXDilation: 6,
       touchAreaYDilation: 6,
       baseColor: 'rgb( 240, 240, 240 )',
-      content: new StopSignNode( 7 )
+      content: new StopSignNode( { tandem: tandem.createTandem( 'stopSignNode' ) } ),
+      tandem: tandem
     }, options );
     RectangularPushButton.call( this, options );
   }

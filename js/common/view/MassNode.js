@@ -29,9 +29,10 @@ define( function( require ) {
    * @param {ModelViewTransform2} mvt
    * @param {MassesAndSpringsScreenView} screenView
    * @param {MassesAndSpringsModel} model
+   * @param {Tandem} tandem
    * @constructor
    */
-  function MassNode( mass, mvt, screenView, model ) {
+  function MassNode( mass, mvt, screenView, model, tandem ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 

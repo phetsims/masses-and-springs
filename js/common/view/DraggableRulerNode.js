@@ -32,7 +32,8 @@ define( function( require ) {
 
    * @constructor
    */
-  //TODO: Look into passing in toolbox bounds to compare with ruler bounds. If these two intersect then trigger "put away event"
+  //TODO: Investigate inheriting from rulerNode instead of Node. Prevents confusion regarding the DraggableRulerNode containing another Ruler Node
+
   function DraggableRulerNode( dragBounds, initialPosition, visibleProperty, tandem ) {
     var self = this;
     Node.call( this );
