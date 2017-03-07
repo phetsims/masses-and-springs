@@ -1,9 +1,10 @@
 // Copyright 2017, University of Colorado Boulder
 
 /**
- * An octagonal, red stop sign node.
+ * An octagonal, red stop sign node with a white internal border
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
+ * @author Sam Reid (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';
@@ -14,28 +15,43 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
   var Tandem = require( 'TANDEM/Tandem' );
-  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
+  var Node = require( 'SCENERY/nodes/Node' )
 
   /**
    * @param {Object} options
    * @constructor
    */
   function StopSignNode( options ) {
+
     options = _.extend( {
-      radius: 9,
-      lineWidth: 1,
-      stroke: '#999999',
-      fill: PhetColorScheme.RED_COLORBLIND,
-      tandem: Tandem.tandemRequired(),
-      rotation: Math.PI / 4 / 2
+      whiteStrokeRadius: 2,
+      blackStrokeRadius: 1,
+      redRadius: 23,
+      innerFill: 'red',
+      whiteFill: 'white',
+      blackFill: 'black',
+      tandem: Tandem.tandemRequired()
     }, options );
+    var createStopSignPath = function( fill, radius ) {
+      return new Path( Shape.regularPolygon( 8, radius ), {
+        fill: fill,
+        rotation: Math.PI / 8,
 
-    var signShape = Shape.regularPolygon( 8, options.radius );
+        // To support centering when stacked in z-order
+        centerX: 0,
+        centerY: 0
+      } );
+    };
+    options.children = [
+      createStopSignPath( options.blackFill, options.redRadius + options.whiteStrokeRadius + options.blackStrokeRadius ),
+      createStopSignPath( options.whiteFill, options.redRadius + options.whiteStrokeRadius ),
+      createStopSignPath( options.innerFill, options.redRadius )
+    ];
 
-    Path.call( this, signShape, options );
+    Node.call( this, options );
   }
 
   massesAndSprings.register( 'StopSignNode', StopSignNode );
 
-  return inherit( Path, StopSignNode );
+  return inherit( Node, StopSignNode );
 } );

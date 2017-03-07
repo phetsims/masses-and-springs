@@ -27,7 +27,10 @@ define( function( require ) {
       touchAreaXDilation: 6,
       touchAreaYDilation: 6,
       baseColor: 'rgb( 240, 240, 240 )',
-      content: new StopSignNode( { tandem: tandem.createTandem( 'stopSignNode' ) } ),
+      content: new StopSignNode( {
+        tandem: tandem.createTandem( 'stopSignNode' ),
+        scale: 0.33
+      } ),
       tandem: tandem
     }, options );
     RectangularPushButton.call( this, options );
