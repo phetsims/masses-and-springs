@@ -31,10 +31,11 @@ define( function( require ) {
    * @param {DraggableTimerNode} timerNode
    * @param {Property.<boolean>} rulerVisibleProperty
    * @param {Property.<boolean>} timerVisibleProperty
+   * @param {Tandem} tandem
    * @param {Options} options
    * @constructor
    */
-  function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, options ) {
+  function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, tandem, options ) {
     options = _.extend( {
       dragBounds: dragBounds,
       fill: 'rgb( 240, 240, 240 )',

@@ -24,9 +24,10 @@ define( function( require ) {
   /**
    * @param {MassesAndSpringsModel} model
    * @param {ModelViewTransform2} mvt
+   * @param {Tandem} tandem
    * @constructor
    */
-  function SpringHangerNode( model, mvt ) {
+  function SpringHangerNode( model, mvt, tandem ) {
     // derived from x positions of springs.
     Node.call( this );
 

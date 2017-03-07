@@ -29,11 +29,12 @@ define( function( require ) {
    *
    * @param {Property.<number>} naturalRestingLengthProperty: length of spring without mass attached
    * @param {Range} rangeLength: range of values for length
-   * @param {string} title: string used to title the panel 
+   * @param {string} title: string used to title the panel
+   * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function SpringLengthControlPanel( naturalRestingLengthProperty, rangeLength, title, options ) {
+  function SpringLengthControlPanel( naturalRestingLengthProperty, rangeLength, title, tandem, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,

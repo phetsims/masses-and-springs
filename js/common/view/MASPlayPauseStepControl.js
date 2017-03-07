@@ -26,10 +26,11 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
+   * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function MASPlayPauseStepControl( model, options ) {
+  function MASPlayPauseStepControl( model, tandem, options ) {
 
     Node.call( this );
 

@@ -32,10 +32,11 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
+   * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function IndicatorVisibilityControlPanel( model, options ) {
+  function IndicatorVisibilityControlPanel( model, tandem, options ) {
     Node.call( this );
 
     // Lines added for reference in panel

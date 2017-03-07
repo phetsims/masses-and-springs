@@ -26,7 +26,7 @@ define( function( require ) {
    * @param {boolean} visibleProperty
    * @constructor
    */
-  function NaturalLengthLineNode( mvt, spring, visibleProperty ) {
+  function NaturalLengthLineNode( mvt, spring, visibleProperty, tandem ) {
     var self = this;
     Node.call( this );
 

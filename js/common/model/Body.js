@@ -9,8 +9,9 @@
 define( function( require ) {
   'use strict';
 
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   var bodyCustomString = require( 'string!MASSES_AND_SPRINGS/body.custom' );
@@ -22,10 +23,11 @@ define( function( require ) {
 
   /**
    * @param {string} title of body.
-   * @param {number} gravity acceleration of body.
+   * @param {number|null} gravity acceleration of body.
+   * @param {Tandem} tandem
    * @constructor
    */
-  function Body( title, gravity ) {
+  function Body( title, gravity, tandem ) {
     // @public {read-write} set title
     this.title = title;
 
@@ -37,12 +39,15 @@ define( function( require ) {
 
   inherit( Object, Body );
 
-  Body.MOON = new Body( bodyMoonString, 1.62 );
-  Body.EARTH = new Body( bodyEarthString, 9.81 );
-  Body.JUPITER = new Body( bodyJupiterString, 24.79 );
-  Body.PLANET_X = new Body( bodyPlanetXString, 14.2 );
-  Body.ZERO_G = new Body( bodyZeroGString, 0 );
-  Body.CUSTOM = new Body( bodyCustomString, null );
+  // A new tandem instance is required here since the bodies are created statically.
+  var tandem = Tandem.createStaticTandem( 'bodies' );
+
+  Body.MOON = new Body( bodyMoonString, 1.62, tandem.createTandem( 'moon' ) );
+  Body.EARTH = new Body( bodyEarthString, 9.81, tandem.createTandem( 'earth' ) );
+  Body.JUPITER = new Body( bodyJupiterString, 24.79, tandem.createTandem( 'jupiter' ) );
+  Body.PLANET_X = new Body( bodyPlanetXString, 14.2, tandem.createTandem( 'planetX' ) );
+  Body.ZERO_G = new Body( bodyZeroGString, 0, tandem.createTandem( 'zeroG' ) );
+  Body.CUSTOM = new Body( bodyCustomString, null, tandem.createTandem( 'custom' ) );
 
   return Body;
 } );

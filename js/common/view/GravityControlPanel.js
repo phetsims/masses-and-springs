@@ -63,7 +63,7 @@ define( function( require ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'bodyLabel' ),
-        phetioValueType: TText( body.title )
+        phetioValueType: TText
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withMaxX( Math.max( 50, bodyLabel.localBounds.maxX ) );
 

@@ -50,6 +50,7 @@ define( function( require ) {
       model.springs[ 0 ].naturalRestingLengthProperty,
       new RangeWithValue( .1, .5, .3 ),
       StringUtils.format( 'Length 1', 1 ),
+      tandem.createTandem( 'springLengthControlPanel' ),
       {
         right: this.springHangerNode.springHangerNode.left - 40,
         top: this.topSpacing,
@@ -62,7 +63,7 @@ define( function( require ) {
     this.constantsControlPanel = new ConstantsControlPanel(
       model.selectedConstantProperty,
       constantString,
-      tandem,
+      tandem.createTandem( 'constantsControlPanel' ),
       {
         minWidth: this.firstSpringConstantControlPanel.maxWidth,
         left: this.firstSpringConstantControlPanel.left,
