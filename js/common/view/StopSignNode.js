@@ -14,6 +14,7 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
   var Tandem = require( 'TANDEM/Tandem' );
+  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   /**
    * @param {Object} options
@@ -24,9 +25,7 @@ define( function( require ) {
       radius: 9,
       lineWidth: 1,
       stroke: '#999999',
-      fill: 'red',
-      lineJoin: 'round',
-      lineColor: 'blue',
+      fill: PhetColorScheme.RED_COLORBLIND,
       tandem: Tandem.tandemRequired(),
       rotation: Math.PI / 4 / 2
     }, options );
