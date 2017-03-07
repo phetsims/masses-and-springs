@@ -34,7 +34,7 @@ define( function( require ) {
     var self = this;
     Node.call( this );
     this.addChild( new Timer( timerSecondsProperty, timerRunningProperty, {
-      tandem: tandem.createTandem( 'Timer' )
+      tandem: tandem.createTandem( 'timer' )
     } ) );
 
     // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.

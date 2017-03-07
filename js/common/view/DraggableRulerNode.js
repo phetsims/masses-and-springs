@@ -67,7 +67,7 @@ define( function( require ) {
       unitsFont: MassesAndSpringsConstants.FONT,
       opacity: .8,
       tickMarksOnBottom: false,
-      tandem: tandem.createTandem( 'RulerNode' )
+      tandem: tandem.createTandem( 'rulerNode' )
     } ) );
 
     // @private
