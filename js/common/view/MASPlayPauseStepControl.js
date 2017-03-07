@@ -30,6 +30,7 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
+  // TODO: Rename to TimeControlPanel, and rename vars/tandems at usage sites
   function MASPlayPauseStepControl( model, tandem, options ) {
 
     Node.call( this );
