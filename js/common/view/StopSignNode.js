@@ -1,9 +1,9 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 /**
- * StopSignNode used to send springs to equilibrium position
+ * An octagonal, red stop sign node.
  *
- * @author Denzell Barnett
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';
@@ -11,7 +11,7 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Path = require( 'SCENERY/nodes/Path' );
+  var Path = require( 'SCENERY/node\s/Path' );
   var Shape = require( 'KITE/Shape' );
   var Tandem = require( 'TANDEM/Tandem' );
 
@@ -30,6 +30,7 @@ define( function( require ) {
       tandem: Tandem.tandemRequired()
     }, options );
 
+    // TODO: All widths should be divided by 2 below
     var width = options.width;
     var initialXPosition = width / 4;
     var signShape = new Shape()
