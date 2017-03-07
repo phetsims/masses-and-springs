@@ -97,10 +97,11 @@ define( function( require ) {
 
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
+
         // model.springPropertyUpdate(model.springs[ 0 ].naturalRestingLengthProperty );
         // Manages stashing and applying parameters to each scene
         scene2Parameters = model.stashSceneParameters();
-        // model.applySceneParameters( scene1Parameters );
+        model.applySceneParameters( scene1Parameters );
         self.springLengthControlPanel.visible = false;
       }
 
