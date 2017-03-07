@@ -24,12 +24,14 @@ define( function( require ) {
   function StopSignNode( options ) {
 
     options = _.extend( {
-      whiteStrokeRadius: 2,
-      blackStrokeRadius: 1,
-      redRadius: 23,
-      innerFill: 'red',
-      whiteFill: 'white',
-      blackFill: 'black',
+      fillRadius: 23,
+      innerStrokeRadius: 2,
+      outerStrokeRadius: 1,
+
+      fill: 'red',
+      outerStroke: 'black',
+      innerStroke: 'white',
+
       tandem: Tandem.tandemRequired()
     }, options );
     var createStopSignPath = function( fill, radius ) {
@@ -42,10 +44,11 @@ define( function( require ) {
         centerY: 0
       } );
     };
+
     options.children = [
-      createStopSignPath( options.blackFill, options.redRadius + options.whiteStrokeRadius + options.blackStrokeRadius ),
-      createStopSignPath( options.whiteFill, options.redRadius + options.whiteStrokeRadius ),
-      createStopSignPath( options.innerFill, options.redRadius )
+      createStopSignPath( options.outerStroke, options.fillRadius + options.innerStrokeRadius + options.outerStrokeRadius ),
+      createStopSignPath( options.innerStroke, options.fillRadius + options.innerStrokeRadius ),
+      createStopSignPath( options.fill, options.fillRadius )
     ];
 
     Node.call( this, options );
