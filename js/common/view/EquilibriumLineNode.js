@@ -19,13 +19,13 @@ define( function( require ) {
   // constants
   var LINE_LENGTH = 100;
   /**
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform2
    * @param {Spring} spring - determines which spring
    * @param {boolean} visibleProperty
    * @param {Tandem} tandem
    * @constructor
    */
-  function EquilibriumLineNode( mvt, spring, visibleProperty, tandem ) {
+  function EquilibriumLineNode( modelViewTransform2, spring, visibleProperty, tandem ) {
     var self = this;
     Node.call( this );
 
@@ -42,9 +42,9 @@ define( function( require ) {
     this.addChild( line );
 
     // @private
-    this.centerX = mvt.modelToViewX( spring.positionProperty.get().x );
+    this.centerX = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
     spring.equilibriumYPositionProperty.link( function( equilibriumPosition ) {
-      self.centerY = mvt.modelToViewY( equilibriumPosition );
+      self.centerY = modelViewTransform2.modelToViewY( equilibriumPosition );
     } );
 
     visibleProperty.linkAttribute( self, 'visible' );

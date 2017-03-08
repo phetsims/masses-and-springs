@@ -119,9 +119,9 @@ define( function( require ) {
             if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
               // model.springPropertyUpdate(model.springs[0].springConstantProperty);
               // TODO: Sloppy implementation. See https://github.com/phetsims/masses-and-springs/issues/34
-              var tempSpringConstant = model.springs[ 0 ].springConstantProperty.get();
-              model.springs[ 0 ].springConstantProperty.set( model.springs[ 0 ].springConstantProperty.get() * .99 );
-              model.springs[ 0 ].springConstantProperty.set( tempSpringConstant );
+              // var tempSpringConstant = model.springs[ 0 ].springConstantProperty.get();
+              // model.springs[ 0 ].springConstantProperty.set( model.springs[ 0 ].springConstantProperty.get() * .99 );
+              // model.springs[ 0 ].springConstantProperty.set( tempSpringConstant );
               self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
             }
             else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
@@ -132,11 +132,11 @@ define( function( require ) {
           }
         } );
       }
-      Property.multilink( [ model.selectedConstantProperty, self.firstOscillatingSpringNode.lineWidthProperty ], function() {
-
-        var property = [ model.springs[ 0 ].springConstantProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() ];
-        console.log( 'springConstant = ' + property[ 0 ] + '\t\t' + 'thickness = ' + self.firstOscillatingSpringNode.lineWidthProperty.get() );
-      } );
+      // Property.multilink( [ model.selectedConstantProperty, self.firstOscillatingSpringNode.lineWidthProperty ], function() {
+      //
+      //   var property = [ model.springs[ 0 ].springConstantProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() ];
+      //   console.log( 'springConstant = ' + property[ 0 ] + '\t\t' + 'thickness = ' + self.firstOscillatingSpringNode.lineWidthProperty.get() );
+      // } );
 
       // Manages visibility of panels for spring length, spring constant, and thickness
       self.constantsControlPanel.visible = self.springLengthControlPanel.visible;
@@ -152,17 +152,17 @@ define( function( require ) {
     ];
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var firstSpringIcon = new OscillatingSpringNode( this.springsIcon[ 0 ], this.mvt );
+    var firstSpringIcon = new OscillatingSpringNode( this.springsIcon[ 0 ], this.modelViewTransform2 );
     firstSpringIcon.loopsProperty.set( 10 );
     firstSpringIcon.lineWidthProperty.set( 3 );
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var secondSpringIcon = new OscillatingSpringNode( this.springsIcon[ 1 ], this.mvt );
+    var secondSpringIcon = new OscillatingSpringNode( this.springsIcon[ 1 ], this.modelViewTransform2 );
     secondSpringIcon.loopsProperty.set( 10 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var thirdSpringIcon = new OscillatingSpringNode( this.springsIcon[ 2 ], this.mvt );
+    var thirdSpringIcon = new OscillatingSpringNode( this.springsIcon[ 2 ], this.modelViewTransform2 );
     thirdSpringIcon.loopsProperty.set( 5 );
     thirdSpringIcon.lineWidthProperty.set( 3 );
 

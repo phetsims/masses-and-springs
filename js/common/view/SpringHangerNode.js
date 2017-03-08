@@ -23,20 +23,20 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform2
    * @param {Tandem} tandem
    * @constructor
    */
-  function SpringHangerNode( model, mvt, tandem ) {
+  function SpringHangerNode( model, modelViewTransform2, tandem ) {
     // derived from x positions of springs.
     Node.call( this );
 
     var springsSeparation =
-      mvt.modelToViewDeltaX( Math.abs( model.springs[ 0 ].positionProperty.get().x - model.springs[ 1 ].positionProperty.get().x ) );
+      modelViewTransform2.modelToViewDeltaX( Math.abs( model.springs[ 0 ].positionProperty.get().x - model.springs[ 1 ].positionProperty.get().x ) );
     var springHangerNodeWidth = springsSeparation * 1.4;
 
     // X coordinate of middle of springs
-    var middleOfSprings = mvt.modelToViewX( (model.springs[ 0 ].positionProperty.get().x + model.springs[ 1 ].positionProperty.get().x) / 2 );
+    var middleOfSprings = modelViewTransform2.modelToViewX( (model.springs[ 0 ].positionProperty.get().x + model.springs[ 1 ].positionProperty.get().x) / 2 );
 
     // Node for hanger text label
     var springHangerLabelNode = new Node();
@@ -46,7 +46,7 @@ define( function( require ) {
       fill: 'rgb( 180, 180, 180 )',
       stroke: 'grey',
       centerX: middleOfSprings,
-      top: mvt.modelToViewY( model.ceilingY )
+      top: modelViewTransform2.modelToViewY( model.ceilingY )
     } );
     springHangerLabelNode.centerX = this.springHangerNode.width / 2;
     springHangerLabelNode.centerY = this.springHangerNode.height / 2;

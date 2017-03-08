@@ -49,7 +49,7 @@ define( function( require ) {
   var MAX_TEXT_WIDTH = 80;
 
   /**
-   * TODO::: Remove mvt transforms from view objects
+   * TODO::: Remove modelViewTransform2 transforms from view objects
    * TODO::: Factor out colors to a Constants object
    * TODO::: Factor out thumb size, track size, etc other slider properties
    * @param {MassesAndSpringsModel} model
@@ -62,26 +62,26 @@ define( function( require ) {
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
     // Needed for grey bar above springHangerNode
-    var mvtSpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( 0, this.layoutBounds.height * 1 ),
       397 );
-    this.mvt = mvtSpringHeight; // Make mvt available to descendant types.
+    this.modelViewTransform2 = modelViewTransform2SpringHeight; // Make modelViewTransform2 available to descendant types.
 
-    var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( 0, this.layoutBounds.height * .98 ),
       397 );
-    this.mvt = mvt; // Make mvt available to descendant types.
+    this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
 
     //Spacing for top margin of layout bounds
-    this.topSpacing = mvt.modelToViewY( model.ceilingY );
+    this.topSpacing = modelViewTransform2.modelToViewY( model.ceilingY );
 
     // Add masses
     this.massLayer = new Node();
     var massNodes = [];
     model.masses.forEach( function( mass ) {
-      var massNode = new MassNode( mass, mvt, self, model, tandem.createTandem( mass.tandem.tail + 'Node' ) );
+      var massNode = new MassNode( mass, modelViewTransform2, self, model, tandem.createTandem( mass.tandem.tail + 'Node' ) );
       self.massLayer.addChild( massNode );
       // Keeps track of the mass node to restore original Z order.
       massNodes.push( massNode );
@@ -97,19 +97,19 @@ define( function( require ) {
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
     this.firstOscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 0 ],
-      mvtSpringHeight,
+      modelViewTransform2SpringHeight,
       tandem.createTandem( 'firstOscillatingSpringNode' )
     );
     this.secondOscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 1 ],
-      mvtSpringHeight,
+      modelViewTransform2SpringHeight,
       tandem.createTandem( 'secondOscillatingSpringNode' )
     );
 
     // Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
       model,
-      mvt,
+      modelViewTransform2,
       tandem.createTandem( 'springHangerNode' )
     );
 
@@ -146,7 +146,7 @@ define( function( require ) {
 
     // @public Initializes equilibrium line for first spring
     this.firstSpringEquilibriumLine = new EquilibriumLineNode(
-      mvt,
+      modelViewTransform2,
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'firstSpringEquilibriumLine' )
@@ -154,7 +154,7 @@ define( function( require ) {
 
     // @public Initializes equilibrium line for second spring
     this.secondSpringEquilibriumLine = new EquilibriumLineNode(
-      mvt,
+      modelViewTransform2,
       model.springs[ 1 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'secondSpringEquilibriumLine' )
@@ -162,7 +162,7 @@ define( function( require ) {
 
     // @public Initializes natural line for first spring
     this.firstNaturalLengthLine = new NaturalLengthLineNode(
-      mvt,
+      modelViewTransform2,
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'firstNaturalLengthLine' )
@@ -170,7 +170,7 @@ define( function( require ) {
 
     // @public Initializes natural line for second spring
     this.secondNaturalLengthLine = new NaturalLengthLineNode(
-      mvt,
+      modelViewTransform2,
       model.springs[ 1 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'secondNaturalLengthLine' )
@@ -247,7 +247,7 @@ define( function( require ) {
         self.resetMassLayer();
       },
       right: this.layoutBounds.right - 10,
-      bottom: mvt.modelToViewY( model.floorY )
+      bottom: modelViewTransform2.modelToViewY( model.floorY )
     } );
 
     // Play/Pause and Step Forward Button Control

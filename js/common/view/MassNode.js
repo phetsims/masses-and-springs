@@ -26,23 +26,23 @@ define( function( require ) {
 
   /**
    * @param {Mass} mass -  model object
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform2
    * @param {MassesAndSpringsScreenView} screenView
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @constructor
    */
-  function MassNode( mass, mvt, screenView, model, tandem ) {
+  function MassNode( mass, modelViewTransform2, screenView, model, tandem ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
     this.mass = mass;
 
     var viewBounds = new Bounds2(
-      mvt.modelToViewDeltaX( -mass.radius ),
+      modelViewTransform2.modelToViewDeltaX( -mass.radius ),
       0,
-      mvt.modelToViewDeltaX( mass.radius ),
-      mvt.modelToViewDeltaY( -mass.height )
+      modelViewTransform2.modelToViewDeltaX( mass.radius ),
+      modelViewTransform2.modelToViewDeltaY( -mass.height )
     );
     var rect = Rectangle.bounds( viewBounds, {
       stroke: 'black',
@@ -69,7 +69,7 @@ define( function( require ) {
     }
 
     this.mass.positionProperty.link( function( position ) {
-      self.translation = mvt.modelToViewPosition( position );
+      self.translation = modelViewTransform2.modelToViewPosition( position );
     } );
 
     var modelOffset;
@@ -80,14 +80,14 @@ define( function( require ) {
 
       // Handler that moves the particle in model space.
       drag: function( event ) {
-        var proposedMassPosition = mvt
+        var proposedMassPosition = modelViewTransform2
           .viewToModelPosition( screenView.globalToLocalPoint( event.pointer.point ) )
           .minus( modelOffset );
         model.adjustDraggedMassPosition( self.mass, proposedMassPosition );
       },
 
       start: function( event ) {
-        modelOffset = mvt
+        modelOffset = modelViewTransform2
           .viewToModelPosition( screenView.globalToLocalPoint( event.pointer.point ) )
           .minus( self.mass.positionProperty.get() );
         mass.userControlledProperty.set( true );

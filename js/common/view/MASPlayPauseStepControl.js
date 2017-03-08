@@ -38,16 +38,16 @@ define( function( require ) {
     // TODO: Can we pass in screen layout bounds from the model rather than declaring the bounds in this scope again?
     var layoutBounds = new Bounds2( 0, 0, 768, 504 );
 
-    var mvt = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+    var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( 0, layoutBounds.height * .98 ),
       397 );
-    this.mvt = mvt; // Make mvt available to descendant types.
+    this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
 
     // Play/Pause Button
     var playPauseButton = new PlayPauseButton( model.playingProperty, {
       right: layoutBounds.right * .65,
-      bottom: mvt.modelToViewY( model.floorY ),
+      bottom: modelViewTransform2.modelToViewY( model.floorY ),
       radius: 18,
       touchAreaDilation: TOUCH_AREA_DILATION
     } );

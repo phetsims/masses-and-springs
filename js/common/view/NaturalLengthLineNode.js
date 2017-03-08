@@ -21,12 +21,14 @@ define( function( require ) {
   var LINE_LENGTH = 100;
 
   /**
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform2
    * @param {Spring} spring - determines which spring is being referenced
    * @param {boolean} visibleProperty
+   * @param {Tandem} tandem
+   * 
    * @constructor
    */
-  function NaturalLengthLineNode( mvt, spring, visibleProperty, tandem ) {
+  function NaturalLengthLineNode( modelViewTransform2, spring, visibleProperty, tandem ) {
     var self = this;
     Node.call( this );
 
@@ -42,8 +44,8 @@ define( function( require ) {
     this.addChild( line );
 
     // @private
-    var xPos = mvt.modelToViewX( spring.positionProperty.get().x ) + 7.5; // prevents overlap with the equilibrium line
-    var yPos = mvt.modelToViewY( spring.bottomProperty.get() );
+    var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x ) + 7.5; // prevents overlap with the equilibrium line
+    var yPos = modelViewTransform2.modelToViewY( spring.bottomProperty.get() );
     this.positionProperty = new Property( new Vector2( xPos, yPos ) );
     this.positionProperty.link( function( position ) {
       self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );

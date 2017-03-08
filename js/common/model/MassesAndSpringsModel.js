@@ -33,7 +33,7 @@ define( function( require ) {
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
-   * TODO:: There has to be a better way to manage all of these properties as one entity (ask JB)
+   * TODO:: There has to be a better way to manage all of these properties as one entity without using propertySet()
    * @constructor
    */
   function MassesAndSpringsModel( tandem ) {

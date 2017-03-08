@@ -214,7 +214,9 @@ define( function( require ) {
     },
 
     updateThicknessFromLength: function() {
+
       this.naturalRestingLengthProperty.set( .111 * this.springConstantProperty.get() - .1377 * this.thicknessProperty.get() );
+
     },
 
     updateThicknessFromSpringConstant: function() {
@@ -225,8 +227,9 @@ define( function( require ) {
       var self = this;
       this.naturalRestingLengthProperty.link( function( length ) {
         self.springConstantProperty.set( length * 9 + 1.24 * self.thicknessProperty.get() );
-
-        console.log( 'this.thicknessProperty.get() = ' + self.thicknessProperty.get() );
+        // debugger;
+        console.log( 'self.thicknessProperty.get() = ' + self.thicknessProperty.get() );
+        console.log( 'self.thicknessProperty.get() = ' + self.thicknessProperty.get() );
       } );
     },
 
