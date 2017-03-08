@@ -12,7 +12,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
-  var StopSignNode = require( 'MASSES_AND_SPRINGS/common/view/StopSignNode' );
+  var StopSignNode = require( 'SCENERY_PHET/StopSignNode' );
 
   /**
    * Constructor for return button
