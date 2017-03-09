@@ -84,22 +84,18 @@ define( function( require ) {
 
     // Link that is responsible for switching the scenes
     model.springLengthModeProperty.lazyLink( function( mode ) {
-
       /**@private Functions used to determine the inverse relationship between the length and springConstant/thickness
        Functions follow logic:
        -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
        -Thickness = constant -->As length increases, spring constant decreases  (and vice versa)
        */
       var mapRestingLengthToSpringConstant = new LinearFunction( .1, .5, 2.5, 5.5 );
-      var mapRestingLengthToThickness = new LinearFunction( .1, .5, 5, 15 );
+      var mapRestingLengthToSpringConstant2 = new LinearFunction( .1, .5, 5, 15 );
       var mapRestingLengthToThickness2 = new LinearFunction( .1, .5, self.firstOscillatingSpringNode.lineWidthProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() );
-
       self.resetMassLayer();
 
       // Reset springs when scenes are switched
       if ( mode === 'same-length' ) {
-
-        // model.springPropertyUpdate(model.springs[ 0 ].naturalRestingLengthProperty );
         // Manages stashing and applying parameters to each scene
         scene2Parameters = model.stashSceneParameters();
         model.applySceneParameters( scene1Parameters );
@@ -115,21 +111,18 @@ define( function( require ) {
         // Manages logic for handling spring constants
         self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
         Property.multilink( [ model.selectedConstantProperty, model.springs[ 0 ].naturalRestingLengthProperty ], function() {
-          {
-            if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
-              // model.springPropertyUpdate(model.springs[0].springConstantProperty);
+          if ( model.selectedConstantProperty.get() === 'spring-constant' && model.springLengthModeProperty.get() === 'adjustable-length' ) {
               // TODO: Sloppy implementation. See https://github.com/phetsims/masses-and-springs/issues/34
-              // var tempSpringConstant = model.springs[ 0 ].springConstantProperty.get();
-              // model.springs[ 0 ].springConstantProperty.set( model.springs[ 0 ].springConstantProperty.get() * .99 );
-              // model.springs[ 0 ].springConstantProperty.set( tempSpringConstant );
+            var tempSpringConstant = model.springs[ 0 ].springConstantProperty.get();
+            model.springs[ 0 ].springConstantProperty.set( model.springs[ 0 ].springConstantProperty.get() * .99 );
+            model.springs[ 0 ].springConstantProperty.set( tempSpringConstant );
               self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
             }
-            else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
+          else if ( model.selectedConstantProperty.get() === 'spring-thickness' && model.springLengthModeProperty.get() === 'adjustable-length' ) {
               // model.springPropertyUpdate(model.springs[0].thicknessProperty);
-              model.springs[ 0 ].springConstantProperty.set( mapRestingLengthToThickness( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+            model.springs[ 0 ].springConstantProperty.set( mapRestingLengthToSpringConstant2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
               self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
             }
-          }
         } );
       }
       // Property.multilink( [ model.selectedConstantProperty, self.firstOscillatingSpringNode.lineWidthProperty ], function() {

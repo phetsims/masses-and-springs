@@ -213,26 +213,6 @@ define( function( require ) {
       }
     },
 
-    updateThicknessFromLength: function() {
-
-      this.naturalRestingLengthProperty.set( .111 * this.springConstantProperty.get() - .1377 * this.thicknessProperty.get() );
-
-    },
-
-    updateThicknessFromSpringConstant: function() {
-      this.thicknessProperty.set( .806 * this.springConstantProperty.get() - 7.2581 * this.naturalRestingLengthProperty.get() );
-    },
-
-    updateSpringConstantFromLength: function() {
-      var self = this;
-      this.naturalRestingLengthProperty.link( function( length ) {
-        self.springConstantProperty.set( length * 9 + 1.24 * self.thicknessProperty.get() );
-        // debugger;
-        console.log( 'self.thicknessProperty.get() = ' + self.thicknessProperty.get() );
-        console.log( 'self.thicknessProperty.get() = ' + self.thicknessProperty.get() );
-      } );
-    },
-
     /**
      * @public
      */

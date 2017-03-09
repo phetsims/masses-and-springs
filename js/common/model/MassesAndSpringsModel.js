@@ -81,11 +81,11 @@ define( function( require ) {
       tandem: tandem.createTandem( 'rulerVisibleProperty' )
     } );
 
-    // @public {Property.<string>} determines which spring property to keep constant in the constants panel
+    // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
     this.selectedConstantProperty = new Property( 'spring-constant', {
       tandem: tandem.createTandem( 'selectedConstantProperty' ),
       phetioValueType: TString,
-      validValues: [ 'spring-constant', 'spring-thickness' ]
+      validValues: [ 'spring-constant', 'spring-thickness', null ]
     } );
 
     // @public {Property.<boolean>} determines visibility of timer node
@@ -136,8 +136,7 @@ define( function( require ) {
       new Spring( new Vector2( .95, this.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'rightSpring' ) )
     ];
 
-    // @public responsible for changing the default length
-
+    // @public (read-only) model of masses used throughout the sim
     this.masses = [
       new Mass( .250, new Vector2( .12, .5 ), true, 'grey', tandem.createTandem( 'largeGreyMass' ) ),
       new Mass( .100, new Vector2( .20, .5 ), true, 'grey', tandem.createTandem( 'mediumGreyMass1' ) ),
@@ -147,6 +146,8 @@ define( function( require ) {
       new Mass( .150, new Vector2( .56, .5 ), false, 'green', tandem.createTandem( 'greenMass' ) ),
       new Mass( .075, new Vector2( .49, .5 ), false, 'red', tandem.createTandem( 'redMass' ) )
     ];
+
+    // @public (read-only) model of bodies used throughout the sim
     this.bodies = [
       Body.MOON,
       Body.EARTH,
@@ -170,7 +171,6 @@ define( function( require ) {
         spring.dampingCoefficientProperty.set( newFriction );
       } );
     } );
-
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
@@ -371,21 +371,6 @@ define( function( require ) {
       var parameters = [ spring1State, spring2State, massesState ];
 
       return parameters;
-    },
-
-    springPropertyUpdate: function( springProperty ) {
-      if ( springProperty === this.springs[ 0 ].springConstantProperty ) {
-        this.springs[ 0 ].updateSpringConstantFromLength();
-        console.log( 'spring Constant from length' );
-      }
-      else if ( springProperty === this.springs[ 0 ].naturalRestingLengthProperty ) {
-        this.springs[ 0 ].updateThicknessFromLength();
-        console.log( 'Thickness from spring Length' );
-      }
-      else if ( springProperty === this.springs[ 0 ].thicknessProperty ) {
-        this.springs[ 0 ].updateThicknessFromSpringConstant();
-        console.log( 'Thickness from spring constant' );
-      }
     },
 
     applySceneParameters: function( parameters ) {
