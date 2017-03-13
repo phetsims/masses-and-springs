@@ -15,6 +15,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
+  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -41,7 +42,7 @@ define( function( require ) {
 
     // Lines added for reference in panel
     var greenLine = new Line( 0, 0, LINE_LENGTH, 0, {
-      stroke: 'rgb(93, 191, 142)',
+      stroke: PhetColorScheme.GREEN_COLORBLIND,
       lineDash: [ 6, 2.5 ],
       lineWidth: 2.0,
       cursor: 'pointer'
@@ -55,7 +56,7 @@ define( function( require ) {
     } );
 
     var redLine = new Line( 0, 0, LINE_LENGTH, 0, {
-      stroke: 'red',
+      stroke: PhetColorScheme.RED_COLORBLIND,
       lineDash: [ 6, 2.5 ],
       lineWidth: 2.0,
       cursor: 'pointer'

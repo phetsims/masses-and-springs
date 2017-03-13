@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var StopSignNode = require( 'SCENERY_PHET/StopSignNode' );
 
@@ -29,7 +30,8 @@ define( function( require ) {
       baseColor: 'rgb( 240, 240, 240 )',
       content: new StopSignNode( {
         tandem: tandem.createTandem( 'stopSignNode' ),
-        scale: 0.33
+        scale: 0.33,
+        fill: PhetColorScheme.RED_COLORBLIND
       } ),
       tandem: tandem
     }, options );

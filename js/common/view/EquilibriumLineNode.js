@@ -15,6 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   // constants
   var LINE_LENGTH = 100;
@@ -30,7 +31,7 @@ define( function( require ) {
     Node.call( this );
 
     var line = new Line( 0, 0, LINE_LENGTH, 0, {
-      stroke: 'rgb(93, 191, 142)',
+      stroke: PhetColorScheme.GREEN_COLORBLIND,
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
       cursor: 'pointer',
