@@ -138,13 +138,13 @@ define( function( require ) {
 
     // @public (read-only) model of masses used throughout the sim
     this.masses = [
-      new Mass( .250, new Vector2( .12, .5 ), true, 'grey', tandem.createTandem( 'largeGreyMass' ) ),
-      new Mass( .100, new Vector2( .20, .5 ), true, 'grey', tandem.createTandem( 'mediumGreyMass1' ) ),
-      new Mass( .100, new Vector2( .28, .5 ), true, 'grey', tandem.createTandem( 'mediumGreyMass2' ) ),
-      new Mass( .050, new Vector2( .33, .5 ), true, 'grey', tandem.createTandem( 'smallGreyMass' ) ),
-      new Mass( .200, new Vector2( .63, .5 ), false, 'blue', tandem.createTandem( 'blueMass' ) ),
-      new Mass( .150, new Vector2( .56, .5 ), false, 'green', tandem.createTandem( 'greenMass' ) ),
-      new Mass( .075, new Vector2( .49, .5 ), false, 'red', tandem.createTandem( 'redMass' ) )
+      new Mass( .250, new Vector2( .12, .5 ), true, 'grey', tandem.createTandem( 'largeLabeledMass' ) ),
+      new Mass( .100, new Vector2( .20, .5 ), true, 'grey', tandem.createTandem( 'mediumLabeledMass1' ) ),
+      new Mass( .100, new Vector2( .28, .5 ), true, 'grey', tandem.createTandem( 'mediumLabeledMass2' ) ),
+      new Mass( .050, new Vector2( .33, .5 ), true, 'grey', tandem.createTandem( 'smallLabeledMass' ) ),
+      new Mass( .200, new Vector2( .63, .5 ), false, 'blue', tandem.createTandem( 'largeUnlabeledMass' ) ),
+      new Mass( .150, new Vector2( .56, .5 ), false, 'green', tandem.createTandem( 'mediumUnlabeledMass' ) ),
+      new Mass( .075, new Vector2( .49, .5 ), false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
     ];
 
     // @public (read-only) model of bodies used throughout the sim
