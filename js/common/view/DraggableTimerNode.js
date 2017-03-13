@@ -17,9 +17,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
   var Timer = require( 'SCENERY_PHET/Timer' );
-
-  // phet-io modules
-  var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
+  var TVector2 = require( 'DOT/TVector2' );
 
   /**
    * @param {Bounds2} dragBounds

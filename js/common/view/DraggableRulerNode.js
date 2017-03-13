@@ -17,13 +17,12 @@ define( function( require ) {
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var TVector2 = require( 'DOT/TVector2' );
 
   // strings
   var cmString = require( 'string!MASSES_AND_SPRINGS/cm' );
 
-  // phet-io modules
-  var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
-  
+
   /**
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition

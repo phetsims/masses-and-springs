@@ -20,12 +20,12 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Complex = require( 'DOT/Complex' );
   var Vector2 = require( 'DOT/Vector2' );
+  var TVector2 = require( 'DOT/TVector2' );
+  var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
 
   // phet-io modules
   var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
-  var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
-  var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
