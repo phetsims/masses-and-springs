@@ -24,7 +24,7 @@ define( function( require ) {
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
   var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
-  var TSpring = require( 'ifphetio!PHET_IO/simulations/masses-and-springs/TSpring' );
+  var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
 
   /**
    * @param {number} massValue:  mass in kg

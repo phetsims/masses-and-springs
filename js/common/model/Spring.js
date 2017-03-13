@@ -25,7 +25,7 @@ define( function( require ) {
   var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
   var TVector2 = require( 'ifphetio!PHET_IO/types/dot/TVector2' );
-  var TMass = require( 'ifphetio!PHET_IO/simulations/masses-and-springs/TMass' );
+  var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring

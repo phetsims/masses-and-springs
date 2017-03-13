@@ -8,10 +8,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var assertInstanceOf = require( 'PHET_IO/assertions/assertInstanceOf' );
-  var phetioNamespace = require( 'PHET_IO/phetioNamespace' );
-  var phetioInherit = require( 'PHET_IO/phetioInherit' );
-  var TObject = require( 'PHET_IO/types/TObject' );
+  var assertInstanceOf = require( 'ifphetio!PHET_IO/assertions/assertInstanceOf' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var phetioInherit = require( 'ifphetio!PHET_IO/phetioInherit' );
+  var TObject = require( 'ifphetio!PHET_IO/types/TObject' );
 
   var TMass = function( instance, phetioID ) {
     assertInstanceOf( instance, phet.massesAndSprings.Mass );
@@ -32,7 +32,7 @@ define( function( require ) {
 
   } );
 
-  phetioNamespace.register( 'TMass', TMass );
+  massesAndSprings.register( 'TMass', TMass );
 
   return TMass;
 } );
