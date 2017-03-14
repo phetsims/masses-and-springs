@@ -30,14 +30,14 @@ define( function( require ) {
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
-   * @param {number} naturalRestingLength - resting length of unweighted spring in m
+   * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
    * @param {Range} springConstantRange - k in N/m
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
    * @param {Tandem} tandem
    *
    * @constructor
    */
-  function Spring( position, naturalRestingLength, springConstantRange, defaultDampingCoefficient, tandem ) {
+  function Spring( position, initialNaturalRestingLength, springConstantRange, defaultDampingCoefficient, tandem ) {
     var self = this;
 
     // @public {Property.<number>} gravitational acceleration
@@ -83,11 +83,11 @@ define( function( require ) {
     } );
 
     // @public {Proeprty.<number>} length of the spring without mass attached
-    this.naturalRestingLengthProperty = new Property( naturalRestingLength, {
+    this.naturalRestingLengthProperty = new Property( initialNaturalRestingLength, {
       tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
       phetioValueType: TNumber( {
         units: 'meters',
-        range: new RangeWithValue( .1, .5, naturalRestingLength )
+        range: new RangeWithValue( .1, .5, initialNaturalRestingLength )
       } )
     } );
 
@@ -106,8 +106,8 @@ define( function( require ) {
     this.springExtension = 0;
 
     // validate and save options
-    assert && assert( naturalRestingLength > 0, 'naturalRestingLength must be > 0 : ' + naturalRestingLength );
-    this.naturalRestingLengthProperty.set( naturalRestingLength ); // @public read-only
+    assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : ' + initialNaturalRestingLength );
+    this.naturalRestingLengthProperty.set( initialNaturalRestingLength ); // @public read-only
 
     assert && assert( springConstantRange.min > 0, 'minimum spring constant must be positive : '
                                                    + springConstantRange.min );
