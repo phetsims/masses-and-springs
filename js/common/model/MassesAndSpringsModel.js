@@ -97,7 +97,10 @@ define( function( require ) {
     this.timerSecondProperty = new NumberProperty( 0, {
       range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
       tandem: tandem.createTandem( 'timerSecondProperty' ),
-      phetioValueType: TNumber( { units: 'seconds', range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ) } )
+      phetioValueType: TNumber( {
+        units: 'seconds',
+        range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 )
+      } )
     } );
 
     // @public {Property.<boolean>} determines whether timer is active or not

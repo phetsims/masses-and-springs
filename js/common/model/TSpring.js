@@ -1,7 +1,8 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
- *
+ * PhET-iO wrapper type for Masses-And-Springs built-in Spring type.
+ * 
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
@@ -28,8 +29,6 @@ define( function( require ) {
         id: spring.phetioID
       };
     }
-
-
   } );
 
   massesAndSprings.register( 'TSpring', TSpring );

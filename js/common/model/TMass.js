@@ -1,6 +1,7 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
+ * PhET-iO wrapper type for Masses-And-Springs built-in Mass type.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */

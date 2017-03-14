@@ -20,6 +20,7 @@ define( function( require ) {
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
+  var TVector2 = require( 'DOT/TVector2' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -33,8 +34,9 @@ define( function( require ) {
     var self = this;
     Node.call( this );
     // Creates laser pointer tip for reference line
-    this.laserEnabledProperty = new Property( null );
-    var laserPointerNode = new LaserPointerNode( this.laserEnabledProperty, {
+    // Laser should never have a button in this sim, but a property is needed for the LaserPointerNode to work
+    var laserEnabledProperty = new Property( false, { validValues: [ false ] } );
+    var laserPointerNode = new LaserPointerNode( laserEnabledProperty, {
       bodySize: new Dimension2( 12, 14 ),
       nozzleSize: new Dimension2( 8, 9 ),
       cornerRadius: 1,
@@ -49,20 +51,25 @@ define( function( require ) {
       stroke: 'red',
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      tandem: tandem.createTandem( 'line' )
     } );
     line.mouseArea = line.localBounds.dilated( 10 );
     line.touchArea = line.localBounds.dilated( 10 );
 
     // @private
     initialPosition.setX( 330 );
-    this.positionProperty = new Property( initialPosition );
+    this.positionProperty = new Property( initialPosition, {
+      tandem: tandem.createTandem( 'positionProperty' ),
+      phetioValueType: TVector2
+    } );
     this.positionProperty.link( function( position ) {
       self.translation = position.minus( new Vector2( length / 2, 0 ) );
     } );
 
     this.addInputListener( new MovableDragHandler( this.positionProperty, {
-      dragBounds: new Bounds2( 330, 75, 330, 410 ) // done so reference line is only draggable on the y-axis
+      dragBounds: new Bounds2( 330, 75, 330, 410 ), // done so reference line is only draggable on the y-axis
+      tandem: tandem.createTandem( 'dragHandler' )
     } ) );
 
     visibleProperty.linkAttribute( self, 'visible' );

@@ -21,7 +21,6 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
   var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
-  var LABEL_FONT = new PhetFont( 10 );
 
   /**
    *
@@ -32,8 +31,6 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  var TITLE_FONT = new PhetFont( { size: 12, weight: 'bold' } );
-
   function SpringConstantControlPanel( springConstantProperty, springConstantPropertyRange, title, tandem, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
@@ -49,12 +46,19 @@ define( function( require ) {
       thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00b3b3',
       thumbFillHighlighted: '#00e6e6',
-      align: 'center'
+      align: 'center',
+      tandem: tandem.createTandem( 'hSlider' )
     } );
 
-    hSlider.addMajorTick( springConstantPropertyRange.min, new Text( springConstantSmallString, { font: LABEL_FONT } ) );
+    hSlider.addMajorTick( springConstantPropertyRange.min, new Text( springConstantSmallString, {
+      font: MassesAndSpringsConstants.LABEL_FONT,
+      tandem: tandem.createTandem( 'springConstantSmallString' )
+    } ) );
     hSlider.addMajorTick( springConstantPropertyRange.min + ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 2 );
-    hSlider.addMajorTick( springConstantPropertyRange.max, new Text( springConstantLargeString, { font: LABEL_FONT } ) );
+    hSlider.addMajorTick( springConstantPropertyRange.max, new Text( springConstantLargeString, {
+      font: MassesAndSpringsConstants.LABEL_FONT,
+      tandem: tandem.createTandem( 'springConstantLargeString' )
+    } ) );
     for ( var i = 1; i < 10; i++ ) {
       if ( i !== 5 ) {
         hSlider.addMinorTick( springConstantPropertyRange.min + i * ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 10 );
@@ -64,9 +68,13 @@ define( function( require ) {
     Panel.call( this, new VBox( {
       align: 'left',
       children: [
-        new Text( title, { font: TITLE_FONT } ),
+        new Text( title, {
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          tandem: tandem.createTandem( 'title' )
+        } ),
         hSlider
-      ]
+      ],
+      tandem: tandem.createTandem( 'vBox' )
     } ), options );
   }
 

@@ -78,7 +78,7 @@ define( function( require ) {
     this.topSpacing = modelViewTransform2.modelToViewY( model.ceilingY );
 
     // Add masses
-    this.massLayer = new Node();
+    this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
     var massNodes = [];
     model.masses.forEach( function( mass ) {
       var massNode = new MassNode( mass, modelViewTransform2, self, model, tandem.createTandem( mass.tandem.tail + 'Node' ) );
@@ -247,7 +247,8 @@ define( function( require ) {
         self.resetMassLayer();
       },
       right: this.layoutBounds.right - 10,
-      bottom: modelViewTransform2.modelToViewY( model.floorY )
+      bottom: modelViewTransform2.modelToViewY( model.floorY ),
+      tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
     // Play/Pause and Step Forward Button Control
@@ -262,14 +263,16 @@ define( function( require ) {
       maxWidth: MAX_TEXT_WIDTH
     };
     var speedSelectionButtonRadius = 8;
-    var normalText = new Text( normalString, speedSelectionButtonOptions );
+    var normalText = new Text( normalString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'normalString' ) } );
     var normalMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'normal', normalText, {
-      radius: speedSelectionButtonRadius
+      radius: speedSelectionButtonRadius,
+      tandem: tandem.createTandem( 'normalMotionRadioBox' )
     } );
 
-    var slowText = new Text( slowMotionString, speedSelectionButtonOptions );
+    var slowText = new Text( slowMotionString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'slowText' ) } );
     var slowMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'slow', slowText, {
-      radius: speedSelectionButtonRadius
+      radius: speedSelectionButtonRadius,
+      tandem: tandem.createTandem( 'normalMotionRadioBox' )
     } );
 
     var radioButtonSpacing = 4;
@@ -278,7 +281,8 @@ define( function( require ) {
       spacing: radioButtonSpacing,
       children: [ normalMotionRadioBox, slowMotionRadioBox ],
       right: resetAllButton.left - 30,
-      centerY: resetAllButton.centerY
+      centerY: resetAllButton.centerY,
+      tandem: tandem.createTandem( 'speedControl' )
     } );
 
     var firstSpringStopperButtonNode = new SpringStopperButtonNode(

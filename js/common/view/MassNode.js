@@ -19,7 +19,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
   var Text = require( 'SCENERY/nodes/Text' );
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
@@ -60,7 +60,8 @@ define( function( require ) {
         centerY: viewBounds.centerY,
         centerX: 0,
         pickable: false,
-        maxWidth: 50
+        maxWidth: 50,
+        tandem: tandem.createTandem( 'label' )
       } );
 
       var labelBackground = Rectangle.bounds( label.bounds, { fill: '#D3D3D3' } );
@@ -74,9 +75,10 @@ define( function( require ) {
 
     var modelOffset;
 
-    self.addInputListener( new SimpleDragHandler( {
+    self.addInputListener( new TandemSimpleDragHandler( {
       // Allow moving a finger (touch) across a node to pick it up.
       allowTouchSnag: true,
+      tandem: tandem.createTandem( 'dragHandler' ),
 
       // Handler that moves the particle in model space.
       drag: function( event ) {

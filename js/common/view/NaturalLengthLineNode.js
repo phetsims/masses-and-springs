@@ -15,6 +15,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
+  var TVector2 = require( 'DOT/TVector2' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -36,7 +37,8 @@ define( function( require ) {
       stroke: 'rgb(65,66,232)',
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      tandem: tandem.createTandem( 'line' )
     } );
     line.mouseArea = line.localBounds.dilated( 10 );
     line.touchArea = line.localBounds.dilated( 10 );
@@ -46,7 +48,10 @@ define( function( require ) {
     // @private
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x ) + 7.5; // prevents overlap with the equilibrium line
     var yPos = modelViewTransform2.modelToViewY( spring.bottomProperty.get() );
-    this.positionProperty = new Property( new Vector2( xPos, yPos ) );
+    this.positionProperty = new Property( new Vector2( xPos, yPos ), {
+      tandem: tandem.createTandem( 'positionProperty' ),
+      phetioValueType: TVector2
+    } );
     this.positionProperty.link( function( position ) {
       self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
     } );

@@ -48,15 +48,14 @@ define( function( require ) {
 
     var constantsSelectionButtonOptions = {
       font: FONT,
-      maxWidth: MAX_TEXT_WIDTH,
-      tandem: tandem
+      maxWidth: MAX_TEXT_WIDTH
     };
 
     // TODO: Add logic for setting values for each aqua button.
     // TODO: Follow the logic of the scene selection radio button (not playspeed).
     // @private {read-only} radius of button
     var constantsSelectionButtonRadius = 6;
-    var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
+    var thicknessText = new Text( thicknessString, _.extend( { tandem: tandem.createTandem( 'thicknessText' ) }, constantsSelectionButtonOptions ) );
     var thicknessRadioBox = new AquaRadioButton( selectedConstant, 'spring-thickness', thicknessText, {
       radius: constantsSelectionButtonRadius,
       tandem: tandem

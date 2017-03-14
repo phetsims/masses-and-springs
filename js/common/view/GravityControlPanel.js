@@ -113,10 +113,17 @@ define( function( require ) {
       trackSize: new Dimension2( 130, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00b3b3',
-      thumbFillHighlighted: '#00e6e6'
+      thumbFillHighlighted: '#00e6e6',
+      tandem: tandem.createTandem( 'gravityPropertyHSlider' )
     } );
-    this.hSlider.addMajorTick( gravityPropertyRange.min, new Text( gravityNoneString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
-    this.hSlider.addMajorTick( gravityPropertyRange.max, new Text( gravityLotsString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
+    this.hSlider.addMajorTick( gravityPropertyRange.min, new Text( gravityNoneString, {
+      font: MassesAndSpringsConstants.LABEL_FONT,
+      tandem: tandem.createTandem( 'gravityNoneString' )
+    } ) );
+    this.hSlider.addMajorTick( gravityPropertyRange.max, new Text( gravityLotsString, {
+      font: MassesAndSpringsConstants.LABEL_FONT,
+      tandem: tandem.createTandem( 'gravityLotsString' )
+    } ) );
 
     Panel.call( this, new VBox( {
       align: 'left',
@@ -124,7 +131,8 @@ define( function( require ) {
         new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
         gravityComboBox,
         self.hSlider
-      ]
+      ],
+      tandem: tandem.createTandem( 'gravityPropertyVBox' )
     } ), options );
 
     this.bodyTitleProperty.link( function( newBodyTitle ) {

@@ -17,7 +17,6 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
 
-
   // constants
   var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
 
@@ -39,14 +38,19 @@ define( function( require ) {
     var middleOfSprings = modelViewTransform2.modelToViewX( (model.springs[ 0 ].positionProperty.get().x + model.springs[ 1 ].positionProperty.get().x) / 2 );
 
     // Node for hanger text label
-    var springHangerLabelNode = new Node();
-    springHangerLabelNode.addChild( new Text( '1', { font: SPRING_HANGER_FONT } ) );
-    springHangerLabelNode.addChild( new Text( '2', { font: SPRING_HANGER_FONT, centerX: springsSeparation } ) );
+    var springHangerLabelNode = new Node( { tandem: tandem.createTandem( 'springHangerLabelNode' ) } );
+    springHangerLabelNode.addChild( new Text( '1', { font: SPRING_HANGER_FONT, tandem: tandem.createTandem( '1' ) } ) );
+    springHangerLabelNode.addChild( new Text( '2', {
+      font: SPRING_HANGER_FONT,
+      tandem: tandem.createTandem( '2' ),
+      centerX: springsSeparation
+    } ) );
     this.springHangerNode = new Rectangle( 0, 0, springHangerNodeWidth, 20, 8, 8, {
       fill: 'rgb( 180, 180, 180 )',
       stroke: 'grey',
       centerX: middleOfSprings,
-      top: modelViewTransform2.modelToViewY( model.ceilingY )
+      top: modelViewTransform2.modelToViewY( model.ceilingY ),
+      tandem: tandem.createTandem( 'springHangerNode' )
     } );
     springHangerLabelNode.centerX = this.springHangerNode.width / 2;
     springHangerLabelNode.centerY = this.springHangerNode.height / 2;

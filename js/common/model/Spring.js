@@ -9,6 +9,7 @@
 define( function( require ) {
   'use strict';
 
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
@@ -66,8 +67,6 @@ define( function( require ) {
       } )
     } );
 
-    // this.thicknessProperty= new Property(3.5);
-
     // @public {Property.<number>} viscous damping coefficient of the system
     this.dampingCoefficientProperty = new Property( defaultDampingCoefficient, {
       tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
@@ -93,9 +92,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<boolean>} determines whether the animation for the spring is played or not
-    this.animatingProperty = new Property( false, {
-      tandem: tandem.createTandem( 'animatingProperty' ),
-      phetioValueType: TBoolean
+    this.animatingProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'animatingProperty' )
     } );
 
     // @public {Property.<Mass>}

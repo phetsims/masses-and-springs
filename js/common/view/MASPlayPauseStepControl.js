@@ -49,7 +49,8 @@ define( function( require ) {
       right: layoutBounds.right * .65,
       bottom: modelViewTransform2.modelToViewY( model.floorY ),
       radius: 18,
-      touchAreaDilation: TOUCH_AREA_DILATION
+      touchAreaDilation: TOUCH_AREA_DILATION,
+      tandem: tandem.createTandem( 'playPauseButton' )
     } );
     this.addChild( playPauseButton );
 
@@ -62,7 +63,8 @@ define( function( require ) {
       fill: FILL,
       touchAreaDilation: TOUCH_AREA_DILATION,
       centerX: playPauseButton.centerX + 50,
-      centerY: playPauseButton.centerY
+      centerY: playPauseButton.centerY,
+      tandem: tandem.createTandem( 'stepForwardButton' )
     } );
     this.addChild( stepForwardButton );
 

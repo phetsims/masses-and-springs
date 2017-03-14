@@ -47,7 +47,7 @@ define( function( require ) {
 
     // @private {read-only} handles timer node drag events
     this.timerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
-      tandem: tandem.createTandem( 'timerNodeMovableDragHandler' ),
+      tandem: tandem.createTandem( 'dragHandler' ),
       dragBounds: dragBounds,
       endDrag: function( event ) {
         // When a node is released, check if it is over the toolbox.  If so, drop it in.

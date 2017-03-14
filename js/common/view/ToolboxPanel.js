@@ -15,14 +15,19 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Range = require( 'DOT/Range' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Timer = require( 'SCENERY_PHET/Timer' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // phet-io modules
+  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
 
   /**
    *
@@ -48,13 +53,23 @@ define( function( require ) {
     var self = this;
     var toolbox = new HBox( {
       align: 'center',
-      spacing: 30
+      spacing: 30,
+      tandem: tandem.createTandem( 'toolbox' )
     } );
     Panel.call( this, toolbox, options );
 
     // Create timer to be turned into icon
-    var secondsProperty = new Property( 0 );
-    var isRunningProperty = new Property( false );
+    var secondsProperty = new Property( 0, {
+      tandem: tandem.createTandem( 'secondsProperty' ),
+      phetioValueType: TNumber( {
+        units: 'seconds',
+        range: new Range( 0, Number.POSITIVE_INFINITY )
+      } )
+    } );
+    var isRunningProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'isRunningProperty' )
+    } );
+    // TODO: Tandemize timer as in common code. See https://github.com/phetsims/masses-and-springs/issues/27
     var timer = new Timer( secondsProperty, isRunningProperty );
 
     // Create ruler to be turned into icon
@@ -65,7 +80,7 @@ define( function( require ) {
       majorTickLabels.push( '' );
     }
     var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
-    var ruler = new RulerNode( rulerWidth, rulerLength, majorTickWidth, majorTickLabels, '' );
+    var ruler = new RulerNode( rulerWidth, rulerLength, majorTickWidth, majorTickLabels, '', { tandem: tandem.createTandem( 'ruler' ) } );
     ruler.rotate( 40, false );
 
     // Create timer icon
@@ -74,7 +89,8 @@ define( function( require ) {
       self.rulerIcon = new Image( image, {
         cursor: 'pointer',
         pickable: true,
-        scale: .1
+        scale: .1,
+        tandem: tandem.createTandem( 'rulerIcon' )
       } );
 
       // Input listeners for the ruler icon
@@ -85,6 +101,7 @@ define( function( require ) {
       self.rulerIcon.addInputListener( new SimpleDragHandler( {
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
+        tandem: tandem.createTandem( 'dragHandler' ),
 
         start: function( event ) {
           // find the parent screen if not already found by moving up the scene graph
@@ -126,7 +143,8 @@ define( function( require ) {
       self.timerIcon = new Image( image, {
         cursor: 'pointer',
         pickable: true,
-        scale: .4
+        scale: .4,
+        tandem: tandem.createTandem( 'timerIcon' )
       } );
 
       var timerParentScreenView2 = null; // needed for coordinate transforms
@@ -136,6 +154,7 @@ define( function( require ) {
       self.timerIcon.addInputListener( new SimpleDragHandler( {
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
+        tandem: tandem.createTandem( 'dragHandler' ),
 
         start: function( event ) {
           // find the parent screen if not already found by moving up the scene graph
