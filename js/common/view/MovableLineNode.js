@@ -19,7 +19,6 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -47,7 +46,7 @@ define( function( require ) {
     this.addChild( laserPointerNode );
 
     var line = new Line( 0, 0, length, 0, {
-      stroke: PhetColorScheme.RED_COLORBLIND,
+      stroke: 'red',
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
       cursor: 'pointer'

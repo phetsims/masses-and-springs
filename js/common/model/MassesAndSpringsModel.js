@@ -19,7 +19,6 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
-  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -144,8 +143,8 @@ define( function( require ) {
       new Mass( .100, new Vector2( .28, .5 ), true, 'grey', tandem.createTandem( 'mediumLabeledMass2' ) ),
       new Mass( .050, new Vector2( .33, .5 ), true, 'grey', tandem.createTandem( 'smallLabeledMass' ) ),
       new Mass( .200, new Vector2( .63, .5 ), false, 'blue', tandem.createTandem( 'largeUnlabeledMass' ) ),
-      new Mass( .150, new Vector2( .56, .5 ), false, PhetColorScheme.GREEN_COLORBLIND, tandem.createTandem( 'mediumUnlabeledMass' ) ),
-      new Mass( .075, new Vector2( .49, .5 ), false, PhetColorScheme.RED_COLORBLIND, tandem.createTandem( 'smallUnlabeledMass' ) )
+      new Mass( .150, new Vector2( .56, .5 ), false, 'green', tandem.createTandem( 'mediumUnlabeledMass' ) ),
+      new Mass( .075, new Vector2( .49, .5 ), false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
     ];
 
     // @public (read-only) model of bodies used throughout the sim
