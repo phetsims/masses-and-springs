@@ -14,6 +14,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var Property = require( 'AXON/Property' );
+  var Color = require( 'SCENERY/util/Color' );
+  var TColor = require( 'SCENERY/util/TColor' );
 
   // strings
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
