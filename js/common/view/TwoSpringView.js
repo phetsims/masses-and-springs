@@ -135,45 +135,44 @@ define( function( require ) {
         top: this.topSpacing,
         maxWidth: 125
       } );
-    // TODO: Refactor variable names and tandem IDs with new instances to name of instance (file name)
     // @public Initializes movable line
-    this.movableLine = new MovableLineNode(
+    this.movableLineNode = new MovableLineNode(
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
       235,
       model.movableLineVisibleProperty,
-      tandem.createTandem( 'movableLine' )
+      tandem.createTandem( 'movableLineNode' )
     );
 
     // @public Initializes equilibrium line for first spring
-    this.firstSpringEquilibriumLine = new EquilibriumLineNode(
+    this.firstSpringEquilibriumLineNode = new EquilibriumLineNode(
       modelViewTransform2,
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
-      tandem.createTandem( 'firstSpringEquilibriumLine' )
+      tandem.createTandem( 'firstSpringEquilibriumLineNode' )
     );
 
     // @public Initializes equilibrium line for second spring
-    this.secondSpringEquilibriumLine = new EquilibriumLineNode(
+    this.secondSpringEquilibriumLineNode = new EquilibriumLineNode(
       modelViewTransform2,
       model.springs[ 1 ],
       model.equilibriumPositionVisibleProperty,
-      tandem.createTandem( 'secondSpringEquilibriumLine' )
+      tandem.createTandem( 'secondSpringEquilibriumLineNode' )
     );
 
     // @public Initializes natural line for first spring
-    this.firstNaturalLengthLine = new NaturalLengthLineNode(
+    this.firstNaturalLengthLineNode = new NaturalLengthLineNode(
       modelViewTransform2,
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
-      tandem.createTandem( 'firstNaturalLengthLine' )
+      tandem.createTandem( 'firstNaturalLengthLineNode' )
     );
 
     // @public Initializes natural line for second spring
-    this.secondNaturalLengthLine = new NaturalLengthLineNode(
+    this.secondNaturalLengthLineNode = new NaturalLengthLineNode(
       modelViewTransform2,
       model.springs[ 1 ],
       model.naturalLengthVisibleProperty,
-      tandem.createTandem( 'secondNaturalLengthLine' )
+      tandem.createTandem( 'secondNaturalLengthLineNode' )
     );
 
     // Control Panel for display elements with varying visibility
