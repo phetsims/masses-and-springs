@@ -2,7 +2,7 @@
 
 /**
  * Responsible for the attributes associated with each spring node.
- * 
+ *
  * @author Matt Pennington
  * @author Denzell Barnett
  */
@@ -25,7 +25,6 @@ define( function( require ) {
   var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
 
   // phet-io modules
-  var TBoolean = require( 'ifphetio!PHET_IO/types/TBoolean' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
 
   /**
