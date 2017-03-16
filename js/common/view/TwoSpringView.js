@@ -174,7 +174,6 @@ define( function( require ) {
       model.springs[ 1 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'secondNaturalLengthLine' )
-
     );
 
     // Control Panel for display elements with varying visibility
@@ -191,6 +190,7 @@ define( function( require ) {
     this.gravityControlPanel = new GravityControlPanel(
       model.gravityProperty,
       model.gravityRange,
+      model.bodyTitleProperty,
       model.bodies,
       this,
       tandem.createTandem( 'gravityControlPanel' ),
@@ -230,7 +230,7 @@ define( function( require ) {
         left: this.gravityControlPanel.left,
         minWidth: this.gravityControlPanel.width,
         maxWidth: 180
-    } );
+      } );
 
     // Done to for movableDragHandler handling intersecting bounds of panel and ruler
     rulerNode.toolbox = this.toolboxPanel;

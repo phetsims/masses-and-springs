@@ -46,7 +46,7 @@ define( function( require ) {
    *
    * @constructor
    */
-  function GravityControlPanel( gravityProperty, gravityPropertyRange, bodies, listNodeParent, tandem, options ) {
+  function GravityControlPanel( gravityProperty, gravityPropertyRange, bodyTitleProperty, bodies, listNodeParent, tandem, options ) {
     var self = this;
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
@@ -75,6 +75,9 @@ define( function( require ) {
     // @public {Property.<number>}
     this.gravityProperty = gravityProperty;
 
+    // @public {Property.<string>}
+    this.bodyTitleProperty = bodyTitleProperty;
+
     // {Property.<number>}
     var previousGravityProperty = new Property( Body.EARTH.gravity, {
       tandem: tandem.createTandem( 'previousGravityProperty' ),
@@ -86,19 +89,15 @@ define( function( require ) {
 
     // @private {Property.<string>}
     // TODO: the selected body should be in the model, not the control panel.  Probably in MassesAndSpringsModel.
-    // TODO: consider making this a Property.<Body> instead of of Propery.<string>
-    this.bodyTitleProperty = new Property( Body.EARTH.title, {
-      tandem: tandem.createTandem( 'bodyTitleProperty' ),
-      phetioValueType: TString
-    } );
+    // TODO: consider making this a Property.<Body> instead of of Propery.<string
 
-    // {Property.<string>}
+    // @public {Property.<string>}
     var previousBodyTitleProperty = new Property( Body.EARTH.title, {
       tandem: tandem.createTandem( 'previousBodyTitleProperty' ),
       phetioValueType: TString
     } );
 
-    var gravityComboBox = new ComboBox( bodyListItems, self.bodyTitleProperty, listNodeParent, {
+    var gravityComboBox = new ComboBox( bodyListItems, bodyTitleProperty, listNodeParent, {
       listPosition: 'below',
       buttonCornerRadius: 5,
       buttonYMargin: 0,
@@ -135,7 +134,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityPropertyVBox' )
     } ), options );
 
-    this.bodyTitleProperty.link( function( newBodyTitle ) {
+    bodyTitleProperty.link( function( newBodyTitle ) {
       var body = _.find( self.bodies, { title: newBodyTitle } );
 
       // Unhide the hSlider if we are not using planetX
@@ -163,7 +162,7 @@ define( function( require ) {
 
     this.gravityProperty.link( function( newGravity ) {
       // Remember the last change to gravity if we are not on planetX
-      if ( self.bodyTitleProperty.get() !== Body.PLANET_X.title ) {
+      if ( bodyTitleProperty.get() !== Body.PLANET_X.title ) {
         previousGravityProperty.set( newGravity );
       }
       // If we changed to a body, don't try to update the title
@@ -175,7 +174,7 @@ define( function( require ) {
         }
       }
       //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
-      self.bodyTitleProperty.set( Body.CUSTOM.title );
+      bodyTitleProperty.set( Body.CUSTOM.title );
     } );
     this.mutate( options );
   }

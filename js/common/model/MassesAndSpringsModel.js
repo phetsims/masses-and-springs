@@ -123,7 +123,11 @@ define( function( require ) {
       tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
     } );
 
-    //body: Body.EARTH, //TODO:: use a default body instead of a default gravity
+    // @public {Property.<string>}
+    this.bodyTitleProperty = new Property( Body.EARTH.title, {
+      tandem: tandem.createTandem( 'bodyTitleProperty' ),
+      phetioValueType: TString
+    } );
 
     // @public {read-only} Y position of floor in m. The floor is at the bottom bounds of the screen.
     this.floorY = 0;
