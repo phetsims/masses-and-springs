@@ -16,6 +16,8 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
+  var Color = require( 'SCENERY/util/Color' );
+  var TColor = require( 'SCENERY/util/TColor' );
 
   // strings
   var introString = require( 'string!MASSES_AND_SPRINGS/intro' );
@@ -29,7 +31,10 @@ define( function( require ) {
 
     var options = {
       name: introString,
-      backgroundColorProperty: new Property( 'white' ),
+      backgroundColorProperty: new Property( new Color( 'white' ), {
+        tandem: tandem.createTandem( 'backgroundColorProperty' ),
+        phetioValueType: TColor( new Color( 'white' ) )
+      } ),
       tandem: tandem
     };
 

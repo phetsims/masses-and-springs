@@ -30,11 +30,10 @@ define( function( require ) {
 
     var options = {
       name: energyString,
-      backgroundColorProperty: 'white',
-      // backgroundColorProperty: new Property( new Color('white'),{
-      //   tandem:tandem.createTandem('backgroundColorProperty'),
-      //   phetioValueType: TColor('white')
-      // }),
+      backgroundColorProperty: new Property( new Color( 'white' ), {
+        tandem: tandem.createTandem( 'backgroundColorProperty' ),
+        phetioValueType: TColor( new Color( 'white' ) )
+      } ),
       tandem: tandem
     };
 

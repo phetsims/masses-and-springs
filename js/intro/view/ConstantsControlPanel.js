@@ -58,13 +58,14 @@ define( function( require ) {
     var thicknessText = new Text( thicknessString, _.extend( { tandem: tandem.createTandem( 'thicknessText' ) }, constantsSelectionButtonOptions ) );
     var thicknessRadioBox = new AquaRadioButton( selectedConstant, 'spring-thickness', thicknessText, {
       radius: constantsSelectionButtonRadius,
-      tandem: tandem
+      tandem: tandem.createTandem( 'thicknessRadioBox' )
     } );
 
+    //TODO: How do we tademize this?
     var constantText = new Text( StringUtils.format( springConstantString, '' ), constantsSelectionButtonOptions );
     var springConstantRadioBox = new AquaRadioButton( selectedConstant, 'spring-constant', constantText, {
       radius: constantsSelectionButtonRadius,
-      tandem: tandem
+      tandem: tandem.createTandem( 'springConstantRadioBox' )
     } );
 
     // @private {read-only} spacing used for radio buttons
@@ -76,7 +77,8 @@ define( function( require ) {
         new Text( title, { font: TITLE_FONT, tandem: tandem } ),
         springConstantRadioBox,
         thicknessRadioBox
-      ]
+      ],
+      tandem: tandem.createTandem( 'vBox' )
     } ), options );
   }
 
