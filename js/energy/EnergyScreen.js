@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  var EnergyModel = require( 'MASSES_AND_SPRINGS/energy/model/EnergyModel' );
   var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
@@ -38,7 +38,7 @@ define( function( require ) {
     };
 
     Screen.call( this,
-      function() { return new MassesAndSpringsModel( tandem.createTandem( 'model' ) ); },
+      function() { return new EnergyModel( tandem.createTandem( 'model' ) ); },
       function( model ) { return new EnergyScreenView( model, tandem.createTandem( 'view' ) ); },
       options
     );
