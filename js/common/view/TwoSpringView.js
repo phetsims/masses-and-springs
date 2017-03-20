@@ -321,11 +321,11 @@ define( function( require ) {
     this.addChild( secondSpringStopperButtonNode )
     ;
     //Reference lines from indicator visibility box
-    this.addChild( this.firstSpringEquilibriumLine );
-    this.addChild( this.secondSpringEquilibriumLine );
-    this.addChild( this.firstNaturalLengthLine );
-    this.addChild( this.secondNaturalLengthLine );
-    this.addChild( this.movableLine );
+    this.addChild( this.firstSpringEquilibriumLineNode );
+    this.addChild( this.secondSpringEquilibriumLineNode );
+    this.addChild( this.firstNaturalLengthLineNode );
+    this.addChild( this.secondNaturalLengthLineNode );
+    this.addChild( this.movableLineNode );
     this.addChild( this.massLayer );
 
     // Adding Nodes in tool box
