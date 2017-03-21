@@ -3,8 +3,8 @@
 /**
  * Object that creates the grey bar that the springs hang from and their respective numerical label.
  *
- * @author Matt Pennington
- * @author Denzell Barnett
+ * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

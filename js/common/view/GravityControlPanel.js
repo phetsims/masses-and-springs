@@ -3,17 +3,15 @@
 /**
  * Node for the gravity control panel and combo box for planet gravity options.
  *
- * @author Matt Pennington
- * @author Denzell Barnett
- *
+ * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';
 
+  // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-
-  //modules
   var Property = require( 'AXON/Property' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );

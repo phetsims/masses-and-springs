@@ -3,10 +3,9 @@
 /**
  * Node for the reference line and laser pointer node.
  *
- * @author Matt Pennington
- * @author Denzell Barnett
+ * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
-
 define( function( require ) {
   'use strict';
 

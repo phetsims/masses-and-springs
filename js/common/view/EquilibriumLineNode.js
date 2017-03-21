@@ -3,10 +3,8 @@
 /**
  * Responsible for the attributes associated with the equilibrium line node.
  *
- * @author Denzell Barnett
- *
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
-
 define( function( require ) {
   'use strict';
 
@@ -18,6 +16,7 @@ define( function( require ) {
 
   // constants
   var LINE_LENGTH = 100;
+
   /**
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Spring} spring - determines which spring

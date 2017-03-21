@@ -3,7 +3,7 @@
 /**
  * Spring stopper button that stops a specific spring from oscillating.
  *
- * @author Denzell Barnett
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

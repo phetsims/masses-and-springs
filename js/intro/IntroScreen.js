@@ -24,7 +24,7 @@ define( function( require ) {
 
   /**
    * @param {Tandem} tandem
-   * 
+   *
    * @constructor
    */
   function IntroScreen( tandem ) {

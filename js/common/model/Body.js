@@ -3,12 +3,13 @@
 /**
  * Responsible for the attributes associated with each planet.
  *
- * @author Denzell Barnett
- * @author Matt Pennington
+ * @author Denzell Barnett (PhET Interactive Simulations)
+ * @author Matt Pennington (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';
 
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Tandem = require( 'TANDEM/Tandem' );
@@ -22,12 +23,13 @@ define( function( require ) {
   var bodyZeroGString = require( 'string!MASSES_AND_SPRINGS/body.zeroG' );
 
   /**
-   * @param {string} title of body.
-   * @param {number|null} gravity acceleration of body.
+   * @param {string} title - name of body.
+   * @param {number|null} gravity - acceleration of body.  TODO: explain what a null gravity is and how it differs from 0
    * @param {Tandem} tandem
    * @constructor
    */
   function Body( title, gravity, tandem ) {
+
     // @public {read-write} set title
     this.title = title;
 

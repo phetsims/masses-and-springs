@@ -3,9 +3,8 @@
 /**
  * Node for the Natural line.
  *
- * @author Denzell Barnett
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
-
 define( function( require ) {
   'use strict';
 
@@ -26,7 +25,7 @@ define( function( require ) {
    * @param {Spring} spring - determines which spring is being referenced
    * @param {boolean} visibleProperty
    * @param {Tandem} tandem
-   * 
+   *
    * @constructor
    */
   function NaturalLengthLineNode( modelViewTransform2, spring, visibleProperty, tandem ) {

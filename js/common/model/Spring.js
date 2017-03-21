@@ -3,12 +3,13 @@
 /**
  * Responsible for the attributes associated with each spring node.
  *
- * @author Matt Pennington
- * @author Denzell Barnett
+ * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';
 
+  // modules
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
