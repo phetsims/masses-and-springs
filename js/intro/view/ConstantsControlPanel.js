@@ -4,7 +4,7 @@
  * Panel responsible for keeping the spring constant and spring thickness constant.
  * This panel should only be visible when in scene with adjustable spring length.
  *
- * @author Denzell Barnett
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

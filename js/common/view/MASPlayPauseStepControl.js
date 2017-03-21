@@ -1,9 +1,9 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- * @author Denzell Barnett
- *
  * Object that combines the play/pause button and the stepforward button.
+ *
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

@@ -3,9 +3,8 @@
 /**
  * Node for the Natural line.
  *
- * @author Denzell Barnett
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
-
 define( function( require ) {
   'use strict';
 

@@ -3,8 +3,8 @@
 /**
  * Responsible for the panel that controls the spring constant of a spring.
  *
- * @author Matt Pennington
- * @author Denzell Barnett
+ * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

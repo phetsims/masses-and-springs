@@ -3,8 +3,8 @@
 /**
  * Panel responsible for adjusting the length of the spring.
  * This panel should only be visible when in scene with adjustable spring length.
- * 
- * @author Denzell Barnett
+ *
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

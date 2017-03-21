@@ -3,10 +3,9 @@
 /**
  * Node responsible for representing the mass object.
  *
- * @author Matt Pennington
- * @author Denzell Barnett
+ * @author Matt Pennington (PhET Interactive Simulations)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
-
 define( function( require ) {
   'use strict';
 

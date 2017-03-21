@@ -3,7 +3,7 @@
 /**
  * Panel that manages options for visibility for reference lines.
  *
- * @author Denzell Barnett
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

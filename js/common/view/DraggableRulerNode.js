@@ -3,8 +3,8 @@
 /**
  * Responsible for the attributes and drag handlers associated with the ruler node.
  *
- * @author Denzell Barnett
- * @author Matt Pennington
+ * @author Denzell Barnett (PhET Interactive Simulations)
+ * @author Matt Pennington (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

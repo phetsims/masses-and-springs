@@ -3,8 +3,8 @@
 /**
  * Responsible for the attributes associated with each planet.
  *
- * @author Denzell Barnett
- * @author Matt Pennington
+ * @author Denzell Barnett (PhET Interactive Simulations)
+ * @author Matt Pennington (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

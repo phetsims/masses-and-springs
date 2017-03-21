@@ -3,10 +3,8 @@
 /**
  * Responsible for the attributes associated with the equilibrium line node.
  *
- * @author Denzell Barnett
- *
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
-
 define( function( require ) {
   'use strict';
 
