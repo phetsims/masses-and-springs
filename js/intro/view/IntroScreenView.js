@@ -33,6 +33,7 @@ define( function( require ) {
   // strings
   var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
 
+  // TODO: Move model elements into IntroModel and out of CommonModel and IntroScreenView
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
@@ -42,19 +43,22 @@ define( function( require ) {
 
     var self = this;
 
+    // Spring 1 is refernced multiple times in the intro screen
+    var spring1 = model.springs[ 0 ];
+    
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
 
     // Spring Constant Length Control Panel
     this.springLengthControlPanel = new SpringLengthControlPanel(
-      model.springs[ 0 ].naturalRestingLengthProperty,
+      spring1.naturalRestingLengthProperty,
       new RangeWithValue( .1, .5, .3 ),
       StringUtils.format( 'Length 1', 1 ),
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         right: this.springHangerNode.springHangerNode.left - 40,
         top: this.topSpacing,
-        maxWidth: 125
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       } );
     this.addChild( this.springLengthControlPanel );
 
@@ -65,7 +69,7 @@ define( function( require ) {
       constantString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
-        minWidth: this.firstSpringConstantControlPanel.maxWidth,
+        minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 60,
         left: this.firstSpringConstantControlPanel.left,
         top: this.firstSpringConstantControlPanel.bottom + this.topSpacing
       }
@@ -77,10 +81,10 @@ define( function( require ) {
     var scene1Parameters = model.stashSceneParameters();
 
     // @private {read-write} array of parameters for scene 2
-    model.springs[ 0 ].naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
+    spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
     var scene2Parameters = model.stashSceneParameters();
 
-    model.springs[ 0 ].naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
+    spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
 
     // Link that is responsible for switching the scenes
     model.springLengthModeProperty.lazyLink( function( mode ) {
@@ -89,12 +93,9 @@ define( function( require ) {
        -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
        -Thickness = constant -->As length increases, spring constant decreases  (and vice versa)
        */
-      var mapRestingLengthToSpringConstant = new LinearFunction( .1, .5, 2.5, 5.5 );
-      var mapRestingLengthToSpringConstant2 = new LinearFunction( .1, .5, 5, 15 );
-      var mapRestingLengthToThickness2 = new LinearFunction( .1, .5, self.firstOscillatingSpringNode.lineWidthProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() );
       self.resetMassLayer();
 
-      // Reset springs when scenes are switched
+      // Restoring spring parameters when scenes are switched
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
         scene2Parameters = model.stashSceneParameters();
@@ -108,27 +109,48 @@ define( function( require ) {
         model.applySceneParameters( scene2Parameters );
         self.springLengthControlPanel.visible = true;
 
-        // Manages logic for handling spring constants
+        // Manages logic for updating spring thickness and spring constant
         self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
-        Property.multilink( [ model.selectedConstantProperty, model.springs[ 0 ].naturalRestingLengthProperty ], function() {
-          if ( model.selectedConstantProperty.get() === 'spring-constant' && model.springLengthModeProperty.get() === 'adjustable-length' ) {
+        spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
+          assert && assert(
+            model.springLengthModeProperty.get() === 'adjustable-length',
+            'Natural resting length should never change unless sim is in adjustable-length mode.'
+          );
+
+          if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
             // TODO: Sloppy implementation. See https://github.com/phetsims/masses-and-springs/issues/34
-            var tempSpringConstant = model.springs[ 0 ].springConstantProperty.get();
-            model.springs[ 0 ].springConstantProperty.set( model.springs[ 0 ].springConstantProperty.get() * .99 );
-            model.springs[ 0 ].springConstantProperty.set( tempSpringConstant );
-            self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+            var tempSpringConstant = spring1.springConstantProperty.get();
+            spring1.springConstantProperty.set( spring1.springConstantProperty.get() * .99 );
+            spring1.springConstantProperty.set( tempSpringConstant );
+            spring1.updateThickness( naturalRestingLength, spring1.springConstantProperty.get() );
           }
-          else if ( model.selectedConstantProperty.get() === 'spring-thickness' && model.springLengthModeProperty.get() === 'adjustable-length' ) {
-            // model.springPropertyUpdate(model.springs[0].thicknessProperty);
-            model.springs[ 0 ].springConstantProperty.set( mapRestingLengthToSpringConstant2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-            self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+          else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
+            spring1.updateSpringConstant( naturalRestingLength, self.firstOscillatingSpringNode.lineWidthProperty.get() );
+          }
+        } );
+
+        model.selectedConstantProperty.link( function( selectedConstant ) {
+          assert && assert(
+            model.springLengthModeProperty.get() === 'adjustable-length',
+            'Natural resting length should never change unless sim is in adjustable-length mode.'
+          );
+
+          // Manages logic for changing between constant parameters
+          // TODO: Enumerate these constants for checks
+          if ( selectedConstant === 'spring-constant' ) {
+            spring1.springConstantProperty.reset();
+            spring1.updateThickness( spring1.naturalRestingLengthProperty.get(), spring1.springConstantProperty.get() );
+          }
+          else if ( selectedConstant === 'spring-thickness' ) {
+            spring1.thicknessProperty.reset();
+            spring1.updateSpringConstant( spring1.naturalRestingLengthProperty.get(), spring1.thicknessProperty.get() );
           }
         } );
       }
-      // Property.multilink( [ model.selectedConstantProperty, self.firstOscillatingSpringNode.lineWidthProperty ], function() {
+      // Used for testing purposes
+      // Property.multilink( [spring1.springConstantProperty, spring1.thicknessProperty ], function(springConstant,springThickness) {
       //
-      //   var property = [ model.springs[ 0 ].springConstantProperty.get(), self.firstOscillatingSpringNode.lineWidthProperty.get() ];
-      //   console.log( 'springConstant = ' + property[ 0 ] + '\t\t' + 'thickness = ' + self.firstOscillatingSpringNode.lineWidthProperty.get() );
+      //   console.log( 'springConstant = ' +springConstant + '\t\t' + 'thickness = ' + springThickness );
       // } );
 
       // Manages visibility of panels for spring length, spring constant, and thickness

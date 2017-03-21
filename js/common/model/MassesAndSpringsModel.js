@@ -69,6 +69,7 @@ define( function( require ) {
       validValues: [ 'slow', 'normal' ]
     } );
 
+    //TODO: Move into the intro Model.
     // @public {Property.<string>} determines the scene selection for the intro screen
     this.springLengthModeProperty = new Property( 'same-length', {
       tandem: tandem.createTandem( 'springLengthModeProperty' ),
@@ -81,6 +82,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'rulerVisibleProperty' )
     } );
 
+    // TODO: This is specific to Intro Screen. Move to Intro Model. Refactor into "constantParameter"
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
     this.selectedConstantProperty = new Property( 'spring-constant', {
       tandem: tandem.createTandem( 'selectedConstantProperty' ),
@@ -178,6 +180,15 @@ define( function( require ) {
         spring.dampingCoefficientProperty.set( newFriction );
       } );
     } );
+
+    // TODO: Move into intro model.
+    this.springs.forEach( function( spring ) {
+      spring.springConstantProperty.link( function( springConstant ) {
+        if ( self.springLengthModeProperty.get() === 'same-length' ) {
+          spring.updateThickness( spring.naturalRestingLengthProperty.get(), springConstant );
+        }
+      } );
+    } )
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
@@ -241,6 +252,7 @@ define( function( require ) {
       }
     },
 
+    // TODO: Move to IntroModel
     stashSceneParameters: function() {
       // @private {read-only} Stashing parameters for first spring
       var sceneSpring1Properties = {
@@ -380,6 +392,8 @@ define( function( require ) {
       return parameters;
     },
 
+    // TODO: Move to IntroModel
+    // TODO: Create object structure and provide loop for applying parameters
     applySceneParameters: function( parameters ) {
       // Applying stashed parameters of first spring
       this.springs[ 0 ].displacementProperty.set( parameters[ 0 ].sceneSpring1.displacement );

@@ -70,9 +70,9 @@ define( function( require ) {
     } );
 
     //ParametricSpringNode width update
-    //springConstant determines lineWidth
-    spring.springConstantProperty.link( function() {
-      self.lineWidthProperty.set( spring.thicknessProperty.get() );
+    //SpringConstant determines lineWidth
+    spring.thicknessProperty.link( function( thickness ) {
+      self.lineWidthProperty.set( thickness );
     } );
   }
 

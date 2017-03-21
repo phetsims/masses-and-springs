@@ -30,13 +30,13 @@ define( function( require ) {
 
   /**
    *
-   * @param {Property.<string>} selectedConstant determines which value to hold constant, values are 'spring-constant' and 'spring-thickness'
+   * @param {Property.<string>} selectedConstantProperty determines which value to hold constant, values are 'spring-constant' and 'spring-thickness'
    * @param {string} title: string used to title the panel
    * @param {tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function ConstantsControlPanel( selectedConstant, title, tandem, options ) {
+  function ConstantsControlPanel( selectedConstantProperty, title, tandem, options ) {
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
@@ -56,16 +56,15 @@ define( function( require ) {
     // @private {read-only} radius of button
     var constantsSelectionButtonRadius = 6;
     var thicknessText = new Text( thicknessString, _.extend( { tandem: tandem.createTandem( 'thicknessText' ) }, _.extend( { tandem: tandem.createTandem( 'thicknessString' ) }, constantsSelectionButtonOptions ) ) );
-    var thicknessRadioBox = new AquaRadioButton( selectedConstant, 'spring-thickness', thicknessText, {
+    var thicknessRadioButton = new AquaRadioButton( selectedConstantProperty, 'spring-thickness', thicknessText, {
       radius: constantsSelectionButtonRadius,
-      tandem: tandem.createTandem( 'thicknessRadioBox' )
+      tandem: tandem.createTandem( 'thicknessRadioButton' )
     } );
 
-    //TODO: How do we tademize this?
     var constantText = new Text( StringUtils.format( springConstantString, '' ), _.extend( { tandem: tandem.createTandem( 'constantText' ) }, constantsSelectionButtonOptions ) );
-    var springConstantRadioBox = new AquaRadioButton( selectedConstant, 'spring-constant', constantText, {
+    var springConstantRadioButton = new AquaRadioButton( selectedConstantProperty, 'spring-constant', constantText, {
       radius: constantsSelectionButtonRadius,
-      tandem: tandem.createTandem( 'springConstantRadioBox' )
+      tandem: tandem.createTandem( 'springConstantRadioButton' )
     } );
 
     // @private {read-only} spacing used for radio buttons
@@ -75,8 +74,8 @@ define( function( require ) {
       spacing: radioButtonSpacing,
       children: [
         new Text( title, { font: TITLE_FONT, tandem: tandem } ),
-        springConstantRadioBox,
-        thicknessRadioBox
+        springConstantRadioButton,
+        thicknessRadioButton
       ],
       tandem: tandem.createTandem( 'vBox' )
     } ), options );

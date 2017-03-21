@@ -28,10 +28,13 @@ define( function( require ) {
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
 
+  // constants
+  var DEFAULT_THICKNESS = 3; // view-coordinates, emperically determined
+
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
-   * @param {Range} springConstantRange - k in N/m
+   * @param {RangeWithValue} springConstantRange - k in N/m
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
    * @param {Tandem} tandem
    *
@@ -63,7 +66,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'springConstantProperty' ),
       phetioValueType: TNumber( {
         units: 'newtons/meters',
-        range: new RangeWithValue( 5, 15, 9 )
+        range: springConstantRange
       } )
     } );
 
@@ -82,7 +85,7 @@ define( function( require ) {
       phetioValueType: TVector2
     } );
 
-    // @public {Proeprty.<number>} length of the spring without mass attached
+    // @public {Property.<number>} length of the spring without mass attached
     this.naturalRestingLengthProperty = new Property( initialNaturalRestingLength, {
       tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
       phetioValueType: TNumber( {
@@ -90,6 +93,12 @@ define( function( require ) {
         range: new RangeWithValue( .1, .5, initialNaturalRestingLength )
       } )
     } );
+
+    // @public {Property.<number> read-only}
+    this.thicknessProperty = new Property( DEFAULT_THICKNESS );
+
+    // Calling this function here will set a calculated value for thie thickness property.
+    this.updateThickness( this.naturalRestingLengthProperty.get(), this.springConstantProperty.get() );
 
     // @public {Property.<boolean>} determines whether the animation for the spring is played or not
     this.animatingProperty = new BooleanProperty( false, {
@@ -125,19 +134,6 @@ define( function( require ) {
         phetioValueType: TNumber( {
           units: 'meters',
           range: new Range( 0, Number.POSITIVE_INFINITY )
-        } )
-      }
-    );
-    // @public {read-only} length of the spring, units = null
-    this.thicknessProperty = new DerivedProperty( [ this.springConstantProperty ],
-      function( springConstant ) {
-        var mapThickness = new LinearFunction( 5, 15, 2.5, 5.5 );
-        return mapThickness( springConstant );
-      },
-      {
-        tandem: tandem.createTandem( 'thicknessProperty' ),
-        phetioValueType: TNumber( {
-          range: new Range( 2.5, 5.5 )
         } )
       }
     );
@@ -209,6 +205,21 @@ define( function( require ) {
       if ( !resetAllProperty ) {
         this.springConstantProperty.reset();
       }
+    },
+
+    //TODO: Revise functions to actually set properties rather than calculate a value.
+    updateThickness: function( length, springConstant ) {
+      var thickness = this.thicknessProperty.initialValue
+                      * springConstant / this.springConstantProperty.initialValue
+                      * length / this.naturalRestingLengthProperty.initialValue;
+      this.thicknessProperty.set( thickness );
+    },
+
+    updateSpringConstant: function( length, thickness ) {
+      var springConstant = this.naturalRestingLengthProperty.initialValue / length
+                           * thickness / this.thicknessProperty.initialValue
+                           * this.springConstantProperty.initialValue;
+      this.springConstantProperty.set( springConstant );
     },
 
     /**
