@@ -25,8 +25,9 @@ define( function( require ) {
 
     MassesAndSpringsModel.call( this, tandem );
 
-    this.velocityVectorVisibility = new BooleanProperty( false );
-
+    this.velocityVectorVisibility = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'velocityVectorVisibility' )
+    } );
   }
 
   massesAndSprings.register( 'EnergyModel', EnergyModel );

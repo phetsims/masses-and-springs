@@ -36,7 +36,7 @@ define( function( require ) {
   // var PANEL_WIDTH = MassesAndSpringsConstants.LEFT_PANELS_MIN_WIDTH;
   // var MAX_TEXT_WIDTH = PANEL_WIDTH * 0.60;  // allows for 60% of the horizontal space in the panel for text.
   /**
-   * @param {MassesAndSpringsModel} model
+   * @param {EnergyModel} model
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
@@ -48,38 +48,43 @@ define( function( require ) {
       fill: VELOCITY_ARROW_COLOR,
       centerY: 0,
       tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH
+      headWidth: ARROW_HEAD_WIDTH,
+      tandem: tandem.createTandem( 'velocityArrow' )
     } );
 
     var accelerationArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
       fill: ACCELERATION_ARROW_COLOR,
       centerY: 0,
       tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH
+      headWidth: ARROW_HEAD_WIDTH,
+      tandem: tandem.createTandem( 'accelerationArrow' )
     } );
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new HBox( {
-          children: [ new Text( velocityString, MassesAndSpringsConstants.TITLE_FONT ), new HStrut( 79 ), velocityArrow ]
+          children: [ new Text( velocityString, MassesAndSpringsConstants.TITLE_FONT, { tandem: tandem.createTandem( 'velocityString' ) } ), new HStrut( 79 ), velocityArrow ]
         } ),
         property: model.velocityVectorVisibility,
         label: velocityString
       },
       {
         content: new HBox( {
-          children: [ new Text( accelerationString, MassesAndSpringsConstants.TITLE_FONT ), new HStrut( 57 ), accelerationArrow ]
+          children: [ new Text( accelerationString, MassesAndSpringsConstants.TITLE_FONT, { tandem: tandem.createTandem( 'accelerationString' ) } ), new HStrut( 57 ), accelerationArrow ]
         } ),
         property: model.velocityVectorVisibility,
         label: accelerationString
       }
-    ] );
+    ], {
+      tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
+    } );
     var titleToControlsVerticalSpace = 2;
     var vectorVisibilityControlsVBox = new VBox( {
         children: [
           new VStrut( titleToControlsVerticalSpace ),
           vectorVisibilityCheckBoxGroup
         ],
-        align: 'left'
+      align: 'left',
+      tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
       }
     );
 
@@ -89,7 +94,8 @@ define( function( require ) {
         minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 10,
         fill: 'rgb( 240, 240, 240 )',
-        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
+        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+        tandem: tandem.createTandem( 'vectorVisibilityControlPanel' )
       }
     );
 

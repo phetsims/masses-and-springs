@@ -24,8 +24,9 @@ define( function( require ) {
     TwoSpringView.call( this, model, tandem );
     var self = this;
 
-    // Unique attributes of screen added here...
+    // TODO: Change this value to the bottom of the vectorVisibilityControlPanel + spacing
     this.toolboxPanel.top = 350;
+
     var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),
