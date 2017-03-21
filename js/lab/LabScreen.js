@@ -32,7 +32,7 @@ define( function( require ) {
       name: labString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioValueType: TColor( new Color( 'white' ) )
+        phetioValueType: TColor
       } ),
       tandem: tandem
     };

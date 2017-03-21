@@ -1,7 +1,6 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- * TODO: Documentation
  *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
@@ -33,7 +32,7 @@ define( function( require ) {
       name: energyString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioValueType: TColor( new Color( 'white' ) )
+        phetioValueType: TColor
       } ),
       tandem: tandem
     };
