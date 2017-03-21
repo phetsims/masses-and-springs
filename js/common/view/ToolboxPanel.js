@@ -20,7 +20,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Range = require( 'DOT/Range' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
   var Timer = require( 'SCENERY_PHET/Timer' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -93,29 +93,15 @@ define( function( require ) {
       } );
 
       // Input listeners for the ruler icon
-      var rulerParentScreenView = null; // needed for coordinate transforms
       var rulerUnboundedPosition = new Vector2();
 
       // Drag listener for event forwarding: rulerIcon ---> rulerNode 
-      self.rulerIcon.addInputListener( new SimpleDragHandler( {
+      self.rulerIcon.addInputListener( new TandemSimpleDragHandler( {
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
         tandem: tandem.createTandem( 'dragHandler' ),
 
         start: function( event ) {
-          // find the parent screen if not already found by moving up the scene graph
-          if ( !rulerParentScreenView ) {
-            var testNode = self;
-            while ( testNode !== null ) {
-              if ( testNode instanceof ScreenView ) {
-                rulerParentScreenView = testNode;
-                break;
-              }
-              testNode = testNode.parents[ 0 ]; // move up the scene graph by one level
-            }
-            assert && assert( rulerParentScreenView, 'unable to find parent screen view' );
-          }
-
           // Toggle visibility
           rulerVisibleProperty.set( true );
           rulerVisibleProperty.link( function( visible ) {
@@ -124,7 +110,7 @@ define( function( require ) {
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
-          var initialPosition = rulerParentScreenView.globalToLocalPoint( event.pointer.point )
+          var initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
             .minus( new Vector2( -rulerNode.width * .5, rulerNode.height * .4 ) );
           rulerNode.positionProperty.set( initialPosition );
           rulerUnboundedPosition.set( initialPosition );
@@ -146,29 +132,15 @@ define( function( require ) {
         tandem: tandem.createTandem( 'timerIcon' )
       } );
 
-      var timerParentScreenView2 = null; // needed for coordinate transforms
       var timerUnboundedPosition = new Vector2();
 
-      // Drag listener for event forwarding: rulerIcon ---> rulerNode
-      self.timerIcon.addInputListener( new SimpleDragHandler( {
+      // Drag listener for event forwarding: timerIcon ---> timerNode
+      self.timerIcon.addInputListener( new TandemSimpleDragHandler( {
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
         tandem: tandem.createTandem( 'dragHandler' ),
 
         start: function( event ) {
-          // find the parent screen if not already found by moving up the scene graph
-          if ( !timerParentScreenView2 ) {
-            var testNode = self;
-            while ( testNode !== null ) {
-              if ( testNode instanceof ScreenView ) {
-                timerParentScreenView2 = testNode;
-                break;
-              }
-              testNode = testNode.parents[ 0 ]; // move up the scene graph by one level
-            }
-            assert && assert( timerParentScreenView2, 'unable to find parent screen view' );
-          }
-
           // Toggle visibility
           timerVisibleProperty.set( true );
           timerVisibleProperty.link( function( visible ) {
@@ -177,7 +149,7 @@ define( function( require ) {
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
-          var initialPosition = timerParentScreenView2.globalToLocalPoint( event.pointer.point )
+          var initialPosition = timerNode.globalToParentPoint( event.pointer.point )
             .minus( new Vector2( timerNode.width / 2, timerNode.height * .4 ) );
 
           timerNode.positionProperty.set( initialPosition );
