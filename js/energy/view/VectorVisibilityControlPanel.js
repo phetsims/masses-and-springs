@@ -71,7 +71,7 @@ define( function( require ) {
         content: new HBox( {
           children: [ new Text( accelerationString, MassesAndSpringsConstants.TITLE_FONT, { tandem: tandem.createTandem( 'accelerationString' ) } ), new HStrut( 57 ), accelerationArrow ]
         } ),
-        property: model.velocityVectorVisibility,
+        property: model.accelerationVectorVisibility,
         label: accelerationString
       }
     ], {

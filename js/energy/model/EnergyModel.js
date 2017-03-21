@@ -28,6 +28,10 @@ define( function( require ) {
     this.velocityVectorVisibility = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'velocityVectorVisibility' )
     } );
+
+    this.accelerationVectorVisibility = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'accelerationVectorVisibility' )
+    } );
   }
 
   massesAndSprings.register( 'EnergyModel', EnergyModel );
