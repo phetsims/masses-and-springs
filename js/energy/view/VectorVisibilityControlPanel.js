@@ -24,12 +24,14 @@ define( function( require ) {
 
   // strings
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
+  var accelerationString = require( 'string!MASSES_AND_SPRINGS/acceleration' );
 
-  var ARROW_LENGTH = 22;
-  var ARROW_HEAD_WIDTH = 12;
-  var ARROW_TAIL_WIDTH = 6;
+  var ARROW_LENGTH = 24;
+  var ARROW_HEAD_WIDTH = 14;
+  var ARROW_TAIL_WIDTH = 8;
   //var TEXT_MARGIN_RIGHT = 5;
   var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
+  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
 
   // var PANEL_WIDTH = MassesAndSpringsConstants.LEFT_PANELS_MIN_WIDTH;
   // var MAX_TEXT_WIDTH = PANEL_WIDTH * 0.60;  // allows for 60% of the horizontal space in the panel for text.
@@ -48,13 +50,27 @@ define( function( require ) {
       tailWidth: ARROW_TAIL_WIDTH,
       headWidth: ARROW_HEAD_WIDTH
     } );
+
+    var accelerationArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
+      fill: ACCELERATION_ARROW_COLOR,
+      centerY: 0,
+      tailWidth: ARROW_TAIL_WIDTH,
+      headWidth: ARROW_HEAD_WIDTH
+    } );
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new HBox( {
-          children: [ new Text( velocityString, MassesAndSpringsConstants.FONT ), new HStrut( 31 ), velocityArrow ]
+          children: [ new Text( velocityString, MassesAndSpringsConstants.TITLE_FONT ), new HStrut( 79 ), velocityArrow ]
         } ),
         property: model.velocityVectorVisibility,
         label: velocityString
+      },
+      {
+        content: new HBox( {
+          children: [ new Text( accelerationString, MassesAndSpringsConstants.TITLE_FONT ), new HStrut( 57 ), accelerationArrow ]
+        } ),
+        property: model.velocityVectorVisibility,
+        label: accelerationString
       }
     ] );
     var titleToControlsVerticalSpace = 2;

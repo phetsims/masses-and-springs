@@ -76,5 +76,8 @@
   },
   "velocity": {
     "value": "Velocity"
+  },
+  "acceleration": {
+    "value": "Acceleration"
   }
 }
