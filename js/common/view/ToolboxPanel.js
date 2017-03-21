@@ -19,7 +19,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Range = require( 'DOT/Range' );
-  var ScreenView = require( 'JOIST/ScreenView' );
   var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
   var Timer = require( 'SCENERY_PHET/Timer' );
   var Image = require( 'SCENERY/nodes/Image' );
@@ -95,7 +94,7 @@ define( function( require ) {
       // Input listeners for the ruler icon
       var rulerUnboundedPosition = new Vector2();
 
-      // Drag listener for event forwarding: rulerIcon ---> rulerNode 
+      // Drag listener for event forwarding: rulerIcon ---> rulerNode
       self.rulerIcon.addInputListener( new TandemSimpleDragHandler( {
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
