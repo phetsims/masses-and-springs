@@ -11,26 +11,9 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
-  var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
-  var Vector2 = require( 'DOT/Vector2' );
-
-  // phet-io modules
-  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
-  var TString = require( 'ifphetio!PHET_IO/types/TString' );
-
-  // constants
-  var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected to
-                               // a spring
-  var DROPPING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -38,7 +21,7 @@ define( function( require ) {
    * @constructor
    */
   function EnergyModel( tandem ) {
-    var self = this;
+    //var self = this;
 
     MassesAndSpringsModel.call( this, tandem );
 

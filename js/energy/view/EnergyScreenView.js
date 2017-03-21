@@ -29,10 +29,12 @@ define( function( require ) {
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),
       {
-        top: self.topSpacing,
+        top: this.gravityControlPanel.bottom + this.topSpacing,
         left: self.secondSpringConstantControlPanel.right + 10,
         maxWidth: 180
-      } );
+      }
+    );
+    this.addChild( vectorVisibilityControlPanel );
   }
 
   massesAndSprings.register( 'EnergyScreenView', EnergyScreenView );

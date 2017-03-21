@@ -28,7 +28,7 @@ define( function( require ) {
   var ARROW_LENGTH = 22;
   var ARROW_HEAD_WIDTH = 12;
   var ARROW_TAIL_WIDTH = 6;
-  var TEXT_MARGIN_RIGHT = 5;
+  //var TEXT_MARGIN_RIGHT = 5;
   var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
 
   // var PANEL_WIDTH = MassesAndSpringsConstants.LEFT_PANELS_MIN_WIDTH;
