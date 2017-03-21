@@ -37,7 +37,8 @@ define( function( require ) {
    *
    * @param {Property,<number>} gravityProperty
    * @param {Range} gravityPropertyRange
-   * @param {[Body]} bodies
+   * @param {Property.<string>} bodyTitleProperty
+   * @param {Body[]} bodies
    * @param {Node} listNodeParent
    * @param {Tandem} tandem
    * @param {Object} [options]
