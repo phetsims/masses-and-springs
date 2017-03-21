@@ -9,10 +9,9 @@
 define( function( require ) {
   'use strict';
 
+  // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-
-  //modules
   var Property = require( 'AXON/Property' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );

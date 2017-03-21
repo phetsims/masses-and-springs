@@ -9,6 +9,7 @@
 define( function( require ) {
   'use strict';
 
+  // modules
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );

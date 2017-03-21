@@ -112,17 +112,17 @@ define( function( require ) {
         self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
         Property.multilink( [ model.selectedConstantProperty, model.springs[ 0 ].naturalRestingLengthProperty ], function() {
           if ( model.selectedConstantProperty.get() === 'spring-constant' && model.springLengthModeProperty.get() === 'adjustable-length' ) {
-              // TODO: Sloppy implementation. See https://github.com/phetsims/masses-and-springs/issues/34
+            // TODO: Sloppy implementation. See https://github.com/phetsims/masses-and-springs/issues/34
             var tempSpringConstant = model.springs[ 0 ].springConstantProperty.get();
             model.springs[ 0 ].springConstantProperty.set( model.springs[ 0 ].springConstantProperty.get() * .99 );
             model.springs[ 0 ].springConstantProperty.set( tempSpringConstant );
-              self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-            }
+            self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToSpringConstant( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+          }
           else if ( model.selectedConstantProperty.get() === 'spring-thickness' && model.springLengthModeProperty.get() === 'adjustable-length' ) {
-              // model.springPropertyUpdate(model.springs[0].thicknessProperty);
+            // model.springPropertyUpdate(model.springs[0].thicknessProperty);
             model.springs[ 0 ].springConstantProperty.set( mapRestingLengthToSpringConstant2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-              self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
-            }
+            self.firstOscillatingSpringNode.lineWidthProperty.set( mapRestingLengthToThickness2( model.springs[ 0 ].naturalRestingLengthProperty.get() ) );
+          }
         } );
       }
       // Property.multilink( [ model.selectedConstantProperty, self.firstOscillatingSpringNode.lineWidthProperty ], function() {

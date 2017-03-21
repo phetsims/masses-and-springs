@@ -9,6 +9,7 @@
 define( function( require ) {
   'use strict';
 
+  // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
@@ -38,7 +39,7 @@ define( function( require ) {
 
     // @public {read-only} Used for constructing tandems for corresponding view nodes.
     this.tandem = tandem;
-    
+
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
     // @public (read-only)
     // {Number} mass of mass object in kg

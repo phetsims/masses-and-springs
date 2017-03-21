@@ -25,7 +25,7 @@ define( function( require ) {
    * @param {Spring} spring - determines which spring is being referenced
    * @param {boolean} visibleProperty
    * @param {Tandem} tandem
-   * 
+   *
    * @constructor
    */
   function NaturalLengthLineNode( modelViewTransform2, spring, visibleProperty, tandem ) {

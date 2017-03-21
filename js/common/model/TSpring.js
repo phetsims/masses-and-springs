@@ -2,7 +2,7 @@
 
 /**
  * PhET-iO wrapper type for Masses-And-Springs built-in Spring type.
- * 
+ *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
