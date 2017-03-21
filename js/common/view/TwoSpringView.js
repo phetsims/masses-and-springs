@@ -122,7 +122,7 @@ define( function( require ) {
       {
         right: this.springHangerNode.springHangerNode.left - 40,
         top: this.topSpacing,
-        maxWidth: 125
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
       } );
 
     this.secondSpringConstantControlPanel = new SpringConstantControlPanel(
@@ -133,7 +133,7 @@ define( function( require ) {
       {
         left: this.springHangerNode.springHangerNode.right + 40,
         top: this.topSpacing,
-        maxWidth: 125
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
       } );
     // @public Initializes movable line
     this.movableLineNode = new MovableLineNode(
@@ -182,7 +182,7 @@ define( function( require ) {
       {
         top: this.topSpacing,
         left: this.secondSpringConstantControlPanel.right + 10,
-        maxWidth: 180
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       } );
 
     // Gravity Control Panel
@@ -197,7 +197,7 @@ define( function( require ) {
         left: indicatorVisibilityControlPanel.left,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         minWidth: 1,
-        maxWidth: 180
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );
 
@@ -228,7 +228,7 @@ define( function( require ) {
         top: this.gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         left: this.gravityControlPanel.left,
         minWidth: this.gravityControlPanel.width,
-        maxWidth: 180
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       } );
 
     // Done to for movableDragHandler handling intersecting bounds of panel and ruler

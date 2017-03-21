@@ -20,7 +20,8 @@ define( function( require ) {
     TITLE_FONT: new PhetFont( { size: 12, weight: 'bold' } ),
     PANEL_CORNER_RADIUS: 7,
     MAX_TEXT_WIDTH: 80,
-    DEFAULT_SPRING_LENGTH: 0.5
+    DEFAULT_SPRING_LENGTH: 0.5,
+    PANEL_MAX_WIDTH: 220
   };
 
   massesAndSprings.register( 'MassesAndSpringsConstants', MassesAndSpringsConstants );

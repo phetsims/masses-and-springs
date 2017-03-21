@@ -70,6 +70,7 @@ define( function( require ) {
     this.vectorVisibilityControlPanel = new Panel(
       vectorVisibilityControlsVBox,
       {
+        minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 10,
         fill: 'rgb( 240, 240, 240 )',
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS

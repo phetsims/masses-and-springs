@@ -50,7 +50,7 @@ define( function( require ) {
     var self = this;
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
-      xMargin: 16,
+      xMargin: 13,
       yMargin: 10,
       align: 'left',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
