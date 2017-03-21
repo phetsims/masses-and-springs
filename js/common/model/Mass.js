@@ -21,7 +21,7 @@ define( function( require ) {
 
   // constants
   var HEIGHT_RATIO = 2;
-  var DENSITY = 80; // density of ???
+  var DENSITY = 80; // TODO: explain this constant
 
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
@@ -41,6 +41,7 @@ define( function( require ) {
     this.tandem = tandem;
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
+
     // @public (read-only)
     // {Number} mass of mass object in kg
     this.mass = massValue;
@@ -75,11 +76,17 @@ define( function( require ) {
     // @public {read-only} Non property model attributes
     this.isLabeled = isLabeled;
     this.color = color;
-    this.hookHeight = .03; // height in m
+    this.hookHeight = 0.03; // height in m
+
+    // TODO: This does not look like the volume of a cylinder.  I expected to see
+    // density = mass/volume
+    // volume = pi*r*r*h
+    // therefore radius = Math.sqrt(volume/pi/h) = Math.sqrt(mass/density/pi/h).
     this.radius = Math.pow( this.mass / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 3 );
     this.cylinderHeight = this.radius * HEIGHT_RATIO;
     this.height = this.cylinderHeight + this.hookHeight;
 
+    // TODO: callback depends on 2 properties but only links to one of them
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
         self.springProperty.get().animatingProperty.set( true );
@@ -90,7 +97,9 @@ define( function( require ) {
   massesAndSprings.register( 'Mass', Mass );
 
   return inherit( Object, Mass, {
+
     /**
+     * TODO: Documentation
      * @public
      *
      * @param {number} gravity
@@ -116,6 +125,7 @@ define( function( require ) {
     },
 
     /**
+     * TODO: Documentation
      * @public
      */
     detach: function() {
@@ -124,6 +134,7 @@ define( function( require ) {
     },
 
     /**
+     * TODO: Documentation
      * @public
      */
     reset: function() {
@@ -133,5 +144,4 @@ define( function( require ) {
       this.verticalVelocityProperty.reset();
     }
   } );
-
 } );
