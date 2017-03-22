@@ -247,6 +247,7 @@ define( function( require ) {
 
         // place that mass at the correct location as well
         mass.positionProperty.set( new Vector2( spring.positionProperty.get().x, spring.bottomProperty.get() ) );
+        mass.verticalVelocityProperty.set( 0 );
       }
     },
 
