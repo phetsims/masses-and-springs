@@ -244,7 +244,7 @@ define( function( require ) {
      *
      * @param {Mass} mass
      */
-    addMass: function( mass ) {
+    setMass: function( mass ) {
       if ( this.massProperty.get() ) {
         this.massProperty.get().detach();
       }

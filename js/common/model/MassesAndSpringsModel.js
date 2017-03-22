@@ -232,7 +232,7 @@ define( function( require ) {
           if ( Math.abs( proposedPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
                Math.abs( proposedPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE &&
                spring.massProperty.get() === null ) {
-            spring.addMass( mass );
+            spring.setMass( mass );
           }
         } );
         //Update position
