@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  var IntroModel = require( 'MASSES_AND_SPRINGS/intro/model/IntroModel' );
   var IntroScreenView = require( 'MASSES_AND_SPRINGS/intro/view/IntroScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
@@ -39,7 +39,7 @@ define( function( require ) {
     };
 
     Screen.call( this,
-      function() { return new MassesAndSpringsModel( tandem.createTandem( 'model' ) ); },
+      function() { return new IntroModel( tandem.createTandem( 'model' ) ); },
       function( model ) { return new IntroScreenView( model, tandem.createTandem( 'view' ) ); },
       options
     );

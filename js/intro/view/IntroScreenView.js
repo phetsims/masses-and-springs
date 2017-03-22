@@ -33,23 +33,19 @@ define( function( require ) {
 
   // TODO: Move model elements into IntroModel and out of CommonModel and IntroScreenView
   /**
-   * @param {MassesAndSpringsModel} model
+   * @param {IntroModel} model
    * @param {Tandem} tandem
    * @constructor
    */
   function IntroScreenView( model, tandem ) {
 
-    var self = this;
-
-    // Spring 1 is referenced multiple times in the intro screen
-    var spring1 = model.springs[ 0 ];
-    
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
+    var self = this;
 
     // Spring Constant Length Control Panel
     this.springLengthControlPanel = new SpringLengthControlPanel(
-      spring1.naturalRestingLengthProperty,
+      model.spring1.naturalRestingLengthProperty,
       new RangeWithValue( .1, .5, .3 ),
       StringUtils.format( 'Length 1', 1 ),
       tandem.createTandem( 'springLengthControlPanel' ),
@@ -60,10 +56,9 @@ define( function( require ) {
       } );
     this.addChild( this.springLengthControlPanel );
 
-
     // @private panel that keeps thickness/spring constant at constant value
     this.constantsControlPanel = new ConstantsControlPanel(
-      model.selectedConstantProperty,
+      model.constantParameterProperty,
       constantString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
@@ -74,78 +69,27 @@ define( function( require ) {
     );
     this.addChild( this.constantsControlPanel );
 
-    // initial parameters set for both scenes
-    // @private {read-write} array of parameters for scene 1
-    var scene1Parameters = model.stashSceneParameters();
-
-    // @private {read-write} array of parameters for scene 2
-    spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
-    var scene2Parameters = model.stashSceneParameters();
-
-    spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
-
-    // Link that is responsible for switching the scenes
     model.springLengthModeProperty.lazyLink( function( mode ) {
-      /**@private Functions used to determine the inverse relationship between the length and springConstant/thickness
-       Functions follow logic:
-       -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
-       -Thickness = constant -->As length increases, spring constant decreases  (and vice versa)
-       */
       self.resetMassLayer();
 
-      // Restoring spring parameters when scenes are switched
       if ( mode === 'same-length' ) {
-        // Manages stashing and applying parameters to each scene
-        scene2Parameters = model.stashSceneParameters();
-        model.applySceneParameters( scene1Parameters );
         self.springLengthControlPanel.visible = false;
       }
-
       else if ( mode === 'adjustable-length' ) {
-        // Manages stashing and applying parameters to each scene
-        scene1Parameters = model.stashSceneParameters();
-        model.applySceneParameters( scene2Parameters );
         self.springLengthControlPanel.visible = true;
-
-        // Manages logic for updating spring thickness and spring constant
-        self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
-        spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
-          if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
-            // TODO: Sloppy implementation. See https://github.com/phetsims/masses-and-springs/issues/34
-            var tempSpringConstant = spring1.springConstantProperty.get();
-            spring1.springConstantProperty.set( spring1.springConstantProperty.get() * .99 );
-            spring1.springConstantProperty.set( tempSpringConstant );
-            spring1.updateThickness( naturalRestingLength, spring1.springConstantProperty.get() );
-          }
-          else if ( model.selectedConstantProperty.get() === 'spring-thickness' ) {
-            spring1.updateSpringConstant( naturalRestingLength, self.firstOscillatingSpringNode.lineWidthProperty.get() );
-          }
-        } );
-
-        model.selectedConstantProperty.link( function( selectedConstant ) {
-          // Manages logic for changing between constant parameters
-          // TODO: Enumerate these constants for checks
-          if ( selectedConstant === 'spring-constant' ) {
-            spring1.springConstantProperty.reset();
-            spring1.updateThickness( spring1.naturalRestingLengthProperty.get(), spring1.springConstantProperty.get() );
-          }
-          else if ( selectedConstant === 'spring-thickness' ) {
-            spring1.thicknessProperty.reset();
-            spring1.updateSpringConstant( spring1.naturalRestingLengthProperty.get(), spring1.thicknessProperty.get() );
-          }
-        } );
       }
-      // Used for testing purposes
-      // Property.multilink( [spring1.springConstantProperty, spring1.thicknessProperty ], function(springConstant,springThickness) {
-      //
-      //   console.log( 'springConstant = ' +springConstant + '\t\t' + 'thickness = ' + springThickness );
-      // } );
+      self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
+
+      if ( model.constantParameterProperty.get() === 'spring-thickness' ) {
+        model.spring1.updateSpringConstant( model.spring1.naturalRestingLengthProperty, self.firstOscillatingSpringNode.lineWidthProperty.get() );
+      }
 
       // Manages visibility of panels for spring length, spring constant, and thickness
       self.constantsControlPanel.visible = self.springLengthControlPanel.visible;
       self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
     } );
+
 
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
     this.springsIcon = [
@@ -154,6 +98,7 @@ define( function( require ) {
       new Spring( new Vector2( .65, model.ceilingY + .17 ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'thirdIconSpring' ) )
     ];
 
+    //TODO: Create a specific file for this?
     // @private {read-only} Creation of spring for use in scene switching icons
     var firstSpringIcon = new OscillatingSpringNode( this.springsIcon[ 0 ], this.modelViewTransform2 );
     firstSpringIcon.loopsProperty.set( 10 );

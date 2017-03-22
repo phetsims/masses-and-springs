@@ -1,7 +1,7 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * Common model (base type) for Masses and Springs
+ * Energy model (base type) for Masses and Springs
  *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
@@ -21,20 +21,29 @@ define( function( require ) {
    * @constructor
    */
   function EnergyModel( tandem ) {
-    //var self = this;
+    var self = this;
 
     MassesAndSpringsModel.call( this, tandem );
 
-    this.velocityVectorVisibility = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'velocityVectorVisibility' )
+    this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
     } );
 
-    this.accelerationVectorVisibility = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'accelerationVectorVisibility' )
+    this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
     } );
   }
 
   massesAndSprings.register( 'EnergyModel', EnergyModel );
 
-  return inherit( MassesAndSpringsModel, EnergyModel );
+  return inherit( MassesAndSpringsModel, EnergyModel, {
+    /**
+     * @override
+     * @public
+     */
+    reset: function() {
+      this.velocityVectorVisibilityProperty.reset();
+      this.accelerationVectorVisibilityProperty.reset();
+    }
+  } );
 } );

@@ -64,14 +64,14 @@ define( function( require ) {
         content: new HBox( {
           children: [ new Text( velocityString, MassesAndSpringsConstants.TITLE_FONT, { tandem: tandem.createTandem( 'velocityString' ) } ), new HStrut( 79 ), velocityArrow ]
         } ),
-        property: model.velocityVectorVisibility,
+        property: model.velocityVectorVisibilityProperty,
         label: velocityString
       },
       {
         content: new HBox( {
           children: [ new Text( accelerationString, MassesAndSpringsConstants.TITLE_FONT, { tandem: tandem.createTandem( 'accelerationString' ) } ), new HStrut( 57 ), accelerationArrow ]
         } ),
-        property: model.accelerationVectorVisibility,
+        property: model.accelerationVectorVisibilityProperty,
         label: accelerationString
       }
     ], {
