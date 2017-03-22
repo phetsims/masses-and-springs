@@ -13,6 +13,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Property = require( 'AXON/Property' );
+  var TVector2 = require( 'DOT/TVector2' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var LINE_LENGTH = 100;
@@ -41,11 +44,20 @@ define( function( require ) {
     this.addChild( line );
 
     // @private
-    this.centerX = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
+    var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
 
     // updates the position of the equilibrium line as the system changes
     spring.equilibriumYPositionProperty.link( function( equilibriumPosition ) {
-      self.centerY = modelViewTransform2.modelToViewY( equilibriumPosition );
+      var yPos = modelViewTransform2.modelToViewY( equilibriumPosition );
+
+      self.positionProperty = new Property( new Vector2( xPos, yPos ), {
+        tandem: tandem.createTandem( 'positionProperty' ),
+        phetioValueType: TVector2
+      } );
+
+      self.positionProperty.link( function( position ) {
+        self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
+      } );
     } );
 
     visibleProperty.linkAttribute( self, 'visible' );
