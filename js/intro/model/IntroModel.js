@@ -96,7 +96,7 @@ define( function( require ) {
             self.spring1.updateThickness( naturalRestingLength, self.spring1.springConstantProperty.get() );
           }
           else if ( self.constantParameterProperty.get() === 'spring-thickness' ) {
-            self.spring1.updateSpringConstant( naturalRestingLength, self.spring1.thicknessProperty.get() )
+            self.spring1.updateSpringConstant( naturalRestingLength, self.spring1.thicknessProperty.get() );
           }
         } );
 
