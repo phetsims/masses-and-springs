@@ -49,7 +49,10 @@ define( function( require ) {
     this.frictionProperty = new NumberProperty( 0.2, {
       range: null,
       tandem: tandem.createTandem( 'frictionProperty' ),
-      phetioValueType: TNumber()
+      phetioValueType: TNumber( {
+        units: 'newtons',
+        range: null
+      } )
     } );
 
     // @public {Property.<number>} a - gravitational acceleration (positive)
@@ -62,6 +65,16 @@ define( function( require ) {
       } )
     } );
 
+    // TODO: Is this the correct TType?
+    this.gravityRangeProperty = new Property( new RangeWithValue( 0, 30, 9.8 ), {
+      range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity ),
+      tandem: tandem.createTandem( 'gravityRange' ),
+      phetioType: TNumber( {
+        units: 'meters/second/second',
+        range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity )
+      } )
+    } );
+    
     // @public {Property.<string>} determines the speed at which the sim plays.
     this.simSpeedProperty = new Property( 'normal', {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
@@ -149,7 +162,6 @@ define( function( require ) {
       Body.ZERO_G,
       Body.CUSTOM
     ];
-    this.gravityRange = new RangeWithValue( 0, 30, 9.8 );
 
     this.gravityProperty.link( function( newGravity ) {
       assert && assert( newGravity >= 0, 'gravity must be 0 or positive : ' + newGravity );
@@ -177,6 +189,7 @@ define( function( require ) {
     reset: function() {
       this.frictionProperty.reset();
       this.gravityProperty.reset();
+      this.gravityRangeProperty.reset();
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();

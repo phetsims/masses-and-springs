@@ -36,7 +36,7 @@ define( function( require ) {
   /**
    *
    * @param {Property,<number>} gravityProperty
-   * @param {Range} gravityPropertyRange
+   * @param {Property.<RangeWithValue>} gravityRangeProperty
    * @param {Property.<string>} bodyTitleProperty
    * @param {Body[]} bodies
    * @param {Node} listNodeParent
@@ -45,7 +45,7 @@ define( function( require ) {
    *
    * @constructor
    */
-  function GravityControlPanel( gravityProperty, gravityPropertyRange, bodyTitleProperty, bodies, listNodeParent, tandem, options ) {
+  function GravityControlPanel( gravityProperty, gravityRangeProperty, bodyTitleProperty, bodies, listNodeParent, tandem, options ) {
     var self = this;
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
@@ -106,7 +106,7 @@ define( function( require ) {
     } );
 
     // Saving a reference to toggle visibility for Planet X
-    this.hSlider = new HSlider( gravityProperty, gravityPropertyRange, {
+    this.hSlider = new HSlider( gravityProperty, gravityRangeProperty.get(), {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
@@ -114,11 +114,11 @@ define( function( require ) {
       thumbFillHighlighted: '#00e6e6',
       tandem: tandem.createTandem( 'gravityPropertyHSlider' )
     } );
-    this.hSlider.addMajorTick( gravityPropertyRange.min, new Text( gravityNoneString, {
+    this.hSlider.addMajorTick( gravityRangeProperty.get().min, new Text( gravityNoneString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityNoneString' )
     } ) );
-    this.hSlider.addMajorTick( gravityPropertyRange.max, new Text( gravityLotsString, {
+    this.hSlider.addMajorTick( gravityRangeProperty.get().max, new Text( gravityLotsString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );

@@ -187,7 +187,7 @@ define( function( require ) {
     // Gravity Control Panel
     this.gravityControlPanel = new GravityControlPanel(
       model.gravityProperty,
-      model.gravityRange,
+      model.gravityRangeProperty,
       model.bodyTitleProperty,
       model.bodies,
       this,
@@ -235,12 +235,11 @@ define( function( require ) {
     timerNode.toolbox = this.toolboxPanel;
 
     // Reset All button
-    var resetAllButton = new ResetAllButton( {
+    this.resetAllButton = new ResetAllButton( {
       listener: function() {
-        model.springs[ 0 ].reset();
-        model.springs[ 1 ].reset();
+        // debugger;
         model.reset();
-        self.gravityControlPanel.reset();
+        // self.gravityControlPanel.reset();
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
         self.resetMassLayer();
       },
@@ -278,8 +277,8 @@ define( function( require ) {
       align: 'left',
       spacing: radioButtonSpacing,
       children: [ normalMotionRadioBox, slowMotionRadioBox ],
-      right: resetAllButton.left - 30,
-      centerY: resetAllButton.centerY,
+      right: this.resetAllButton.left - 30,
+      centerY: this.resetAllButton.centerY,
       tandem: tandem.createTandem( 'speedControl' )
     } );
 
@@ -313,7 +312,7 @@ define( function( require ) {
     this.addChild( this.toolboxPanel );
 
     // Adding Buttons to scene graph
-    this.addChild( resetAllButton );
+    this.addChild( this.resetAllButton );
     this.addChild( MASPlayPauseStepControlNode );
     this.addChild( speedControl );
     this.addChild( firstSpringStopperButtonNode );

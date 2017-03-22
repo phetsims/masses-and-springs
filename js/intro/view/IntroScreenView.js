@@ -39,9 +39,9 @@ define( function( require ) {
    */
   function IntroScreenView( model, tandem ) {
 
+    var self = this;
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
-    var self = this;
 
     // Spring Constant Length Control Panel
     this.springLengthControlPanel = new SpringLengthControlPanel(
