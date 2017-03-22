@@ -41,7 +41,7 @@ define( function( require ) {
 
     var self = this;
 
-    // Spring 1 is refernced multiple times in the intro screen
+    // Spring 1 is referenced multiple times in the intro screen
     var spring1 = model.springs[ 0 ];
     
     // Calls common two spring view
@@ -110,11 +110,6 @@ define( function( require ) {
         // Manages logic for updating spring thickness and spring constant
         self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
         spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
-          assert && assert(
-            model.springLengthModeProperty.get() === 'adjustable-length',
-            'Natural resting length should never change unless sim is in adjustable-length mode.'
-          );
-
           if ( model.selectedConstantProperty.get() === 'spring-constant' ) {
             // TODO: Sloppy implementation. See https://github.com/phetsims/masses-and-springs/issues/34
             var tempSpringConstant = spring1.springConstantProperty.get();
@@ -128,11 +123,6 @@ define( function( require ) {
         } );
 
         model.selectedConstantProperty.link( function( selectedConstant ) {
-          assert && assert(
-            model.springLengthModeProperty.get() === 'adjustable-length',
-            'Natural resting length should never change unless sim is in adjustable-length mode.'
-          );
-
           // Manages logic for changing between constant parameters
           // TODO: Enumerate these constants for checks
           if ( selectedConstant === 'spring-constant' ) {
