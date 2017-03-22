@@ -96,7 +96,7 @@ define( function( require ) {
     // @public {Property.<number> read-only}
     this.thicknessProperty = new Property( DEFAULT_THICKNESS );
 
-    // Calling this function here will set a calculated value for thie thickness property.
+    // Calling this function here will set a calculated value for the thickness property.
     this.updateThickness( this.naturalRestingLengthProperty.get(), this.springConstantProperty.get() );
 
     // @public {Property.<boolean>} determines whether the animation for the spring is played or not

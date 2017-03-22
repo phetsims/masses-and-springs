@@ -21,7 +21,7 @@ define( function( require ) {
    * @constructor
    */
   function EnergyModel( tandem ) {
-    var self = this;
+    //var self = this;
 
     MassesAndSpringsModel.call( this, tandem );
 

@@ -69,6 +69,7 @@ define( function( require ) {
     );
     this.addChild( this.constantsControlPanel );
 
+    // Link responsible for visibility of the length control panel.
     model.springLengthModeProperty.lazyLink( function( mode ) {
       self.resetMassLayer();
 
@@ -78,13 +79,8 @@ define( function( require ) {
       else if ( mode === 'adjustable-length' ) {
         self.springLengthControlPanel.visible = true;
       }
-      self.firstOscillatingSpringNode.lineWidthProperty.set( self.secondOscillatingSpringNode.lineWidthProperty.get() );
 
-      if ( model.constantParameterProperty.get() === 'spring-thickness' ) {
-        model.spring1.updateSpringConstant( model.spring1.naturalRestingLengthProperty, self.firstOscillatingSpringNode.lineWidthProperty.get() );
-      }
-
-      // Manages visibility of panels for spring length, spring constant, and thickness
+      // Manages visibility of panels for spring constant and thickness
       self.constantsControlPanel.visible = self.springLengthControlPanel.visible;
       self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;

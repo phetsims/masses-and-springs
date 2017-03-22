@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -96,6 +95,9 @@ define( function( require ) {
             // self.spring1.springConstantProperty.set( tempSpringConstant );
             self.spring1.updateThickness( naturalRestingLength, self.spring1.springConstantProperty.get() );
           }
+          else if ( self.constantParameterProperty.get() === 'spring-thickness' ) {
+            self.spring1.updateSpringConstant( naturalRestingLength, self.spring1.thicknessProperty.get() )
+          }
         } );
 
         self.constantParameterProperty.link( function( selectedConstant ) {
@@ -109,12 +111,13 @@ define( function( require ) {
             self.spring1.thicknessProperty.reset();
             self.spring1.updateSpringConstant( self.spring1.naturalRestingLengthProperty.get(), self.spring1.thicknessProperty.get() );
           }
+
         } );
       }
-      // Used for testing purposes
-      // Property.multilink( [spring1.springConstantProperty, spring1.thicknessProperty ], function(springConstant,springThickness) {
+      // // Used for testing purposes
+      // Property.multilink( [ self.spring1.springConstantProperty, self.spring1.thicknessProperty ], function( springConstant, springThickness ) {
       //
-      //   console.log( 'springConstant = ' +springConstant + '\t\t' + 'thickness = ' + springThickness );
+      //   console.log( 'springConstant = ' + springConstant + '\t\t' + 'thickness = ' + springThickness );
       // } );
     } );
   }
