@@ -46,13 +46,18 @@ define( function( require ) {
 
     // @private
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x ) + 7.5; // prevents overlap with the equilibrium line
-    var yPos = modelViewTransform2.modelToViewY( spring.bottomProperty.get() );
-    this.positionProperty = new Property( new Vector2( xPos, yPos ), {
+
+    // updates the position of the natural length line as the system changes
+    spring.bottomProperty.link( function( bottom ) {
+      var yPos = modelViewTransform2.modelToViewY( bottom );
+
+      self.positionProperty = new Property( new Vector2( xPos, yPos ), {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TVector2
     } );
-    this.positionProperty.link( function( position ) {
+      self.positionProperty.link( function( position ) {
       self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
+      } );
     } );
 
     visibleProperty.linkAttribute( self, 'visible' );

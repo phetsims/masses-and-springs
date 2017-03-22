@@ -42,6 +42,8 @@ define( function( require ) {
 
     // @private
     this.centerX = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
+
+    // updates the position of the equilibrium line as the system changes
     spring.equilibriumYPositionProperty.link( function( equilibriumPosition ) {
       self.centerY = modelViewTransform2.modelToViewY( equilibriumPosition );
     } );
