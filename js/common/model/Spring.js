@@ -93,8 +93,14 @@ define( function( require ) {
       } )
     } );
 
-    // @public {Property.<number> read-only}
-    this.thicknessProperty = new Property( DEFAULT_THICKNESS );
+    // @public {Property.<number> read-only} line width of oscillating spring node
+    this.thicknessProperty = new Property( DEFAULT_THICKNESS, {
+      tandem: tandem.createTandem( 'thicknessProperty' ),
+      phetioType: TNumber( {
+        //units: screenViewCoordinates
+        range: new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS ) // derived emperically from updateSpringThickness()
+      } )
+    } );
 
     // Calling this function here will set a calculated value for the thickness property.
     this.updateThickness( this.naturalRestingLengthProperty.get(), this.springConstantProperty.get() );

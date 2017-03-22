@@ -91,10 +91,6 @@ define( function( require ) {
         // Manages logic for updating spring thickness and spring constant
         self.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
           if ( self.constantParameterProperty.get() === 'spring-constant' ) {
-            // TODO: Sloppy implementation. See https://github.com/phetsims/masses-and-springs/issues/34
-            // var tempSpringConstant = self.spring1.springConstantProperty.get();
-            // self.spring1.springConstantProperty.set( self.spring1.springConstantProperty.get() * .99 );
-            // self.spring1.springConstantProperty.set( tempSpringConstant );
             self.spring1.updateThickness( naturalRestingLength, self.spring1.springConstantProperty.get() );
           }
           else if ( self.constantParameterProperty.get() === 'spring-thickness' ) {
