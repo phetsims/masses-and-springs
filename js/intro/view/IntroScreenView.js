@@ -18,9 +18,7 @@ define( function( require ) {
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var LinearFunction = require( 'DOT/LinearFunction' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Property = require( 'AXON/Property' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/SpringLengthControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );

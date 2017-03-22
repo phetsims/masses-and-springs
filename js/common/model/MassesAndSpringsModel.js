@@ -188,7 +188,7 @@ define( function( require ) {
           spring.updateThickness( spring.naturalRestingLengthProperty.get(), springConstant );
         }
       } );
-    } )
+    } );
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );

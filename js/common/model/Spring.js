@@ -13,7 +13,6 @@ define( function( require ) {
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LinearFunction = require( 'DOT/LinearFunction' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Range = require( 'DOT/Range' );
 
