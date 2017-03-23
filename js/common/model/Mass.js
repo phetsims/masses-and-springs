@@ -42,8 +42,7 @@ define( function( require ) {
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
 
-    // @public (read-only)
-    // {Number} mass of mass object in kg
+    // @public (read-only) {Number} mass of mass object in kg
     this.mass = massValue;
 
     // @public Main model properties
@@ -77,12 +76,7 @@ define( function( require ) {
     this.isLabeled = isLabeled;
     this.color = color;
     this.hookHeight = 0.03; // height in m
-
-    // TODO: This does not look like the volume of a cylinder.  I expected to see
-    // density = mass/volume
-    // volume = pi*r*r*h
-    // therefore radius = Math.sqrt(volume/pi/h) = Math.sqrt(mass/density/pi/h).
-    this.radius = Math.pow( this.mass / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 3 );
+    this.radius = Math.pow( this.mass / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 3 ); // cubed root fits design standards
     this.cylinderHeight = this.radius * HEIGHT_RATIO;
     this.height = this.cylinderHeight + this.hookHeight;
 
