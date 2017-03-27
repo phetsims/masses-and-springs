@@ -38,12 +38,12 @@ define( function( require ) {
    */
   function IndicatorVisibilityControlPanel( model, tandem, options ) {
     Node.call( this );
-    var self = this;
+    //var self = this;
 
     // Lines added for reference in panel
-    var greenLine = this.createLine( 'rgb(93, 191, 142)' );
-    var blueLine = this.createLine( 'rgb(65,66,232)' );
-    var redLine = this.createLine( 'red' );
+    var greenLine = this.createLine( 'rgb(93, 191, 142)', tandem.createTandem( 'greenLine' ) );
+    var blueLine = this.createLine( 'rgb(65,66,232)', tandem.createTandem( 'blueLine' ) );
+    var redLine = this.createLine( 'red', tandem.createTandem( 'redLine' ) );
 
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
@@ -98,12 +98,13 @@ define( function( require ) {
   massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );
 
   return inherit( Node, IndicatorVisibilityControlPanel, {
-    createLine: function( color ) {
+    createLine: function( color, tandem ) {
       return new Line( 0, 0, LINE_LENGTH, 0, {
         stroke: color,
         lineDash: [ 6, 2.5 ],
         lineWidth: 2.0,
-        cursor: 'pointer'
+        cursor: 'pointer',
+        tandem: tandem
       } );
     }
   } );
