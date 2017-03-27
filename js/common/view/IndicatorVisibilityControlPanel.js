@@ -13,7 +13,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -37,13 +36,12 @@ define( function( require ) {
    * @constructor
    */
   function IndicatorVisibilityControlPanel( model, tandem, options ) {
-    Node.call( this );
-    //var self = this;
+    var self = this;
 
     // Lines added for reference in panel
-    var greenLine = this.createLine( 'rgb(93, 191, 142)', tandem.createTandem( 'greenLine' ) );
-    var blueLine = this.createLine( 'rgb(65,66,232)', tandem.createTandem( 'blueLine' ) );
-    var redLine = this.createLine( 'red', tandem.createTandem( 'redLine' ) );
+    var greenLine = self.createLine( 'rgb(93, 191, 142)', tandem.createTandem( 'greenLine' ) );
+    var blueLine = self.createLine( 'rgb(65,66,232)', tandem.createTandem( 'blueLine' ) );
+    var redLine = self.createLine( 'red', tandem.createTandem( 'redLine' ) );
 
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
@@ -81,7 +79,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
       }
     );
-    this.indicatorVisibilityControlPanel = new Panel(
+    Panel.call( this,
       indicatorVisibilityControlsVBox,
       {
         xMargin: 10,
@@ -89,15 +87,15 @@ define( function( require ) {
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         tandem: tandem.createTandem( 'indicatorVisibilityControlPanel' )
       }
+
     );
-    this.addChild( this.indicatorVisibilityControlPanel );
-    this.mutate( options );
+    self.mutate( options );
 
   }
 
   massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );
 
-  return inherit( Node, IndicatorVisibilityControlPanel, {
+  return inherit( Panel, IndicatorVisibilityControlPanel, {
     createLine: function( color, tandem ) {
       return new Line( 0, 0, LINE_LENGTH, 0, {
         stroke: color,
