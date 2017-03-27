@@ -24,6 +24,8 @@ define( function( require ) {
 
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
+  var TProperty = require( 'AXON/TProperty' );
+  var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
 
   // constants
@@ -64,16 +66,8 @@ define( function( require ) {
         range: new RangeWithValue( 0, 30, Body.EARTH.gravity )
       } )
     } );
-
-    // TODO: Is this the correct TType?
-    this.gravityRangeProperty = new Property( new RangeWithValue( 0, 30, 9.8 ), {
-      range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity ),
-      tandem: tandem.createTandem( 'gravityRange' ),
-      phetioType: TNumber( {
-        units: 'meters/second/second',
-        range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity )
-      } )
-    } );
+    
+    this.gravityRangeProperty = new Property( new RangeWithValue( 0, 30, 9.8 ) );
     
     // @public {Property.<string>} determines the speed at which the sim plays.
     this.simSpeedProperty = new Property( 'normal', {

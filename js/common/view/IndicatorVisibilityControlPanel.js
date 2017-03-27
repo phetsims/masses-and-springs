@@ -38,31 +38,12 @@ define( function( require ) {
    */
   function IndicatorVisibilityControlPanel( model, tandem, options ) {
     Node.call( this );
+    var self = this;
 
     // Lines added for reference in panel
-    var greenLine = new Line( 0, 0, LINE_LENGTH, 0, {
-      stroke: 'rgb(93, 191, 142)',
-      lineDash: [ 6, 2.5 ],
-      lineWidth: 2.0,
-      cursor: 'pointer',
-      tandem: tandem.createTandem( 'greenLine' )
-    } );
-
-    var blueLine = new Line( 0, 0, LINE_LENGTH, 0, {
-      stroke: 'rgb(65,66,232)',
-      lineDash: [ 6, 2.5 ],
-      lineWidth: 2.0,
-      cursor: 'pointer',
-      tandem: tandem.createTandem( 'blueLine' )
-    } );
-
-    var redLine = new Line( 0, 0, LINE_LENGTH, 0, {
-      stroke: 'red',
-      lineDash: [ 6, 2.5 ],
-      lineWidth: 2.0,
-      cursor: 'pointer',
-      tandem: tandem.createTandem( 'redLine' )
-    } );
+    var greenLine = this.createLine( 'rgb(93, 191, 142)' );
+    var blueLine = this.createLine( 'rgb(65,66,232)' );
+    var redLine = this.createLine( 'red' );
 
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
@@ -116,5 +97,14 @@ define( function( require ) {
 
   massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );
 
-  return inherit( Node, IndicatorVisibilityControlPanel );
+  return inherit( Node, IndicatorVisibilityControlPanel, {
+    createLine: function( color ) {
+      return new Line( 0, 0, LINE_LENGTH, 0, {
+        stroke: color,
+        lineDash: [ 6, 2.5 ],
+        lineWidth: 2.0,
+        cursor: 'pointer'
+      } );
+    }
+  } );
 } );

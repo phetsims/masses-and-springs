@@ -96,7 +96,7 @@ define( function( require ) {
     // @public {Property.<number> read-only} line width of oscillating spring node
     this.thicknessProperty = new Property( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
-      phetioType: TNumber( {
+      phetioValueType: TNumber( {
         //units: screenViewCoordinates
         range: new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS ) // derived emperically from updateSpringThickness()
       } )
