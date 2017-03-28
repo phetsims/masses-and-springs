@@ -24,8 +24,6 @@ define( function( require ) {
 
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
-  var TProperty = require( 'AXON/TProperty' );
-  var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
 
   // constants
