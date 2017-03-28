@@ -64,7 +64,8 @@ define( function( require ) {
         range: new RangeWithValue( 0, 30, Body.EARTH.gravity )
       } )
     } );
-    
+
+    // @public {Property.<number>}
     this.gravityRangeProperty = new Property( new RangeWithValue( 0, 30, 9.8 ) );
     
     // @public {Property.<string>} determines the speed at which the sim plays.

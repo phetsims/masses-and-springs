@@ -212,7 +212,13 @@ define( function( require ) {
       }
     },
 
-    //TODO: Revise functions to actually set properties rather than calculate a value.
+    /**
+     * Updates thickness of spring and sets its thickness property to calculated value.
+     * @public
+     *
+     * @param length {number} current natural resting length of spring
+     * @param springConstant {number} current spring constant of spring
+     */
     updateThickness: function( length, springConstant ) {
       var thickness = this.thicknessProperty.initialValue
                       * springConstant / this.springConstantProperty.initialValue
@@ -220,6 +226,13 @@ define( function( require ) {
       this.thicknessProperty.set( thickness );
     },
 
+    /**
+     * Updates springConstant of spring and sets its spring constant property to calculated value.
+     * @public
+     *
+     * @param length {number} current natural resting length of spring
+     * @param thickness number {number} current thickness of spring
+     */
     updateSpringConstant: function( length, thickness ) {
       var springConstant = this.naturalRestingLengthProperty.initialValue / length
                            * thickness / this.thicknessProperty.initialValue

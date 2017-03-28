@@ -44,6 +44,7 @@ define( function( require ) {
   // A new tandem instance is required here since the bodies are created statically.
   var tandem = Tandem.createStaticTandem( 'bodies' );
 
+  // @public {read-only} body objects for gravity panel
   Body.MOON = new Body( bodyMoonString, 1.62, tandem.createTandem( 'moon' ) );
   Body.EARTH = new Body( bodyEarthString, 9.81, tandem.createTandem( 'earth' ) );
   Body.JUPITER = new Body( bodyJupiterString, 24.79, tandem.createTandem( 'jupiter' ) );

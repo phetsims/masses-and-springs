@@ -77,7 +77,7 @@ define( function( require ) {
     // @public {Property.<string>}
     this.bodyTitleProperty = bodyTitleProperty;
 
-    // {Property.<number>}
+    // @private {Property.<number>}
     var previousGravityProperty = new Property( Body.EARTH.gravity, {
       tandem: tandem.createTandem( 'previousGravityProperty' ),
       phetioValueType: TNumber( {
@@ -86,16 +86,13 @@ define( function( require ) {
       } )
     } );
 
-    // @private {Property.<string>}
-    // TODO: the selected body should be in the model, not the control panel.  Probably in MassesAndSpringsModel.
-    // TODO: consider making this a Property.<Body> instead of of Propery.<string
-
     // @public {Property.<string>}
     var previousBodyTitleProperty = new Property( Body.EARTH.title, {
       tandem: tandem.createTandem( 'previousBodyTitleProperty' ),
       phetioValueType: TString
     } );
 
+    // @private {read-only} manages the items associated with the gravity panel in a combo box
     var gravityComboBox = new ComboBox( bodyListItems, bodyTitleProperty, listNodeParent, {
       listPosition: 'below',
       buttonCornerRadius: 5,
@@ -105,7 +102,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityComboBox' )
     } );
 
-    // Saving a reference to toggle visibility for Planet X
+    // @private {read-only} manages the values associated with the gravity panel in a combo box
     this.hSlider = new HSlider( gravityProperty, gravityRangeProperty.get(), {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
@@ -184,6 +181,7 @@ define( function( require ) {
 
     /**
      * @public
+     * @override
      */
     reset: function() {
       // On reset we need to manually set title to Earth or the gravityLink will change it to custom.

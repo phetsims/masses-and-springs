@@ -21,7 +21,6 @@ define( function( require ) {
   // strings
   var cmString = require( 'string!MASSES_AND_SPRINGS/cm' );
 
-
   /**
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition
@@ -66,7 +65,7 @@ define( function( require ) {
       tickMarksOnBottom: false
     }, { tandem: tandem.createTandem( 'ruler' ) } );
 
-    // @private
+    // @private {read-only} position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TVector2
@@ -91,7 +90,11 @@ define( function( require ) {
   massesAndSprings.register( 'DraggableRulerNode', DraggableRulerNode );
 
   return inherit( RulerNode, DraggableRulerNode, {
-
+    /**
+     * @override
+     * @public
+     *
+     */
     reset: function() {
       this.positionProperty.reset();
     },

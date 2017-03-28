@@ -35,7 +35,7 @@ define( function( require ) {
     // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
 
-    // @private
+    // @private {read-only} position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TVector2
@@ -63,6 +63,14 @@ define( function( require ) {
   massesAndSprings.register( 'DraggableTimerNode', DraggableTimerNode );
 
   return inherit( Timer, DraggableTimerNode, {
+    /**
+     * @override
+     * @public
+     *
+     */
+    reset: function() {
+      this.positionProperty.reset();
+    },
 
     /**
      * Responsible for handling drag event for timer node using event forwarding from timer icon in toolbox
