@@ -87,10 +87,8 @@ define( function( require ) {
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         tandem: tandem.createTandem( 'indicatorVisibilityControlPanel' )
       }
-
     );
     self.mutate( options );
-
   }
 
   massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );

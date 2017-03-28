@@ -42,7 +42,7 @@ define( function( require ) {
    * @constructor
    */
   function VectorVisibilityControlPanel( model, tandem, options ) {
-    Node.call( this );
+    var self = this;
 
     var velocityArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
       fill: VELOCITY_ARROW_COLOR,
@@ -87,8 +87,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
       }
     );
-
-    this.vectorVisibilityControlPanel = new Panel(
+    Panel.call( this,
       vectorVisibilityControlsVBox,
       {
         minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
@@ -98,13 +97,10 @@ define( function( require ) {
         tandem: tandem.createTandem( 'vectorVisibilityControlPanel' )
       }
     );
-
-    this.addChild( this.vectorVisibilityControlPanel );
-    this.mutate( options );
-
+    self.mutate( options );
   }
 
   massesAndSprings.register( 'VectorVisibilityControlPanel', VectorVisibilityControlPanel );
 
-  return inherit( Node, VectorVisibilityControlPanel );
+  return inherit( Panel, VectorVisibilityControlPanel );
 } );

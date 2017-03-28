@@ -29,10 +29,9 @@ define( function( require ) {
    */
   function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty, tandem ) {
     var self = this;
-    Node.call( this );
-    this.addChild( new Timer( timerSecondsProperty, timerRunningProperty, {
+    Timer.call( this, timerSecondsProperty, timerRunningProperty, {
       tandem: tandem.createTandem( 'timer' )
-    } ) );
+    } );
 
     // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
@@ -48,7 +47,7 @@ define( function( require ) {
     this.timerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
       tandem: tandem.createTandem( 'dragHandler' ),
       dragBounds: dragBounds,
-      endDrag: function( event ) {
+      endDrag: function() {
         // When a node is released, check if it is over the toolbox.  If so, drop it in.
         if ( self.toolbox && self.getGlobalBounds().intersectsBounds( self.toolbox.getGlobalBounds() ) ) {
           visibleProperty.set( false );
@@ -64,7 +63,7 @@ define( function( require ) {
 
   massesAndSprings.register( 'DraggableTimerNode', DraggableTimerNode );
 
-  return inherit( Node, DraggableTimerNode, {
+  return inherit( Timer, DraggableTimerNode, {
 
     /**
      * Responsible for handling drag event for timer node using event forwarding from timer icon in toolbox

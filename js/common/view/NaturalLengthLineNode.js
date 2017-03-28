@@ -30,19 +30,16 @@ define( function( require ) {
    */
   function NaturalLengthLineNode( modelViewTransform2, spring, visibleProperty, tandem ) {
     var self = this;
-    Node.call( this );
-
-    var line = new Line( 0, 0, LINE_LENGTH, 0, {
+    Line.call( this, 0, 0, LINE_LENGTH, 0, {
       stroke: 'rgb(65,66,232)',
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
       cursor: 'pointer',
       tandem: tandem.createTandem( 'line' )
     } );
-    line.mouseArea = line.localBounds.dilated( 10 );
-    line.touchArea = line.localBounds.dilated( 10 );
+    line.mouseArea = this.localBounds.dilated( 10 );
+    line.touchArea = this.localBounds.dilated( 10 );
 
-    this.addChild( line );
 
     // @private
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x ) + 7.5; // prevents overlap with the equilibrium line
@@ -65,7 +62,7 @@ define( function( require ) {
 
   massesAndSprings.register( 'NaturalLengthLineNode', NaturalLengthLineNode );
 
-  return inherit( Node, NaturalLengthLineNode, {
+  return inherit( Line, NaturalLengthLineNode, {
     reset: function() {
       this.positionProperty.reset();
     }

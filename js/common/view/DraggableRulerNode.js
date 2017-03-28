@@ -35,7 +35,6 @@ define( function( require ) {
 
   function DraggableRulerNode( dragBounds, initialPosition, visibleProperty, tandem ) {
     var self = this;
-    Node.call( this );
 
     // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
@@ -53,7 +52,7 @@ define( function( require ) {
     majorTickLabels.push( '' );
     var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
 
-    this.addChild( new RulerNode( rulerWidth, rulerLength, majorTickWidth, majorTickLabels, cmString, {
+    RulerNode.call( this, rulerWidth, rulerLength, majorTickWidth, majorTickLabels, cmString, {
       insetsWidth: 5,
       minorTicksPerMajorTick: 4,
       unitsMajorTickIndex: 19,
@@ -65,9 +64,8 @@ define( function( require ) {
       minorTickHeight: 5,
       unitsFont: MassesAndSpringsConstants.FONT,
       opacity: .8,
-      tickMarksOnBottom: false,
-      tandem: tandem.createTandem( 'rulerNode' )
-    } ) );
+      tickMarksOnBottom: false
+    }, { tandem: tandem.createTandem( 'ruler' ) } );
 
     // @private
     this.positionProperty = new Property( initialPosition, {
@@ -80,7 +78,7 @@ define( function( require ) {
     this.rulerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
       tandem: tandem.createTandem( 'dragHandler' ),
       dragBounds: dragBounds,
-      endDrag: function( event ) {
+      endDrag: function() {
         // When a node is released, check if it is over the toolbox.  If so, drop it in.
         if ( self.toolbox && self.getGlobalBounds().intersectsBounds( self.toolbox.getGlobalBounds() ) ) {
           visibleProperty.set( false );
@@ -93,7 +91,7 @@ define( function( require ) {
 
   massesAndSprings.register( 'DraggableRulerNode', DraggableRulerNode );
 
-  return inherit( Node, DraggableRulerNode, {
+  return inherit( RulerNode, DraggableRulerNode, {
 
     reset: function() {
       this.positionProperty.reset();

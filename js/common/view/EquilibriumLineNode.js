@@ -29,19 +29,15 @@ define( function( require ) {
    */
   function EquilibriumLineNode( modelViewTransform2, spring, visibleProperty, tandem ) {
     var self = this;
-    Node.call( this );
-
-    var line = new Line( 0, 0, LINE_LENGTH, 0, {
+    Line.call( this, 0, 0, LINE_LENGTH, 0, {
       stroke: 'rgb(93, 191, 142)',
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
       cursor: 'pointer',
       tandem: tandem.createTandem( 'equilibriumLineNode' )
     } );
-    line.mouseArea = line.localBounds.dilated( 10 );
-    line.touchArea = line.localBounds.dilated( 10 );
-
-    this.addChild( line );
+    this.mouseArea = this.localBounds.dilated( 10 );
+    this.touchArea = this.localBounds.dilated( 10 );
 
     // @private
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
@@ -65,7 +61,7 @@ define( function( require ) {
 
   massesAndSprings.register( 'EquilibriumLineNode', EquilibriumLineNode );
 
-  return inherit( Node, EquilibriumLineNode, {
+  return inherit( Line, EquilibriumLineNode, {
     reset: function() {
       this.positionProperty.reset();
     }
