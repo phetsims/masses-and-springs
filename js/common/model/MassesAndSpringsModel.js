@@ -67,7 +67,7 @@ define( function( require ) {
 
     // @public {Property.<number>}
     this.gravityRangeProperty = new Property( new RangeWithValue( 0, 30, 9.8 ) );
-    
+
     // @public {Property.<string>} determines the speed at which the sim plays.
     this.simSpeedProperty = new Property( 'normal', {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
@@ -207,7 +207,13 @@ define( function( require ) {
       this.movableLineVisibleProperty.reset();
       this.naturalLengthVisibleProperty.reset();
       this.equilibriumPositionVisibleProperty.reset();
-      this.masses.forEach( function( mass ) { mass.reset(); } );
+      for ( var referencedMass in this.masses ) {
+        if ( !this.masses.hasOwnProperty( referencedMass ) ) {
+          continue;
+        }
+        var mass = this.referenceMass( referencedMass );
+        mass.reset();
+      }
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
 
@@ -346,8 +352,8 @@ define( function( require ) {
       }
 
       if ( self.playingProperty.get() === true ) {
-        Object.keys( this.masses ).forEach( function( referenedMass ) {
-          var mass = self.referenceMass( referenedMass );
+        Object.keys( this.masses ).forEach( function( referencedMass ) {
+          var mass = self.referenceMass( referencedMass );
           // Fall if not hung or grabbed
           if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
             mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );
