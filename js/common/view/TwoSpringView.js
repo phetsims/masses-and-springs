@@ -79,12 +79,16 @@ define( function( require ) {
     // Add masses
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
     var massNodes = [];
-    model.masses.forEach( function( mass ) {
-      var massNode = new MassNode( mass, modelViewTransform2, self, model, tandem.createTandem( mass.tandem.tail + 'Node' ) );
+    for ( var property in model.masses ) {
+      if ( !model.masses.hasOwnProperty( property ) ) {
+        continue;
+      }
+      var referencedMassProperty = model.referenceMass( property );
+      var massNode = new MassNode( referencedMassProperty, modelViewTransform2, self, model, tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
       self.massLayer.addChild( massNode );
       // Keeps track of the mass node to restore original Z order.
       massNodes.push( massNode );
-    } );
+    }
 
     // @protected Helper function to restore initial layering of the masses to prevent them from stacking over each other.
     this.resetMassLayer = function() {

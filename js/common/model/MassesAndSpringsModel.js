@@ -136,15 +136,28 @@ define( function( require ) {
     ];
 
     // @public (read-only) model of masses used throughout the sim
-    this.masses = [
-      new Mass( .250, new Vector2( .12, .5 ), true, 'grey', tandem.createTandem( 'largeLabeledMass' ) ),
-      new Mass( .100, new Vector2( .20, .5 ), true, 'grey', tandem.createTandem( 'mediumLabeledMass1' ) ),
-      new Mass( .100, new Vector2( .28, .5 ), true, 'grey', tandem.createTandem( 'mediumLabeledMass2' ) ),
-      new Mass( .050, new Vector2( .33, .5 ), true, 'grey', tandem.createTandem( 'smallLabeledMass' ) ),
-      new Mass( .200, new Vector2( .63, .5 ), false, 'blue', tandem.createTandem( 'largeUnlabeledMass' ) ),
-      new Mass( .150, new Vector2( .56, .5 ), false, 'green', tandem.createTandem( 'mediumUnlabeledMass' ) ),
-      new Mass( .075, new Vector2( .49, .5 ), false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
-    ];
+    this.masses = {
+      largeLabeledMass: new Mass( .250, new Vector2( .12, .5 ), true, 'grey', tandem.createTandem( 'largeLabeledMass' ) ),
+      mediumLabeledMass1: new Mass( .100, new Vector2( .20, .5 ), true, 'grey', tandem.createTandem( 'mediumLabeledMass1' ) ),
+      mediumLabeledMass2: new Mass( .100, new Vector2( .28, .5 ), true, 'grey', tandem.createTandem( 'mediumLabeledMass2' ) ),
+      smallLabeledMass: new Mass( .050, new Vector2( .33, .5 ), true, 'grey', tandem.createTandem( 'smallLabeledMass' ) ),
+      largeUnlabeledMass: new Mass( .200, new Vector2( .63, .5 ), false, 'blue', tandem.createTandem( 'largeUnlabeledMass' ) ),
+      mediumUnlabeledMass: new Mass( .150, new Vector2( .56, .5 ), false, 'green', tandem.createTandem( 'mediumUnlabeledMass' ) ),
+      smallUnlabeledMass: new Mass( .075, new Vector2( .49, .5 ), false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
+    };
+
+    // FIXME: Left in temporarily for iterating through object references. See issue: https://github.com/phetsims/masses-and-springs/issues/66
+    // for (var property in this.masses){
+    //   if (!this.masses.hasOwnProperty(property)){
+    //     continue;
+    //   }
+    //   console.log(  property );
+    // }
+    // var array=Object.keys(this.masses)
+    // debugger;
+    // Object.keys(this.masses).forEach(function(key){
+    //   debugger;
+    // });
 
     // @public (read-only) model of bodies used throughout the sim
     this.bodies = [
@@ -233,6 +246,42 @@ define( function( require ) {
       }
     },
 
+    //TODO: Is there a means of removing this function? Iterating through an object returns string values.
+    // We actually want the value of the element in the object not the string equivalant.
+    /**
+     * Helper function for referencing masses by their respective names{string} ---> object{mass}
+     *
+     * @public
+     * @param {Mass} mass object
+     */
+    referenceMass: function( mass ) {
+      switch( mass ) {
+        case 'largeLabeledMass':
+          return this.masses.largeLabeledMass;
+          break;
+        case 'mediumLabeledMass1':
+          return this.masses.mediumLabeledMass1;
+          break;
+        case 'mediumLabeledMass2':
+          return this.masses.mediumLabeledMass2;
+          break;
+        case 'smallLabeledMass':
+          return this.masses.smallLabeledMass;
+          break;
+        case 'largeUnlabeledMass':
+          return this.masses.largeUnlabeledMass;
+          break;
+        case 'mediumUnlabeledMass':
+          return this.masses.mediumUnlabeledMass;
+          break;
+        case 'smallUnlabeledMass':
+          return this.masses.smallUnlabeledMass;
+          break;
+        default:
+          break;
+      }
+    },
+
     /**
      * Stop spring motion by setting the displacement to the spring's extension, which is the length from the natural
      * resting position. This will also stop the spring from further oscillation.
@@ -297,7 +346,8 @@ define( function( require ) {
       }
 
       if ( self.playingProperty.get() === true ) {
-        this.masses.forEach( function( mass ) {
+        Object.keys( this.masses ).forEach( function( referenedMass ) {
+          var mass = self.referenceMass( referenedMass );
           // Fall if not hung or grabbed
           if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
             mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );
