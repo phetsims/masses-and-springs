@@ -146,7 +146,7 @@ define( function( require ) {
       smallUnlabeledMass: new Mass( .075, new Vector2( .49, .5 ), false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
     };
 
-    // FIXME: Left in temporarily for iterating through object references. See issue: https://github.com/phetsims/masses-and-springs/issues/66
+    // TODO: Left in temporarily for iterating through object references. See issue: https://github.com/phetsims/masses-and-springs/issues/66
     // for (var property in this.masses){
     //   if (!this.masses.hasOwnProperty(property)){
     //     continue;

@@ -255,6 +255,7 @@ define( function( require ) {
     // Play/Pause and Step Forward Button Control
     var MASPlayPauseStepControlNode = new MASPlayPauseStepControl(
       model,
+      this.layoutBounds,
       tandem.createTandem( 'MASPlayPauseStepControlNode' )
     );
 

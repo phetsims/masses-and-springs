@@ -26,17 +26,15 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
+   * @param {Bounds2} layoutBounds - Bounds of screenview in screenview coordinates
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
   // TODO: Rename to TimeControlPanel, and rename vars/tandems at usage sites
-  function MASPlayPauseStepControl( model, tandem, options ) {
+  function MASPlayPauseStepControl( model, layoutBounds, tandem, options ) {
 
     Node.call( this );
-
-    // TODO: Can we pass in screen layout bounds from the model rather than declaring the bounds in this scope again?
-    var layoutBounds = new Bounds2( 0, 0, 768, 504 );
 
     var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
