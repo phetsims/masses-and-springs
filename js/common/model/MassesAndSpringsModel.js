@@ -200,7 +200,6 @@ define( function( require ) {
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();
       this.constantParameterProperty.reset();
-      this.springLengthModeProperty.reset();
       this.timerVisibleProperty.reset();
       this.timerSecondProperty.reset();
       this.timerRunningProperty.reset();

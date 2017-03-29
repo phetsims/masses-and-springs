@@ -46,13 +46,12 @@ define( function( require ) {
     // updates the position of the natural length line as the system changes
     spring.bottomProperty.link( function( bottom ) {
       var yPos = modelViewTransform2.modelToViewY( bottom );
-
       self.positionProperty = new Property( new Vector2( xPos, yPos ), {
-      tandem: tandem.createTandem( 'positionProperty' ),
-      phetioValueType: TVector2
-    } );
+        tandem: tandem.createTandem( 'positionProperty' ),
+        phetioValueType: TVector2
+      } );
       self.positionProperty.link( function( position ) {
-      self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
+        self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
       } );
     } );
 
@@ -66,5 +65,4 @@ define( function( require ) {
       this.positionProperty.reset();
     }
   } );
-
 } );

@@ -241,9 +241,7 @@ define( function( require ) {
     // Reset All button
     this.resetAllButton = new ResetAllButton( {
       listener: function() {
-        // debugger;
         model.reset();
-        // self.gravityControlPanel.reset();
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
         self.resetMassLayer();
       },

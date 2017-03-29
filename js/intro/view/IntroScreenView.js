@@ -70,7 +70,7 @@ define( function( require ) {
     this.addChild( this.constantsControlPanel );
 
     // Link responsible for visibility of the length control panel.
-    model.springLengthModeProperty.lazyLink( function( mode ) {
+    model.sceneModeProperty.lazyLink( function( mode ) {
       self.resetMassLayer();
 
       if ( mode === 'same-length' ) {
@@ -135,7 +135,7 @@ define( function( require ) {
     } ];
 
     // @private {read-only} Creation of icons for scene selection
-    var sceneRadioButtonGroup = new RadioButtonGroup( model.springLengthModeProperty, toggleButtonsContent, {
+    var sceneRadioButtonGroup = new RadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
       buttonContentXMargin: 4,
       buttonContentYMargin: 4,
       top: this.toolboxPanel.bottom + 55,
