@@ -440,7 +440,6 @@ define( function( require ) {
 
       // @private {read-write} array of parameters for scene 2
       this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
-      var scene2Parameters = this.stashSceneParameters();
 
       this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
     }
