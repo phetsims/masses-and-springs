@@ -13,13 +13,13 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
-  var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/energy/view/VectorVisibilityControlPanel' );
+  var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vector/view/VectorVisibilityControlPanel' );
 
   /**
-   * @param {EnergyModel} model
+   * @param {VectorModel} model
    * @constructor
    */
-  function EnergyScreenView( model, tandem ) {
+  function VectorScreenView( model, tandem ) {
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
     var self = this;
@@ -39,7 +39,7 @@ define( function( require ) {
     this.addChild( vectorVisibilityControlPanel );
   }
 
-  massesAndSprings.register( 'EnergyScreenView', EnergyScreenView );
+  massesAndSprings.register( 'VectorScreenView', VectorScreenView );
 
-  return inherit( TwoSpringView, EnergyScreenView );
+  return inherit( TwoSpringView, VectorScreenView );
 } );

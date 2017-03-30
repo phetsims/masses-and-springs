@@ -9,8 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var EnergyModel = require( 'MASSES_AND_SPRINGS/energy/model/EnergyModel' );
-  var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
+  var VectorModel = require( 'MASSES_AND_SPRINGS/vector/model/VectorModel' );
+  var VectorScreenView = require( 'MASSES_AND_SPRINGS/vector/view/VectorScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -19,17 +19,17 @@ define( function( require ) {
   var TColor = require( 'SCENERY/util/TColor' );
 
   // strings
-  var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
+  var vectorString = require( 'string!MASSES_AND_SPRINGS/vector' );
 
   /**
    * @param {Tandem} tandem
    *
    * @constructor
    */
-  function EnergyScreen( tandem ) {
+  function VectorScreen( tandem ) {
 
     var options = {
-      name: energyString,
+      name: vectorString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
         phetioValueType: TColor
@@ -38,13 +38,13 @@ define( function( require ) {
     };
 
     Screen.call( this,
-      function() { return new EnergyModel( tandem.createTandem( 'model' ) ); },
-      function( model ) { return new EnergyScreenView( model, tandem.createTandem( 'view' ) ); },
+      function() { return new VectorModel( tandem.createTandem( 'model' ) ); },
+      function( model ) { return new VectorScreenView( model, tandem.createTandem( 'view' ) ); },
       options
     );
   }
 
-  massesAndSprings.register( 'EnergyScreen', EnergyScreen );
+  massesAndSprings.register( 'VectorScreen', VectorScreen );
 
-  return inherit( Screen, EnergyScreen );
+  return inherit( Screen, VectorScreen );
 } );

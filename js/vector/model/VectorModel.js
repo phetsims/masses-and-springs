@@ -1,7 +1,7 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * Energy model (base type) for Masses and Springs
+ * Vector model (base type) for Masses and Springs
  *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
@@ -20,7 +20,7 @@ define( function( require ) {
    * TODO:: There has to be a better way to manage all of these properties as one entity without using propertySet()
    * @constructor
    */
-  function EnergyModel( tandem ) {
+  function VectorModel( tandem ) {
     //var self = this;
 
     MassesAndSpringsModel.call( this, tandem );
@@ -34,9 +34,9 @@ define( function( require ) {
     } );
   }
 
-  massesAndSprings.register( 'EnergyModel', EnergyModel );
+  massesAndSprings.register( 'VectorModel', VectorModel );
 
-  return inherit( MassesAndSpringsModel, EnergyModel, {
+  return inherit( MassesAndSpringsModel, VectorModel, {
     /**
      * @override
      * @public

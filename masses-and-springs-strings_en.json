@@ -11,8 +11,8 @@
   "constant": {
     "value": "Constant"
   },
-  "energy": {
-    "value": "Energy"
+  "vector": {
+    "value": "Vector"
   },
   "equilibriumPosition": {
     "value": "Equilibrium Position"

@@ -20,6 +20,7 @@ define( function( require ) {
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
 
   // strings
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
@@ -35,7 +36,7 @@ define( function( require ) {
   // var PANEL_WIDTH = MassesAndSpringsConstants.LEFT_PANELS_MIN_WIDTH;
   // var MAX_TEXT_WIDTH = PANEL_WIDTH * 0.60;  // allows for 60% of the horizontal space in the panel for text.
   /**
-   * @param {EnergyModel} model
+   * @param {VectorModel} model
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
@@ -76,6 +77,7 @@ define( function( require ) {
     ], {
       tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
     } );
+    var vectorVisibilityRadioButtonGroup = new VerticalAquaRadioButtonGroup( [] );
     var titleToControlsVerticalSpace = 2;
     var vectorVisibilityControlsVBox = new VBox( {
         children: [
