@@ -263,25 +263,18 @@ define( function( require ) {
       switch( mass ) {
         case 'largeLabeledMass':
           return this.masses.largeLabeledMass;
-          break;
         case 'mediumLabeledMass1':
           return this.masses.mediumLabeledMass1;
-          break;
         case 'mediumLabeledMass2':
           return this.masses.mediumLabeledMass2;
-          break;
         case 'smallLabeledMass':
           return this.masses.smallLabeledMass;
-          break;
         case 'largeUnlabeledMass':
           return this.masses.largeUnlabeledMass;
-          break;
         case 'mediumUnlabeledMass':
           return this.masses.mediumUnlabeledMass;
-          break;
         case 'smallUnlabeledMass':
           return this.masses.smallUnlabeledMass;
-          break;
         default:
           break;
       }
