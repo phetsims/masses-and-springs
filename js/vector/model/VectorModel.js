@@ -12,8 +12,12 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
+  var Property = require( 'AXON/Property' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+
+  // phet-io modules
+  var TString = require( 'ifphetio!PHET_IO/types/TString' );
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -22,8 +26,8 @@ define( function( require ) {
    */
   function VectorModel( tandem ) {
     //var self = this;
-
     MassesAndSpringsModel.call( this, tandem );
+
 
     this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
@@ -31,6 +35,14 @@ define( function( require ) {
 
     this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
+    } );
+
+    this.forcesVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'forceVectorVisibilityProperty' )
+    } );
+
+    this.netForceVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' )
     } );
   }
 

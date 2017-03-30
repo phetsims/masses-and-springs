@@ -79,5 +79,11 @@
   },
   "acceleration": {
     "value": "Acceleration"
+  },
+  "forces": {
+    "value": "Forces"
+  },
+  "netForce": {
+    "value": "Net Force"
   }
 }
