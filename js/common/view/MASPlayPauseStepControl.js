@@ -10,7 +10,6 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Bounds2 = require( 'DOT/Bounds2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
