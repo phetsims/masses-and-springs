@@ -130,6 +130,16 @@ define( function( require ) {
       }
     );
     self.mutate( options );
+    model.netForceVectorVisibilityProperty.link( function( netForceVisibility ) {
+      if ( netForceVisibility === true ) {
+        model.forcesVectorVisibilityProperty.set( false );
+      }
+    } );
+    model.forcesVectorVisibilityProperty.link( function( forceVisibility ) {
+      if ( forceVisibility === true ) {
+        model.netForceVectorVisibilityProperty.set( false )
+      }
+    } );
   }
 
   massesAndSprings.register( 'VectorVisibilityControlPanel', VectorVisibilityControlPanel );

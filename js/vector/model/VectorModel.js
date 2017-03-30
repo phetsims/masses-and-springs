@@ -15,10 +15,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-
-  // phet-io modules
-  var TString = require( 'ifphetio!PHET_IO/types/TString' );
-
+  
   /**
    * TODO:: document all properties and items set on objects (entire sim)
    * TODO:: There has to be a better way to manage all of these properties as one entity without using propertySet()
