@@ -137,7 +137,7 @@ define( function( require ) {
     } );
     model.forcesVectorVisibilityProperty.link( function( forceVisibility ) {
       if ( forceVisibility === true ) {
-        model.netForceVectorVisibilityProperty.set( false )
+        model.netForceVectorVisibilityProperty.set( false );
       }
     } );
   }
