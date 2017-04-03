@@ -36,7 +36,12 @@ define( function( require ) {
    * @constructor
    */
   function IndicatorVisibilityControlPanel( model, tandem, options ) {
-
+    /**
+     * Creates line for visual representation within the panel.
+     * @param {Color} color
+     * @param {Tandem} tandem
+     * @returns {Line} line object with passed in color.
+     */
     var createLine = function( color, tandem ) {
       return new Line( 0, 0, LINE_LENGTH, 0, {
         stroke: color,
