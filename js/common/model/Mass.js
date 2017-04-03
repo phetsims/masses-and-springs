@@ -76,8 +76,9 @@ define( function( require ) {
     this.isLabeled = isLabeled;
     this.color = color;
     this.hookHeight = 0.03; // height in m
-    this.radius = Math.pow( this.mass / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 3 ); // cubed root fits design standards
-    this.cylinderHeight = this.radius * HEIGHT_RATIO;
+    var scalingFactor = 4; // scales the radius to desired size
+    this.radius = (Math.pow( this.mass / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
+    this.cylinderHeight = (this.radius) * HEIGHT_RATIO;
     this.height = this.cylinderHeight + this.hookHeight;
 
     // TODO: callback depends on 2 properties but only links to one of them
