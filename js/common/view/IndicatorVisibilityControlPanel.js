@@ -36,12 +36,20 @@ define( function( require ) {
    * @constructor
    */
   function IndicatorVisibilityControlPanel( model, tandem, options ) {
-    var self = this;
 
+    var createLine = function( color, tandem ) {
+      return new Line( 0, 0, LINE_LENGTH, 0, {
+        stroke: color,
+        lineDash: [ 6, 2.5 ],
+        lineWidth: 2.0,
+        cursor: 'pointer',
+        tandem: tandem
+      } );
+    };
     // Lines added for reference in panel
-    var greenLine = self.createLine( 'rgb(93, 191, 142)', tandem.createTandem( 'greenLine' ) );
-    var blueLine = self.createLine( 'rgb(65,66,232)', tandem.createTandem( 'blueLine' ) );
-    var redLine = self.createLine( 'red', tandem.createTandem( 'redLine' ) );
+    var greenLine = createLine( 'rgb(93, 191, 142)', tandem.createTandem( 'greenLine' ) );
+    var blueLine = createLine( 'rgb(65,66,232)', tandem.createTandem( 'blueLine' ) );
+    var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
@@ -88,20 +96,10 @@ define( function( require ) {
         tandem: tandem.createTandem( 'indicatorVisibilityControlPanel' )
       }
     );
-    self.mutate( options );
+    this.mutate( options );
   }
 
   massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );
 
-  return inherit( Panel, IndicatorVisibilityControlPanel, {
-    createLine: function( color, tandem ) {
-      return new Line( 0, 0, LINE_LENGTH, 0, {
-        stroke: color,
-        lineDash: [ 6, 2.5 ],
-        lineWidth: 2.0,
-        cursor: 'pointer',
-        tandem: tandem
-      } );
-    }
-  } );
+  return inherit( Panel, IndicatorVisibilityControlPanel );
 } );
