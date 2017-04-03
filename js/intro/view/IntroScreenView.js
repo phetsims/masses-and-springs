@@ -50,7 +50,7 @@ define( function( require ) {
       StringUtils.format( 'Length 1', 1 ),
       tandem.createTandem( 'springLengthControlPanel' ),
       {
-        right: this.springHangerNode.springHangerNode.left - 40,
+        right: this.springHangerNode.left - 40,
         top: this.topSpacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       } );

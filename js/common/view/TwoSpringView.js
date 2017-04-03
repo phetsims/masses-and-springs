@@ -123,7 +123,7 @@ define( function( require ) {
       StringUtils.format( springConstantString, 1 ),
       tandem.createTandem( 'firstSpringConstantControlPanel' ),
       {
-        right: this.springHangerNode.springHangerNode.left - 40,
+        right: this.springHangerNode.left - 40,
         top: this.topSpacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
       } );
@@ -134,7 +134,7 @@ define( function( require ) {
       StringUtils.format( springConstantString, 2 ),
       tandem.createTandem( 'secondSpringConstantControlPanel' ),
       {
-        left: this.springHangerNode.springHangerNode.right + 40,
+        left: this.springHangerNode.right + 40,
         top: this.topSpacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
       } );
@@ -289,7 +289,7 @@ define( function( require ) {
       tandem.createTandem( 'firstSpringStopperButtonNode' ),
       {
         listener: model.stopSpring.bind( model, 0 ),
-        right: this.springHangerNode.springHangerNode.left - 5,
+        right: this.springHangerNode.left - 5,
         top: this.topSpacing
       }
     );
@@ -297,7 +297,7 @@ define( function( require ) {
       tandem.createTandem( 'secondSpringStopperButtonNode' ),
       {
         listener: model.stopSpring.bind( model, 1 ),
-        left: this.springHangerNode.springHangerNode.right + 5,
+        left: this.springHangerNode.right + 5,
         top: this.topSpacing
       }
     );

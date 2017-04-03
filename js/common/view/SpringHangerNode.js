@@ -27,8 +27,6 @@ define( function( require ) {
    * @constructor
    */
   function SpringHangerNode( model, modelViewTransform2, tandem ) {
-    // derived from x positions of springs.
-    Node.call( this );
 
     var springsSeparation =
       modelViewTransform2.modelToViewDeltaX( Math.abs( model.springs[ 0 ].positionProperty.get().x - model.springs[ 1 ].positionProperty.get().x ) );
@@ -36,6 +34,16 @@ define( function( require ) {
 
     // X coordinate of middle of springs
     var middleOfSprings = modelViewTransform2.modelToViewX( (model.springs[ 0 ].positionProperty.get().x + model.springs[ 1 ].positionProperty.get().x) / 2 );
+
+    // derived from x positions of springs.
+    Rectangle.call( this, 0, 0, springHangerNodeWidth, 20, 8, 8, {
+      fill: 'rgb( 180, 180, 180 )',
+      stroke: 'grey',
+      centerX: middleOfSprings,
+      top: modelViewTransform2.modelToViewY( model.ceilingY ),
+      tandem: tandem.createTandem( 'springHangerNode' )
+    } );
+
 
     // Node for hanger text label
     var springHangerLabelNode = new Node( { tandem: tandem.createTandem( 'springHangerLabelNode' ) } );
@@ -45,20 +53,12 @@ define( function( require ) {
       tandem: tandem.createTandem( '2' ),
       centerX: springsSeparation
     } ) );
-    this.springHangerNode = new Rectangle( 0, 0, springHangerNodeWidth, 20, 8, 8, {
-      fill: 'rgb( 180, 180, 180 )',
-      stroke: 'grey',
-      centerX: middleOfSprings,
-      top: modelViewTransform2.modelToViewY( model.ceilingY ),
-      tandem: tandem.createTandem( 'springHangerNode' )
-    } );
-    springHangerLabelNode.centerX = this.springHangerNode.width / 2;
-    springHangerLabelNode.centerY = this.springHangerNode.height / 2;
-    this.springHangerNode.addChild( springHangerLabelNode );
-    this.addChild( this.springHangerNode );
+    springHangerLabelNode.centerX = this.width / 2;
+    springHangerLabelNode.centerY = this.height / 2;
+    this.addChild( springHangerLabelNode );
   }
 
   massesAndSprings.register( 'SpringHangerNode', SpringHangerNode );
 
-  return inherit( Node, SpringHangerNode );
+  return inherit( Rectangle, SpringHangerNode );
 } );
