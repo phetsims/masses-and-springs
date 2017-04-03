@@ -18,6 +18,7 @@ define( function( require ) {
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -27,7 +28,7 @@ define( function( require ) {
   var ARROW_LENGTH = 24;
   var ARROW_HEAD_WIDTH = 14;
   var ARROW_TAIL_WIDTH = 8;
-  // var ARROW_SIZE_DEFAULT = 25;
+  var ARROW_SIZE_DEFAULT = 25;
   var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
   // var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
   /**
@@ -120,11 +121,22 @@ define( function( require ) {
           tandem: tandem.createTandem( 'velocityArrow' )
         } );
         self.addChild( velocityArrow );
+
+        // no need to unlink, present for the lifetime of the sim
+        Property.multilink( [ model.velocityVectorVisibilityProperty, mass.verticalVelocityProperty ], function( velocityVectorVisible, verticalVelocity ) {
+          velocityArrow.visible = velocityVectorVisible;
+          // update the size of the arrow
+          if ( velocityArrow.visible ) {
+            var position = modelViewTransform2.modelToViewPosition( mass.positionProperty.get() );
+            velocityArrow.setTailAndTip( position.x,
+              position.y,
+              position.x + ARROW_SIZE_DEFAULT,
+              position.y - ARROW_SIZE_DEFAULT * verticalVelocity );
+          }
+        } );
       }
     } );
   }
-
   massesAndSprings.register( 'MassNode', MassNode );
   return inherit( Node, MassNode );
-
 } );
