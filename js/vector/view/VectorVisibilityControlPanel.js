@@ -31,12 +31,9 @@ define( function( require ) {
   var ARROW_LENGTH = 24;
   var ARROW_HEAD_WIDTH = 14;
   var ARROW_TAIL_WIDTH = 8;
-  //var TEXT_MARGIN_RIGHT = 5;
   var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
   var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
 
-  // var PANEL_WIDTH = MassesAndSpringsConstants.LEFT_PANELS_MIN_WIDTH;
-  // var MAX_TEXT_WIDTH = PANEL_WIDTH * 0.60;  // allows for 60% of the horizontal space in the panel for text.
   /**
    * @param {VectorModel} model
    * @param {Tandem} tandem

@@ -10,11 +10,22 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  
+  var Property = require( 'AXON/Property' );
+  var Vector2 = require( 'DOT/Vector2' );
+
+  // constants
+  var ARROW_LENGTH = 24;
+  var ARROW_HEAD_WIDTH = 14;
+  var ARROW_TAIL_WIDTH = 8;
+  var ARROW_SIZE_DEFAULT = 25;
+  var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
+  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
+
   /**
    * TODO:: document all properties and items set on objects (entire sim)
    * TODO:: There has to be a better way to manage all of these properties as one entity without using propertySet()
@@ -28,6 +39,8 @@ define( function( require ) {
     this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
     } );
+
+    // this.velocityVectorPositionProperty = new Property(Vector2(0,0));
 
     this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )

@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Bounds2 = require( 'DOT/Bounds2' );
@@ -22,7 +23,13 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
-
+  // constants
+  var ARROW_LENGTH = 24;
+  var ARROW_HEAD_WIDTH = 14;
+  var ARROW_TAIL_WIDTH = 8;
+  var ARROW_SIZE_DEFAULT = 25;
+  var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
+  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
   /**
    * @param {Mass} mass -  model object
    * @param {ModelViewTransform2} modelViewTransform2
@@ -100,6 +107,21 @@ define( function( require ) {
       }
     } ) );
 
+    // add velocity arrows if necessary
+    mass.springProperty.link( function() {
+
+      if ( mass.springProperty.get() ) {
+        console.log( 'hello_world' );
+        var velocityArrow = new ArrowNode( 0, self.height * 1.25, ARROW_LENGTH - 24, 0, {
+          fill: VELOCITY_ARROW_COLOR,
+          centerY: 0,
+          tailWidth: ARROW_TAIL_WIDTH,
+          headWidth: ARROW_HEAD_WIDTH,
+          tandem: tandem.createTandem( 'velocityArrow' )
+        } );
+        self.addChild( velocityArrow );
+      }
+    } );
   }
 
   massesAndSprings.register( 'MassNode', MassNode );
