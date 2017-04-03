@@ -113,7 +113,7 @@ define( function( require ) {
 
       if ( mass.springProperty.get() ) {
         console.log( 'hello_world' );
-        var velocityArrow = new ArrowNode( 0, self.height * 1.25, ARROW_LENGTH - 24, 0, {
+        var velocityArrow = new ArrowNode( 0, self.height * 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
           fill: VELOCITY_ARROW_COLOR,
           centerY: 0,
           tailWidth: ARROW_TAIL_WIDTH,
@@ -127,10 +127,10 @@ define( function( require ) {
           velocityArrow.visible = velocityVectorVisible;
           // update the size of the arrow
           if ( velocityArrow.visible ) {
-            var position = modelViewTransform2.modelToViewPosition( mass.positionProperty.get() );
-            velocityArrow.setTailAndTip( position.x,
+            var position = ( mass.positionProperty.get() );
+            velocityArrow.setTailAndTip( position.x - 10,
               position.y,
-              position.x + ARROW_SIZE_DEFAULT,
+              position.x - 10,
               position.y - ARROW_SIZE_DEFAULT * verticalVelocity );
           }
         } );
