@@ -27,9 +27,9 @@ define( function( require ) {
   var ARROW_LENGTH = 24;
   var ARROW_HEAD_WIDTH = 14;
   var ARROW_TAIL_WIDTH = 8;
-  var ARROW_SIZE_DEFAULT = 25;
+  // var ARROW_SIZE_DEFAULT = 25;
   var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
-  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
+  // var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
   /**
    * @param {Mass} mass -  model object
    * @param {ModelViewTransform2} modelViewTransform2
