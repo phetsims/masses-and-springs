@@ -38,7 +38,7 @@ define( function( require ) {
   function IndicatorVisibilityControlPanel( model, tandem, options ) {
     /**
      * Creates line for visual representation within the panel.
-     * @param {Color} color
+     * @param {string} color
      * @param {Tandem} tandem
      * @returns {Line} line object with passed in color.
      */
