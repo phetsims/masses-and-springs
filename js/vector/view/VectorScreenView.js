@@ -10,10 +10,20 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Property = require( 'AXON/Property' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
   var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vector/view/VectorVisibilityControlPanel' );
+
+  // constants
+  var ARROW_LENGTH = 24;
+  var ARROW_HEAD_WIDTH = 14;
+  var ARROW_TAIL_WIDTH = 8;
+  var ARROW_SIZE_DEFAULT = 25;
+  var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
+  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
 
   /**
    * @param {VectorModel} model
@@ -37,6 +47,57 @@ define( function( require ) {
       }
     );
     this.addChild( vectorVisibilityControlPanel );
+
+    var velocityArrow = new ArrowNode( 0, 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
+      fill: VELOCITY_ARROW_COLOR,
+      centerY: 0,
+      tailWidth: ARROW_TAIL_WIDTH,
+      headWidth: ARROW_HEAD_WIDTH,
+      tandem: tandem.createTandem( 'velocityArrow' )
+    } );
+
+
+    var accelerationArrow = new ArrowNode( 0, 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
+      fill: ACCELERATION_ARROW_COLOR,
+      centerY: 0,
+      tailWidth: ARROW_TAIL_WIDTH,
+      headWidth: ARROW_HEAD_WIDTH,
+      tandem: tandem.createTandem( 'accelerationArrow' )
+    } );
+
+    // Property.multilink( [
+    //     model.velocityVectorVisibilityProperty,
+    //     model.springs[0].massProperty.verticalVelocityProperty,
+    //     model.springs[1].massProperty.verticalVelocityProperty ],
+    //   function( velocityVectorVisible, verticalVelocity ) {
+    //     if ( velocityVectorVisible && model.massAttachedProperty.get() ) {
+    //       self.addChild( velocityArrow );
+    //     }
+    //     self.addChild( accelerationArrow );
+    //     velocityArrow.visible = velocityVectorVisible;
+    //     // update the size of the arrow
+    //     console.log( 'velocity visible' );
+    //     if ( velocityArrow.visible ) {
+    //       var position = ( self.mass.positionProperty.get() );
+    //       velocityArrow.setTailAndTip( position.x - 10,
+    //         position.y + 75,
+    //         position.x - 10,
+    //         position.y + 75 - ARROW_SIZE_DEFAULT * verticalVelocity );
+    //     }
+    //   } );
+    model.accelerationVectorVisibilityProperty.link( function( accelerationVectorVisible ) {
+      accelerationArrow.visible = accelerationVectorVisible;
+      // update the size of the arrow
+      if ( accelerationArrow.visible ) {
+        console.log( 'velocity visible' );
+        var position = ( self.mass.positionProperty.get() );
+        accelerationArrow.setTailAndTip( position.x + 10,
+          position.y + 90 - ARROW_SIZE_DEFAULT + 40,
+          position.x + 10,
+          position.y + 90 + 40
+        );
+      }
+    } );
   }
 
   massesAndSprings.register( 'VectorScreenView', VectorScreenView );

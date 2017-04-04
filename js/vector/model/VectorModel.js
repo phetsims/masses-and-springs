@@ -10,21 +10,14 @@ define( function( require ) {
   'use strict';
 
   // modules
-  // var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  // var Property = require( 'AXON/Property' );
-  // var Vector2 = require( 'DOT/Vector2' );
+  var Property = require( 'AXON/Property' );
+  var Vector2 = require( 'DOT/Vector2' );
 
-  // // constants
-  // var ARROW_LENGTH = 24;
-  // var ARROW_HEAD_WIDTH = 14;
-  // var ARROW_TAIL_WIDTH = 8;
-  // var ARROW_SIZE_DEFAULT = 25;
-  // var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
-  // var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -32,9 +25,8 @@ define( function( require ) {
    * @constructor
    */
   function VectorModel( tandem ) {
-    //var self = this;
+    var self = this;
     MassesAndSpringsModel.call( this, tandem );
-
 
     this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
@@ -53,6 +45,31 @@ define( function( require ) {
     this.netForceVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' )
     } );
+
+    this.massAttachedProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'massAttachedProperty' )
+    } );
+
+    // add velocity arrows if necessary
+    // for ( var mass in self.masses ) {
+    //   if ( !self.masses.hasOwnProperty( mass ) ) {
+    //     continue;
+    //   }
+    //   var referencedMass = self.referenceMass(mass);
+    Property.multilink( [
+        this.springs[ 0 ].massProperty,
+        this.springs[ 1 ].massProperty
+      ],
+      function( mass ) {
+        // debugger;
+        if ( mass ) {
+          self.massAttachedProperty.set( true );
+        }
+        else if ( !mass ) {
+          self.massAttachedProperty.set( false );
+        }
+      } );
+    // }
   }
 
   massesAndSprings.register( 'VectorModel', VectorModel );

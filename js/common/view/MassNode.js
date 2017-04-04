@@ -24,13 +24,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
-  // constants
-  // var ARROW_LENGTH = 24;
-  var ARROW_HEAD_WIDTH = 14;
-  var ARROW_TAIL_WIDTH = 8;
-  var ARROW_SIZE_DEFAULT = 25;
-  var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
-  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
   /**
    * @param {Mass} mass -  model object
    * @param {ModelViewTransform2} modelViewTransform2
@@ -107,58 +100,6 @@ define( function( require ) {
         mass.userControlledProperty.set( false );
       }
     } ) );
-
-    // add velocity arrows if necessary
-    mass.springProperty.link( function() {
-
-      if ( mass.springProperty.get() ) {
-        console.log( 'hello_world' );
-        var velocityArrow = new ArrowNode( 0, self.height * 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
-          fill: VELOCITY_ARROW_COLOR,
-          centerY: 0,
-          tailWidth: ARROW_TAIL_WIDTH,
-          headWidth: ARROW_HEAD_WIDTH,
-          tandem: tandem.createTandem( 'velocityArrow' )
-        } );
-        self.addChild( velocityArrow );
-
-        var accelerationArrow = new ArrowNode( 0, self.height * 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
-          fill: ACCELERATION_ARROW_COLOR,
-          centerY: 0,
-          tailWidth: ARROW_TAIL_WIDTH,
-          headWidth: ARROW_HEAD_WIDTH,
-          tandem: tandem.createTandem( 'accelerationArrow' )
-        } );
-        self.addChild( accelerationArrow );
-
-        // no need to unlink, present for the lifetime of the sim
-        Property.multilink( [ model.velocityVectorVisibilityProperty, mass.verticalVelocityProperty ], function( velocityVectorVisible, verticalVelocity ) {
-          velocityArrow.visible = velocityVectorVisible;
-          // update the size of the arrow
-          console.log( 'velocity visible' );
-          if ( velocityArrow.visible ) {
-            var position = ( mass.positionProperty.get() );
-            velocityArrow.setTailAndTip( position.x - 10,
-              position.y,
-              position.x - 10,
-              position.y - ARROW_SIZE_DEFAULT * verticalVelocity );
-          }
-        } );
-        model.accelerationVectorVisibilityProperty.link( function( accelerationVectorVisible ) {
-          accelerationArrow.visible = accelerationVectorVisible;
-          // update the size of the arrow
-          if ( accelerationArrow.visible ) {
-            console.log( 'velocity visible' );
-            var position = ( mass.positionProperty.get() );
-            accelerationArrow.setTailAndTip( position.x + 10,
-              position.y - ARROW_SIZE_DEFAULT + 40,
-              position.x + 10,
-              position.y + 40
-            );
-          }
-        } );
-      }
-    } );
   }
   massesAndSprings.register( 'MassNode', MassNode );
   return inherit( Node, MassNode );

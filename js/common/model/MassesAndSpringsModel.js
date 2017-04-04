@@ -151,13 +151,20 @@ define( function( require ) {
     //   if (!this.masses.hasOwnProperty(property)){
     //     continue;
     //   }
-    //   console.log(  property );
+    //   var mass = this.masses[property]; // accesses the value using the key as an index
+    // console.log(  property );
     // }
     // var array=Object.keys(this.masses)
     // debugger;
     // Object.keys(this.masses).forEach(function(key){
     //   debugger;
     // });
+
+    // var masses = _.values(this.masses) // using lo-dash library
+    //
+    // REVIEW: Remove referenceMass()
+    // var largeLabeledMass = new Mass( .250, new Vector2( .12, .5 ), true, 'grey', tandem.createTandem( 'largeLabeledMass' ) )
+    // this.masses =[this.largeLabeledMass,...];
 
     // @public (read-only) model of bodies used throughout the sim
     this.bodies = [
