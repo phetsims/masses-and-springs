@@ -217,7 +217,7 @@ define( function( require ) {
         if ( !this.masses.hasOwnProperty( referencedMass ) ) {
           continue;
         }
-        var mass = this.referenceMass( referencedMass );
+        var mass = this.masses[ referencedMass ];
         mass.reset();
       }
       this.springs.forEach( function( spring ) { spring.reset(); } );
@@ -255,35 +255,6 @@ define( function( require ) {
         } );
         //Update position
         mass.positionProperty.set( proposedPosition );
-      }
-    },
-
-    //TODO: Is there a means of removing this function? Iterating through an object returns string values.
-    // We actually want the value of the element in the object not the string equivalant.
-    /**
-     * Helper function for referencing masses by their respective names{string} ---> object{mass}
-     *
-     * @public
-     * @param {Mass} mass object
-     */
-    referenceMass: function( mass ) {
-      switch( mass ) {
-        case 'largeLabeledMass':
-          return this.masses.largeLabeledMass;
-        case 'mediumLabeledMass1':
-          return this.masses.mediumLabeledMass1;
-        case 'mediumLabeledMass2':
-          return this.masses.mediumLabeledMass2;
-        case 'smallLabeledMass':
-          return this.masses.smallLabeledMass;
-        case 'largeUnlabeledMass':
-          return this.masses.largeUnlabeledMass;
-        case 'mediumUnlabeledMass':
-          return this.masses.mediumUnlabeledMass;
-        case 'smallUnlabeledMass':
-          return this.masses.smallUnlabeledMass;
-        default:
-          break;
       }
     },
 
@@ -352,7 +323,7 @@ define( function( require ) {
 
       if ( self.playingProperty.get() === true ) {
         Object.keys( this.masses ).forEach( function( referencedMass ) {
-          var mass = self.referenceMass( referencedMass );
+          var mass = self.masses[ referencedMass ];
           // Fall if not hung or grabbed
           if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
             mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );

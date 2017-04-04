@@ -83,7 +83,7 @@ define( function( require ) {
       if ( !model.masses.hasOwnProperty( property ) ) {
         continue;
       }
-      var referencedMassProperty = model.referenceMass( property );
+      var referencedMassProperty = model.masses[ property ];
       var massNode = new MassNode( referencedMassProperty, modelViewTransform2, self, model, tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
       self.massLayer.addChild( massNode );
       // Keeps track of the mass node to restore original Z order.
