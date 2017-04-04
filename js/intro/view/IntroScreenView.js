@@ -96,17 +96,17 @@ define( function( require ) {
 
     //TODO: Create a specific file for this?
     // @private {read-only} Creation of spring for use in scene switching icons
-    var firstSpringIcon = new OscillatingSpringNode( this.springsIcon[ 0 ], this.modelViewTransform2, { tandem: tandem.createTandem( 'firstSpringIcon' ) } );
+    var firstSpringIcon = new OscillatingSpringNode( this.springsIcon[ 0 ], this.modelViewTransform2, tandem.createTandem( 'firstSpringIcon' ) );
     firstSpringIcon.loopsProperty.set( 10 );
     firstSpringIcon.lineWidthProperty.set( 3 );
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var secondSpringIcon = new OscillatingSpringNode( this.springsIcon[ 1 ], this.modelViewTransform2, { tandem: tandem.createTandem( 'secondSpringIcon' ) } );
+    var secondSpringIcon = new OscillatingSpringNode( this.springsIcon[ 1 ], this.modelViewTransform2, tandem.createTandem( 'secondSpringIcon' ) );
     secondSpringIcon.loopsProperty.set( 10 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var thirdSpringIcon = new OscillatingSpringNode( this.springsIcon[ 2 ], this.modelViewTransform2, { tandem: tandem.createTandem( 'thirdSpringIcon' ) } );
+    var thirdSpringIcon = new OscillatingSpringNode( this.springsIcon[ 2 ], this.modelViewTransform2, tandem.createTandem( 'thirdSpringIcon' ) );
     thirdSpringIcon.loopsProperty.set( 5 );
     thirdSpringIcon.lineWidthProperty.set( 3 );
 

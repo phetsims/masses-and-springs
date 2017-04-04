@@ -39,7 +39,8 @@ define( function( require ) {
       deltaLineWidth: 1.5, // increase in line width per 1 unit of spring constant increase
       leftEndLength: -15, // {number} length of the horizontal line added to the left end of the coil
       rightEndLength: -15, // {number} length of the horizontal line added to the right end of the coil
-      rotation: Math.PI / 2 // {number} angle in radians of rotation of spring
+      rotation: Math.PI / 2, // {number} angle in radians of rotation of spring
+      tandem: tandem
     }, options );
 
     ParametricSpringNode.call( this, options );
