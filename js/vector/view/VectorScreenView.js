@@ -48,6 +48,7 @@ define( function( require ) {
       }
     );
     this.addChild( vectorVisibilityControlPanel );
+    vectorVisibilityControlPanel.moveToBack();
 
     var velocityArrow = new ArrowNode( 0, 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
       fill: VELOCITY_ARROW_COLOR,
