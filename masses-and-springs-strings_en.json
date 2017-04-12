@@ -85,5 +85,8 @@
   },
   "netForce": {
     "value": "Net Force"
+  },
+  "spring": {
+    "value": "Spring"
   }
 }

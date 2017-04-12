@@ -27,12 +27,16 @@ define( function( require ) {
   var accelerationString = require( 'string!MASSES_AND_SPRINGS/acceleration' );
   var forcesString = require( 'string!MASSES_AND_SPRINGS/forces' );
   var netForceString = require( 'string!MASSES_AND_SPRINGS/netForce' );
+  var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
+  var springString = require( 'string!MASSES_AND_SPRINGS/spring' );
 
   var ARROW_LENGTH = 24;
   var ARROW_HEAD_WIDTH = 14;
   var ARROW_TAIL_WIDTH = 8;
   var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
   var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
+  var GRAVITY_ARROW_COLOR = 'rgb( 236, 63, 71 )';
+  var SPRING_ARROW_COLOR = 'rgb( 36, 36, 255 )';
 
   /**
    * @param {VectorModel} model
@@ -43,6 +47,7 @@ define( function( require ) {
   function VectorVisibilityControlPanel( model, tandem, options ) {
     var self = this;
 
+    // TODO: Create function for velocity/acceleration vectors and forces vectors
     var velocityArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
       fill: VELOCITY_ARROW_COLOR,
       centerY: 0,
@@ -57,6 +62,20 @@ define( function( require ) {
       tailWidth: ARROW_TAIL_WIDTH,
       headWidth: ARROW_HEAD_WIDTH,
       tandem: tandem.createTandem( 'accelerationArrow' )
+    } );
+    var gravityArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
+      fill: GRAVITY_ARROW_COLOR,
+      centerY: 0,
+      tailWidth: ARROW_TAIL_WIDTH,
+      headWidth: ARROW_HEAD_WIDTH,
+      tandem: tandem.createTandem( 'gravityArrow' )
+    } );
+    var springArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
+      fill: SPRING_ARROW_COLOR,
+      centerY: 0,
+      tailWidth: ARROW_TAIL_WIDTH,
+      headWidth: ARROW_HEAD_WIDTH,
+      tandem: tandem.createTandem( 'springArrow' )
     } );
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
@@ -82,7 +101,32 @@ define( function( require ) {
     ], {
       tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
     } );
-    var vectorVisibilityRadioButtonGroup = new VerticalAquaRadioButtonGroup( [
+    var forcesVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
+      {
+        content: new HBox( {
+          children: [ new Text( gravityString, {
+            font: MassesAndSpringsConstants.FONT,
+            tandem: tandem.createTandem( 'gravityString' )
+          } ), new HStrut( 79 ), gravityArrow ]
+        } ),
+        property: model.gravityVectorVisibilityProperty,
+        label: gravityString
+      },
+      {
+        content: new HBox( {
+          children: [ new Text( springString, {
+            font: MassesAndSpringsConstants.FONT,
+            tandem: tandem.createTandem( 'springString' )
+          } ), new HStrut( 57 ), springArrow ]
+        } ),
+        property: model.springVectorVisibilityProperty,
+        label: springString
+      }
+    ], {
+      xMargin: 20,
+      tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
+    } );
+    var vectorVisibilityRadioButtonGroup = new VerticalAquaRadioButtonGroup( [//new VBox()
       {
         node: new Text( forcesString, {
           font: MassesAndSpringsConstants.FONT,
@@ -112,7 +156,6 @@ define( function( require ) {
           vectorVisibilityRadioButtonGroup
         ],
       align: 'left',
-
       tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
       }
     );
@@ -130,6 +173,8 @@ define( function( require ) {
     model.netForceVectorVisibilityProperty.link( function( netForceVisibility ) {
       if ( netForceVisibility === true ) {
         model.forcesVectorVisibilityProperty.set( false );
+        model.gravityVectorVisibilityProperty.set( false );
+        model.springVectorVisibilityProperty.set( false );
       }
     } );
     model.forcesVectorVisibilityProperty.link( function( forceVisibility ) {

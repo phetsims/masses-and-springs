@@ -206,7 +206,6 @@ define( function( require ) {
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();
-      this.constantParameterProperty.reset();
       this.timerVisibleProperty.reset();
       this.timerSecondProperty.reset();
       this.timerRunningProperty.reset();

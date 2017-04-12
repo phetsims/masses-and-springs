@@ -16,6 +16,9 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Property = require( 'AXON/Property' );
 
+  // modules
+  var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
+
   /**
    * TODO:: document all properties and items set on objects (entire sim)
    * TODO:: There has to be a better way to manage all of these properties as one entity without using propertySet()
@@ -35,16 +38,31 @@ define( function( require ) {
       tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
     } );
 
-    this.forcesVectorVisibilityProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'forceVectorVisibilityProperty' )
+    // TODO: Make one setting with two modes 'forces' and 'net forces'
+    // this.forcesVectorVisibilityProperty = new BooleanProperty( false, {
+    //   tandem: tandem.createTandem( 'forceVectorVisibilityProperty' )
+    // } );
+    //
+    // this.netForceVectorVisibilityProperty = new BooleanProperty( false, {
+    //   tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' )
+    // } );
+
+    this.gravityVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'gravityVectorVisibilityProperty' )
     } );
 
-    this.netForceVectorVisibilityProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' )
+    this.springVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'springVectorVisibilityProperty' )
     } );
 
-    this.massAttachedProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'massAttachedProperty' )
+    this.spring1MassAttachedProperty = new Property( null, {
+      tandem: tandem.createTandem( 'spring1MassAttachedProperty' ),
+      phetioValueType: TMass
+    } );
+
+    this.spring2MassAttachedProperty = new Property( null, {
+      tandem: tandem.createTandem( 'spring1MassAttachedProperty' ),
+      phetioValueType: TMass
     } );
 
     // add velocity arrows if necessary
@@ -57,13 +75,14 @@ define( function( require ) {
         this.springs[ 0 ].massProperty,
         this.springs[ 1 ].massProperty
       ],
-      function( mass ) {
-        // debugger;
-        if ( mass ) {
-          self.massAttachedProperty.set( true );
+      function( mass1, mass2 ) {
+        if ( mass1 || mass2 ) {
+          self.spring1MassAttachedProperty.set( mass1 );
+          self.spring2MassAttachedProperty.set( mass2 );
         }
-        else if ( !mass ) {
-          self.massAttachedProperty.set( false );
+        else {
+          self.spring1MassAttachedProperty.set( null );
+          self.spring2MassAttachedProperty.set( null );
         }
       } );
     // }
