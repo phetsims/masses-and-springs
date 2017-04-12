@@ -18,6 +18,7 @@ define( function( require ) {
 
   // modules
   var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
+  var TString = require( 'ifphetio!PHET_IO/types/TString' );
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -45,6 +46,12 @@ define( function( require ) {
 
     this.netForceVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' )
+    } );
+
+    this.forcesModeProperty = new Property( 'forces', {
+      tandem: tandem.createTandem( 'forcesModeProperty' ),
+      phetioValueType: TString,
+      validValues: [ 'forces', 'netForce' ]
     } );
 
     this.gravityVectorVisibilityProperty = new BooleanProperty( false, {

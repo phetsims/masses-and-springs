@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var HBox = require( 'SCENERY/nodes/HBox' );
@@ -20,7 +21,6 @@ define( function( require ) {
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
 
   // strings
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
@@ -77,6 +77,13 @@ define( function( require ) {
       headWidth: ARROW_HEAD_WIDTH,
       tandem: tandem.createTandem( 'springArrow' )
     } );
+    var netForceArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
+      fill: 'black',
+      centerY: 0,
+      tailWidth: ARROW_TAIL_WIDTH,
+      headWidth: ARROW_HEAD_WIDTH,
+      tandem: tandem.createTandem( 'springArrow' )
+    } );
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new HBox( {
@@ -126,34 +133,51 @@ define( function( require ) {
       xMargin: 20,
       tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
     } );
-    var vectorVisibilityRadioButtonGroup = new VerticalAquaRadioButtonGroup( [//new VBox()
-      {
-        node: new Text( forcesString, {
-          font: MassesAndSpringsConstants.FONT,
-          tandem: tandem.createTandem( 'forcesString' )
-        } ),
-        property: model.forcesVectorVisibilityProperty,
-        value: true
-      },
-      {
-        node: new Text( netForceString, {
+
+    var forcesVisibilityRadioButton = new AquaRadioButton(
+      model.forcesModeProperty,
+      'forces',
+      new Text( forcesString, {
+        font: MassesAndSpringsConstants.FONT,
+        tandem: tandem.createTandem( 'forcesString' )
+      } ),
+      { radius: 9, spacing: 8 }
+    );
+
+    var netForceVisibilityRadioButton = new AquaRadioButton(
+      model.forcesModeProperty,
+      'netForce',
+      new HBox( {
+        children: [ new Text( netForceString, {
           font: MassesAndSpringsConstants.FONT,
           tandem: tandem.createTandem( 'netForceString' )
-        } ),
-        property: model.netForceVectorVisibilityProperty,
-        value: true
+        } ), new HStrut( 57 ), netForceArrow ]
+      } ),
+      { radius: 9, spacing: 8 }
+    );
+
+    model.forcesModeProperty.link( function( mode ) {
+      if ( mode === 'forces' ) {
+        forcesVisibilityCheckBoxGroup.pickable = true;
+        forcesVisibilityCheckBoxGroup.opacity = 1;
       }
-    ], {
-      radius: 8,
-      spacing: 8
+      else if ( mode === 'netForce' ) {
+        forcesVisibilityCheckBoxGroup.pickable = false;
+        forcesVisibilityCheckBoxGroup.opacity = 0.3;
+      }
     } );
+
     var titleToControlsVerticalSpace = 2;
     var vectorVisibilityControlsVBox = new VBox( {
         children: [
           new VStrut( titleToControlsVerticalSpace ),
           vectorVisibilityCheckBoxGroup,
-          new VStrut( titleToControlsVerticalSpace ),
-          vectorVisibilityRadioButtonGroup
+          new VStrut( titleToControlsVerticalSpace + 8 ),
+          forcesVisibilityRadioButton,
+          new VStrut( titleToControlsVerticalSpace + 8 ),
+          new HBox( { children: [ new HStrut( 15 ), forcesVisibilityCheckBoxGroup ] } ),
+          new VStrut( titleToControlsVerticalSpace + 8 ),
+          netForceVisibilityRadioButton
         ],
       align: 'left',
       tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
