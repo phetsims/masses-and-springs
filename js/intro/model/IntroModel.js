@@ -422,9 +422,6 @@ define( function( require ) {
     },
 
     applyResetParameters: function() {
-
-
-
       // apply reset parameters to each scene
       this.sceneModeProperty.set( 'adjustable-length' );
       this.resetSceneParameters();
@@ -434,7 +431,6 @@ define( function( require ) {
 
       // initial parameters set for both scenes
       // @private {read-write} array of parameters for scene 1
-
       this.sceneModeProperty.set( 'same-length' );
       this.resetSceneParameters();
 

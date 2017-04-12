@@ -105,6 +105,13 @@ define( function( require ) {
     reset: function() {
       this.velocityVectorVisibilityProperty.reset();
       this.accelerationVectorVisibilityProperty.reset();
+      this.forcesVectorVisibilityProperty.reset();
+      this.netForceVectorVisibilityProperty.reset();
+      this.gravityVectorVisibilityProperty.reset();
+      this.springVectorVisibilityProperty.reset();
+      this.spring1MassAttachedProperty.reset();
+      this.spring2MassAttachedProperty.reset();
+      this.forcesModeProperty = reset();
     }
   } );
 } );

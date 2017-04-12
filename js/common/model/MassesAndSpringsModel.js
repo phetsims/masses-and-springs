@@ -202,6 +202,7 @@ define( function( require ) {
     reset: function() {
       this.frictionProperty.reset();
       this.gravityProperty.reset();
+      this.bodyTitleProperty.reset();
       this.gravityRangeProperty.reset();
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
