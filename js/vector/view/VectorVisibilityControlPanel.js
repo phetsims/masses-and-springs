@@ -63,26 +63,28 @@ define( function( require ) {
       headWidth: ARROW_HEAD_WIDTH,
       tandem: tandem.createTandem( 'accelerationArrow' )
     } );
-    var gravityArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
+    var gravityArrow = new ArrowNode( 5, 0, 7 + ARROW_LENGTH, 0, {
       fill: GRAVITY_ARROW_COLOR,
+      stroke: GRAVITY_ARROW_COLOR,
       centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
+      tailWidth: ARROW_TAIL_WIDTH - 5,
+      headWidth: ARROW_HEAD_WIDTH - 3,
       tandem: tandem.createTandem( 'gravityArrow' )
     } );
-    var springArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
+    var springArrow = new ArrowNode( 5, 0, 7 + ARROW_LENGTH, 0, {
       fill: SPRING_ARROW_COLOR,
+      stroke: SPRING_ARROW_COLOR,
       centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
+      tailWidth: ARROW_TAIL_WIDTH - 5,
+      headWidth: ARROW_HEAD_WIDTH - 3,
       tandem: tandem.createTandem( 'springArrow' )
     } );
-    var netForceArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
+    var netForceArrow = new ArrowNode( 5, 0, 7 + ARROW_LENGTH, 0, {
       fill: 'black',
       centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
-      tandem: tandem.createTandem( 'springArrow' )
+      tailWidth: ARROW_TAIL_WIDTH - 5,
+      headWidth: ARROW_HEAD_WIDTH - 3,
+      tandem: tandem.createTandem( 'netForceArrow' )
     } );
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
