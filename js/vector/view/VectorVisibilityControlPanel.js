@@ -50,13 +50,13 @@ define( function( require ) {
     var self = this;
 
     // Creation of arrow nodes to be used in vector screen.
-    var createArrow = function( tailX, tipX, color, arrowTailWidth, arrowHeadWidth, tandem ) {
+    var createArrow = function( tailX, tipX, color, arrowTailWidth, arrowHeadWidth, tandemID ) {
       return new ArrowNode( tailX, 0, tipX, 0, {
         fill: color,
         centerY: 0,
         tailWidth: arrowTailWidth,
         headWidth: arrowHeadWidth,
-        tandem: tandem.createTandem( tandem )
+        tandem: tandem.createTandem( tandemID )
       } );
     };
     var velocityArrow = createArrow( 10, 10 + ARROW_LENGTH, VELOCITY_ARROW_COLOR, ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'velocityArrow' );
