@@ -33,6 +33,8 @@ define( function( require ) {
   var ARROW_LENGTH = 24;
   var ARROW_HEAD_WIDTH = 14;
   var ARROW_TAIL_WIDTH = 8;
+  var SMALLER_ARROW_HEAD_WIDTH = 11;
+  var SMALLER_ARROW_TAIL_WIDTH = 3;
   var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
   var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
   var GRAVITY_ARROW_COLOR = 'rgb( 236, 63, 71 )';
@@ -47,45 +49,22 @@ define( function( require ) {
   function VectorVisibilityControlPanel( model, tandem, options ) {
     var self = this;
 
-    // TODO: Create function for velocity/acceleration vectors and forces vectors
-    var velocityArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
-      fill: VELOCITY_ARROW_COLOR,
-      centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
-      tandem: tandem.createTandem( 'velocityArrow' )
-    } );
+    // Creation of arrow nodes to be used in vector screen.
+    var createArrow = function( tailX, tipX, color, arrowTailWidth, arrowHeadWidth, tandem ) {
+      return new ArrowNode( tailX, 0, tipX, 0, {
+        fill: color,
+        centerY: 0,
+        tailWidth: arrowTailWidth,
+        headWidth: arrowHeadWidth,
+        tandem: tandem.createTandem( tandem )
+      } );
+    };
+    var velocityArrow = createArrow( 10, 10 + ARROW_LENGTH, VELOCITY_ARROW_COLOR, ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'velocityArrow' );
+    var accelerationArrow = createArrow( 10, 10 + ARROW_LENGTH, ACCELERATION_ARROW_COLOR, ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'accelerationArrow' );
+    var gravityArrow = createArrow( 5, 7 + ARROW_LENGTH, GRAVITY_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'gravityArrow' );
+    var springArrow = createArrow( 5, 7 + ARROW_LENGTH, SPRING_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'springArrow' );
+    var netForceArrow = createArrow( 5, 7 + ARROW_LENGTH, 'black', SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'netForceArrow' );
 
-    var accelerationArrow = new ArrowNode( 10, 0, 10 + ARROW_LENGTH, 0, {
-      fill: ACCELERATION_ARROW_COLOR,
-      centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
-      tandem: tandem.createTandem( 'accelerationArrow' )
-    } );
-    var gravityArrow = new ArrowNode( 5, 0, 7 + ARROW_LENGTH, 0, {
-      fill: GRAVITY_ARROW_COLOR,
-      stroke: GRAVITY_ARROW_COLOR,
-      centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH - 5,
-      headWidth: ARROW_HEAD_WIDTH - 3,
-      tandem: tandem.createTandem( 'gravityArrow' )
-    } );
-    var springArrow = new ArrowNode( 5, 0, 7 + ARROW_LENGTH, 0, {
-      fill: SPRING_ARROW_COLOR,
-      stroke: SPRING_ARROW_COLOR,
-      centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH - 5,
-      headWidth: ARROW_HEAD_WIDTH - 3,
-      tandem: tandem.createTandem( 'springArrow' )
-    } );
-    var netForceArrow = new ArrowNode( 5, 0, 7 + ARROW_LENGTH, 0, {
-      fill: 'black',
-      centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH - 5,
-      headWidth: ARROW_HEAD_WIDTH - 3,
-      tandem: tandem.createTandem( 'netForceArrow' )
-    } );
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new HBox( {
