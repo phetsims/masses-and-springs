@@ -50,20 +50,21 @@ define( function( require ) {
     var self = this;
 
     // Creation of arrow nodes to be used in vector screen.
-    var createArrow = function( tailX, tipX, color, arrowTailWidth, arrowHeadWidth, tandemID ) {
+    var createArrow = function( tailX, tipX, color, strokeColor, arrowTailWidth, arrowHeadWidth, tandemID ) {
       return new ArrowNode( tailX, 0, tipX, 0, {
         fill: color,
+        stroke: strokeColor,
         centerY: 0,
         tailWidth: arrowTailWidth,
         headWidth: arrowHeadWidth,
         tandem: tandem.createTandem( tandemID )
       } );
     };
-    var velocityArrow = createArrow( 10, 10 + ARROW_LENGTH, VELOCITY_ARROW_COLOR, ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'velocityArrow' );
-    var accelerationArrow = createArrow( 10, 10 + ARROW_LENGTH, ACCELERATION_ARROW_COLOR, ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'accelerationArrow' );
-    var gravityArrow = createArrow( 5, 7 + ARROW_LENGTH, GRAVITY_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'gravityArrow' );
-    var springArrow = createArrow( 5, 7 + ARROW_LENGTH, SPRING_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'springArrow' );
-    var netForceArrow = createArrow( 5, 7 + ARROW_LENGTH, 'black', SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'netForceArrow' );
+    var velocityArrow = createArrow( 10, 10 + ARROW_LENGTH, VELOCITY_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'velocityArrow' );
+    var accelerationArrow = createArrow( 10, 10 + ARROW_LENGTH, ACCELERATION_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'accelerationArrow' );
+    var gravityArrow = createArrow( 5, 7 + ARROW_LENGTH, GRAVITY_ARROW_COLOR, GRAVITY_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'gravityArrow' );
+    var springArrow = createArrow( 5, 7 + ARROW_LENGTH, SPRING_ARROW_COLOR, SPRING_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'springArrow' );
+    var netForceArrow = createArrow( 5, 7 + ARROW_LENGTH, 'black', 'black', SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'netForceArrow' );
 
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
