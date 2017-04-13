@@ -111,7 +111,7 @@ define( function( require ) {
       this.springVectorVisibilityProperty.reset();
       this.spring1MassAttachedProperty.reset();
       this.spring2MassAttachedProperty.reset();
-      this.forcesModeProperty = reset();
+      this.forcesModeProperty.reset();
     }
   } );
 } );
