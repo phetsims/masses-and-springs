@@ -8,7 +8,6 @@
   },
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-eslint": "~19.0.0"
   },
   "phet": {
     "requirejsNamespace": "MASSES_AND_SPRINGS"
