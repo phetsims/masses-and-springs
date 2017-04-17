@@ -61,16 +61,16 @@ define( function( require ) {
     this.verticalVelocityProperty = new Property( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
       phetioValueType: TNumber( {
-        units: 'meters/seconds',
+        units: 'meters/second',
         range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 )
       } )
     } );
-
+    
     // @public {Property.<number>} vertical acceleration of the mass
     this.accelerationProperty = new Property( 0, {
       tandem: tandem.createTandem( 'accelerationProperty' ),
       phetioValueType: TNumber( {
-        units: 'meters/seconds/seconds',
+        units: 'meters/second/second',
         range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
       } )
     } );
@@ -126,6 +126,10 @@ define( function( require ) {
           this.positionProperty.set( new Vector2( this.positionProperty.get().x, newY ) );
         }
       }
+    },
+
+    calculateGravitationalForce: function( gravity ) {
+      return this.mass * gravity;
     },
 
     /**

@@ -146,26 +146,6 @@ define( function( require ) {
       smallUnlabeledMass: new Mass( .075, new Vector2( .49, .5 ), false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
     };
 
-    // TODO: Left in temporarily for iterating through object references. See issue: https://github.com/phetsims/masses-and-springs/issues/66
-    // for (var property in this.masses){
-    //   if (!this.masses.hasOwnProperty(property)){
-    //     continue;
-    //   }
-    //   var mass = this.masses[property]; // accesses the value using the key as an index
-    // console.log(  property );
-    // }
-    // var array=Object.keys(this.masses)
-    // debugger;
-    // Object.keys(this.masses).forEach(function(key){
-    //   debugger;
-    // });
-
-    // var masses = _.values(this.masses) // using lo-dash library
-    //
-    // REVIEW: Remove referenceMass()
-    // var largeLabeledMass = new Mass( .250, new Vector2( .12, .5 ), true, 'grey', tandem.createTandem( 'largeLabeledMass' ) )
-    // this.masses =[this.largeLabeledMass,...];
-
     // @public (read-only) model of bodies used throughout the sim
     this.bodies = [
       Body.MOON,
@@ -224,7 +204,7 @@ define( function( require ) {
     },
 
     /**
-     *  Based on new dragged position of mass, try to attach or detach mass if eligible and then update position.
+     * Based on new dragged position of mass, try to attach or detach mass if eligible and then update position.
      *
      * @public
      *

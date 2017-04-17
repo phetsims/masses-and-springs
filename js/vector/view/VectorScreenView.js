@@ -15,7 +15,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
   var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vector/view/VectorVisibilityControlPanel' );
-  var Property = require( 'AXON/Property' );
 
   // constants
   // var ARROW_LENGTH = 24;
@@ -68,13 +67,9 @@ define( function( require ) {
     } );
     this.addChild( accelerationArrow );
 
-    // MultiLink handling the visibility of vectors
-    // TODO: Ask Sam about having a multilink instead of multiple links despite not having interdependence
-    Property.multilink( [ model.velocityVectorVisibilityProperty, model.accelerationVectorVisibilityProperty ],
-      function( velocityVectorVisibility, accelerationVectorVisibility ) {
-        velocityArrow.visible = velocityVectorVisibility;
-        accelerationArrow.visible = accelerationVectorVisibility;
-      } );
+    // Links handling the visibility of vectors
+    model.velocityVectorVisibilityProperty.link( function( visible ) {velocityArrow.visible = visible;} );
+    model.accelerationVectorVisibilityProperty.link( function( visible ) {accelerationArrow.visible = visible;} );
 
     // Link for velocity vector position and length
     model.spring1MassAttachedProperty.link( function( massAttachedProperty ) {
@@ -102,6 +97,7 @@ define( function( require ) {
               position.y + 50,
               position.x + 10,
               position.y + 50 + ARROW_SIZE_DEFAULT
+              //TODO: gain access to common model gravity property
             );
           }
         } );

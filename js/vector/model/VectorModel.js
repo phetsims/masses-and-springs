@@ -39,7 +39,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
     } );
 
-    // TODO: Make one setting with two modes 'forces' and 'net forces'
     this.forcesVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'forceVectorVisibilityProperty' )
     } );

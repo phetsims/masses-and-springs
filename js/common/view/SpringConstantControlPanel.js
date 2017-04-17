@@ -35,7 +35,8 @@ define( function( require ) {
       fill: 'rgb( 240, 240, 240 )',
       xMargin: 5,
       yMargin: 5,
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+      tandem: tandem
     }, options );
 
     var hSlider = new HSlider( springConstantProperty, springConstantPropertyRange, {

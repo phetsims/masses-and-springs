@@ -39,6 +39,7 @@ define( function( require ) {
       bodySize: new Dimension2( 12, 14 ),
       nozzleSize: new Dimension2( 8, 9 ),
       cornerRadius: 1,
+      tandem: tandem.createTandem( 'laserPointerNode' ),
       hasButton: false,
         buttonRadius: 5,
       buttonTouchAreaDilation: 10
