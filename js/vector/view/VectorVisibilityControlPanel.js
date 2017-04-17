@@ -47,7 +47,6 @@ define( function( require ) {
    * @constructor
    */
   function VectorVisibilityControlPanel( model, tandem, options ) {
-    var self = this;
 
     // Creation of arrow nodes to be used in vector screen.
     var createArrow = function( tailX, tipX, color, strokeColor, arrowTailWidth, arrowHeadWidth, tandemID ) {
@@ -175,7 +174,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'vectorVisibilityControlPanel' )
       }
     );
-    self.mutate( options );
+    this.mutate( options );
     model.netForceVectorVisibilityProperty.link( function( netForceVisibility ) {
       if ( netForceVisibility === true ) {
         model.forcesVectorVisibilityProperty.set( false );

@@ -73,7 +73,7 @@ define( function( require ) {
 
     var modelOffset;
 
-    self.addInputListener( new TandemSimpleDragHandler( {
+    this.addInputListener( new TandemSimpleDragHandler( {
       // Allow moving a finger (touch) across a node to pick it up.
       allowTouchSnag: true,
       tandem: tandem.createTandem( 'dragHandler' ),

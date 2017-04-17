@@ -301,7 +301,7 @@ define( function( require ) {
         }
       }
 
-      if ( self.playingProperty.get() === true ) {
+      if ( this.playingProperty.get() === true ) {
         Object.keys( this.masses ).forEach( function( referencedMass ) {
           var mass = self.masses[ referencedMass ];
           // Fall if not hung or grabbed

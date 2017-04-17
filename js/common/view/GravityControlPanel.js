@@ -125,7 +125,7 @@ define( function( require ) {
       children: [
         new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
         gravityComboBox,
-        self.hSlider
+        this.hSlider
       ],
       tandem: tandem.createTandem( 'gravityPropertyVBox' )
     } ), options );
