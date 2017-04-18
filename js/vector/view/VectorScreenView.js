@@ -10,19 +10,19 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  // var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
   var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vector/view/VectorVisibilityControlPanel' );
 
-  // constants
+  // // constants
   // var ARROW_LENGTH = 24;
-  var ARROW_HEAD_WIDTH = 14;
-  var ARROW_TAIL_WIDTH = 8;
-  var ARROW_SIZE_DEFAULT = 25;
-  var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
-  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
+  // var ARROW_HEAD_WIDTH = 14;
+  // var ARROW_TAIL_WIDTH = 8;
+  // var ARROW_SIZE_DEFAULT = 25;
+  // var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
+  // var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
 
   /**
    * @param {VectorModel} model
@@ -32,7 +32,7 @@ define( function( require ) {
   function VectorScreenView( model, tandem ) {
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
-    var self = this;
+    // var self = this;
 
     // TODO: Change this value to the bottom of the vectorVisibilityControlPanel + spacing
     this.toolboxPanel.top = 350;
