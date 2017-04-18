@@ -142,6 +142,29 @@ define( function( require ) {
       else if ( springMassAttachedTo == null || model.accelerationVectorVisibilityProperty.get() == false ) {accelerationArrow.visible = false;}
     } );
 
+    var scalingFactor = 2.5;
+    mass.verticalVelocityProperty.link( function( velocity ) {
+        var position = ( mass.positionProperty.get() );
+        velocityArrow.setTailAndTip( position.x - 10,
+          position.y + 10,
+          position.x - 10,
+          position.y + 10 - ARROW_SIZE_DEFAULT * velocity * scalingFactor
+        );
+      }
+    );
+
+    model.gravityProperty.link( function( gravity ) {
+        var gravitationalAcceleration = mass.mass * gravity;
+        console.log( 'gravitationalAcceleration = ' + gravitationalAcceleration );
+        var position = ( mass.positionProperty.get() );
+        accelerationArrow.setTailAndTip( position.x + 10,
+          position.y + 10,
+          position.x + 10,
+          position.y + 10 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
+        );
+      }
+    );
+
     // // Link for acceleration vector position and length
     // mass.springProperty.link( function( massAttached ) {
     //   if ( massAttached ) {
