@@ -37,7 +37,6 @@ define( function( require ) {
       validValues: [ 'same-length', 'adjustable-length' ]
     } );
 
-    // TODO: This is specific to Intro Screen. Move to Intro Model. Refactor into "constantParameter"
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
     this.constantParameterProperty = new Property( 'spring-constant', {
       tandem: tandem.createTandem( 'constantParameterProperty' ),
@@ -49,7 +48,6 @@ define( function( require ) {
     this.spring1 = this.springs[ 0 ];
     this.spring2 = this.springs[ 1 ];
 
-    // TODO: Move into intro model.
     this.springs.forEach( function( spring ) {
       spring.springConstantProperty.link( function( springConstant ) {
         if ( self.sceneModeProperty.get() === 'same-length' ) {
