@@ -170,7 +170,8 @@ define( function( require ) {
         naturalRestingLength: this.spring2.naturalRestingLengthProperty.get(),
         animating: this.spring2.animatingProperty.get(),
         mass: this.spring2.massProperty.get(),
-        springConstant: this.spring2.springConstantProperty.get()
+        springConstant: this.spring2.springConstantProperty.get(),
+        thickness: this.spring2.thicknessProperty.get()
       };
 
       // @private {read-only} Stashing parameters for mass attached to first spring
@@ -309,6 +310,8 @@ define( function( require ) {
       this.spring2.animatingProperty.set( parameters.spring2State.sceneSpring2.animating );
       this.spring2.massProperty.set( parameters.spring2State.sceneSpring2.mass );
       this.spring2.springConstantProperty.set( parameters.spring2State.sceneSpring2.springConstant );
+      this.spring2.thicknessProperty.set( parameters.spring2State.sceneSpring2.thickness );
+      console.log( 'this.spring2.springConstantProperty.get() = ' + this.spring2.springConstantProperty.get() );
 
       // Handle applying stashed parameters of first spring if mass is attached
       if ( this.spring2.massProperty.get() ) {
@@ -397,6 +400,7 @@ define( function( require ) {
       this.spring2.animatingProperty.reset();
       this.spring2.massProperty.reset();
       this.spring2.springConstantProperty.reset();
+      this.spring2.thicknessProperty.reset();
 
 
       // Applying stashed parameters of 250g grey mass
