@@ -20,6 +20,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
+  var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
@@ -108,7 +109,7 @@ define( function( require ) {
     var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
     var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
 
-    this.accelerationArrow = new ArrowNode( 10, 0, 10, ARROW_SIZE_DEFAULT, {
+    var accelerationArrow = new ArrowNode( 10, 0, 10, ARROW_SIZE_DEFAULT, {
       fill: ACCELERATION_ARROW_COLOR,
       centerY: 0,
       tailWidth: ARROW_TAIL_WIDTH,
@@ -116,24 +117,29 @@ define( function( require ) {
       tandem: tandem.createTandem( 'accelerationArrow' )
     } );
 
-    this.addChild( this.accelerationArrow );
+    this.addChild( accelerationArrow );
 
     var velocityArrow = new ArrowNode( -10, 0, -10, ARROW_SIZE_DEFAULT, {
       fill: VELOCITY_ARROW_COLOR,
       centerY: 0,
       tailWidth: ARROW_TAIL_WIDTH,
       headWidth: ARROW_HEAD_WIDTH,
+      visible: model.velocityVectorVisibilityProperty.get(),
       tandem: tandem.createTandem( 'velocityArrow' )
     } );
     this.addChild( velocityArrow );
 
+
+    //TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this link is being referenced in the intro screen where it isn't needed.
     // Links handling the visibility of vectors
-    model.velocityVectorVisibilityProperty.link( function( visible ) {
-      if ( mass.springProperty !== null ) { velocityArrow.visible = visible;}
+    Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
+      if ( springMassAttachedTo !== null && model.velocityVectorVisibilityProperty.get() == true ) {velocityArrow.visible = visible;}
+      else if ( springMassAttachedTo == null || model.velocityVectorVisibilityProperty.get() == false ) {velocityArrow.visible = false;}
     } );
 
-    model.accelerationVectorVisibilityProperty.link( function( visible ) {
-      if ( mass.springProperty !== null ) {self.accelerationArrow.visible = visible;}
+    Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
+      if ( springMassAttachedTo !== null && model.accelerationVectorVisibilityProperty.get() == true ) {accelerationArrow.visible = visible;}
+      else if ( springMassAttachedTo == null || model.accelerationVectorVisibilityProperty.get() == false ) {accelerationArrow.visible = false;}
     } );
 
     // // Link for acceleration vector position and length
@@ -152,7 +158,6 @@ define( function( require ) {
     //     } );
     //   }
     // } );
-
   }
 
   massesAndSprings.register( 'MassNode', MassNode );
