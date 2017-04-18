@@ -165,22 +165,7 @@ define( function( require ) {
       }
     );
 
-    // // Link for acceleration vector position and length
-    // mass.springProperty.link( function( massAttached ) {
-    //   if ( massAttached ) {
-    //     mass.verticalVelocityProperty.link( function() {
-    //       if ( massAttached !== null ) {
-    //         var position = modelViewTransform2.modelToViewPosition( mass.positionProperty.get() );
-    //         self.accelerationArrow.setTailAndTip( position.x - 250,
-    //           position.y - 200,
-    //           position.x - 250,
-    //           position.y - 200 + ARROW_SIZE_DEFAULT
-    //           //TODO: gain access to common model gravity property
-    //         );
-    //       }
-    //     } );
-    //   }
-    // } );
+ 
   }
 
   massesAndSprings.register( 'MassNode', MassNode );
