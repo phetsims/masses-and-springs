@@ -29,16 +29,6 @@ define( function( require ) {
     var self = this;
     MassesAndSpringsModel.call( this, tandem );
 
-    this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
-    } );
-
-    // this.velocityVectorPositionProperty = new Property(Vector2(0,0));
-
-    this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
-    } );
-
     this.forcesVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'forceVectorVisibilityProperty' )
     } );

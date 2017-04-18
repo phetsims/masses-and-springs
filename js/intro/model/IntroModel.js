@@ -309,7 +309,6 @@ define( function( require ) {
       this.spring2.massProperty.set( parameters.spring2State.sceneSpring2.mass );
       this.spring2.springConstantProperty.set( parameters.spring2State.sceneSpring2.springConstant );
       this.spring2.thicknessProperty.set( parameters.spring2State.sceneSpring2.thickness );
-      console.log( 'this.spring2.springConstantProperty.get() = ' + this.spring2.springConstantProperty.get() );
 
       // Handle applying stashed parameters of first spring if mass is attached
       if ( this.spring2.massProperty.get() ) {

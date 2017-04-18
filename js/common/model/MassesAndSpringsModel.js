@@ -120,6 +120,14 @@ define( function( require ) {
       tandem: tandem.createTandem( 'bodyTitleProperty' ),
       phetioValueType: TString
     } );
+    
+    this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
+    } );
+
+    this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
+    } );
 
     // @public {read-only} Y position of floor in m. The floor is at the bottom bounds of the screen.
     this.floorY = 0;

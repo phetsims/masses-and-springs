@@ -49,60 +49,73 @@ define( function( require ) {
     this.addChild( vectorVisibilityControlPanel );
     vectorVisibilityControlPanel.moveToBack();
 
-    var velocityArrow = new ArrowNode( 0, 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
-      fill: VELOCITY_ARROW_COLOR,
-      centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
-      tandem: tandem.createTandem( 'velocityArrow' )
-    } );
-    this.addChild( velocityArrow );
+    // var velocityArrow = new ArrowNode( 0, 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
+    //   fill: VELOCITY_ARROW_COLOR,
+    //   centerY: 0,
+    //   tailWidth: ARROW_TAIL_WIDTH,
+    //   headWidth: ARROW_HEAD_WIDTH,
+    //   tandem: tandem.createTandem( 'velocityArrow' )
+    // } );
+    // this.addChild( velocityArrow );
 
-    var accelerationArrow = new ArrowNode( 0, 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
-      fill: ACCELERATION_ARROW_COLOR,
-      centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
-      tandem: tandem.createTandem( 'accelerationArrow' )
-    } );
-    this.addChild( accelerationArrow );
+    // var accelerationArrow = new ArrowNode( 0, 1.25, ARROW_SIZE_DEFAULT - 24, 0, {
+    //   fill: ACCELERATION_ARROW_COLOR,
+    //   centerY: 0,
+    //   tailWidth: ARROW_TAIL_WIDTH,
+    //   headWidth: ARROW_HEAD_WIDTH,
+    //   tandem: tandem.createTandem( 'accelerationArrow' )
+    // } );
+    // this.addChild( accelerationArrow );
 
-    // Links handling the visibility of vectors
-    model.velocityVectorVisibilityProperty.link( function( visible ) {velocityArrow.visible = visible;} );
-    model.accelerationVectorVisibilityProperty.link( function( visible ) {accelerationArrow.visible = visible;} );
 
-    // Link for velocity vector position and length
-    model.spring1MassAttachedProperty.link( function( massAttachedProperty ) {
-      if ( massAttachedProperty ) {
-        massAttachedProperty.verticalVelocityProperty.link( function( massVelocity ) {
-          if ( massAttachedProperty !== null ) {
-            var position = self.modelViewTransform2.modelToViewPosition( massAttachedProperty.positionProperty.get() );
-            velocityArrow.setTailAndTip( position.x - 10,
-              position.y + 50,
-              position.x - 10,
-              position.y + 50 - ARROW_SIZE_DEFAULT * massVelocity * 3
-            );
-          }
-        } );
-      }
-    } );
+    // // Link for velocity vector position and length
+    // model.spring1MassAttachedProperty.link( function( massAttachedProperty ) {
+    //   if ( massAttachedProperty ) {
+    //     massAttachedProperty.verticalVelocityProperty.link( function( massVelocity ) {
+    //       if ( massAttachedProperty !== null ) {
+    //         var position = self.modelViewTransform2.modelToViewPosition( massAttachedProperty.positionProperty.get() );
+    //         velocityArrow.setTailAndTip( position.x - 10,
+    //           position.y + 50,
+    //           position.x - 10,
+    //           position.y + 50 - ARROW_SIZE_DEFAULT * massVelocity * 3
+    //         );
+    //       }
+    //     } );
+    //   }
+    // } );
 
-    // Link for acceleration vector position and length
-    model.spring1MassAttachedProperty.link( function( massAttachedProperty ) {
-      if ( massAttachedProperty ) {
-        massAttachedProperty.verticalVelocityProperty.link( function() {
-          if ( massAttachedProperty !== null ) {
-            var position = self.modelViewTransform2.modelToViewPosition( massAttachedProperty.positionProperty.get() );
-            accelerationArrow.setTailAndTip( position.x + 10,
-              position.y + 50,
-              position.x + 10,
-              position.y + 50 + ARROW_SIZE_DEFAULT
-              //TODO: gain access to common model gravity property
-            );
-          }
-        } );
-      }
-    } );
+    // // Link for velocity vector position and length
+    // model.spring1MassAttachedProperty.link( function( massAttachedProperty ) {
+    //   if ( massAttachedProperty ) {
+    //     massAttachedProperty.verticalVelocityProperty.link( function( massVelocity ) {
+    //       if ( massAttachedProperty !== null ) {
+    //         var position = self.modelViewTransform2.modelToViewPosition( massAttachedProperty.positionProperty.get() );
+    //         velocityArrow.setTailAndTip( position.x - 10,
+    //           position.y + 50,
+    //           position.x - 10,
+    //           position.y + 50 - ARROW_SIZE_DEFAULT * massVelocity * 3
+    //         );
+    //       }
+    //     } );
+    //   }
+    // } );
+
+    // // Link for acceleration vector position and length
+    // model.spring1MassAttachedProperty.link( function( massAttachedProperty ) {
+    //   if ( massAttachedProperty ) {
+    //     massAttachedProperty.verticalVelocityProperty.link( function() {
+    //       if ( massAttachedProperty !== null ) {
+    //         var position = self.modelViewTransform2.modelToViewPosition( massAttachedProperty.positionProperty.get() );
+    //         accelerationArrow.setTailAndTip( position.x + 10,
+    //           position.y + 50,
+    //           position.x + 10,
+    //           position.y + 50 + ARROW_SIZE_DEFAULT
+    //           //TODO: gain access to common model gravity property
+    //         );
+    //       }
+    //     } );
+    //   }
+    // } );
   }
 
   massesAndSprings.register( 'VectorScreenView', VectorScreenView );

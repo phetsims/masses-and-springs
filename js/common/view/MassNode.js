@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Bounds2 = require( 'DOT/Bounds2' );
@@ -98,7 +99,62 @@ define( function( require ) {
         mass.userControlledProperty.set( false );
       }
     } ) );
+
+    // constants
+    // var ARROW_LENGTH = 24;
+    var ARROW_HEAD_WIDTH = 14;
+    var ARROW_TAIL_WIDTH = 8;
+    var ARROW_SIZE_DEFAULT = 25;
+    var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
+    var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
+
+    this.accelerationArrow = new ArrowNode( 10, 0, 10, ARROW_SIZE_DEFAULT, {
+      fill: ACCELERATION_ARROW_COLOR,
+      centerY: 0,
+      tailWidth: ARROW_TAIL_WIDTH,
+      headWidth: ARROW_HEAD_WIDTH,
+      tandem: tandem.createTandem( 'accelerationArrow' )
+    } );
+
+    this.addChild( this.accelerationArrow );
+
+    var velocityArrow = new ArrowNode( -10, 0, -10, ARROW_SIZE_DEFAULT, {
+      fill: VELOCITY_ARROW_COLOR,
+      centerY: 0,
+      tailWidth: ARROW_TAIL_WIDTH,
+      headWidth: ARROW_HEAD_WIDTH,
+      tandem: tandem.createTandem( 'velocityArrow' )
+    } );
+    this.addChild( velocityArrow );
+
+    // Links handling the visibility of vectors
+    model.velocityVectorVisibilityProperty.link( function( visible ) {
+      if ( mass.springProperty !== null ) { velocityArrow.visible = visible;}
+    } );
+
+    model.accelerationVectorVisibilityProperty.link( function( visible ) {
+      if ( mass.springProperty !== null ) {self.accelerationArrow.visible = visible;}
+    } );
+
+    // // Link for acceleration vector position and length
+    // mass.springProperty.link( function( massAttached ) {
+    //   if ( massAttached ) {
+    //     mass.verticalVelocityProperty.link( function() {
+    //       if ( massAttached !== null ) {
+    //         var position = modelViewTransform2.modelToViewPosition( mass.positionProperty.get() );
+    //         self.accelerationArrow.setTailAndTip( position.x - 250,
+    //           position.y - 200,
+    //           position.x - 250,
+    //           position.y - 200 + ARROW_SIZE_DEFAULT
+    //           //TODO: gain access to common model gravity property
+    //         );
+    //       }
+    //     } );
+    //   }
+    // } );
+
   }
+
   massesAndSprings.register( 'MassNode', MassNode );
   return inherit( Node, MassNode );
 } );
