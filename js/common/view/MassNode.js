@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -113,53 +114,66 @@ define( function( require ) {
       }
     } ) );
 
+    var forceNullLine = new Line( 0, 0, 0, 0, {
+      stroke: 'black',
+      lineWidth: 1,
+      cursor: 'pointer'
+    } );
+
     //Arrows created for vectors associated with mass nodes
     this.velocityArrow = model.createArrow( 10, 10 + ARROW_LENGTH, VELOCITY_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'velocityArrow' );
     this.accelerationArrow = model.createArrow( 10, 10 + ARROW_LENGTH, ACCELERATION_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'accelerationArrow' );
-    this.gravityArrow = model.createArrow( 5, 7 + ARROW_LENGTH, GRAVITY_ARROW_COLOR, GRAVITY_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'gravityArrow' );
-    this.springArrow = model.createArrow( 5, 7 + ARROW_LENGTH, SPRING_ARROW_COLOR, SPRING_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'springArrow' );
+    this.gravityForceArrow = model.createArrow( 5, 7 + ARROW_LENGTH, GRAVITY_ARROW_COLOR, GRAVITY_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'gravityForceArrow' );
+    this.springForceArrow = model.createArrow( 5, 7 + ARROW_LENGTH, SPRING_ARROW_COLOR, SPRING_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'springForceArrow' );
     this.netForceArrow = model.createArrow( 5, 7 + ARROW_LENGTH, 'black', 'black', SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'netForceArrow' );
 
     this.addChild( this.velocityArrow );
     this.addChild( this.accelerationArrow );
-    this.addChild( this.gravityArrow );
-    this.addChild( this.springArrow );
+    this.addChild( this.gravityForceArrow );
+    this.addChild( this.springForceArrow );
     this.addChild( this.netForceArrow );
+    this.addChild( forceNullLine );
 
 
     //TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this link is being referenced in the intro screen where it isn't needed.
     // Links handling the visibility of vectors
-    Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
-      if ( springMassAttachedTo !== null && visible === true ) {self.velocityArrow.visible = visible;}
-      else if ( springMassAttachedTo === null || visible === false ) {self.velocityArrow.visible = false;}
+    Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty, mass.userControlledProperty ], function( springMassAttachedTo, visible, userControlled ) {
+      if ( springMassAttachedTo !== null && visible === true && userControlled === false ) {self.velocityArrow.visible = visible;}
+      else if ( springMassAttachedTo === null || visible === false || userControlled === true ) {self.velocityArrow.visible = false;}
     } );
 
-    Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
-      if ( springMassAttachedTo !== null && visible === true ) {self.accelerationArrow.visible = visible;}
-      else if ( springMassAttachedTo === null || visible === false ) {self.accelerationArrow.visible = false;}
+    Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty, mass.userControlledProperty ], function( springMassAttachedTo, visible, userControlled ) {
+      if ( springMassAttachedTo !== null && visible === true && userControlled === false ) {self.accelerationArrow.visible = visible;}
+      else if ( springMassAttachedTo === null || visible === false || userControlled === true ) {self.accelerationArrow.visible = false;}
     } );
 
     Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
-      if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {self.gravityArrow.visible = visible;}
-      else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {self.gravityArrow.visible = false;}
+      if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {self.gravityForceArrow.visible = visible;}
+      else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {self.gravityForceArrow.visible = false;}
     } );
 
     Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
-      if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {self.springArrow.visible = visible;}
-      else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {self.springArrow.visible = false;}
+      if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {self.springForceArrow.visible = visible;}
+      else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {self.springForceArrow.visible = false;}
     } );
 
     Property.multilink( [ mass.springProperty, model.netForceVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
-      // debugger;
       if ( springMassAttachedTo !== null && forcesVisible === 'netForce' ) {self.netForceArrow.visible = true;}
       else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'forces' ) {self.netForceArrow.visible = false;}
     } );
+
+    Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
+      function( springMassAttachedTo, gravityForceVisible, springForceVisible, forcesVisible ) {
+        if ( springMassAttachedTo !== null && ( gravityForceVisible || springForceVisible || (forcesVisible === 'netForce') ) ) {forceNullLine.visible = true;}
+        else {forceNullLine.visible = false;}
+      } );
 
     //Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;
     mass.verticalVelocityProperty.link( function( velocity ) {
         var position = ( mass.positionProperty.get() );
-      self.velocityArrow.setTailAndTip( position.x - 10,
+      self.velocityArrow.setTailAndTip(
+        position.x - 10,
           position.y + 10,
           position.x - 10,
           position.y + 10 - ARROW_SIZE_DEFAULT * velocity * scalingFactor
@@ -167,17 +181,56 @@ define( function( require ) {
       }
     );
 
-    model.gravityProperty.link( function( gravity ) {
-      var gravitationalAcceleration = gravity / scalingFactor;
-        console.log( 'gravitationalAcceleration = ' + gravitationalAcceleration );
-        var position = ( mass.positionProperty.get() );
-      self.accelerationArrow.setTailAndTip( position.x + 10,
-          position.y + 10,
-          position.x + 10,
-          position.y + 10 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
-        );
-      }
-    );
+    Property.multilink( [ model.springs[ 0 ].springConstantProperty, model.springs[ 0 ].displacementProperty, model.gravityProperty ],
+      function( springConstant, displacement, gravity ) {
+        {
+          var gravitationalAcceleration = mass.mass * gravity;
+          var position = ( mass.positionProperty.get() );
+          self.gravityForceArrow.setTailAndTip(
+            position.x + 45,
+            position.y + 40,
+            position.x + 45,
+            position.y + 40 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
+          );
+          var springForce = -1 * springConstant * displacement;
+          self.springForceArrow.setTailAndTip(
+            position.x + 45,
+            position.y + 40,
+            position.x + 45,
+            position.y + 40 - ARROW_SIZE_DEFAULT * springForce
+          );
+          var netForceValue = springForce + (mass.mass * -gravity);
+          self.netForceArrow.setTailAndTip(
+            position.x + 45,
+            position.y + 40,
+            position.x + 45,
+            position.y + 40 - ARROW_SIZE_DEFAULT * netForceValue
+          );
+          forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
+        }
+      } );
+
+    Property.multilink( [ model.springs[ 1 ].springConstantProperty, model.springs[ 1 ].displacementProperty, model.gravityProperty ],
+      function( springConstant, displacement, gravity ) {
+        {
+          var springForce = -1 * springConstant * displacement;
+          var position = ( mass.positionProperty.get() );
+          self.springForceArrow.setTailAndTip(
+            position.x + 45,
+            position.y + 40,
+            position.x + 45,
+            position.y + 40 - ARROW_SIZE_DEFAULT * springForce
+          );
+          var netForceValue = springForce + (mass.mass * -gravity);
+          self.netForceArrow.setTailAndTip(
+            position.x + 45,
+            position.y + 40,
+            position.x + 45,
+            position.y + 40 - ARROW_SIZE_DEFAULT * netForceValue
+          );
+          forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
+        }
+      } );
   }
 
   massesAndSprings.register( 'MassNode', MassNode );

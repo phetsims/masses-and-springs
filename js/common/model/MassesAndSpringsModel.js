@@ -228,6 +228,12 @@ define( function( require ) {
       this.movableLineVisibleProperty.reset();
       this.naturalLengthVisibleProperty.reset();
       this.equilibriumPositionVisibleProperty.reset();
+      this.velocityVectorVisibilityProperty.reset();
+      this.accelerationVectorVisibilityProperty.reset();
+      this.gravityVectorVisibilityProperty.reset();
+      this.springVectorVisibilityProperty.reset();
+      this.netForceVectorVisibilityProperty.reset();
+      this.forcesModeProperty.reset();
       for ( var referencedMass in this.masses ) {
         if ( !this.masses.hasOwnProperty( referencedMass ) ) {
           continue;

@@ -75,6 +75,15 @@ define( function( require ) {
       } )
     } );
 
+    // @public {Property.<number>} vertical acceleration of the mass
+    this.gravitationalAccelerationProperty = new Property( 0, {
+      tandem: tandem.createTandem( 'accelerationProperty' ),
+      phetioValueType: TNumber( {
+        units: 'meters/second/second',
+        range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
+      } )
+    } );
+
     // @public {Property.<Spring>} {Spring|null} is the mass attached to a Spring?
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
