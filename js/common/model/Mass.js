@@ -128,10 +128,6 @@ define( function( require ) {
       }
     },
 
-    calculateGravitationalForce: function( gravity ) {
-      return this.mass * gravity;
-    },
-
     /**
      * TODO: Documentation
      * @public

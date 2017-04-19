@@ -344,6 +344,7 @@ define( function( require ) {
           }
           else {
             this.displacementProperty.set( newDisplacement );
+            //TODO: add in the kinematic equation for acceleration here. Store old velocity and use new velocity in equ.
             this.massProperty.get().verticalVelocityProperty.set( newVelocity );
           }
 

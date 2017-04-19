@@ -26,11 +26,15 @@ define( function( require ) {
 
   // constants
   var ARROW_LENGTH = 24;
+  var ARROW_SIZE_DEFAULT = 25;
   var ARROW_HEAD_WIDTH = 14;
   var ARROW_TAIL_WIDTH = 8;
-  var ARROW_SIZE_DEFAULT = 25;
+  var SMALLER_ARROW_HEAD_WIDTH = 11;
+  var SMALLER_ARROW_TAIL_WIDTH = 3;
   var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
   var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
+  var GRAVITY_ARROW_COLOR = 'rgb( 236, 63, 71 )';
+  var SPRING_ARROW_COLOR = 'rgb( 36, 36, 255 )';
 
 
   /**
@@ -113,25 +117,43 @@ define( function( require ) {
     //Arrows created for vectors associated with mass nodes
     this.velocityArrow = model.createArrow( 10, 10 + ARROW_LENGTH, VELOCITY_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'velocityArrow' );
     this.accelerationArrow = model.createArrow( 10, 10 + ARROW_LENGTH, ACCELERATION_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'accelerationArrow' );
+    this.gravityArrow = model.createArrow( 5, 7 + ARROW_LENGTH, GRAVITY_ARROW_COLOR, GRAVITY_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'gravityArrow' );
+    this.springArrow = model.createArrow( 5, 7 + ARROW_LENGTH, SPRING_ARROW_COLOR, SPRING_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'springArrow' );
+    this.netForceArrow = model.createArrow( 5, 7 + ARROW_LENGTH, 'black', 'black', SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'netForceArrow' );
 
     this.addChild( this.velocityArrow );
     this.addChild( this.accelerationArrow );
+    this.addChild( this.gravityArrow );
+    this.addChild( this.springArrow );
+    // this.addChild( this.netForceArrow );
 
 
     //TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this link is being referenced in the intro screen where it isn't needed.
     // Links handling the visibility of vectors
     Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
-      if ( springMassAttachedTo !== null && model.velocityVectorVisibilityProperty.get() == true ) {self.velocityArrow.visible = visible;}
-      else if ( springMassAttachedTo == null || model.velocityVectorVisibilityProperty.get() == false ) {self.velocityArrow.visible = false;}
+      if ( springMassAttachedTo !== null && visible == true ) {self.velocityArrow.visible = visible;}
+      else if ( springMassAttachedTo == null || visible == false ) {self.velocityArrow.visible = false;}
     } );
 
     Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
-      if ( springMassAttachedTo !== null && model.accelerationVectorVisibilityProperty.get() == true ) {self.accelerationArrow.visible = visible;}
-      else if ( springMassAttachedTo == null || model.accelerationVectorVisibilityProperty.get() == false ) {self.accelerationArrow.visible = false;}
+      if ( springMassAttachedTo !== null && visible == true ) {self.accelerationArrow.visible = visible;}
+      else if ( springMassAttachedTo == null || visible == false ) {self.accelerationArrow.visible = false;}
+    } );
+
+    Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
+      // debugger;
+      if ( springMassAttachedTo !== null && visible == true && forcesVisible == 'forces' ) {self.gravityArrow.visible = visible;}
+      else if ( springMassAttachedTo == null || visible == false || forcesVisible == 'netForce' ) {self.gravityArrow.visible = false;}
+    } );
+
+    Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
+      // debugger;
+      if ( springMassAttachedTo !== null && visible == true && forcesVisible == 'forces' ) {self.springArrow.visible = visible;}
+      else if ( springMassAttachedTo == null || visible == false || forcesVisible == 'netForce' ) {self.springArrow.visible = false;}
     } );
 
     //Links for handling the length of the vectors in response to the   system.
-    var scalingFactor = 2.5;
+    var scalingFactor = 3;
     mass.verticalVelocityProperty.link( function( velocity ) {
         var position = ( mass.positionProperty.get() );
       self.velocityArrow.setTailAndTip( position.x - 10,
@@ -143,7 +165,7 @@ define( function( require ) {
     );
 
     model.gravityProperty.link( function( gravity ) {
-        var gravitationalAcceleration = mass.mass * gravity;
+      var gravitationalAcceleration = gravity / scalingFactor;
         console.log( 'gravitationalAcceleration = ' + gravitationalAcceleration );
         var position = ( mass.positionProperty.get() );
       self.accelerationArrow.setTailAndTip( position.x + 10,

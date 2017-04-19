@@ -122,14 +122,26 @@ define( function( require ) {
       phetioValueType: TString
     } );
 
+    // Visibility properties of vectors associated with each mass
     // @public {Property.<boolean>} determines the visibility of the velocity vector
-    this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
-    } );
+    this.velocityVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' ) } );
 
     // @public {Property.<boolean>} determines the visibility of the acceleration vector
-    this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
+    this.accelerationVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' ) } );
+
+    // @public {Property.<boolean>} determines the visibility of the gravitational force vector
+    this.gravityVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'gravityVectorVisibilityProperty' ) } );
+
+    // @public {Property.<boolean>} determines the visibility of the spring force vector
+    this.springVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'springVectorVisibilityProperty' ) } );
+
+    // @public {Property.<boolean>} determines the visibility of the net force vector
+    this.netForceVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' ) } );
+
+    this.forcesModeProperty = new Property( 'forces', {
+      tandem: tandem.createTandem( 'forcesModeProperty' ),
+      phetioValueType: TString,
+      validValues: [ 'forces', 'netForce' ]
     } );
 
     // @public {read-only} Y position of floor in m. The floor is at the bottom bounds of the screen.
