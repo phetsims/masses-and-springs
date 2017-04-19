@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Property = require( 'AXON/Property' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var NumberProperty = require( 'AXON/NumberProperty' );
@@ -115,16 +116,18 @@ define( function( require ) {
       tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
     } );
 
-    // @public {Property.<string>}
+    // @public {Property.<string>} name of planet selected
     this.bodyTitleProperty = new Property( Body.EARTH.title, {
       tandem: tandem.createTandem( 'bodyTitleProperty' ),
       phetioValueType: TString
     } );
-    
+
+    // @public {Property.<boolean>} determines the visibility of the velocity vector
     this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
     } );
 
+    // @public {Property.<boolean>} determines the visibility of the acceleration vector
     this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
     } );
@@ -177,6 +180,18 @@ define( function( require ) {
         spring.dampingCoefficientProperty.set( newFriction );
       } );
     } );
+
+    // Creation of arrow nodes to be used in vector screen.
+    this.createArrow = function( tailX, tipX, color, strokeColor, arrowTailWidth, arrowHeadWidth, tandemID ) {
+      return new ArrowNode( tailX, 0, tipX, 0, {
+        fill: color,
+        stroke: strokeColor,
+        centerY: 0,
+        tailWidth: arrowTailWidth,
+        headWidth: arrowHeadWidth,
+        tandem: tandem.createTandem( tandemID )
+      } );
+    };
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );

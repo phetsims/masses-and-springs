@@ -24,6 +24,15 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
+  // constants
+  var ARROW_LENGTH = 24;
+  var ARROW_HEAD_WIDTH = 14;
+  var ARROW_TAIL_WIDTH = 8;
+  var ARROW_SIZE_DEFAULT = 25;
+  var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
+  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
+
+
   /**
    * @param {Mass} mass -  model object
    * @param {ModelViewTransform2} modelViewTransform2
@@ -101,51 +110,31 @@ define( function( require ) {
       }
     } ) );
 
-    // constants
-    // var ARROW_LENGTH = 24;
-    var ARROW_HEAD_WIDTH = 14;
-    var ARROW_TAIL_WIDTH = 8;
-    var ARROW_SIZE_DEFAULT = 25;
-    var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
-    var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
+    //Arrows created for vectors associated with mass nodes
+    this.velocityArrow = model.createArrow( 10, 10 + ARROW_LENGTH, VELOCITY_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'velocityArrow' );
+    this.accelerationArrow = model.createArrow( 10, 10 + ARROW_LENGTH, ACCELERATION_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'accelerationArrow' );
 
-    var accelerationArrow = new ArrowNode( 10, 0, 10, ARROW_SIZE_DEFAULT, {
-      fill: ACCELERATION_ARROW_COLOR,
-      centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
-      tandem: tandem.createTandem( 'accelerationArrow' )
-    } );
-
-    this.addChild( accelerationArrow );
-
-    var velocityArrow = new ArrowNode( -10, 0, -10, ARROW_SIZE_DEFAULT, {
-      fill: VELOCITY_ARROW_COLOR,
-      centerY: 0,
-      tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
-      visible: model.velocityVectorVisibilityProperty.get(),
-      tandem: tandem.createTandem( 'velocityArrow' )
-    } );
-    this.addChild( velocityArrow );
+    this.addChild( this.velocityArrow );
+    this.addChild( this.accelerationArrow );
 
 
     //TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this link is being referenced in the intro screen where it isn't needed.
     // Links handling the visibility of vectors
     Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
-      if ( springMassAttachedTo !== null && model.velocityVectorVisibilityProperty.get() == true ) {velocityArrow.visible = visible;}
-      else if ( springMassAttachedTo == null || model.velocityVectorVisibilityProperty.get() == false ) {velocityArrow.visible = false;}
+      if ( springMassAttachedTo !== null && model.velocityVectorVisibilityProperty.get() == true ) {self.velocityArrow.visible = visible;}
+      else if ( springMassAttachedTo == null || model.velocityVectorVisibilityProperty.get() == false ) {self.velocityArrow.visible = false;}
     } );
 
     Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
-      if ( springMassAttachedTo !== null && model.accelerationVectorVisibilityProperty.get() == true ) {accelerationArrow.visible = visible;}
-      else if ( springMassAttachedTo == null || model.accelerationVectorVisibilityProperty.get() == false ) {accelerationArrow.visible = false;}
+      if ( springMassAttachedTo !== null && model.accelerationVectorVisibilityProperty.get() == true ) {self.accelerationArrow.visible = visible;}
+      else if ( springMassAttachedTo == null || model.accelerationVectorVisibilityProperty.get() == false ) {self.accelerationArrow.visible = false;}
     } );
 
+    //Links for handling the length of the vectors in response to the   system.
     var scalingFactor = 2.5;
     mass.verticalVelocityProperty.link( function( velocity ) {
         var position = ( mass.positionProperty.get() );
-        velocityArrow.setTailAndTip( position.x - 10,
+      self.velocityArrow.setTailAndTip( position.x - 10,
           position.y + 10,
           position.x - 10,
           position.y + 10 - ARROW_SIZE_DEFAULT * velocity * scalingFactor
@@ -157,7 +146,7 @@ define( function( require ) {
         var gravitationalAcceleration = mass.mass * gravity;
         console.log( 'gravitationalAcceleration = ' + gravitationalAcceleration );
         var position = ( mass.positionProperty.get() );
-        accelerationArrow.setTailAndTip( position.x + 10,
+      self.accelerationArrow.setTailAndTip( position.x + 10,
           position.y + 10,
           position.x + 10,
           position.y + 10 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
@@ -165,7 +154,7 @@ define( function( require ) {
       }
     );
 
- 
+
   }
 
   massesAndSprings.register( 'MassNode', MassNode );
