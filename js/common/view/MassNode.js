@@ -149,12 +149,13 @@ define( function( require ) {
       else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {self.springArrow.visible = false;}
     } );
 
-    Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
-      if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {self.springArrow.visible = visible;}
-      else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {self.springArrow.visible = false;}
+    Property.multilink( [ mass.springProperty, model.netForceVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
+      // debugger;
+      if ( springMassAttachedTo !== null && forcesVisible === 'netForce' ) {self.netForceArrow.visible = true;}
+      else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'forces' ) {self.netForceArrow.visible = false;}
     } );
 
-    //Links for handling the length of the vectors in response to the   system.
+    //Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;
     mass.verticalVelocityProperty.link( function( velocity ) {
         var position = ( mass.positionProperty.get() );
