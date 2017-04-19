@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Bounds2 = require( 'DOT/Bounds2' );
@@ -125,31 +124,34 @@ define( function( require ) {
     this.addChild( this.accelerationArrow );
     this.addChild( this.gravityArrow );
     this.addChild( this.springArrow );
-    // this.addChild( this.netForceArrow );
+    this.addChild( this.netForceArrow );
 
 
     //TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this link is being referenced in the intro screen where it isn't needed.
     // Links handling the visibility of vectors
     Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
-      if ( springMassAttachedTo !== null && visible == true ) {self.velocityArrow.visible = visible;}
-      else if ( springMassAttachedTo == null || visible == false ) {self.velocityArrow.visible = false;}
+      if ( springMassAttachedTo !== null && visible === true ) {self.velocityArrow.visible = visible;}
+      else if ( springMassAttachedTo === null || visible === false ) {self.velocityArrow.visible = false;}
     } );
 
     Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty ], function( springMassAttachedTo, visible ) {
-      if ( springMassAttachedTo !== null && visible == true ) {self.accelerationArrow.visible = visible;}
-      else if ( springMassAttachedTo == null || visible == false ) {self.accelerationArrow.visible = false;}
+      if ( springMassAttachedTo !== null && visible === true ) {self.accelerationArrow.visible = visible;}
+      else if ( springMassAttachedTo === null || visible === false ) {self.accelerationArrow.visible = false;}
     } );
 
     Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
-      // debugger;
-      if ( springMassAttachedTo !== null && visible == true && forcesVisible == 'forces' ) {self.gravityArrow.visible = visible;}
-      else if ( springMassAttachedTo == null || visible == false || forcesVisible == 'netForce' ) {self.gravityArrow.visible = false;}
+      if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {self.gravityArrow.visible = visible;}
+      else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {self.gravityArrow.visible = false;}
     } );
 
     Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
-      // debugger;
-      if ( springMassAttachedTo !== null && visible == true && forcesVisible == 'forces' ) {self.springArrow.visible = visible;}
-      else if ( springMassAttachedTo == null || visible == false || forcesVisible == 'netForce' ) {self.springArrow.visible = false;}
+      if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {self.springArrow.visible = visible;}
+      else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {self.springArrow.visible = false;}
+    } );
+
+    Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ], function( springMassAttachedTo, visible, forcesVisible ) {
+      if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {self.springArrow.visible = visible;}
+      else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {self.springArrow.visible = false;}
     } );
 
     //Links for handling the length of the vectors in response to the   system.
@@ -175,8 +177,6 @@ define( function( require ) {
         );
       }
     );
-
-
   }
 
   massesAndSprings.register( 'MassNode', MassNode );
