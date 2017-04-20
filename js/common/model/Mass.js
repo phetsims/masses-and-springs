@@ -104,7 +104,7 @@ define( function( require ) {
 
     // TODO: derive net force from gravity force and spring force
     this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ], function( springForce, gravity ) {
-      return springForce - self.mass * gravity
+      return springForce - self.mass * gravity;
     } );
 
     // @public {read-only} Non property model attributes
