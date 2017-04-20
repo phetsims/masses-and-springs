@@ -48,7 +48,7 @@ define( function( require ) {
     this.translation = modelViewTransform2.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );
     this.modelViewTransform2 = modelViewTransform2;
 
-    function updateViewLength() { 
+    function updateViewLength() {
       // ParametricSpringNode calculations
       var coilLength = ( modelViewTransform2.modelToViewDeltaY( spring.lengthProperty.get() ) - ( options.leftEndLength + options.rightEndLength ) );
       var xScale = coilLength / ( self.loopsProperty.get() * self.radiusProperty.get() );

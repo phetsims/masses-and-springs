@@ -65,7 +65,7 @@ define( function( require ) {
         range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 )
       } )
     } );
-    
+
     // @public {Property.<number>} vertical acceleration of the mass
     this.accelerationProperty = new Property( 0, {
       tandem: tandem.createTandem( 'accelerationProperty' ),
