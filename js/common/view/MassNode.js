@@ -194,30 +194,36 @@ define( function( require ) {
 
     // When the spring force changes, update the arrow
     Property.multilink( [ mass.springForceProperty, mass.positionProperty ], function( springForce, position ) {
-      self.springForceArrow.setTailAndTip(
-        position.x + 45,
-        position.y + 40,
-        position.x + 45,
-        position.y + 40 - ARROW_SIZE_DEFAULT * springForce
-      );
+      if ( Math.abs( springForce ) < 1E-6 ) {
+        self.springForceArrow.setTailAndTip(
+          position.x + 45,
+          position.y + 40,
+          position.x + 45,
+          position.y + 40 - ARROW_SIZE_DEFAULT * springForce
+        );
+      }
     } );
 
     assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
 
     Property.multilink( [ mass.netForceProperty, mass.positionProperty ], function( netForce, position ) {
-      self.netForceArrow.setTailAndTip(
-        position.x + 45,
-        position.y + 40,
-        position.x + 45,
-        position.y + 40 - ARROW_SIZE_DEFAULT * netForce
-      );
+      if ( Math.abs( netForce ) > 1E-6 ) {
+        self.netForceArrow.setTailAndTip(
+          position.x + 45,
+          position.y + 40,
+          position.x + 45,
+          position.y + 40 - ARROW_SIZE_DEFAULT * netForce
+        );
+      }
       var netAcceleration = netForce / mass.mass;
-      self.accelerationArrow.setTailAndTip(
-        position.x + 10,
-        position.y + 10,
-        position.x + 10,
-        position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
-      );
+      if ( Math.abs( netAcceleration ) > 1E-6 ) {
+        self.accelerationArrow.setTailAndTip(
+          position.x + 10,
+          position.y + 10,
+          position.x + 10,
+          position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
+        );
+      }
     } );
 
     mass.positionProperty.link( function( position ) {
