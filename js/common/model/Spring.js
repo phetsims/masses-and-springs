@@ -28,7 +28,7 @@ define( function( require ) {
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
 
   // constants
-  var DEFAULT_THICKNESS = 3; // view-coordinates, emperically determined
+  var DEFAULT_THICKNESS = 3; // view-coordinates, empirically determined
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
@@ -107,7 +107,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'thicknessProperty' ),
       phetioValueType: TNumber( {
         //units: screenViewCoordinates
-        range: new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS ) // derived emperically from updateSpringThickness()
+        range: new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS ) // derived empirically from updateSpringThickness()
       } )
     } );
 
