@@ -181,6 +181,7 @@ define( function( require ) {
       }
     );
 
+    // TODO: Only watch for the spring attached to the specific mass
     Property.multilink( [ model.springs[ 0 ].springConstantProperty, model.springs[ 0 ].displacementProperty, model.gravityProperty ],
       function( springConstant, displacement, gravity ) {
         {
@@ -206,6 +207,13 @@ define( function( require ) {
             position.x + 45,
             position.y + 40 - ARROW_SIZE_DEFAULT * netForceValue
           );
+          var netAcceleration = netForceValue / mass.mass;
+          self.accelerationArrow.setTailAndTip(
+            position.x + 10,
+            position.y + 10,
+            position.x + 10,
+            position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
+          );
           forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
         }
       } );
@@ -213,8 +221,15 @@ define( function( require ) {
     Property.multilink( [ model.springs[ 1 ].springConstantProperty, model.springs[ 1 ].displacementProperty, model.gravityProperty ],
       function( springConstant, displacement, gravity ) {
         {
-          var springForce = -1 * springConstant * displacement;
+          var gravitationalAcceleration = mass.mass * gravity;
           var position = ( mass.positionProperty.get() );
+          self.gravityForceArrow.setTailAndTip(
+            position.x + 45,
+            position.y + 40,
+            position.x + 45,
+            position.y + 40 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
+          );
+          var springForce = -1 * springConstant * displacement;
           self.springForceArrow.setTailAndTip(
             position.x + 45,
             position.y + 40,
@@ -227,6 +242,13 @@ define( function( require ) {
             position.y + 40,
             position.x + 45,
             position.y + 40 - ARROW_SIZE_DEFAULT * netForceValue
+          );
+          var netAcceleration = netForceValue / mass.mass;
+          self.accelerationArrow.setTailAndTip(
+            position.x + 10,
+            position.y + 10,
+            position.x + 10,
+            position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
           );
           forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
         }
