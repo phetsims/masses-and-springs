@@ -168,6 +168,9 @@ define( function( require ) {
         else {forceNullLine.visible = false;}
       } );
 
+
+    //TODO: Create MASArrowNode with arguements for deltas in X&Y, mass position, and the property it is depicting
+    //TODO: Considering moving in visibility multilinks)
     //Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;
     mass.verticalVelocityProperty.link( function( velocity ) {
