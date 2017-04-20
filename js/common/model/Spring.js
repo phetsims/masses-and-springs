@@ -69,6 +69,15 @@ define( function( require ) {
       } )
     } );
 
+    // @public {Property.<number>} spring force
+    this.springForceProperty = new DerivedProperty( [ this.displacementProperty, this.springConstantProperty ], function( displacement, springConstant ) {
+      return -1 * springConstant * displacement;
+    }, {
+      phetioValueType: TNumber( {
+        units: 'newtons'
+      } )
+    } );
+
     // @public {Property.<number>} viscous damping coefficient of the system
     this.dampingCoefficientProperty = new Property( defaultDampingCoefficient, {
       tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
@@ -199,7 +208,7 @@ define( function( require ) {
     reset: function( resetAllProperty ) {
       //ensures displacement will change on reset, otherwise springs will be upside down.
       // TODO: find a better fix for this problem.
-      this.displacementProperty.set( 1 );
+      this.displacementProperty.set( 1 ); // TODO: can this line be removed?
       this.gravityProperty.reset();
       this.displacementProperty.reset();
       this.dampingCoefficientProperty.reset();

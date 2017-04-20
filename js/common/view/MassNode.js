@@ -181,76 +181,48 @@ define( function( require ) {
       }
     );
 
-    // TODO: Only watch for the spring attached to the specific mass
-    Property.multilink( [ model.springs[ 0 ].springConstantProperty, model.springs[ 0 ].displacementProperty, model.gravityProperty ],
-      function( springConstant, displacement, gravity ) {
-        var gravitationalAcceleration = mass.mass * gravity;
-        var position = ( mass.positionProperty.get() );
-        self.gravityForceArrow.setTailAndTip(
-          position.x + 45,
-          position.y + 40,
-          position.x + 45,
-          position.y + 40 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
-        );
-        var springForce = -1 * springConstant * displacement;
-        self.springForceArrow.setTailAndTip(
-          position.x + 45,
-          position.y + 40,
-          position.x + 45,
-          position.y + 40 - ARROW_SIZE_DEFAULT * springForce
-        );
-        var netForceValue = springForce + (mass.mass * -gravity);
-        self.netForceArrow.setTailAndTip(
-          position.x + 45,
-          position.y + 40,
-          position.x + 45,
-          position.y + 40 - ARROW_SIZE_DEFAULT * netForceValue
-        );
-        var netAcceleration = netForceValue / mass.mass;
-        self.accelerationArrow.setTailAndTip(
-          position.x + 10,
-          position.y + 10,
-          position.x + 10,
-          position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
-        );
-        forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
-      } );
+    // When gravity changes, update the gravitational force arrow
+    Property.multilink( [ mass.gravityProperty, mass.positionProperty ], function( gravity, position ) {
+      var gravitationalAcceleration = mass.mass * gravity;
+      self.gravityForceArrow.setTailAndTip(
+        position.x + 45,
+        position.y + 40,
+        position.x + 45,
+        position.y + 40 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
+      );
+    } );
 
-    Property.multilink( [ model.springs[ 1 ].springConstantProperty, model.springs[ 1 ].displacementProperty, model.gravityProperty ],
-      function( springConstant, displacement, gravity ) {
-        {
-          var gravitationalAcceleration = mass.mass * gravity;
-          var position = ( mass.positionProperty.get() );
-          self.gravityForceArrow.setTailAndTip(
-            position.x + 45,
-            position.y + 40,
-            position.x + 45,
-            position.y + 40 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
-          );
-          var springForce = -1 * springConstant * displacement;
-          self.springForceArrow.setTailAndTip(
-            position.x + 45,
-            position.y + 40,
-            position.x + 45,
-            position.y + 40 - ARROW_SIZE_DEFAULT * springForce
-          );
-          var netForceValue = springForce + (mass.mass * -gravity);
-          self.netForceArrow.setTailAndTip(
-            position.x + 45,
-            position.y + 40,
-            position.x + 45,
-            position.y + 40 - ARROW_SIZE_DEFAULT * netForceValue
-          );
-          var netAcceleration = netForceValue / mass.mass;
-          self.accelerationArrow.setTailAndTip(
-            position.x + 10,
-            position.y + 10,
-            position.x + 10,
-            position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
-          );
-          forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
-        }
-      } );
+    // When the spring force changes, update the arrow
+    Property.multilink( [ mass.springForceProperty, mass.positionProperty ], function( springForce, position ) {
+      self.springForceArrow.setTailAndTip(
+        position.x + 45,
+        position.y + 40,
+        position.x + 45,
+        position.y + 40 - ARROW_SIZE_DEFAULT * springForce
+      );
+    } );
+
+    assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
+
+    Property.multilink( [ mass.netForceProperty, mass.positionProperty ], function( netForce, position ) {
+      self.netForceArrow.setTailAndTip(
+        position.x + 45,
+        position.y + 40,
+        position.x + 45,
+        position.y + 40 - ARROW_SIZE_DEFAULT * netForce
+      );
+      var netAcceleration = netForce / mass.mass;
+      self.accelerationArrow.setTailAndTip(
+        position.x + 10,
+        position.y + 10,
+        position.x + 10,
+        position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
+      );
+    } );
+
+    mass.positionProperty.link( function( position ) {
+      forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
+    } );
   }
 
   massesAndSprings.register( 'MassNode', MassNode );

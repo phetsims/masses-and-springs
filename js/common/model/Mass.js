@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Property = require( 'AXON/Property' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -31,10 +32,11 @@ define( function( require ) {
    * @param {Vector2} initialPosition: initial coordinates of the mass
    * @param {boolean} isLabeled: determines if the mass is labeled in the view
    * @param {string} color: color of shown mass
+   * @param {Property.<number>} gravityProperty - the gravity property from the model
    * @param {Tandem} tandem
    * @constructor
    */
-  function Mass( massValue, initialPosition, isLabeled, color, tandem ) {
+  function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem ) {
     var self = this;
 
     // @public {read-only} Used for constructing tandems for corresponding view nodes.
@@ -76,18 +78,33 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} vertical acceleration of the mass
-    this.gravitationalAccelerationProperty = new Property( 0, {
-      tandem: tandem.createTandem( 'accelerationProperty' ),
-      phetioValueType: TNumber( {
-        units: 'meters/second/second',
-        range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
-      } )
-    } );
+    // TODO: use this property
+    this.gravityProperty = gravityProperty; // TODO: align those names
 
     // @public {Property.<Spring>} {Spring|null} is the mass attached to a Spring?
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
       phetioValueType: TSpring
+    } );
+
+    // The force of the attached spring or 0 if unattached
+    this.springForceProperty = new Property();
+
+    // Forward the value from the attached spring through to the mass's springForceProperty
+    var springForceListener = function( springForce ) {
+      self.springForceProperty.set( springForce );
+    };
+    this.springProperty.link( function( spring, oldSpring ) {
+      oldSpring && oldSpring.springForceProperty.unlink( springForceListener );
+      spring && spring.springForceProperty.link( springForceListener );
+      if ( !spring ) {
+        self.springForceProperty.set( 0.0 );
+      }
+    } );
+
+    // TODO: derive net force from gravity force and spring force
+    this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ], function( springForce, gravity ) {
+      return springForce - self.mass * gravity
     } );
 
     // @public {read-only} Non property model attributes
