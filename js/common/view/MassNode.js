@@ -134,7 +134,7 @@ define( function( require ) {
     this.addChild( this.netForceArrow );
     this.addChild( forceNullLine );
 
-
+    // TODO: Truncate all of these multilinks. It may be useful to start an use ArrowNode.js to set the visibility as a flag.
     //TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this link is being referenced in the intro screen where it isn't needed.
     // Links handling the visibility of vectors
     Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty, mass.userControlledProperty ], function( springMassAttachedTo, visible, userControlled ) {
