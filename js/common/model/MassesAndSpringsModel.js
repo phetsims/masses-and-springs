@@ -27,8 +27,7 @@ define( function( require ) {
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
 
   // constants
-  var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected to
-                               // a spring
+  var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
   var DROPPING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
 
   /**
@@ -146,6 +145,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' )
     } );
 
+    // @public {Property.<string>} determines mode of the vectors to be viewed
     this.forcesModeProperty = new Property( 'forces', {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
       phetioValueType: TString,
@@ -160,7 +160,6 @@ define( function( require ) {
     this.ceilingY = 1.23;
 
     // @public (read-only) model of springs used throughout the sim
-    // TODO:: See if other places need (read-only) too
     this.springs = [
       new Spring(
         new Vector2( .65, this.ceilingY ),
@@ -233,7 +232,7 @@ define( function( require ) {
       Body.CUSTOM
     ];
 
-    // Links to set gravity property of each spring to the gravity property of the system
+    // Links are used to set gravity property of each spring to the gravity property of the system
     this.gravityProperty.link( function( newGravity ) {
       assert && assert( newGravity >= 0, 'gravity must be 0 or positive : ' + newGravity );
       self.springs.forEach( function( spring ) {
@@ -241,7 +240,7 @@ define( function( require ) {
       } );
     } );
 
-    // Links to set friction property of each spring to the friction property of the system
+    // Links are used to set friction property of each spring to the friction property of the system
     this.frictionProperty.link( function( newFriction ) {
       assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
       self.springs.forEach( function( spring ) {
@@ -291,10 +290,9 @@ define( function( require ) {
     /**
      * Based on new dragged position of mass, try to attach or detach mass if eligible and then update position.
      *
-     * @public
-     *
      * @param {Mass} mass
      * @param {Vector2} proposedPosition
+     * @public
      */
     adjustDraggedMassPosition: function( mass, proposedPosition ) {
 
@@ -334,9 +332,9 @@ define( function( require ) {
     /**
      * Stop spring motion by setting the displacement to the spring's extension, which is the length from the natural
      * resting position. This will also stop the spring from further oscillation.
-     * @public
      *
      * @param {number} springNumber: Determines which spring will be affected.
+     * @public
      */
     stopSpring: function( springNumber ) {
       var spring = this.springs[ springNumber ];
@@ -356,6 +354,7 @@ define( function( require ) {
     },
 
     /**
+     * Responsible for stepping through sim at 1/60th speed and paused after step.
      * @public
      */
     stepForward: function() {
@@ -365,9 +364,8 @@ define( function( require ) {
     },
 
     /**
-     * @public
-     *
      * @param {number} dt
+     * @public
      */
     step: function( dt ) {
       var self = this;
@@ -377,12 +375,10 @@ define( function( require ) {
       if ( dt > 1.0 ) {
         return;
       }
-
       if ( this.playingProperty.get() ) {
 
         // Using real world time for this results in the atoms moving a little slowly, so the time step is adjusted
         // here.  The multipliers were empirically determined.
-
         switch( this.simSpeedProperty.get() ) {
           case 'normal':
             break;
@@ -393,16 +389,14 @@ define( function( require ) {
             assert( false, 'invalid setting for model speed' );
         }
       }
-
       if ( this.playingProperty.get() === true ) {
-        Object.keys( this.masses ).forEach( function( referencedMass ) {
-          var mass = self.masses[ referencedMass ];
+        _.values( this.masses ).forEach( function( mass ) {
+
           // Fall if not hung or grabbed
           if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
             mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );
           }
         } );
-
         if ( this.timerRunningProperty.get() ) {
           this.timerSecondProperty.set( this.timerSecondProperty.get() + dt );
         }
