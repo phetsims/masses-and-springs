@@ -18,6 +18,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  // var ArrowNodeCreator = require( 'MASSES_AND_SPRINGS/common/util/ArrowNodeCreator' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
@@ -193,7 +194,7 @@ define( function( require ) {
       } );
 
 
-    //TODO: Create MASArrowNode with arguements for deltas in X&Y, mass position, and the property it is depicting
+    //TODO: Create MASArrowNode with arguments for deltas in X&Y, mass position, and the property it is depicting
     //TODO: Considering moving in visibility multilinks)
     //Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;
@@ -221,12 +222,12 @@ define( function( require ) {
 
     // When the spring force changes, update the arrow
     Property.multilink( [ mass.springForceProperty, mass.positionProperty ], function( springForce, position ) {
-        self.springForceArrow.setTailAndTip(
-          position.x + 45,
-          position.y + 40,
-          position.x + 45,
-          position.y + 40 - ARROW_SIZE_DEFAULT * springForce
-        );
+      self.springForceArrow.setTailAndTip(
+        position.x + 45,
+        position.y + 40,
+        position.x + 45,
+        position.y + 40 - ARROW_SIZE_DEFAULT * springForce
+      );
     } );
 
     assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
