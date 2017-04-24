@@ -124,7 +124,10 @@ define( function( require ) {
 
     // Visibility properties of vectors associated with each mass
     // @public {Property.<boolean>} determines the visibility of the velocity vector
-    this.velocityVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' ) } );
+    this.velocityVectorVisibilityProperty = new BooleanProperty(
+      false,
+      { tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' ) }
+    );
 
     // @public {Property.<boolean>} determines the visibility of the acceleration vector
     this.accelerationVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' ) } );
@@ -154,7 +157,13 @@ define( function( require ) {
     // @public (read-only) model of springs used throughout the sim
     // TODO:: See if other places need (read-only) too
     this.springs = [
-      new Spring( new Vector2( .65, this.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'leftSpring' ) ),
+      new Spring(
+        new Vector2( .65, this.ceilingY ),
+        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
+        new RangeWithValue( 5, 15, 9 ),
+        this.frictionProperty.get(),
+        tandem.createTandem( 'leftSpring' )
+      ),
       new Spring( new Vector2( .95, this.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'rightSpring' ) )
     ];
 

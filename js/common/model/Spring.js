@@ -139,7 +139,8 @@ define( function( require ) {
     //------------------------------------------------
     // Derived properties
     // @public {read-only} length of the spring, units = m
-    this.lengthProperty = new DerivedProperty( [ this.naturalRestingLengthProperty, this.displacementProperty ],
+    this.lengthProperty = new DerivedProperty(
+      [ this.naturalRestingLengthProperty, this.displacementProperty ],
       function( naturalRestingLength, displacement ) {
         return naturalRestingLength - displacement;
       },
@@ -153,7 +154,8 @@ define( function( require ) {
     );
 
     // @public {read-only} y position of the bottom end of the spring, units = m
-    this.bottomProperty = new DerivedProperty( [ this.positionProperty, this.lengthProperty ],
+    this.bottomProperty = new DerivedProperty(
+      [ this.positionProperty, this.lengthProperty ],
       function( position, length ) {
         return position.y - length;
       },
@@ -167,7 +169,8 @@ define( function( require ) {
     );
 
     // @public {read-only} y position of the equilibrium position
-    this.equilibriumYPositionProperty = new DerivedProperty( [ this.springConstantProperty, this.gravityProperty, this.massProperty, this.naturalRestingLengthProperty ],
+    this.equilibriumYPositionProperty = new DerivedProperty(
+      [ this.springConstantProperty, this.gravityProperty, this.massProperty, this.naturalRestingLengthProperty ],
       function( springConstant, gravity, mass ) {
         // springExtension = mg/k
         self.springExtension = mass ? (mass.mass * gravity) / springConstant : 0;
