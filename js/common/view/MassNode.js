@@ -197,14 +197,12 @@ define( function( require ) {
 
     // When the spring force changes, update the arrow
     Property.multilink( [ mass.springForceProperty, mass.positionProperty ], function( springForce, position ) {
-      if ( Math.abs( springForce ) < 1E-6 ) {
         self.springForceArrow.setTailAndTip(
           position.x + 45,
           position.y + 40,
           position.x + 45,
           position.y + 40 - ARROW_SIZE_DEFAULT * springForce
         );
-      }
     } );
 
     assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
