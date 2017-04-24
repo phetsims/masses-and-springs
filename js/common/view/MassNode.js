@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -25,7 +26,8 @@ define( function( require ) {
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
   // constants
-  var ARROW_LENGTH = 24;
+  var VECTOR_ARROW_LENGTH = 34;
+  var FORCES_ARROW_LENGTH = 31;
   var ARROW_SIZE_DEFAULT = 25;
   var ARROW_HEAD_WIDTH = 14;
   var ARROW_TAIL_WIDTH = 8;
@@ -120,12 +122,34 @@ define( function( require ) {
       cursor: 'pointer'
     } );
 
+    var createVectorArrow = function( color, tandemID ) {
+      return new ArrowNode( 10, 0, VECTOR_ARROW_LENGTH, 0, {
+        fill: color,
+        stroke: 'black',
+        centerY: 0,
+        tailWidth: ARROW_TAIL_WIDTH,
+        headWidth: ARROW_HEAD_WIDTH,
+        tandem: tandem.createTandem( tandemID )
+      } );
+    };
+
+    var createForceArrow = function( color, tandemID ) {
+      return new ArrowNode( 5, 0, FORCES_ARROW_LENGTH, 0, {
+        fill: color,
+        stroke: color,
+        centerY: 0,
+        tailWidth: SMALLER_ARROW_TAIL_WIDTH,
+        headWidth: SMALLER_ARROW_HEAD_WIDTH,
+        tandem: tandem.createTandem( tandemID )
+      } );
+    };
+
     //Arrows created for vectors associated with mass nodes
-    this.velocityArrow = model.createArrow( 10, 10 + ARROW_LENGTH, VELOCITY_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'velocityArrow' );
-    this.accelerationArrow = model.createArrow( 10, 10 + ARROW_LENGTH, ACCELERATION_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'accelerationArrow' );
-    this.gravityForceArrow = model.createArrow( 5, 7 + ARROW_LENGTH, GRAVITY_ARROW_COLOR, GRAVITY_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'gravityForceArrow' );
-    this.springForceArrow = model.createArrow( 5, 7 + ARROW_LENGTH, SPRING_ARROW_COLOR, SPRING_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'springForceArrow' );
-    this.netForceArrow = model.createArrow( 5, 7 + ARROW_LENGTH, 'black', 'black', SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'netForceArrow' );
+    this.velocityArrow = createVectorArrow( VELOCITY_ARROW_COLOR, 'velocityArrow' );
+    this.accelerationArrow = createVectorArrow( ACCELERATION_ARROW_COLOR, 'accelerationArrow' );
+    this.gravityForceArrow = createForceArrow( GRAVITY_ARROW_COLOR, 'gravityForceArrow' );
+    this.springForceArrow = createForceArrow( SPRING_ARROW_COLOR, 'springForceArrow' );
+    this.netForceArrow = createForceArrow( 'black', 'netForceArrow' );
 
     this.addChild( this.velocityArrow );
     this.addChild( this.accelerationArrow );

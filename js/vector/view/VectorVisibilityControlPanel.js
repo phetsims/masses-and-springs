@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
@@ -29,7 +30,10 @@ define( function( require ) {
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
   var springString = require( 'string!MASSES_AND_SPRINGS/spring' );
 
-  var ARROW_LENGTH = 24;
+  // Constants
+  // TODO:Merge some of these into a constants file
+  var VECTOR_ARROW_LENGTH = 34;
+  var FORCES_ARROW_LENGTH = 31;
   var ARROW_HEAD_WIDTH = 14;
   var ARROW_TAIL_WIDTH = 8;
   var SMALLER_ARROW_HEAD_WIDTH = 11;
@@ -47,11 +51,34 @@ define( function( require ) {
    */
   function VectorVisibilityControlPanel( model, tandem, options ) {
 
-    var velocityArrow = model.createArrow( 10, 10 + ARROW_LENGTH, VELOCITY_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'velocityArrow' );
-    var accelerationArrow = model.createArrow( 10, 10 + ARROW_LENGTH, ACCELERATION_ARROW_COLOR, 'black', ARROW_TAIL_WIDTH, ARROW_HEAD_WIDTH, 'accelerationArrow' );
-    var gravityArrow = model.createArrow( 5, 7 + ARROW_LENGTH, GRAVITY_ARROW_COLOR, GRAVITY_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'gravityArrow' );
-    var springArrow = model.createArrow( 5, 7 + ARROW_LENGTH, SPRING_ARROW_COLOR, SPRING_ARROW_COLOR, SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'springArrow' );
-    var netForceArrow = model.createArrow( 5, 7 + ARROW_LENGTH, 'black', 'black', SMALLER_ARROW_TAIL_WIDTH, SMALLER_ARROW_HEAD_WIDTH, 'netForceArrow' );
+    // Creation of arrow nodes to be used in vector screen.
+    var createVectorArrow = function( color, tandemID ) {
+      return new ArrowNode( 10, 0, VECTOR_ARROW_LENGTH, 0, {
+        fill: color,
+        stroke: 'black',
+        centerY: 0,
+        tailWidth: ARROW_TAIL_WIDTH,
+        headWidth: ARROW_HEAD_WIDTH,
+        tandem: tandem.createTandem( tandemID )
+      } );
+    };
+
+    var createForceArrow = function( color, tandemID ) {
+      return new ArrowNode( 5, 0, FORCES_ARROW_LENGTH, 0, {
+        fill: color,
+        stroke: color,
+        centerY: 0,
+        tailWidth: SMALLER_ARROW_TAIL_WIDTH,
+        headWidth: SMALLER_ARROW_HEAD_WIDTH,
+        tandem: tandem.createTandem( tandemID )
+      } );
+    };
+
+    var velocityArrow = createVectorArrow( VELOCITY_ARROW_COLOR, 'panelVelocityArrow' );
+    var accelerationArrow = createVectorArrow( ACCELERATION_ARROW_COLOR, 'panelAccelerationArrow' );
+    var gravityArrow = createForceArrow( GRAVITY_ARROW_COLOR, 'panelGravityArrow' );
+    var springArrow = createForceArrow( SPRING_ARROW_COLOR, 'panelSpringArrow' );
+    var netForceArrow = createForceArrow( 'black', 'panelNetForceArrow' );
 
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {

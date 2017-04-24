@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Property = require( 'AXON/Property' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var NumberProperty = require( 'AXON/NumberProperty' );
@@ -34,7 +33,6 @@ define( function( require ) {
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
-   * TODO:: There has to be a better way to manage all of these properties as one entity without using propertySet()
    * @constructor
    */
   function MassesAndSpringsModel( tandem ) {
@@ -45,7 +43,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'playingProperty' )
     } );
 
-    // @public {Property.<number>} c - coefficient of friction
+    // @public {Property.<number>} coefficient of friction applied to the system
     // TODO: Once range is decided for frictionProperty, pass in as range property for TNumber()
     this.frictionProperty = new NumberProperty( 0.2, {
       range: null,
@@ -56,7 +54,7 @@ define( function( require ) {
       } )
     } );
 
-    // @public {Property.<number>} a - gravitational acceleration (positive)
+    // @public {Property.<number>} gravitational acceleration associated with each planet
     this.gravityProperty = new Property( Body.EARTH.gravity, {
       range: new RangeWithValue( 0, 30, Body.EARTH.gravity ),
       tandem: tandem.createTandem( 'gravityProperty' ),
@@ -66,7 +64,7 @@ define( function( require ) {
       } )
     } );
 
-    // @public {Property.<number>}
+    // @public {Property.<number>} range of gravitational acceleration associated with each planet
     this.gravityRangeProperty = new Property( new RangeWithValue( 0, 30, 9.8 ) );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
@@ -124,19 +122,29 @@ define( function( require ) {
 
     // Visibility properties of vectors associated with each mass
     // @public {Property.<boolean>} determines the visibility of the velocity vector
-    this.velocityVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' ) } );
+    this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
+    } );
 
     // @public {Property.<boolean>} determines the visibility of the acceleration vector
-    this.accelerationVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' ) } );
+    this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
+    } );
 
     // @public {Property.<boolean>} determines the visibility of the gravitational force vector
-    this.gravityVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'gravityVectorVisibilityProperty' ) } );
+    this.gravityVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'gravityVectorVisibilityProperty' )
+    } );
 
     // @public {Property.<boolean>} determines the visibility of the spring force vector
-    this.springVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'springVectorVisibilityProperty' ) } );
+    this.springVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'springVectorVisibilityProperty' )
+    } );
 
     // @public {Property.<boolean>} determines the visibility of the net force vector
-    this.netForceVectorVisibilityProperty = new BooleanProperty( false, { tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' ) } );
+    this.netForceVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' )
+    } );
 
     this.forcesModeProperty = new Property( 'forces', {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
@@ -154,19 +162,65 @@ define( function( require ) {
     // @public (read-only) model of springs used throughout the sim
     // TODO:: See if other places need (read-only) too
     this.springs = [
-      new Spring( new Vector2( .65, this.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'leftSpring' ) ),
-      new Spring( new Vector2( .95, this.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), this.frictionProperty.get(), tandem.createTandem( 'rightSpring' ) )
+      new Spring(
+        new Vector2( .65, this.ceilingY ),
+        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
+        new RangeWithValue( 5, 15, 9 ),
+        this.frictionProperty.get(),
+        tandem.createTandem( 'leftSpring' )
+      ),
+      new Spring(
+        new Vector2( .95, this.ceilingY ),
+        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
+        new RangeWithValue( 5, 15, 9 ),
+        this.frictionProperty.get(),
+        tandem.createTandem( 'rightSpring' )
+      )
     ];
 
     // @public (read-only) model of masses used throughout the sim
     this.masses = {
-      largeLabeledMass: new Mass( .250, new Vector2( .12, .5 ), true, 'grey', this.gravityProperty, tandem.createTandem( 'largeLabeledMass' ) ),
-      mediumLabeledMass1: new Mass( .100, new Vector2( .20, .5 ), true, 'grey', this.gravityProperty, tandem.createTandem( 'mediumLabeledMass1' ) ),
-      mediumLabeledMass2: new Mass( .100, new Vector2( .28, .5 ), true, 'grey', this.gravityProperty, tandem.createTandem( 'mediumLabeledMass2' ) ),
-      smallLabeledMass: new Mass( .050, new Vector2( .33, .5 ), true, 'grey', this.gravityProperty, tandem.createTandem( 'smallLabeledMass' ) ),
-      largeUnlabeledMass: new Mass( .200, new Vector2( .63, .5 ), false, 'blue', this.gravityProperty, tandem.createTandem( 'largeUnlabeledMass' ) ),
-      mediumUnlabeledMass: new Mass( .150, new Vector2( .56, .5 ), false, 'green', this.gravityProperty, tandem.createTandem( 'mediumUnlabeledMass' ) ),
-      smallUnlabeledMass: new Mass( .075, new Vector2( .49, .5 ), false, 'red', this.gravityProperty, tandem.createTandem( 'smallUnlabeledMass' ) )
+      largeLabeledMass: new Mass( .250, new Vector2( .12, .5 ),
+        true,
+        'grey',
+        this.gravityProperty,
+        tandem.createTandem( 'largeLabeledMass' ) ),
+
+      mediumLabeledMass1: new Mass( .100, new Vector2( .20, .5 ),
+        true,
+        'grey',
+        this.gravityProperty,
+        tandem.createTandem( 'mediumLabeledMass1' ) ),
+
+      mediumLabeledMass2: new Mass( .100, new Vector2( .28, .5 ),
+        true,
+        'grey',
+        this.gravityProperty,
+        tandem.createTandem( 'mediumLabeledMass2' ) ),
+
+      smallLabeledMass: new Mass( .050, new Vector2( .33, .5 ),
+        true,
+        'grey',
+        this.gravityProperty,
+        tandem.createTandem( 'smallLabeledMass' ) ),
+
+      largeUnlabeledMass: new Mass( .200, new Vector2( .63, .5 ),
+        false,
+        'blue',
+        this.gravityProperty,
+        tandem.createTandem( 'largeUnlabeledMass' ) ),
+
+      mediumUnlabeledMass: new Mass( .150, new Vector2( .56, .5 ),
+        false,
+        'green',
+        this.gravityProperty,
+        tandem.createTandem( 'mediumUnlabeledMass' ) ),
+
+      smallUnlabeledMass: new Mass( .075, new Vector2( .49, .5 ),
+        false,
+        'red',
+        this.gravityProperty,
+        tandem.createTandem( 'smallUnlabeledMass' ) )
     };
 
     // @public (read-only) model of bodies used throughout the sim
@@ -179,6 +233,7 @@ define( function( require ) {
       Body.CUSTOM
     ];
 
+    // Links to set gravity property of each spring to the gravity property of the system
     this.gravityProperty.link( function( newGravity ) {
       assert && assert( newGravity >= 0, 'gravity must be 0 or positive : ' + newGravity );
       self.springs.forEach( function( spring ) {
@@ -186,24 +241,13 @@ define( function( require ) {
       } );
     } );
 
+    // Links to set friction property of each spring to the friction property of the system
     this.frictionProperty.link( function( newFriction ) {
       assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
       self.springs.forEach( function( spring ) {
         spring.dampingCoefficientProperty.set( newFriction );
       } );
     } );
-
-    // Creation of arrow nodes to be used in vector screen.
-    this.createArrow = function( tailX, tipX, color, strokeColor, arrowTailWidth, arrowHeadWidth, tandemID ) {
-      return new ArrowNode( tailX, 0, tipX, 0, {
-        fill: color,
-        stroke: strokeColor,
-        centerY: 0,
-        tailWidth: arrowTailWidth,
-        headWidth: arrowHeadWidth,
-        tandem: tandem.createTandem( tandemID )
-      } );
-    };
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
@@ -253,17 +297,24 @@ define( function( require ) {
      * @param {Vector2} proposedPosition
      */
     adjustDraggedMassPosition: function( mass, proposedPosition ) {
+
       // Attempt to detach
-      if ( mass.springProperty.get() && Math.abs( proposedPosition.x - mass.positionProperty.get().x ) > DROPPING_DISTANCE ) {
+      if ( mass.springProperty.get()
+           && Math.abs( proposedPosition.x - mass.positionProperty.get().x ) > DROPPING_DISTANCE ) {
         mass.springProperty.get().removeMass();
         mass.detach();
       }
+
       // Update mass position and spring length if attached
       if ( mass.springProperty.get() ) {
-        mass.springProperty.get().displacementProperty.set( -( mass.springProperty.get().positionProperty.get().y -
-                                                               mass.springProperty.get().naturalRestingLengthProperty.get() ) + proposedPosition.y );
-        mass.positionProperty.set( new Vector2( mass.springProperty.get().positionProperty.get().x, proposedPosition.y ) );
+        mass.springProperty.get().displacementProperty.set(
+          -(mass.springProperty.get().positionProperty.get().y -
+            mass.springProperty.get().naturalRestingLengthProperty.get() ) +
+          proposedPosition.y );
+        mass.positionProperty.set(
+          new Vector2( mass.springProperty.get().positionProperty.get().x, proposedPosition.y ) );
       }
+
       // Update mass position if unattached
       else {
         //Attempt to attach
@@ -274,6 +325,7 @@ define( function( require ) {
             spring.setMass( mass );
           }
         } );
+
         //Update position
         mass.positionProperty.set( proposedPosition );
       }

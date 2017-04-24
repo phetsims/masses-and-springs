@@ -56,6 +56,7 @@ define( function( require ) {
     var blueLine = createLine( 'rgb(65,66,232)', tandem.createTandem( 'blueLine' ) );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
+    // REVIEW:Why does this keep raising an assertion failure (get advice from SR)
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new HBox( {
@@ -68,7 +69,7 @@ define( function( require ) {
       {
         content: new HBox( {
           children: [ new Text( equilibriumPositionString, MassesAndSpringsConstants.FONT, { tandem: tandem.createTandem( 'equilibriumPositionString' ) } ), new HStrut( 10 ), greenLine ],
-          tandem: tandem.createTandem( 'equilibriumPositionString' )
+          tandem: tandem.createTandem( 'equilibriumPositionHBox' )
         } ),
         property: model.equilibriumPositionVisibleProperty,
         label: equilibriumPositionString
@@ -76,7 +77,7 @@ define( function( require ) {
       {
         content: new HBox( {
           children: [ new Text( movableLineString, MassesAndSpringsConstants.FONT, { tandem: tandem.createTandem( 'movableLineString' ) } ), new HStrut( 38 ), redLine ],
-          tandem: tandem.createTandem( 'movableLineString' )
+          tandem: tandem.createTandem( 'movableLineHBox' )
         } ),
         property: model.movableLineVisibleProperty,
         label: movableLineString
