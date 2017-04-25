@@ -130,7 +130,7 @@ define( function( require ) {
       MassesAndSpringsModel.prototype.reset.call( this );
       this.sceneModeProperty.reset();
       this.constantParameterProperty.reset();
-      this.applyResetParameters();
+      this.applyresetState();
       console.log( 'Reset called' );
     },
 
@@ -171,62 +171,17 @@ define( function( require ) {
       this.masses.smallUnlabeledMass.setMassState( sceneState.smallUnlabeledMass );
     },
 
-    resetSceneParameters: function() {
-
-      if ( this.sceneModeProperty.get() === 'same-length' ) {
-        this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
-      }
-      else if ( this.sceneModeProperty.get() === 'adjustable-length' ) {
-        this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
-      }
-      console.log( 'reset' );
-
-      // Applying stashed parameters of first spring
-      this.spring1.displacementProperty.reset();
-      this.spring1.gravityProperty.reset();
-      this.spring1.dampingCoefficientProperty.reset();
-      this.spring1.positionProperty.reset();
-      this.spring1.naturalRestingLengthProperty.reset();
-      this.spring1.animatingProperty.reset();
-      this.spring1.massProperty.reset();
-      this.spring1.springConstantProperty.reset();
-
-      // Applying stashed parameters of first spring
-      this.spring2.displacementProperty.reset();
-      this.spring2.gravityProperty.reset();
-      this.spring2.dampingCoefficientProperty.reset();
-      this.spring2.positionProperty.reset();
-      this.spring2.animatingProperty.reset();
-      this.spring2.massProperty.reset();
-      this.spring2.springConstantProperty.reset();
-      this.spring2.thicknessProperty.reset();
-
-      // Applying stashed parameters of 250g grey mass
-      this.masses.largeLabeledMass.reset();
-
-      // Applying stashed parameters of first 100g grey mass
-      this.masses.mediumLabeledMass1.reset();
-
-      // Applying stashed parameters of second 100g grey mass
-      this.masses.mediumLabeledMass2.reset();
-
-      // Applying stashed parameters of 50g grey mass
-      this.masses.smallLabeledMass.reset();
-
-      // Applying stashed parameters of 200g blue mass
-      this.masses.largeUnlabeledMass.reset();
-
-      // Applying stashed parameters of 150g green mass
-      this.masses.mediumUnlabeledMass.reset();
-
-      // Applying stashed parameters of 75g red mass
-      this.masses.smallUnlabeledMass.reset();
+    resetState: function() {
+      this.spring1.reset();
+      this.spring2.reset();
+      _.values( this.masses ).forEach( function( mass ) {
+        mass.reset();
+      } );
     },
 
-    applyResetParameters: function() {
-      // apply reset parameters to each scene
+    applyresetState: function() {
       this.sceneModeProperty.set( 'adjustable-length' );
-      this.resetSceneParameters();
+      this.resetState();
       this.scene1Parameters = this.getSceneState();
 
       this.sceneModeProperty.set( 'same-length' );
@@ -234,12 +189,7 @@ define( function( require ) {
       // initial parameters set for both scenes
       // @private {read-write} array of parameters for scene 1
       this.sceneModeProperty.set( 'same-length' );
-      this.resetSceneParameters();
-
-      // @private {read-write} array of parameters for scene 2
-      this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
-
-      this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
+      this.resetState();
     }
   } );
 } );
