@@ -129,12 +129,12 @@ define( function( require ) {
   return inherit( Object, Mass, {
 
     /**
-     * TODO: Documentation
-     * @public
-     *
+     * Responsible for mass falling without being attached to spring.
      * @param {number} gravity
      * @param {number} floorY
      * @param {number} dt
+     *
+     * @public
      */
     fallWithGravity: function( gravity, floorY, dt ) {
       var floorPosition = floorY + this.height;
@@ -154,6 +154,11 @@ define( function( require ) {
       }
     },
 
+    /**
+     * Retains the properties of the spring in an object that can publicly accessed.
+     *
+     *@public
+     */
     getMassState: function() {
       var massState = {
         mass: this.mass,
@@ -165,6 +170,11 @@ define( function( require ) {
       return massState;
     },
 
+    /**
+     * Sets the properties of the spring with previously stored properties.
+     *
+     * @param {Object} massState
+     */
     setMassState: function( massState ) {
       this.mass = (massState.mass);
       this.positionProperty.set( massState.position );
@@ -174,7 +184,8 @@ define( function( require ) {
     },
 
     /**
-     * TODO: Documentation
+     * Detaches the mass from the spring.
+     *
      * @public
      */
     detach: function() {
@@ -183,7 +194,8 @@ define( function( require ) {
     },
 
     /**
-     * TODO: Documentation
+     * @Override
+     * 
      * @public
      */
     reset: function() {

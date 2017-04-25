@@ -224,7 +224,7 @@ define( function( require ) {
       }
     },
     /**
-     * Retains the properties of the spring in an object that can publically accessed
+     * Retains the properties of the spring in an object that can publicly accessed.
      *
      * @public
      */
@@ -243,20 +243,20 @@ define( function( require ) {
     },
 
     /**
-     * Retains the properties of the spring in an object that can publically accessed
-     * @param {Object} springState - object that contains the properties of the spring
+     * Sets the properties of the spring with previously stored properties.
+     * @param {Object} springState - Sets the properties of the spring with previously stored properties.
      *
      * @public
      */
     setSpringState: function( springState ) {
-      this.displacementProperty.set( springState.displacement ),
-        this.gravityProperty.set( springState.gravity ),
-        this.dampingCoefficientProperty.set( springState.dampingCoefficient ),
-        this.positionProperty.set( springState.position ),
-        this.naturalRestingLengthProperty.set( springState.naturalRestingLength ),
-        this.animatingProperty.set( springState.animating ),
-        this.massProperty.set( springState.mass ),
-        this.springConstantProperty.set( springState.springConstant );
+      this.displacementProperty.set( springState.displacement );
+      this.gravityProperty.set( springState.gravity );
+      this.dampingCoefficientProperty.set( springState.dampingCoefficient );
+      this.positionProperty.set( springState.position );
+      this.naturalRestingLengthProperty.set( springState.naturalRestingLength );
+      this.animatingProperty.set( springState.animating );
+      this.massProperty.set( springState.mass );
+      this.springConstantProperty.set( springState.springConstant );
     },
 
     /**
@@ -271,9 +271,7 @@ define( function( require ) {
                       * springConstant / this.springConstantProperty.initialValue
                       * length / this.naturalRestingLengthProperty.initialValue;
       this.thicknessProperty.set( thickness );
-    }
-
-    ,
+    },
 
     /**
      * Updates springConstant of spring and sets its spring constant property to calculated value.
@@ -287,8 +285,7 @@ define( function( require ) {
                            * thickness / this.thicknessProperty.initialValue
                            * this.springConstantProperty.initialValue;
       this.springConstantProperty.set( springConstant );
-    }
-    ,
+    },
 
     /**
      * Removes mass from spring.
@@ -319,8 +316,7 @@ define( function( require ) {
       this.displacementProperty.set( this.massProperty.get().positionProperty.get().y -
                                      ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) );
       this.massProperty.get().verticalVelocityProperty.set( 0 );
-    }
-    ,
+    },
 
     /**
      * Responsible for oscillatory motion of spring system.
@@ -426,6 +422,5 @@ define( function( require ) {
       }
     }
   } );
-
 } )
 ;
