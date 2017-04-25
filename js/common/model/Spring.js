@@ -1,7 +1,7 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * Responsible for the attributes associated with each spring node.
+ * Responsible for the attributes associated with each spring.
  *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
@@ -203,10 +203,10 @@ define( function( require ) {
   return inherit( Object, Spring, {
 
     /**
-     * @public
      * @override
-     *
      * @param {boolean} resetAllProperty used for stop buttons to ignore resetting every property
+     *
+     * @public
      */
     reset: function( resetAllProperty ) {
       //ensures displacement will change on reset, otherwise springs will be upside down.
@@ -223,7 +223,11 @@ define( function( require ) {
         this.springConstantProperty.reset();
       }
     },
-
+    /**
+     * Retains the properties of the spring in an object that can publically accessed
+     *
+     * @public
+     */
     getSpringState: function() {
       var springState = {
         displacement: this.displacementProperty.get(),
@@ -238,6 +242,12 @@ define( function( require ) {
       return springState;
     },
 
+    /**
+     * Retains the properties of the spring in an object that can publically accessed
+     * @param {Object} springState - object that contains the properties of the spring
+     *
+     * @public
+     */
     setSpringState: function( springState ) {
       this.displacementProperty.set( springState.displacement ),
         this.gravityProperty.set( springState.gravity ),
@@ -248,7 +258,7 @@ define( function( require ) {
         this.massProperty.set( springState.mass ),
         this.springConstantProperty.set( springState.springConstant );
     },
-    
+
     /**
      * Updates thickness of spring and sets its thickness property to calculated value.
      * @public
@@ -281,6 +291,8 @@ define( function( require ) {
     ,
 
     /**
+     * Removes mass from spring.
+     *
      * @public
      */
     removeMass: function() {
@@ -290,13 +302,13 @@ define( function( require ) {
       this.displacementProperty.set( 0 );
       this.massProperty.set( null );
       this.animatingProperty.set( false );
-    }
-    ,
+    },
 
     /**
-     * @public
-     *
+     * Sets mass on spring
      * @param {Mass} mass
+     *
+     * @public
      */
     setMass: function( mass ) {
       if ( this.massProperty.get() ) {
@@ -311,9 +323,10 @@ define( function( require ) {
     ,
 
     /**
-     * @public
-     *
+     * Responsible for oscillatory motion of spring system.
      * @param {number} dt - animation time step
+     *
+     * @public
      */
     oscillate: function( dt ) {
       if ( this.massProperty.get() && !this.massProperty.get().userControlledProperty.get() &&
