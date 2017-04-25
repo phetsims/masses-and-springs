@@ -30,6 +30,7 @@ define( function( require ) {
   // constants
   var DEFAULT_THICKNESS = 3; // view-coordinates, empirically determined
 
+
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
@@ -41,6 +42,12 @@ define( function( require ) {
    */
   function Spring( position, initialNaturalRestingLength, springConstantRange, defaultDampingCoefficient, tandem ) {
     var self = this;
+
+    // range of natural resting length in meters (values used from design doc)
+    var naturalRestingLengthRange = new RangeWithValue( .1, .5, initialNaturalRestingLength );
+
+    // derived empirically from updateSpringThickness()
+    var thicknessRange = new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS );
 
     // @public {Property.<number>} gravitational acceleration
     this.gravityProperty = new Property( massesAndSprings.Body.EARTH.gravity, {
@@ -87,7 +94,7 @@ define( function( require ) {
       } )
     } );
 
-    // @public {Property.<Vector2>} position of the spring
+    // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
     this.positionProperty = new Property( position, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TVector2
@@ -98,7 +105,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
       phetioValueType: TNumber( {
         units: 'meters',
-        range: new RangeWithValue( .1, .5, initialNaturalRestingLength )
+        range: naturalRestingLengthRange
       } )
     } );
 
@@ -107,7 +114,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'thicknessProperty' ),
       phetioValueType: TNumber( {
         //units: screenViewCoordinates
-        range: new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS ) // derived empirically from updateSpringThickness()
+        range: thicknessRange
       } )
     } );
 
@@ -130,8 +137,6 @@ define( function( require ) {
 
     // validate and save options
     assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : ' + initialNaturalRestingLength );
-    this.naturalRestingLengthProperty.set( initialNaturalRestingLength ); // @public read-only
-
     assert && assert( springConstantRange.min > 0, 'minimum spring constant must be positive : '
                                                    + springConstantRange.min );
     this.springConstantRange = springConstantRange; // @public read-only
@@ -171,10 +176,10 @@ define( function( require ) {
     // @public {read-only} y position of the equilibrium position
     this.equilibriumYPositionProperty = new DerivedProperty(
       [ this.springConstantProperty, this.gravityProperty, this.massProperty, this.naturalRestingLengthProperty ],
-      function( springConstant, gravity, mass ) {
+      function( springConstant, gravity, mass, naturalRestingLength ) {
         // springExtension = mg/k
         self.springExtension = mass ? (mass.mass * gravity) / springConstant : 0;
-        return self.positionProperty.get().y - self.naturalRestingLengthProperty.get() - self.springExtension;
+        return self.positionProperty.get().y - naturalRestingLength - self.springExtension;
       },
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
@@ -204,11 +209,10 @@ define( function( require ) {
 
     /**
      * @override
-     * @param {boolean} resetAllProperty used for stop buttons to ignore resetting every property
      *
      * @public
      */
-    reset: function( resetAllProperty ) {
+    reset: function() {
       //ensures displacement will change on reset, otherwise springs will be upside down.
       // TODO: find a better fix for this problem.
       this.displacementProperty.set( 1 ); // TODO: can this line be removed?
@@ -219,9 +223,7 @@ define( function( require ) {
       this.naturalRestingLengthProperty.reset();
       this.animatingProperty.reset();
       this.massProperty.reset();
-      if ( !resetAllProperty ) {
-        this.springConstantProperty.reset();
-      }
+      this.springConstantProperty.reset();
     },
     /**
      * Retains the properties of the spring in an object that can publicly accessed.
@@ -324,7 +326,7 @@ define( function( require ) {
      *
      * @public
      */
-    oscillate: function( dt ) {
+    stepOscillate: function( dt ) {
       if ( this.massProperty.get() && !this.massProperty.get().userControlledProperty.get() &&
            this.animatingProperty.get() ) {
         //TODO:: implement upper limit for dt
