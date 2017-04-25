@@ -154,6 +154,25 @@ define( function( require ) {
       }
     },
 
+    getMassState: function() {
+      var massState = {
+        mass: this.mass,
+        position: this.positionProperty.get(),
+        userControlled: this.userControlledProperty.get(),
+        verticalVelocity: this.verticalVelocityProperty.get(),
+        spring: this.springProperty.get()
+      };
+      return massState;
+    },
+
+    setMassState: function( massState ) {
+      this.mass = (massState.mass);
+      this.positionProperty.set( massState.position );
+      this.userControlledProperty.set( massState.userControlled );
+      this.verticalVelocityProperty.set( massState.verticalVelocity );
+      this.springProperty.set( massState.spring );
+    },
+
     /**
      * TODO: Documentation
      * @public
@@ -173,5 +192,6 @@ define( function( require ) {
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
     }
-  } );
+  } )
+    ;
 } );

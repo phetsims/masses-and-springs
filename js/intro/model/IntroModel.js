@@ -58,11 +58,11 @@ define( function( require ) {
 
     // initial parameters set for both scenes
     // @private {read-write} array of parameters for scene 1
-    var scene1Parameters = this.stashSceneParameters();
+    var scene1Parameters = this.getSceneState();
 
     // @private {read-write} array of parameters for scene 2
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
-    var scene2Parameters = this.stashSceneParameters();
+    var scene2Parameters = this.getSceneState();
 
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
 
@@ -76,14 +76,14 @@ define( function( require ) {
       // Restoring spring parameters when scenes are switched
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
-        scene2Parameters = self.stashSceneParameters();
-        self.applySceneParameters( scene1Parameters );
+        scene2Parameters = self.getSceneState();
+        self.setSceneState( scene1Parameters );
       }
 
       else if ( mode === 'adjustable-length' ) {
         // Manages stashing and applying parameters to each scene
-        scene1Parameters = self.stashSceneParameters();
-        self.applySceneParameters( scene2Parameters );
+        scene1Parameters = self.getSceneState();
+        self.setSceneState( scene2Parameters );
 
         // Manages logic for updating spring thickness and spring constant
         self.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
@@ -134,239 +134,41 @@ define( function( require ) {
       console.log( 'Reset called' );
     },
 
-    // TODO: Move spring elements into spring.js. Move Mass elements into mass.js. With methods to getState()
-    stashSceneParameters: function() {
-      // @private {read-only} Stashing parameters for first spring
-      var sceneSpring1Properties = {
-        displacement: this.spring1.displacementProperty.get(),
-        gravity: this.spring1.gravityProperty.get(),
-        dampingCoefficient: this.spring1.dampingCoefficientProperty.get(),
-        position: this.spring1.positionProperty.get(),
-        naturalRestingLength: this.spring1.naturalRestingLengthProperty.get(),
-        animating: this.spring1.animatingProperty.get(),
-        mass: this.spring1.massProperty.get(),
-        springConstant: this.spring1.springConstantProperty.get()
-      };
-
-      // @private {read-only} Stashing parameters for mass attached to first spring
-      if ( this.spring1.massProperty.get() ) {
-        var sceneSpring1MassProperties = {
-          mass: this.spring1.massProperty.get().mass,
-          position: this.spring1.massProperty.get().positionProperty.get(),
-          userControlledProperty: this.spring1.massProperty.get().userControlledProperty.get(),
-          verticalVelocity: this.spring1.massProperty.get().verticalVelocityProperty.get(),
-          spring: this.spring1.massProperty.get().springProperty.get()
-        };
-      }
-
-      // @private {read-only} Stashing parameters for first spring
-      var sceneSpring2Properties = {
-        displacement: this.spring2.displacementProperty.get(),
-        gravity: this.spring2.gravityProperty.get(),
-        dampingCoefficient: this.spring2.dampingCoefficientProperty.get(),
-        position: this.spring2.positionProperty.get(),
-        naturalRestingLength: this.spring2.naturalRestingLengthProperty.get(),
-        animating: this.spring2.animatingProperty.get(),
-        mass: this.spring2.massProperty.get(),
-        springConstant: this.spring2.springConstantProperty.get(),
-        thickness: this.spring2.thicknessProperty.get()
-      };
-
-      // @private {read-only} Stashing parameters for mass attached to first spring
-      if ( this.spring2.massProperty.get() ) {
-        var sceneSpring2MassProperties = {
-          mass: this.spring2.massProperty.get().mass,
-          position: this.spring2.massProperty.get().positionProperty.get(),
-          userControlledProperty: this.spring2.massProperty.get().userControlledProperty.get(),
-          verticalVelocity: this.spring2.massProperty.get().verticalVelocityProperty.get(),
-          spring: this.spring2.massProperty.get().springProperty.get()
-        };
-      }
-
-      // @private {read-only} Stashing parameters for mass attached to 250g grey mass
-      var sceneMass1 = {
-        mass: this.masses.largeLabeledMass.mass,
-        position: this.masses.largeLabeledMass.positionProperty.get(),
-        userControlled: this.masses.largeLabeledMass.userControlledProperty.get(),
-        verticalVelocity: this.masses.largeLabeledMass.verticalVelocityProperty.get(),
-        spring: this.masses.largeLabeledMass.springProperty.get()
-      };
-
-      // @private {read-only} Stashing parameters for mass attached to first 100g grey mass
-      var sceneMass2 = {
-        mass: this.masses.mediumLabeledMass1.mass,
-        position: this.masses.mediumLabeledMass1.positionProperty.get(),
-        userControlled: this.masses.mediumLabeledMass1.userControlledProperty.get(),
-        verticalVelocity: this.masses.mediumLabeledMass1.verticalVelocityProperty.get(),
-        spring: this.masses.mediumLabeledMass1.springProperty.get()
-      };
-
-      // @private {read-only} Stashing parameters for mass attached to second 100g grey mass
-      var sceneMass3 = {
-        mass: this.masses.mediumLabeledMass2.mass,
-        position: this.masses.mediumLabeledMass2.positionProperty.get(),
-        userControlled: this.masses.mediumLabeledMass2.userControlledProperty.get(),
-        verticalVelocity: this.masses.mediumLabeledMass2.verticalVelocityProperty.get(),
-        spring: this.masses.mediumLabeledMass2.springProperty.get()
-      };
-
-      // @private {read-only} Stashing parameters for mass attached to 50g grey mass
-      var sceneMass4 = {
-        mass: this.masses.smallLabeledMass.mass,
-        position: this.masses.smallLabeledMass.positionProperty.get(),
-        userControlled: this.masses.smallLabeledMass.userControlledProperty.get(),
-        verticalVelocity: this.masses.smallLabeledMass.verticalVelocityProperty.get(),
-        spring: this.masses.smallLabeledMass.springProperty.get()
-      };
-
-      // @private {read-only} Stashing parameters for mass attached to 200g blue mass
-      var sceneMass5 = {
-        mass: this.masses.largeUnlabeledMass.mass,
-        position: this.masses.largeUnlabeledMass.positionProperty.get(),
-        userControlled: this.masses.largeUnlabeledMass.userControlledProperty.get(),
-        verticalVelocity: this.masses.largeUnlabeledMass.verticalVelocityProperty.get(),
-        spring: this.masses.largeUnlabeledMass.springProperty.get()
-      };
-
-      // @private {read-only} Stashing parameters for mass attached to 150g green mass
-      var sceneMass6 = {
-        mass: this.masses.mediumUnlabeledMass.mass,
-        position: this.masses.mediumUnlabeledMass.positionProperty.get(),
-        userControlled: this.masses.mediumUnlabeledMass.userControlledProperty.get(),
-        verticalVelocity: this.masses.mediumUnlabeledMass.verticalVelocityProperty.get(),
-        spring: this.masses.mediumUnlabeledMass.springProperty.get()
-      };
-
-      // @private {read-only} Stashing parameters for mass attached to 75g red mass
-      var sceneMass7 = {
-        mass: this.masses.smallUnlabeledMass.mass,
-        position: this.masses.smallUnlabeledMass.positionProperty.get(),
-        userControlled: this.masses.smallUnlabeledMass.userControlledProperty.get(),
-        verticalVelocity: this.masses.smallUnlabeledMass.verticalVelocityProperty.get(),
-        spring: this.masses.smallUnlabeledMass.springProperty.get()
-      };
-
-      // @private {read-only} Stashing sceneMasses into one object
-      var massesState = {
-        sceneMass1: sceneMass1,
-        sceneMass2: sceneMass2,
-        sceneMass3: sceneMass3,
-        sceneMass4: sceneMass4,
-        sceneMass5: sceneMass5,
-        sceneMass6: sceneMass6,
-        sceneMass7: sceneMass7
-      };
-
-      // @private {read-only} Stashing spring 1 parameters into one object
-      var spring1State = {
-        sceneSpring1: sceneSpring1Properties,
-        sceneSpring1Mass: sceneSpring1MassProperties
-      };
-
-      // @private {read-only} Stashing spring 2 parameters into one object
-      var spring2State = {
-        sceneSpring2: sceneSpring2Properties,
-        sceneSpring2Mass: sceneSpring2MassProperties
-      };
-
-      // @public {read-write} Array that contains all of the parameters associated with the spring and mass states
-      var parameters = {
+    getSceneState: function() {
+      var spring1State = this.spring1.getSpringState();
+      var spring2State = this.spring2.getSpringState();
+      var largeLabeledMassState = this.masses.largeLabeledMass.getMassState();
+      var mediumLabeledMass1State = this.masses.mediumLabeledMass1.getMassState();
+      var mediumLabeledMass2State = this.masses.mediumLabeledMass2.getMassState();
+      var smallLabeledMassState = this.masses.smallLabeledMass.getMassState();
+      var largeUnlabeledMass = this.masses.largeUnlabeledMass.getMassState();
+      var mediumUnlabeledMass = this.masses.mediumUnlabeledMass.getMassState();
+      var smallUnlabeledMass = this.masses.smallUnlabeledMass.getMassState();
+      var sceneState = {
         spring1State: spring1State,
         spring2State: spring2State,
-        massesState: massesState
+        largeLabeledMassState: largeLabeledMassState,
+        mediumLabeledMass1State: mediumLabeledMass1State,
+        mediumLabeledMass2State: mediumLabeledMass2State,
+        smallLabeledMassState: smallLabeledMassState,
+        largeUnlabeledMass: largeUnlabeledMass,
+        mediumUnlabeledMass: mediumUnlabeledMass,
+        smallUnlabeledMass: smallUnlabeledMass
       };
-      return parameters;
+      return sceneState;
+
     },
 
-    // TODO: Move to IntroModel
-    // TODO: Create object structure and provide loop for applying parameters
-    applySceneParameters: function( parameters ) {
-      // Applying stashed parameters of first spring
-      this.spring1.displacementProperty.set( parameters.spring1State.sceneSpring1.displacement );
-      this.spring1.gravityProperty.set( parameters.spring1State.sceneSpring1.gravity );
-      this.spring1.dampingCoefficientProperty.set( parameters.spring1State.sceneSpring1.dampingCoefficient );
-      this.spring1.positionProperty.set( parameters.spring1State.sceneSpring1.position );
-      this.spring1.naturalRestingLengthProperty.set( parameters.spring1State.sceneSpring1.naturalRestingLength );
-      this.spring1.animatingProperty.set( parameters.spring1State.sceneSpring1.animating );
-      this.spring1.massProperty.set( parameters.spring1State.sceneSpring1.mass );
-      this.spring1.springConstantProperty.set( parameters.spring1State.sceneSpring1.springConstant );
-
-      // Handle applying stashed parameters of first spring if mass is attached
-      if ( this.spring1.massProperty.get() ) {
-        this.spring1.massProperty.get().mass = parameters.spring1State.sceneSpring1Mass.mass;
-        this.spring1.massProperty.get().positionProperty.set( parameters.spring1State.sceneSpring1Mass.position );
-        this.spring1.massProperty.get().userControlledProperty.set( parameters.spring1State.sceneSpring1Mass.userControlledProperty );
-        this.spring1.massProperty.get().verticalVelocityProperty.set( parameters.spring1State.sceneSpring1Mass.verticalVelocity );
-        this.spring1.massProperty.get().springProperty.set( parameters.spring1State.sceneSpring1Mass.spring );
-      }
-      // Applying stashed parameters of first spring
-      this.spring2.displacementProperty.set( parameters.spring2State.sceneSpring2.displacement );
-      this.spring2.gravityProperty.set( parameters.spring2State.sceneSpring2.gravity );
-      this.spring2.dampingCoefficientProperty.set( parameters.spring2State.sceneSpring2.dampingCoefficient );
-      this.spring2.positionProperty.set( parameters.spring2State.sceneSpring2.position );
-      this.spring2.naturalRestingLengthProperty.set( parameters.spring2State.sceneSpring2.naturalRestingLength );
-      this.spring2.animatingProperty.set( parameters.spring2State.sceneSpring2.animating );
-      this.spring2.massProperty.set( parameters.spring2State.sceneSpring2.mass );
-      this.spring2.springConstantProperty.set( parameters.spring2State.sceneSpring2.springConstant );
-      this.spring2.thicknessProperty.set( parameters.spring2State.sceneSpring2.thickness );
-
-      // Handle applying stashed parameters of first spring if mass is attached
-      if ( this.spring2.massProperty.get() ) {
-        this.spring2.massProperty.get().mass = parameters.spring2State.sceneSpring2Mass.mass;
-        this.spring2.massProperty.get().positionProperty.set( parameters.spring2State.sceneSpring2Mass.position );
-        this.spring2.massProperty.get().userControlledProperty.set( parameters.spring2State.sceneSpring2Mass.userControlledProperty );
-        this.spring2.massProperty.get().verticalVelocityProperty.set( parameters.spring2State.sceneSpring2Mass.verticalVelocity );
-        this.spring2.massProperty.get().springProperty.set( parameters.spring2State.sceneSpring2Mass.spring );
-      }
-
-      // Applying stashed parameters of 250g grey mass
-      this.masses.largeLabeledMass.mass = parameters.massesState.sceneMass1.mass;
-      this.masses.largeLabeledMass.positionProperty.set( parameters.massesState.sceneMass1.position );
-      this.masses.largeLabeledMass.userControlledProperty.set( parameters.massesState.sceneMass1.userControlled );
-      this.masses.largeLabeledMass.verticalVelocityProperty.set( parameters.massesState.sceneMass1.verticalVelocity );
-      this.masses.largeLabeledMass.springProperty.set( parameters.massesState.sceneMass1.spring );
-
-      // Applying stashed parameters of first 100g grey mass
-      this.masses.mediumLabeledMass1.mass = parameters.massesState.sceneMass2.mass;
-      this.masses.mediumLabeledMass1.positionProperty.set( parameters.massesState.sceneMass2.position );
-      this.masses.mediumLabeledMass1.userControlledProperty.set( parameters.massesState.sceneMass2.userControlled );
-      this.masses.mediumLabeledMass1.verticalVelocityProperty.set( parameters.massesState.sceneMass2.verticalVelocity );
-      this.masses.mediumLabeledMass1.springProperty.set( parameters.massesState.sceneMass2.spring );
-
-      // Applying stashed parameters of second 100g grey mass
-      this.masses.mediumLabeledMass2.mass = parameters.massesState.sceneMass3.mass;
-      this.masses.mediumLabeledMass2.positionProperty.set( parameters.massesState.sceneMass3.position );
-      this.masses.mediumLabeledMass2.userControlledProperty.set( parameters.massesState.sceneMass3.userControlled );
-      this.masses.mediumLabeledMass2.verticalVelocityProperty.set( parameters.massesState.sceneMass3.verticalVelocity );
-      this.masses.mediumLabeledMass2.springProperty.set( parameters.massesState.sceneMass3.spring );
-
-      // Applying stashed parameters of 50g grey mass
-      this.masses.smallLabeledMass.mass = parameters.massesState.sceneMass4.mass;
-      this.masses.smallLabeledMass.positionProperty.set( parameters.massesState.sceneMass4.position );
-      this.masses.smallLabeledMass.userControlledProperty.set( parameters.massesState.sceneMass4.userControlled );
-      this.masses.smallLabeledMass.verticalVelocityProperty.set( parameters.massesState.sceneMass4.verticalVelocity );
-      this.masses.smallLabeledMass.springProperty.set( parameters.massesState.sceneMass4.spring );
-
-      // Applying stashed parameters of 200g blue mass
-      this.masses.largeUnlabeledMass.mass = parameters.massesState.sceneMass5.mass;
-      this.masses.largeUnlabeledMass.positionProperty.set( parameters.massesState.sceneMass5.position );
-      this.masses.largeUnlabeledMass.userControlledProperty.set( parameters.massesState.sceneMass5.userControlled );
-      this.masses.largeUnlabeledMass.verticalVelocityProperty.set( parameters.massesState.sceneMass5.verticalVelocity );
-      this.masses.largeUnlabeledMass.springProperty.set( parameters.massesState.sceneMass5.spring );
-
-      // Applying stashed parameters of 150g green mass
-      this.masses.mediumUnlabeledMass.mass = parameters.massesState.sceneMass6.mass;
-      this.masses.mediumUnlabeledMass.positionProperty.set( parameters.massesState.sceneMass6.position );
-      this.masses.mediumUnlabeledMass.userControlledProperty.set( parameters.massesState.sceneMass6.userControlled );
-      this.masses.mediumUnlabeledMass.verticalVelocityProperty.set( parameters.massesState.sceneMass6.verticalVelocity );
-      this.masses.mediumUnlabeledMass.springProperty.set( parameters.massesState.sceneMass6.spring );
-
-      // Applying stashed parameters of 75g red mass
-      this.masses.smallUnlabeledMass.mass = parameters.massesState.sceneMass7.mass;
-      this.masses.smallUnlabeledMass.positionProperty.set( parameters.massesState.sceneMass7.position );
-      this.masses.smallUnlabeledMass.userControlledProperty.set( parameters.massesState.sceneMass7.userControlled );
-      this.masses.smallUnlabeledMass.verticalVelocityProperty.set( parameters.massesState.sceneMass7.verticalVelocity );
-      this.masses.smallUnlabeledMass.springProperty.set( parameters.massesState.sceneMass7.spring );
+    setSceneState: function( sceneState ) {
+      this.spring1.setSpringState( sceneState.spring1State );
+      this.spring2.setSpringState( sceneState.spring2State );
+      this.masses.largeLabeledMass.setMassState( sceneState.largeLabeledMassState );
+      this.masses.mediumLabeledMass1.setMassState( sceneState.mediumLabeledMass1State );
+      this.masses.mediumLabeledMass2.setMassState( sceneState.mediumLabeledMass2State );
+      this.masses.smallLabeledMass.setMassState( sceneState.smallLabeledMassState );
+      this.masses.largeUnlabeledMass.setMassState( sceneState.largeUnlabeledMass );
+      this.masses.mediumUnlabeledMass.setMassState( sceneState.mediumUnlabeledMass );
+      this.masses.smallUnlabeledMass.setMassState( sceneState.smallUnlabeledMass );
     },
 
     resetSceneParameters: function() {
@@ -399,7 +201,6 @@ define( function( require ) {
       this.spring2.springConstantProperty.reset();
       this.spring2.thicknessProperty.reset();
 
-
       // Applying stashed parameters of 250g grey mass
       this.masses.largeLabeledMass.reset();
 
@@ -426,7 +227,7 @@ define( function( require ) {
       // apply reset parameters to each scene
       this.sceneModeProperty.set( 'adjustable-length' );
       this.resetSceneParameters();
-      this.scene1Parameters = this.stashSceneParameters();
+      this.scene1Parameters = this.getSceneState();
 
       this.sceneModeProperty.set( 'same-length' );
 

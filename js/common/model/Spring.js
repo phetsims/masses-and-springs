@@ -224,6 +224,31 @@ define( function( require ) {
       }
     },
 
+    getSpringState: function() {
+      var springState = {
+        displacement: this.displacementProperty.get(),
+        gravity: this.gravityProperty.get(),
+        dampingCoefficient: this.dampingCoefficientProperty.get(),
+        position: this.positionProperty.get(),
+        naturalRestingLength: this.naturalRestingLengthProperty.get(),
+        animating: this.animatingProperty.get(),
+        mass: this.massProperty.get(),
+        springConstant: this.springConstantProperty.get()
+      };
+      return springState;
+    },
+
+    setSpringState: function( springState ) {
+      this.displacementProperty.set( springState.displacement ),
+        this.gravityProperty.set( springState.gravity ),
+        this.dampingCoefficientProperty.set( springState.dampingCoefficient ),
+        this.positionProperty.set( springState.position ),
+        this.naturalRestingLengthProperty.set( springState.naturalRestingLength ),
+        this.animatingProperty.set( springState.animating ),
+        this.massProperty.set( springState.mass ),
+        this.springConstantProperty.set( springState.springConstant );
+    },
+    
     /**
      * Updates thickness of spring and sets its thickness property to calculated value.
      * @public
@@ -236,7 +261,9 @@ define( function( require ) {
                       * springConstant / this.springConstantProperty.initialValue
                       * length / this.naturalRestingLengthProperty.initialValue;
       this.thicknessProperty.set( thickness );
-    },
+    }
+
+    ,
 
     /**
      * Updates springConstant of spring and sets its spring constant property to calculated value.
@@ -250,7 +277,8 @@ define( function( require ) {
                            * thickness / this.thicknessProperty.initialValue
                            * this.springConstantProperty.initialValue;
       this.springConstantProperty.set( springConstant );
-    },
+    }
+    ,
 
     /**
      * @public
@@ -262,7 +290,8 @@ define( function( require ) {
       this.displacementProperty.set( 0 );
       this.massProperty.set( null );
       this.animatingProperty.set( false );
-    },
+    }
+    ,
 
     /**
      * @public
@@ -278,7 +307,8 @@ define( function( require ) {
       this.displacementProperty.set( this.massProperty.get().positionProperty.get().y -
                                      ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) );
       this.massProperty.get().verticalVelocityProperty.set( 0 );
-    },
+    }
+    ,
 
     /**
      * @public
@@ -384,4 +414,5 @@ define( function( require ) {
     }
   } );
 
-} );
+} )
+;
