@@ -86,27 +86,56 @@ define( function( require ) {
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
     } );
 
-
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
     this.springsIcon = [
-      new Spring( new Vector2( .65, model.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'firstIconSpring' ) ),
-      new Spring( new Vector2( .85, model.ceilingY ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'secondIconSpring' ) ),
-      new Spring( new Vector2( .65, model.ceilingY + .17 ), MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH, new RangeWithValue( 5, 15, 9 ), 0, tandem.createTandem( 'thirdIconSpring' ) )
+      new Spring(
+        new Vector2( .65, model.ceilingY ),
+        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
+        new RangeWithValue( 5, 15, 9 ),
+        0,
+        tandem.createTandem( 'firstIconSpring' )
+      ),
+      new Spring(
+        new Vector2( .85, model.ceilingY ),
+        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
+        new RangeWithValue( 5, 15, 9 ),
+        0,
+        tandem.createTandem( 'secondIconSpring' )
+      ),
+      new Spring(
+        new Vector2( .65, model.ceilingY + .17 ),
+        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
+        new RangeWithValue( 5, 15, 9 ),
+        0,
+        tandem.createTandem( 'thirdIconSpring' )
+      )
     ];
 
     //TODO: Create a specific file for this?
     // @private {read-only} Creation of spring for use in scene switching icons
-    var firstSpringIcon = new OscillatingSpringNode( this.springsIcon[ 0 ], this.modelViewTransform2, tandem.createTandem( 'firstSpringIcon' ) );
+    var firstSpringIcon = new OscillatingSpringNode(
+      this.springsIcon[ 0 ],
+      this.modelViewTransform2,
+      tandem.createTandem( 'firstSpringIcon' )
+    );
     firstSpringIcon.loopsProperty.set( 10 );
     firstSpringIcon.lineWidthProperty.set( 3 );
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var secondSpringIcon = new OscillatingSpringNode( this.springsIcon[ 1 ], this.modelViewTransform2, tandem.createTandem( 'secondSpringIcon' ) );
+    var secondSpringIcon = new OscillatingSpringNode(
+      this.springsIcon[ 1 ],
+      this.modelViewTransform2,
+      tandem.createTandem( 'secondSpringIcon' )
+    );
     secondSpringIcon.loopsProperty.set( 10 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
     // @private {read-only} Creation of spring for use in scene switching icons
-    var thirdSpringIcon = new OscillatingSpringNode( this.springsIcon[ 2 ], this.modelViewTransform2, tandem.createTandem( 'thirdSpringIcon' ) );
+    var thirdSpringIcon = new OscillatingSpringNode(
+      this.springsIcon[ 2 ],
+      this.modelViewTransform2,
+      tandem.createTandem( 'thirdSpringIcon' )
+    );
     thirdSpringIcon.loopsProperty.set( 5 );
     thirdSpringIcon.lineWidthProperty.set( 3 );
 

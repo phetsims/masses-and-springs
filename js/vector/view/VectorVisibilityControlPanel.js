@@ -80,6 +80,7 @@ define( function( require ) {
     var springArrow = createForceArrow( SPRING_ARROW_COLOR, 'panelSpringArrow' );
     var netForceArrow = createForceArrow( 'black', 'panelNetForceArrow' );
 
+    // responsible for velocity and acceleration vectors checkboxes
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new HBox( {
@@ -104,6 +105,8 @@ define( function( require ) {
     ], {
       tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
     } );
+
+    // responsible for forces vectors checkboxes
     var forcesVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new HBox( {
@@ -130,6 +133,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
     } );
 
+    // responsible for forces aquaRadioButton
     var forcesVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
       'forces',
@@ -140,6 +144,7 @@ define( function( require ) {
       { radius: 9, spacing: 8 }
     );
 
+    // responsible for net force aquaRadioButton
     var netForceVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
       'netForce',
@@ -152,6 +157,7 @@ define( function( require ) {
       { radius: 9, spacing: 8 }
     );
 
+    // manages the mutability of the forces check boxes dependent on the forces and net force aquaRadioButton
     model.forcesModeProperty.link( function( mode ) {
       if ( mode === 'forces' ) {
         forcesVisibilityCheckBoxGroup.pickable = true;
@@ -163,6 +169,7 @@ define( function( require ) {
       }
     } );
 
+    // groups the checkboxes and forces aquaRadioButton
     var titleToControlsVerticalSpace = 2;
     var vectorVisibilityControlsVBox = new VBox( {
         children: [

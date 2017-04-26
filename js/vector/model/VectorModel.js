@@ -21,7 +21,6 @@ define( function( require ) {
    */
   function VectorModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem );
-
   }
 
   massesAndSprings.register( 'VectorModel', VectorModel );

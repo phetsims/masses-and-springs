@@ -51,17 +51,23 @@ define( function( require ) {
       maxWidth: MAX_TEXT_WIDTH
     };
 
-    // TODO: Add logic for setting values for each aqua button.
-    // TODO: Follow the logic of the scene selection radio button (not playspeed).
     // @private {read-only} radius of button
     var constantsSelectionButtonRadius = 6;
-    var thicknessText = new Text( thicknessString, _.extend( { tandem: tandem.createTandem( 'thicknessText' ) }, _.extend( { tandem: tandem.createTandem( 'thicknessString' ) }, constantsSelectionButtonOptions ) ) );
+    var thicknessText = new Text(
+      thicknessString,
+      _.extend( { tandem: tandem.createTandem( 'thicknessText' ) },
+        _.extend( { tandem: tandem.createTandem( 'thicknessString' ) },
+          constantsSelectionButtonOptions
+        ) ) );
     var thicknessRadioButton = new AquaRadioButton( selectedConstantProperty, 'spring-thickness', thicknessText, {
       radius: constantsSelectionButtonRadius,
       tandem: tandem.createTandem( 'thicknessRadioButton' )
     } );
 
-    var constantText = new Text( StringUtils.format( springConstantString, '' ), _.extend( { tandem: tandem.createTandem( 'constantText' ) }, constantsSelectionButtonOptions ) );
+    var constantText = new Text(
+      StringUtils.format( springConstantString, '' ),
+      _.extend( { tandem: tandem.createTandem( 'constantText' ) },
+        constantsSelectionButtonOptions ) );
     var springConstantRadioButton = new AquaRadioButton( selectedConstantProperty, 'spring-constant', constantText, {
       radius: constantsSelectionButtonRadius,
       tandem: tandem.createTandem( 'springConstantRadioButton' )

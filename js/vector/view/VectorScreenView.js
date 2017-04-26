@@ -22,12 +22,9 @@ define( function( require ) {
    * @constructor
    */
   function VectorScreenView( model, tandem ) {
+
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
-    // var self = this;
-
-    // TODO: Change this value to the bottom of the vectorVisibilityControlPanel + spacing
-    this.toolboxPanel.top = 350;
 
     var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
       model,
@@ -40,6 +37,8 @@ define( function( require ) {
     );
     this.addChild( vectorVisibilityControlPanel );
     vectorVisibilityControlPanel.moveToBack();
+
+    this.toolboxPanel.top = vectorVisibilityControlPanel.bottom + this.topSpacing;
   }
 
   massesAndSprings.register( 'VectorScreenView', VectorScreenView );
