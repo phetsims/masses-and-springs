@@ -121,8 +121,7 @@ define( function( require ) {
           rulerUnboundedPosition.set( initialPosition );
 
           // Sending through the startDrag from icon to rulerNode causes it to receive all subsequent drag events.
-          //TODO: reference https://github.com/phetsims/masses-and-springs/issues/60
-          rulerNode.startDrag( event );
+          rulerNode.rulerNodeMovableDragHandler.startDrag( event );
         }
       } ) );
       toolbox.addChild( self.rulerIcon );
@@ -164,8 +163,7 @@ define( function( require ) {
           timerUnboundedPosition.set( initialPosition );
 
           // Sending through the startDrag from icon to timerNode causes it to receive all subsequent drag events.
-          //TODO: reference https://github.com/phetsims/masses-and-springs/issues/60
-          timerNode.startDrag( event );
+          timerNode.timerNodeMovableDragHandler.startDrag( event );
         }
       } ) );
       toolbox.addChild( self.timerIcon );

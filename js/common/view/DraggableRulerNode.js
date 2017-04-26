@@ -76,6 +76,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'dragHandler' ),
       dragBounds: dragBounds,
       endDrag: function() {
+
         // When a node is released, check if it is over the toolbox.  If so, drop it in.
         if ( self.toolbox && self.getGlobalBounds().intersectsBounds( self.toolbox.getGlobalBounds() ) ) {
           visibleProperty.set( false );
@@ -96,16 +97,6 @@ define( function( require ) {
      */
     reset: function() {
       this.positionProperty.reset();
-    },
-
-    /**
-     * Responsible for handling drag event for ruler node using event forwarding from ruler icon in toolbox
-     * @param {Event} event - Drag event that is forwarded from ruler icon in toolbox node
-     *
-     * @public
-     */
-    startDrag: function( event ) {
-      this.rulerNodeMovableDragHandler.startDrag( event );
     }
   } );
 
