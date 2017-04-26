@@ -27,18 +27,7 @@ define( function( require ) {
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
   // constants
-  var VECTOR_ARROW_LENGTH = 34;
-  var FORCES_ARROW_LENGTH = 31;
   var ARROW_SIZE_DEFAULT = 25;
-  var ARROW_HEAD_WIDTH = 14;
-  var ARROW_TAIL_WIDTH = 8;
-  var SMALLER_ARROW_HEAD_WIDTH = 11;
-  var SMALLER_ARROW_TAIL_WIDTH = 3;
-  var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
-  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
-  var GRAVITY_ARROW_COLOR = 'rgb( 236, 63, 71 )';
-  var SPRING_ARROW_COLOR = 'rgb( 36, 36, 255 )';
-
 
   /**
    * @param {Mass} mass -  model object
@@ -124,32 +113,32 @@ define( function( require ) {
     } );
 
     var createVectorArrow = function( color, tandemID ) {
-      return new ArrowNode( 10, 0, VECTOR_ARROW_LENGTH, 0, {
+      return new ArrowNode( 10, 0, MassesAndSpringsConstants.VECTOR_ARROW_LENGTH, 0, {
         fill: color,
         stroke: 'black',
         centerY: 0,
-        tailWidth: ARROW_TAIL_WIDTH,
-        headWidth: ARROW_HEAD_WIDTH,
+        tailWidth: MassesAndSpringsConstants.ARROW_TAIL_WIDTH,
+        headWidth: MassesAndSpringsConstants.ARROW_HEAD_WIDTH,
         tandem: tandem.createTandem( tandemID )
       } );
     };
 
     var createForceArrow = function( color, tandemID ) {
-      return new ArrowNode( 5, 0, FORCES_ARROW_LENGTH, 0, {
+      return new ArrowNode( 5, 0, MassesAndSpringsConstants.FORCES_ARROW_LENGTH, 0, {
         fill: color,
         stroke: color,
         centerY: 0,
-        tailWidth: SMALLER_ARROW_TAIL_WIDTH,
-        headWidth: SMALLER_ARROW_HEAD_WIDTH,
+        tailWidth: MassesAndSpringsConstants.SMALLER_ARROW_TAIL_WIDTH,
+        headWidth: MassesAndSpringsConstants.SMALLER_ARROW_HEAD_WIDTH,
         tandem: tandem.createTandem( tandemID )
       } );
     };
 
     //Arrows created for vectors associated with mass nodes
-    this.velocityArrow = createVectorArrow( VELOCITY_ARROW_COLOR, 'velocityArrow' );
-    this.accelerationArrow = createVectorArrow( ACCELERATION_ARROW_COLOR, 'accelerationArrow' );
-    this.gravityForceArrow = createForceArrow( GRAVITY_ARROW_COLOR, 'gravityForceArrow' );
-    this.springForceArrow = createForceArrow( SPRING_ARROW_COLOR, 'springForceArrow' );
+    this.velocityArrow = createVectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'velocityArrow' );
+    this.accelerationArrow = createVectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'accelerationArrow' );
+    this.gravityForceArrow = createForceArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'gravityForceArrow' );
+    this.springForceArrow = createForceArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'springForceArrow' );
     this.netForceArrow = createForceArrow( 'black', 'netForceArrow' );
 
     this.addChild( this.velocityArrow );

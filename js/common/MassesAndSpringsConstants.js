@@ -14,13 +14,29 @@ define( function( require ) {
 
   var MassesAndSpringsConstants = {
     //TODO: Insert constants here
-    PANEL_VERTICAL_SPACING: 10,
+    MAX_TEXT_WIDTH: 80,
+    DEFAULT_SPRING_LENGTH: 0.5,
+
+    // Constants for vectors
+    VECTOR_ARROW_LENGTH: 34,
+    FORCES_ARROW_LENGTH: 31,
+    ARROW_HEAD_WIDTH: 14,
+    ARROW_TAIL_WIDTH: 8,
+    SMALLER_ARROW_HEAD_WIDTH: 11,
+    SMALLER_ARROW_TAIL_WIDTH: 3,
+    VELOCITY_ARROW_COLOR: 'rgb( 41, 253, 46 )',
+    ACCELERATION_ARROW_COLOR: 'rgb( 255, 253, 56 )',
+    GRAVITY_ARROW_COLOR: 'rgb( 236, 63, 71 )',
+    SPRING_ARROW_COLOR: 'rgb( 36, 36, 255 )',
+
+    // Constants regarding fonts
     FONT: new PhetFont( 12 ),
     LABEL_FONT: new PhetFont( 10 ),
     TITLE_FONT: new PhetFont( { size: 12, weight: 'bold' } ),
+
+    // Constants regarding panels
+    PANEL_VERTICAL_SPACING: 10,
     PANEL_CORNER_RADIUS: 7,
-    MAX_TEXT_WIDTH: 80,
-    DEFAULT_SPRING_LENGTH: 0.5,
     PANEL_MAX_WIDTH: 220
   };
 

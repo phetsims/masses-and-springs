@@ -30,19 +30,6 @@ define( function( require ) {
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
   var springString = require( 'string!MASSES_AND_SPRINGS/spring' );
 
-  // Constants
-  // TODO:Merge some of these into a constants file
-  var VECTOR_ARROW_LENGTH = 34;
-  var FORCES_ARROW_LENGTH = 31;
-  var ARROW_HEAD_WIDTH = 14;
-  var ARROW_TAIL_WIDTH = 8;
-  var SMALLER_ARROW_HEAD_WIDTH = 11;
-  var SMALLER_ARROW_TAIL_WIDTH = 3;
-  var VELOCITY_ARROW_COLOR = 'rgb( 41, 253, 46 )';
-  var ACCELERATION_ARROW_COLOR = 'rgb( 255, 253, 56 )';
-  var GRAVITY_ARROW_COLOR = 'rgb( 236, 63, 71 )';
-  var SPRING_ARROW_COLOR = 'rgb( 36, 36, 255 )';
-
   /**
    * @param {VectorModel} model
    * @param {Tandem} tandem
@@ -53,31 +40,31 @@ define( function( require ) {
 
     // Creation of arrow nodes to be used in vector screen.
     var createVectorArrow = function( color, tandemID ) {
-      return new ArrowNode( 10, 0, VECTOR_ARROW_LENGTH, 0, {
+      return new ArrowNode( 10, 0, MassesAndSpringsConstants.VECTOR_ARROW_LENGTH, 0, {
         fill: color,
         stroke: 'black',
         centerY: 0,
-        tailWidth: ARROW_TAIL_WIDTH,
-        headWidth: ARROW_HEAD_WIDTH,
+        tailWidth: MassesAndSpringsConstants.ARROW_TAIL_WIDTH,
+        headWidth: MassesAndSpringsConstants.ARROW_HEAD_WIDTH,
         tandem: tandem.createTandem( tandemID )
       } );
     };
 
     var createForceArrow = function( color, tandemID ) {
-      return new ArrowNode( 5, 0, FORCES_ARROW_LENGTH, 0, {
+      return new ArrowNode( 5, 0, MassesAndSpringsConstants.FORCES_ARROW_LENGTH, 0, {
         fill: color,
         stroke: color,
         centerY: 0,
-        tailWidth: SMALLER_ARROW_TAIL_WIDTH,
-        headWidth: SMALLER_ARROW_HEAD_WIDTH,
+        tailWidth: MassesAndSpringsConstants.SMALLER_ARROW_TAIL_WIDTH,
+        headWidth: MassesAndSpringsConstants.SMALLER_ARROW_HEAD_WIDTH,
         tandem: tandem.createTandem( tandemID )
       } );
     };
 
-    var velocityArrow = createVectorArrow( VELOCITY_ARROW_COLOR, 'panelVelocityArrow' );
-    var accelerationArrow = createVectorArrow( ACCELERATION_ARROW_COLOR, 'panelAccelerationArrow' );
-    var gravityArrow = createForceArrow( GRAVITY_ARROW_COLOR, 'panelGravityArrow' );
-    var springArrow = createForceArrow( SPRING_ARROW_COLOR, 'panelSpringArrow' );
+    var velocityArrow = createVectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'panelVelocityArrow' );
+    var accelerationArrow = createVectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'panelAccelerationArrow' );
+    var gravityArrow = createForceArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'panelGravityArrow' );
+    var springArrow = createForceArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'panelSpringArrow' );
     var netForceArrow = createForceArrow( 'black', 'panelNetForceArrow' );
 
     // responsible for velocity and acceleration vectors checkboxes
