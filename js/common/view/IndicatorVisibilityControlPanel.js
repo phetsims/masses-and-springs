@@ -36,6 +36,7 @@ define( function( require ) {
    * @constructor
    */
   function IndicatorVisibilityControlPanel( model, tandem, options ) {
+
     /**
      * Creates line for visual representation within the panel.
      * @param {string} color
@@ -51,6 +52,7 @@ define( function( require ) {
         tandem: tandem
       } );
     };
+
     // Lines added for reference in panel
     var greenLine = createLine( 'rgb(93, 191, 142)', tandem.createTandem( 'greenLine' ) );
     var blueLine = createLine( 'rgb(65,66,232)', tandem.createTandem( 'blueLine' ) );
@@ -60,7 +62,13 @@ define( function( require ) {
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new HBox( {
-          children: [ new Text( naturalLengthString, MassesAndSpringsConstants.FONT, { tandem: tandem.createTandem( 'naturalLengthString' ) } ), new HStrut( 31 ), blueLine ],
+          children: [ new Text(
+            naturalLengthString,
+            MassesAndSpringsConstants.FONT,
+            { tandem: tandem.createTandem( 'naturalLengthString' ) } ),
+            new HStrut( 31 ),
+            blueLine
+          ],
           tandem: tandem.createTandem( 'naturalLengthHBox' )
         } ),
         property: model.naturalLengthVisibleProperty,
@@ -68,7 +76,13 @@ define( function( require ) {
       },
       {
         content: new HBox( {
-          children: [ new Text( equilibriumPositionString, MassesAndSpringsConstants.FONT, { tandem: tandem.createTandem( 'equilibriumPositionString' ) } ), new HStrut( 10 ), greenLine ],
+          children: [ new Text(
+            equilibriumPositionString,
+            MassesAndSpringsConstants.FONT,
+            { tandem: tandem.createTandem( 'equilibriumPositionString' ) } ),
+            new HStrut( 10 ),
+            greenLine
+          ],
           tandem: tandem.createTandem( 'equilibriumPositionHBox' )
         } ),
         property: model.equilibriumPositionVisibleProperty,
@@ -76,7 +90,13 @@ define( function( require ) {
       },
       {
         content: new HBox( {
-          children: [ new Text( movableLineString, MassesAndSpringsConstants.FONT, { tandem: tandem.createTandem( 'movableLineString' ) } ), new HStrut( 38 ), redLine ],
+          children: [ new Text(
+            movableLineString,
+            MassesAndSpringsConstants.FONT,
+            { tandem: tandem.createTandem( 'movableLineString' ) } ),
+            new HStrut( 38 ),
+            redLine
+          ],
           tandem: tandem.createTandem( 'movableLineHBox' )
         } ),
         property: model.movableLineVisibleProperty,
@@ -104,7 +124,6 @@ define( function( require ) {
     );
     this.mutate( options );
   }
-
   massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );
 
   return inherit( Panel, IndicatorVisibilityControlPanel );

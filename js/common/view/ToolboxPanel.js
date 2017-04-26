@@ -28,7 +28,6 @@ define( function( require ) {
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
 
   /**
-   *
    * @param {Bounds2} dragBounds
    * @param {DraggableRulerNode} rulerNode
    * @param {DraggableTimerNode} timerNode
@@ -67,7 +66,6 @@ define( function( require ) {
     var isRunningProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isRunningProperty' )
     } );
-    // TODO: Tandemize timer as in common code. See https://github.com/phetsims/masses-and-springs/issues/27
     var timer = new Timer( secondsProperty, isRunningProperty );
 
     // Create ruler to be turned into icon
@@ -78,11 +76,18 @@ define( function( require ) {
       majorTickLabels.push( '' );
     }
     var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
-    var ruler = new RulerNode( rulerWidth, rulerLength, majorTickWidth, majorTickLabels, '', { tandem: tandem.createTandem( 'ruler' ) } );
+    var ruler = new RulerNode(
+      rulerWidth,
+      rulerLength,
+      majorTickWidth,
+      majorTickLabels,
+      '',
+      { tandem: tandem.createTandem( 'ruler' ) } );
     ruler.rotate( 40, false );
 
     // Create timer icon
     ruler.toImage( function( image ) {
+
       // @private - visible option is used only for reset() in ToolboxPanel.js
       self.rulerIcon = new Image( image, {
         cursor: 'pointer',
@@ -96,6 +101,7 @@ define( function( require ) {
 
       // Drag listener for event forwarding: rulerIcon ---> rulerNode
       self.rulerIcon.addInputListener( new TandemSimpleDragHandler( {
+
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
         tandem: tandem.createTandem( 'dragHandler' ),
@@ -124,6 +130,7 @@ define( function( require ) {
 
     // Create timer icon
     timer.toImage( function( image ) {
+
       // @private - visible option is used only for reset() in ToolboxPanel.js
       self.timerIcon = new Image( image, {
         cursor: 'pointer',
@@ -136,6 +143,7 @@ define( function( require ) {
 
       // Drag listener for event forwarding: timerIcon ---> timerNode
       self.timerIcon.addInputListener( new TandemSimpleDragHandler( {
+
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
         tandem: tandem.createTandem( 'dragHandler' ),

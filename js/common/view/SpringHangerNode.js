@@ -29,11 +29,13 @@ define( function( require ) {
   function SpringHangerNode( model, modelViewTransform2, tandem ) {
 
     var springsSeparation =
-      modelViewTransform2.modelToViewDeltaX( Math.abs( model.springs[ 0 ].positionProperty.get().x - model.springs[ 1 ].positionProperty.get().x ) );
+      modelViewTransform2.modelToViewDeltaX( Math.abs( model.springs[ 0 ].positionProperty.get().x -
+                                                       model.springs[ 1 ].positionProperty.get().x ) );
     var springHangerNodeWidth = springsSeparation * 1.4;
 
     // X coordinate of middle of springs
-    var middleOfSprings = modelViewTransform2.modelToViewX( (model.springs[ 0 ].positionProperty.get().x + model.springs[ 1 ].positionProperty.get().x) / 2 );
+    var middleOfSprings = modelViewTransform2.modelToViewX( (model.springs[ 0 ].positionProperty.get().x +
+                                                             model.springs[ 1 ].positionProperty.get().x) / 2 );
 
     // derived from x positions of springs.
     Rectangle.call( this, 0, 0, springHangerNodeWidth, 20, 8, 8, {
@@ -43,7 +45,6 @@ define( function( require ) {
       top: modelViewTransform2.modelToViewY( model.ceilingY ),
       tandem: tandem.createTandem( 'springHangerNode' )
     } );
-
 
     // Node for hanger text label
     var springHangerLabelNode = new Node( { tandem: tandem.createTandem( 'springHangerLabelNode' ) } );

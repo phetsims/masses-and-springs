@@ -40,8 +40,8 @@ define( function( require ) {
     this.touchArea = this.localBounds.dilated( 10 );
 
 
-    // @private
-    var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x ) + 7.5; // prevents overlap with the equilibrium line
+    // @private {read-write} prevents overlap with the equilibrium line
+    var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x ) + 7.5; 
 
     // updates the position of the natural length line as the system changes
     spring.bottomProperty.link( function( bottom ) {

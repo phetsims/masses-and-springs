@@ -84,8 +84,14 @@ define( function( require ) {
         continue;
       }
       var referencedMassProperty = model.masses[ property ];
-      var massNode = new MassNode( referencedMassProperty, modelViewTransform2, self, model, tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
+      var massNode = new MassNode(
+        referencedMassProperty,
+        modelViewTransform2,
+        self,
+        model,
+        tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
       this.massLayer.addChild( massNode );
+
       // Keeps track of the mass node to restore original Z order.
       massNodes.push( massNode );
     }
@@ -138,6 +144,7 @@ define( function( require ) {
         top: this.topSpacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
       } );
+
     // @public Initializes movable line
     this.movableLineNode = new MovableLineNode(
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
@@ -242,6 +249,7 @@ define( function( require ) {
     this.resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
+
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
         self.resetMassLayer();
       },

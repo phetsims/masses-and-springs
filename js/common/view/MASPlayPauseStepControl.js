@@ -32,9 +32,7 @@ define( function( require ) {
    */
   // TODO: Rename to TimeControlPanel, and rename vars/tandems at usage sites
   function MASPlayPauseStepControl( model, layoutBounds, tandem, options ) {
-
     Node.call( this );
-
     var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( 0, layoutBounds.height * .98 ),
@@ -70,7 +68,6 @@ define( function( require ) {
     model.playingProperty.lazyLink( function( isPlaying ) {
       playPauseButton.scale( isPlaying ? ( 1 / PAUSE_SIZE_INCREASE_FACTOR ) : PAUSE_SIZE_INCREASE_FACTOR );
     } );
-
     this.mutate( options );
   }
 

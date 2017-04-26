@@ -193,7 +193,6 @@ define( function( require ) {
         else {forceNullLine.visible = false;}
       } );
 
-
     //TODO: Create MASArrowNode with arguments for deltas in X&Y, mass position, and the property it is depicting
     //TODO: Considering moving in visibility multilinks)
     //Links for handling the length of the vectors in response to the system.
@@ -220,7 +219,7 @@ define( function( require ) {
       );
     } );
 
-    // When the spring force changes, update the arrow
+    // When the spring force changes, update the spring force arrow
     Property.multilink( [ mass.springForceProperty, mass.positionProperty ], function( springForce, position ) {
       self.springForceArrow.setTailAndTip(
         position.x + 45,
@@ -230,8 +229,8 @@ define( function( require ) {
       );
     } );
 
+    // When net force changes changes, update the net force arrow
     assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
-
     Property.multilink( [ mass.netForceProperty, mass.positionProperty ], function( netForce, position ) {
       if ( Math.abs( netForce ) > 1E-6 ) {
         self.netForceArrow.setTailAndTip(
@@ -252,6 +251,7 @@ define( function( require ) {
       }
     } );
 
+    // When the mass's position changes update the forces baseline marker
     mass.positionProperty.link( function( position ) {
       forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
     } );

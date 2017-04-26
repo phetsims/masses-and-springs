@@ -56,7 +56,6 @@ define( function( require ) {
       }
     } );
     this.addInputListener( this.timerNodeMovableDragHandler );
-
     visibleProperty.linkAttribute( self, 'visible' );
   }
 
@@ -65,8 +64,8 @@ define( function( require ) {
   return inherit( Timer, DraggableTimerNode, {
     /**
      * @override
+     * 
      * @public
-     *
      */
     reset: function() {
       this.positionProperty.reset();
@@ -74,9 +73,9 @@ define( function( require ) {
 
     /**
      * Responsible for handling drag event for timer node using event forwarding from timer icon in toolbox
-     * @public
-     *
      * @param {Event} event - Drag event that is forwarded from timer icon in toolbox node
+     *
+     * @public
      */
     startDrag: function( event ) {
       this.timerNodeMovableDragHandler.startDrag( event );

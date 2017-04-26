@@ -24,7 +24,7 @@ define( function( require ) {
 
   /**
    * @param {string} title - name of body.
-   * @param {number|null} gravity - acceleration of body.  TODO: explain what a null gravity is and how it differs from 0
+   * @param {number} gravity - gravitational acceleration of body.
    * @param {Tandem} tandem
    * @constructor
    */

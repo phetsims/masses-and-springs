@@ -22,7 +22,6 @@ define( function( require ) {
   var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
 
   /**
-   *
    * @param {Property.<number>} springConstantProperty
    * @param {Range} springConstantPropertyRange
    * @param {string} title
@@ -54,14 +53,16 @@ define( function( require ) {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'springConstantSmallString' )
     } ) );
-    hSlider.addMajorTick( springConstantPropertyRange.min + ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 2 );
+    hSlider.addMajorTick( springConstantPropertyRange.min
+                          + ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 2 );
     hSlider.addMajorTick( springConstantPropertyRange.max, new Text( springConstantLargeString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'springConstantLargeString' )
     } ) );
     for ( var i = 1; i < 10; i++ ) {
       if ( i !== 5 ) {
-        hSlider.addMinorTick( springConstantPropertyRange.min + i * ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 10 );
+        hSlider.addMinorTick( springConstantPropertyRange.min +
+                              i * ( springConstantPropertyRange.max - springConstantPropertyRange.min ) / 10 );
       }
     }
 

@@ -255,6 +255,7 @@ define( function( require ) {
 
     /**
      * @override
+     * 
      * @public
      */
     reset: function() {

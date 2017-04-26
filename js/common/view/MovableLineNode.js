@@ -32,6 +32,7 @@ define( function( require ) {
   function MovableLineNode( initialPosition, length, visibleProperty, tandem ) {
     var self = this;
     Node.call( this );
+
     // Creates laser pointer tip for reference line
     // Laser should never have a button in this sim, but a property is needed for the LaserPointerNode to work
     var laserEnabledProperty = new Property( false, { validValues: [ false ] } );

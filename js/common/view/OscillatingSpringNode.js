@@ -25,7 +25,6 @@ define( function( require ) {
    * @constructor
    */
   function OscillatingSpringNode( spring, modelViewTransform2, tandem, options ) {
-
     var self = this;
 
     options = _.extend( {
@@ -45,12 +44,17 @@ define( function( require ) {
 
     ParametricSpringNode.call( this, options );
     this.spring = spring;
-    this.translation = modelViewTransform2.modelToViewPosition( new Vector2( spring.positionProperty.get().x, spring.positionProperty.get().y - length ) );
+    this.translation = modelViewTransform2.modelToViewPosition(
+      new Vector2( spring.positionProperty.get().x,
+        spring.positionProperty.get().y - length ) );
     this.modelViewTransform2 = modelViewTransform2;
 
     function updateViewLength() {
+
       // ParametricSpringNode calculations
-      var coilLength = ( modelViewTransform2.modelToViewDeltaY( spring.lengthProperty.get() ) - ( options.leftEndLength + options.rightEndLength ) );
+      var coilLength = (
+      modelViewTransform2.modelToViewDeltaY( spring.lengthProperty.get() )
+      - ( options.leftEndLength + options.rightEndLength) );
       var xScale = coilLength / ( self.loopsProperty.get() * self.radiusProperty.get() );
 
       //The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
@@ -76,7 +80,6 @@ define( function( require ) {
       self.lineWidthProperty.set( thickness );
     } );
   }
-
   massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );
 
   return inherit( ParametricSpringNode, OscillatingSpringNode, {

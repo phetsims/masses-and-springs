@@ -41,8 +41,9 @@ define( function( require ) {
     // @private {read-write} X position of line in screen coordinates
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
 
-    // updates the position of the equilibrium line as the system changes
+    // Link that updates the position of the equilibrium line as the system changes.
     spring.equilibriumYPositionProperty.link( function( equilibriumPosition ) {
+
       // @private {read-write} Y position of line in screen coordinates
       var yPos = modelViewTransform2.modelToViewY( equilibriumPosition );
 
@@ -52,7 +53,7 @@ define( function( require ) {
         phetioValueType: TVector2
       } );
 
-      // link that handles the change in the lines position in screen coordinates
+      // Link that handles the change in the lines position in screen coordinates
       self.positionProperty.link( function( position ) {
         self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
       } );
@@ -65,12 +66,11 @@ define( function( require ) {
   return inherit( Line, EquilibriumLineNode, {
     /**
      * @override
-     * @public
      *
+     * @public
      */
     reset: function() {
       this.positionProperty.reset();
     }
   } );
-
 } );

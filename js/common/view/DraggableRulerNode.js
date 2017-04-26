@@ -26,10 +26,9 @@ define( function( require ) {
    * @param {Vector2} initialPosition
    * @param {Property.<boolean>} visibleProperty
    * @param {Tandem} tandem
-
+   * 
    * @constructor
    */
-  //TODO: Investigate inheriting from rulerNode instead of Node. Prevents confusion regarding the DraggableRulerNode containing another Ruler Node
 
   function DraggableRulerNode( dragBounds, initialPosition, visibleProperty, tandem ) {
     var self = this;
@@ -39,7 +38,7 @@ define( function( require ) {
 
     // define ruler params in pixels
     var rulerWidth = 397; // 1 meter
-    var rulerLength = .1 * rulerWidth; //
+    var rulerLength = .1 * rulerWidth; 
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
       majorTickLabels.push( '' );
@@ -92,8 +91,8 @@ define( function( require ) {
   return inherit( RulerNode, DraggableRulerNode, {
     /**
      * @override
+     * 
      * @public
-     *
      */
     reset: function() {
       this.positionProperty.reset();
@@ -101,9 +100,9 @@ define( function( require ) {
 
     /**
      * Responsible for handling drag event for ruler node using event forwarding from ruler icon in toolbox
-     * @public
-     *
      * @param {Event} event - Drag event that is forwarded from ruler icon in toolbox node
+     *
+     * @public
      */
     startDrag: function( event ) {
       this.rulerNodeMovableDragHandler.startDrag( event );

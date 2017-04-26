@@ -71,6 +71,7 @@ define( function( require ) {
         value: body.title
       } );
     } );
+
     // @public {Property.<number>}
     this.gravityProperty = gravityProperty;
 
@@ -143,10 +144,12 @@ define( function( require ) {
         self.hSlider.visible = false;
         self.gravityProperty.set( body.gravity );
       }
+
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
       else if ( previousBodyTitleProperty.get() === Body.PLANET_X.title && newBodyTitle === Body.CUSTOM.title ) {
         self.gravityProperty.set( previousGravityProperty.get() );
       }
+
       // Update gravity
       else if ( body.gravity || body.title === Body.ZERO_G.title ) {
         self.gravityProperty.set( body.gravity );
@@ -157,18 +160,21 @@ define( function( require ) {
     } );
 
     this.gravityProperty.link( function( newGravity ) {
+
       // Remember the last change to gravity if we are not on planetX
       if ( bodyTitleProperty.get() !== Body.PLANET_X.title ) {
         previousGravityProperty.set( newGravity );
       }
       // If we changed to a body, don't try to update the title
       for ( var i in self.bodies ) {
+
         // We can't check for truthiness of self.bodies[ i ].gravity because ZeroG is not truthy
         if ( self.bodies[ i ] && self.bodies[ i ].hasOwnProperty( 'gravity' ) &&
              newGravity === self.bodies[ i ].gravity ) {
           return;
         }
       }
+
       //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
       bodyTitleProperty.set( Body.CUSTOM.title );
     } );
@@ -180,13 +186,14 @@ define( function( require ) {
   return inherit( Panel, GravityControlPanel, {
 
     /**
-     * @public
      * @override
+     *
+     * @public
      */
     reset: function() {
+
       // On reset we need to manually set title to Earth or the gravityLink will change it to custom.
       this.bodyTitleProperty.set( Body.EARTH.title );
     }
   } );
-
 } );
