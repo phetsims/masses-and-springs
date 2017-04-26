@@ -123,17 +123,21 @@ define( function( require ) {
 
     /**
      * @override
-     * @public
+     *
+     * @private
      */
     reset: function() {
-      // debugger;
       MassesAndSpringsModel.prototype.reset.call( this );
       this.sceneModeProperty.reset();
       this.constantParameterProperty.reset();
-      this.applyresetState();
-      console.log( 'Reset called' );
+      this.applyResetState();
     },
 
+    /**
+     * Responsible for preserving the properties of the masses and springs then stores them in a mutable object.
+     *
+     * @private
+     */
     getSceneState: function() {
       var spring1State = this.spring1.getSpringState();
       var spring2State = this.spring2.getSpringState();
@@ -144,7 +148,7 @@ define( function( require ) {
       var largeUnlabeledMass = this.masses.largeUnlabeledMass.getMassState();
       var mediumUnlabeledMass = this.masses.mediumUnlabeledMass.getMassState();
       var smallUnlabeledMass = this.masses.smallUnlabeledMass.getMassState();
-      var sceneState = {
+      return {
         spring1State: spring1State,
         spring2State: spring2State,
         largeLabeledMassState: largeLabeledMassState,
@@ -155,10 +159,14 @@ define( function( require ) {
         mediumUnlabeledMass: mediumUnlabeledMass,
         smallUnlabeledMass: smallUnlabeledMass
       };
-      return sceneState;
-
     },
 
+    /**
+     * Responsible for setting the properties of the masses and springs.
+     * @param {Object} sceneState: Contains properties of springs and masses
+     *
+     * @private
+     */
     setSceneState: function( sceneState ) {
       this.spring1.setSpringState( sceneState.spring1State );
       this.spring2.setSpringState( sceneState.spring2State );
@@ -171,6 +179,11 @@ define( function( require ) {
       this.masses.smallUnlabeledMass.setMassState( sceneState.smallUnlabeledMass );
     },
 
+    /**
+     * Resets the properties of the masses and springs
+     *
+     * @private
+     */
     resetState: function() {
       this.spring1.reset();
       this.spring2.reset();
@@ -179,9 +192,15 @@ define( function( require ) {
       } );
     },
 
-    applyresetState: function() {
+    /**
+     * Resets both scenes of intro screen.
+     *
+     * @private
+     */
+    applyResetState: function() {
       this.sceneModeProperty.set( 'adjustable-length' );
       this.resetState();
+      this.spring1.naturalRestingLengthProperty.set( .25 );
       this.scene1Parameters = this.getSceneState();
 
       this.sceneModeProperty.set( 'same-length' );
