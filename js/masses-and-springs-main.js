@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var EnergyScreen = require( 'MASSES_AND_SPRINGS/energy/EnergyScreen' );
   var VectorScreen = require( 'MASSES_AND_SPRINGS/vector/VectorScreen' );
   var IntroScreen = require( 'MASSES_AND_SPRINGS/intro/IntroScreen' );
   var LabScreen = require( 'MASSES_AND_SPRINGS/lab/LabScreen' );
@@ -40,6 +41,7 @@ define( function( require ) {
     var sim = new Sim( massesAndSpringsTitleString, [
       new IntroScreen( tandem.createTandem( 'introScreen' ) ),
       new VectorScreen( tandem.createTandem( 'vectorScreen' ) ),
+      new EnergyScreen( tandem.createTandem( 'energyScreen' ) ),
       new LabScreen( tandem.createTandem( 'labScreen' ) )
     ], simOptions );
     sim.start();
