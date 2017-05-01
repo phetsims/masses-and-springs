@@ -37,7 +37,7 @@ define( function( require ) {
    */
   function MassesAndSpringsModel( springCount, tandem ) {
     var self = this;
-    
+
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'playingProperty' )
@@ -179,49 +179,32 @@ define( function( require ) {
       createSpring( RIGHT_SPRING_X, tandem.createTandem( 'spring' ) )
     ];
 
+    var createMass = function( mass, xPosition, labelVisible, color, tandem ) {
+      return new Mass(
+        mass,
+        new Vector2( xPosition, .5 ),
+        labelVisible,
+        color,
+        self.gravityProperty,
+        tandem
+      );
+    };
     // @public (read-only) model of masses used throughout the sim
-    this.masses = {
-      largeLabeledMass: new Mass( .250, new Vector2( .12, .5 ),
+    this.masses = springCount === 2 ? {
+      largeLabeledMass: createMass( .250, .12, true, 'grey', tandem.createTandem( 'largeLabeledMass' ) ),
+      mediumLabeledMass1: createMass( .100, .20, true, 'grey', tandem.createTandem( 'mediumLabeledMass1' ) ),
+      mediumLabeledMass2: createMass( .100, .28, true, 'grey', tandem.createTandem( 'mediumLabeledMass2' ) ),
+      smallLabeledMass: createMass( .050, .33, true, 'grey', tandem.createTandem( 'smallLabeledMass' ) ),
+      largeUnlabeledMass: createMass( .200, .63, false, 'blue', tandem.createTandem( 'largeUnlabeledMass' ) ),
+      mediumUnlabeledMass: createMass( .150, .56, false, 'green', tandem.createTandem( 'mediumUnlabeledMass' ) ),
+      smallUnlabeledMass: createMass( .075, .49, false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
+    } : {
+      adjustableMass: createMass(
+        .100,
+        this.springs[ 0 ].positionProperty.get().x,
         true,
-        'grey',
-        this.gravityProperty,
-        tandem.createTandem( 'largeLabeledMass' ) ),
-
-      mediumLabeledMass1: new Mass( .100, new Vector2( .20, .5 ),
-        true,
-        'grey',
-        this.gravityProperty,
-        tandem.createTandem( 'mediumLabeledMass1' ) ),
-
-      mediumLabeledMass2: new Mass( .100, new Vector2( .28, .5 ),
-        true,
-        'grey',
-        this.gravityProperty,
-        tandem.createTandem( 'mediumLabeledMass2' ) ),
-
-      smallLabeledMass: new Mass( .050, new Vector2( .33, .5 ),
-        true,
-        'grey',
-        this.gravityProperty,
-        tandem.createTandem( 'smallLabeledMass' ) ),
-
-      largeUnlabeledMass: new Mass( .200, new Vector2( .63, .5 ),
-        false,
-        'blue',
-        this.gravityProperty,
-        tandem.createTandem( 'largeUnlabeledMass' ) ),
-
-      mediumUnlabeledMass: new Mass( .150, new Vector2( .56, .5 ),
-        false,
-        'green',
-        this.gravityProperty,
-        tandem.createTandem( 'mediumUnlabeledMass' ) ),
-
-      smallUnlabeledMass: new Mass( .075, new Vector2( .49, .5 ),
-        false,
-        'red',
-        this.gravityProperty,
-        tandem.createTandem( 'smallUnlabeledMass' ) )
+        'rgb( 191, 140, 88 )',
+        tandem.createTandem( 'adjustableMass' ) )
     };
 
     // @public (read-only) model of bodies used throughout the sim
@@ -257,7 +240,7 @@ define( function( require ) {
 
     /**
      * @override
-     * 
+     *
      * @public
      */
     reset: function() {
