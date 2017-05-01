@@ -9,12 +9,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  // var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
-  var Property = require ('AXON/Property');
+  var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   // var Text = require( 'SCENERY/nodes/Text' );
 
@@ -28,9 +29,17 @@ define( function( require ) {
    */
   function MassValueControlPanel( mass, tandem ) {
     // var title = new Text( massString, { font: MassesAndSpringsConstants.TITLE_FONT } );
-    var massProperty = new Property( mass);
+    var massProperty = new Property( mass );
 
-    Panel.call( this, new NumberControl( 'mass', massProperty, new Range( 50, 300 ) ) );
+    Panel.call( this, new NumberControl( 'mass', massProperty, new Range( 50, 300 ), {
+      valuePattern: '{0} g',
+      majorTickLength: 10,
+      trackSize: new Dimension2( 100, 2 ),
+      thumbSize: new Dimension2( 13, 22 )
+    } ), {
+      fill: 'rgb( 240, 240, 240 )',
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
+    } );
   }
 
   massesAndSprings.register( 'MassValueControlPanel', MassValueControlPanel );
