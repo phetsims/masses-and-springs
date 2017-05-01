@@ -25,7 +25,7 @@ define( function( require ) {
    */
   function IntroModel( tandem ) {
 
-    MassesAndSpringsModel.call( this, tandem );
+    MassesAndSpringsModel.call( this, 2, tandem );
     var self = this;
 
     //TODO: Move into the intro Model.

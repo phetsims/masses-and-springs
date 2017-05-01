@@ -26,10 +26,11 @@ define( function( require ) {
    * @param {Vector2} initialPosition - of the center of line
    * @param {number} length - in view coordinates
    * @param {boolean} visibleProperty
+   * @param {number} xPosOfLine - limits draggable bounds and position on the x-axis
    * @param {Tandem} tandem
    * @constructor
    */
-  function MovableLineNode( initialPosition, length, visibleProperty, tandem ) {
+  function MovableLineNode( initialPosition, length, visibleProperty,xPosOfLine, tandem ) {
     var self = this;
     Node.call( this );
 
@@ -55,11 +56,12 @@ define( function( require ) {
       cursor: 'pointer',
       tandem: tandem.createTandem( 'line' )
     } );
-    line.mouseArea = line.localBounds.dilated( 10 );
-    line.touchArea = line.localBounds.dilated( 10 );
+    var dilatedLineBounds = line.localBounds.dilated( 10 );
+    line.mouseArea = dilatedLineBounds;
+    line.touchArea = dilatedLineBounds;
 
     // @private
-    initialPosition.setX( 330 );
+    initialPosition.setX( xPosOfLine );
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TVector2
@@ -69,7 +71,7 @@ define( function( require ) {
     } );
 
     this.addInputListener( new MovableDragHandler( this.positionProperty, {
-      dragBounds: new Bounds2( 330, 75, 330, 410 ), // done so reference line is only draggable on the y-axis
+      dragBounds: new Bounds2( xPosOfLine, 75, xPosOfLine, 410 ), // done so reference line is only draggable on the y-axis
       tandem: tandem.createTandem( 'dragHandler' )
     } ) );
 

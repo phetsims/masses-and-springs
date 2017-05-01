@@ -150,6 +150,7 @@ define( function( require ) {
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
       235,
       model.movableLineVisibleProperty,
+      330,
       tandem.createTandem( 'movableLineNode' )
     );
 

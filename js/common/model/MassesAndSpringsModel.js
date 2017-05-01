@@ -29,14 +29,15 @@ define( function( require ) {
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
   var DROPPING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
+  var RIGHT_SPRING_X = 0.95; // {number} X position of the spring node in screen coordinates
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
    * @constructor
    */
-  function MassesAndSpringsModel( tandem ) {
+  function MassesAndSpringsModel( springCount, tandem ) {
     var self = this;
-
+    
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'playingProperty' )
@@ -158,6 +159,26 @@ define( function( require ) {
     // @public {read-only} Y position of ceiling in m.  The ceiling is at the top of the SpringHangerNode,
     // just below the top of the dev view bounds
     this.ceilingY = 1.23;
+
+
+    var createSpring = function( x, tandem ) {
+      return new Spring(
+        new Vector2( x, self.ceilingY ),
+        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
+        new RangeWithValue( 5, 15, 9 ),
+        self.frictionProperty.get(),
+        tandem
+      );
+    };
+
+    // @public (read-only) model of springs used throughout the sim
+    this.springs = springCount === 2 ? [
+      createSpring( 0.65, tandem.createTandem( 'leftSpring' ) ),
+      createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
+    ] : [
+      createSpring( RIGHT_SPRING_X, tandem.createTandem( 'spring' ) )
+    ];
+
 
     // @public (read-only) model of springs used throughout the sim
     this.springs = [

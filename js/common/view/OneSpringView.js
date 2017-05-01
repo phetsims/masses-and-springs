@@ -30,7 +30,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
+  var SingleSpringHangerNode = require( 'MASSES_AND_SPRINGS/energy/view/SingleSpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var SpringStopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/SpringStopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -103,62 +103,36 @@ define( function( require ) {
       } );
     };
 
-    //  TODO: put in a vbox?? hmm... wrong place for this comment??
-    this.firstOscillatingSpringNode = new OscillatingSpringNode(
-      model.springs[ 0 ],
-      modelViewTransform2SpringHeight,
-      tandem.createTandem( 'firstOscillatingSpringNode' )
-    );
-    this.secondOscillatingSpringNode = new OscillatingSpringNode(
+    this.oscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 1 ],
       modelViewTransform2SpringHeight,
-      tandem.createTandem( 'secondOscillatingSpringNode' )
+      tandem.createTandem( 'oscillatingSpringNode' )
     );
 
-    // Spring Hanger Node
-    this.springHangerNode = new SpringHangerNode(
-      model,
-      modelViewTransform2,
-      tandem.createTandem( 'springHangerNode' )
-    );
+    var singleSpringHangerNode = new SingleSpringHangerNode( tandem.createTandem( 'singleSpringHangerNode' ) );
+    singleSpringHangerNode.centerX = this.oscillatingSpringNode.centerX;
 
-    // Spring Constant Control Panels
-    this.firstSpringConstantControlPanel = new SpringConstantControlPanel(
-      model.springs[ 0 ].springConstantProperty,
-      model.springs[ 0 ].springConstantRange,
-      StringUtils.format( springConstantString, 1 ),
-      tandem.createTandem( 'firstSpringConstantControlPanel' ),
-      {
-        right: this.springHangerNode.left - 40,
-        top: this.topSpacing,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
-      } );
-
-    this.secondSpringConstantControlPanel = new SpringConstantControlPanel(
+    // Spring Constant Control Panel
+    this.springConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 1 ].springConstantProperty,
       model.springs[ 1 ].springConstantRange,
       StringUtils.format( springConstantString, 2 ),
-      tandem.createTandem( 'secondSpringConstantControlPanel' ),
+      tandem.createTandem( 'springConstantControlPanel' ),
       {
-        left: this.springHangerNode.right + 40,
+        left: singleSpringHangerNode.right + 40,
         top: this.topSpacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
       } );
 
+    singleSpringHangerNode.top = this.springConstantControlPanel.top;
+
     // @public Initializes movable line
     this.movableLineNode = new MovableLineNode(
-      this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
-      235,
+      singleSpringHangerNode.getCenter().plus( new Vector2( 45, 200 ) ),
+      150,
       model.movableLineVisibleProperty,
+      376,
       tandem.createTandem( 'movableLineNode' )
-    );
-
-    // @public Initializes equilibrium line for first spring
-    this.firstSpringEquilibriumLineNode = new EquilibriumLineNode(
-      modelViewTransform2,
-      model.springs[ 0 ],
-      model.equilibriumPositionVisibleProperty,
-      tandem.createTandem( 'firstSpringEquilibriumLineNode' )
     );
 
     // @public Initializes equilibrium line for second spring
@@ -167,14 +141,6 @@ define( function( require ) {
       model.springs[ 1 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'secondSpringEquilibriumLineNode' )
-    );
-
-    // @public Initializes natural line for first spring
-    this.firstNaturalLengthLineNode = new NaturalLengthLineNode(
-      modelViewTransform2,
-      model.springs[ 0 ],
-      model.naturalLengthVisibleProperty,
-      tandem.createTandem( 'firstNaturalLengthLineNode' )
     );
 
     // @public Initializes natural line for second spring
@@ -191,7 +157,7 @@ define( function( require ) {
       tandem.createTandem( 'indicatorVisibilityControlPanel' ),
       {
         top: this.topSpacing,
-        left: this.secondSpringConstantControlPanel.right + 10,
+        left: this.springConstantControlPanel.right + 10,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       } );
 
@@ -293,31 +259,21 @@ define( function( require ) {
       tandem: tandem.createTandem( 'speedControl' )
     } );
 
-    var firstSpringStopperButtonNode = new SpringStopperButtonNode(
-      tandem.createTandem( 'firstSpringStopperButtonNode' ),
-      {
-        listener: model.stopSpring.bind( model, 0 ),
-        right: this.springHangerNode.left - 5,
-        top: this.topSpacing
-      }
-    );
-    var secondSpringStopperButtonNode = new SpringStopperButtonNode(
-      tandem.createTandem( 'secondSpringStopperButtonNode' ),
+    var springStopperButtonNode = new SpringStopperButtonNode(
+      tandem.createTandem( 'springStopperButtonNode' ),
       {
         listener: model.stopSpring.bind( model, 1 ),
-        left: this.springHangerNode.right + 5,
+        left: singleSpringHangerNode.right + 5,
         top: this.topSpacing
       }
     );
 
     // Adding all of the nodes to the scene graph
-    this.addChild( this.firstOscillatingSpringNode );
-    this.addChild( this.secondOscillatingSpringNode );
-    this.addChild( this.springHangerNode );
+    this.addChild( this.oscillatingSpringNode );
 
     // Adding Panels to scene graph
-    this.addChild( this.firstSpringConstantControlPanel );
-    this.addChild( this.secondSpringConstantControlPanel );
+    this.addChild( singleSpringHangerNode );
+    this.addChild( this.springConstantControlPanel );
     this.addChild( indicatorVisibilityControlPanel );
     this.addChild( this.gravityControlPanel );
     this.addChild( this.toolboxPanel );
@@ -326,13 +282,10 @@ define( function( require ) {
     this.addChild( this.resetAllButton );
     this.addChild( MASPlayPauseStepControlNode );
     this.addChild( speedControl );
-    this.addChild( firstSpringStopperButtonNode );
-    this.addChild( secondSpringStopperButtonNode )
+    this.addChild( springStopperButtonNode )
     ;
     //Reference lines from indicator visibility box
-    this.addChild( this.firstSpringEquilibriumLineNode );
     this.addChild( this.secondSpringEquilibriumLineNode );
-    this.addChild( this.firstNaturalLengthLineNode );
     this.addChild( this.secondNaturalLengthLineNode );
     this.addChild( this.movableLineNode );
     this.addChild( this.massLayer );

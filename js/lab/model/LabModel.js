@@ -18,11 +18,11 @@ define( function( require ) {
    * TODO:: document all properties and items set on objects (entire sim)
    * @constructor
    */
-  function EnergyModel( tandem ) {
+  function LabModel( tandem ) {
     MassesAndSpringsModel.call( this, 1, tandem );
   }
 
-  massesAndSprings.register( 'EnergyModel', EnergyModel );
+  massesAndSprings.register( 'LabModel', LabModel );
 
-  return inherit( MassesAndSpringsModel, EnergyModel );
+  return inherit( MassesAndSpringsModel, LabModel );
 } );

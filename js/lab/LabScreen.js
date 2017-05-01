@@ -38,7 +38,7 @@ define( function( require ) {
     };
 
     Screen.call( this,
-      function() { return new MassesAndSpringsModel( tandem.createTandem( 'model' ) ); },
+      function() { return new MassesAndSpringsModel( 1,tandem.createTandem( 'model' ) ); },
       function( model ) { return new LabScreenView( model, tandem.createTandem( 'view' ) ); },
       options
     );
