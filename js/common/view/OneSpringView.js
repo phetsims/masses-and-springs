@@ -17,6 +17,7 @@ define( function( require ) {
   var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
+  var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/energy/view/EnergyGraphNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
@@ -268,6 +269,9 @@ define( function( require ) {
       }
     );
 
+    var energyGraphNode = new EnergyGraphNode();
+    this.addChild(energyGraphNode);
+    
     // Adding all of the nodes to the scene graph
     this.addChild( this.oscillatingSpringNode );
 
