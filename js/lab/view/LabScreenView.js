@@ -12,7 +12,7 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
+  var OneSpringView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringView' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -20,12 +20,12 @@ define( function( require ) {
    */
   function LabScreenView( model, tandem ) {
     // Calls common two spring view
-    TwoSpringView.call( this, model, tandem );
+    OneSpringView.call( this, model, tandem );
 
     // Unique attributes of screen added here...
   }
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );
 
-  return inherit( TwoSpringView, LabScreenView );
+  return inherit( OneSpringView, LabScreenView );
 } );

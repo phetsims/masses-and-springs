@@ -179,25 +179,6 @@ define( function( require ) {
       createSpring( RIGHT_SPRING_X, tandem.createTandem( 'spring' ) )
     ];
 
-
-    // @public (read-only) model of springs used throughout the sim
-    this.springs = [
-      new Spring(
-        new Vector2( .65, this.ceilingY ),
-        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        new RangeWithValue( 5, 15, 9 ),
-        this.frictionProperty.get(),
-        tandem.createTandem( 'leftSpring' )
-      ),
-      new Spring(
-        new Vector2( .95, this.ceilingY ),
-        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        new RangeWithValue( 5, 15, 9 ),
-        this.frictionProperty.get(),
-        tandem.createTandem( 'rightSpring' )
-      )
-    ];
-
     // @public (read-only) model of masses used throughout the sim
     this.masses = {
       largeLabeledMass: new Mass( .250, new Vector2( .12, .5 ),

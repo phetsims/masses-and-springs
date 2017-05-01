@@ -104,7 +104,7 @@ define( function( require ) {
     };
 
     this.oscillatingSpringNode = new OscillatingSpringNode(
-      model.springs[ 1 ],
+      model.springs[ 0 ],
       modelViewTransform2SpringHeight,
       tandem.createTandem( 'oscillatingSpringNode' )
     );
@@ -114,8 +114,8 @@ define( function( require ) {
 
     // Spring Constant Control Panel
     this.springConstantControlPanel = new SpringConstantControlPanel(
-      model.springs[ 1 ].springConstantProperty,
-      model.springs[ 1 ].springConstantRange,
+      model.springs[ 0 ].springConstantProperty,
+      model.springs[ 0 ].springConstantRange,
       StringUtils.format( springConstantString, 2 ),
       tandem.createTandem( 'springConstantControlPanel' ),
       {
@@ -138,7 +138,7 @@ define( function( require ) {
     // @public Initializes equilibrium line for second spring
     this.secondSpringEquilibriumLineNode = new EquilibriumLineNode(
       modelViewTransform2,
-      model.springs[ 1 ],
+      model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'secondSpringEquilibriumLineNode' )
     );
@@ -146,7 +146,7 @@ define( function( require ) {
     // @public Initializes natural line for second spring
     this.secondNaturalLengthLineNode = new NaturalLengthLineNode(
       modelViewTransform2,
-      model.springs[ 1 ],
+      model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'secondNaturalLengthLineNode' )
     );
