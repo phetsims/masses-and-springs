@@ -26,13 +26,13 @@ define( function( require ) {
    * @param {number} mass - mass of massObject
    * @constructor
    */
-  function NumberControlPanel( mass, tandem ) {
+  function MassValueControlPanel( mass, tandem ) {
     // var title = new Text( massString, { font: MassesAndSpringsConstants.TITLE_FONT } );
     var massProperty = new Property( mass);
 
     Panel.call( this, new NumberControl( 'mass', massProperty, new Range( 50, 300 ) ) );
   }
 
-  massesAndSprings.register( 'NumberControlPanel', NumberControlPanel );
-  return inherit( Panel, NumberControlPanel );
+  massesAndSprings.register( 'MassValueControlPanel', MassValueControlPanel );
+  return inherit( Panel, MassValueControlPanel );
 } );

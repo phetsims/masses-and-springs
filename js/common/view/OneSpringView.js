@@ -291,8 +291,8 @@ define( function( require ) {
     this.addChild( this.resetAllButton );
     this.addChild( MASPlayPauseStepControlNode );
     this.addChild( speedControl );
-    this.addChild( springStopperButtonNode )
-    ;
+    this.addChild( springStopperButtonNode );
+    
     //Reference lines from indicator visibility box
     this.addChild( this.secondSpringEquilibriumLineNode );
     this.addChild( this.secondNaturalLengthLineNode );
