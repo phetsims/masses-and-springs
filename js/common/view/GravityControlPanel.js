@@ -27,11 +27,11 @@ define( function( require ) {
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
   var gravityNoneString = require( 'string!MASSES_AND_SPRINGS/gravity.none' );
   var gravityLotsString = require( 'string!MASSES_AND_SPRINGS/gravity.lots' );
-  var TText = require( 'SCENERY/nodes/TText' );
 
   // phet-io modules
-  var TString = require( 'ifphetio!PHET_IO/types/TString' );
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
+  var TString = require( 'ifphetio!PHET_IO/types/TString' );
+  var TText = require( 'SCENERY/nodes/TText' );
 
   /**
    *

@@ -27,6 +27,7 @@ define( function( require ) {
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var NumberControlPanel = require( 'MASSES_AND_SPRINGS/common/view/NumberControlPanel' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -270,8 +271,12 @@ define( function( require ) {
     );
 
     var energyGraphNode = new EnergyGraphNode();
-    this.addChild(energyGraphNode);
-    
+    this.addChild( energyGraphNode );
+
+    var numberControlPanel = new NumberControlPanel(
+      model.masses.adjustableMass.mass, { tandem: tandem.createTandem( 'numberControlPanel' ) }
+    );
+    this.addChild( numberControlPanel );
     // Adding all of the nodes to the scene graph
     this.addChild( this.oscillatingSpringNode );
 

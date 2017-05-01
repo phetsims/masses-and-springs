@@ -18,6 +18,8 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  
+  // strings
   var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
   var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
 

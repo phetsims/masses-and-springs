@@ -59,6 +59,9 @@
   "massValue": {
     "value": "{0} g"
   },
+  "mass":{
+    "value": "Mass"
+  },
   "thickness": {
     "value": "Thickness"
   },
