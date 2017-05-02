@@ -171,41 +171,43 @@ define( function( require ) {
       );
     };
 
+    assert && assert( springCount === 1 || 2, "Spring count must be one or two" );
     // @public (read-only) model of springs used throughout the sim
-    this.springs = springCount === 2 ? [
-      createSpring( 0.65, tandem.createTandem( 'leftSpring' ) ),
-      createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
-    ] : [
-      createSpring( RIGHT_SPRING_X, tandem.createTandem( 'spring' ) )
-    ];
+    if ( springCount === 2 ) {
+      this.springs = [
+        createSpring( 0.65, tandem.createTandem( 'leftSpring' ) ),
+        createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
+      ]
+    }
+    else {
+      this.springs = [ createSpring( RIGHT_SPRING_X, tandem.createTandem( 'spring' ) ) ];
+    }
 
     var createMass = function( mass, xPosition, labelVisible, color, tandem ) {
-      return new Mass(
-        mass,
-        new Vector2( xPosition, .5 ),
-        labelVisible,
-        color,
-        self.gravityProperty,
-        tandem
-      );
+      return new Mass( mass, new Vector2( xPosition, .5 ), labelVisible, color, self.gravityProperty, tandem );
     };
+
     // @public (read-only) model of masses used throughout the sim
-    this.masses = springCount === 2 ? {
-      largeLabeledMass: createMass( .250, .12, true, 'grey', tandem.createTandem( 'largeLabeledMass' ) ),
-      mediumLabeledMass1: createMass( .100, .20, true, 'grey', tandem.createTandem( 'mediumLabeledMass1' ) ),
-      mediumLabeledMass2: createMass( .100, .28, true, 'grey', tandem.createTandem( 'mediumLabeledMass2' ) ),
-      smallLabeledMass: createMass( .050, .33, true, 'grey', tandem.createTandem( 'smallLabeledMass' ) ),
-      largeUnlabeledMass: createMass( .200, .63, false, 'blue', tandem.createTandem( 'largeUnlabeledMass' ) ),
-      mediumUnlabeledMass: createMass( .150, .56, false, 'green', tandem.createTandem( 'mediumUnlabeledMass' ) ),
-      smallUnlabeledMass: createMass( .075, .49, false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
-    } : {
-      adjustableMass: createMass(
-        .100,
-        this.springs[ 0 ].positionProperty.get().x,
-        true,
-        'rgb( 191, 140, 88 )',
-        tandem.createTandem( 'adjustableMass' ) )
-    };
+    if ( springCount === 2 ) {
+      this.masses = {
+        largeLabeledMass: createMass( .250, .12, true, 'grey', tandem.createTandem( 'largeLabeledMass' ) ),
+        mediumLabeledMass1: createMass( .100, .20, true, 'grey', tandem.createTandem( 'mediumLabeledMass1' ) ),
+        mediumLabeledMass2: createMass( .100, .28, true, 'grey', tandem.createTandem( 'mediumLabeledMass2' ) ),
+        smallLabeledMass: createMass( .050, .33, true, 'grey', tandem.createTandem( 'smallLabeledMass' ) ),
+        largeUnlabeledMass: createMass( .200, .63, false, 'blue', tandem.createTandem( 'largeUnlabeledMass' ) ),
+        mediumUnlabeledMass: createMass( .150, .56, false, 'green', tandem.createTandem( 'mediumUnlabeledMass' ) ),
+        smallUnlabeledMass: createMass( .075, .49, false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
+      };
+    }
+    else {
+      this.masses = {
+        adjustableMass: createMass( .100,
+          this.springs[ 0 ].positionProperty.get().x,
+          true,
+          'rgb( 191, 140, 88 )',
+          tandem.createTandem( 'adjustableMass' ) )
+      };
+    }
 
     // @public (read-only) model of bodies used throughout the sim
     this.bodies = [
@@ -394,4 +396,5 @@ define( function( require ) {
       }
     }
   } );
-} );
+} )
+;
