@@ -171,13 +171,13 @@ define( function( require ) {
       );
     };
 
-    assert && assert( springCount === 1 || 2, "Spring count must be one or two" );
+    assert && assert( springCount === 1 || 2, 'Spring count must be one or two' );
     // @public (read-only) model of springs used throughout the sim
     if ( springCount === 2 ) {
       this.springs = [
         createSpring( 0.65, tandem.createTandem( 'leftSpring' ) ),
         createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
-      ]
+      ];
     }
     else {
       this.springs = [ createSpring( RIGHT_SPRING_X, tandem.createTandem( 'spring' ) ) ];

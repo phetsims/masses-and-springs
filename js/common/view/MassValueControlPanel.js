@@ -17,7 +17,6 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
