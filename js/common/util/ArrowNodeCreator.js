@@ -28,11 +28,11 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function ArrowNodeCreator() {}
+  function ArrowNodeCreator(tandem) {}
 
   massesAndSprings.register( 'ArrowNodeCreator', ArrowNodeCreator );
 
-  return inherit( Object, ArrowNodeCreator, {
+  return inherit( ArrowNode, ArrowNodeCreator, {
     createVectorArrow: function( color ) {
       return new ArrowNode( 10, 0, VECTOR_ARROW_LENGTH, 0, {
         fill: color,

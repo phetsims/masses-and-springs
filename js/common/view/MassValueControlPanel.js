@@ -24,12 +24,17 @@ define( function( require ) {
 
   /**
    * @param {Tandem} tandem
-   * @param {number} mass - mass of massObject
+   * @param {Mass} mass
    * @constructor
    */
   function MassValueControlPanel( mass, tandem ) {
     // var title = new Text( massString, { font: MassesAndSpringsConstants.TITLE_FONT } );
-    var massProperty = new Property( mass );
+    var massProperty = new Property( mass.mass );
+
+    massProperty.link( function( massValue ) {
+      mass.mass = massValue/1000;
+      console.log(massValue);
+    } );
 
     Panel.call( this, new NumberControl( 'mass', massProperty, new Range( 50, 300 ), {
       valuePattern: '{0} g',

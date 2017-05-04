@@ -21,8 +21,8 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @constructor
    */
-  function EnergyGraphNode(  tandem ) {
-    var content = new Text( 'PhET Energy Box \n Coming Soon' );
+  function EnergyGraphNode( tandem ) {
+    var content = new Text( 'PhET Energy Graph \n Coming Soon' );
 
     AccordionBox.call( this, new VBox( {
       children: [

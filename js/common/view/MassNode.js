@@ -188,8 +188,8 @@ define( function( require ) {
     var scalingFactor = 3;
     mass.verticalVelocityProperty.link( function( velocity ) {
         var position = ( mass.positionProperty.get() );
-      self.velocityArrow.setTailAndTip(
-        position.x - 10,
+        self.velocityArrow.setTailAndTip(
+          position.x - 10,
           position.y + 10,
           position.x - 10,
           position.y + 10 - ARROW_SIZE_DEFAULT * velocity * scalingFactor

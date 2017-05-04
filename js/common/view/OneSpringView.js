@@ -274,8 +274,10 @@ define( function( require ) {
     this.addChild( energyGraphNode );
 
     var massValueControlPanel = new MassValueControlPanel(
-      model.masses.adjustableMass.mass, { tandem: tandem.createTandem( 'massValueControlPanel' ) }
+      model.masses.adjustableMass, { tandem: tandem.createTandem( 'massValueControlPanel' ) }
     );
+    
+    massValueControlPanel.top = 420;
     this.addChild( massValueControlPanel );
     // Adding all of the nodes to the scene graph
     this.addChild( this.oscillatingSpringNode );
