@@ -39,6 +39,8 @@ define( function( require ) {
   function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem ) {
     var self = this;
 
+    this.initialPosition=initialPosition;
+
     // @public {read-only} Used for constructing tandems for corresponding view nodes.
     this.tandem = tandem;
 
@@ -49,7 +51,7 @@ define( function( require ) {
 
     // @public Main model properties
     // {Property.<Vector2>} the position of a mass is the center top of the model object.
-    this.positionProperty = new Property( initialPosition, {
+    this.positionProperty = new Property( this.initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TVector2
     } );
@@ -152,35 +154,6 @@ define( function( require ) {
           this.positionProperty.set( new Vector2( this.positionProperty.get().x, newY ) );
         }
       }
-    },
-
-    /**
-     * Retains the properties of the spring in an object that can publicly accessed.
-     *
-     *@public
-     */
-    getMassState: function() {
-      var massState = {
-        mass: this.mass,
-        position: this.positionProperty.get(),
-        userControlled: this.userControlledProperty.get(),
-        verticalVelocity: this.verticalVelocityProperty.get(),
-        spring: this.springProperty.get()
-      };
-      return massState;
-    },
-
-    /**
-     * Sets the properties of the spring with previously stored properties.
-     *
-     * @param {Object} massState
-     */
-    setMassState: function( massState ) {
-      this.mass = (massState.mass);
-      this.positionProperty.set( massState.position );
-      this.userControlledProperty.set( massState.userControlled );
-      this.verticalVelocityProperty.set( massState.verticalVelocity );
-      this.springProperty.set( massState.spring );
     },
 
     /**

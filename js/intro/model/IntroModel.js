@@ -142,23 +142,10 @@ define( function( require ) {
     getSceneState: function() {
       var spring1State = this.spring1.getSpringState();
       var spring2State = this.spring2.getSpringState();
-      var largeLabeledMassState = this.masses.largeLabeledMass.getMassState();
-      var mediumLabeledMass1State = this.masses.mediumLabeledMass1.getMassState();
-      var mediumLabeledMass2State = this.masses.mediumLabeledMass2.getMassState();
-      var smallLabeledMassState = this.masses.smallLabeledMass.getMassState();
-      var largeUnlabeledMass = this.masses.largeUnlabeledMass.getMassState();
-      var mediumUnlabeledMass = this.masses.mediumUnlabeledMass.getMassState();
-      var smallUnlabeledMass = this.masses.smallUnlabeledMass.getMassState();
+
       return {
         spring1State: spring1State,
-        spring2State: spring2State,
-        largeLabeledMassState: largeLabeledMassState,
-        mediumLabeledMass1State: mediumLabeledMass1State,
-        mediumLabeledMass2State: mediumLabeledMass2State,
-        smallLabeledMassState: smallLabeledMassState,
-        largeUnlabeledMass: largeUnlabeledMass,
-        mediumUnlabeledMass: mediumUnlabeledMass,
-        smallUnlabeledMass: smallUnlabeledMass
+        spring2State: spring2State
       };
     },
 
@@ -171,13 +158,6 @@ define( function( require ) {
     setSceneState: function( sceneState ) {
       this.spring1.setSpringState( sceneState.spring1State );
       this.spring2.setSpringState( sceneState.spring2State );
-      this.masses.largeLabeledMass.setMassState( sceneState.largeLabeledMassState );
-      this.masses.mediumLabeledMass1.setMassState( sceneState.mediumLabeledMass1State );
-      this.masses.mediumLabeledMass2.setMassState( sceneState.mediumLabeledMass2State );
-      this.masses.smallLabeledMass.setMassState( sceneState.smallLabeledMassState );
-      this.masses.largeUnlabeledMass.setMassState( sceneState.largeUnlabeledMass );
-      this.masses.mediumUnlabeledMass.setMassState( sceneState.mediumUnlabeledMass );
-      this.masses.smallUnlabeledMass.setMassState( sceneState.smallUnlabeledMass );
     },
 
     /**
