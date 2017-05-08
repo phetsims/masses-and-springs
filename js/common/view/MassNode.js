@@ -62,7 +62,7 @@ define( function( require ) {
 
     this.addChild( rect );
     if ( mass.isLabeled ) {
-      var label = new Text( StringUtils.format( massValueString, mass.mass * 1000 ), {
+      var label = new Text( StringUtils.format( massValueString , mass.mass * 1000 ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
         fill: 'black',
         centerY: viewBounds.centerY,
@@ -79,7 +79,8 @@ define( function( require ) {
       this.mass.massProperty.link( function( massValue ) {
         if ( model.masses.adjustableMass ) {
           mass.mass = massValue / 1000;
-          label.setText( massValue );
+          // TODO: Find a better way to add the 'g' in the mass readout.
+          label.setText( massValue + 'g' );
         }
       } );
     }
