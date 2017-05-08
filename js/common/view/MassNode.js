@@ -168,10 +168,10 @@ define( function( require ) {
     );
 
     // Show/hide the spring force arrow
-    const forces = 'forces';
+    var forces = 'forces';
     Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
       function( spring, springVectorVisibility, forcesMode ) {
-        self.springForceArrow.visible = !!spring && springVectorVisibility && forcesMode === forces
+        self.springForceArrow.visible = !!spring && springVectorVisibility && forcesMode === forces;
       }
     );
 
@@ -189,7 +189,7 @@ define( function( require ) {
       }
     );
 
-    // Links handling the visibility of line at base of vectors
+    // Show/hide line at base of vectors
     Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
       function( springMassAttachedTo, gravityForceVisible, springForceVisible, forcesVisible ) {
         forceNullLine.visible =
