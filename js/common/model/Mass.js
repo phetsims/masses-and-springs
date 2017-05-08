@@ -46,8 +46,10 @@ define( function( require ) {
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
 
+    // TODO: refactor mass into massProperty
     // @public (read-only) {Number} mass of mass object in kg
     this.mass = massValue;
+    this.massProperty = new Property (massValue);
 
     // @public Main model properties
     // {Property.<Vector2>} the position of a mass is the center top of the model object.

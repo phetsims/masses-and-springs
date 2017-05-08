@@ -56,9 +56,10 @@ define( function( require ) {
       lineWidth: .5,
       fill: new LinearGradient( viewBounds.minX, 0, viewBounds.maxX, 0 )
         .addColorStop( 0.1, mass.color )
-        .addColorStop( 0.2, 'rgb(205,206,207)' )
+        .addColorStop( 0.2, 'rgb(205, 206, 207)' )
         .addColorStop( .7, mass.color )
     } );
+
     this.addChild( rect );
     if ( mass.isLabeled ) {
       var label = new Text( StringUtils.format( massValueString, mass.mass * 1000 ), {
@@ -74,6 +75,11 @@ define( function( require ) {
       var labelBackground = Rectangle.bounds( label.bounds, { fill: '#D3D3D3' } );
       this.addChild( labelBackground );
       this.addChild( label );
+
+      this.mass.massProperty.link( function( massValue ) {
+        mass.mass = massValue / 1000;
+        label.setText(massValue);
+      } );
     }
 
     this.mass.positionProperty.link( function( position ) {

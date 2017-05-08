@@ -22,19 +22,13 @@ define( function( require ) {
   var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
 
   /**
-   * @param {Tandem} tandem
    * @param {Mass} mass
+   * @param {Tandem} tandem
    * @constructor
    */
   function MassValueControlPanel( mass, tandem ) {
-    var massProperty = new Property( mass.mass );
 
-    massProperty.link( function( massValue ) {
-      mass.mass = massValue / 1000;
-      console.log( massValue );
-    } );
-
-    Panel.call( this, new NumberControl( massString, massProperty, new Range( 50, 300 ), {
+    Panel.call( this, new NumberControl( massString, mass.massProperty, new Range( 50, 300 ), {
       valuePattern: '{0} g',
       majorTickLength: 10,
       trackSize: new Dimension2( 100, 2 ),
