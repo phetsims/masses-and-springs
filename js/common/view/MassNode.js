@@ -172,7 +172,7 @@ define( function( require ) {
     } );
 
     // Links handling the visibility of line at base of vectors
-    mass.springProperty.link( function( massAttached ) {forceNullLine.visible = massAttached !== null} );
+    mass.springProperty.link( function( massAttached ) {forceNullLine.visible = massAttached !== null;} );
 
     //TODO: Create MASArrowNode with arguments for deltas in X&Y, mass position, and the property it is depicting
     //TODO: Considering moving in visibility multilinks)
