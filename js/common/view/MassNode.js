@@ -148,67 +148,31 @@ define( function( require ) {
     this.addChild( this.netForceArrow );
     this.addChild( forceNullLine );
 
-    // TODO: Truncate all of these multilinks. It may be useful to start an use ArrowNode.js to set the visibility as a flag.
     // TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this link is being referenced in the intro screen where it isn't needed.
-
     // Link handling the visibility of the velocity vector
-    Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty, mass.userControlledProperty ],
-      function( springMassAttachedTo, visible, userControlled ) {
-        if ( springMassAttachedTo !== null && visible === true && userControlled === false ) {self.velocityArrow.visible = visible;}
-        else if ( springMassAttachedTo === null || visible === false || userControlled === true ) {self.velocityArrow.visible = false;}
-      } );
-
-    // Links handling the visibility of acceleration vector
-    Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty, mass.userControlledProperty ],
-      function( springMassAttachedTo, visible, userControlled ) {
-        if ( springMassAttachedTo !== null && visible === true && userControlled === false ) {
-          self.accelerationArrow.visible = visible;
-        }
-        else if ( springMassAttachedTo === null || visible === false || userControlled === true ) {
-          self.accelerationArrow.visible = false;
-        }
-      } );
+    Property.multilink( [
+      mass.springProperty,
+      model.velocityVectorVisibilityProperty,
+      model.accelerationVectorVisibilityProperty,
+      mass.userControlledProperty
+    ], function( massAttached, vectorVisible, accelerationVisible, userControlled ) {
+      self.velocityArrow.visible = massAttached !== null && vectorVisible === true && userControlled === false;
+      self.accelerationArrow.visible = massAttached !== null && accelerationVisible === true && userControlled === false;
+    } );
 
     // Links handling the visibility of gravity vector
-    Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.forcesModeProperty ],
-      function( springMassAttachedTo, visible, forcesVisible ) {
-        if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {
-          self.gravityForceArrow.visible = visible;
-        }
-        else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {
-          self.gravityForceArrow.visible = false;
-        }
-      } );
-
-    // Links handling the visibility of springForce vector
-    Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
-      function( springMassAttachedTo, visible, forcesVisible ) {
-        if ( springMassAttachedTo !== null && visible === true && forcesVisible === 'forces' ) {
-          self.springForceArrow.visible = visible;
-        }
-        else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'netForce' ) {
-          self.springForceArrow.visible = false;
-        }
-      } );
-
-    // Links handling the visibility of netforce vector
-    Property.multilink( [ mass.springProperty, model.netForceVectorVisibilityProperty, model.forcesModeProperty ],
-      function( springMassAttachedTo, visible, forcesVisible ) {
-        if ( springMassAttachedTo !== null && forcesVisible === 'netForce' ) {
-          self.netForceArrow.visible = true;
-        }
-        else if ( springMassAttachedTo === null || visible === false || forcesVisible === 'forces' ) {
-          self.netForceArrow.visible = false;
-        }
-      } );
+    Property.multilink( [ mass.springProperty,
+      model.gravityVectorVisibilityProperty,
+      model.springVectorVisibilityProperty,
+      model.forcesModeProperty
+    ], function( massAttached, gravityVisible, springForceVisible, forcesVisible ) {
+      self.springForceArrow.visible = ( massAttached !== null && springForceVisible === true && forcesVisible === 'forces' );
+      self.gravityForceArrow.visible = ( massAttached !== null && gravityVisible === true && forcesVisible === 'forces' );
+      self.netForceArrow.visible = ( massAttached !== null && forcesVisible === 'netForce' );
+    } );
 
     // Links handling the visibility of line at base of vectors
-    Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
-      function( springMassAttachedTo, gravityForceVisible, springForceVisible, forcesVisible ) {
-        forceNullLine.visible =
-          (springMassAttachedTo !== null && ( gravityForceVisible || springForceVisible || (forcesVisible === 'netForce') ) ) ?
-          true : false;
-      } );
+    mass.springProperty.link( function( massAttached ) {forceNullLine.visible = massAttached !== null} );
 
     //TODO: Create MASArrowNode with arguments for deltas in X&Y, mass position, and the property it is depicting
     //TODO: Considering moving in visibility multilinks)
