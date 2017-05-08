@@ -77,8 +77,10 @@ define( function( require ) {
       this.addChild( label );
 
       this.mass.massProperty.link( function( massValue ) {
-        mass.mass = massValue / 1000;
-        label.setText(massValue);
+        if ( model.masses.adjustableMass ) {
+          mass.mass = massValue / 1000;
+          label.setText( massValue );
+        }
       } );
     }
 
