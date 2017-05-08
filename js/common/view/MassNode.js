@@ -155,15 +155,15 @@ define( function( require ) {
 
     // Show/hide the velocity arrow
     Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty, mass.userControlledProperty ],
-      function( spring, velocityVectorVisibility, accelerationVectorVisibility, userControlled ) {
-        self.velocityArrow.visible = spring && velocityVectorVisibility && !userControlled;
+      function( spring, velocityVectorVisibility, userControlled ) {
+        self.velocityArrow.visible = !!spring && velocityVectorVisibility && !userControlled;
       }
     );
 
     // Show/hide the acceleration arrow
     Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty, mass.userControlledProperty ],
-      function( spring, velocityVectorVisibility, accelerationVectorVisibility, userControlled ) {
-        self.accelerationArrow.visible = spring && accelerationVectorVisibility && !userControlled;
+      function( spring, accelerationVectorVisibility, userControlled ) {
+        self.accelerationArrow.visible = !!spring && accelerationVectorVisibility && !userControlled;
       }
     );
 
@@ -171,21 +171,21 @@ define( function( require ) {
     const forces = 'forces';
     Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
       function( spring, springVectorVisibility, forcesMode ) {
-        self.springForceArrow.visible = spring && springVectorVisibility && forcesMode === forces
+        self.springForceArrow.visible = !!spring && springVectorVisibility && forcesMode === forces
       }
     );
 
     // Show/hide the gravity force arrow
     Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.forcesModeProperty ],
       function( spring, gravityVectorVisibility, forcesMode ) {
-        self.gravityForceArrow.visible = spring && gravityVectorVisibility && forcesMode === forces;
+        self.gravityForceArrow.visible = !!spring && gravityVectorVisibility && forcesMode === forces;
       }
     );
 
     // Show/hide the net force arrow
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
       function( spring, forcesMode ) {
-        self.netForceArrow.visible = spring && forcesMode === 'netForce';
+        self.netForceArrow.visible = !!spring && forcesMode === 'netForce';
       }
     );
 
