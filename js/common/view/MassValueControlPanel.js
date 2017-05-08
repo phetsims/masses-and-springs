@@ -15,7 +15,6 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
-  var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
 
   // strings
