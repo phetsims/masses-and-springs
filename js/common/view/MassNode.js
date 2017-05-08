@@ -148,16 +148,18 @@ define( function( require ) {
     this.addChild( this.netForceArrow );
     this.addChild( forceNullLine );
 
-    // TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this link is being referenced in the intro screen where it isn't needed.
+    // TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this
+    // link is being referenced in the intro screen where it isn't needed.
+
     // Link handling the visibility of the velocity vector
     Property.multilink( [
       mass.springProperty,
       model.velocityVectorVisibilityProperty,
       model.accelerationVectorVisibilityProperty,
       mass.userControlledProperty
-    ], function( massAttached, vectorVisible, accelerationVisible, userControlled ) {
-      self.velocityArrow.visible = massAttached !== null && vectorVisible === true && userControlled === false;
-      self.accelerationArrow.visible = massAttached !== null && accelerationVisible === true && userControlled === false;
+    ], function( spring, velocityVectorVisibility, accelerationVectorVisibility, userControlled ) {
+      self.velocityArrow.visible = !!spring  && velocityVectorVisibility && !userControlled;
+      self.accelerationArrow.visible = !!spring && accelerationVectorVisibility && !userControlled;
     } );
 
     // Links handling the visibility of gravity vector
@@ -165,10 +167,10 @@ define( function( require ) {
       model.gravityVectorVisibilityProperty,
       model.springVectorVisibilityProperty,
       model.forcesModeProperty
-    ], function( massAttached, gravityVisible, springForceVisible, forcesVisible ) {
-      self.springForceArrow.visible = ( massAttached !== null && springForceVisible === true && forcesVisible === 'forces' );
-      self.gravityForceArrow.visible = ( massAttached !== null && gravityVisible === true && forcesVisible === 'forces' );
-      self.netForceArrow.visible = ( massAttached !== null && forcesVisible === 'netForce' );
+    ], function( spring, gravityVectorVisibility, springVectorVisibility, forcesMode) {
+      self.springForceArrow.visible = !!spring && springVectorVisibility && forcesMode === 'forces';
+      self.gravityForceArrow.visible = !!spring && gravityVectorVisibility && forcesMode === 'forces';
+      self.netForceArrow.visible = !!spring && forcesMode === 'netForce';
     } );
 
     // Links handling the visibility of line at base of vectors
