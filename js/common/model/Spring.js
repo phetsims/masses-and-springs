@@ -191,16 +191,11 @@ define( function( require ) {
     );
 
     //  Restart animation if it was squelched
-    this.gravityProperty.link( function() {
-      if ( self.massProperty.get() ) {
-        self.animatingProperty.set( true );
-      }
-    } );
-    this.springConstantProperty.link( function() {
+    Property.multilink( [ this.gravityProperty, this.springConstantProperty ], (function() {
       if ( self.massProperty.get ) {
         self.animatingProperty.set( true );
       }
-    } );
+    }) );
   }
 
   massesAndSprings.register( 'Spring', Spring );
