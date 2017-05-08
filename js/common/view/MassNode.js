@@ -190,8 +190,12 @@ define( function( require ) {
     );
 
     // Links handling the visibility of line at base of vectors
-    mass.springProperty.link( function( massAttached ) {forceNullLine.visible = massAttached !== null;} );
-
+    Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
+      function( springMassAttachedTo, gravityForceVisible, springForceVisible, forcesVisible ) {
+        forceNullLine.visible =
+          springMassAttachedTo !== null && (gravityForceVisible || springForceVisible || (forcesVisible === 'netForce'))
+            ? true : false;
+      } );
     //TODO: Create MASArrowNode with arguments for deltas in X&Y, mass position, and the property it is depicting
     //TODO: Considering moving in visibility multilinks)
     //Links for handling the length of the vectors in response to the system.

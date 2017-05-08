@@ -29,8 +29,6 @@ define( function( require ) {
         color: mass.color
       };
     }
-
-
   } );
 
   massesAndSprings.register( 'TMass', TMass );
