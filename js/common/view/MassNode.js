@@ -24,6 +24,8 @@ define( function( require ) {
   var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
   var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
+
+  // strings
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
   // constants
@@ -151,27 +153,41 @@ define( function( require ) {
     // TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this
     // link is being referenced in the intro screen where it isn't needed.
 
-    // Link handling the visibility of the velocity vector
-    Property.multilink( [
-      mass.springProperty,
-      model.velocityVectorVisibilityProperty,
-      model.accelerationVectorVisibilityProperty,
-      mass.userControlledProperty
-    ], function( spring, velocityVectorVisibility, accelerationVectorVisibility, userControlled ) {
-      self.velocityArrow.visible = !!spring  && velocityVectorVisibility && !userControlled;
-      self.accelerationArrow.visible = !!spring && accelerationVectorVisibility && !userControlled;
-    } );
+    // Show/hide the velocity arrow
+    Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty, mass.userControlledProperty ],
+      function( spring, velocityVectorVisibility, accelerationVectorVisibility, userControlled ) {
+        self.velocityArrow.visible = spring && velocityVectorVisibility && !userControlled;
+      }
+    );
 
-    // Links handling the visibility of gravity vector
-    Property.multilink( [ mass.springProperty,
-      model.gravityVectorVisibilityProperty,
-      model.springVectorVisibilityProperty,
-      model.forcesModeProperty
-    ], function( spring, gravityVectorVisibility, springVectorVisibility, forcesMode) {
-      self.springForceArrow.visible = !!spring && springVectorVisibility && forcesMode === 'forces';
-      self.gravityForceArrow.visible = !!spring && gravityVectorVisibility && forcesMode === 'forces';
-      self.netForceArrow.visible = !!spring && forcesMode === 'netForce';
-    } );
+    // Show/hide the acceleration arrow
+    Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty, mass.userControlledProperty ],
+      function( spring, velocityVectorVisibility, accelerationVectorVisibility, userControlled ) {
+        self.accelerationArrow.visible = spring && accelerationVectorVisibility && !userControlled;
+      }
+    );
+
+    // Show/hide the spring force arrow
+    const forces = 'forces';
+    Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
+      function( spring, springVectorVisibility, forcesMode ) {
+        self.springForceArrow.visible = spring && springVectorVisibility && forcesMode === forces
+      }
+    );
+
+    // Show/hide the gravity force arrow
+    Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.forcesModeProperty ],
+      function( spring, gravityVectorVisibility, forcesMode ) {
+        self.gravityForceArrow.visible = spring && gravityVectorVisibility && forcesMode === forces;
+      }
+    );
+
+    // Show/hide the net force arrow
+    Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
+      function( spring, forcesMode ) {
+        self.netForceArrow.visible = spring && forcesMode === 'netForce';
+      }
+    );
 
     // Links handling the visibility of line at base of vectors
     mass.springProperty.link( function( massAttached ) {forceNullLine.visible = massAttached !== null;} );
