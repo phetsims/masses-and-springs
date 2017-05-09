@@ -391,7 +391,7 @@ define( function( require ) {
 
         // Oscillate springs
         this.springs.forEach( function( spring ) {
-          spring.stepOscillate( dt );
+          if ( spring.massProperty.get() ) {spring.stepOscillate( dt );}
         } );
       }
     }

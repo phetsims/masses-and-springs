@@ -322,8 +322,7 @@ define( function( require ) {
      * @public
      */
     stepOscillate: function( dt ) {
-      if ( this.massProperty.get() && !this.massProperty.get().userControlledProperty.get() &&
-           this.animatingProperty.get() ) {
+      if ( !this.massProperty.get().userControlledProperty.get() && this.animatingProperty.get() ) {
         //TODO:: implement upper limit for dt
         var k = this.springConstantProperty.get();
         var m = this.massProperty.get().mass;
