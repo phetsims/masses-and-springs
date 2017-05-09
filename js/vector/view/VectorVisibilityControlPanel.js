@@ -37,6 +37,9 @@ define( function( require ) {
    * @constructor
    */
   function VectorVisibilityControlPanel( model, tandem, options ) {
+    options = _.extend({
+      showForces: true
+    },options);
 
     // Creation of arrow nodes to be used in vector screen.
     var createVectorArrow = function( color, tandemID ) {
@@ -156,23 +159,37 @@ define( function( require ) {
       }
     } );
 
+    var vectorVisibilityControlsVBox;
     // groups the checkboxes and forces aquaRadioButton
     var titleToControlsVerticalSpace = 2;
-    var vectorVisibilityControlsVBox = new VBox( {
-        children: [
-          new VStrut( titleToControlsVerticalSpace ),
-          vectorVisibilityCheckBoxGroup,
-          new VStrut( titleToControlsVerticalSpace + 8 ),
-          forcesVisibilityRadioButton,
-          new VStrut( titleToControlsVerticalSpace + 8 ),
-          new HBox( { children: [ new HStrut( 15 ), forcesVisibilityCheckBoxGroup ] } ),
-          new VStrut( titleToControlsVerticalSpace + 8 ),
-          netForceVisibilityRadioButton
-        ],
-      align: 'left',
-      tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
-      }
-    );
+    if (options.showForces) {
+      vectorVisibilityControlsVBox = new VBox( {
+          children: [
+            new VStrut( titleToControlsVerticalSpace ),
+            vectorVisibilityCheckBoxGroup,
+            new VStrut( titleToControlsVerticalSpace + 8 ),
+            forcesVisibilityRadioButton,
+            new VStrut( titleToControlsVerticalSpace + 8 ),
+            new HBox( { children: [ new HStrut( 15 ), forcesVisibilityCheckBoxGroup ] } ),
+            new VStrut( titleToControlsVerticalSpace + 8 ),
+            netForceVisibilityRadioButton
+          ],
+          align: 'left',
+          tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
+        }
+      );
+    }
+    else
+       vectorVisibilityControlsVBox= new VBox( {
+           children: [
+             new VStrut( titleToControlsVerticalSpace ),
+             vectorVisibilityCheckBoxGroup,
+             new VStrut( titleToControlsVerticalSpace + 8 ),
+           ],
+           align: 'left',
+           tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
+         }
+       );
     Panel.call( this,
       vectorVisibilityControlsVBox,
       {

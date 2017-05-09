@@ -204,7 +204,7 @@ define( function( require ) {
         adjustableMass: createMass( .100,
           this.springs[ 0 ].positionProperty.get().x,
           true,
-          'rgb( 191, 140, 88 )',
+          'rgb(  247, 151, 34 )',
           tandem.createTandem( 'adjustableMass' ) )
       };
     }

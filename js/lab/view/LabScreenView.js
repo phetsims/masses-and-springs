@@ -13,6 +13,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var OneSpringView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringView' );
+  var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vector/view/VectorVisibilityControlPanel' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -22,6 +23,17 @@ define( function( require ) {
     // Calls common two spring view
     OneSpringView.call( this, model, tandem );
 
+    var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
+      model,
+      tandem.createTandem( 'vectorVisibilityControlPanel' ),
+      {
+        top: this.gravityControlPanel.bottom + this.topSpacing,
+        left: this.gravityControlPanel.left ,
+        maxWidth: 180,
+        showForces: false
+      }
+    );
+    this.addChild( vectorVisibilityControlPanel );
     // Unique attributes of screen added here...
   }
 
