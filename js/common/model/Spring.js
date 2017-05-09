@@ -322,6 +322,7 @@ define( function( require ) {
      * @public
      */
     stepOscillate: function( dt ) {
+      // REVIEW: We have to check if the mass exist then if the mass is userControlled. Can we consolidate this into one check?
       if ( !this.massProperty.get().userControlledProperty.get() && this.animatingProperty.get() ) {
         //TODO:: implement upper limit for dt
         var k = this.springConstantProperty.get();

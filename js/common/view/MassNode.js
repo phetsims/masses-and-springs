@@ -62,7 +62,7 @@ define( function( require ) {
 
     this.addChild( rect );
     if ( mass.isLabeled ) {
-      var label = new Text( StringUtils.format( massValueString , mass.mass * 1000 ), {
+      var label = new Text( StringUtils.format( massValueString, mass.mass * 1000 ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
         fill: 'black',
         centerY: viewBounds.centerY,
@@ -79,8 +79,12 @@ define( function( require ) {
       this.mass.massProperty.link( function( massValue ) {
         if ( model.masses.adjustableMass ) {
           mass.mass = massValue / 1000;
-          // TODO: Find a better way to add the 'g' in the mass readout.
-          label.setText( massValue + 'g' );
+          console.log( mass.mass );
+          label.setText( StringUtils.format( massValueString, massValue ) );
+        }
+        // REVIEW: We have to check if the mass exist then the mass's spring exist. Can we consolidate this into one check?
+        if ( model.masses.adjustableMass && model.masses.adjustableMass.springProperty.get() ) {
+          model.masses.adjustableMass.springProperty.get().animatingProperty.set( true );
         }
       } );
     }
