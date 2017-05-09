@@ -37,9 +37,9 @@ define( function( require ) {
    * @constructor
    */
   function VectorVisibilityControlPanel( model, tandem, options ) {
-    options = _.extend({
+    options = _.extend( {
       showForces: true
-    },options);
+    }, options );
 
     // Creation of arrow nodes to be used in vector screen.
     var createVectorArrow = function( color, tandemID ) {
@@ -162,7 +162,7 @@ define( function( require ) {
     var vectorVisibilityControlsVBox;
     // groups the checkboxes and forces aquaRadioButton
     var titleToControlsVerticalSpace = 2;
-    if (options.showForces) {
+    if ( options.showForces ) {
       vectorVisibilityControlsVBox = new VBox( {
           children: [
             new VStrut( titleToControlsVerticalSpace ),
@@ -179,17 +179,18 @@ define( function( require ) {
         }
       );
     }
-    else
-       vectorVisibilityControlsVBox= new VBox( {
-           children: [
-             new VStrut( titleToControlsVerticalSpace ),
-             vectorVisibilityCheckBoxGroup,
-             new VStrut( titleToControlsVerticalSpace + 8 ),
-           ],
-           align: 'left',
-           tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
-         }
-       );
+    else {
+      vectorVisibilityControlsVBox = new VBox( {
+          children: [
+            new VStrut( titleToControlsVerticalSpace ),
+            vectorVisibilityCheckBoxGroup,
+            new VStrut( titleToControlsVerticalSpace + 8 )
+          ],
+          align: 'left',
+          tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
+        }
+      );
+    }
     Panel.call( this,
       vectorVisibilityControlsVBox,
       {
