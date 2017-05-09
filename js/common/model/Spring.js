@@ -192,7 +192,7 @@ define( function( require ) {
 
     //  Restart animation if it was squelched
     Property.multilink( [ this.gravityProperty, this.springConstantProperty ], (function() {
-      if ( self.massProperty.get ) {
+      if ( self.massProperty.get() ) {
         self.animatingProperty.set( true );
       }
     }) );
