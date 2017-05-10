@@ -39,7 +39,7 @@ define( function( require ) {
   function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem ) {
     var self = this;
 
-    this.initialPosition=initialPosition;
+    this.initialPosition = initialPosition;
 
     // @public {read-only} Used for constructing tandems for corresponding view nodes.
     this.tandem = tandem;
@@ -49,7 +49,7 @@ define( function( require ) {
     // TODO: refactor mass into massProperty
     // @public (read-only) {Number} mass of mass object in kg
     this.mass = massValue;
-    this.massProperty = new Property (massValue);
+    this.massProperty = new Property( massValue );
 
     // @public Main model properties
     // {Property.<Vector2>} the position of a mass is the center top of the model object.
@@ -170,7 +170,7 @@ define( function( require ) {
 
     /**
      * @Override
-     * 
+     *
      * @public
      */
     reset: function() {

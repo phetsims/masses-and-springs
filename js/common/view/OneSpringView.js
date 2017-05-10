@@ -276,7 +276,7 @@ define( function( require ) {
     var massValueControlPanel = new MassValueControlPanel(
       model.masses.adjustableMass, { tandem: tandem.createTandem( 'massValueControlPanel' ) }
     );
-    
+
     massValueControlPanel.top = 420;
     this.addChild( massValueControlPanel );
     // Adding all of the nodes to the scene graph
@@ -294,7 +294,7 @@ define( function( require ) {
     this.addChild( MASPlayPauseStepControlNode );
     this.addChild( speedControl );
     this.addChild( springStopperButtonNode );
-    
+
     //Reference lines from indicator visibility box
     this.addChild( this.secondSpringEquilibriumLineNode );
     this.addChild( this.secondNaturalLengthLineNode );

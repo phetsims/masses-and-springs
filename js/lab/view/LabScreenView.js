@@ -27,8 +27,8 @@ define( function( require ) {
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),
       {
-        top: this.toolboxPanel.bottom +55 ,
-        left: this.gravityControlPanel.left ,
+        top: this.toolboxPanel.bottom + 55,
+        left: this.gravityControlPanel.left,
         maxWidth: 180,
         showForces: false
       }

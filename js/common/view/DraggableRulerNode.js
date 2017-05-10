@@ -26,7 +26,7 @@ define( function( require ) {
    * @param {Vector2} initialPosition
    * @param {Property.<boolean>} visibleProperty
    * @param {Tandem} tandem
-   * 
+   *
    * @constructor
    */
 
@@ -38,7 +38,7 @@ define( function( require ) {
 
     // define ruler params in pixels
     var rulerWidth = 397; // 1 meter
-    var rulerLength = .1 * rulerWidth; 
+    var rulerLength = .1 * rulerWidth;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
       majorTickLabels.push( '' );
@@ -92,7 +92,7 @@ define( function( require ) {
   return inherit( RulerNode, DraggableRulerNode, {
     /**
      * @override
-     * 
+     *
      * @public
      */
     reset: function() {

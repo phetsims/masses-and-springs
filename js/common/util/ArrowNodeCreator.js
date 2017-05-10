@@ -28,7 +28,7 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function ArrowNodeCreator(tandem) {}
+  function ArrowNodeCreator( tandem ) {}
 
   massesAndSprings.register( 'ArrowNodeCreator', ArrowNodeCreator );
 

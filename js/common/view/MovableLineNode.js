@@ -30,7 +30,7 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @constructor
    */
-  function MovableLineNode( initialPosition, length, visibleProperty,xPosOfLine, tandem ) {
+  function MovableLineNode( initialPosition, length, visibleProperty, xPosOfLine, tandem ) {
     var self = this;
     Node.call( this );
 

@@ -124,6 +124,7 @@ define( function( require ) {
     );
     this.mutate( options );
   }
+
   massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );
 
   return inherit( Panel, IndicatorVisibilityControlPanel );

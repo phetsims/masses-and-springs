@@ -80,6 +80,7 @@ define( function( require ) {
       self.lineWidthProperty.set( thickness );
     } );
   }
+
   massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );
 
   return inherit( ParametricSpringNode, OscillatingSpringNode, {

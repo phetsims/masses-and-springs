@@ -202,7 +202,7 @@ define( function( require ) {
         smallUnlabeledMass: createMass( .075, .49, false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
       };
     }
-    else if (options.springCount === 1 ){
+    else if ( options.springCount === 1 ) {
       this.masses = {
         adjustableMass: createMass( .100,
           this.springs[ 0 ].positionProperty.get().x,
