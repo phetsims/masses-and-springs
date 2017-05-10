@@ -166,12 +166,13 @@ define( function( require ) {
      * @private
      */
     resetState: function(massesOnly) {
-      this.spring1.reset();
-      this.spring2.reset();
-      _.values( this.masses ).forEach( function( mass ) {
-        mass.reset();
-      } );
-      if (massesOnly){
+      if (!massesOnly) {
+        this.spring1.reset();
+        this.spring2.reset();
+        _.values( this.masses ).forEach( function( mass ) {
+          mass.reset();
+        } );
+      }
         _.values( this.masses ).forEach( function( mass ) {
           mass.reset();
         } );
@@ -183,7 +184,6 @@ define( function( require ) {
           this.spring1.displacementProperty.reset();
           this.spring2.displacementProperty.reset();
         }
-      }
     },
 
     /**
