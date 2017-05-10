@@ -17,6 +17,8 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
+   * @param {Tandem} tandem
+   * 
    * @constructor
    */
   function LabScreenView( model, tandem ) {
