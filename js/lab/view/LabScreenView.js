@@ -35,6 +35,7 @@ define( function( require ) {
     );
     this.addChild( vectorVisibilityControlPanel );
     vectorVisibilityControlPanel.moveToBack();
+
     // Unique attributes of screen added here...
   }
 

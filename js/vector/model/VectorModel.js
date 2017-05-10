@@ -19,7 +19,7 @@ define( function( require ) {
    * @constructor
    */
   function VectorModel( tandem ) {
-    MassesAndSpringsModel.call( this, 2,tandem );
+    MassesAndSpringsModel.call( this, tandem, { springCount: 2 } );
   }
 
   massesAndSprings.register( 'VectorModel', VectorModel );

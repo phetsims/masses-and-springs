@@ -35,7 +35,10 @@ define( function( require ) {
    * TODO:: document all properties and items set on objects (entire sim)
    * @constructor
    */
-  function MassesAndSpringsModel( springCount, tandem ) {
+  function MassesAndSpringsModel( tandem, options ) {
+    options = _.extend( {
+      springCount: 2
+    }, options );
     var self = this;
 
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
@@ -171,9 +174,9 @@ define( function( require ) {
       );
     };
 
-    assert && assert( springCount === 1 || 2, 'Spring count must be one or two' );
+    assert && assert( options.springCount === 1 || 2, 'Spring count must be one or two' );
     // @public (read-only) model of springs used throughout the sim
-    if ( springCount === 2 ) {
+    if ( options.springCount === 2 ) {
       this.springs = [
         createSpring( 0.65, tandem.createTandem( 'leftSpring' ) ),
         createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
@@ -188,7 +191,7 @@ define( function( require ) {
     };
 
     // @public (read-only) model of masses used throughout the sim
-    if ( springCount === 2 ) {
+    if ( options.springCount === 2 ) {
       this.masses = {
         largeLabeledMass: createMass( .250, .12, true, 'grey', tandem.createTandem( 'largeLabeledMass' ) ),
         mediumLabeledMass1: createMass( .100, .20, true, 'grey', tandem.createTandem( 'mediumLabeledMass1' ) ),
@@ -199,7 +202,7 @@ define( function( require ) {
         smallUnlabeledMass: createMass( .075, .49, false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
       };
     }
-    else {
+    else if (options.springCount === 1 ){
       this.masses = {
         adjustableMass: createMass( .100,
           this.springs[ 0 ].positionProperty.get().x,

@@ -25,7 +25,7 @@ define( function( require ) {
    */
   function IntroModel( tandem ) {
 
-    MassesAndSpringsModel.call( this, 2, tandem );
+    MassesAndSpringsModel.call( this, tandem, { springCount: 2 } );
     var self = this;
 
     //TODO: Move into the intro Model.
@@ -75,14 +75,14 @@ define( function( require ) {
       // Restoring spring parameters when scenes are switched
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
-        self.setResetState(true);
+        self.setResetState( true );
         scene2Parameters = self.getSceneState();
         self.setSceneState( scene1Parameters );
       }
 
       else if ( mode === 'adjustable-length' ) {
         // Manages stashing and applying parameters to each scene
-        self.setResetState(true);
+        self.setResetState( true );
         scene1Parameters = self.getSceneState();
         self.setSceneState( scene2Parameters );
 
@@ -165,25 +165,25 @@ define( function( require ) {
      *
      * @private
      */
-    setResetState: function( massesOnly) {
-      if (massesOnly===false) {
+    setResetState: function( massesOnly ) {
+      if ( massesOnly === false ) {
         this.spring1.reset();
         this.spring2.reset();
         _.values( this.masses ).forEach( function( mass ) {
           mass.reset();
         } );
       }
-        _.values( this.masses ).forEach( function( mass ) {
-          mass.reset();
-        } );
+      _.values( this.masses ).forEach( function( mass ) {
+        mass.reset();
+      } );
 
-        // We are resetting the springs' displacement property to recalculate an appropriate length (derived property)
-        if ( this.spring1.massProperty.get() || this.spring2.massProperty.get() ) {
-          this.spring1.massProperty.reset();
-          this.spring2.massProperty.reset();
-          this.spring1.displacementProperty.reset();
-          this.spring2.displacementProperty.reset();
-        }
+      // We are resetting the springs' displacement property to recalculate an appropriate length (derived property)
+      if ( this.spring1.massProperty.get() || this.spring2.massProperty.get() ) {
+        this.spring1.massProperty.reset();
+        this.spring2.massProperty.reset();
+        this.spring1.displacementProperty.reset();
+        this.spring2.displacementProperty.reset();
+      }
     },
 
     /**
@@ -193,13 +193,13 @@ define( function( require ) {
      */
     getResetState: function() {
       this.sceneModeProperty.set( 'adjustable-length' );
-      this.setResetState(false);
+      this.setResetState( false );
       this.spring1.naturalRestingLengthProperty.set( .25 );
 
       // initial parameters set for both scenes
       // @private {read-write} array of parameters for scene 1
       this.sceneModeProperty.set( 'same-length' );
-      this.setResetState(false);
+      this.setResetState( false );
     }
   } );
 } )
