@@ -234,7 +234,8 @@ define( function( require ) {
         naturalRestingLength: this.naturalRestingLengthProperty.get(),
         animating: this.animatingProperty.get(),
         mass: this.massProperty.get(),
-        springConstant: this.springConstantProperty.get()
+        springConstant: this.springConstantProperty.get(),
+        thickness: this.thicknessProperty.get()
       };
       return springState;
     },
@@ -254,6 +255,7 @@ define( function( require ) {
       this.animatingProperty.set( springState.animating );
       this.massProperty.set( springState.mass );
       this.springConstantProperty.set( springState.springConstant );
+      this.thicknessProperty.set( springState.thickness );
     },
 
     /**

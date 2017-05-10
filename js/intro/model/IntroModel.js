@@ -166,7 +166,7 @@ define( function( require ) {
      * @private
      */
     resetState: function(massesOnly) {
-      if (!massesOnly) {
+      if (massesOnly===false) {
         this.spring1.reset();
         this.spring2.reset();
         _.values( this.masses ).forEach( function( mass ) {
@@ -193,14 +193,14 @@ define( function( require ) {
      */
     applyResetState: function() {
       this.sceneModeProperty.set( 'adjustable-length' );
-      this.resetState();
+      this.resetState(false);
       this.spring1.naturalRestingLengthProperty.set( .25 );
       this.scene1Parameters = this.getSceneState();
 
       // initial parameters set for both scenes
       // @private {read-write} array of parameters for scene 1
       this.sceneModeProperty.set( 'same-length' );
-      this.resetState();
+      this.resetState(false);
     }
   } );
 } )
