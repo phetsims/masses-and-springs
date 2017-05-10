@@ -75,14 +75,14 @@ define( function( require ) {
       // Restoring spring parameters when scenes are switched
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
-        self.resetMassesStates();
+        self.resetState(true);
         scene2Parameters = self.getSceneState();
         self.setSceneState( scene1Parameters );
       }
 
       else if ( mode === 'adjustable-length' ) {
         // Manages stashing and applying parameters to each scene
-        self.resetMassesStates();
+        self.resetState(true);
         scene1Parameters = self.getSceneState();
         self.setSceneState( scene2Parameters );
 
@@ -165,30 +165,24 @@ define( function( require ) {
      *
      * @private
      */
-    resetState: function() {
+    resetState: function(massesOnly) {
       this.spring1.reset();
       this.spring2.reset();
       _.values( this.masses ).forEach( function( mass ) {
         mass.reset();
       } );
-    },
+      if (massesOnly){
+        _.values( this.masses ).forEach( function( mass ) {
+          mass.reset();
+        } );
 
-    /**
-     * Resets the properties of the masses and spring length to be used when switching scenes
-     *
-     * @private
-     */
-    resetMassesStates: function() {
-      _.values( this.masses ).forEach( function( mass ) {
-        mass.reset();
-      } );
-
-      // We are resetting the springs' displacement property to recalculate an appropriate length (derived property)
-      if ( this.spring1.massProperty.get() || this.spring2.massProperty.get() ) {
-        this.spring1.massProperty.reset();
-        this.spring2.massProperty.reset();
-        this.spring1.displacementProperty.reset();
-        this.spring2.displacementProperty.reset();
+        // We are resetting the springs' displacement property to recalculate an appropriate length (derived property)
+        if ( this.spring1.massProperty.get() || this.spring2.massProperty.get() ) {
+          this.spring1.massProperty.reset();
+          this.spring2.massProperty.reset();
+          this.spring1.displacementProperty.reset();
+          this.spring2.displacementProperty.reset();
+        }
       }
     },
 
