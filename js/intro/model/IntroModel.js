@@ -197,8 +197,6 @@ define( function( require ) {
       this.spring1.naturalRestingLengthProperty.set( .25 );
       this.scene1Parameters = this.getSceneState();
 
-      this.sceneModeProperty.set( 'same-length' );
-
       // initial parameters set for both scenes
       // @private {read-write} array of parameters for scene 1
       this.sceneModeProperty.set( 'same-length' );
