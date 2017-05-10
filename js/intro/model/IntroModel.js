@@ -75,14 +75,14 @@ define( function( require ) {
       // Restoring spring parameters when scenes are switched
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
-        self.resetState(true);
+        self.setResetState(true);
         scene2Parameters = self.getSceneState();
         self.setSceneState( scene1Parameters );
       }
 
       else if ( mode === 'adjustable-length' ) {
         // Manages stashing and applying parameters to each scene
-        self.resetState(true);
+        self.setResetState(true);
         scene1Parameters = self.getSceneState();
         self.setSceneState( scene2Parameters );
 
@@ -131,7 +131,7 @@ define( function( require ) {
       MassesAndSpringsModel.prototype.reset.call( this );
       this.sceneModeProperty.reset();
       this.constantParameterProperty.reset();
-      this.applyResetState();
+      this.getResetState();
     },
 
     /**
@@ -165,7 +165,7 @@ define( function( require ) {
      *
      * @private
      */
-    resetState: function(massesOnly) {
+    setResetState: function( massesOnly) {
       if (massesOnly===false) {
         this.spring1.reset();
         this.spring2.reset();
@@ -191,15 +191,15 @@ define( function( require ) {
      *
      * @private
      */
-    applyResetState: function() {
+    getResetState: function() {
       this.sceneModeProperty.set( 'adjustable-length' );
-      this.resetState(false);
+      this.setResetState(false);
       this.spring1.naturalRestingLengthProperty.set( .25 );
-      
+
       // initial parameters set for both scenes
       // @private {read-write} array of parameters for scene 1
       this.sceneModeProperty.set( 'same-length' );
-      this.resetState(false);
+      this.setResetState(false);
     }
   } );
 } )
