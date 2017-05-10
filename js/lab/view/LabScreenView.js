@@ -27,13 +27,14 @@ define( function( require ) {
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),
       {
-        top: this.gravityControlPanel.bottom + this.topSpacing,
+        top: this.toolboxPanel.bottom +55 ,
         left: this.gravityControlPanel.left ,
         maxWidth: 180,
         showForces: false
       }
     );
     this.addChild( vectorVisibilityControlPanel );
+    vectorVisibilityControlPanel.moveToBack();
     // Unique attributes of screen added here...
   }
 
