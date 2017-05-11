@@ -30,6 +30,8 @@ define( function( require ) {
 
   // constants
   var ARROW_SIZE_DEFAULT = 25;
+  var FORCES = 'forces'; // TODO: if used in multiple files, factor out to MassesAndSpringsConstants
+  var NET_FORCE = 'netForce'; // TODO: if used in multiple files, factor out to MassesAndSpringsConstants
 
   /**
    * @param {Mass} mass -  model object
@@ -181,24 +183,23 @@ define( function( require ) {
     );
 
     // Show/hide the spring force arrow
-    var forces = 'forces';
     Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
       function( spring, springVectorVisibility, forcesMode ) {
-        self.springForceArrow.visible = !!spring && springVectorVisibility && forcesMode === forces;
+        self.springForceArrow.visible = !!spring && springVectorVisibility && forcesMode === FORCES;
       }
     );
 
     // Show/hide the gravity force arrow
     Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.forcesModeProperty ],
       function( spring, gravityVectorVisibility, forcesMode ) {
-        self.gravityForceArrow.visible = !!spring && gravityVectorVisibility && forcesMode === forces;
+        self.gravityForceArrow.visible = !!spring && gravityVectorVisibility && forcesMode === FORCES;
       }
     );
 
     // Show/hide the net force arrow
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
       function( spring, forcesMode ) {
-        self.netForceArrow.visible = !!spring && forcesMode === 'netForce';
+        self.netForceArrow.visible = !!spring && forcesMode === NET_FORCE;
       }
     );
 
