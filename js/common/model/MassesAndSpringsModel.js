@@ -47,15 +47,17 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} coefficient of friction applied to the system
-    // TODO: Once range is decided for frictionProperty, pass in as range property for TNumber()
     this.frictionProperty = new NumberProperty( 0.2, {
-      range: null,
+      // range: null,
       tandem: tandem.createTandem( 'frictionProperty' ),
       phetioValueType: TNumber( {
         units: 'newtons',
         range: null
       } )
     } );
+
+    // TODO: Once range is decided for frictionProperty, pass in as range property for TNumber()
+    this.frictionRangeProperty = new Property( new RangeWithValue( 0, 100, 0.2 ) );
 
     // @public {Property.<number>} gravitational acceleration associated with each planet
     this.gravityProperty = new Property( Body.EARTH.gravity, {

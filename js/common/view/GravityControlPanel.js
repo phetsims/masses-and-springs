@@ -45,7 +45,8 @@ define( function( require ) {
    *
    * @constructor
    */
-  function GravityControlPanel( gravityProperty, gravityRangeProperty, bodyTitleProperty, bodies, listNodeParent, tandem, options ) {
+  function GravityControlPanel( gravityProperty, gravityRangeProperty,
+                                bodyTitleProperty, bodies, listNodeParent, tandem, options ) {
     var self = this;
     options = _.extend( {
       fill: 'rgb( 240, 240, 240 )',
@@ -104,7 +105,7 @@ define( function( require ) {
     } );
 
     // @private {read-only} manages the values associated with the gravity panel in a combo box
-    this.hSlider = new HSlider( gravityProperty, gravityRangeProperty.get(), {
+    this.gravityHSlider = new HSlider( gravityProperty, gravityRangeProperty.get(), {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
@@ -112,21 +113,32 @@ define( function( require ) {
       thumbFillHighlighted: '#00e6e6',
       tandem: tandem.createTandem( 'gravityPropertyHSlider' )
     } );
-    this.hSlider.addMajorTick( gravityRangeProperty.get().min, new Text( gravityNoneString, {
+    this.gravityHSlider.addMajorTick( gravityRangeProperty.get().min, new Text( gravityNoneString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityNoneString' )
     } ) );
-    this.hSlider.addMajorTick( gravityRangeProperty.get().max, new Text( gravityLotsString, {
+    this.gravityHSlider.addMajorTick( gravityRangeProperty.get().max, new Text( gravityLotsString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
+
+    // this.frictionHSlider = new HSlider( frictionProperty, frictionRangeProperty.get(), {
+    //   majorTickLength: 10,
+    //   trackSize: new Dimension2( 130, 2 ),
+    //   thumbSize: new Dimension2( 13, 22 ),
+    //   thumbFillEnabled: '#00b3b3',
+    //   thumbFillHighlighted: '#00e6e6',
+    //   tandem: tandem.createTandem( 'gravityPropertyHSlider' )
+    // } );
 
     Panel.call( this, new VBox( {
       align: 'left',
       children: [
         new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
         gravityComboBox,
-        this.hSlider
+        this.gravityHSlider,
+        new Text( 'Friction', { font: MassesAndSpringsConstants.TITLE_FONT } ),
+        // this.frictionHSlider
       ],
       tandem: tandem.createTandem( 'gravityPropertyVBox' )
     } ), options );
@@ -134,14 +146,14 @@ define( function( require ) {
     bodyTitleProperty.link( function( newBodyTitle ) {
       var body = _.find( self.bodies, { title: newBodyTitle } );
 
-      // Unhide the hSlider if we are not using planetX
+      // Unhide the gravityHSlider if we are not using planetX
       if ( newBodyTitle !== Body.PLANET_X.title ) {
-        self.hSlider.visible = true;
+        self.gravityHSlider.visible = true;
       }
 
       //  If PlanetX hide the slider and update gravity
       if ( newBodyTitle === Body.PLANET_X.title ) {
-        self.hSlider.visible = false;
+        self.gravityHSlider.visible = false;
         self.gravityProperty.set( body.gravity );
       }
 
