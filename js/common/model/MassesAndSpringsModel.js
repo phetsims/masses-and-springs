@@ -394,10 +394,13 @@ define( function( require ) {
 
         // Oscillate springs
         this.springs.forEach( function( spring ) {
-          if ( spring.massProperty.get() ) {spring.stepOscillate( dt );}
+          if ( spring.massProperty.get() &&
+               !spring.massProperty.get().userControlledProperty.get() &&
+               spring.animatingProperty.get() ) {
+            spring.stepOscillate( dt );
+          }
         } );
       }
     }
   } );
-} )
-;
+} );

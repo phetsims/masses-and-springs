@@ -84,7 +84,7 @@ define( function( require ) {
           console.log( mass.mass );
           label.setText( StringUtils.format( massValueString, massValue ) );
         }
-        // REVIEW: We have to check if the mass exist then the mass's spring exist. Can we consolidate this into one check?
+
         if ( model.masses.adjustableMass && model.masses.adjustableMass.springProperty.get() ) {
           model.masses.adjustableMass.springProperty.get().animatingProperty.set( true );
         }

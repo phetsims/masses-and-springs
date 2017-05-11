@@ -191,11 +191,11 @@ define( function( require ) {
     );
 
     //  Restart animation if it was squelched
-    Property.multilink( [ this.gravityProperty, this.springConstantProperty ], (function() {
-      if ( self.massProperty.get() ) {
+    Property.multilink( [ this.massProperty, this.gravityProperty, this.springConstantProperty ], function( mass ) {
+      if ( mass ) {
         self.animatingProperty.set( true );
       }
-    }) );
+    } );
   }
 
   massesAndSprings.register( 'Spring', Spring );
@@ -324,101 +324,99 @@ define( function( require ) {
      * @public
      */
     stepOscillate: function( dt ) {
-      // REVIEW: We have to check if the mass exist then if the mass is userControlled. Can we consolidate this into one check?
-      if ( !this.massProperty.get().userControlledProperty.get() && this.animatingProperty.get() ) {
-        //TODO:: implement upper limit for dt
-        var k = this.springConstantProperty.get();
-        var m = this.massProperty.get().mass;
-        var c = this.dampingCoefficientProperty.get();
-        var v = this.massProperty.get().verticalVelocityProperty.get();
-        var x = this.displacementProperty.get();
-        var g = this.gravityProperty.get();
 
-        // Underdamped and Overdamped case
-        if ( ( c * c - 4 * k * m ) !== 0 ) {
-          // TODO::  possibly decouple any constants or terms not dependent on t, x, or v as we don't need a new object
-          //         for example k, c, and g may change, but not with every update.
-          // TODO:: improve readability of variables
+      //TODO:: implement upper limit for dt
+      var k = this.springConstantProperty.get();
+      var m = this.massProperty.get().mass;
+      var c = this.dampingCoefficientProperty.get();
+      var v = this.massProperty.get().verticalVelocityProperty.get();
+      var x = this.displacementProperty.get();
+      var g = this.gravityProperty.get();
 
-          // Precompute expressions used more than twice
-          // TODO:: document what algorithm is being used here
-          var km = k * m;
-          var gm = g * m;
-          var tDm = dt / m;
-          var kx = k * x;
-          var c2 = c * c;
-          var kR2 = Math.sqrt( k );
-          var k3R2 = k * kR2;
-          var twok3R2mv = Complex.real( 2 * k3R2 * m * v );
-          var alpha = Complex.real( 4 * km - c2 ).sqrt();
-          var alphaI = alpha.times( Complex.I );
-          var alphaPrime = Complex.real( c2 - 4 * km ).sqrt();
-          var alphatD2m = Complex.real( tDm / 2 ).multiply( alpha );
-          var beta = Complex.real( tDm ).multiply( alphaI ).exponentiate();
-          var eta = Complex.real( c ).add( alphaI ).multiply( Complex.real( tDm / 2 ) ).exponentiate()
-            .multiply( Complex.real( 2 ) );
+      // Underdamped and Overdamped case
+      if ( ( c * c - 4 * k * m ) !== 0 ) {
+        // TODO::  possibly decouple any constants or terms not dependent on t, x, or v as we don't need a new object
+        //         for example k, c, and g may change, but not with every update.
+        // TODO:: improve readability of variables
 
-          // Calculate new displacement
-          var coef = Complex.ONE.dividedBy( Complex.real( k3R2 ).multiply( alphaPrime ).multiply( eta ) );
-          var A = beta.minus( Complex.ONE ).multiply( Complex.real( c * kR2 * ( gm + kx ) ) );
-          var B = Complex.real( gm * kR2 ).multiply( alphaI ).multiply(
-            beta.minus( eta ).add( Complex.ONE )
-          );
-          var C = twok3R2mv.times( beta );
-          var D = Complex.real( k3R2 * x ).multiply( alphaI );
-          var E = D.times( beta );
-          var newDisplacement = coef.multiply( A.add( B ).add( C ).add( D ).add( E ).subtract( twok3R2mv ) ).real;
+        // Precompute expressions used more than twice
+        // TODO:: document what algorithm is being used here
+        var km = k * m;
+        var gm = g * m;
+        var tDm = dt / m;
+        var kx = k * x;
+        var c2 = c * c;
+        var kR2 = Math.sqrt( k );
+        var k3R2 = k * kR2;
+        var twok3R2mv = Complex.real( 2 * k3R2 * m * v );
+        var alpha = Complex.real( 4 * km - c2 ).sqrt();
+        var alphaI = alpha.times( Complex.I );
+        var alphaPrime = Complex.real( c2 - 4 * km ).sqrt();
+        var alphatD2m = Complex.real( tDm / 2 ).multiply( alpha );
+        var beta = Complex.real( tDm ).multiply( alphaI ).exponentiate();
+        var eta = Complex.real( c ).add( alphaI ).multiply( Complex.real( tDm / 2 ) ).exponentiate()
+          .multiply( Complex.real( 2 ) );
 
-          // Calculate new velocity
-          coef = Complex.real( -( Math.exp( ( -c * dt ) / ( 2 * m ) ) ) / ( 2 * k3R2 * m ) ).divide( alphaPrime )
-            .multiply( Complex.I );
-          A = alphatD2m.sinOf().multiply(
-            Complex.real( kR2 * ( gm + kx ) )
-              .multiply( alpha.squared().add( Complex.real( c2 ) ) )
-              .add( twok3R2mv.times( Complex.real( c ) ) ) );
-          B = alphatD2m.cos().multiply( twok3R2mv ).multiply( alpha ).multiply( Complex.real( -1 ) );
-          var newVelocity = A.add( B ).multiply( coef ).real;
+        // Calculate new displacement
+        var coef = Complex.ONE.dividedBy( Complex.real( k3R2 ).multiply( alphaPrime ).multiply( eta ) );
+        var A = beta.minus( Complex.ONE ).multiply( Complex.real( c * kR2 * ( gm + kx ) ) );
+        var B = Complex.real( gm * kR2 ).multiply( alphaI ).multiply(
+          beta.minus( eta ).add( Complex.ONE )
+        );
+        var C = twok3R2mv.times( beta );
+        var D = Complex.real( k3R2 * x ).multiply( alphaI );
+        var E = D.times( beta );
+        var newDisplacement = coef.multiply( A.add( B ).add( C ).add( D ).add( E ).subtract( twok3R2mv ) ).real;
 
-          //  Stop the alternation between +/- in overdamped displacement
-          // TODO:: This is probably a bug in the model equation. Are we missing an i somewhere?
-          if ( ( c * c - 4 * k * m ) > 0 ) {
-            newDisplacement = ( this.displacementProperty.get() > 0 ) ? Math.abs( newDisplacement ) : -Math.abs( newDisplacement );
-          }
+        // Calculate new velocity
+        coef = Complex.real( -( Math.exp( ( -c * dt ) / ( 2 * m ) ) ) / ( 2 * k3R2 * m ) ).divide( alphaPrime )
+          .multiply( Complex.I );
+        A = alphatD2m.sinOf().multiply(
+          Complex.real( kR2 * ( gm + kx ) )
+            .multiply( alpha.squared().add( Complex.real( c2 ) ) )
+            .add( twok3R2mv.times( Complex.real( c ) ) ) );
+        B = alphatD2m.cos().multiply( twok3R2mv ).multiply( alpha ).multiply( Complex.real( -1 ) );
+        var newVelocity = A.add( B ).multiply( coef ).real;
 
-          // Squelch noise after coming to rest with tolerance of 1 micron
-          if ( Math.abs( this.displacementProperty.get() - newDisplacement ) < 1e-6 &&
-               Math.abs( this.massProperty.get().verticalVelocityProperty.get() ) < 1e-6 ) {
-            this.displacementProperty.set( -m * g / k );  // Equilibrium length
-            this.massProperty.get().verticalVelocityProperty.set( 0 );
-            this.animatingProperty.set( false );
-          }
-          else {
-            this.displacementProperty.set( newDisplacement );
-            //TODO: add in the kinematic equation for acceleration here. Store old velocity and use new velocity in equ.
-            this.massProperty.get().verticalVelocityProperty.set( newVelocity );
-          }
-
-          assert && assert( !isNaN( this.displacementProperty.get() ), 'displacement must be a number' );
-          assert && assert( !isNaN( this.massProperty.get().verticalVelocityProperty.get() ), 'velocity must be a number' );
-
+        //  Stop the alternation between +/- in overdamped displacement
+        // TODO:: This is probably a bug in the model equation. Are we missing an i somewhere?
+        if ( ( c * c - 4 * k * m ) > 0 ) {
+          newDisplacement = ( this.displacementProperty.get() > 0 ) ? Math.abs( newDisplacement ) : -Math.abs( newDisplacement );
         }
-        // Critically damped case
+
+        // Squelch noise after coming to rest with tolerance of 1 micron
+        if ( Math.abs( this.displacementProperty.get() - newDisplacement ) < 1e-6 &&
+             Math.abs( this.massProperty.get().verticalVelocityProperty.get() ) < 1e-6 ) {
+          this.displacementProperty.set( -m * g / k );  // Equilibrium length
+          this.massProperty.get().verticalVelocityProperty.set( 0 );
+          this.animatingProperty.set( false );
+        }
         else {
-          //TODO::  if needed decouple these objects
-          var omega = Math.sqrt( k / m );
-          var phi = Math.exp( dt * omega );
-
-
-          this.displacementProperty.set( ( g * ( -m * phi + dt * Math.sqrt( k * m ) + m ) +
-                                           k * (  dt * ( x * omega + v ) + x )
-                                         ) / ( phi * k ) );
-          this.massProperty.get().verticalVelocityProperty.set( ( g * m * ( Math.sqrt( k * m ) - omega * ( m + dt * Math.sqrt( k * m ) ) ) -
-                                                                  k * ( m * v * ( omega * dt - 1 ) + k * dt * x )
-                                                                ) / ( phi * k * m) );
+          this.displacementProperty.set( newDisplacement );
+          //TODO: add in the kinematic equation for acceleration here. Store old velocity and use new velocity in equ.
+          this.massProperty.get().verticalVelocityProperty.set( newVelocity );
         }
 
-        this.massProperty.get().positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );
+        assert && assert( !isNaN( this.displacementProperty.get() ), 'displacement must be a number' );
+        assert && assert( !isNaN( this.massProperty.get().verticalVelocityProperty.get() ), 'velocity must be a number' );
+
       }
+      // Critically damped case
+      else {
+        //TODO::  if needed decouple these objects
+        var omega = Math.sqrt( k / m );
+        var phi = Math.exp( dt * omega );
+
+
+        this.displacementProperty.set( ( g * ( -m * phi + dt * Math.sqrt( k * m ) + m ) +
+                                         k * (  dt * ( x * omega + v ) + x )
+                                       ) / ( phi * k ) );
+        this.massProperty.get().verticalVelocityProperty.set( ( g * m * ( Math.sqrt( k * m ) - omega * ( m + dt * Math.sqrt( k * m ) ) ) -
+                                                                k * ( m * v * ( omega * dt - 1 ) + k * dt * x )
+                                                              ) / ( phi * k * m) );
+      }
+
+      this.massProperty.get().positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );
     }
   } );
 } )
