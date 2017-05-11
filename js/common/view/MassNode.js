@@ -170,18 +170,25 @@ define( function( require ) {
     // In other words, these arrows are created and linked in all screens, even though they are only shown in the "Vector" and "Lab"
     // screens.
     // Show/hide the velocity arrow
-    Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty, mass.userControlledProperty ],
-      function( spring, velocityVectorVisibility, userControlled ) {
-        self.velocityArrow.visible = !!spring && velocityVectorVisibility && !userControlled;
-      }
-    );
+
+    /**
+     * Show/hide the velocity and acceleration arrows when appropriate
+     * @param {Property.<boolean>} arrowVisibilityProperty
+     * @param {Node} arrowNode
+     */
+    var updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
+      Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
+        function( spring, vectorVisibility, userControlled ) {
+          arrowNode.visible = !!spring && vectorVisibility && !userControlled;
+        }
+      );
+    };
+
+    // Show/hide the velocity arrow
+    updateArrowVisibility( model.velocityVectorVisibilityProperty, self.velocityArrow );
 
     // Show/hide the acceleration arrow
-    Property.multilink( [ mass.springProperty, model.accelerationVectorVisibilityProperty, mass.userControlledProperty ],
-      function( spring, accelerationVectorVisibility, userControlled ) {
-        self.accelerationArrow.visible = !!spring && accelerationVectorVisibility && !userControlled;
-      }
-    );
+    updateArrowVisibility( model.accelerationVectorVisibilityProperty, self.accelerationArrow );
 
     // Show/hide the spring force arrow
     Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
