@@ -213,10 +213,8 @@ define( function( require ) {
 
     // Show/hide line at base of vectors
     Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
-      function( springMassAttachedTo, gravityForceVisible, springForceVisible, forcesVisible ) {
-        forceNullLine.visible =
-          springMassAttachedTo !== null && (gravityForceVisible || springForceVisible || (forcesVisible === 'netForce'))
-            ? true : false;
+      function( spring, gravityForceVisible, springForceVisible, forcesVisible ) {
+        forceNullLine.visible = !!spring && (gravityForceVisible || springForceVisible || forcesVisible === NET_FORCE);
       } );
     //TODO: Create MASArrowNode with arguments for deltas in X&Y, mass position, and the property it is depicting
     //TODO: Considering moving in visibility multilinks)
