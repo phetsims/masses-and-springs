@@ -178,6 +178,14 @@ define( function( require ) {
       this.userControlledProperty.reset();
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
+    },
+    // TODO: Find a better name
+    massSceneChange: function() {
+      var newPos = this.positionProperty.initialValue.minusXY( 0, 2 );
+      this.positionProperty.set( newPos );
+      this.userControlledProperty.reset();
+      this.springProperty.reset();
+      this.verticalVelocityProperty.reset();
     }
   } )
     ;

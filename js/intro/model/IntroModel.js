@@ -173,9 +173,11 @@ define( function( require ) {
           mass.reset();
         } );
       }
-      _.values( this.masses ).forEach( function( mass ) {
-        mass.reset();
-      } );
+      else if ( massesOnly === true ) {
+        _.values( this.masses ).forEach( function( mass ) {
+          mass.massSceneChange();
+        } );
+      }
 
       // We are resetting the springs' displacement property to recalculate an appropriate length (derived property)
       if ( this.spring1.massProperty.get() || this.spring2.massProperty.get() ) {
