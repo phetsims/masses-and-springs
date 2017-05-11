@@ -167,7 +167,8 @@ define( function( require ) {
 
     // TODO: We are keeping these properties in the common model because they are referenced in the lab screen, but this
     // link is being referenced in the intro screen where it isn't needed.
-
+    // In other words, these arrows are created and linked in all screens, even though they are only shown in the "Vector" and "Lab"
+    // screens.
     // Show/hide the velocity arrow
     Property.multilink( [ mass.springProperty, model.velocityVectorVisibilityProperty, mass.userControlledProperty ],
       function( spring, velocityVectorVisibility, userControlled ) {
