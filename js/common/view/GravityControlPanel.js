@@ -35,6 +35,9 @@ define( function( require ) {
 
   /**
    *
+   * @param {Boolean} frictionVisible
+   * @param {Property,<number>} frictionProperty
+   * @param {Property,<number>} frictionRangeProperty
    * @param {Property,<number>} gravityProperty
    * @param {Property.<RangeWithValue>} gravityRangeProperty
    * @param {Property.<string>} bodyTitleProperty
@@ -45,7 +48,8 @@ define( function( require ) {
    *
    * @constructor
    */
-  function GravityControlPanel( gravityProperty, gravityRangeProperty,
+  //TODO: Just pass in model
+  function GravityControlPanel( frictionVisible, frictionProperty, frictionRangeProperty, gravityProperty, gravityRangeProperty,
                                 bodyTitleProperty, bodies, listNodeParent, tandem, options ) {
     var self = this;
     options = _.extend( {
@@ -122,26 +126,39 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
-    // this.frictionHSlider = new HSlider( frictionProperty, frictionRangeProperty.get(), {
-    //   majorTickLength: 10,
-    //   trackSize: new Dimension2( 130, 2 ),
-    //   thumbSize: new Dimension2( 13, 22 ),
-    //   thumbFillEnabled: '#00b3b3',
-    //   thumbFillHighlighted: '#00e6e6',
-    //   tandem: tandem.createTandem( 'gravityPropertyHSlider' )
-    // } );
+    this.frictionHSlider = new HSlider( frictionProperty, frictionRangeProperty.get(), {
+      majorTickLength: 10,
+      trackSize: new Dimension2( 130, 2 ),
+      thumbSize: new Dimension2( 13, 22 ),
+      thumbFillEnabled: '#00b3b3',
+      thumbFillHighlighted: '#00e6e6',
+      tandem: tandem.createTandem( 'gravityPropertyHSlider' )
+    } );
 
-    Panel.call( this, new VBox( {
-      align: 'left',
-      children: [
-        new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-        gravityComboBox,
-        this.gravityHSlider,
-        new Text( 'Friction', { font: MassesAndSpringsConstants.TITLE_FONT } ),
-        // this.frictionHSlider
-      ],
-      tandem: tandem.createTandem( 'gravityPropertyVBox' )
-    } ), options );
+    if ( frictionVisible ) {
+      Panel.call( this, new VBox( {
+        align: 'left',
+        children: [
+          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          gravityComboBox,
+          this.gravityHSlider,
+          new Text( 'Friction', { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          this.frictionHSlider
+        ],
+        tandem: tandem.createTandem( 'gravityPropertyVBox' )
+      } ), options );
+    }
+    else {
+      Panel.call( this, new VBox( {
+        align: 'left',
+        children: [
+          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          gravityComboBox,
+          this.gravityHSlider
+        ],
+        tandem: tandem.createTandem( 'gravityPropertyVBox' )
+      } ), options );
+    }
 
     bodyTitleProperty.link( function( newBodyTitle ) {
       var body = _.find( self.bodies, { title: newBodyTitle } );

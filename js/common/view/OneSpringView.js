@@ -165,6 +165,9 @@ define( function( require ) {
 
     // Gravity Control Panel
     this.gravityControlPanel = new GravityControlPanel(
+      true,
+      model.frictionProperty,
+      model.frictionRangeProperty,
       model.gravityProperty,
       model.gravityRangeProperty,
       model.bodyTitleProperty,

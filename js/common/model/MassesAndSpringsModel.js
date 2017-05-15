@@ -57,7 +57,7 @@ define( function( require ) {
     } );
 
     // TODO: Once range is decided for frictionProperty, pass in as range property for TNumber()
-    this.frictionRangeProperty = new Property( new RangeWithValue( 0, 100, 0.2 ) );
+    this.frictionRangeProperty = new Property( new RangeWithValue( 0, 1, 1 ) );
 
     // @public {Property.<number>} gravitational acceleration associated with each planet
     this.gravityProperty = new Property( Body.EARTH.gravity, {

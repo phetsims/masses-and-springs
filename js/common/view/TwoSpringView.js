@@ -192,7 +192,6 @@ define( function( require ) {
       tandem.createTandem( 'indicatorVisibilityControlPanel' ),
       {
         top: this.topSpacing,
-        // left: this.secondSpringConstantControlPanel.right + 10,
         right: this.layoutBounds.getMaxX() - this.topSpacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
@@ -200,8 +199,9 @@ define( function( require ) {
 
     // Gravity Control Panel
     this.gravityControlPanel = new GravityControlPanel(
-      // model.frictionProperty,
-      // model.frictionRangeProperty,
+      false,
+      model.frictionProperty,
+      model.frictionRangeProperty,
       model.gravityProperty,
       model.gravityRangeProperty,
       model.bodyTitleProperty,
