@@ -33,8 +33,11 @@ define( function( require ) {
       trackSize: new Dimension2( 100, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
-      arrowButtonScale: .6
+      arrowButtonScale: .6,
+      tandem: tandem
     } ), {
+      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
+      maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
       fill: 'rgb( 240, 240, 240 )',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     } );

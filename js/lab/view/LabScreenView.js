@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var OneSpringView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringView' );
   var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vector/view/VectorVisibilityControlPanel' );
 
@@ -31,7 +32,7 @@ define( function( require ) {
       {
         top: this.toolboxPanel.bottom + 55,
         left: this.gravityControlPanel.left,
-        maxWidth: 180,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         showForces: false
       }
     );
