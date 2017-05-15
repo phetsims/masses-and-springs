@@ -169,7 +169,7 @@ define( function( require ) {
       buttonContentXMargin: 4,
       buttonContentYMargin: 4,
       top: this.toolboxPanel.bottom + 55,
-      right: this.gravityControlPanel.right,
+      right: this.gravityAndFrictionControlPanel.right,
       baseColor: 'black',
       selectedStroke: 'yellow',
       deselectedStroke: 'yellow',

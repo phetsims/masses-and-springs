@@ -29,7 +29,7 @@ define( function( require ) {
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),
       {
-        top: this.gravityControlPanel.bottom + this.topSpacing,
+        top: this.gravityAndFrictionControlPanel.bottom + this.topSpacing,
         left: this.secondSpringConstantControlPanel.right + 10,
         maxWidth: 180
       }

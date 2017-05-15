@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var GravityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityControlPanel' );
+  var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
@@ -198,7 +198,7 @@ define( function( require ) {
       } );
 
     // Gravity Control Panel
-    this.gravityControlPanel = new GravityControlPanel(
+    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
       false,
       model.frictionProperty,
       model.frictionRangeProperty,
@@ -207,7 +207,7 @@ define( function( require ) {
       model.bodyTitleProperty,
       model.bodies,
       this,
-      tandem.createTandem( 'gravityControlPanel' ),
+      tandem.createTandem( 'gravityAndFrictionControlPanel' ),
       {
         right: this.layoutBounds.getMaxX() - this.topSpacing,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
@@ -239,9 +239,9 @@ define( function( require ) {
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ),
       {
-        top: this.gravityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        left: this.gravityControlPanel.left,
-        minWidth: this.gravityControlPanel.width,
+        top: this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        left: this.gravityAndFrictionControlPanel.left,
+        minWidth: this.gravityAndFrictionControlPanel.width,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       } );
 
@@ -323,7 +323,7 @@ define( function( require ) {
     this.addChild( this.firstSpringConstantControlPanel );
     this.addChild( this.secondSpringConstantControlPanel );
     this.addChild( indicatorVisibilityControlPanel );
-    this.addChild( this.gravityControlPanel );
+    this.addChild( this.gravityAndFrictionControlPanel );
     this.addChild( this.toolboxPanel );
 
     // Adding Buttons to scene graph
