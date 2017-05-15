@@ -199,15 +199,7 @@ define( function( require ) {
 
     // Gravity Control Panel
     this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
-      false,
-      model.frictionProperty,
-      model.frictionRangeProperty,
-      model.gravityProperty,
-      model.gravityRangeProperty,
-      model.bodyTitleProperty,
-      model.bodies,
-      this,
-      tandem.createTandem( 'gravityAndFrictionControlPanel' ),
+      model, false, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
       {
         right: this.layoutBounds.getMaxX() - this.topSpacing,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
