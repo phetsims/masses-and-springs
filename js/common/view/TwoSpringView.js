@@ -336,6 +336,7 @@ define( function( require ) {
     // Adding Nodes in tool box
     this.addChild( timerNode );
     this.addChild( rulerNode );
+    console.log( 'this.layoutBounds = ' + this.layoutBounds );
   }
 
   massesAndSprings.register( 'TwoSpringView', TwoSpringView );

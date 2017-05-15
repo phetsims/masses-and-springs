@@ -175,13 +175,28 @@ define( function( require ) {
      * Show/hide the velocity and acceleration arrows when appropriate
      * @param {Property.<boolean>} arrowVisibilityProperty
      * @param {Node} arrowNode
+     *
+     * @private
      */
     var updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
         function( spring, vectorVisibility, userControlled ) {
           arrowNode.visible = !!spring && vectorVisibility && !userControlled;
-        }
-      );
+        } );
+    };
+
+    /**
+     * Show/hide the spring and gravity force vectors when appropriate
+     * @param {Property.<boolean>} arrowVisibilityProperty
+     * @param {Node} arrowNode
+     *
+     * @private
+     */
+    var updateForceVisiblity = function( arrowVisibilityProperty, arrowNode ) {
+      Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
+        function( spring, springVectorVisibility, forcesMode ) {
+          arrowNode.visible = !!spring && springVectorVisibility && forcesMode === FORCES;
+        } );
     };
 
     // Show/hide the velocity arrow
@@ -191,18 +206,10 @@ define( function( require ) {
     updateArrowVisibility( model.accelerationVectorVisibilityProperty, self.accelerationArrow );
 
     // Show/hide the spring force arrow
-    Property.multilink( [ mass.springProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
-      function( spring, springVectorVisibility, forcesMode ) {
-        self.springForceArrow.visible = !!spring && springVectorVisibility && forcesMode === FORCES;
-      }
-    );
+    updateForceVisiblity( model.springVectorVisibilityProperty, self.springForceArrow );
 
     // Show/hide the gravity force arrow
-    Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.forcesModeProperty ],
-      function( spring, gravityVectorVisibility, forcesMode ) {
-        self.gravityForceArrow.visible = !!spring && gravityVectorVisibility && forcesMode === FORCES;
-      }
-    );
+    updateForceVisiblity( model.gravityVectorVisibilityProperty, self.gravityForceArrow );
 
     // Show/hide the net force arrow
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],

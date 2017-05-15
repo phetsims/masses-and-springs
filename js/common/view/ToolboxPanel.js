@@ -34,7 +34,7 @@ define( function( require ) {
    * @param {Property.<boolean>} rulerVisibleProperty
    * @param {Property.<boolean>} timerVisibleProperty
    * @param {Tandem} tandem
-   * @param {Options} options
+   * @param {Object} options
    * @constructor
    */
   function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, tandem, options ) {
@@ -138,8 +138,6 @@ define( function( require ) {
         tandem: tandem.createTandem( 'timerIcon' )
       } );
 
-      var timerUnboundedPosition = new Vector2();
-
       // Drag listener for event forwarding: timerIcon ---> timerNode
       self.timerIcon.addInputListener( new TandemSimpleDragHandler( {
 
@@ -160,7 +158,6 @@ define( function( require ) {
             .minus( new Vector2( timerNode.width / 2, timerNode.height * .4 ) );
 
           timerNode.positionProperty.set( initialPosition );
-          timerUnboundedPosition.set( initialPosition );
 
           // Sending through the startDrag from icon to timerNode causes it to receive all subsequent drag events.
           timerNode.timerNodeMovableDragHandler.startDrag( event );
