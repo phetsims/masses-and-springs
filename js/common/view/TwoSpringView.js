@@ -131,7 +131,7 @@ define( function( require ) {
       {
         right: this.springHangerNode.left - 40,
         top: this.topSpacing,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
 
     this.secondSpringConstantControlPanel = new SpringConstantControlPanel(
@@ -142,7 +142,7 @@ define( function( require ) {
       {
         left: this.springHangerNode.right + 40,
         top: this.topSpacing,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
 
     // @public Initializes movable line
@@ -192,8 +192,10 @@ define( function( require ) {
       tandem.createTandem( 'indicatorVisibilityControlPanel' ),
       {
         top: this.topSpacing,
-        left: this.secondSpringConstantControlPanel.right + 10,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+        // left: this.secondSpringConstantControlPanel.right + 10,
+        right: this.layoutBounds.getMaxX() - this.topSpacing,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       } );
 
     // Gravity Control Panel
@@ -207,9 +209,8 @@ define( function( require ) {
       this,
       tandem.createTandem( 'gravityControlPanel' ),
       {
-        left: indicatorVisibilityControlPanel.left,
+        right: this.layoutBounds.getMaxX() - this.topSpacing,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );

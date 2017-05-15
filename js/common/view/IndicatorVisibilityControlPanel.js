@@ -119,7 +119,8 @@ define( function( require ) {
         xMargin: 10,
         fill: 'rgb( 240, 240, 240 )',
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'indicatorVisibilityControlPanel' )
+        tandem: tandem.createTandem( 'indicatorVisibilityControlPanel' ),
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       }
     );
     this.mutate( options );

@@ -37,7 +37,8 @@ define( function( require ) {
     // Constants regarding panels
     PANEL_VERTICAL_SPACING: 10,
     PANEL_CORNER_RADIUS: 7,
-    PANEL_MAX_WIDTH: 220
+    PANEL_MAX_WIDTH: 170,
+    PANEL_MIN_WIDTH: 170
   };
 
   massesAndSprings.register( 'MassesAndSpringsConstants', MassesAndSpringsConstants );

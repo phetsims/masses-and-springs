@@ -52,7 +52,7 @@ define( function( require ) {
       {
         right: this.springHangerNode.left - 40,
         top: this.topSpacing,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
     this.addChild( this.springLengthControlPanel );
 
@@ -62,9 +62,10 @@ define( function( require ) {
       constantString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
-        minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 60,
         left: this.firstSpringConstantControlPanel.left,
-        top: this.firstSpringConstantControlPanel.bottom + this.topSpacing
+        top: this.firstSpringConstantControlPanel.bottom + this.topSpacing,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       }
     );
     this.addChild( this.constantsControlPanel );
