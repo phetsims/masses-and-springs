@@ -176,6 +176,7 @@ define( function( require ) {
       var updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
         Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
           function( spring, vectorVisibility, userControlled ) {
+            // console.log( 'updateArrow' );
             arrowNode.visible = !!spring && vectorVisibility && !userControlled;
           } );
       };
@@ -218,12 +219,13 @@ define( function( require ) {
         function( spring, gravityForceVisible, springForceVisible, forcesVisible ) {
           forceNullLine.visible = !!spring && (gravityForceVisible || springForceVisible || forcesVisible === NET_FORCE);
         } );
+
       //TODO: Create MASArrowNode with arguments for deltas in X&Y, mass position, and the property it is depicting
-      //TODO: Considering moving in visibility multilinks)
       //Links for handling the length of the vectors in response to the system.
       var scalingFactor = 3;
-      mass.verticalVelocityProperty.link( function( velocity ) {
-          var position = ( mass.positionProperty.get() );
+      Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty ], function( velocity, visible ) {
+        if ( visible ) {
+          var position = mass.positionProperty.get();
           self.velocityArrow.setTailAndTip(
             position.x - 10,
             position.y + 10,
@@ -231,52 +233,67 @@ define( function( require ) {
             position.y + 10 - ARROW_SIZE_DEFAULT * velocity * scalingFactor
           );
         }
-      );
+      } );
 
       // When gravity changes, update the gravitational force arrow
-      Property.multilink( [ mass.gravityProperty, mass.positionProperty ], function( gravity, position ) {
-        var gravitationalAcceleration = mass.mass * gravity;
-        self.gravityForceArrow.setTailAndTip(
-          position.x + 45,
-          position.y + 40,
-          position.x + 45,
-          position.y + 40 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
-        );
+      Property.multilink( [ mass.gravityProperty, model.gravityVectorVisibilityProperty ], function( gravity, visible ) {
+        if ( visible ) {
+          var position = mass.positionProperty.get();
+          var gravitationalAcceleration = mass.mass * gravity;
+          self.gravityForceArrow.setTailAndTip(
+            position.x + 45,
+            position.y + 40,
+            position.x + 45,
+            position.y + 40 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
+          );
+        }
       } );
 
       // When the spring force changes, update the spring force arrow
-      Property.multilink( [ mass.springForceProperty, mass.positionProperty ], function( springForce, position ) {
-        self.springForceArrow.setTailAndTip(
-          position.x + 45,
-          position.y + 40,
-          position.x + 45,
-          position.y + 40 - ARROW_SIZE_DEFAULT * springForce
-        );
+      Property.multilink( [ mass.springForceProperty, model.springVectorVisibilityProperty ], function( springForce, visible ) {
+        if ( visible ) {
+          var position = mass.positionProperty.get();
+          self.springForceArrow.setTailAndTip(
+            position.x + 45,
+            position.y + 40,
+            position.x + 45,
+            position.y + 40 - ARROW_SIZE_DEFAULT * springForce
+          );
+        }
       } );
 
       // When net force changes changes, update the net force arrow
       assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
-      Property.multilink( [ mass.netForceProperty, mass.positionProperty ], function( netForce, position ) {
-        if ( Math.abs( netForce ) > 1E-6 ) {
-          self.netForceArrow.setTailAndTip(
-            position.x + 45,
-            position.y + 40,
-            position.x + 45,
-            position.y + 40 - ARROW_SIZE_DEFAULT * netForce
-          );
+      Property.multilink( [
+        mass.netForceProperty,
+        model.forcesModeProperty,
+        model.accelerationVectorVisibilityProperty
+      ], function( netForce, forcesMode, accelerationVisible ) {
+        var position = mass.positionProperty.get();
+        if ( forcesMode === 'netForce' ) {
+          if ( Math.abs( netForce ) > 1E-6 ) {
+            self.netForceArrow.setTailAndTip(
+              position.x + 45,
+              position.y + 40,
+              position.x + 45,
+              position.y + 40 - ARROW_SIZE_DEFAULT * netForce
+            );
+          }
         }
-        var netAcceleration = netForce / mass.mass;
-        if ( Math.abs( netAcceleration ) > 1E-6 ) {
-          self.accelerationArrow.setTailAndTip(
-            position.x + 10,
-            position.y + 10,
-            position.x + 10,
-            position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
-          );
+        if ( accelerationVisible ) {
+          var netAcceleration = netForce / mass.mass;
+          if ( Math.abs( netAcceleration ) > 1E-6 ) {
+            self.accelerationArrow.setTailAndTip(
+              position.x + 10,
+              position.y + 10,
+              position.x + 10,
+              position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
+            );
+          }
         }
       } );
 
-      // When the mass's position changes update the forces baseline marker
+// When the mass's position changes update the forces baseline marker
       mass.positionProperty.link( function( position ) {
         forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
       } );
@@ -285,4 +302,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'MassNode', MassNode );
   return inherit( Node, MassNode );
-} );
+} )
+;

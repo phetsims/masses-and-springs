@@ -149,12 +149,7 @@ define( function( require ) {
     this.springVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'springVectorVisibilityProperty' )
     } );
-
-    // @public {Property.<boolean>} determines the visibility of the net force vector
-    this.netForceVectorVisibilityProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'netForceVectorVisibilityProperty' )
-    } );
-
+    
     // @public {Property.<string>} determines mode of the vectors to be viewed
     this.forcesModeProperty = new Property( 'forces', {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
@@ -272,7 +267,6 @@ define( function( require ) {
       this.accelerationVectorVisibilityProperty.reset();
       this.gravityVectorVisibilityProperty.reset();
       this.springVectorVisibilityProperty.reset();
-      this.netForceVectorVisibilityProperty.reset();
       this.forcesModeProperty.reset();
       for ( var referencedMass in this.masses ) {
         if ( !this.masses.hasOwnProperty( referencedMass ) ) {
