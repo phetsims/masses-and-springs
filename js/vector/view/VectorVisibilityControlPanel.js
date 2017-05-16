@@ -229,7 +229,8 @@ define( function( require ) {
         children: [
           vectorVisibilityControlsVBox,
           new HStrut( 10 ),
-          vectorVBox
+          vectorVBox,
+          new HStrut( 10 )
         ]
       }
     );

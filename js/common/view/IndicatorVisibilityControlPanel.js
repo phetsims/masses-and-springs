@@ -65,9 +65,7 @@ define( function( require ) {
           children: [ new Text(
             naturalLengthString,
             MassesAndSpringsConstants.FONT,
-            { tandem: tandem.createTandem( 'naturalLengthString' ) } ),
-            new HStrut( 31 ),
-            blueLine
+            { tandem: tandem.createTandem( 'naturalLengthString' ) } )
           ],
           tandem: tandem.createTandem( 'naturalLengthHBox' )
         } ),
@@ -79,9 +77,7 @@ define( function( require ) {
           children: [ new Text(
             equilibriumPositionString,
             MassesAndSpringsConstants.FONT,
-            { tandem: tandem.createTandem( 'equilibriumPositionString' ) } ),
-            new HStrut( 10 ),
-            greenLine
+            { tandem: tandem.createTandem( 'equilibriumPositionString' ) } )
           ],
           tandem: tandem.createTandem( 'equilibriumPositionHBox' )
         } ),
@@ -93,9 +89,7 @@ define( function( require ) {
           children: [ new Text(
             movableLineString,
             MassesAndSpringsConstants.FONT,
-            { tandem: tandem.createTandem( 'movableLineString' ) } ),
-            new HStrut( 38 ),
-            redLine
+            { tandem: tandem.createTandem( 'movableLineString' ) } )
           ],
           tandem: tandem.createTandem( 'movableLineHBox' )
         } ),
@@ -113,8 +107,27 @@ define( function( require ) {
       tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
       }
     );
+    var lineVBox = new VBox( {
+      children: [
+        new VStrut( titleToControlsVerticalSpace ),
+        blueLine,
+        new VStrut( 20 ),
+        greenLine,
+        new VStrut( 20 ),
+        redLine,
+        new VStrut( titleToControlsVerticalSpace )
+      ]
+    } );
+    var controlBox = new HBox( {
+      children: [
+        indicatorVisibilityControlsVBox,
+        new HStrut( 10 ),
+        lineVBox,
+        new HStrut( 10 )
+      ]
+    } );
     Panel.call( this,
-      indicatorVisibilityControlsVBox,
+      controlBox,
       {
         xMargin: 10,
         fill: 'rgb( 240, 240, 240 )',
