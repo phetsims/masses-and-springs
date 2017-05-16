@@ -88,6 +88,7 @@ define( function( require ) {
       var referencedMassProperty = model.masses[ property ];
       var massNode = new MassNode(
         referencedMassProperty,
+        model.showVectors,
         modelViewTransform2,
         self,
         model,

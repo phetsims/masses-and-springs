@@ -56,6 +56,7 @@ define( function( require ) {
    * @constructor
    */
   function TwoSpringView( model, tandem ) {
+
     this.model = model; // Make model available for reset
     var self = this;
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
@@ -86,6 +87,7 @@ define( function( require ) {
       var referencedMassProperty = model.masses[ property ];
       var massNode = new MassNode(
         referencedMassProperty,
+        model.showVectors,
         modelViewTransform2,
         self,
         model,

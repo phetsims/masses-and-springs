@@ -19,7 +19,7 @@ define( function( require ) {
    * @constructor
    */
   function EnergyModel( tandem ) {
-    MassesAndSpringsModel.call( this, tandem, { springCount: 1 } );
+    MassesAndSpringsModel.call( this, tandem, { springCount: 1, showVectors: false } );
   }
 
   massesAndSprings.register( 'EnergyModel', EnergyModel );
