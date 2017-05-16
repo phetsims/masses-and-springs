@@ -82,7 +82,6 @@ define( function( require ) {
       this.mass.massProperty.link( function( massValue ) {
         if ( model.masses.adjustableMass ) {
           mass.mass = massValue / 1000;
-          console.log( mass.mass );
           label.setText( StringUtils.format( massValueString, massValue ) );
         }
 
@@ -191,7 +190,6 @@ define( function( require ) {
       var updateForceVisiblity = function( arrowVisibilityProperty, arrowNode ) {
         Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
           function( spring, springVectorVisibility, forcesMode ) {
-            console.log( 'UpdateArrowNode' );
             arrowNode.visible = !!spring && springVectorVisibility && forcesMode === FORCES;
           } );
       };
