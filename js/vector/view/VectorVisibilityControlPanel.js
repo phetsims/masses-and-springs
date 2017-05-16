@@ -77,7 +77,7 @@ define( function( require ) {
           children: [ new Text( velocityString, {
             font: MassesAndSpringsConstants.FONT,
             tandem: tandem.createTandem( 'velocityString' )
-          } ), new HStrut( 79 ), velocityArrow ]
+          } ) ]
         } ),
         property: model.velocityVectorVisibilityProperty,
         label: velocityString
@@ -87,7 +87,7 @@ define( function( require ) {
           children: [ new Text( accelerationString, {
             font: MassesAndSpringsConstants.FONT,
             tandem: tandem.createTandem( 'accelerationString' )
-          } ), new HStrut( 57 ), accelerationArrow ]
+          } ) ]
         } ),
         property: model.accelerationVectorVisibilityProperty,
         label: accelerationString
@@ -103,7 +103,7 @@ define( function( require ) {
           children: [ new Text( gravityString, {
             font: MassesAndSpringsConstants.FONT,
             tandem: tandem.createTandem( 'gravityString' )
-          } ), new HStrut( 79 ), gravityArrow ]
+          } ) ]
         } ),
         property: model.gravityVectorVisibilityProperty,
         label: gravityString
@@ -113,7 +113,7 @@ define( function( require ) {
           children: [ new Text( springString, {
             font: MassesAndSpringsConstants.FONT,
             tandem: tandem.createTandem( 'springString' )
-          } ), new HStrut( 57 ), springArrow ]
+          } ) ]
         } ),
         property: model.springVectorVisibilityProperty,
         label: springString
@@ -142,7 +142,7 @@ define( function( require ) {
         children: [ new Text( netForceString, {
           font: MassesAndSpringsConstants.FONT,
           tandem: tandem.createTandem( 'netForceString' )
-        } ), new HStrut( 57 ), netForceArrow ]
+        } ) ]
       } ),
       { radius: 9, spacing: 8 }
     );
@@ -159,40 +159,82 @@ define( function( require ) {
       }
     } );
 
+    // Spacing unit used for orientation
+    var spacingUnit = 2;
+
+    //Contains all check boxes and radio buttons for vector visibility
     var vectorVisibilityControlsVBox;
+
+    // Contains all vectors for each force
+    var vectorVBox;
+
     // groups the checkboxes and forces aquaRadioButton
-    var titleToControlsVerticalSpace = 2;
     if ( options.showForces ) {
       vectorVisibilityControlsVBox = new VBox( {
           children: [
-            new VStrut( titleToControlsVerticalSpace ),
+            new VStrut( spacingUnit ),
             vectorVisibilityCheckBoxGroup,
-            new VStrut( titleToControlsVerticalSpace + 8 ),
+            new VStrut( spacingUnit + 8 ),
             forcesVisibilityRadioButton,
-            new VStrut( titleToControlsVerticalSpace + 8 ),
-            new HBox( { children: [ new HStrut( 15 ), forcesVisibilityCheckBoxGroup ] } ),
-            new VStrut( titleToControlsVerticalSpace + 8 ),
+            new VStrut( spacingUnit + 8 ),
+            new HBox( {
+              children: [ new HStrut( 15 ),
+                forcesVisibilityCheckBoxGroup
+              ]
+            } ),
+            new VStrut( spacingUnit + 8 ),
             netForceVisibilityRadioButton
           ],
           align: 'left',
-          tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
+        tandem: tandem.createTandem( 'spacingUnit' )
         }
       );
+      vectorVBox = new VBox( {
+        children: [
+          velocityArrow,
+          new VStrut( spacingUnit + 10 ),
+          accelerationArrow,
+          new VStrut( spacingUnit + 50 ),
+          gravityArrow,
+          new VStrut( spacingUnit + 12 ),
+          springArrow,
+          new VStrut( spacingUnit + 20 ),
+          netForceArrow
+        ],
+        align: 'left',
+        tandem: tandem.createTandem( 'spacingUnit' )
+      } );
     }
     else {
       vectorVisibilityControlsVBox = new VBox( {
-          children: [
-            new VStrut( titleToControlsVerticalSpace ),
-            vectorVisibilityCheckBoxGroup,
-            new VStrut( titleToControlsVerticalSpace + 8 )
-          ],
-          align: 'left',
-          tandem: tandem.createTandem( 'titleToControlsVerticalSpace' )
-        }
-      );
+        children: [
+          new VStrut( spacingUnit ),
+          vectorVisibilityCheckBoxGroup,
+          new VStrut( spacingUnit + 8 )
+        ],
+        align: 'left',
+        tandem: tandem.createTandem( 'spacingUnit' )
+      } );
+      vectorVBox = new VBox( {
+        children: [
+          velocityArrow,
+          new VStrut( spacingUnit + 10 ),
+          accelerationArrow
+        ],
+        align: 'left',
+        tandem: tandem.createTandem( 'spacingUnit' )
+      } );
     }
+    var controlsHBox = new HBox( {
+        children: [
+          vectorVisibilityControlsVBox,
+          new HStrut( 10 ),
+          vectorVBox
+        ]
+      }
+    );
     Panel.call( this,
-      vectorVisibilityControlsVBox,
+      controlsHBox,
       {
         minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 10,
