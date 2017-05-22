@@ -20,7 +20,7 @@ define( function( require ) {
 
   // constants
   var HEIGHT_RATIO = 2;
-  var DENSITY = 80; // TODO: explain this constant
+  var DENSITY = 80; // Constant used to keep all of our masses consistant in the model.
 
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
@@ -82,8 +82,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} vertical acceleration of the mass
-    // TODO: use this property
-    this.gravityProperty = gravityProperty; // TODO: align those names
+    this.gravityProperty = gravityProperty;
 
     // @public {Property.<Spring>} {Spring|null} is the mass attached to a Spring?
     this.springProperty = new Property( null, {
@@ -120,7 +119,6 @@ define( function( require ) {
     this.cylinderHeight = (this.radius) * HEIGHT_RATIO;
     this.height = this.cylinderHeight + this.hookHeight;
 
-    // TODO: callback depends on 2 properties but only links to one of them
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
         self.springProperty.get().animatingProperty.set( true );
