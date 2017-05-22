@@ -178,7 +178,7 @@ define( function( require ) {
       this.verticalVelocityProperty.reset();
     },
     // TODO: Find a better name
-    massSceneChange: function() {
+    resetMassOnly: function() {
       var newPos = this.positionProperty.initialValue.minusXY( 0, 2 );
       this.positionProperty.set( newPos );
       this.userControlledProperty.reset();

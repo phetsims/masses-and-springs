@@ -175,7 +175,7 @@ define( function( require ) {
       }
       else if ( massesOnly === true ) {
         _.values( this.masses ).forEach( function( mass ) {
-          mass.massSceneChange();
+          mass.resetMassOnly();
         } );
       }
 
