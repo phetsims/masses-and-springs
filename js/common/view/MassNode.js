@@ -65,7 +65,7 @@ define( function( require ) {
 
     this.addChild( rect );
     if ( mass.isLabeled ) {
-      var label = new Text( StringUtils.format( massValueString, mass.mass * 1000 ), {
+      var label = new Text( StringUtils.format( massValueString, mass.massValueProperty.get() * 1000 ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
         fill: 'black',
         centerY: viewBounds.centerY,
@@ -79,9 +79,9 @@ define( function( require ) {
       this.addChild( labelBackground );
       this.addChild( label );
 
-      this.mass.massProperty.link( function( massValue ) {
+      this.mass.massValueProperty.link( function( massValue ) {
         if ( model.masses.adjustableMass ) {
-          mass.mass = massValue / 1000;
+          massValue = ( massValue / 1000 );
           label.setText( StringUtils.format( massValueString, massValue ) );
         }
 
@@ -239,7 +239,7 @@ define( function( require ) {
       Property.multilink( [ mass.gravityProperty, model.gravityVectorVisibilityProperty ], function( gravity, visible ) {
         if ( visible ) {
           var position = mass.positionProperty.get();
-          var gravitationalAcceleration = mass.mass * gravity;
+          var gravitationalAcceleration = mass.massValueProperty * gravity;
           self.gravityForceArrow.setTailAndTip(
             position.x + 45,
             position.y + 40,
@@ -281,7 +281,7 @@ define( function( require ) {
           }
         }
         if ( accelerationVisible ) {
-          var netAcceleration = netForce / mass.mass;
+          var netAcceleration = netForce / mass.massValueProperty;
           if ( Math.abs( netAcceleration ) > 1E-6 ) {
             self.accelerationArrow.setTailAndTip(
               position.x + 10,

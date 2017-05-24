@@ -25,7 +25,7 @@ define( function( require ) {
         return null;
       }
       return {
-        mass: mass.mass,
+        mass: mass.massValueProperty.get(),
         color: mass.color
       };
     }
