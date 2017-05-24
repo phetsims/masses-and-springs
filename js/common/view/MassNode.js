@@ -30,8 +30,6 @@ define( function( require ) {
 
   // constants
   var ARROW_SIZE_DEFAULT = 25;
-  var FORCES = 'forces'; // TODO: if used in multiple files, factor out to MassesAndSpringsConstants
-  var NET_FORCE = 'netForce'; // TODO: if used in multiple files, factor out to MassesAndSpringsConstants
 
   /**
    * @param {Mass} mass:  model object
@@ -191,7 +189,7 @@ define( function( require ) {
       var updateForceVisiblity = function( arrowVisibilityProperty, arrowNode ) {
         Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
           function( spring, springVectorVisibility, forcesMode ) {
-            arrowNode.visible = !!spring && springVectorVisibility && forcesMode === FORCES;
+            arrowNode.visible = !!spring && springVectorVisibility && forcesMode === MassesAndSpringsConstants.FORCES_STRING;
           } );
       };
 
@@ -210,14 +208,14 @@ define( function( require ) {
       // Show/hide the net force arrow
       Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
         function( spring, forcesMode ) {
-          self.netForceArrow.visible = !!spring && forcesMode === NET_FORCE;
+          self.netForceArrow.visible = !!spring && forcesMode === MassesAndSpringsConstants.NET_FORCE_STRING;
         }
       );
 
       // Show/hide line at base of vectors
       Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
         function( spring, gravityForceVisible, springForceVisible, forcesVisible ) {
-          forceNullLine.visible = !!spring && (gravityForceVisible || springForceVisible || forcesVisible === NET_FORCE);
+          forceNullLine.visible = !!spring && (gravityForceVisible || springForceVisible || forcesVisible === MassesAndSpringsConstants.NET_FORCE_STRING);
         } );
 
       //TODO: Create MASArrowNode with arguments for deltas in X&Y, mass position, and the property it is depicting

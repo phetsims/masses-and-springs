@@ -44,7 +44,7 @@ define( function( require ) {
 
     // @public {boolean} determines whether vectors associated with massNode vectors.
     this.showVectors = options.showVectors;
-    
+
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'playingProperty' )
@@ -149,12 +149,12 @@ define( function( require ) {
     this.springVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'springVectorVisibilityProperty' )
     } );
-    
+
     // @public {Property.<string>} determines mode of the vectors to be viewed
-    this.forcesModeProperty = new Property( 'forces', {
+    this.forcesModeProperty = new Property( MassesAndSpringsConstants.FORCES_STRING, {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
       phetioValueType: TString,
-      validValues: [ 'forces', 'netForce' ]
+      validValues: [ MassesAndSpringsConstants.FORCES_STRING, MassesAndSpringsConstants.NET_FORCE_STRING ]
     } );
 
     // @public {read-only} Y position of floor in m. The floor is at the bottom bounds of the screen.
@@ -394,8 +394,7 @@ define( function( require ) {
 
         // Oscillate springs
         this.springs.forEach( function( spring ) {
-          if ( spring.massProperty.get() &&
-               !spring.massProperty.get().userControlledProperty.get() &&
+          if ( spring.massProperty.get() && !spring.massProperty.get().userControlledProperty.get() &&
                spring.animatingProperty.get() ) {
             spring.stepOscillate( dt );
           }
