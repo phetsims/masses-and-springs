@@ -18,7 +18,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  // var ArrowNodeCreator = require( 'MASSES_AND_SPRINGS/common/util/ArrowNodeCreator' );
+  var ArrowNodeCreator = require( 'MASSES_AND_SPRINGS/common/util/ArrowNodeCreator' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
@@ -127,34 +127,12 @@ define( function( require ) {
       cursor: 'pointer'
     } );
 
-    var createVectorArrow = function( color, tandemID ) {
-      return new ArrowNode( 10, 0, MassesAndSpringsConstants.VECTOR_ARROW_LENGTH, 0, {
-        fill: color,
-        stroke: 'black',
-        centerY: 0,
-        tailWidth: MassesAndSpringsConstants.ARROW_TAIL_WIDTH,
-        headWidth: MassesAndSpringsConstants.ARROW_HEAD_WIDTH,
-        tandem: tandem.createTandem( tandemID )
-      } );
-    };
-
-    var createForceArrow = function( color, tandemID ) {
-      return new ArrowNode( 5, 0, MassesAndSpringsConstants.FORCES_ARROW_LENGTH, 0, {
-        fill: color,
-        stroke: color,
-        centerY: 0,
-        tailWidth: MassesAndSpringsConstants.SMALLER_ARROW_TAIL_WIDTH,
-        headWidth: MassesAndSpringsConstants.SMALLER_ARROW_HEAD_WIDTH,
-        tandem: tandem.createTandem( tandemID )
-      } );
-    };
-
     //Arrows created for vectors associated with mass nodes
-    this.velocityArrow = createVectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'velocityArrow' );
-    this.accelerationArrow = createVectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'accelerationArrow' );
-    this.gravityForceArrow = createForceArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'gravityForceArrow' );
-    this.springForceArrow = createForceArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'springForceArrow' );
-    this.netForceArrow = createForceArrow( 'black', 'netForceArrow' );
+    this.velocityArrow = new ArrowNodeCreator( 'vector', MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'velocityArrow', tandem );
+    this.accelerationArrow = new ArrowNodeCreator( 'vector', MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'accelerationArrow', tandem );
+    this.gravityForceArrow = new ArrowNodeCreator( 'force', MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'gravityForceArrow', tandem );
+    this.springForceArrow = new ArrowNodeCreator( 'force', MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'springForceArrow', tandem );
+    this.netForceArrow = new ArrowNodeCreator( 'force', 'black', 'netForceArrow', tandem );
 
     if ( showVectors ) {
       this.addChild( this.velocityArrow );
@@ -174,7 +152,6 @@ define( function( require ) {
       var updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
         Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
           function( spring, vectorVisibility, userControlled ) {
-            // console.log( 'updateArrow' );
             arrowNode.visible = !!spring && vectorVisibility && !userControlled;
           } );
       };
@@ -291,7 +268,7 @@ define( function( require ) {
         }
       } );
 
-// When the mass's position changes update the forces baseline marker
+      // When the mass's position changes update the forces baseline marker
       mass.positionProperty.link( function( position ) {
         forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
       } );

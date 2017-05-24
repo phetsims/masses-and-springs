@@ -23,33 +23,38 @@ define( function( require ) {
   var SMALLER_ARROW_TAIL_WIDTH = 3;
 
   /**
-   * @param {VectorModel} model
+   * @param {string} type - type of arrow to be displayed, 'vector' or 'force'
+   * @param {Color} color
+   * @param {string} tandemID - string name of tandem
    * @param {Tandem} tandem
-   * @param {Object} options
    * @constructor
    */
-  function ArrowNodeCreator( tandem ) {}
+  // REVIEW: We are creating different arrows. Should we have to pass in the tandem and tandem ID separately?
+  function ArrowNodeCreator( type, color, tandemID, tandem ) {
 
-  massesAndSprings.register( 'ArrowNodeCreator', ArrowNodeCreator );
-
-  return inherit( ArrowNode, ArrowNodeCreator, {
-    createVectorArrow: function( color ) {
-      return new ArrowNode( 10, 0, VECTOR_ARROW_LENGTH, 0, {
+    if ( type === 'vector' ) {
+      ArrowNode.call( this, 10, 0, VECTOR_ARROW_LENGTH, 0, {
         fill: color,
         stroke: 'black',
         centerY: 0,
         tailWidth: ARROW_TAIL_WIDTH,
-        headWidth: ARROW_HEAD_WIDTH
+        headWidth: ARROW_HEAD_WIDTH,
+        tandem: tandem.createTandem( tandemID )
       } );
-    },
-    createForceArrow: function( color ) {
-      return new ArrowNode( 5, 0, FORCES_ARROW_LENGTH, 0, {
+    }
+    else if ( type === 'force' ) {
+      ArrowNode.call( this, 5, 0, FORCES_ARROW_LENGTH, 0, {
         fill: color,
         stroke: color,
         centerY: 0,
         tailWidth: SMALLER_ARROW_TAIL_WIDTH,
-        headWidth: SMALLER_ARROW_HEAD_WIDTH
-      } );
+        headWidth: SMALLER_ARROW_HEAD_WIDTH,
+        tandem: tandem.createTandem( tandemID )
+
+      } )
     }
-  } );
+  }
+
+  massesAndSprings.register( 'ArrowNodeCreator', ArrowNodeCreator );
+  return inherit( ArrowNode, ArrowNodeCreator );
 } );
