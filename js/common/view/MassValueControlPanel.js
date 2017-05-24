@@ -27,7 +27,7 @@ define( function( require ) {
    */
   function MassValueControlPanel( mass, tandem ) {
 
-    Panel.call( this, new NumberControl( massString, mass.massValueProperty, new Range( 50, 300 ), {
+    Panel.call( this, new NumberControl( massString, mass.massProperty, new Range( 50, 300 ), {
       valuePattern: '{0} g',
       majorTickLength: 10,
       trackSize: new Dimension2( 100, 2 ),

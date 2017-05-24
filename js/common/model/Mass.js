@@ -48,7 +48,7 @@ define( function( require ) {
 
     // @public (read-only) {Number} mass of mass object in kg
     this.mass = massValue;
-    this.massValueProperty = new Property( massValue );
+    this.massProperty = new Property( massValue );
 
     // @public Main model properties
     // {Property.<Vector2>} the position of a mass is the center top of the model object.
@@ -105,7 +105,7 @@ define( function( require ) {
     } );
 
     this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ], function( springForce, gravity ) {
-      return springForce - self.massValueProperty.get() * gravity;
+      return springForce - self.mass * gravity;
     } );
 
     // @public {read-only} Non property model attributes
@@ -113,7 +113,7 @@ define( function( require ) {
     this.color = color;
     this.hookHeight = 0.03; // height in m
     var scalingFactor = 4; // scales the radius to desired size
-    this.radius = (Math.pow( this.massValueProperty.get() / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
+    this.radius = (Math.pow( this.mass / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
     this.cylinderHeight = (this.radius) * HEIGHT_RATIO;
     this.height = this.cylinderHeight + this.hookHeight;
 
