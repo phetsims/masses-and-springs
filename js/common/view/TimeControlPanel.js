@@ -31,7 +31,7 @@ define( function( require ) {
    * @constructor
    */
   // TODO: Rename to TimeControlPanel, and rename vars/tandems at usage sites
-  function MASPlayPauseStepControl( model, layoutBounds, tandem, options ) {
+  function TimeControlPanel( model, layoutBounds, tandem, options ) {
     Node.call( this );
     var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
@@ -71,7 +71,7 @@ define( function( require ) {
     this.mutate( options );
   }
 
-  massesAndSprings.register( 'MASPlayPauseStepControl', MASPlayPauseStepControl );
+  massesAndSprings.register( 'TimeControlPanel', TimeControlPanel );
 
-  return inherit( Node, MASPlayPauseStepControl );
+  return inherit( Node, TimeControlPanel );
 } );

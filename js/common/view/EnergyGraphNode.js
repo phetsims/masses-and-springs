@@ -3,7 +3,6 @@
 /**
  * TODO: Documentation
  *
- * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {

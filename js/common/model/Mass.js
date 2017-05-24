@@ -104,7 +104,6 @@ define( function( require ) {
       }
     } );
 
-    // TODO: derive net force from gravity force and spring force
     this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ], function( springForce, gravity ) {
       return springForce - self.massValueProperty.get() * gravity;
     } );
@@ -176,7 +175,7 @@ define( function( require ) {
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
     },
-    // TODO: Find a better name
+
     resetMassOnly: function() {
       var newPos = this.positionProperty.initialValue.minusXY( 0, 2 );
       this.positionProperty.set( newPos );

@@ -208,9 +208,6 @@ define( function( require ) {
      * @public
      */
     reset: function() {
-      //ensures displacement will change on reset, otherwise springs will be upside down.
-      // TODO: find a better fix for this problem.
-      this.displacementProperty.set( 1 ); // TODO: can this line be removed?
       this.gravityProperty.reset();
       this.displacementProperty.reset();
       this.dampingCoefficientProperty.reset();

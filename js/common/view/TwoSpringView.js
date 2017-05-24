@@ -19,7 +19,7 @@ define( function( require ) {
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
-  var MASPlayPauseStepControl = require( 'MASSES_AND_SPRINGS/common/view/MASPlayPauseStepControl' );
+  var TimeControlPanel = require( 'MASSES_AND_SPRINGS/common/view/TimeControlPanel' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
@@ -257,10 +257,10 @@ define( function( require ) {
     } );
 
     // Play/Pause and Step Forward Button Control
-    var MASPlayPauseStepControlNode = new MASPlayPauseStepControl(
+    var timeControlPanel = new TimeControlPanel(
       model,
       this.layoutBounds,
-      tandem.createTandem( 'MASPlayPauseStepControlNode' )
+      tandem.createTandem( 'timeControlPanel' )
     );
 
     // Sim speed controls
@@ -322,7 +322,7 @@ define( function( require ) {
 
     // Adding Buttons to scene graph
     this.addChild( this.resetAllButton );
-    this.addChild( MASPlayPauseStepControlNode );
+    this.addChild( timeControlPanel );
     this.addChild( speedControl );
     this.addChild( firstSpringStopperButtonNode );
     this.addChild( secondSpringStopperButtonNode )
