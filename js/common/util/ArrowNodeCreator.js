@@ -50,8 +50,7 @@ define( function( require ) {
         tailWidth: SMALLER_ARROW_TAIL_WIDTH,
         headWidth: SMALLER_ARROW_HEAD_WIDTH,
         tandem: tandem.createTandem( tandemID )
-
-      } )
+      } );
     }
   }
 
