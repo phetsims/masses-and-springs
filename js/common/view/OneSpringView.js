@@ -113,7 +113,7 @@ define( function( require ) {
     );
 
     var singleSpringHangerNode = new SingleSpringHangerNode( tandem.createTandem( 'singleSpringHangerNode' ) );
-    singleSpringHangerNode.centerX = this.oscillatingSpringNode.centerX;
+    singleSpringHangerNode.centerX = 0;
 
     // Spring Constant Control Panel
     this.springConstantControlPanel = new SpringConstantControlPanel(
