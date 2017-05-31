@@ -78,7 +78,7 @@ define( function( require ) {
 
       this.mass.massProperty.link( function( massValue ) {
         if ( model.masses.adjustableMass ) {
-          massValue = ( massValue / 1000 );
+          massValue = ( massValue  );
           label.setText( StringUtils.format( massValueString, massValue ) );
         }
 
