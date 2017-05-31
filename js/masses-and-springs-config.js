@@ -31,6 +31,7 @@ require.config( {
     BALANCING_ACT: '../../balancing-act/js',
     BRAND: '../../brand/' + phet.chipper.brand + '/js',
     DOT: '../../dot/js',
+    GRIDDLE: '../../griddle/js',
     JOIST: '../../joist/js',
     KITE: '../../kite/js',
     PHET_CORE: '../../phet-core/js',

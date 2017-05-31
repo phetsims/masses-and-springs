@@ -15,17 +15,21 @@ define( function( require ) {
   // var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var VerticalBarChart = require( 'GRIDDLE/VerticalBarChart' );
+  var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
 
   /**
    * @param {Tandem} tandem
    * @constructor
    */
-  function EnergyGraphNode( tandem ) {
+  function EnergyGraphNode( model, tandem ) {
     var content = new Text( 'PhET Energy Graph \n Coming Soon' );
-
+    var barNodes = [ new VerticalBarNode( model.masses.adjustableMass.massProperty ) ];
+    
     AccordionBox.call( this, new VBox( {
       children: [
-        content
+        content,
+        new VerticalBarChart( barNodes )
       ]
     } ), {
       titleNode: new Text( 'Energy Graph' )

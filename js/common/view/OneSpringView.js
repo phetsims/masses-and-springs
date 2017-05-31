@@ -266,7 +266,7 @@ define( function( require ) {
       }
     );
 
-    var energyGraphNode = new EnergyGraphNode();
+    var energyGraphNode = new EnergyGraphNode( model );
     this.addChild( energyGraphNode );
 
     var massValueControlPanel = new MassValueControlPanel(
