@@ -275,6 +275,8 @@ define( function( require ) {
     );
     massValueControlPanel.bottom = this.layoutBounds.getMaxY() - this.topSpacing;
 
+
+    //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
     // Adding all of the nodes to the scene graph
     this.addChild( this.oscillatingSpringNode );
 
