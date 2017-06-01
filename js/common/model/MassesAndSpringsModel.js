@@ -61,7 +61,7 @@ define( function( require ) {
     } );
 
     // TODO: Once range is decided for frictionProperty, pass in as range property for TNumber()
-    this.frictionRangeProperty = new Property( new RangeWithValue( 0, 1, 1 ) );
+    this.frictionRangeProperty = new Property( new RangeWithValue( 0, 10, 1 ) );
 
     // @public {Property.<number>} gravitational acceleration associated with each planet
     this.gravityProperty = new Property( Body.EARTH.gravity, {
@@ -238,6 +238,12 @@ define( function( require ) {
         spring.dampingCoefficientProperty.set( newFriction );
       } );
     } );
+    this.springs.forEach( function( spring ) {
+      spring.springConstantProperty.link( function( springConstant ) {
+        spring.updateThickness( spring.naturalRestingLengthProperty.get(), springConstant );
+      } );
+    } );
+
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );

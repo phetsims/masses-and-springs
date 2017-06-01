@@ -24,7 +24,12 @@ define( function( require ) {
    */
   function EnergyGraphNode( model, tandem ) {
     var content = new Text( 'PhET Energy Graph \n Coming Soon' );
-    var barNodes = [ new VerticalBarNode( model.masses.adjustableMass.massProperty ) ];
+    var barNodes = [
+      new VerticalBarNode( model.masses.adjustableMass.massProperty ),
+      new VerticalBarNode( model.springs[ 0 ].springConstantProperty ),
+      new VerticalBarNode( model.frictionProperty ),
+      new VerticalBarNode( model.gravityProperty )
+    ];
     
     AccordionBox.call( this, new VBox( {
       children: [
