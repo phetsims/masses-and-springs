@@ -40,7 +40,7 @@ define( function( require ) {
    * @constructor
    */
   function MassNode( mass, showVectors, modelViewTransform2, screenView, model, tandem ) {
-    Node.call( this, { cursor: 'pointer' } );
+    Node.call( this, { cursor: 'pointer', pathBoundsMethod: 'none', renderer: 'canvas' } );
     var self = this;
 
     this.mass = mass;
