@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
+  var Emitter = require( 'AXON/Emitter' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -244,6 +245,8 @@ define( function( require ) {
       } );
     } );
 
+    // Triggered after pushing stopSpringButton
+    this.stopSpringEmitter = new Emitter();
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
@@ -339,7 +342,7 @@ define( function( require ) {
 
       // check if mass attached on spring
       if ( mass ) {
-        // for readability
+
         // set displacement and stop further animation
         spring.displacementProperty.set( -spring.springExtension );
         spring.animatingProperty.reset();
@@ -347,6 +350,7 @@ define( function( require ) {
         // place that mass at the correct location as well
         mass.positionProperty.set( new Vector2( spring.positionProperty.get().x, spring.bottomProperty.get() ) );
         mass.verticalVelocityProperty.set( 0 );
+        mass.accelerationProperty.set( 0 );
       }
     },
 

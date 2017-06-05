@@ -240,8 +240,9 @@ define( function( require ) {
       Property.multilink( [
         mass.netForceProperty,
         model.forcesModeProperty,
-        model.accelerationVectorVisibilityProperty
-      ], function( netForce, forcesMode, accelerationVisible ) {
+        model.accelerationVectorVisibilityProperty,
+        mass.accelerationProperty
+      ], function( netForce, forcesMode, accelerationVisible, netAcceleration ) {
         var position = mass.positionProperty.get();
         if ( forcesMode === 'netForce' ) {
           if ( Math.abs( netForce ) > 1E-6 ) {
@@ -254,7 +255,6 @@ define( function( require ) {
           }
         }
         if ( accelerationVisible ) {
-          var netAcceleration = netForce / mass.mass;
           if ( Math.abs( netAcceleration ) > 1E-6 ) {
             self.accelerationArrow.setTailAndTip(
               position.x + 10,
@@ -262,6 +262,9 @@ define( function( require ) {
               position.x + 10,
               position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
             );
+          }
+          else if ( netAcceleration === 0 ) {
+            self.accelerationArrow.visible = false;
           }
         }
       } );

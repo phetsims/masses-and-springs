@@ -108,6 +108,11 @@ define( function( require ) {
       return springForce - self.mass * gravity;
     } );
 
+    this.netForceProperty.link( function( netForce ) {
+      self.accelerationProperty.set( netForce / self.mass );
+    } );
+
+
     // @public {read-only} Non property model attributes
     this.isLabeled = isLabeled;
     this.color = color;
