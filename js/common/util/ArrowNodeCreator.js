@@ -39,6 +39,7 @@ define( function( require ) {
         centerY: 0,
         tailWidth: ARROW_TAIL_WIDTH,
         headWidth: ARROW_HEAD_WIDTH,
+        renderer: 'canvas',
         tandem: tandem.createTandem( tandemID )
       } );
     }
@@ -49,6 +50,7 @@ define( function( require ) {
         centerY: 0,
         tailWidth: SMALLER_ARROW_TAIL_WIDTH,
         headWidth: SMALLER_ARROW_HEAD_WIDTH,
+        renderer: 'canvas',
         tandem: tandem.createTandem( tandemID )
       } );
     }
