@@ -194,7 +194,7 @@ define( function( require ) {
       tandem.createTandem( 'indicatorVisibilityControlPanel' ),
       {
         top: this.topSpacing,
-        right: this.layoutBounds.getMaxX() - this.topSpacing,
+        left: this.secondSpringConstantControlPanel.right + 10,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       } );

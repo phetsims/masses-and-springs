@@ -116,7 +116,7 @@ define( function( require ) {
     singleSpringHangerNode.centerX = this.oscillatingSpringNode.centerX;
 
     // Spring Constant Control Panel
-    this.springConstantControlPanel = new SpringConstantControlPanel(
+    var springConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
       model.springs[ 0 ].springConstantRange,
       StringUtils.format( springConstantString, 2 ),
@@ -124,10 +124,10 @@ define( function( require ) {
       {
         left: singleSpringHangerNode.right + 40,
         top: this.topSpacing,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 55
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
 
-    singleSpringHangerNode.top = this.springConstantControlPanel.top;
+    singleSpringHangerNode.top = springConstantControlPanel.top;
 
     // @public Initializes movable line
     this.movableLineNode = new MovableLineNode(
@@ -160,7 +160,7 @@ define( function( require ) {
       tandem.createTandem( 'indicatorVisibilityControlPanel' ),
       {
         top: this.topSpacing,
-        left: this.springConstantControlPanel.right + 10,
+        left: springConstantControlPanel.right + 10,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       } );
 
@@ -283,7 +283,7 @@ define( function( require ) {
     // Adding Panels to scene graph
     this.addChild( singleSpringHangerNode );
     this.addChild( massValueControlPanel );
-    this.addChild( this.springConstantControlPanel );
+    this.addChild( springConstantControlPanel );
     this.addChild( indicatorVisibilityControlPanel );
     this.addChild( this.gravityAndFrictionControlPanel );
     this.addChild( this.toolboxPanel );
