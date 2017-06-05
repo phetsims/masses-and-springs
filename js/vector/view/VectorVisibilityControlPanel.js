@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var ArrowNodeCreator = require( 'MASSES_AND_SPRINGS/common/util/ArrowNodeCreator' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -136,9 +137,6 @@ define( function( require ) {
       }
     } );
 
-    // Spacing unit used for orientation
-    var spacingUnit = 2;
-
     //Contains all check boxes and radio buttons for vector visibility
     var vectorVisibilityControlsVBox;
 
@@ -149,17 +147,13 @@ define( function( require ) {
     if ( options.showForces ) {
       vectorVisibilityControlsVBox = new VBox( {
           children: [
-            new VStrut( spacingUnit ),
+            new VStrut( 2 ),
             vectorVisibilityCheckBoxGroup,
-            new VStrut( spacingUnit + 8 ),
+            new VStrut( 10 ),
             forcesVisibilityRadioButton,
-            new VStrut( spacingUnit + 8 ),
-            new HBox( {
-              children: [ new HStrut( 15 ),
-                forcesVisibilityCheckBoxGroup
-              ]
-            } ),
-            new VStrut( spacingUnit + 8 ),
+            new VStrut( 10 ),
+            new AlignBox( forcesVisibilityCheckBoxGroup, { leftMargin: 15 } ),
+            new VStrut( 10 ),
             netForceVisibilityRadioButton
           ],
           align: 'left',
@@ -169,13 +163,13 @@ define( function( require ) {
       vectorVBox = new VBox( {
         children: [
           velocityArrow,
-          new VStrut( spacingUnit + 10 ),
+          new VStrut( 14 ),
           accelerationArrow,
-          new VStrut( spacingUnit + 50 ),
+          new VStrut( 52 ),
           gravityArrow,
-          new VStrut( spacingUnit + 12 ),
+          new VStrut( 14 ),
           springArrow,
-          new VStrut( spacingUnit + 20 ),
+          new VStrut( 22 ),
           netForceArrow
         ],
         align: 'left',
@@ -185,9 +179,9 @@ define( function( require ) {
     else {
       vectorVisibilityControlsVBox = new VBox( {
         children: [
-          new VStrut( spacingUnit ),
+          new VStrut( 2 ),
           vectorVisibilityCheckBoxGroup,
-          new VStrut( spacingUnit + 8 )
+          new VStrut( 10 )
         ],
         align: 'left',
         tandem: tandem.createTandem( 'spacingUnit' )
@@ -195,7 +189,7 @@ define( function( require ) {
       vectorVBox = new VBox( {
         children: [
           velocityArrow,
-          new VStrut( spacingUnit + 10 ),
+          new VStrut( 12 ),
           accelerationArrow
         ],
         align: 'left',
