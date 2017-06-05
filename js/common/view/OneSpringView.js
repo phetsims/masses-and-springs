@@ -267,7 +267,6 @@ define( function( require ) {
     );
 
     var energyGraphNode = new EnergyGraphNode( model );
-    this.addChild( energyGraphNode );
 
     var massValueControlPanel = new MassValueControlPanel(
       model.masses.adjustableMass,
@@ -287,6 +286,7 @@ define( function( require ) {
     this.addChild( indicatorVisibilityControlPanel );
     this.addChild( this.gravityAndFrictionControlPanel );
     this.addChild( this.toolboxPanel );
+    this.addChild( energyGraphNode );
 
     // Adding Buttons to scene graph
     this.addChild( this.resetAllButton );

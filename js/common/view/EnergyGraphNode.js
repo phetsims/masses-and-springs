@@ -34,7 +34,9 @@ define( function( require ) {
     AccordionBox.call( this, new VBox( {
       children: [
         content,
-        new VerticalBarChart( barNodes )
+        new VerticalBarChart( barNodes
+          , { width: 100, height: 300 }
+        )
       ]
     } ), {
       titleNode: new Text( 'Energy Graph' )
