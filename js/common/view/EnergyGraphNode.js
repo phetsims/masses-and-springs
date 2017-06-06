@@ -16,6 +16,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var VerticalBarChart = require( 'GRIDDLE/VerticalBarChart' );
   var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
   var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
@@ -47,7 +48,12 @@ define( function( require ) {
       disabledBaseColor: '#EDEDED',
       in: true
     } );
-    var displayButtons = new HBox( { children: [ zoomInButton, zoomOutButton ] } );
+
+    var infoButton = new RectangularPushButton();
+    infoButton.addListener( function() {
+      console.log( 'You pushed me' );
+    } );
+    var displayButtons = new HBox( { children: [ infoButton, zoomInButton, zoomOutButton ] } );
 
     AccordionBox.call( this, new VBox( {
       children: [
