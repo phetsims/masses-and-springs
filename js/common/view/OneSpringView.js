@@ -273,6 +273,7 @@ define( function( require ) {
       tandem.createTandem( 'massValueControlPanel' )
     );
     massValueControlPanel.bottom = this.layoutBounds.getMaxY() - this.topSpacing;
+    massValueControlPanel.left = energyGraphNode.right + this.topSpacing;
 
 
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
