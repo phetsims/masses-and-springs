@@ -16,10 +16,12 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var VStrut = require( 'SCENERY/nodes/VStrut' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var VerticalBarChart = require( 'GRIDDLE/VerticalBarChart' );
   var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
   var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
+  var Dialog = require( 'JOIST/Dialog' );
 
   /**
    * @param {Tandem} tandem
@@ -49,9 +51,19 @@ define( function( require ) {
       in: true
     } );
 
+    var dialogContent = new VBox( {
+      children: [
+        new Text( 'you pushed the info button' ),
+        new VStrut( 10 ),
+        new Text( 'here is your information' ),
+        new VStrut( 10 ),
+        new Text( 'here is some more information' )
+      ]
+    } );
+
     var infoButton = new RectangularPushButton();
     infoButton.addListener( function() {
-      console.log( 'You pushed me' );
+      new Dialog( dialogContent, { modal: true } ).show();
     } );
     var displayButtons = new HBox( { children: [ infoButton, zoomInButton, zoomOutButton ] } );
 
