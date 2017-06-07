@@ -56,10 +56,10 @@ define( function( require ) {
     // Manages the symbols used in the axes of the graph
     var symbolContent = new VBox( {
       children: [
-        new Text( 'KE', { font: MassesAndSpringsConstants.FONT } ),
-        new RichText( 'PE<sub>' + 'grav' + '</sub>', { font: MassesAndSpringsConstants.FONT } ),
-        new RichText( 'PE<sub>' + 'elas' + '</sub>', { font: MassesAndSpringsConstants.FONT } ),
-        new RichText( 'E<sub>' + 'therm' + '</sub>', { font: MassesAndSpringsConstants.FONT } ),
+        new Text( 'KE', { font: MassesAndSpringsConstants.FONT, fill: '#39d74e' } ),
+        new RichText( 'PE<sub>' + 'grav' + '</sub>', { font: MassesAndSpringsConstants.FONT, fill: '#5798de' } ),
+        new RichText( 'PE<sub>' + 'elas' + '</sub>', { font: MassesAndSpringsConstants.FONT, fill: '#29d4ff' } ),
+        new RichText( 'E<sub>' + 'therm' + '</sub>', { font: MassesAndSpringsConstants.FONT, fill: '#ff6e26' } ),
         new RichText( 'E<sub>' + 'tot' + '</sub>', { font: MassesAndSpringsConstants.FONT } )
       ], align: 'left', spacing: 10
     } );
