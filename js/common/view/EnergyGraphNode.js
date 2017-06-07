@@ -13,11 +13,9 @@ define( function( require ) {
   var AccordionBox = require( 'SUN/AccordionBox' );
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var inherit = require( 'PHET_CORE/inherit' );
-  // var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
