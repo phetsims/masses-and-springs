@@ -25,6 +25,7 @@ define( function( require ) {
   var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
   var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
   var Dialog = require( 'JOIST/Dialog' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
 
   /**
    * @param {Tandem} tandem
@@ -57,11 +58,11 @@ define( function( require ) {
     // Manages the symbols used in the axes of the graph
     var symbolContent = new VBox( {
       children: [
-        new Text( 'KE' ),
-        new Text( 'PEgrav' ),
-        new Text( 'PEelas' ),
-        new Text( 'Etherm' ),
-        new Text( 'Etot' )
+        new Text( 'KE', { font: MassesAndSpringsConstants.FONT } ),
+        new RichText( 'PE<sub>' + 'grav' + '</sub>', { font: MassesAndSpringsConstants.FONT } ),
+        new RichText( 'PE<sub>' + 'elas' + '</sub>', { font: MassesAndSpringsConstants.FONT } ),
+        new RichText( 'E<sub>' + 'therm' + '</sub>', { font: MassesAndSpringsConstants.FONT } ),
+        new RichText( 'E<sub>' + 'tot' + '</sub>', { font: MassesAndSpringsConstants.FONT } )
       ], align: 'left', spacing: 10
     } );
 
@@ -73,7 +74,7 @@ define( function( require ) {
         new Text( 'Elastic Potential Energy' ),
         new Text( 'Thermal Energy' ),
         new Text( 'Total Energy' )
-      ], align: 'left', spacing: 10
+      ], align: 'left', spacing: 15
     } );
     var content = new HBox( {
       children: [
