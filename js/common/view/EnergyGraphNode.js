@@ -92,7 +92,10 @@ define( function( require ) {
     infoButton.addListener( function() {
       new Dialog( dialogContent, { modal: true } ).show();
     } );
-    var displayButtons = new HBox( { children: [ infoButton, zoomInButton, zoomOutButton ] } );
+    var displayButtons = new HBox( {
+      children: [ infoButton, new HStrut( 40 ), zoomInButton, zoomOutButton ],
+      spacing: 5
+    } );
 
     AccordionBox.call( this, new VBox( {
       children: [
