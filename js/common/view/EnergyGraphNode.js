@@ -11,12 +11,15 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var AccordionBox = require( 'SUN/AccordionBox' );
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   // var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var VerticalBarChart = require( 'GRIDDLE/VerticalBarChart' );
   var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
@@ -51,14 +54,39 @@ define( function( require ) {
       in: true
     } );
 
+    // Manages the symbols used in the axes of the graph
+    var symbolContent = new VBox( {
+      children: [
+        new Text( 'KE' ),
+        new Text( 'PEgrav' ),
+        new Text( 'PEelas' ),
+        new Text( 'Etherm' ),
+        new Text( 'Etot' )
+      ], align: 'left', spacing: 10
+    } );
+
+    // Manages the description of the symbols
+    var descriptionContent = new VBox( {
+      children: [
+        new Text( 'Kinetic Energy' ),
+        new Text( 'Gravitational Potential Energy' ),
+        new Text( 'Elastic Potential Energy' ),
+        new Text( 'Thermal Energy' ),
+        new Text( 'Total Energy' )
+      ], align: 'left', spacing: 10
+    } );
+    var content = new HBox( {
+      children: [
+        new AlignBox( symbolContent ),
+        new HStrut( 20 ),
+        new AlignBox( descriptionContent )
+      ]
+    } );
     var dialogContent = new VBox( {
       children: [
-        new Text( 'you pushed the info button' ),
-        new VStrut( 10 ),
-        new Text( 'here is your information' ),
-        new VStrut( 10 ),
-        new Text( 'here is some more information' )
-      ]
+        new Text( 'Energy Legend', { font: MassesAndSpringsConstants.TITLE_FONT } ),
+        new AlignBox( content )
+      ], spacing: 10
     } );
 
     var infoButton = new RectangularPushButton();
@@ -71,7 +99,7 @@ define( function( require ) {
       children: [
         new VerticalBarChart( barNodes, { width: 140, height: 400 } ),
         displayButtons
-      ]
+      ], spacing: 8
     } ), {
       titleNode: new Text( 'Energy Graph' )
     } );
