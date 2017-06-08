@@ -38,7 +38,7 @@ define( function( require ) {
       new VerticalBarNode( model.gravityProperty, { fill: 'black', width: 15 } )
     ];
     var zoomInButton = new ZoomButton( {
-      baseColor: '#FFD333',
+      baseColor: '#E7E8E9',
       radius: 8,
       xMargin: 3,
       yMargin: 3,
@@ -46,7 +46,7 @@ define( function( require ) {
       in: false
     } );
     var zoomOutButton = new ZoomButton( {
-      baseColor: '#FFD333',
+      baseColor: '#E7E8E9',
       radius: 8,
       xMargin: 3,
       yMargin: 3,
@@ -90,8 +90,9 @@ define( function( require ) {
     } );
 
     var infoButton = new RectangularPushButton( {
-      baseColor: '#FFD333',
-      radius: 8,
+      baseColor: '#E7E8E9',
+      minWidth: 28,
+      minHeight: 20,
       xMargin: 3,
       yMargin: 3
     } );
@@ -105,7 +106,7 @@ define( function( require ) {
 
     AccordionBox.call( this, new VBox( {
       children: [
-        new VerticalBarChart( barNodes, { width: 140, height: 400 } ),
+        new VerticalBarChart( barNodes, { width: 140, height: 425 } ),
         displayButtons
       ], spacing: 8
     } ), {
