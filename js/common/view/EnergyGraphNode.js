@@ -75,14 +75,14 @@ define( function( require ) {
     } );
     zoomOutButton.addListener( function() {
       self.barNodes.forEach( function( bar ) {
-        bar.setMaxHeight( bar.height * .5 );
+        bar.rectangleNode.rectHeight = bar.height * .5;
       } );
       console.log( 'you pushed me' );
     } );
 
     zoomInButton.addListener( function() {
       self.barNodes.forEach( function( bar ) {
-        bar.setMaxHeight( bar.height * 1.5 );
+        bar.rectangleNode.rectHeight = bar.height * 1.5;
       } );
       console.log( 'you pushed me' );
     } );
