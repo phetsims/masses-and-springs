@@ -78,7 +78,7 @@ define( function( require ) {
     zoomOutButton.addListener( function() {
       self.barNodes.forEach( function( bar ) {
         bar.rectangleNode.setMaxHeight( verticalBarChart.height );
-        bar.rectangleNode.setRect( 0, -bar.height * .5, bar.width, bar.height * .5 );
+        bar.rectangleNode.setRect( 0, -bar.height * 1.5, bar.width, bar.height * 1.5 );
       } );
       console.log( 'you pushed me' );
     } );
@@ -86,7 +86,7 @@ define( function( require ) {
     zoomInButton.addListener( function() {
       self.barNodes.forEach( function( bar ) {
         bar.rectangleNode.setMaxHeight( verticalBarChart.height );
-        bar.rectangleNode.setRect( 0, -bar.height * 1.5, bar.width, bar.height * 1.5 );
+        bar.rectangleNode.setRect( 0, -bar.height * .5, bar.width, bar.height * .5 );
       } );
       console.log( 'you pushed me' );
     } );
