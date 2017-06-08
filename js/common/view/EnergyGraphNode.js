@@ -57,6 +57,7 @@ define( function( require ) {
 
     var verticalBarChart = new VerticalBarChart( this.barNodes, { width: 140, height: 425 } );
 
+    // Creation of zoom in/out buttons
     var zoomInButton = new ZoomButton( {
       baseColor: '#E7E8E9',
       radius: 8,
@@ -108,6 +109,8 @@ define( function( require ) {
         new Text( 'Total Energy' )
       ], align: 'left', spacing: 15
     } );
+
+    // Used to separate the symbols from their corresponding descriptions.
     var content = new HBox( {
       children: [
         new AlignBox( symbolContent ),
@@ -115,6 +118,8 @@ define( function( require ) {
         new AlignBox( descriptionContent )
       ]
     } );
+
+    // Dialog that contains text for graph legend
     var dialogContent = new VBox( {
       children: [
         new Text( 'Energy Legend', { font: MassesAndSpringsConstants.TITLE_FONT } ),
@@ -122,6 +127,7 @@ define( function( require ) {
       ], spacing: 10
     } );
 
+    // Button that pops up dialog box for the graph's legend
     var infoButton = new RectangularPushButton( {
       baseColor: '#E7E8E9',
       minWidth: 28,
@@ -132,6 +138,8 @@ define( function( require ) {
     infoButton.addListener( function() {
       new Dialog( dialogContent, { modal: true } ).show();
     } );
+
+    // Display buttons at the bottom of the graph
     var displayButtons = new HBox( {
       children: [ infoButton, new HStrut( 40 ), zoomInButton, zoomOutButton ],
       spacing: 5
