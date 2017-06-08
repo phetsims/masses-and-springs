@@ -30,13 +30,33 @@ define( function( require ) {
    * @constructor
    */
   function EnergyGraphNode( model, tandem ) {
-    var barNodes = [
-      new VerticalBarNode( model.masses.adjustableMass.massProperty, { fill: '#39d74e', width: 15 } ),
-      new VerticalBarNode( model.springs[ 0 ].springConstantProperty, { fill: '#5798de', width: 15 } ),
-      new VerticalBarNode( model.frictionProperty, { fill: '#29d4ff', width: 15 } ),
-      new VerticalBarNode( model.gravityProperty, { fill: '#ff6e26', width: 15 } ),
-      new VerticalBarNode( model.gravityProperty, { fill: 'black', width: 15 } )
+
+    var self = this;
+
+    // Creation of our different bar nodes to be represented in the graph
+    // TODO: Factor out a function for this.
+    var kineticEnergyBarNode = new VerticalBarNode( model.masses.adjustableMass.massProperty, {
+      fill: '#39d74e',
+      width: 15
+    } );
+    var gravitationalPotentialEnergyBarNode = new VerticalBarNode( model.springs[ 0 ].springConstantProperty, {
+      fill: '#5798de',
+      width: 15
+    } );
+    var elasticPotentialEnergyBarNode = new VerticalBarNode( model.frictionProperty, { fill: '#29d4ff', width: 15 } );
+    var thermalEnergyBarNode = new VerticalBarNode( model.gravityProperty, { fill: '#ff6e26', width: 15 } );
+    var totalEnergyBarNode = new VerticalBarNode( model.gravityProperty, { fill: 'black', width: 15 } );
+
+    this.barNodes = [
+      kineticEnergyBarNode,
+      gravitationalPotentialEnergyBarNode,
+      elasticPotentialEnergyBarNode,
+      thermalEnergyBarNode,
+      totalEnergyBarNode
     ];
+
+    var verticalBarChart = new VerticalBarChart( this.barNodes, { width: 140, height: 425 } );
+
     var zoomInButton = new ZoomButton( {
       baseColor: '#E7E8E9',
       radius: 8,
@@ -52,6 +72,12 @@ define( function( require ) {
       yMargin: 3,
       disabledBaseColor: '#EDEDED',
       in: true
+    } );
+    zoomOutButton.addListener( function() {
+      self.barNodes.forEach( function( bar ) {
+        // bar.height=10*.5;
+      } );
+      console.log( 'you pushed me' );
     } );
 
     // Manages the symbols used in the axes of the graph
@@ -106,7 +132,7 @@ define( function( require ) {
 
     AccordionBox.call( this, new VBox( {
       children: [
-        new VerticalBarChart( barNodes, { width: 140, height: 425 } ),
+        verticalBarChart,
         displayButtons
       ], spacing: 8
     } ), {
