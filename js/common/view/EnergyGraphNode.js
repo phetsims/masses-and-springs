@@ -88,7 +88,12 @@ define( function( require ) {
       ], spacing: 10
     } );
 
-    var infoButton = new RectangularPushButton();
+    var infoButton = new RectangularPushButton( {
+      baseColor: '#FFD333',
+      radius: 8,
+      xMargin: 3,
+      yMargin: 3
+    } );
     infoButton.addListener( function() {
       new Dialog( dialogContent, { modal: true } ).show();
     } );
