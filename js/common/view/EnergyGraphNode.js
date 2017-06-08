@@ -31,10 +31,11 @@ define( function( require ) {
    */
   function EnergyGraphNode( model, tandem ) {
     var barNodes = [
-      new VerticalBarNode( model.masses.adjustableMass.massProperty, { fill: 'red', width: 15 } ),
-      new VerticalBarNode( model.springs[ 0 ].springConstantProperty, { fill: 'black', width: 15 } ),
-      new VerticalBarNode( model.frictionProperty, { fill: 'orange', width: 15 } ),
-      new VerticalBarNode( model.gravityProperty, { width: 15 } )
+      new VerticalBarNode( model.masses.adjustableMass.massProperty, { fill: '#39d74e', width: 15 } ),
+      new VerticalBarNode( model.springs[ 0 ].springConstantProperty, { fill: '#5798de', width: 15 } ),
+      new VerticalBarNode( model.frictionProperty, { fill: '#29d4ff', width: 15 } ),
+      new VerticalBarNode( model.gravityProperty, { fill: '#ff6e26', width: 15 } ),
+      new VerticalBarNode( model.gravityProperty, { fill: 'black', width: 15 } )
     ];
     var zoomInButton = new ZoomButton( {
       baseColor: '#FFD333',
