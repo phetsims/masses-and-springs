@@ -74,16 +74,19 @@ define( function( require ) {
       disabledBaseColor: '#EDEDED',
       in: true
     } );
+
     zoomOutButton.addListener( function() {
       self.barNodes.forEach( function( bar ) {
-        bar.rectangleNode.rectHeight = bar.height * .5;
+        bar.rectangleNode.setMaxHeight( verticalBarChart.height );
+        bar.rectangleNode.setRect( 0, -bar.height * .5, bar.width, bar.height * .5 );
       } );
       console.log( 'you pushed me' );
     } );
 
     zoomInButton.addListener( function() {
       self.barNodes.forEach( function( bar ) {
-        bar.rectangleNode.rectHeight = bar.height * 1.5;
+        bar.rectangleNode.setMaxHeight( verticalBarChart.height );
+        bar.rectangleNode.setRect( 0, -bar.height * 1.5, bar.width, bar.height * 1.5 );
       } );
       console.log( 'you pushed me' );
     } );
