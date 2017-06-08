@@ -27,7 +27,7 @@ define( function( require ) {
    */
   function MassValueControlPanel( mass, tandem ) {
 
-    Panel.call( this, new NumberControl( massString, mass.massProperty, new Range( 50, 300 ), {
+    var numberControl = new NumberControl( massString, mass.massProperty, new Range( 50, 300 ), {
       valuePattern: '{0} g',
       majorTickLength: 10,
       trackSize: new Dimension2( 100, 2 ),
@@ -35,7 +35,9 @@ define( function( require ) {
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       arrowButtonScale: .6,
       tandem: tandem
-    } ), {
+    } );
+
+    Panel.call( this, numberControl, {
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
       maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
       fill: 'rgb( 240, 240, 240 )',
