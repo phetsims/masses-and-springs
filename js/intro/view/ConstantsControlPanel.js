@@ -65,7 +65,7 @@ define( function( require ) {
     } );
 
     var constantText = new Text(
-      StringUtils.format( springConstantString, '' ),
+      StringUtils.fillIn( springConstantString, { spring: '' } ),
       _.extend( { tandem: tandem.createTandem( 'constantText' ) },
         constantsSelectionButtonOptions ) );
     var springConstantRadioButton = new AquaRadioButton( selectedConstantProperty, 'spring-constant', constantText, {

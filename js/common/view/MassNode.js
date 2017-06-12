@@ -62,7 +62,7 @@ define( function( require ) {
 
     this.addChild( rect );
     if ( mass.isLabeled ) {
-      var label = new Text( StringUtils.format( massValueString, mass.mass * 1000 ), {
+      var label = new Text( StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
         fill: 'black',
         centerY: viewBounds.centerY,
@@ -78,7 +78,7 @@ define( function( require ) {
 
       this.mass.massProperty.link( function( massValue ) {
         if ( model.masses.adjustableMass ) {
-          label.setText( StringUtils.format( massValueString, massValue ) );
+          label.setText( StringUtils.fillIn( massValueString, { mass: massValue } ) );
         }
 
         if ( model.masses.adjustableMass && model.masses.adjustableMass.springProperty.get() ) {

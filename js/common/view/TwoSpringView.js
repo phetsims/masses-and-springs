@@ -128,7 +128,7 @@ define( function( require ) {
     this.firstSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
       model.springs[ 0 ].springConstantRange,
-      StringUtils.format( springConstantString, 1 ),
+      StringUtils.fillIn( springConstantString, { spring: 1 } ),
       tandem.createTandem( 'firstSpringConstantControlPanel' ),
       {
         right: this.springHangerNode.left - 40,
@@ -139,7 +139,7 @@ define( function( require ) {
     this.secondSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 1 ].springConstantProperty,
       model.springs[ 1 ].springConstantRange,
-      StringUtils.format( springConstantString, 2 ),
+      StringUtils.fillIn( springConstantString, { spring: 2 } ),
       tandem.createTandem( 'secondSpringConstantControlPanel' ),
       {
         left: this.springHangerNode.right + 40,

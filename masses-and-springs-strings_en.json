@@ -54,10 +54,13 @@
     "value": "Large"
   },
   "springConstant": {
-    "value": "Spring Constant {0}"
+    "value": "Spring Constant {{spring}}"
+  },
+  "length": {
+    "value": "Length {{spring}}"
   },
   "massValue": {
-    "value": "{0} g"
+    "value": "{{mass}} g"
   },
   "mass":{
     "value": "Mass"
