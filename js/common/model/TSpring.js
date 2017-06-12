@@ -14,10 +14,16 @@ define( function( require ) {
   var phetioInherit = require( 'ifphetio!PHET_IO/phetioInherit' );
   var TObject = require( 'ifphetio!PHET_IO/types/TObject' );
 
-  var TSpring = function( instance, phetioID ) {
+  /**
+   *
+   * @param instance
+   * @param phetioID
+   * @constructor
+   */
+  function TSpring( instance, phetioID ) {
     assertInstanceOf( instance, phet.massesAndSprings.Spring );
     TObject.call( this, instance, phetioID );
-  };
+  }
 
   phetioInherit( TObject, 'TSpring', TSpring, {}, {
     toStateObject: function( spring ) {
