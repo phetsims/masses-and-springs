@@ -25,6 +25,9 @@ define( function( require ) {
   var Dialog = require( 'JOIST/Dialog' );
   var RichText = require( 'SCENERY_PHET/RichText' );
 
+  // strings
+  var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
+
   /**
    * @param {Tandem} tandem
    * @constructor
@@ -154,7 +157,7 @@ define( function( require ) {
         displayButtons
       ], spacing: 8
     } ), {
-      titleNode: new Text( 'Energy Graph' )
+      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT } )
     } );
   }
 

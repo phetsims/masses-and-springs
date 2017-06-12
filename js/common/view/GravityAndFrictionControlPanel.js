@@ -27,6 +27,7 @@ define( function( require ) {
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
   var gravityNoneString = require( 'string!MASSES_AND_SPRINGS/gravity.none' );
   var gravityLotsString = require( 'string!MASSES_AND_SPRINGS/gravity.lots' );
+  var frictionString = require( 'string!MASSES_AND_SPRINGS/friction' );
 
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
@@ -135,7 +136,7 @@ define( function( require ) {
           new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
           gravityComboBox,
           this.gravityHSlider,
-          new Text( 'Friction', { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          new Text( frictionString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
           this.frictionHSlider
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )

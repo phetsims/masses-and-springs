@@ -19,6 +19,7 @@ define( function( require ) {
 
   // strings
   var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
+  var gramUnitString = require( 'string!MASSES_AND_SPRINGS/gramUnit' );
 
   /**
    * @param {Mass} mass
@@ -28,7 +29,7 @@ define( function( require ) {
   function MassValueControlPanel( mass, tandem ) {
 
     var numberControl = new NumberControl( massString, mass.massProperty, new Range( 50, 300 ), {
-      valuePattern: '{0} g',
+      valuePattern: '{0}' + gramUnitString,
       majorTickLength: 10,
       trackSize: new Dimension2( 100, 2 ),
       thumbSize: new Dimension2( 13, 22 ),

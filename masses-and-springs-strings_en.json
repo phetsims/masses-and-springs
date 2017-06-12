@@ -59,8 +59,17 @@
   "length": {
     "value": "Length {{spring}}"
   },
+  "energyGraph": {
+    "value": "Energy Graph"
+  },
+  "friction": {
+    "value": "Friction"
+  },
   "massValue": {
     "value": "{{mass}} g"
+  },
+  "gramUnit": {
+    "value": "g"
   },
   "mass":{
     "value": "Mass"
