@@ -57,7 +57,7 @@
     "value": "Spring Constant {{spring}}"
   },
   "length": {
-    "value": "Length {{spring}}"
+    "value": "Spring Length {{spring}}"
   },
   "energyGraph": {
     "value": "Energy Graph"
