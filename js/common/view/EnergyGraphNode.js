@@ -67,7 +67,7 @@ define( function( require ) {
       xMargin: 3,
       yMargin: 3,
       disabledBaseColor: '#EDEDED',
-      in: false
+      in: true
     } );
     var zoomOutButton = new ZoomButton( {
       baseColor: '#E7E8E9',
@@ -75,23 +75,21 @@ define( function( require ) {
       xMargin: 3,
       yMargin: 3,
       disabledBaseColor: '#EDEDED',
-      in: true
+      in: false
     } );
 
     zoomOutButton.addListener( function() {
       self.barNodes.forEach( function( bar ) {
-        bar.rectangleNode.setMaxHeight( verticalBarChart.height );
-        bar.rectangleNode.setRect( 0, -bar.height * 1.5, bar.width, bar.height * 1.5 );
+        bar.rectangleNode.setRectHeight( Math.min( verticalBarChart.maximumHeight, bar.rectangleNode.rectHeight *= .3 ) );
+        bar.rectangleNode.bottom = 0;
       } );
-      console.log( 'you pushed me' );
     } );
 
     zoomInButton.addListener( function() {
       self.barNodes.forEach( function( bar ) {
-        bar.rectangleNode.setMaxHeight( verticalBarChart.height );
-        bar.rectangleNode.setRect( 0, -bar.height * .5, bar.width, bar.height * .5 );
+        bar.rectangleNode.setRectHeight( Math.min( verticalBarChart.maximumHeight, bar.rectangleNode.rectHeight /= .3 ) );
+        bar.rectangleNode.bottom = 0;
       } );
-      console.log( 'you pushed me' );
     } );
 
     // Manages the symbols used in the axes of the graph
@@ -147,7 +145,7 @@ define( function( require ) {
 
     // Display buttons at the bottom of the graph
     var displayButtons = new HBox( {
-      children: [ infoButton, new HStrut( 40 ), zoomInButton, zoomOutButton ],
+      children: [ infoButton, new HStrut( 40 ), zoomOutButton, zoomInButton ],
       spacing: 5
     } );
 
