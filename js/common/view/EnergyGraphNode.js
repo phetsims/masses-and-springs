@@ -18,6 +18,7 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Property = require( 'AXON/Property' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var VerticalBarChart = require( 'GRIDDLE/VerticalBarChart' );
@@ -25,6 +26,9 @@ define( function( require ) {
   var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
   var Dialog = require( 'JOIST/Dialog' );
   var RichText = require( 'SCENERY_PHET/RichText' );
+
+  // constants
+  var MAXIMUM_HEIGHT = 425;
 
   // strings
   var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
@@ -35,21 +39,47 @@ define( function( require ) {
    */
   function EnergyGraphNode( model, tandem ) {
 
-    var self = this;
+    // Zoom levels are based on powers of two (i.e. 1x, 2x, 4x, 8x, 16x). The Min/Max scales and scale factor
+    // must always be a power of two.
+    // TODO: Check this over with design team.
+    var MIN_SCALE = 1;
+    var MAX_SCALE = 8;
+
+
+    //Add documentation
+    var zoomLevelProperty = new Property( 0 );
+
+    var scaleFactorProperty = new DerivedProperty( [ zoomLevelProperty ], function( zoomLevel ) {
+      return Math.pow( 2, zoomLevel );
+    } );
+
+    var createScaledBarHeight = function( property ) {
+      var derivedProperty = new DerivedProperty( [ property, scaleFactorProperty ],
+        function( value, scale ) {
+          return Math.min( MAXIMUM_HEIGHT, value * scale );
+        } );
+      return derivedProperty;
+    };
+
+    var KEBarHeight = createScaledBarHeight( model.masses.adjustableMass.massProperty );
+    var GPEBarHeight = createScaledBarHeight( model.springs[ 0 ].springConstantProperty );
+    var EPBarHeight = createScaledBarHeight( model.frictionProperty );
+    var ThermalEnergyBarHeight = createScaledBarHeight( model.gravityProperty );
+    var TotalEnergyBarHeight = createScaledBarHeight( model.gravityProperty );
 
     // Creation of our different bar nodes to be represented in the graph
     // TODO: Factor out a function for this.
-    var kineticEnergyBarNode = new VerticalBarNode( model.masses.adjustableMass.massProperty, {
+    var kineticEnergyBarNode = new VerticalBarNode( KEBarHeight, {
       fill: '#39d74e',
       width: 15
     } );
-    var gravitationalPotentialEnergyBarNode = new VerticalBarNode( model.springs[ 0 ].springConstantProperty, {
+    var gravitationalPotentialEnergyBarNode = new VerticalBarNode( GPEBarHeight, {
       fill: '#5798de',
       width: 15
     } );
-    var elasticPotentialEnergyBarNode = new VerticalBarNode( model.frictionProperty, { fill: '#29d4ff', width: 15 } );
-    var thermalEnergyBarNode = new VerticalBarNode( model.gravityProperty, { fill: '#ff6e26', width: 15 } );
-    var totalEnergyBarNode = new VerticalBarNode( model.gravityProperty, { fill: 'black', width: 15 } );
+    var elasticPotentialEnergyBarNode = new VerticalBarNode( EPBarHeight, { fill: '#29d4ff', width: 15 } );
+    var thermalEnergyBarNode = new VerticalBarNode( ThermalEnergyBarHeight, { fill: '#ff6e26', width: 15 } );
+    var totalEnergyBarNode = new VerticalBarNode( TotalEnergyBarHeight, { fill: 'black', width: 15 } );
 
     this.barNodes = [
       kineticEnergyBarNode,
@@ -59,7 +89,7 @@ define( function( require ) {
       totalEnergyBarNode
     ];
 
-    var verticalBarChart = new VerticalBarChart( this.barNodes, { width: 140, height: 425 } );
+    var verticalBarChart = new VerticalBarChart( this.barNodes, { width: 140, height: MAXIMUM_HEIGHT } );
 
     // Creation of zoom in/out buttons
     var zoomInButton = new ZoomButton( {
@@ -79,50 +109,18 @@ define( function( require ) {
       in: false
     } );
 
-    // Zoom levels are based on powers of two (i.e. 1x, 2x, 4x, 8x, 16x). The Min/Max scales and scale factor
-    // must always be a power of two.
-    // TODO: Check this over with design team.
-    var MIN_SCALE = 1;
-    var MAX_SCALE = 8;
-    var zoomLevel = 0;
-    var scaleFactor = new Property( Math.pow( 2, zoomLevel ) );
-
-    var updateBarView = function( bar, zoomLevel, zoomInOrOut ) {
-      if ( zoomInOrOut === 'in' ) {
-        bar.rectangleNode.setRectHeight( Math.min( verticalBarChart.maximumHeight, bar.property.value * scaleFactor.get() ) );
-        bar.rectangleNode.bottom = 0;
-      }
-      else if ( zoomInOrOut === 'out' ) {
-        bar.rectangleNode.setRectHeight( Math.min( verticalBarChart.maximumHeight, bar.property.value / scaleFactor.get() ) );
-        bar.rectangleNode.bottom = 0;
-      }
-    };
-
-    // Zooming out means bars get smaller. Zoom level gets smaller.
+    // Zooming out means bars and zoom level gets smaller.
     zoomOutButton.addListener( function() {
-      zoomLevel -= 1;
-      scaleFactor.set( Math.pow( 2, zoomLevel ) );
-      console.log( 'zoomLevel = ' + zoomLevel );
-      console.log( 'scaleFactor = ' + scaleFactor.get() );
-      self.barNodes.forEach( function( bar ) {
-        updateBarView( bar, zoomLevel, 'out' );
-      } );
+      zoomLevelProperty.value -= 1;
     } );
 
-    // Zooming in means bars get larger. Zoom level gets larger.
+    // Zooming in means bars and zoom level gets larger.
     zoomInButton.addListener( function() {
-      zoomLevel += 1;
-      scaleFactor.set( Math.pow( 2, zoomLevel ) );
-
-      console.log( 'zoomLevel = ' + zoomLevel );
-      console.log( 'scaleFactor = ' + scaleFactor.get() );
-      self.barNodes.forEach( function( bar ) {
-        updateBarView( bar, zoomLevel, 'in' );
-      } );
+      zoomLevelProperty.value += 1;
     } );
 
     // Provides a limit on the scale
-    scaleFactor.link( function( value ) {
+    scaleFactorProperty.link( function( value ) {
       zoomOutButton.setEnabled( value !== MIN_SCALE );
       zoomInButton.setEnabled( value !== MAX_SCALE );
     } );
@@ -138,7 +136,7 @@ define( function( require ) {
       ], align: 'left', spacing: 10
     } );
 
-    // Manages the descarleription of the symbols
+    // Manages the description of the symbols
     var descriptionContent = new VBox( {
       children: [
         new Text( 'Kinetic Energy' ),
