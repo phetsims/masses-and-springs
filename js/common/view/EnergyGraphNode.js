@@ -56,30 +56,44 @@ define( function( require ) {
     var createScaledBarHeight = function( property ) {
       var derivedProperty = new DerivedProperty( [ property, scaleFactorProperty ],
         function( value, scale ) {
-          return Math.min( MAXIMUM_HEIGHT, value * scale );
+          return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale );
         } );
       return derivedProperty;
     };
 
-    var KEBarHeight = createScaledBarHeight( model.masses.adjustableMass.massProperty );
+    var KEBarHeight = createScaledBarHeight( model.masses.adjustableMass.accelerationProperty );
     var GPEBarHeight = createScaledBarHeight( model.springs[ 0 ].springConstantProperty );
     var EPBarHeight = createScaledBarHeight( model.frictionProperty );
-    var ThermalEnergyBarHeight = createScaledBarHeight( model.gravityProperty );
+    var ThermalEnergyBarHeight = createScaledBarHeight( model.masses.adjustableMass.verticalVelocityProperty );
     var TotalEnergyBarHeight = createScaledBarHeight( model.gravityProperty );
 
     // Creation of our different bar nodes to be represented in the graph
     // TODO: Factor out a function for this.
     var kineticEnergyBarNode = new VerticalBarNode( KEBarHeight, {
       fill: '#39d74e',
-      width: 15
+      width: 15,
+      displayContinuousArrow: true
     } );
     var gravitationalPotentialEnergyBarNode = new VerticalBarNode( GPEBarHeight, {
       fill: '#5798de',
-      width: 15
+      width: 15,
+      displayContinuousArrow: true
     } );
-    var elasticPotentialEnergyBarNode = new VerticalBarNode( EPBarHeight, { fill: '#29d4ff', width: 15 } );
-    var thermalEnergyBarNode = new VerticalBarNode( ThermalEnergyBarHeight, { fill: '#ff6e26', width: 15 } );
-    var totalEnergyBarNode = new VerticalBarNode( TotalEnergyBarHeight, { fill: 'black', width: 15 } );
+    var elasticPotentialEnergyBarNode = new VerticalBarNode( EPBarHeight, {
+      fill: '#29d4ff',
+      width: 15,
+      displayContinuousArrow: true
+    } );
+    var thermalEnergyBarNode = new VerticalBarNode( ThermalEnergyBarHeight, {
+      fill: '#ff6e26',
+      width: 15,
+      displayContinuousArrow: true
+    } );
+    var totalEnergyBarNode = new VerticalBarNode( TotalEnergyBarHeight, {
+      fill: 'black',
+      width: 15,
+      displayContinuousArrow: true
+    } );
 
     this.barNodes = [
       kineticEnergyBarNode,
