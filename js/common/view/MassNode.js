@@ -59,10 +59,12 @@ define( function( require ) {
         .addColorStop( 0.2, 'rgb(205, 206, 207)' )
         .addColorStop( .7, mass.color )
     } );
-
     this.addChild( rect );
-    if ( mass.isLabeled ) {
-      var label = new Text( StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } ), {
+
+
+    var labelString;
+    var createLabel = function( labelString ) {
+      var label = new Text( labelString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         fill: 'black',
         centerY: viewBounds.centerY,
@@ -73,23 +75,34 @@ define( function( require ) {
       } );
 
       var labelBackground = Rectangle.bounds( label.bounds, { fill: '#D3D3D3' } );
-      this.addChild( labelBackground );
-      this.addChild( label );
+      self.addChild( labelBackground );
+      self.addChild( label );
 
-      this.mass.massProperty.link( function( massValue ) {
+      self.mass.massProperty.link( function( massValue ) {
         if ( model.masses.adjustableMass ) {
           label.setText( StringUtils.fillIn( massValueString, { mass: massValue } ) );
         }
-
         if ( model.masses.adjustableMass && model.masses.adjustableMass.springProperty.get() ) {
           model.masses.adjustableMass.springProperty.get().animatingProperty.set( true );
         }
       } );
+    };
+
+    // TODO: Short-hand?
+    if ( mass.specificLabel === null ) {
+      labelString = StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
+      createLabel( labelString );
+    }
+    else if ( mass.specificLabel !== null ) {
+      labelString = mass.specificLabel;
+      createLabel( labelString );
     }
 
-    this.mass.positionProperty.link( function( position ) {
-      self.translation = modelViewTransform2.modelToViewPosition( position );
-    } );
+    if ( mass.isLabeled ) {
+      this.mass.positionProperty.link( function( position ) {
+        self.translation = modelViewTransform2.modelToViewPosition( position );
+      } );
+    }
 
     var modelOffset;
 

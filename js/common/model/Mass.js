@@ -36,8 +36,15 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @constructor
    */
-  function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem ) {
+  function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem, options ) {
+    options = _.extend( {
+      specificLabel: null
+    }, options );
+    
     var self = this;
+
+    // String that can be assigned as a label for any mass
+    this.specificLabel = options.specificLabel;
 
     this.initialPosition = initialPosition;
 
@@ -118,7 +125,7 @@ define( function( require ) {
     this.color = color;
     this.hookHeight = 0.03; // height in m
     var scalingFactor = 4; // scales the radius to desired size
-    this.radius = (Math.pow( this.mass / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
+    this.radius = (Math.pow( (this.mass - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
     this.cylinderHeight = (this.radius) * HEIGHT_RATIO;
     this.height = this.cylinderHeight + this.hookHeight;
 
