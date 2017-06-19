@@ -26,7 +26,6 @@ define( function( require ) {
     // REVIEW: I don't know why but bracket notation doesn't work for this. ( this.masses[redMass]=redMass)
     this.masses.redMass = redMass;
     this.masses.greenMass = greenMass;
-    debugger;
   }
 
   massesAndSprings.register( 'LabModel', LabModel );

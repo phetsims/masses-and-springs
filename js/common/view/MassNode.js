@@ -20,6 +20,8 @@ define( function( require ) {
   var ArrowNodeCreator = require( 'MASSES_AND_SPRINGS/common/util/ArrowNodeCreator' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var Shape = require( 'KITE/Shape' );
   var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
   var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -45,29 +47,51 @@ define( function( require ) {
 
     this.mass = mass;
 
-    var viewBounds = new Bounds2(
+    // TODO: factor out the hook from the height.
+    var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
+    var rectangleBounds = new Bounds2(
       modelViewTransform2.modelToViewDeltaX( -mass.radius ),
-      0,
+      hookHeight,
       modelViewTransform2.modelToViewDeltaX( mass.radius ),
-      modelViewTransform2.modelToViewDeltaY( -mass.height )
+      modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight
     );
-    var rect = Rectangle.bounds( viewBounds, {
+    var rect = Rectangle.bounds( rectangleBounds, {
       stroke: 'black',
       lineWidth: .5,
-      fill: new LinearGradient( viewBounds.minX, 0, viewBounds.maxX, 0 )
+      fill: new LinearGradient( rectangleBounds.minX, 0, rectangleBounds.maxX, 0 )
         .addColorStop( 0.1, mass.color )
         .addColorStop( 0.2, 'rgb(205, 206, 207)' )
         .addColorStop( .7, mass.color )
     } );
     this.addChild( rect );
 
+    // Creation of hook
+    // var hookNode = new Rectangle( 0, 0, rectangleBounds.width * .1, hookHeight, {
+    //   fill: mass.color,
+    //   centerX: rectangleBounds.centerX,
+    //   bottom: rectangleBounds.top
+    // } );
+
+    // TODO: Change the attachment point to respond to hook, not the mass.
+    var hookShape = new Shape();
+    var radius = hookHeight / 4;
+    hookShape.arc( 0, 0, radius, Math.PI, (1 / 2 * Math.PI) );
+    hookShape.lineTo( 0, hookHeight / 2 );
+    var hookNode = new Path( hookShape, {
+      stroke: mass.color,
+      lineWidth: 2,
+      lineCap: 'round',
+      centerX: rectangleBounds.centerX,
+      bottom: rectangleBounds.top
+    } );
+    this.addChild( hookNode );
 
     var labelString;
     var createLabel = function( labelString ) {
       var label = new Text( labelString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         fill: 'black',
-        centerY: viewBounds.centerY,
+        centerY: rectangleBounds.centerY,
         centerX: 0,
         pickable: false,
         maxWidth: 50,
@@ -98,11 +122,9 @@ define( function( require ) {
       createLabel( labelString );
     }
 
-    if ( mass.isLabeled ) {
-      this.mass.positionProperty.link( function( position ) {
-        self.translation = modelViewTransform2.modelToViewPosition( position );
-      } );
-    }
+    this.mass.positionProperty.link( function( position ) {
+      self.translation = modelViewTransform2.modelToViewPosition( position );
+    } );
 
     var modelOffset;
 

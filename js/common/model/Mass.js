@@ -20,6 +20,7 @@ define( function( require ) {
 
   // constants
   var HEIGHT_RATIO = 2;
+  var HOOK_HEIGHT_RATIO = .75;
   var DENSITY = 80; // Constant used to keep all of our masses consistant in the model.
 
   // phet-io modules
@@ -40,7 +41,7 @@ define( function( require ) {
     options = _.extend( {
       specificLabel: null
     }, options );
-    
+
     var self = this;
 
     // String that can be assigned as a label for any mass
@@ -119,14 +120,13 @@ define( function( require ) {
       self.accelerationProperty.set( netForce / self.mass );
     } );
 
-
     // @public {read-only} Non property model attributes
     this.isLabeled = isLabeled;
     this.color = color;
-    this.hookHeight = 0.03; // height in m
     var scalingFactor = 4; // scales the radius to desired size
     this.radius = (Math.pow( (this.mass - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
-    this.cylinderHeight = (this.radius) * HEIGHT_RATIO;
+    this.cylinderHeight = this.radius * HEIGHT_RATIO; // height in m
+    this.hookHeight = this.radius * HOOK_HEIGHT_RATIO; // height in m
     this.height = this.cylinderHeight + this.hookHeight;
 
     this.userControlledProperty.link( function( userControlled ) {
