@@ -13,7 +13,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var Emitter = require( 'AXON/Emitter' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
