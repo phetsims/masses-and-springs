@@ -65,13 +65,6 @@ define( function( require ) {
     } );
     this.addChild( rect );
 
-    // Creation of hook
-    // var hookNode = new Rectangle( 0, 0, rectangleBounds.width * .1, hookHeight, {
-    //   fill: mass.color,
-    //   centerX: rectangleBounds.centerX,
-    //   bottom: rectangleBounds.top
-    // } );
-
     // TODO: Change the attachment point to respond to hook, not the mass.
     var hookShape = new Shape();
     var radius = hookHeight / 4;
