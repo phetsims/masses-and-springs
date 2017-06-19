@@ -188,25 +188,21 @@ define( function( require ) {
       this.springs = [ createSpring( RIGHT_SPRING_X, tandem.createTandem( 'spring' ) ) ];
     }
 
-    var createMass = function( mass, xPosition, labelVisible, color, tandem ) {
-      return new Mass( mass, new Vector2( xPosition, .5 ), labelVisible, color, self.gravityProperty, tandem );
-    };
-
     // @public (read-only) model of masses used throughout the sim
     if ( options.springCount === 2 ) {
       this.masses = {
-        largeLabeledMass: createMass( .250, .12, true, 'grey', tandem.createTandem( 'largeLabeledMass' ) ),
-        mediumLabeledMass1: createMass( .100, .20, true, 'grey', tandem.createTandem( 'mediumLabeledMass1' ) ),
-        mediumLabeledMass2: createMass( .100, .28, true, 'grey', tandem.createTandem( 'mediumLabeledMass2' ) ),
-        smallLabeledMass: createMass( .050, .33, true, 'grey', tandem.createTandem( 'smallLabeledMass' ) ),
-        largeUnlabeledMass: createMass( .200, .63, false, 'blue', tandem.createTandem( 'largeUnlabeledMass' ) ),
-        mediumUnlabeledMass: createMass( .150, .56, false, 'green', tandem.createTandem( 'mediumUnlabeledMass' ) ),
-        smallUnlabeledMass: createMass( .075, .49, false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
+        largeLabeledMass: this.createMass( .250, .12, true, 'grey', tandem.createTandem( 'largeLabeledMass' ) ),
+        mediumLabeledMass1: this.createMass( .100, .20, true, 'grey', tandem.createTandem( 'mediumLabeledMass1' ) ),
+        mediumLabeledMass2: this.createMass( .100, .28, true, 'grey', tandem.createTandem( 'mediumLabeledMass2' ) ),
+        smallLabeledMass: this.createMass( .050, .33, true, 'grey', tandem.createTandem( 'smallLabeledMass' ) ),
+        largeUnlabeledMass: this.createMass( .200, .63, false, 'blue', tandem.createTandem( 'largeUnlabeledMass' ) ),
+        mediumUnlabeledMass: this.createMass( .150, .56, false, 'green', tandem.createTandem( 'mediumUnlabeledMass' ) ),
+        smallUnlabeledMass: this.createMass( .075, .49, false, 'red', tandem.createTandem( 'smallUnlabeledMass' ) )
       };
     }
     else if ( options.springCount === 1 ) {
       this.masses = {
-        adjustableMass: createMass( .100,
+        adjustableMass: this.createMass( .100,
           this.springs[ 0 ].positionProperty.get().x,
           true,
           'rgb(  247, 151, 34 )',
@@ -287,6 +283,10 @@ define( function( require ) {
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
 
+    createMass: function( mass, xPosition, labelVisible, color, tandem ) {
+      return new Mass( mass, new Vector2( xPosition, .5 ), labelVisible, color, this.gravityProperty, tandem );
+    },
+
     /**
      * Based on new dragged position of mass, try to attach or detach mass if eligible and then update position.
      *
@@ -352,7 +352,8 @@ define( function( require ) {
         mass.verticalVelocityProperty.set( 0 );
         mass.accelerationProperty.set( 0 );
       }
-    },
+    }
+    ,
 
     /**
      * Responsible for stepping through sim at 1/60th speed and paused after step.
@@ -362,7 +363,8 @@ define( function( require ) {
       this.playingProperty.set( true );
       this.step( 1 / 60 );// steps the nominal amount used by step forward button listener
       this.playingProperty.set( false );
-    },
+    }
+    ,
 
     /**
      * @param {number} dt
@@ -388,7 +390,7 @@ define( function( require ) {
             break;
           default:
             assert( false, 'invalid setting for model speed' );
-        }
+      }
       }
       if ( this.playingProperty.get() === true ) {
         _.values( this.masses ).forEach( function( mass ) {
@@ -396,20 +398,21 @@ define( function( require ) {
           // Fall if not hung or grabbed
           if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
             mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );
-          }
+        }
         } );
         if ( this.timerRunningProperty.get() ) {
           this.timerSecondProperty.set( this.timerSecondProperty.get() + dt );
-        }
+      }
 
         // Oscillate springs
         this.springs.forEach( function( spring ) {
           if ( spring.massProperty.get() && !spring.massProperty.get().userControlledProperty.get() &&
                spring.animatingProperty.get() ) {
             spring.stepOscillate( dt );
-          }
+        }
         } );
-      }
     }
-  } );
+    }
+  } )
+    ;
 } );

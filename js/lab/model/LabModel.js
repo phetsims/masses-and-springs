@@ -20,6 +20,9 @@ define( function( require ) {
    */
   function LabModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem, { springCount: 1, showVectors: true } );
+
+    var redMass = this.createMass( .250, .12, false, 'green', tandem.createTandem( 'largeLabeledMass' ) );
+    this.masses
   }
 
   massesAndSprings.register( 'LabModel', LabModel );
