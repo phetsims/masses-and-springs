@@ -27,12 +27,13 @@ define( function( require ) {
   var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
   var Dialog = require( 'JOIST/Dialog' );
   var RichText = require( 'SCENERY_PHET/RichText' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   // constants
   var MAXIMUM_HEIGHT = 425;
 
   // strings
-  var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
+  var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
 
   /**
    * @param {Tandem} tandem
@@ -44,7 +45,7 @@ define( function( require ) {
     // must always be a power of two.
     // TODO: Check this over with design team.
     var MIN_SCALE = 1;
-    var MAX_SCALE = 8;
+    var MAX_SCALE = 32;
 
 
     //Add documentation
@@ -104,7 +105,11 @@ define( function( require ) {
       totalEnergyBarNode
     ];
 
-    var verticalBarChart = new VerticalBarChart( this.barNodes, { width: 140, height: MAXIMUM_HEIGHT } );
+    var verticalBarChart = new VerticalBarChart( this.barNodes, {
+      width: 140,
+      height: MAXIMUM_HEIGHT,
+      title: energyString
+    } );
 
     // Creation of zoom in/out buttons
     var zoomInButton = new ZoomButton( {
@@ -132,12 +137,6 @@ define( function( require ) {
     // Zooming in means bars and zoom level gets larger.
     zoomInButton.addListener( function() {
       zoomLevelProperty.value += 1;
-    } );
-
-    // Provides a limit on the scale
-    scaleFactorProperty.link( function( value ) {
-      zoomOutButton.setEnabled( value !== MIN_SCALE );
-      zoomInButton.setEnabled( value !== MAX_SCALE );
     } );
 
     // Manages the symbols used in the axes of the graph
@@ -192,19 +191,31 @@ define( function( require ) {
       new Dialog( dialogContent, { modal: true } ).show();
     } );
 
+    var zoomReadout = new Text( scaleFactorProperty.get() + 'x', {
+      font: new PhetFont( { size: 18, weight: 'bold' } ),
+      maxWidth: 18
+    } );
     // Display buttons at the bottom of the graph
-    var displayButtons = new HBox( {
-      children: [ infoButton, new HStrut( 40 ), zoomOutButton, zoomInButton ],
+    var displayOptions = new HBox( {
+      children: [ infoButton, new HStrut( 20 ), zoomReadout, zoomOutButton, zoomInButton ],
       spacing: 5
     } );
 
+    // Provides a limit on the scale
+    scaleFactorProperty.link( function( value ) {
+      zoomReadout.text = (value + 'x');
+      zoomOutButton.setEnabled( value !== MIN_SCALE );
+      zoomInButton.setEnabled( value !== MAX_SCALE );
+    } );
+
+    // REVIEW: Not having an option for the accordion box gives me a tandem error.
     AccordionBox.call( this, new VBox( {
       children: [
         verticalBarChart,
-        displayButtons
+        displayOptions
       ], spacing: 8
     } ), {
-      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT } )
+      titleNode: new Text( '', { font: MassesAndSpringsConstants.TITLE_FONT } )
     } );
   }
 

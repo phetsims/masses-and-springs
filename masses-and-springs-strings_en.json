@@ -59,9 +59,6 @@
   "length": {
     "value": "Spring Length {{spring}}"
   },
-  "energyGraph": {
-    "value": "Energy Graph"
-  },
   "friction": {
     "value": "Friction"
   },
