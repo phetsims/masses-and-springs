@@ -16,6 +16,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Property = require( 'AXON/Property' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
@@ -180,6 +181,7 @@ define( function( require ) {
 
     // Button that pops up dialog box for the graph's legend
     var infoButton = new RectangularPushButton( {
+      content: new FontAwesomeNode( 'info_circle', { scale: 0.55 } ),
       baseColor: '#E7E8E9',
       minWidth: 28,
       minHeight: 20,
