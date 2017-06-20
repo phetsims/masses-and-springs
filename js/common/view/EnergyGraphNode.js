@@ -61,7 +61,7 @@ define( function( require ) {
       return derivedProperty;
     };
 
-    var KEBarHeight = createScaledBarHeight( model.masses.adjustableMass.accelerationProperty );
+    var KEBarHeight = createScaledBarHeight( model.masses.adjustableMass.massProperty );
     var GPEBarHeight = createScaledBarHeight( model.springs[ 0 ].springConstantProperty );
     var EPBarHeight = createScaledBarHeight( model.frictionProperty );
     var ThermalEnergyBarHeight = createScaledBarHeight( model.masses.adjustableMass.verticalVelocityProperty );
