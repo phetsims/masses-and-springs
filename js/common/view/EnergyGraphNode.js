@@ -31,10 +31,16 @@ define( function( require ) {
 
   // constants
   var MAXIMUM_HEIGHT = 425;
+  var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
 
   // strings
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
   var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
+  var kineticEnergyString = require( 'string!MASSES_AND_SPRINGS/kineticEnergy' );
+  var gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
+  var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
+  var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
+  var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
 
   /**
    * @param {Tandem} tandem
@@ -109,7 +115,7 @@ define( function( require ) {
     var verticalBarChart = new VerticalBarChart( this.barNodes, {
       width: 140,
       height: MAXIMUM_HEIGHT,
-      title: energyString
+      title: new Text( energyString, { maxWidth: 100 } )
     } );
 
     // Creation of zoom in/out buttons
@@ -152,13 +158,14 @@ define( function( require ) {
     } );
 
     // Manages the description of the symbols
+
     var descriptionContent = new VBox( {
       children: [
-        new Text( 'Kinetic Energy' ),
-        new Text( 'Gravitational Potential Energy' ),
-        new Text( 'Elastic Potential Energy' ),
-        new Text( 'Thermal Energy' ),
-        new Text( 'Total Energy' )
+        new Text( kineticEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } ),
+        new Text( gravitationalPotentialEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } ),
+        new Text( elasticPotentialEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } ),
+        new Text( thermalEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } ),
+        new Text( totalEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } )
       ], align: 'left', spacing: 15
     } );
 
@@ -216,7 +223,7 @@ define( function( require ) {
         displayOptions
       ], spacing: 8
     } ), {
-      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT } )
+      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 150 } )
     } );
   }
 

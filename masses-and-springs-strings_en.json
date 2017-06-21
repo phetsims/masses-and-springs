@@ -11,6 +11,21 @@
   "constant": {
     "value": "Constant"
   },
+  "kineticEnergy": {
+    "value": "Kinetic Energy"
+  },
+  "gravitationalPotentialEnergy": {
+    "value": "Gravitational Potential Energy"
+  },
+  "elasticPotentialEnergy": {
+    "value": "Elastic Potential Energy"
+  },
+  "thermalEnergy": {
+    "value": "Thermal Energy"
+  },
+  "totalEnergy": {
+    "value": "Total Energy"
+  },
   "vector": {
     "value": "Vector"
   },
