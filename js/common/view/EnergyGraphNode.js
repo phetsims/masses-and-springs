@@ -32,15 +32,21 @@ define( function( require ) {
   // constants
   var MAXIMUM_HEIGHT = 425;
   var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
+  var MAX_WIDTH = 150;
 
   // strings
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
   var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
   var kineticEnergyString = require( 'string!MASSES_AND_SPRINGS/kineticEnergy' );
+  var KEString = require( 'string!MASSES_AND_SPRINGS/KE' );
   var gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
+  var PeGravString = require( 'string!MASSES_AND_SPRINGS/PeGrav' );
   var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
+  var PeElasString = require( 'string!MASSES_AND_SPRINGS/PeElas' );
   var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
+  var EThermString = require( 'string!MASSES_AND_SPRINGS/ETherm' );
   var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
+  var TTotString = require( 'string!MASSES_AND_SPRINGS/TTot' );
   var energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
 
   /**
@@ -115,7 +121,8 @@ define( function( require ) {
     var verticalBarChart = new VerticalBarChart( this.barNodes, {
       width: 140,
       height: MAXIMUM_HEIGHT,
-      title: new Text( energyString, { maxWidth: 100 } )
+      title: new Text( energyString, { maxWidth: 100 } ),
+      titleFill: '#b37e46'
     } );
 
     // Creation of zoom in/out buttons
@@ -149,11 +156,11 @@ define( function( require ) {
     // Manages the symbols used in the axes of the graph
     var symbolContent = new VBox( {
       children: [
-        new Text( 'KE', { font: MassesAndSpringsConstants.FONT, fill: '#39d74e' } ),
-        new RichText( 'PE<sub>' + 'grav' + '</sub>', { font: MassesAndSpringsConstants.FONT, fill: '#5798de' } ),
-        new RichText( 'PE<sub>' + 'elas' + '</sub>', { font: MassesAndSpringsConstants.FONT, fill: '#29d4ff' } ),
-        new RichText( 'E<sub>' + 'therm' + '</sub>', { font: MassesAndSpringsConstants.FONT, fill: '#ff6e26' } ),
-        new RichText( 'E<sub>' + 'tot' + '</sub>', { font: MassesAndSpringsConstants.FONT } )
+        new Text( KEString, { font: MassesAndSpringsConstants.FONT, fill: '#39d74e', maxWidth: MAX_WIDTH } ),
+        new RichText( PeGravString, { font: MassesAndSpringsConstants.FONT, fill: '#5798de', maxWidth: MAX_WIDTH } ),
+        new RichText( PeElasString, { font: MassesAndSpringsConstants.FONT, fill: '#29d4ff', maxWidth: MAX_WIDTH } ),
+        new RichText( EThermString, { font: MassesAndSpringsConstants.FONT, fill: '#ff6e26', maxWidth: MAX_WIDTH } ),
+        new RichText( TTotString, { font: MassesAndSpringsConstants.FONT, maxWidth: MAX_WIDTH } )
       ], align: 'left', spacing: 10
     } );
 
@@ -181,7 +188,7 @@ define( function( require ) {
     // Dialog that contains text for graph legend
     var dialogContent = new VBox( {
       children: [
-        new Text( energyLegendString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 150 } ),
+        new Text( energyLegendString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } ),
         new AlignBox( content )
       ], spacing: 10
     } );
@@ -212,6 +219,7 @@ define( function( require ) {
     // Provides a limit on the scale
     scaleFactorProperty.link( function( value ) {
       zoomReadout.text = (value + 'x');
+
       zoomOutButton.setEnabled( value !== MIN_SCALE );
       zoomInButton.setEnabled( value !== MAX_SCALE );
     } );
@@ -223,7 +231,7 @@ define( function( require ) {
         displayOptions
       ], spacing: 8
     } ), {
-      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 150 } )
+      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
     } );
   }
 
