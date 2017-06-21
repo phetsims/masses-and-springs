@@ -34,6 +34,7 @@ define( function( require ) {
 
   // strings
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
+  var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
 
   /**
    * @param {Tandem} tandem
@@ -215,7 +216,7 @@ define( function( require ) {
         displayOptions
       ], spacing: 8
     } ), {
-      titleNode: new Text( '', { font: MassesAndSpringsConstants.TITLE_FONT } )
+      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT } )
     } );
   }
 

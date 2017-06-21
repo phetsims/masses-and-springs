@@ -17,6 +17,9 @@
   "energy": {
     "value": "Energy"
   },
+  "energyGraph": {
+    "value": "Energy Graph"
+  },
   "equilibriumPosition": {
     "value": "Equilibrium Position"
   },
