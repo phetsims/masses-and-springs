@@ -41,6 +41,7 @@ define( function( require ) {
   var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
   var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
   var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
+  var energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
 
   /**
    * @param {Tandem} tandem
@@ -53,7 +54,6 @@ define( function( require ) {
     // TODO: Check this over with design team.
     var MIN_SCALE = 1;
     var MAX_SCALE = 32;
-
 
     //Add documentation
     var zoomLevelProperty = new Property( 0 );
@@ -181,7 +181,7 @@ define( function( require ) {
     // Dialog that contains text for graph legend
     var dialogContent = new VBox( {
       children: [
-        new Text( 'Energy Legend', { font: MassesAndSpringsConstants.TITLE_FONT } ),
+        new Text( energyLegendString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 150 } ),
         new AlignBox( content )
       ], spacing: 10
     } );

@@ -30,10 +30,12 @@ define( function( require ) {
 
     var numberControl = new NumberControl( massString, mass.massProperty, new Range( 50, 300 ), {
       valuePattern: '{0}' + gramUnitString,
+      valueMaxWidth: 100,
       majorTickLength: 10,
       trackSize: new Dimension2( 100, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
+      titleMaxWidth: 100,
       arrowButtonScale: .6,
       tandem: tandem
     } );

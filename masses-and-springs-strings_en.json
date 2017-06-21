@@ -26,6 +26,9 @@
   "totalEnergy": {
     "value": "Total Energy"
   },
+  "energyLegend": {
+    "value": "Energy Legend"
+  },
   "vector": {
     "value": "Vector"
   },
