@@ -91,5 +91,4 @@ define( function( require ) {
       this.spring.reset();
     }
   } );
-
 } );

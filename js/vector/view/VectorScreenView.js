@@ -30,7 +30,7 @@ define( function( require ) {
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),
       {
-        top: this.gravityAndFrictionControlPanel.bottom + this.topSpacing,
+        top: this.gravityAndFrictionControlPanel.bottom + this.spacing,
         left: this.secondSpringConstantControlPanel.right + 10,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
@@ -38,7 +38,7 @@ define( function( require ) {
     this.addChild( vectorVisibilityControlPanel );
     vectorVisibilityControlPanel.moveToBack();
 
-    this.toolboxPanel.top = vectorVisibilityControlPanel.bottom + this.topSpacing;
+    this.toolboxPanel.top = vectorVisibilityControlPanel.bottom + this.spacing;
   }
 
   massesAndSprings.register( 'VectorScreenView', VectorScreenView );

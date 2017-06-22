@@ -59,7 +59,7 @@ define( function( require ) {
 
     this.model = model; // Make model available for reset
     var self = this;
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 850, 504 ) } );
 
     // Needed for grey bar above springHangerNode
     var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
@@ -74,8 +74,11 @@ define( function( require ) {
       397 );
     this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
 
-    //Spacing for top margin of layout bounds
-    this.topSpacing = modelViewTransform2.modelToViewY( model.ceilingY );
+    // Spacing for top margin of layout bounds
+    this.spacing = modelViewTransform2.modelToViewY( model.ceilingY );
+
+    // Alignment for panels on most right side of sim view
+    var rightPanelAlignment = this.layoutBounds.getMaxX() - this.spacing;
 
     // Add masses
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
@@ -105,6 +108,17 @@ define( function( require ) {
       } );
     };
 
+    // Control Panel for display elements with varying visibility
+    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
+      model,
+      tandem.createTandem( 'indicatorVisibilityControlPanel' ),
+      {
+        top: this.spacing,
+        right: rightPanelAlignment,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+      } );
+
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
     this.firstOscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 0 ],
@@ -132,7 +146,7 @@ define( function( require ) {
       tandem.createTandem( 'firstSpringConstantControlPanel' ),
       {
         right: this.springHangerNode.left - 40,
-        top: this.topSpacing,
+        top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
 
@@ -142,17 +156,17 @@ define( function( require ) {
       StringUtils.fillIn( springConstantString, { spring: 2 } ),
       tandem.createTandem( 'secondSpringConstantControlPanel' ),
       {
-        left: this.springHangerNode.right + 40,
-        top: this.topSpacing,
+        right: indicatorVisibilityControlPanel.left - this.spacing,
+        top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
 
     // @public Initializes movable line
     this.movableLineNode = new MovableLineNode(
       this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
-      235,
+      180,
       model.movableLineVisibleProperty,
-      330,
+      this.springHangerNode.centerX,
       tandem.createTandem( 'movableLineNode' )
     );
 
@@ -188,22 +202,11 @@ define( function( require ) {
       tandem.createTandem( 'secondNaturalLengthLineNode' )
     );
 
-    // Control Panel for display elements with varying visibility
-    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlPanel' ),
-      {
-        top: this.topSpacing,
-        left: this.secondSpringConstantControlPanel.right + 10,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
-      } );
-
     // Gravity Control Panel
     this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
       model, false, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
       {
-        right: this.layoutBounds.getMaxX() - this.topSpacing,
+        right: rightPanelAlignment,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
@@ -212,7 +215,7 @@ define( function( require ) {
     // Timer and Ruler
     var timerNode = new DraggableTimerNode(
       this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 80, this.topSpacing + 35 ),
+      new Vector2( this.layoutBounds.left + 80, this.spacing + 35 ),
       model.timerSecondProperty,
       model.timerRunningProperty,
       model.timerVisibleProperty,
@@ -220,7 +223,7 @@ define( function( require ) {
     );
     var rulerNode = new DraggableRulerNode(
       this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 50, this.topSpacing + 35 ),
+      new Vector2( this.layoutBounds.left + 50, this.spacing + 35 ),
       model.rulerVisibleProperty,
       tandem.createTandem( 'rulerNode' )
     );
@@ -295,18 +298,21 @@ define( function( require ) {
       tandem.createTandem( 'firstSpringStopperButtonNode' ),
       {
         listener: model.stopSpring.bind( model, 0 ),
-        right: this.springHangerNode.left - 5,
-        top: this.topSpacing
+        right: this.springHangerNode.left - this.spacing,
+        top: this.spacing
       }
     );
     var secondSpringStopperButtonNode = new SpringStopperButtonNode(
       tandem.createTandem( 'secondSpringStopperButtonNode' ),
       {
         listener: model.stopSpring.bind( model, 1 ),
-        left: this.springHangerNode.right + 5,
-        top: this.topSpacing
+        right: this.secondSpringConstantControlPanel.left - this.spacing,
+        top: this.spacing
       }
     );
+
+    this.springHangerNode.right = secondSpringStopperButtonNode.left - this.spacing;
+
 
     // Adding all of the nodes to the scene graph
     this.addChild( this.firstOscillatingSpringNode );

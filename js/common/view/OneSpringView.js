@@ -76,7 +76,7 @@ define( function( require ) {
     this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
 
     //Spacing for top margin of layout bounds
-    this.topSpacing = modelViewTransform2.modelToViewY( model.ceilingY );
+    this.spacing = modelViewTransform2.modelToViewY( model.ceilingY );
 
     // Add masses
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
@@ -123,7 +123,7 @@ define( function( require ) {
       tandem.createTandem( 'springConstantControlPanel' ),
       {
         left: singleSpringHangerNode.right + 40,
-        top: this.topSpacing,
+        top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
 
@@ -159,7 +159,7 @@ define( function( require ) {
       model,
       tandem.createTandem( 'indicatorVisibilityControlPanel' ),
       {
-        top: this.topSpacing,
+        top: this.spacing,
         left: springConstantControlPanel.right + 10,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       } );
@@ -178,7 +178,7 @@ define( function( require ) {
     // Timer and Ruler
     var timerNode = new DraggableTimerNode(
       this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 80, this.topSpacing + 35 ),
+      new Vector2( this.layoutBounds.left + 80, this.spacing + 35 ),
       model.timerSecondProperty,
       model.timerRunningProperty,
       model.timerVisibleProperty,
@@ -186,7 +186,7 @@ define( function( require ) {
     );
     var rulerNode = new DraggableRulerNode(
       this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 50, this.topSpacing + 35 ),
+      new Vector2( this.layoutBounds.left + 50, this.spacing + 35 ),
       model.rulerVisibleProperty,
       tandem.createTandem( 'rulerNode' )
     );
@@ -262,7 +262,7 @@ define( function( require ) {
       {
         listener: model.stopSpring.bind( model, 0 ),
         left: singleSpringHangerNode.right + 5,
-        top: this.topSpacing
+        top: this.spacing
       }
     );
 
@@ -272,8 +272,8 @@ define( function( require ) {
       model.masses.adjustableMass,
       tandem.createTandem( 'massValueControlPanel' )
     );
-    massValueControlPanel.bottom = this.layoutBounds.getMaxY() - this.topSpacing;
-    massValueControlPanel.left = energyGraphNode.right + this.topSpacing;
+    massValueControlPanel.bottom = this.layoutBounds.getMaxY() - this.spacing;
+    massValueControlPanel.left = energyGraphNode.right + this.spacing;
 
 
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.

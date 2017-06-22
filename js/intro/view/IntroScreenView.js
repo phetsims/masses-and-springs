@@ -54,7 +54,7 @@ define( function( require ) {
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         right: this.springHangerNode.left - 40,
-        top: this.topSpacing,
+        top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
     this.addChild( this.springLengthControlPanel );
@@ -66,7 +66,7 @@ define( function( require ) {
       tandem.createTandem( 'constantsControlPanel' ),
       {
         left: this.firstSpringConstantControlPanel.left,
-        top: this.firstSpringConstantControlPanel.bottom + this.topSpacing,
+        top: this.firstSpringConstantControlPanel.bottom + this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       }

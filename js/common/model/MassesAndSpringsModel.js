@@ -29,7 +29,7 @@ define( function( require ) {
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
   var DROPPING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
-  var RIGHT_SPRING_X = 0.95; // {number} X position of the spring node in screen coordinates
+  var RIGHT_SPRING_X = 1.175; // {number} X position of the spring node in screen coordinates
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -179,7 +179,7 @@ define( function( require ) {
     // @public (read-only) model of springs used throughout the sim
     if ( options.springCount === 2 ) {
       this.springs = [
-        createSpring( 0.65, tandem.createTandem( 'leftSpring' ) ),
+        createSpring( RIGHT_SPRING_X - .25, tandem.createTandem( 'leftSpring' ) ),
         createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
       ];
     }
