@@ -60,7 +60,7 @@ define( function( require ) {
   function OneSpringView( model, tandem ) {
     this.model = model; // Make model available for reset
     var self = this;
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 850, 504 ) } );
 
     // Needed for grey bar above springHangerNode
     var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
@@ -77,6 +77,9 @@ define( function( require ) {
 
     //Spacing for top margin of layout bounds
     this.spacing = modelViewTransform2.modelToViewY( model.ceilingY );
+
+    // Alignment for panels on most right side of sim view
+    var rightPanelAlignment = this.layoutBounds.right - this.spacing;
 
     // Add masses
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
@@ -113,16 +116,23 @@ define( function( require ) {
     );
 
     var singleSpringHangerNode = new SingleSpringHangerNode( tandem.createTandem( 'singleSpringHangerNode' ) );
-    singleSpringHangerNode.centerX = this.oscillatingSpringNode.centerX;
+
+    // Control Panel for display elements with varying visibility
+    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
+      model,
+      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
+        top: this.spacing,
+        right: rightPanelAlignment,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+      } );
 
     // Spring Constant Control Panel
     var springConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
       model.springs[ 0 ].springConstantRange,
       StringUtils.fillIn( springConstantString, { spring: 2 } ),
-      tandem.createTandem( 'springConstantControlPanel' ),
-      {
-        left: singleSpringHangerNode.right + 40,
+      tandem.createTandem( 'springConstantControlPanel' ), {
+        right: indicatorVisibilityControlPanel.left - this.spacing,
         top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
@@ -132,9 +142,9 @@ define( function( require ) {
     // @public Initializes movable line
     this.movableLineNode = new MovableLineNode(
       singleSpringHangerNode.getCenter().plus( new Vector2( 45, 200 ) ),
-      150,
+      100,
       model.movableLineVisibleProperty,
-      376,
+      475,
       tandem.createTandem( 'movableLineNode' )
     );
 
@@ -154,21 +164,11 @@ define( function( require ) {
       tandem.createTandem( 'secondNaturalLengthLineNode' )
     );
 
-    // Control Panel for display elements with varying visibility
-    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlPanel' ),
-      {
-        top: this.spacing,
-        left: springConstantControlPanel.right + 10,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      } );
-
     // Gravity Control Panel
     this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
       model, true, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
       {
-        left: indicatorVisibilityControlPanel.left,
+        right: rightPanelAlignment,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
@@ -258,15 +258,17 @@ define( function( require ) {
     } );
 
     var springStopperButtonNode = new SpringStopperButtonNode(
-      tandem.createTandem( 'springStopperButtonNode' ),
-      {
+      tandem.createTandem( 'springStopperButtonNode' ), {
         listener: model.stopSpring.bind( model, 0 ),
-        left: singleSpringHangerNode.right + 5,
+        right: springConstantControlPanel.left - this.spacing,
         top: this.spacing
       }
     );
 
     var energyGraphNode = new EnergyGraphNode( model );
+    energyGraphNode.top = this.layoutBounds.top + this.spacing;
+    energyGraphNode.left = this.layoutBounds.left + this.spacing;
+
 
     var massValueControlPanel = new MassValueControlPanel(
       model.masses.adjustableMass,
@@ -274,6 +276,7 @@ define( function( require ) {
     );
     massValueControlPanel.bottom = this.layoutBounds.getMaxY() - this.spacing;
     massValueControlPanel.left = energyGraphNode.right + this.spacing;
+    singleSpringHangerNode.right = springStopperButtonNode.left - this.spacing;
 
 
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
