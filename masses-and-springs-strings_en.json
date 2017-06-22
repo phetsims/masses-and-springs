@@ -14,31 +14,31 @@
   "kineticEnergy": {
     "value": "Kinetic Energy"
   },
-  "KE": {
+  "ke": {
     "value": "KE"
   },
   "gravitationalPotentialEnergy": {
     "value": "Gravitational Potential Energy"
   },
-  "PeGrav": {
+  "peGrav": {
     "value": "PE<sub>grav</sub>"
   },
   "elasticPotentialEnergy": {
     "value": "Elastic Potential Energy"
   },
-  "PeElas": {
+  "peElas": {
     "value": "PE<sub>elas</sub>"
   },
   "thermalEnergy": {
     "value": "Thermal Energy"
   },
-  "ETherm": {
+  "eTherm": {
     "value": "E<sub>therm</sub>"
   },
   "totalEnergy": {
     "value": "Total Energy"
   },
-  "TTot": {
+  "tTot": {
     "value": "T<sub>tot</sub>"
   },
   "energyLegend": {

@@ -39,15 +39,15 @@ define( function( require ) {
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
   var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
   var kineticEnergyString = require( 'string!MASSES_AND_SPRINGS/kineticEnergy' );
-  var KEString = require( 'string!MASSES_AND_SPRINGS/KE' );
+  var keString = require( 'string!MASSES_AND_SPRINGS/ke' );
   var gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
-  var PeGravString = require( 'string!MASSES_AND_SPRINGS/PeGrav' );
+  var peGravString = require( 'string!MASSES_AND_SPRINGS/peGrav' );
   var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
-  var PeElasString = require( 'string!MASSES_AND_SPRINGS/PeElas' );
+  var peElasString = require( 'string!MASSES_AND_SPRINGS/peElas' );
   var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
-  var EThermString = require( 'string!MASSES_AND_SPRINGS/ETherm' );
+  var eThermString = require( 'string!MASSES_AND_SPRINGS/eTherm' );
   var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
-  var TTotString = require( 'string!MASSES_AND_SPRINGS/TTot' );
+  var tTotString = require( 'string!MASSES_AND_SPRINGS/tTot' );
   var energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
 
   /**
@@ -163,11 +163,11 @@ define( function( require ) {
     // Manages the symbols used in the axes of the graph
     var symbolContent = new VBox( {
       children: [
-        new Text( KEString, { font: MassesAndSpringsConstants.FONT, fill: '#39d74e', maxWidth: MAX_WIDTH } ),
-        new RichText( PeGravString, { font: MassesAndSpringsConstants.FONT, fill: '#5798de', maxWidth: MAX_WIDTH } ),
-        new RichText( PeElasString, { font: MassesAndSpringsConstants.FONT, fill: '#29d4ff', maxWidth: MAX_WIDTH } ),
-        new RichText( EThermString, { font: MassesAndSpringsConstants.FONT, fill: '#ff6e26', maxWidth: MAX_WIDTH } ),
-        new RichText( TTotString, { font: MassesAndSpringsConstants.FONT, maxWidth: MAX_WIDTH } )
+        new Text( keString, { font: MassesAndSpringsConstants.FONT, fill: '#39d74e', maxWidth: MAX_WIDTH } ),
+        new RichText( peGravString, { font: MassesAndSpringsConstants.FONT, fill: '#5798de', maxWidth: MAX_WIDTH } ),
+        new RichText( peElasString, { font: MassesAndSpringsConstants.FONT, fill: '#29d4ff', maxWidth: MAX_WIDTH } ),
+        new RichText( eThermString, { font: MassesAndSpringsConstants.FONT, fill: '#ff6e26', maxWidth: MAX_WIDTH } ),
+        new RichText( tTotString, { font: MassesAndSpringsConstants.FONT, maxWidth: MAX_WIDTH } )
       ], align: 'left', spacing: 10
     } );
 
