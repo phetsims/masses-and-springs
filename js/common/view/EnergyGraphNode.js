@@ -24,6 +24,7 @@ define( function( require ) {
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var VerticalBarChart = require( 'GRIDDLE/VerticalBarChart' );
   var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
+  var VerticalCompositeBarNode = require( 'GRIDDLE/VerticalCompositeBarNode' );
   var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
   var Dialog = require( 'JOIST/Dialog' );
   var RichText = require( 'SCENERY_PHET/RichText' );
@@ -117,6 +118,9 @@ define( function( require ) {
       thermalEnergyBarNode,
       totalEnergyBarNode
     ];
+
+    var compositeBar = new VerticalCompositeBarNode( this.barNodes );
+    // this.barNodes.push(compositeBar);
 
     var verticalBarChart = new VerticalBarChart( this.barNodes, {
       width: 140,
