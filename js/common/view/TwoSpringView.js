@@ -204,8 +204,7 @@ define( function( require ) {
 
     // Gravity Control Panel
     this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
-      model, false, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
-      {
+      model, false, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ), {
         right: rightPanelAlignment,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
@@ -294,7 +293,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'speedControl' )
     } );
 
-    var firstSpringStopperButtonNode = new SpringStopperButtonNode(
+    this.firstSpringStopperButtonNode = new SpringStopperButtonNode(
       tandem.createTandem( 'firstSpringStopperButtonNode' ),
       {
         listener: model.stopSpring.bind( model, 0 ),
@@ -330,7 +329,7 @@ define( function( require ) {
     this.addChild( this.resetAllButton );
     this.addChild( timeControlPanel );
     this.addChild( speedControl );
-    this.addChild( firstSpringStopperButtonNode );
+    this.addChild( this.firstSpringStopperButtonNode );
     this.addChild( secondSpringStopperButtonNode )
     ;
     //Reference lines from indicator visibility box

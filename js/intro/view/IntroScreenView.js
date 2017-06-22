@@ -45,15 +45,13 @@ define( function( require ) {
     TwoSpringView.call( this, model, tandem );
 
     // Spring Constant Length Control Panel
-
-
     this.springLengthControlPanel = new SpringLengthControlPanel(
       model.spring1.naturalRestingLengthProperty,
       new RangeWithValue( .1, .5, .3 ),
       StringUtils.fillIn( lengthString, { spring: 1 } ),
       tandem.createTandem( 'springLengthControlPanel' ),
       {
-        right: this.springHangerNode.left - 40,
+        right: this.firstSpringStopperButtonNode.left - this.spacing,
         top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
