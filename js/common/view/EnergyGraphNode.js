@@ -119,8 +119,11 @@ define( function( require ) {
       totalEnergyBarNode
     ];
 
-    var compositeBar = new VerticalCompositeBarNode( this.barNodes );
-    // this.barNodes.push(compositeBar);
+    var compositeBar = new VerticalCompositeBarNode( this.barNodes, {
+      width: 15,
+      displayContinuousArrow: true
+    } );
+    this.barNodes.push( compositeBar );
 
     var verticalBarChart = new VerticalBarChart( this.barNodes, {
       width: 140,
