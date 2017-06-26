@@ -61,6 +61,7 @@ define( function( require ) {
     } );
 
     // TODO: Once range is decided for frictionProperty, pass in as range property for TNumber()
+    // REVIEW - could this be a static constant?  I see it being read elsewhere but never changed.
     this.frictionRangeProperty = new Property( new RangeWithValue( 0, 10, 1 ) );
 
     // @public {Property.<number>} gravitational acceleration associated with each planet
@@ -74,6 +75,9 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} range of gravitational acceleration associated with each planet
+    // REVIEW: Shouldn't this be using Body.EARTH.gravity?
+    // REVIEW: I see this being used and reset, but never set.  Does it really need to be a property?  Could it just be
+    //         a static constant range value?
     this.gravityRangeProperty = new Property( new RangeWithValue( 0, 30, 9.8 ) );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
@@ -158,12 +162,13 @@ define( function( require ) {
     } );
 
     // @public {read-only} Y position of floor in m. The floor is at the bottom bounds of the screen.
+    // REVIEW - this is never set to another value, could be a static constant.
     this.floorY = 0;
 
     // @public {read-only} Y position of ceiling in m.  The ceiling is at the top of the SpringHangerNode,
     // just below the top of the dev view bounds
+    // REVIEW - this is never set to another value, could be a static constant.
     this.ceilingY = 1.23;
-
 
     var createSpring = function( x, tandem ) {
       return new Spring(
@@ -175,6 +180,7 @@ define( function( require ) {
       );
     };
 
+    // REVIEW - Generally we like to have validation of options up where the options are extended - they're easier to notice that way.
     assert && assert( options.springCount === 1 || 2, 'Spring count must be one or two' );
     // @public (read-only) model of springs used throughout the sim
     if ( options.springCount === 2 ) {
