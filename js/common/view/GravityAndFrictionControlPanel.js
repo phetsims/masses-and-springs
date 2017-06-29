@@ -103,7 +103,7 @@ define( function( require ) {
     } );
 
     // @private {read-only} manages the values associated with the gravity panel in a combo box
-    this.gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.gravityRangeProperty.get(), {
+    this.gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
@@ -111,16 +111,16 @@ define( function( require ) {
       thumbFillHighlighted: '#00e6e6',
       tandem: tandem.createTandem( 'gravityPropertyHSlider' )
     } );
-    this.gravityHSlider.addMajorTick( MassesAndSpringsConstants.gravityRangeProperty.get().min, new Text( gravityNoneString, {
+    this.gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( gravityNoneString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityNoneString' )
     } ) );
-    this.gravityHSlider.addMajorTick( MassesAndSpringsConstants.gravityRangeProperty.get().max, new Text( gravityLotsString, {
+    this.gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().max, new Text( gravityLotsString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
-    this.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.frictionRangeProperty.get(), {
+    this.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
       thumbSize: new Dimension2( 13, 22 ),

@@ -18,13 +18,16 @@ define( function( require ) {
     //TODO: Insert constants here
     MAX_TEXT_WIDTH: 80,
     DEFAULT_SPRING_LENGTH: 0.5,
-    
+
+    // @public {read-only} Y position of floor in m. The floor is at the bottom bounds of the screen.
+    FLOOR_Y: 0,
+
     // @public {Property.<number>} range of friction associated with sim
-    frictionRangeProperty: new Property( new RangeWithValue( 0, 10, 1 ) ),
+    FRICTION_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 10, 1 ) ),
 
     // REVIEW: Shouldn't this be using Body.EARTH.gravity?
     // @public {Property.<number>} range of gravitational acceleration associated with each planet
-    gravityRangeProperty: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
+    GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
 
     // Constants for vectors
     VECTOR_ARROW_LENGTH: 34,

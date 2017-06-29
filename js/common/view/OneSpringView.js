@@ -218,7 +218,7 @@ define( function( require ) {
         self.resetMassLayer();
       },
       right: this.layoutBounds.right - 10,
-      bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.floorY ),
+      bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 

@@ -43,7 +43,7 @@ define( function( require ) {
     // Play/Pause Button
     var playPauseButton = new PlayPauseButton( model.playingProperty, {
       right: layoutBounds.right * .65,
-      bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.floorY ),
+      bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       radius: 18,
       touchAreaDilation: TOUCH_AREA_DILATION,
       tandem: tandem.createTandem( 'playPauseButton' )
