@@ -153,7 +153,7 @@ define( function( require ) {
 
     // @public {read-only} Y position of floor in m. The floor is at the bottom bounds of the screen.
     // REVIEW - this is never set to another value, could be a static constant.
-    this.floorY = 0;
+    MassesAndSpringsConstants.floorY = 0;
 
     // @public {read-only} Y position of ceiling in m.  The ceiling is at the top of the SpringHangerNode,
     // just below the top of the dev view bounds
@@ -389,7 +389,7 @@ define( function( require ) {
 
           // Fall if not hung or grabbed
           if ( mass.springProperty.get() === null && !mass.userControlledProperty.get() ) {
-            mass.fallWithGravity( self.gravityProperty.get(), self.floorY, dt );
+            mass.fallWithGravity( self.gravityProperty.get(), MassesAndSpringsConstants.floorY, dt );
           }
         } );
         if ( this.timerRunningProperty.get() ) {

@@ -18,6 +18,8 @@ define( function( require ) {
     //TODO: Insert constants here
     MAX_TEXT_WIDTH: 80,
     DEFAULT_SPRING_LENGTH: 0.5,
+    
+    // @public {Property.<number>} range of friction associated with sim
     frictionRangeProperty: new Property( new RangeWithValue( 0, 10, 1 ) ),
 
     // REVIEW: Shouldn't this be using Body.EARTH.gravity?

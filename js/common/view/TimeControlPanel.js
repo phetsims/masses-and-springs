@@ -16,6 +16,7 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   var Vector2 = require( 'DOT/Vector2' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // constants
   var TOUCH_AREA_DILATION = 4;
@@ -42,7 +43,7 @@ define( function( require ) {
     // Play/Pause Button
     var playPauseButton = new PlayPauseButton( model.playingProperty, {
       right: layoutBounds.right * .65,
-      bottom: modelViewTransform2.modelToViewY( model.floorY ),
+      bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.floorY ),
       radius: 18,
       touchAreaDilation: TOUCH_AREA_DILATION,
       tandem: tandem.createTandem( 'playPauseButton' )
