@@ -21,11 +21,12 @@ define( function( require ) {
   function LabModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem, { springCount: 1, showVectors: true } );
 
-    var redMass = this.createMass( .125, .12, true, 'red', '?', tandem.createTandem( 'redLabeledMass' ) );
-    var greenMass = this.createMass( .150, .14, true, 'green', '?', tandem.createTandem( 'greenLabeledMass' ) );
+    var massXPosition = this.springs[ 0 ].positionProperty.get().x;
+    var greenMass = this.createMass( .150, massXPosition + .05, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) );
+    var redMass = this.createMass( .125, massXPosition - .02, true, 'red', null, tandem.createTandem( 'redLabeledMass' ) );
     // REVIEW: I don't know why but bracket notation doesn't work for this. ( this.masses[redMass]=redMass)
-    this.masses.redMass = redMass;
     this.masses.greenMass = greenMass;
+    this.masses.redMass = redMass;
   }
 
   massesAndSprings.register( 'LabModel', LabModel );

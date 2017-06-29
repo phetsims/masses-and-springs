@@ -110,10 +110,10 @@ define( function( require ) {
       labelString = StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
       createLabel( labelString );
     }
-    else if ( mass.specificLabel !== null ) {
-      labelString = mass.specificLabel;
-      createLabel( labelString );
-    }
+    // else if ( mass.specificLabel !== null ) {
+    //   labelString = mass.specificLabel;
+    //   createLabel( labelString );
+    // }
 
     this.mass.positionProperty.link( function( position ) {
       self.translation = modelViewTransform2.modelToViewPosition( position );

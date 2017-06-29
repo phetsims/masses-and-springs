@@ -202,7 +202,7 @@ define( function( require ) {
     else if ( options.springCount === 1 ) {
       this.masses = {
         adjustableMass: this.createMass( .100,
-          this.springs[ 0 ].positionProperty.get().x,
+          this.springs[ 0 ].positionProperty.get().x - .15,
           true,
           'rgb(  247, 151, 34 )',
           null,
