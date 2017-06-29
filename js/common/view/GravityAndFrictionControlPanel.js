@@ -103,7 +103,7 @@ define( function( require ) {
     } );
 
     // @private {read-only} manages the values associated with the gravity panel in a combo box
-    this.gravityHSlider = new HSlider( model.gravityProperty, model.gravityRangeProperty.get(), {
+    this.gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.gravityRangeProperty.get(), {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
@@ -111,11 +111,11 @@ define( function( require ) {
       thumbFillHighlighted: '#00e6e6',
       tandem: tandem.createTandem( 'gravityPropertyHSlider' )
     } );
-    this.gravityHSlider.addMajorTick( model.gravityRangeProperty.get().min, new Text( gravityNoneString, {
+    this.gravityHSlider.addMajorTick( MassesAndSpringsConstants.gravityRangeProperty.get().min, new Text( gravityNoneString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityNoneString' )
     } ) );
-    this.gravityHSlider.addMajorTick( model.gravityRangeProperty.get().max, new Text( gravityLotsString, {
+    this.gravityHSlider.addMajorTick( MassesAndSpringsConstants.gravityRangeProperty.get().max, new Text( gravityLotsString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );

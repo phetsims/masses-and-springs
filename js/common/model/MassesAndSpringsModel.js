@@ -70,12 +70,6 @@ define( function( require ) {
       } )
     } );
 
-    // @public {Property.<number>} range of gravitational acceleration associated with each planet
-    // REVIEW: Shouldn't this be using Body.EARTH.gravity?
-    // REVIEW: I see this being used and reset, but never set.  Does it really need to be a property?  Could it just be
-    //         a static constant range value?
-    this.gravityRangeProperty = new Property( new RangeWithValue( 0, 30, 9.8 ) );
-
     // @public {Property.<string>} determines the speed at which the sim plays.
     this.simSpeedProperty = new Property( 'normal', {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
@@ -257,7 +251,6 @@ define( function( require ) {
       this.frictionProperty.reset();
       this.gravityProperty.reset();
       this.bodyTitleProperty.reset();
-      this.gravityRangeProperty.reset();
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();

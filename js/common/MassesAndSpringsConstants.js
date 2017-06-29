@@ -20,6 +20,10 @@ define( function( require ) {
     DEFAULT_SPRING_LENGTH: 0.5,
     frictionRangeProperty: new Property( new RangeWithValue( 0, 10, 1 ) ),
 
+    // REVIEW: Shouldn't this be using Body.EARTH.gravity?
+    // @public {Property.<number>} range of gravitational acceleration associated with each planet
+    gravityRangeProperty: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
+
     // Constants for vectors
     VECTOR_ARROW_LENGTH: 34,
     FORCES_ARROW_LENGTH: 31,
