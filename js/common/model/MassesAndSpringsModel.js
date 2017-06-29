@@ -42,6 +42,8 @@ define( function( require ) {
     }, options );
     var self = this;
 
+    assert && assert( options.springCount === 1 || 2, 'Spring count must be one or two' );
+
     // @public {boolean} determines whether vectors associated with massNode vectors.
     this.showVectors = options.showVectors;
 
@@ -161,8 +163,7 @@ define( function( require ) {
       );
     };
 
-    // REVIEW - Generally we like to have validation of options up where the options are extended - they're easier to notice that way.
-    assert && assert( options.springCount === 1 || 2, 'Spring count must be one or two' );
+
     // @public (read-only) model of springs used throughout the sim
     if ( options.springCount === 2 ) {
       this.springs = [
