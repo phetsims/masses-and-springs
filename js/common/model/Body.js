@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Tandem = require( 'TANDEM/Tandem' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // strings
   var bodyCustomString = require( 'string!MASSES_AND_SPRINGS/body.custom' );
@@ -45,11 +46,11 @@ define( function( require ) {
   var tandem = Tandem.createStaticTandem( 'bodies' );
 
   // @public {read-only} body objects for gravity panel
-  Body.MOON = new Body( bodyMoonString, 1.62, tandem.createTandem( 'moon' ) );
-  Body.EARTH = new Body( bodyEarthString, 9.81, tandem.createTandem( 'earth' ) );
-  Body.JUPITER = new Body( bodyJupiterString, 24.79, tandem.createTandem( 'jupiter' ) );
-  Body.PLANET_X = new Body( bodyPlanetXString, 14.2, tandem.createTandem( 'planetX' ) );
-  Body.ZERO_G = new Body( bodyZeroGString, 0, tandem.createTandem( 'zeroG' ) );
+  Body.MOON = new Body( bodyMoonString, MassesAndSpringsConstants.MOON_GRAVITY, tandem.createTandem( 'moon' ) );
+  Body.EARTH = new Body( bodyEarthString, MassesAndSpringsConstants.EARTH_GRAVITY, tandem.createTandem( 'earth' ) );
+  Body.JUPITER = new Body( bodyJupiterString, MassesAndSpringsConstants.JUPITER_GRAVITY, tandem.createTandem( 'jupiter' ) );
+  Body.PLANET_X = new Body( bodyPlanetXString, MassesAndSpringsConstants.PLANET_X, tandem.createTandem( 'planetX' ) );
+  Body.ZERO_G = new Body( bodyZeroGString, MassesAndSpringsConstants.ZERO_G, tandem.createTandem( 'zeroG' ) );
   Body.CUSTOM = new Body( bodyCustomString, null, tandem.createTandem( 'custom' ) );
 
   return Body;

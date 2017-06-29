@@ -28,7 +28,6 @@ define( function( require ) {
     // {Property.<number>} range of friction associated with sim
     FRICTION_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 10, 1 ) ),
 
-    // REVIEW: Shouldn't this be using Body.EARTH.gravity?
     // {Property.<number>} range of gravitational acceleration associated with each planet
     GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
 
@@ -44,6 +43,13 @@ define( function( require ) {
     GRAVITY_ARROW_COLOR: 'rgb( 236, 63, 71 )',
     SPRING_ARROW_COLOR: 'rgb( 36, 36, 255 )',
 
+    // Constants for planets' gravity
+    EARTH_GRAVITY: 9.81,
+    MOON_GRAVITY: 1.62,
+    JUPITER_GRAVITY: 24.79,
+    PLANET_X: 14.2,
+    ZERO_G: 0,
+    
     // Constants regarding fonts
     FONT: new PhetFont( 12 ),
     LABEL_FONT: new PhetFont( 10 ),
