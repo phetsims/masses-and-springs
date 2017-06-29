@@ -120,7 +120,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
-    this.frictionHSlider = new HSlider( model.frictionProperty, model.frictionRangeProperty.get(), {
+    this.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.frictionRangeProperty.get(), {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
       thumbSize: new Dimension2( 13, 22 ),

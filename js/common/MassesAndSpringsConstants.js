@@ -11,11 +11,14 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Property = require( 'AXON/Property' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   var MassesAndSpringsConstants = {
     //TODO: Insert constants here
     MAX_TEXT_WIDTH: 80,
     DEFAULT_SPRING_LENGTH: 0.5,
+    frictionRangeProperty: new Property( new RangeWithValue( 0, 10, 1 ) ),
 
     // Constants for vectors
     VECTOR_ARROW_LENGTH: 34,

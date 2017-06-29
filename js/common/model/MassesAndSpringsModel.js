@@ -60,10 +60,6 @@ define( function( require ) {
       } )
     } );
 
-    // TODO: Once range is decided for frictionProperty, pass in as range property for TNumber()
-    // REVIEW - could this be a static constant?  I see it being read elsewhere but never changed.
-    this.frictionRangeProperty = new Property( new RangeWithValue( 0, 10, 1 ) );
-
     // @public {Property.<number>} gravitational acceleration associated with each planet
     this.gravityProperty = new Property( Body.EARTH.gravity, {
       range: new RangeWithValue( 0, 30, Body.EARTH.gravity ),
