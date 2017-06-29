@@ -151,14 +151,9 @@ define( function( require ) {
       validValues: [ MassesAndSpringsConstants.FORCES_STRING, MassesAndSpringsConstants.NET_FORCE_STRING ]
     } );
 
-    // @public {read-only} Y position of ceiling in m.  The ceiling is at the top of the SpringHangerNode,
-    // just below the top of the dev view bounds
-    // REVIEW - this is never set to another value, could be a static constant.
-    this.ceilingY = 1.23;
-
     var createSpring = function( x, tandem ) {
       return new Spring(
-        new Vector2( x, self.ceilingY ),
+        new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         new RangeWithValue( 5, 15, 9 ),
         self.frictionProperty.get(),

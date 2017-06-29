@@ -91,21 +91,21 @@ define( function( require ) {
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
     this.springsIcon = [
       new Spring(
-        new Vector2( .65, model.ceilingY ),
+        new Vector2( .65, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         new RangeWithValue( 5, 15, 9 ),
         0,
         tandem.createTandem( 'firstIconSpring' )
       ),
       new Spring(
-        new Vector2( .85, model.ceilingY ),
+        new Vector2( .85, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         new RangeWithValue( 5, 15, 9 ),
         0,
         tandem.createTandem( 'secondIconSpring' )
       ),
       new Spring(
-        new Vector2( .65, model.ceilingY + .17 ),
+        new Vector2( .65, MassesAndSpringsConstants.CEILING_Y + .17 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         new RangeWithValue( 5, 15, 9 ),
         0,

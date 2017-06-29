@@ -16,6 +16,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // constants
   var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
@@ -42,7 +43,7 @@ define( function( require ) {
       fill: 'rgb( 180, 180, 180 )',
       stroke: 'grey',
       centerX: middleOfSprings,
-      top: modelViewTransform2.modelToViewY( model.ceilingY ),
+      top: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.CEILING_Y ),
       tandem: tandem.createTandem( 'springHangerNode' )
     } );
 

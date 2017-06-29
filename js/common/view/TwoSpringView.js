@@ -75,7 +75,7 @@ define( function( require ) {
     this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
 
     // Spacing for top margin of layout bounds
-    this.spacing = modelViewTransform2.modelToViewY( model.ceilingY );
+    this.spacing = modelViewTransform2.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
 
     // Alignment for panels on most right side of sim view
     var rightPanelAlignment = this.layoutBounds.getMaxX() - this.spacing;

@@ -19,14 +19,17 @@ define( function( require ) {
     MAX_TEXT_WIDTH: 80,
     DEFAULT_SPRING_LENGTH: 0.5,
 
-    // @public {read-only} Y position of floor in m. The floor is at the bottom bounds of the screen.
+    // Y position of floor in m. The floor is at the bottom bounds of the screen.
     FLOOR_Y: 0,
+    
+    // Y position of ceiling in m. The ceiling is the top of the SpringHangerNode, just below the top of the dev view bounds
+    CEILING_Y: 1.23,
 
-    // @public {Property.<number>} range of friction associated with sim
+    // {Property.<number>} range of friction associated with sim
     FRICTION_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 10, 1 ) ),
 
     // REVIEW: Shouldn't this be using Body.EARTH.gravity?
-    // @public {Property.<number>} range of gravitational acceleration associated with each planet
+    // {Property.<number>} range of gravitational acceleration associated with each planet
     GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
 
     // Constants for vectors
