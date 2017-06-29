@@ -229,9 +229,9 @@ define( function( require ) {
           var position = mass.positionProperty.get();
           self.velocityArrow.setTailAndTip(
             position.x - 10,
-            position.y + 10,
+            position.y + rect.top + 10,
             position.x - 10,
-            position.y + 10 - ARROW_SIZE_DEFAULT * velocity * scalingFactor
+            position.y + rect.top + 10 - ARROW_SIZE_DEFAULT * velocity * scalingFactor
           );
         }
       } );
@@ -286,9 +286,9 @@ define( function( require ) {
           if ( Math.abs( netAcceleration ) > 1E-6 ) {
             self.accelerationArrow.setTailAndTip(
               position.x + 10,
-              position.y + 10,
+              position.y + rect.top + 10,
               position.x + 10,
-              position.y + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
+              position.y + rect.top + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
             );
           }
           else if ( netAcceleration === 0 ) {
