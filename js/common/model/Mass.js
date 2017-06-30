@@ -132,15 +132,35 @@ define( function( require ) {
     //   function( springConstant, displacement ) {
     //     return (1 / 2) * springConstant * Math.pow( displacement, 2 );
     //   } );
+    this.elasticPotentialEnergyProperty = new Property( 0 );
 
-    // this.totalEnergyProperty = new DerivedProperty ([
-    //     this.kineticEnergyProperty,
-    //     this.gravitationalPotentialEnergyProperty,
-    //     this.elasticPotentialEnergyProperty
-    //   ],
-    //     function( kineticEnergy, gravitationalPotentialEnergy, elasticPotentialEnergy ) {
-    //       return kineticEnergy + gravitationalPotentialEnergy + elasticPotentialEnergy;
-    //     });
+    this.springProperty.link( function( spring ) {
+      if ( spring ) {
+        Property.multilink( [ spring.springConstantProperty, spring.displacementProperty ],
+          function( springConstant, displacement ) {
+            self.elasticPotentialEnergyProperty.set( .5 * springConstant * Math.pow( displacement, 2 ) );
+          } );
+      }
+    } );
+
+    // Property.multilink( [
+    //     this.springProperty,
+    //     this.springProperty.springConstantProperty,
+    //     this.springProperty.displacementProperty ],
+    //   function( spring, springConstant, displacement ) {
+    //     if (spring){
+    //       self.elasticPotentialEnergyProperty.set(.5*springConstant*Math.pow(displacement,2));
+    //     }
+    //   } );
+
+    this.totalEnergyProperty = new DerivedProperty( [
+        this.kineticEnergyProperty,
+        this.gravitationalPotentialEnergyProperty,
+        this.elasticPotentialEnergyProperty
+      ],
+      function( kineticEnergy, gravitationalPotentialEnergy, elasticPotentialEnergy ) {
+        return kineticEnergy + gravitationalPotentialEnergy + elasticPotentialEnergy;
+      } );
 
     // @public {read-only} Non property model attributes
     this.isLabeled = isLabeled;

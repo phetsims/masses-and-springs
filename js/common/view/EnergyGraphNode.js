@@ -79,7 +79,7 @@ define( function( require ) {
 
     var KEBarHeight = createScaledBarHeight( model.masses.adjustableMass.kineticEnergyProperty );
     var GPEBarHeight = createScaledBarHeight( model.masses.adjustableMass.gravitationalPotentialEnergyProperty );
-    // var EPBarHeight = createScaledBarHeight( model.masses.adjustableMass.elasticPotentialEnergyProperty );
+    var EPBarHeight = createScaledBarHeight( model.masses.adjustableMass.elasticPotentialEnergyProperty );
     // var ThermalEnergyBarHeight = createScaledBarHeight( model.masses.adjustableMass.elasticPotentialEnergyProperty );
     // var TotalEnergyBarHeight = createScaledBarHeight( model.masses.adjustableMass.totalEnergyProperty );
     // debugger;
@@ -96,11 +96,11 @@ define( function( require ) {
       width: 15,
       displayContinuousArrow: true
     } );
-    // var elasticPotentialEnergyBarNode = new VerticalBarNode( EPBarHeight, {
-    //   fill: '#29d4ff',
-    //   width: 15,
-    //   displayContinuousArrow: true
-    // } );
+    var elasticPotentialEnergyBarNode = new VerticalBarNode( EPBarHeight, {
+      fill: '#29d4ff',
+      width: 15,
+      displayContinuousArrow: true
+    } );
     // var thermalEnergyBarNode = new VerticalBarNode( ThermalEnergyBarHeight, {
     //   fill: '#ff6e26',
     //   width: 15,
@@ -115,7 +115,7 @@ define( function( require ) {
     this.barNodes = [
       kineticEnergyBarNode,
       gravitationalPotentialEnergyBarNode,
-      // elasticPotentialEnergyBarNode,
+      elasticPotentialEnergyBarNode
       // thermalEnergyBarNode,
       // totalEnergyBarNode
     ];
