@@ -120,6 +120,28 @@ define( function( require ) {
       self.accelerationProperty.set( netForce / self.mass );
     } );
 
+    this.kineticEnergyProperty = new DerivedProperty( [ this.massProperty, this.verticalVelocityProperty ], function( mass, velocity ) {
+      return (1 / 2) * (mass) * (Math.pow( velocity, 2 ));
+    } );
+
+    this.gravitationalPotentialEnergyProperty = new DerivedProperty( [ this.massProperty, this.gravityProperty, this.positionProperty ], function( mass, gravity, position ) {
+      return Math.abs( mass * gravity * position.y );
+    } );
+    //
+    // this.elasticPotentialEnergyProperty = new DerivedProperty( [ this.springProperty.springConstantProperty, this.springProperty.displacementProperty ],
+    //   function( springConstant, displacement ) {
+    //     return (1 / 2) * springConstant * Math.pow( displacement, 2 );
+    //   } );
+
+    // this.totalEnergyProperty = new DerivedProperty ([
+    //     this.kineticEnergyProperty,
+    //     this.gravitationalPotentialEnergyProperty,
+    //     this.elasticPotentialEnergyProperty
+    //   ],
+    //     function( kineticEnergy, gravitationalPotentialEnergy, elasticPotentialEnergy ) {
+    //       return kineticEnergy + gravitationalPotentialEnergy + elasticPotentialEnergy;
+    //     });
+
     // @public {read-only} Non property model attributes
     this.isLabeled = isLabeled;
     this.color = color;
