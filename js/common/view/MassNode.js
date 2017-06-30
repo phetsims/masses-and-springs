@@ -79,6 +79,7 @@ define( function( require ) {
     } );
     this.addChild( hookNode );
 
+
     var labelString;
     var createLabel = function( labelString ) {
       var label = new Text( labelString, {
@@ -114,6 +115,8 @@ define( function( require ) {
     //   labelString = mass.specificLabel;
     //   createLabel( labelString );
     // }
+    var Left_In_Code_to_Test_imported_settings;
+
 
     this.mass.positionProperty.link( function( position ) {
       self.translation = modelViewTransform2.modelToViewPosition( position );
