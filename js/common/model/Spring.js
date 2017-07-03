@@ -127,6 +127,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<Mass>}
+    // REVIEW: A name like "attachedMassProperty" would help to avoid confusion about whether this is the mass (i.e. the
+    // weight) of the spring itself.
     this.massProperty = new Property( null, {
       tandem: tandem.createTandem( 'massProperty' ),
       phetioValueType: TMass

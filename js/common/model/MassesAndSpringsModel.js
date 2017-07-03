@@ -90,6 +90,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
+    // REVIEW: timerSecondsProperty (i.e. 'seconds' is plural) seem like it would make more sense
     this.timerSecondProperty = new NumberProperty( 0, {
       range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
       tandem: tandem.createTandem( 'timerSecondProperty' ),
@@ -120,6 +121,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<string>} name of planet selected
+    // REVIEW: Generally, the planet should be what is selected, and the title is determined in the view.
     this.bodyTitleProperty = new Property( Body.EARTH.title, {
       tandem: tandem.createTandem( 'bodyTitleProperty' ),
       phetioValueType: TString
@@ -163,7 +165,6 @@ define( function( require ) {
       );
     };
 
-
     // @public (read-only) model of springs used throughout the sim
     if ( options.springCount === 2 ) {
       this.springs = [
@@ -199,6 +200,7 @@ define( function( require ) {
     }
 
     // @public (read-only) model of bodies used throughout the sim
+    // REVIEW - this seems like it should be in the shared constants file or at least in the static area for this type.
     this.bodies = [
       Body.MOON,
       Body.EARTH,
@@ -223,6 +225,8 @@ define( function( require ) {
         spring.dampingCoefficientProperty.set( newFriction );
       } );
     } );
+
+    // REVIEW: Why is this here instead of in the Spring file?
     this.springs.forEach( function( spring ) {
       spring.springConstantProperty.link( function( springConstant ) {
         spring.updateThickness( spring.naturalRestingLengthProperty.get(), springConstant );
@@ -267,6 +271,7 @@ define( function( require ) {
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
 
+    // REVIEW: Remember to document this.
     createMass: function( mass, xPosition, labelVisible, color, specifiedLabel, tandem ) {
       return new Mass( mass, new Vector2( xPosition, .5 ), labelVisible, color, this.gravityProperty, tandem, { specificLabel: specifiedLabel } );
     },
@@ -321,6 +326,8 @@ define( function( require ) {
      * @public
      */
     stopSpring: function( springNumber ) {
+
+      // REVIEW: This entire method seems to this review like it should be in the Spring for better encapsulation.
       var spring = this.springs[ springNumber ];
       var mass = spring.massProperty.get();
 
@@ -336,8 +343,7 @@ define( function( require ) {
         mass.verticalVelocityProperty.set( 0 );
         mass.accelerationProperty.set( 0 );
       }
-    }
-    ,
+    },
 
     /**
      * Responsible for stepping through sim at 1/60th speed and paused after step.
@@ -347,8 +353,7 @@ define( function( require ) {
       this.playingProperty.set( true );
       this.step( 1 / 60 );// steps the nominal amount used by step forward button listener
       this.playingProperty.set( false );
-    }
-    ,
+    },
 
     /**
      * @param {number} dt
@@ -359,11 +364,13 @@ define( function( require ) {
 
       // If simulationTimeStep is excessively large, ignore it - it probably means the user returned to the tab after
       // the tab or the browser was hidden for a while.
+      // REVIEW: There is a new feature in Screen.js which can be used to cap dt, should probably use that instead of doing it explicitly here.
       if ( dt > 1.0 ) {
         return;
       }
       if ( this.playingProperty.get() ) {
 
+        // REVIEW: The comment immediately below looks out of place.  Cut and paste issue?
         // Using real world time for this results in the atoms moving a little slowly, so the time step is adjusted
         // here.  The multipliers were empirically determined.
         switch( this.simSpeedProperty.get() ) {
@@ -376,6 +383,7 @@ define( function( require ) {
             assert( false, 'invalid setting for model speed' );
         }
       }
+      // REVIEW: Why is the same value being tested twice (playingProperty)?  Can these be consolidated?
       if ( this.playingProperty.get() === true ) {
         _.values( this.masses ).forEach( function( mass ) {
 
@@ -388,6 +396,8 @@ define( function( require ) {
           this.timerSecondProperty.set( this.timerSecondProperty.get() + dt );
         }
 
+        // REVIEW: The springs would have better encapulation if they were simply stepped here and the spring tested
+        // the various conditions and decided whether to do the oscillation.
         // Oscillate springs
         this.springs.forEach( function( spring ) {
           if ( spring.massProperty.get() && !spring.massProperty.get().userControlledProperty.get() &&
