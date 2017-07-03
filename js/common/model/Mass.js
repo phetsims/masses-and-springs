@@ -112,30 +112,34 @@ define( function( require ) {
       }
     } );
 
+    // Net force applied to mass
     this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ], function( springForce, gravity ) {
       return springForce - self.mass * gravity;
     } );
 
+    // Link that sets the acceleration property of the mass
     this.netForceProperty.link( function( netForce ) {
       self.accelerationProperty.set( netForce / self.mass );
     } );
 
+    // Kinetic energy of the mass
     this.kineticEnergyProperty = new DerivedProperty( [ this.massProperty, this.verticalVelocityProperty ], function( mass, velocity ) {
       return (1 / 2) * (mass) * (Math.pow( velocity, 2 ));
     } );
 
+    // Gravitational potential energy of the mass
     this.gravitationalPotentialEnergyProperty = new DerivedProperty( [ this.massProperty, this.gravityProperty, this.positionProperty ], function( mass, gravity, position ) {
       return Math.abs( mass * gravity * position.y );
     } );
-    //
-    // this.elasticPotentialEnergyProperty = new DerivedProperty( [ this.springProperty.springConstantProperty, this.springProperty.displacementProperty ],
-    //   function( springConstant, displacement ) {
-    //     return (1 / 2) * springConstant * Math.pow( displacement, 2 );
-    //   } );
+
+    // Kinetic energy of the mass
     this.elasticPotentialEnergyProperty = new Property( 0 );
 
+    // Link that sets the elastic potential energy
     this.springProperty.link( function( spring ) {
       if ( spring ) {
+
+        // Check if mass is attached to spring first, then update the elastic potential energy
         Property.multilink( [ spring.springConstantProperty, spring.displacementProperty ],
           function( springConstant, displacement ) {
             self.elasticPotentialEnergyProperty.set( .5 * springConstant * Math.pow( displacement, 2 ) );
@@ -143,16 +147,7 @@ define( function( require ) {
       }
     } );
 
-    // Property.multilink( [
-    //     this.springProperty,
-    //     this.springProperty.springConstantProperty,
-    //     this.springProperty.displacementProperty ],
-    //   function( spring, springConstant, displacement ) {
-    //     if (spring){
-    //       self.elasticPotentialEnergyProperty.set(.5*springConstant*Math.pow(displacement,2));
-    //     }
-    //   } );
-
+    // Total energy of the mass
     this.totalEnergyProperty = new DerivedProperty( [
         this.kineticEnergyProperty,
         this.gravitationalPotentialEnergyProperty,
@@ -163,7 +158,6 @@ define( function( require ) {
       } );
 
     // @public {read-only} Non property model attributes
-    this.isLabeled = isLabeled;
     this.color = color;
     var scalingFactor = 4; // scales the radius to desired size
     this.radius = (Math.pow( (this.mass - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
