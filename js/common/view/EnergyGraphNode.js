@@ -101,23 +101,11 @@ define( function( require ) {
       width: 15,
       displayContinuousArrow: true
     } );
-    // var thermalEnergyBarNode = new VerticalBarNode( ThermalEnergyBarHeight, {
-    //   fill: '#ff6e26',
-    //   width: 15,
-    //   displayContinuousArrow: true
-    // } );
-    // var totalEnergyBarNode = new VerticalBarNode( TotalEnergyBarHeight, {
-    //   fill: 'black',
-    //   width: 15,
-    //   displayContinuousArrow: true
-    // } );
 
     this.barNodes = [
       kineticEnergyBarNode,
       gravitationalPotentialEnergyBarNode,
       elasticPotentialEnergyBarNode
-      // thermalEnergyBarNode,
-      // totalEnergyBarNode
     ];
 
     var compositeBar = new VerticalCompositeBarNode( this.barNodes, {
@@ -125,7 +113,6 @@ define( function( require ) {
       displayContinuousArrow: true
     } );
     this.barNodes.push( compositeBar );
-
     var verticalBarChart = new VerticalBarChart( this.barNodes, {
       width: 140,
       height: MAXIMUM_HEIGHT,
