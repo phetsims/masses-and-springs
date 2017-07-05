@@ -80,9 +80,6 @@ define( function( require ) {
     var KEBarHeight = createScaledBarHeight( model.masses.adjustableMass.kineticEnergyProperty );
     var GPEBarHeight = createScaledBarHeight( model.masses.adjustableMass.gravitationalPotentialEnergyProperty );
     var EPBarHeight = createScaledBarHeight( model.masses.adjustableMass.elasticPotentialEnergyProperty );
-    // var ThermalEnergyBarHeight = createScaledBarHeight( model.masses.adjustableMass.elasticPotentialEnergyProperty );
-    // var TotalEnergyBarHeight = createScaledBarHeight( model.masses.adjustableMass.totalEnergyProperty );
-    // debugger;
 
     // Creation of our different bar nodes to be represented in the graph
     // TODO: Factor out a function for this.
@@ -113,12 +110,32 @@ define( function( require ) {
       displayContinuousArrow: true
     } );
     this.barNodes.push( compositeBar );
+
+    var createLabelText = function( string, color, font ) {
+      return new RichText( string, {
+        fill: color,
+        font: font
+      } );
+    };
+
+    var sampleLabels = [
+      createLabelText( keString, '#39d74e', MassesAndSpringsConstants.TITLE_FONT ),
+      createLabelText( peGravString, '#5798de', MassesAndSpringsConstants.TITLE_FONT ),
+      createLabelText( peElasString, '#29d4ff', MassesAndSpringsConstants.TITLE_FONT ),
+      createLabelText( tTotString, 'black', MassesAndSpringsConstants.TITLE_FONT )
+    ];
+
+    sampleLabels.forEach( function( labelText ) {
+      labelText.rotate( -Math.PI / 2 );
+    } );
     var verticalBarChart = new VerticalBarChart( this.barNodes, {
       width: 140,
       height: MAXIMUM_HEIGHT,
       title: new Text( energyString, { maxWidth: 100 } ),
-      titleFill: '#b37e46'
+      titleFill: '#b37e46',
+      xAxisLabels: sampleLabels
     } );
+
 
     // Creation of zoom in/out buttons
     var zoomInButton = new ZoomButton( {
