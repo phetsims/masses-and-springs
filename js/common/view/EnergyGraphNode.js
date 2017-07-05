@@ -133,7 +133,7 @@ define( function( require ) {
       height: MAXIMUM_HEIGHT,
       title: new Text( energyString, { maxWidth: 100 } ),
       titleFill: '#b37e46',
-      xAxisLabels: sampleLabels
+      xAxisLabels: null
     } );
 
 

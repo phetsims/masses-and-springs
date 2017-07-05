@@ -90,10 +90,9 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
-    // REVIEW: timerSecondsProperty (i.e. 'seconds' is plural) seem like it would make more sense
-    this.timerSecondProperty = new NumberProperty( 0, {
+    this.timerSecondsProperty = new NumberProperty( 0, {
       range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
-      tandem: tandem.createTandem( 'timerSecondProperty' ),
+      tandem: tandem.createTandem( 'timerSecondsProperty' ),
       phetioValueType: TNumber( {
         units: 'seconds',
         range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 )
@@ -251,7 +250,7 @@ define( function( require ) {
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();
       this.timerVisibleProperty.reset();
-      this.timerSecondProperty.reset();
+      this.timerSecondsProperty.reset();
       this.timerRunningProperty.reset();
       this.movableLineVisibleProperty.reset();
       this.naturalLengthVisibleProperty.reset();
@@ -393,7 +392,7 @@ define( function( require ) {
           }
         } );
         if ( this.timerRunningProperty.get() ) {
-          this.timerSecondProperty.set( this.timerSecondProperty.get() + dt );
+          this.timerSecondsProperty.set( this.timerSecondsProperty.get() + dt );
         }
 
         // REVIEW: The springs would have better encapsulation if they were simply stepped here and the spring tested

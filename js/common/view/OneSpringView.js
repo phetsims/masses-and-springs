@@ -179,7 +179,7 @@ define( function( require ) {
     var timerNode = new DraggableTimerNode(
       this.layoutBounds,
       new Vector2( this.layoutBounds.left + 80, this.spacing + 35 ),
-      model.timerSecondProperty,
+      model.timerSecondsProperty,
       model.timerRunningProperty,
       model.timerVisibleProperty,
       tandem.createTandem( 'timerNode' )
