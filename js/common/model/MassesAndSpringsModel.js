@@ -328,33 +328,6 @@ define( function( require ) {
     },
 
     /**
-     * Stop spring motion by setting the displacement to the spring's extension, which is the length from the natural
-     * resting position. This will also stop the spring from further oscillation.
-     *
-     * @param {number} springNumber: Determines which spring will be affected.
-     * @public
-     */
-    stopSpring: function( springNumber ) {
-
-      // REVIEW: This entire method seems to this review like it should be in the Spring for better encapsulation.
-      var spring = this.springs[ springNumber ];
-      var mass = spring.massProperty.get();
-
-      // check if mass attached on spring
-      if ( mass ) {
-
-        // set displacement and stop further animation
-        spring.displacementProperty.set( -spring.springExtension );
-        spring.animatingProperty.reset();
-
-        // place that mass at the correct location as well
-        mass.positionProperty.set( new Vector2( spring.positionProperty.get().x, spring.bottomProperty.get() ) );
-        mass.verticalVelocityProperty.set( 0 );
-        mass.accelerationProperty.set( 0 );
-      }
-    },
-
-    /**
      * Responsible for stepping through sim at 1/60th speed and paused after step.
      * @public
      */

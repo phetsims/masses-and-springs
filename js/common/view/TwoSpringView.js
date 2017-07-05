@@ -294,24 +294,19 @@ define( function( require ) {
     } );
 
     this.firstSpringStopperButtonNode = new SpringStopperButtonNode(
-      tandem.createTandem( 'firstSpringStopperButtonNode' ),
-      {
-        listener: model.stopSpring.bind( model, 0 ),
+      tandem.createTandem( 'firstSpringStopperButtonNode' ), {
+        listener: model.springs[ 0 ].stopSpring.bind( model.springs[ 0 ] ),
         right: this.springHangerNode.left - this.spacing,
         top: this.spacing
-      }
-    );
+      } );
     var secondSpringStopperButtonNode = new SpringStopperButtonNode(
-      tandem.createTandem( 'secondSpringStopperButtonNode' ),
-      {
-        listener: model.stopSpring.bind( model, 1 ),
+      tandem.createTandem( 'secondSpringStopperButtonNode' ), {
+        listener: model.springs[ 1 ].stopSpring.bind( model.springs[ 1 ] ),
         right: this.secondSpringConstantControlPanel.left - this.spacing,
         top: this.spacing
-      }
-    );
+      } );
 
     this.springHangerNode.right = secondSpringStopperButtonNode.left - this.spacing;
-
 
     // Adding all of the nodes to the scene graph
     this.addChild( this.firstOscillatingSpringNode );

@@ -259,7 +259,7 @@ define( function( require ) {
 
     var springStopperButtonNode = new SpringStopperButtonNode(
       tandem.createTandem( 'springStopperButtonNode' ), {
-        listener: model.stopSpring.bind( model, 0 ),
+        listener: model.springs[ 0 ].stopSpring.bind( model.springs[ 0 ] ),
         right: springConstantControlPanel.left - this.spacing,
         top: this.spacing
       }

@@ -317,6 +317,29 @@ define( function( require ) {
     },
 
     /**
+     * Stop spring motion by setting the displacement to the spring's extension, which is the length from the natural
+     * resting position. This will also stop the spring from further oscillation.
+     *
+     * @public
+     */
+    stopSpring: function() {
+
+      // check if mass attached on spring
+      if ( this.massProperty.get() ) {
+        var mass = this.massProperty.get();
+
+        // set displacement and stop further animation
+        this.displacementProperty.set( -this.springExtension );
+        this.animatingProperty.reset();
+
+        // place that mass at the correct location as well
+        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );
+        mass.verticalVelocityProperty.set( 0 );
+        mass.accelerationProperty.set( 0 );
+      }
+    },
+
+    /**
      * Responsible for oscillatory motion of spring system.
      * @param {number} dt - animation time step
      *
