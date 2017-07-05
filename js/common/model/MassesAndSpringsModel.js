@@ -344,12 +344,8 @@ define( function( require ) {
     step: function( dt ) {
       var self = this;
 
-      // If simulationTimeStep is excessively large, ignore it - it probably means the user returned to the tab after
+      // If simulationTimeStep > 1, ignore it - it probably means the user returned to the tab after
       // the tab or the browser was hidden for a while.
-      // REVIEW: There is a new feature in Screen.js which can be used to cap dt, should probably use that instead of doing it explicitly here.
-      if ( dt > 1.0 ) {
-        return;
-      }
       if ( this.playingProperty.get() ) {
 
         // REVIEW: The comment immediately below looks out of place.  Cut and paste issue?

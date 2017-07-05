@@ -33,7 +33,8 @@ define( function( require ) {
       name: introString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioValueType: TColor
+        phetioValueType: TColor,
+        maxDT: 1
       } ),
       tandem: tandem
     };
