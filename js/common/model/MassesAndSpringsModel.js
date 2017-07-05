@@ -396,7 +396,7 @@ define( function( require ) {
           this.timerSecondProperty.set( this.timerSecondProperty.get() + dt );
         }
 
-        // REVIEW: The springs would have better encapulation if they were simply stepped here and the spring tested
+        // REVIEW: The springs would have better encapsulation if they were simply stepped here and the spring tested
         // the various conditions and decided whether to do the oscillation.
         // Oscillate springs
         this.springs.forEach( function( spring ) {
