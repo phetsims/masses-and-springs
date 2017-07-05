@@ -270,7 +270,17 @@ define( function( require ) {
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
 
-    // REVIEW: Remember to document this.
+    /**
+     * Creates new mass object
+     *
+     * @param {number} mass - mass in kg
+     * @param {number} xPosition - starting x-coordinate of the mass object
+     * @param {boolean} labelVisible - should a label be shown on the MassNode
+     * @param {string} color - color of the MassNode
+     * @param {string} specifiedLabel - customized label for the MassNode
+     * @param {Tandem} tandem
+     * @returns {*}
+     */
     createMass: function( mass, xPosition, labelVisible, color, specifiedLabel, tandem ) {
       return new Mass( mass, new Vector2( xPosition, .5 ), labelVisible, color, this.gravityProperty, tandem, { specificLabel: specifiedLabel } );
     },
