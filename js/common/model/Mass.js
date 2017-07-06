@@ -21,7 +21,7 @@ define( function( require ) {
   // constants
   var HEIGHT_RATIO = 2;
   var HOOK_HEIGHT_RATIO = .75;
-  var DENSITY = 80; // Constant used to keep all of our masses consistant in the model.
+  var DENSITY = 80; // Constant used to keep all of our masses consistent in the model.
 
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
@@ -44,6 +44,15 @@ define( function( require ) {
 
     var self = this;
 
+    // @public {read-only} Non property model attributes
+    this.mass = massValue;
+    this.color = color;
+    var scalingFactor = 4; // scales the radius to desired size
+    this.radius = (Math.pow( (this.mass - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
+    this.cylinderHeight = this.radius * HEIGHT_RATIO; // height in m
+    this.hookHeight = this.radius * HOOK_HEIGHT_RATIO; // height in m
+    this.height = this.cylinderHeight + this.hookHeight;
+
     // String that can be assigned as a label for any mass
     this.specificLabel = options.specificLabel;
 
@@ -55,7 +64,6 @@ define( function( require ) {
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
 
     // @public (read-only) {Number} mass of mass object in kg
-    this.mass = massValue;
     this.massProperty = new Property( massValue );
 
     // @public Main model properties
@@ -129,7 +137,7 @@ define( function( require ) {
 
     // Gravitational potential energy of the mass
     this.gravitationalPotentialEnergyProperty = new DerivedProperty( [ this.massProperty, this.gravityProperty, this.positionProperty ], function( mass, gravity, position ) {
-      return Math.abs( mass * gravity * position.y );
+      return Math.abs( mass * gravity * (position.y - self.height) );
     } );
 
     // Kinetic energy of the mass
@@ -156,14 +164,6 @@ define( function( require ) {
       function( kineticEnergy, gravitationalPotentialEnergy, elasticPotentialEnergy ) {
         return kineticEnergy + gravitationalPotentialEnergy + elasticPotentialEnergy;
       } );
-
-    // @public {read-only} Non property model attributes
-    this.color = color;
-    var scalingFactor = 4; // scales the radius to desired size
-    this.radius = (Math.pow( (this.mass - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
-    this.cylinderHeight = this.radius * HEIGHT_RATIO; // height in m
-    this.hookHeight = this.radius * HOOK_HEIGHT_RATIO; // height in m
-    this.height = this.cylinderHeight + this.hookHeight;
 
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
