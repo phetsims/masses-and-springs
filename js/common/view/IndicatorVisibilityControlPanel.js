@@ -62,11 +62,10 @@ define( function( require ) {
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
       {
         content: new HBox( {
-          children: [ new Text(
-            naturalLengthString,
-            MassesAndSpringsConstants.FONT,
-            { tandem: tandem.createTandem( 'naturalLengthString' ) } )
-          ],
+          children: [ new Text( naturalLengthString, {
+            font: MassesAndSpringsConstants.FONT,
+            tandem: tandem.createTandem( 'naturalLengthString' )
+          } ) ],
           tandem: tandem.createTandem( 'naturalLengthHBox' )
         } ),
         property: model.naturalLengthVisibleProperty,
@@ -74,11 +73,10 @@ define( function( require ) {
       },
       {
         content: new HBox( {
-          children: [ new Text(
-            equilibriumPositionString,
-            MassesAndSpringsConstants.FONT,
-            { tandem: tandem.createTandem( 'equilibriumPositionString' ) } )
-          ],
+          children: [ new Text( equilibriumPositionString, {
+            font: MassesAndSpringsConstants.FONT,
+            tandem: tandem.createTandem( 'equilibriumPositionString' )
+          } ) ],
           tandem: tandem.createTandem( 'equilibriumPositionHBox' )
         } ),
         property: model.equilibriumPositionVisibleProperty,
@@ -86,11 +84,10 @@ define( function( require ) {
       },
       {
         content: new HBox( {
-          children: [ new Text(
-            movableLineString,
-            MassesAndSpringsConstants.FONT,
-            { tandem: tandem.createTandem( 'movableLineString' ) } )
-          ],
+          children: [ new Text( movableLineString, {
+            font: MassesAndSpringsConstants.FONT,
+            tandem: tandem.createTandem( 'movableLineString' )
+          } ) ],
           tandem: tandem.createTandem( 'movableLineHBox' )
         } ),
         property: model.movableLineVisibleProperty,
