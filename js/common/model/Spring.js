@@ -196,6 +196,10 @@ define( function( require ) {
         self.animatingProperty.set( true );
       }
     } );
+
+    this.springConstantProperty.link( function( springConstant ) {
+      self.updateThickness( self.naturalRestingLengthProperty.get(), springConstant );
+    } );
   }
 
   massesAndSprings.register( 'Spring', Spring );

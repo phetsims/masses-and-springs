@@ -224,13 +224,6 @@ define( function( require ) {
         spring.dampingCoefficientProperty.set( newFriction );
       } );
     } );
-
-    // REVIEW: Why is this here instead of in the Spring file?
-    this.springs.forEach( function( spring ) {
-      spring.springConstantProperty.link( function( springConstant ) {
-        spring.updateThickness( spring.naturalRestingLengthProperty.get(), springConstant );
-      } );
-    } );
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
