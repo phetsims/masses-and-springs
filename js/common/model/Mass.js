@@ -99,16 +99,20 @@ define( function( require ) {
     // @public {Property.<number>} vertical acceleration of the mass
     this.gravityProperty = gravityProperty;
 
-    // REVIEW: I think {Property.<Spring|null>} is the type documentation that you're looking for.
-    // @public {Property.<Spring>} {Spring|null} is the mass attached to a Spring?
+    // @public {Property.<Spring|null>}  is the mass attached to a Spring?
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
       phetioValueType: TSpring
     } );
 
-    // REVIEW: Should be initialized to a value, and the type and visibility should be documented. Also, units?
-    // The force of the attached spring or 0 if unattached
-    this.springForceProperty = new Property();
+    // @public {Property.<number>} The force of the attached spring or 0 if unattached
+    this.springForceProperty = new Property( 0.0, {
+      tandem: tandem.createTandem( 'springForceProperty' ),
+      phetioValueType: TNumber( {
+        units: 'newtons/meter',
+        range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0.0 )
+      } )
+    } );
 
     // Forward the value from the attached spring through to the mass's springForceProperty
     var springForceListener = function( springForce ) {
@@ -118,7 +122,7 @@ define( function( require ) {
       oldSpring && oldSpring.springForceProperty.unlink( springForceListener );
       spring && spring.springForceProperty.link( springForceListener );
       if ( !spring ) {
-        self.springForceProperty.set( 0.0 ); // REVIEW: Recommend using springForceProperty.reset here once an initial value is correctly set (see comment above)
+        self.springForceProperty.reset();
       }
     } );
 
