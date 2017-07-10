@@ -14,7 +14,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
-  var Timer = require( 'SCENERY_PHET/Timer' );
+  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var TVector2 = require( 'DOT/TVector2' );
 
   /**
@@ -28,7 +28,7 @@ define( function( require ) {
    */
   function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty, tandem ) {
     var self = this;
-    Timer.call( this, timerSecondsProperty, timerRunningProperty, {
+    TimerNode.call( this, timerSecondsProperty, timerRunningProperty, {
       tandem: tandem.createTandem( 'timer' )
     } );
 
@@ -61,7 +61,7 @@ define( function( require ) {
 
   massesAndSprings.register( 'DraggableTimerNode', DraggableTimerNode );
 
-  return inherit( Timer, DraggableTimerNode, {
+  return inherit( TimerNode, DraggableTimerNode, {
     /**
      * @override
      *

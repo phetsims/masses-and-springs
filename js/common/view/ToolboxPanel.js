@@ -20,7 +20,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Range = require( 'DOT/Range' );
   var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
-  var Timer = require( 'SCENERY_PHET/Timer' );
+  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -66,7 +66,7 @@ define( function( require ) {
     var isRunningProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isRunningProperty' )
     } );
-    var timer = new Timer( secondsProperty, isRunningProperty );
+    var timer = new TimerNode( secondsProperty, isRunningProperty );
 
     // Create ruler to be turned into icon
     var rulerWidth = 397; // 1 meter
