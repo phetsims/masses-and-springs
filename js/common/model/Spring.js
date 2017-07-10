@@ -363,16 +363,16 @@ define( function( require ) {
       if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() &&
            this.animatingProperty.get() ) {
 
-      // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
-      // references that could be provided that describe where this came from?
+        // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
+        // references that could be provided that describe where this came from?
 
-      //TODO:: implement upper limit for dt
-      var k = this.springConstantProperty.get();
-      var m = this.massProperty.get().mass;
-      var c = this.dampingCoefficientProperty.get();
-      var v = this.massProperty.get().verticalVelocityProperty.get();
-      var x = this.displacementProperty.get();
-      var g = this.gravityProperty.get();
+        //TODO:: implement upper limit for dt
+        var k = this.springConstantProperty.get();
+        var m = this.massProperty.get().mass;
+        var c = this.dampingCoefficientProperty.get();
+        var v = this.massProperty.get().verticalVelocityProperty.get();
+        var x = this.displacementProperty.get();
+        var g = this.gravityProperty.get();
 
         // Underdamped and Overdamped case
         if ( ( c * c - 4 * k * m ) !== 0 ) {
