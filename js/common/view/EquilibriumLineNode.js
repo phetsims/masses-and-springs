@@ -66,6 +66,8 @@ define( function( require ) {
   massesAndSprings.register( 'EquilibriumLineNode', EquilibriumLineNode );
 
   return inherit( Line, EquilibriumLineNode, {
+
+    // REVIEW: really an override?
     /**
      * @override
      *

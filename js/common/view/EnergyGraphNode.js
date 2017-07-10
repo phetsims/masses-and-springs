@@ -69,6 +69,7 @@ define( function( require ) {
       return Math.pow( 2, zoomLevel );
     } );
 
+    // REVIEW: This seems like a good approach, but the names threw me for a bit.  I'd recommend something like 'createBarHeightProperty' for the function.
     var createScaledBarHeight = function( property ) {
       var derivedProperty = new DerivedProperty( [ property, scaleFactorProperty ],
         function( value, scale ) {
@@ -77,12 +78,15 @@ define( function( require ) {
       return derivedProperty;
     };
 
+    // REVIEW: Since these are all of type Property, they should be named KEBarHeightProperty (for example).
     var KEBarHeight = createScaledBarHeight( model.masses.adjustableMass.kineticEnergyProperty );
     var GPEBarHeight = createScaledBarHeight( model.masses.adjustableMass.gravitationalPotentialEnergyProperty );
     var EPBarHeight = createScaledBarHeight( model.masses.adjustableMass.elasticPotentialEnergyProperty );
 
     // Creation of our different bar nodes to be represented in the graph
     // TODO: Factor out a function for this.
+    // REVIEW: How about one function to create the property and the VerticalBarNode, since the properties don't appear to be used elsewhere?
+    // REVIEW: And, since the width is used in a number of places, it should be factored out as a constant.
     var kineticEnergyBarNode = new VerticalBarNode( KEBarHeight, {
       fill: '#39d74e',
       width: 15,
@@ -111,6 +115,7 @@ define( function( require ) {
     } );
     this.barNodes.push( compositeBar );
 
+    // REVIEW: Seems unnecessary to pass in the font since it's always the same.
     var createLabelText = function( string, color, font ) {
       return new RichText( string, {
         fill: color,
@@ -128,6 +133,7 @@ define( function( require ) {
     sampleLabels.forEach( function( labelText ) {
       labelText.rotate( -Math.PI / 2 );
     } );
+
     var verticalBarChart = new VerticalBarChart( this.barNodes, {
       width: 140,
       height: MAXIMUM_HEIGHT,
@@ -136,8 +142,8 @@ define( function( require ) {
       xAxisLabels: null
     } );
 
-
     // Creation of zoom in/out buttons
+    // REVIEW: With the exception of the 'in' key, all values are the same for both, so I recommend using a constant options object + _.extend.
     var zoomInButton = new ZoomButton( {
       baseColor: '#E7E8E9',
       radius: 8,
@@ -177,7 +183,6 @@ define( function( require ) {
     } );
 
     // Manages the description of the symbols
-
     var descriptionContent = new VBox( {
       children: [
         new Text( kineticEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } ),
@@ -231,7 +236,6 @@ define( function( require ) {
     // Provides a limit on the scale
     scaleFactorProperty.link( function( value ) {
       zoomReadout.text = (value + 'x');
-
       zoomOutButton.setEnabled( value !== MIN_SCALE );
       zoomInButton.setEnabled( value !== MAX_SCALE );
     } );

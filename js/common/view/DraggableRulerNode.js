@@ -37,6 +37,9 @@ define( function( require ) {
     this.toolbox = null;
 
     // define ruler params in pixels
+    // REVIEW: Why is 397 equal to 1 meter?  Seems like MVT should be passed in and length should be calculated.
+    // REVIEW: Seems like the width and length variable are reversed.  This is probably because of the constructor used
+    // below, but I think it would be better to name them as they are used in this context.
     var rulerWidth = 397; // 1 meter
     var rulerLength = .1 * rulerWidth;
     var majorTickLabels = [ '' ];
@@ -90,6 +93,8 @@ define( function( require ) {
   massesAndSprings.register( 'DraggableRulerNode', DraggableRulerNode );
 
   return inherit( RulerNode, DraggableRulerNode, {
+
+    // REVIEW: Is the @override annotation correct?
     /**
      * @override
      *
