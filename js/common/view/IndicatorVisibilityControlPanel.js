@@ -64,8 +64,7 @@ define( function( require ) {
         content: new HBox( {
           children: [ new Text(
             naturalLengthString,
-            MassesAndSpringsConstants.FONT,
-            { tandem: tandem.createTandem( 'naturalLengthString' ) } )
+            { font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'naturalLengthString' ) } )
           ],
           tandem: tandem.createTandem( 'naturalLengthHBox' )
         } ),
@@ -76,8 +75,7 @@ define( function( require ) {
         content: new HBox( {
           children: [ new Text(
             equilibriumPositionString,
-            MassesAndSpringsConstants.FONT,
-            { tandem: tandem.createTandem( 'equilibriumPositionString' ) } )
+            { font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'equilibriumPositionString' ) } )
           ],
           tandem: tandem.createTandem( 'equilibriumPositionHBox' )
         } ),
@@ -88,8 +86,7 @@ define( function( require ) {
         content: new HBox( {
           children: [ new Text(
             movableLineString,
-            MassesAndSpringsConstants.FONT,
-            { tandem: tandem.createTandem( 'movableLineString' ) } )
+            { font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'movableLineString' ) } )
           ],
           tandem: tandem.createTandem( 'movableLineHBox' )
         } ),
