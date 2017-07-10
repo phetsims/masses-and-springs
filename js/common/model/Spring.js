@@ -368,9 +368,9 @@ define( function( require ) {
 
         //TODO:: implement upper limit for dt
         var k = this.springConstantProperty.get();
-        var m = this.massProperty.get().mass;
+        var m = this.massAttachedProperty.get().mass;
         var c = this.dampingCoefficientProperty.get();
-        var v = this.massProperty.get().verticalVelocityProperty.get();
+        var v = this.massAttachedProperty.get().verticalVelocityProperty.get();
         var x = this.displacementProperty.get();
         var g = this.gravityProperty.get();
 
