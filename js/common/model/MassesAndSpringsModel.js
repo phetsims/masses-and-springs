@@ -366,15 +366,9 @@ define( function( require ) {
         if ( this.timerRunningProperty.get() ) {
           this.timerSecondsProperty.set( this.timerSecondsProperty.get() + dt );
         }
-
-        // REVIEW: The springs would have better encapsulation if they were simply stepped here and the spring tested
-        // the various conditions and decided whether to do the oscillation.
         // Oscillate springs
         this.springs.forEach( function( spring ) {
-          if ( spring.massAttachedProperty.get() && !spring.massAttachedProperty.get().userControlledProperty.get() &&
-               spring.animatingProperty.get() ) {
             spring.stepOscillate( dt );
-          }
         } );
       }
     }
