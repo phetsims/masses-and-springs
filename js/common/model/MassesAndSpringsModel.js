@@ -341,9 +341,7 @@ define( function( require ) {
       // the tab or the browser was hidden for a while.
       if ( this.playingProperty.get() ) {
 
-        // REVIEW: The comment immediately below looks out of place.  Cut and paste issue?
-        // Using real world time for this results in the atoms moving a little slowly, so the time step is adjusted
-        // here.  The multipliers were empirically determined.
+        // Change the dt value if we are playing in slow motion.
         switch( this.simSpeedProperty.get() ) {
           case 'normal':
             break;
