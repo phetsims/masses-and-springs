@@ -44,7 +44,7 @@ define( function( require ) {
 
     var self = this;
 
-    // @public {read-only} Non property model attributes
+    // @public {read-only} Non-property model attributes
     this.mass = massValue;
     this.color = color;
     var scalingFactor = 4; // scales the radius to desired size
@@ -99,12 +99,14 @@ define( function( require ) {
     // @public {Property.<number>} vertical acceleration of the mass
     this.gravityProperty = gravityProperty;
 
+    // REVIEW: I think {Property.<Spring|null>} is the type documentation that you're looking for.
     // @public {Property.<Spring>} {Spring|null} is the mass attached to a Spring?
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
       phetioValueType: TSpring
     } );
 
+    // REVIEW: Should be initialized to a value, and the type and visibility should be documented. Also, units?
     // The force of the attached spring or 0 if unattached
     this.springForceProperty = new Property();
 
@@ -116,9 +118,11 @@ define( function( require ) {
       oldSpring && oldSpring.springForceProperty.unlink( springForceListener );
       spring && spring.springForceProperty.link( springForceListener );
       if ( !spring ) {
-        self.springForceProperty.set( 0.0 );
+        self.springForceProperty.set( 0.0 ); // REVIEW: Recommend using springForceProperty.reset here once an initial value is correctly set (see comment above)
       }
     } );
+
+    // REVIEW: Several of the derived property declaration below exceen the 120 column guideline and should be cleaned up.
 
     // Net force applied to mass
     this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ], function( springForce, gravity ) {
@@ -148,10 +152,12 @@ define( function( require ) {
       if ( spring ) {
 
         // Check if mass is attached to spring first, then update the elastic potential energy
-        Property.multilink( [ spring.springConstantProperty, spring.displacementProperty ],
+        Property.multilink(
+          [ spring.springConstantProperty, spring.displacementProperty ],
           function( springConstant, displacement ) {
             self.elasticPotentialEnergyProperty.set( .5 * springConstant * Math.pow( displacement, 2 ) );
-          } );
+          }
+        );
       }
     } );
 
@@ -163,7 +169,8 @@ define( function( require ) {
       ],
       function( kineticEnergy, gravitationalPotentialEnergy, elasticPotentialEnergy ) {
         return kineticEnergy + gravitationalPotentialEnergy + elasticPotentialEnergy;
-      } );
+      }
+    );
 
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
@@ -176,6 +183,8 @@ define( function( require ) {
 
   return inherit( Object, Mass, {
 
+    // REVIEW: To better match PhET conventions, this should be 'step', and the prerequisite properities of 'spring'
+    // and 'userControlled' should be checked within instead of in the main model as they are now.
     /**
      * Responsible for mass falling without being attached to spring.
      * @param {number} gravity
@@ -212,6 +221,7 @@ define( function( require ) {
       this.springProperty.set( null );
     },
 
+    // REVIEW: Is this really an override?  Looks incorrect, since it inherits from a vanilla Object.
     /**
      * @Override
      *
@@ -224,13 +234,17 @@ define( function( require ) {
       this.verticalVelocityProperty.reset();
     },
 
+    // REVIEW: Documentation missing.
     resetMassOnly: function() {
+
+      // REVIEW: This doesn't make much sense to me.  Why isn't the position simply reset?  And why is it different
+      // from the main reset function?  And where does the 2 come from?  This should either be well documented (if there
+      // is a good reason) or removed.
       var newPos = this.positionProperty.initialValue.minusXY( 0, 2 );
       this.positionProperty.set( newPos );
       this.userControlledProperty.reset();
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
     }
-  } )
-    ;
+  } );
 } );

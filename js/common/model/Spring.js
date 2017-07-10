@@ -30,7 +30,6 @@ define( function( require ) {
   // constants
   var DEFAULT_THICKNESS = 3; // view-coordinates, empirically determined
 
-
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
@@ -44,9 +43,11 @@ define( function( require ) {
     var self = this;
 
     // range of natural resting length in meters (values used from design doc)
+    // REVIEW: This is pretty minor, but we should be consisten about using .1 versus 0.1.  I think we generally use 0.1, since Java has issues with the other format.
     var naturalRestingLengthRange = new RangeWithValue( .1, .5, initialNaturalRestingLength );
 
     // derived empirically from updateSpringThickness()
+    // REVIEW: What are the units?
     var thicknessRange = new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS );
 
     // @public {Property.<number>} gravitational acceleration
@@ -77,13 +78,17 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} spring force
-    this.springForceProperty = new DerivedProperty( [ this.displacementProperty, this.springConstantProperty ], function( displacement, springConstant ) {
-      return -1 * springConstant * displacement;
-    }, {
-      phetioValueType: TNumber( {
-        units: 'newtons'
-      } )
-    } );
+    this.springForceProperty = new DerivedProperty(
+      [ this.displacementProperty, this.springConstantProperty ],
+      function( displacement, springConstant ) {
+        return -1 * springConstant * displacement;
+      },
+      {
+        phetioValueType: TNumber( {
+          units: 'newtons'
+        } )
+      }
+    );
 
     // @public {Property.<number>} viscous damping coefficient of the system
     this.dampingCoefficientProperty = new Property( defaultDampingCoefficient, {
@@ -110,6 +115,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number> read-only} line width of oscillating spring node
+    // REVIEW: this should probably be in some units other than screen coords, e.g. meters, for consistency with rest of sim
     this.thicknessProperty = new Property( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
       phetioValueType: TNumber( {
@@ -136,6 +142,7 @@ define( function( require ) {
     this.springExtension = 0;
 
     // validate and save options
+    // REVIEW: Since these are validation of the values provided to the constructor, they should be at the beginning of the constructor.
     assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : ' + initialNaturalRestingLength );
     assert && assert( springConstantRange.min > 0, 'minimum spring constant must be positive : '
                                                    + springConstantRange.min );
@@ -143,6 +150,7 @@ define( function( require ) {
 
     //------------------------------------------------
     // Derived properties
+
     // @public {read-only} length of the spring, units = m
     this.lengthProperty = new DerivedProperty(
       [ this.naturalRestingLengthProperty, this.displacementProperty ],
@@ -178,7 +186,7 @@ define( function( require ) {
       [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
         // springExtension = mg/k
-        self.springExtension = mass ? (mass.mass * gravity) / springConstant : 0;
+        self.springExtension = mass ? ( mass.mass * gravity ) / springConstant : 0;
         return self.positionProperty.get().y - naturalRestingLength - self.springExtension;
       },
       {
@@ -258,6 +266,9 @@ define( function( require ) {
       this.springConstantProperty.set( springState.springConstant );
       this.thicknessProperty.set( springState.thickness );
     },
+
+    // REVIEW: There should be some documentation on the next two methods that describe why they are called by
+    // external entities instead of handled internally.
 
     /**
      * Updates thickness of spring and sets its thickness property to calculated value.
@@ -341,6 +352,7 @@ define( function( require ) {
       }
     },
 
+    // REVIEW: Calling this method simply 'step' would be more consistent within this sim and with other PhET sims.
     /**
      * Responsible for oscillatory motion of spring system.
      * @param {number} dt - animation time step
@@ -351,13 +363,16 @@ define( function( require ) {
       if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() &&
            this.animatingProperty.get() ) {
 
-        //TODO:: implement upper limit for dt
-        var k = this.springConstantProperty.get();
-        var m = this.massAttachedProperty.get().mass;
-        var c = this.dampingCoefficientProperty.get();
-        var v = this.massAttachedProperty.get().verticalVelocityProperty.get();
-        var x = this.displacementProperty.get();
-        var g = this.gravityProperty.get();
+      // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
+      // references that could be provided that describe where this came from?
+
+      //TODO:: implement upper limit for dt
+      var k = this.springConstantProperty.get();
+      var m = this.massProperty.get().mass;
+      var c = this.dampingCoefficientProperty.get();
+      var v = this.massProperty.get().verticalVelocityProperty.get();
+      var x = this.displacementProperty.get();
+      var g = this.gravityProperty.get();
 
         // Underdamped and Overdamped case
         if ( ( c * c - 4 * k * m ) !== 0 ) {

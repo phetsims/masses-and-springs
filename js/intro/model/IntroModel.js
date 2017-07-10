@@ -110,6 +110,8 @@ define( function( require ) {
 
         } );
       }
+
+      // REVIEW: If this is useful, consider putting it behind a query parameter and keeping it in the code.
       // // Used for testing purposes
       // Property.multilink( [ self.spring1.springConstantProperty, self.spring1.thicknessProperty ], function( springConstant, springThickness ) {
       //
