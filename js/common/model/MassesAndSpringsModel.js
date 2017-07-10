@@ -353,9 +353,6 @@ define( function( require ) {
           default:
             assert( false, 'invalid setting for model speed' );
         }
-      }
-      // REVIEW: Why is the same value being tested twice (playingProperty)?  Can these be consolidated?
-      if ( this.playingProperty.get() === true ) {
         _.values( this.masses ).forEach( function( mass ) {
 
           // Fall if not hung or grabbed
