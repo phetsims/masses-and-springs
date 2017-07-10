@@ -317,7 +317,7 @@ define( function( require ) {
         this.springs.forEach( function( spring ) {
           if ( Math.abs( proposedPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
                Math.abs( proposedPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE &&
-               spring.massProperty.get() === null ) {
+               spring.massAttachedProperty.get() === null ) {
             spring.setMass( mass );
           }
         } );
@@ -378,7 +378,7 @@ define( function( require ) {
         // the various conditions and decided whether to do the oscillation.
         // Oscillate springs
         this.springs.forEach( function( spring ) {
-          if ( spring.massProperty.get() && !spring.massProperty.get().userControlledProperty.get() &&
+          if ( spring.massAttachedProperty.get() && !spring.massAttachedProperty.get().userControlledProperty.get() &&
                spring.animatingProperty.get() ) {
             spring.stepOscillate( dt );
           }

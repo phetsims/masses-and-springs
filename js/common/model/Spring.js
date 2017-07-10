@@ -127,10 +127,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<Mass>}
-    // REVIEW: A name like "attachedMassProperty" would help to avoid confusion about whether this is the mass (i.e. the
-    // weight) of the spring itself.
-    this.massProperty = new Property( null, {
-      tandem: tandem.createTandem( 'massProperty' ),
+    this.massAttachedProperty = new Property( null, {
+      tandem: tandem.createTandem( 'massAttachedProperty' ),
       phetioValueType: TMass
     } );
 
@@ -177,7 +175,7 @@ define( function( require ) {
 
     // @public {read-only} y position of the equilibrium position
     this.equilibriumYPositionProperty = new DerivedProperty(
-      [ this.springConstantProperty, this.gravityProperty, this.massProperty, this.naturalRestingLengthProperty ],
+      [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
         // springExtension = mg/k
         self.springExtension = mass ? (mass.mass * gravity) / springConstant : 0;
@@ -193,7 +191,7 @@ define( function( require ) {
     );
 
     //  Restart animation if it was squelched
-    Property.multilink( [ this.massProperty, this.gravityProperty, this.springConstantProperty ], function( mass ) {
+    Property.multilink( [ this.massAttachedProperty, this.gravityProperty, this.springConstantProperty ], function( mass ) {
       if ( mass ) {
         self.animatingProperty.set( true );
       }
@@ -216,7 +214,7 @@ define( function( require ) {
       this.positionProperty.reset();
       this.naturalRestingLengthProperty.reset();
       this.animatingProperty.reset();
-      this.massProperty.reset();
+      this.massAttachedProperty.reset();
       this.springConstantProperty.reset();
     },
     /**
@@ -232,7 +230,7 @@ define( function( require ) {
         position: this.positionProperty.get(),
         naturalRestingLength: this.naturalRestingLengthProperty.get(),
         animating: this.animatingProperty.get(),
-        mass: this.massProperty.get(),
+        mass: this.massAttachedProperty.get(),
         springConstant: this.springConstantProperty.get(),
         thickness: this.thicknessProperty.get()
       };
@@ -252,7 +250,7 @@ define( function( require ) {
       this.positionProperty.set( springState.position );
       this.naturalRestingLengthProperty.set( springState.naturalRestingLength );
       this.animatingProperty.set( springState.animating );
-      this.massProperty.set( springState.mass );
+      this.massAttachedProperty.set( springState.mass );
       this.springConstantProperty.set( springState.springConstant );
       this.thicknessProperty.set( springState.thickness );
     },
@@ -291,11 +289,11 @@ define( function( require ) {
      * @public
      */
     removeMass: function() {
-      if ( this.massProperty.get() ) {
-        this.massProperty.get().detach();
+      if ( this.massAttachedProperty.get() ) {
+        this.massAttachedProperty.get().detach();
       }
       this.displacementProperty.set( 0 );
-      this.massProperty.set( null );
+      this.massAttachedProperty.set( null );
       this.animatingProperty.set( false );
     },
 
@@ -306,14 +304,14 @@ define( function( require ) {
      * @public
      */
     setMass: function( mass ) {
-      if ( this.massProperty.get() ) {
-        this.massProperty.get().detach();
+      if ( this.massAttachedProperty.get() ) {
+        this.massAttachedProperty.get().detach();
       }
-      this.massProperty.set( mass );
-      this.massProperty.get().springProperty.set( this );
-      this.displacementProperty.set( this.massProperty.get().positionProperty.get().y -
+      this.massAttachedProperty.set( mass );
+      this.massAttachedProperty.get().springProperty.set( this );
+      this.displacementProperty.set( this.massAttachedProperty.get().positionProperty.get().y -
                                      ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) );
-      this.massProperty.get().verticalVelocityProperty.set( 0 );
+      this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
     },
 
     /**
@@ -325,8 +323,8 @@ define( function( require ) {
     stopSpring: function() {
 
       // check if mass attached on spring
-      if ( this.massProperty.get() ) {
-        var mass = this.massProperty.get();
+      if ( this.massAttachedProperty.get() ) {
+        var mass = this.massAttachedProperty.get();
 
         // set displacement and stop further animation
         this.displacementProperty.set( -this.springExtension );
@@ -349,9 +347,9 @@ define( function( require ) {
 
       //TODO:: implement upper limit for dt
       var k = this.springConstantProperty.get();
-      var m = this.massProperty.get().mass;
+      var m = this.massAttachedProperty.get().mass;
       var c = this.dampingCoefficientProperty.get();
-      var v = this.massProperty.get().verticalVelocityProperty.get();
+      var v = this.massAttachedProperty.get().verticalVelocityProperty.get();
       var x = this.displacementProperty.get();
       var g = this.gravityProperty.get();
 
@@ -408,19 +406,19 @@ define( function( require ) {
 
         // Squelch noise after coming to rest with tolerance of 1 micron
         if ( Math.abs( this.displacementProperty.get() - newDisplacement ) < 1e-6 &&
-             Math.abs( this.massProperty.get().verticalVelocityProperty.get() ) < 1e-6 ) {
+             Math.abs( this.massAttachedProperty.get().verticalVelocityProperty.get() ) < 1e-6 ) {
           this.displacementProperty.set( -m * g / k );  // Equilibrium length
-          this.massProperty.get().verticalVelocityProperty.set( 0 );
+          this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
           this.animatingProperty.set( false );
         }
         else {
           this.displacementProperty.set( newDisplacement );
           //TODO: add in the kinematic equation for acceleration here. Store old velocity and use new velocity in equ.
-          this.massProperty.get().verticalVelocityProperty.set( newVelocity );
+          this.massAttachedProperty.get().verticalVelocityProperty.set( newVelocity );
         }
 
         assert && assert( !isNaN( this.displacementProperty.get() ), 'displacement must be a number' );
-        assert && assert( !isNaN( this.massProperty.get().verticalVelocityProperty.get() ), 'velocity must be a number' );
+        assert && assert( !isNaN( this.massAttachedProperty.get().verticalVelocityProperty.get() ), 'velocity must be a number' );
 
       }
       // Critically damped case
@@ -433,12 +431,12 @@ define( function( require ) {
         this.displacementProperty.set( ( g * ( -m * phi + dt * Math.sqrt( k * m ) + m ) +
                                          k * (  dt * ( x * omega + v ) + x )
                                        ) / ( phi * k ) );
-        this.massProperty.get().verticalVelocityProperty.set( ( g * m * ( Math.sqrt( k * m ) - omega * ( m + dt * Math.sqrt( k * m ) ) ) -
+        this.massAttachedProperty.get().verticalVelocityProperty.set( ( g * m * ( Math.sqrt( k * m ) - omega * ( m + dt * Math.sqrt( k * m ) ) ) -
                                                                 k * ( m * v * ( omega * dt - 1 ) + k * dt * x )
                                                               ) / ( phi * k * m) );
       }
 
-      this.massProperty.get().positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );
+      this.massAttachedProperty.get().positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );
     }
   } );
 } )

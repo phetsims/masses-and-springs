@@ -180,9 +180,9 @@ define( function( require ) {
       }
 
       // We are resetting the springs' displacement property to recalculate an appropriate length (derived property)
-      if ( this.spring1.massProperty.get() || this.spring2.massProperty.get() ) {
-        this.spring1.massProperty.reset();
-        this.spring2.massProperty.reset();
+      if ( this.spring1.massAttachedProperty.get() || this.spring2.massAttachedProperty.get() ) {
+        this.spring1.massAttachedProperty.reset();
+        this.spring2.massAttachedProperty.reset();
         this.spring1.displacementProperty.reset();
         this.spring2.displacementProperty.reset();
       }
