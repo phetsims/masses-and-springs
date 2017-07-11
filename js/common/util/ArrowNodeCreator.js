@@ -1,8 +1,7 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
-// REVIEW: Header comment is missing.
 /**
- *
+ * Responsible for the creation of the arrowNodes associated with the masses and visibility panels.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
