@@ -65,10 +65,7 @@ define( function( require ) {
 
   return inherit( Line, EquilibriumLineNode, {
 
-    // REVIEW: really an override?
     /**
-     * @override
-     *
      * @public
      */
     reset: function() {

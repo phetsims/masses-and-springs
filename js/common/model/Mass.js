@@ -225,10 +225,7 @@ define( function( require ) {
       this.springProperty.set( null );
     },
 
-    // REVIEW: Is this really an override?  Looks incorrect, since it inherits from a vanilla Object.
     /**
-     * @Override
-     *
      * @public
      */
     reset: function() {

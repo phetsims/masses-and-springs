@@ -94,10 +94,7 @@ define( function( require ) {
 
   return inherit( RulerNode, DraggableRulerNode, {
 
-    // REVIEW: Is the @override annotation correct?
     /**
-     * @override
-     *
      * @public
      */
     reset: function() {
