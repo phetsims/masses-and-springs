@@ -21,6 +21,7 @@ define( function( require ) {
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Util = require( 'DOT/Util' );
 
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
@@ -224,6 +225,15 @@ define( function( require ) {
         spring.dampingCoefficientProperty.set( newFriction );
       } );
     } );
+
+    var MassesAndSpringsQueryParameters = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsQueryParameters' );
+    // Used for testing purposes
+    if ( MassesAndSpringsQueryParameters.printSpringProperties ) {
+      Property.multilink( [ self.springs[ 0 ].springConstantProperty, self.springs[ 0 ].thicknessProperty ], function( springConstant, springThickness ) {
+
+        console.log( 'springConstant = ' + Util.toFixed( springConstant, 3 ) + '\t\t' + 'thickness = ' + Util.toFixed( springThickness, 3 ) );
+      } );
+    }
   }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
