@@ -102,25 +102,27 @@ define( function( require ) {
     } );
     this.barNodes.push( compositeBar );
 
-    // REVIEW: Seems unnecessary to pass in the font since it's always the same.
-    var createLabelText = function( string, color, font ) {
+
+    // Creates a text for the labels to be placed on the x-axis.
+    var createLabelText = function( string, color ) {
       return new RichText( string, {
         fill: color,
-        font: font
+        font: MassesAndSpringsConstants.TITLE_FONT
       } );
     };
 
-    var sampleLabels = [
-      createLabelText( keString, '#39d74e', MassesAndSpringsConstants.TITLE_FONT ),
-      createLabelText( peGravString, '#5798de', MassesAndSpringsConstants.TITLE_FONT ),
-      createLabelText( peElasString, '#29d4ff', MassesAndSpringsConstants.TITLE_FONT ),
-      createLabelText( tTotString, 'black', MassesAndSpringsConstants.TITLE_FONT )
+    // Labels that are rotated and added to the bottom of the x-axis
+    var xAxisLabels = [
+      createLabelText( keString, '#39d74e' ),
+      createLabelText( peGravString, '#5798de' ),
+      createLabelText( peElasString, '#29d4ff' ),
+      createLabelText( tTotString, 'black' )
     ];
-
-    sampleLabels.forEach( function( labelText ) {
+    xAxisLabels.forEach( function( labelText ) {
       labelText.rotate( -Math.PI / 2 );
     } );
 
+    // The main body for the bar chart
     var verticalBarChart = new VerticalBarChart( this.barNodes, {
       width: 140,
       height: MAXIMUM_HEIGHT,
