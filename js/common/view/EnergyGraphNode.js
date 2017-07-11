@@ -70,37 +70,25 @@ define( function( require ) {
       return Math.pow( 2, zoomLevel );
     } );
 
-    // Create a scaled height for the bar to represent
-    var createScaledBarHeightProperty = function( property ) {
-      return new DerivedProperty( [ property, scaleFactorProperty ],
+    // Function that returns a barNode representing a property.
+    var createBarNode = function( property, fill ) {
+
+      // Create a scaled height for the bar to represent
+      var scaledHeightProperty = new DerivedProperty( [ property, scaleFactorProperty ],
         function( value, scale ) {
           return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale );
         } );
+      return new VerticalBarNode( scaledHeightProperty, {
+        fill: fill,
+        width: BAR_NODE_WIDTH,
+        displayContinuousArrow: true
+      } );
     };
 
-    // REVIEW: Since these are all of type Property, they should be named KEBarHeightProperty (for example).
-    var KEBarHeightProperty = createScaledBarHeightProperty( model.masses.adjustableMass.kineticEnergyProperty );
-    var GPEBarHeightProperty = createScaledBarHeightProperty( model.masses.adjustableMass.gravitationalPotentialEnergyProperty );
-    var EPBarHeightProperty = createScaledBarHeightProperty( model.masses.adjustableMass.elasticPotentialEnergyProperty );
-
     // Creation of our different bar nodes to be represented in the graph
-    // TODO: Factor out a function for this.
-    // REVIEW: How about one function to create the property and the VerticalBarNode, since the properties don't appear to be used elsewhere?
-    var kineticEnergyBarNode = new VerticalBarNode( KEBarHeightProperty, {
-      fill: '#39d74e',
-      width: BAR_NODE_WIDTH,
-      displayContinuousArrow: true
-    } );
-    var gravitationalPotentialEnergyBarNode = new VerticalBarNode( GPEBarHeightProperty, {
-      fill: '#5798de',
-      width: BAR_NODE_WIDTH,
-      displayContinuousArrow: true
-    } );
-    var elasticPotentialEnergyBarNode = new VerticalBarNode( EPBarHeightProperty, {
-      fill: '#29d4ff',
-      width: BAR_NODE_WIDTH,
-      displayContinuousArrow: true
-    } );
+    var kineticEnergyBarNode = createBarNode( model.masses.adjustableMass.kineticEnergyProperty, '#39d74e' );
+    var gravitationalPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.gravitationalPotentialEnergyProperty, '#5798de' );
+    var elasticPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.elasticPotentialEnergyProperty, '#29d4ff' );
 
     this.barNodes = [
       kineticEnergyBarNode,
