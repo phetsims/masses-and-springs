@@ -17,6 +17,7 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var MassesAndSpringsQueryParameters = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsQueryParameters' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
@@ -226,7 +227,6 @@ define( function( require ) {
       } );
     } );
 
-    var MassesAndSpringsQueryParameters = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsQueryParameters' );
     // Used for testing purposes
     if ( MassesAndSpringsQueryParameters.printSpringProperties ) {
       Property.multilink( [ self.springs[ 0 ].springConstantProperty, self.springs[ 0 ].thicknessProperty ], function( springConstant, springThickness ) {
@@ -373,7 +373,7 @@ define( function( require ) {
         }
         // Oscillate springs
         this.springs.forEach( function( spring ) {
-            spring.stepOscillate( dt );
+          spring.stepOscillate( dt );
         } );
       }
     }
