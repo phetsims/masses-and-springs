@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 /**
  * Query parameters supported by this simulation.
@@ -11,13 +11,13 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
 
-  var MassesAndSpringQueryParameters = QueryStringMachine.getAll( {
+  var MassesAndSpringsQueryParameters = QueryStringMachine.getAll( {
 
     // {boolean} print the spring constant and spring length, to the console.
     printSpringProperties: { type: 'flag' }
   } );
 
-  massesAndSprings.register( 'MassesAndSpringQueryParameters', MassesAndSpringQueryParameters );
+  massesAndSprings.register( 'MassesAndSpringsQueryParameters', MassesAndSpringsQueryParameters );
 
-  return MassesAndSpringQueryParameters;
+  return MassesAndSpringsQueryParameters;
 } );

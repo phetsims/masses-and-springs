@@ -14,6 +14,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var MassesAndSpringsQueryParameters = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsQueryParameters' );
   var Property = require( 'AXON/Property' );
 
   // phet-io modules
@@ -111,12 +112,13 @@ define( function( require ) {
         } );
       }
 
-      // REVIEW: If this is useful, consider putting it behind a query parameter and keeping it in the code.
-      // // Used for testing purposes
-      // Property.multilink( [ self.spring1.springConstantProperty, self.spring1.thicknessProperty ], function( springConstant, springThickness ) {
-      //
-      //   console.log( 'springConstant = ' + springConstant + '\t\t' + 'thickness = ' + springThickness );
-      // } );
+      // Used for testing purposes
+      if ( MassesAndSpringsQueryParameters.printSpringProperties ) {
+        Property.multilink( [ self.spring1.springConstantProperty, self.spring1.thicknessProperty ], function( springConstant, springThickness ) {
+
+          console.log( 'springConstant = ' + springConstant + '\t\t' + 'thickness = ' + springThickness );
+        } );
+      }
     } );
   }
 
