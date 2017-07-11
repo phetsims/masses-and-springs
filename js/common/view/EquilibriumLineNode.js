@@ -43,7 +43,6 @@ define( function( require ) {
 
     // Link that updates the position of the equilibrium line as the system changes.
     spring.equilibriumYPositionProperty.link( function( equilibriumPosition ) {
-      if ( self.visible ) {
 
         // @private {read-write} Y position of line in screen coordinates
         var yPos = modelViewTransform2.modelToViewY( equilibriumPosition );
@@ -58,7 +57,6 @@ define( function( require ) {
         self.positionProperty.link( function( position ) {
           self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
         } );
-      }
     } );
     visibleProperty.linkAttribute( self, 'visible' );
   }

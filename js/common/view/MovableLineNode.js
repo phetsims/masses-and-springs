@@ -43,7 +43,7 @@ define( function( require ) {
       cornerRadius: 1,
       tandem: tandem.createTandem( 'laserPointerNode' ),
       hasButton: false,
-        buttonRadius: 5,
+      buttonRadius: 5,
       buttonTouchAreaDilation: 10
       }
     );
@@ -60,12 +60,16 @@ define( function( require ) {
     line.mouseArea = dilatedLineBounds;
     line.touchArea = dilatedLineBounds;
 
-    // @private
+    // @private {read-only} X coordinate for the position of the line
     initialPosition.setX( xPosOfLine );
+
+    // @private {read-write} position of line in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TVector2
     } );
+
+    // @private {read-write} position of line in screen coordinates
     this.positionProperty.link( function( position ) {
       self.translation = position.minus( new Vector2( length / 2, 0 ) );
     } );
