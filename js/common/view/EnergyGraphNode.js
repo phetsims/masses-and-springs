@@ -34,6 +34,7 @@ define( function( require ) {
   var MAXIMUM_HEIGHT = 425;
   var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
   var MAX_WIDTH = 150;
+  var BAR_NODE_WIDTH = 15;
 
   // strings
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
@@ -85,20 +86,19 @@ define( function( require ) {
     // Creation of our different bar nodes to be represented in the graph
     // TODO: Factor out a function for this.
     // REVIEW: How about one function to create the property and the VerticalBarNode, since the properties don't appear to be used elsewhere?
-    // REVIEW: And, since the width is used in a number of places, it should be factored out as a constant.
     var kineticEnergyBarNode = new VerticalBarNode( KEBarHeightProperty, {
       fill: '#39d74e',
-      width: 15,
+      width: BAR_NODE_WIDTH,
       displayContinuousArrow: true
     } );
     var gravitationalPotentialEnergyBarNode = new VerticalBarNode( GPEBarHeightProperty, {
       fill: '#5798de',
-      width: 15,
+      width: BAR_NODE_WIDTH,
       displayContinuousArrow: true
     } );
     var elasticPotentialEnergyBarNode = new VerticalBarNode( EPBarHeightProperty, {
       fill: '#29d4ff',
-      width: 15,
+      width: BAR_NODE_WIDTH,
       displayContinuousArrow: true
     } );
 
@@ -109,7 +109,7 @@ define( function( require ) {
     ];
 
     var compositeBar = new VerticalCompositeBarNode( this.barNodes, {
-      width: 15,
+      width: BAR_NODE_WIDTH,
       displayContinuousArrow: true
     } );
     this.barNodes.push( compositeBar );
