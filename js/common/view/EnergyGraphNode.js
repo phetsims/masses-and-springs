@@ -69,35 +69,34 @@ define( function( require ) {
       return Math.pow( 2, zoomLevel );
     } );
 
-    // REVIEW: This seems like a good approach, but the names threw me for a bit.  I'd recommend something like 'createBarHeightProperty' for the function.
-    var createScaledBarHeight = function( property ) {
-      var derivedProperty = new DerivedProperty( [ property, scaleFactorProperty ],
+    // Create a scaled height for the bar to represent
+    var createScaledBarHeightProperty = function( property ) {
+      return new DerivedProperty( [ property, scaleFactorProperty ],
         function( value, scale ) {
           return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale );
         } );
-      return derivedProperty;
     };
 
     // REVIEW: Since these are all of type Property, they should be named KEBarHeightProperty (for example).
-    var KEBarHeight = createScaledBarHeight( model.masses.adjustableMass.kineticEnergyProperty );
-    var GPEBarHeight = createScaledBarHeight( model.masses.adjustableMass.gravitationalPotentialEnergyProperty );
-    var EPBarHeight = createScaledBarHeight( model.masses.adjustableMass.elasticPotentialEnergyProperty );
+    var KEBarHeightProperty = createScaledBarHeightProperty( model.masses.adjustableMass.kineticEnergyProperty );
+    var GPEBarHeightProperty = createScaledBarHeightProperty( model.masses.adjustableMass.gravitationalPotentialEnergyProperty );
+    var EPBarHeightProperty = createScaledBarHeightProperty( model.masses.adjustableMass.elasticPotentialEnergyProperty );
 
     // Creation of our different bar nodes to be represented in the graph
     // TODO: Factor out a function for this.
     // REVIEW: How about one function to create the property and the VerticalBarNode, since the properties don't appear to be used elsewhere?
     // REVIEW: And, since the width is used in a number of places, it should be factored out as a constant.
-    var kineticEnergyBarNode = new VerticalBarNode( KEBarHeight, {
+    var kineticEnergyBarNode = new VerticalBarNode( KEBarHeightProperty, {
       fill: '#39d74e',
       width: 15,
       displayContinuousArrow: true
     } );
-    var gravitationalPotentialEnergyBarNode = new VerticalBarNode( GPEBarHeight, {
+    var gravitationalPotentialEnergyBarNode = new VerticalBarNode( GPEBarHeightProperty, {
       fill: '#5798de',
       width: 15,
       displayContinuousArrow: true
     } );
-    var elasticPotentialEnergyBarNode = new VerticalBarNode( EPBarHeight, {
+    var elasticPotentialEnergyBarNode = new VerticalBarNode( EPBarHeightProperty, {
       fill: '#29d4ff',
       width: 15,
       displayContinuousArrow: true
