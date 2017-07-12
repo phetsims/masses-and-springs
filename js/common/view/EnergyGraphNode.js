@@ -70,39 +70,6 @@ define( function( require ) {
       return Math.pow( 2, zoomLevel );
     } );
 
-    // Function that returns a barNode representing a property.
-    var createBarNode = function( property, fill ) {
-
-      // Create a scaled height for the bar to represent
-      var scaledHeightProperty = new DerivedProperty( [ property, scaleFactorProperty ],
-        function( value, scale ) {
-          return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale );
-        } );
-      return new VerticalBarNode( scaledHeightProperty, {
-        fill: fill,
-        width: BAR_NODE_WIDTH,
-        displayContinuousArrow: true
-      } );
-    };
-
-    // Creation of our different bar nodes to be represented in the graph
-    var kineticEnergyBarNode = createBarNode( model.masses.adjustableMass.kineticEnergyProperty, '#39d74e' );
-    var gravitationalPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.gravitationalPotentialEnergyProperty, '#5798de' );
-    var elasticPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.elasticPotentialEnergyProperty, '#29d4ff' );
-
-    this.barNodes = [
-      kineticEnergyBarNode,
-      gravitationalPotentialEnergyBarNode,
-      elasticPotentialEnergyBarNode
-    ];
-
-    var compositeBar = new VerticalCompositeBarNode( this.barNodes, {
-      width: BAR_NODE_WIDTH,
-      displayContinuousArrow: true
-    } );
-    this.barNodes.push( compositeBar );
-
-
     // Creates a text for the labels to be placed on the x-axis.
     var createLabelText = function( string, color ) {
       return new RichText( string, {
@@ -122,13 +89,48 @@ define( function( require ) {
       labelText.rotate( -Math.PI / 2 );
     } );
 
+    // Function that returns a barNode representing a property.
+    var createBarNode = function( property, fill ) {
+
+      // Create a scaled height for the bar to represent
+      var scaledHeightProperty = new DerivedProperty( [ property, scaleFactorProperty ],
+        function( value, scale ) {
+          return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale );
+        } );
+      return new VerticalBarNode( scaledHeightProperty, {
+        fill: fill,
+        width: BAR_NODE_WIDTH,
+        maxHeight: 350,
+        displayContinuousArrow: true
+      } );
+    };
+
+    // Creation of our different bar nodes to be represented in the graph
+    var kineticEnergyBarNode = createBarNode( model.masses.adjustableMass.kineticEnergyProperty, '#39d74e' );
+    var gravitationalPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.gravitationalPotentialEnergyProperty, '#5798de' );
+    var elasticPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.elasticPotentialEnergyProperty, '#29d4ff' );
+
+    this.barNodes = [
+      kineticEnergyBarNode,
+      gravitationalPotentialEnergyBarNode,
+      elasticPotentialEnergyBarNode
+    ];
+
+    var compositeBar = new VerticalCompositeBarNode( this.barNodes, {
+      width: BAR_NODE_WIDTH,
+      displayContinuousArrow: true,
+      fill: 'black',
+      maxHeight: 350
+    } );
+    this.barNodes.push( compositeBar );
+
     // The main body for the bar chart
     var verticalBarChart = new VerticalBarChart( this.barNodes, {
       width: 140,
       height: MAXIMUM_HEIGHT,
       title: new Text( energyString, { maxWidth: 100 } ),
       titleFill: '#b37e46',
-      xAxisLabels: null
+      xAxisLabels: xAxisLabels
     } );
 
     // Creation of zoom in/out buttons
