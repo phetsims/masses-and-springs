@@ -132,23 +132,15 @@ define( function( require ) {
     } );
 
     // Creation of zoom in/out buttons
-    // REVIEW: With the exception of the 'in' key, all values are the same for both, so I recommend using a constant options object + _.extend.
-    var zoomInButton = new ZoomButton( {
+    var zoomButtonOptions = {
       baseColor: '#E7E8E9',
       radius: 8,
       xMargin: 3,
       yMargin: 3,
-      disabledBaseColor: '#EDEDED',
-      in: true
-    } );
-    var zoomOutButton = new ZoomButton( {
-      baseColor: '#E7E8E9',
-      radius: 8,
-      xMargin: 3,
-      yMargin: 3,
-      disabledBaseColor: '#EDEDED',
-      in: false
-    } );
+      disabledBaseColor: '#EDEDED'
+    };
+    var zoomInButton = new ZoomButton( _.extend( { in: true }, zoomButtonOptions ) );
+    var zoomOutButton = new ZoomButton( _.extend( { in: false }, zoomButtonOptions ) );
 
     // Zooming out means bars and zoom level gets smaller.
     zoomOutButton.addListener( function() {

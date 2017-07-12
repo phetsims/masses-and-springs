@@ -123,6 +123,7 @@ define( function( require ) {
 
     // @public {Property.<string>} name of planet selected
     // REVIEW: Generally, the planet should be what is selected, and the title is determined in the view.
+    //title is a view element, we should be selecting the body not its title
     this.bodyTitleProperty = new Property( Body.EARTH.title, {
       tandem: tandem.createTandem( 'bodyTitleProperty' ),
       phetioValueType: TString
