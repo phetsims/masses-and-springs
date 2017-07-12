@@ -199,6 +199,10 @@ define( function( require ) {
       ], spacing: 10
     } );
 
+    // a placeholder for the dialog - constructed lazily so that Dialog has access to
+    // sim bounds
+    var dialog = null;
+
     // Button that pops up dialog box for the graph's legend
     var infoButton = new RectangularPushButton( {
       content: new FontAwesomeNode( 'info_circle', { scale: 0.55 } ),
@@ -209,7 +213,10 @@ define( function( require ) {
       yMargin: 3
     } );
     infoButton.addListener( function() {
-      new Dialog( dialogContent, { modal: true } ).show();
+      if ( !dialog ) {
+        dialog = new Dialog( dialogContent, { modal: true } );
+      }
+      dialog.show();
     } );
 
     var zoomReadout = new Text( scaleFactorProperty.get() + 'x', {
