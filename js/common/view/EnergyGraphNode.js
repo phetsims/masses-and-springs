@@ -105,7 +105,7 @@ define( function( require ) {
       } );
     };
 
-    // Creation of our different bar nodes to be represented in the graph
+    // Creation of our different bar nodes to be represented in the graph on energy screen
     var kineticEnergyBarNode = createBarNode( model.masses.adjustableMass.kineticEnergyProperty, '#39d74e' );
     var gravitationalPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.gravitationalPotentialEnergyProperty, '#5798de' );
     var elasticPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.elasticPotentialEnergyProperty, '#29d4ff' );
@@ -132,6 +132,55 @@ define( function( require ) {
       titleFill: '#b37e46',
       xAxisLabels: xAxisLabels
     } );
+
+    ////////////////////////////////////////////
+    //GREEN MASS
+    ////////////////////////////////////////////
+
+    var greenMassKineticEnergyBarNode = createBarNode( model.masses.greenMass.kineticEnergyProperty, '#39d74e' );
+    var greenMassGravitationalPotentialEnergyBarNode = createBarNode( model.masses.greenMass.gravitationalPotentialEnergyProperty, '#5798de' );
+    var greenMassElasticPotentialEnergyBarNode = createBarNode( model.masses.greenMass.elasticPotentialEnergyProperty, '#29d4ff' );
+
+    this.greenMassBarNodes = [
+      greenMassKineticEnergyBarNode,
+      greenMassGravitationalPotentialEnergyBarNode,
+      greenMassElasticPotentialEnergyBarNode
+    ];
+
+    var greenMassCompositeBar = new VerticalCompositeBarNode( this.greenMassBarNodes, {
+      width: BAR_NODE_WIDTH,
+      displayContinuousArrow: true,
+      fill: 'black',
+      maxHeight: 350
+    } );
+    this.greenMassBarNodes.push( greenMassCompositeBar );
+
+    // The main body for the bar chart
+    var greenMassVerticalBarChart = new VerticalBarChart( this.greenMassBarNodes, {
+      width: 140,
+      height: MAXIMUM_HEIGHT,
+      title: new Text( energyString, { maxWidth: 100 } ),
+      titleFill: '#b37e46',
+      xAxisLabels: xAxisLabels
+    } );
+
+    // Creation of barNodes specific to Lab screen
+    if ( model.masses.redMass ) {
+
+      var redMassKineticEnergyBarNode = createBarNode( model.masses.redMass.kineticEnergyProperty, '#39d74e' );
+      var redMassGravitationalPotentialEnergyBarNode = createBarNode( model.masses.redMass.gravitationalPotentialEnergyProperty, '#5798de' );
+      var redMassElasticPotentialEnergyBarNode = createBarNode( model.masses.redMass.elasticPotentialEnergyProperty, '#29d4ff' );
+
+      this.nullMassBarNodes = [];
+
+
+      this.redMassBarNode = [
+        redMassKineticEnergyBarNode,
+        redMassGravitationalPotentialEnergyBarNode,
+        redMassElasticPotentialEnergyBarNode
+      ];
+    }
+
 
     // Creation of zoom in/out buttons
     var zoomButtonOptions = {
@@ -231,14 +280,28 @@ define( function( require ) {
     } );
 
     // REVIEW: Not having an option for the accordion box gives me a tandem error.
-    AccordionBox.call( this, new VBox( {
+    var content = new VBox( {
       children: [
         verticalBarChart,
         displayOptions
       ], spacing: 8
-    } ), {
+    } );
+    AccordionBox.call( this, content, {
       titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
     } );
+    model.springs[ 0 ].massAttachedProperty.link( function( mass ) {
+
+      if ( mass !== null && mass.color === 'green' ) {
+        content.removeAllChildren();
+        content.addChild( greenMassVerticalBarChart );
+        content.addChild( displayOptions );
+        greenMassVerticalBarChart.visible = true;
+        verticalBarChart.visible = false;
+      }
+      else if ( (model.springs[ 0 ].massAttachedProperty.get() === 'redMass' ) ) {
+      }
+    } );
+
   }
 
   massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
