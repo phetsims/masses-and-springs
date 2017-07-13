@@ -280,28 +280,28 @@ define( function( require ) {
     } );
 
     // REVIEW: Not having an option for the accordion box gives me a tandem error.
-    var content = new VBox( {
+    var accordionBoxContent = new VBox( {
       children: [
         verticalBarChart,
         displayOptions
       ], spacing: 8
     } );
-    AccordionBox.call( this, content, {
+    AccordionBox.call( this, accordionBoxContent, {
       titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
     } );
     model.springs[ 0 ].massAttachedProperty.link( function( mass ) {
 
       if ( mass !== null && mass.color === 'green' ) {
-        content.removeAllChildren();
-        content.addChild( greenMassVerticalBarChart );
-        content.addChild( displayOptions );
+        accordionBoxContent.removeAllChildren();
+        accordionBoxContent.addChild( greenMassVerticalBarChart );
+        accordionBoxContent.addChild( displayOptions );
         greenMassVerticalBarChart.visible = true;
         verticalBarChart.visible = false;
       }
       else if ( (model.springs[ 0 ].massAttachedProperty.get() === 'redMass' ) ) {
+        console.log( 'you have picked attached a red mass' );
       }
     } );
-
   }
 
   massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
