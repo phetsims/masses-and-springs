@@ -35,6 +35,7 @@ define( function( require ) {
   var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
   var MAX_WIDTH = 150;
   var BAR_NODE_WIDTH = 15;
+  var ZERO_PROPERTY = new Property( 0 );
 
   // strings
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
@@ -55,6 +56,7 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @constructor
    */
+  // TODO: Don't expose the whole model. We should only need the attachedMass.
   function EnergyGraphNode( model, tandem ) {
 
     // Zoom levels are based on powers of two (i.e. 1x, 2x, 4x, 8x, 16x). The Min/Max scales and scale factor
@@ -89,18 +91,26 @@ define( function( require ) {
       labelText.rotate( -Math.PI / 2 );
     } );
 
+    // TODO: Add doc
+    var scaleHeight = function( property, scaleFactorProperty ) {
+
+      // Create a scaled height for the bar to represent
+      return new DerivedProperty( [ property, scaleFactorProperty ],
+        function( value, scale ) {
+          return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale );
+        } );
+    };
+
+    // TODO: Add doc
     // Function that returns a barNode representing a property.
     var createBarNode = function( property, fill ) {
 
       // Create a scaled height for the bar to represent
-      var scaledHeightProperty = new DerivedProperty( [ property, scaleFactorProperty ],
-        function( value, scale ) {
-          return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale );
-        } );
+      var scaledHeightProperty = scaleHeight( property, scaleFactorProperty );
       return new VerticalBarNode( scaledHeightProperty, {
         fill: fill,
         width: BAR_NODE_WIDTH,
-        maxHeight: 350,
+        maxBarHeight: 350,
         displayContinuousArrow: true
       } );
     };
@@ -116,11 +126,22 @@ define( function( require ) {
       elasticPotentialEnergyBarNode
     ];
 
-    var compositeBar = new VerticalCompositeBarNode( this.barNodes, {
+    var barProperties = [
+      scaleHeight( model.masses.adjustableMass.kineticEnergyProperty, scaleFactorProperty ),
+      scaleHeight( model.masses.adjustableMass.gravitationalPotentialEnergyProperty, scaleFactorProperty ),
+      scaleHeight( model.masses.adjustableMass.elasticPotentialEnergyProperty, scaleFactorProperty )
+    ];
+    var barColors = [
+      '#39d74e',
+      '#5798de',
+      '#29d4ff'
+    ];
+
+    var compositeBar = new VerticalCompositeBarNode( barProperties, barColors, {
       width: BAR_NODE_WIDTH,
       displayContinuousArrow: true,
-      fill: 'black',
-      maxHeight: 350
+      arrowFill: 'black',
+      maxBarHeight: 350
     } );
     this.barNodes.push( compositeBar );
 
@@ -132,55 +153,6 @@ define( function( require ) {
       titleFill: '#b37e46',
       xAxisLabels: xAxisLabels
     } );
-
-    ////////////////////////////////////////////
-    //GREEN MASS
-    ////////////////////////////////////////////
-
-    var greenMassKineticEnergyBarNode = createBarNode( model.masses.greenMass.kineticEnergyProperty, '#39d74e' );
-    var greenMassGravitationalPotentialEnergyBarNode = createBarNode( model.masses.greenMass.gravitationalPotentialEnergyProperty, '#5798de' );
-    var greenMassElasticPotentialEnergyBarNode = createBarNode( model.masses.greenMass.elasticPotentialEnergyProperty, '#29d4ff' );
-
-    this.greenMassBarNodes = [
-      greenMassKineticEnergyBarNode,
-      greenMassGravitationalPotentialEnergyBarNode,
-      greenMassElasticPotentialEnergyBarNode
-    ];
-
-    var greenMassCompositeBar = new VerticalCompositeBarNode( this.greenMassBarNodes, {
-      width: BAR_NODE_WIDTH,
-      displayContinuousArrow: true,
-      fill: 'black',
-      maxHeight: 350
-    } );
-    this.greenMassBarNodes.push( greenMassCompositeBar );
-
-    // The main body for the bar chart
-    var greenMassVerticalBarChart = new VerticalBarChart( this.greenMassBarNodes, {
-      width: 140,
-      height: MAXIMUM_HEIGHT,
-      title: new Text( energyString, { maxWidth: 100 } ),
-      titleFill: '#b37e46',
-      xAxisLabels: xAxisLabels
-    } );
-
-    // Creation of barNodes specific to Lab screen
-    if ( model.masses.redMass ) {
-
-      var redMassKineticEnergyBarNode = createBarNode( model.masses.redMass.kineticEnergyProperty, '#39d74e' );
-      var redMassGravitationalPotentialEnergyBarNode = createBarNode( model.masses.redMass.gravitationalPotentialEnergyProperty, '#5798de' );
-      var redMassElasticPotentialEnergyBarNode = createBarNode( model.masses.redMass.elasticPotentialEnergyProperty, '#29d4ff' );
-
-      this.nullMassBarNodes = [];
-
-
-      this.redMassBarNode = [
-        redMassKineticEnergyBarNode,
-        redMassGravitationalPotentialEnergyBarNode,
-        redMassElasticPotentialEnergyBarNode
-      ];
-    }
-
 
     // Creation of zoom in/out buttons
     var zoomButtonOptions = {
@@ -279,28 +251,44 @@ define( function( require ) {
       zoomInButton.setEnabled( value !== MAX_SCALE );
     } );
 
-    // REVIEW: Not having an option for the accordion box gives me a tandem error.
     var accordionBoxContent = new VBox( {
       children: [
         verticalBarChart,
         displayOptions
       ], spacing: 8
     } );
-    AccordionBox.call( this, accordionBoxContent, {
-      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
-    } );
+
     model.springs[ 0 ].massAttachedProperty.link( function( mass ) {
 
-      if ( mass !== null && mass.color === 'green' ) {
-        accordionBoxContent.removeAllChildren();
-        accordionBoxContent.addChild( greenMassVerticalBarChart );
-        accordionBoxContent.addChild( displayOptions );
-        greenMassVerticalBarChart.visible = true;
-        verticalBarChart.visible = false;
+      if ( mass ) {
+        kineticEnergyBarNode.setMonitoredProperty( mass.kineticEnergyProperty );
+        gravitationalPotentialEnergyBarNode.setMonitoredProperty( mass.gravitationalPotentialEnergyProperty );
+        elasticPotentialEnergyBarNode.setMonitoredProperty( mass.elasticPotentialEnergyProperty );
       }
-      else if ( (model.springs[ 0 ].massAttachedProperty.get() === 'redMass' ) ) {
-        console.log( 'you have picked attached a red mass' );
+      else {
+        kineticEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
+        gravitationalPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
+        elasticPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
       }
+      // {
+      //
+      //   var test1 = createBarNode( model.masses.adjustableMass.kineticEnergyProperty, 'pink' );
+      //   var test2 = createBarNode( model.masses.adjustableMass.gravitationalPotentialEnergyProperty, 'red' );
+      //   var test3 = createBarNode( model.masses.adjustableMass.elasticPotentialEnergyProperty, 'blue' );
+      //   var test4 = createBarNode( model.masses.adjustableMass.elasticPotentialEnergyProperty, 'orange' );
+      //
+      //   var newNodes = [test1,test2, test3,test4];
+      //   console.log('hello world');
+      //
+      //   newNodes.forEach(function(newNode, index){
+      //     verticalBarChart.setBarNode(newNode, index);
+      //   });
+      // }
+
+    } );
+    // REVIEW: Not having an option for the accordion box gives me a tandem error.
+    AccordionBox.call( this, accordionBoxContent, {
+      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
     } );
   }
 
