@@ -270,20 +270,6 @@ define( function( require ) {
         gravitationalPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
         elasticPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
       }
-      // {
-      //
-      //   var test1 = createBarNode( model.masses.adjustableMass.kineticEnergyProperty, 'pink' );
-      //   var test2 = createBarNode( model.masses.adjustableMass.gravitationalPotentialEnergyProperty, 'red' );
-      //   var test3 = createBarNode( model.masses.adjustableMass.elasticPotentialEnergyProperty, 'blue' );
-      //   var test4 = createBarNode( model.masses.adjustableMass.elasticPotentialEnergyProperty, 'orange' );
-      //
-      //   var newNodes = [test1,test2, test3,test4];
-      //   console.log('hello world');
-      //
-      //   newNodes.forEach(function(newNode, index){
-      //     verticalBarChart.setBarNode(newNode, index);
-      //   });
-      // }
 
     } );
     // REVIEW: Not having an option for the accordion box gives me a tandem error.
