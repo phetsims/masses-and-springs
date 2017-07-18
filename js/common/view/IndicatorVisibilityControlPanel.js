@@ -1,7 +1,7 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * Panel that manages options for visibility for reference lines.
+ * Panel that manages options for visibility of reference lines.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -54,8 +54,8 @@ define( function( require ) {
     };
 
     // Lines added for reference in panel
-    var greenLine = createLine( 'rgb(93, 191, 142)', tandem.createTandem( 'greenLine' ) );
-    var blueLine = createLine( 'rgb(65,66,232)', tandem.createTandem( 'blueLine' ) );
+    var greenLine = createLine( 'rgb( 93, 191, 142 )', tandem.createTandem( 'greenLine' ) );
+    var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
     // REVIEW:Why does this keep raising an assertion failure (get advice from SR)

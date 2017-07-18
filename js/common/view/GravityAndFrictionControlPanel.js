@@ -35,7 +35,6 @@ define( function( require ) {
   var TText = require( 'SCENERY/nodes/TText' );
 
   /**
-   *
    * @param {MassesAndSpringsModel} model
    * @param {Boolean} frictionVisible
    * @param {Node} listNodeParent
@@ -77,7 +76,11 @@ define( function( require ) {
     // @public {Property.<string>}
     this.bodyTitleProperty = model.bodyTitleProperty;
 
+    // REVIEW: Below are several local variables with visibility annotations, these should be updated/removed.
+
     // @private {Property.<number>}
+    // REVIEW - I don't see any links to this property - can it be a plain variable?
+    // REVIEW - Also probably doesn't need a tandem, right?
     var previousGravityProperty = new Property( Body.EARTH.gravity, {
       tandem: tandem.createTandem( 'previousModel.gravityProperty' ),
       phetioValueType: TNumber( {
@@ -87,6 +90,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<string>}
+    // REVIEW - I don't see any links to this property - can it be a plain variable?
+    // REVIEW - Also probably doesn't need a tandem, right?
     var previousBodyTitleProperty = new Property( Body.EARTH.title, {
       tandem: tandem.createTandem( 'previousBodyTitleProperty' ),
       phetioValueType: TString
@@ -102,6 +107,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityComboBox' )
     } );
 
+    // REVIEW: If gravityHSlider is private, why is it a property?  I see no uses in methods.  Can it be local?
     // @private {read-only} manages the values associated with the gravity panel in a combo box
     this.gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), {
       majorTickLength: 10,
@@ -120,6 +126,8 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
+    // REVIEW: This probably doesn't need to be a property, correct?  It can just be a local variable?
+    // REVIEW: This appears to be created regardless of whether frictionVisible is true, but then not used - suggest moving into 'if' clause below.
     this.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
@@ -154,6 +162,11 @@ define( function( require ) {
       } ), options );
     }
 
+    // REVIEW: I (jbphet) mentioned this in MassesAndSpringsModel, but just to reiterate - it would make a lot more
+    // sense to me if it was the BODY that was being selected, and not the title.
+    // REVIEW: There is a second parameter available to the callback function that is the previous value - this could
+    // be used instead of having to track the previous value, and only the previous gravity setting would need to be
+    // tracked.
     model.bodyTitleProperty.link( function( newBodyTitle ) {
       var body = _.find( self.bodies, { title: newBodyTitle } );
 
@@ -162,7 +175,7 @@ define( function( require ) {
         self.gravityHSlider.visible = true;
       }
 
-      //  If PlanetX hide the slider and update gravity
+      // If PlanetX hide the slider and update gravity
       if ( newBodyTitle === Body.PLANET_X.title ) {
         self.gravityHSlider.visible = false;
         self.gravityProperty.set( body.gravity );
@@ -174,11 +187,12 @@ define( function( require ) {
       }
 
       // Update gravity
+      // REVIEW: Why is this qualified? Why not just save the value every time?
       else if ( body.gravity || body.title === Body.ZERO_G.title ) {
         self.gravityProperty.set( body.gravity );
       }
 
-      //Store previous state so we can revert after leaving Planet X.
+      // Store previous state so we can revert after leaving Planet X.
       previousBodyTitleProperty.set( newBodyTitle );
     } );
 
@@ -188,7 +202,9 @@ define( function( require ) {
       if ( model.bodyTitleProperty.get() !== Body.PLANET_X.title ) {
         previousGravityProperty.set( newGravity );
       }
+
       // If we changed to a body, don't try to update the title
+      // REVIEW: Suggest using forEach instead - IntelliJ is flagging the i variable as not checked for hasOwnProperty
       for ( var i in self.bodies ) {
 
         // We can't check for truthiness of self.bodies[ i ].gravity because ZeroG is not truthy
@@ -216,6 +232,8 @@ define( function( require ) {
     reset: function() {
 
       // On reset we need to manually set title to Earth or the gravityLink will change it to custom.
+      // REVIEW: This doesn't make sense to me - there is an 'if' clause in gravityLink that should prevent it.  Also,
+      // the reset should really be done in the model, not here.
       this.bodyTitleProperty.set( Body.EARTH.title );
     }
   } );

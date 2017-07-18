@@ -30,6 +30,9 @@ define( function( require ) {
    * @constructor
    */
   // REVIEW: We are creating different arrows. Should we have to pass in the tandem and tandem ID separately?
+  // REVIEW: Having a constructor that is named 'XxxCreator' seems odd, and there doesn't seem to be a lot of
+  // similarity between the two arrow types other than that they are arrows.  I suggest breaking this into two simple
+  // types - VectorArrowNode and ForceArrowNode.
   function ArrowNodeCreator( type, color, tandemID, tandem ) {
 
     if ( type === 'vector' ) {

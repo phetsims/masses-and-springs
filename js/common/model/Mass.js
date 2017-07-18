@@ -39,6 +39,7 @@ define( function( require ) {
    */
   function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem, options ) {
     options = _.extend( {
+      // REVEW: I (jbphet) looked through the code and didn't find any usages of this option.  I could have missed something, but is this really needed?
       specificLabel: null
     }, options );
 
