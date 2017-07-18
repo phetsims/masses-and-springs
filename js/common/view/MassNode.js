@@ -79,7 +79,6 @@ define( function( require ) {
     } );
     this.addChild( hookNode );
 
-
     var labelString;
     var createLabel = function( labelString ) {
       var label = new Text( labelString, {
@@ -92,10 +91,14 @@ define( function( require ) {
         tandem: tandem.createTandem( 'label' )
       } );
 
+      // REVIEW: The background looks a little tight on some of the labels, suggest tring label.bounds.dilated().
       var labelBackground = Rectangle.bounds( label.bounds, { fill: '#D3D3D3' } );
       self.addChild( labelBackground );
       self.addChild( label );
 
+      // REVIEW: This should not even be linked if this isn't an adjustable mass.  Consider adding a flag to Mass.js
+      // that indicates if the mass is adjustable, then only link this method if it is.  It would be a lot cleaner and
+      // more extensible.
       self.mass.massProperty.link( function( massValue ) {
         console.log( massValue );
         if ( model.masses[ 0 ] ) {
@@ -124,6 +127,7 @@ define( function( require ) {
     var modelOffset;
 
     this.addInputListener( new TandemSimpleDragHandler( {
+
       // Allow moving a finger (touch) across a node to pick it up.
       allowTouchSnag: true,
       tandem: tandem.createTandem( 'dragHandler' ),

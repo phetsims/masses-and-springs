@@ -29,7 +29,6 @@ define( function( require ) {
    *
    * @constructor
    */
-
   function DraggableRulerNode( dragBounds, initialPosition, visibleProperty, tandem ) {
     var self = this;
 

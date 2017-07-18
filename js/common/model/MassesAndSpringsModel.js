@@ -180,7 +180,7 @@ define( function( require ) {
 
     // @public (read-only) model of masses used throughout the sim
     // TODO: Add a method to add masses
-    // TODO: Thesse masses don't need to be identified by name. Make this an arry instead of an array.
+    // TODO: These masses don't need to be identified by name. Make this an array instead of an object.
     if ( options.springCount === 2 ) {
       this.masses = [
         this.createMass( .250, .12, true, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
