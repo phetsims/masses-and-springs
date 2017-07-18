@@ -44,7 +44,8 @@ define( function( require ) {
       tandem: tandem.createTandem( 'laserPointerNode' ),
       hasButton: false,
       buttonRadius: 5,
-      buttonTouchAreaDilation: 10
+      buttonTouchAreaDilation: 10,
+      cursor: 'pointer'
       }
     );
     this.addChild( laserPointerNode );
