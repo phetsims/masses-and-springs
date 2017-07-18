@@ -116,9 +116,9 @@ define( function( require ) {
     };
 
     // Creation of our different bar nodes to be represented in the graph on energy screen
-    var kineticEnergyBarNode = createBarNode( model.masses.adjustableMass.kineticEnergyProperty, '#39d74e' );
-    var gravitationalPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.gravitationalPotentialEnergyProperty, '#5798de' );
-    var elasticPotentialEnergyBarNode = createBarNode( model.masses.adjustableMass.elasticPotentialEnergyProperty, '#29d4ff' );
+    var kineticEnergyBarNode = createBarNode( model.masses[ 0 ].kineticEnergyProperty, '#39d74e' );
+    var gravitationalPotentialEnergyBarNode = createBarNode( model.springs[ 0 ].massAttachedProperty.get().gravitationalPotentialEnergyProperty, '#5798de' );
+    var elasticPotentialEnergyBarNode = createBarNode( model.springs[ 0 ].massAttachedProperty.get().elasticPotentialEnergyProperty, '#29d4ff' );
 
     this.barNodes = [
       kineticEnergyBarNode,
@@ -127,9 +127,9 @@ define( function( require ) {
     ];
 
     var barProperties = [
-      scaleHeight( model.masses.adjustableMass.kineticEnergyProperty, scaleFactorProperty ),
-      scaleHeight( model.masses.adjustableMass.gravitationalPotentialEnergyProperty, scaleFactorProperty ),
-      scaleHeight( model.masses.adjustableMass.elasticPotentialEnergyProperty, scaleFactorProperty )
+      scaleHeight( model.springs[ 0 ].massAttachedProperty.get().kineticEnergyProperty, scaleFactorProperty ),
+      scaleHeight( model.springs[ 0 ].massAttachedProperty.get().gravitationalPotentialEnergyProperty, scaleFactorProperty ),
+      scaleHeight( model.springs[ 0 ].massAttachedProperty.get().elasticPotentialEnergyProperty, scaleFactorProperty )
     ];
     var barColors = [
       '#39d74e',

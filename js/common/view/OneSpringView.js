@@ -269,9 +269,8 @@ define( function( require ) {
     energyGraphNode.top = this.layoutBounds.top + this.spacing;
     energyGraphNode.left = this.layoutBounds.left + this.spacing;
 
-
     var massValueControlPanel = new MassValueControlPanel(
-      model.masses.adjustableMass,
+      model.masses[ 0 ],
       tandem.createTandem( 'massValueControlPanel' )
     );
     massValueControlPanel.bottom = this.layoutBounds.getMaxY() - this.spacing;

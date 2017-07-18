@@ -97,11 +97,12 @@ define( function( require ) {
       self.addChild( label );
 
       self.mass.massProperty.link( function( massValue ) {
-        if ( model.masses.adjustableMass ) {
+        console.log( massValue );
+        if ( model.masses[ 0 ] ) {
           label.setText( StringUtils.fillIn( massValueString, { mass: massValue } ) );
         }
-        if ( model.masses.adjustableMass && model.masses.adjustableMass.springProperty.get() ) {
-          model.masses.adjustableMass.springProperty.get().animatingProperty.set( true );
+        if ( model.masses[ 0 ] && model.masses[ 0 ].springProperty.get() ) {
+          model.masses[ 0 ].springProperty.get().animatingProperty.set( true );
         }
       } );
     };

@@ -182,25 +182,21 @@ define( function( require ) {
     // TODO: Add a method to add masses
     // TODO: Thesse masses don't need to be identified by name. Make this an arry instead of an array.
     if ( options.springCount === 2 ) {
-      this.masses = {
-        largeLabeledMass: this.createMass( .250, .12, true, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
-        mediumLabeledMass1: this.createMass( .100, .20, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) ),
-        mediumLabeledMass2: this.createMass( .100, .28, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) ),
-        smallLabeledMass: this.createMass( .050, .33, true, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) ),
-        largeUnlabeledMass: this.createMass( .200, .63, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) ),
-        mediumUnlabeledMass: this.createMass( .150, .56, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) ),
-        smallUnlabeledMass: this.createMass( .075, .49, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) )
-      };
+      this.masses = [
+        this.createMass( .250, .12, true, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
+        this.createMass( .100, .20, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) ),
+        this.createMass( .100, .28, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) ),
+        this.createMass( .050, .33, true, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) ),
+        this.createMass( .200, .63, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) ),
+        this.createMass( .150, .56, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) ),
+        this.createMass( .075, .49, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) )
+      ];
     }
     else if ( options.springCount === 1 ) {
-      this.masses = {
-        adjustableMass: this.createMass( .100,
-          this.springs[ 0 ].positionProperty.get().x - .15,
-          true,
-          'rgb(  247, 151, 34 )',
-          null,
-          tandem.createTandem( 'adjustableMass' ) )
-      };
+      var massXCoordinate = this.springs[ 0 ].positionProperty.get().x - .15;
+      this.masses = [
+        this.createMass( .100, massXCoordinate, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) )
+      ];
     }
 
     // @public (read-only) model of bodies used throughout the sim
