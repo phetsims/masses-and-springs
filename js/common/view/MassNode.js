@@ -65,7 +65,6 @@ define( function( require ) {
     } );
     this.addChild( rect );
 
-    // TODO: Change the attachment point to respond to hook, not the mass.
     var hookShape = new Shape();
     var radius = hookHeight / 4;
     hookShape.arc( 0, 0, radius, Math.PI, (1 / 2 * Math.PI) );
