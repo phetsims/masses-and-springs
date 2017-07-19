@@ -93,7 +93,7 @@ define( function( require ) {
         referencedMassProperty,
         model.showVectors,
         modelViewTransform2,
-        self,
+        this.layoutBounds,
         model,
         tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
       this.massLayer.addChild( massNode );

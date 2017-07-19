@@ -33,27 +33,27 @@ define( function( require ) {
   var ARROW_SIZE_DEFAULT = 25;
 
   /**
-   * @param {Mass} mass:  model object
+   * @param {Mass} mass - model object
    * @param {boolean} showVectors
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {MassesAndSpringsScreenView} screenView
+   * @param {ModelViewTransform2} modelViewTransform2
+   * @param {Bounds2} dragBounds
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @constructor
    */
-  function MassNode( mass, showVectors, modelViewTransform, screenView, model, tandem ) {
+  function MassNode( mass, showVectors, modelViewTransform2, dragBounds, model, tandem ) {
     Node.call( this, { cursor: 'pointer', pathBoundsMethod: 'none', renderer: 'canvas' } );
     var self = this;
 
     this.mass = mass;
 
     // TODO: factor out the hook from the height.
-    var hookHeight = modelViewTransform.modelToViewDeltaY( -mass.hookHeight );
+    var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
     var rectangleBounds = new Bounds2(
-      modelViewTransform.modelToViewDeltaX( -mass.radius ),
+      modelViewTransform2.modelToViewDeltaX( -mass.radius ),
       hookHeight,
-      modelViewTransform.modelToViewDeltaX( mass.radius ),
-      modelViewTransform.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight
+      modelViewTransform2.modelToViewDeltaX( mass.radius ),
+      modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight
     );
     var rect = Rectangle.bounds( rectangleBounds, {
       stroke: 'black',
@@ -116,16 +116,15 @@ define( function( require ) {
     }
 
     this.mass.positionProperty.link( function( position ) {
-      self.translation = modelViewTransform.modelToViewPosition( position );
+      self.translation = modelViewTransform2.modelToViewPosition( position );
     } );
 
     this.addInputListener( new MovableDragHandler( this.mass.positionProperty, {
 
       // Allow moving a finger (touch) across a node to pick it up.
-      //TODO:  Make drag bounds layoutbounds (pass in)
-      // dragBounds:null
+      dragBounds: modelViewTransform2.viewToModelBounds( dragBounds ),
       allowTouchSnag: true,
-      modelViewTransform: modelViewTransform,
+      modelViewTransform: modelViewTransform2,
       tandem: tandem.createTandem( 'dragHandler' ),
 
       // Handler that moves the particle in model space.
@@ -135,7 +134,7 @@ define( function( require ) {
         model.adjustDraggedMassPosition( self.mass );
       },
 
-      startDrag: function( event ) {
+      startDrag: function() {
         mass.userControlledProperty.set( true );
         self.moveToFront();
       },
