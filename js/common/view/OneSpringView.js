@@ -65,13 +65,13 @@ define( function( require ) {
     // Needed for grey bar above springHangerNode
     var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( 0, this.layoutBounds.height * 1 ),
+      new Vector2( 0, this.visibleBoundsProperty.get().height * 1 ),
       397 );
     this.modelViewTransform2 = modelViewTransform2SpringHeight; // Make modelViewTransform2 available to descendant types.
 
     var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( 0, this.layoutBounds.height * .98 ),
+      new Vector2( 0, this.visibleBoundsProperty.get().height * .98 ),
       397 );
     this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
 
@@ -79,7 +79,7 @@ define( function( require ) {
     this.spacing = modelViewTransform2.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
 
     // Alignment for panels on most right side of sim view
-    var rightPanelAlignment = this.layoutBounds.right - this.spacing;
+    var rightPanelAlignment = this.visibleBoundsProperty.get().right - this.spacing;
 
     // Add masses
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
@@ -93,7 +93,7 @@ define( function( require ) {
         referencedMassProperty,
         model.showVectors,
         modelViewTransform2,
-        this.layoutBounds,
+        this.visibleBoundsProperty.get(),
         model,
         tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
       this.massLayer.addChild( massNode );
@@ -177,23 +177,23 @@ define( function( require ) {
 
     // Timer and Ruler
     var timerNode = new DraggableTimerNode(
-      this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 80, this.spacing + 35 ),
+      this.visibleBoundsProperty.get(),
+      new Vector2( this.visibleBoundsProperty.get().left + 80, this.spacing + 35 ),
       model.timerSecondsProperty,
       model.timerRunningProperty,
       model.timerVisibleProperty,
       tandem.createTandem( 'timerNode' )
     );
     var rulerNode = new DraggableRulerNode(
-      this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 50, this.spacing + 35 ),
+      this.visibleBoundsProperty.get(),
+      new Vector2( this.visibleBoundsProperty.get().left + 50, this.spacing + 35 ),
       model.rulerVisibleProperty,
       tandem.createTandem( 'rulerNode' )
     );
 
     // Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
-      this.layoutBounds,
+      this.visibleBoundsProperty.get(),
       rulerNode, timerNode,
       model.rulerVisibleProperty,
       model.timerVisibleProperty,
@@ -217,7 +217,7 @@ define( function( require ) {
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
         self.resetMassLayer();
       },
-      right: this.layoutBounds.right - 10,
+      right: this.visibleBoundsProperty.get().right - 10,
       bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
@@ -225,7 +225,7 @@ define( function( require ) {
     // Play/Pause and Step Forward Button Control
     var timeControlPanel = new TimeControlPanel(
       model,
-      this.layoutBounds,
+      this.visibleBoundsProperty.get(),
       tandem.createTandem( 'timeControlPanel' )
     );
 
@@ -266,14 +266,14 @@ define( function( require ) {
     );
 
     var energyGraphNode = new EnergyGraphNode( model );
-    energyGraphNode.top = this.layoutBounds.top + this.spacing;
-    energyGraphNode.left = this.layoutBounds.left + this.spacing;
+    energyGraphNode.top = this.visibleBoundsProperty.get().top + this.spacing;
+    energyGraphNode.left = this.visibleBoundsProperty.get().left + this.spacing;
 
     var massValueControlPanel = new MassValueControlPanel(
       model.masses[ 0 ],
       tandem.createTandem( 'massValueControlPanel' )
     );
-    massValueControlPanel.bottom = this.layoutBounds.getMaxY() - this.spacing;
+    massValueControlPanel.bottom = this.visibleBoundsProperty.get().getMaxY() - this.spacing;
     massValueControlPanel.left = energyGraphNode.right + this.spacing;
     singleSpringHangerNode.right = springStopperButtonNode.left - this.spacing;
 

@@ -65,13 +65,13 @@ define( function( require ) {
     // TODO: Should not need to have two mvt in the view.
     var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( 0, this.layoutBounds.height * 1 ),
+      new Vector2( 0, this.visibleBoundsProperty.get().height * 1 ),
       397 );
     this.modelViewTransform2 = modelViewTransform2SpringHeight; // Make modelViewTransform2 available to descendant types.
 
     var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
-      new Vector2( 0, this.layoutBounds.height * .98 ),
+      new Vector2( 0, this.visibleBoundsProperty.get().height * .98 ),
       397 );
     this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
 
@@ -79,7 +79,7 @@ define( function( require ) {
     this.spacing = modelViewTransform2.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
 
     // Alignment for panels on most right side of sim view
-    var rightPanelAlignment = this.layoutBounds.getMaxX() - this.spacing;
+    var rightPanelAlignment = this.visibleBoundsProperty.get().getMaxX() - this.spacing;
 
     // Add masses
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
@@ -93,7 +93,7 @@ define( function( require ) {
         referencedMassProperty,
         model.showVectors,
         modelViewTransform2,
-        this.layoutBounds,
+        this.visibleBoundsProperty.get(),
         model,
         tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
       this.massLayer.addChild( massNode );
@@ -167,7 +167,7 @@ define( function( require ) {
 
     // @public Initializes movable line
     this.movableLineNode = new MovableLineNode(
-      this.layoutBounds.getCenter().minus( new Vector2( 45, 0 ) ),
+      this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 45, 0 ) ),
       180,
       model.movableLineVisibleProperty,
       this.springHangerNode.centerX,
@@ -217,23 +217,23 @@ define( function( require ) {
 
     // Timer and Ruler
     var timerNode = new DraggableTimerNode(
-      this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 80, this.spacing + 35 ),
+      this.visibleBoundsProperty.get(),
+      new Vector2( this.visibleBoundsProperty.get().left + 80, this.spacing + 35 ),
       model.timerSecondsProperty,
       model.timerRunningProperty,
       model.timerVisibleProperty,
       tandem.createTandem( 'timerNode' )
     );
     var rulerNode = new DraggableRulerNode(
-      this.layoutBounds,
-      new Vector2( this.layoutBounds.left + 50, this.spacing + 35 ),
+      this.visibleBoundsProperty.get(),
+      new Vector2( this.visibleBoundsProperty.get().left + 50, this.spacing + 35 ),
       model.rulerVisibleProperty,
       tandem.createTandem( 'rulerNode' )
     );
 
     // Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
-      this.layoutBounds,
+      this.visibleBoundsProperty.get(),
       rulerNode, timerNode,
       model.rulerVisibleProperty,
       model.timerVisibleProperty,
@@ -257,7 +257,7 @@ define( function( require ) {
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
         self.resetMassLayer();
       },
-      right: this.layoutBounds.right - 10,
+      right: this.visibleBoundsProperty.get().right - 10,
       bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
@@ -265,7 +265,7 @@ define( function( require ) {
     // Play/Pause and Step Forward Button Control
     var timeControlPanel = new TimeControlPanel(
       model,
-      this.layoutBounds,
+      this.visibleBoundsProperty.get(),
       tandem.createTandem( 'timeControlPanel' )
     );
 
