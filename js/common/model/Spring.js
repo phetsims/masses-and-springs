@@ -39,8 +39,12 @@ define( function( require ) {
    *
    * @constructor
    */
-  function Spring( position, initialNaturalRestingLength, springConstantRange, defaultDampingCoefficient, tandem ) {
+  function Spring( position, initialNaturalRestingLength, springConstantRange, defaultDampingCoefficient, tandem, options ) {
     var self = this;
+
+    this.options = _.extend( {
+      modelViewTransform: null
+    }, options );
 
     // range of natural resting length in meters (values used from design doc)
     // REVIEW: This is pretty minor, but we should be consisten about using .1 versus 0.1.  I think we generally use 0.1, since Java has issues with the other format.
@@ -209,6 +213,14 @@ define( function( require ) {
     this.springConstantProperty.link( function( springConstant ) {
       self.updateThickness( self.naturalRestingLengthProperty.get(), springConstant );
     } );
+
+    // this.massAttachedProperty.link( function( mass ) {
+    //   if ( mass ) {
+    //     mass.positionProperty.link( function( position ) {
+    //       self.translation = self.options.modelViewTransform2.modelToViewPosition( position );
+    //     } );
+    //   }
+    // } );
   }
 
   massesAndSprings.register( 'Spring', Spring );

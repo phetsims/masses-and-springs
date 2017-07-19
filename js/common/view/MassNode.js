@@ -22,7 +22,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
-  var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
+  var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
 
@@ -35,25 +35,25 @@ define( function( require ) {
   /**
    * @param {Mass} mass:  model object
    * @param {boolean} showVectors
-   * @param {ModelViewTransform2} modelViewTransform2
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {MassesAndSpringsScreenView} screenView
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @constructor
    */
-  function MassNode( mass, showVectors, modelViewTransform2, screenView, model, tandem ) {
+  function MassNode( mass, showVectors, modelViewTransform, screenView, model, tandem ) {
     Node.call( this, { cursor: 'pointer', pathBoundsMethod: 'none', renderer: 'canvas' } );
     var self = this;
 
     this.mass = mass;
 
     // TODO: factor out the hook from the height.
-    var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
+    var hookHeight = modelViewTransform.modelToViewDeltaY( -mass.hookHeight );
     var rectangleBounds = new Bounds2(
-      modelViewTransform2.modelToViewDeltaX( -mass.radius ),
+      modelViewTransform.modelToViewDeltaX( -mass.radius ),
       hookHeight,
-      modelViewTransform2.modelToViewDeltaX( mass.radius ),
-      modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight
+      modelViewTransform.modelToViewDeltaX( mass.radius ),
+      modelViewTransform.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight
     );
     var rect = Rectangle.bounds( rectangleBounds, {
       stroke: 'black',
@@ -100,7 +100,6 @@ define( function( require ) {
       // that indicates if the mass is adjustable, then only link this method if it is.  It would be a lot cleaner and
       // more extensible.
       self.mass.massProperty.link( function( massValue ) {
-        console.log( massValue );
         if ( model.masses[ 0 ] ) {
           label.setText( StringUtils.fillIn( massValueString, { mass: massValue } ) );
         }
@@ -115,40 +114,33 @@ define( function( require ) {
       labelString = StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
       createLabel( labelString );
     }
-    // else if ( mass.specificLabel !== null ) {
-    //   labelString = mass.specificLabel;
-    //   createLabel( labelString );
-    // }
 
     this.mass.positionProperty.link( function( position ) {
-      self.translation = modelViewTransform2.modelToViewPosition( position );
+      self.translation = modelViewTransform.modelToViewPosition( position );
     } );
 
-    var modelOffset;
-
-    this.addInputListener( new TandemSimpleDragHandler( {
+    this.addInputListener( new MovableDragHandler( this.mass.positionProperty, {
 
       // Allow moving a finger (touch) across a node to pick it up.
+      //TODO:  Make drag bounds layoutbounds (pass in)
+      // dragBounds:null
       allowTouchSnag: true,
+      modelViewTransform: modelViewTransform,
       tandem: tandem.createTandem( 'dragHandler' ),
 
       // Handler that moves the particle in model space.
-      drag: function( event ) {
-        var proposedMassPosition = modelViewTransform2
-          .viewToModelPosition( screenView.globalToLocalPoint( event.pointer.point ) )
-          .minus( modelOffset );
-        model.adjustDraggedMassPosition( self.mass, proposedMassPosition );
+      onDrag: function() {
+
+        // Checks if mass should be attached/detached to spring and adjusts its position if so.
+        model.adjustDraggedMassPosition( self.mass );
       },
 
-      start: function( event ) {
-        modelOffset = modelViewTransform2
-          .viewToModelPosition( screenView.globalToLocalPoint( event.pointer.point ) )
-          .minus( self.mass.positionProperty.get() );
+      startDrag: function( event ) {
         mass.userControlledProperty.set( true );
         self.moveToFront();
       },
 
-      end: function() {
+      endDrag: function() {
         mass.userControlledProperty.set( false );
       }
     } ) );

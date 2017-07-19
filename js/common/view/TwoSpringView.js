@@ -62,6 +62,7 @@ define( function( require ) {
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 850, 504 ) } );
 
     // Needed for grey bar above springHangerNode
+    // TODO: Should not need to have two mvt in the view.
     var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( 0, this.layoutBounds.height * 1 ),
@@ -118,6 +119,9 @@ define( function( require ) {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       } );
+
+    model.springs[ 0 ].options.modelViewTransform2 = modelViewTransform2;
+    model.springs[ 1 ].options.modelViewTransform2 = modelViewTransform2;
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
     this.firstOscillatingSpringNode = new OscillatingSpringNode(

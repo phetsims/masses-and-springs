@@ -100,7 +100,7 @@ define( function( require ) {
     // @public {Property.<number>} vertical acceleration of the mass
     this.gravityProperty = gravityProperty;
 
-    // @public {Property.<Spring|null>}  is the mass attached to a Spring?
+    // @public {Property.<Spring|null>}  spring that the mass is attached to
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
       phetioValueType: TSpring

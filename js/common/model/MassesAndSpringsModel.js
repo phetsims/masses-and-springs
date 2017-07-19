@@ -30,7 +30,7 @@ define( function( require ) {
 
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
-  var DROPPING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
+  var RELEASE_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
   var RIGHT_SPRING_X = 1.175; // {number} X position of the spring node in screen coordinates
 
   /**
@@ -291,14 +291,14 @@ define( function( require ) {
      * Based on new dragged position of mass, try to attach or detach mass if eligible and then update position.
      *
      * @param {Mass} mass
-     * @param {Vector2} proposedPosition
      * @public
      */
-    adjustDraggedMassPosition: function( mass, proposedPosition ) {
+    adjustDraggedMassPosition: function( mass ) {
+      var massPosition = mass.positionProperty.get();
 
       // Attempt to detach
       if ( mass.springProperty.get()
-           && Math.abs( proposedPosition.x - mass.positionProperty.get().x ) > DROPPING_DISTANCE ) {
+           && Math.abs( mass.springProperty.get().positionProperty.get().x - massPosition.x ) > RELEASE_DISTANCE ) {
         mass.springProperty.get().removeMass();
         mass.detach();
       }
@@ -308,24 +308,24 @@ define( function( require ) {
         mass.springProperty.get().displacementProperty.set(
           -(mass.springProperty.get().positionProperty.get().y -
             mass.springProperty.get().naturalRestingLengthProperty.get() ) +
-          proposedPosition.y );
-        mass.positionProperty.set(
-          new Vector2( mass.springProperty.get().positionProperty.get().x, proposedPosition.y ) );
+          massPosition.y );
+        mass.positionProperty.set( new Vector2( mass.springProperty.get().positionProperty.get().x, massPosition.y ) );
       }
 
       // Update mass position if unattached
       else {
+
         //Attempt to attach
         this.springs.forEach( function( spring ) {
-          if ( Math.abs( proposedPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
-               Math.abs( proposedPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE &&
+          if ( Math.abs( massPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
+               Math.abs( massPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE &&
                spring.massAttachedProperty.get() === null ) {
             spring.setMass( mass );
           }
         } );
 
         //Update position
-        mass.positionProperty.set( proposedPosition );
+        mass.positionProperty.set( massPosition );
       }
     },
 
