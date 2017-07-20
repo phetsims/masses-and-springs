@@ -22,6 +22,7 @@ define( function( require ) {
    * @constructor
    */
   function VectorScreenView( model, tandem ) {
+    var self = this;
 
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
@@ -31,7 +32,6 @@ define( function( require ) {
       tandem.createTandem( 'vectorVisibilityControlPanel' ),
       {
         top: this.gravityAndFrictionControlPanel.bottom + this.spacing,
-        right: this.layoutBounds.right - this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );
@@ -39,6 +39,10 @@ define( function( require ) {
     vectorVisibilityControlPanel.moveToBack();
 
     this.toolboxPanel.top = vectorVisibilityControlPanel.bottom + this.spacing;
+
+    this.visibleBoundsProperty.link( function( visibleBounds ) {
+      vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+    } );
   }
 
   massesAndSprings.register( 'VectorScreenView', VectorScreenView );
