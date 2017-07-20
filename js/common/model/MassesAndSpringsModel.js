@@ -31,7 +31,7 @@ define( function( require ) {
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
   var RELEASE_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
-  var RIGHT_SPRING_X = 1.175; // {number} X position of the spring node in screen coordinates
+  var RIGHT_SPRING_X = .975; // {number} X position of the spring node in screen coordinates
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)

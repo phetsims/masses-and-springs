@@ -59,7 +59,7 @@ define( function( require ) {
 
     this.model = model; // Make model available for reset
     var self = this;
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 850, 504 ) } );
+    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
     // Needed for grey bar above springHangerNode
     // TODO: Should not need to have two mvt in the view.
@@ -142,6 +142,19 @@ define( function( require ) {
       tandem.createTandem( 'springHangerNode' )
     );
 
+    this.firstSpringStopperButtonNode = new SpringStopperButtonNode(
+      tandem.createTandem( 'firstSpringStopperButtonNode' ), {
+        listener: model.springs[ 0 ].stopSpring.bind( model.springs[ 0 ] ),
+        right: this.springHangerNode.left - this.spacing,
+        top: this.spacing
+      } );
+    var secondSpringStopperButtonNode = new SpringStopperButtonNode(
+      tandem.createTandem( 'secondSpringStopperButtonNode' ), {
+        listener: model.springs[ 1 ].stopSpring.bind( model.springs[ 1 ] ),
+        left: this.springHangerNode.right + this.spacing,
+        top: this.spacing
+      } );
+
     // Spring Constant Control Panels
     this.firstSpringConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
@@ -160,7 +173,7 @@ define( function( require ) {
       StringUtils.fillIn( springConstantString, { spring: 2 } ),
       tandem.createTandem( 'secondSpringConstantControlPanel' ),
       {
-        right: indicatorVisibilityControlPanel.left - this.spacing,
+        left: secondSpringStopperButtonNode.right + this.spacing,
         top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
@@ -297,20 +310,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'speedControl' )
     } );
 
-    this.firstSpringStopperButtonNode = new SpringStopperButtonNode(
-      tandem.createTandem( 'firstSpringStopperButtonNode' ), {
-        listener: model.springs[ 0 ].stopSpring.bind( model.springs[ 0 ] ),
-        right: this.springHangerNode.left - this.spacing,
-        top: this.spacing
-      } );
-    var secondSpringStopperButtonNode = new SpringStopperButtonNode(
-      tandem.createTandem( 'secondSpringStopperButtonNode' ), {
-        listener: model.springs[ 1 ].stopSpring.bind( model.springs[ 1 ] ),
-        right: this.secondSpringConstantControlPanel.left - this.spacing,
-        top: this.spacing
-      } );
-
-    this.springHangerNode.right = secondSpringStopperButtonNode.left - this.spacing;
+    this.springHangerNode.centerX = 336;
 
     // Adding all of the nodes to the scene graph
     this.addChild( this.firstOscillatingSpringNode );
