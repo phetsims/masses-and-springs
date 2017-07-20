@@ -178,12 +178,12 @@ define( function( require ) {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
 
-    // @public Initializes movable line
+    // @public Initializes red movable reference line
     this.movableLineNode = new MovableLineNode(
-      this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 10, 0 ) ),
+      this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 45, 0 ) ),
       180,
       model.movableLineVisibleProperty,
-      this.springHangerNode.centerX,
+      this.springHangerNode.centerX + 5,
       tandem.createTandem( 'movableLineNode' )
     );
 
