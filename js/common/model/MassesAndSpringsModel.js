@@ -175,7 +175,7 @@ define( function( require ) {
       ];
     }
     else {
-      this.springs = [ createSpring( RIGHT_SPRING_X, tandem.createTandem( 'spring' ) ) ];
+      this.springs = [ createSpring( RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) ) ];
     }
 
     // @public (read-only) model of masses used throughout the sim
