@@ -110,7 +110,7 @@ define( function( require ) {
     this.springForceProperty = new Property( 0.0, {
       tandem: tandem.createTandem( 'springForceProperty' ),
       phetioValueType: TNumber( {
-        units: 'newtons/meter',
+        units: 'newtons/meters',
         range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0.0 )
       } )
     } );
