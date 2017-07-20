@@ -71,7 +71,7 @@ define( function( require ) {
     hookShape.lineTo( 0, hookHeight / 2 );
     var hookNode = new Path( hookShape, {
       stroke: 'black',
-      lineWidth: 2,
+      lineWidth: 1.5,
       lineCap: 'round',
       centerX: rectangleBounds.centerX,
       bottom: rectangleBounds.top
