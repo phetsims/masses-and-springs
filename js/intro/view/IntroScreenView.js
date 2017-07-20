@@ -181,6 +181,10 @@ define( function( require ) {
     } );
     this.addChild( sceneRadioButtonGroup );
     sceneRadioButtonGroup.moveToBack();
+
+    this.visibleBoundsProperty.link( function( visibleBounds ) {
+      sceneRadioButtonGroup.right = visibleBounds.right - self.spacing;
+    } );
   }
 
   massesAndSprings.register( 'IntroScreenView', IntroScreenView );

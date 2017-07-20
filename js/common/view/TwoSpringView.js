@@ -180,7 +180,7 @@ define( function( require ) {
 
     // @public Initializes movable line
     this.movableLineNode = new MovableLineNode(
-      this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 45, 0 ) ),
+      this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 10, 0 ) ),
       180,
       model.movableLineVisibleProperty,
       this.springHangerNode.centerX,
@@ -348,8 +348,8 @@ define( function( require ) {
       self.gravityAndFrictionControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;
-      speedControl.right = self.resetAllButton.left - 30;
-      timeControlPanel.right = speedControl.left - 30;
+      speedControl.right = self.resetAllButton.left - self.spacing * 6;
+      timeControlPanel.right = speedControl.left - self.spacing * 6;
     } );
   }
 
