@@ -70,7 +70,7 @@ define( function( require ) {
     hookShape.arc( 0, 0, radius, Math.PI, (1 / 2 * Math.PI) );
     hookShape.lineTo( 0, hookHeight / 2 );
     var hookNode = new Path( hookShape, {
-      stroke: mass.color,
+      stroke: 'black',
       lineWidth: 2,
       lineCap: 'round',
       centerX: rectangleBounds.centerX,
