@@ -305,7 +305,6 @@ define( function( require ) {
       align: 'left',
       spacing: radioButtonSpacing,
       children: [ normalMotionRadioBox, slowMotionRadioBox ],
-      right: this.resetAllButton.left - 30,
       centerY: this.resetAllButton.centerY,
       tandem: tandem.createTandem( 'speedControl' )
     } );
@@ -342,6 +341,16 @@ define( function( require ) {
     // Adding Nodes in tool box
     this.addChild( timerNode );
     this.addChild( rulerNode );
+
+    // Adjust the floating panels to the visibleBounds of the screen.
+    this.visibleBoundsProperty.link( function( visibleBounds ) {
+      indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      self.gravityAndFrictionControlPanel.right = visibleBounds.right - self.spacing;
+      self.toolboxPanel.right = visibleBounds.right - self.spacing;
+      self.resetAllButton.right = visibleBounds.right - self.spacing;
+      speedControl.right = self.resetAllButton.left - 30;
+      timeControlPanel.right = speedControl.left - 30;
+    } );
   }
 
   massesAndSprings.register( 'TwoSpringView', TwoSpringView );
