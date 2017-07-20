@@ -60,7 +60,7 @@ define( function( require ) {
   function OneSpringView( model, tandem ) {
     this.model = model; // Make model available for reset
     var self = this;
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 850, 504 ) } );
+    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
     // Needed for grey bar above springHangerNode
     var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
@@ -138,15 +138,6 @@ define( function( require ) {
       } );
 
     singleSpringHangerNode.top = springConstantControlPanel.top;
-
-    // @public Initializes movable line
-    this.movableLineNode = new MovableLineNode(
-      singleSpringHangerNode.getCenter().plus( new Vector2( 45, 200 ) ),
-      100,
-      model.movableLineVisibleProperty,
-      475,
-      tandem.createTandem( 'movableLineNode' )
-    );
 
     // @public Initializes equilibrium line for second spring
     this.secondSpringEquilibriumLineNode = new EquilibriumLineNode(
@@ -276,6 +267,15 @@ define( function( require ) {
     massValueControlPanel.bottom = this.visibleBoundsProperty.get().getMaxY() - this.spacing;
     massValueControlPanel.left = energyGraphNode.right + this.spacing;
     singleSpringHangerNode.right = springStopperButtonNode.left - this.spacing;
+
+    // @public Initializes movable line
+    this.movableLineNode = new MovableLineNode(
+      singleSpringHangerNode.getCenter().plus( new Vector2( 45, 200 ) ),
+      100,
+      model.movableLineVisibleProperty,
+      singleSpringHangerNode.centerX + 5,
+      tandem.createTandem( 'movableLineNode' )
+    );
 
 
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.

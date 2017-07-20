@@ -61,6 +61,9 @@ define( function( require ) {
     line.mouseArea = dilatedLineBounds;
     line.touchArea = dilatedLineBounds;
 
+    // @private {read-only} X coordinate for the position of the line
+    initialPosition.setX( xPosOfLine );
+
     // @private {read-write} position of line in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
