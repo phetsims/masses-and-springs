@@ -20,7 +20,7 @@ define( function( require ) {
   // constants
   var LINEAR_LOOP_MAPPING = new LinearFunction( .1, .5, 1, 12 );
   var MAP_NUMBER_OF_LOOPS = function( springLength ) {
-    return Util.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) )
+    return Util.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) );
   };
 
   /**
