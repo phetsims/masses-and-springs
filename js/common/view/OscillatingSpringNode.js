@@ -17,6 +17,12 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // constants
+  var LINEAR_LOOP_MAPPING = new LinearFunction( .1, .5, 1, 12 );
+  var MAP_NUMBER_OF_LOOPS = function( springLength ) {
+    return Util.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) )
+  };
+
   /**
    * @param {spring} spring model object
    * @param {ModelViewTransform2} modelViewTransform2
@@ -66,9 +72,8 @@ define( function( require ) {
       self.y = modelViewTransform2.modelToViewY( spring.positionProperty.get().y - spring.lengthProperty.get() );
     }
 
-    spring.naturalRestingLengthProperty.link( function() {
-      var mapNumberOfLoops = new LinearFunction( .1, .5, 1, 12 );
-      self.loopsProperty.set( Util.roundSymmetric( mapNumberOfLoops( spring.naturalRestingLengthProperty.get() ) ) );
+    spring.naturalRestingLengthProperty.link( function( springLength ) {
+      self.loopsProperty.set( MAP_NUMBER_OF_LOOPS( springLength ) );
       updateViewLength();
     } );
 
@@ -86,9 +91,13 @@ define( function( require ) {
   massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );
 
   return inherit( ParametricSpringNode, OscillatingSpringNode, {
-    reset: function() {
-      ParametricSpringNode.prototype.reset.call( this );
-      this.spring.reset();
-    }
-  } );
+      reset: function() {
+        ParametricSpringNode.prototype.reset.call( this );
+        this.spring.reset();
+      }
+    },
+    {
+      // statics
+      MAP_NUMBER_OF_LOOPS: MAP_NUMBER_OF_LOOPS
+    } );
 } );
