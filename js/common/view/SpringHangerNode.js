@@ -21,6 +21,7 @@ define( function( require ) {
   // constants
   var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
 
+  // REVIEW: The model is only used for the springs, would be better to just pass in the springs array.
   /**
    * @param {MassesAndSpringsModel} model
    * @param {ModelViewTransform2} modelViewTransform2
