@@ -36,10 +36,11 @@ define( function( require ) {
       cursor: 'pointer',
       tandem: tandem.createTandem( 'line' )
     } );
+    // REVIEW: Why dilate in the X direction?  Seems like it would make more seems to do the Y direction only.
     this.mouseArea = this.localBounds.dilated( 10 );
     this.touchArea = this.localBounds.dilated( 10 );
 
-
+    // REVIEW: There are some variables with visibility annotations below - these annotations are unnecessary.
     // @private {read-write} prevents overlap with the equilibrium line
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x ) + 7.5;
 
