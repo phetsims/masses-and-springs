@@ -118,10 +118,10 @@ define( function( require ) {
       self.translation = modelViewTransform2.modelToViewPosition( position );
     } );
 
-    this.addInputListener( new MovableDragHandler( this.mass.positionProperty, {
+    this.movableDragHandler = new MovableDragHandler( this.mass.positionProperty, {
 
       // Allow moving a finger (touch) across a node to pick it up.
-      dragBounds: modelViewTransform2.viewToModelBounds( dragBounds ),
+      dragBounds: modelViewTransform2.viewToModelBounds( dragBounds.get() ),
       allowTouchSnag: true,
       modelViewTransform: modelViewTransform2,
       tandem: tandem.createTandem( 'dragHandler' ),
@@ -141,7 +141,13 @@ define( function( require ) {
       endDrag: function() {
         mass.userControlledProperty.set( false );
       }
-    } ) );
+    } );
+
+    dragBounds.link( function( dragBounds ) {
+      self.movableDragHandler.dragBounds.set( dragBounds );
+    } );
+
+    this.addInputListener( this.movableDragHandler );
 
     var forceNullLine = new Line( 0, 0, 0, 0, {
       stroke: 'black',

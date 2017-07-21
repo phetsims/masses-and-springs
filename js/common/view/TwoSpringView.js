@@ -93,7 +93,7 @@ define( function( require ) {
         referencedMassProperty,
         model.showVectors,
         modelViewTransform2,
-        this.visibleBoundsProperty.get(),
+        this.visibleBoundsProperty,
         model,
         tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
       this.massLayer.addChild( massNode );
@@ -350,6 +350,21 @@ define( function( require ) {
       self.resetAllButton.right = visibleBounds.right - self.spacing;
       speedControl.right = self.resetAllButton.left - self.spacing * 6;
       timeControlPanel.right = speedControl.left - self.spacing * 6;
+      self.toolboxPanel.dragBounds = 3;
+      massNodes.forEach( function( massNode ) {
+        massNode.movableDragHandler.dragBounds = modelViewTransform2.viewToModelBounds( visibleBounds );
+
+        if ( massNode.centerX > visibleBounds.maxX ) {
+          massNode.mass.positionProperty.set(
+            new Vector2( modelViewTransform2.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
+          );
+        }
+        if ( massNode.centerX < visibleBounds.minX ) {
+          massNode.mass.positionProperty.set(
+            new Vector2( modelViewTransform2.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
+          );
+        }
+      } );
     } );
   }
 

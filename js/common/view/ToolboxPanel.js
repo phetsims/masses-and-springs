@@ -47,6 +47,8 @@ define( function( require ) {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
 
+    this.dragBounds = options.dragBounds;
+
     var self = this;
     var toolbox = new HBox( {
       align: 'center',
