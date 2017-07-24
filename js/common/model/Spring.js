@@ -64,7 +64,7 @@ define( function( require ) {
       } )
     } );
 
-    //  @public {Property.<number>} displacement of the bottom of the spring from the natural resting position
+    //  @public {Property.<number>} distance from of the bottom of the spring from the natural resting position
     this.displacementProperty = new Property( 0, {
       tandem: tandem.createTandem( 'displacementProperty' ),
       phetioValueType: TNumber( {

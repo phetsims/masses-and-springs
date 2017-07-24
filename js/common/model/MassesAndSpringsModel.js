@@ -23,6 +23,8 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Bounds2 = require( 'DOT/Bounds2' );
+  var LinearFunction = require( 'DOT/LinearFunction' );
   var Util = require( 'DOT/Util' );
 
   // phet-io modules
@@ -306,24 +308,37 @@ define( function( require ) {
 
       // Update mass position and spring length if attached
       if ( mass.springProperty.get() ) {
+
+        // Update the position of the mass
+        mass.positionProperty.set( mass.positionProperty.get().copy().setX( mass.springProperty.get().positionProperty.get().x ) );
+
+        // Update spring length
         mass.springProperty.get().displacementProperty.set(
           -(mass.springProperty.get().positionProperty.get().y -
             mass.springProperty.get().naturalRestingLengthProperty.get() ) +
           massPosition.y );
-        var limitedMassYPosition = massPosition.y;
-        var springConstantLimit = mass.springProperty.get().thicknessProperty.get() *
-                                  OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
-        mass.positionProperty.link( function() {
-          if ( mass.springProperty ) {
-            springConstantLimit = mass.springProperty.get().thicknessProperty.get() *
-                                  OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
-          }
-        } );
-        if ( massPosition.y > springConstantLimit ) {
-          limitedMassYPosition = springConstantLimit;
+
+        // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
+        var maxY = mass.springProperty.get().thicknessProperty.get() *
+                   OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
+        var constraint = new LinearFunction( 20, 60, 1.112, 1.006 );
+
+        // Max Y value in model coordinates
+        var modelMaxY = constraint( maxY );
+
+        // Update only the spring's length if we are lower than the ma
+        if ( mass.positionProperty.get().y > modelMaxY ) {
+
+          // set mass position to maximum y position based on spring coils
+          mass.positionProperty.set( mass.positionProperty.get().copy().setY( modelMaxY ) );
+          mass.positionProperty.get().setX( mass.positionProperty.get().x );
+
+          // Limit the length of the spring to based on the spring coils.
+          mass.springProperty.get().displacementProperty.set(
+            -(mass.springProperty.get().positionProperty.get().y -
+              mass.springProperty.get().naturalRestingLengthProperty.get() ) +
+            modelMaxY );
         }
-        console.log( massPosition.y );
-        mass.positionProperty.set( new Vector2( mass.springProperty.get().positionProperty.get().x, limitedMassYPosition ) );
       }
 
       // Update mass position if unattached
@@ -339,6 +354,7 @@ define( function( require ) {
         } );
 
         //Update position
+        //TODO: Do we need this?
         mass.positionProperty.set( massPosition );
       }
     },
