@@ -37,7 +37,9 @@ define( function( require ) {
     var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( 0, layoutBounds.height * .98 ),
-      397 );
+      397
+    );
+
     this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
 
     // Play/Pause Button

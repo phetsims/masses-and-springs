@@ -1,5 +1,7 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
+// REVIEW: This button isn't specific to stopping the springs.  I (jbphet) would suggest changing the name to
+// StopButtonNode and updating the documentation, then someone could just grab it if they wanted to reuse it.
 /**
  * Spring stopper button that stops a specific spring from oscillating.
  *

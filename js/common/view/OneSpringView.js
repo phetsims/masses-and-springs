@@ -1,5 +1,6 @@
 // Copyright 2017, University of Colorado Boulder
 
+// REVIEW: This comment seems incorrect.  Cut and paste error?
 /**
  * Common ScreenView for  using two masses.
  *
@@ -62,21 +63,30 @@ define( function( require ) {
     var self = this;
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
+    // REVIEW: The code below looks odd for a couple of reasons.  For one thing, this.modelViewTransform2 gets set once
+    // and then overwritten.  For another, the two transforms are almost identical.  Why are the both needed?  Can't
+    // the bar just be positioned based on the main MVT?  Finally, the "2" on the end of the name is unconventional.
+
     // Needed for grey bar above springHangerNode
     var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( 0, this.visibleBoundsProperty.get().height * 1 ),
-      397 );
+      397
+    );
     this.modelViewTransform2 = modelViewTransform2SpringHeight; // Make modelViewTransform2 available to descendant types.
 
     var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       new Vector2( 0, this.visibleBoundsProperty.get().height * .98 ),
-      397 );
+      397
+    );
     this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
 
-    //Spacing for top margin of layout bounds
+    // REVIEW: The comment below says 'top margin', but within the code it seems to be used as the inset for right and left too.
+    // Spacing for top margin of layout bounds
     this.spacing = modelViewTransform2.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
+
+    // REVIEW: Panels should be floated (probably just haven't gotten to it yet).
 
     // Alignment for panels on most right side of sim view
     var rightPanelAlignment = this.visibleBoundsProperty.get().right - this.spacing;
@@ -84,6 +94,10 @@ define( function( require ) {
     // Add masses
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
     var massNodes = [];
+
+    // REVIEW: model.masses used to be an object, but was changed to be an array.  The code below that iterates through
+    // the masses works, but only because of the way that JavaScript treats arrays, and is hard to understand.  This
+    // should be changed to use model.masses.forEach().
     for ( var property in model.masses ) {
       if ( !model.masses.hasOwnProperty( property ) ) {
         continue;
@@ -102,6 +116,7 @@ define( function( require ) {
       massNodes.push( massNode );
     }
 
+    // REVIEW: Should be down in the 'method block' of the inherit call.
     // @protected Helper function to restore initial layering of the masses to prevent them from stacking over each other.
     this.resetMassLayer = function() {
       massNodes.forEach( function( massNode ) {
@@ -124,7 +139,8 @@ define( function( require ) {
         top: this.spacing,
         right: rightPanelAlignment,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      } );
+      }
+    );
 
     // Spring Constant Control Panel
     var springConstantControlPanel = new SpringConstantControlPanel(
@@ -135,9 +151,18 @@ define( function( require ) {
         right: indicatorVisibilityControlPanel.left - this.spacing,
         top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
-      } );
+      }
+    );
 
     singleSpringHangerNode.top = springConstantControlPanel.top;
+
+    // REVIEW: There are a number of view elements, such as e.g. secondSpringEquilibriumLineNode,
+    // gravityAndFrictionControlPanel, etc, that are created as properties (i.e. this.x) instead of variables (i.e.
+    // var x), but as far as I (jbphet) can tell they aren't used outside of the object instance.  These should be
+    // checked and made local if possible.
+
+    // REVIEW: This is OneSpringView, but there are some names below that refer to "secondXxx", such as
+    // secondSpringEquilibriumLineNode.  These should probably be cleaned up.
 
     // @public Initializes equilibrium line for second spring
     this.secondSpringEquilibriumLineNode = new EquilibriumLineNode(
@@ -165,6 +190,10 @@ define( function( require ) {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );
+
+    // REVIEW: timerNode and rulerNode are initially positioned using some unexplained constant values.  Are these
+    // even needed?  Aren't they invisible until dragged out of the panel, and aren't their positions set when that
+    // happens?  If these ARE in fact needed, they should be documented.
 
     // Timer and Ruler
     var timerNode = new DraggableTimerNode(
@@ -194,7 +223,8 @@ define( function( require ) {
         left: this.gravityAndFrictionControlPanel.left,
         minWidth: this.gravityAndFrictionControlPanel.width,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      } );
+      }
+    );
 
     // Done to for movableDragHandler handling intersecting bounds of panel and ruler
     rulerNode.toolbox = this.toolboxPanel;
@@ -250,6 +280,7 @@ define( function( require ) {
 
     var springStopperButtonNode = new SpringStopperButtonNode(
       tandem.createTandem( 'springStopperButtonNode' ), {
+        // REVIEW: Is the 'bind' really necessary? Doesn't seem like it should be.
         listener: model.springs[ 0 ].stopSpring.bind( model.springs[ 0 ] ),
         right: springConstantControlPanel.left - this.spacing,
         top: this.spacing
@@ -277,7 +308,6 @@ define( function( require ) {
       tandem.createTandem( 'movableLineNode' )
     );
 
-
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
     // Adding all of the nodes to the scene graph
     this.addChild( this.oscillatingSpringNode );
@@ -297,7 +327,7 @@ define( function( require ) {
     this.addChild( speedControl );
     this.addChild( springStopperButtonNode );
 
-    //Reference lines from indicator visibility box
+    // Reference lines from indicator visibility box
     this.addChild( this.secondSpringEquilibriumLineNode );
     this.addChild( this.secondNaturalLengthLineNode );
     this.addChild( this.movableLineNode );
