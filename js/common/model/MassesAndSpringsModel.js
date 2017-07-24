@@ -16,11 +16,13 @@ define( function( require ) {
   var NumberProperty = require( 'AXON/NumberProperty' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var LinearFunction = require( 'DOT/LinearFunction' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsQueryParameters = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsQueryParameters' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
+  var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Vector2 = require( 'DOT/Vector2' );
   var Util = require( 'DOT/Util' );
 
@@ -309,7 +311,20 @@ define( function( require ) {
           -(mass.springProperty.get().positionProperty.get().y -
             mass.springProperty.get().naturalRestingLengthProperty.get() ) +
           massPosition.y );
-        mass.positionProperty.set( new Vector2( mass.springProperty.get().positionProperty.get().x, massPosition.y ) );
+        var limitedMassYPosition = massPosition.y;
+        var springConstantLimit = mass.springProperty.get().thicknessProperty.get() *
+                                  OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
+        mass.positionProperty.link( function() {
+          if ( mass.springProperty ) {
+            springConstantLimit = mass.springProperty.get().thicknessProperty.get() *
+                                  OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
+          }
+        } );
+        if ( massPosition.y > springConstantLimit ) {
+          limitedMassYPosition = springConstantLimit;
+        }
+        console.log( massPosition.y );
+        mass.positionProperty.set( new Vector2( mass.springProperty.get().positionProperty.get().x, limitedMassYPosition ) );
       }
 
       // Update mass position if unattached

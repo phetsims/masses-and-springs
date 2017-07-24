@@ -213,14 +213,6 @@ define( function( require ) {
     this.springConstantProperty.link( function( springConstant ) {
       self.updateThickness( self.naturalRestingLengthProperty.get(), springConstant );
     } );
-
-    // this.massAttachedProperty.link( function( mass ) {
-    //   if ( mass ) {
-    //     mass.positionProperty.link( function( position ) {
-    //       self.translation = self.options.modelViewTransform2.modelToViewPosition( position );
-    //     } );
-    //   }
-    // } );
   }
 
   massesAndSprings.register( 'Spring', Spring );
