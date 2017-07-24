@@ -23,7 +23,6 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Bounds2 = require( 'DOT/Bounds2' );
   var LinearFunction = require( 'DOT/LinearFunction' );
   var Util = require( 'DOT/Util' );
 
