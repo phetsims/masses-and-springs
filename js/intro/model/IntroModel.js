@@ -28,6 +28,7 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem, { springCount: 2, showVectors: false } );
     var self = this;
 
+    // REVIEW: Is the TODO item below out of date, since this IS the IntroModel?
     //TODO: Move into the intro Model.
     // @public {Property.<string>} determines the scene selection for the intro screen
     this.sceneModeProperty = new Property( 'same-length', {
@@ -47,6 +48,7 @@ define( function( require ) {
     this.spring1 = this.springs[ 0 ];
     this.spring2 = this.springs[ 1 ];
 
+    // REVIEW: Some documentation to describe what this does would be helpful.
     this.springs.forEach( function( spring ) {
       spring.springConstantProperty.link( function( springConstant ) {
         if ( self.sceneModeProperty.get() === 'same-length' ) {
@@ -54,6 +56,10 @@ define( function( require ) {
         }
       } );
     } );
+
+    // REVIEW: The only thing that is retained between the two "scenes" is the state of the springs, so the code would
+    // be easier to understand if the variables had names like "sameLengthModeSpringState" and
+    // "adjustableLengthModeSpringState".
 
     // initial parameters set for both scenes
     // @private {read-write} array of parameters for scene 1
@@ -67,6 +73,7 @@ define( function( require ) {
 
     // Link that is responsible for switching the scenes
     this.sceneModeProperty.lazyLink( function( mode ) {
+      // REVIEW#: The following is marked as JSDoc (i.e. using the /** header) but doesn't look like JavaDoc.
       /**Functions used to determine the inverse relationship between the length and springConstant/thickness
        Functions follow logic:
        -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
@@ -85,6 +92,11 @@ define( function( require ) {
         self.setResetState( true );
         scene1Parameters = self.getSceneState();
         self.setSceneState( scene2Parameters );
+
+        // REVIEW: There are several link statements below, which are inside the link to the sceneModeProperty.  It is
+        // rarely necessary to have a link inside a link, and I don't think it is warranted here.  These links should
+        // probably be outside, on their own, and the other state information should be taken into account when the
+        // properties change.
 
         // Manages logic for updating spring thickness and spring constant
         self.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
@@ -126,8 +138,11 @@ define( function( require ) {
       MassesAndSpringsModel.prototype.reset.call( this );
       this.sceneModeProperty.reset();
       this.constantParameterProperty.reset();
-      this.getResetState();
+      this.getResetState(); // REVIEW: It seems odd that a getter would be called during a reset (more on this method below)
     },
+
+    // RE#VIEW: The methods below are only setting and getting the state of the springs.  Can they be renamed to
+    // getSpringsState and setSpringsState?
 
     /**
      * Responsible for preserving the properties of the masses and springs then stores them in a mutable object.
@@ -154,6 +169,11 @@ define( function( require ) {
       this.spring1.setSpringState( sceneState.spring1State );
       this.spring2.setSpringState( sceneState.spring2State );
     },
+
+    // REVIEW: The methods below - setResetState and getResetState - have misleading names.  The names would seem to
+    // imply that there is some property called 'resetState' that is being set and retreived, but this doesn't appear
+    // to be the case.  Also, getResetState calls setResetState.  This needs to be clarified - I (jbphet) found it
+    // challenging to figure out what these methods do and why they are necessary.
 
     /**
      * Resets the properties of the masses and springs

@@ -1,7 +1,7 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- *
+ * main file for the "Energy" screen
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */

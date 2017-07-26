@@ -26,7 +26,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var IMAGE_SCALE = .3;
+  var IMAGE_SCALE = 0.3;
 
   // strings
   var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
@@ -54,7 +54,8 @@ define( function( require ) {
         right: this.firstSpringStopperButtonNode.left - this.spacing,
         top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
-      } );
+      }
+    );
     this.addChild( this.springLengthControlPanel );
 
     // @private panel that keeps thickness/spring constant at constant value
@@ -87,6 +88,8 @@ define( function( require ) {
       self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
     } );
+
+    // REVIEW: this.springsIcon doesn't appear to be accessed outside this object or in methods.  Can it be a local var?
 
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
     this.springsIcon = [

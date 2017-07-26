@@ -26,7 +26,6 @@ define( function( require ) {
   var TITLE_FONT = MassesAndSpringsConstants.TITLE_FONT;
 
   /**
-   *
    * @param {Property.<number>} naturalRestingLengthProperty: length of spring without mass attached
    * @param {Range} rangeLength: range of values for length
    * @param {string} title: string used to title the panel
