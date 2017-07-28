@@ -341,6 +341,32 @@ define( function( require ) {
     // Adding Nodes in tool box
     this.addChild( timerNode );
     this.addChild( rulerNode );
+
+    // Adjust the floating panels to the visibleBounds of the screen.
+    this.visibleBoundsProperty.link( function( visibleBounds ) {
+      indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      self.gravityAndFrictionControlPanel.right = visibleBounds.right - self.spacing;
+      self.toolboxPanel.right = visibleBounds.right - self.spacing;
+      self.resetAllButton.right = visibleBounds.right - self.spacing;
+      speedControl.right = self.resetAllButton.left - self.spacing * 6;
+      timeControlPanel.right = speedControl.left - self.spacing * 6;
+      self.toolboxPanel.dragBounds = 3;
+      energyGraphNode.left = visibleBounds.left + self.spacing;
+      massNodes.forEach( function( massNode ) {
+        massNode.movableDragHandler.dragBounds = modelViewTransform2.viewToModelBounds( visibleBounds );
+
+        if ( massNode.centerX > visibleBounds.maxX ) {
+          massNode.mass.positionProperty.set(
+            new Vector2( modelViewTransform2.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
+          );
+        }
+        if ( massNode.centerX < visibleBounds.minX ) {
+          massNode.mass.positionProperty.set(
+            new Vector2( modelViewTransform2.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
+          );
+        }
+      } );
+    } );
   }
 
   massesAndSprings.register( 'OneSpringView', OneSpringView );
