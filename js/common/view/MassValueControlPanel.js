@@ -39,7 +39,8 @@ define( function( require ) {
       thumbSize: new Dimension2( 13, 22 ),
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       titleMaxWidth: 100,
-      arrowButtonScale: .6,
+      arrowButtonScale: .7,
+      layoutFunction: NumberControl.createLayoutFunction1( { arrowButtonsXSpacing: 5 } ),
       majorTicks: [
         {
           value: range.min,
