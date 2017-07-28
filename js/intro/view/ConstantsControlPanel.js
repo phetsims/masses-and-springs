@@ -38,7 +38,7 @@ define( function( require ) {
    */
   function ConstantsControlPanel( selectedConstantProperty, title, tandem, options ) {
     options = _.extend( {
-      fill: 'rgb( 240, 240, 240 )',
+      fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 5,
       yMargin: 5,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,

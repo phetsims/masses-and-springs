@@ -61,7 +61,8 @@ define( function( require ) {
     PANEL_MAX_WIDTH: 170,
     PANEL_MIN_WIDTH: 170,
     FORCES_STRING: 'forces',
-    NET_FORCE_STRING: 'netForce'
+    NET_FORCE_STRING: 'netForce',
+    PANEL_FILL: 'rgb( 240, 240, 240 )'
   };
 
   massesAndSprings.register( 'MassesAndSpringsConstants', MassesAndSpringsConstants );

@@ -210,7 +210,7 @@ define( function( require ) {
       {
         minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 10,
-        fill: 'rgb( 240, 240, 240 )',
+        fill: MassesAndSpringsConstants.PANEL_FILL,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         tandem: tandem.createTandem( 'vectorVisibilityControlPanel' )
       }

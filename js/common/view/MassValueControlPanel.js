@@ -44,7 +44,7 @@ define( function( require ) {
     Panel.call( this, numberControl, {
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
       maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-      fill: 'rgb( 240, 240, 240 )',
+      fill: MassesAndSpringsConstants.PANEL_FILL,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     } );
   }

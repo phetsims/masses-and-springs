@@ -40,7 +40,7 @@ define( function( require ) {
   function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, tandem, options ) {
     options = _.extend( {
       dragBounds: dragBounds,
-      fill: 'rgb( 240, 240, 240 )',
+      fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 5,
       yMargin: 5,
       align: 'center',

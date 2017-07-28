@@ -14,6 +14,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var StopSignNode = require( 'SCENERY_PHET/StopSignNode' );
 
   /**
@@ -28,7 +29,7 @@ define( function( require ) {
       yMargin: 3,
       touchAreaXDilation: 6,
       touchAreaYDilation: 6,
-      baseColor: 'rgb( 240, 240, 240 )',
+      baseColor: MassesAndSpringsConstants.PANEL_FILL,
       content: new StopSignNode( {
         tandem: tandem.createTandem( 'stopSignNode' ),
         scale: 0.33

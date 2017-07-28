@@ -46,7 +46,7 @@ define( function( require ) {
   function GravityAndFrictionControlPanel( model, frictionVisible, listNodeParent, tandem, options ) {
     var self = this;
     options = _.extend( {
-      fill: 'rgb( 240, 240, 240 )',
+      fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 13,
       yMargin: 10,
       align: 'left',

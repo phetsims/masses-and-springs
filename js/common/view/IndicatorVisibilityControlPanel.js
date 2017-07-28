@@ -127,7 +127,7 @@ define( function( require ) {
       controlBox,
       {
         xMargin: 10,
-        fill: 'rgb( 240, 240, 240 )',
+        fill: MassesAndSpringsConstants.PANEL_FILL,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         tandem: tandem.createTandem( 'indicatorVisibilityControlPanel' ),
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
