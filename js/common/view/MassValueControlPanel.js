@@ -15,6 +15,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var Range = require( 'DOT/Range' );
 
   // strings
@@ -28,7 +29,9 @@ define( function( require ) {
    */
   function MassValueControlPanel( mass, tandem ) {
 
-    var numberControl = new NumberControl( massString, mass.massProperty, new Range( .050, .300 ), {
+    // range for mass in kg
+    var range = new Range( .050, .300 );
+    var numberControl = new NumberControl( massString, mass.massProperty, range, {
       valuePattern: '{0}' + gramUnitString,
       valueMaxWidth: 100,
       majorTickLength: 10,
@@ -37,6 +40,15 @@ define( function( require ) {
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       titleMaxWidth: 100,
       arrowButtonScale: .6,
+      majorTicks: [
+        {
+          value: range.min,
+          label: new Text( range.min * 1000 + gramUnitString, { font: MassesAndSpringsConstants.LABEL_FONT } )
+        },
+        {
+          value: range.max,
+          label: new Text( range.max * 1000 + gramUnitString, { font: MassesAndSpringsConstants.LABEL_FONT } )
+        } ],
       delta: .001,
       tandem: tandem
     } );
