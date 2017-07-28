@@ -276,6 +276,7 @@ define( function( require ) {
     AccordionBox.call( this, accordionBoxContent, {
       titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
     } );
+    this.maxHeight = 490;
   }
 
   massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
