@@ -19,12 +19,14 @@ define( function( require ) {
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
-   * 
+   *
    * @constructor
    */
   function LabScreenView( model, tandem ) {
-    // Calls common two spring view
+
+    // Calls common spring view
     OneSpringView.call( this, model, tandem );
+    var self = this;
 
     var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
       model,
@@ -39,7 +41,10 @@ define( function( require ) {
     this.addChild( vectorVisibilityControlPanel );
     vectorVisibilityControlPanel.moveToBack();
 
-    // Unique attributes of screen added here...
+    // Adjust the floating panels to the visibleBounds of the screen.
+    this.visibleBoundsProperty.link( function( visibleBounds ) {
+      vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+    } );
   }
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );
