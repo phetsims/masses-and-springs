@@ -33,7 +33,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var SingleSpringHangerNode = require( 'MASSES_AND_SPRINGS/energy/view/SingleSpringHangerNode' );
+  var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var SpringStopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/SpringStopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -130,7 +130,12 @@ define( function( require ) {
       tandem.createTandem( 'oscillatingSpringNode' )
     );
 
-    var singleSpringHangerNode = new SingleSpringHangerNode( tandem.createTandem( 'singleSpringHangerNode' ) );
+    var springHangerNode = new SpringHangerNode( model,
+      modelViewTransform2,
+      tandem.createTandem( 'springHangerNode' ),
+      {
+        singleSpring: true
+      } );
 
     // Control Panel for display elements with varying visibility
     var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
@@ -154,7 +159,7 @@ define( function( require ) {
       }
     );
 
-    singleSpringHangerNode.top = springConstantControlPanel.top;
+    springHangerNode.top = springConstantControlPanel.top;
 
     // REVIEW: There are a number of view elements, such as e.g. secondSpringEquilibriumLineNode,
     // gravityAndFrictionControlPanel, etc, that are created as properties (i.e. this.x) instead of variables (i.e.
@@ -297,14 +302,14 @@ define( function( require ) {
     );
     massValueControlPanel.bottom = this.visibleBoundsProperty.get().getMaxY() - this.spacing;
     massValueControlPanel.left = energyGraphNode.right + this.spacing;
-    singleSpringHangerNode.right = springStopperButtonNode.left - this.spacing;
+    springHangerNode.right = springStopperButtonNode.left - this.spacing;
 
     // @public Initializes movable line
     this.movableLineNode = new MovableLineNode(
-      singleSpringHangerNode.getCenter().plus( new Vector2( 45, 200 ) ),
+      springHangerNode.getCenter().plus( new Vector2( 45, 200 ) ),
       100,
       model.movableLineVisibleProperty,
-      singleSpringHangerNode.centerX + 5,
+      springHangerNode.centerX + 5,
       tandem.createTandem( 'movableLineNode' )
     );
 
@@ -313,7 +318,7 @@ define( function( require ) {
     this.addChild( this.oscillatingSpringNode );
 
     // Adding Panels to scene graph
-    this.addChild( singleSpringHangerNode );
+    this.addChild( springHangerNode );
     this.addChild( massValueControlPanel );
     this.addChild( springConstantControlPanel );
     this.addChild( indicatorVisibilityControlPanel );
