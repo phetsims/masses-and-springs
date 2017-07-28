@@ -300,7 +300,7 @@ define( function( require ) {
       model.masses[ 0 ],
       tandem.createTandem( 'massValueControlPanel' )
     );
-    massValueControlPanel.bottom = this.visibleBoundsProperty.get().getMaxY() - this.spacing;
+    massValueControlPanel.top = this.visibleBoundsProperty.get().getMinY() + this.spacing;
     massValueControlPanel.left = energyGraphNode.right + this.spacing;
     springHangerNode.right = springStopperButtonNode.left - this.spacing;
 
