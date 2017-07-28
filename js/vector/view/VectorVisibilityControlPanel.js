@@ -42,6 +42,7 @@ define( function( require ) {
       showForces: true
     }, options );
 
+    // REVIEW: some minor cleanup is needed below to keep these within the 120 char limit
     var velocityArrow = new ArrowNodeCreator( 'vector', MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'panelVelocityArrow', tandem );
     var accelerationArrow = new ArrowNodeCreator( 'vector', MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'panelAccelerationArrow', tandem );
     var gravityArrow = new ArrowNodeCreator( 'force', MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'panelGravityArrow', tandem );

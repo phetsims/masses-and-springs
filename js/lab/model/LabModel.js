@@ -22,6 +22,12 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem, { springCount: 1, showVectors: true } );
 
     var massXPosition = this.springs[ 0 ].positionProperty.get().x;
+    // REVIEW: Where do the numbers used to position the masses below come from?
+    // REVIEW: There should be a protected method on the base class for adding masses, rather than directly reaching
+    // in to the array and pushing them on.
+    // REVIEW: It bothers me (jbphet) that this constructor is essentially relying on the way that the superconstructor
+    // adds a single mass for the single spring mode, then adds two more.  An alternative would be to be able to
+    // specify one of three 'mass sets' in the options to the MassAndSpringsModel and use those instead.
     this.masses.push( this.createMass( .125, massXPosition - .02, true, 'red', null, tandem.createTandem( 'redLabeledMass' ) ) );
     this.masses.push( this.createMass( .150, massXPosition + .05, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) ) );
 

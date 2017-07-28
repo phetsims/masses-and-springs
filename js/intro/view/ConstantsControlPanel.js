@@ -29,7 +29,6 @@ define( function( require ) {
   var FONT = MassesAndSpringsConstants.FONT;
 
   /**
-   *
    * @param {Property.<string>} selectedConstantProperty determines which value to hold constant, values are 'spring-constant' and 'spring-thickness'
    * @param {string} title: string used to title the panel
    * @param {tandem} tandem
@@ -50,6 +49,8 @@ define( function( require ) {
       font: FONT,
       maxWidth: MAX_TEXT_WIDTH
     };
+
+    // REVIEW: visibility annotation is unnecessary for local variables (there are a handful of instances below)
 
     // @private {read-only} radius of button
     var constantsSelectionButtonRadius = 6;
@@ -74,7 +75,7 @@ define( function( require ) {
     } );
 
     // @private {read-only} spacing used for radio buttons
-    var radioButtonSpacing = 4;
+    var radioButtonSpacing = 4; // REVIEW: should be in 'constants' section at top
     Panel.call( this, new VBox( {
       align: 'left',
       spacing: radioButtonSpacing,
