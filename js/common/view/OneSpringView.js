@@ -344,6 +344,8 @@ define( function( require ) {
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
+
+      //Update the bounds of view elements
       indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
       self.gravityAndFrictionControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
@@ -352,6 +354,8 @@ define( function( require ) {
       timeControlPanel.right = speedControl.left - self.spacing * 6;
       self.toolboxPanel.dragBounds = 3;
       energyGraphNode.left = visibleBounds.left + self.spacing;
+      timerNode.updateBounds( visibleBounds );
+      rulerNode.updateBounds( visibleBounds );
       massNodes.forEach( function( massNode ) {
         massNode.movableDragHandler.dragBounds = modelViewTransform2.viewToModelBounds( visibleBounds );
 

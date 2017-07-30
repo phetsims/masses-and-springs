@@ -98,7 +98,12 @@ define( function( require ) {
      */
     reset: function() {
       this.positionProperty.reset();
+    },
+
+    updateBounds: function( newBounds ) {
+      this.rulerNodeMovableDragHandler.dragBounds = newBounds;
     }
+
   } );
 
 } );
