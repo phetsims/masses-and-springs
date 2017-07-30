@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var VectorModel = require( 'MASSES_AND_SPRINGS/vector/model/VectorModel' );
+  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var VectorScreenView = require( 'MASSES_AND_SPRINGS/vector/view/VectorScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
@@ -39,7 +39,12 @@ define( function( require ) {
     };
 
     Screen.call( this,
-      function() { return new VectorModel( tandem.createTandem( 'model' ) ); },
+      function() {
+        return new MassesAndSpringsModel( tandem.createTandem( 'model' ), {
+          springCount: 2,
+          showVectors: true
+        } );
+      },
       function( model ) { return new VectorScreenView( model, tandem.createTandem( 'view' ) ); },
       options
     );
