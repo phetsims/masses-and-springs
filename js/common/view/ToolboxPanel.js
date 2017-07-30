@@ -19,7 +19,7 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Range = require( 'DOT/Range' );
-  var TandemSimpleDragHandler = require( 'TANDEM/scenery/input/TandemSimpleDragHandler' );
+  var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -102,13 +102,14 @@ define( function( require ) {
       var rulerUnboundedPosition = new Vector2();
 
       // Drag listener for event forwarding: rulerIcon ---> rulerNode
-      self.rulerIcon.addInputListener( new TandemSimpleDragHandler( {
+      self.rulerIcon.addInputListener( new MovableDragHandler( rulerNode.positionProperty, {
 
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
+        dragBounds: dragBounds,
         tandem: tandem.createTandem( 'dragHandler' ),
 
-        start: function( event ) {
+        startDrag: function( event ) {
           // Toggle visibility
           rulerVisibleProperty.set( true );
           rulerVisibleProperty.link( function( visible ) {
@@ -141,13 +142,14 @@ define( function( require ) {
       } );
 
       // Drag listener for event forwarding: timerIcon ---> timerNode
-      self.timerIcon.addInputListener( new TandemSimpleDragHandler( {
+      self.timerIcon.addInputListener( new MovableDragHandler( timerNode.positionProperty, {
 
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
+        dragBounds: dragBounds,
         tandem: tandem.createTandem( 'dragHandler' ),
 
-        start: function( event ) {
+        startDrag: function( event ) {
           // Toggle visibility
           timerVisibleProperty.set( true );
           timerVisibleProperty.link( function( visible ) {
