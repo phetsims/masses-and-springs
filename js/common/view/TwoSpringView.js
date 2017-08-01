@@ -353,8 +353,12 @@ define( function( require ) {
       speedControl.right = self.resetAllButton.left - self.spacing * 6;
       timeControlPanel.right = speedControl.left - self.spacing * 6;
       self.toolboxPanel.dragBounds = 3;
-      timerNode.updateBounds( visibleBounds );
-      rulerNode.updateBounds( visibleBounds );
+      timerNode.updateBounds( visibleBounds.withOffsets(
+        timerNode.width / 2, timerNode.height / 2, -timerNode.width / 2, -timerNode.height / 2
+      ) );
+      rulerNode.updateBounds( visibleBounds.withOffsets(
+        -rulerNode.width / 2, rulerNode.height / 2, rulerNode.width / 2, -rulerNode.height / 2
+      ) );
       massNodes.forEach( function( massNode ) {
         massNode.movableDragHandler.dragBounds = modelViewTransform2.viewToModelBounds( visibleBounds );
 
