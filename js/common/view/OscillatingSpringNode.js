@@ -35,8 +35,7 @@ define( function( require ) {
 
     options = _.extend( {
       deltaPhase: 3 * Math.PI / 2,
-      // REVIEW: Can the number of loops be calculated using the loop mapping functions defined above?
-      loops: 12, // {number} number of loops in the coil
+      loops: MAP_NUMBER_OF_LOOPS( spring.lengthProperty.get() ), // {number} number of loops in the coil
       pointsPerLoop: 40, // {number} number of points per loop
       radius: 6.5, // {number} radius of a loop with aspect ratio of 1:1
       aspectRatio: 4, // {number} y:x aspect ratio of the loop radius
