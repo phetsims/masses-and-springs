@@ -31,11 +31,10 @@ define( function( require ) {
    */
   function Body( title, gravity, tandem ) {
 
-    // REVIEW: Types are {read-write} instead of type values
-    // @public {read-write} set title
+    // @public {string} set title
     this.title = title;
 
-    // @public {read-write} set gravity acceleration
+    // @public {number} set gravity acceleration
     this.gravity = gravity;
   }
 
