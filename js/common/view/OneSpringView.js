@@ -62,29 +62,11 @@ define( function( require ) {
     this.model = model; // Make model available for reset
     var self = this;
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
-
-    // REVIEW: The code below looks odd for a couple of reasons.  For one thing, this.modelViewTransform2 gets set once
-    // and then overwritten.  For another, the two transforms are almost identical.  Why are the both needed?  Can't
-    // the bar just be positioned based on the main MVT?  Finally, the "2" on the end of the name is unconventional.
-
-    // Needed for grey bar above springHangerNode
-    var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
-      Vector2.ZERO,
-      new Vector2( 0, this.visibleBoundsProperty.get().height * 1 ),
-      397
-    );
-    this.modelViewTransform2 = modelViewTransform2SpringHeight; // Make modelViewTransform2 available to descendant types.
-
-    var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
-      Vector2.ZERO,
-      new Vector2( 0, this.visibleBoundsProperty.get().height * .98 ),
-      397
-    );
-    this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
+    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 );
 
     // REVIEW: The comment below says 'top margin', but within the code it seems to be used as the inset for right and left too.
     // Spacing for top margin of layout bounds
-    this.spacing = modelViewTransform2.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
+    this.spacing = modelViewTransform.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
 
     // REVIEW: Panels should be floated (probably just haven't gotten to it yet).
 
@@ -106,7 +88,7 @@ define( function( require ) {
       var massNode = new MassNode(
         referencedMassProperty,
         model.showVectors,
-        modelViewTransform2,
+        modelViewTransform,
         this.visibleBoundsProperty,
         model,
         tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
@@ -126,12 +108,12 @@ define( function( require ) {
 
     this.oscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 0 ],
-      modelViewTransform2SpringHeight,
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 1 ),
       tandem.createTandem( 'oscillatingSpringNode' )
     );
 
     var springHangerNode = new SpringHangerNode( model,
-      modelViewTransform2,
+      modelViewTransform,
       tandem.createTandem( 'springHangerNode' ),
       {
         singleSpring: true
@@ -171,7 +153,7 @@ define( function( require ) {
 
     // @public Initializes equilibrium line for second spring
     this.secondSpringEquilibriumLineNode = new EquilibriumLineNode(
-      modelViewTransform2,
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'secondSpringEquilibriumLineNode' )
@@ -179,7 +161,7 @@ define( function( require ) {
 
     // @public Initializes natural line for second spring
     this.secondNaturalLengthLineNode = new NaturalLengthLineNode(
-      modelViewTransform2,
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'secondNaturalLengthLineNode' )
@@ -244,7 +226,8 @@ define( function( require ) {
         self.resetMassLayer();
       },
       right: this.visibleBoundsProperty.get().right - 10,
-      bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
+      bottom: MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 )
+        .modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
@@ -361,16 +344,16 @@ define( function( require ) {
         -rulerNode.width / 2, rulerNode.height / 2, rulerNode.width / 2, -rulerNode.height / 2
       ) );
       massNodes.forEach( function( massNode ) {
-        massNode.movableDragHandler.dragBounds = modelViewTransform2.viewToModelBounds( visibleBounds );
+        massNode.movableDragHandler.dragBounds = modelViewTransform.viewToModelBounds( visibleBounds );
 
         if ( massNode.centerX > visibleBounds.maxX ) {
           massNode.mass.positionProperty.set(
-            new Vector2( modelViewTransform2.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
+            new Vector2( modelViewTransform.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
           );
         }
         if ( massNode.centerX < visibleBounds.minX ) {
           massNode.mass.positionProperty.set(
-            new Vector2( modelViewTransform2.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
+            new Vector2( modelViewTransform.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
           );
         }
       } );

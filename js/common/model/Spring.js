@@ -23,6 +23,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var TVector2 = require( 'DOT/TVector2' );
   var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );

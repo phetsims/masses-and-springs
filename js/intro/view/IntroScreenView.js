@@ -120,7 +120,7 @@ define( function( require ) {
     // @private {read-only} Creation of spring for use in scene switching icons
     var firstSpringIcon = new OscillatingSpringNode(
       this.springsIcon[ 0 ],
-      this.modelViewTransform2,
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
       tandem.createTandem( 'firstSpringIcon' )
     );
     firstSpringIcon.loopsProperty.set( 10 );
@@ -129,7 +129,7 @@ define( function( require ) {
     // @private {read-only} Creation of spring for use in scene switching icons
     var secondSpringIcon = new OscillatingSpringNode(
       this.springsIcon[ 1 ],
-      this.modelViewTransform2,
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
       tandem.createTandem( 'secondSpringIcon' )
     );
     secondSpringIcon.loopsProperty.set( 10 );
@@ -138,7 +138,7 @@ define( function( require ) {
     // @private {read-only} Creation of spring for use in scene switching icons
     var thirdSpringIcon = new OscillatingSpringNode(
       this.springsIcon[ 2 ],
-      this.modelViewTransform2,
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
       tandem.createTandem( 'thirdSpringIcon' )
     );
     thirdSpringIcon.loopsProperty.set( 5 );

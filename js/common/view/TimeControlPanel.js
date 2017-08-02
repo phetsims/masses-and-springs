@@ -26,26 +26,20 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
-   * @param {Bounds2} layoutBounds - Bounds of screenview in screenview coordinates
+   * @param {Bounds2} visibleBounds - Bounds of screenview in screenview coordinates
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
   // TODO: Rename to TimeControlPanel, and rename vars/tandems at usage sites
-  function TimeControlPanel( model, layoutBounds, tandem, options ) {
+  function TimeControlPanel( model, visibleBounds, tandem, options ) {
     Node.call( this );
-    var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
-      Vector2.ZERO,
-      new Vector2( 0, layoutBounds.height * .98 ),
-      397
-    );
-
-    this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
+    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( visibleBounds, .98 );
 
     // Play/Pause Button
     var playPauseButton = new PlayPauseButton( model.playingProperty, {
-      right: layoutBounds.right * .65,
-      bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
+      right: visibleBounds.right * .65,
+      bottom: modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       radius: 18,
       touchAreaDilation: TOUCH_AREA_DILATION,
       tandem: tandem.createTandem( 'playPauseButton' )

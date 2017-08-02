@@ -61,22 +61,9 @@ define( function( require ) {
     var self = this;
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
-    // Needed for grey bar above springHangerNode
-    // TODO: Should not need to have two mvt in the view.
-    var modelViewTransform2SpringHeight = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
-      Vector2.ZERO,
-      new Vector2( 0, this.visibleBoundsProperty.get().height * 1 ),
-      397 );
-    this.modelViewTransform2 = modelViewTransform2SpringHeight; // Make modelViewTransform2 available to descendant types.
-
-    var modelViewTransform2 = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
-      Vector2.ZERO,
-      new Vector2( 0, this.visibleBoundsProperty.get().height * .98 ),
-      397 );
-    this.modelViewTransform2 = modelViewTransform2; // Make modelViewTransform2 available to descendant types.
-
+    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 )
     // Spacing for top margin of layout bounds
-    this.spacing = modelViewTransform2.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
+    this.spacing = modelViewTransform.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
 
     // Alignment for panels on most right side of sim view
     var rightPanelAlignment = this.visibleBoundsProperty.get().getMaxX() - this.spacing;
@@ -93,7 +80,7 @@ define( function( require ) {
       var massNode = new MassNode(
         referencedMass,
         model.showVectors,
-        modelViewTransform2,
+        modelViewTransform,
         this.visibleBoundsProperty,
         model,
         tandem.createTandem( referencedMass.tandem.tail + 'Node' ) );
@@ -121,25 +108,25 @@ define( function( require ) {
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       } );
 
-    model.springs[ 0 ].options.modelViewTransform2 = modelViewTransform2;
-    model.springs[ 1 ].options.modelViewTransform2 = modelViewTransform2;
+    model.springs[ 0 ].options.modelViewTransform2 = modelViewTransform;
+    model.springs[ 1 ].options.modelViewTransform2 = modelViewTransform;
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
     this.firstOscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 0 ],
-      modelViewTransform2SpringHeight,
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 1 ),
       tandem.createTandem( 'firstOscillatingSpringNode' )
     );
     this.secondOscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 1 ],
-      modelViewTransform2SpringHeight,
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 1 ),
       tandem.createTandem( 'secondOscillatingSpringNode' )
     );
 
     // Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
       model,
-      modelViewTransform2,
+      modelViewTransform,
       tandem.createTandem( 'springHangerNode' )
     );
 
@@ -190,7 +177,7 @@ define( function( require ) {
 
     // @public Initializes equilibrium line for first spring
     this.firstSpringEquilibriumLineNode = new EquilibriumLineNode(
-      modelViewTransform2,
+      modelViewTransform,
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'firstSpringEquilibriumLineNode' )
@@ -198,7 +185,7 @@ define( function( require ) {
 
     // @public Initializes equilibrium line for second spring
     this.secondSpringEquilibriumLineNode = new EquilibriumLineNode(
-      modelViewTransform2,
+      modelViewTransform,
       model.springs[ 1 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'secondSpringEquilibriumLineNode' )
@@ -206,7 +193,7 @@ define( function( require ) {
 
     // @public Initializes natural line for first spring
     this.firstNaturalLengthLineNode = new NaturalLengthLineNode(
-      modelViewTransform2,
+      modelViewTransform,
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'firstNaturalLengthLineNode' )
@@ -214,7 +201,7 @@ define( function( require ) {
 
     // @public Initializes natural line for second spring
     this.secondNaturalLengthLineNode = new NaturalLengthLineNode(
-      modelViewTransform2,
+      modelViewTransform,
       model.springs[ 1 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'secondNaturalLengthLineNode' )
@@ -272,7 +259,7 @@ define( function( require ) {
         self.resetMassLayer();
       },
       right: this.visibleBoundsProperty.get().right - 10,
-      bottom: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
+      bottom: modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
@@ -362,16 +349,16 @@ define( function( require ) {
         -rulerNode.width / 2, rulerNode.height / 2, rulerNode.width / 2, -rulerNode.height / 2
       ) );
       massNodes.forEach( function( massNode ) {
-        massNode.movableDragHandler.dragBounds = modelViewTransform2.viewToModelBounds( visibleBounds );
+        massNode.movableDragHandler.dragBounds = modelViewTransform.viewToModelBounds( visibleBounds );
 
         if ( massNode.centerX > visibleBounds.maxX ) {
           massNode.mass.positionProperty.set(
-            new Vector2( modelViewTransform2.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
+            new Vector2( modelViewTransform.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
           );
         }
         if ( massNode.centerX < visibleBounds.minX ) {
           massNode.mass.positionProperty.set(
-            new Vector2( modelViewTransform2.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
+            new Vector2( modelViewTransform.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
           );
         }
       } );
