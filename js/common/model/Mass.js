@@ -183,8 +183,6 @@ define( function( require ) {
 
   return inherit( Object, Mass, {
 
-    // REVIEW: To better match PhET conventions, this should be 'step', and the prerequisite properities of 'spring'
-    // and 'userControlled' should be checked within instead of in the main model as they are now.
     /**
      * Responsible for mass falling without being attached to spring.
      * @param {number} gravity
@@ -193,20 +191,22 @@ define( function( require ) {
      *
      * @public
      */
-    fallWithGravity: function( gravity, floorY, dt ) {
-      var floorPosition = floorY + this.height;
-      var oldY = this.positionProperty.get().y;
-      if ( oldY !== floorPosition ) {
-        var newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
-        var newY = oldY + ( this.verticalVelocityProperty.get() + newVerticalVelocity ) * dt / 2;
-        if ( newY < floorPosition ) {
-          // if we hit the ground stop falling
-          this.positionProperty.set( new Vector2( this.positionProperty.get().x, floorPosition ) );
-          this.verticalVelocityProperty.set( 0 );
-        }
-        else {
-          this.verticalVelocityProperty.set( newVerticalVelocity );
-          this.positionProperty.set( new Vector2( this.positionProperty.get().x, newY ) );
+    step: function( gravity, floorY, dt ) {
+      if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
+        var floorPosition = floorY + this.height;
+        var oldY = this.positionProperty.get().y;
+        if ( oldY !== floorPosition ) {
+          var newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
+          var newY = oldY + ( this.verticalVelocityProperty.get() + newVerticalVelocity ) * dt / 2;
+          if ( newY < floorPosition ) {
+            // if we hit the ground stop falling
+            this.positionProperty.set( new Vector2( this.positionProperty.get().x, floorPosition ) );
+            this.verticalVelocityProperty.set( 0 );
+          }
+          else {
+            this.verticalVelocityProperty.set( newVerticalVelocity );
+            this.positionProperty.set( new Vector2( this.positionProperty.get().x, newY ) );
+          }
         }
       }
     },
