@@ -229,19 +229,6 @@ define( function( require ) {
       this.userControlledProperty.reset();
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
-    },
-
-    // REVIEW: Documentation missing.
-    resetMassOnly: function() {
-
-      // REVIEW: This doesn't make much sense to me.  Why isn't the position simply reset?  And why is it different
-      // from the main reset function?  And where does the 2 come from?  This should either be well documented (if there
-      // is a good reason) or removed.
-      var newPos = this.positionProperty.initialValue.minusXY( 0, 2 );
-      this.positionProperty.set( newPos );
-      this.userControlledProperty.reset();
-      this.springProperty.reset();
-      this.verticalVelocityProperty.reset();
     }
   } );
 } );

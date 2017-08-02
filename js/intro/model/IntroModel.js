@@ -74,7 +74,7 @@ define( function( require ) {
     // Link that is responsible for switching the scenes
     this.sceneModeProperty.lazyLink( function( mode ) {
       // REVIEW#: The following is marked as JSDoc (i.e. using the /** header) but doesn't look like JavaDoc.
-      /**Functions used to determine the inverse relationship between the length and springConstant/thickness
+      /*Functions used to determine the inverse relationship between the length and springConstant/thickness
        Functions follow logic:
        -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
        -Thickness = constant -->As length increases, spring constant decreases  (and vice versa)
@@ -190,7 +190,7 @@ define( function( require ) {
       }
       else if ( massesOnly === true ) {
         _.values( this.masses ).forEach( function( mass ) {
-          mass.resetMassOnly();
+          mass.reset();
         } );
       }
 
