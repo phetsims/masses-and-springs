@@ -45,8 +45,6 @@ define( function( require ) {
     }, options );
 
     // range of natural resting length in meters (values used from design doc)
-    // REVIEW: This is pretty minor, but we should be consisten about using .1 versus 0.1.  I think we generally use 0.1, since Java has issues with the other format.
-    // Do this for every instance of .1
     var naturalRestingLengthRange = new RangeWithValue( 0.1, 0.5, initialNaturalRestingLength );
 
     // derived empirically from updateSpringThickness()

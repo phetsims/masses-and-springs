@@ -33,7 +33,7 @@ define( function( require ) {
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
   var RELEASE_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
-  var RIGHT_SPRING_X = .975; // {number} X position of the spring node in screen coordinates
+  var RIGHT_SPRING_X = 0.975; // {number} X position of the spring node in screen coordinates
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -172,7 +172,7 @@ define( function( require ) {
     // @public (read-only) model of springs used throughout the sim
     if ( options.springCount === 2 ) {
       this.springs = [
-        createSpring( RIGHT_SPRING_X - .25, tandem.createTandem( 'leftSpring' ) ),
+        createSpring( RIGHT_SPRING_X - 0.25, tandem.createTandem( 'leftSpring' ) ),
         createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
       ];
     }
@@ -185,19 +185,19 @@ define( function( require ) {
     // TODO: These masses don't need to be identified by name. Make this an array instead of an object.
     if ( options.springCount === 2 ) {
       this.masses = [
-        this.createMass( .250, .12, true, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
-        this.createMass( .100, .20, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) ),
-        this.createMass( .100, .28, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) ),
-        this.createMass( .050, .33, true, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) ),
-        this.createMass( .200, .63, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) ),
-        this.createMass( .150, .56, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) ),
-        this.createMass( .075, .49, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) )
+        this.createMass( 0.250, 0.12, true, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
+        this.createMass( 0.100, 0.20, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) ),
+        this.createMass( 0.100, 0.28, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) ),
+        this.createMass( 0.050, 0.33, true, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) ),
+        this.createMass( 0.200, 0.63, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) ),
+        this.createMass( 0.150, 0.56, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) ),
+        this.createMass( 0.075, 0.49, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) )
       ];
     }
     else if ( options.springCount === 1 ) {
-      var massXCoordinate = this.springs[ 0 ].positionProperty.get().x - .15;
+      var massXCoordinate = this.springs[ 0 ].positionProperty.get().x - 0.15;
       this.masses = [
-        this.createMass( .100, massXCoordinate, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) )
+        this.createMass( 0.100, massXCoordinate, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) )
       ];
     }
 
@@ -286,7 +286,7 @@ define( function( require ) {
      * @returns {*}
      */
     createMass: function( mass, xPosition, labelVisible, color, specifiedLabel, tandem ) {
-      return new Mass( mass, new Vector2( xPosition, .5 ), labelVisible, color, this.gravityProperty, tandem );
+      return new Mass( mass, new Vector2( xPosition, 0.5 ), labelVisible, color, this.gravityProperty, tandem );
     },
 
     /**

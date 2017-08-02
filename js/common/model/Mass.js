@@ -20,7 +20,7 @@ define( function( require ) {
 
   // constants
   var HEIGHT_RATIO = 2;
-  var HOOK_HEIGHT_RATIO = .75;
+  var HOOK_HEIGHT_RATIO = 0.75;
   var DENSITY = 80; // Constant used to keep all of our masses consistent in the model.
 
   // phet-io modules
@@ -155,7 +155,7 @@ define( function( require ) {
         Property.multilink(
           [ spring.springConstantProperty, spring.displacementProperty ],
           function( springConstant, displacement ) {
-            self.elasticPotentialEnergyProperty.set( .5 * springConstant * Math.pow( displacement, 2 ) );
+            self.elasticPotentialEnergyProperty.set( 0.5 * springConstant * Math.pow( displacement, 2 ) );
           }
         );
       }

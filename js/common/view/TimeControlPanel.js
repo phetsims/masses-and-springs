@@ -32,11 +32,11 @@ define( function( require ) {
   // TODO: Rename to TimeControlPanel, and rename vars/tandems at usage sites
   function TimeControlPanel( model, visibleBounds, tandem, options ) {
     Node.call( this );
-    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( visibleBounds, .98 );
+    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( visibleBounds, 0.98 );
 
     // Play/Pause Button
     var playPauseButton = new PlayPauseButton( model.playingProperty, {
-      right: visibleBounds.right * .65,
+      right: visibleBounds.right * 0.65,
       bottom: modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       radius: 18,
       touchAreaDilation: TOUCH_AREA_DILATION,

@@ -61,7 +61,7 @@ define( function( require ) {
     this.model = model; // Make model available for reset
     var self = this;
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
-    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 );
+    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 );
 
     // REVIEW: The comment below says 'top margin', but within the code it seems to be used as the inset for right and left too.
     // Spacing for top margin of layout bounds
@@ -152,7 +152,7 @@ define( function( require ) {
 
     // @public Initializes equilibrium line for second spring
     this.secondSpringEquilibriumLineNode = new EquilibriumLineNode(
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'secondSpringEquilibriumLineNode' )
@@ -160,7 +160,7 @@ define( function( require ) {
 
     // @public Initializes natural line for second spring
     this.secondNaturalLengthLineNode = new NaturalLengthLineNode(
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'secondNaturalLengthLineNode' )
@@ -225,7 +225,7 @@ define( function( require ) {
         self.resetMassLayer();
       },
       right: this.visibleBoundsProperty.get().right - 10,
-      bottom: MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 )
+      bottom: MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 )
         .modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       tandem: tandem.createTandem( 'resetAllButton' )
     } );

@@ -28,8 +28,8 @@ define( function( require ) {
     // REVIEW: It bothers me (jbphet) that this constructor is essentially relying on the way that the superconstructor
     // adds a single mass for the single spring mode, then adds two more.  An alternative would be to be able to
     // specify one of three 'mass sets' in the options to the MassAndSpringsModel and use those instead.
-    this.masses.push( this.createMass( .125, massXPosition - .02, true, 'red', null, tandem.createTandem( 'redLabeledMass' ) ) );
-    this.masses.push( this.createMass( .150, massXPosition + .05, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) ) );
+    this.masses.push( this.createMass( 0.125, massXPosition - .02, true, 'red', null, tandem.createTandem( 'redLabeledMass' ) ) );
+    this.masses.push( this.createMass( 0.150, massXPosition + .05, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) ) );
 
   }
 

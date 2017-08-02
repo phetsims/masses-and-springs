@@ -211,7 +211,7 @@ define( function( require ) {
     getResetState: function() {
       this.sceneModeProperty.set( 'adjustable-length' );
       this.setResetState( false );
-      this.spring1.naturalRestingLengthProperty.set( .25 );
+      this.spring1.naturalRestingLengthProperty.set( 0.25 );
 
       // initial parameters set for both scenes
       // @private {read-write} array of parameters for scene 1

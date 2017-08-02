@@ -72,7 +72,7 @@ define( function( require ) {
 
     // Create ruler to be turned into icon
     var rulerWidth = 397; // 1 meter
-    var rulerLength = .175 * rulerWidth;
+    var rulerLength = 0.175 * rulerWidth;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) { // create 10 empty strings for labels
       majorTickLabels.push( '' );
@@ -94,7 +94,7 @@ define( function( require ) {
       self.rulerIcon = new Image( image, {
         cursor: 'pointer',
         pickable: true,
-        scale: .1,
+        scale: 0.1,
         tandem: tandem.createTandem( 'rulerIcon' )
       } );
 
@@ -119,7 +119,7 @@ define( function( require ) {
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
           var initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
-            .minus( new Vector2( -rulerNode.width * .5, rulerNode.height * .4 ) );
+            .minus( new Vector2( -rulerNode.width * 0.5, rulerNode.height * 0.4 ) );
           rulerNode.positionProperty.set( initialPosition );
           rulerUnboundedPosition.set( initialPosition );
 
@@ -137,7 +137,7 @@ define( function( require ) {
       self.timerIcon = new Image( image, {
         cursor: 'pointer',
         pickable: true,
-        scale: .4,
+        scale: 0.4,
         tandem: tandem.createTandem( 'timerIcon' )
       } );
 
@@ -159,7 +159,7 @@ define( function( require ) {
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
           var initialPosition = timerNode.globalToParentPoint( event.pointer.point )
-            .minus( new Vector2( timerNode.width / 2, timerNode.height * .4 ) );
+            .minus( new Vector2( timerNode.width / 2, timerNode.height * 0.4 ) );
 
           timerNode.positionProperty.set( initialPosition );
 

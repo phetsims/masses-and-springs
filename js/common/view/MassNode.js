@@ -57,11 +57,11 @@ define( function( require ) {
     );
     var rect = Rectangle.bounds( rectangleBounds, {
       stroke: 'black',
-      lineWidth: .5,
+      lineWidth: 0.5,
       fill: new LinearGradient( rectangleBounds.minX, 0, rectangleBounds.maxX, 0 )
         .addColorStop( 0.1, mass.color )
         .addColorStop( 0.2, 'rgb(205, 206, 207)' )
-        .addColorStop( .7, mass.color )
+        .addColorStop( 0.7, mass.color )
     } );
     this.addChild( rect );
 

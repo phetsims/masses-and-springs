@@ -40,7 +40,7 @@ define( function( require ) {
     // REVIEW: Seems like the width and length variable are reversed.  This is probably because of the constructor used
     // below, but I think it would be better to name them as they are used in this context.
     var rulerWidth = 397; // 1 meter
-    var rulerLength = .1 * rulerWidth;
+    var rulerLength = 0.1 * rulerWidth;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
       majorTickLabels.push( '' );
@@ -62,7 +62,7 @@ define( function( require ) {
       majorTickHeight: 10,
       minorTickHeight: 5,
       unitsFont: MassesAndSpringsConstants.FONT,
-      opacity: .8,
+      opacity: 0.8,
       tickMarksOnBottom: false
     }, { tandem: tandem.createTandem( 'ruler' ) } );
 

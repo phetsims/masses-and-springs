@@ -47,7 +47,7 @@ define( function( require ) {
     // Spring Constant Length Control Panel
     this.springLengthControlPanel = new SpringLengthControlPanel(
       model.spring1.naturalRestingLengthProperty,
-      new RangeWithValue( .1, .5, .3 ),
+      new RangeWithValue( 0.1, 0.5, 0.3 ),
       StringUtils.fillIn( lengthString, { spring: 1 } ),
       tandem.createTandem( 'springLengthControlPanel' ),
       {
@@ -94,21 +94,21 @@ define( function( require ) {
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
     this.springsIcon = [
       new Spring(
-        new Vector2( .65, MassesAndSpringsConstants.CEILING_Y ),
+        new Vector2( 0.65, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         new RangeWithValue( 5, 15, 9 ),
         0,
         tandem.createTandem( 'firstIconSpring' )
       ),
       new Spring(
-        new Vector2( .85, MassesAndSpringsConstants.CEILING_Y ),
+        new Vector2( 0.85, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         new RangeWithValue( 5, 15, 9 ),
         0,
         tandem.createTandem( 'secondIconSpring' )
       ),
       new Spring(
-        new Vector2( .65, MassesAndSpringsConstants.CEILING_Y + .17 ),
+        new Vector2( 0.65, MassesAndSpringsConstants.CEILING_Y + 0.17 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         new RangeWithValue( 5, 15, 9 ),
         0,
@@ -120,7 +120,7 @@ define( function( require ) {
     // @private {read-only} Creation of spring for use in scene switching icons
     var firstSpringIcon = new OscillatingSpringNode(
       this.springsIcon[ 0 ],
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       tandem.createTandem( 'firstSpringIcon' )
     );
     firstSpringIcon.loopsProperty.set( 10 );
@@ -129,7 +129,7 @@ define( function( require ) {
     // @private {read-only} Creation of spring for use in scene switching icons
     var secondSpringIcon = new OscillatingSpringNode(
       this.springsIcon[ 1 ],
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       tandem.createTandem( 'secondSpringIcon' )
     );
     secondSpringIcon.loopsProperty.set( 10 );
@@ -138,7 +138,7 @@ define( function( require ) {
     // @private {read-only} Creation of spring for use in scene switching icons
     var thirdSpringIcon = new OscillatingSpringNode(
       this.springsIcon[ 2 ],
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 ),
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       tandem.createTandem( 'thirdSpringIcon' )
     );
     thirdSpringIcon.loopsProperty.set( 5 );

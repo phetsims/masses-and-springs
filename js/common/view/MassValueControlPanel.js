@@ -30,7 +30,7 @@ define( function( require ) {
   function MassValueControlPanel( mass, tandem ) {
 
     // range for mass in kg
-    var range = new Range( .050, .300 );
+    var range = new Range( 0.050, 0.300 );
     var numberControl = new NumberControl( massString, mass.massProperty, range, {
       valuePattern: '{0}' + gramUnitString,
       valueMaxWidth: 100,
@@ -39,7 +39,7 @@ define( function( require ) {
       thumbSize: new Dimension2( 13, 22 ),
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       titleMaxWidth: 100,
-      arrowButtonScale: .7,
+      arrowButtonScale: 0.7,
       layoutFunction: NumberControl.createLayoutFunction1( { arrowButtonsXSpacing: 5 } ),
       majorTicks: [
         {
