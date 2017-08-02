@@ -88,14 +88,15 @@ define( function( require ) {
       if ( !model.masses.hasOwnProperty( property ) ) {
         continue;
       }
-      var referencedMassProperty = model.masses[ property ];
+      var referencedMass = model.masses[ property ];
+      // referencedMass.positionProperty.set(new Vector2(this.visibleBoundsProperty.get().minX,0));
       var massNode = new MassNode(
-        referencedMassProperty,
+        referencedMass,
         model.showVectors,
         modelViewTransform2,
         this.visibleBoundsProperty,
         model,
-        tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
+        tandem.createTandem( referencedMass.tandem.tail + 'Node' ) );
       this.massLayer.addChild( massNode );
 
       // Keeps track of the mass node to restore original Z order.
@@ -343,6 +344,7 @@ define( function( require ) {
     this.addChild( rulerNode );
 
     // Adjust the floating panels to the visibleBounds of the screen.
+
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
