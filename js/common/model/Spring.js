@@ -352,14 +352,13 @@ define( function( require ) {
       }
     },
 
-    // REVIEW: Calling this method simply 'step' would be more consistent within this sim and with other PhET sims.
     /**
      * Responsible for oscillatory motion of spring system.
      * @param {number} dt - animation time step
      *
      * @public
      */
-    stepOscillate: function( dt ) {
+    step: function( dt ) {
       if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() &&
            this.animatingProperty.get() ) {
 

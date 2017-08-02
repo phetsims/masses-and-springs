@@ -399,7 +399,7 @@ define( function( require ) {
         }
         // Oscillate springs
         this.springs.forEach( function( spring ) {
-          spring.stepOscillate( dt );
+          spring.step( dt );
         } );
       }
     }
