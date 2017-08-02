@@ -47,8 +47,7 @@ define( function( require ) {
     // range of natural resting length in meters (values used from design doc)
     var naturalRestingLengthRange = new RangeWithValue( 0.1, 0.5, initialNaturalRestingLength );
 
-    // derived empirically from updateSpringThickness()
-    // REVIEW: What are the units?
+    // derived empirically from updateSpringThickness() in view-coordinates
     var thicknessRange = new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS );
 
     // @public {Property.<number>} gravitational acceleration
