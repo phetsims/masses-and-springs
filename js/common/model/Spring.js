@@ -38,6 +38,12 @@ define( function( require ) {
    * @constructor
    */
   function Spring( position, initialNaturalRestingLength, springConstantRange, defaultDampingCoefficient, tandem, options ) {
+
+    // validate and save options
+    assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : '
+                                                       + initialNaturalRestingLength );
+    assert && assert( springConstantRange.min > 0, 'minimum spring constant must be positive : '
+                                                   + springConstantRange.min );
     var self = this;
 
     this.options = _.extend( {
@@ -139,12 +145,8 @@ define( function( require ) {
     // @public (read-only) - distance from natural resting position to equilibrium position (units: m)
     this.springExtension = 0;
 
-    // validate and save options
-    // REVIEW: Since these are validation of the values provided to the constructor, they should be at the beginning of the constructor.
-    assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : ' + initialNaturalRestingLength );
-    assert && assert( springConstantRange.min > 0, 'minimum spring constant must be positive : '
-                                                   + springConstantRange.min );
-    this.springConstantRange = springConstantRange; // @public read-only
+    // @public (read-only)
+    this.springConstantRange = springConstantRange;
 
     //------------------------------------------------
     // Derived properties
