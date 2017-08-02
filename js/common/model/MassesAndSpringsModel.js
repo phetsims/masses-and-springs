@@ -286,7 +286,7 @@ define( function( require ) {
      * @returns {*}
      */
     createMass: function( mass, xPosition, labelVisible, color, specifiedLabel, tandem ) {
-      return new Mass( mass, new Vector2( xPosition, .5 ), labelVisible, color, this.gravityProperty, tandem, { specificLabel: specifiedLabel } );
+      return new Mass( mass, new Vector2( xPosition, .5 ), labelVisible, color, this.gravityProperty, tandem );
     },
 
     /**

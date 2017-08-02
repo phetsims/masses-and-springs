@@ -38,11 +38,6 @@ define( function( require ) {
    * @constructor
    */
   function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem, options ) {
-    options = _.extend( {
-      // REVEW: I (jbphet) looked through the code and didn't find any usages of this option.  I could have missed something, but is this really needed?
-      specificLabel: null
-    }, options );
-
     var self = this;
 
     // @public {read-only} Non-property model attributes
@@ -54,8 +49,6 @@ define( function( require ) {
     this.hookHeight = this.radius * HOOK_HEIGHT_RATIO; // height in m
     this.height = this.cylinderHeight + this.hookHeight;
 
-    // String that can be assigned as a label for any mass
-    this.specificLabel = options.specificLabel;
 
     this.initialPosition = initialPosition;
 
