@@ -24,7 +24,6 @@ define( function( require ) {
   var TimeControlPanel = require( 'MASSES_AND_SPRINGS/common/view/TimeControlPanel' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
   var Node = require( 'SCENERY/nodes/Node' );

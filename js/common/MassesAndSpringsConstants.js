@@ -70,7 +70,7 @@ define( function( require ) {
         return ModelViewTransform2.createSinglePointScaleInvertedYMapping(
           Vector2.ZERO,
           new Vector2( 0, bounds.height * ratio ),
-          397 )
+          397 );
       }
     }
   ;

@@ -22,7 +22,6 @@ define( function( require ) {
   var TimeControlPanel = require( 'MASSES_AND_SPRINGS/common/view/TimeControlPanel' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -61,7 +60,7 @@ define( function( require ) {
     var self = this;
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
-    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 )
+    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), .98 );
     // Spacing for top margin of layout bounds
     this.spacing = modelViewTransform.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
 

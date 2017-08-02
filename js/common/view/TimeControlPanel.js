@@ -13,9 +13,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
-  var Vector2 = require( 'DOT/Vector2' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // constants
