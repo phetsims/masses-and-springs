@@ -26,7 +26,7 @@ define( function( require ) {
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
 
   // constants
-  var DEFAULT_THICKNESS = 3; // view-coordinates, empirically determined
+  var DEFAULT_THICKNESS = 3; // empirically determine
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
@@ -115,11 +115,9 @@ define( function( require ) {
     } );
 
     // @public {Property.<number> read-only} line width of oscillating spring node
-    // REVIEW: this should probably be in some units other than screen coords, e.g. meters, for consistency with rest of sim
     this.thicknessProperty = new Property( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
       phetioValueType: TNumber( {
-        //units: screenViewCoordinates
         range: thicknessRange
       } )
     } );
