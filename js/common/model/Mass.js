@@ -120,12 +120,11 @@ define( function( require ) {
       }
     } );
 
-    // REVIEW: Several of the derived property declaration below exceen the 120 column guideline and should be cleaned up.
-
     // Net force applied to mass
-    this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ], function( springForce, gravity ) {
-      return springForce - self.mass * gravity;
-    } );
+    this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ],
+      function( springForce, gravity ) {
+        return springForce - self.mass * gravity;
+      } );
 
     // Link that sets the acceleration property of the mass
     this.netForceProperty.link( function( netForce ) {
@@ -133,14 +132,17 @@ define( function( require ) {
     } );
 
     // Kinetic energy of the mass
-    this.kineticEnergyProperty = new DerivedProperty( [ this.massProperty, this.verticalVelocityProperty ], function( mass, velocity ) {
-      return (1 / 2) * (mass) * (Math.pow( velocity, 2 ));
-    } );
+    this.kineticEnergyProperty = new DerivedProperty( [ this.massProperty, this.verticalVelocityProperty ],
+      function( mass, velocity ) {
+        return (1 / 2) * (mass) * (Math.pow( velocity, 2 ));
+      } );
 
     // Gravitational potential energy of the mass
-    this.gravitationalPotentialEnergyProperty = new DerivedProperty( [ this.massProperty, this.gravityProperty, this.positionProperty ], function( mass, gravity, position ) {
-      return Math.abs( mass * gravity * (position.y - self.height) );
-    } );
+    this.gravitationalPotentialEnergyProperty = new DerivedProperty(
+      [ this.massProperty, this.gravityProperty, this.positionProperty ],
+      function( mass, gravity, position ) {
+        return Math.abs( mass * gravity * (position.y - self.height) );
+      } );
 
     // Kinetic energy of the mass
     this.elasticPotentialEnergyProperty = new Property( 0 );
