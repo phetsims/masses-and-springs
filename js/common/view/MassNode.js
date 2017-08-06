@@ -17,7 +17,8 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var ArrowNodeCreator = require( 'MASSES_AND_SPRINGS/common/util/ArrowNodeCreator' );
+  var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
+  var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -152,11 +153,11 @@ define( function( require ) {
     } );
 
     //Arrows created for vectors associated with mass nodes
-    this.velocityArrow = new ArrowNodeCreator( 'vector', MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'velocityArrow', tandem );
-    this.accelerationArrow = new ArrowNodeCreator( 'vector', MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'accelerationArrow', tandem );
-    this.gravityForceArrow = new ArrowNodeCreator( 'force', MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'gravityForceArrow', tandem );
-    this.springForceArrow = new ArrowNodeCreator( 'force', MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'springForceArrow', tandem );
-    this.netForceArrow = new ArrowNodeCreator( 'force', 'black', 'netForceArrow', tandem );
+    this.velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'velocityArrow', tandem );
+    this.accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'accelerationArrow', tandem );
+    this.gravityForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'gravityForceArrow', tandem );
+    this.springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'springForceArrow', tandem );
+    this.netForceArrow = new ForceVectorArrow( 'black', 'netForceArrow', tandem );
 
     if ( showVectors ) {
       this.addChild( this.velocityArrow );

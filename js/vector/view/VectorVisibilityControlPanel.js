@@ -11,7 +11,6 @@ define( function( require ) {
   // modules
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var ArrowNodeCreator = require( 'MASSES_AND_SPRINGS/common/util/ArrowNodeCreator' );
   var inherit = require( 'PHET_CORE/inherit' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
@@ -22,6 +21,8 @@ define( function( require ) {
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
+  var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
 
   // strings
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
@@ -43,11 +44,11 @@ define( function( require ) {
     }, options );
 
     // REVIEW: some minor cleanup is needed below to keep these within the 120 char limit
-    var velocityArrow = new ArrowNodeCreator( 'vector', MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'panelVelocityArrow', tandem );
-    var accelerationArrow = new ArrowNodeCreator( 'vector', MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'panelAccelerationArrow', tandem );
-    var gravityArrow = new ArrowNodeCreator( 'force', MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'panelGravityArrow', tandem );
-    var springArrow = new ArrowNodeCreator( 'force', MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'panelSpringArrow', tandem );
-    var netForceArrow = new ArrowNodeCreator( 'force', 'black', 'panelNetForceArrow', tandem );
+    var velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'panelVelocityArrow', tandem );
+    var accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'panelAccelerationArrow', tandem );
+    var gravityArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'panelGravityArrow', tandem );
+    var springArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'panelSpringArrow', tandem );
+    var netForceArrow = new ForceVectorArrow( 'black', 'panelNetForceArrow', tandem );
 
     // responsible for velocity and acceleration vectors checkboxes
     var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
