@@ -102,9 +102,8 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityComboBox' )
     } );
 
-    // REVIEW: If gravityHSlider is private, why is it a property?  I see no uses in methods.  Can it be local?
     // @private {read-only} manages the values associated with the gravity panel in a combo box
-    this.gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), {
+    var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
@@ -112,11 +111,11 @@ define( function( require ) {
       thumbFillHighlighted: '#00e6e6',
       tandem: tandem.createTandem( 'gravityPropertyHSlider' )
     } );
-    this.gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( gravityNoneString, {
+    gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( gravityNoneString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityNoneString' )
     } ) );
-    this.gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().max, new Text( gravityLotsString, {
+    gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().max, new Text( gravityLotsString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
@@ -138,7 +137,7 @@ define( function( require ) {
         children: [
           new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
           gravityComboBox,
-          this.gravityHSlider,
+          gravityHSlider,
           new Text( frictionString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
           this.frictionHSlider
         ],
@@ -151,7 +150,7 @@ define( function( require ) {
         children: [
           new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
           gravityComboBox,
-          this.gravityHSlider
+          gravityHSlider
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } ), options );
@@ -167,12 +166,12 @@ define( function( require ) {
 
       // Unhide the gravityHSlider if we are not using planetX
       if ( newBodyTitle !== Body.PLANET_X.title ) {
-        self.gravityHSlider.visible = true;
+        gravityHSlider.visible = true;
       }
 
       // If PlanetX hide the slider and update gravity
       if ( newBodyTitle === Body.PLANET_X.title ) {
-        self.gravityHSlider.visible = false;
+        gravityHSlider.visible = false;
         self.gravityProperty.set( body.gravity );
       }
 
