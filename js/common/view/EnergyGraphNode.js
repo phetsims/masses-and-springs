@@ -27,7 +27,7 @@ define( function( require ) {
   var VerticalCompositeBarNode = require( 'GRIDDLE/VerticalCompositeBarNode' );
   var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
   var Dialog = require( 'JOIST/Dialog' );
-  var RichText = require( 'SCENERY_PHET/RichText' );
+  var RichText = require( 'SCENERY/nodes/RichText' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   // constants
