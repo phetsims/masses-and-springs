@@ -12,14 +12,12 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ComboBox = require( 'SUN/ComboBox' );
   var HSlider = require( 'SUN/HSlider' );
-  var Range = require( 'DOT/Range' );
   var Panel = require( 'SUN/Panel' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
@@ -30,8 +28,6 @@ define( function( require ) {
   var frictionString = require( 'string!MASSES_AND_SPRINGS/friction' );
 
   // phet-io modules
-  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
-  var TString = require( 'ifphetio!PHET_IO/types/TString' );
   var TText = require( 'SCENERY/nodes/TText' );
 
   /**
