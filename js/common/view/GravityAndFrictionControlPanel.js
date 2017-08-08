@@ -70,26 +70,12 @@ define( function( require ) {
       } );
     } );
 
-    // @public {Property.<number>}
+    // @public
     this.gravityProperty = model.gravityProperty;
 
-    // @public {Property.<string>}
+    // @public
     this.bodyTitleProperty = model.bodyTitleProperty;
-
-    // REVIEW: Below are several local variables with visibility annotations, these should be updated/removed.
-
-    // @private {Property.<number>}
-    // REVIEW - I don't see any links to this property - can it be a plain variable?
-    // REVIEW - Also probably doesn't need a tandem, right?
-    var previousGravityProperty = new Property( Body.EARTH.gravity, {
-      tandem: tandem.createTandem( 'previousModel.gravityProperty' ),
-      phetioValueType: TNumber( {
-        units: 'meters/second/second',
-        range: new Range( 0, 30 )
-      } )
-    } );
-
-    // @public {Property.<string>}
+    var previousGravityProperty = Body.EARTH.gravity;
     var previousBodyTitle = Body.EARTH.title;
 
     // @private {read-only} manages the items associated with the gravity panel in a combo box
@@ -176,7 +162,7 @@ define( function( require ) {
 
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
       else if ( previousBodyTitle === Body.PLANET_X.title && newBodyTitle === Body.CUSTOM.title ) {
-        self.gravityProperty.set( previousGravityProperty.get() );
+        self.gravityProperty = previousGravityProperty.get();
       }
 
       // Update gravity
@@ -193,7 +179,7 @@ define( function( require ) {
 
       // Remember the last change to gravity if we are not on planetX
       if ( model.bodyTitleProperty.get() !== Body.PLANET_X.title ) {
-        previousGravityProperty.set( newGravity );
+        previousGravityProperty = newGravity;
       }
 
       // If we changed to a body, don't try to update the title
