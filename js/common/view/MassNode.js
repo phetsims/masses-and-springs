@@ -26,6 +26,7 @@ define( function( require ) {
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Util = require( 'DOT/Util' );
 
   // strings
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
@@ -101,7 +102,7 @@ define( function( require ) {
       // more extensible.
       self.mass.massProperty.link( function( massValue ) {
         if ( model.masses[ 0 ] ) {
-          label.setText( StringUtils.fillIn( massValueString, { mass: massValue } ) );
+          label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
         }
         if ( model.masses[ 0 ] && model.masses[ 0 ].springProperty.get() ) {
           model.masses[ 0 ].springProperty.get().animatingProperty.set( true );
