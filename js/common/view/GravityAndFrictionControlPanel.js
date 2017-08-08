@@ -36,21 +36,21 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
-   * @param {Boolean} frictionVisible
    * @param {Node} listNodeParent
    * @param {Tandem} tandem
    * @param {Object} [options]
    *
    * @constructor
    */
-  function GravityAndFrictionControlPanel( model, frictionVisible, listNodeParent, tandem, options ) {
+  function GravityAndFrictionControlPanel( model, listNodeParent, tandem, options ) {
     var self = this;
     options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 13,
       yMargin: 10,
       align: 'left',
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+      frictionVisible: false
     }, options );
 
     //  Add gravity info for various planets
@@ -121,17 +121,16 @@ define( function( require ) {
     } ) );
 
     // REVIEW: This probably doesn't need to be a property, correct?  It can just be a local variable?
-    // REVIEW: This appears to be created regardless of whether frictionVisible is true, but then not used - suggest moving into 'if' clause below.
-    this.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
-      majorTickLength: 10,
-      trackSize: new Dimension2( 130, 2 ),
-      thumbSize: new Dimension2( 13, 22 ),
-      thumbFillEnabled: '#00b3b3',
-      thumbFillHighlighted: '#00e6e6',
-      tandem: tandem.createTandem( 'gravityPropertyHSlider' )
-    } );
 
-    if ( frictionVisible ) {
+    if ( options.frictionVisible ) {
+      this.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
+        majorTickLength: 10,
+        trackSize: new Dimension2( 130, 2 ),
+        thumbSize: new Dimension2( 13, 22 ),
+        thumbFillEnabled: '#00b3b3',
+        thumbFillHighlighted: '#00e6e6',
+        tandem: tandem.createTandem( 'gravityPropertyHSlider' )
+      } );
       Panel.call( this, new VBox( {
         align: 'left',
         children: [

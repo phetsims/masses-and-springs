@@ -208,7 +208,7 @@ define( function( require ) {
 
     // Gravity Control Panel
     this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
-      model, false, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ), {
+      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ), {
         right: rightPanelAlignment,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
