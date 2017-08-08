@@ -90,12 +90,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<string>}
-    // REVIEW - I don't see any links to this property - can it be a plain variable?
-    // REVIEW - Also probably doesn't need a tandem, right?
-    var previousBodyTitleProperty = new Property( Body.EARTH.title, {
-      tandem: tandem.createTandem( 'previousBodyTitleProperty' ),
-      phetioValueType: TString
-    } );
+    var previousBodyTitle = Body.EARTH.title;
 
     // @private {read-only} manages the items associated with the gravity panel in a combo box
     var gravityComboBox = new ComboBox( bodyListItems, model.bodyTitleProperty, listNodeParent, {
@@ -182,7 +177,7 @@ define( function( require ) {
       }
 
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
-      else if ( previousBodyTitleProperty.get() === Body.PLANET_X.title && newBodyTitle === Body.CUSTOM.title ) {
+      else if ( previousBodyTitle === Body.PLANET_X.title && newBodyTitle === Body.CUSTOM.title ) {
         self.gravityProperty.set( previousGravityProperty.get() );
       }
 
@@ -193,7 +188,7 @@ define( function( require ) {
       }
 
       // Store previous state so we can revert after leaving Planet X.
-      previousBodyTitleProperty.set( newBodyTitle );
+      previousBodyTitle = newBodyTitle;
     } );
 
     this.gravityProperty.link( function( newGravity ) {
