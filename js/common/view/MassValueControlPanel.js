@@ -54,6 +54,8 @@ define( function( require ) {
       tandem: tandem
     } );
 
+    mass.options.adjustable = true;
+
     Panel.call( this, numberControl, {
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
       maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,

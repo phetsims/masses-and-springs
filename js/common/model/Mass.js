@@ -40,6 +40,11 @@ define( function( require ) {
   function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem, options ) {
     var self = this;
 
+    this.options = _.extend( {
+      adjustable: false,
+      isLabeled: false
+    }, options );
+
     // @public {read-only} Non-property model attributes
     this.mass = massValue;
     this.color = color;

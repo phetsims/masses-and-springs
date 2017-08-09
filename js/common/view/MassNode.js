@@ -96,17 +96,17 @@ define( function( require ) {
       self.addChild( labelBackground );
       self.addChild( label );
 
-      // REVIEW: This should not even be linked if this isn't an adjustable mass.  Consider adding a flag to Mass.js
-      // that indicates if the mass is adjustable, then only link this method if it is.  It would be a lot cleaner and
-      // more extensible.
-      self.mass.massProperty.link( function( massValue ) {
-        if ( model.masses[ 0 ] ) {
-          label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
-        }
-        if ( model.masses[ 0 ] && model.masses[ 0 ].springProperty.get() ) {
-          model.masses[ 0 ].springProperty.get().animatingProperty.set( true );
-        }
-      } );
+      // Adjust the mass label for adjustable masses.
+      if ( mass.options.adjustable ) {
+        self.mass.massProperty.link( function( massValue ) {
+          if ( model.masses[ 0 ] ) {
+            label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
+          }
+          if ( model.masses[ 0 ] && model.masses[ 0 ].springProperty.get() ) {
+            model.masses[ 0 ].springProperty.get().animatingProperty.set( true );
+          }
+        } );
+      }
     };
     labelString = StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
     createLabel( labelString );
