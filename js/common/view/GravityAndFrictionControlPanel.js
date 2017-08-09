@@ -102,8 +102,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
-    // REVIEW: This probably doesn't need to be a property, correct?  It can just be a local variable?
-
     if ( options.frictionVisible ) {
       this.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
         majorTickLength: 10,

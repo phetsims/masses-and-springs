@@ -98,6 +98,9 @@
   "friction": {
     "value": "Friction"
   },
+  "massReadout": {
+    "value": "{{value}}{{units}}"
+  },
   "massValue": {
     "value": "{{mass}} g"
   },
