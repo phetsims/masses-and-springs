@@ -185,8 +185,10 @@ define( function( require ) {
     this.equilibriumYPositionProperty = new DerivedProperty(
       [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
-        // springExtension = mg/k
-        self.springExtension = mass ? ( mass.mass * gravity ) / springConstant : 0;
+        if ( mass ) {
+          // springExtension = mg/k
+          self.springExtension = mass.massProperty.get() ? ( mass.massProperty.get() * gravity ) / springConstant : 0;
+        }
         return self.positionProperty.get().y - naturalRestingLength - self.springExtension;
       },
       {

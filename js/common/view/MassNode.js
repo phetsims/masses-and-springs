@@ -92,8 +92,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'label' )
       } );
 
-      // REVIEW: The background looks a little tight on some of the labels, suggest tring label.bounds.dilated().
-      var labelBackground = Rectangle.bounds( label.bounds, { fill: '#D3D3D3' } );
+      var labelBackground = Rectangle.bounds( label.bounds.dilated( 1.5 ), { fill: '#D3D3D3' } );
       self.addChild( labelBackground );
       self.addChild( label );
 
