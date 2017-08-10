@@ -93,8 +93,10 @@ define( function( require ) {
       } );
 
       var labelBackground = Rectangle.bounds( label.bounds.dilated( 1.5 ), { fill: '#D3D3D3' } );
-      self.addChild( labelBackground );
-      self.addChild( label );
+      if ( mass.options.isLabeled ) {
+        self.addChild( labelBackground );
+        self.addChild( label );
+      }
 
       // Adjust the mass label for adjustable masses.
       if ( mass.options.adjustable ) {
