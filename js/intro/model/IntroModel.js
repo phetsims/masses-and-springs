@@ -55,17 +55,13 @@ define( function( require ) {
       } );
     } );
 
-    // REVIEW: The only thing that is retained between the two "scenes" is the state of the springs, so the code would
-    // be easier to understand if the variables had names like "sameLengthModeSpringState" and
-    // "adjustableLengthModeSpringState".
-
     // initial parameters set for both scenes
     // @private {read-write} array of parameters for scene 1
-    var scene1Parameters = this.getSceneState();
+    var sameLengthModeSpringState = this.getSceneState();
 
     // @private {read-write} array of parameters for scene 2
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
-    var scene2Parameters = this.getSceneState();
+    var adjustableLengthModeSpringState = this.getSceneState();
 
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
 
@@ -81,15 +77,15 @@ define( function( require ) {
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
         self.setResetState( true );
-        scene2Parameters = self.getSceneState();
-        self.setSceneState( scene1Parameters );
+        adjustableLengthModeSpringState = self.getSceneState();
+        self.setSceneState( sameLengthModeSpringState );
       }
 
       else if ( mode === 'adjustable-length' ) {
         // Manages stashing and applying parameters to each scene
         self.setResetState( true );
-        scene1Parameters = self.getSceneState();
-        self.setSceneState( scene2Parameters );
+        sameLengthModeSpringState = self.getSceneState();
+        self.setSceneState( adjustableLengthModeSpringState );
 
         // REVIEW: There are several link statements below, which are inside the link to the sceneModeProperty.  It is
         // rarely necessary to have a link inside a link, and I don't think it is warranted here.  These links should
