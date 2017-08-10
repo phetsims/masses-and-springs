@@ -30,6 +30,8 @@ define( function( require ) {
     // specify one of three 'mass sets' in the options to the MassAndSpringsModel and use those instead.
     this.masses.push( this.createMass( 0.125, massXPosition - .02, true, false, 'red', null, tandem.createTandem( 'redLabeledMass' ) ) );
     this.masses.push( this.createMass( 0.150, massXPosition + .05, true, false, 'green', null, tandem.createTandem( 'greenLabeledMass' ) ) );
+    this.masses[ 1 ].options.mysteryLabel = true;
+    this.masses[ 2 ].options.mysteryLabel = true;
 
   }
 

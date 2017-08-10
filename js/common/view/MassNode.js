@@ -30,6 +30,7 @@ define( function( require ) {
 
   // strings
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
+  var questionMarkString = require( 'string!MASSES_AND_SPRINGS/questionMark' );
 
   // constants
   var ARROW_SIZE_DEFAULT = 25;
@@ -110,7 +111,7 @@ define( function( require ) {
         } );
       }
     };
-    labelString = StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
+    labelString = mass.options.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
     createLabel( labelString );
 
     this.mass.positionProperty.link( function( position ) {

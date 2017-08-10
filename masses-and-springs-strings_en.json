@@ -101,13 +101,16 @@
   "massReadout": {
     "value": "{{value}}{{units}}"
   },
+  "questionMark": {
+    "value": "?"
+  },
   "massValue": {
     "value": "{{mass}} g"
   },
   "gramUnit": {
     "value": "g"
   },
-  "mass":{
+  "mass": {
     "value": "Mass"
   },
   "thickness": {

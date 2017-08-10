@@ -42,7 +42,8 @@ define( function( require ) {
 
     this.options = _.extend( {
       adjustable: false,
-      isLabeled: isLabeled
+      isLabeled: isLabeled,
+      mysteryLabel: false
     }, options );
 
     // @public {read-only} Non-property model attributes
