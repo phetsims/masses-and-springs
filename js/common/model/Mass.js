@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Color = require( 'SCENERY/util/Color' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
@@ -43,7 +44,8 @@ define( function( require ) {
     this.options = _.extend( {
       adjustable: false,
       isLabeled: isLabeled,
-      mysteryLabel: false
+      mysteryLabel: false,
+      color: new Color( color )
     }, options );
 
     // @public {read-only} Non-property model attributes
