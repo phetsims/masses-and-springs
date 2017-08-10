@@ -28,8 +28,6 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem, { springCount: 2, showVectors: false } );
     var self = this;
 
-    // REVIEW: Is the TODO item below out of date, since this IS the IntroModel?
-    //TODO: Move into the intro Model.
     // @public {Property.<string>} determines the scene selection for the intro screen
     this.sceneModeProperty = new Property( 'same-length', {
       tandem: tandem.createTandem( 'sceneModeProperty' ),

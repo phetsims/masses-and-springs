@@ -62,9 +62,6 @@ define( function( require ) {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     } );
-    mass.massProperty.link( function( mass ) {
-      numberControl.valuePattern = mass * 1000 + gramUnitString;
-    } );
   }
 
   massesAndSprings.register( 'MassValueControlPanel', MassValueControlPanel );
