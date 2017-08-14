@@ -122,6 +122,9 @@
   "slowMotion": {
     "value": "Slow Motion"
   },
+  "massReadoutPattern": {
+    "value": "{{value}} {{units}} "
+  },
   "naturalLength": {
     "value": "Natural Length"
   },

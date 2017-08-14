@@ -17,9 +17,11 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Range = require( 'DOT/Range' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // strings
   var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
+  var massReadoutPatternString = require( 'string!MASSES_AND_SPRINGS/massReadoutPattern' );
   var gramUnitString = require( 'string!MASSES_AND_SPRINGS/gramUnit' );
 
   /**
@@ -31,8 +33,12 @@ define( function( require ) {
 
     // range for mass in kg
     var range = new Range( 0.050, 0.300 );
+
     var numberControl = new NumberControl( massString, mass.massProperty, range, {
-      valuePattern: mass.massProperty.get() * 1000 + gramUnitString,
+      valuePattern: StringUtils.fillIn( massReadoutPatternString, {
+        value: mass.massProperty.get(),
+        units: gramUnitString
+      } ),
       valueMaxWidth: 100,
       majorTickLength: 10,
       trackSize: new Dimension2( 100, 2 ),
@@ -52,6 +58,14 @@ define( function( require ) {
         } ],
       delta: .001,
       tandem: tandem
+    } );
+
+    mass.massProperty.link( function( mass ) {
+      numberControl.valuePattern = StringUtils.fillIn( massReadoutPatternString, {
+        value: mass,
+        units: gramUnitString
+      } );
+      console.log( numberControl.valuePattern );
     } );
 
     mass.options.adjustable = true;
