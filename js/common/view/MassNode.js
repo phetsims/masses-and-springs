@@ -56,7 +56,7 @@ define( function( require ) {
       modelViewTransform2.modelToViewDeltaX( -mass.radius ),
       hookHeight,
       modelViewTransform2.modelToViewDeltaX( mass.radius ),
-      modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight
+      modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight * 1.30 ) + hookHeight
     );
     var rect = Rectangle.bounds( rectangleBounds, {
       stroke: 'black',
