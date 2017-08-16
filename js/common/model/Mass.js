@@ -20,7 +20,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var HEIGHT_RATIO = 2;
+  var HEIGHT_RATIO = 2.5;
   var HOOK_HEIGHT_RATIO = 0.75;
   var DENSITY = 80; // Constant used to keep all of our masses consistent in the model.
 

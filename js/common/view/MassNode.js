@@ -56,7 +56,7 @@ define( function( require ) {
       modelViewTransform2.modelToViewDeltaX( -mass.radius ),
       hookHeight,
       modelViewTransform2.modelToViewDeltaX( mass.radius ),
-      modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight * 1.30 ) + hookHeight
+      modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight
     );
     var rect = Rectangle.bounds( rectangleBounds, {
       stroke: 'black',
@@ -93,7 +93,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'label' )
       } );
 
-      var labelBackground = Rectangle.bounds( label.bounds.dilated( 1.2 ), { fill: mass.options.color.colorUtilsBrighter( .4 ) } );
+      var labelBackground = Rectangle.bounds( label.bounds.dilated( .5 ), { fill: mass.options.color.colorUtilsBrighter( .4 ) } );
       if ( mass.options.isLabeled ) {
         self.addChild( labelBackground );
         self.addChild( label );
