@@ -60,12 +60,14 @@ define( function( require ) {
       tandem: tandem
     } );
 
-    mass.massProperty.link( function( mass ) {
+    mass.massProperty.link( function( massValue ) {
       numberControl.valuePattern = StringUtils.fillIn( massReadoutPatternString, {
-        value: mass,
+        value: massValue,
         units: gramUnitString
       } );
       console.log( numberControl.valuePattern );
+
+      mass.setRadius( massValue );
     } );
 
     mass.options.adjustable = true;

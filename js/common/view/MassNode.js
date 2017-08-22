@@ -52,21 +52,28 @@ define( function( require ) {
 
     // TODO: factor out the hook from the height.
     var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
-    var rectangleBounds = new Bounds2(
-      modelViewTransform2.modelToViewDeltaX( -mass.radius ),
-      hookHeight,
-      modelViewTransform2.modelToViewDeltaX( mass.radius ),
-      modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight
-    );
-    var rect = Rectangle.bounds( rectangleBounds, {
+
+    var rectOptions = {
       stroke: 'black',
-      lineWidth: 0.5,
-      fill: new LinearGradient( rectangleBounds.minX, 0, rectangleBounds.maxX, 0 )
+      lineWidth: 0.5
+    };
+
+    var rect = new Rectangle( rectOptions );
+    this.addChild( rect );
+
+    // Update the size of the massNode
+    mass.radiusProperty.link( function( radiusValue ) {
+      rect.rectBounds = new Bounds2(
+        modelViewTransform2.modelToViewDeltaX( -radiusValue ),
+        hookHeight,
+        modelViewTransform2.modelToViewDeltaX( radiusValue ),
+        modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight );
+
+      rect.fill = new LinearGradient( rect.left, 0, rect.right, 0 )
         .addColorStop( 0.1, mass.color )
         .addColorStop( 0.2, 'rgb(205, 206, 207)' )
         .addColorStop( 0.7, mass.color )
     } );
-    this.addChild( rect );
 
     var hookShape = new Shape();
     var radius = hookHeight / 4;
@@ -76,8 +83,8 @@ define( function( require ) {
       stroke: 'black',
       lineWidth: 1.5,
       lineCap: 'round',
-      centerX: rectangleBounds.centerX,
-      bottom: rectangleBounds.top
+      centerX: rect.centerX,
+      bottom: rect.top
     } );
     this.addChild( hookNode );
 
@@ -86,7 +93,7 @@ define( function( require ) {
       var label = new Text( labelString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         fill: 'black',
-        centerY: rectangleBounds.centerY,
+        centerY: rect.centerY,
         centerX: 0,
         pickable: false,
         maxWidth: 50,

@@ -48,16 +48,17 @@ define( function( require ) {
       color: new Color( color )
     }, options );
 
+    this.scalingFactor = 4; // scales the radius to desired size
+
+    // @public {Property.<number>} radius of the massNode dependent its mass value
+    this.radiusProperty = new Property( (Math.pow( (massValue - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * this.scalingFactor) );
+
     // @public {read-only} Non-property model attributes
     this.mass = massValue;
     this.color = color;
-    var scalingFactor = 4; // scales the radius to desired size
-    this.radius = (Math.pow( (this.mass - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * scalingFactor);
-    this.cylinderHeight = this.radius * HEIGHT_RATIO; // height in m
-    this.hookHeight = this.radius * HOOK_HEIGHT_RATIO; // height in m
+    this.cylinderHeight = this.radiusProperty.get() * HEIGHT_RATIO; // height in m
+    this.hookHeight = this.radiusProperty.get() * HOOK_HEIGHT_RATIO; // height in m
     this.height = this.cylinderHeight + this.hookHeight;
-
-
     this.initialPosition = initialPosition;
 
     // @public {read-only} Used for constructing tandems for corresponding view nodes.
@@ -227,6 +228,10 @@ define( function( require ) {
     detach: function() {
       this.verticalVelocityProperty.set( 0 );
       this.springProperty.set( null );
+    },
+
+    setRadius: function( massValue ) {
+      this.radiusProperty.set( (Math.pow( (massValue - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * this.scalingFactor) );
     },
 
     /**
