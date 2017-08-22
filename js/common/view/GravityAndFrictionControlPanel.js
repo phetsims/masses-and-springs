@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
+  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ComboBox = require( 'SUN/ComboBox' );
@@ -51,8 +52,8 @@ define( function( require ) {
 
     //  Add gravity info for various planets
     var bodyListItems = [];
-    this.bodies = model.bodies;
-    model.bodies.forEach( function( body ) {
+    this.bodies = MassesAndSpringsModel.BODIES;
+    MassesAndSpringsModel.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'bodyLabel' ),

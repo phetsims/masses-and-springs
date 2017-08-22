@@ -66,7 +66,8 @@ define( function( require ) {
       NET_FORCE_STRING: 'netForce',
       PANEL_FILL: 'rgb( 240, 240, 240 )',
 
-      MODEL_VIEW_TRANSFORM: function( bounds, ratio ) {
+
+    MODEL_VIEW_TRANSFORM: function( bounds, ratio ) {
         return ModelViewTransform2.createSinglePointScaleInvertedYMapping(
           Vector2.ZERO,
           new Vector2( 0, bounds.height * ratio ),

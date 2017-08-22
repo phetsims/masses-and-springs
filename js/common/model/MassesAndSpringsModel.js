@@ -201,16 +201,6 @@ define( function( require ) {
     }
 
     // @public (read-only) model of bodies used throughout the sim
-    // REVIEW - this seems like it should be in the shared constants file or at least in the static area for this type.
-    this.bodies = [
-      Body.MOON,
-      Body.EARTH,
-      Body.JUPITER,
-      Body.PLANET_X,
-      Body.ZERO_G,
-      Body.CUSTOM
-    ];
-
     // Links are used to set gravity property of each spring to the gravity property of the system
     this.gravityProperty.link( function( newGravity ) {
       assert && assert( newGravity >= 0, 'gravity must be 0 or positive : ' + newGravity );
@@ -404,6 +394,7 @@ define( function( require ) {
         } );
       }
     }
-  } )
-    ;
+  }, {
+    BODIES: [ Body.MOON, Body.EARTH, Body.JUPITER, Body.PLANET_X, Body.ZERO_G, Body.CUSTOM ]
+  } );
 } );
