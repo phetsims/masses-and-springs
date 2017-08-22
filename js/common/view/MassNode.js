@@ -77,7 +77,7 @@ define( function( require ) {
       rect.fill = new LinearGradient( rect.left, 0, rect.right, 0 )
         .addColorStop( 0.1, mass.color )
         .addColorStop( 0.2, 'rgb(205, 206, 207)' )
-        .addColorStop( 0.7, mass.color )
+        .addColorStop( 0.7, mass.color );
     } );
 
     var hookShape = new Shape();
