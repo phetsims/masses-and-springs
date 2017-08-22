@@ -51,7 +51,7 @@ define( function( require ) {
     this.mass = mass;
 
     // TODO: factor out the hook from the height.
-    var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
+    var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeightProperty.get() );
 
     var rectOptions = {
       stroke: 'black',
@@ -67,7 +67,12 @@ define( function( require ) {
         modelViewTransform2.modelToViewDeltaX( -radiusValue ),
         hookHeight,
         modelViewTransform2.modelToViewDeltaX( radiusValue ),
-        modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeight ) + hookHeight );
+        modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeightProperty.get() ) + hookHeight );
+
+      // if (rect.rectBounds.intersectsBounds(dragBounds)){
+      //   debugger;
+      //
+      // }
 
       rect.fill = new LinearGradient( rect.left, 0, rect.right, 0 )
         .addColorStop( 0.1, mass.color )
