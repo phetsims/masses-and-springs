@@ -62,7 +62,7 @@ define( function( require ) {
 
       bodyListItems.push( {
         node: bodyLabel,
-        value: body.title
+        value: body
       } );
     } );
 
@@ -70,12 +70,12 @@ define( function( require ) {
     this.gravityProperty = model.gravityProperty;
 
     // @public
-    this.bodyTitleProperty = model.bodyTitleProperty;
+    this.bodyProperty = model.bodyProperty;
     var previousGravityProperty = Body.EARTH.gravity;
-    var previousBodyTitle = Body.EARTH.title;
+    var previousBody = Body.EARTH;
 
     // @private {read-only} manages the items associated with the gravity panel in a combo box
-    var gravityComboBox = new ComboBox( bodyListItems, model.bodyTitleProperty, listNodeParent, {
+    var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
       listPosition: 'below',
       buttonCornerRadius: 5,
       buttonYMargin: 0,
@@ -135,44 +135,42 @@ define( function( require ) {
       } ), options );
     }
 
-    // REVIEW: I (jbphet) mentioned this in MassesAndSpringsModel, but just to reiterate - it would make a lot more
-    // sense to me if it was the BODY that was being selected, and not the title.
     // REVIEW: There is a second parameter available to the callback function that is the previous value - this could
     // be used instead of having to track the previous value, and only the previous gravity setting would need to be
     // tracked.
-    model.bodyTitleProperty.link( function( newBodyTitle ) {
-      var body = _.find( self.bodies, { title: newBodyTitle } );
+    model.bodyProperty.link( function( newBody ) {
+      var body = _.find( self.bodies, newBody );
 
       // Unhide the gravityHSlider if we are not using planetX
-      if ( newBodyTitle !== Body.PLANET_X.title ) {
+      if ( newBody !== Body.PLANET_X ) {
         gravityHSlider.visible = true;
       }
 
       // If PlanetX hide the slider and update gravity
-      if ( newBodyTitle === Body.PLANET_X.title ) {
+      if ( newBody === Body.PLANET_X ) {
         gravityHSlider.visible = false;
         self.gravityProperty.set( body.gravity );
       }
 
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
-      else if ( previousBodyTitle === Body.PLANET_X.title && newBodyTitle === Body.CUSTOM.title ) {
+      else if ( previousBody === Body.PLANET_X && newBody === Body.CUSTOM ) {
         self.gravityProperty = previousGravityProperty.get();
       }
 
       // Update gravity
       // REVIEW: Why is this qualified? Why not just save the value every time?
-      else if ( body.gravity || body.title === Body.ZERO_G.title ) {
+      else if ( body.gravity || body === Body.ZERO_G ) {
         self.gravityProperty.set( body.gravity );
       }
 
       // Store previous state so we can revert after leaving Planet X.
-      previousBodyTitle = newBodyTitle;
+      previousBody = newBody;
     } );
 
     this.gravityProperty.link( function( newGravity ) {
 
       // Remember the last change to gravity if we are not on planetX
-      if ( model.bodyTitleProperty.get() !== Body.PLANET_X.title ) {
+      if ( model.bodyProperty.get() !== Body.PLANET_X ) {
         previousGravityProperty = newGravity;
       }
 
@@ -188,7 +186,7 @@ define( function( require ) {
       }
 
       //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
-      model.bodyTitleProperty.set( Body.CUSTOM.title );
+      model.bodyProperty.set( Body.CUSTOM );
     } );
     this.mutate( options );
   }
@@ -207,7 +205,7 @@ define( function( require ) {
       // On reset we need to manually set title to Earth or the gravityLink will change it to custom.
       // REVIEW: This doesn't make sense to me - there is an 'if' clause in gravityLink that should prevent it.  Also,
       // the reset should really be done in the model, not here.
-      this.bodyTitleProperty.set( Body.EARTH.title );
+      this.bodyProperty.set( Body.EARTH );
     }
   } );
 } );
