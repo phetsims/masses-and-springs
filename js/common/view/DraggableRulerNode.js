@@ -29,7 +29,7 @@ define( function( require ) {
    *
    * @constructor
    */
-  function DraggableRulerNode( dragBounds, initialPosition, visibleProperty, tandem ) {
+  function DraggableRulerNode( mvt, dragBounds, initialPosition, visibleProperty, tandem ) {
     var self = this;
 
     // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
@@ -37,10 +37,8 @@ define( function( require ) {
 
     // define ruler params in pixels
     // REVIEW: Why is 397 equal to 1 meter?  Seems like MVT should be passed in and length should be calculated.
-    // REVIEW: Seems like the width and length variable are reversed.  This is probably because of the constructor used
-    // below, but I think it would be better to name them as they are used in this context.
-    var rulerWidth = 397; // 1 meter
-    var rulerLength = 0.1 * rulerWidth;
+    var rulerLength = (397); // 1 meter
+    var rulerWidth = 0.1 * rulerLength;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
       majorTickLabels.push( '' );
@@ -49,9 +47,9 @@ define( function( require ) {
     }
     majorTickLabels.push( '' );
     majorTickLabels.push( '' );
-    var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
+    var majorTickWidth = rulerLength / ( majorTickLabels.length - 1 );
 
-    RulerNode.call( this, rulerWidth, rulerLength, majorTickWidth, majorTickLabels, cmString, {
+    RulerNode.call( this, rulerLength, rulerWidth, majorTickWidth, majorTickLabels, cmString, {
       insetsWidth: 5,
       minorTicksPerMajorTick: 4,
       unitsMajorTickIndex: 19,

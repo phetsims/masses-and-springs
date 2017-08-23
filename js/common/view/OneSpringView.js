@@ -192,6 +192,7 @@ define( function( require ) {
       tandem.createTandem( 'timerNode' )
     );
     var rulerNode = new DraggableRulerNode(
+      modelViewTransform,
       this.visibleBoundsProperty.get(),
       new Vector2( this.visibleBoundsProperty.get().left + 50, this.spacing + 35 ),
       model.rulerVisibleProperty,
