@@ -169,11 +169,6 @@ define( function( require ) {
 
     this.gravityProperty.link( function( newGravity, previousGravity ) {
 
-      // Remember the last change to gravity if we are not on planetX
-      if ( model.bodyProperty.get() !== Body.PLANET_X ) {
-        previousGravity = newGravity;
-      }
-
       // If we changed to a body, don't try to update the title
       // REVIEW: Suggest using forEach instead - IntelliJ is flagging the i variable as not checked for hasOwnProperty
       for ( var i in self.bodies ) {
