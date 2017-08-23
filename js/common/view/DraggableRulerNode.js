@@ -36,8 +36,7 @@ define( function( require ) {
     this.toolbox = null;
 
     // define ruler params in pixels
-    // REVIEW: Why is 397 equal to 1 meter?  Seems like MVT should be passed in and length should be calculated.
-    var rulerLength = (397); // 1 meter
+    var rulerLength = mvt.modelToViewY( .245 ); // 1 meter
     var rulerWidth = 0.1 * rulerLength;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
