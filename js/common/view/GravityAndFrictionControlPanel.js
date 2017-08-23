@@ -72,7 +72,6 @@ define( function( require ) {
 
     // @public
     this.bodyProperty = model.bodyProperty;
-    var previousGravityProperty = Body.EARTH.gravity;
     var previousBody = Body.EARTH;
 
     // @private {read-only} manages the items associated with the gravity panel in a combo box
@@ -139,7 +138,7 @@ define( function( require ) {
     // REVIEW: There is a second parameter available to the callback function that is the previous value - this could
     // be used instead of having to track the previous value, and only the previous gravity setting would need to be
     // tracked.
-    model.bodyProperty.link( function( newBody ) {
+    model.bodyProperty.link( function( newBody, previousGravity ) {
       var body = _.find( self.bodies, newBody );
 
       // Unhide the gravityHSlider if we are not using planetX
@@ -155,7 +154,7 @@ define( function( require ) {
 
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
       else if ( previousBody === Body.PLANET_X && newBody === Body.CUSTOM ) {
-        self.gravityProperty = previousGravityProperty.get();
+        self.gravityProperty = previousGravity;
       }
 
       // Update gravity
@@ -168,11 +167,11 @@ define( function( require ) {
       previousBody = newBody;
     } );
 
-    this.gravityProperty.link( function( newGravity ) {
+    this.gravityProperty.link( function( newGravity, previousGravity ) {
 
       // Remember the last change to gravity if we are not on planetX
       if ( model.bodyProperty.get() !== Body.PLANET_X ) {
-        previousGravityProperty = newGravity;
+        previousGravity = newGravity;
       }
 
       // If we changed to a body, don't try to update the title
