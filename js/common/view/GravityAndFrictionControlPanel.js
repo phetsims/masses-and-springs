@@ -193,19 +193,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'GravityAndFrictionControlPanel', GravityAndFrictionControlPanel );
 
-  return inherit( Panel, GravityAndFrictionControlPanel, {
-
-    /**
-     * @override
-     *
-     * @public
-     */
-    reset: function() {
-
-      // On reset we need to manually set title to Earth or the gravityLink will change it to custom.
-      // REVIEW: This doesn't make sense to me - there is an 'if' clause in gravityLink that should prevent it.  Also,
-      // the reset should really be done in the model, not here.
-      this.bodyProperty.set( Body.EARTH );
-    }
-  } );
+  return inherit( Panel, GravityAndFrictionControlPanel );
 } );
