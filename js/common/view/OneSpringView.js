@@ -121,26 +121,22 @@ define( function( require ) {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       }
     );
-
     springHangerNode.top = springConstantControlPanel.top;
 
-    // REVIEW: This is OneSpringView, but there are some names below that refer to "secondXxx", such as
-    // secondSpringEquilibriumLineNode.  These should probably be cleaned up.
-
-    // @public Initializes equilibrium line for second spring
-    var secondSpringEquilibriumLineNode = new EquilibriumLineNode(
+    // @public Initializes equilibrium line for the spring
+    var springEquilibriumLineNode = new EquilibriumLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
-      tandem.createTandem( 'secondSpringEquilibriumLineNode' )
+      tandem.createTandem( 'springEquilibriumLineNode' )
     );
 
-    // @public Initializes natural line for second spring
-    var secondNaturalLengthLineNode = new NaturalLengthLineNode(
+    // @public Initializes natural line for the spring
+    var naturalLengthLineNode = new NaturalLengthLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
-      tandem.createTandem( 'secondNaturalLengthLineNode' )
+      tandem.createTandem( 'naturalLengthLineNode' )
     );
 
     // Gravity Control Panel
@@ -294,8 +290,8 @@ define( function( require ) {
     this.addChild( springStopperButtonNode );
 
     // Reference lines from indicator visibility box
-    this.addChild( secondSpringEquilibriumLineNode );
-    this.addChild( secondNaturalLengthLineNode );
+    this.addChild( springEquilibriumLineNode );
+    this.addChild( naturalLengthLineNode );
     this.addChild( movableLineNode );
     this.addChild( this.massLayer );
 
