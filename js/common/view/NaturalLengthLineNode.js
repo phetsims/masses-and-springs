@@ -65,6 +65,10 @@ define( function( require ) {
   massesAndSprings.register( 'NaturalLengthLineNode', NaturalLengthLineNode );
 
   return inherit( Line, NaturalLengthLineNode, {
+
+    /**
+     * Resets the position of the line Node.
+     */
     reset: function() {
       this.positionProperty.reset();
     }

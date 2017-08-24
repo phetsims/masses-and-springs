@@ -69,7 +69,7 @@ define( function( require ) {
 
     // Add masses
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
-    var massNodes = [];
+    this.massNodes = [];
     for ( var property in model.masses ) {
       if ( !model.masses.hasOwnProperty( property ) ) {
         continue;
@@ -86,15 +86,8 @@ define( function( require ) {
       this.massLayer.addChild( massNode );
 
       // Keeps track of the mass node to restore original Z order.
-      massNodes.push( massNode );
+      self.massNodes.push( massNode );
     }
-
-    // @protected Helper function to restore initial layering of the masses to prevent them from stacking over each other.
-    this.resetMassLayer = function() {
-      massNodes.forEach( function( massNode ) {
-        massNode.moveToFront();
-      } );
-    };
 
     // Control Panel for display elements with varying visibility
     var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
@@ -348,7 +341,7 @@ define( function( require ) {
       rulerNode.updateBounds( visibleBounds.withOffsets(
         -rulerNode.width / 2, rulerNode.height / 2, rulerNode.width / 2, -rulerNode.height / 2
       ) );
-      massNodes.forEach( function( massNode ) {
+      self.massNodes.forEach( function( massNode ) {
         massNode.movableDragHandler.dragBounds = modelViewTransform.viewToModelBounds( visibleBounds );
 
         if ( massNode.centerX > visibleBounds.maxX ) {
@@ -367,5 +360,17 @@ define( function( require ) {
 
   massesAndSprings.register( 'TwoSpringView', TwoSpringView );
 
-  return inherit( ScreenView, TwoSpringView );
+  return inherit( ScreenView, TwoSpringView, {
+
+    /**
+     * Helper function to restore initial layering of the masses to prevent them from stacking over each other.
+     *
+     * @public
+     */
+    resetMassLayer: function() {
+      this.massNodes.forEach( function( massNode ) {
+        massNode.moveToFront();
+      } );
+    }
+  } );
 } );

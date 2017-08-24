@@ -70,7 +70,7 @@ define( function( require ) {
 
     // Add masses
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
-    var massNodes = [];
+    this.massNodes = [];
 
     model.masses.forEach( function( property, index ) {
       var referencedMassProperty = model.masses[ index ];
@@ -84,16 +84,8 @@ define( function( require ) {
       self.massLayer.addChild( massNode );
 
       // Keeps track of the mass node to restore original Z order.
-      massNodes.push( massNode );
+      self.massNodes.push( massNode );
     } );
-
-    // REVIEW: Should be down in the 'method block' of the inherit call.
-    // @protected Helper function to restore initial layering of the masses to prevent them from stacking over each other.
-    this.resetMassLayer = function() {
-      massNodes.forEach( function( massNode ) {
-        massNode.moveToFront();
-      } );
-    };
 
     this.oscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 0 ],
@@ -334,7 +326,7 @@ define( function( require ) {
       rulerNode.updateBounds( visibleBounds.withOffsets(
         -rulerNode.width / 2, rulerNode.height / 2, rulerNode.width / 2, -rulerNode.height / 2
       ) );
-      massNodes.forEach( function( massNode ) {
+      self.massNodes.forEach( function( massNode ) {
         massNode.movableDragHandler.dragBounds = modelViewTransform.viewToModelBounds( visibleBounds );
 
         if ( massNode.centerX > visibleBounds.maxX ) {
@@ -353,5 +345,17 @@ define( function( require ) {
 
   massesAndSprings.register( 'OneSpringView', OneSpringView );
 
-  return inherit( ScreenView, OneSpringView );
+  return inherit( ScreenView, OneSpringView, {
+
+    /**
+     * Helper function to restore initial layering of the masses to prevent them from stacking over each other.
+     *
+     * @private
+     */
+    resetMassLayer: function() {
+      self.massNodes.forEach( function( massNode ) {
+        massNode.moveToFront();
+      } );
+    }
+  } );
 } );
