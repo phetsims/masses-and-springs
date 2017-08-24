@@ -135,9 +135,6 @@ define( function( require ) {
       } ), options );
     }
 
-    // REVIEW: There is a second parameter available to the callback function that is the previous value - this could
-    // be used instead of having to track the previous value, and only the previous gravity setting would need to be
-    // tracked.
     model.bodyProperty.link( function( newBody, previousGravity ) {
       var body = _.find( self.bodies, newBody );
 
