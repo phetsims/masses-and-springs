@@ -89,10 +89,8 @@ define( function( require ) {
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
     } );
 
-    // REVIEW: this.springsIcon doesn't appear to be accessed outside this object or in methods.  Can it be a local var?
-
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
-    this.springsIcon = [
+    var springsIcon = [
       new Spring(
         new Vector2( 0.65, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
@@ -119,7 +117,7 @@ define( function( require ) {
     //TODO: Create a specific file for this?
     // @private {read-only} Creation of spring for use in scene switching icons
     var firstSpringIcon = new OscillatingSpringNode(
-      this.springsIcon[ 0 ],
+      springsIcon[ 0 ],
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       tandem.createTandem( 'firstSpringIcon' )
     );
@@ -128,7 +126,7 @@ define( function( require ) {
 
     // @private {read-only} Creation of spring for use in scene switching icons
     var secondSpringIcon = new OscillatingSpringNode(
-      this.springsIcon[ 1 ],
+      springsIcon[ 1 ],
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       tandem.createTandem( 'secondSpringIcon' )
     );
@@ -137,7 +135,7 @@ define( function( require ) {
 
     // @private {read-only} Creation of spring for use in scene switching icons
     var thirdSpringIcon = new OscillatingSpringNode(
-      this.springsIcon[ 2 ],
+      springsIcon[ 2 ],
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       tandem.createTandem( 'thirdSpringIcon' )
     );
