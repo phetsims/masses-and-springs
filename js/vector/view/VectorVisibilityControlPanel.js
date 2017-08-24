@@ -43,10 +43,15 @@ define( function( require ) {
       showForces: true
     }, options );
 
-    // REVIEW: some minor cleanup is needed below to keep these within the 120 char limit
-    var velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'panelVelocityArrow', tandem );
-    var accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'panelAccelerationArrow', tandem );
-    var gravityArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'panelGravityArrow', tandem );
+    var velocityArrow = new VectorArrow(
+      MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'panelVelocityArrow', tandem
+    );
+    var accelerationArrow = new VectorArrow(
+      MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'panelAccelerationArrow', tandem
+    );
+    var gravityArrow = new ForceVectorArrow(
+      MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'panelGravityArrow', tandem
+    );
     var springArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'panelSpringArrow', tandem );
     var netForceArrow = new ForceVectorArrow( 'black', 'panelNetForceArrow', tandem );
 
