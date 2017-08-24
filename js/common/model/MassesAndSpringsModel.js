@@ -342,10 +342,6 @@ define( function( require ) {
             spring.setMass( mass );
           }
         } );
-
-        //Update position
-        //TODO: Do we need this?
-        mass.positionProperty.set( massPosition );
       }
     },
 
