@@ -29,6 +29,7 @@ define( function( require ) {
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
+  var TBody = require( 'MASSES_AND_SPRINGS/common/model/TBody' );
 
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
@@ -125,9 +126,8 @@ define( function( require ) {
 
     // @public {Property.<string>} name of planet selected
     this.bodyProperty = new Property( Body.EARTH, {
-      tandem: tandem.createTandem( 'bodyProperty' )
-      //TODO: Create TBody type
-      //phetioValueType: TString
+      tandem: tandem.createTandem( 'bodyProperty' ),
+      phetioValueType: TBody
     } );
 
     // Visibility properties of vectors associated with each mass
