@@ -1,9 +1,7 @@
 // Copyright 2014-2017, University of Colorado Boulder
 
-// REVIEW: This button isn't specific to stopping the springs.  I (jbphet) would suggest changing the name to
-// StopButtonNode and updating the documentation, then someone could just grab it if they wanted to reuse it.
 /**
- * Spring stopper button that stops a specific spring from oscillating.
+ * Button that stops a specific spring from oscillating.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -23,7 +21,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function SpringStopperButtonNode( tandem, options ) {
+  function StopperButtonNode( tandem, options ) {
     options = _.extend( {
       xMargin: 3,
       yMargin: 3,
@@ -39,7 +37,7 @@ define( function( require ) {
     RectangularPushButton.call( this, options );
   }
 
-  massesAndSprings.register( 'SpringStopperButtonNode', SpringStopperButtonNode );
+  massesAndSprings.register( 'StopperButtonNode', StopperButtonNode );
 
-  return inherit( RectangularPushButton, SpringStopperButtonNode );
+  return inherit( RectangularPushButton, StopperButtonNode );
 } );

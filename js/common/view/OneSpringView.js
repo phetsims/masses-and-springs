@@ -33,7 +33,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
-  var SpringStopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/SpringStopperButtonNode' );
+  var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
@@ -236,7 +236,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'speedControl' )
     } );
 
-    var springStopperButtonNode = new SpringStopperButtonNode(
+    var springStopperButtonNode = new StopperButtonNode(
       tandem.createTandem( 'springStopperButtonNode' ), {
         listener: function() {
           model.springs[ 0 ].stopSpring()

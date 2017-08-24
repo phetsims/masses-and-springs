@@ -31,7 +31,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
-  var SpringStopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/SpringStopperButtonNode' );
+  var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
@@ -122,7 +122,7 @@ define( function( require ) {
       tandem.createTandem( 'springHangerNode' )
     );
 
-    this.firstSpringStopperButtonNode = new SpringStopperButtonNode(
+    this.firstSpringStopperButtonNode = new StopperButtonNode(
       tandem.createTandem( 'firstSpringStopperButtonNode' ), {
         listener: function() {
           model.springs[ 0 ].stopSpring()
@@ -130,7 +130,7 @@ define( function( require ) {
         right: this.springHangerNode.left - this.spacing,
         top: this.spacing
       } );
-    var secondSpringStopperButtonNode = new SpringStopperButtonNode(
+    var secondSpringStopperButtonNode = new StopperButtonNode(
       tandem.createTandem( 'secondSpringStopperButtonNode' ), {
         listener: function() {
           model.springs[ 1 ].stopSpring()
