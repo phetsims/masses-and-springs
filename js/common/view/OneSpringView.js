@@ -62,8 +62,7 @@ define( function( require ) {
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
     var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 );
 
-    // REVIEW: The comment below says 'top margin', but within the code it seems to be used as the inset for right and left too.
-    // Spacing for top margin of layout bounds
+    // Spacing used for the margins of layout bounds
     this.spacing = modelViewTransform.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
 
     // REVIEW: Panels should be floated (probably just haven't gotten to it yet).
