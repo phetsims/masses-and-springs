@@ -27,6 +27,7 @@ define( function( require ) {
   var TITLE_FONT = MassesAndSpringsConstants.TITLE_FONT;
   var MAX_TEXT_WIDTH = MassesAndSpringsConstants.MAX_TEXT_WIDTH;
   var FONT = MassesAndSpringsConstants.FONT;
+  var RADIO_BUTTON_SPACING = 4;
 
   /**
    * @param {Property.<string>} selectedConstantProperty determines which value to hold constant, values are 'spring-constant' and 'spring-thickness'
@@ -72,11 +73,9 @@ define( function( require ) {
       tandem: tandem.createTandem( 'springConstantRadioButton' )
     } );
 
-    // spacing used for radio buttons
-    var radioButtonSpacing = 4; // REVIEW: should be in 'constants' section at top
     Panel.call( this, new VBox( {
       align: 'left',
-      spacing: radioButtonSpacing,
+      spacing: RADIO_BUTTON_SPACING,
       children: [
         new Text( title, { font: TITLE_FONT, tandem: tandem } ),
         springConstantRadioButton,
