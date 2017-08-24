@@ -72,26 +72,20 @@ define( function( require ) {
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
     var massNodes = [];
 
-    // REVIEW: model.masses used to be an object, but was changed to be an array.  The code below that iterates through
-    // the masses works, but only because of the way that JavaScript treats arrays, and is hard to understand.  This
-    // should be changed to use model.masses.forEach().
-    for ( var property in model.masses ) {
-      if ( !model.masses.hasOwnProperty( property ) ) {
-        continue;
-      }
-      var referencedMassProperty = model.masses[ property ];
+    model.masses.forEach( function( property, index ) {
+      var referencedMassProperty = model.masses[ index ];
       var massNode = new MassNode(
         referencedMassProperty,
         model.showVectors,
         modelViewTransform,
-        this.visibleBoundsProperty,
+        self.visibleBoundsProperty,
         model,
         tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
-      this.massLayer.addChild( massNode );
+      self.massLayer.addChild( massNode );
 
       // Keeps track of the mass node to restore original Z order.
       massNodes.push( massNode );
-    }
+    } );
 
     // REVIEW: Should be down in the 'method block' of the inherit call.
     // @protected Helper function to restore initial layering of the masses to prevent them from stacking over each other.
