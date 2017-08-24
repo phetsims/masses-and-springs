@@ -85,36 +85,31 @@ define( function( require ) {
         self.setResetState( true );
         sameLengthModeSpringState = self.getSceneState();
         self.setSceneState( adjustableLengthModeSpringState );
-
-        // REVIEW: There are several link statements below, which are inside the link to the sceneModeProperty.  It is
-        // rarely necessary to have a link inside a link, and I don't think it is warranted here.  These links should
-        // probably be outside, on their own, and the other state information should be taken into account when the
-        // properties change.
-
-        // Manages logic for updating spring thickness and spring constant
-        self.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
-          if ( self.constantParameterProperty.get() === 'spring-constant' ) {
-            self.spring1.updateThickness( naturalRestingLength, self.spring1.springConstantProperty.get() );
-          }
-          else if ( self.constantParameterProperty.get() === 'spring-thickness' ) {
-            self.spring1.updateSpringConstant( naturalRestingLength, self.spring1.thicknessProperty.get() );
-          }
-        } );
-
-        self.constantParameterProperty.link( function( selectedConstant ) {
-          // Manages logic for changing between constant parameters
-          // TODO: Enumerate these constants for checks
-          if ( selectedConstant === 'spring-constant' ) {
-            self.spring1.springConstantProperty.reset();
-            self.spring1.updateThickness( self.spring1.naturalRestingLengthProperty.get(), self.spring1.springConstantProperty.get() );
-          }
-          else if ( selectedConstant === 'spring-thickness' ) {
-            self.spring1.thicknessProperty.reset();
-            self.spring1.updateSpringConstant( self.spring1.naturalRestingLengthProperty.get(), self.spring1.thicknessProperty.get() );
-          }
-
-        } );
       }
+    } );
+
+    // Manages logic for updating spring thickness and spring constant
+    self.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
+      if ( self.constantParameterProperty.get() === 'spring-constant' ) {
+        self.spring1.updateThickness( naturalRestingLength, self.spring1.springConstantProperty.get() );
+      }
+      else if ( self.constantParameterProperty.get() === 'spring-thickness' ) {
+        self.spring1.updateSpringConstant( naturalRestingLength, self.spring1.thicknessProperty.get() );
+      }
+    } );
+
+    self.constantParameterProperty.link( function( selectedConstant ) {
+      // Manages logic for changing between constant parameters
+      // TODO: Enumerate these constants for checks
+      if ( selectedConstant === 'spring-constant' ) {
+        self.spring1.springConstantProperty.reset();
+        self.spring1.updateThickness( self.spring1.naturalRestingLengthProperty.get(), self.spring1.springConstantProperty.get() );
+      }
+      else if ( selectedConstant === 'spring-thickness' ) {
+        self.spring1.thicknessProperty.reset();
+        self.spring1.updateSpringConstant( self.spring1.naturalRestingLengthProperty.get(), self.spring1.thicknessProperty.get() );
+      }
+
     } );
   }
 
