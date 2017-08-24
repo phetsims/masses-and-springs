@@ -211,7 +211,7 @@ define( function( require ) {
     // Timer and Ruler
     var timerNode = new DraggableTimerNode(
       this.visibleBoundsProperty.get(),
-      new Vector2( this.visibleBoundsProperty.get().left + 80, this.spacing + 35 ),
+      new Vector2( 0, 0 ),
       model.timerSecondsProperty,
       model.timerRunningProperty,
       model.timerVisibleProperty,
@@ -220,7 +220,7 @@ define( function( require ) {
     var rulerNode = new DraggableRulerNode(
       modelViewTransform,
       this.visibleBoundsProperty.get(),
-      new Vector2( this.visibleBoundsProperty.get().left + 50, this.spacing + 35 ),
+      new Vector2( 0, 0 ),
       model.rulerVisibleProperty,
       tandem.createTandem( 'rulerNode' )
     );

@@ -151,14 +151,10 @@ define( function( require ) {
       }
     );
 
-    // REVIEW: timerNode and rulerNode are initially positioned using some unexplained constant values.  Are these
-    // even needed?  Aren't they invisible until dragged out of the panel, and aren't their positions set when that
-    // happens?  If these ARE in fact needed, they should be documented.
-
     // Timer and Ruler
     var timerNode = new DraggableTimerNode(
       this.visibleBoundsProperty.get(),
-      new Vector2( this.visibleBoundsProperty.get().left + 80, this.spacing + 35 ),
+      new Vector2( 0, 0 ),
       model.timerSecondsProperty,
       model.timerRunningProperty,
       model.timerVisibleProperty,
@@ -167,7 +163,7 @@ define( function( require ) {
     var rulerNode = new DraggableRulerNode(
       modelViewTransform,
       this.visibleBoundsProperty.get(),
-      new Vector2( this.visibleBoundsProperty.get().left + 50, this.spacing + 35 ),
+      new Vector2( 0, 0 ),
       model.rulerVisibleProperty,
       tandem.createTandem( 'rulerNode' )
     );
