@@ -87,7 +87,7 @@ define( function( require ) {
       self.massNodes.push( massNode );
     } );
 
-    this.oscillatingSpringNode = new OscillatingSpringNode(
+    var oscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 0 ],
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 1 ),
       tandem.createTandem( 'oscillatingSpringNode' )
@@ -124,16 +124,11 @@ define( function( require ) {
 
     springHangerNode.top = springConstantControlPanel.top;
 
-    // REVIEW: There are a number of view elements, such as e.g. secondSpringEquilibriumLineNode,
-    // gravityAndFrictionControlPanel, etc, that are created as properties (i.e. this.x) instead of variables (i.e.
-    // var x), but as far as I (jbphet) can tell they aren't used outside of the object instance.  These should be
-    // checked and made local if possible.
-
     // REVIEW: This is OneSpringView, but there are some names below that refer to "secondXxx", such as
     // secondSpringEquilibriumLineNode.  These should probably be cleaned up.
 
     // @public Initializes equilibrium line for second spring
-    this.secondSpringEquilibriumLineNode = new EquilibriumLineNode(
+    var secondSpringEquilibriumLineNode = new EquilibriumLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
@@ -141,7 +136,7 @@ define( function( require ) {
     );
 
     // @public Initializes natural line for second spring
-    this.secondNaturalLengthLineNode = new NaturalLengthLineNode(
+    var secondNaturalLengthLineNode = new NaturalLengthLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
@@ -270,8 +265,8 @@ define( function( require ) {
     massValueControlPanel.left = energyGraphNode.right + this.spacing;
     springHangerNode.right = springStopperButtonNode.left - this.spacing;
 
-    // @public Initializes movable line
-    this.movableLineNode = new MovableLineNode(
+    // Initializes movable line
+    var movableLineNode = new MovableLineNode(
       springHangerNode.getCenter().plus( new Vector2( 45, 200 ) ),
       100,
       model.movableLineVisibleProperty,
@@ -281,7 +276,7 @@ define( function( require ) {
 
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
     // Adding all of the nodes to the scene graph
-    this.addChild( this.oscillatingSpringNode );
+    this.addChild( oscillatingSpringNode );
 
     // Adding Panels to scene graph
     this.addChild( springHangerNode );
@@ -299,9 +294,9 @@ define( function( require ) {
     this.addChild( springStopperButtonNode );
 
     // Reference lines from indicator visibility box
-    this.addChild( this.secondSpringEquilibriumLineNode );
-    this.addChild( this.secondNaturalLengthLineNode );
-    this.addChild( this.movableLineNode );
+    this.addChild( secondSpringEquilibriumLineNode );
+    this.addChild( secondNaturalLengthLineNode );
+    this.addChild( movableLineNode );
     this.addChild( this.massLayer );
 
     // Adding Nodes in tool box
@@ -353,7 +348,7 @@ define( function( require ) {
      * @private
      */
     resetMassLayer: function() {
-      self.massNodes.forEach( function( massNode ) {
+      this.massNodes.forEach( function( massNode ) {
         massNode.moveToFront();
       } );
     }

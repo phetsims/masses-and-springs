@@ -158,8 +158,8 @@ define( function( require ) {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       } );
 
-    // @public Initializes red movable reference line
-    this.movableLineNode = new MovableLineNode(
+    // Initializes red movable reference line
+    var movableLineNode = new MovableLineNode(
       this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 45, 0 ) ),
       180,
       model.movableLineVisibleProperty,
@@ -168,7 +168,7 @@ define( function( require ) {
     );
 
     // @public Initializes equilibrium line for first spring
-    this.firstSpringEquilibriumLineNode = new EquilibriumLineNode(
+    var firstSpringEquilibriumLineNode = new EquilibriumLineNode(
       modelViewTransform,
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
@@ -176,7 +176,7 @@ define( function( require ) {
     );
 
     // @public Initializes equilibrium line for second spring
-    this.secondSpringEquilibriumLineNode = new EquilibriumLineNode(
+    var secondSpringEquilibriumLineNode = new EquilibriumLineNode(
       modelViewTransform,
       model.springs[ 1 ],
       model.equilibriumPositionVisibleProperty,
@@ -184,7 +184,7 @@ define( function( require ) {
     );
 
     // @public Initializes natural line for first spring
-    this.firstNaturalLengthLineNode = new NaturalLengthLineNode(
+    var firstNaturalLengthLineNode = new NaturalLengthLineNode(
       modelViewTransform,
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
@@ -192,7 +192,7 @@ define( function( require ) {
     );
 
     // @public Initializes natural line for second spring
-    this.secondNaturalLengthLineNode = new NaturalLengthLineNode(
+    var secondNaturalLengthLineNode = new NaturalLengthLineNode(
       modelViewTransform,
       model.springs[ 1 ],
       model.naturalLengthVisibleProperty,
@@ -312,11 +312,11 @@ define( function( require ) {
     this.addChild( secondSpringStopperButtonNode )
     ;
     //Reference lines from indicator visibility box
-    this.addChild( this.firstSpringEquilibriumLineNode );
-    this.addChild( this.secondSpringEquilibriumLineNode );
-    this.addChild( this.firstNaturalLengthLineNode );
-    this.addChild( this.secondNaturalLengthLineNode );
-    this.addChild( this.movableLineNode );
+    this.addChild( firstSpringEquilibriumLineNode );
+    this.addChild( secondSpringEquilibriumLineNode );
+    this.addChild( firstNaturalLengthLineNode );
+    this.addChild( secondNaturalLengthLineNode );
+    this.addChild( movableLineNode );
     this.addChild( this.massLayer );
 
     // Adding Nodes in tool box
