@@ -46,7 +46,7 @@ define( function( require ) {
     this.spring1 = this.springs[ 0 ];
     this.spring2 = this.springs[ 1 ];
 
-    // REVIEW: Some documentation to describe what this does would be helpful.
+    // We are updating the spring thickness for each spring, whenever we are on the first scene
     this.springs.forEach( function( spring ) {
       spring.springConstantProperty.link( function( springConstant ) {
         if ( self.sceneModeProperty.get() === 'same-length' ) {
