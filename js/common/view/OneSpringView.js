@@ -1,8 +1,7 @@
 // Copyright 2017, University of Colorado Boulder
 
-// REVIEW: This comment seems incorrect.  Cut and paste error?
 /**
- * Common ScreenView for  using two masses.
+ * Common ScreenView for  using one masse.
  *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
