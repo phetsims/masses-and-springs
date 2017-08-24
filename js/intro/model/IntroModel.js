@@ -57,11 +57,11 @@ define( function( require ) {
 
     // initial parameters set for both scenes
     // @private {read-write} array of parameters for scene 1
-    var sameLengthModeSpringState = this.getSceneState();
+    var sameLengthModeSpringState = this.getSpringState();
 
     // @private {read-write} array of parameters for scene 2
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
-    var adjustableLengthModeSpringState = this.getSceneState();
+    var adjustableLengthModeSpringState = this.getSpringState();
 
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
 
@@ -76,15 +76,15 @@ define( function( require ) {
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
         self.setResetState( true );
-        adjustableLengthModeSpringState = self.getSceneState();
-        self.setSceneState( sameLengthModeSpringState );
+        adjustableLengthModeSpringState = self.getSpringState();
+        self.setSpringState( sameLengthModeSpringState );
       }
 
       else if ( mode === 'adjustable-length' ) {
         // Manages stashing and applying parameters to each scene
         self.setResetState( true );
-        sameLengthModeSpringState = self.getSceneState();
-        self.setSceneState( adjustableLengthModeSpringState );
+        sameLengthModeSpringState = self.getSpringState();
+        self.setSpringState( adjustableLengthModeSpringState );
       }
     } );
 
@@ -109,7 +109,6 @@ define( function( require ) {
         self.spring1.thicknessProperty.reset();
         self.spring1.updateSpringConstant( self.spring1.naturalRestingLengthProperty.get(), self.spring1.thicknessProperty.get() );
       }
-
     } );
   }
 
@@ -129,15 +128,12 @@ define( function( require ) {
       this.getResetState(); // REVIEW: It seems odd that a getter would be called during a reset (more on this method below)
     },
 
-    // RE#VIEW: The methods below are only setting and getting the state of the springs.  Can they be renamed to
-    // getSpringsState and setSpringsState?
-
     /**
      * Responsible for preserving the properties of the masses and springs then stores them in a mutable object.
      *
      * @private
      */
-    getSceneState: function() {
+    getSpringState: function() {
       var spring1State = this.spring1.getSpringState();
       var spring2State = this.spring2.getSpringState();
 
@@ -153,7 +149,7 @@ define( function( require ) {
      *
      * @private
      */
-    setSceneState: function( sceneState ) {
+    setSpringState: function( sceneState ) {
       this.spring1.setSpringState( sceneState.spring1State );
       this.spring2.setSpringState( sceneState.spring2State );
     },
