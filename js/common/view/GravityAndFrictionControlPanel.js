@@ -158,7 +158,6 @@ define( function( require ) {
       }
 
       // Update gravity
-      // REVIEW: Why is this qualified? Why not just save the value every time?
       else if ( body.gravity || body === Body.ZERO_G ) {
         self.gravityProperty.set( body.gravity );
       }
@@ -167,7 +166,7 @@ define( function( require ) {
       previousBody = newBody;
     } );
 
-    this.gravityProperty.link( function( newGravity, previousGravity ) {
+    this.gravityProperty.link( function( newGravity ) {
 
       // If we changed to a body, don't try to update the title
       // REVIEW: Suggest using forEach instead - IntelliJ is flagging the i variable as not checked for hasOwnProperty
