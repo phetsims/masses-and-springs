@@ -65,8 +65,6 @@ define( function( require ) {
     // Spacing used for the margins of layout bounds
     this.spacing = modelViewTransform.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
 
-    // REVIEW: Panels should be floated (probably just haven't gotten to it yet).
-
     // Alignment for panels on most right side of sim view
     var rightPanelAlignment = this.visibleBoundsProperty.get().right - this.spacing;
 
