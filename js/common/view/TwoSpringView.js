@@ -125,7 +125,7 @@ define( function( require ) {
     this.firstSpringStopperButtonNode = new StopperButtonNode(
       tandem.createTandem( 'firstSpringStopperButtonNode' ), {
         listener: function() {
-          model.springs[ 0 ].stopSpring()
+          model.springs[ 0 ].stopSpring();
         },
         right: this.springHangerNode.left - this.spacing,
         top: this.spacing
@@ -133,7 +133,7 @@ define( function( require ) {
     var secondSpringStopperButtonNode = new StopperButtonNode(
       tandem.createTandem( 'secondSpringStopperButtonNode' ), {
         listener: function() {
-          model.springs[ 1 ].stopSpring()
+          model.springs[ 1 ].stopSpring();
         },
         left: this.springHangerNode.right + this.spacing,
         top: this.spacing
