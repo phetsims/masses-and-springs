@@ -117,7 +117,7 @@ define( function( require ) {
 
     // Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
-      model,
+      model.springs,
       modelViewTransform,
       tandem.createTandem( 'springHangerNode' )
     );

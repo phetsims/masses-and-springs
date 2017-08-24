@@ -93,7 +93,7 @@ define( function( require ) {
       tandem.createTandem( 'oscillatingSpringNode' )
     );
 
-    var springHangerNode = new SpringHangerNode( model,
+    var springHangerNode = new SpringHangerNode( model.springs,
       modelViewTransform,
       tandem.createTandem( 'springHangerNode' ),
       {

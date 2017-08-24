@@ -21,28 +21,27 @@ define( function( require ) {
   // constants
   var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
 
-  // REVIEW: The model is only used for the springs, would be better to just pass in the springs array.
   /**
-   * @param {MassesAndSpringsModel} model
+   * @param {Array} springs
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function SpringHangerNode( model, modelViewTransform2, tandem, options ) {
+  function SpringHangerNode( springs, modelViewTransform2, tandem, options ) {
     options = _.extend( {
       singleSpring: false
     }, options );
 
     if ( options.singleSpring === false ) {
       var springsSeparation =
-        modelViewTransform2.modelToViewDeltaX( Math.abs( model.springs[ 0 ].positionProperty.get().x -
-                                                         model.springs[ 1 ].positionProperty.get().x ) );
+        modelViewTransform2.modelToViewDeltaX( Math.abs( springs[ 0 ].positionProperty.get().x -
+                                                         springs[ 1 ].positionProperty.get().x ) );
       var springHangerNodeWidth = springsSeparation * 1.4;
 
       // X coordinate of middle of springs
-      var middleOfSprings = modelViewTransform2.modelToViewX( (model.springs[ 0 ].positionProperty.get().x +
-                                                               model.springs[ 1 ].positionProperty.get().x) / 2 );
+      var middleOfSprings = modelViewTransform2.modelToViewX( (springs[ 0 ].positionProperty.get().x +
+                                                               springs[ 1 ].positionProperty.get().x) / 2 );
 
       // derived from x positions of springs.
       Rectangle.call( this, 0, 0, springHangerNodeWidth, 20, 8, 8, {
