@@ -50,9 +50,7 @@ define( function( require ) {
       maxWidth: MAX_TEXT_WIDTH
     };
 
-    // REVIEW: visibility annotation is unnecessary for local variables (there are a handful of instances below)
-
-    // @private {read-only} radius of button
+    // radius of button
     var constantsSelectionButtonRadius = 6;
     var thicknessText = new Text(
       thicknessString,
@@ -74,7 +72,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'springConstantRadioButton' )
     } );
 
-    // @private {read-only} spacing used for radio buttons
+    // spacing used for radio buttons
     var radioButtonSpacing = 4; // REVIEW: should be in 'constants' section at top
     Panel.call( this, new VBox( {
       align: 'left',
