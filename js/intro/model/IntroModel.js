@@ -67,12 +67,11 @@ define( function( require ) {
 
     // Link that is responsible for switching the scenes
     this.sceneModeProperty.lazyLink( function( mode ) {
-      // REVIEW#: The following is marked as JSDoc (i.e. using the /** header) but doesn't look like JavaDoc.
-      /*Functions used to determine the inverse relationship between the length and springConstant/thickness
-       Functions follow logic:
-       -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
-       -Thickness = constant -->As length increases, spring constant decreases  (and vice versa)
-       */
+
+      //Functions used to determine the inverse relationship between the length and springConstant/thickness
+      // Functions follow logic:
+      //  -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
+      //  -Thickness = constant -->As length increases, spring constant decreases  (and vice versa)
       // Restoring spring parameters when scenes are switched
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
