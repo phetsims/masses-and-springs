@@ -39,14 +39,13 @@ define( function( require ) {
     this.mouseArea = this.localBounds.dilatedY( 10 );
     this.touchArea = this.localBounds.dilatedY( 10 );
 
-    // REVIEW: There are some variables with visibility annotations below - these annotations are unnecessary.
-    // @private {read-write} prevents overlap with the equilibrium line
+    // {read-write} prevents overlap with the equilibrium line
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x ) + 7.5;
 
     // updates the position of the natural length line as the system changes
     spring.bottomProperty.link( function( bottom ) {
 
-      // @private {read-write} Y position of line in screen coordinates
+      // {read-write} Y position of line in screen coordinates
       var yPos = modelViewTransform2.modelToViewY( bottom );
 
       // @private {read-write} position of line in screen coordinates
@@ -59,9 +58,7 @@ define( function( require ) {
       self.positionProperty.link( function( position ) {
           self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
         } );
-
     } );
-
     visibleProperty.linkAttribute( self, 'visible' );
   }
 
