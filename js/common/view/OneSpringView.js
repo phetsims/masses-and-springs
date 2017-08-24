@@ -238,8 +238,9 @@ define( function( require ) {
 
     var springStopperButtonNode = new SpringStopperButtonNode(
       tandem.createTandem( 'springStopperButtonNode' ), {
-        // REVIEW: Is the 'bind' really necessary? Doesn't seem like it should be.
-        listener: model.springs[ 0 ].stopSpring.bind( model.springs[ 0 ] ),
+        listener: function() {
+          model.springs[ 0 ].stopSpring()
+        },
         right: springConstantControlPanel.left - this.spacing,
         top: this.spacing
       }

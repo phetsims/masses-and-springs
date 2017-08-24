@@ -124,13 +124,17 @@ define( function( require ) {
 
     this.firstSpringStopperButtonNode = new SpringStopperButtonNode(
       tandem.createTandem( 'firstSpringStopperButtonNode' ), {
-        listener: model.springs[ 0 ].stopSpring.bind( model.springs[ 0 ] ),
+        listener: function() {
+          model.springs[ 0 ].stopSpring()
+        },
         right: this.springHangerNode.left - this.spacing,
         top: this.spacing
       } );
     var secondSpringStopperButtonNode = new SpringStopperButtonNode(
       tandem.createTandem( 'secondSpringStopperButtonNode' ), {
-        listener: model.springs[ 1 ].stopSpring.bind( model.springs[ 1 ] ),
+        listener: function() {
+          model.springs[ 1 ].stopSpring()
+        },
         left: this.springHangerNode.right + this.spacing,
         top: this.spacing
       } );
