@@ -29,6 +29,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
@@ -55,39 +56,9 @@ define( function( require ) {
    * @constructor
    */
   function TwoSpringView( model, tandem ) {
-
     this.model = model; // Make model available for reset
     var self = this;
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
-
-    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 );
-    // Spacing for top margin of layout bounds
-    this.spacing = modelViewTransform.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
-
-    // Alignment for panels on most right side of sim view
-    var rightPanelAlignment = this.visibleBoundsProperty.get().getMaxX() - this.spacing;
-
-    // Add masses
-    this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
-    this.massNodes = [];
-    for ( var property in model.masses ) {
-      if ( !model.masses.hasOwnProperty( property ) ) {
-        continue;
-      }
-      var referencedMass = model.masses[ property ];
-      // referencedMass.positionProperty.set(new Vector2(this.visibleBoundsProperty.get().minX,0));
-      var massNode = new MassNode(
-        referencedMass,
-        model.showVectors,
-        modelViewTransform,
-        this.visibleBoundsProperty,
-        model,
-        tandem.createTandem( referencedMass.tandem.tail + 'Node' ) );
-      this.massLayer.addChild( massNode );
-
-      // Keeps track of the mass node to restore original Z order.
-      self.massNodes.push( massNode );
-    }
+    SpringView.call( this, model, tandem, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
     // Control Panel for display elements with varying visibility
     var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
@@ -95,13 +66,13 @@ define( function( require ) {
       tandem.createTandem( 'indicatorVisibilityControlPanel' ),
       {
         top: this.spacing,
-        right: rightPanelAlignment,
+        right: this.rightPanelAlignment,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       } );
 
-    model.springs[ 0 ].options.modelViewTransform2 = modelViewTransform;
-    model.springs[ 1 ].options.modelViewTransform2 = modelViewTransform;
+    model.springs[ 0 ].options.modelViewTransform2 = this.modelViewTransform;
+    model.springs[ 1 ].options.modelViewTransform2 = this.modelViewTransform;
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
     this.firstOscillatingSpringNode = new OscillatingSpringNode(
@@ -118,7 +89,7 @@ define( function( require ) {
     // Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
       model.springs,
-      modelViewTransform,
+      this.modelViewTransform,
       tandem.createTandem( 'springHangerNode' )
     );
 
@@ -173,7 +144,7 @@ define( function( require ) {
 
     // @public Initializes equilibrium line for first spring
     var firstSpringEquilibriumLineNode = new EquilibriumLineNode(
-      modelViewTransform,
+      this.modelViewTransform,
       model.springs[ 0 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'firstSpringEquilibriumLineNode' )
@@ -181,7 +152,7 @@ define( function( require ) {
 
     // @public Initializes equilibrium line for second spring
     var secondSpringEquilibriumLineNode = new EquilibriumLineNode(
-      modelViewTransform,
+      this.modelViewTransform,
       model.springs[ 1 ],
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'secondSpringEquilibriumLineNode' )
@@ -189,7 +160,7 @@ define( function( require ) {
 
     // @public Initializes natural line for first spring
     var firstNaturalLengthLineNode = new NaturalLengthLineNode(
-      modelViewTransform,
+      this.modelViewTransform,
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'firstNaturalLengthLineNode' )
@@ -197,7 +168,7 @@ define( function( require ) {
 
     // @public Initializes natural line for second spring
     var secondNaturalLengthLineNode = new NaturalLengthLineNode(
-      modelViewTransform,
+      this.modelViewTransform,
       model.springs[ 1 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'secondNaturalLengthLineNode' )
@@ -206,93 +177,15 @@ define( function( require ) {
     // Gravity Control Panel
     this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
       model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ), {
-        right: rightPanelAlignment,
+        right: this.rightPanelAlignment,
         top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );
 
-    // Timer and Ruler
-    var timerNode = new DraggableTimerNode(
-      this.visibleBoundsProperty.get(),
-      new Vector2( 0, 0 ),
-      model.timerSecondsProperty,
-      model.timerRunningProperty,
-      model.timerVisibleProperty,
-      tandem.createTandem( 'timerNode' )
-    );
-    var rulerNode = new DraggableRulerNode(
-      modelViewTransform,
-      this.visibleBoundsProperty.get(),
-      new Vector2( 0, 0 ),
-      model.rulerVisibleProperty,
-      tandem.createTandem( 'rulerNode' )
-    );
-
-    // Toolbox Panel
-    this.toolboxPanel = new ToolboxPanel(
-      this.visibleBoundsProperty.get(),
-      rulerNode, timerNode,
-      model.rulerVisibleProperty,
-      model.timerVisibleProperty,
-      tandem.createTandem( 'toolboxPanel' ),
-      {
-        top: this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        left: this.gravityAndFrictionControlPanel.left,
-        minWidth: this.gravityAndFrictionControlPanel.width,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      } );
-
-    // Done to for movableDragHandler handling intersecting bounds of panel and ruler
-    rulerNode.toolbox = this.toolboxPanel;
-    timerNode.toolbox = this.toolboxPanel;
-
-    // Reset All button
-    this.resetAllButton = new ResetAllButton( {
-      listener: function() {
-        model.reset();
-
-        // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
-        self.resetMassLayer();
-      },
-      right: this.visibleBoundsProperty.get().right - 10,
-      bottom: modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
-      tandem: tandem.createTandem( 'resetAllButton' )
-    } );
-
-    // Play/Pause and Step Forward Button Control
-    var timeControlPanel = new TimeControlPanel(
-      model,
-      this.visibleBoundsProperty.get(),
-      tandem.createTandem( 'timeControlPanel' )
-    );
-
-    // Sim speed controls
-    var speedSelectionButtonOptions = {
-      font: new PhetFont( 14 ),
-      maxWidth: MAX_TEXT_WIDTH
-    };
-    var speedSelectionButtonRadius = 8;
-    var normalText = new Text( normalString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'normalString' ) } );
-    var normalMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'normal', normalText, {
-      radius: speedSelectionButtonRadius,
-      tandem: tandem.createTandem( 'normalMotionRadioBox' )
-    } );
-
-    var slowText = new Text( slowMotionString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'slowText' ) } );
-    var slowMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'slow', slowText, {
-      radius: speedSelectionButtonRadius,
-      tandem: tandem.createTandem( 'normalMotionRadioBox' )
-    } );
-
-    var radioButtonSpacing = 4;
-    var speedControl = new VBox( {
-      align: 'left',
-      spacing: radioButtonSpacing,
-      children: [ normalMotionRadioBox, slowMotionRadioBox ],
-      centerY: this.resetAllButton.centerY,
-      tandem: tandem.createTandem( 'speedControl' )
-    } );
+    this.toolboxPanel.top = this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+    this.toolboxPanel.left = this.gravityAndFrictionControlPanel.left;
+    this.toolboxPanel.minWidth = this.gravityAndFrictionControlPanel.width;
 
     this.springHangerNode.centerX = 336;
 
@@ -310,11 +203,11 @@ define( function( require ) {
 
     // Adding Buttons to scene graph
     this.addChild( this.resetAllButton );
-    this.addChild( timeControlPanel );
-    this.addChild( speedControl );
+    this.addChild( this.timeControlPanel );
+    this.addChild( this.speedControl );
     this.addChild( this.firstSpringStopperButtonNode );
-    this.addChild( secondSpringStopperButtonNode )
-    ;
+    this.addChild( secondSpringStopperButtonNode );
+
     //Reference lines from indicator visibility box
     this.addChild( firstSpringEquilibriumLineNode );
     this.addChild( secondSpringEquilibriumLineNode );
@@ -324,11 +217,10 @@ define( function( require ) {
     this.addChild( this.massLayer );
 
     // Adding Nodes in tool box
-    this.addChild( timerNode );
-    this.addChild( rulerNode );
+    this.addChild( this.timerNode );
+    this.addChild( this.rulerNode );
 
     // Adjust the floating panels to the visibleBounds of the screen.
-
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
@@ -336,26 +228,26 @@ define( function( require ) {
       self.gravityAndFrictionControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;
-      speedControl.right = self.resetAllButton.left - self.spacing * 6;
-      timeControlPanel.right = speedControl.left - self.spacing * 6;
+      self.speedControl.right = self.resetAllButton.left - self.spacing * 6;
+      self.timeControlPanel.right = self.speedControl.left - self.spacing * 6;
       self.toolboxPanel.dragBounds = 3;
-      timerNode.updateBounds( visibleBounds.withOffsets(
-        timerNode.width / 2, timerNode.height / 2, -timerNode.width / 2, -timerNode.height / 2
+      self.timerNode.updateBounds( visibleBounds.withOffsets(
+        self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2
       ) );
-      rulerNode.updateBounds( visibleBounds.withOffsets(
-        -rulerNode.width / 2, rulerNode.height / 2, rulerNode.width / 2, -rulerNode.height / 2
+      self.rulerNode.updateBounds( visibleBounds.withOffsets(
+        -self.rulerNode.width / 2, self.rulerNode.height / 2, self.rulerNode.width / 2, -self.rulerNode.height / 2
       ) );
       self.massNodes.forEach( function( massNode ) {
-        massNode.movableDragHandler.dragBounds = modelViewTransform.viewToModelBounds( visibleBounds );
+        massNode.movableDragHandler.dragBounds = self.modelViewTransform.viewToModelBounds( visibleBounds );
 
         if ( massNode.centerX > visibleBounds.maxX ) {
           massNode.mass.positionProperty.set(
-            new Vector2( modelViewTransform.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
+            new Vector2( self.modelViewTransform.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
           );
         }
         if ( massNode.centerX < visibleBounds.minX ) {
           massNode.mass.positionProperty.set(
-            new Vector2( modelViewTransform.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
+            new Vector2( self.modelViewTransform.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
           );
         }
       } );
@@ -364,17 +256,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'TwoSpringView', TwoSpringView );
 
-  return inherit( ScreenView, TwoSpringView, {
-
-    /**
-     * Helper function to restore initial layering of the masses to prevent them from stacking over each other.
-     *
-     * @public
-     */
-    resetMassLayer: function() {
-      this.massNodes.forEach( function( massNode ) {
-        massNode.moveToFront();
-      } );
-    }
-  } );
+  return inherit( SpringView, TwoSpringView );
 } );

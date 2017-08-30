@@ -137,6 +137,7 @@ define( function( require ) {
 
     model.bodyProperty.link( function( newBody, previousGravity ) {
       var body = _.find( self.bodies, newBody );
+      console.log( body );
 
       // Unhide the gravityHSlider if we are not using planetX
       if ( newBody !== Body.PLANET_X ) {
@@ -167,17 +168,18 @@ define( function( require ) {
 
       // If we changed to a body, don't try to update the title
       // REVIEW: Suggest using forEach instead - IntelliJ is flagging the i variable as not checked for hasOwnProperty
-      for ( var i in self.bodies ) {
+      self.bodies.forEach( function( body, index ) {
 
         // We can't check for truthiness of self.bodies[ i ].gravity because ZeroG is not truthy
-        if ( self.bodies[ i ] && self.bodies[ i ].hasOwnProperty( 'gravity' ) &&
-             newGravity === self.bodies[ i ].gravity ) {
+        if ( self.bodies[ index ] && self.bodies[ index ].hasOwnProperty( 'gravity' ) &&
+             newGravity === self.bodies[ index ].gravity ) {
           return;
         }
-      }
-
-      //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
-      model.bodyProperty.set( Body.CUSTOM );
+        else {
+          //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
+          model.bodyProperty.set( Body.CUSTOM );
+        }
+      } );
     } );
     this.mutate( options );
   }
