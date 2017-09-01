@@ -40,8 +40,8 @@ define( function( require ) {
    */
   function OneSpringView( model, tandem ) {
     this.model = model; // Make model available for reset
-    var self = this;
     SpringView.call( this, model, tandem, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    var self = this;
 
     var oscillatingSpringNode = new OscillatingSpringNode(
       model.springs[ 0 ],
@@ -116,6 +116,8 @@ define( function( require ) {
       springHangerNode.centerX + 5,
       tandem.createTandem( 'movableLineNode' )
     );
+
+    this.gravityAndFrictionControlPanel.options.frictionVisible = true;
 
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
     // Adding all of the nodes to the scene graph

@@ -39,8 +39,8 @@ define( function( require ) {
    */
   function TwoSpringView( model, tandem ) {
     this.model = model; // Make model available for reset
-    var self = this;
     SpringView.call( this, model, tandem, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    var self = this;
 
     model.springs[ 0 ].options.modelViewTransform2 = this.modelViewTransform;
     model.springs[ 1 ].options.modelViewTransform2 = this.modelViewTransform;
@@ -145,10 +145,7 @@ define( function( require ) {
       tandem.createTandem( 'secondNaturalLengthLineNode' )
     );
 
-    this.toolboxPanel.top = this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
-    this.toolboxPanel.left = this.gravityAndFrictionControlPanel.left;
-    this.toolboxPanel.minWidth = this.gravityAndFrictionControlPanel.width;
-
+    this.gravityAndFrictionControlPanel.options.frictionVisible = false;
     this.springHangerNode.centerX = 336;
 
     // Adding all of the nodes to the scene graph

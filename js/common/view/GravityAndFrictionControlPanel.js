@@ -41,7 +41,7 @@ define( function( require ) {
    */
   function GravityAndFrictionControlPanel( model, listNodeParent, tandem, options ) {
     var self = this;
-    options = _.extend( {
+    this.options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 13,
       yMargin: 10,
@@ -102,7 +102,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
-    if ( options.frictionVisible ) {
+    if ( this.options.frictionVisible ) {
       this.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
         majorTickLength: 10,
         trackSize: new Dimension2( 130, 2 ),
@@ -121,7 +121,7 @@ define( function( require ) {
           this.frictionHSlider
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
-      } ), options );
+      } ), this.options );
     }
     else {
       Panel.call( this, new VBox( {
@@ -132,7 +132,7 @@ define( function( require ) {
           gravityHSlider
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
-      } ), options );
+      } ), this.options );
     }
 
     model.bodyProperty.link( function( newBody, previousGravity ) {
@@ -181,7 +181,7 @@ define( function( require ) {
         }
       } );
     } );
-    this.mutate( options );
+    this.mutate( this.options );
   }
 
   massesAndSprings.register( 'GravityAndFrictionControlPanel', GravityAndFrictionControlPanel );

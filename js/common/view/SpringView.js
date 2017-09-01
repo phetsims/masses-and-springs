@@ -89,22 +89,12 @@ define( function( require ) {
 
     // Gravity Control Panel
     this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
-      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ), {
-        right: this.rightPanelAlignment,
-        top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      }
-    );
-
-    // Gravity Control Panel
-    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
       model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
       {
         right: this.rightPanelAlignment,
         top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         minWidth: 1,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        frictionVisible: true
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );
 
