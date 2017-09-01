@@ -42,17 +42,6 @@ define( function( require ) {
     var self = this;
     SpringView.call( this, model, tandem, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
 
-    // Control Panel for display elements with varying visibility
-    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlPanel' ),
-      {
-        top: this.spacing,
-        right: this.rightPanelAlignment,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
-      } );
-
     model.springs[ 0 ].options.modelViewTransform2 = this.modelViewTransform;
     model.springs[ 1 ].options.modelViewTransform2 = this.modelViewTransform;
 
