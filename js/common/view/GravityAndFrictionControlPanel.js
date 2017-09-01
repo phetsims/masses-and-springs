@@ -142,7 +142,6 @@ define( function( require ) {
 
     model.bodyProperty.link( function( newBody, previousGravity ) {
       var body = _.find( self.bodies, newBody );
-      console.log( body );
 
       // Unhide the gravityHSlider if we are not using planetX
       if ( newBody !== Body.PLANET_X ) {
@@ -157,7 +156,7 @@ define( function( require ) {
 
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
       else if ( previousBody === Body.PLANET_X && newBody === Body.CUSTOM ) {
-        self.gravityProperty = previousGravity;
+        self.gravityProperty.set( previousGravity );
       }
 
       // Update gravity
@@ -171,20 +170,13 @@ define( function( require ) {
 
     this.gravityProperty.link( function( newGravity ) {
 
-      // If we changed to a body, don't try to update the title
-      // REVIEW: Suggest using forEach instead - IntelliJ is flagging the i variable as not checked for hasOwnProperty
-      self.bodies.forEach( function( body, index ) {
+      // If the user manually changed the gravity then change the body to CUSTOM.
+      var selectedBody = model.bodyProperty.get();
+      if ( selectedBody !== Body.CUSTOM && selectedBody.gravity !== newGravity ) {
 
-        // We can't check for truthiness of self.bodies[ i ].gravity because ZeroG is not truthy
-        if ( self.bodies[ index ] && self.bodies[ index ].hasOwnProperty( 'gravity' ) &&
-             newGravity === self.bodies[ index ].gravity ) {
-          return;
+        //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
+        model.bodyProperty.set( Body.CUSTOM );
         }
-        else {
-          //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
-          model.bodyProperty.set( Body.CUSTOM );
-        }
-      } );
     } );
     this.mutate( this.options );
   }
