@@ -45,9 +45,6 @@ define( function( require ) {
     model.springs[ 1 ].options.modelViewTransform2 = this.modelViewTransform;
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
-    this.firstOscillatingSpringNode = this.addOscillatingSpringNode( model.springs[ 0 ], tandem );
-    this.secondOscillatingSpringNode = this.addOscillatingSpringNode( model.springs[ 1 ], tandem );
-
     // Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
       model.springs,
@@ -55,6 +52,7 @@ define( function( require ) {
       tandem.createTandem( 'springHangerNode' )
     );
 
+    // TODO: Crate in an array like in line 55-65 of SpringView.js. Position in each deescendent class.
     this.firstSpringStopperButtonNode = new StopperButtonNode(
       tandem.createTandem( 'firstSpringStopperButtonNode' ), {
         listener: function() {
@@ -140,8 +138,6 @@ define( function( require ) {
     this.springHangerNode.centerX = 336;
 
     // Adding all of the nodes to the scene graph
-    this.addChild( this.firstOscillatingSpringNode );
-    this.addChild( this.secondOscillatingSpringNode );
     this.addChild( this.springHangerNode );
 
     // Adding Panels to scene graph

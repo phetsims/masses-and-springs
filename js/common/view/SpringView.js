@@ -48,9 +48,21 @@ define( function( require ) {
    */
   function SpringView( model, tandem ) {
     this.model = model; // Make model available for reset
-    var self = this;
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    var self = this;
     this.modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 );
+
+    // @protected {Array.<OscillatingSpringNode>} Used to reference the created springs in the view.
+    this.springNodes = [];
+    model.springs.forEach( function( spring ) {
+      var springNode = new OscillatingSpringNode(
+        spring,
+        MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( self.visibleBoundsProperty.get(), 1 ),
+        tandem.createTandem( 'firstOscillatingSpringNode' )
+      );
+      self.addChild( springNode );
+      self.springNodes.push( springNode );
+    } );
 
     // Spacing used for the margin of layout bounds
     this.spacing = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
@@ -197,20 +209,6 @@ define( function( require ) {
       this.massNodes.forEach( function( massNode ) {
         massNode.moveToFront();
       } );
-    },
-    /**
-     * Adds an oscillating spring
-     *
-     * @param {Spring} spring
-     * @param {Tandem} tandem
-     * @returns {OscillatingSpringNode}
-     */
-    addOscillatingSpringNode: function( spring, tandem ) {
-      return new OscillatingSpringNode(
-        spring,
-        MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 1 ),
-        tandem.createTandem( 'firstOscillatingSpringNode' )
-      );
     }
   } );
 } );

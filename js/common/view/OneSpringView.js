@@ -43,12 +43,6 @@ define( function( require ) {
     SpringView.call( this, model, tandem, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
     var self = this;
 
-    var oscillatingSpringNode = new OscillatingSpringNode(
-      model.springs[ 0 ],
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 1 ),
-      tandem.createTandem( 'oscillatingSpringNode' )
-    );
-
     var springHangerNode = new SpringHangerNode( model.springs,
       this.modelViewTransform,
       tandem.createTandem( 'springHangerNode' ),
@@ -126,8 +120,6 @@ define( function( require ) {
 
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
     // Adding all of the nodes to the scene graph
-    this.addChild( oscillatingSpringNode );
-
     // Adding Panels to scene graph
     this.addChild( springHangerNode );
     this.addChild( massValueControlPanel );
