@@ -144,7 +144,7 @@ define( function( require ) {
       tandem.createTandem( 'secondNaturalLengthLineNode' )
     );
 
-    this.gravityAndFrictionControlPanel.options.frictionVisible = false;
+    this.gravityAndFrictionControlPanel.options.frictionVisibleProperty.set( false );
     this.springHangerNode.centerX = 336;
 
     // Adding all of the nodes to the scene graph

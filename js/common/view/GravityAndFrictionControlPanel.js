@@ -20,6 +20,7 @@ define( function( require ) {
   var ComboBox = require( 'SUN/ComboBox' );
   var HSlider = require( 'SUN/HSlider' );
   var Panel = require( 'SUN/Panel' );
+  var Property = require( 'AXON/Property' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // strings
@@ -47,7 +48,7 @@ define( function( require ) {
       yMargin: 10,
       align: 'left',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      frictionVisible: false
+      frictionVisibleProperty: new Property( false )
     }, options );
 
     //  Add gravity info for various planets
@@ -102,38 +103,42 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
-    if ( this.options.frictionVisible ) {
-      this.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
-        majorTickLength: 10,
-        trackSize: new Dimension2( 130, 2 ),
-        thumbSize: new Dimension2( 13, 22 ),
-        thumbFillEnabled: '#00b3b3',
-        thumbFillHighlighted: '#00e6e6',
-        tandem: tandem.createTandem( 'gravityPropertyHSlider' )
-      } );
-      Panel.call( this, new VBox( {
-        align: 'left',
-        children: [
-          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-          gravityComboBox,
-          gravityHSlider,
-          new Text( frictionString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-          this.frictionHSlider
-        ],
-        tandem: tandem.createTandem( 'gravityPropertyVBox' )
-      } ), this.options );
-    }
-    else {
-      Panel.call( this, new VBox( {
-        align: 'left',
-        children: [
-          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-          gravityComboBox,
-          gravityHSlider
-        ],
-        tandem: tandem.createTandem( 'gravityPropertyVBox' )
-      } ), this.options );
-    }
+    this.options.frictionVisibleProperty.link( function( visible ) {
+      if ( visible ) {
+        self.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
+          majorTickLength: 10,
+          trackSize: new Dimension2( 130, 2 ),
+          thumbSize: new Dimension2( 13, 22 ),
+          thumbFillEnabled: '#00b3b3',
+          thumbFillHighlighted: '#00e6e6',
+          tandem: tandem.createTandem( 'gravityPropertyHSlider' )
+        } );
+
+        Panel.call( self, new VBox( {
+          align: 'left',
+          children: [
+            new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+            gravityComboBox,
+            gravityHSlider,
+            new Text( frictionString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+            self.frictionHSlider
+          ],
+          tandem: tandem.createTandem( 'gravityPropertyVBox' )
+        } ), self.options );
+      }
+      else {
+        Panel.call( self, new VBox( {
+          align: 'left',
+          children: [
+            new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+            gravityComboBox,
+            gravityHSlider
+          ],
+          tandem: tandem.createTandem( 'gravityPropertyVBox' )
+        } ), self.options );
+      }
+    } );
+
 
     model.bodyProperty.link( function( newBody, previousGravity ) {
       var body = _.find( self.bodies, newBody );

@@ -117,7 +117,12 @@ define( function( require ) {
       tandem.createTandem( 'movableLineNode' )
     );
 
-    this.gravityAndFrictionControlPanel.options.frictionVisible = true;
+
+    this.gravityAndFrictionControlPanel.options.frictionVisibleProperty.set( true );
+
+    this.toolboxPanel.top = this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+    this.toolboxPanel.left = this.gravityAndFrictionControlPanel.left;
+    this.toolboxPanel.minWidth = this.gravityAndFrictionControlPanel.width;
 
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
     // Adding all of the nodes to the scene graph
