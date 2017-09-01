@@ -16,6 +16,7 @@ define( function( require ) {
   var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var TimeControlPanel = require( 'MASSES_AND_SPRINGS/common/view/TimeControlPanel' );
@@ -196,6 +197,14 @@ define( function( require ) {
       this.massNodes.forEach( function( massNode ) {
         massNode.moveToFront();
       } );
+    },
+
+    addOscillatingSpringNode: function( spring, tandem ) {
+      return new OscillatingSpringNode(
+        spring,
+        MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 1 ),
+        tandem.createTandem( 'firstOscillatingSpringNode' )
+      );
     }
   } );
 } );

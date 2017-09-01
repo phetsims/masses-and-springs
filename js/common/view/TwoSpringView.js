@@ -45,16 +45,8 @@ define( function( require ) {
     model.springs[ 1 ].options.modelViewTransform2 = this.modelViewTransform;
 
     //  TODO: put in a vbox?? hmm... wrong place for this comment??
-    this.firstOscillatingSpringNode = new OscillatingSpringNode(
-      model.springs[ 0 ],
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 1 ),
-      tandem.createTandem( 'firstOscillatingSpringNode' )
-    );
-    this.secondOscillatingSpringNode = new OscillatingSpringNode(
-      model.springs[ 1 ],
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 1 ),
-      tandem.createTandem( 'secondOscillatingSpringNode' )
-    );
+    this.firstOscillatingSpringNode = this.addOscillatingSpringNode( model.springs[ 0 ], tandem );
+    this.secondOscillatingSpringNode = this.addOscillatingSpringNode( model.springs[ 1 ], tandem );
 
     // Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
