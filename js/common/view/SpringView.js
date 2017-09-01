@@ -13,6 +13,8 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
+  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
@@ -74,6 +76,38 @@ define( function( require ) {
       self.massNodes.push( massNode );
     } );
 
+
+    // Control Panel for display elements with varying visibility
+    this.indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
+      model,
+      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
+        top: this.spacing,
+        right: this.rightPanelAlignment,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+      }
+    );
+
+    // Gravity Control Panel
+    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
+      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ), {
+        right: this.rightPanelAlignment,
+        top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+      }
+    );
+
+    // Gravity Control Panel
+    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
+      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
+      {
+        right: this.rightPanelAlignment,
+        top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        minWidth: 1,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        frictionVisible: true
+      }
+    );
+
     // Timer and Ruler
     this.timerNode = new DraggableTimerNode(
       this.visibleBoundsProperty.get(),
@@ -99,6 +133,9 @@ define( function( require ) {
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ),
       {
+        top: this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        left: this.gravityAndFrictionControlPanel.left,
+        minWidth: this.gravityAndFrictionControlPanel.width,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );

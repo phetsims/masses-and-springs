@@ -13,7 +13,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -157,15 +156,6 @@ define( function( require ) {
       tandem.createTandem( 'secondNaturalLengthLineNode' )
     );
 
-    // Gravity Control Panel
-    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
-      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ), {
-        right: this.rightPanelAlignment,
-        top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      }
-    );
-
     this.toolboxPanel.top = this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
     this.toolboxPanel.left = this.gravityAndFrictionControlPanel.left;
     this.toolboxPanel.minWidth = this.gravityAndFrictionControlPanel.width;
@@ -180,7 +170,7 @@ define( function( require ) {
     // Adding Panels to scene graph
     this.addChild( this.firstSpringConstantControlPanel );
     this.addChild( this.secondSpringConstantControlPanel );
-    this.addChild( indicatorVisibilityControlPanel );
+    this.addChild( this.indicatorVisibilityControlPanel );
     this.addChild( this.gravityAndFrictionControlPanel );
     this.addChild( this.toolboxPanel );
 
@@ -207,7 +197,7 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
-      indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      self.indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
       self.gravityAndFrictionControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;

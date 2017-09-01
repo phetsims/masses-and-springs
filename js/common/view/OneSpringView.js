@@ -13,10 +13,8 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
-  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
@@ -58,23 +56,13 @@ define( function( require ) {
         singleSpring: true
       } );
 
-    // Control Panel for display elements with varying visibility
-    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
-        top: this.spacing,
-        right: this.rightPanelAlignment,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      }
-    );
-
     // Spring Constant Control Panel
     var springConstantControlPanel = new SpringConstantControlPanel(
       model.springs[ 0 ].springConstantProperty,
       model.springs[ 0 ].springConstantRange,
       StringUtils.fillIn( springConstantString, { spring: 2 } ),
       tandem.createTandem( 'springConstantControlPanel' ), {
-        right: indicatorVisibilityControlPanel.left - this.spacing,
+        right: this.indicatorVisibilityControlPanel.left - this.spacing,
         top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
       }
@@ -95,18 +83,6 @@ define( function( require ) {
       model.springs[ 0 ],
       model.naturalLengthVisibleProperty,
       tandem.createTandem( 'naturalLengthLineNode' )
-    );
-
-    // Gravity Control Panel
-    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
-      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
-      {
-        right: this.rightPanelAlignment,
-        top: indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        minWidth: 1,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        frictionVisible: true
-      }
     );
 
 
@@ -149,7 +125,7 @@ define( function( require ) {
     this.addChild( springHangerNode );
     this.addChild( massValueControlPanel );
     this.addChild( springConstantControlPanel );
-    this.addChild( indicatorVisibilityControlPanel );
+    this.addChild( this.indicatorVisibilityControlPanel );
     this.addChild( this.gravityAndFrictionControlPanel );
     this.addChild( this.toolboxPanel );
     this.addChild( energyGraphNode );
@@ -174,7 +150,7 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
-      indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      self.indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
       self.gravityAndFrictionControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;
