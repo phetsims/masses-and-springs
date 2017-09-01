@@ -198,7 +198,13 @@ define( function( require ) {
         massNode.moveToFront();
       } );
     },
-
+    /**
+     * Adds an oscillating spring
+     *
+     * @param {Spring} spring
+     * @param {Tandem} tandem
+     * @returns {OscillatingSpringNode}
+     */
     addOscillatingSpringNode: function( spring, tandem ) {
       return new OscillatingSpringNode(
         spring,
