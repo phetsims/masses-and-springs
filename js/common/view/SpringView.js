@@ -211,6 +211,14 @@ define( function( require ) {
         massNode.moveToFront();
       } );
     },
+
+    /**
+     * Creates a stopper button that stops the oscillation of its referenced spring.
+     *
+     * @param {Spring} spring
+     * @param {Tandem} tandem
+     * @returns {StopperButtonNode}
+     */
     createStopperButton: function( spring, tandem ) {
       return new StopperButtonNode(
         tandem.createTandem( 'secondSpringStopperButtonNode' ), {
