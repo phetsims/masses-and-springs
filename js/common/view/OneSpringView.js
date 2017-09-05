@@ -21,11 +21,7 @@ define( function( require ) {
   var MassValueControlPanel = require( 'MASSES_AND_SPRINGS/common/view/MassValueControlPanel' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
-  var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Vector2 = require( 'DOT/Vector2' );
-
-
 
   /**
    * TODO::: Remove modelViewTransform2 transforms from view objects
@@ -36,7 +32,7 @@ define( function( require ) {
    * @constructor
    */
   function OneSpringView( model, tandem ) {
-    this.model = model; // Make model available for reset
+    this.model = model; // Make model available
     SpringView.call( this, model, tandem, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
     var self = this;
 

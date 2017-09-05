@@ -14,17 +14,11 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
-  var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Vector2 = require( 'DOT/Vector2' );
-
-  // strings
-  var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
 
   /**
    * TODO::: Remove modelViewTransform2 transforms from view objects
@@ -35,7 +29,7 @@ define( function( require ) {
    * @constructor
    */
   function TwoSpringView( model, tandem ) {
-    this.model = model; // Make model available for reset
+    this.model = model; // Make model available
     SpringView.call( this, model, tandem, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
     var self = this;
 
@@ -57,15 +51,12 @@ define( function( require ) {
     var secondSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 1 ], tandem );
     secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
 
-
     // Spring Constant Control Panels
     this.firstSpringConstantControlPanel = this.createSpringConstantPanel( 0, tandem );
     this.firstSpringConstantControlPanel.right = this.springHangerNode.left - 40;
 
-
     this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, tandem );
     this.secondSpringConstantControlPanel.left = secondSpringStopperButtonNode.right + this.spacing;
-
 
     // Initializes red movable reference line
     var movableLineNode = new MovableLineNode(

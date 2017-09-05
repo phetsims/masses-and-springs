@@ -232,6 +232,13 @@ define( function( require ) {
         } );
     },
 
+    /**
+     * Creates a panel that controls the designated spring's spring constant value.
+     *
+     * @param {Number} springIndex
+     * @param {Tandem} tandem
+     * @returns {*}
+     */
     createSpringConstantPanel: function( springIndex, tandem ) {
       return new SpringConstantControlPanel(
         this.model.springs[ springIndex ].springConstantProperty,
