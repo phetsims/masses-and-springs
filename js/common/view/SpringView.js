@@ -26,8 +26,10 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -35,6 +37,7 @@ define( function( require ) {
   // strings
   var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
   var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
+  var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
 
   // constants
   var MAX_TEXT_WIDTH = 80;
@@ -226,6 +229,18 @@ define( function( require ) {
             spring.stopSpring();
           },
           top: this.spacing
+        } );
+    },
+
+    createSpringConstantPanel: function( springIndex, tandem ) {
+      return new SpringConstantControlPanel(
+        this.model.springs[ springIndex ].springConstantProperty,
+        this.model.springs[ springIndex ].springConstantRange,
+        StringUtils.fillIn( springConstantString, { spring: springIndex + 1 } ),
+        tandem.createTandem( 'firstSpringConstantControlPanel' ),
+        {
+          top: this.spacing,
+          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
         } );
     }
   } );

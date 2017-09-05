@@ -25,8 +25,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // strings
-  var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
+
 
   /**
    * TODO::: Remove modelViewTransform2 transforms from view objects
@@ -49,16 +48,9 @@ define( function( require ) {
       } );
 
     // Spring Constant Control Panel
-    var springConstantControlPanel = new SpringConstantControlPanel(
-      model.springs[ 0 ].springConstantProperty,
-      model.springs[ 0 ].springConstantRange,
-      StringUtils.fillIn( springConstantString, { spring: 2 } ),
-      tandem.createTandem( 'springConstantControlPanel' ), {
-        right: this.indicatorVisibilityControlPanel.left - this.spacing,
-        top: this.spacing,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
-      }
-    );
+    var springConstantControlPanel = this.createSpringConstantPanel( 0, tandem );
+    springConstantControlPanel.right = this.indicatorVisibilityControlPanel.left - this.spacing;
+
     springHangerNode.top = springConstantControlPanel.top;
 
     // @public Initializes equilibrium line for the spring

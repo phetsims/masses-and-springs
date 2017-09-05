@@ -59,27 +59,13 @@ define( function( require ) {
 
 
     // Spring Constant Control Panels
-    this.firstSpringConstantControlPanel = new SpringConstantControlPanel(
-      model.springs[ 0 ].springConstantProperty,
-      model.springs[ 0 ].springConstantRange,
-      StringUtils.fillIn( springConstantString, { spring: 1 } ),
-      tandem.createTandem( 'firstSpringConstantControlPanel' ),
-      {
-        right: this.springHangerNode.left - 40,
-        top: this.spacing,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
-      } );
+    this.firstSpringConstantControlPanel = this.createSpringConstantPanel( 0, tandem );
+    this.firstSpringConstantControlPanel.right = this.springHangerNode.left - 40;
 
-    this.secondSpringConstantControlPanel = new SpringConstantControlPanel(
-      model.springs[ 1 ].springConstantProperty,
-      model.springs[ 1 ].springConstantRange,
-      StringUtils.fillIn( springConstantString, { spring: 2 } ),
-      tandem.createTandem( 'secondSpringConstantControlPanel' ),
-      {
-        left: secondSpringStopperButtonNode.right + this.spacing,
-        top: this.spacing,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
-      } );
+
+    this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, tandem );
+    this.secondSpringConstantControlPanel.left = secondSpringStopperButtonNode.right + this.spacing;
+
 
     // Initializes red movable reference line
     var movableLineNode = new MovableLineNode(
