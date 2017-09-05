@@ -20,7 +20,6 @@ define( function( require ) {
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
-  var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -52,22 +51,12 @@ define( function( require ) {
     );
 
     // TODO: Crate in an array like in line 55-65 of SpringView.js. Position in each deescendent class.
-    this.firstSpringStopperButtonNode = new StopperButtonNode(
-      tandem.createTandem( 'firstSpringStopperButtonNode' ), {
-        listener: function() {
-          model.springs[ 0 ].stopSpring();
-        },
-        right: this.springHangerNode.left - this.spacing,
-        top: this.spacing
-      } );
-    var secondSpringStopperButtonNode = new StopperButtonNode(
-      tandem.createTandem( 'secondSpringStopperButtonNode' ), {
-        listener: function() {
-          model.springs[ 1 ].stopSpring();
-        },
-        left: this.springHangerNode.right + this.spacing,
-        top: this.spacing
-      } );
+    this.firstSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
+    this.firstSpringStopperButtonNode.right = this.springHangerNode.left - this.spacing;
+
+    var secondSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 1 ], tandem );
+    secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
+
 
     // Spring Constant Control Panels
     this.firstSpringConstantControlPanel = new SpringConstantControlPanel(

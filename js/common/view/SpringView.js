@@ -27,6 +27,7 @@ define( function( require ) {
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -209,6 +210,15 @@ define( function( require ) {
       this.massNodes.forEach( function( massNode ) {
         massNode.moveToFront();
       } );
+    },
+    createStopperButton: function( spring, tandem ) {
+      return new StopperButtonNode(
+        tandem.createTandem( 'secondSpringStopperButtonNode' ), {
+          listener: function() {
+            spring.stopSpring();
+          },
+          top: this.spacing
+        } );
     }
   } );
 } );

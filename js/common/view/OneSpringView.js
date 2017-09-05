@@ -22,7 +22,6 @@ define( function( require ) {
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
-  var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -79,15 +78,8 @@ define( function( require ) {
     );
 
 
-    var springStopperButtonNode = new StopperButtonNode(
-      tandem.createTandem( 'springStopperButtonNode' ), {
-        listener: function() {
-          model.springs[ 0 ].stopSpring();
-        },
-        right: springConstantControlPanel.left - this.spacing,
-        top: this.spacing
-      }
-    );
+    var springStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
+    springStopperButtonNode.right = springConstantControlPanel.left - this.spacing;
 
     var energyGraphNode = new EnergyGraphNode( model, tandem );
     energyGraphNode.top = this.visibleBoundsProperty.get().top + this.spacing;
