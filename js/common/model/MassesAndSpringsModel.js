@@ -179,11 +179,13 @@ define( function( require ) {
       this.springs = [ createSpring( RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) ) ];
     }
 
+    // Array that will contain all of the masses.
+    this.masses = [];
+
     // @public (read-only) model of masses used throughout the sim
     // TODO: Add a method to add masses
     // TODO: These masses don't need to be identified by name. Make this an array instead of an object.
     if ( options.springCount === 2 ) {
-      this.masses = [
         this.createMass( 0.250, 0.12, true, false, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
         this.createMass( 0.100, 0.20, true, false, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) ),
         this.createMass( 0.100, 0.28, true, false, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) ),
@@ -191,13 +193,10 @@ define( function( require ) {
         this.createMass( 0.200, 0.63, false, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) ),
         this.createMass( 0.150, 0.56, false, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) ),
         this.createMass( 0.075, 0.49, false, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) )
-      ];
     }
     else if ( options.springCount === 1 ) {
       var massXCoordinate = this.springs[ 0 ].positionProperty.get().x - 0.15;
-      this.masses = [
         this.createMass( 0.100, massXCoordinate, true, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) )
-      ];
     }
 
     // @public (read-only) model of bodies used throughout the sim
@@ -264,7 +263,7 @@ define( function( require ) {
     },
 
     /**
-     * Creates new mass object
+     * Creates new mass object and pushes it into the model's mass array.
      *
      * @param {number} mass - mass in kg
      * @param {number} xPosition - starting x-coordinate of the mass object
@@ -272,12 +271,14 @@ define( function( require ) {
      * @param {string} color - color of the MassNode
      * @param {string} specifiedLabel - customized label for the MassNode
      * @param {Tandem} tandem
+     *
+     * @protected
      * @returns {*}
      */
     createMass: function( mass, xPosition, labelVisible, adjustableMass, color, specifiedLabel, tandem ) {
-      return new Mass( mass, new Vector2( xPosition, 0.5 ), labelVisible, color, this.gravityProperty, tandem, {
+      this.masses.push( new Mass( mass, new Vector2( xPosition, 0.5 ), labelVisible, color, this.gravityProperty, tandem, {
         adjustable: adjustableMass
-      } );
+      } ) );
     },
 
     /**
