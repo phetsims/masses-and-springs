@@ -85,6 +85,7 @@ define( function( require ) {
       createLabelText( keString, '#39d74e' ),
       createLabelText( peGravString, '#5798de' ),
       createLabelText( peElasString, '#29d4ff' ),
+      createLabelText( eThermString, '#ee6f3e' ),
       createLabelText( tTotString, 'black' )
     ];
     xAxisLabels.forEach( function( labelText ) {
@@ -115,6 +116,15 @@ define( function( require ) {
       } );
     };
 
+    // Testing new approach to creating energy bar graph
+    var thermalEnergyHeight = scaleHeight( model.frictionProperty, scaleFactorProperty );
+    var thermalEnergyBarNode = new VerticalBarNode( thermalEnergyHeight, {
+      fill: '#ee6f3e',
+      width: BAR_NODE_WIDTH,
+      maxBarHeight: 350,
+      displayContinuousArrow: true
+    } );
+
     // Creation of our different bar nodes to be represented in the graph on energy screen
     var kineticEnergyBarNode = createBarNode( model.masses[ 0 ].kineticEnergyProperty, '#39d74e' );
     var gravitationalPotentialEnergyBarNode = createBarNode( model.masses[ 0 ].gravitationalPotentialEnergyProperty, '#5798de' );
@@ -123,18 +133,21 @@ define( function( require ) {
     this.barNodes = [
       kineticEnergyBarNode,
       gravitationalPotentialEnergyBarNode,
-      elasticPotentialEnergyBarNode
+      elasticPotentialEnergyBarNode,
+      thermalEnergyBarNode
     ];
 
     var barProperties = [
       scaleHeight( model.masses[ 0 ].kineticEnergyProperty, scaleFactorProperty ),
       scaleHeight( model.masses[ 0 ].gravitationalPotentialEnergyProperty, scaleFactorProperty ),
-      scaleHeight( model.masses[ 0 ].elasticPotentialEnergyProperty, scaleFactorProperty )
+      scaleHeight( model.masses[ 0 ].elasticPotentialEnergyProperty, scaleFactorProperty ),
+      thermalEnergyHeight
     ];
     var barColors = [
       '#39d74e',
       '#5798de',
-      '#29d4ff'
+      '#29d4ff',
+      '#ee6f3e'
     ];
 
     var compositeBar = new VerticalCompositeBarNode( barProperties, barColors, {

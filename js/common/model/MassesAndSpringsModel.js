@@ -213,7 +213,7 @@ define( function( require ) {
     this.frictionProperty.link( function( newFriction ) {
       assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
       self.springs.forEach( function( spring ) {
-        spring.dampingCoefficientProperty.set( newFriction );
+        spring.dampingCoefficientProperty.set( newFriction * .10 );
       } );
     } );
 
