@@ -12,6 +12,7 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var VectorScreenView = require( 'MASSES_AND_SPRINGS/vector/view/VectorScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
@@ -20,6 +21,10 @@ define( function( require ) {
 
   // strings
   var vectorString = require( 'string!MASSES_AND_SPRINGS/vector' );
+
+  // image
+  var vectorHomescreenImage = require( 'image!MASSES_AND_SPRINGS/game-home-screen.png' );
+  var vectorNavbarImage = require( 'image!MASSES_AND_SPRINGS/game-nav-bar.png' );
 
   /**
    * @param {Tandem} tandem
@@ -35,6 +40,8 @@ define( function( require ) {
         phetioValueType: TColor,
         maxDT: 1
       } ),
+      homeScreenIcon: new Image( vectorHomescreenImage ),
+      navigationBarIcon: new Image( vectorNavbarImage ),
       tandem: tandem
     };
 

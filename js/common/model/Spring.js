@@ -186,6 +186,7 @@ define( function( require ) {
       [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
         if ( mass ) {
+
           // springExtension = mg/k
           self.springExtension = mass.massProperty.get() ? ( mass.massProperty.get() * gravity ) / springConstant : 0;
         }

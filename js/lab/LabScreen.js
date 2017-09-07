@@ -12,6 +12,7 @@ define( function( require ) {
   var LabModel = require( 'MASSES_AND_SPRINGS/lab/model/LabModel' );
   var LabScreenView = require( 'MASSES_AND_SPRINGS/lab/view/LabScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
@@ -20,6 +21,10 @@ define( function( require ) {
 
   // strings
   var labString = require( 'string!MASSES_AND_SPRINGS/lab' );
+
+  // image
+  var labHomescreenImage = require( 'image!MASSES_AND_SPRINGS/game-home-screen.png' );
+  var labNavbarImage = require( 'image!MASSES_AND_SPRINGS/game-nav-bar.png' );
 
   /**
    * @param {Tandem} tandem
@@ -35,6 +40,8 @@ define( function( require ) {
         phetioValueType: TColor,
         maxDT: 1
       } ),
+      homeScreenIcon: new Image( labHomescreenImage ),
+      navigationBarIcon: new Image( labNavbarImage ),
       tandem: tandem
     };
 

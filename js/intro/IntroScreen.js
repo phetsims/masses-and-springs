@@ -13,6 +13,7 @@ define( function( require ) {
   var IntroModel = require( 'MASSES_AND_SPRINGS/intro/model/IntroModel' );
   var IntroScreenView = require( 'MASSES_AND_SPRINGS/intro/view/IntroScreenView' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
@@ -21,6 +22,10 @@ define( function( require ) {
 
   // strings
   var introString = require( 'string!MASSES_AND_SPRINGS/intro' );
+
+  // image
+  var introHomescreenImage = require( 'image!MASSES_AND_SPRINGS/game-home-screen.png' );
+  var introNavbarImage = require( 'image!MASSES_AND_SPRINGS/game-nav-bar.png' );
 
   /**
    * @param {Tandem} tandem
@@ -36,6 +41,8 @@ define( function( require ) {
         phetioValueType: TColor,
         maxDT: 1
       } ),
+      homeScreenIcon: new Image( introHomescreenImage ),
+      navigationBarIcon: new Image( introNavbarImage ),
       tandem: tandem
     };
 
