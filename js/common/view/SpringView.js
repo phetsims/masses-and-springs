@@ -13,7 +13,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
@@ -30,7 +29,6 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -104,17 +102,6 @@ define( function( require ) {
       }
     );
 
-    // Gravity Control Panel
-    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
-      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
-      {
-        right: this.rightPanelAlignment,
-        top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        minWidth: 1,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      }
-    );
-
     // Timer and Ruler
     this.timerNode = new DraggableTimerNode(
       this.visibleBoundsProperty.get(),
@@ -131,25 +118,6 @@ define( function( require ) {
       model.rulerVisibleProperty,
       tandem.createTandem( 'rulerNode' )
     );
-
-    // Toolbox Panel
-    this.toolboxPanel = new ToolboxPanel(
-      this.visibleBoundsProperty.get(),
-      this.rulerNode, this.timerNode,
-      model.rulerVisibleProperty,
-      model.timerVisibleProperty,
-      tandem.createTandem( 'toolboxPanel' ),
-      {
-        top: this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        left: this.gravityAndFrictionControlPanel.left,
-        minWidth: this.gravityAndFrictionControlPanel.width,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      }
-    );
-
-    // Done to for movableDragHandler handling intersecting bounds of panel and ruler
-    this.rulerNode.toolbox = this.toolboxPanel;
-    this.timerNode.toolbox = this.toolboxPanel;
 
     // Reset All button
     this.resetAllButton = new ResetAllButton( {

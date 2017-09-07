@@ -15,12 +15,14 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
+  var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
   var MassValueControlPanel = require( 'MASSES_AND_SPRINGS/common/view/MassValueControlPanel' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
+  var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -90,8 +92,36 @@ define( function( require ) {
       tandem.createTandem( 'movableLineNode' )
     );
 
+    // Gravity Control Panel
+    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
+      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
+      {
+        right: this.rightPanelAlignment,
+        top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        minWidth: 1,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        frictionVisible: true
+      }
+    );
 
-    this.gravityAndFrictionControlPanel.options.frictionVisibleProperty.set( true );
+    // Toolbox Panel
+    this.toolboxPanel = new ToolboxPanel(
+      this.visibleBoundsProperty.get(),
+      this.rulerNode, this.timerNode,
+      model.rulerVisibleProperty,
+      model.timerVisibleProperty,
+      tandem.createTandem( 'toolboxPanel' ),
+      {
+        top: this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        left: this.gravityAndFrictionControlPanel.left,
+        minWidth: this.gravityAndFrictionControlPanel.width,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+      }
+    );
+
+    // Done to for movableDragHandler handling intersecting bounds of panel and ruler
+    this.rulerNode.toolbox = this.toolboxPanel;
+    this.timerNode.toolbox = this.toolboxPanel;
 
     this.toolboxPanel.top = this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
     this.toolboxPanel.left = this.gravityAndFrictionControlPanel.left;

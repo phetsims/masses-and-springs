@@ -14,10 +14,13 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
+  var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
+  var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -99,7 +102,37 @@ define( function( require ) {
       tandem.createTandem( 'secondNaturalLengthLineNode' )
     );
 
-    this.gravityAndFrictionControlPanel.options.frictionVisibleProperty.set( false );
+    // Gravity Control Panel
+    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
+      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
+      {
+        right: this.rightPanelAlignment,
+        top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        minWidth: 1,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        frictionVisible: false
+      }
+    );
+
+    // Toolbox Panel
+    this.toolboxPanel = new ToolboxPanel(
+      this.visibleBoundsProperty.get(),
+      this.rulerNode, this.timerNode,
+      model.rulerVisibleProperty,
+      model.timerVisibleProperty,
+      tandem.createTandem( 'toolboxPanel' ),
+      {
+        top: this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        left: this.gravityAndFrictionControlPanel.left,
+        minWidth: this.gravityAndFrictionControlPanel.width,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+      }
+    );
+
+    // Done to for movableDragHandler handling intersecting bounds of panel and ruler
+    this.rulerNode.toolbox = this.toolboxPanel;
+    this.timerNode.toolbox = this.toolboxPanel;
+
     this.springHangerNode.centerX = 336;
 
     // Adding all of the nodes to the scene graph

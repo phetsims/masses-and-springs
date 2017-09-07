@@ -48,7 +48,7 @@ define( function( require ) {
       yMargin: 10,
       align: 'left',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      frictionVisibleProperty: new Property( false )
+      frictionVisible: false
     }, options );
 
     //  Add gravity info for various planets
@@ -103,42 +103,40 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
-    this.options.frictionVisibleProperty.link( function( visible ) {
-      if ( visible ) {
-        self.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
-          majorTickLength: 10,
-          trackSize: new Dimension2( 130, 2 ),
-          thumbSize: new Dimension2( 13, 22 ),
-          thumbFillEnabled: '#00b3b3',
-          thumbFillHighlighted: '#00e6e6',
-          tandem: tandem.createTandem( 'gravityPropertyHSlider' )
-        } );
+    if ( this.options.frictionVisible ) {
+      self.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
+        majorTickLength: 10,
+        trackSize: new Dimension2( 130, 2 ),
+        thumbSize: new Dimension2( 13, 22 ),
+        thumbFillEnabled: '#00b3b3',
+        thumbFillHighlighted: '#00e6e6',
+        tandem: tandem.createTandem( 'gravityPropertyHSlider' )
+      } );
 
-        Panel.call( self, new VBox( {
-          align: 'left',
-          children: [
-            new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-            gravityComboBox,
-            gravityHSlider,
-            new Text( frictionString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-            self.frictionHSlider
-          ],
-          tandem: tandem.createTandem( 'gravityPropertyVBox' )
-        } ), self.options );
-      }
-      else {
-        Panel.call( self, new VBox( {
-          align: 'left',
-          children: [
-            new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-            gravityComboBox,
-            gravityHSlider
-          ],
-          tandem: tandem.createTandem( 'gravityPropertyVBox' )
-        } ), self.options );
-      }
-    } );
-
+      Panel.call( self, new VBox( {
+        align: 'left',
+        children: [
+          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          gravityComboBox,
+          gravityHSlider,
+          new Text( frictionString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          self.frictionHSlider
+        ],
+        tandem: tandem.createTandem( 'gravityPropertyVBox' )
+      } ), self.options );
+    }
+    else {
+      Panel.call( self, new VBox( {
+        align: 'left',
+        children: [
+          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          gravityComboBox,
+          gravityHSlider
+        ],
+        tandem: tandem.createTandem( 'gravityPropertyVBox' )
+      } ), self.options );
+    }
+    ;
 
     model.bodyProperty.link( function( newBody, previousGravity ) {
       var body = _.find( self.bodies, newBody );
@@ -176,7 +174,7 @@ define( function( require ) {
 
         //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
         model.bodyProperty.set( Body.CUSTOM );
-        }
+      }
     } );
     this.mutate( this.options );
   }
