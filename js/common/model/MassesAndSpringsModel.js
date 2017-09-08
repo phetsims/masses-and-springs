@@ -192,11 +192,11 @@ define( function( require ) {
         this.createMass( 0.050, 0.33, true, false, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) ),
         this.createMass( 0.200, 0.63, false, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) ),
         this.createMass( 0.150, 0.56, false, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) ),
-        this.createMass( 0.075, 0.49, false, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) )
+        this.createMass( 0.075, 0.49, false, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) );
     }
     else if ( options.springCount === 1 ) {
       var massXCoordinate = this.springs[ 0 ].positionProperty.get().x - 0.15;
-        this.createMass( 0.100, massXCoordinate, true, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) )
+        this.createMass( 0.100, massXCoordinate, true, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) );
     }
 
     // @public (read-only) model of bodies used throughout the sim
