@@ -20,7 +20,6 @@ define( function( require ) {
   var ComboBox = require( 'SUN/ComboBox' );
   var HSlider = require( 'SUN/HSlider' );
   var Panel = require( 'SUN/Panel' );
-  var Property = require( 'AXON/Property' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // strings
@@ -136,7 +135,6 @@ define( function( require ) {
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } ), self.options );
     }
-    ;
 
     model.bodyProperty.link( function( newBody, previousGravity ) {
       var body = _.find( self.bodies, newBody );
