@@ -10,16 +10,16 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var inherit = require( 'PHET_CORE/inherit' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
-  var Panel = require( 'SUN/Panel' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Panel = require( 'SUN/Panel' );
+  var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
+  var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
-  var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
 
   // constants
   var LABEL_FONT = MassesAndSpringsConstants.LABEL_FONT;

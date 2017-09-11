@@ -9,15 +9,15 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  var VectorScreenView = require( 'MASSES_AND_SPRINGS/vector/view/VectorScreenView' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var Screen = require( 'JOIST/Screen' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var Property = require( 'AXON/Property' );
   var Color = require( 'SCENERY/util/Color' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  var Property = require( 'AXON/Property' );
+  var Screen = require( 'JOIST/Screen' );
   var TColor = require( 'SCENERY/util/TColor' );
+  var VectorScreenView = require( 'MASSES_AND_SPRINGS/vector/view/VectorScreenView' );
 
   // strings
   var vectorString = require( 'string!MASSES_AND_SPRINGS/vector' );

@@ -9,10 +9,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var StopSignNode = require( 'SCENERY_PHET/StopSignNode' );
 
   /**

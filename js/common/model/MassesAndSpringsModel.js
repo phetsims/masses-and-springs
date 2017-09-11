@@ -10,25 +10,25 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
+  var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var LinearFunction = require( 'DOT/LinearFunction' );
+  var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsQueryParameters = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsQueryParameters' );
-  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
-  var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
-  var Vector2 = require( 'DOT/Vector2' );
-  var LinearFunction = require( 'DOT/LinearFunction' );
+  var Property = require( 'AXON/Property' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
-  var TString = require( 'ifphetio!PHET_IO/types/TString' );
   var TBody = require( 'MASSES_AND_SPRINGS/common/model/TBody' );
+  var TString = require( 'ifphetio!PHET_IO/types/TString' );
 
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected

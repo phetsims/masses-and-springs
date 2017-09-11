@@ -11,14 +11,14 @@ define( function( require ) {
 
   // modules
   var BooleanProperty = require( 'AXON/BooleanProperty' );
+  var Color = require( 'SCENERY/util/Color' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Vector2 = require( 'DOT/Vector2' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Color = require( 'SCENERY/util/Color' );
 
   // constants
   var HEIGHT_RATIO = 2.5;
@@ -26,8 +26,8 @@ define( function( require ) {
   var DENSITY = 80; // Constant used to keep all of our masses consistent in the model.
 
   // phet-io modules
-  var TVector2 = require( 'DOT/TVector2' );
   var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
+  var TVector2 = require( 'DOT/TVector2' );
 
   /**
    * @param {number} massValue:  mass in kg

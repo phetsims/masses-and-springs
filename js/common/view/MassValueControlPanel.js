@@ -15,14 +15,14 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var Range = require( 'DOT/Range' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
-  var massReadoutPatternString = require( 'string!MASSES_AND_SPRINGS/massReadoutPattern' );
   var gramUnitString = require( 'string!MASSES_AND_SPRINGS/gramUnit' );
+  var massReadoutPatternString = require( 'string!MASSES_AND_SPRINGS/massReadoutPattern' );
+  var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
 
   /**
    * @param {Mass} mass

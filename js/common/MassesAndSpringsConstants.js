@@ -10,11 +10,11 @@ define( function( require ) {
 
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Vector2 = require( 'DOT/Vector2' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
 
   var MassesAndSpringsConstants = {
       //TODO: Insert constants here

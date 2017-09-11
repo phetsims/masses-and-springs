@@ -11,12 +11,12 @@ define( function( require ) {
 
   // modules
   var EnergyScreen = require( 'MASSES_AND_SPRINGS/energy/EnergyScreen' );
-  var VectorScreen = require( 'MASSES_AND_SPRINGS/vector/VectorScreen' );
   var IntroScreen = require( 'MASSES_AND_SPRINGS/intro/IntroScreen' );
   var LabScreen = require( 'MASSES_AND_SPRINGS/lab/LabScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var Tandem = require( 'TANDEM/Tandem' );
+  var VectorScreen = require( 'MASSES_AND_SPRINGS/vector/VectorScreen' );
 
   // strings
   var massesAndSpringsTitleString = require( 'string!MASSES_AND_SPRINGS/masses-and-springs.title' );

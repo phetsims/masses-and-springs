@@ -10,14 +10,14 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Color = require( 'SCENERY/util/Color' );
+  var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var IntroModel = require( 'MASSES_AND_SPRINGS/intro/model/IntroModel' );
   var IntroScreenView = require( 'MASSES_AND_SPRINGS/intro/view/IntroScreenView' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var Screen = require( 'JOIST/Screen' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
-  var Color = require( 'SCENERY/util/Color' );
+  var Screen = require( 'JOIST/Screen' );
   var TColor = require( 'SCENERY/util/TColor' );
 
   // strings

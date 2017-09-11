@@ -11,26 +11,26 @@ define( function( require ) {
     'use strict';
 
     // modules
-    var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+    var DerivedProperty = require( 'AXON/DerivedProperty' );
+    var Dialog = require( 'JOIST/Dialog' );
+    var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
+    var HBox = require( 'SCENERY/nodes/HBox' );
+    var HStrut = require( 'SCENERY/nodes/HStrut' );
     var inherit = require( 'PHET_CORE/inherit' );
+    var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+    var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+    var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+    var Property = require( 'AXON/Property' );
+    var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+    var RichText = require( 'SCENERY/nodes/RichText' );
     var Text = require( 'SCENERY/nodes/Text' );
     var VBox = require( 'SCENERY/nodes/VBox' );
-    var HBox = require( 'SCENERY/nodes/HBox' );
-    var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
-    var HStrut = require( 'SCENERY/nodes/HStrut' );
-    var Property = require( 'AXON/Property' );
-    var DerivedProperty = require( 'AXON/DerivedProperty' );
-    var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-    var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
     var VerticalBarChart = require( 'GRIDDLE/VerticalBarChart' );
     var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
     var VerticalCompositeBarNode = require( 'GRIDDLE/VerticalCompositeBarNode' );
     var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
-    var Dialog = require( 'JOIST/Dialog' );
-    var RichText = require( 'SCENERY/nodes/RichText' );
-    var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
     // constants
     var MAXIMUM_HEIGHT = 425;
@@ -40,19 +40,19 @@ define( function( require ) {
     var ZERO_PROPERTY = new Property( 0 );
 
     // strings
-    var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
-    var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
-    var kineticEnergyString = require( 'string!MASSES_AND_SPRINGS/kineticEnergy' );
-    var keString = require( 'string!MASSES_AND_SPRINGS/ke' );
-    var gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
-    var peGravString = require( 'string!MASSES_AND_SPRINGS/peGrav' );
     var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
-    var peElasString = require( 'string!MASSES_AND_SPRINGS/peElas' );
-    var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
+    var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
+    var energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
+    var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
     var eThermString = require( 'string!MASSES_AND_SPRINGS/eTherm' );
+    var gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
+    var keString = require( 'string!MASSES_AND_SPRINGS/ke' );
+    var kineticEnergyString = require( 'string!MASSES_AND_SPRINGS/kineticEnergy' );
+    var peElasString = require( 'string!MASSES_AND_SPRINGS/peElas' );
+    var peGravString = require( 'string!MASSES_AND_SPRINGS/peGrav' );
+    var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
     var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
     var tTotString = require( 'string!MASSES_AND_SPRINGS/tTot' );
-    var energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
 
     /**
      *

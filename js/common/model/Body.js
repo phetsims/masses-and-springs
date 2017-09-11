@@ -12,8 +12,8 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var Tandem = require( 'TANDEM/Tandem' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   var bodyCustomString = require( 'string!MASSES_AND_SPRINGS/body.custom' );

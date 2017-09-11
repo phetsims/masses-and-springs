@@ -11,18 +11,18 @@ define( function( require ) {
 
   // modules
   var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var Range = require( 'DOT/Range' );
-  var Vector2 = require( 'DOT/Vector2' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var inherit = require( 'PHET_CORE/inherit' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
+  var Panel = require( 'SUN/Panel' );
+  var Range = require( 'DOT/Range' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var TimerNode = require( 'SCENERY_PHET/TimerNode' );
-  var Panel = require( 'SUN/Panel' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Bounds2} dragBounds

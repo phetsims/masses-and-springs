@@ -11,26 +11,26 @@ define( function( require ) {
   // modules
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var inherit = require( 'PHET_CORE/inherit' );
+  var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var Panel = require( 'SUN/Panel' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
-  var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
 
   // strings
-  var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
   var accelerationString = require( 'string!MASSES_AND_SPRINGS/acceleration' );
   var forcesString = require( 'string!MASSES_AND_SPRINGS/forces' );
-  var netForceString = require( 'string!MASSES_AND_SPRINGS/netForce' );
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
+  var netForceString = require( 'string!MASSES_AND_SPRINGS/netForce' );
   var springString = require( 'string!MASSES_AND_SPRINGS/spring' );
+  var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
 
   /**
    * @param {VectorModel} model
