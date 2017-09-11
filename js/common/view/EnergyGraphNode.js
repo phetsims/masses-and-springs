@@ -106,9 +106,9 @@ define( function( require ) {
 
       // TODO: Add doc
       // Function that returns a barNode representing a property.
-      var createBarNode = function( property, fill ) {
+      var createBarNode = function( fill ) {
 
-        return new VerticalBarNode( property, {
+        return new VerticalBarNode( ZERO_PROPERTY, {
           fill: fill,
           width: BAR_NODE_WIDTH,
           maxBarHeight: 350,
@@ -116,19 +116,11 @@ define( function( require ) {
         } );
       };
 
-      // TODO: Refactor this to match the initiation method of the other non-composite bars
-      var thermalEnergyHeight = createScaledHeightProperty( model.frictionProperty, scaleFactorProperty );
-      var thermalEnergyBarNode = new VerticalBarNode( thermalEnergyHeight, {
-        fill: '#ee6f3e',
-        width: BAR_NODE_WIDTH,
-        maxBarHeight: 350,
-        displayContinuousArrow: true
-      } );
-
       // Creation of our different bar nodes to be represented in the graph on energy screen
-      var kineticEnergyBarNode = createBarNode( new Property( 0 ), '#39d74e' );
-      var gravitationalPotentialEnergyBarNode = createBarNode( new Property( 0 ), '#5798de' );
-      var elasticPotentialEnergyBarNode = createBarNode( model.masses[ 0 ].elasticPotentialEnergyProperty, '#29d4ff' );
+      var kineticEnergyBarNode = createBarNode( '#39d74e' );
+      var gravitationalPotentialEnergyBarNode = createBarNode( '#5798de' );
+      var elasticPotentialEnergyBarNode = createBarNode( '#29d4ff' );
+      var thermalEnergyBarNode = createBarNode( '#ee6f3e' );
 
       this.barNodes = [
         kineticEnergyBarNode,
@@ -141,7 +133,7 @@ define( function( require ) {
         createScaledHeightProperty( model.masses[ 0 ].kineticEnergyProperty ),
         createScaledHeightProperty( model.masses[ 0 ].gravitationalPotentialEnergyProperty ),
         createScaledHeightProperty( model.masses[ 0 ].elasticPotentialEnergyProperty ),
-        thermalEnergyHeight
+        createScaledHeightProperty( model.frictionProperty )
       ];
       var barColors = [
         '#39d74e',
@@ -278,10 +270,12 @@ define( function( require ) {
           var scaledKineticEnergyProperty = createScaledHeightProperty( mass.kineticEnergyProperty );
           var scaledGravitationalPotentialEnergyProperty = createScaledHeightProperty( mass.gravitationalPotentialEnergyProperty );
           var scaledElasticPotentialEnergyProperty = createScaledHeightProperty( mass.elasticPotentialEnergyProperty );
+          var scaledThermalEnergyProperty = createScaledHeightProperty( model.frictionProperty );
 
           kineticEnergyBarNode.setMonitoredProperty( scaledKineticEnergyProperty );
           gravitationalPotentialEnergyBarNode.setMonitoredProperty( scaledGravitationalPotentialEnergyProperty );
           elasticPotentialEnergyBarNode.setMonitoredProperty( scaledElasticPotentialEnergyProperty );
+          thermalEnergyBarNode.setMonitoredProperty( scaledThermalEnergyProperty );
 
           // compositeBar.setMonitoredProperties ([scaledKineticEnergyProperty,...])
         }
@@ -289,6 +283,7 @@ define( function( require ) {
           kineticEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
           gravitationalPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
           elasticPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
+          thermalEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
         }
 
       } );
