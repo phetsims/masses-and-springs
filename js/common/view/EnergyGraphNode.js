@@ -68,7 +68,6 @@ define( function( require ) {
       //Add documentation
       var zoomLevelProperty = new Property( 0 );
 
-
       // TODO: Can we move this into the bar node? Ask JO
       var scaleFactorProperty = new DerivedProperty( [ zoomLevelProperty ], function( zoomLevel ) {
         return Math.pow( 2, zoomLevel );
@@ -135,6 +134,12 @@ define( function( require ) {
         createScaledHeightProperty( model.masses[ 0 ].elasticPotentialEnergyProperty ),
         createScaledHeightProperty( model.frictionProperty )
       ];
+
+      var zeroedBarProperties = [];
+      barProperties.forEach( function() {
+        zeroedBarProperties.push( ZERO_PROPERTY );
+      } );
+
       var barColors = [
         '#39d74e',
         '#5798de',
@@ -142,7 +147,7 @@ define( function( require ) {
         '#ee6f3e'
       ];
 
-      var compositeBar = new VerticalCompositeBarNode( barProperties, barColors, {
+      var compositeBar = new VerticalCompositeBarNode( zeroedBarProperties, barColors, {
         width: BAR_NODE_WIDTH,
         displayContinuousArrow: true,
         arrowFill: 'black',
@@ -264,8 +269,8 @@ define( function( require ) {
       } );
 
       model.springs[ 0 ].massAttachedProperty.link( function( mass ) {
-
         if ( mass ) {
+
           //Create scaled Properties to be used for composite and non-composite bars
           var scaledKineticEnergyProperty = createScaledHeightProperty( mass.kineticEnergyProperty );
           var scaledGravitationalPotentialEnergyProperty = createScaledHeightProperty( mass.gravitationalPotentialEnergyProperty );
@@ -276,14 +281,15 @@ define( function( require ) {
           gravitationalPotentialEnergyBarNode.setMonitoredProperty( scaledGravitationalPotentialEnergyProperty );
           elasticPotentialEnergyBarNode.setMonitoredProperty( scaledElasticPotentialEnergyProperty );
           thermalEnergyBarNode.setMonitoredProperty( scaledThermalEnergyProperty );
+          compositeBar.setMonitoredProperties( barProperties );
 
-          // compositeBar.setMonitoredProperties ([scaledKineticEnergyProperty,...])
         }
         else {
           kineticEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
           gravitationalPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
           elasticPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
           thermalEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
+          compositeBar.setMonitoredProperties( zeroedBarProperties );
         }
 
       } );
