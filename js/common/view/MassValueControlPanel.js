@@ -65,7 +65,7 @@ define( function( require ) {
         value: massValue,
         units: gramUnitString
       } );
-      console.log( numberControl.valuePattern );
+      // console.log( numberControl.valuePattern );
 
       mass.setRadius( massValue );
     } );

@@ -104,6 +104,9 @@ define( function( require ) {
         range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, defaultDampingCoefficient )
       } )
     } );
+    this.dampingCoefficientProperty.link( function( value ) {
+      // console.log( 'value = ' + value );
+    } );
 
     // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
     this.positionProperty = new Property( position, {
@@ -427,6 +430,7 @@ define( function( require ) {
             newDisplacement = ( this.displacementProperty.get() > 0 ) ? Math.abs( newDisplacement ) : -Math.abs( newDisplacement );
           }
 
+          // In this case ( c * c - 4 * k m < 0 ) and we are underdamped.
           // Squelch noise after coming to rest with tolerance of 1 micron
           if ( Math.abs( this.displacementProperty.get() - newDisplacement ) < 1e-6 &&
                Math.abs( this.massAttachedProperty.get().verticalVelocityProperty.get() ) < 1e-6 ) {
