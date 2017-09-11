@@ -1,7 +1,9 @@
 // Copyright 2016, University of Colorado Boulder
 
 /**
- * TODO: Documentation
+ * Bar graph that represents the kinetic, potential, elastic potential, thermal, and total energy of the mass attached
+ * to our spring system. This is a qualitative graph with x-axis labels, a legend, and zoom in/out functionality.
+ * When a bar exceeds the y-axis an arrow is shown to indicate continuous growth.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -53,33 +55,62 @@ define( function( require ) {
     var energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
 
     /**
+     *
+     * @param {MassesAndSpringsModel} model
      * @param {Tandem} tandem
      * @constructor
      */
-    // TODO: Don't expose the whole model. We should only need the attachedMass.
     function EnergyGraphNode( model, tandem ) {
 
       // Zoom levels are based on powers of two (i.e. 1x, 2x, 4x, 8x, 16x). The Min/Max scales and scale factor
       // must always be a power of two.
-      // TODO: Check this over with design team.
       var MIN_SCALE = 1;
       var MAX_SCALE = 32;
 
-      //Add documentation
+      // {read-write} Responsible for the zoom level in the bar graph. Is adjusted by the zoom buttons and used for the
+      // scaling property of the barNodes.
       var zoomLevelProperty = new Property( 0 );
 
+      // Creation of zoom in/out buttons
+      var zoomButtonOptions = {
+        baseColor: '#E7E8E9',
+        radius: 8,
+        xMargin: 3,
+        yMargin: 3,
+        disabledBaseColor: '#EDEDED'
+      };
+      var zoomInButton = new ZoomButton( _.extend( { in: true }, zoomButtonOptions ) );
+      var zoomOutButton = new ZoomButton( _.extend( { in: false }, zoomButtonOptions ) );
+
+      // Zooming out means bars and zoom level gets smaller.
+      zoomOutButton.addListener( function() {
+        zoomLevelProperty.value -= 1;
+      } );
+
+      // Zooming in means bars and zoom level gets larger.
+      zoomInButton.addListener( function() {
+        zoomLevelProperty.value += 1;
+      } );
+
       // TODO: Can we move this into the bar node? Ask JO
+      // {read-write} Responsible for adjusting the scaling of the barNode heights.
       var scaleFactorProperty = new DerivedProperty( [ zoomLevelProperty ], function( zoomLevel ) {
         return Math.pow( 2, zoomLevel );
       } );
 
-      // Creates a text for the labels to be placed on the x-axis.
-      var createLabelText = function( string, color ) {
+      /**
+       * Creates a text for the labels to be placed on the x-axis.
+       *
+       * @param {String} string
+       * @param {String} color
+       * @returns {RichText}
+       */
+      function createLabelText( string, color ) {
         return new RichText( string, {
           fill: color,
           font: MassesAndSpringsConstants.TITLE_FONT
         } );
-      };
+      }
 
       // Labels that are rotated and added to the bottom of the x-axis
       var xAxisLabels = [
@@ -93,7 +124,12 @@ define( function( require ) {
         labelText.rotate( -Math.PI / 2 );
       } );
 
-      // TODO: Add doc. ScaleFactor only scales in vertical direction (maybe YScaleProperty)
+      /**
+       * Creates a scaled height for the bar to represent
+       *
+       * @param {Property} property
+       * @returns {DerivedProperty}
+       */
       function createScaledHeightProperty( property ) {
 
         // Create a scaled height for the bar to represent
@@ -101,12 +137,15 @@ define( function( require ) {
           function( value, scale ) {
             return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale );
           } );
-      };
+      }
 
-      // TODO: Add doc
-      // Function that returns a barNode representing a property.
+      /**
+       * Function that returns a barNode representing a property. BarNodes are initialized with a value of zero
+       *
+       * @param {String} fill
+       * @returns {VerticalBarNode}
+       */
       var createBarNode = function( fill ) {
-
         return new VerticalBarNode( ZERO_PROPERTY, {
           fill: fill,
           width: BAR_NODE_WIDTH,
@@ -128,6 +167,7 @@ define( function( require ) {
         thermalEnergyBarNode
       ];
 
+      // These properties are used for the composite bar node.
       var barProperties = [
         createScaledHeightProperty( model.masses[ 0 ].kineticEnergyProperty ),
         createScaledHeightProperty( model.masses[ 0 ].gravitationalPotentialEnergyProperty ),
@@ -135,11 +175,13 @@ define( function( require ) {
         createScaledHeightProperty( model.frictionProperty )
       ];
 
+      // Used for initializing the composite bar node.
       var zeroedBarProperties = [];
       barProperties.forEach( function() {
         zeroedBarProperties.push( ZERO_PROPERTY );
       } );
 
+      // Colors used for each bar. Consider that the first barColor will be applied to the first barNode.
       var barColors = [
         '#39d74e',
         '#5798de',
@@ -147,6 +189,7 @@ define( function( require ) {
         '#ee6f3e'
       ];
 
+      // Composite bar is used for the total energy readout in the energy graph.
       var compositeBar = new VerticalCompositeBarNode( zeroedBarProperties, barColors, {
         width: BAR_NODE_WIDTH,
         displayContinuousArrow: true,
@@ -155,34 +198,13 @@ define( function( require ) {
       } );
       this.barNodes.push( compositeBar );
 
-      // The main body for the bar chart
+      // The main body for the energy graph.
       var verticalBarChart = new VerticalBarChart( this.barNodes, {
         width: 140,
         height: MAXIMUM_HEIGHT,
         title: new Text( energyString, { maxWidth: 100 } ),
         titleFill: '#b37e46',
         xAxisLabels: xAxisLabels
-      } );
-
-      // Creation of zoom in/out buttons
-      var zoomButtonOptions = {
-        baseColor: '#E7E8E9',
-        radius: 8,
-        xMargin: 3,
-        yMargin: 3,
-        disabledBaseColor: '#EDEDED'
-      };
-      var zoomInButton = new ZoomButton( _.extend( { in: true }, zoomButtonOptions ) );
-      var zoomOutButton = new ZoomButton( _.extend( { in: false }, zoomButtonOptions ) );
-
-      // Zooming out means bars and zoom level gets smaller.
-      zoomOutButton.addListener( function() {
-        zoomLevelProperty.value -= 1;
-      } );
-
-      // Zooming in means bars and zoom level gets larger.
-      zoomInButton.addListener( function() {
-        zoomLevelProperty.value += 1;
       } );
 
       // Manages the symbols used in the axes of the graph
@@ -244,10 +266,12 @@ define( function( require ) {
         dialog.show();
       } );
 
+      // Visual readout for the scale of the factor
       var zoomReadout = new Text( scaleFactorProperty.get() + 'x', {
         font: new PhetFont( { size: 18, weight: 'bold' } ),
         maxWidth: 18
       } );
+
       // Display buttons at the bottom of the graph
       var displayOptions = new HBox( {
         children: [ infoButton, new HStrut( 20 ), zoomReadout, zoomOutButton, zoomInButton ],
@@ -268,6 +292,7 @@ define( function( require ) {
         ], spacing: 8
       } );
 
+      // This link is responsible for assuring the energy graph monitors properties only when a mass is attached.
       model.springs[ 0 ].massAttachedProperty.link( function( mass ) {
         if ( mass ) {
 
@@ -293,6 +318,7 @@ define( function( require ) {
         }
 
       } );
+
       // REVIEW: Not having an option for the accordion box gives me a tandem error.
       AccordionBox.call( this, accordionBoxContent, {
         titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
