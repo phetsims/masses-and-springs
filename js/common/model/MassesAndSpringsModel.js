@@ -27,7 +27,6 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   // phet-io modules
-  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
   var TBody = require( 'MASSES_AND_SPRINGS/common/model/TBody' );
 
@@ -59,22 +58,15 @@ define( function( require ) {
 
     // @public {Property.<number>} coefficient of friction applied to the system
     this.frictionProperty = new NumberProperty( 0.2, {
-      // range: null,
-      tandem: tandem.createTandem( 'frictionProperty' ),
-      phetioValueType: TNumber( {
-        units: 'newtons',
-        range: null
-      } )
+      units: 'newtons',
+      tandem: tandem.createTandem( 'frictionProperty' )
     } );
 
     // @public {Property.<number>} gravitational acceleration associated with each planet
     this.gravityProperty = new Property( Body.EARTH.gravity, {
-      range: new RangeWithValue( 0, 30, Body.EARTH.gravity ),
       tandem: tandem.createTandem( 'gravityProperty' ),
-      phetioValueType: TNumber( {
-        units: 'meters/second/second',
-        range: new RangeWithValue( 0, 30, Body.EARTH.gravity )
-      } )
+      units: 'meters/second/second',
+      range: new RangeWithValue( 0, 30, Body.EARTH.gravity )
     } );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
@@ -98,10 +90,7 @@ define( function( require ) {
     this.timerSecondsProperty = new NumberProperty( 0, {
       range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
       tandem: tandem.createTandem( 'timerSecondsProperty' ),
-      phetioValueType: TNumber( {
-        units: 'seconds',
-        range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 )
-      } )
+      units: 'seconds',
     } );
 
     // @public {Property.<boolean>} determines whether timer is active or not
@@ -186,7 +175,7 @@ define( function( require ) {
     // TODO: Add a method to add masses
     // TODO: These masses don't need to be identified by name. Make this an array instead of an object.
     if ( options.springCount === 2 ) {
-        this.createMass( 0.250, 0.12, true, false, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
+      this.createMass( 0.250, 0.12, true, false, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
         this.createMass( 0.100, 0.20, true, false, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) ),
         this.createMass( 0.100, 0.28, true, false, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) ),
         this.createMass( 0.050, 0.33, true, false, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) ),
@@ -196,7 +185,7 @@ define( function( require ) {
     }
     else if ( options.springCount === 1 ) {
       var massXCoordinate = this.springs[ 0 ].positionProperty.get().x - 0.15;
-        this.createMass( 0.100, massXCoordinate, true, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) );
+      this.createMass( 0.100, massXCoordinate, true, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) );
     }
 
     // @public (read-only) model of bodies used throughout the sim

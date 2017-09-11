@@ -10,22 +10,19 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
+  var Range = require( 'DOT/Range' );
+  var Vector2 = require( 'DOT/Vector2' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Panel = require( 'SUN/Panel' );
-  var Property = require( 'AXON/Property' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Range = require( 'DOT/Range' );
-  var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
-  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var Vector2 = require( 'DOT/Vector2' );
-
-  // phet-io modules
-  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
+  var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
+  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  var Panel = require( 'SUN/Panel' );
 
   /**
    * @param {Bounds2} dragBounds
@@ -58,12 +55,10 @@ define( function( require ) {
     Panel.call( this, toolbox, options );
 
     // Create timer to be turned into icon
-    var secondsProperty = new Property( 0, {
+    var secondsProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'secondsProperty' ),
-      phetioValueType: TNumber( {
-        units: 'seconds',
-        range: new Range( 0, Number.POSITIVE_INFINITY )
-      } )
+      units: 'seconds',
+      range: new Range( 0, Number.POSITIVE_INFINITY )
     } );
     var isRunningProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isRunningProperty' )

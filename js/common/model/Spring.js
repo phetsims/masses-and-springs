@@ -11,16 +11,17 @@ define( function( require ) {
 
   // modules
   var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var Range = require( 'DOT/Range' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var Complex = require( 'DOT/Complex' );
-  var Vector2 = require( 'DOT/Vector2' );
+  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var TVector2 = require( 'DOT/TVector2' );
+  var Vector2 = require( 'DOT/Vector2' );
   var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var inherit = require( 'PHET_CORE/inherit' );
 
   // phet-io modules
   var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
@@ -57,30 +58,24 @@ define( function( require ) {
     var thicknessRange = new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS );
 
     // @public {Property.<number>} gravitational acceleration
-    this.gravityProperty = new Property( massesAndSprings.Body.EARTH.gravity, {
+    this.gravityProperty = new NumberProperty( massesAndSprings.Body.EARTH.gravity, {
       tandem: tandem.createTandem( 'gravityProperty' ),
-      phetioValueType: TNumber( {
-        units: 'meters/second/second',
-        range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity )
-      } )
+      units: 'meters/second/second',
+      range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity )
     } );
 
     //  @public {Property.<number>} distance from of the bottom of the spring from the natural resting position
-    this.displacementProperty = new Property( 0, {
+    this.displacementProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'displacementProperty' ),
-      phetioValueType: TNumber( {
-        units: 'meters',
-        range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
-      } )
+      units: 'meters',
+      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
     // @public {Property.<number>} spring constant of spring
-    this.springConstantProperty = new Property( springConstantRange.defaultValue, {
+    this.springConstantProperty = new NumberProperty( springConstantRange.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
-      phetioValueType: TNumber( {
-        units: 'newtons/meters',
-        range: springConstantRange
-      } )
+      units: 'newtons/meters',
+      range: springConstantRange
     } );
 
     // @public {Property.<number>} spring force
@@ -90,19 +85,16 @@ define( function( require ) {
         return -1 * springConstant * displacement;
       },
       {
-        phetioValueType: TNumber( {
-          units: 'newtons'
-        } )
+        units: 'newtons',
+        phetioValueType: TNumber
       }
     );
 
     // @public {Property.<number>} viscous damping coefficient of the system
-    this.dampingCoefficientProperty = new Property( defaultDampingCoefficient, {
+    this.dampingCoefficientProperty = new NumberProperty( defaultDampingCoefficient, {
       tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
-      phetioValueType: TNumber( {
-        units: 'newtons-second/meters',
-        range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, defaultDampingCoefficient )
-      } )
+      units: 'newtons-second/meters',
+      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, defaultDampingCoefficient )
     } );
 
     // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
@@ -112,20 +104,16 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} length of the spring without mass attached
-    this.naturalRestingLengthProperty = new Property( initialNaturalRestingLength, {
+    this.naturalRestingLengthProperty = new NumberProperty( initialNaturalRestingLength, {
       tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
-      phetioValueType: TNumber( {
-        units: 'meters',
-        range: naturalRestingLengthRange
-      } )
+      units: 'meters',
+      range: naturalRestingLengthRange
     } );
 
     // @public {Property.<number> read-only} line width of oscillating spring node
-    this.thicknessProperty = new Property( DEFAULT_THICKNESS, {
+    this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
-      phetioValueType: TNumber( {
-        range: thicknessRange
-      } )
+      range: thicknessRange
     } );
 
     // Calling this function here will set a calculated value for the thickness property.
@@ -159,10 +147,9 @@ define( function( require ) {
       },
       {
         tandem: tandem.createTandem( 'lengthProperty' ),
-        phetioValueType: TNumber( {
-          units: 'meters',
-          range: new Range( 0, Number.POSITIVE_INFINITY )
-        } )
+        units: 'meters',
+        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        phetioValueType: TNumber
       }
     );
 
@@ -174,10 +161,9 @@ define( function( require ) {
       },
       {
         tandem: tandem.createTandem( 'bottomProperty' ),
-        phetioValueType: TNumber( {
-          units: 'meters',
-          range: new Range( 0, Number.POSITIVE_INFINITY )
-        } )
+        units: 'meters',
+        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        phetioValueType: TNumber
       }
     );
 
@@ -194,10 +180,9 @@ define( function( require ) {
       },
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
-        phetioValueType: TNumber( {
-          units: 'meters',
-          range: new Range( 0, Number.POSITIVE_INFINITY )
-        } )
+        units: 'meters',
+        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        phetioValueType: TNumber
       }
     );
 

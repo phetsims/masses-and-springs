@@ -10,14 +10,15 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var inherit = require( 'PHET_CORE/inherit' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var Property = require( 'AXON/Property' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
+  var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Vector2 = require( 'DOT/Vector2' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Color = require( 'SCENERY/util/Color' );
 
   // constants
   var HEIGHT_RATIO = 2.5;
@@ -25,9 +26,8 @@ define( function( require ) {
   var DENSITY = 80; // Constant used to keep all of our masses consistent in the model.
 
   // phet-io modules
-  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
-  var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
   var TVector2 = require( 'DOT/TVector2' );
+  var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
 
   /**
    * @param {number} massValue:  mass in kg
@@ -92,21 +92,17 @@ define( function( require ) {
     } );
 
 // @public {Property.<number>} vertical velocity of mass
-    this.verticalVelocityProperty = new Property( 0, {
+    this.verticalVelocityProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
-      phetioValueType: TNumber( {
-        units: 'meters/second',
-        range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 )
-      } )
+      units: 'meters/second',
+      range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 )
     } );
 
 // @public {Property.<number>} vertical acceleration of the mass
-    this.accelerationProperty = new Property( 0, {
+    this.accelerationProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'accelerationProperty' ),
-      phetioValueType: TNumber( {
-        units: 'meters/second/second',
-        range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
-      } )
+      units: 'meters/second/second',
+      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
     } );
 
 // @public {Property.<number>} vertical acceleration of the mass
@@ -119,12 +115,10 @@ define( function( require ) {
     } );
 
 // @public {Property.<number>} The force of the attached spring or 0 if unattached
-    this.springForceProperty = new Property( 0.0, {
+    this.springForceProperty = new NumberProperty( 0.0, {
       tandem: tandem.createTandem( 'springForceProperty' ),
-      phetioValueType: TNumber( {
-        units: 'newtons/meters',
-        range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0.0 )
-      } )
+      units: 'newtons/meters',
+      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0.0 )
     } );
 
 // Forward the value from the attached spring through to the mass's springForceProperty
