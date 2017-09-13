@@ -299,7 +299,6 @@ define( function( require ) {
         if ( mass ) {
 
           //Create scaled Properties to be used for composite and non-composite bars
-          var scaledKineticEnergyProperty = createScaledHeightProperty( mass.kineticEnergyProperty );
           var scaledGravitationalPotentialEnergyProperty = createScaledHeightProperty( mass.gravitationalPotentialEnergyProperty );
           var scaledElasticPotentialEnergyProperty = createScaledHeightProperty( mass.elasticPotentialEnergyProperty );
           var scaledThermalEnergyProperty = createScaledHeightProperty( model.frictionProperty );
