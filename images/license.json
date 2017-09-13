@@ -1,0 +1,18 @@
+{
+  "game-home-screen.png": {
+    "text": [
+      "Copyright 2002-2016 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Amanda McGarry"
+  },
+  "game-nav-bar.png": {
+    "text": [
+      "Copyright 2002-2016 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Amanda McGarry"
+  }
+}
