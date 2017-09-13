@@ -37,7 +37,6 @@ define( function( require ) {
     var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
     var MAX_WIDTH = 150;
     var BAR_NODE_WIDTH = 15;
-    var ZERO_PROPERTY = new Property( 0 );
 
     // strings
     var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
