@@ -123,15 +123,27 @@ define( function( require ) {
       tandem: tandem.createTandem( 'animatingProperty' )
     } );
 
-    // @public {Property.<Mass|null>} This is the Mass object that is attached to the spring
+    // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
       tandem: tandem.createTandem( 'massAttachedProperty' ),
       phetioValueType: TMass
     } );
 
-    // @public {Property.<number>} Kinetic Energy of the attached Mass
+    // @public {Property.<number> read-write} Kinetic Energy of the attached Mass
     this.kineticEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
       derive: 'kineticEnergyProperty',
+      defaultValue: 0
+    } );
+
+    // @public {Property.<number> read-write} Gravitational Potential Energy of the attached Mass
+    this.gravitationalPotentialEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'gravitationalPotentialEnergyProperty',
+      defaultValue: 0
+    } );
+
+    // @public {Property.<number> read-write} Gravitational Potential Energy of the attached Mass
+    this.elasticPotentialEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'elasticPotentialEnergyProperty',
       defaultValue: 0
     } );
 

@@ -142,6 +142,7 @@ define( function( require ) {
       /**
        * Function that returns a barNode representing a property. BarNodes are initialized with a value of zero
        *
+       * @param {Property} property
        * @param {String} fill
        * @returns {VerticalBarNode}
        */
@@ -154,19 +155,18 @@ define( function( require ) {
         } );
       };
 
+      // We are using scaled heights to represent our bar values
       var scaledKineticEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty );
+      var scaledGravitationalPotentialEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty );
+      var scaledElasticPotentialEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].elasticPotentialEnergyProperty );
+      var scaledthermalEnergyProperty = createScaledHeightProperty( model.frictionProperty );
 
       // Creation of our different bar nodes to be represented in the graph on energy screen
-      var kineticEnergyBarNode = createBarNode( scaledKineticEnergyProperty, '#39d74e' );
-      var gravitationalPotentialEnergyBarNode = createBarNode( ZERO_PROPERTY, '#5798de' );
-      var elasticPotentialEnergyBarNode = createBarNode( ZERO_PROPERTY, '#29d4ff' );
-      var thermalEnergyBarNode = createBarNode( ZERO_PROPERTY, '#ee6f3e' );
-
       this.barNodes = [
-        kineticEnergyBarNode,
-        gravitationalPotentialEnergyBarNode,
-        elasticPotentialEnergyBarNode,
-        thermalEnergyBarNode
+        createBarNode( scaledKineticEnergyProperty, '#39d74e' ),
+        createBarNode( scaledGravitationalPotentialEnergyProperty, '#5798de' ),
+        createBarNode( scaledElasticPotentialEnergyProperty, '#29d4ff' ),
+        createBarNode( scaledthermalEnergyProperty, '#ee6f3e' )
       ];
 
       // These properties are used for the composite bar node.
@@ -177,12 +177,6 @@ define( function( require ) {
         createScaledHeightProperty( model.frictionProperty )
       ];
 
-      // Used for initializing the composite bar node.
-      var zeroedBarProperties = [];
-      barProperties.forEach( function() {
-        zeroedBarProperties.push( ZERO_PROPERTY );
-      } );
-
       // Colors used for each bar. Consider that the first barColor will be applied to the first barNode.
       var barColors = [
         '#39d74e',
@@ -192,7 +186,7 @@ define( function( require ) {
       ];
 
       // Composite bar is used for the total energy readout in the energy graph.
-      var compositeBar = new VerticalCompositeBarNode( zeroedBarProperties, barColors, {
+      var compositeBar = new VerticalCompositeBarNode( barProperties, barColors, {
         width: BAR_NODE_WIDTH,
         displayContinuousArrow: true,
         arrowFill: 'black',
@@ -292,31 +286,6 @@ define( function( require ) {
           verticalBarChart,
           displayOptions
         ], spacing: 8
-      } );
-
-      // This link is responsible for assuring the energy graph monitors properties only when a mass is attached.
-      model.springs[ 0 ].massAttachedProperty.link( function( mass ) {
-        if ( mass ) {
-
-          //Create scaled Properties to be used for composite and non-composite bars
-          var scaledGravitationalPotentialEnergyProperty = createScaledHeightProperty( mass.gravitationalPotentialEnergyProperty );
-          var scaledElasticPotentialEnergyProperty = createScaledHeightProperty( mass.elasticPotentialEnergyProperty );
-          var scaledThermalEnergyProperty = createScaledHeightProperty( model.frictionProperty );
-
-
-          gravitationalPotentialEnergyBarNode.setMonitoredProperty( scaledGravitationalPotentialEnergyProperty );
-          elasticPotentialEnergyBarNode.setMonitoredProperty( scaledElasticPotentialEnergyProperty );
-          thermalEnergyBarNode.setMonitoredProperty( scaledThermalEnergyProperty );
-          compositeBar.setMonitoredProperties( barProperties );
-
-        }
-        else {
-          gravitationalPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
-          elasticPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
-          thermalEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
-          compositeBar.setMonitoredProperties( zeroedBarProperties );
-        }
-
       } );
 
       // REVIEW: Not having an option for the accordion box gives me a tandem error.
