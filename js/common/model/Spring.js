@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Complex = require( 'DOT/Complex' );
+  var DynamicProperty = require( 'AXON/DynamicProperty' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -122,10 +123,16 @@ define( function( require ) {
       tandem: tandem.createTandem( 'animatingProperty' )
     } );
 
-    // @public {Property.<Mass>}
+    // @public {Property.<Mass|null>} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
       tandem: tandem.createTandem( 'massAttachedProperty' ),
       phetioValueType: TMass
+    } );
+
+    // @public {Property.<number>} Kinetic Energy of the attached Mass
+    this.kineticEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'kineticEnergyProperty',
+      defaultValue: 0
     } );
 
     // @public (read-only) - distance from natural resting position to equilibrium position (units: m)

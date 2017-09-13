@@ -145,8 +145,8 @@ define( function( require ) {
        * @param {String} fill
        * @returns {VerticalBarNode}
        */
-      var createBarNode = function( fill ) {
-        return new VerticalBarNode( ZERO_PROPERTY, {
+      var createBarNode = function( property, fill ) {
+        return new VerticalBarNode( property, {
           fill: fill,
           width: BAR_NODE_WIDTH,
           maxBarHeight: 350,
@@ -154,11 +154,13 @@ define( function( require ) {
         } );
       };
 
+      var scaledKineticEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty );
+
       // Creation of our different bar nodes to be represented in the graph on energy screen
-      var kineticEnergyBarNode = createBarNode( '#39d74e' );
-      var gravitationalPotentialEnergyBarNode = createBarNode( '#5798de' );
-      var elasticPotentialEnergyBarNode = createBarNode( '#29d4ff' );
-      var thermalEnergyBarNode = createBarNode( '#ee6f3e' );
+      var kineticEnergyBarNode = createBarNode( scaledKineticEnergyProperty, '#39d74e' );
+      var gravitationalPotentialEnergyBarNode = createBarNode( ZERO_PROPERTY, '#5798de' );
+      var elasticPotentialEnergyBarNode = createBarNode( ZERO_PROPERTY, '#29d4ff' );
+      var thermalEnergyBarNode = createBarNode( ZERO_PROPERTY, '#ee6f3e' );
 
       this.barNodes = [
         kineticEnergyBarNode,
@@ -302,7 +304,7 @@ define( function( require ) {
           var scaledElasticPotentialEnergyProperty = createScaledHeightProperty( mass.elasticPotentialEnergyProperty );
           var scaledThermalEnergyProperty = createScaledHeightProperty( model.frictionProperty );
 
-          kineticEnergyBarNode.setMonitoredProperty( scaledKineticEnergyProperty );
+
           gravitationalPotentialEnergyBarNode.setMonitoredProperty( scaledGravitationalPotentialEnergyProperty );
           elasticPotentialEnergyBarNode.setMonitoredProperty( scaledElasticPotentialEnergyProperty );
           thermalEnergyBarNode.setMonitoredProperty( scaledThermalEnergyProperty );
@@ -310,7 +312,6 @@ define( function( require ) {
 
         }
         else {
-          kineticEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
           gravitationalPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
           elasticPotentialEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
           thermalEnergyBarNode.setMonitoredProperty( ZERO_PROPERTY );
