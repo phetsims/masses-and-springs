@@ -22,6 +22,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
@@ -210,13 +211,15 @@ define( function( require ) {
     createSpringConstantPanel: function( springIndex, tandem ) {
       return new SpringConstantControlPanel(
         this.model.springs[ springIndex ].springConstantProperty,
-        this.model.springs[ springIndex ].springConstantRange,
+        new RangeWithValue( 5, 15, 9 ),
         StringUtils.fillIn( springConstantString, { spring: springIndex + 1 } ),
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
         {
           top: this.spacing,
           maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
-        } );
+        }
+      )
+        ;
     }
   } );
 } );

@@ -151,7 +151,6 @@ define( function( require ) {
       return new Spring(
         new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        new RangeWithValue( 5, 15, 9 ),
         self.frictionProperty.get(),
         tandem
       );

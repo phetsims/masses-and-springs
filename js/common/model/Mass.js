@@ -95,7 +95,7 @@ define( function( require ) {
     this.verticalVelocityProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
       units: 'meters/second',
-      range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 )
+      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
 // @public {Property.<number>} vertical acceleration of the mass

@@ -28,23 +28,21 @@ define( function( require ) {
 
   // constants
   var DEFAULT_THICKNESS = 3; // empirically determine
+  var DEFAULT_SPRING_CONSTANT_RANGE = new RangeWithValue( 5, 15, 9 );
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
-   * @param {RangeWithValue} springConstantRange - k in N/m
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
    * @param {Tandem} tandem
    *
    * @constructor
    */
-  function Spring( position, initialNaturalRestingLength, springConstantRange, defaultDampingCoefficient, tandem, options ) {
+  function Spring( position, initialNaturalRestingLength, defaultDampingCoefficient, tandem, options ) {
 
     // validate and save options
     assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : '
                                                        + initialNaturalRestingLength );
-    assert && assert( springConstantRange.min > 0, 'minimum spring constant must be positive : '
-                                                   + springConstantRange.min );
     var self = this;
 
     this.options = _.extend( {
@@ -53,9 +51,6 @@ define( function( require ) {
 
     // range of natural resting length in meters (values used from design doc)
     var naturalRestingLengthRange = new RangeWithValue( 0.1, 0.5, initialNaturalRestingLength );
-
-    // derived empirically from updateSpringThickness() in view-coordinates
-    var thicknessRange = new RangeWithValue( 0.6, 3, DEFAULT_THICKNESS );
 
     // @public {Property.<number>} gravitational acceleration
     this.gravityProperty = new NumberProperty( massesAndSprings.Body.EARTH.gravity, {
@@ -72,10 +67,10 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} spring constant of spring
-    this.springConstantProperty = new NumberProperty( springConstantRange.defaultValue, {
+    this.springConstantProperty = new NumberProperty( DEFAULT_SPRING_CONSTANT_RANGE.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
       units: 'newtons/meters',
-      range: springConstantRange
+      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9 )
     } );
 
     // @public {Property.<number>} spring force
@@ -116,7 +111,7 @@ define( function( require ) {
     // @public {Property.<number> read-only} line width of oscillating spring node
     this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
-      range: thicknessRange
+      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, DEFAULT_THICKNESS )
     } );
 
     // Calling this function here will set a calculated value for the thickness property.
@@ -137,7 +132,7 @@ define( function( require ) {
     this.springExtension = 0;
 
     // @public (read-only)
-    this.springConstantRange = springConstantRange;
+    this.springConstantRange = DEFAULT_SPRING_CONSTANT_RANGE;
 
     //------------------------------------------------
     // Derived properties
