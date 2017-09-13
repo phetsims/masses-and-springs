@@ -159,7 +159,7 @@ define( function( require ) {
       var scaledKineticEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty );
       var scaledGravitationalPotentialEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty );
       var scaledElasticPotentialEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].elasticPotentialEnergyProperty );
-      var scaledthermalEnergyProperty = createScaledHeightProperty( model.frictionProperty );
+      var scaledthermalEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty );
 
       // Creation of our different bar nodes to be represented in the graph on energy screen
       this.barNodes = [
@@ -171,10 +171,10 @@ define( function( require ) {
 
       // These properties are used for the composite bar node.
       var barProperties = [
-        createScaledHeightProperty( model.masses[ 0 ].kineticEnergyProperty ),
-        createScaledHeightProperty( model.masses[ 0 ].gravitationalPotentialEnergyProperty ),
-        createScaledHeightProperty( model.masses[ 0 ].elasticPotentialEnergyProperty ),
-        createScaledHeightProperty( model.frictionProperty )
+        createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty ),
+        createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty ),
+        createScaledHeightProperty( model.springs[ 0 ].elasticPotentialEnergyProperty ),
+        createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty )
       ];
 
       // Colors used for each bar. Consider that the first barColor will be applied to the first barNode.

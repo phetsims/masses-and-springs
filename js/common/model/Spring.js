@@ -144,6 +144,11 @@ define( function( require ) {
       defaultValue: 0
     } );
 
+    this.thermalEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'thermalEnergyProperty',
+      defaultValue: 0
+    } );
+
     // @public (read-only) - distance from natural resting position to equilibrium position (units: m)
     this.springExtension = 0;
 

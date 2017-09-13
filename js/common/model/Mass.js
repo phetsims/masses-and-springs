@@ -71,57 +71,57 @@ define( function( require ) {
     this.height = this.cylinderHeightProperty.get() + this.hookHeightProperty.get();
     this.initialPosition = initialPosition;
 
-// @public {read-only} Used for constructing tandems for corresponding view nodes.
+    // @public {read-only} Used for constructing tandems for corresponding view nodes.
     this.tandem = tandem;
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
 
-// @public (read-only) {Number} mass of mass object in kg
+    // @public (read-only) {Number} mass of mass object in kg
     this.massProperty = new Property( massValue );
 
-// @public Main model properties
-// {Property.<Vector2>} the position of a mass is the center top of the model object.
+    // @public Main model properties
+    // {Property.<Vector2>} the position of a mass is the center top of the model object.
     this.positionProperty = new Property( this.initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TVector2
     } );
 
-// @public {Property.<boolean>} indicates whether this mass is currently user controlled
+    // @public {Property.<boolean>} indicates whether this mass is currently user controlled
     this.userControlledProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'userControlledProperty' )
     } );
 
-// @public {Property.<number>} vertical velocity of mass
+    // @public {Property.<number>} vertical velocity of mass
     this.verticalVelocityProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
       units: 'meters/second',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
-// @public {Property.<number>} vertical acceleration of the mass
+    // @public {Property.<number>} vertical acceleration of the mass
     this.accelerationProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'accelerationProperty' ),
       units: 'meters/second/second',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
     } );
 
-// @public {Property.<number>} vertical acceleration of the mass
+    // @public {Property.<number>} vertical acceleration of the mass
     this.gravityProperty = gravityProperty;
 
-// @public {Property.<Spring|null>}  spring that the mass is attached to
+    // @public {Property.<Spring|null>}  spring that the mass is attached to
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
       phetioValueType: TSpring
     } );
 
-// @public {Property.<number>} The force of the attached spring or 0 if unattached
+    // @public {Property.<number>} The force of the attached spring or 0 if unattached
     this.springForceProperty = new NumberProperty( 0.0, {
       tandem: tandem.createTandem( 'springForceProperty' ),
       units: 'newtons/meters',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0.0 )
     } );
 
-// Forward the value from the attached spring through to the mass's springForceProperty
+    // Forward the value from the attached spring through to the mass's springForceProperty
     var springForceListener = function( springForce ) {
       self.springForceProperty.set( springForce );
     };
@@ -133,34 +133,37 @@ define( function( require ) {
       }
     } );
 
-// Net force applied to mass
+    // Net force applied to mass
     this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ],
       function( springForce, gravity ) {
         return springForce - self.mass * gravity;
       } );
 
-// Link that sets the acceleration property of the mass
+    // Link that sets the acceleration property of the mass
     this.netForceProperty.link( function( netForce ) {
       self.accelerationProperty.set( netForce / self.mass );
     } );
 
-// Kinetic energy of the mass
+    // Kinetic energy of the mass
     this.kineticEnergyProperty = new DerivedProperty( [ this.massProperty, this.verticalVelocityProperty ],
       function( mass, velocity ) {
         return (1 / 2) * (mass) * (Math.pow( velocity, 2 ));
       } );
 
-// Gravitational potential energy of the mass
+    // Gravitational potential energy of the mass
     this.gravitationalPotentialEnergyProperty = new DerivedProperty(
       [ this.massProperty, this.gravityProperty, this.positionProperty ],
       function( mass, gravity, position ) {
         return Math.abs( mass * gravity * (position.y - self.height) );
       } );
 
-// Kinetic energy of the mass
+    // Kinetic energy of the mass
     this.elasticPotentialEnergyProperty = new Property( 0 );
 
-// Link that sets the elastic potential energy
+    // Thermal energy of the mass
+    this.thermalEnergyProperty = new Property( 0 );
+
+    // Link that sets the elastic potential energy
     this.springProperty.link( function( spring ) {
       if ( spring ) {
 
@@ -174,16 +177,23 @@ define( function( require ) {
       }
     } );
 
-// Total energy of the mass
+    // Total energy of the mass
+    this.initialTotalEnergy = this.kineticEnergyProperty.get() +
+                              this.gravitationalPotentialEnergyProperty.get() +
+                              this.elasticPotentialEnergyProperty.get();
+
     this.totalEnergyProperty = new DerivedProperty( [
         this.kineticEnergyProperty,
         this.gravitationalPotentialEnergyProperty,
         this.elasticPotentialEnergyProperty
       ],
       function( kineticEnergy, gravitationalPotentialEnergy, elasticPotentialEnergy ) {
-        return kineticEnergy + gravitationalPotentialEnergy + elasticPotentialEnergy;
+        var totalEnergy = kineticEnergy + gravitationalPotentialEnergy + elasticPotentialEnergy;
+        self.thermalEnergyProperty.set( totalEnergy - self.initialTotalEnergy );
+        return totalEnergy;
       }
     );
+
 
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
