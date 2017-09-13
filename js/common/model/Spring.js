@@ -92,9 +92,6 @@ define( function( require ) {
       units: 'newtons-second/meters',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, defaultDampingCoefficient )
     } );
-    this.dampingCoefficientProperty.link( function( value ) {
-      // console.log( 'value = ' + value );
-    } );
 
     // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
     this.positionProperty = new Property( position, {
