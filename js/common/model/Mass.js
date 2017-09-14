@@ -145,9 +145,9 @@ define( function( require ) {
     } );
 
     // Kinetic energy of the mass
-    this.kineticEnergyProperty = new DerivedProperty( [ this.massProperty, this.verticalVelocityProperty ],
-      function( mass, velocity ) {
-        return (1 / 2) * (mass) * (Math.pow( velocity, 2 ));
+    this.kineticEnergyProperty = new DerivedProperty( [ this.massProperty, this.verticalVelocityProperty, this.userControlledProperty ],
+      function( mass, velocity, userControlled ) {
+        return userControlled ? 0 : (1 / 2) * (mass) * (Math.pow( velocity, 2 ));
       } );
 
     // Gravitational potential energy of the mass
