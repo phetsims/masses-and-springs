@@ -134,7 +134,7 @@ define( function( require ) {
         // Create a scaled height for the bar to represent
         return new DerivedProperty( [ property, scaleFactorProperty ],
           function( value, scale ) {
-            return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale );
+            return Math.min( MAXIMUM_HEIGHT, Math.abs( value ) * scale * 20 );
           } );
       }
 
