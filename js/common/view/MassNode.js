@@ -69,11 +69,6 @@ define( function( require ) {
         modelViewTransform2.modelToViewDeltaX( radiusValue ),
         modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeightProperty.get() ) + hookHeight );
 
-      // if (rect.rectBounds.intersectsBounds(dragBounds)){
-      //   debugger;
-      //
-      // }
-
       rect.fill = new LinearGradient( rect.left, 0, rect.right, 0 )
         .addColorStop( 0.1, mass.color )
         .addColorStop( 0.2, 'rgb(205, 206, 207)' )
