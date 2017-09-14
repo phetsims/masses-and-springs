@@ -199,6 +199,9 @@ define( function( require ) {
       if ( !userControlled && self.springProperty.get() ) {
         self.springProperty.get().animatingProperty.set( true );
       }
+      if ( userControlled ) {
+        self.verticalVelocityProperty.set( 0 );
+      }
     } );
   }
 
