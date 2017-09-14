@@ -168,20 +168,21 @@ define( function( require ) {
         createBarNode( scaledthermalEnergyProperty, '#ee6f3e' )
       ];
 
+      // TODO: May be useful to make the property and color as one object with key value pair.
       // These properties are used for the composite bar node.
       var barProperties = [
-        createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty ),
-        createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty ),
+        createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty ),
         createScaledHeightProperty( model.springs[ 0 ].elasticPotentialEnergyProperty ),
-        createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty )
+        createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty ),
+        createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty )
       ];
 
       // Colors used for each bar. Consider that the first barColor will be applied to the first barNode.
       var barColors = [
-        '#39d74e',
-        '#5798de',
+        '#ee6f3e',
         '#29d4ff',
-        '#ee6f3e'
+        '#5798de',
+        '#39d74e'
       ];
 
       // Composite bar is used for the total energy readout in the energy graph.
