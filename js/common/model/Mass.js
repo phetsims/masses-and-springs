@@ -178,30 +178,39 @@ define( function( require ) {
     } );
 
     // Total energy of the mass
-    this.initialTotalEnergy = this.kineticEnergyProperty.get() +
-                              this.gravitationalPotentialEnergyProperty.get() +
-                              this.elasticPotentialEnergyProperty.get();
-
     this.totalEnergyProperty = new DerivedProperty( [
         this.kineticEnergyProperty,
         this.gravitationalPotentialEnergyProperty,
         this.elasticPotentialEnergyProperty
       ],
       function( kineticEnergy, gravitationalPotentialEnergy, elasticPotentialEnergy ) {
-        var totalEnergy = kineticEnergy + gravitationalPotentialEnergy + elasticPotentialEnergy;
-        self.thermalEnergyProperty.set( totalEnergy - self.initialTotalEnergy );
-        return totalEnergy;
+        return kineticEnergy + gravitationalPotentialEnergy + elasticPotentialEnergy;
       }
     );
 
-
+    var initialTotalEnergy = 0;
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
         self.springProperty.get().animatingProperty.set( true );
+
+        // When a user drags an attached mass it is as if they are restarting the spring system
+        initialTotalEnergy = self.kineticEnergyProperty.get() +
+                             self.gravitationalPotentialEnergyProperty.get() +
+                             self.elasticPotentialEnergyProperty.get();
       }
       if ( userControlled ) {
-        self.verticalVelocityProperty.set( 0 );
+        self.verticalVelocityProperty.reset();
       }
+    } );
+
+    // As the total energy changes we can derive the thermal energy as being the energy lost from the system
+    this.totalEnergyProperty.link( function( totalEnergy ) {
+      if ( self.userControlledProperty.get() ) {
+
+        //If a user is dragging the mass we remove the thermal energy.
+        return self.thermalEnergyProperty.set( 0 );
+      }
+      self.thermalEnergyProperty.set( initialTotalEnergy - totalEnergy );
     } );
   }
 
