@@ -50,20 +50,20 @@ define( function( require ) {
 
     this.scalingFactor = 4; // scales the radius to desired size
 
-    // @public {Property.<number>} radius of the massNode dependent its mass value
+    // @public {Property.<number>} (read-write) radius of the massNode dependent its mass value
     this.radiusProperty = new Property( (Math.pow( (massValue - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * this.scalingFactor) );
 
-    // @public {read-only} Non-property model attributes
+    // Non-property model attributes
     this.mass = massValue;
     this.color = color;
 
-    // @public Property.<number> height in m
+    // @public {Property.<number>} height in m
     this.cylinderHeightProperty = new DerivedProperty( [ this.radiusProperty ],
       function( radius ) {
         return radius * HEIGHT_RATIO;
       } );
 
-    // @public Property.<number> hook height in m
+    // @public {Property.<number>} hook height in m
     this.hookHeightProperty = new DerivedProperty( [ this.radiusProperty ], function( radius ) {
       return radius * HOOK_HEIGHT_RATIO;
     } );
@@ -71,7 +71,7 @@ define( function( require ) {
     this.height = this.cylinderHeightProperty.get() + this.hookHeightProperty.get();
     this.initialPosition = initialPosition;
 
-    // @public {read-only} Used for constructing tandems for corresponding view nodes.
+    // @public (read-only) Used for constructing tandems for corresponding view nodes.
     this.tandem = tandem;
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
@@ -80,7 +80,7 @@ define( function( require ) {
     this.massProperty = new Property( massValue );
 
     // @public Main model properties
-    // {Property.<Vector2>} the position of a mass is the center top of the model object.
+    // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
     this.positionProperty = new Property( this.initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioValueType: TVector2
