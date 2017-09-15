@@ -68,7 +68,7 @@ define( function( require ) {
 
       // {read-write} Responsible for the zoom level in the bar graph. Is adjusted by the zoom buttons and used for the
       // scaling property of the barNodes.
-      var zoomLevelProperty = new Property( 0 );
+      var zoomLevelProperty = new Property( 3 );
 
       // Creation of zoom in/out buttons
       var zoomButtonOptions = {
