@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
+  var Color = require( 'SCENERY/util/Color' );
   var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
@@ -69,10 +70,9 @@ define( function( require ) {
         modelViewTransform2.modelToViewDeltaX( radiusValue ),
         modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeightProperty.get() ) + hookHeight );
 
-      rect.fill = new LinearGradient( rect.left, 0, rect.right, 0 )
-        .addColorStop( 0.1, mass.color )
-        .addColorStop( 0.2, 'rgb(205, 206, 207)' )
-        .addColorStop( 0.7, mass.color );
+      rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 ).addColorStop( 0.3, mass.color )
+        .addColorStop( 0.8, Color.toColor( mass.color ).colorUtilsBrighter( 0.9 ) )
+        .addColorStop( 1, Color.toColor( mass.color ).colorUtilsBrighter( 0.4 ) );
     } );
 
     var hookShape = new Shape();
