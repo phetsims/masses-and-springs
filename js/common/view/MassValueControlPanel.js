@@ -36,7 +36,7 @@ define( function( require ) {
 
     var numberControl = new NumberControl( massString, mass.massProperty, range, {
       valuePattern: StringUtils.fillIn( massReadoutPatternString, {
-        value: mass.massProperty.get(),
+        value: mass.massProperty.get() * 1000,
         units: gramUnitString
       } ),
       valueMaxWidth: 100,
