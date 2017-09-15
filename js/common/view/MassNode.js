@@ -103,7 +103,7 @@ define( function( require ) {
       if ( mass.options.isLabeled ) {
         self.addChild( label );
       }
-      mass.massProperty.link( function( mass ) {
+      mass.massProperty.link( function() {
         label.center = rect.center;
       } );
 
