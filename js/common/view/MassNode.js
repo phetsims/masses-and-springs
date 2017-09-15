@@ -103,8 +103,9 @@ define( function( require ) {
       if ( mass.options.isLabeled ) {
         self.addChild( label );
       }
-      mass.massProperty.link( function() {
+      mass.massProperty.link( function( mass ) {
         label.center = rect.center;
+        console.log( 'mass = ' + mass );
       } );
 
       // Adjust the mass label for adjustable masses.

@@ -268,6 +268,8 @@ define( function( require ) {
       this.userControlledProperty.reset();
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
+      this.radiusProperty.reset();
+      this.massProperty.reset();
     }
   } );
 } )
