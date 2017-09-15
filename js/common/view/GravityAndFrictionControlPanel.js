@@ -103,7 +103,7 @@ define( function( require ) {
     } ) );
 
     if ( this.options.frictionVisible ) {
-      self.frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
+      var frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
         majorTickLength: 10,
         trackSize: new Dimension2( 130, 2 ),
         thumbSize: new Dimension2( 13, 22 ),
@@ -119,7 +119,7 @@ define( function( require ) {
           gravityComboBox,
           gravityHSlider,
           new Text( frictionString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-          self.frictionHSlider
+          frictionHSlider
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } ), self.options );
