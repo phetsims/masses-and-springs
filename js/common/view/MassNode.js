@@ -105,7 +105,6 @@ define( function( require ) {
       }
       mass.massProperty.link( function( mass ) {
         label.center = rect.center;
-        console.log( 'mass = ' + mass );
       } );
 
       // Adjust the mass label for adjustable masses.
