@@ -145,14 +145,14 @@ define( function( require ) {
        * @param {String} fill
        * @returns {VerticalBarNode}
        */
-      var createBarNode = function( property, fill ) {
+      function createBarNode( property, fill ) {
         return new VerticalBarNode( property, {
           fill: fill,
           width: BAR_NODE_WIDTH,
           maxBarHeight: 350,
           displayContinuousArrow: true
         } );
-      };
+      }
 
       // We are using scaled heights to represent our bar values
       var scaledKineticEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty );
@@ -200,7 +200,8 @@ define( function( require ) {
         height: MAXIMUM_HEIGHT,
         title: new Text( energyString, { maxWidth: 100 } ),
         titleFill: '#b37e46',
-        xAxisLabels: xAxisLabels
+        xAxisLabels: xAxisLabels,
+        thermalEnergyProperty: model.springs[ 0 ].thermalEnergyProperty
       } );
 
       // Manages the symbols used in the axes of the graph
