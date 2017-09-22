@@ -1,4 +1,4 @@
-// Copyright 2016-2017, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 /**
  * Object that creates the grey bar that the springs hang from and their respective numerical label.

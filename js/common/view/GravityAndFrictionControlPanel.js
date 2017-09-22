@@ -1,4 +1,4 @@
-// Copyright 2016-2017, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 /**
  * Node for the gravity control panel and combo box for planet gravity options.

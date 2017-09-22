@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 /**
  * Panel responsible for keeping the spring constant and spring thickness constant.
