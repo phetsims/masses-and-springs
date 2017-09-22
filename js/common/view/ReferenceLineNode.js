@@ -1,7 +1,7 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * Node for the Natural line.
+ * Responsible for the attributes associated with the reference line nodes.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -21,36 +21,34 @@ define( function( require ) {
 
   /**
    * @param {ModelViewTransform2} modelViewTransform2
-   * @param {Spring} spring - determines which spring is being referenced
+   * @param {Spring}
+   * @param {Property} property - determines which property is being referenced
    * @param {boolean} visibleProperty
-   * @param {Tandem} tandem
    *
    * @constructor
    */
-  function NaturalLengthLineNode( modelViewTransform2, spring, visibleProperty, tandem ) {
+  function ReferenceLineNode( modelViewTransform2, spring, property, visibleProperty ) {
     var self = this;
     Line.call( this, 0, 0, LINE_LENGTH, 0, {
       stroke: 'rgb(65,66,232)',
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
-      cursor: 'pointer',
-      tandem: tandem.createTandem( 'line' )
+      cursor: 'pointer'
     } );
     this.mouseArea = this.localBounds.dilatedY( 10 );
     this.touchArea = this.localBounds.dilatedY( 10 );
 
     // {read-write} prevents overlap with the equilibrium line
-    var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x ) + 7.5;
+    var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
 
     // updates the position of the natural length line as the system changes
-    spring.bottomProperty.link( function( bottom ) {
+    property.link( function( value ) {
 
       // {read-write} Y position of line in screen coordinates
-      var yPos = modelViewTransform2.modelToViewY( bottom );
+      var yPos = modelViewTransform2.modelToViewY( value );
 
       // @private {read-write} position of line in screen coordinates
       self.positionProperty = new Property( new Vector2( xPos, yPos ), {
-          tandem: tandem.createTandem( 'positionProperty' ),
           phetioValueType: TVector2
         } );
 
@@ -62,12 +60,14 @@ define( function( require ) {
     visibleProperty.linkAttribute( self, 'visible' );
   }
 
-  massesAndSprings.register( 'NaturalLengthLineNode', NaturalLengthLineNode );
+  massesAndSprings.register( 'ReferenceLineNode', ReferenceLineNode );
 
-  return inherit( Line, NaturalLengthLineNode, {
+  return inherit( Line, ReferenceLineNode, {
 
     /**
      * Resets the position of the line Node.
+     *
+     * @public
      */
     reset: function() {
       this.positionProperty.reset();

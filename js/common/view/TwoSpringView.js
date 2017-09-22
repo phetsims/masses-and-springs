@@ -11,13 +11,12 @@ define( function( require ) {
 
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
-  var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
   var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
-  var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
+  var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
@@ -71,35 +70,36 @@ define( function( require ) {
     );
 
     // @public Initializes equilibrium line for first spring
-    var firstSpringEquilibriumLineNode = new EquilibriumLineNode(
+    var firstSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
+      model.springs[ 0 ].equilibriumYPositionProperty,
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'firstSpringEquilibriumLineNode' )
     );
 
     // @public Initializes equilibrium line for second spring
-    var secondSpringEquilibriumLineNode = new EquilibriumLineNode(
+    var secondSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 1 ],
-      model.equilibriumPositionVisibleProperty,
-      tandem.createTandem( 'secondSpringEquilibriumLineNode' )
+      model.springs[ 1 ].equilibriumYPositionProperty,
+      model.equilibriumPositionVisibleProperty
     );
 
     // @public Initializes natural line for first spring
-    var firstNaturalLengthLineNode = new NaturalLengthLineNode(
+    var firstNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
-      model.naturalLengthVisibleProperty,
-      tandem.createTandem( 'firstNaturalLengthLineNode' )
+      model.springs[ 0 ].bottomProperty,
+      model.naturalLengthVisibleProperty
     );
 
     // @public Initializes natural line for second spring
-    var secondNaturalLengthLineNode = new NaturalLengthLineNode(
+    var secondNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 1 ],
-      model.naturalLengthVisibleProperty,
-      tandem.createTandem( 'secondNaturalLengthLineNode' )
+      model.springs[ 1 ].bottomProperty,
+      model.naturalLengthVisibleProperty
     );
 
     // Gravity Control Panel

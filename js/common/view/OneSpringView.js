@@ -12,14 +12,13 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
-  var EquilibriumLineNode = require( 'MASSES_AND_SPRINGS/common/view/EquilibriumLineNode' );
   var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassValueControlPanel = require( 'MASSES_AND_SPRINGS/common/view/MassValueControlPanel' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
-  var NaturalLengthLineNode = require( 'MASSES_AND_SPRINGS/common/view/NaturalLengthLineNode' );
+  var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
@@ -52,19 +51,19 @@ define( function( require ) {
     springHangerNode.top = springConstantControlPanel.top;
 
     // @public Initializes equilibrium line for the spring
-    var springEquilibriumLineNode = new EquilibriumLineNode(
+    var springEquilibriumLineNode = new ReferenceLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
-      model.equilibriumPositionVisibleProperty,
-      tandem.createTandem( 'springEquilibriumLineNode' )
+      model.springs[ 0 ].equilibriumYPositionProperty,
+      model.equilibriumPositionVisibleProperty
     );
 
     // @public Initializes natural line for the spring
-    var naturalLengthLineNode = new NaturalLengthLineNode(
+    var naturalLengthLineNode = new ReferenceLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
-      model.naturalLengthVisibleProperty,
-      tandem.createTandem( 'naturalLengthLineNode' )
+      model.springs[ 0 ].bottomProperty,
+      model.naturalLengthVisibleProperty
     );
 
 
