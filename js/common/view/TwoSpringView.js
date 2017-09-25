@@ -73,6 +73,7 @@ define( function( require ) {
     var firstSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
+      'rgb( 93, 191, 142 )',
       model.springs[ 0 ].equilibriumYPositionProperty,
       model.equilibriumPositionVisibleProperty,
       tandem.createTandem( 'firstSpringEquilibriumLineNode' )
@@ -82,6 +83,7 @@ define( function( require ) {
     var secondSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 1 ],
+      'rgb( 93, 191, 142 )',
       model.springs[ 1 ].equilibriumYPositionProperty,
       model.equilibriumPositionVisibleProperty
     );
@@ -90,6 +92,7 @@ define( function( require ) {
     var firstNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
+      'rgb( 65, 66, 232 )',
       model.springs[ 0 ].bottomProperty,
       model.naturalLengthVisibleProperty
     );
@@ -98,6 +101,7 @@ define( function( require ) {
     var secondNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 1 ],
+      'rgb( 65, 66, 232 )',
       model.springs[ 1 ].bottomProperty,
       model.naturalLengthVisibleProperty
     );

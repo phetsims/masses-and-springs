@@ -54,6 +54,7 @@ define( function( require ) {
     var springEquilibriumLineNode = new ReferenceLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
+      'rgb( 93, 191, 142 )',
       model.springs[ 0 ].equilibriumYPositionProperty,
       model.equilibriumPositionVisibleProperty
     );
@@ -62,6 +63,7 @@ define( function( require ) {
     var naturalLengthLineNode = new ReferenceLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
+      'rgb( 65, 66, 232 )',
       model.springs[ 0 ].bottomProperty,
       model.naturalLengthVisibleProperty
     );
