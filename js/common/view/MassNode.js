@@ -62,11 +62,13 @@ define( function( require ) {
     var rect = new Rectangle( rectOptions );
     this.addChild( rect );
 
+
     // Update the size of the massNode
     mass.radiusProperty.link( function( radiusValue ) {
+      console.log( mass.cylinderHeightProperty.get() );
 
       // Handles case where mass is enlarged near the floor, so it doesn't extend pass the visible bounds.
-      if ( !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() ) {
+      if ( !mass.springProperty.get() ) {
         self.bottom = dragBounds.value.bottom;
       }
       rect.rectBounds = new Bounds2(
