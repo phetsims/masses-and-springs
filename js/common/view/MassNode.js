@@ -66,7 +66,7 @@ define( function( require ) {
     mass.radiusProperty.link( function( radiusValue ) {
 
       // Handles case where mass is enlarged near the floor, so it doesn't extend pass the visible bounds.
-      if ( !dragBounds.value.containsBounds( self.getBounds() ) ) {
+      if ( !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() ) {
         self.bottom = dragBounds.value.bottom;
       }
       rect.rectBounds = new Bounds2(
