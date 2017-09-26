@@ -18,7 +18,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsQueryParameters = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsQueryParameters' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
@@ -57,7 +56,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} coefficient of friction applied to the system
-    this.frictionProperty = new NumberProperty( 0.2, {
+    this.frictionProperty = new Property( 0.2, {
       units: 'newtons',
       tandem: tandem.createTandem( 'frictionProperty' )
     } );
@@ -87,7 +86,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
-    this.timerSecondsProperty = new NumberProperty( 0, {
+    this.timerSecondsProperty = new Property( 0, {
       range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
       tandem: tandem.createTandem( 'timerSecondsProperty' ),
       units: 'seconds',

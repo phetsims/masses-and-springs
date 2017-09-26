@@ -15,7 +15,6 @@ define( function( require ) {
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -92,14 +91,14 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} vertical velocity of mass
-    this.verticalVelocityProperty = new NumberProperty( 0, {
+    this.verticalVelocityProperty = new Property( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
       units: 'meters/second',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
     // @public {Property.<number>} vertical acceleration of the mass
-    this.accelerationProperty = new NumberProperty( 0, {
+    this.accelerationProperty = new Property( 0, {
       tandem: tandem.createTandem( 'accelerationProperty' ),
       units: 'meters/second/second',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
@@ -115,7 +114,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} The force of the attached spring or 0 if unattached
-    this.springForceProperty = new NumberProperty( 0.0, {
+    this.springForceProperty = new Property( 0.0, {
       tandem: tandem.createTandem( 'springForceProperty' ),
       units: 'newtons/meters',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0.0 )
