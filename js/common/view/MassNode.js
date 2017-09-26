@@ -40,7 +40,7 @@ define( function( require ) {
    * @param {Mass} mass - model object
    * @param {boolean} showVectors
    * @param {ModelViewTransform2} modelViewTransform2
-   * @param {Bounds2} dragBounds
+   * @param {Property.<Bounds2>} dragBounds
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @constructor
@@ -64,6 +64,11 @@ define( function( require ) {
 
     // Update the size of the massNode
     mass.radiusProperty.link( function( radiusValue ) {
+
+      // Handles case where mass is enlarged near the floor, so it doesn't extend pass the visible bounds.
+      if ( !dragBounds.value.containsBounds( self.getBounds() ) ) {
+        self.bottom = dragBounds.value.bottom;
+      }
       rect.rectBounds = new Bounds2(
         modelViewTransform2.modelToViewDeltaX( -radiusValue ),
         hookHeight,
