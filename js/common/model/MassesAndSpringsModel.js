@@ -39,8 +39,7 @@ define( function( require ) {
    * @constructor
    */
   function MassesAndSpringsModel( tandem, options ) {
-    options = _.extend( {
-    }, options );
+
     var self = this;
 
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
@@ -82,7 +81,7 @@ define( function( require ) {
     this.timerSecondsProperty = new Property( 0, {
       range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
       tandem: tandem.createTandem( 'timerSecondsProperty' ),
-      units: 'seconds',
+      units: 'seconds'
     } );
 
     // @public {Property.<boolean>} determines whether timer is active or not
