@@ -189,7 +189,6 @@ define( function( require ) {
     // @public (read-only) model of bodies used throughout the sim
     // Links are used to set gravity property of each spring to the gravity property of the system
     this.gravityProperty.link( function( newGravity ) {
-      assert && assert( newGravity >= 0, 'gravity must be 0 or positive : ' + newGravity );
       self.springs.forEach( function( spring ) {
         spring.gravityProperty.set( newGravity );
       } );
