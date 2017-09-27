@@ -65,19 +65,20 @@ define( function( require ) {
 
     var rect = new Rectangle( rectOptions );
     this.addChild( rect );
-    //
-    // mass.positionProperty.link( function( position ) {
-    //   if ( position.y < 0 ) {
-    //     debugger;
-    //   }
-    // } );
 
     // Update the size of the massNode
     var originalBounds = dragBounds.value;
     mass.radiusProperty.link( function( radiusValue ) {
+      // mass.zeroThermalEnergy.bind(this); // TODO:
+
+      mass.initialTotalEnergy = mass.kineticEnergyProperty.get() +
+                                mass.gravitationalPotentialEnergyProperty.get() +
+                                mass.elasticPotentialEnergyProperty.get();
+      mass.thermalEnergyProperty.set( mass.initialTotalEnergy - mass.totalEnergyProperty.get() );
+
 
       if (
-        !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() &&
+        !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() ||
         !mass.springProperty.get() &&
         model.gravityProperty.value >= 0 && model.playingProperty.value &&
         originalBounds !== dragBounds.value ) {

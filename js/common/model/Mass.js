@@ -270,6 +270,15 @@ define( function( require ) {
       this.verticalVelocityProperty.reset();
       this.radiusProperty.reset();
       this.massProperty.reset();
+    },
+
+    zeroThermalEnergy: function() {
+      this.initialTotalEnergy = this.kineticEnergyProperty.get() +
+                                this.gravitationalPotentialEnergyProperty.get() +
+                                this.elasticPotentialEnergyProperty.get();
+      this.thermalEnergyProperty.set( this.initialTotalEnergy - this.totalEnergyProperty.get() );
+
+
     }
   } );
 } )
