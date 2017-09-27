@@ -151,16 +151,20 @@ define( function( require ) {
       );
     };
 
-    // @public (read-only) model of springs used throughout the sim
-    if ( options.springCount === 2 ) {
-      this.springs = [
-        createSpring( RIGHT_SPRING_X - 0.25, tandem.createTandem( 'leftSpring' ) ),
-        createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
-      ];
-    }
-    else {
-      this.springs = [ createSpring( RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) ) ];
-    }
+    // Array that will contain all of the springs.
+    this.springs = [];
+
+    // Spring set that contains two springs. Used on the Intro and Vector screens.
+    this.defaultSpringSet = [
+      createSpring( RIGHT_SPRING_X - 0.25, tandem.createTandem( 'leftSpring' ) ),
+      createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
+    ];
+
+    // Spring set that contains one spring. Used on the Energy and Lab screens.
+    this.oneSpringSet = [ createSpring( RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) ) ];
+
+    // Here we set our common model springs to represent the default set of two springs.
+    this.springs = this.defaultSpringSet;
 
     // Array that will contain all of the masses.
     this.masses = [];
@@ -179,7 +183,7 @@ define( function( require ) {
       this.createMass( 0.075, 0.49, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) )
     ];
 
-    // Mass set contining one adjustable mass that is used on the energy screen.
+    // Mass set containing one adjustable mass that is used on the energy screen.
     this.energyScreenMasses = [
       this.createMass( 0.100, massXCoordinate - 0.15, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) )
     ];
@@ -195,6 +199,7 @@ define( function( require ) {
     this.labScreenMasses[ 1 ].options.mysteryLabel = true;
     this.labScreenMasses[ 2 ].options.mysteryLabel = true;
 
+    // Here we set our common model masses to represent the default set of seven standard masses.
     this.masses = this.defaultMasses;
 
     // @public (read-only) model of bodies used throughout the sim

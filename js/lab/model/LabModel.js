@@ -21,6 +21,7 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem, { springCount: 1 } );
 
     this.masses = this.labScreenMasses;
+    this.springs = this.oneSpringSet;
   }
   massesAndSprings.register( 'LabModel', LabModel );
 
