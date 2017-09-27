@@ -140,7 +140,7 @@ define( function( require ) {
       // Adjust the mass label for adjustable masses.
       if ( mass.adjustable ) {
         self.mass.massProperty.link( function( massValue ) {
-            label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
+          label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
           if ( model.masses[ 0 ] && model.masses[ 0 ].springProperty.get() ) {
             model.masses[ 0 ].springProperty.get().animatingProperty.set( true );
           }

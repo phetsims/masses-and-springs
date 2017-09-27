@@ -177,7 +177,7 @@ define( function( require ) {
       }
     } );
 
-    // Total energy of the mass
+    // @public (read-only) Total energy of the mass
     this.totalEnergyProperty = new DerivedProperty( [
         this.kineticEnergyProperty,
         this.gravitationalPotentialEnergyProperty,
@@ -188,15 +188,15 @@ define( function( require ) {
       }
     );
 
-    var initialTotalEnergy = 0;
+    this.initialTotalEnergy = 0;
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
         self.springProperty.get().animatingProperty.set( true );
 
         // When a user drags an attached mass it is as if they are restarting the spring system
-        initialTotalEnergy = self.kineticEnergyProperty.get() +
-                             self.gravitationalPotentialEnergyProperty.get() +
-                             self.elasticPotentialEnergyProperty.get();
+        self.initialTotalEnergy = self.kineticEnergyProperty.get() +
+                                  self.gravitationalPotentialEnergyProperty.get() +
+                                  self.elasticPotentialEnergyProperty.get();
       }
       if ( userControlled ) {
         self.verticalVelocityProperty.reset();
@@ -210,7 +210,7 @@ define( function( require ) {
         //If a user is dragging the mass we remove the thermal energy.
         return self.thermalEnergyProperty.set( 0 );
       }
-      self.thermalEnergyProperty.set( initialTotalEnergy - totalEnergy );
+      self.thermalEnergyProperty.set( self.initialTotalEnergy - totalEnergy );
     } );
   }
 

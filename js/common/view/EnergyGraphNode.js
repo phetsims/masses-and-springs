@@ -201,7 +201,19 @@ define( function( require ) {
         title: new Text( energyString, { maxWidth: 100 } ),
         titleFill: '#b37e46',
         xAxisLabels: xAxisLabels,
-        thermalEnergyProperty: model.springs[ 0 ].thermalEnergyProperty
+        thermalEnergyProperty: model.springs[ 0 ].thermalEnergyProperty,
+        thermalEnergyListener: function() {
+
+          // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
+          // has been reset. Thermal energy is the only value that is dependent on initial total energy.
+          var mass = model.springs[ 0 ].massAttachedProperty.get();
+          if ( mass ) {
+            mass.initialTotalEnergy = mass.kineticEnergyProperty.get() +
+                                      mass.gravitationalPotentialEnergyProperty.get() +
+                                      mass.elasticPotentialEnergyProperty.get();
+            mass.thermalEnergyProperty.set( mass.initialTotalEnergy - mass.totalEnergyProperty.get() );
+          }
+        }
       } );
 
       // Manages the symbols used in the axes of the graph
