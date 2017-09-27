@@ -69,7 +69,7 @@ define( function( require ) {
     // Update the size of the massNode
     var originalBounds = dragBounds.value;
     mass.radiusProperty.link( function( radiusValue ) {
-      // mass.zeroThermalEnergy.bind(this); // TODO:
+      // mass.zeroThermalEnergy.bind(this); // TODO: Why doesn't this work?
 
       mass.initialTotalEnergy = mass.kineticEnergyProperty.get() +
                                 mass.gravitationalPotentialEnergyProperty.get() +
