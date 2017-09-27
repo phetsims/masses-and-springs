@@ -10,10 +10,10 @@ define( function( require ) {
 
   // modules
   var Color = require( 'SCENERY/util/Color' );
+  var EnergyModel = require( 'MASSES_AND_SPRINGS/energy/model/EnergyModel' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var OneSpringView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringView' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
@@ -47,12 +47,11 @@ define( function( require ) {
 
     Screen.call( this,
       function() {
-        return new MassesAndSpringsModel( tandem.createTandem( 'model' ), {
-          springCount: 1,
-          vectorViewEnabled: false
-        } );
+        return new EnergyModel( tandem.createTandem( 'model' ) );
       },
-      function( model ) { return new OneSpringView( model, tandem.createTandem( 'view' ) ); },
+      function( model ) {
+        return new OneSpringView( model, tandem.createTandem( 'view' ) );
+      },
       options
     );
   }

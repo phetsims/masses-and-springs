@@ -46,8 +46,12 @@ define( function( require ) {
     };
 
     Screen.call( this,
-      function() { return new LabModel( tandem.createTandem( 'model' ) ); },
-      function( model ) { return new LabScreenView( model, tandem.createTandem( 'view' ) ); },
+      function() {
+        return new LabModel( tandem.createTandem( 'model' ) );
+      },
+      function( model ) {
+        return new LabScreenView( model, tandem.createTandem( 'view' ) );
+      },
       options
     );
   }

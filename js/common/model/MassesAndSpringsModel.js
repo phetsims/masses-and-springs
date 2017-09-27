@@ -165,22 +165,37 @@ define( function( require ) {
     // Array that will contain all of the masses.
     this.masses = [];
 
-    // @public (read-only) model of masses used throughout the sim
-    // TODO: Add a method to add masses
-    // TODO: These masses don't need to be identified by name. Make this an array instead of an object.
-    if ( options.springCount === 2 ) {
-      this.createMass( 0.250, 0.12, true, false, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
-        this.createMass( 0.100, 0.20, true, false, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) ),
-        this.createMass( 0.100, 0.28, true, false, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) ),
-        this.createMass( 0.050, 0.33, true, false, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) ),
-        this.createMass( 0.200, 0.63, false, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) ),
-        this.createMass( 0.150, 0.56, false, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) ),
-        this.createMass( 0.075, 0.49, false, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) );
-    }
-    else if ( options.springCount === 1 ) {
-      var massXCoordinate = this.springs[ 0 ].positionProperty.get().x - 0.15;
-      this.createMass( 0.100, massXCoordinate, true, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) );
-    }
+    // Positional reference to the first spring, that is used to position the masses.
+    var massXCoordinate = this.springs[ 0 ].positionProperty.get().x;
+
+    // Mass set that contains seven standard masses. Used on the Intro and Vector screens.
+    this.defaultMasses = [
+      this.createMass( 0.250, 0.12, true, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
+      this.createMass( 0.100, 0.20, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) ),
+      this.createMass( 0.100, 0.28, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) ),
+      this.createMass( 0.050, 0.33, true, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) ),
+      this.createMass( 0.200, 0.63, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) ),
+      this.createMass( 0.150, 0.56, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) ),
+      this.createMass( 0.075, 0.49, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) )
+    ];
+
+    // Mass set contining one adjustable mass that is used on the energy screen.
+    this.energyScreenMasses = [
+      this.createMass( 0.100, massXCoordinate - 0.15, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) )
+    ];
+    this.energyScreenMasses[ 0 ].adjustable = true;
+
+    // Mass set containing three masses for use on the lab screen.
+    this.labScreenMasses = [
+      this.createMass( 0.100, massXCoordinate - 0.15, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) ),
+      this.createMass( 0.150, massXCoordinate - .35, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) ),
+      this.createMass( 0.125, massXCoordinate - .45, true, 'red', null, tandem.createTandem( 'redLabeledMass' ) )
+    ];
+    this.labScreenMasses[ 0 ].adjustable = true;
+    this.labScreenMasses[ 1 ].options.mysteryLabel = true;
+    this.labScreenMasses[ 2 ].options.mysteryLabel = true;
+
+    this.masses = this.defaultMasses;
 
     // @public (read-only) model of bodies used throughout the sim
     // Links are used to set gravity property of each spring to the gravity property of the system
@@ -257,10 +272,8 @@ define( function( require ) {
      * @protected
      * @returns {*}
      */
-    createMass: function( mass, xPosition, labelVisible, adjustableMass, color, specifiedLabel, tandem ) {
-      this.masses.push( new Mass( mass, new Vector2( xPosition, 0.5 ), labelVisible, color, this.gravityProperty, tandem, {
-        adjustable: adjustableMass
-      } ) );
+    createMass: function( mass, xPosition, labelVisible, color, specifiedLabel, tandem ) {
+      return new Mass( mass, new Vector2( xPosition, 0.5 ), labelVisible, color, this.gravityProperty, tandem );
     },
 
     /**

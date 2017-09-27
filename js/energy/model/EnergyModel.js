@@ -1,7 +1,7 @@
 // Copyright 2017, University of Colorado Boulder
 
 /**
- * Lab model (base type) for Masses and Springs
+ * Energy model (base type) for Masses and Springs
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -17,12 +17,13 @@ define( function( require ) {
    * TODO:: document all properties and items set on objects (entire sim)
    * @constructor
    */
-  function LabModel( tandem ) {
+  function EnergyModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem, { springCount: 1 } );
 
-    this.masses = this.labScreenMasses;
+    this.masses = this.energyScreenMasses;
   }
-  massesAndSprings.register( 'LabModel', LabModel );
 
-  return inherit( MassesAndSpringsModel, LabModel );
+  massesAndSprings.register( 'EnergyModel', EnergyModel );
+
+  return inherit( MassesAndSpringsModel, EnergyModel );
 } );
