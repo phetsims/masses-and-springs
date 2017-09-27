@@ -61,14 +61,33 @@ define( function( require ) {
 
     var rect = new Rectangle( rectOptions );
     this.addChild( rect );
+    //
+    // mass.positionProperty.link( function( position ) {
+    //   if ( position.y < 0 ) {
+    //     debugger;
+    //   }
+    // } );
 
     // Update the size of the massNode
+    var originalBounds = dragBounds.value;
     mass.radiusProperty.link( function( radiusValue ) {
 
-      // Handles case where mass is enlarged near the floor, so it doesn't extend pass the visible bounds.
-      if ( !mass.springProperty.get() ) {
+      if (
+        !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() &&
+        !mass.springProperty.get() &&
+        model.gravityProperty.value >= 0 && model.playingProperty.value &&
+        originalBounds !== dragBounds.value ) {
         self.bottom = dragBounds.value.bottom;
       }
+      // if ( !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() ){
+      //   self.bottom = dragBounds.value.bottom;
+      // }
+
+      // Handles case where mass is enlarged near the floor, so it doesn't extend pass the visible bounds.
+      // if ( !mass.springProperty.get() ) {
+      //   mass.positionProperty.value.setY(modelViewTransform2.viewToModelY(self.top));
+      // }
+
       rect.rectBounds = new Bounds2(
         modelViewTransform2.modelToViewDeltaX( -radiusValue ),
         hookHeight,
@@ -78,6 +97,8 @@ define( function( require ) {
       rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 ).addColorStop( 0.3, mass.color )
         .addColorStop( 0.8, Color.toColor( mass.color ).colorUtilsBrighter( 0.9 ) )
         .addColorStop( 1, Color.toColor( mass.color ).colorUtilsBrighter( 0.4 ) );
+
+
     } );
 
     var hookShape = new Shape();
