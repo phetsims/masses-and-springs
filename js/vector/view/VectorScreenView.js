@@ -22,10 +22,14 @@ define( function( require ) {
    * @constructor
    */
   function VectorScreenView( model, tandem ) {
-    var self = this;
 
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
+    var self = this;
+
+    this.massNodes.forEach( function( massNode ) {
+      massNode.vectorViewEnabled = true;
+    } );
 
     var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
       model,

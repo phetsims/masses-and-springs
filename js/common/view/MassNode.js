@@ -38,14 +38,18 @@ define( function( require ) {
 
   /**
    * @param {Mass} mass - model object
-   * @param {boolean} showVectors
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Property.<Bounds2>} dragBounds
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
+   * @param {Object} options
    * @constructor
    */
-  function MassNode( mass, showVectors, modelViewTransform2, dragBounds, model, tandem ) {
+  function MassNode( mass, modelViewTransform2, dragBounds, model, tandem, options ) {
+    options = _.extend( {
+      vectorViewEnabled: false
+    }, options );
+
     Node.call( this, { cursor: 'pointer', pathBoundsMethod: 'none', renderer: 'canvas' } );
     var self = this;
 
@@ -196,7 +200,7 @@ define( function( require ) {
     this.springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'springForceArrow', tandem );
     this.netForceArrow = new ForceVectorArrow( 'black', 'netForceArrow', tandem );
 
-    if ( showVectors ) {
+    if ( options.vectorViewEnabled ) {
       this.addChild( this.velocityArrow );
       this.addChild( this.accelerationArrow );
       this.addChild( this.gravityForceArrow );

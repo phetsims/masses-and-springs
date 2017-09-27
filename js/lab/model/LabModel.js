@@ -19,7 +19,7 @@ define( function( require ) {
    * @constructor
    */
   function LabModel( tandem ) {
-    MassesAndSpringsModel.call( this, tandem, { springCount: 1, showVectors: true } );
+    MassesAndSpringsModel.call( this, tandem, { springCount: 1 } );
 
     var massXPosition = this.springs[ 0 ].positionProperty.get().x;
     // REVIEW: Where do the numbers used to position the masses below come from?

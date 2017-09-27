@@ -50,9 +50,14 @@ define( function( require ) {
    * @constructor
    */
   function SpringView( model, tandem ) {
+    var options = _.extend( {
+      vectorViewEnabled: true
+    }, options );
+
     this.model = model; // Make model available for reset
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
     var self = this;
+
     this.modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 );
 
     // @protected {Array.<OscillatingSpringNode>} Used to reference the created springs in the view.
@@ -81,11 +86,12 @@ define( function( require ) {
       var referencedMassProperty = model.masses[ index ];
       var massNode = new MassNode(
         referencedMassProperty,
-        model.showVectors,
         self.modelViewTransform,
         self.visibleBoundsProperty,
         model,
-        tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ) );
+        tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ), {
+          vectorViewEnabled: options.vectorViewEnabled
+        } );
       self.massLayer.addChild( massNode );
 
       // Keeps track of the mass node to restore original Z order.

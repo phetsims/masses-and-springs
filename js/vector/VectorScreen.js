@@ -49,7 +49,7 @@ define( function( require ) {
       function() {
         return new MassesAndSpringsModel( tandem.createTandem( 'model' ), {
           springCount: 2,
-          showVectors: true
+          vectorViewEnabled: true
         } );
       },
       function( model ) { return new VectorScreenView( model, tandem.createTandem( 'view' ) ); },

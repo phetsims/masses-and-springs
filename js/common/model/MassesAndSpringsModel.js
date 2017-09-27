@@ -40,15 +40,11 @@ define( function( require ) {
    */
   function MassesAndSpringsModel( tandem, options ) {
     options = _.extend( {
-      springCount: 2,
-      showVectors: true
+      springCount: 2
     }, options );
     var self = this;
 
     assert && assert( options.springCount === 1 || 2, 'Spring count must be one or two' );
-
-    // @public {boolean} determines whether vectors associated with massNode vectors.
-    this.showVectors = options.showVectors;
 
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
