@@ -48,7 +48,6 @@ define( function( require ) {
     Screen.call( this,
       function() {
         return new MassesAndSpringsModel( tandem.createTandem( 'model' ), {
-          springCount: 2,
           vectorViewEnabled: true
         } );
       },

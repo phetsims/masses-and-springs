@@ -18,7 +18,7 @@ define( function( require ) {
    * @constructor
    */
   function LabModel( tandem ) {
-    MassesAndSpringsModel.call( this, tandem, { springCount: 1 } );
+    MassesAndSpringsModel.call( this, tandem );
 
     this.masses = this.labScreenMasses;
     this.springs = this.oneSpringSet;

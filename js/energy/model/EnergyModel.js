@@ -18,7 +18,7 @@ define( function( require ) {
    * @constructor
    */
   function EnergyModel( tandem ) {
-    MassesAndSpringsModel.call( this, tandem, { springCount: 1 } );
+    MassesAndSpringsModel.call( this, tandem );
 
     this.masses = this.energyScreenMasses;
     this.springs = this.oneSpringSet;
