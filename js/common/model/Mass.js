@@ -68,7 +68,10 @@ define( function( require ) {
       return radius * HOOK_HEIGHT_RATIO;
     } );
 
-    this.height = this.cylinderHeightProperty.get() + this.hookHeightProperty.get();
+    this.heightProperty = new DerivedProperty( [ this.cylinderHeightProperty, this.hookHeightProperty ], function( cylinderHeight, hookHeight ) {
+      return cylinderHeight + hookHeight;
+    } );
+
     this.initialPosition = initialPosition;
 
     // @public (read-only) Used for constructing tandems for corresponding view nodes.
@@ -154,7 +157,7 @@ define( function( require ) {
     this.gravitationalPotentialEnergyProperty = new DerivedProperty(
       [ this.massProperty, this.gravityProperty, this.positionProperty ],
       function( mass, gravity, position ) {
-        return Math.abs( mass * gravity * (position.y - self.height) );
+        return Math.abs( mass * gravity * (position.y - self.heightProperty.value) );
       } );
 
     // Kinetic energy of the mass
@@ -228,7 +231,8 @@ define( function( require ) {
      */
     step: function( gravity, floorY, dt ) {
       if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
-        var floorPosition = floorY + this.height;
+        console.log( 'this.height = ' + this.heightProperty.value );
+        var floorPosition = floorY + this.heightProperty.value;
         var oldY = this.positionProperty.get().y;
         if ( oldY !== floorPosition ) {
           var newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
@@ -281,5 +285,4 @@ define( function( require ) {
 
     }
   } );
-} )
-;
+} );

@@ -77,13 +77,7 @@ define( function( require ) {
       mass.thermalEnergyProperty.set( mass.initialTotalEnergy - mass.totalEnergyProperty.get() );
 
 
-      if (
-        !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() ||
-        !mass.springProperty.get() &&
-        model.gravityProperty.value >= 0 && model.playingProperty.value &&
-        originalBounds !== dragBounds.value ) {
-        self.bottom = dragBounds.value.bottom;
-      }
+
       // if ( !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() ){
       //   self.bottom = dragBounds.value.bottom;
       // }
@@ -102,8 +96,14 @@ define( function( require ) {
       rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 ).addColorStop( 0.3, mass.color )
         .addColorStop( 0.8, Color.toColor( mass.color ).colorUtilsBrighter( 0.9 ) )
         .addColorStop( 1, Color.toColor( mass.color ).colorUtilsBrighter( 0.4 ) );
-
-
+      if (
+        !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get()
+      // !mass.springProperty.get() &&
+      // model.gravityProperty.value >= 0 && model.playingProperty.value &&
+      // originalBounds !== dragBounds.value
+      ) {
+        self.bottom = dragBounds.value.bottom;
+      }
     } );
 
     var hookShape = new Shape();

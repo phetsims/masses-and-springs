@@ -141,7 +141,7 @@ define( function( require ) {
       /**
        * Function that returns a barNode representing a property. BarNodes are initialized with a value of zero
        *
-       * @param {Property} property
+       * @param {DerivedProperty} property
        * @param {String} fill
        * @returns {VerticalBarNode}
        */
