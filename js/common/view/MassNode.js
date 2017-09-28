@@ -67,7 +67,6 @@ define( function( require ) {
     this.addChild( rect );
 
     // Update the size of the massNode
-    var originalBounds = dragBounds.value;
     mass.radiusProperty.link( function( radiusValue ) {
       // mass.zeroThermalEnergy.bind(this); // TODO: Why doesn't this work?
 
@@ -75,17 +74,6 @@ define( function( require ) {
                                 mass.gravitationalPotentialEnergyProperty.get() +
                                 mass.elasticPotentialEnergyProperty.get();
       mass.thermalEnergyProperty.set( mass.initialTotalEnergy - mass.totalEnergyProperty.get() );
-
-
-
-      // if ( !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() ){
-      //   self.bottom = dragBounds.value.bottom;
-      // }
-
-      // Handles case where mass is enlarged near the floor, so it doesn't extend pass the visible bounds.
-      // if ( !mass.springProperty.get() ) {
-      //   mass.positionProperty.value.setY(modelViewTransform2.viewToModelY(self.top));
-      // }
 
       rect.rectBounds = new Bounds2(
         modelViewTransform2.modelToViewDeltaX( -radiusValue ),
@@ -96,12 +84,10 @@ define( function( require ) {
       rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 ).addColorStop( 0.3, mass.color )
         .addColorStop( 0.8, Color.toColor( mass.color ).colorUtilsBrighter( 0.9 ) )
         .addColorStop( 1, Color.toColor( mass.color ).colorUtilsBrighter( 0.4 ) );
-      if (
-        !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get()
-      // !mass.springProperty.get() &&
-      // model.gravityProperty.value >= 0 && model.playingProperty.value &&
-      // originalBounds !== dragBounds.value
-      ) {
+
+      // TODO: we need to constrain this to the Y bounds only because we will get buggy behavior if we adjust the massValue
+      // while half of the mass is hanging off the side of the screen in the x direction.
+      if ( !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() ) {
         self.bottom = dragBounds.value.bottom;
       }
     } );
