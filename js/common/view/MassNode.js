@@ -70,6 +70,7 @@ define( function( require ) {
     mass.radiusProperty.link( function( radiusValue ) {
       // mass.zeroThermalEnergy.bind(this); // TODO: Why doesn't this work?
 
+      // TODO: Placeholder to reset thermal energy until we figure out why thermal energy responds to change in spring constant and mass value.
       mass.initialTotalEnergy = mass.kineticEnergyProperty.get() +
                                 mass.gravitationalPotentialEnergyProperty.get() +
                                 mass.elasticPotentialEnergyProperty.get();
