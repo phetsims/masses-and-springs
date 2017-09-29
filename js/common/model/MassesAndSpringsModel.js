@@ -281,9 +281,10 @@ define( function( require ) {
      * Based on new dragged position of mass, try to attach or detach mass if eligible and then update position.
      *
      * @param {Mass} mass
+     * @param {Bounds2} visibleBounds - visible bounds of the sim screen
      * @public
      */
-    adjustDraggedMassPosition: function( mass ) {
+    adjustDraggedMassPosition: function( mass, visibleBounds ) {
       var massPosition = mass.positionProperty.get();
 
       // Attempt to detach
@@ -308,13 +309,16 @@ define( function( require ) {
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         var maxY = mass.springProperty.get().thicknessProperty.get() *
                    OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
-        var constraint = new LinearFunction( 20, 60, 1.112, 1.006 );
+
+        // Constraints used to limit how much we can prime the spring's oscillation.
+        var upperConstraint = new LinearFunction( 20, 60, 1.112, 1.006 );
+        var lowerConstraint = visibleBounds.bottom;
 
         // Max Y value in model coordinates
-        var modelMaxY = constraint( maxY );
+        var modelMaxY = upperConstraint( maxY );
 
-        // Update only the spring's length if we are lower than the ma
-        if ( mass.positionProperty.get().y > modelMaxY ) {
+        // Update only the spring's length if we are lower than the max Y
+        if ( lowerConstraint > mass.positionProperty.get().y || mass.positionProperty.get().y > modelMaxY ) {
 
           // set mass position to maximum y position based on spring coils
           mass.positionProperty.set( mass.positionProperty.get().copy().setY( modelMaxY ) );

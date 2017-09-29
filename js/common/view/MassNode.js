@@ -154,7 +154,7 @@ define( function( require ) {
       onDrag: function() {
 
         // Checks if mass should be attached/detached to spring and adjusts its position if so.
-        model.adjustDraggedMassPosition( self.mass );
+        model.adjustDraggedMassPosition( self.mass, dragBounds );
       },
 
       startDrag: function() {
