@@ -22,6 +22,7 @@ define( function( require ) {
   var cmString = require( 'string!MASSES_AND_SPRINGS/cm' );
 
   /**
+   * @param {ModelViewTransform2} mvt
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition
    * @param {Property.<boolean>} visibleProperty
@@ -49,7 +50,7 @@ define( function( require ) {
     var majorTickWidth = rulerLength / ( majorTickLabels.length - 1 );
 
     RulerNode.call( this, rulerLength, rulerWidth, majorTickWidth, majorTickLabels, cmString, {
-      insetsWidth: 5,
+      insetsWidth: 0,
       minorTicksPerMajorTick: 4,
       unitsMajorTickIndex: 19,
       rotation: Math.PI / 2,
