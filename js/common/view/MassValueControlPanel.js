@@ -10,6 +10,8 @@ define( function( require ) {
 
   // modules
   var Dimension2 = require( 'DOT/Dimension2' );
+  var DynamicProperty = require( 'AXON/DynamicProperty' );
+  var Property = require( 'AXON/Property' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -20,8 +22,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var gramUnitString = require( 'string!MASSES_AND_SPRINGS/gramUnit' );
-  var massReadoutPatternString = require( 'string!MASSES_AND_SPRINGS/massReadoutPattern' );
+  var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
   var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
 
   /**
@@ -32,12 +33,21 @@ define( function( require ) {
   function MassValueControlPanel( mass, tandem ) {
 
     // range for mass in kg
-    var range = new Range( 0.050, 0.300 );
+    var range = new Range( 50, 300 );
 
-    var numberControl = new NumberControl( massString, mass.massProperty, range, {
-      valuePattern: StringUtils.fillIn( massReadoutPatternString, {
-        value: mass.massProperty.get() * 1000,
-        units: gramUnitString
+    var massInGramsProperty = new DynamicProperty( new Property( mass.massProperty ), {
+      bidirectional: true,
+      map: function( mass ) {
+        return mass * 1000;
+      },
+      inverseMap: function( massInGrams ) {
+        return massInGrams / 1000;
+      }
+    } );
+
+    var numberControl = new NumberControl( massString, massInGramsProperty, range, {
+      valuePattern: StringUtils.fillIn( massValueString, {
+        mass: '{0}'
       } ),
       valueMaxWidth: 100,
       majorTickLength: 10,
@@ -50,23 +60,18 @@ define( function( require ) {
       majorTicks: [
         {
           value: range.min,
-          label: new Text( range.min * 1000 + gramUnitString, { font: MassesAndSpringsConstants.LABEL_FONT } )
+          label: new Text( StringUtils.fillIn( massValueString, { mass: range.min } ), {
+            font: MassesAndSpringsConstants.LABEL_FONT
+          } )
         },
         {
           value: range.max,
-          label: new Text( range.max * 1000 + gramUnitString, { font: MassesAndSpringsConstants.LABEL_FONT } )
+          label: new Text( StringUtils.fillIn( massValueString, { mass: range.max } ), {
+            font: MassesAndSpringsConstants.LABEL_FONT
+          } )
         } ],
-      delta: .001,
+      delta: 1,
       tandem: tandem
-    } );
-
-    mass.massProperty.link( function( massValue ) {
-      numberControl.valuePattern = StringUtils.fillIn( massReadoutPatternString, {
-        value: massValue,
-        units: gramUnitString
-      } );
-
-      mass.setRadius( massValue );
     } );
 
     mass.options.adjustable = true;
