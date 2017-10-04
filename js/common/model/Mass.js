@@ -45,7 +45,8 @@ define( function( require ) {
       adjustable: false,
       isLabeled: isLabeled,
       mysteryLabel: false,
-      color: new Color( color )
+      color: new Color( color ),
+      restingHeight: .1 // Height of the mass when it is resting on the shelf
     }, options );
 
     this.scalingFactor = 4; // scales the radius to desired size
@@ -157,7 +158,10 @@ define( function( require ) {
     this.gravitationalPotentialEnergyProperty = new DerivedProperty(
       [ this.massProperty, this.gravityProperty, this.positionProperty ],
       function( mass, gravity, position ) {
-        return ( mass * gravity * (position.y - self.heightProperty.value) );
+
+        // The height used is determined based on the height of the shelf the masses rest on.
+        var heightFromZero = position.y - self.options.restingHeight - self.heightProperty.value;
+        return ( mass * gravity * (heightFromZero) );
       } );
 
     // Kinetic energy of the mass
