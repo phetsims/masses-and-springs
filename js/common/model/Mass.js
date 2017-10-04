@@ -157,7 +157,7 @@ define( function( require ) {
     this.gravitationalPotentialEnergyProperty = new DerivedProperty(
       [ this.massProperty, this.gravityProperty, this.positionProperty ],
       function( mass, gravity, position ) {
-        return Math.abs( mass * gravity * (position.y - self.heightProperty.value) );
+        return ( mass * gravity * (position.y - self.heightProperty.value) );
       } );
 
     // Kinetic energy of the mass
@@ -231,7 +231,6 @@ define( function( require ) {
      */
     step: function( gravity, floorY, dt ) {
       if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
-        console.log( 'this.height = ' + this.heightProperty.value );
         var floorPosition = floorY + this.heightProperty.value;
         var oldY = this.positionProperty.get().y;
         if ( oldY !== floorPosition ) {
