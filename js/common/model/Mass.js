@@ -51,8 +51,14 @@ define( function( require ) {
 
     this.scalingFactor = 4; // scales the radius to desired size
 
+    // @public (read-only) {Number} mass of mass object in kg
+    this.massProperty = new Property( massValue );
+
     // @public {Property.<number>} (read-write) radius of the massNode dependent its mass value
-    this.radiusProperty = new Property( (Math.pow( (massValue - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * this.scalingFactor) );
+    this.radiusProperty = new DerivedProperty( [ this.massProperty ],
+      function( massValue ) {
+        return Math.pow( (massValue - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * self.scalingFactor;
+      } );
 
     // Non-property model attributes
     this.mass = massValue;
@@ -79,9 +85,6 @@ define( function( require ) {
     this.tandem = tandem;
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
-
-    // @public (read-only) {Number} mass of mass object in kg
-    this.massProperty = new Property( massValue );
 
     // @public Main model properties
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
