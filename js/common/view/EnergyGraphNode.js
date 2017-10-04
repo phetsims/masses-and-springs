@@ -13,6 +13,7 @@ define( function( require ) {
     // modules
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var Color = require( 'SCENERY/util/Color' );
     var DerivedProperty = require( 'AXON/DerivedProperty' );
     var Dialog = require( 'JOIST/Dialog' );
     var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
@@ -107,7 +108,8 @@ define( function( require ) {
       function createLabelText( string, color ) {
         return new RichText( string, {
           fill: color,
-          font: MassesAndSpringsConstants.TITLE_FONT
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          stroke: Color.toColor( color ).colorUtilsBrighter( 0.25 )
         } );
       }
 
