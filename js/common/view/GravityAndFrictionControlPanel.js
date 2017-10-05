@@ -136,7 +136,7 @@ define( function( require ) {
       } ), self.options );
     }
 
-    model.bodyProperty.link( function( newBody, previousGravity ) {
+    model.bodyProperty.link( function( newBody, previousBody ) {
       var body = _.find( self.bodies, newBody );
 
       // Unhide the gravityHSlider if we are not using planetX
@@ -152,16 +152,13 @@ define( function( require ) {
 
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
       else if ( previousBody === Body.PLANET_X && newBody === Body.CUSTOM ) {
-        self.gravityProperty.set( previousGravity );
+        self.gravityProperty.set( previousBody.gravity );
       }
 
       // Update gravity
       else if ( body.gravity || body === Body.ZERO_G ) {
         self.gravityProperty.set( body.gravity );
       }
-
-      // Store previous state so we can revert after leaving Planet X.
-      previousBody = newBody;
     } );
 
     this.gravityProperty.link( function( newGravity ) {
