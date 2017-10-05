@@ -47,6 +47,10 @@ define( function( require ) {
       tandem: tandem.createTandem( 'playingProperty' )
     } );
 
+    this.isSoundEnabledProperty = new Property( true, {
+      tandem: tandem.createTandem( 'isSoundEnabledProperty' )
+    } );
+
     // @public {Property.<number>} coefficient of friction applied to the system
     this.frictionProperty = new Property( 0.2, {
       units: 'newtons',

@@ -25,6 +25,7 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -172,6 +173,18 @@ define( function( require ) {
       right: this.resetAllButton.left - 30,
       centerY: this.resetAllButton.centerY,
       tandem: tandem.createTandem( 'speedControl' )
+    } );
+
+    // sound toggle button at bottom right
+    var soundToggleButton = new SoundToggleButton( model.isSoundEnabledProperty, {
+      centerY: this.resetAllButton.centerY - 55
+    } );
+    this.addChild( soundToggleButton );
+
+    this.visibleBoundsProperty.link( function( visibleBounds ) {
+
+      //Update the bounds of view elements
+      soundToggleButton.right = visibleBounds.right - self.spacing;
     } );
   }
 
