@@ -72,7 +72,6 @@ define( function( require ) {
 
     // @public
     this.bodyProperty = model.bodyProperty;
-    var previousBody = Body.EARTH;
 
     // @private {read-only} manages the items associated with the gravity panel in a combo box
     var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
