@@ -220,6 +220,7 @@ define( function( require ) {
         //If a user is dragging the mass we remove the thermal energy.
         return self.thermalEnergyProperty.set( 0 );
       }
+      console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergy + '\t' + 'totalEnergy = ' + totalEnergy );
       self.thermalEnergyProperty.set( self.initialTotalEnergy - totalEnergy );
     } );
   }
@@ -278,7 +279,6 @@ define( function( require ) {
       this.userControlledProperty.reset();
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
-      this.radiusProperty.reset();
       this.massProperty.reset();
     },
 
