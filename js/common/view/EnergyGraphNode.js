@@ -13,6 +13,7 @@ define( function( require ) {
     // modules
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var Bounds2 = require( 'DOT/Bounds2' );
   var Color = require( 'SCENERY/util/Color' );
     var DerivedProperty = require( 'AXON/DerivedProperty' );
     var Dialog = require( 'JOIST/Dialog' );
@@ -22,9 +23,11 @@ define( function( require ) {
     var inherit = require( 'PHET_CORE/inherit' );
     var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
     var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Node = require( 'SCENERY/nodes/Node' );
     var PhetFont = require( 'SCENERY_PHET/PhetFont' );
     var Property = require( 'AXON/Property' );
     var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
     var RichText = require( 'SCENERY/nodes/RichText' );
     var Text = require( 'SCENERY/nodes/Text' );
     var VBox = require( 'SCENERY/nodes/VBox' );
@@ -261,20 +264,33 @@ define( function( require ) {
       // sim bounds
       var dialog = null;
 
+      // Because zoom buttons don't support getting internal size, and other buttons don't resize, we need to do a
+      // hacky workaround to get their content to be the same size.
+      var chromeBounds = new RoundPushButton( {
+        content: new Node( { localBounds: new Bounds2( 0, 0, 0, 0 ) } )
+      } ).bounds;
+
       // Button that pops up dialog box for the graph's legend
-      var infoButton = new RectangularPushButton( {
-        content: new FontAwesomeNode( 'info_circle', { scale: 0.55 } ),
-        baseColor: '#E7E8E9',
-        minWidth: 28,
-        minHeight: 20,
-        xMargin: 3,
-        yMargin: 3
+      var iconPadding = 1;
+      var icon = new FontAwesomeNode( 'info_circle', {
+        fill: 'hsl(208,60%,40%)',
+        maxWidth: zoomInButton.width - chromeBounds.width - 2 * iconPadding,
+        maxHeight: zoomInButton.height - chromeBounds.height - 2 * iconPadding
       } );
-      infoButton.addListener( function() {
-        if ( !dialog ) {
-          dialog = new Dialog( dialogContent, { modal: true } );
-        }
-        dialog.show();
+      var infoButton = new RoundPushButton( {
+        minXMargin: 5 + iconPadding,
+        minYMargin: 5 + iconPadding,
+        content: icon,
+        baseColor: '#eee',
+        centerY: zoomOutButton.centerY,
+        listener: function() {
+          if ( !dialog ) {
+            dialog = new Dialog( dialogContent, { modal: true } );
+          }
+          dialog.show();
+        },
+        touchAreaXDilation: 10,
+        touchAreaYDilation: 5
       } );
 
       // Display buttons at the bottom of the graph
