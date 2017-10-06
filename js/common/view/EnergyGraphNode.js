@@ -25,9 +25,7 @@ define( function( require ) {
     var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
     var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-    var PhetFont = require( 'SCENERY_PHET/PhetFont' );
     var Property = require( 'AXON/Property' );
-    var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
     var RichText = require( 'SCENERY/nodes/RichText' );
     var Text = require( 'SCENERY/nodes/Text' );
