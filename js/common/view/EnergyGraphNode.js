@@ -15,6 +15,7 @@ define( function( require ) {
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Color = require( 'SCENERY/util/Color' );
+  var ColorConstants = require( 'SUN/ColorConstants' );
     var DerivedProperty = require( 'AXON/DerivedProperty' );
     var Dialog = require( 'JOIST/Dialog' );
     var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
@@ -76,11 +77,13 @@ define( function( require ) {
 
       // Creation of zoom in/out buttons
       var zoomButtonOptions = {
-        baseColor: '#E7E8E9',
-        radius: 8,
+        baseColor: ColorConstants.LIGHT_BLUE,
         xMargin: 3,
         yMargin: 3,
-        disabledBaseColor: '#EDEDED'
+        // disabledBaseColor: '#EDEDED',
+        radius: 7,
+        touchAreaXDilation: 5,
+        touchAreaYDilation: 5
       };
       var zoomInButton = new ZoomButton( _.extend( { in: true }, zoomButtonOptions ) );
       var zoomOutButton = new ZoomButton( _.extend( { in: false }, zoomButtonOptions ) );
