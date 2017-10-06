@@ -78,6 +78,7 @@ define( function( require ) {
         label: accelerationString
       }
     ], {
+      boxWidth: 15,
       tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
     } );
 
@@ -104,6 +105,7 @@ define( function( require ) {
         label: springString
       }
     ], {
+      boxWidth: 15,
       xMargin: 20,
       tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
     } );
@@ -116,7 +118,7 @@ define( function( require ) {
         font: MassesAndSpringsConstants.FONT,
         tandem: tandem.createTandem( 'forcesString' )
       } ),
-      { radius: 9, spacing: 8 }
+      { radius: 7, spacing: 7 }
     );
 
     // responsible for net force aquaRadioButton
@@ -129,7 +131,7 @@ define( function( require ) {
           tandem: tandem.createTandem( 'netForceString' )
         } ) ]
       } ),
-      { radius: 9, spacing: 8 }
+      { radius: 7, spacing: 7 }
     );
 
     // manages the mutability of the forces check boxes dependent on the forces and net force aquaRadioButton
@@ -154,13 +156,12 @@ define( function( require ) {
     if ( options.showForces ) {
       vectorVisibilityControlsVBox = new VBox( {
           children: [
-            new VStrut( 2 ),
             vectorVisibilityCheckBoxGroup,
-            new VStrut( 10 ),
+            new VStrut( 8 ),
             forcesVisibilityRadioButton,
-            new VStrut( 10 ),
+            new VStrut( 8 ),
             new AlignBox( forcesVisibilityCheckBoxGroup, { leftMargin: 15 } ),
-            new VStrut( 10 ),
+            new VStrut( 8 ),
             netForceVisibilityRadioButton
           ],
           align: 'left',
@@ -170,13 +171,13 @@ define( function( require ) {
       vectorVBox = new VBox( {
         children: [
           velocityArrow,
-          new VStrut( 14 ),
+          new VStrut( 8 ),
           accelerationArrow,
-          new VStrut( 52 ),
+          new VStrut( 35 ),
           gravityArrow,
-          new VStrut( 14 ),
+          new VStrut( 10 ),
           springArrow,
-          new VStrut( 22 ),
+          new VStrut( 15 ),
           netForceArrow
         ],
         align: 'left',
@@ -188,7 +189,7 @@ define( function( require ) {
         children: [
           new VStrut( 2 ),
           vectorVisibilityCheckBoxGroup,
-          new VStrut( 10 )
+          new VStrut( 2 )
         ],
         align: 'left',
         tandem: tandem.createTandem( 'spacingUnit' )
