@@ -277,21 +277,14 @@ define( function( require ) {
         dialog.show();
       } );
 
-      // Visual readout for the scale of the factor
-      var zoomReadout = new Text( scaleFactorProperty.get() + 'x', {
-        font: new PhetFont( { size: 18, weight: 'bold' } ),
-        maxWidth: 18
-      } );
-
       // Display buttons at the bottom of the graph
       var displayOptions = new HBox( {
-        children: [ infoButton, new HStrut( 20 ), zoomReadout, zoomOutButton, zoomInButton ],
+        children: [ infoButton, new HStrut( 20 ), zoomOutButton, zoomInButton ],
         spacing: 5
       } );
 
       // Provides a limit on the scale
       scaleFactorProperty.link( function( value ) {
-        zoomReadout.text = (value + 'x');
         zoomOutButton.setEnabled( value !== MIN_SCALE );
         zoomInButton.setEnabled( value !== MAX_SCALE );
       } );
