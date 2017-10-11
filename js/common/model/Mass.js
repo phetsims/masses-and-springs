@@ -265,17 +265,25 @@ define( function( require ) {
      */
     step: function( gravity, floorY, dt ) {
       if ( this.isAnimatingProperty.value ) {
+        var distance = this.animationStartPosition.distance( this.animationEndPosition );
+        if ( distance > 0 ) {
+          // Adjust the speed of animation depending on the distance between the start and end
+          var animationSpeed = Math.sqrt( 2 / distance );
 
-        // Responsible for animating a horizontal motion when the mass is released and not attached to a spring.
-        this.animationProgress = Math.min( 1, this.animationProgress + dt * 2 );
-        var ratio = Easing.CUBIC_IN_OUT.value( this.animationProgress );
+          // Responsible for animating a horizontal motion when the mass is released and not attached to a spring.
+          this.animationProgress = Math.min( 1, this.animationProgress + dt * animationSpeed );
+          var ratio = Easing.CUBIC_IN_OUT.value( this.animationProgress );
 
-        // TODO: Go over with design team.
-        // Diagonal animation. Remember to remove the else in the next if clause.
-        // this.positionProperty.set(new Vector2 (this.animationStartPosition.blend(this.animationEndPosition,ratio).x, this.positionProperty.value.y));
+          // TODO: Go over with design team.
+          // Diagonal animation. Remember to remove the else in the next if clause.
+          // this.positionProperty.set(new Vector2 (this.animationStartPosition.blend(this.animationEndPosition,ratio).x, this.positionProperty.value.y));
 
-        this.positionProperty.set( this.animationStartPosition.blend( this.animationEndPosition, ratio ) );
-        if ( this.animationProgress === 1 ) {
+          this.positionProperty.set( this.animationStartPosition.blend( this.animationEndPosition, ratio ) );
+          if ( this.animationProgress === 1 ) {
+            this.isAnimatingProperty.set( false );
+          }
+        }
+        else {
           this.isAnimatingProperty.set( false );
         }
       }
