@@ -10,6 +10,9 @@
     "grunt": "^1.0.1"
   },
   "phet": {
-    "requirejsNamespace": "MASSES_AND_SPRINGS"
+    "requirejsNamespace": "MASSES_AND_SPRINGS",
+    "phetLibs": [
+      "twixt"
+    ]
   }
 }
