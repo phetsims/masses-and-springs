@@ -26,6 +26,10 @@ define( function( require ) {
   function IntroModel( tandem ) {
 
     MassesAndSpringsModel.call( this, tandem, { vectorViewEnabled: false } );
+
+    this.addDefaultSprings( tandem );
+    this.addDefaultMasses( tandem );
+
     var self = this;
 
     // @public {Property.<string>} determines the scene selection for the intro screen

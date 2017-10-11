@@ -13,8 +13,10 @@ define( function( require ) {
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Color = require( 'SCENERY/util/Color' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var DynamicProperty = require( 'AXON/DynamicProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Easing = require( 'TWIXT/Easing' );
@@ -24,6 +26,7 @@ define( function( require ) {
   var HEIGHT_RATIO = 2.5;
   var HOOK_HEIGHT_RATIO = 0.75;
   var DENSITY = 80; // Constant used to keep all of our masses consistent in the model.
+  var SCALING_FACTOR = 4; // scales the radius to desired size
 
   // phet-io modules
   var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
@@ -40,6 +43,9 @@ define( function( require ) {
    * @constructor
    */
   function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem, options ) {
+
+    assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
+
     var self = this;
 
     this.options = _.extend( {
@@ -47,22 +53,21 @@ define( function( require ) {
       isLabeled: isLabeled,
       mysteryLabel: false,
       color: new Color( color ),
-      zeroReferencePoint: .0 // Height of the mass when it is resting on the shelf
+      zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf
     }, options );
 
-    this.scalingFactor = 4; // scales the radius to desired size
-
-    // @public (read-only) {Number} mass of mass object in kg
-    this.massProperty = new Property( massValue );
+    // @public (read-only) {Property.<number>} mass of mass object in kg
+    this.massProperty = new NumberProperty( massValue );
 
     // @public {Property.<number>} (read-write) radius of the massNode dependent its mass value
-    this.radiusProperty = new DerivedProperty( [ this.massProperty ],
-      function( massValue ) {
-        return Math.pow( (massValue - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * self.scalingFactor;
-      } );
+    this.radiusProperty = new DerivedProperty( [ this.massProperty ], function( massValue ) {
+      return Math.pow( ( massValue - .01 ) / ( DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * SCALING_FACTOR;
+    } );
 
-    // Non-property model attributes
+    // @public {number}
     this.mass = massValue;
+
+    // @public {string}
     this.color = color;
 
     // @public {Property.<number>} height in m
@@ -72,24 +77,23 @@ define( function( require ) {
       } );
 
     this.cylinderHeightProperty.link( function( cylinderHeight ) {
-      self.options.zeroReferencePoint = 0 - cylinderHeight / 2;
+      self.options.zeroReferencePoint = -cylinderHeight / 2;
     } );
 
-    // @public {Property.<number>} hook height in m
+    // @public {number} hook height in m
     this.hookHeight = this.radiusProperty.value * HOOK_HEIGHT_RATIO;
 
+    // @public {Property.<number>} total height of the mass, including its hook
     this.heightProperty = new DerivedProperty( [ this.cylinderHeightProperty ], function( cylinderHeight ) {
       return cylinderHeight + self.hookHeight;
     } );
 
+    // @private {Vector2}
     this.initialPosition = initialPosition;
 
     // @public (read-only) Used for constructing tandems for corresponding view nodes.
     this.tandem = tandem;
 
-    assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
-
-    // @public Main model properties
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
     this.positionProperty = new Property( this.initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
@@ -107,14 +111,14 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} vertical velocity of mass
-    this.verticalVelocityProperty = new Property( 0, {
+    this.verticalVelocityProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
       units: 'meters/second',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
     // @public {Property.<number>} vertical acceleration of the mass
-    this.accelerationProperty = new Property( 0, {
+    this.accelerationProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'accelerationProperty' ),
       units: 'meters/second/second',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
@@ -130,16 +134,14 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} The force of the attached spring or 0 if unattached
-    this.springForceProperty = new Property( 0.0, {
+    this.springForceProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'springForceProperty' ),
       units: 'newtons/meters',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0.0 )
     } );
 
     // Forward the value from the attached spring through to the mass's springForceProperty
-    var springForceListener = function( springForce ) {
-      self.springForceProperty.set( springForce );
-    };
+    var springForceListener = this.springForceProperty.set.bind( this.springForceProperty );
     this.springProperty.link( function( spring, oldSpring ) {
       oldSpring && oldSpring.springForceProperty.unlink( springForceListener );
       spring && spring.springForceProperty.link( springForceListener );
@@ -148,7 +150,7 @@ define( function( require ) {
       }
     } );
 
-    // Net force applied to mass
+    // @public {Property.<number>} Net force applied to mass
     this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ],
       function( springForce, gravity ) {
         return springForce - self.mass * gravity;
@@ -159,41 +161,30 @@ define( function( require ) {
       self.accelerationProperty.set( netForce / self.mass );
     } );
 
-    // Kinetic energy of the mass
+    // @public {Property.<number>} Kinetic energy of the mass
     this.kineticEnergyProperty = new DerivedProperty( [ this.massProperty, this.verticalVelocityProperty, this.userControlledProperty ],
       function( mass, velocity, userControlled ) {
-        return userControlled ? 0 : (1 / 2) * (mass) * (Math.pow( velocity, 2 ));
+        return userControlled ? 0 : 0.5 * mass * Math.pow( velocity, 2 );
       } );
 
-    // Gravitational potential energy of the mass
+    // @public {Property.<number>} Gravitational potential energy of the mass
     this.gravitationalPotentialEnergyProperty = new DerivedProperty(
       [ this.massProperty, this.gravityProperty, this.positionProperty ],
       function( mass, gravity, position ) {
 
         // The height used is determined based on the height of the shelf the masses rest on.
         var heightFromZero = position.y - self.options.zeroReferencePoint - self.heightProperty.value;
-        return ( mass * gravity * (heightFromZero) );
+        return ( mass * gravity * ( heightFromZero ) );
       } );
 
-    // Kinetic energy of the mass
-    this.elasticPotentialEnergyProperty = new Property( 0 );
-
-    // Thermal energy of the mass
-    this.thermalEnergyProperty = new Property( 0 );
-
-    // Link that sets the elastic potential energy
-    this.springProperty.link( function( spring ) {
-      if ( spring ) {
-
-        // Check if mass is attached to spring first, then update the elastic potential energy
-        Property.multilink(
-          [ spring.springConstantProperty, spring.displacementProperty ],
-          function( springConstant, displacement ) {
-            self.elasticPotentialEnergyProperty.set( 0.5 * springConstant * Math.pow( displacement, 2 ) );
-          }
-        );
-      }
+    // @public {Property.<number>} Kinetic energy of the mass
+    this.elasticPotentialEnergyProperty = new DynamicProperty( this.springProperty, {
+      derive: 'elasticPotentialEnergyProperty',
+      defaultValue: 0
     } );
+
+    // @public {Property.<number>} Thermal energy of the mass
+    this.thermalEnergyProperty = new NumberProperty( 0 );
 
     // @public (read-only) Total energy of the mass
     this.totalEnergyProperty = new DerivedProperty( [
@@ -206,7 +197,9 @@ define( function( require ) {
       }
     );
 
+    // @public {number}
     this.initialTotalEnergy = 0;
+
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
 
@@ -223,6 +216,7 @@ define( function( require ) {
     // As the total energy changes we can derive the thermal energy as being the energy lost from the system
     this.totalEnergyProperty.link( function( totalEnergy ) {
       if ( self.userControlledProperty.get() ) {
+        // TODO: why are we not setting initialTotalEnergy here?
 
         //If a user is dragging the mass we remove the thermal energy.
         return self.thermalEnergyProperty.set( 0 );
@@ -230,6 +224,7 @@ define( function( require ) {
       // console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergy + '\t' + 'totalEnergy = ' + totalEnergy );
     } );
 
+    // TODO: Can thermalEnergyProperty be a derivedProperty based on initialTotalEnegry (Property it) and totalEnergyProperty?
     Property.multilink( [ this.positionProperty, this.userControlledProperty ], function( position, userControlled ) {
       if ( !userControlled ) {
         self.thermalEnergyProperty.set( self.initialTotalEnergy - self.totalEnergyProperty.get() );
@@ -237,9 +232,9 @@ define( function( require ) {
     } );
 
     // Used for animating the motion of a mass being released and not attached to the spring
-    this.animationStartPosition = null;
-    this.animationEndPosition = null;
-    this.animationProgress = null; // Valid values 0 <= x <= 1. Used to adjust rate of animation completion.
+    this.animationStartPosition = null; // {Vector2|null}
+    this.animationEndPosition = null; // {Vector2|null}
+    this.animationProgress = 0; // {number} Valid values 0 <= x <= 1. Used to adjust rate of animation completion.
 
     // Responsible for animating the mass back to its initial position
     Property.lazyMultilink( [ this.userControlledProperty, this.springProperty ], function( userControlled, spring ) {
@@ -261,7 +256,7 @@ define( function( require ) {
   return inherit( Object, Mass, {
 
     /**
-     * Responsible for mass falling without being attached to spring.
+     * Responsible for mass falling or animating without being attached to spring.
      * @param {number} gravity
      * @param {number} floorY
      * @param {number} dt
@@ -284,6 +279,7 @@ define( function( require ) {
           this.isAnimatingProperty.set( false );
         }
       }
+      // If we're not animating/controlled or attached to a spring, we'll fall due to gravity
       else if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
         var floorPosition = floorY + this.heightProperty.value;
         var oldY = this.positionProperty.get().y;
@@ -313,10 +309,6 @@ define( function( require ) {
       this.springProperty.set( null );
     },
 
-    setRadius: function( massValue ) {
-      this.radiusProperty.set( (Math.pow( (massValue - .01) / (DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * this.scalingFactor) );
-    },
-
     /**
      * @public
      */
@@ -328,6 +320,9 @@ define( function( require ) {
       this.massProperty.reset();
     },
 
+    /**
+     * @public
+     */
     zeroThermalEnergy: function() {
       this.initialTotalEnergy = this.kineticEnergyProperty.get() +
                                 this.gravitationalPotentialEnergyProperty.get() +

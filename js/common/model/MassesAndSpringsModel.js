@@ -18,6 +18,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsQueryParameters = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsQueryParameters' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
@@ -32,7 +33,6 @@ define( function( require ) {
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
   var RELEASE_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
-  var RIGHT_SPRING_X = 0.975; // {number} X position of the spring node in screen coordinates
 
   /**
    * TODO:: document all properties and items set on objects (entire sim)
@@ -58,7 +58,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} gravitational acceleration associated with each planet
-    this.gravityProperty = new Property( Body.EARTH.gravity, {
+    this.gravityProperty = new NumberProperty( Body.EARTH.gravity, {
       tandem: tandem.createTandem( 'gravityProperty' ),
       units: 'meters/second/second',
       range: new RangeWithValue( 0, 30, Body.EARTH.gravity )
@@ -82,7 +82,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
-    this.timerSecondsProperty = new Property( 0, {
+    this.timerSecondsProperty = new NumberProperty( 0, {
       range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
       tandem: tandem.createTandem( 'timerSecondsProperty' ),
       units: 'seconds'
@@ -142,81 +142,11 @@ define( function( require ) {
       validValues: [ MassesAndSpringsConstants.FORCES_STRING, MassesAndSpringsConstants.NET_FORCE_STRING ]
     } );
 
-    var createSpring = function( x, tandem ) {
-      return new Spring(
-        new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
-        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        self.frictionProperty.get(),
-        tandem
-      );
-    };
-
-    // Array that will contain all of the springs.
+    // @public {Spring[]} Array that will contain all of the springs.
     this.springs = [];
 
-    // Spring set that contains two springs. Used on the Intro and Vector screens.
-    this.defaultSpringSet = [
-      createSpring( RIGHT_SPRING_X - 0.25, tandem.createTandem( 'leftSpring' ) ),
-      createSpring( RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) )
-    ];
-
-    // Spring set that contains one spring. Used on the Energy and Lab screens.
-    this.oneSpringSet = [ createSpring( RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) ) ];
-
-    // Here we set our common model springs to represent the default set of two springs.
-    this.springs = this.defaultSpringSet;
-
-    // Array that will contain all of the masses.
+    // @public {Mass[]} Array that will contain all of the masses.
     this.masses = [];
-
-    // Positional reference to the first spring, that is used to position the masses.
-    var massXCoordinate = this.springs[ 0 ].positionProperty.get().x;
-
-    // Mass set that contains seven standard masses. Used on the Intro and Vector screens.
-    this.defaultMasses = [
-      this.createMass( 0.250, 0.12, true, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) ),
-      this.createMass( 0.100, 0.20, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) ),
-      this.createMass( 0.100, 0.28, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) ),
-      this.createMass( 0.050, 0.33, true, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) ),
-      this.createMass( 0.200, 0.63, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) ),
-      this.createMass( 0.150, 0.56, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) ),
-      this.createMass( 0.075, 0.49, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) )
-    ];
-
-    // Mass set containing one adjustable mass that is used on the energy screen.
-    this.energyScreenMasses = [
-      this.createMass( 0.100, massXCoordinate - 0.10, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) )
-    ];
-    this.energyScreenMasses[ 0 ].adjustable = true;
-
-    // Mass set containing three masses for use on the lab screen.
-    this.labScreenMasses = [
-      this.createMass( 0.100, massXCoordinate - 0.20, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) ),
-      this.createMass( 0.125, massXCoordinate - 0.10, true, 'red', null, tandem.createTandem( 'redLabeledMass' ) ),
-      this.createMass( 0.150, massXCoordinate, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) )
-    ];
-    this.labScreenMasses[ 0 ].adjustable = true;
-    this.labScreenMasses[ 1 ].options.mysteryLabel = true;
-    this.labScreenMasses[ 2 ].options.mysteryLabel = true;
-
-    // Here we set our common model masses to represent the default set of seven standard masses.
-    this.masses = this.defaultMasses;
-
-    // @public (read-only) model of bodies used throughout the sim
-    // Links are used to set gravity property of each spring to the gravity property of the system
-    this.gravityProperty.link( function( newGravity ) {
-      self.springs.forEach( function( spring ) {
-        spring.gravityProperty.set( newGravity );
-      } );
-    } );
-
-    // Links are used to set friction property of each spring to the friction property of the system
-    this.frictionProperty.link( function( newFriction ) {
-      assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
-      self.springs.forEach( function( spring ) {
-        spring.dampingCoefficientProperty.set( newFriction );
-      } );
-    } );
 
     // Used for testing purposes
     if ( MassesAndSpringsQueryParameters.printSpringProperties ) {
@@ -230,6 +160,76 @@ define( function( require ) {
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
 
   return inherit( Object, MassesAndSpringsModel, {
+
+    /**
+     * Creates new mass object and pushes it into the model's mass array.
+     * @public
+     *
+     * @param {number} mass - mass in kg
+     * @param {number} xPosition - starting x-coordinate of the mass object, offset from the first spring position
+     * @param {boolean} labelVisible - should a label be shown on the MassNode
+     * @param {string} color - color of the MassNode
+     * @param {string} specifiedLabel - customized label for the MassNode
+     * @param {Tandem} tandem
+     */
+    createMass: function( mass, xPosition, labelVisible, color, specifiedLabel, tandem ) {
+      this.masses.push( new Mass( mass, new Vector2( xPosition, 0.5 ), labelVisible, color, this.gravityProperty, tandem ) );
+    },
+
+    /**
+     * Creates a new spring and adds it to the model.
+     * @public
+     *
+     * @param {number} x - The x coordinate of the spring, in model coordinates.
+     * @param {Tandem} tandem
+     */
+    createSpring: function( x, tandem ) {
+      var spring = new Spring(
+        new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
+        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
+        this.frictionProperty.get(),
+        tandem
+      );
+      this.springs.push( spring );
+
+      // Links are used to set gravity property of each spring to the gravity property of the system
+      this.gravityProperty.link( function( newGravity ) {
+        spring.gravityProperty.set( newGravity );
+      } );
+
+      // Links are used to set friction property of each spring to the friction property of the system
+      this.frictionProperty.link( function( newFriction ) {
+        assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
+        spring.dampingCoefficientProperty.set( newFriction );
+      } );
+    },
+
+    /**
+     * Spring set that contains two springs. Used on the Intro and Vector screens.
+     * @protected
+     *
+     * @param {Tandem} tandem
+     */
+    addDefaultSprings: function( tandem ) {
+      this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - 0.25, tandem.createTandem( 'leftSpring' ) );
+      this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) );
+    },
+
+    /**
+     * Mass set that contains seven standard masses. Used on the Intro and Vector screens.
+     * @protected
+     *
+     * @param {Tandem} tandem
+     */
+    addDefaultMasses: function( tandem ) {
+      this.createMass( 0.250, 0.12, true, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) );
+      this.createMass( 0.100, 0.20, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) );
+      this.createMass( 0.100, 0.28, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) );
+      this.createMass( 0.050, 0.33, true, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) );
+      this.createMass( 0.200, 0.63, false, 'blue', null, tandem.createTandem( 'largeUnlabeledMass' ) );
+      this.createMass( 0.150, 0.56, false, 'green', null, tandem.createTandem( 'mediumUnlabeledMass' ) );
+      this.createMass( 0.075, 0.49, false, 'red', null, tandem.createTandem( 'smallUnlabeledMass' ) );
+    },
 
     /**
      * @override
@@ -262,23 +262,6 @@ define( function( require ) {
         mass.reset();
       }
       this.springs.forEach( function( spring ) { spring.reset(); } );
-    },
-
-    /**
-     * Creates new mass object and pushes it into the model's mass array.
-     *
-     * @param {number} mass - mass in kg
-     * @param {number} xPosition - starting x-coordinate of the mass object
-     * @param {boolean} labelVisible - should a label be shown on the MassNode
-     * @param {string} color - color of the MassNode
-     * @param {string} specifiedLabel - customized label for the MassNode
-     * @param {Tandem} tandem
-     *
-     * @protected
-     * @returns {*}
-     */
-    createMass: function( mass, xPosition, labelVisible, color, specifiedLabel, tandem ) {
-      return new Mass( mass, new Vector2( xPosition, 0.5 ), labelVisible, color, this.gravityProperty, tandem );
     },
 
     /**

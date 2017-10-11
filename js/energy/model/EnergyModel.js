@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
 
   /**
@@ -20,8 +21,11 @@ define( function( require ) {
   function EnergyModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem );
 
-    this.masses = this.energyScreenMasses;
-    this.springs = this.oneSpringSet;
+    this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
+
+    this.createMass( 0.1, 0.625, true, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ) );
+
+    this.masses[ 0 ].adjustable = true;
   }
 
   massesAndSprings.register( 'EnergyModel', EnergyModel );

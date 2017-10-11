@@ -47,9 +47,11 @@ define( function( require ) {
 
     Screen.call( this,
       function() {
-        return new MassesAndSpringsModel( tandem.createTandem( 'model' ), {
-          vectorViewEnabled: true
-        } );
+        var modelTandem = tandem.createTandem( 'model' );
+        var model = new MassesAndSpringsModel( modelTandem, { vectorViewEnabled: true } );
+        model.addDefaultSprings( modelTandem );
+        model.addDefaultMasses( modelTandem );
+        return model;
       },
       function( model ) { return new VectorScreenView( model, tandem.createTandem( 'view' ) ); },
       options

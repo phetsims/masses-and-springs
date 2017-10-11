@@ -25,16 +25,16 @@ define( function( require ) {
 
   /**
    * @param {string} title - name of body.
-   * @param {number} gravity - gravitational acceleration of body.
+   * @param {number|null} gravity - gravitational acceleration of body.
    * @param {Tandem} tandem
    * @constructor
    */
   function Body( title, gravity, tandem ) {
 
-    // @public {string} set title
+    // @public {string}
     this.title = title;
 
-    // @public {number} set gravity acceleration
+    // @public {number|null} gravity acceleration (m/s^2)
     this.gravity = gravity;
   }
 

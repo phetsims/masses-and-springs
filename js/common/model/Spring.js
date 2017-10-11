@@ -16,6 +16,7 @@ define( function( require ) {
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
@@ -53,21 +54,21 @@ define( function( require ) {
     var naturalRestingLengthRange = new RangeWithValue( 0.1, 0.5, initialNaturalRestingLength );
 
     // @public {Property.<number>} gravitational acceleration
-    this.gravityProperty = new Property( massesAndSprings.Body.EARTH.gravity, {
+    this.gravityProperty = new NumberProperty( massesAndSprings.Body.EARTH.gravity, {
       tandem: tandem.createTandem( 'gravityProperty' ),
       units: 'meters/second/second',
       range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity )
     } );
 
     //  @public {Property.<number>} distance from of the bottom of the spring from the natural resting position
-    this.displacementProperty = new Property( 0, {
+    this.displacementProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'displacementProperty' ),
       units: 'meters',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
     // @public {Property.<number>} spring constant of spring
-    this.springConstantProperty = new Property( DEFAULT_SPRING_CONSTANT_RANGE.defaultValue, {
+    this.springConstantProperty = new NumberProperty( DEFAULT_SPRING_CONSTANT_RANGE.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
       units: 'newtons/meters',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9 )
@@ -86,7 +87,7 @@ define( function( require ) {
     );
 
     // @public {Property.<number>} viscous damping coefficient of the system
-    this.dampingCoefficientProperty = new Property( defaultDampingCoefficient, {
+    this.dampingCoefficientProperty = new NumberProperty( defaultDampingCoefficient, {
       tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
       units: 'newtons-second/meters',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, defaultDampingCoefficient )
@@ -99,14 +100,14 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} length of the spring without mass attached
-    this.naturalRestingLengthProperty = new Property( initialNaturalRestingLength, {
+    this.naturalRestingLengthProperty = new NumberProperty( initialNaturalRestingLength, {
       tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
       units: 'meters',
       range: naturalRestingLengthRange
     } );
 
     // @public {Property.<number> read-only} line width of oscillating spring node
-    this.thicknessProperty = new Property( DEFAULT_THICKNESS, {
+    this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, DEFAULT_THICKNESS )
     } );
@@ -137,11 +138,11 @@ define( function( require ) {
       defaultValue: 0
     } );
 
-    // @public {Property.<number> read-write} Gravitational Potential Energy of the attached Mass
-    this.elasticPotentialEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
-      derive: 'elasticPotentialEnergyProperty',
-      defaultValue: 0
-    } );
+    // @public {Property.<number>}
+    this.elasticPotentialEnergyProperty = new DerivedProperty( [ this.springConstantProperty, this.displacementProperty ],
+      function( springConstant, displacement ) {
+        return 0.5 * springConstant * Math.pow( displacement, 2 );
+      } );
 
     this.thermalEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
       derive: 'thermalEnergyProperty',

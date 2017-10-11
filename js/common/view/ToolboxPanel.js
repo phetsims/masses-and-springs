@@ -17,8 +17,8 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Panel = require( 'SUN/Panel' );
-  var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var TimerNode = require( 'SCENERY_PHET/TimerNode' );
@@ -55,7 +55,7 @@ define( function( require ) {
     Panel.call( this, toolbox, options );
 
     // Create timer to be turned into icon
-    var secondsProperty = new Property( 0, {
+    var secondsProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'secondsProperty' ),
       units: 'seconds',
       range: new Range( 0, Number.POSITIVE_INFINITY )
