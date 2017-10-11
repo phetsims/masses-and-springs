@@ -84,7 +84,7 @@ define( function( require ) {
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
     this.massNodes = [];
 
-    model.masses.forEach( function( property, index ) {
+    model.masses.forEach( function( mass, index ) {
       var referencedMassProperty = model.masses[ index ];
       var massNode = new MassNode(
         referencedMassProperty,

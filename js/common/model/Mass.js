@@ -17,6 +17,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Easing = require( 'TWIXT/Easing' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -101,6 +102,11 @@ define( function( require ) {
     // @public {Property.<boolean>} indicates whether this mass is currently user controlled
     this.userControlledProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'userControlledProperty' )
+    } );
+
+    // @private {Property.<boolean>} indicates whether the mass is animating after being released
+    this.isAnimatingProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'isAnimatingProperty' )
     } );
 
     // @public {Property.<number>} vertical velocity of mass
@@ -224,7 +230,7 @@ define( function( require ) {
         //If a user is dragging the mass we remove the thermal energy.
         return self.thermalEnergyProperty.set( 0 );
       }
-      console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergy + '\t' + 'totalEnergy = ' + totalEnergy );
+      // console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergy + '\t' + 'totalEnergy = ' + totalEnergy );
     } );
 
     Property.multilink( [ this.positionProperty, this.userControlledProperty ], function( position, userControlled ) {
@@ -232,6 +238,25 @@ define( function( require ) {
         self.thermalEnergyProperty.set( self.initialTotalEnergy - self.totalEnergyProperty.get() );
       }
     } );
+
+    // Used for animating the motion of a mass being released and not attached to the spring
+    this.animationStartPosition = null;
+    this.animationEndPosition = null;
+    this.animationProgress = null; // Valid values 0 <= x <= 1. Used to adjust rate of animation completion.
+
+    // Responsible for animating the mass back to its initial position
+    Property.lazyMultilink( [ this.userControlledProperty, this.springProperty ], function( userControlled, spring ) {
+      if ( !userControlled && spring === null ) {
+        self.animationProgress = 0;
+        self.animationStartPosition = self.positionProperty.value;
+        self.animationEndPosition = new Vector2( self.initialPosition.x, self.positionProperty.value.y );
+        self.isAnimatingProperty.set( true )
+      }
+      else {
+        self.isAnimatingProperty.set( false );
+      }
+    } );
+
   }
 
   massesAndSprings.register( 'Mass', Mass );
@@ -247,7 +272,22 @@ define( function( require ) {
      * @public
      */
     step: function( gravity, floorY, dt ) {
-      if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
+      if ( this.isAnimatingProperty.value ) {
+
+        // Responsible for animating a horizontal motion when the mass is released and not attached to a spring.
+        this.animationProgress = Math.min( 1, this.animationProgress + dt * 2 );
+        var ratio = Easing.CUBIC_IN_OUT.value( this.animationProgress );
+
+        // TODO: Go over with design team.
+        // Diagonal animation. Remember to remove the else in the next if clause.
+        // this.positionProperty.set(new Vector2 (this.animationStartPosition.blend(this.animationEndPosition,ratio).x, this.positionProperty.value.y));
+
+        this.positionProperty.set( this.animationStartPosition.blend( this.animationEndPosition, ratio ) );
+        if ( this.animationProgress === 1 ) {
+          this.isAnimatingProperty.set( false );
+        }
+      }
+      else if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
         var floorPosition = floorY + this.heightProperty.value;
         var oldY = this.positionProperty.get().y;
         if ( oldY !== floorPosition ) {
