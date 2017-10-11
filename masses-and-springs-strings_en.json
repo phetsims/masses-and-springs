@@ -145,5 +145,8 @@
   },
   "spring": {
     "value": "Spring"
+  },
+  "heightEqualsZero": {
+    "value": "Height = 0"
   }
 }

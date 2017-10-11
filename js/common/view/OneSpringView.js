@@ -18,11 +18,17 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassValueControlPanel = require( 'MASSES_AND_SPRINGS/common/view/MassValueControlPanel' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Property = require( 'AXON/Property' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // strings
+  var heightEqualsZeroString = require( 'string!MASSES_AND_SPRINGS/heightEqualsZero' );
 
   /**
    * TODO::: Remove modelViewTransform2 transforms from view objects
@@ -119,6 +125,32 @@ define( function( require ) {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );
+
+    // Zero height reference line
+    var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
+    var zeroHeightLine = new ReferenceLineNode(
+      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
+      model.springs[ 0 ],
+      '#5798de',
+      zeroHeightProperty,
+      new Property( true )
+    );
+    zeroHeightLine.x = springEquilibriumLineNode.x;
+    zeroHeightLine.y = zeroHeightProperty.get();
+    this.addChild( zeroHeightLine );
+
+    // Label for zero height
+    var zeroHeightLabel = new Node( {
+      children: [
+        new Text( heightEqualsZeroString, {
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          fill: zeroHeightLine.stroke
+        } )
+      ]
+    } );
+    zeroHeightLabel.center = zeroHeightLine.center;
+    zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width);
+    this.addChild( zeroHeightLabel );
 
     // Done to for movableDragHandler handling intersecting bounds of panel and ruler
     this.rulerNode.toolbox = this.toolboxPanel;

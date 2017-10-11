@@ -24,7 +24,7 @@ define( function( require ) {
    * @param {Spring} spring - spring model object
    * @param {String} stroke
    * @param {Property} property - determines which property is being referenced
-   * @param {boolean} visibleProperty
+   * @param {Property.<boolean>} visibleProperty
    *
    * @constructor
    */
