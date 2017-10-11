@@ -302,7 +302,9 @@ define( function( require ) {
       if ( mass.springProperty.get() ) {
 
         // Update the position of the mass
-        mass.positionProperty.set( mass.positionProperty.get().copy().setX( mass.springProperty.get().positionProperty.get().x ) );
+        if ( mass.positionProperty.value.x !== mass.springProperty.get().positionProperty.get().x ) {
+          mass.positionProperty.set( mass.positionProperty.get().copy().setX( mass.springProperty.get().positionProperty.get().x ) );
+        }
 
         // Update spring length
         mass.springProperty.get().displacementProperty.set(
@@ -316,17 +318,15 @@ define( function( require ) {
 
         // Constraints used to limit how much we can prime the spring's oscillation.
         var upperConstraint = new LinearFunction( 20, 60, 1.112, 1.006 );
-        var lowerConstraint = visibleBounds.bottom;
 
         // Max Y value in model coordinates
         var modelMaxY = upperConstraint( maxY );
 
         // Update only the spring's length if we are lower than the max Y
-        if ( lowerConstraint > mass.positionProperty.get().y || mass.positionProperty.get().y > modelMaxY ) {
+        if ( mass.positionProperty.get().y > modelMaxY ) {
 
           // set mass position to maximum y position based on spring coils
           mass.positionProperty.set( mass.positionProperty.get().copy().setY( modelMaxY ) );
-          mass.positionProperty.get().setX( mass.positionProperty.get().x );
 
           // Limit the length of the spring to based on the spring coils.
           mass.springProperty.get().displacementProperty.set(

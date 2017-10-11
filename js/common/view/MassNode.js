@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var Color = require( 'SCENERY/util/Color' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
@@ -28,6 +29,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
   var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
@@ -39,13 +41,13 @@ define( function( require ) {
   /**
    * @param {Mass} mass - model object
    * @param {ModelViewTransform2} modelViewTransform2
-   * @param {Property.<Bounds2>} dragBounds
+   * @param {Property.<Bounds2>} dragBoundsProperty
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function MassNode( mass, modelViewTransform2, dragBounds, model, tandem, options ) {
+  function MassNode( mass, modelViewTransform2, dragBoundsProperty, model, tandem, options ) {
     options = _.extend( {
       vectorViewEnabled: false
     }, options );
@@ -66,6 +68,12 @@ define( function( require ) {
     var rect = new Rectangle( rectOptions );
     this.addChild( rect );
 
+    var modelBoundsProperty = new DerivedProperty( [ dragBoundsProperty, mass.heightProperty ], function( dragBounds, massHeight ) {
+      var modelBounds = modelViewTransform2.viewToModelBounds( dragBounds );
+      modelBounds.minY += massHeight;
+      return modelBounds;
+    } );
+
     // Update the size of the massNode
     mass.radiusProperty.link( function( radiusValue ) {
       // mass.zeroThermalEnergy.bind(this); // TODO: Why doesn't this work?
@@ -80,10 +88,10 @@ define( function( require ) {
         .addColorStop( 0.8, Color.toColor( mass.color ).colorUtilsBrighter( 0.9 ) )
         .addColorStop( 1, Color.toColor( mass.color ).colorUtilsBrighter( 0.4 ) );
 
-      // TODO: we need to constrain this to the Y bounds only because we will get buggy behavior if we adjust the massValue
-      // while half of the mass is hanging off the side of the screen in the x direction.
-      if ( !dragBounds.value.containsBounds( self.getBounds() ) && !mass.springProperty.get() ) {
-        self.bottom = dragBounds.value.bottom;
+      // We are constraining the draggable bounds on our massNodes except.
+      if ( mass.positionProperty.value.y < modelBoundsProperty.value.minY && !mass.springProperty.value ) {
+        mass.positionProperty.set( new Vector2( mass.positionProperty.value.x, modelBoundsProperty.value.minY ) );
+        model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       }
     } );
 
@@ -132,14 +140,11 @@ define( function( require ) {
     labelString = mass.options.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
     createLabel( labelString );
 
-    this.mass.positionProperty.link( function( position ) {
-      self.translation = modelViewTransform2.modelToViewPosition( position );
-    } );
-
+    // @public {read-write}
     this.movableDragHandler = new MovableDragHandler( this.mass.positionProperty, {
 
       // Allow moving a finger (touch) across a node to pick it up.
-      dragBounds: modelViewTransform2.viewToModelBounds( dragBounds.get() ),
+      dragBounds: modelBoundsProperty.value,
       allowTouchSnag: true,
       modelViewTransform: modelViewTransform2,
       tandem: tandem.createTandem( 'dragHandler' ),
@@ -148,7 +153,7 @@ define( function( require ) {
       onDrag: function() {
 
         // Checks if mass should be attached/detached to spring and adjusts its position if so.
-        model.adjustDraggedMassPosition( self.mass, dragBounds );
+        model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       },
 
       startDrag: function() {
@@ -161,8 +166,15 @@ define( function( require ) {
       }
     } );
 
-    dragBounds.link( function( dragBounds ) {
-      self.movableDragHandler.dragBounds.set( dragBounds );
+
+    this.mass.positionProperty.link( function( position ) {
+      self.translation = modelViewTransform2.modelToViewPosition( position );
+    } );
+
+    modelBoundsProperty.link( function( modelDragBounds ) {
+      //TODO: Using setDragBounds() causes the massNode to be constrained to the drag bounds. Check MovableDragHandler.js line 114
+      self.movableDragHandler._dragBounds = modelDragBounds;
+      console.log( 'modelDragBounds = ' + modelDragBounds.toString() );
     } );
 
     this.addInputListener( this.movableDragHandler );

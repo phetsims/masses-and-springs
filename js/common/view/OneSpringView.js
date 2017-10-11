@@ -209,7 +209,6 @@ define( function( require ) {
         -self.rulerNode.width / 2, self.rulerNode.height / 2, self.rulerNode.width / 2, -self.rulerNode.height / 2
       ) );
       self.massNodes.forEach( function( massNode ) {
-        massNode.movableDragHandler.dragBounds = self.modelViewTransform.viewToModelBounds( visibleBounds );
 
         if ( massNode.centerX > visibleBounds.maxX ) {
           massNode.mass.positionProperty.set(
