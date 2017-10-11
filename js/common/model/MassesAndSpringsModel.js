@@ -35,8 +35,10 @@ define( function( require ) {
   var RELEASE_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
 
   /**
-   * TODO:: document all properties and items set on objects (entire sim)
    * @constructor
+   *
+   * @param {Tandem} tandem
+   * @param {Object} [options]
    */
   function MassesAndSpringsModel( tandem, options ) {
 
@@ -232,8 +234,6 @@ define( function( require ) {
     },
 
     /**
-     * @override
-     *
      * @public
      */
     reset: function() {
@@ -254,13 +254,7 @@ define( function( require ) {
       this.gravityVectorVisibilityProperty.reset();
       this.springVectorVisibilityProperty.reset();
       this.forcesModeProperty.reset();
-      for ( var referencedMass in this.masses ) {
-        if ( !this.masses.hasOwnProperty( referencedMass ) ) {
-          continue;
-        }
-        var mass = this.masses[ referencedMass ];
-        mass.reset();
-      }
+      this.masses.forEach( function( mass ) { mass.reset(); } );
       this.springs.forEach( function( spring ) { spring.reset(); } );
     },
 
@@ -291,8 +285,8 @@ define( function( require ) {
 
         // Update spring length
         mass.springProperty.get().displacementProperty.set(
-          -(mass.springProperty.get().positionProperty.get().y -
-            mass.springProperty.get().naturalRestingLengthProperty.get() ) +
+          -( mass.springProperty.get().positionProperty.get().y -
+             mass.springProperty.get().naturalRestingLengthProperty.get() ) +
           massPosition.y );
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
@@ -313,8 +307,8 @@ define( function( require ) {
 
           // Limit the length of the spring to based on the spring coils.
           mass.springProperty.get().displacementProperty.set(
-            -(mass.springProperty.get().positionProperty.get().y -
-              mass.springProperty.get().naturalRestingLengthProperty.get() ) +
+            -( mass.springProperty.get().positionProperty.get().y -
+               mass.springProperty.get().naturalRestingLengthProperty.get() ) +
             modelMaxY );
         }
       }

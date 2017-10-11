@@ -39,7 +39,7 @@ define( function( require ) {
    * @param {string} color: color of shown mass
    * @param {Property.<number>} gravityProperty - the gravity property from the model
    * @param {Tandem} tandem
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem, options ) {

@@ -36,6 +36,7 @@ define( function( require ) {
    * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
    * @param {Tandem} tandem
+   * @param {Object} [options]
    *
    * @constructor
    */
@@ -78,7 +79,7 @@ define( function( require ) {
     this.springForceProperty = new DerivedProperty(
       [ this.displacementProperty, this.springConstantProperty ],
       function( displacement, springConstant ) {
-        return -1 * springConstant * displacement;
+        return -springConstant * displacement;
       },
       {
         units: 'newtons',
@@ -144,21 +145,22 @@ define( function( require ) {
         return 0.5 * springConstant * Math.pow( displacement, 2 );
       } );
 
+    // @public {Property.<number>}
     this.thermalEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
       derive: 'thermalEnergyProperty',
       defaultValue: 0
     } );
 
-    // @public (read-only) - distance from natural resting position to equilibrium position (units: m)
+    // @public {number} (read-only) - distance from natural resting position to equilibrium position (units: m)
     this.springExtension = 0;
 
-    // @public (read-only)
+    // @public {Range} (read-only)
     this.springConstantRange = DEFAULT_SPRING_CONSTANT_RANGE;
 
     //------------------------------------------------
     // Derived properties
 
-    // @public {read-only} length of the spring, units = m
+    // @public {Property.<number>} (read-only) length of the spring, units = m
     this.lengthProperty = new DerivedProperty(
       [ this.naturalRestingLengthProperty, this.displacementProperty ],
       function( naturalRestingLength, displacement ) {
@@ -172,7 +174,7 @@ define( function( require ) {
       }
     );
 
-    // @public {read-only} y position of the bottom end of the spring, units = m
+    // @public {Property.<number} (read-only) y position of the bottom end of the spring, units = m
     this.bottomProperty = new DerivedProperty(
       [ this.positionProperty, this.lengthProperty ],
       function( position, length ) {
@@ -205,7 +207,7 @@ define( function( require ) {
       }
     );
 
-    //  Restart animation if it was squelched
+    // Restart animation if it was squelched
     Property.multilink( [ this.massAttachedProperty, this.gravityProperty, this.springConstantProperty ], function( mass ) {
       if ( mass ) {
         self.animatingProperty.set( true );
@@ -222,8 +224,6 @@ define( function( require ) {
   return inherit( Object, Spring, {
 
     /**
-     * @override
-     *
      * @public
      */
     reset: function() {
@@ -236,13 +236,13 @@ define( function( require ) {
       this.massAttachedProperty.reset();
       this.springConstantProperty.reset();
     },
+
     /**
      * Retains the properties of the spring in an object that can publicly accessed.
-     *
      * @public
      */
     getSpringState: function() {
-      var springState = {
+      return {
         displacement: this.displacementProperty.get(),
         gravity: this.gravityProperty.get(),
         dampingCoefficient: this.dampingCoefficientProperty.get(),
@@ -253,7 +253,6 @@ define( function( require ) {
         springConstant: this.springConstantProperty.get(),
         thickness: this.thicknessProperty.get()
       };
-      return springState;
     },
 
     /**

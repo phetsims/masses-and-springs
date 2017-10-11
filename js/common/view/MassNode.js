@@ -174,7 +174,6 @@ define( function( require ) {
     modelBoundsProperty.link( function( modelDragBounds ) {
       //TODO: Using setDragBounds() causes the massNode to be constrained to the drag bounds. Check MovableDragHandler.js line 114
       self.movableDragHandler._dragBounds = modelDragBounds;
-      console.log( 'modelDragBounds = ' + modelDragBounds.toString() );
     } );
 
     this.addInputListener( this.movableDragHandler );

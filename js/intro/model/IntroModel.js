@@ -46,7 +46,7 @@ define( function( require ) {
       validValues: [ 'spring-constant', 'spring-thickness', null ]
     } );
 
-    // Renamed for readability. Springs are constantly referenced.
+    // @public {Spring} Renamed for readability. Springs are constantly referenced.
     this.spring1 = this.springs[ 0 ];
     this.spring2 = this.springs[ 1 ];
 
@@ -123,10 +123,11 @@ define( function( require ) {
     /**
      * @override
      *
-     * @private
+     * @public
      */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
+
       this.sceneModeProperty.reset();
       this.constantParameterProperty.reset();
       this.getResetState(); // REVIEW: It seems odd that a getter would be called during a reset (more on this method below)
@@ -134,22 +135,20 @@ define( function( require ) {
 
     /**
      * Responsible for preserving the properties of the masses and springs then stores them in a mutable object.
-     *
      * @private
+     *
+     * @returns {Object}
      */
     getSpringState: function() {
-      var spring1State = this.spring1.getSpringState();
-      var spring2State = this.spring2.getSpringState();
-
       return {
-        spring1State: spring1State,
-        spring2State: spring2State
+        spring1State: this.spring1.getSpringState(),
+        spring2State: this.spring2.getSpringState()
       };
     },
 
     /**
      * Responsible for setting the properties of the masses and springs.
-     * @param {Object} sceneState: Contains properties of springs and masses
+     * @param {Object} sceneState: Contains properties of springs and masses. See getSpringState().
      *
      * @private
      */
@@ -165,30 +164,27 @@ define( function( require ) {
 
     /**
      * Resets the properties of the masses and springs
-     *
      * @private
+     *
+     * @param {boolean} massesOnly
      */
     setResetState: function( massesOnly ) {
       if ( massesOnly === false ) {
         this.spring1.reset();
         this.spring2.reset();
-        _.values( this.masses ).forEach( function( mass ) {
-          mass.reset();
-        } );
-      }
-      else if ( massesOnly === true ) {
-        _.values( this.masses ).forEach( function( mass ) {
-          mass.reset();
-        } );
       }
 
+      this.masses.forEach( function( mass ) {
+        mass.reset();
+      } );
+
       // We are resetting the springs' displacement property to recalculate an appropriate length (derived property)
-      if ( this.spring1.massAttachedProperty.get() || this.spring2.massAttachedProperty.get() ) {
-        this.spring1.massAttachedProperty.reset();
-        this.spring2.massAttachedProperty.reset();
-        this.spring1.displacementProperty.reset();
-        this.spring2.displacementProperty.reset();
-      }
+      this.springs.forEach( function( spring ) {
+        if ( spring.massAttachedProperty.get() ) {
+          spring.massAttachedProperty.reset();
+          spring.displacementProperty.reset();
+        }
+      } );
     },
 
     /**
@@ -202,7 +198,6 @@ define( function( require ) {
       this.spring1.naturalRestingLengthProperty.set( 0.25 );
 
       // initial parameters set for both scenes
-      // @private {read-write} array of parameters for scene 1
       this.sceneModeProperty.set( 'same-length' );
       this.setResetState( false );
     }
