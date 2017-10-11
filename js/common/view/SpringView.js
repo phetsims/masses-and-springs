@@ -21,6 +21,7 @@ define( function( require ) {
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
+  var Shelf = require( 'MASSES_AND_SPRINGS/common/view/Shelf' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -99,6 +100,12 @@ define( function( require ) {
       self.massNodes.push( massNode );
     } );
 
+    // Add shelf for to house massNodes
+    this.shelf = new Shelf( tandem, {
+      rectHeight: 10,
+      rectY: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y )
+    } );
+    this.addChild( this.shelf );
 
     // Control Panel for display elements with varying visibility
     this.indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(

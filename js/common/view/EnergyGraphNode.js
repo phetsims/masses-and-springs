@@ -78,7 +78,6 @@ define( function( require ) {
         baseColor: ColorConstants.LIGHT_BLUE,
         xMargin: 3,
         yMargin: 3,
-        // disabledBaseColor: '#EDEDED',
         radius: 7,
         touchAreaXDilation: 5,
         touchAreaYDilation: 5

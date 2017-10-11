@@ -201,7 +201,6 @@ define( function( require ) {
     this.initialTotalEnergy = 0;
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
-        self.springProperty.get().animatingProperty.set( true );
 
         // When a user drags an attached mass it is as if they are restarting the spring system
         self.initialTotalEnergy = self.kineticEnergyProperty.get() +
@@ -221,7 +220,12 @@ define( function( require ) {
         return self.thermalEnergyProperty.set( 0 );
       }
       console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergy + '\t' + 'totalEnergy = ' + totalEnergy );
-      self.thermalEnergyProperty.set( self.initialTotalEnergy - totalEnergy );
+    } );
+
+    Property.multilink( [ this.positionProperty, this.userControlledProperty ], function( position, userControlled ) {
+      if ( !userControlled ) {
+        self.thermalEnergyProperty.set( self.initialTotalEnergy - self.totalEnergyProperty.get() );
+      }
     } );
   }
 

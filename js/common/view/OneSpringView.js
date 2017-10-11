@@ -72,16 +72,16 @@ define( function( require ) {
     var springStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
     springStopperButtonNode.right = springConstantControlPanel.left - this.spacing;
 
-    var energyGraphNode = new EnergyGraphNode( model, tandem );
-    energyGraphNode.top = this.visibleBoundsProperty.get().top + this.spacing;
-    energyGraphNode.left = this.visibleBoundsProperty.get().left + this.spacing;
+    this.energyGraphNode = new EnergyGraphNode( model, tandem );
+    this.energyGraphNode.top = this.visibleBoundsProperty.get().top + this.spacing;
+    this.energyGraphNode.left = this.visibleBoundsProperty.get().left + this.spacing;
 
     var massValueControlPanel = new MassValueControlPanel(
       model.masses[ 0 ],
       tandem.createTandem( 'massValueControlPanel' )
     );
     massValueControlPanel.top = this.visibleBoundsProperty.get().getMinY() + this.spacing;
-    massValueControlPanel.left = energyGraphNode.right + this.spacing;
+    massValueControlPanel.left = this.energyGraphNode.right + this.spacing;
     springHangerNode.right = springStopperButtonNode.left - this.spacing;
 
     // Initializes movable line
@@ -128,6 +128,9 @@ define( function( require ) {
     this.toolboxPanel.left = this.gravityAndFrictionControlPanel.left;
     this.toolboxPanel.minWidth = this.gravityAndFrictionControlPanel.width;
 
+    this.shelf.rectWidth = 140;
+    this.shelf.rectX = this.energyGraphNode.right + (this.spacing * .20);
+
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
     // Adding all of the nodes to the scene graph
     // Adding Panels to scene graph
@@ -137,7 +140,7 @@ define( function( require ) {
     this.addChild( this.indicatorVisibilityControlPanel );
     this.addChild( this.gravityAndFrictionControlPanel );
     this.addChild( this.toolboxPanel );
-    this.addChild( energyGraphNode );
+    this.addChild( this.energyGraphNode );
 
     // Adding Buttons to scene graph
     this.addChild( this.resetAllButton );
@@ -166,7 +169,7 @@ define( function( require ) {
       self.speedControl.right = self.resetAllButton.left - self.spacing * 6;
       self.timeControlPanel.right = self.speedControl.left - self.spacing * 6;
       self.toolboxPanel.dragBounds = 3;
-      energyGraphNode.left = visibleBounds.left + self.spacing;
+      self.energyGraphNode.left = visibleBounds.left + self.spacing;
       self.timerNode.updateBounds( visibleBounds.withOffsets(
         self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2
       ) );
