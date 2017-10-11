@@ -72,17 +72,14 @@ define( function( require ) {
       } );
 
     this.cylinderHeightProperty.link( function( cylinderHeight ) {
-      // self.options.zeroReferencePoint = 0 - cylinderHeight/ 2;
       self.options.zeroReferencePoint = 0 - cylinderHeight / 2;
     } );
 
     // @public {Property.<number>} hook height in m
-    this.hookHeightProperty = new DerivedProperty( [ this.radiusProperty ], function( radius ) {
-      return radius * HOOK_HEIGHT_RATIO;
-    } );
+    this.hookHeight = this.radiusProperty.value * HOOK_HEIGHT_RATIO;
 
-    this.heightProperty = new DerivedProperty( [ this.cylinderHeightProperty, this.hookHeightProperty ], function( cylinderHeight, hookHeight ) {
-      return cylinderHeight + hookHeight;
+    this.heightProperty = new DerivedProperty( [ this.cylinderHeightProperty ], function( cylinderHeight ) {
+      return cylinderHeight + self.hookHeight;
     } );
 
     this.initialPosition = initialPosition;

@@ -56,7 +56,7 @@ define( function( require ) {
     this.mass = mass;
 
     // TODO: factor out the hook from the height.
-    var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeightProperty.get() );
+    var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
 
     var rectOptions = {
       stroke: 'black',
