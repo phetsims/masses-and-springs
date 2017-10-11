@@ -250,7 +250,7 @@ define( function( require ) {
         self.animationProgress = 0;
         self.animationStartPosition = self.positionProperty.value;
         self.animationEndPosition = new Vector2( self.initialPosition.x, self.positionProperty.value.y );
-        self.isAnimatingProperty.set( true )
+        self.isAnimatingProperty.set( true );
       }
       else {
         self.isAnimatingProperty.set( false );
