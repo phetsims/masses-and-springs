@@ -191,13 +191,13 @@ define( function( require ) {
 
     // Mass set containing three masses for use on the lab screen.
     this.labScreenMasses = [
-      this.createMass( 0.150, massXCoordinate, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) ),
+      this.createMass( 0.100, massXCoordinate - 0.20, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) ),
       this.createMass( 0.125, massXCoordinate - 0.10, true, 'red', null, tandem.createTandem( 'redLabeledMass' ) ),
-      this.createMass( 0.100, massXCoordinate - 0.20, true, 'rgb(  247, 151, 34 )', null, tandem.createTandem( 'adjustableMass' ) )
+      this.createMass( 0.150, massXCoordinate, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) )
     ];
-    this.labScreenMasses[ 2 ].adjustable = true;
+    this.labScreenMasses[ 0 ].adjustable = true;
     this.labScreenMasses[ 1 ].options.mysteryLabel = true;
-    this.labScreenMasses[ 0 ].options.mysteryLabel = true;
+    this.labScreenMasses[ 2 ].options.mysteryLabel = true;
 
     // Here we set our common model masses to represent the default set of seven standard masses.
     this.masses = this.defaultMasses;

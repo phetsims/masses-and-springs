@@ -46,7 +46,7 @@ define( function( require ) {
       isLabeled: isLabeled,
       mysteryLabel: false,
       color: new Color( color ),
-      restingHeight: .1 // Height of the mass when it is resting on the shelf
+      zeroReferencePoint: .0 // Height of the mass when it is resting on the shelf
     }, options );
 
     this.scalingFactor = 4; // scales the radius to desired size
@@ -69,6 +69,11 @@ define( function( require ) {
       function( radius ) {
         return radius * HEIGHT_RATIO;
       } );
+
+    this.cylinderHeightProperty.link( function( cylinderHeight ) {
+      // self.options.zeroReferencePoint = 0 - cylinderHeight/ 2;
+      self.options.zeroReferencePoint = 0 - cylinderHeight / 2;
+    } );
 
     // @public {Property.<number>} hook height in m
     this.hookHeightProperty = new DerivedProperty( [ this.radiusProperty ], function( radius ) {
@@ -163,7 +168,7 @@ define( function( require ) {
       function( mass, gravity, position ) {
 
         // The height used is determined based on the height of the shelf the masses rest on.
-        var heightFromZero = position.y - self.options.restingHeight - self.heightProperty.value;
+        var heightFromZero = position.y - self.options.zeroReferencePoint - self.heightProperty.value;
         return ( mass * gravity * (heightFromZero) );
       } );
 
