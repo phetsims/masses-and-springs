@@ -183,9 +183,6 @@ define( function( require ) {
       defaultValue: 0
     } );
 
-    // @public {Property.<number>} Thermal energy of the mass
-    this.thermalEnergyProperty = new NumberProperty( 0 );
-
     // @public (read-only) Total energy of the mass
     this.totalEnergyProperty = new DerivedProperty( [
         this.kineticEnergyProperty,
@@ -198,15 +195,22 @@ define( function( require ) {
     );
 
     // @public {number}
-    this.initialTotalEnergy = 0;
+    this.initialTotalEnergyProperty = new Property( 0 );
+
+    // @public {Property.<number>} Thermal energy of the mass
+    this.thermalEnergyProperty = new DerivedProperty( [ this.initialTotalEnergyProperty, this.totalEnergyProperty ],
+      function( initialEnergy, totalEnergy ) {
+        return initialEnergy - totalEnergy;
+      } );
+
 
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
 
         // When a user drags an attached mass it is as if they are restarting the spring system
-        self.initialTotalEnergy = self.kineticEnergyProperty.get() +
-                                  self.gravitationalPotentialEnergyProperty.get() +
-                                  self.elasticPotentialEnergyProperty.get();
+        self.initialTotalEnergyProperty.set( self.kineticEnergyProperty.get() +
+                                             self.gravitationalPotentialEnergyProperty.get() +
+                                             self.elasticPotentialEnergyProperty.get() );
       }
       if ( userControlled ) {
         self.verticalVelocityProperty.reset();
@@ -219,16 +223,9 @@ define( function( require ) {
         // TODO: why are we not setting initialTotalEnergy here?
 
         //If a user is dragging the mass we remove the thermal energy.
-        return self.thermalEnergyProperty.set( 0 );
+        return self.initialTotalEnergyProperty.set( totalEnergy );
       }
-      // console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergy + '\t' + 'totalEnergy = ' + totalEnergy );
-    } );
-
-    // TODO: Can thermalEnergyProperty be a derivedProperty based on initialTotalEnegry (Property it) and totalEnergyProperty?
-    Property.multilink( [ this.positionProperty, this.userControlledProperty ], function( position, userControlled ) {
-      if ( !userControlled ) {
-        self.thermalEnergyProperty.set( self.initialTotalEnergy - self.totalEnergyProperty.get() );
-      }
+      console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergyProperty.get() + '\t' + 'totalEnergy = ' + totalEnergy );
     } );
 
     // Used for animating the motion of a mass being released and not attached to the spring
@@ -332,10 +329,10 @@ define( function( require ) {
      * @public
      */
     zeroThermalEnergy: function() {
-      this.initialTotalEnergy = this.kineticEnergyProperty.get() +
-                                this.gravitationalPotentialEnergyProperty.get() +
-                                this.elasticPotentialEnergyProperty.get();
-      this.thermalEnergyProperty.set( this.initialTotalEnergy - this.totalEnergyProperty.get() );
+      this.initialTotalEnergyProperty.set( this.kineticEnergyProperty.get() +
+                                           this.gravitationalPotentialEnergyProperty.get() +
+                                           this.elasticPotentialEnergyProperty.get() );
+      this.thermalEnergyProperty.set( this.initialTotalEnergyProperty.get() - this.totalEnergyProperty.get() );
 
 
     }

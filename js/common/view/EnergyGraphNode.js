@@ -213,10 +213,9 @@ define( function( require ) {
           // has been reset. Thermal energy is the only value that is dependent on initial total energy.
           var mass = model.springs[ 0 ].massAttachedProperty.get();
           if ( mass ) {
-            mass.initialTotalEnergy = mass.kineticEnergyProperty.get() +
-                                      mass.gravitationalPotentialEnergyProperty.get() +
-                                      mass.elasticPotentialEnergyProperty.get();
-            mass.thermalEnergyProperty.set( mass.initialTotalEnergy - mass.totalEnergyProperty.get() );
+            mass.initialTotalEnergyProperty.set( mass.kineticEnergyProperty.get() +
+                                                 mass.gravitationalPotentialEnergyProperty.get() +
+                                                 mass.elasticPotentialEnergyProperty.get() );
           }
         }
       } );
