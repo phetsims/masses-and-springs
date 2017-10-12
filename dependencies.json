@@ -1,11 +1,11 @@
 {
-  "comment": "# masses-and-springs 1.0.0-dev.17 Thu Oct 05 2017 11:28:40 GMT-0400 (EDT)",
+  "comment": "# masses-and-springs 1.0.0-dev.18 Thu Oct 12 2017 13:57:59 GMT-0400 (EDT)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
   },
   "axon": {
-    "sha": "1fd5dcd36ca32ff05140b0c3edc78b74a486f668",
+    "sha": "b8dd4e51210531bb8fb2d12bfcb779821d49f95c",
     "branch": "master"
   },
   "brand": {
@@ -13,23 +13,23 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "269ca1354d01219a7d94932596ef6373c631f81a",
+    "sha": "66763c36d9e0bbb57fd40ddafa62115ac3cdd964",
     "branch": "master"
   },
   "dot": {
-    "sha": "8c2cfa7f29df484e4f2130a9b9a3cb556d0f7b26",
+    "sha": "84bc5146e1a75e42674927d520777323f33c7e7e",
     "branch": "master"
   },
   "joist": {
-    "sha": "f59c30f20dc17e7cf900dce94f090cb1d5bb4217",
+    "sha": "3eff115f7ee1e367630fcf45081f2ece1d92285a",
     "branch": "master"
   },
   "kite": {
-    "sha": "34bf85d14fc936d7017cced72ffc221e71d82df7",
+    "sha": "9689a3de27640c67fa66b8b343643f47da99d9d9",
     "branch": "master"
   },
   "masses-and-springs": {
-    "sha": "035bd4d1f142a477df5cbcb116fe66231a58f4fa",
+    "sha": "b95de26be0d3daa449c97858db8ff7c183d1628a",
     "branch": "master"
   },
   "phet-core": {
@@ -45,11 +45,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "883d2c46cd407041824aa5fecd6ed9055d4fe6af",
+    "sha": "db7ea875eaba59fe7f4c929d8e88832c5f0ab995",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "bf870679861d11accea837a592a402239e21f214",
+    "sha": "a90363b5f2629cefc880f205cc738a4277f3dc93",
     "branch": "master"
   },
   "sherpa": {
@@ -57,11 +57,15 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "91b2315cb781a5ac4e9c6c54cffe346d9abb49a4",
+    "sha": "d57850fdc9057f33ce4a216273d0d4c08b366422",
     "branch": "master"
   },
   "tandem": {
-    "sha": "de2aad711f893d45277776b813e340ff5555084f",
+    "sha": "f399e7ee0d418db571047da7c17201a6315cf737",
+    "branch": "master"
+  },
+  "twixt": {
+    "sha": "a2eaa10a8a7296fe32bf3d16213b8122c28bd585",
     "branch": "master"
   }
 }
