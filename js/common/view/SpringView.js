@@ -102,9 +102,10 @@ define( function( require ) {
 
     // Add shelf for to house massNodes
     this.shelf = new Shelf( tandem, {
-      rectHeight: 10,
-      rectY: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y )
+      rectHeight: 10
     } );
+    this.shelf.rectY = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) - this.shelf.rectHeight;
+
     this.addChild( this.shelf );
 
     // Control Panel for display elements with varying visibility
