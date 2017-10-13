@@ -24,9 +24,9 @@ define( function( require ) {
 
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
 
-    this.createMass( 0.100, 0.525, true, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ) );
+    this.createMass( 0.100, 0.55, true, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ) );
     this.createMass( 0.125, 0.625, true, 'red', null, tandem.createTandem( 'redLabeledMass' ) );
-    this.createMass( 0.150, 0.725, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) );
+    this.createMass( 0.150, 0.7, true, 'green', null, tandem.createTandem( 'greenLabeledMass' ) );
 
     this.masses[ 0 ].adjustable = true;
     this.masses[ 1 ].options.mysteryLabel = true;

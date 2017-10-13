@@ -45,8 +45,6 @@ define( function( require ) {
     this.addChild( vectorVisibilityControlPanel );
     vectorVisibilityControlPanel.moveToBack();
 
-    this.shelf.rectWidth = 150;
-
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
