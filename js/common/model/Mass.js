@@ -105,7 +105,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'userControlledProperty' )
     } );
 
-    // @private {Property.<boolean>} indicates whether the mass is animating after being released
+    // @private {Property.<boolean>} indicates whether the mass is animating after being released and not attached to s
     this.isAnimatingProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isAnimatingProperty' )
     } );

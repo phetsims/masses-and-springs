@@ -206,14 +206,6 @@ define( function( require ) {
         phetioValueType: TNumber
       }
     );
-
-    // Restart animation if it was squelched
-    Property.multilink( [ this.massAttachedProperty, this.gravityProperty, this.springConstantProperty ], function( mass ) {
-      if ( mass ) {
-        self.animatingProperty.set( true );
-      }
-    } );
-
     this.springConstantProperty.link( function( springConstant ) {
       self.updateThickness( self.naturalRestingLengthProperty.get(), springConstant );
     } );
@@ -232,7 +224,6 @@ define( function( require ) {
       this.dampingCoefficientProperty.reset();
       this.positionProperty.reset();
       this.naturalRestingLengthProperty.reset();
-      this.animatingProperty.reset();
       this.massAttachedProperty.reset();
       this.springConstantProperty.reset();
     },
@@ -248,7 +239,6 @@ define( function( require ) {
         dampingCoefficient: this.dampingCoefficientProperty.get(),
         position: this.positionProperty.get(),
         naturalRestingLength: this.naturalRestingLengthProperty.get(),
-        animating: this.animatingProperty.get(),
         mass: this.massAttachedProperty.get(),
         springConstant: this.springConstantProperty.get(),
         thickness: this.thicknessProperty.get()
@@ -267,7 +257,6 @@ define( function( require ) {
       this.dampingCoefficientProperty.set( springState.dampingCoefficient );
       this.positionProperty.set( springState.position );
       this.naturalRestingLengthProperty.set( springState.naturalRestingLength );
-      this.animatingProperty.set( springState.animating );
       this.massAttachedProperty.set( springState.mass );
       this.springConstantProperty.set( springState.springConstant );
       this.thicknessProperty.set( springState.thickness );
@@ -315,7 +304,6 @@ define( function( require ) {
       }
       this.displacementProperty.set( 0 );
       this.massAttachedProperty.set( null );
-      this.animatingProperty.set( false );
     },
 
     /**
@@ -349,7 +337,6 @@ define( function( require ) {
 
         // set displacement and stop further animation
         this.displacementProperty.set( -this.springExtension );
-        this.animatingProperty.reset();
 
         // place that mass at the correct location as well
         mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );
@@ -365,8 +352,7 @@ define( function( require ) {
      * @public
      */
     step: function( dt ) {
-      if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() &&
-           this.animatingProperty.get() ) {
+      if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() ) {
 
         // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
         // references that could be provided that describe where this came from?
@@ -436,7 +422,6 @@ define( function( require ) {
                Math.abs( this.massAttachedProperty.get().verticalVelocityProperty.get() ) < 1e-6 ) {
             this.displacementProperty.set( -m * g / k );  // Equilibrium length
             this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
-            this.animatingProperty.set( false );
           }
           else {
             this.displacementProperty.set( newDisplacement );
