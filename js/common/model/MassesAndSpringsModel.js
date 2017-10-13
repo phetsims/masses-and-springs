@@ -361,7 +361,7 @@ define( function( require ) {
         _.values( this.masses ).forEach( function( mass ) {
 
           // Fall if not hung or grabbed
-          mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + .025, dt );
+          mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + .02, dt );
         } );
         if ( this.timerRunningProperty.get() ) {
           this.timerSecondsProperty.set( this.timerSecondsProperty.get() + dt );
