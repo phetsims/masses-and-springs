@@ -152,7 +152,9 @@ define( function( require ) {
     this.timeControlPanel = new TimeControlPanel(
       model,
       this.visibleBoundsProperty.get(),
-      tandem.createTandem( 'timeControlPanel' )
+      tandem.createTandem( 'timeControlPanel' ), {
+        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + 0.02 )
+      }
     );
 
     // Sim speed controls
