@@ -161,7 +161,7 @@ define( function( require ) {
     this.toolboxPanel.minWidth = this.gravityAndFrictionControlPanel.width;
 
     this.shelf.rectWidth = 140;
-    this.shelf.rectX = this.energyGraphNode.right + (this.spacing );
+    this.shelf.left = massValueControlPanel.left;
 
     //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
     // Adding all of the nodes to the scene graph

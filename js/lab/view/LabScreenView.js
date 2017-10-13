@@ -46,7 +46,6 @@ define( function( require ) {
     vectorVisibilityControlPanel.moveToBack();
 
     this.shelf.rectWidth = 150;
-    this.shelf.rectX = this.energyGraphNode.right + (this.spacing * .25);
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
