@@ -68,6 +68,7 @@ define( function( require ) {
     var rect = new Rectangle( rectOptions );
     this.addChild( rect );
 
+    // @private {read-write} Bounds that limit where we can drag our mass should be dependent on how large our mass is
     var modelBoundsProperty = new DerivedProperty( [ dragBoundsProperty, mass.heightProperty ], function( dragBounds, massHeight ) {
       var modelBounds = modelViewTransform2.viewToModelBounds( dragBounds );
       modelBounds.minY += massHeight;
@@ -87,10 +88,16 @@ define( function( require ) {
       rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 ).addColorStop( 0.3, mass.color )
         .addColorStop( 0.8, Color.toColor( mass.color ).colorUtilsBrighter( 0.9 ) )
         .addColorStop( 1, Color.toColor( mass.color ).colorUtilsBrighter( 0.4 ) );
+      // console.log( 'mass.positionProperty.get() = ' + mass.positionProperty.get() );
 
-      // We are constraining the draggable bounds on our massNodes except.
-      if ( mass.positionProperty.value.y < modelBoundsProperty.value.minY && !mass.springProperty.value ) {
-        mass.positionProperty.set( new Vector2( mass.positionProperty.value.x, modelBoundsProperty.value.minY ) );
+      // We are constraining the draggable bounds on our massNodes except when the mass is attached to a spring.
+      var minY = mass.userControlledProperty.value ?
+                 modelBoundsProperty.value.minY :
+                 MassesAndSpringsConstants.FLOOR_Y + 0.02 + mass.heightProperty.value;
+      console.log( 'minY = ' + minY );
+
+      if ( mass.positionProperty.value.y < minY && !mass.springProperty.value ) {
+        mass.positionProperty.set( new Vector2( mass.positionProperty.value.x, minY ) );
         model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       }
     } );

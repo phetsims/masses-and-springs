@@ -343,6 +343,7 @@ define( function( require ) {
      */
     step: function( dt ) {
       var self = this;
+      var animationDt = dt;
 
       // If simulationTimeStep > 1, ignore it - it probably means the user returned to the tab after
       // the tab or the browser was hidden for a while.
@@ -353,7 +354,7 @@ define( function( require ) {
           case 'normal':
             break;
           case 'slow':
-            dt = dt / 8;
+            dt = dt / MassesAndSpringsConstants.SIM_DT_RATIO;
             break;
           default:
             assert( false, 'invalid setting for model speed' );
@@ -361,7 +362,7 @@ define( function( require ) {
         _.values( this.masses ).forEach( function( mass ) {
 
           // Fall if not hung or grabbed
-          mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + .02, dt );
+          mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + .02, dt, animationDt );
         } );
         if ( this.timerRunningProperty.get() ) {
           this.timerSecondsProperty.set( this.timerSecondsProperty.get() + dt );

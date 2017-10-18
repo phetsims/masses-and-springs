@@ -21,10 +21,13 @@ define( function( require ) {
     MAX_TEXT_WIDTH: 80,
     DEFAULT_SPRING_LENGTH: 0.5,
 
-    // Y position of floor in m. The floor is at the bottom bounds of the screen.
+    // Ratio for dt when sim is in slow motion
+    SIM_DT_RATIO: 8,
+
+    // Y position of floor in meters. The floor is at the bottom bounds of the screen.
     FLOOR_Y: 0,
 
-    // Y position of ceiling in m. The ceiling is the top of the SpringHangerNode, just below the top of the dev view bounds
+    // Y position of ceiling in meters. The ceiling is the top of the SpringHangerNode, just below the top of the dev view bounds
     CEILING_Y: 1.23,
 
     // {Property.<number>} range of friction associated with sim
