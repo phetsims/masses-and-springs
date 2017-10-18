@@ -263,10 +263,11 @@ define( function( require ) {
      * @param {number} gravity
      * @param {number} floorY
      * @param {number} dt
+     * @param {number} animationDt - dt used for the falling animation after a mass is released
      *
      * @public
      */
-    step: function( gravity, floorY, dt ) {
+    step: function( gravity, floorY, dt, animationDt ) {
       if ( this.isAnimatingProperty.value ) {
         var distance = this.animationStartPosition.distance( this.animationEndPosition );
         if ( distance > 0 ) {
@@ -274,7 +275,7 @@ define( function( require ) {
           var animationSpeed = Math.sqrt( 2 / distance );
 
           // Responsible for animating a horizontal motion when the mass is released and not attached to a spring.
-          this.animationProgress = Math.min( 1, this.animationProgress + dt * animationSpeed );
+          this.animationProgress = Math.min( 1, this.animationProgress + animationDt * animationSpeed );
           var ratio = Easing.CUBIC_IN_OUT.value( this.animationProgress );
 
           // TODO: Go over with design team.
