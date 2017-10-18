@@ -40,6 +40,7 @@ define( function( require ) {
     var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
     var MAX_WIDTH = 150;
     var BAR_NODE_WIDTH = 15;
+  var BAR_MAX_HEIGHT = 340;
 
     // strings
     var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
@@ -153,7 +154,7 @@ define( function( require ) {
         return new VerticalBarNode( property, {
           fill: fill,
           width: BAR_NODE_WIDTH,
-          maxBarHeight: 350,
+          maxBarHeight: BAR_MAX_HEIGHT,
           displayContinuousArrow: true
         } );
       }
@@ -162,14 +163,14 @@ define( function( require ) {
       var scaledKineticEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty );
       var scaledGravitationalPotentialEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty );
       var scaledElasticPotentialEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].elasticPotentialEnergyProperty );
-      var scaledthermalEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty );
+      var scaledThermalEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty );
 
       // Creation of our different bar nodes to be represented in the graph on energy screen
       this.barNodes = [
         createBarNode( scaledKineticEnergyProperty, '#39d74e' ),
         createBarNode( scaledGravitationalPotentialEnergyProperty, '#5798de' ),
         createBarNode( scaledElasticPotentialEnergyProperty, '#29d4ff' ),
-        createBarNode( scaledthermalEnergyProperty, '#ee6f3e' )
+        createBarNode( scaledThermalEnergyProperty, '#ee6f3e' )
       ];
 
       // TODO: May be useful to make the property and color as one object with key value pair.
@@ -194,7 +195,7 @@ define( function( require ) {
         width: BAR_NODE_WIDTH,
         displayContinuousArrow: true,
         arrowFill: 'black',
-        maxBarHeight: 350
+        maxBarHeight: BAR_MAX_HEIGHT
       } );
       this.barNodes.push( compositeBar );
 
