@@ -25,7 +25,7 @@ define( function( require ) {
     var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
     var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-    var Property = require( 'AXON/Property' );
+  var Property = require( 'AXON/Property' );
   var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
     var RichText = require( 'SCENERY/nodes/RichText' );
     var Text = require( 'SCENERY/nodes/Text' );
@@ -45,7 +45,6 @@ define( function( require ) {
     var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
     var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
     var energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
-    var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
     var eThermString = require( 'string!MASSES_AND_SPRINGS/eTherm' );
     var gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
     var keString = require( 'string!MASSES_AND_SPRINGS/ke' );
@@ -203,7 +202,6 @@ define( function( require ) {
       var verticalBarChart = new VerticalBarChart( this.barNodes, {
         width: 140,
         height: MAXIMUM_HEIGHT,
-        title: new Text( energyString, { maxWidth: 100 } ),
         titleFill: '#b37e46',
         xAxisLabels: xAxisLabels,
         thermalEnergyProperty: model.springs[ 0 ].thermalEnergyProperty,
