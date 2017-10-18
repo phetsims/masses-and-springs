@@ -194,7 +194,7 @@ define( function( require ) {
       }
     );
 
-    // @public {number}
+    // @public {number} Total energy of our spring system when it is initialized
     this.initialTotalEnergyProperty = new Property( 0 );
 
     // @public {Property.<number>} Thermal energy of the mass
@@ -217,15 +217,21 @@ define( function( require ) {
       }
     } );
 
-    // As the total energy changes we can derive the thermal energy as being the energy lost from the system
-    this.totalEnergyProperty.link( function( totalEnergy ) {
-      if ( self.userControlledProperty.get() ) {
-        // TODO: why are we not setting initialTotalEnergy here?
+    // @private {boolean} Flag used to determine whether we are preserving the thermal energy.
+    this.perserveThermalEnergy = true;
 
+    // As the total energy changes we can derive the thermal energy as being the energy lost from the system
+    this.totalEnergyProperty.link( function( newTotalEnergy, oldTotalEnergy ) {
+      if ( self.userControlledProperty.get() ) {
         //If a user is dragging the mass we remove the thermal energy.
-        return self.initialTotalEnergyProperty.set( totalEnergy );
+        self.initialTotalEnergyProperty.set( newTotalEnergy );
       }
-      console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergyProperty.get() + '\t' + 'totalEnergy = ' + totalEnergy );
+
+      // We can preserve thermal energy by adding any change to total energy to the initial energy, as long as it is not in its natural oscillation
+      else if ( self.preserveThermalEnergy ) {
+        self.initialTotalEnergyProperty.value += newTotalEnergy - oldTotalEnergy;
+      }
+      console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergyProperty.get() + '\t' + 'newTotalEnergy = ' + newTotalEnergy );
     } );
 
     // Used for animating the motion of a mass being released and not attached to the spring

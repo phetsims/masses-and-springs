@@ -353,6 +353,7 @@ define( function( require ) {
      */
     step: function( dt ) {
       if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() ) {
+        this.massAttachedProperty.get().preserveThermalEnergy = false;
 
         // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
         // references that could be provided that describe where this came from?
@@ -449,6 +450,8 @@ define( function( require ) {
         }
 
         this.massAttachedProperty.get().positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );
+
+        this.massAttachedProperty.get().preserveThermalEnergy = true;
       }
     }
   } );
