@@ -111,8 +111,8 @@ define( function( require ) {
       function createLabelText( string, color ) {
         return new RichText( string, {
           fill: color,
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          stroke: Color.toColor( color ).colorUtilsBrighter( 0.25 )
+          font: MassesAndSpringsConstants.TITLE_FONT
+          // stroke: Color.toColor( color ).colorUtilsBrighter( 0.25 )
         } );
       }
 
