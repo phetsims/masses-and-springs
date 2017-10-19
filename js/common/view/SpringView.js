@@ -189,6 +189,7 @@ define( function( require ) {
     var soundToggleButton = new SoundToggleButton( model.isSoundEnabledProperty, {
       centerY: this.resetAllButton.centerY - 55
     } );
+    soundToggleButton.scale( .9 );
     this.addChild( soundToggleButton );
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
