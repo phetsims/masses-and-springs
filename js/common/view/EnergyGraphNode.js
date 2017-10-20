@@ -14,7 +14,6 @@ define( function( require ) {
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var Color = require( 'SCENERY/util/Color' );
   var ColorConstants = require( 'SUN/ColorConstants' );
     var DerivedProperty = require( 'AXON/DerivedProperty' );
     var Dialog = require( 'JOIST/Dialog' );
