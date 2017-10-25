@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -42,7 +43,6 @@ define( function( require ) {
       touchAreaDilation: TOUCH_AREA_DILATION,
       tandem: tandem.createTandem( 'playPauseButton' )
     } );
-    this.addChild( playPauseButton );
 
     // Step Forward Button
     var stepForwardButton = new StepForwardButton( {
@@ -56,13 +56,17 @@ define( function( require ) {
       centerY: playPauseButton.centerY,
       tandem: tandem.createTandem( 'stepForwardButton' )
     } );
-    this.addChild( stepForwardButton );
 
     // Blow up the play/pause button slightly when paused.  The PhET convention is to do this for sims where interaction
     // does NOT unpause the sim, which is true for all usages in this sim.
     model.playingProperty.lazyLink( function( isPlaying ) {
       playPauseButton.scale( isPlaying ? ( 1 / PAUSE_SIZE_INCREASE_FACTOR ) : PAUSE_SIZE_INCREASE_FACTOR );
     } );
+    this.addChild( new HBox( {
+      children: [ playPauseButton, stepForwardButton ],
+      spacing: 10
+    } ) );
+
     this.mutate( options );
   }
 
