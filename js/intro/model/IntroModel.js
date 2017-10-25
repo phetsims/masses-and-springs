@@ -79,14 +79,14 @@ define( function( require ) {
       // Restoring spring parameters when scenes are switched
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
-        self.setResetState( true );
+        self.resetScene( true );
         adjustableLengthModeSpringState = self.getSpringState();
         self.setSpringState( sameLengthModeSpringState );
       }
 
       else if ( mode === 'adjustable-length' ) {
         // Manages stashing and applying parameters to each scene
-        self.setResetState( true );
+        self.resetScene( true );
         sameLengthModeSpringState = self.getSpringState();
         self.setSpringState( adjustableLengthModeSpringState );
       }
@@ -130,7 +130,7 @@ define( function( require ) {
 
       this.sceneModeProperty.reset();
       this.constantParameterProperty.reset();
-      this.getResetState(); // REVIEW: It seems odd that a getter would be called during a reset (more on this method below)
+      this.initializeScenes();
     },
 
     /**
@@ -157,18 +157,14 @@ define( function( require ) {
       this.spring2.setSpringState( sceneState.spring2State );
     },
 
-    // REVIEW: The methods below - setResetState and getResetState - have misleading names.  The names would seem to
-    // imply that there is some property called 'resetState' that is being set and retreived, but this doesn't appear
-    // to be the case.  Also, getResetState calls setResetState.  This needs to be clarified - I (jbphet) found it
-    // challenging to figure out what these methods do and why they are necessary.
-
     /**
-     * Resets the properties of the masses and springs
+     * Resets the properties of the masses and springs. The entire sim isn't reset, just the properties affectign the
+     * masses and the springs.
      * @private
      *
      * @param {boolean} massesOnly
      */
-    setResetState: function( massesOnly ) {
+    resetScene: function( massesOnly ) {
       if ( massesOnly === false ) {
         this.spring1.reset();
         this.spring2.reset();
@@ -188,18 +184,19 @@ define( function( require ) {
     },
 
     /**
-     * Resets both scenes of intro screen.
+     * Resets both scenes of intro screen to initial sim state. This resets only the properties affecting the masses
+     * and the springs.
      *
      * @private
      */
-    getResetState: function() {
+    initializeScenes: function() {
       this.sceneModeProperty.set( 'adjustable-length' );
-      this.setResetState( false );
+      this.resetScene( false );
       this.spring1.naturalRestingLengthProperty.set( 0.25 );
 
       // initial parameters set for both scenes
       this.sceneModeProperty.set( 'same-length' );
-      this.setResetState( false );
+      this.resetScene( false );
     }
   } );
 } )
