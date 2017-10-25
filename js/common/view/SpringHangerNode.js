@@ -76,6 +76,7 @@ define( function( require ) {
         tandem: tandem
       } );
     }
+    this.setCornerRadius( MassesAndSpringsConstants.PANEL_CORNER_RADIUS );
   }
 
   massesAndSprings.register( 'SpringHangerNode', SpringHangerNode );
