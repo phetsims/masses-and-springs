@@ -354,7 +354,7 @@ define( function( require ) {
           case 'normal':
             break;
           case 'slow':
-            dt = dt / 8;
+            dt = dt / MassesAndSpringsConstants.SIM_DT_RATIO;
             break;
           default:
             assert( false, 'invalid setting for model speed' );
