@@ -48,43 +48,37 @@ define( function( require ) {
     // {read-write} prevents overlap with the equilibrium line
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
 
-    // updates the position of the natural length line as the system changes
-    if ( options.fixedPosition ) {
-      spring.naturalRestingLengthProperty.link( function( value ) {
+    // Helper function to derive the length as if the mass wasn't attached.
+    var lengthFunction = new LinearFunction( 0.1, 0.5, 1.13, 0.73 );
 
-        // Helper function to derive the length as if the mass wasn't attached.
-        var lengthFunction = new LinearFunction( 0.1, 0.5, 1.13, 0.73 );
+    var yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
+    // @private {read-write} position of line in screen coordinates.
+    this.positionProperty = new Property( new Vector2( xPos, yPos ), {
+      phetioValueType: TVector2
+    } );
 
-        // Y position of line in screen coordinates
-        var yPos = modelViewTransform2.modelToViewY( lengthFunction( value ) );
+    // updates the position of the reference line as the system changes
+    Property.multilink( [ spring.massAttachedProperty, spring.naturalRestingLengthProperty, property ], function( mass, restingLength, monitoredProperty ) {
 
-        // @private {read-write} position of line in screen coordinates.
-        self.positionProperty = new Property( new Vector2( xPos, yPos ), {
-          phetioValueType: TVector2
-        } );
-        self.translation = self.positionProperty.value.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
-      } );
-    }
+      if ( options.fixedPosition || !mass ) {
 
-    else {
-      property.link( function( value ) {
+        // Y position of line in screen coordinates as if a mass isn't attached
+        yPos = modelViewTransform2.modelToViewY( lengthFunction( restingLength ) );
+      }
+      else {
+        // Y position of line in screen coordinates with an attached mass
+        yPos = modelViewTransform2.modelToViewY( monitoredProperty );
+      }
+      self.positionProperty.set( new Vector2( xPos, yPos ) );
+    } );
 
-        // Y position of line in screen coordinates
-        var yPos = modelViewTransform2.modelToViewY( value );
-
-        // @private {read-write} position of line in screen coordinates
-        self.positionProperty = new Property( new Vector2( xPos, yPos ), {
-          phetioValueType: TVector2
-        } );
-
-        // Link that handles the change in the lines position in screen coordinates
-        self.positionProperty.link( function( position ) {
-          self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
-        } );
-      } );
-    }
+    // Link that handles the change in the lines position in screen coordinates
+    this.positionProperty.link( function( position ) {
+      self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
+    } );
 
     visibleProperty.linkAttribute( self, 'visible' );
+
   }
 
   massesAndSprings.register( 'ReferenceLineNode', ReferenceLineNode );
