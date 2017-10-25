@@ -94,7 +94,9 @@ define( function( require ) {
       model.springs[ 0 ],
       'rgb( 65, 66, 232 )',
       model.springs[ 0 ].bottomProperty,
-      model.naturalLengthVisibleProperty
+      model.naturalLengthVisibleProperty, {
+        fixedPosition: true
+      }
     );
 
     // @public Initializes natural line for second spring
@@ -103,7 +105,9 @@ define( function( require ) {
       model.springs[ 1 ],
       'rgb( 65, 66, 232 )',
       model.springs[ 1 ].bottomProperty,
-      model.naturalLengthVisibleProperty
+      model.naturalLengthVisibleProperty, {
+        fixedPosition: true
+      }
     );
 
     // Gravity Control Panel

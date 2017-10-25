@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var LinearFunction = require( 'DOT/LinearFunction' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
   var TVector2 = require( 'DOT/TVector2' );
@@ -25,10 +26,15 @@ define( function( require ) {
    * @param {String} stroke
    * @param {Property} property - determines which property is being referenced
    * @param {Property.<boolean>} visibleProperty
+   * @param {Object} [options]
    *
    * @constructor
    */
-  function ReferenceLineNode( modelViewTransform2, spring, stroke, property, visibleProperty ) {
+  function ReferenceLineNode( modelViewTransform2, spring, stroke, property, visibleProperty, options ) {
+    options = _.extend( {
+      fixedPosition: false // flag for a line that shouldn't move
+    }, options );
+
     var self = this;
     Line.call( this, 0, 0, LINE_LENGTH, 0, {
       stroke: stroke,
@@ -43,21 +49,41 @@ define( function( require ) {
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
 
     // updates the position of the natural length line as the system changes
-    property.link( function( value ) {
+    if ( options.fixedPosition ) {
+      spring.naturalRestingLengthProperty.link( function( value ) {
 
-      // {read-write} Y position of line in screen coordinates
-      var yPos = modelViewTransform2.modelToViewY( value );
+        // Helper function to derive the length as if the mass wasn't attached.
+        var lengthFunction = new LinearFunction( 0.1, 0.5, 1.13, 0.73 );
 
-      // @private {read-write} position of line in screen coordinates
-      self.positionProperty = new Property( new Vector2( xPos, yPos ), {
+        // Y position of line in screen coordinates
+        var yPos = modelViewTransform2.modelToViewY( lengthFunction( value ) );
+
+        // @private {read-write} position of line in screen coordinates.
+        self.positionProperty = new Property( new Vector2( xPos, yPos ), {
+          phetioValueType: TVector2
+        } );
+        self.translation = self.positionProperty.value.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
+      } );
+    }
+
+    else {
+      property.link( function( value ) {
+
+        // Y position of line in screen coordinates
+        var yPos = modelViewTransform2.modelToViewY( value );
+
+        // @private {read-write} position of line in screen coordinates
+        self.positionProperty = new Property( new Vector2( xPos, yPos ), {
           phetioValueType: TVector2
         } );
 
-      // Link that handles the change in the lines position in screen coordinates
-      self.positionProperty.link( function( position ) {
+        // Link that handles the change in the lines position in screen coordinates
+        self.positionProperty.link( function( position ) {
           self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
         } );
-    } );
+      } );
+    }
+
     visibleProperty.linkAttribute( self, 'visible' );
   }
 

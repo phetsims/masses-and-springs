@@ -71,7 +71,9 @@ define( function( require ) {
       model.springs[ 0 ],
       'rgb( 65, 66, 232 )',
       model.springs[ 0 ].bottomProperty,
-      model.naturalLengthVisibleProperty
+      model.naturalLengthVisibleProperty, {
+        fixedPosition: true
+      }
     );
 
 
