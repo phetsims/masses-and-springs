@@ -49,6 +49,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'playingProperty' )
     } );
 
+    //@public {Property.<boolean>} determines whether the sim is playing sound
     this.isSoundEnabledProperty = new Property( true, {
       tandem: tandem.createTandem( 'isSoundEnabledProperty' )
     } );
