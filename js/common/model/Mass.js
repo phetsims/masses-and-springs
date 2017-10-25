@@ -231,6 +231,7 @@ define( function( require ) {
       else if ( self.preserveThermalEnergy ) {
         self.initialTotalEnergyProperty.value += newTotalEnergy - oldTotalEnergy;
       }
+      // console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergyProperty.get() + '\t' + 'newTotalEnergy = ' + newTotalEnergy );
     } );
 
     // Used for animating the motion of a mass being released and not attached to the spring
@@ -238,17 +239,9 @@ define( function( require ) {
     this.animationEndPosition = null; // {Vector2|null}
     this.animationProgress = 0; // {number} Valid values 0 <= x <= 1. Used to adjust rate of animation completion.
 
-    // Responsible for animating the mass back to its initial position
-    Property.lazyMultilink( [ this.userControlledProperty, this.springProperty ], function( userControlled, spring ) {
-      if ( !userControlled && spring === null ) {
-        self.animationProgress = 0;
-        self.animationStartPosition = self.positionProperty.value;
-        self.animationEndPosition = new Vector2( self.initialPosition.x, self.positionProperty.value.y );
-        self.isAnimatingProperty.set( true );
-      }
-      else {
-        self.isAnimatingProperty.set( false );
-      }
+    // The mass is considered to be animating if we are not controlling it and it isn't attached to a spring.
+    Property.lazyMultilink( [ this.userControlledProperty, this.springProperty ], function() {
+      self.isAnimatingProperty.set( false );
     } );
 
   }
@@ -267,6 +260,8 @@ define( function( require ) {
      * @public
      */
     step: function( gravity, floorY, dt, animationDt ) {
+      var floorPosition = floorY + this.heightProperty.value;
+
       if ( this.isAnimatingProperty.value ) {
         var distance = this.animationStartPosition.distance( this.animationEndPosition );
         if ( distance > 0 ) {
@@ -281,18 +276,17 @@ define( function( require ) {
           // Diagonal animation. Remember to remove the else in the next if clause.
           // this.positionProperty.set(new Vector2 (this.animationStartPosition.blend(this.animationEndPosition,ratio).x, this.positionProperty.value.y));
 
-          this.positionProperty.set( this.animationStartPosition.blend( this.animationEndPosition, ratio ) );
-          if ( this.animationProgress === 1 ) {
-            this.isAnimatingProperty.set( false );
-          }
+          this.positionProperty.set( new Vector2( this.animationStartPosition.blend( this.animationEndPosition, ratio ).x, floorPosition ) );
         }
         else {
+          this.animationProgress = 1;
+        }
+        if ( this.animationProgress === 1 ) {
           this.isAnimatingProperty.set( false );
         }
       }
       // If we're not animating/controlled or attached to a spring, we'll fall due to gravity
       else if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
-        var floorPosition = floorY + this.heightProperty.value;
         var oldY = this.positionProperty.get().y;
         if ( oldY !== floorPosition ) {
           var newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
@@ -301,6 +295,12 @@ define( function( require ) {
             // if we hit the ground stop falling
             this.positionProperty.set( new Vector2( this.positionProperty.get().x, floorPosition ) );
             this.verticalVelocityProperty.set( 0 );
+
+            // Responsible for animating the mass back to its initial position
+            this.animationProgress = 0;
+            this.animationStartPosition = this.positionProperty.value;
+            this.animationEndPosition = new Vector2( this.initialPosition.x, this.positionProperty.value.y );
+            this.isAnimatingProperty.set( true );
           }
           else {
             this.verticalVelocityProperty.set( newVerticalVelocity );
