@@ -262,11 +262,9 @@ define( function( require ) {
       this.thicknessProperty.set( springState.thickness );
     },
 
-    // REVIEW: There should be some documentation on the next two methods that describe why they are called by
-    // external entities instead of handled internally.
-
     /**
-     * Updates thickness of spring and sets its thickness property to calculated value.
+     * Updates thickness of spring and sets its thickness property to calculated value. This is not handled internally
+     * by the spring because the intro model determines the conditions for updating thickness.
      * @public
      *
      * @param length {number} current natural resting length of spring
@@ -280,7 +278,8 @@ define( function( require ) {
     },
 
     /**
-     * Updates springConstant of spring and sets its spring constant property to calculated value.
+     * Updates springConstant of spring and sets its spring constant property to calculated value. This is not handled
+     * internally by the spring because the intro model determines the conditions for updating spring constant.
      * @public
      *
      * @param length {number} current natural resting length of spring
