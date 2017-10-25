@@ -30,7 +30,7 @@ define( function( require ) {
    * @constructor
    */
   // TODO: Rename to TimeControlPanel, and rename vars/tandems at usage sites
-  function TimeControlPanel( model, visibleBounds, tandem, options ) {
+  function TimeControlNode( model, visibleBounds, tandem, options ) {
     Node.call( this );
     var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( visibleBounds, 0.98 );
 
@@ -66,7 +66,7 @@ define( function( require ) {
     this.mutate( options );
   }
 
-  massesAndSprings.register( 'TimeControlPanel', TimeControlPanel );
+  massesAndSprings.register( 'TimeControlNode', TimeControlNode );
 
-  return inherit( Node, TimeControlPanel );
+  return inherit( Node, TimeControlNode );
 } );

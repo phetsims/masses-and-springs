@@ -31,7 +31,7 @@ define( function( require ) {
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TimeControlPanel = require( 'MASSES_AND_SPRINGS/common/view/TimeControlPanel' );
+  var TimeControlNode = require( 'MASSES_AND_SPRINGS/common/view/TimeControlNode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -149,7 +149,7 @@ define( function( require ) {
     } );
 
     // Play/Pause and Step Forward Button Control
-    this.timeControlPanel = new TimeControlPanel(
+    this.timeControlPanel = new TimeControlNode(
       model,
       this.visibleBoundsProperty.get(),
       tandem.createTandem( 'timeControlPanel' ), {
