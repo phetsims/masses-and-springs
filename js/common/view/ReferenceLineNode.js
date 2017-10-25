@@ -23,21 +23,21 @@ define( function( require ) {
   /**
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Spring} spring - spring model object
-   * @param {String} stroke
    * @param {Property} property - determines which property is being referenced
    * @param {Property.<boolean>} visibleProperty
    * @param {Object} [options]
    *
    * @constructor
    */
-  function ReferenceLineNode( modelViewTransform2, spring, stroke, property, visibleProperty, options ) {
+  function ReferenceLineNode( modelViewTransform2, spring, property, visibleProperty, options ) {
     options = _.extend( {
-      fixedPosition: false // flag for a line that shouldn't move
+      fixedPosition: false, // flag for a line that shouldn't move
+      stroke: 'black'
     }, options );
 
     var self = this;
     Line.call( this, 0, 0, LINE_LENGTH, 0, {
-      stroke: stroke,
+      stroke: options.stroke,
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
       cursor: 'pointer'

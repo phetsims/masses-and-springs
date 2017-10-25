@@ -60,18 +60,19 @@ define( function( require ) {
     var springEquilibriumLineNode = new ReferenceLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
-      'rgb( 93, 191, 142 )',
       model.springs[ 0 ].equilibriumYPositionProperty,
-      model.equilibriumPositionVisibleProperty
+      model.equilibriumPositionVisibleProperty, {
+        stroke: 'rgb( 93, 191, 142 )'
+      }
     );
 
     // @public Initializes natural line for the spring
     var naturalLengthLineNode = new ReferenceLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
-      'rgb( 65, 66, 232 )',
       model.springs[ 0 ].bottomProperty,
       model.naturalLengthVisibleProperty, {
+        stroke: 'rgb( 65, 66, 232 )',
         fixedPosition: true
       }
     );
@@ -133,9 +134,10 @@ define( function( require ) {
     var zeroHeightLine = new ReferenceLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
-      '#5798de',
       zeroHeightProperty,
-      new Property( true )
+      new Property( true ), {
+        stroke: '#5798de'
+      }
     );
     zeroHeightLine.x = springEquilibriumLineNode.x;
     zeroHeightLine.y = zeroHeightProperty.get();

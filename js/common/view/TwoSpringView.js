@@ -73,28 +73,29 @@ define( function( require ) {
     var firstSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
-      'rgb( 93, 191, 142 )',
       model.springs[ 0 ].equilibriumYPositionProperty,
-      model.equilibriumPositionVisibleProperty,
-      tandem.createTandem( 'firstSpringEquilibriumLineNode' )
+      model.equilibriumPositionVisibleProperty, {
+        stroke: 'rgb( 93, 191, 142 )'
+      }
     );
 
     // @public Initializes equilibrium line for second spring
     var secondSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 1 ],
-      'rgb( 93, 191, 142 )',
       model.springs[ 1 ].equilibriumYPositionProperty,
-      model.equilibriumPositionVisibleProperty
+      model.equilibriumPositionVisibleProperty, {
+        stroke: 'rgb( 93, 191, 142 )'
+      }
     );
 
     // @public Initializes natural line for first spring
     var firstNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
-      'rgb( 65, 66, 232 )',
       model.springs[ 0 ].bottomProperty,
       model.naturalLengthVisibleProperty, {
+        stroke: 'rgb( 65, 66, 232 )',
         fixedPosition: true
       }
     );
@@ -103,9 +104,9 @@ define( function( require ) {
     var secondNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 1 ],
-      'rgb( 65, 66, 232 )',
       model.springs[ 1 ].bottomProperty,
       model.naturalLengthVisibleProperty, {
+        stroke: 'rgb( 65, 66, 232 )',
         fixedPosition: true
       }
     );
