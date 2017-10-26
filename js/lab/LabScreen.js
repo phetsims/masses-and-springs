@@ -23,8 +23,7 @@ define( function( require ) {
   var labString = require( 'string!MASSES_AND_SPRINGS/lab' );
 
   // image
-  var labHomescreenImage = require( 'image!MASSES_AND_SPRINGS/game-home-screen.png' );
-  var labNavbarImage = require( 'image!MASSES_AND_SPRINGS/game-nav-bar.png' );
+  var labHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/lab_screen_icon.png' );
 
   /**
    * @param {Tandem} tandem
@@ -40,8 +39,8 @@ define( function( require ) {
         phetioValueType: TColor,
         maxDT: 1
       } ),
-      homeScreenIcon: new Image( labHomescreenImage ),
-      navigationBarIcon: new Image( labNavbarImage ),
+      homeScreenIcon: new Image( labHomeScreenImage ),
+      navigationBarIcon: new Image( labHomeScreenImage ),
       tandem: tandem
     };
 

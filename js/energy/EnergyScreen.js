@@ -23,8 +23,7 @@ define( function( require ) {
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
 
   // image
-  var energyHomescreenImage = require( 'image!MASSES_AND_SPRINGS/game-home-screen.png' );
-  var energyNavbarImage = require( 'image!MASSES_AND_SPRINGS/game-nav-bar.png' );
+  var energyHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/energy_screen_icon.png' );
 
   /**
    * @param {Tandem} tandem
@@ -40,8 +39,8 @@ define( function( require ) {
         phetioValueType: TColor,
         maxDT: 1
       } ),
-      homeScreenIcon: new Image( energyHomescreenImage ),
-      navigationBarIcon: new Image( energyNavbarImage ),
+      homeScreenIcon: new Image( energyHomeScreenImage ),
+      navigationBarIcon: new Image( energyHomeScreenImage ),
       tandem: tandem
     };
 

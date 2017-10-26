@@ -23,8 +23,7 @@ define( function( require ) {
   var vectorString = require( 'string!MASSES_AND_SPRINGS/vector' );
 
   // image
-  var vectorHomescreenImage = require( 'image!MASSES_AND_SPRINGS/game-home-screen.png' );
-  var vectorNavbarImage = require( 'image!MASSES_AND_SPRINGS/game-nav-bar.png' );
+  var vectorHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/vectors_screen_icon.png' );
 
   /**
    * @param {Tandem} tandem
@@ -40,8 +39,8 @@ define( function( require ) {
         phetioValueType: TColor,
         maxDT: 1
       } ),
-      homeScreenIcon: new Image( vectorHomescreenImage ),
-      navigationBarIcon: new Image( vectorNavbarImage ),
+      homeScreenIcon: new Image( vectorHomeScreenImage ),
+      navigationBarIcon: new Image( vectorHomeScreenImage ),
       tandem: tandem
     };
 

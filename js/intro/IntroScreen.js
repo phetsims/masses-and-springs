@@ -24,8 +24,7 @@ define( function( require ) {
   var introString = require( 'string!MASSES_AND_SPRINGS/intro' );
 
   // image
-  var introHomescreenImage = require( 'image!MASSES_AND_SPRINGS/game-home-screen.png' );
-  var introNavbarImage = require( 'image!MASSES_AND_SPRINGS/game-nav-bar.png' );
+  var introHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/intro_screen_icon.png' );
 
   /**
    * @param {Tandem} tandem
@@ -41,8 +40,8 @@ define( function( require ) {
         phetioValueType: TColor,
         maxDT: 1
       } ),
-      homeScreenIcon: new Image( introHomescreenImage ),
-      navigationBarIcon: new Image( introNavbarImage ),
+      homeScreenIcon: new Image( introHomeScreenImage ),
+      navigationBarIcon: new Image( introHomeScreenImage ),
       tandem: tandem
     };
 
