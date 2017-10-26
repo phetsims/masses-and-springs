@@ -89,13 +89,11 @@ define( function( require ) {
         .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.3 ) )
         .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.8 ) )
         .addColorStop( 0.7, mass.color );
-      // console.log( 'mass.positionProperty.get() = ' + mass.positionProperty.get() );
 
       // We are constraining the draggable bounds on our massNodes except when the mass is attached to a spring.
       var minY = mass.userControlledProperty.value ?
                  modelBoundsProperty.value.minY :
                  MassesAndSpringsConstants.FLOOR_Y + 0.02 + mass.heightProperty.value;
-      console.log( 'minY = ' + minY );
 
       if ( mass.positionProperty.value.y < minY && !mass.springProperty.value ) {
         mass.positionProperty.set( new Vector2( mass.positionProperty.value.x, minY ) );
