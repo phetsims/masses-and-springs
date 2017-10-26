@@ -312,6 +312,7 @@ define( function( require ) {
 
       // REVIEW: Not having an option for the accordion box gives me a tandem error.
       AccordionBox.call( this, accordionBoxContent, {
+        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
       } );
       this.maxHeight = 490;
