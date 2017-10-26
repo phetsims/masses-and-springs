@@ -292,10 +292,12 @@ define( function( require ) {
       } );
 
       // Display buttons at the bottom of the graph
-      var displayOptions = new HBox( {
-        children: [ infoButton, new HStrut( 20 ), zoomOutButton, zoomInButton ],
+      var displayButtons = new HBox( {
+        children: [ infoButton, new HStrut( 42 ), zoomOutButton, new HStrut( 3 ), zoomInButton ],
         spacing: 5
       } );
+
+      displayButtons.left = verticalBarChart.left;
 
       // Provides a limit on the scale
       scaleFactorProperty.link( function( value ) {
@@ -306,7 +308,7 @@ define( function( require ) {
       var accordionBoxContent = new VBox( {
         children: [
           verticalBarChart,
-          displayOptions
+          displayButtons
         ], spacing: 8
       } );
 
