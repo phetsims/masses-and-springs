@@ -85,9 +85,10 @@ define( function( require ) {
         modelViewTransform2.modelToViewDeltaX( radiusValue ),
         modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeightProperty.get() ) + hookHeight );
 
-      rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 ).addColorStop( 0.3, mass.color )
-        .addColorStop( 0.8, Color.toColor( mass.color ).colorUtilsBrighter( 0.9 ) )
-        .addColorStop( 1, Color.toColor( mass.color ).colorUtilsBrighter( 0.4 ) );
+      rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 )
+        .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.3 ) )
+        .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.8 ) )
+        .addColorStop( 0.7, mass.color );
       // console.log( 'mass.positionProperty.get() = ' + mass.positionProperty.get() );
 
       // We are constraining the draggable bounds on our massNodes except when the mass is attached to a spring.
