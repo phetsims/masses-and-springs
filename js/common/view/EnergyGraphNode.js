@@ -53,7 +53,7 @@ define( function( require ) {
     var peGravString = require( 'string!MASSES_AND_SPRINGS/peGrav' );
     var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
     var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
-    var tTotString = require( 'string!MASSES_AND_SPRINGS/tTot' );
+  var eTotString = require( 'string!MASSES_AND_SPRINGS/eTot' );
 
     /**
      *
@@ -121,7 +121,7 @@ define( function( require ) {
         createLabelText( peGravString, '#5798de' ),
         createLabelText( peElasString, '#29d4ff' ),
         createLabelText( eThermString, '#ee6f3e' ),
-        createLabelText( tTotString, 'black' )
+        createLabelText( eTotString, 'black' )
       ];
       xAxisLabels.forEach( function( labelText ) {
         labelText.rotate( -Math.PI / 2 );
@@ -226,7 +226,7 @@ define( function( require ) {
           new RichText( peGravString, { font: MassesAndSpringsConstants.FONT, fill: '#5798de', maxWidth: MAX_WIDTH } ),
           new RichText( peElasString, { font: MassesAndSpringsConstants.FONT, fill: '#29d4ff', maxWidth: MAX_WIDTH } ),
           new RichText( eThermString, { font: MassesAndSpringsConstants.FONT, fill: '#ff6e26', maxWidth: MAX_WIDTH } ),
-          new RichText( tTotString, { font: MassesAndSpringsConstants.FONT, maxWidth: MAX_WIDTH } )
+          new RichText( eTotString, { font: MassesAndSpringsConstants.FONT, maxWidth: MAX_WIDTH } )
         ], align: 'left', spacing: 10
       } );
 

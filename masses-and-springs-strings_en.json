@@ -38,8 +38,8 @@
   "totalEnergy": {
     "value": "Total Energy"
   },
-  "tTot": {
-    "value": "T<sub>tot</sub>"
+  "eTot": {
+    "value": "E<sub>tot</sub>"
   },
   "energyLegend": {
     "value": "Energy Legend"
