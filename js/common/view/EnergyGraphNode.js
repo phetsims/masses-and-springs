@@ -206,6 +206,7 @@ define( function( require ) {
         titleFill: '#b37e46',
         xAxisLabels: xAxisLabels,
         thermalEnergyProperty: model.springs[ 0 ].thermalEnergyProperty,
+        thermalEnergyIndex: 3,
         thermalEnergyListener: function() {
 
           // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
