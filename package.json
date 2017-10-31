@@ -12,6 +12,7 @@
   "phet": {
     "requirejsNamespace": "MASSES_AND_SPRINGS",
     "phetLibs": [
+      "griddle",
       "twixt"
     ]
   }
