@@ -21,6 +21,9 @@ define( function( require ) {
   function EnergyModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem );
 
+    // Energy screen should have spring damping
+    this.dampingProperty.set( 0.2 );
+
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
 
     this.createMass( 0.1, 0.625, true, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ) );
