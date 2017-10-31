@@ -111,7 +111,6 @@ define( function( require ) {
         return new RichText( string, {
           fill: color,
           font: MassesAndSpringsConstants.TITLE_FONT
-          // stroke: Color.toColor( color ).colorUtilsBrighter( 0.25 )
         } );
       }
 
