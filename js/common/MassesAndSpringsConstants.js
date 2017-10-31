@@ -30,8 +30,8 @@ define( function( require ) {
     // Y position of ceiling in meters. The ceiling is the top of the SpringHangerNode, just below the top of the dev view bounds
     CEILING_Y: 1.23,
 
-    // {Property.<number>} range of friction associated with sim
-    FRICTION_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 1, .2 ) ),
+    // {Property.<number>} range of damping associated with sim
+    DAMPING_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 1, .2 ) ),
 
     // {Property.<number>} range of gravitational acceleration associated with each planet
     GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),

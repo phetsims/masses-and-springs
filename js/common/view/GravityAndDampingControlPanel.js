@@ -23,7 +23,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var frictionString = require( 'string!MASSES_AND_SPRINGS/friction' );
+  var dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
   var gravityLotsString = require( 'string!MASSES_AND_SPRINGS/gravity.lots' );
   var gravityNoneString = require( 'string!MASSES_AND_SPRINGS/gravity.none' );
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
@@ -39,7 +39,7 @@ define( function( require ) {
    *
    * @constructor
    */
-  function GravityAndFrictionControlPanel( model, listNodeParent, tandem, options ) {
+  function GravityAndDampingControlPanel( model, listNodeParent, tandem, options ) {
     var self = this;
     this.options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
@@ -47,7 +47,7 @@ define( function( require ) {
       yMargin: 10,
       align: 'left',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      frictionVisible: false
+      dampingVisible: false
     }, options );
 
     //  Add gravity info for various planets
@@ -101,8 +101,8 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
-    if ( this.options.frictionVisible ) {
-      var frictionHSlider = new HSlider( model.frictionProperty, MassesAndSpringsConstants.FRICTION_RANGE_PROPERTY.get(), {
+    if ( this.options.dampingVisible ) {
+      var dampingHSlider = new HSlider( model.dampingProperty, MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get(), {
         majorTickLength: 10,
         trackSize: new Dimension2( 130, 2 ),
         thumbSize: new Dimension2( 13, 22 ),
@@ -117,8 +117,8 @@ define( function( require ) {
           new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
           gravityComboBox,
           gravityHSlider,
-          new Text( frictionString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-          frictionHSlider
+          new Text( dampingString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          dampingHSlider
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } ), self.options );
@@ -173,7 +173,7 @@ define( function( require ) {
     this.mutate( this.options );
   }
 
-  massesAndSprings.register( 'GravityAndFrictionControlPanel', GravityAndFrictionControlPanel );
+  massesAndSprings.register( 'GravityAndDampingControlPanel', GravityAndDampingControlPanel );
 
-  return inherit( Panel, GravityAndFrictionControlPanel );
+  return inherit( Panel, GravityAndDampingControlPanel );
 } );

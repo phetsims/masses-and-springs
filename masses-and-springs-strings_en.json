@@ -95,8 +95,8 @@
   "length": {
     "value": "Spring Length {{spring}}"
   },
-  "friction": {
-    "value": "Friction"
+  "damping": {
+    "value": "Damping"
   },
   "questionMark": {
     "value": "?"

@@ -35,7 +35,7 @@ define( function( require ) {
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),
       {
-        top: this.gravityAndFrictionControlPanel.bottom + this.spacing,
+        top: this.gravityAndDampingControlPanel.bottom + this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );

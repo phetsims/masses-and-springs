@@ -12,7 +12,7 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
-  var GravityAndFrictionControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndFrictionControlPanel' );
+  var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -103,14 +103,14 @@ define( function( require ) {
     );
 
     // Gravity Control Panel
-    this.gravityAndFrictionControlPanel = new GravityAndFrictionControlPanel(
-      model, this, tandem.createTandem( 'gravityAndFrictionControlPanel' ),
+    this.gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
+      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
       {
         right: this.rightPanelAlignment,
         top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        frictionVisible: true
+        dampingVisible: true
       }
     );
 
@@ -122,9 +122,9 @@ define( function( require ) {
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ),
       {
-        top: this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        left: this.gravityAndFrictionControlPanel.left,
-        minWidth: this.gravityAndFrictionControlPanel.width,
+        top: this.gravityAndDampingControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        left: this.gravityAndDampingControlPanel.left,
+        minWidth: this.gravityAndDampingControlPanel.width,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );
@@ -160,9 +160,9 @@ define( function( require ) {
     this.rulerNode.toolbox = this.toolboxPanel;
     this.timerNode.toolbox = this.toolboxPanel;
 
-    this.toolboxPanel.top = this.gravityAndFrictionControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
-    this.toolboxPanel.left = this.gravityAndFrictionControlPanel.left;
-    this.toolboxPanel.minWidth = this.gravityAndFrictionControlPanel.width;
+    this.toolboxPanel.top = this.gravityAndDampingControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+    this.toolboxPanel.left = this.gravityAndDampingControlPanel.left;
+    this.toolboxPanel.minWidth = this.gravityAndDampingControlPanel.width;
 
     this.shelf.rectWidth = 140;
     this.shelf.left = massValueControlPanel.left;
@@ -174,7 +174,7 @@ define( function( require ) {
     this.addChild( massValueControlPanel );
     this.addChild( springConstantControlPanel );
     this.addChild( this.indicatorVisibilityControlPanel );
-    this.addChild( this.gravityAndFrictionControlPanel );
+    this.addChild( this.gravityAndDampingControlPanel );
     this.addChild( this.toolboxPanel );
     this.addChild( this.energyGraphNode );
 
@@ -199,7 +199,7 @@ define( function( require ) {
 
       //Update the bounds of view elements
       self.indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
-      self.gravityAndFrictionControlPanel.right = visibleBounds.right - self.spacing;
+      self.gravityAndDampingControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;
       self.speedControl.right = self.resetAllButton.left - self.spacing * 6;

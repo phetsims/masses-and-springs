@@ -54,10 +54,10 @@ define( function( require ) {
       tandem: tandem.createTandem( 'isSoundEnabledProperty' )
     } );
 
-    // @public {Property.<number>} coefficient of friction applied to the system
-    this.frictionProperty = new Property( 0.2, {
+    // @public {Property.<number>} coefficient of damping applied to the system
+    this.dampingProperty = new Property( 0.2, {
       units: 'newtons',
-      tandem: tandem.createTandem( 'frictionProperty' )
+      tandem: tandem.createTandem( 'dampingProperty' )
     } );
 
     // @public {Property.<number>} gravitational acceleration associated with each planet
@@ -190,7 +190,7 @@ define( function( require ) {
       var spring = new Spring(
         new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        this.frictionProperty.get(),
+        this.dampingProperty.get(),
         tandem
       );
       this.springs.push( spring );
@@ -200,10 +200,10 @@ define( function( require ) {
         spring.gravityProperty.set( newGravity );
       } );
 
-      // Links are used to set friction property of each spring to the friction property of the system
-      this.frictionProperty.link( function( newFriction ) {
-        assert && assert( newFriction >= 0, 'friction must be greater than or equal to 0: ' + newFriction );
-        spring.dampingCoefficientProperty.set( newFriction );
+      // Links are used to set damping property of each spring to the damping property of the system
+      this.dampingProperty.link( function( newDamping ) {
+        assert && assert( newDamping >= 0, 'damping must be greater than or equal to 0: ' + newDamping );
+        spring.dampingCoefficientProperty.set( newDamping );
       } );
     },
 
@@ -238,7 +238,7 @@ define( function( require ) {
      * @public
      */
     reset: function() {
-      this.frictionProperty.reset();
+      this.dampingProperty.reset();
       this.gravityProperty.reset();
       this.bodyProperty.reset();
       this.playingProperty.reset();
