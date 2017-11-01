@@ -110,7 +110,9 @@ define( function( require ) {
       function createLabelText( string, color ) {
         return new RichText( string, {
           fill: color,
-          font: MassesAndSpringsConstants.TITLE_FONT
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          rotation: ( -Math.PI / 2 ),
+          centerX: 40
         } );
       }
 
@@ -122,9 +124,6 @@ define( function( require ) {
         createLabelText( eThermString, '#ee6f3e' ),
         createLabelText( eTotString, 'black' )
       ];
-      xAxisLabels.forEach( function( labelText ) {
-        labelText.rotate( -Math.PI / 2 );
-      } );
 
       /**
        * Creates a scaled height for the bar to represent
@@ -153,7 +152,7 @@ define( function( require ) {
           fill: fill,
           width: BAR_NODE_WIDTH,
           maxBarHeight: BAR_MAX_HEIGHT,
-          minBarHeight: 39,
+          minBarHeight: 36,
           displayContinuousArrow: true
         } );
       }
@@ -219,7 +218,7 @@ define( function( require ) {
         }
       } );
 
-      // Manages the symbols used in the axes of the graph
+      // Manages the symbols used in the legend of the graph
       var symbolContent = new VBox( {
         children: [
           new Text( keString, { font: MassesAndSpringsConstants.FONT, fill: '#39d74e', maxWidth: MAX_WIDTH } ),
