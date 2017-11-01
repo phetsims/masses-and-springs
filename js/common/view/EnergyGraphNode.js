@@ -39,7 +39,7 @@ define( function( require ) {
     var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
     var MAX_WIDTH = 150;
   var BAR_NODE_WIDTH = 17;
-  var BAR_MAX_HEIGHT = 340;
+  var BAR_MAX_HEIGHT = 320;
 
     // strings
     var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
@@ -152,7 +152,7 @@ define( function( require ) {
           fill: fill,
           width: BAR_NODE_WIDTH,
           maxBarHeight: BAR_MAX_HEIGHT,
-          minBarHeight: 36,
+          minBarHeight: 39,
           displayContinuousArrow: true
         } );
       }
