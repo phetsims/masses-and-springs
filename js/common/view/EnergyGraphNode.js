@@ -153,7 +153,8 @@ define( function( require ) {
           width: BAR_NODE_WIDTH,
           maxBarHeight: BAR_MAX_HEIGHT,
           minBarHeight: 39,
-          displayContinuousArrow: true
+          displayContinuousArrow: true,
+          barHighlightStroke: 'black'
         } );
       }
 
