@@ -18,6 +18,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var Util = require( 'DOT/Util' );
 
   // strings
   var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
@@ -48,6 +49,9 @@ define( function( require ) {
       thumbFillEnabled: '#00b3b3',
       thumbFillHighlighted: '#00e6e6',
       align: 'center',
+      constrainValue: function( value ) {
+        return Util.roundSymmetric( value );
+      },
       tandem: tandem.createTandem( 'hSlider' )
     } );
 
