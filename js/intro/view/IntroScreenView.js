@@ -183,6 +183,7 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       sceneRadioButtonGroup.right = visibleBounds.right - self.spacing;
     } );
+    this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
   }
 
   massesAndSprings.register( 'IntroScreenView', IntroScreenView );

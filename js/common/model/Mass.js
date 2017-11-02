@@ -231,7 +231,6 @@ define( function( require ) {
       else if ( self.preserveThermalEnergy ) {
         self.initialTotalEnergyProperty.value += newTotalEnergy - oldTotalEnergy;
       }
-      // console.log( 'self.initialTotalEnergy = ' + self.initialTotalEnergyProperty.get() + '\t' + 'newTotalEnergy = ' + newTotalEnergy );
     } );
 
     // Used for animating the motion of a mass being released and not attached to the spring

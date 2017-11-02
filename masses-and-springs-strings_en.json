@@ -104,6 +104,9 @@
   "massValue": {
     "value": "{{mass}} g"
   },
+  "gravityValue": {
+    "value": "{{gravity}} m/s<sup>2</sup>"
+  },
   "mass": {
     "value": "Mass"
   },

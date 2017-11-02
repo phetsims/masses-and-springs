@@ -18,15 +18,19 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var Panel = require( 'SUN/Panel' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
 
   // strings
   var dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
   var gravityLotsString = require( 'string!MASSES_AND_SPRINGS/gravity.lots' );
   var gravityNoneString = require( 'string!MASSES_AND_SPRINGS/gravity.none' );
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
+  var gravityValueString = require( 'string!MASSES_AND_SPRINGS/gravityValue' );
 
   // phet-io modules
   var TText = require( 'SCENERY/nodes/TText' );
@@ -47,7 +51,8 @@ define( function( require ) {
       yMargin: 10,
       align: 'left',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      dampingVisible: false
+      dampingVisible: false,
+      readoutVisible: false
     }, options );
 
     //  Add gravity info for various planets
@@ -101,7 +106,20 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityLotsString' )
     } ) );
 
-    if ( this.options.dampingVisible ) {
+    this.gravityNumberDisplay = new NumberDisplay( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), {
+      align: 'center',
+      valuePattern: StringUtils.fillIn( gravityValueString, {
+        gravity: '{0}'
+      } ),
+      useRichText: true,
+      font: MassesAndSpringsConstants.FONT,
+      decimalPlaces: 1,
+      xMargin: 3,
+      yMargin: 1,
+      numberFill: 'black'
+    } );
+
+    if ( options.dampingVisible ) {
       var dampingHSlider = new HSlider( model.dampingProperty, MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get(), {
         majorTickLength: 10,
         trackSize: new Dimension2( 130, 2 ),
@@ -114,7 +132,10 @@ define( function( require ) {
       Panel.call( self, new VBox( {
         align: 'left',
         children: [
-          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          new HBox( {
+            spacing: 20,
+            children: [ new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ), this.gravityNumberDisplay ]
+          } ),
           gravityComboBox,
           gravityHSlider,
           new Text( dampingString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
@@ -127,7 +148,10 @@ define( function( require ) {
       Panel.call( self, new VBox( {
         align: 'left',
         children: [
-          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          new HBox( {
+            spacing: 20,
+            children: [ new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ), this.gravityNumberDisplay ]
+          } ),
           gravityComboBox,
           gravityHSlider
         ],

@@ -47,6 +47,7 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
     } );
+    this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
   }
 
   massesAndSprings.register( 'VectorScreenView', VectorScreenView );

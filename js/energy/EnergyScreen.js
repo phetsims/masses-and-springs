@@ -14,7 +14,7 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var OneSpringView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringView' );
+  var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
   var TColor = require( 'SCENERY/util/TColor' );
@@ -49,7 +49,7 @@ define( function( require ) {
         return new EnergyModel( tandem.createTandem( 'model' ) );
       },
       function( model ) {
-        return new OneSpringView( model, tandem.createTandem( 'view' ) );
+        return new EnergyScreenView( model, tandem.createTandem( 'view' ) );
       },
       options
     );
