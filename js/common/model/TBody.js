@@ -21,7 +21,7 @@ define( function( require ) {
    * @constructor
    */
   function TBody( instance, phetioID ) {
-    assertInstanceOf( instance, phet.massesAndSprings.Body );
+    assert && assertInstanceOf( instance, phet.massesAndSprings.Body );
     TObject.call( this, instance, phetioID );
   }
 

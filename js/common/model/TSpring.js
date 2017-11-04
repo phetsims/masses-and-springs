@@ -21,7 +21,7 @@ define( function( require ) {
    * @constructor
    */
   function TSpring( instance, phetioID ) {
-    assertInstanceOf( instance, phet.massesAndSprings.Spring );
+    assert && assertInstanceOf( instance, phet.massesAndSprings.Spring );
     TObject.call( this, instance, phetioID );
   }
 
