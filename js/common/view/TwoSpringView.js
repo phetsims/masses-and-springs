@@ -22,6 +22,10 @@ define( function( require ) {
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // constants
+  var EQUILIBRIUM_LINE_FILL = 'rgb( 93, 191, 142 )';
+  var NATURAL_LENGTH_LINE_FILL = 'rgb( 65, 66, 232 )';
+
   /**
    * TODO::: Remove modelViewTransform2 transforms from view objects
    * TODO::: Factor out colors to a Constants object
@@ -75,7 +79,7 @@ define( function( require ) {
       model.springs[ 0 ],
       model.springs[ 0 ].equilibriumYPositionProperty,
       model.equilibriumPositionVisibleProperty, {
-        stroke: 'rgb( 93, 191, 142 )'
+        stroke: EQUILIBRIUM_LINE_FILL
       }
     );
 
@@ -85,7 +89,7 @@ define( function( require ) {
       model.springs[ 1 ],
       model.springs[ 1 ].equilibriumYPositionProperty,
       model.equilibriumPositionVisibleProperty, {
-        stroke: 'rgb( 93, 191, 142 )'
+        stroke: EQUILIBRIUM_LINE_FILL
       }
     );
 
@@ -95,7 +99,7 @@ define( function( require ) {
       model.springs[ 0 ],
       model.springs[ 0 ].bottomProperty,
       model.naturalLengthVisibleProperty, {
-        stroke: 'rgb( 65, 66, 232 )',
+        stroke: NATURAL_LENGTH_LINE_FILL,
         fixedPosition: true
       }
     );
@@ -106,7 +110,7 @@ define( function( require ) {
       model.springs[ 1 ],
       model.springs[ 1 ].bottomProperty,
       model.naturalLengthVisibleProperty, {
-        stroke: 'rgb( 65, 66, 232 )',
+        stroke: NATURAL_LENGTH_LINE_FILL,
         fixedPosition: true
       }
     );

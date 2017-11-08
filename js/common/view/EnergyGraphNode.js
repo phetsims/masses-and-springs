@@ -173,7 +173,7 @@ define( function( require ) {
       ];
 
       // These properties are used for the composite bar node.
-      var barObjects = [
+      var barProperties = [
         createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty ),
         createScaledHeightProperty( model.springs[ 0 ].elasticPotentialEnergyProperty ),
         createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty ),

@@ -20,7 +20,7 @@ define( function( require ) {
 
   // constants
   var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
-
+  var SPRING_HANGER_FILL = 'rgb( 180, 180, 180 )';
   /**
    * @param {Array} springs
    * @param {ModelViewTransform2} modelViewTransform2
@@ -29,10 +29,10 @@ define( function( require ) {
    * @constructor
    */
   function SpringHangerNode( springs, modelViewTransform2, tandem, options ) {
+
     options = _.extend( {
       singleSpring: false
     }, options );
-
     if ( options.singleSpring === false ) {
       var springsSeparation =
         modelViewTransform2.modelToViewDeltaX( Math.abs( springs[ 0 ].positionProperty.get().x -
@@ -45,7 +45,7 @@ define( function( require ) {
 
       // derived from x positions of springs.
       Rectangle.call( this, 0, 0, springHangerNodeWidth, 20, 8, 8, {
-        fill: 'rgb( 180, 180, 180 )',
+        fill: SPRING_HANGER_FILL,
         stroke: 'grey',
         centerX: middleOfSprings,
         top: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.CEILING_Y ),
@@ -71,7 +71,7 @@ define( function( require ) {
     else {
       // derived from x positions of springs.
       Rectangle.call( this, 0, 0, 48, 20, 8, 8, {
-        fill: 'rgb( 180, 180, 180 )',
+        fill: SPRING_HANGER_FILL,
         stroke: 'grey',
         tandem: tandem
       } );
