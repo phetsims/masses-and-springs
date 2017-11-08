@@ -343,11 +343,13 @@ define( function( require ) {
      * @public
      */
     step: function( dt ) {
+
+      // If simulationTimeStep > 0.3, ignore it - it probably means the user returned to the tab after
+      // the tab or the browser was hidden for a while.
+      dt = Math.min( dt, 0.3 );
+
       var self = this;
       var animationDt = dt;
-
-      // If simulationTimeStep > 1, ignore it - it probably means the user returned to the tab after
-      // the tab or the browser was hidden for a while.
       if ( this.playingProperty.get() ) {
 
         // Change the dt value if we are playing in slow motion.
