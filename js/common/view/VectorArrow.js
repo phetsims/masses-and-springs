@@ -14,7 +14,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
 
   // Constants
-  // TODO:Merge some of these into a constants file
   var VECTOR_ARROW_LENGTH = 34;
   var ARROW_HEAD_WIDTH = 14;
   var ARROW_TAIL_WIDTH = 8;

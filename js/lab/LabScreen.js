@@ -1,8 +1,8 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * TODO: Documentation
- * @author Matt Pennington (PhET Interactive Simulations)
+ *  main file for the "Lab" screen
+ *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {

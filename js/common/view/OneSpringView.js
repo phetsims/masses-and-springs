@@ -31,9 +31,6 @@ define( function( require ) {
   var heightEqualsZeroString = require( 'string!MASSES_AND_SPRINGS/heightEqualsZero' );
 
   /**
-   * TODO::: Remove modelViewTransform2 transforms from view objects
-   * TODO::: Factor out colors to a Constants object
-   * TODO::: Factor out thumb size, track size, etc other slider properties
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @constructor
@@ -167,7 +164,6 @@ define( function( require ) {
     this.shelf.rectWidth = 140;
     this.shelf.left = massValueControlPanel.left;
 
-    //TODO: Make this an array. this.children = [] and add this as an option object. Follow Griddle VerticalBarChart as example.
     // Adding all of the nodes to the scene graph
     // Adding Panels to scene graph
     this.addChild( springHangerNode );

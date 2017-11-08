@@ -44,9 +44,6 @@ define( function( require ) {
   var MAX_TEXT_WIDTH = 80;
 
   /**
-   * TODO::: Remove modelViewTransform2 transforms from view objects
-   * TODO::: Factor out colors to a Constants object
-   * TODO::: Factor out thumb size, track size, etc other slider properties
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @constructor

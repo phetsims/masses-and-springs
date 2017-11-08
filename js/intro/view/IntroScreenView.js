@@ -32,7 +32,6 @@ define( function( require ) {
   var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
   var lengthString = require( 'string!MASSES_AND_SPRINGS/length' );
 
-  // TODO: Move model elements into IntroModel and out of CommonModel and IntroScreenView
   /**
    * @param {IntroModel} model
    * @param {Tandem} tandem
@@ -111,7 +110,6 @@ define( function( require ) {
       )
     ];
 
-    //TODO: Create a specific file for this?
     // @private {read-only} Creation of spring for use in scene switching icons
     var firstSpringIcon = new OscillatingSpringNode(
       springsIcon[ 0 ],

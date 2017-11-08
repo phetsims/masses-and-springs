@@ -15,7 +15,6 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
 
   /**
-   * TODO:: document all properties and items set on objects (entire sim)
    * @constructor
    */
   function EnergyModel( tandem ) {
@@ -24,8 +23,8 @@ define( function( require ) {
     // Energy screen should have spring damping
     this.dampingProperty.set( 0.2 );
 
+    // Creation of masses and springs specific for this screen
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
-
     this.createMass( 0.1, 0.625, true, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ) );
 
     this.masses[ 0 ].adjustable = true;

@@ -15,7 +15,6 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
 
   /**
-   * TODO:: document all properties and items set on objects (entire sim)
    * @constructor
    */
   function LabModel( tandem ) {

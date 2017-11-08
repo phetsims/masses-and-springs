@@ -1,7 +1,7 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * TODO: Documentation
+ * Spring view used for the energy screen.
  *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)

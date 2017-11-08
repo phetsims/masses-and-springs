@@ -30,7 +30,6 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  // TODO: Rename to TimeControlPanel, and rename vars/tandems at usage sites
   function TimeControlNode( model, visibleBounds, tandem, options ) {
     Node.call( this );
     var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( visibleBounds, 0.98 );

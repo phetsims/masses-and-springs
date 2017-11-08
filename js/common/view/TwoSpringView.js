@@ -27,9 +27,6 @@ define( function( require ) {
   var NATURAL_LENGTH_LINE_FILL = 'rgb( 65, 66, 232 )';
 
   /**
-   * TODO::: Remove modelViewTransform2 transforms from view objects
-   * TODO::: Factor out colors to a Constants object
-   * TODO::: Factor out thumb size, track size, etc other slider properties
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @constructor
@@ -42,7 +39,6 @@ define( function( require ) {
     model.springs[ 0 ].options.modelViewTransform2 = this.modelViewTransform;
     model.springs[ 1 ].options.modelViewTransform2 = this.modelViewTransform;
 
-    //  TODO: put in a vbox?? hmm... wrong place for this comment??
     // Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
       model.springs,
@@ -50,7 +46,6 @@ define( function( require ) {
       tandem.createTandem( 'springHangerNode' )
     );
 
-    // TODO: Crate in an array like in line 55-65 of SpringView.js. Position in each deescendent class.
     this.firstSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
     this.firstSpringStopperButtonNode.right = this.springHangerNode.left - this.spacing;
 

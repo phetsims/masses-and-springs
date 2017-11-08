@@ -20,7 +20,6 @@ define( function( require ) {
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
 
   /**
-   * TODO:: document all properties and items set on objects (entire sim)
    * @constructor
    */
   function IntroModel( tandem ) {
