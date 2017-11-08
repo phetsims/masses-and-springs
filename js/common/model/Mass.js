@@ -270,11 +270,6 @@ define( function( require ) {
           // Responsible for animating a horizontal motion when the mass is released and not attached to a spring.
           this.animationProgress = Math.min( 1, this.animationProgress + animationDt * animationSpeed );
           var ratio = Easing.CUBIC_IN_OUT.value( this.animationProgress );
-
-          // TODO: Go over with design team.
-          // Diagonal animation. Remember to remove the else in the next if clause.
-          // this.positionProperty.set(new Vector2 (this.animationStartPosition.blend(this.animationEndPosition,ratio).x, this.positionProperty.value.y));
-
           this.positionProperty.set( new Vector2( this.animationStartPosition.blend( this.animationEndPosition, ratio ).x, floorPosition ) );
         }
         else {
