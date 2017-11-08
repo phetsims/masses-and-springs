@@ -357,7 +357,6 @@ define( function( require ) {
         // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
         // references that could be provided that describe where this came from?
 
-        //TODO:: implement upper limit for dt
         var k = this.springConstantProperty.get();
         var m = this.massAttachedProperty.get().massProperty.get();
         var c = this.dampingCoefficientProperty.get();
@@ -425,7 +424,6 @@ define( function( require ) {
           }
           else {
             this.displacementProperty.set( newDisplacement );
-            //TODO: add in the kinematic equation for acceleration here. Store old velocity and use new velocity in equ.
             this.massAttachedProperty.get().verticalVelocityProperty.set( newVelocity );
           }
 

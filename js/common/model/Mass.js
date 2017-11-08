@@ -323,18 +323,6 @@ define( function( require ) {
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
       this.massProperty.reset();
-    },
-
-    /**
-     * @public
-     */
-    zeroThermalEnergy: function() {
-      this.initialTotalEnergyProperty.set( this.kineticEnergyProperty.get() +
-                                           this.gravitationalPotentialEnergyProperty.get() +
-                                           this.elasticPotentialEnergyProperty.get() );
-      this.thermalEnergyProperty.set( this.initialTotalEnergyProperty.get() - this.totalEnergyProperty.get() );
-
-
     }
   } );
 } );

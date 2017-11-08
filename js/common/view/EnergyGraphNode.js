@@ -172,9 +172,8 @@ define( function( require ) {
         createBarNode( scaledThermalEnergyProperty, '#ee6f3e' )
       ];
 
-      // TODO: May be useful to make the property and color as one object with key value pair.
       // These properties are used for the composite bar node.
-      var barProperties = [
+      var barObjects = [
         createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty ),
         createScaledHeightProperty( model.springs[ 0 ].elasticPotentialEnergyProperty ),
         createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty ),

@@ -1,7 +1,7 @@
 // Copyright 2017, University of Colorado Boulder
 
 /**
- * TODO: Documentation
+ * Panel that is responsible for adjusting the value of its corresponding mass.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */

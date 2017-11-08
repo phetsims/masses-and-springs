@@ -57,7 +57,6 @@ define( function( require ) {
 
     this.mass = mass;
 
-    // TODO: factor out the hook from the height.
     var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
 
     var rectOptions = {
@@ -77,7 +76,6 @@ define( function( require ) {
 
     // Update the size of the massNode
     mass.radiusProperty.link( function( radiusValue ) {
-      // mass.zeroThermalEnergy.bind(this); // TODO: Why doesn't this work?
 
       rect.rectBounds = new Bounds2(
         modelViewTransform2.modelToViewDeltaX( -radiusValue ),
@@ -175,7 +173,6 @@ define( function( require ) {
     } );
 
     modelBoundsProperty.link( function( modelDragBounds ) {
-      //TODO: Using setDragBounds() causes the massNode to be constrained to the drag bounds. Check MovableDragHandler.js line 114
       self.movableDragHandler._dragBounds = modelDragBounds;
     } );
 
@@ -255,7 +252,6 @@ define( function( require ) {
           forceNullLine.visible = !!spring && (gravityForceVisible || springForceVisible || forcesVisible === MassesAndSpringsConstants.NET_FORCE_STRING);
         } );
 
-      //TODO: Create MASArrowNode with arguments for deltas in X&Y, mass position, and the property it is depicting
       //Links for handling the length of the vectors in response to the system.
       var scalingFactor = 3;
       Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty ], function( velocity, visible ) {

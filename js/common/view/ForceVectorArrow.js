@@ -14,7 +14,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
 
   // Constants
-  // TODO:Merge some of these into a constants file
   var FORCES_ARROW_LENGTH = 31;
   var SMALLER_ARROW_HEAD_WIDTH = 11;
   var SMALLER_ARROW_TAIL_WIDTH = 3;
