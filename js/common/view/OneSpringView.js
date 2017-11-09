@@ -133,7 +133,8 @@ define( function( require ) {
       model.springs[ 0 ],
       zeroHeightProperty,
       new Property( true ), {
-        stroke: '#5798de'
+        stroke: '#5798de',
+        zeroPointLine: true
       }
     );
     zeroHeightLine.x = springEquilibriumLineNode.x;

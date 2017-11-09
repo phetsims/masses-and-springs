@@ -13,6 +13,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearFunction = require( 'DOT/LinearFunction' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Property = require( 'AXON/Property' );
   var TVector2 = require( 'DOT/TVector2' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -31,7 +32,8 @@ define( function( require ) {
    */
   function ReferenceLineNode( modelViewTransform2, spring, property, visibleProperty, options ) {
     options = _.extend( {
-      fixedPosition: false, // flag for a line that shouldn't move
+      fixedPosition: false, // flag for a line that remain at a target location
+      zeroPointLine: false, // flag for a line that remains at the zero reference point of the sim
       stroke: 'black'
     }, options );
 
@@ -60,6 +62,9 @@ define( function( require ) {
     // updates the position of the reference line as the system changes
     Property.multilink( [ spring.massAttachedProperty, spring.naturalRestingLengthProperty, property ], function( mass, restingLength, monitoredProperty ) {
 
+      if ( options.zeroPointLine ) {
+        return
+      }
       if ( options.fixedPosition || !mass ) {
 
         // Y position of line in screen coordinates as if a mass isn't attached
