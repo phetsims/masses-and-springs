@@ -193,7 +193,8 @@ define( function( require ) {
         width: BAR_NODE_WIDTH,
         displayContinuousArrow: true,
         arrowFill: 'black',
-        maxBarHeight: BAR_MAX_HEIGHT
+        maxBarHeight: BAR_MAX_HEIGHT,
+        barHighlightStroke: 'black'
       } );
       this.barNodes.push( compositeBar );
 
