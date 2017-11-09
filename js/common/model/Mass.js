@@ -92,7 +92,7 @@ define( function( require ) {
     this.initialPosition = initialPosition;
 
     // @public (read-only) Used for constructing tandems for corresponding view nodes.
-    this.tandem = tandem;
+    this.massTandem = tandem;
 
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
     this.positionProperty = new Property( this.initialPosition, {

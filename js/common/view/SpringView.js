@@ -88,7 +88,7 @@ define( function( require ) {
         self.modelViewTransform,
         self.visibleBoundsProperty,
         model,
-        tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ), {
+        tandem.createTandem( referencedMassProperty.massTandem.tail + 'Node' ), {
           vectorViewEnabled: options.vectorViewEnabled
         } );
       self.massLayer.addChild( massNode );
