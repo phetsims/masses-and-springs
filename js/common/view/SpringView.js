@@ -81,14 +81,13 @@ define( function( require ) {
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
     this.massNodes = [];
 
-    model.masses.forEach( function( mass, index ) {
-      var referencedMassProperty = model.masses[ index ];
+    model.masses.forEach( function( mass ) {
       var massNode = new MassNode(
-        referencedMassProperty,
+        mass,
         self.modelViewTransform,
         self.visibleBoundsProperty,
         model,
-        tandem.createTandem( referencedMassProperty.tandem.tail + 'Node' ), {
+        tandem.createTandem( mass.tandem.tail + 'Node' ), {
           vectorViewEnabled: options.vectorViewEnabled
         } );
       self.massLayer.addChild( massNode );
