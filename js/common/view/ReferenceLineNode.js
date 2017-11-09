@@ -13,7 +13,6 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearFunction = require( 'DOT/LinearFunction' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Property = require( 'AXON/Property' );
   var TVector2 = require( 'DOT/TVector2' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -63,7 +62,7 @@ define( function( require ) {
     Property.multilink( [ spring.massAttachedProperty, spring.naturalRestingLengthProperty, property ], function( mass, restingLength, monitoredProperty ) {
 
       if ( options.zeroPointLine ) {
-        return
+        return;
       }
       if ( options.fixedPosition || !mass ) {
 
