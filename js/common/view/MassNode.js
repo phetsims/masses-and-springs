@@ -135,6 +135,7 @@ define( function( require ) {
       if ( mass.adjustable ) {
         self.mass.massProperty.link( function( massValue ) {
           label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
+          label.center = rect.center;
         } );
       }
     };
