@@ -55,6 +55,7 @@ define( function( require ) {
       thumbSize: new Dimension2( 13, 22 ),
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       titleMaxWidth: 100,
+      titleFontWeight: 'bold',
       arrowButtonScale: 0.7,
       layoutFunction: NumberControl.createLayoutFunction1( { arrowButtonsXSpacing: 5 } ),
       majorTicks: [
