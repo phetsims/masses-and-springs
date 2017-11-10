@@ -14,6 +14,7 @@ define( function( require ) {
   var ComboBox = require( 'SUN/ComboBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -88,15 +89,17 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityComboBox' )
     } );
 
-    // @private {read-only} manages the values associated with the gravity panel in a combo box
-    var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), {
+    var sliderOptions = {
       majorTickLength: 10,
       trackSize: new Dimension2( 130, 2 ),
       thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00b3b3',
-      thumbFillHighlighted: '#00e6e6',
-      tandem: tandem.createTandem( 'gravityPropertyHSlider' )
-    } );
+      thumbFillHighlighted: '#00e6e6'
+    };
+
+    // @private {read-only} manages the values associated with the gravity panel in a combo box
+    var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), sliderOptions );
+
     gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( gravityNoneString, {
       font: MassesAndSpringsConstants.LABEL_FONT,
       tandem: tandem.createTandem( 'gravityNoneString' )
@@ -120,29 +123,28 @@ define( function( require ) {
     } );
 
     if ( options.dampingVisible ) {
-      var dampingHSlider = new HSlider( model.dampingProperty, MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get(), {
-        majorTickLength: 10,
-        trackSize: new Dimension2( 130, 2 ),
-        thumbSize: new Dimension2( 13, 22 ),
-        thumbFillEnabled: '#00b3b3',
-        thumbFillHighlighted: '#00e6e6',
-        tandem: tandem.createTandem( 'gravityPropertyHSlider' )
-      } );
+
+      var dampingHSlider = new HSlider( model.dampingProperty, MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get(), sliderOptions );
 
       Panel.call( self, new VBox( {
-        align: 'left',
-        children: [
-          new HBox( {
-            spacing: 20,
-            children: [ new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ), this.gravityNumberDisplay ]
-          } ),
-          gravityComboBox,
-          gravityHSlider,
-          new Text( dampingString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-          dampingHSlider
-        ],
-        tandem: tandem.createTandem( 'gravityPropertyVBox' )
-      } ), self.options );
+          align: 'left',
+          children: [
+            new HBox( {
+              spacing: 20,
+              children: [ new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ), this.gravityNumberDisplay ]
+            } ),
+            gravityComboBox,
+            gravityHSlider,
+            new Text( dampingString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+            new HBox( {
+              children: [
+                new HStrut( 5 ), dampingHSlider
+              ]
+            } )
+          ],
+          tandem: tandem.createTandem( 'gravityPropertyVBox' )
+        }
+      ), self.options );
     }
     else {
       Panel.call( self, new VBox( {
@@ -200,4 +202,5 @@ define( function( require ) {
   massesAndSprings.register( 'GravityAndDampingControlPanel', GravityAndDampingControlPanel );
 
   return inherit( Panel, GravityAndDampingControlPanel );
-} );
+} )
+;
