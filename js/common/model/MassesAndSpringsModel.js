@@ -23,7 +23,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var TProperty = require( 'AXON/TProperty' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -71,7 +71,7 @@ define( function( require ) {
     // @public {Property.<string>} determines the speed at which the sim plays.
     this.simSpeedProperty = new Property( 'normal', {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
-      phetioType: TProperty( TString ),
+      phetioType: PropertyIO( TString ),
       validValues: [ 'slow', 'normal' ]
     } );
 
@@ -115,7 +115,7 @@ define( function( require ) {
     // @public {Property.<string>} name of planet selected
     this.bodyProperty = new Property( Body.EARTH, {
       tandem: tandem.createTandem( 'bodyProperty' ),
-      phetioType: TProperty( TBody )
+      phetioType: PropertyIO( TBody )
     } );
 
     // Visibility properties of vectors associated with each mass
@@ -142,7 +142,7 @@ define( function( require ) {
     // @public {Property.<string>} determines mode of the vectors to be viewed
     this.forcesModeProperty = new Property( MassesAndSpringsConstants.FORCES_STRING, {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
-      phetioType: TProperty( TString ),
+      phetioType: PropertyIO( TString ),
       validValues: [ MassesAndSpringsConstants.FORCES_STRING, MassesAndSpringsConstants.NET_FORCE_STRING ]
     } );
 

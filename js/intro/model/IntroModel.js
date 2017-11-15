@@ -15,7 +15,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Property = require( 'AXON/Property' );
-  var TProperty = require( 'AXON/TProperty' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
 
   // phet-io modules
   var TString = require( 'ifphetio!PHET_IO/types/TString' );
@@ -35,14 +35,14 @@ define( function( require ) {
     // @public {Property.<string>} determines the scene selection for the intro screen
     this.sceneModeProperty = new Property( 'same-length', {
       tandem: tandem.createTandem( 'sceneModeProperty' ),
-      phetioType: TProperty( TString ),
+      phetioType: PropertyIO( TString ),
       validValues: [ 'same-length', 'adjustable-length' ]
     } );
 
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
     this.constantParameterProperty = new Property( 'spring-constant', {
       tandem: tandem.createTandem( 'constantParameterProperty' ),
-      phetioType: TProperty( TString ),
+      phetioType: PropertyIO( TString ),
       validValues: [ 'spring-constant', 'spring-thickness', null ]
     } );
 

@@ -17,7 +17,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
   var TColor = require( 'SCENERY/util/TColor' );
-  var TProperty = require( 'AXON/TProperty' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var VectorScreenView = require( 'MASSES_AND_SPRINGS/vector/view/VectorScreenView' );
 
   // strings
@@ -37,7 +37,7 @@ define( function( require ) {
       name: vectorString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioType: TProperty( TColor ),
+        phetioType: PropertyIO( TColor ),
         maxDT: 1
       } ),
       homeScreenIcon: new Image( vectorHomeScreenImage ),

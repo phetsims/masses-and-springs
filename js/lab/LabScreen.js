@@ -18,7 +18,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
   var TColor = require( 'SCENERY/util/TColor' );
-  var TProperty = require( 'AXON/TProperty' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
 
   // strings
   var labString = require( 'string!MASSES_AND_SPRINGS/lab' );
@@ -37,7 +37,7 @@ define( function( require ) {
       name: labString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioType: TProperty( TColor ),
+        phetioType: PropertyIO( TColor ),
         maxDT: 1
       } ),
       homeScreenIcon: new Image( labHomeScreenImage ),
