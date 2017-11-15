@@ -12,7 +12,7 @@ define( function( require ) {
   var assertInstanceOf = require( 'ifphetio!PHET_IO/assertInstanceOf' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var phetioInherit = require( 'ifphetio!PHET_IO/phetioInherit' );
-  var TObject = require( 'ifphetio!PHET_IO/types/TObject' );
+  var ObjectIO = require( 'ifphetio!PHET_IO/types/ObjectIO' );
 
   /**
    *
@@ -22,10 +22,10 @@ define( function( require ) {
    */
   function TBody( instance, phetioID ) {
     assert && assertInstanceOf( instance, phet.massesAndSprings.Body );
-    TObject.call( this, instance, phetioID );
+    ObjectIO.call( this, instance, phetioID );
   }
 
-  phetioInherit( TObject, 'TBody', TBody, {}, {
+  phetioInherit( ObjectIO, 'TBody', TBody, {}, {
     toStateObject: function( body ) {
       if ( body === null ) {
         return null;

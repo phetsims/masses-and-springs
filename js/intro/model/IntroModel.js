@@ -18,7 +18,7 @@ define( function( require ) {
   var PropertyIO = require( 'AXON/PropertyIO' );
 
   // phet-io modules
-  var TString = require( 'ifphetio!PHET_IO/types/TString' );
+  var StringIO = require( 'ifphetio!PHET_IO/types/StringIO' );
 
   /**
    * @constructor
@@ -35,14 +35,14 @@ define( function( require ) {
     // @public {Property.<string>} determines the scene selection for the intro screen
     this.sceneModeProperty = new Property( 'same-length', {
       tandem: tandem.createTandem( 'sceneModeProperty' ),
-      phetioType: PropertyIO( TString ),
+      phetioType: PropertyIO( StringIO ),
       validValues: [ 'same-length', 'adjustable-length' ]
     } );
 
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
     this.constantParameterProperty = new Property( 'spring-constant', {
       tandem: tandem.createTandem( 'constantParameterProperty' ),
-      phetioType: PropertyIO( TString ),
+      phetioType: PropertyIO( StringIO ),
       validValues: [ 'spring-constant', 'spring-thickness', null ]
     } );
 

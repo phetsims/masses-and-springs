@@ -29,7 +29,7 @@ define( function( require ) {
 
   // phet-io modules
   var TBody = require( 'MASSES_AND_SPRINGS/common/model/TBody' );
-  var TString = require( 'ifphetio!PHET_IO/types/TString' );
+  var StringIO = require( 'ifphetio!PHET_IO/types/StringIO' );
 
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
@@ -71,7 +71,7 @@ define( function( require ) {
     // @public {Property.<string>} determines the speed at which the sim plays.
     this.simSpeedProperty = new Property( 'normal', {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
-      phetioType: PropertyIO( TString ),
+      phetioType: PropertyIO( StringIO ),
       validValues: [ 'slow', 'normal' ]
     } );
 
@@ -142,7 +142,7 @@ define( function( require ) {
     // @public {Property.<string>} determines mode of the vectors to be viewed
     this.forcesModeProperty = new Property( MassesAndSpringsConstants.FORCES_STRING, {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
-      phetioType: PropertyIO( TString ),
+      phetioType: PropertyIO( StringIO ),
       validValues: [ MassesAndSpringsConstants.FORCES_STRING, MassesAndSpringsConstants.NET_FORCE_STRING ]
     } );
 
