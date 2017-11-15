@@ -27,7 +27,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
-  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
+  var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
 
   // constants
   var DEFAULT_THICKNESS = 3; // empirically determine
@@ -85,7 +85,7 @@ define( function( require ) {
       },
       {
         units: 'newtons',
-        phetioType: DerivedPropertyIO( TNumber )
+        phetioType: DerivedPropertyIO( NumberIO )
       }
     );
 
@@ -172,7 +172,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'lengthProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioType: DerivedPropertyIO( TNumber )
+        phetioType: DerivedPropertyIO( NumberIO )
       }
     );
 
@@ -186,7 +186,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'bottomProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioType: DerivedPropertyIO( TNumber )
+        phetioType: DerivedPropertyIO( NumberIO )
       }
     );
 
@@ -205,7 +205,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioType: DerivedPropertyIO( TNumber )
+        phetioType: DerivedPropertyIO( NumberIO )
       }
     );
     this.springConstantProperty.link( function( springConstant ) {
