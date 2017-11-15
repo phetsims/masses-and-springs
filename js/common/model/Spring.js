@@ -20,7 +20,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var TDerivedProperty = require( 'AXON/TDerivedProperty' );
+  var DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var TVector2 = require( 'DOT/TVector2' );
@@ -85,7 +85,7 @@ define( function( require ) {
       },
       {
         units: 'newtons',
-        phetioType: TDerivedProperty( TNumber )
+        phetioType: DerivedPropertyIO( TNumber )
       }
     );
 
@@ -172,7 +172,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'lengthProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioType: TDerivedProperty( TNumber )
+        phetioType: DerivedPropertyIO( TNumber )
       }
     );
 
@@ -186,7 +186,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'bottomProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioType: TDerivedProperty( TNumber )
+        phetioType: DerivedPropertyIO( TNumber )
       }
     );
 
@@ -205,7 +205,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioType: TDerivedProperty( TNumber )
+        phetioType: DerivedPropertyIO( TNumber )
       }
     );
     this.springConstantProperty.link( function( springConstant ) {
