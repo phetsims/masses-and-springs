@@ -53,7 +53,6 @@ define( function( require ) {
     MOON_GRAVITY: 1.62,
     JUPITER_GRAVITY: 24.79,
     PLANET_X: 14.2,
-    ZERO_G: 0,
 
     // Constants regarding fonts
     FONT: new PhetFont( 12 ),

@@ -21,7 +21,6 @@ define( function( require ) {
   var bodyJupiterString = require( 'string!MASSES_AND_SPRINGS/body.jupiter' );
   var bodyMoonString = require( 'string!MASSES_AND_SPRINGS/body.moon' );
   var bodyPlanetXString = require( 'string!MASSES_AND_SPRINGS/body.planetX' );
-  var bodyZeroGString = require( 'string!MASSES_AND_SPRINGS/body.zeroG' );
 
   /**
    * @param {string} title - name of body.
@@ -50,7 +49,6 @@ define( function( require ) {
   Body.EARTH = new Body( bodyEarthString, MassesAndSpringsConstants.EARTH_GRAVITY, tandem.createTandem( 'earth' ) );
   Body.JUPITER = new Body( bodyJupiterString, MassesAndSpringsConstants.JUPITER_GRAVITY, tandem.createTandem( 'jupiter' ) );
   Body.PLANET_X = new Body( bodyPlanetXString, MassesAndSpringsConstants.PLANET_X, tandem.createTandem( 'planetX' ) );
-  Body.ZERO_G = new Body( bodyZeroGString, MassesAndSpringsConstants.ZERO_G, tandem.createTandem( 'zeroG' ) );
   Body.CUSTOM = new Body( bodyCustomString, null, tandem.createTandem( 'custom' ) );
 
   return Body;

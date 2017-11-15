@@ -377,6 +377,6 @@ define( function( require ) {
       }
     }
   }, {
-    BODIES: [ Body.MOON, Body.EARTH, Body.JUPITER, Body.PLANET_X, Body.ZERO_G, Body.CUSTOM ]
+    BODIES: [ Body.MOON, Body.EARTH, Body.JUPITER, Body.PLANET_X, Body.CUSTOM ]
   } );
 } );
