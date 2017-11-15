@@ -20,7 +20,9 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var TDerivedProperty = require( 'AXON/TDerivedProperty' );
   var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
+  var TProperty = require( 'AXON/TProperty' );
   var TVector2 = require( 'DOT/TVector2' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -83,7 +85,7 @@ define( function( require ) {
       },
       {
         units: 'newtons',
-        phetioValueType: TNumber
+        phetioType: TDerivedProperty( TNumber )
       }
     );
 
@@ -97,7 +99,7 @@ define( function( require ) {
     // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
     this.positionProperty = new Property( position, {
       tandem: tandem.createTandem( 'positionProperty' ),
-      phetioValueType: TVector2
+      phetioType: TProperty( TVector2 )
     } );
 
     // @public {Property.<number>} length of the spring without mass attached
@@ -124,7 +126,7 @@ define( function( require ) {
     // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
       tandem: tandem.createTandem( 'massAttachedProperty' ),
-      phetioValueType: TMass
+      phetioType: TProperty( TMass )
     } );
 
     // @public {Property.<number> read-write} Kinetic Energy of the attached Mass
@@ -170,7 +172,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'lengthProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioValueType: TNumber
+        phetioType: TDerivedProperty( TNumber )
       }
     );
 
@@ -184,7 +186,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'bottomProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioValueType: TNumber
+        phetioType: TDerivedProperty( TNumber )
       }
     );
 
@@ -203,7 +205,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioValueType: TNumber
+        phetioType: TDerivedProperty( TNumber )
       }
     );
     this.springConstantProperty.link( function( springConstant ) {

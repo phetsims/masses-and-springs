@@ -13,6 +13,7 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var ComboBox = require( 'SUN/ComboBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var HSlider = require( 'SUN/HSlider' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -24,7 +25,6 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
 
   // strings
   var dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
@@ -32,9 +32,6 @@ define( function( require ) {
   var gravityNoneString = require( 'string!MASSES_AND_SPRINGS/gravity.none' );
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
   var gravityValueString = require( 'string!MASSES_AND_SPRINGS/gravityValue' );
-
-  // phet-io modules
-  var TText = require( 'SCENERY/nodes/TText' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -62,8 +59,7 @@ define( function( require ) {
     MassesAndSpringsModel.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
-        tandem: tandem.createTandem( 'bodyLabel' ),
-        phetioValueType: TText
+        tandem: tandem.createTandem( 'bodyLabel' )
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withMaxX( Math.max( 50, bodyLabel.localBounds.maxX ) );
 

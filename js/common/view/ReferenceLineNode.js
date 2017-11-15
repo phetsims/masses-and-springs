@@ -14,6 +14,7 @@ define( function( require ) {
   var LinearFunction = require( 'DOT/LinearFunction' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
+  var TProperty = require( 'AXON/TProperty' );
   var TVector2 = require( 'DOT/TVector2' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -55,7 +56,7 @@ define( function( require ) {
     var yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
     // @private {read-write} position of line in screen coordinates.
     this.positionProperty = new Property( new Vector2( xPos, yPos ), {
-      phetioValueType: TVector2
+      phetioType: TProperty( TVector2 )
     } );
 
     // updates the position of the reference line as the system changes

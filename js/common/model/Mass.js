@@ -14,12 +14,13 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
+  var Easing = require( 'TWIXT/Easing' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var Easing = require( 'TWIXT/Easing' );
+  var TProperty = require( 'AXON/TProperty' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -97,7 +98,7 @@ define( function( require ) {
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
     this.positionProperty = new Property( this.initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
-      phetioValueType: TVector2
+      phetioType: TProperty( TVector2 )
     } );
 
     // @public {Property.<boolean>} indicates whether this mass is currently user controlled
@@ -130,7 +131,7 @@ define( function( require ) {
     // @public {Property.<Spring|null>}  spring that the mass is attached to
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
-      phetioValueType: TSpring
+      phetioType: TProperty( TSpring )
     } );
 
     // @public {Property.<number>} The force of the attached spring or 0 if unattached
