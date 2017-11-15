@@ -23,7 +23,7 @@ define( function( require ) {
   var DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
   var PropertyIO = require( 'AXON/PropertyIO' );
-  var TVector2 = require( 'DOT/TVector2' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
@@ -99,7 +99,7 @@ define( function( require ) {
     // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
     this.positionProperty = new Property( position, {
       tandem: tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( TVector2 )
+      phetioType: PropertyIO( Vector2IO )
     } );
 
     // @public {Property.<number>} length of the spring without mass attached

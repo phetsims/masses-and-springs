@@ -17,7 +17,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var PropertyIO = require( 'AXON/PropertyIO' );
-  var TVector2 = require( 'DOT/TVector2' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
 
   // strings
   var cmString = require( 'string!MASSES_AND_SPRINGS/cm' );
@@ -68,7 +68,7 @@ define( function( require ) {
     // @private {read-only} position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( TVector2 )
+      phetioType: PropertyIO( Vector2IO )
     } );
     this.positionProperty.linkAttribute( this, 'translation' );
 

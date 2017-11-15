@@ -16,7 +16,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var PropertyIO = require( 'AXON/PropertyIO' );
-  var TVector2 = require( 'DOT/TVector2' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
 
   /**
    * @param {Bounds2} dragBounds
@@ -39,7 +39,7 @@ define( function( require ) {
     // @private {read-only} position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( TVector2 )
+      phetioType: PropertyIO( Vector2IO )
     } );
     this.positionProperty.linkAttribute( self, 'translation' );
 

@@ -31,7 +31,7 @@ define( function( require ) {
 
   // phet-io modules
   var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
-  var TVector2 = require( 'DOT/TVector2' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
 
   /**
    * @param {number} massValue:  mass in kg
@@ -98,7 +98,7 @@ define( function( require ) {
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
     this.positionProperty = new Property( this.initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( TVector2 )
+      phetioType: PropertyIO( Vector2IO )
     } );
 
     // @public {Property.<boolean>} indicates whether this mass is currently user controlled
