@@ -11,19 +11,19 @@ define( function( require ) {
   // modules
   var Dimension2 = require( 'DOT/Dimension2' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
-  var Property = require( 'AXON/Property' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
+  var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
   var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
+  var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );
 
   /**
    * @param {Mass} mass

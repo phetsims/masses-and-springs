@@ -9,15 +9,15 @@ define( function( require ) {
 
   // modules
   var Color = require( 'SCENERY/util/Color' );
+  var ColorIO = require( 'SCENERY/util/ColorIO' );
   var EnergyModel = require( 'MASSES_AND_SPRINGS/energy/model/EnergyModel' );
   var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
-  var Screen = require( 'JOIST/Screen' );
-  var ColorIO = require( 'SCENERY/util/ColorIO' );
   var PropertyIO = require( 'AXON/PropertyIO' );
+  var Screen = require( 'JOIST/Screen' );
 
   // strings
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );

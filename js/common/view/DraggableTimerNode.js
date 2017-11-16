@@ -14,8 +14,8 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
-  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var PropertyIO = require( 'AXON/PropertyIO' );
+  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var Vector2IO = require( 'DOT/Vector2IO' );
 
   /**

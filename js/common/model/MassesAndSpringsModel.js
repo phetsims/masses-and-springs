@@ -21,9 +21,9 @@ define( function( require ) {
   var NumberProperty = require( 'AXON/NumberProperty' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Property = require( 'AXON/Property' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 

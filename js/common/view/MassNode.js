@@ -28,8 +28,8 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
-  var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
   var Vector2 = require( 'DOT/Vector2' );
+  var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
 
   // strings
   var massValueString = require( 'string!MASSES_AND_SPRINGS/massValue' );

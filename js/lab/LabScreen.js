@@ -10,15 +10,15 @@ define( function( require ) {
 
   // modules
   var Color = require( 'SCENERY/util/Color' );
+  var ColorIO = require( 'SCENERY/util/ColorIO' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LabModel = require( 'MASSES_AND_SPRINGS/lab/model/LabModel' );
   var LabScreenView = require( 'MASSES_AND_SPRINGS/lab/view/LabScreenView' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
-  var Screen = require( 'JOIST/Screen' );
-  var ColorIO = require( 'SCENERY/util/ColorIO' );
   var PropertyIO = require( 'AXON/PropertyIO' );
+  var Screen = require( 'JOIST/Screen' );
 
   // strings
   var labString = require( 'string!MASSES_AND_SPRINGS/lab' );

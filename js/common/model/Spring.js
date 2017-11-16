@@ -13,18 +13,18 @@ define( function( require ) {
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Complex = require( 'DOT/Complex' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassiO = require( 'MASSES_AND_SPRINGS/common/model/MassiO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
-  var MassiO = require( 'MASSES_AND_SPRINGS/common/model/MassiO' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
-  var Vector2IO = require( 'DOT/Vector2IO' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
 
   // phet-io modules
   var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );

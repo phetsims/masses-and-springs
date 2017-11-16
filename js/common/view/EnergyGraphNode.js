@@ -13,8 +13,6 @@ define( function( require ) {
     // modules
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var ColorConstants = require( 'SUN/ColorConstants' );
     var DerivedProperty = require( 'AXON/DerivedProperty' );
     var Dialog = require( 'JOIST/Dialog' );
     var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
@@ -23,9 +21,6 @@ define( function( require ) {
     var inherit = require( 'PHET_CORE/inherit' );
     var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
     var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
-  var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
     var RichText = require( 'SCENERY/nodes/RichText' );
     var Text = require( 'SCENERY/nodes/Text' );
     var VBox = require( 'SCENERY/nodes/VBox' );
@@ -33,6 +28,11 @@ define( function( require ) {
     var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
     var VerticalCompositeBarNode = require( 'GRIDDLE/VerticalCompositeBarNode' );
     var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
+  var Bounds2 = require( 'DOT/Bounds2' );
+  var ColorConstants = require( 'SUN/ColorConstants' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Property = require( 'AXON/Property' );
+  var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
 
     // constants
     var MAXIMUM_HEIGHT = 425;

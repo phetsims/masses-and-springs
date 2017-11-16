@@ -21,11 +21,11 @@ define( function( require ) {
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
-  var Shelf = require( 'MASSES_AND_SPRINGS/common/view/Shelf' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
+  var Shelf = require( 'MASSES_AND_SPRINGS/common/view/Shelf' );
   var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
   var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );

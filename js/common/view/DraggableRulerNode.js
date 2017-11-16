@@ -15,8 +15,8 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
-  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var PropertyIO = require( 'AXON/PropertyIO' );
+  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
   var Vector2IO = require( 'DOT/Vector2IO' );
 
   // strings
