@@ -21,7 +21,7 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
-  var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
+  var MassiO = require( 'MASSES_AND_SPRINGS/common/model/MassiO' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Vector2IO = require( 'DOT/Vector2IO' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -126,7 +126,7 @@ define( function( require ) {
     // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
       tandem: tandem.createTandem( 'massAttachedProperty' ),
-      phetioType: PropertyIO( TMass )
+      phetioType: PropertyIO( MassiO )
     } );
 
     // @public {Property.<number> read-write} Kinetic Energy of the attached Mass

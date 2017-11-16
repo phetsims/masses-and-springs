@@ -30,7 +30,7 @@ define( function( require ) {
   var SCALING_FACTOR = 4; // scales the radius to desired size
 
   // phet-io modules
-  var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
+  var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
   var Vector2IO = require( 'DOT/Vector2IO' );
 
   /**
@@ -131,7 +131,7 @@ define( function( require ) {
     // @public {Property.<Spring|null>}  spring that the mass is attached to
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
-      phetioType: PropertyIO( TSpring )
+      phetioType: PropertyIO( SpringIO )
     } );
 
     // @public {Property.<number>} The force of the attached spring or 0 if unattached

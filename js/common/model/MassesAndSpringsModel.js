@@ -28,7 +28,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
-  var TBody = require( 'MASSES_AND_SPRINGS/common/model/TBody' );
+  var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
   var StringIO = require( 'ifphetio!PHET_IO/types/StringIO' );
 
   // constants
@@ -115,7 +115,7 @@ define( function( require ) {
     // @public {Property.<string>} name of planet selected
     this.bodyProperty = new Property( Body.EARTH, {
       tandem: tandem.createTandem( 'bodyProperty' ),
-      phetioType: PropertyIO( TBody )
+      phetioType: PropertyIO( BodyIO )
     } );
 
     // Visibility properties of vectors associated with each mass

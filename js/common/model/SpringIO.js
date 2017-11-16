@@ -1,7 +1,7 @@
 // Copyright 2017, University of Colorado Boulder
 
 /**
- * PhET-iO wrapper type for Masses-And-Springs built-in Body type.
+ * PhET-iO wrapper type for Masses-And-Springs built-in Spring type.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -20,23 +20,24 @@ define( function( require ) {
    * @param phetioID
    * @constructor
    */
-  function TBody( instance, phetioID ) {
-    assert && assertInstanceOf( instance, phet.massesAndSprings.Body );
+  function SpringIO( instance, phetioID ) {
+    assert && assertInstanceOf( instance, phet.massesAndSprings.Spring );
     ObjectIO.call( this, instance, phetioID );
   }
 
-  phetioInherit( ObjectIO, 'TBody', TBody, {}, {
-    toStateObject: function( body ) {
-      if ( body === null ) {
+  phetioInherit( ObjectIO, 'SpringIO', SpringIO, {}, {
+    toStateObject: function( spring ) {
+      if ( spring === null ) {
         return null;
       }
       return {
-        body: body
+        position: spring.positionProperty.get(),
+        id: spring.phetioID
       };
     }
   } );
 
-  massesAndSprings.register( 'TBody', TBody );
+  massesAndSprings.register( 'SpringIO', SpringIO );
 
-  return TBody;
+  return SpringIO;
 } );

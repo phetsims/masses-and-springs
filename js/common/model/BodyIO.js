@@ -1,7 +1,7 @@
 // Copyright 2017, University of Colorado Boulder
 
 /**
- * PhET-iO wrapper type for Masses-And-Springs built-in Mass type.
+ * PhET-iO wrapper type for Masses-And-Springs built-in Body type.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -20,24 +20,23 @@ define( function( require ) {
    * @param phetioID
    * @constructor
    */
-  function TMass( instance, phetioID ) {
-    assert && assertInstanceOf( instance, phet.massesAndSprings.Mass );
+  function BodyIO( instance, phetioID ) {
+    assert && assertInstanceOf( instance, phet.massesAndSprings.Body );
     ObjectIO.call( this, instance, phetioID );
   }
 
-  phetioInherit( ObjectIO, 'TMass', TMass, {}, {
-    toStateObject: function( mass ) {
-      if ( mass === null ) {
+  phetioInherit( ObjectIO, 'BodyIO', BodyIO, {}, {
+    toStateObject: function( body ) {
+      if ( body === null ) {
         return null;
       }
       return {
-        mass: mass.mass,
-        color: mass.color
+        body: body
       };
     }
   } );
 
-  massesAndSprings.register( 'TMass', TMass );
+  massesAndSprings.register( 'BodyIO', BodyIO );
 
-  return TMass;
+  return BodyIO;
 } );
