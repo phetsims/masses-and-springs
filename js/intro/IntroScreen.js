@@ -18,7 +18,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
-  var TColor = require( 'SCENERY/util/TColor' );
+  var ColorIO = require( 'SCENERY/util/ColorIO' );
   var PropertyIO = require( 'AXON/PropertyIO' );
 
   // strings
@@ -38,7 +38,7 @@ define( function( require ) {
       name: introString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioType: PropertyIO( TColor ),
+        phetioType: PropertyIO( ColorIO ),
         maxDT: 1
       } ),
       homeScreenIcon: new Image( introHomeScreenImage ),
