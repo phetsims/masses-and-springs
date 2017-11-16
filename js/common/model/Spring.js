@@ -17,7 +17,7 @@ define( function( require ) {
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassiO = require( 'MASSES_AND_SPRINGS/common/model/MassiO' );
+  var MassIO = require( 'MASSES_AND_SPRINGS/common/model/MassIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
@@ -126,7 +126,7 @@ define( function( require ) {
     // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
       tandem: tandem.createTandem( 'massAttachedProperty' ),
-      phetioType: PropertyIO( MassiO )
+      phetioType: PropertyIO( MassIO )
     } );
 
     // @public {Property.<number> read-write} Kinetic Energy of the attached Mass

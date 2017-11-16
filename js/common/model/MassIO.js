@@ -20,12 +20,12 @@ define( function( require ) {
    * @param phetioID
    * @constructor
    */
-  function MassiO( instance, phetioID ) {
+  function MassIO( instance, phetioID ) {
     assert && assertInstanceOf( instance, phet.massesAndSprings.Mass );
     ObjectIO.call( this, instance, phetioID );
   }
 
-  phetioInherit( ObjectIO, 'MassiO', MassiO, {}, {
+  phetioInherit( ObjectIO, 'MassIO', MassIO, {}, {
     toStateObject: function( mass ) {
       if ( mass === null ) {
         return null;
@@ -37,7 +37,7 @@ define( function( require ) {
     }
   } );
 
-  massesAndSprings.register( 'MassiO', MassiO );
+  massesAndSprings.register( 'MassIO', MassIO );
 
-  return MassiO;
+  return MassIO;
 } );
