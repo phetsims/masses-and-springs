@@ -260,9 +260,9 @@ define( function( require ) {
           var position = mass.positionProperty.get();
           self.velocityArrow.setTailAndTip(
             position.x - 10,
-            position.y + rect.top + 10,
+            position.y + rect.centerY,
             position.x - 10,
-            position.y + rect.top + 10 - ARROW_SIZE_DEFAULT * velocity * scalingFactor
+            position.y + rect.centerY - ARROW_SIZE_DEFAULT * velocity * scalingFactor
           );
         }
       } );
@@ -274,9 +274,9 @@ define( function( require ) {
           var gravitationalAcceleration = mass.mass * gravity;
           self.gravityForceArrow.setTailAndTip(
             position.x + 45,
-            position.y + 40,
+            position.y + rect.centerY,
             position.x + 45,
-            position.y + 40 + ARROW_SIZE_DEFAULT * gravitationalAcceleration
+            position.y + rect.centerY + ARROW_SIZE_DEFAULT * gravitationalAcceleration
           );
         }
       } );
@@ -287,9 +287,9 @@ define( function( require ) {
           var position = mass.positionProperty.get();
           self.springForceArrow.setTailAndTip(
             position.x + 45,
-            position.y + 40,
+            position.y + rect.centerY,
             position.x + 45,
-            position.y + 40 - ARROW_SIZE_DEFAULT * springForce
+            position.y + rect.centerY - ARROW_SIZE_DEFAULT * springForce
           );
         }
       } );
@@ -307,9 +307,9 @@ define( function( require ) {
           if ( Math.abs( netForce ) > 1E-6 ) {
             self.netForceArrow.setTailAndTip(
               position.x + 45,
-              position.y + 40,
+              position.y + rect.centerY,
               position.x + 45,
-              position.y + 40 - ARROW_SIZE_DEFAULT * netForce
+              position.y + rect.centerY - ARROW_SIZE_DEFAULT * netForce
             );
           }
         }
@@ -317,9 +317,9 @@ define( function( require ) {
           if ( Math.abs( netAcceleration ) > 1E-6 ) {
             self.accelerationArrow.setTailAndTip(
               position.x + 10,
-              position.y + rect.top + 10,
+              position.y + rect.centerY,
               position.x + 10,
-              position.y + rect.top + 10 - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
+              position.y + rect.centerY - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
             );
           }
           else if ( netAcceleration === 0 ) {
@@ -330,7 +330,7 @@ define( function( require ) {
 
       // When the mass's position changes update the forces baseline marker
       mass.positionProperty.link( function( position ) {
-        forceNullLine.setLine( position.x + 40, position.y + 40, position.x + 50, position.y + 40 );
+        forceNullLine.setLine( position.x + 40, position.y + rect.centerY, position.x + 50, position.y + rect.centerY );
       } );
     }
   }

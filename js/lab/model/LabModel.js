@@ -34,7 +34,13 @@ define( function( require ) {
     this.masses[ 1 ].options.mysteryLabel = true;
     this.masses[ 2 ].options.mysteryLabel = true;
   }
+
   massesAndSprings.register( 'LabModel', LabModel );
 
-  return inherit( MassesAndSpringsModel, LabModel );
+  return inherit( MassesAndSpringsModel, LabModel, {
+    reset: function() {
+      MassesAndSpringsModel.prototype.reset.call( this );
+      this.dampingProperty.set( 0.2 );
+    }
+  } );
 } );
