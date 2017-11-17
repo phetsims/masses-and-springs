@@ -19,8 +19,9 @@ define( function( require ) {
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
-  var TVector2 = require( 'DOT/TVector2' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
 
   /**
    * @param {Vector2} initialPosition - of the center of line
@@ -67,7 +68,7 @@ define( function( require ) {
     // @private {read-write} position of line in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
-      phetioValueType: TVector2
+      phetioType: PropertyIO( Vector2IO )
     } );
 
     // @private {read-write} position of line in screen coordinates

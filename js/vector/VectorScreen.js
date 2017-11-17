@@ -10,13 +10,14 @@ define( function( require ) {
 
   // modules
   var Color = require( 'SCENERY/util/Color' );
+  var ColorIO = require( 'SCENERY/util/ColorIO' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Property = require( 'AXON/Property' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var Screen = require( 'JOIST/Screen' );
-  var TColor = require( 'SCENERY/util/TColor' );
   var VectorScreenView = require( 'MASSES_AND_SPRINGS/vector/view/VectorScreenView' );
 
   // strings
@@ -36,7 +37,7 @@ define( function( require ) {
       name: vectorString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioValueType: TColor,
+        phetioType: PropertyIO( ColorIO ),
         maxDT: 1
       } ),
       homeScreenIcon: new Image( vectorHomeScreenImage ),

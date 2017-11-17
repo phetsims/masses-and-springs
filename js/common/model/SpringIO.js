@@ -11,22 +11,23 @@ define( function( require ) {
   // modules
   var assertInstanceOf = require( 'ifphetio!PHET_IO/assertInstanceOf' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var ObjectIO = require( 'ifphetio!PHET_IO/types/ObjectIO' );
   var phetioInherit = require( 'ifphetio!PHET_IO/phetioInherit' );
-  var TObject = require( 'ifphetio!PHET_IO/types/TObject' );
 
   /**
    *
-   * @param instance
+   * @param spring
    * @param phetioID
    * @constructor
    */
-  function TSpring( instance, phetioID ) {
-    assert && assertInstanceOf( instance, phet.massesAndSprings.Spring );
-    TObject.call( this, instance, phetioID );
+  function SpringIO( spring, phetioID ) {
+    assert && assertInstanceOf( spring, phet.massesAndSprings.Spring );
+    ObjectIO.call( this, spring, phetioID );
   }
 
-  phetioInherit( TObject, 'TSpring', TSpring, {}, {
+  phetioInherit( ObjectIO, 'SpringIO', SpringIO, {}, {
     toStateObject: function( spring ) {
+      assert && assertInstanceOf( spring, phet.massesAndSprings.Spring );
       if ( spring === null ) {
         return null;
       }
@@ -37,7 +38,7 @@ define( function( require ) {
     }
   } );
 
-  massesAndSprings.register( 'TSpring', TSpring );
+  massesAndSprings.register( 'SpringIO', SpringIO );
 
-  return TSpring;
+  return SpringIO;
 } );

@@ -21,14 +21,15 @@ define( function( require ) {
   var NumberProperty = require( 'AXON/NumberProperty' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Property = require( 'AXON/Property' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
-  var TBody = require( 'MASSES_AND_SPRINGS/common/model/TBody' );
-  var TString = require( 'ifphetio!PHET_IO/types/TString' );
+  var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
+  var StringIO = require( 'ifphetio!PHET_IO/types/StringIO' );
 
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
@@ -70,7 +71,7 @@ define( function( require ) {
     // @public {Property.<string>} determines the speed at which the sim plays.
     this.simSpeedProperty = new Property( 'normal', {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
-      phetioValueType: TString,
+      phetioType: PropertyIO( StringIO ),
       validValues: [ 'slow', 'normal' ]
     } );
 
@@ -114,7 +115,7 @@ define( function( require ) {
     // @public {Property.<string>} name of planet selected
     this.bodyProperty = new Property( Body.EARTH, {
       tandem: tandem.createTandem( 'bodyProperty' ),
-      phetioValueType: TBody
+      phetioType: PropertyIO( BodyIO )
     } );
 
     // Visibility properties of vectors associated with each mass
@@ -141,7 +142,7 @@ define( function( require ) {
     // @public {Property.<string>} determines mode of the vectors to be viewed
     this.forcesModeProperty = new Property( MassesAndSpringsConstants.FORCES_STRING, {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
-      phetioValueType: TString,
+      phetioType: PropertyIO( StringIO ),
       validValues: [ MassesAndSpringsConstants.FORCES_STRING, MassesAndSpringsConstants.NET_FORCE_STRING ]
     } );
 

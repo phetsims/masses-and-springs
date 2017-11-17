@@ -9,14 +9,15 @@ define( function( require ) {
 
   // modules
   var Color = require( 'SCENERY/util/Color' );
+  var ColorIO = require( 'SCENERY/util/ColorIO' );
   var EnergyModel = require( 'MASSES_AND_SPRINGS/energy/model/EnergyModel' );
+  var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
   var Property = require( 'AXON/Property' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var Screen = require( 'JOIST/Screen' );
-  var TColor = require( 'SCENERY/util/TColor' );
 
   // strings
   var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
@@ -35,7 +36,7 @@ define( function( require ) {
       name: energyString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioValueType: TColor,
+        phetioType: PropertyIO( ColorIO ),
         maxDT: 1
       } ),
       homeScreenIcon: new Image( energyHomeScreenImage ),

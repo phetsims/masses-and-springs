@@ -30,9 +30,7 @@ define( function( require ) {
       leadDesign: 'Amy Rouinfar',
       softwareDevelopment: 'Denzell Barnett, Matt Pennington',
       team: 'Ariel Paul, Kathy Perkins, Mike Dubson',
-      qualityAssurance: 'Steele Dalton',
-      graphicArts: 'Amy Rouinfar',
-      thanks: ''
+      qualityAssurance: 'Steele Dalton'
     },
     showSmallHomeScreenIconFrame: true
   };

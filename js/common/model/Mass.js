@@ -14,12 +14,13 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
+  var Easing = require( 'TWIXT/Easing' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var Easing = require( 'TWIXT/Easing' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -29,8 +30,8 @@ define( function( require ) {
   var SCALING_FACTOR = 4; // scales the radius to desired size
 
   // phet-io modules
-  var TSpring = require( 'MASSES_AND_SPRINGS/common/model/TSpring' );
-  var TVector2 = require( 'DOT/TVector2' );
+  var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
 
   /**
    * @param {number} massValue:  mass in kg
@@ -97,7 +98,7 @@ define( function( require ) {
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
     this.positionProperty = new Property( this.initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
-      phetioValueType: TVector2
+      phetioType: PropertyIO( Vector2IO )
     } );
 
     // @public {Property.<boolean>} indicates whether this mass is currently user controlled
@@ -130,7 +131,7 @@ define( function( require ) {
     // @public {Property.<Spring|null>}  spring that the mass is attached to
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
-      phetioValueType: TSpring
+      phetioType: PropertyIO( SpringIO )
     } );
 
     // @public {Property.<number>} The force of the attached spring or 0 if unattached

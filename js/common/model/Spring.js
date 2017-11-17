@@ -13,19 +13,21 @@ define( function( require ) {
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Complex = require( 'DOT/Complex' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassIO = require( 'MASSES_AND_SPRINGS/common/model/MassIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
+  var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var TMass = require( 'MASSES_AND_SPRINGS/common/model/TMass' );
-  var TVector2 = require( 'DOT/TVector2' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
 
   // phet-io modules
-  var TNumber = require( 'ifphetio!PHET_IO/types/TNumber' );
+  var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
 
   // constants
   var DEFAULT_THICKNESS = 3; // empirically determine
@@ -83,7 +85,7 @@ define( function( require ) {
       },
       {
         units: 'newtons',
-        phetioValueType: TNumber
+        phetioType: DerivedPropertyIO( NumberIO )
       }
     );
 
@@ -97,7 +99,7 @@ define( function( require ) {
     // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
     this.positionProperty = new Property( position, {
       tandem: tandem.createTandem( 'positionProperty' ),
-      phetioValueType: TVector2
+      phetioType: PropertyIO( Vector2IO )
     } );
 
     // @public {Property.<number>} length of the spring without mass attached
@@ -124,7 +126,7 @@ define( function( require ) {
     // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
       tandem: tandem.createTandem( 'massAttachedProperty' ),
-      phetioValueType: TMass
+      phetioType: PropertyIO( MassIO )
     } );
 
     // @public {Property.<number> read-write} Kinetic Energy of the attached Mass
@@ -170,7 +172,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'lengthProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioValueType: TNumber
+        phetioType: DerivedPropertyIO( NumberIO )
       }
     );
 
@@ -184,7 +186,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'bottomProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioValueType: TNumber
+        phetioType: DerivedPropertyIO( NumberIO )
       }
     );
 
@@ -203,7 +205,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioValueType: TNumber
+        phetioType: DerivedPropertyIO( NumberIO )
       }
     );
     this.springConstantProperty.link( function( springConstant ) {
