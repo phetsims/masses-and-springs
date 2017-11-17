@@ -45,7 +45,7 @@ define( function( require ) {
     // Step Forward Button
     var stepForwardButton = new StepForwardButton( {
       playingProperty: model.playingProperty,
-      listener: function() { model.stepForward(); },
+      listener: function() { model.stepForward( 0.01 ); },
       radius: 12,
       stroke: STROKE,
       fill: FILL,

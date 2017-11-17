@@ -330,13 +330,12 @@ define( function( require ) {
     },
 
     /**
-     * Responsible for stepping through sim at 1/60th speed and paused after step.
+     * Responsible for stepping through the model at a specified dt
+     *
      * @public
      */
-    stepForward: function() {
-      this.playingProperty.set( true );
-      this.step( 1 / 60 );// steps the nominal amount used by step forward button listener
-      this.playingProperty.set( false );
+    stepForward: function( dt ) {
+      this.modelStep( dt );// steps the nominal amount used by step forward button listener
     },
 
     /**
@@ -344,40 +343,43 @@ define( function( require ) {
      * @public
      */
     step: function( dt ) {
-
       // If simulationTimeStep > 0.3, ignore it - it probably means the user returned to the tab after
       // the tab or the browser was hidden for a while.
       dt = Math.min( dt, 0.3 );
 
+      if ( this.playingProperty.get() ) {
+        this.modelStep( dt );
+      }
+    },
+    /**
+     * Steps in model time.
+     *
+     * @param {number} dt
+     * @private
+     */
+    modelStep: function( dt ) {
       var self = this;
       var animationDt = dt;
-      if ( this.playingProperty.get() ) {
 
-        // Change the dt value if we are playing in slow motion.
-        switch( this.simSpeedProperty.get() ) {
-          case 'normal':
-            break;
-          case 'slow':
-            dt = dt / MassesAndSpringsConstants.SIM_DT_RATIO;
-            break;
-          default:
-            assert( false, 'invalid setting for model speed' );
-        }
-        _.values( this.masses ).forEach( function( mass ) {
-
-          // Fall if not hung or grabbed
-          mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + .02, dt, animationDt );
-        } );
-        if ( this.timerRunningProperty.get() ) {
-          this.timerSecondsProperty.set( this.timerSecondsProperty.get() + dt );
-        }
-        // Oscillate springs
-        this.springs.forEach( function( spring ) {
-          spring.step( dt );
-        } );
+      // Change the dt value if we are playing in slow motion.
+      if ( this.simSpeedProperty.get() === 'slow' && this.playingProperty.get() ) {
+        dt = dt / MassesAndSpringsConstants.SIM_DT_RATIO;
       }
+      _.values( this.masses ).forEach( function( mass ) {
+
+        // Fall if not hung or grabbed
+        mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + .02, dt, animationDt );
+      } );
+      if ( this.timerRunningProperty.get() ) {
+        this.timerSecondsProperty.set( this.timerSecondsProperty.get() + dt );
+      }
+      // Oscillate springs
+      this.springs.forEach( function( spring ) {
+        spring.step( dt );
+      } );
     }
   }, {
+    // Array of bodies that are referenced throughout the model.
     BODIES: [ Body.MOON, Body.EARTH, Body.JUPITER, Body.PLANET_X, Body.CUSTOM ]
   } );
 } );
