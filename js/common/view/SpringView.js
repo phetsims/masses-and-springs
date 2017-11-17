@@ -27,7 +27,7 @@ define( function( require ) {
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
-  var SpringConstantControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringConstantControlPanel' );
+  var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -235,14 +235,15 @@ define( function( require ) {
      * @returns {*}
      */
     createSpringConstantPanel: function( springIndex, tandem ) {
-      return new SpringConstantControlPanel(
+      return new SpringControlPanel(
         this.model.springs[ springIndex ].springConstantProperty,
         new RangeWithValue( 5, 15, 9 ),
         StringUtils.fillIn( springConstantString, { spring: springIndex + 1 } ),
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
         {
           top: this.spacing,
-          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
+          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
+          visible: true
         }
       )
         ;

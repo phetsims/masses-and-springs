@@ -20,9 +20,10 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var SpringLengthControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/SpringLengthControlPanel' );
+  var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
+  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -44,7 +45,7 @@ define( function( require ) {
     TwoSpringView.call( this, model, tandem );
 
     // Spring Constant Length Control Panel
-    this.springLengthControlPanel = new SpringLengthControlPanel(
+    this.springLengthControlPanel = new SpringControlPanel(
       model.spring1.naturalRestingLengthProperty,
       new RangeWithValue( 0.1, 0.5, 0.3 ),
       StringUtils.fillIn( lengthString, { spring: 1 } ),
@@ -52,7 +53,13 @@ define( function( require ) {
       {
         right: this.firstSpringStopperButtonNode.left - this.spacing,
         top: this.spacing,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
+        visible: false,
+        constrainValue: function( value ) {
+          value = Number( Util.toFixed( value, 1 ) );
+          console.log( value );
+          return value;
+        }
       }
     );
     this.addChild( this.springLengthControlPanel );
