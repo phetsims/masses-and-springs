@@ -28,6 +28,7 @@ define( function( require ) {
 
   // phet-io modules
   var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
+  var NullableIO = require( 'ifphetio!PHET_IO/types/NullableIO' );
 
   // constants
   var DEFAULT_THICKNESS = 3; // empirically determine
@@ -126,7 +127,7 @@ define( function( require ) {
     // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
       tandem: tandem.createTandem( 'massAttachedProperty' ),
-      phetioType: PropertyIO( MassIO )
+      phetioType: PropertyIO( NullableIO( MassIO ) )
     } );
 
     // @public {Property.<number> read-write} Kinetic Energy of the attached Mass

@@ -23,6 +23,9 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // phet-io modules
+  var NullableIO = require( 'ifphetio!PHET_IO/types/NullableIO' );
+
   // constants
   var HEIGHT_RATIO = 2.5;
   var HOOK_HEIGHT_RATIO = 0.75;
@@ -131,7 +134,7 @@ define( function( require ) {
     // @public {Property.<Spring|null>}  spring that the mass is attached to
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
-      phetioType: PropertyIO( SpringIO )
+      phetioType: PropertyIO( NullableIO( SpringIO ) )
     } );
 
     // @public {Property.<number>} The force of the attached spring or 0 if unattached
