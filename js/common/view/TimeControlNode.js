@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -61,11 +60,8 @@ define( function( require ) {
     model.playingProperty.lazyLink( function( isPlaying ) {
       playPauseButton.scale( isPlaying ? ( 1 / PAUSE_SIZE_INCREASE_FACTOR ) : PAUSE_SIZE_INCREASE_FACTOR );
     } );
-    this.addChild( new HBox( {
-      children: [ playPauseButton, stepForwardButton ],
-      spacing: 10
-    } ) );
-
+    this.addChild( playPauseButton );
+    this.addChild( stepForwardButton );
     this.mutate( options );
   }
 
