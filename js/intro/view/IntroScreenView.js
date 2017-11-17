@@ -56,7 +56,7 @@ define( function( require ) {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
         visible: false,
         constrainValue: function( value ) {
-          value = Number( Util.toFixed( value, 1 ) );
+          value = Number( Util.toFixed( value, 2 ) );
           console.log( value );
           return value;
         }
