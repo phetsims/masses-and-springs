@@ -16,17 +16,18 @@ define( function( require ) {
 
   /**
    *
-   * @param instance
+   * @param spring
    * @param phetioID
    * @constructor
    */
-  function SpringIO( instance, phetioID ) {
-    assert && assertInstanceOf( instance, phet.massesAndSprings.Spring );
-    ObjectIO.call( this, instance, phetioID );
+  function SpringIO( spring, phetioID ) {
+    assert && assertInstanceOf( spring, phet.massesAndSprings.Spring );
+    ObjectIO.call( this, spring, phetioID );
   }
 
   phetioInherit( ObjectIO, 'SpringIO', SpringIO, {}, {
     toStateObject: function( spring ) {
+      assert && assertInstanceOf( spring, phet.massesAndSprings.Spring );
       if ( spring === null ) {
         return null;
       }

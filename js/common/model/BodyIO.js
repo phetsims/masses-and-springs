@@ -16,17 +16,18 @@ define( function( require ) {
 
   /**
    *
-   * @param instance
+   * @param body
    * @param phetioID
    * @constructor
    */
-  function BodyIO( instance, phetioID ) {
-    assert && assertInstanceOf( instance, phet.massesAndSprings.Body );
-    ObjectIO.call( this, instance, phetioID );
+  function BodyIO( body, phetioID ) {
+    assert && assertInstanceOf( body, phet.massesAndSprings.Body );
+    ObjectIO.call( this, body, phetioID );
   }
 
   phetioInherit( ObjectIO, 'BodyIO', BodyIO, {}, {
     toStateObject: function( body ) {
+      assert && assertInstanceOf( body, phet.massesAndSprings.Body );
       if ( body === null ) {
         return null;
       }

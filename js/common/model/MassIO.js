@@ -16,17 +16,18 @@ define( function( require ) {
 
   /**
    *
-   * @param instance
+   * @param mass
    * @param phetioID
    * @constructor
    */
-  function MassIO( instance, phetioID ) {
-    assert && assertInstanceOf( instance, phet.massesAndSprings.Mass );
-    ObjectIO.call( this, instance, phetioID );
+  function MassIO( mass, phetioID ) {
+    assert && assertInstanceOf( mass, phet.massesAndSprings.Mass );
+    ObjectIO.call( this, mass, phetioID );
   }
 
   phetioInherit( ObjectIO, 'MassIO', MassIO, {}, {
     toStateObject: function( mass ) {
+      assert && assertInstanceOf( mass, phet.massesAndSprings.Mass );
       if ( mass === null ) {
         return null;
       }
