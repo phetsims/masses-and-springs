@@ -42,7 +42,7 @@ define( function( require ) {
   inherit( Object, Body );
 
   // A new tandem instance is required here since the bodies are created statically.
-  var tandem = Tandem.createStaticTandem( 'bodies' );
+  var tandem = Tandem.rootTandem.createTandem( 'bodies' );
 
   // @public {read-only} body objects for gravity panel
   Body.MOON = new Body( bodyMoonString, MassesAndSpringsConstants.MOON_GRAVITY, tandem.createTandem( 'moon' ) );
