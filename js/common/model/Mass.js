@@ -222,7 +222,7 @@ define( function( require ) {
     } );
 
     // @private {boolean} Flag used to determine whether we are preserving the thermal energy.
-    this.perserveThermalEnergy = true;
+    this.preserveThermalEnergy = true;
 
     // As the total energy changes we can derive the thermal energy as being the energy lost from the system
     this.totalEnergyProperty.link( function( newTotalEnergy, oldTotalEnergy ) {
