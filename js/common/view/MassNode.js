@@ -312,6 +312,9 @@ define( function( require ) {
               position.y + rect.centerY - ARROW_SIZE_DEFAULT * netForce
             );
           }
+          else if ( netAcceleration === 0 ) {
+            self.netForceArrow.setTailAndTip( 0, 0, 0, 0 );
+          }
         }
         if ( accelerationVisible ) {
           if ( Math.abs( netAcceleration ) > 1E-6 ) {
@@ -323,7 +326,7 @@ define( function( require ) {
             );
           }
           else if ( netAcceleration === 0 ) {
-            self.accelerationArrow.visible = false;
+            self.accelerationArrow.setTailAndTip( 0, 0, 0, 0 );
           }
         }
       } );
