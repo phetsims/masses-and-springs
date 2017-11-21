@@ -150,6 +150,12 @@ define( function( require ) {
         } )
       ]
     } );
+
+    this.resetAllButton.addListener( function() {
+      self.model.reset();
+      self.energyGraphNode.reset();
+    } );
+
     zeroHeightLabel.center = zeroHeightLine.center;
     zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width);
     this.addChild( zeroHeightLabel );
@@ -210,7 +216,6 @@ define( function( require ) {
         -self.rulerNode.width / 2, self.rulerNode.height / 2, self.rulerNode.width / 2, -self.rulerNode.height / 2
       ) );
       self.massNodes.forEach( function( massNode ) {
-
         if ( massNode.centerX > visibleBounds.maxX ) {
           massNode.mass.positionProperty.set(
             new Vector2( self.modelViewTransform.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
@@ -227,5 +232,10 @@ define( function( require ) {
 
   massesAndSprings.register( 'OneSpringView', OneSpringView );
 
-  return inherit( SpringView, OneSpringView );
+  return inherit( SpringView, OneSpringView, {
+    reset: function() {
+      MassesAndSpringsModel.prototype.reset.call( this );
+      this.energyGraphNode.reset()
+    }
+  } );
 } );

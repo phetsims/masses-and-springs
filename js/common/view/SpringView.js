@@ -135,7 +135,6 @@ define( function( require ) {
     this.resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
-
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
         self.resetMassLayer();
       },

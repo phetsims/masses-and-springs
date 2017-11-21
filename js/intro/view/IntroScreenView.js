@@ -57,7 +57,6 @@ define( function( require ) {
         visible: false,
         constrainValue: function( value ) {
           value = Number( Util.toFixed( value, 2 ) );
-          console.log( value );
           return value;
         }
       }

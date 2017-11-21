@@ -62,6 +62,7 @@ define( function( require ) {
      * @constructor
      */
     function EnergyGraphNode( model, tandem ) {
+      var self = this;
 
       // Zoom levels are based on powers of two (i.e. 1x, 2x, 4x, 8x, 16x). The Min/Max scales and scale factor
       // must always be a power of two.
@@ -70,7 +71,7 @@ define( function( require ) {
 
       // {read-write} Responsible for the zoom level in the bar graph. Is adjusted by the zoom buttons and used for the
       // scaling property of the barNodes.
-      var zoomLevelProperty = new Property( 3 );
+      this.zoomLevelProperty = new Property( 3 );
 
       // Creation of zoom in/out buttons
       var zoomButtonOptions = {
@@ -86,17 +87,17 @@ define( function( require ) {
 
       // Zooming out means bars and zoom level gets smaller.
       zoomOutButton.addListener( function() {
-        zoomLevelProperty.value -= 1;
+        self.zoomLevelProperty.value -= 1;
       } );
 
       // Zooming in means bars and zoom level gets larger.
       zoomInButton.addListener( function() {
-        zoomLevelProperty.value += 1;
+        self.zoomLevelProperty.value += 1;
       } );
 
       // TODO: Can we move this into the bar node? Ask JO
       // {read-write} Responsible for adjusting the scaling of the barNode heights.
-      var scaleFactorProperty = new DerivedProperty( [ zoomLevelProperty ], function( zoomLevel ) {
+      var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
         return Math.pow( 2, zoomLevel );
       } );
 
@@ -321,6 +322,12 @@ define( function( require ) {
     }
 
     massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
-    return inherit( AccordionBox, EnergyGraphNode );
+  return inherit( AccordionBox, EnergyGraphNode, {
+      reset: function() {
+        this.zoomLevelProperty.reset();
+        console.log( 'reset called' );
+      }
+    }
+  );
   }
 );
