@@ -16,6 +16,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var MassValueControlPanel = require( 'MASSES_AND_SPRINGS/common/view/MassValueControlPanel' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -235,7 +236,7 @@ define( function( require ) {
   return inherit( SpringView, OneSpringView, {
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
-      this.energyGraphNode.reset()
+      this.energyGraphNode.reset();
     }
   } );
 } );
