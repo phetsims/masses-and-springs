@@ -22,7 +22,7 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var introString = require( 'string!MASSES_AND_SPRINGS/intro' );
+  var screenIntroString = require( 'string!MASSES_AND_SPRINGS/screen.intro' );
 
   // image
   var introHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/intro_screen_icon.png' );
@@ -35,7 +35,7 @@ define( function( require ) {
   function IntroScreen( tandem ) {
 
     var options = {
-      name: introString,
+      name: screenIntroString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
         phetioType: PropertyIO( ColorIO ),

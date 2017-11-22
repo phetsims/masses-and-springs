@@ -21,7 +21,7 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var labString = require( 'string!MASSES_AND_SPRINGS/lab' );
+  var screenLabString = require( 'string!MASSES_AND_SPRINGS/screen.lab' );
 
   // image
   var labHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/lab_screen_icon.png' );
@@ -34,7 +34,7 @@ define( function( require ) {
   function LabScreen( tandem ) {
 
     var options = {
-      name: labString,
+      name: screenLabString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
         phetioType: PropertyIO( ColorIO ),

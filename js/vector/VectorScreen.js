@@ -21,7 +21,7 @@ define( function( require ) {
   var VectorScreenView = require( 'MASSES_AND_SPRINGS/vector/view/VectorScreenView' );
 
   // strings
-  var vectorString = require( 'string!MASSES_AND_SPRINGS/vector' );
+  var screenVectorString = require( 'string!MASSES_AND_SPRINGS/screen.vector' );
 
   // image
   var vectorHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/vectors_screen_icon.png' );
@@ -34,7 +34,7 @@ define( function( require ) {
   function VectorScreen( tandem ) {
 
     var options = {
-      name: vectorString,
+      name: screenVectorString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
         phetioType: PropertyIO( ColorIO ),

@@ -2,10 +2,10 @@
   "masses-and-springs.title": {
     "value": "Masses and Springs"
   },
-  "intro": {
+  "screen.intro": {
     "value": "Intro"
   },
-  "lab": {
+  "screen.lab": {
     "value": "Lab"
   },
   "constant": {
@@ -44,10 +44,10 @@
   "energyLegend": {
     "value": "Energy Legend"
   },
-  "vector": {
+  "screen.vector": {
     "value": "Vector"
   },
-  "energy": {
+  "screen.energy": {
     "value": "Energy"
   },
   "energyGraph": {

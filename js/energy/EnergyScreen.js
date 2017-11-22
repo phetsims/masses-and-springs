@@ -20,7 +20,7 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var energyString = require( 'string!MASSES_AND_SPRINGS/energy' );
+  var screenEnergyString = require( 'string!MASSES_AND_SPRINGS/screen.energy' );
 
   // image
   var energyHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/energy_screen_icon.png' );
@@ -33,7 +33,7 @@ define( function( require ) {
   function EnergyScreen( tandem ) {
 
     var options = {
-      name: energyString,
+      name: screenEnergyString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
         phetioType: PropertyIO( ColorIO ),
