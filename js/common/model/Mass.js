@@ -247,6 +247,16 @@ define( function( require ) {
       self.isAnimatingProperty.set( false );
     } );
 
+    // Set the equilibrium position when a mass value changes. We do a similar process in Mass.js when the mass is attached to the spring.
+    this.massProperty.link( function( value ) {
+      var spring = self.springProperty.value;
+      if ( spring ) {
+
+        // springExtension = mg/k
+        var springExtensionValue = ( value * spring.gravityProperty.value) / spring.springConstantProperty.value;
+        spring.equilibriumYPositionProperty.set( spring.positionProperty.get().y - spring.naturalRestingLengthProperty.value - springExtensionValue );
+      }
+    } );
   }
 
   massesAndSprings.register( 'Mass', Mass );

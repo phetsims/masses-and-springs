@@ -192,23 +192,23 @@ define( function( require ) {
     );
 
     // @public {read-only} y position of the equilibrium position
-    this.equilibriumYPositionProperty = new DerivedProperty(
-      [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
-      function( springConstant, gravity, mass, naturalRestingLength ) {
-        if ( mass ) {
-
-          // springExtension = mg/k
-          self.springExtension = mass.massProperty.get() ? ( mass.massProperty.get() * gravity ) / springConstant : 0;
-        }
-        return self.positionProperty.get().y - naturalRestingLength - self.springExtension;
-      },
+    this.equilibriumYPositionProperty = new Property( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
         phetioType: DerivedPropertyIO( NumberIO )
-      }
-    );
+      } );
+
+    // Set the equilibrium position when a mass is attached to the spring. We do a similar process in Mass.js when the mass value changes.
+    Property.multilink( [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
+      function( springConstant, gravity, mass, naturalRestingLength ) {
+        if ( mass ) {
+          var springExtensionValue = ( mass.massProperty.value * self.gravityProperty.value) / self.springConstantProperty.value;
+          self.equilibriumYPositionProperty.set( self.positionProperty.get().y - naturalRestingLength - springExtensionValue );
+        }
+      } );
+
     this.springConstantProperty.link( function( springConstant ) {
       self.updateThickness( self.naturalRestingLengthProperty.get(), springConstant );
     } );
@@ -337,13 +337,18 @@ define( function( require ) {
       if ( this.massAttachedProperty.get() ) {
         var mass = this.massAttachedProperty.get();
 
+        this.step( 100 );
+
         // set displacement and stop further animation
         this.displacementProperty.set( -this.springExtension );
 
         // place that mass at the correct location as well
-        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );
+        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.displacementProperty.get() ) );
         mass.verticalVelocityProperty.set( 0 );
+        this.step( 100 );
         mass.accelerationProperty.set( 0 );
+
+
       }
     },
 

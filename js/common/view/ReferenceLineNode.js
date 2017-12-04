@@ -60,8 +60,8 @@ define( function( require ) {
     } );
 
     // updates the position of the reference line as the system changes
-    Property.multilink( [ spring.massAttachedProperty, spring.naturalRestingLengthProperty, property ], function( mass, restingLength, monitoredProperty ) {
-
+    Property.multilink( [ spring.massAttachedProperty, spring.naturalRestingLengthProperty, property ],
+      function( mass, restingLength, monitoredProperty ) {
       if ( options.zeroPointLine ) {
         return;
       }

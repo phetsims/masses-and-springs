@@ -325,7 +325,6 @@ define( function( require ) {
   return inherit( AccordionBox, EnergyGraphNode, {
       reset: function() {
         this.zoomLevelProperty.reset();
-        console.log( 'reset called' );
       }
     }
   );
