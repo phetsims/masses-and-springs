@@ -268,7 +268,7 @@ define( function( require ) {
      * @param {number} gravity
      * @param {number} floorY
      * @param {number} dt
-     * @param {number} animationDt - dt used for the falling animation after a mass is released
+     * @param {number} animationDt - dt used for the sliding animation after a mass is released
      *
      * @public
      */
@@ -278,6 +278,7 @@ define( function( require ) {
       if ( this.isAnimatingProperty.value ) {
         var distance = this.animationStartPosition.distance( this.animationEndPosition );
         if ( distance > 0 ) {
+
           // Adjust the speed of animation depending on the distance between the start and end
           var animationSpeed = Math.sqrt( 2 / distance );
 
@@ -296,10 +297,10 @@ define( function( require ) {
       // If we're not animating/controlled or attached to a spring, we'll fall due to gravity
       else if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
         var oldY = this.positionProperty.get().y;
-        if ( oldY !== floorPosition ) {
           var newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
           var newY = oldY + ( this.verticalVelocityProperty.get() + newVerticalVelocity ) * dt / 2;
           if ( newY < floorPosition ) {
+
             // if we hit the ground stop falling
             this.positionProperty.set( new Vector2( this.positionProperty.get().x, floorPosition ) );
             this.verticalVelocityProperty.set( 0 );
@@ -314,7 +315,6 @@ define( function( require ) {
             this.verticalVelocityProperty.set( newVerticalVelocity );
             this.positionProperty.set( new Vector2( this.positionProperty.get().x, newY ) );
           }
-        }
       }
     },
 
