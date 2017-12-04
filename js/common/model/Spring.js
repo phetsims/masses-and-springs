@@ -337,18 +337,14 @@ define( function( require ) {
       if ( this.massAttachedProperty.get() ) {
         var mass = this.massAttachedProperty.get();
 
-        this.step( 100 );
-
         // set displacement and stop further animation
         this.displacementProperty.set( -this.springExtension );
 
         // place that mass at the correct location as well
         mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.displacementProperty.get() ) );
         mass.verticalVelocityProperty.set( 0 );
-        this.step( 100 );
         mass.accelerationProperty.set( 0 );
-
-
+        this.step( 100 );
       }
     },
 

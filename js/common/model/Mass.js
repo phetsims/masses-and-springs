@@ -155,9 +155,9 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} Net force applied to mass
-    this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.gravityProperty ],
-      function( springForce, gravity ) {
-        return springForce - self.mass * gravity;
+    this.netForceProperty = new DerivedProperty( [ this.springForceProperty, this.massProperty, this.gravityProperty ],
+      function( springForce, massValue, gravity ) {
+        return springForce - massValue * gravity;
       } );
 
     // Link that sets the acceleration property of the mass
