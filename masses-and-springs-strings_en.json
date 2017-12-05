@@ -1,60 +1,6 @@
 {
-  "masses-and-springs.title": {
-    "value": "Masses and Springs"
-  },
-  "screen.intro": {
-    "value": "Intro"
-  },
-  "screen.lab": {
-    "value": "Lab"
-  },
-  "constant": {
-    "value": "Constant"
-  },
-  "kineticEnergy": {
-    "value": "Kinetic Energy"
-  },
-  "ke": {
-    "value": "KE"
-  },
-  "gravitationalPotentialEnergy": {
-    "value": "Gravitational Potential Energy"
-  },
-  "peGrav": {
-    "value": "PE<sub>grav</sub>"
-  },
-  "elasticPotentialEnergy": {
-    "value": "Elastic Potential Energy"
-  },
-  "peElas": {
-    "value": "PE<sub>elas</sub>"
-  },
-  "thermalEnergy": {
-    "value": "Thermal Energy"
-  },
-  "eTherm": {
-    "value": "E<sub>therm</sub>"
-  },
-  "totalEnergy": {
-    "value": "Total Energy"
-  },
-  "eTot": {
-    "value": "E<sub>tot</sub>"
-  },
-  "energyLegend": {
-    "value": "Energy Legend"
-  },
-  "screen.vectors": {
-    "value": "Vectors"
-  },
-  "screen.energy": {
-    "value": "Energy"
-  },
-  "energyGraph": {
-    "value": "Energy Graph"
-  },
-  "equilibriumPosition": {
-    "value": "Equilibrium Position"
+  "acceleration": {
+    "value": "Acceleration"
   },
   "body.custom": {
     "value": "Custom"
@@ -71,6 +17,42 @@
   "body.planetX": {
     "value": "Planet X"
   },
+  "cm": {
+    "value": "cm"
+  },
+  "constant": {
+    "value": "Constant"
+  },
+  "damping": {
+    "value": "Damping"
+  },
+  "elasticPotentialEnergy": {
+    "value": "Elastic Potential Energy"
+  },
+  "energyGraph": {
+    "value": "Energy Graph"
+  },
+  "energyLegend": {
+    "value": "Energy Legend"
+  },
+  "equilibriumPosition": {
+    "value": "Equilibrium Position"
+  },
+  "eTherm": {
+    "value": "E<sub>therm</sub>"
+  },
+  "eTot": {
+    "value": "E<sub>tot</sub>"
+  },
+  "forces": {
+    "value": "Forces"
+  },
+  "gravitationalPotentialEnergy": {
+    "value": "Gravitational Potential Energy"
+  },
+  "gravityValue": {
+    "value": "{{gravity}} m/s<sup>2</sup>"
+  },
   "gravity": {
     "value": "Gravity"
   },
@@ -80,67 +62,85 @@
   "gravity.lots": {
     "value": "Lots"
   },
-  "springConstant.small": {
-    "value": "Small"
+  "heightEqualsZero": {
+    "value": "Height = 0"
   },
-  "springConstant.large": {
-    "value": "Large"
+  "ke": {
+    "value": "KE"
   },
-  "springConstant": {
-    "value": "Spring Constant {{spring}}"
+  "kineticEnergy": {
+    "value": "Kinetic Energy"
   },
   "length": {
     "value": "Spring Length {{spring}}"
   },
-  "damping": {
-    "value": "Damping"
-  },
-  "questionMark": {
-    "value": "?"
+  "mass": {
+    "value": "Mass"
   },
   "massValue": {
     "value": "{{mass}} g"
   },
-  "gravityValue": {
-    "value": "{{gravity}} m/s<sup>2</sup>"
-  },
-  "mass": {
-    "value": "Mass"
-  },
-  "thickness": {
-    "value": "Thickness"
-  },
-  "cm": {
-    "value": "cm"
-  },
-  "normal": {
-    "value": "Normal"
-  },
-  "slow": {
-    "value": "Slow"
-  },
-  "naturalLength": {
-    "value": "Natural Length"
+  "masses-and-springs.title": {
+    "value": "Masses and Springs"
   },
   "movableLine": {
     "value": "Movable Line"
   },
-  "velocity": {
-    "value": "Velocity"
-  },
-  "acceleration": {
-    "value": "Acceleration"
-  },
-  "forces": {
-    "value": "Forces"
+  "naturalLength": {
+    "value": "Natural Length"
   },
   "netForce": {
     "value": "Net Force"
   },
+  "normal": {
+    "value": "Normal"
+  },
+  "peElas": {
+    "value": "PE<sub>elas</sub>"
+  },
+  "peGrav": {
+    "value": "PE<sub>grav</sub>"
+  },
+  "questionMark": {
+    "value": "?"
+  },
+  "screen.energy": {
+    "value": "Energy"
+  },
+  "screen.intro": {
+    "value": "Intro"
+  },
+  "screen.lab": {
+    "value": "Lab"
+  },
+  "screen.vectors": {
+    "value": "Vectors"
+  },
+  "slow": {
+    "value": "Slow"
+  },
   "spring": {
     "value": "Spring"
   },
-  "heightEqualsZero": {
-    "value": "Height = 0"
+  "springConstant": {
+    "value": "Spring Constant {{spring}}"
+  },
+  "springConstant.large": {
+    "value": "Large"
+  },
+  "springConstant.small": {
+    "value": "Small"
+  },
+  "thermalEnergy": {
+    "value": "Thermal Energy"
+  },
+  "thickness": {
+    "value": "Thickness"
+  },
+  "totalEnergy": {
+    "value": "Total Energy"
+  },
+  "velocity": {
+    "value": "Velocity"
   }
 }
