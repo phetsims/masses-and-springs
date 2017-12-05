@@ -37,7 +37,7 @@ define( function( require ) {
 
   // strings
   var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
-  var slowMotionString = require( 'string!MASSES_AND_SPRINGS/slowMotion' );
+  var slowString = require( 'string!MASSES_AND_SPRINGS/slow' );
   var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
 
   // constants
@@ -159,22 +159,22 @@ define( function( require ) {
     };
     var speedSelectionButtonRadius = 8;
     var normalText = new Text( normalString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'normalString' ) } );
-    this.normalMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'normal', normalText, {
+    this.normalRadioBox = new AquaRadioButton( model.simSpeedProperty, 'normal', normalText, {
       radius: speedSelectionButtonRadius,
-      tandem: tandem.createTandem( 'normalMotionRadioBox' )
+      tandem: tandem.createTandem( 'normalRadioBox' )
     } );
 
-    var slowText = new Text( slowMotionString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'slowText' ) } );
-    this.slowMotionRadioBox = new AquaRadioButton( model.simSpeedProperty, 'slow', slowText, {
+    var slowText = new Text( slowString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'slowText' ) } );
+    this.slowRadioBox = new AquaRadioButton( model.simSpeedProperty, 'slow', slowText, {
       radius: speedSelectionButtonRadius,
-      tandem: tandem.createTandem( 'normalMotionRadioBox' )
+      tandem: tandem.createTandem( 'slowRadioBox' )
     } );
 
     var radioButtonSpacing = 4;
     this.speedControl = new VBox( {
       align: 'left',
       spacing: radioButtonSpacing,
-      children: [ this.normalMotionRadioBox, this.slowMotionRadioBox ],
+      children: [ this.normalRadioBox, this.slowRadioBox ],
       right: this.resetAllButton.left - 30,
       centerY: this.resetAllButton.centerY,
       tandem: tandem.createTandem( 'speedControl' )
