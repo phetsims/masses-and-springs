@@ -44,8 +44,8 @@
   "energyLegend": {
     "value": "Energy Legend"
   },
-  "screen.vector": {
-    "value": "Vector"
+  "screen.vectors": {
+    "value": "Vectors"
   },
   "screen.energy": {
     "value": "Energy"
