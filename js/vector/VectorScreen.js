@@ -41,7 +41,6 @@ define( function( require ) {
         maxDT: 1
       } ),
       homeScreenIcon: new Image( vectorHomeScreenImage ),
-      navigationBarIcon: new Image( vectorHomeScreenImage ),
       tandem: tandem
     };
 

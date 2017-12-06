@@ -40,7 +40,6 @@ define( function( require ) {
         maxDT: 1
       } ),
       homeScreenIcon: new Image( energyHomeScreenImage ),
-      navigationBarIcon: new Image( energyHomeScreenImage ),
       tandem: tandem
     };
 

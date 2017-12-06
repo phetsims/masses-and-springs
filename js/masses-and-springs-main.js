@@ -31,8 +31,7 @@ define( function( require ) {
       softwareDevelopment: 'Denzell Barnett, Matt Pennington',
       team: 'Ariel Paul, Kathy Perkins, Mike Dubson',
       qualityAssurance: 'Steele Dalton'
-    },
-    showSmallHomeScreenIconFrame: true
+    }
   };
 
   SimLauncher.launch( function() {

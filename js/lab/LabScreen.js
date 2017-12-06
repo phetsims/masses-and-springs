@@ -41,7 +41,6 @@ define( function( require ) {
         maxDT: 1
       } ),
       homeScreenIcon: new Image( labHomeScreenImage ),
-      navigationBarIcon: new Image( labHomeScreenImage ),
       tandem: tandem
     };
 
