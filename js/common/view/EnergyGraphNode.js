@@ -33,6 +33,8 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
   var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
+  var PushButtonIO = require( 'SUN/buttons/PushButtonIO' );
+
 
     // constants
     var MAXIMUM_HEIGHT = 425;
@@ -288,6 +290,7 @@ define( function( require ) {
           }
           dialog.show();
         },
+        phetioType: PushButtonIO,
         touchAreaXDilation: 10,
         touchAreaYDilation: 5
       } );
