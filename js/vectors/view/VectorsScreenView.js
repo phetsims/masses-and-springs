@@ -1,7 +1,7 @@
 // Copyright 2016-2017, University of Colorado Boulder
 
 /**
- * Common screen view for vector screen.
+ * Common screen view for vectors screen.
  *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
@@ -14,14 +14,14 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
-  var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vector/view/VectorVisibilityControlPanel' );
+  var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlPanel' );
 
   /**
-   * @param {VectorModel} model
+   * @param {VectorsModel} model
    * @param {Tandem} tandem
    * @constructor
    */
-  function VectorScreenView( model, tandem ) {
+  function VectorsScreenView( model, tandem ) {
 
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
@@ -50,7 +50,7 @@ define( function( require ) {
     this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
   }
 
-  massesAndSprings.register( 'VectorScreenView', VectorScreenView );
+  massesAndSprings.register( 'VectorsScreenView', VectorsScreenView );
 
-  return inherit( TwoSpringView, VectorScreenView );
+  return inherit( TwoSpringView, VectorsScreenView );
 } );
