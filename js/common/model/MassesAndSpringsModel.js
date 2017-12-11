@@ -92,6 +92,10 @@ define( function( require ) {
       units: 'seconds'
     } );
 
+    this.timerSecondsProperty.link( function( value ) {
+      console.log( 'timerSeconds = ' + value );
+    } );
+
     // @public {Property.<boolean>} determines whether timer is active or not
     this.timerRunningProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'timerRunningPropertyProperty' )
@@ -371,11 +375,9 @@ define( function( require ) {
         mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + .02, dt, animationDt );
       } );
       if ( this.timerRunningProperty.get() ) {
-
-        // Removal of rounding errors by setting to fixed decimal places.
-        var seconds = Number( Util.toFixed( this.timerSecondsProperty.get() + dt, 2 ) );
-        this.timerSecondsProperty.set( Number( Util.toFixed( seconds, 2 ) ) );
+        this.timerSecondsProperty.set( this.timerSecondsProperty.get() + dt );
       }
+
       // Oscillate springs
       this.springs.forEach( function( spring ) {
         spring.step( dt );

@@ -14,8 +14,10 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
+  var DynamicProperty = require( 'AXON/DynamicProperty' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  var Util = require( 'DOT/Util' );
   var Vector2IO = require( 'DOT/Vector2IO' );
 
   /**
@@ -29,7 +31,16 @@ define( function( require ) {
    */
   function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty, tandem ) {
     var self = this;
-    TimerNode.call( this, timerSecondsProperty, timerRunningProperty, {
+
+    // Readout value that is used for the timerNode. We are rounding the value in the view component.
+    var timerReadoutProperty = new DynamicProperty( new Property( timerSecondsProperty ), {
+      bidirectional: true,
+      map: function( seconds ) {
+        return Util.roundSymmetric( seconds * 1e5 ) / 1e5;
+      }
+    } );
+
+    TimerNode.call( this, timerReadoutProperty, timerRunningProperty, {
       tandem: tandem.createTandem( 'timer' )
     } );
 
