@@ -110,6 +110,7 @@ define( function( require ) {
       range: naturalRestingLengthRange
     } );
 
+
     // @public {Property.<number> read-only} line width of oscillating spring node
     this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
@@ -211,6 +212,13 @@ define( function( require ) {
 
     this.springConstantProperty.link( function( springConstant ) {
       self.updateThickness( self.naturalRestingLengthProperty.get(), springConstant );
+    } );
+
+    // When the length of the spring is adjusted we need to adjust the position of the attached mass.
+    this.naturalRestingLengthProperty.link( function() {
+      if ( self.massAttachedProperty.value ) {
+        self.setMass( self.massAttachedProperty.get() );
+      }
     } );
   }
 
