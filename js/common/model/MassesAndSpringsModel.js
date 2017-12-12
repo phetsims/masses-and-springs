@@ -92,10 +92,6 @@ define( function( require ) {
       units: 'seconds'
     } );
 
-    this.timerSecondsProperty.link( function( value ) {
-      console.log( 'timerSeconds = ' + value );
-    } );
-
     // @public {Property.<boolean>} determines whether timer is active or not
     this.timerRunningProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'timerRunningPropertyProperty' )
