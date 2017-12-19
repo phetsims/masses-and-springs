@@ -27,8 +27,8 @@ define( function( require ) {
   var Vector2IO = require( 'DOT/Vector2IO' );
 
   // phet-io modules
-  var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
   var NullableIO = require( 'ifphetio!PHET_IO/types/NullableIO' );
+  var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
 
   // constants
   var DEFAULT_THICKNESS = 3; // empirically determine

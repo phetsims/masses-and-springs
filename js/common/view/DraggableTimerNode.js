@@ -10,11 +10,11 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var DynamicProperty = require( 'AXON/DynamicProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
-  var DynamicProperty = require( 'AXON/DynamicProperty' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var Util = require( 'DOT/Util' );

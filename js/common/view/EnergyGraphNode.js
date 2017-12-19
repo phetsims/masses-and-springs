@@ -32,8 +32,8 @@ define( function( require ) {
   var ColorConstants = require( 'SUN/ColorConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
-  var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
   var PushButtonIO = require( 'SUN/buttons/PushButtonIO' );
+  var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
 
 
     // constants
