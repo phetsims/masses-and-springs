@@ -34,8 +34,7 @@ define( function( require ) {
     var Property = require( 'AXON/Property' );
     var Rectangle = require( 'SCENERY/nodes/Rectangle' );
     var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
-
-
+    var PushButtonIO = require( 'SUN/buttons/PushButtonIO' );
 
     // constants
     var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
@@ -124,15 +123,15 @@ define( function( require ) {
       } );
 
       var eThermText = new RichText( eThermString, {
-        rotation: -Math.PI/2,
-        font:MassesAndSpringsConstants.TITLE_FONT,
+        rotation: -Math.PI / 2,
+        font: MassesAndSpringsConstants.TITLE_FONT,
         fill: '#ee6f3e'
         // maxWidth:40
       } );
 
-      clearThermalButton.center=eThermText.center.plusXY(0,eThermText.height);
+      clearThermalButton.center = eThermText.center.plusXY( 0, eThermText.height );
 
-      var dEntryNode = new Node( { children: [  eThermText , clearThermalButton ] } );
+      var dEntryNode = new Node( { children: [ eThermText, clearThermalButton ] } );
 
       var aEntry = {
         property: model.springs[ 0 ].kineticEnergyProperty,
@@ -176,7 +175,7 @@ define( function( require ) {
       ], new Property( new Range( -80, 380 ) ), {
         // TODO: Options here are not being used by sim. Why are common code options being used? Ask JO.
         barOptions: {
-          totalRange: new Range(0, 380 ),
+          totalRange: new Range( 0, 380 ),
           scaleProperty: scaleFactorProperty,
           xAxisOptions: {
             stroke: 'black',
@@ -185,7 +184,7 @@ define( function( require ) {
             minPadding: 3,
             maxExtension: 4
           },
-          barWidth:18
+          barWidth: 18
         },
         barSpacing: 5
       } );
