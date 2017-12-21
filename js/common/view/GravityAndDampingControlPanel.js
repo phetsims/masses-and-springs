@@ -47,7 +47,7 @@ define( function( require ) {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 13,
       yMargin: 10,
-      align: 'left',
+      align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       dampingVisible: false,
       readoutVisible: false
@@ -123,7 +123,7 @@ define( function( require ) {
       var dampingHSlider = new HSlider( model.dampingProperty, MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get(), sliderOptions );
 
       Panel.call( self, new VBox( {
-          align: 'left',
+          align: 'center',
           children: [
             new HBox( {
               spacing: 20,
@@ -144,7 +144,7 @@ define( function( require ) {
     }
     else {
       Panel.call( self, new VBox( {
-        align: 'left',
+        align: 'center',
         children: [
           new HBox( {
             spacing: 20,

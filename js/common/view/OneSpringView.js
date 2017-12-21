@@ -234,9 +234,18 @@ define( function( require ) {
   massesAndSprings.register( 'OneSpringView', OneSpringView );
 
   return inherit( SpringView, OneSpringView, {
+    /**
+     * TODO: add documentation
+     */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
       this.energyGraphNode.reset();
+    },
+    /**
+     * TODO: add documentation
+     */
+    step: function(dt) {
+      this.energyGraphNode.update();
     }
   } );
 } );

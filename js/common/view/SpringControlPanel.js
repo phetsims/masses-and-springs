@@ -68,7 +68,7 @@ define( function( require ) {
     }
 
     Panel.call( this, new VBox( {
-      align: 'left',
+      align: 'center',
       children: [
         new Text( title, { font: TITLE_FONT } ),
         hSlider

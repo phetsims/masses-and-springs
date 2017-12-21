@@ -13,12 +13,14 @@ define( function( require ) {
     // modules
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+    var BarChartNode = require( 'GRIDDLE/BarChartNode' );
     var DerivedProperty = require( 'AXON/DerivedProperty' );
     var Dialog = require( 'JOIST/Dialog' );
     var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
     var HBox = require( 'SCENERY/nodes/HBox' );
     var HStrut = require( 'SCENERY/nodes/HStrut' );
     var inherit = require( 'PHET_CORE/inherit' );
+    var Range = require( 'DOT/Range' );
     var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
     var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
     var RichText = require( 'SCENERY/nodes/RichText' );
@@ -28,18 +30,18 @@ define( function( require ) {
     var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
     var VerticalCompositeBarNode = require( 'GRIDDLE/VerticalCompositeBarNode' );
     var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var ColorConstants = require( 'SUN/ColorConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
-  var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
+    var Bounds2 = require( 'DOT/Bounds2' );
+    var ColorConstants = require( 'SUN/ColorConstants' );
+    var Node = require( 'SCENERY/nodes/Node' );
+    var Property = require( 'AXON/Property' );
+    var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
 
     // constants
     var MAXIMUM_HEIGHT = 425;
     var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
     var MAX_WIDTH = 150;
-  var BAR_NODE_WIDTH = 17;
-  var BAR_MAX_HEIGHT = 320;
+    var BAR_NODE_WIDTH = 17;
+    var BAR_MAX_HEIGHT = 320;
 
     // strings
     var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
@@ -53,7 +55,7 @@ define( function( require ) {
     var peGravString = require( 'string!MASSES_AND_SPRINGS/peGrav' );
     var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
     var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
-  var eTotString = require( 'string!MASSES_AND_SPRINGS/eTot' );
+    var eTotString = require( 'string!MASSES_AND_SPRINGS/eTot' );
 
     /**
      *
@@ -98,7 +100,7 @@ define( function( require ) {
       // TODO: Can we move this into the bar node? Ask JO
       // {read-write} Responsible for adjusting the scaling of the barNode heights.
       var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
-        return Math.pow( 2, zoomLevel );
+        return Math.pow( 2, zoomLevel )*20;
       } );
 
       /**
@@ -117,106 +119,48 @@ define( function( require ) {
         } );
       }
 
-      // Labels that are rotated and added to the bottom of the x-axis
-      var xAxisLabels = [
-        createLabelText( keString, '#39d74e' ),
-        createLabelText( peGravString, '#5798de' ),
-        createLabelText( peElasString, '#29d4ff' ),
-        createLabelText( eThermString, '#ee6f3e' ),
-        createLabelText( eTotString, 'black' )
-      ];
+      var aEntry = {
+        property: model.springs[ 0 ].kineticEnergyProperty,
+        color: '#39d74e'
+      };
+      var bEntry = {
+        property: model.springs[ 0 ].gravitationalPotentialEnergyProperty,
+        color: '#5798de'
+      };
+      var cEntry = {
+        property: model.springs[ 0 ].elasticPotentialEnergyProperty,
+        color: '#29d4ff'
+      };
+      var dEntry = {
+        property: model.springs[ 0 ].thermalEnergyProperty,
+        color: '#ee6f3e'
+      };
 
-      /**
-       * Creates a scaled height for the bar to represent
-       *
-       * @param {Property} property
-       * @returns {DerivedProperty}
-       */
-      function createScaledHeightProperty( property ) {
-
-        // Create a scaled height for the bar to represent
-        return new DerivedProperty( [ property, scaleFactorProperty ],
-          function( value, scale ) {
-            return Math.min( MAXIMUM_HEIGHT, value * scale * 20 );
-          } );
-      }
-
-      /**
-       * Function that returns a barNode representing a property. BarNodes are initialized with a value of zero
-       *
-       * @param {DerivedProperty} property
-       * @param {String} fill
-       * @returns {VerticalBarNode}
-       */
-      function createBarNode( property, fill ) {
-        return new VerticalBarNode( property, {
-          fill: fill,
-          width: BAR_NODE_WIDTH,
-          maxBarHeight: BAR_MAX_HEIGHT,
-          minBarHeight: 39,
-          displayContinuousArrow: true,
-          barHighlightStroke: 'black'
-        } );
-      }
-
-      // We are using scaled heights to represent our bar values
-      var scaledKineticEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty );
-      var scaledGravitationalPotentialEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty );
-      var scaledElasticPotentialEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].elasticPotentialEnergyProperty );
-      var scaledThermalEnergyProperty = createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty );
-
-      // Creation of our different bar nodes to be represented in the graph on energy screen
-      this.barNodes = [
-        createBarNode( scaledKineticEnergyProperty, '#39d74e' ),
-        createBarNode( scaledGravitationalPotentialEnergyProperty, '#5798de' ),
-        createBarNode( scaledElasticPotentialEnergyProperty, '#29d4ff' ),
-        createBarNode( scaledThermalEnergyProperty, '#ee6f3e' )
-      ];
-
-      // These properties are used for the composite bar node.
-      var barProperties = [
-        createScaledHeightProperty( model.springs[ 0 ].thermalEnergyProperty ),
-        createScaledHeightProperty( model.springs[ 0 ].elasticPotentialEnergyProperty ),
-        createScaledHeightProperty( model.springs[ 0 ].gravitationalPotentialEnergyProperty ),
-        createScaledHeightProperty( model.springs[ 0 ].kineticEnergyProperty )
-      ];
-
-      // Colors used for each bar. Consider that the first barColor will be applied to the first barNode.
-      var barColors = [
-        '#ee6f3e',
-        '#29d4ff',
-        '#5798de',
-        '#39d74e'
-      ];
-
-      // Composite bar is used for the total energy readout in the energy graph.
-      var compositeBar = new VerticalCompositeBarNode( barProperties, barColors, {
-        width: BAR_NODE_WIDTH,
-        displayContinuousArrow: true,
-        arrowFill: 'black',
-        maxBarHeight: BAR_MAX_HEIGHT,
-        barHighlightStroke: 'black'
-      } );
-      this.barNodes.push( compositeBar );
-
-      // The main body for the energy graph.
-      var verticalBarChart = new VerticalBarChart( this.barNodes, {
-        width: 140,
-        height: MAXIMUM_HEIGHT,
-        titleFill: '#b37e46',
-        xAxisLabels: xAxisLabels,
-        thermalEnergyProperty: model.springs[ 0 ].thermalEnergyProperty,
-        thermalEnergyIndex: 3,
-        thermalEnergyListener: function() {
-
-          // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
-          // has been reset. Thermal energy is the only value that is dependent on initial total energy.
-          var mass = model.springs[ 0 ].massAttachedProperty.get();
-          if ( mass ) {
-            mass.initialTotalEnergyProperty.set( mass.kineticEnergyProperty.get() +
-                                                 mass.gravitationalPotentialEnergyProperty.get() +
-                                                 mass.elasticPotentialEnergyProperty.get() );
-          }
+      this.barChartNode = new BarChartNode( [
+        {
+          entries: [ aEntry ],
+          labelString: keString
+        },
+        {
+          entries: [ bEntry ],
+          labelString: peGravString
+        },
+        {
+          entries: [ cEntry ],
+          labelString: peElasString
+        },
+        {
+          entries: [ dEntry ],
+          labelString: eThermString
+        },
+        {
+          entries: [ dEntry,cEntry, bEntry, aEntry ],
+          labelString: eTotString
+        }
+      ], new Property( new Range( -100, 200 ) ), {
+        barOptions: {
+          totalRange: new Range( -100, 200 ),
+          scaleProperty: scaleFactorProperty
         }
       } );
 
@@ -298,7 +242,7 @@ define( function( require ) {
         spacing: 5
       } );
 
-      displayButtons.left = verticalBarChart.left;
+      displayButtons.left = this.barChartNode.left;
 
       // Provides a limit on the scale
       scaleFactorProperty.link( function( value ) {
@@ -308,7 +252,7 @@ define( function( require ) {
 
       var accordionBoxContent = new VBox( {
         children: [
-          verticalBarChart,
+          this.barChartNode,
           displayButtons
         ], spacing: 8
       } );
@@ -322,11 +266,19 @@ define( function( require ) {
     }
 
     massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
-  return inherit( AccordionBox, EnergyGraphNode, {
+    return inherit( AccordionBox, EnergyGraphNode, {
+      /**
+       * TODO: add documentation
+       */
       reset: function() {
         this.zoomLevelProperty.reset();
+      },
+      /**
+       * TODO: add documentation
+       */
+      update: function(){
+        this.barChartNode.update();
       }
-    }
-  );
+    } );
   }
 );
