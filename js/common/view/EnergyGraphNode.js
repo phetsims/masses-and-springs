@@ -14,6 +14,7 @@ define( function( require ) {
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
     var BarChartNode = require( 'GRIDDLE/BarChartNode' );
+    var ClearThermalButton = require( 'SCENERY_PHET/ClearThermalButton' );
     var DerivedProperty = require( 'AXON/DerivedProperty' );
     var Dialog = require( 'JOIST/Dialog' );
     var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
@@ -97,6 +98,39 @@ define( function( require ) {
       var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
         return Math.pow( 2, zoomLevel ) * 20;
       } );
+      // var buttonCenter = barNodes[ options.thermalEnergyIndex ].centerX;
+
+      var clearThermalButton = new ClearThermalButton( {
+        listener: function() {
+
+          // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
+          // has been reset. Thermal energy is the only value that is dependent on initial total energy.
+          var mass = model.springs[ 0 ].massAttachedProperty.get();
+          if ( mass ) {
+            mass.initialTotalEnergyProperty.set( mass.kineticEnergyProperty.get() +
+                                                 mass.gravitationalPotentialEnergyProperty.get() +
+                                                 mass.elasticPotentialEnergyProperty.get() );
+          }
+        },
+        // centerX: buttonCenter,
+        // top: xAxis.centerY + this.labelLayer.height,
+        scale: 0.7,
+        enabled: false
+      } );
+      model.springs[ 0 ].thermalEnergyProperty.lazyLink( function( value ) {
+        clearThermalButton.enabled = ( value > 0.001);
+      } );
+
+      var eThermText = new RichText( eThermString, {
+        rotation: -Math.PI/2,
+        font:MassesAndSpringsConstants.TITLE_FONT,
+        fill: '#ee6f3e'
+        // maxWidth:20
+      } );
+
+      clearThermalButton.center=eThermText.center.plusXY(0,eThermText.height);
+
+      var dEntryNode = new Node( { children: [  eThermText , clearThermalButton ] } );
 
       var aEntry = {
         property: model.springs[ 0 ].kineticEnergyProperty,
@@ -115,6 +149,7 @@ define( function( require ) {
         color: '#ee6f3e'
       };
 
+
       this.barChartNode = new BarChartNode( [
         {
           entries: [ aEntry ],
@@ -130,7 +165,7 @@ define( function( require ) {
         },
         {
           entries: [ dEntry ],
-          labelString: eThermString
+          labelNode: dEntryNode
         },
         {
           entries: [ dEntry, cEntry, bEntry, aEntry ],
