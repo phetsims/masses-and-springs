@@ -26,9 +26,6 @@ define( function( require ) {
     var RichText = require( 'SCENERY/nodes/RichText' );
     var Text = require( 'SCENERY/nodes/Text' );
     var VBox = require( 'SCENERY/nodes/VBox' );
-    var VerticalBarChart = require( 'GRIDDLE/VerticalBarChart' );
-    var VerticalBarNode = require( 'GRIDDLE/VerticalBarNode' );
-    var VerticalCompositeBarNode = require( 'GRIDDLE/VerticalCompositeBarNode' );
     var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
     var Bounds2 = require( 'DOT/Bounds2' );
     var ColorConstants = require( 'SUN/ColorConstants' );
@@ -37,11 +34,8 @@ define( function( require ) {
     var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
 
     // constants
-    var MAXIMUM_HEIGHT = 425;
     var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
     var MAX_WIDTH = 150;
-    var BAR_NODE_WIDTH = 17;
-    var BAR_MAX_HEIGHT = 320;
 
     // strings
     var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
@@ -102,22 +96,6 @@ define( function( require ) {
       var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
         return Math.pow( 2, zoomLevel )*20;
       } );
-
-      /**
-       * Creates a text for the labels to be placed on the x-axis.
-       *
-       * @param {String} string
-       * @param {String} color
-       * @returns {RichText}
-       */
-      function createLabelText( string, color ) {
-        return new RichText( string, {
-          fill: color,
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          rotation: ( -Math.PI / 2 ),
-          centerX: 40
-        } );
-      }
 
       var aEntry = {
         property: model.springs[ 0 ].kineticEnergyProperty,
