@@ -204,6 +204,7 @@ define( function( require ) {
     // @public {Property.<number>} Thermal energy of the mass
     this.thermalEnergyProperty = new DerivedProperty( [ this.initialTotalEnergyProperty, this.totalEnergyProperty ],
       function( initialEnergy, totalEnergy ) {
+        return initialEnergy - totalEnergy;
       } );
 
 
