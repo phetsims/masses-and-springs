@@ -31,6 +31,7 @@ define( function( require ) {
     var ColorConstants = require( 'SUN/ColorConstants' );
     var Node = require( 'SCENERY/nodes/Node' );
     var Property = require( 'AXON/Property' );
+    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
     var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
 
     // constants
@@ -94,7 +95,7 @@ define( function( require ) {
       // TODO: Can we move this into the bar node? Ask JO
       // {read-write} Responsible for adjusting the scaling of the barNode heights.
       var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
-        return Math.pow( 2, zoomLevel )*20;
+        return Math.pow( 2, zoomLevel ) * 20;
       } );
 
       var aEntry = {
@@ -132,14 +133,23 @@ define( function( require ) {
           labelString: eThermString
         },
         {
-          entries: [ dEntry,cEntry, bEntry, aEntry ],
+          entries: [ dEntry, cEntry, bEntry, aEntry ],
           labelString: eTotString
         }
-      ], new Property( new Range( -100, 200 ) ), {
+      ], new Property( new Range( -100, 350 ) ), {
+        // TODO: Options here are not being used by sim. Why are common code options being used? Ask JO.
         barOptions: {
-          totalRange: new Range( -100, 200 ),
-          scaleProperty: scaleFactorProperty
-        }
+          totalRange: new Range( -100, 350 ),
+          scaleProperty: scaleFactorProperty,
+          xAxisOptions: {
+            stroke: 'black',
+            lineWidth: 1,
+
+            minPadding: 3,
+            maxExtension: 4
+          }
+        },
+        barSpacing: 5
       } );
 
       // Manages the symbols used in the legend of the graph
@@ -228,11 +238,25 @@ define( function( require ) {
         zoomInButton.setEnabled( value !== MAX_SCALE );
       } );
 
+      // Background for bar graph
+      this.background = new Rectangle( 0, 0, 145, 450, {
+        fill: 'white',
+        stroke: 'black',
+        lineWidth: 0.8, // Empirically determined
+        cornerRadius: 7
+      } );
+      this.barChartNode.center = this.background.center.plusXY( 0, 20 );
+
+      var chartNode = new Node( {
+          children: [ this.background, this.barChartNode ]
+        }
+      );
+
       var accordionBoxContent = new VBox( {
         children: [
-          this.barChartNode,
+          chartNode,
           displayButtons
-        ], spacing: 8
+        ], spacing: 4
       } );
 
       // REVIEW: Not having an option for the accordion box gives me a tandem error.
@@ -254,7 +278,7 @@ define( function( require ) {
       /**
        * TODO: add documentation
        */
-      update: function(){
+      update: function() {
         this.barChartNode.update();
       }
     } );

@@ -123,7 +123,7 @@ define( function( require ) {
       var dampingHSlider = new HSlider( model.dampingProperty, MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get(), sliderOptions );
 
       Panel.call( self, new VBox( {
-          align: 'center',
+          align: 'left',
           children: [
             new HBox( {
               spacing: 20,
@@ -144,7 +144,7 @@ define( function( require ) {
     }
     else {
       Panel.call( self, new VBox( {
-        align: 'center',
+        align: 'left',
         children: [
           new HBox( {
             spacing: 20,
