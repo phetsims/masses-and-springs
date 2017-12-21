@@ -27,8 +27,8 @@ define( function( require ) {
   var Vector2IO = require( 'DOT/Vector2IO' );
 
   // phet-io modules
-  var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
   var NullableIO = require( 'ifphetio!PHET_IO/types/NullableIO' );
+  var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
 
   // constants
   var DEFAULT_THICKNESS = 3; // empirically determine
@@ -109,6 +109,7 @@ define( function( require ) {
       units: 'meters',
       range: naturalRestingLengthRange
     } );
+
 
     // @public {Property.<number> read-only} line width of oscillating spring node
     this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
@@ -211,6 +212,13 @@ define( function( require ) {
 
     this.springConstantProperty.link( function( springConstant ) {
       self.updateThickness( self.naturalRestingLengthProperty.get(), springConstant );
+    } );
+
+    // When the length of the spring is adjusted we need to adjust the position of the attached mass.
+    this.naturalRestingLengthProperty.link( function() {
+      if ( self.massAttachedProperty.value ) {
+        self.setMass( self.massAttachedProperty.get() );
+      }
     } );
   }
 

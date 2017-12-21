@@ -35,6 +35,8 @@ define( function( require ) {
     var Rectangle = require( 'SCENERY/nodes/Rectangle' );
     var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
 
+
+
     // constants
     var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
     var MAX_WIDTH = 150;
@@ -256,6 +258,7 @@ define( function( require ) {
           }
           dialog.show();
         },
+        phetioType: PushButtonIO,
         touchAreaXDilation: 10,
         touchAreaYDilation: 5
       } );

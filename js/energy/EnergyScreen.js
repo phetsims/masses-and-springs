@@ -36,8 +36,7 @@ define( function( require ) {
       name: screenEnergyString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioType: PropertyIO( ColorIO ),
-        maxDT: 1
+        phetioType: PropertyIO( ColorIO )
       } ),
       homeScreenIcon: new Image( energyHomeScreenImage ),
       tandem: tandem

@@ -18,7 +18,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Screen = require( 'JOIST/Screen' );
-  var VectorScreenView = require( 'MASSES_AND_SPRINGS/vector/view/VectorScreenView' );
+  var VectorsScreenView = require( 'MASSES_AND_SPRINGS/vectors/view/VectorsScreenView' );
 
   // strings
   var screenVectorsString = require( 'string!MASSES_AND_SPRINGS/screen.vectors' );
@@ -31,14 +31,13 @@ define( function( require ) {
    *
    * @constructor
    */
-  function VectorScreen( tandem ) {
+  function VectorsScreen( tandem ) {
 
     var options = {
       name: screenVectorsString,
       backgroundColorProperty: new Property( new Color( 'white' ), {
         tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioType: PropertyIO( ColorIO ),
-        maxDT: 1
+        phetioType: PropertyIO( ColorIO )
       } ),
       homeScreenIcon: new Image( vectorHomeScreenImage ),
       tandem: tandem
@@ -52,12 +51,12 @@ define( function( require ) {
         model.addDefaultMasses( modelTandem );
         return model;
       },
-      function( model ) { return new VectorScreenView( model, tandem.createTandem( 'view' ) ); },
+      function( model ) { return new VectorsScreenView( model, tandem.createTandem( 'view' ) ); },
       options
     );
   }
 
-  massesAndSprings.register( 'VectorScreen', VectorScreen );
+  massesAndSprings.register( 'VectorsScreen', VectorsScreen );
 
-  return inherit( Screen, VectorScreen );
+  return inherit( Screen, VectorsScreen );
 } );

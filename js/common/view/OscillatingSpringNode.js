@@ -60,10 +60,11 @@ define( function( require ) {
     function updateViewLength() {
 
       // ParametricSpringNode calculations
-      var coilLength = (
+      // Value of coilStretch is in view coordinates and doesn't have model units.
+      var coilStretch = (
       modelViewTransform2.modelToViewDeltaY( spring.lengthProperty.get() )
       - ( options.leftEndLength + options.rightEndLength) );
-      var xScale = coilLength / ( self.loopsProperty.get() * self.radiusProperty.get() );
+      var xScale = coilStretch / ( self.loopsProperty.get() * self.radiusProperty.get() );
 
       //The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
       //Spring is rotated to be rotated so XScale relates to Y-direction in view
