@@ -45,7 +45,7 @@ define( function( require ) {
 
     var displacementArrowNode = new DisplacementArrowNode( this.springNodes[ 0 ].spring.displacementProperty, tandem );
     displacementArrowNode.right = this.springNodes[ 0 ].left;
-    displacementArrowNode.bottom = 300
+    displacementArrowNode.bottom = 300; // TODO: magic number
     this.addChild( displacementArrowNode );
 
     this.toolboxPanel.top = vectorVisibilityControlPanel.bottom + this.spacing;
