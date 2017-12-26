@@ -15,7 +15,6 @@ define( function( require ) {
   var phetioInherit = require( 'ifphetio!PHET_IO/phetioInherit' );
 
   /**
-   *
    * @param {Spring} spring
    * @param {string} phetioID
    * @constructor
