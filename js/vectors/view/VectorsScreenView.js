@@ -15,6 +15,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
   var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlPanel' );
+  var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
 
   /**
    * @param {VectorsModel} model
@@ -41,6 +42,11 @@ define( function( require ) {
     );
     this.addChild( vectorVisibilityControlPanel );
     vectorVisibilityControlPanel.moveToBack();
+
+    var displacementArrowNode = new DisplacementArrowNode( this.springNodes[ 0 ].spring.displacementProperty, tandem );
+    displacementArrowNode.right = this.springNodes[ 0 ].left;
+    displacementArrowNode.bottom = 300
+    this.addChild( displacementArrowNode );
 
     this.toolboxPanel.top = vectorVisibilityControlPanel.bottom + this.spacing;
 
