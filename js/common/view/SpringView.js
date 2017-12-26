@@ -242,7 +242,9 @@ define( function( require ) {
         {
           top: this.spacing,
           maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
-          visible: true
+          visible: true,
+          fill: 'white',
+          stroke: 'gray'
         }
       )
         ;

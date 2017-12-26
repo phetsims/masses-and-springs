@@ -52,6 +52,8 @@ define( function( require ) {
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         right: this.firstSpringStopperButtonNode.left - this.spacing,
+        fill: 'white',
+        stroke: 'gray',
         top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
         visible: false,
