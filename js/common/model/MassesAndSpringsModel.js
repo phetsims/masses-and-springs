@@ -98,12 +98,12 @@ define( function( require ) {
     } );
 
     // @public {Property.<boolean>} determines visibility of movable line node
-    this.movableLineVisibleProperty = new BooleanProperty( true, {
+    this.movableLineVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'movableLineVisibleProperty' )
     } );
 
     // @public {Property.<boolean>} determines visibility of equilibrium line node
-    this.equilibriumPositionVisibleProperty = new BooleanProperty( true, {
+    this.equilibriumPositionVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'equilibriumPositionVisibleProperty' )
     } );
 
