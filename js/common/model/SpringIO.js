@@ -16,8 +16,8 @@ define( function( require ) {
 
   /**
    *
-   * @param spring
-   * @param phetioID
+   * @param {Spring} spring
+   * @param {string} phetioID
    * @constructor
    */
   function SpringIO( spring, phetioID ) {
