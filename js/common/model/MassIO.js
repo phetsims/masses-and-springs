@@ -16,8 +16,8 @@ define( function( require ) {
 
   /**
    *
-   * @param mass
-   * @param phetioID
+   * @param {Mass} mass
+   * @param {string} phetioID
    * @constructor
    */
   function MassIO( mass, phetioID ) {

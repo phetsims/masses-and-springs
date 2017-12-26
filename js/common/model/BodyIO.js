@@ -16,8 +16,8 @@ define( function( require ) {
 
   /**
    *
-   * @param body
-   * @param phetioID
+   * @param {Body} body
+   * @param {string} phetioID
    * @constructor
    */
   function BodyIO( body, phetioID ) {
