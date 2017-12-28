@@ -47,7 +47,6 @@ define( function( require ) {
       // update the vector
       displacementArrow.visible = ( displacement !== 0 ); // since we can't draw a zero-length arrow
       if ( displacement !== 0 ) {
-        console.log( 'displacement = ' + displacement );
         displacementArrow.setTailAndTip( 0, 0, 0, options.unitDisplacementLength * displacement );
       }
 
