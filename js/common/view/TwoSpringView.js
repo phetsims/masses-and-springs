@@ -49,15 +49,15 @@ define( function( require ) {
     this.firstSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
     this.firstSpringStopperButtonNode.right = this.springHangerNode.left - this.spacing;
 
-    var secondSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 1 ], tandem );
-    secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
+    this.secondSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 1 ], tandem );
+    this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
 
     // Spring Constant Control Panels
     this.firstSpringConstantControlPanel = this.createSpringConstantPanel( 0, tandem );
     this.firstSpringConstantControlPanel.right = this.springHangerNode.left - 40;
 
     this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, tandem );
-    this.secondSpringConstantControlPanel.left = secondSpringStopperButtonNode.right + this.spacing;
+    this.secondSpringConstantControlPanel.left = this.secondSpringStopperButtonNode.right + this.spacing;
 
     // Initializes red movable reference line
     var movableLineNode = new MovableLineNode(
@@ -158,7 +158,7 @@ define( function( require ) {
     this.addChild( this.timeControlPanel );
     this.addChild( this.speedControl );
     this.addChild( this.firstSpringStopperButtonNode );
-    this.addChild( secondSpringStopperButtonNode );
+    this.addChild( this.secondSpringStopperButtonNode );
 
     //Reference lines from indicator visibility box
     this.addChild( firstSpringEquilibriumLineNode );
