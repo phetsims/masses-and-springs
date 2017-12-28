@@ -27,16 +27,17 @@ define( function( require ) {
     options = _.extend( {
       verticalLineVisible: true,
       valueVisibleProperty: new Property( true ), // {Property.<boolean>} determines whether the value is visible
-      unitDisplacementLength: 100
+      unitDisplacementLength: -100
     }, options );
 
     var displacementArrow = new ForceVectorArrow( 'green', 'displacementArrow', tandem );
 
-    var verticalLine = new Line( 0, 0, 0, 20, {
+    var verticalLine = new Line( -10, 0, 10, 0, {
       stroke: 'black',
       lineWidth: 2,
       centerY: displacementArrow.centerY,
-      visible: options.verticalLineVisible
+      visible: options.verticalLineVisible,
+      rotate: Math.PI
     } );
 
     options.children = [ verticalLine, displacementArrow ];
@@ -47,7 +48,7 @@ define( function( require ) {
       displacementArrow.visible = ( displacement !== 0 ); // since we can't draw a zero-length arrow
       if ( displacement !== 0 ) {
         console.log( 'displacement = ' + displacement );
-        displacementArrow.setTailAndTip( 0, 0, options.unitDisplacementLength * displacement, 0 );
+        displacementArrow.setTailAndTip( 0, 0, 0, options.unitDisplacementLength * displacement );
       }
 
     } );
