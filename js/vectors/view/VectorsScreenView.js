@@ -80,8 +80,8 @@ define( function( require ) {
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
-      self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+      vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
       vectorVisibilityControlPanel.top = self.gravityAndDampingControlPanel.bottom + self.spacing;
       self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
       self.toolboxPanel.top = vectorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
