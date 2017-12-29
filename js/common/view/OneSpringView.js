@@ -13,7 +13,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
-  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
+  var ReferenceLinePanel = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLinePanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -50,9 +50,9 @@ define( function( require ) {
       } );
 
     // Control Panel for display elements with varying visibility
-    this.indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
+    this.referenceLinePanel = new ReferenceLinePanel(
       model,
-      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
+      tandem.createTandem( 'referenceLinePanel' ), {
         top: this.spacing,
         right: this.rightPanelAlignment,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
@@ -61,7 +61,7 @@ define( function( require ) {
 
     // Spring Constant Control Panel
     var springConstantControlPanel = this.createSpringConstantPanel( 0, tandem );
-    springConstantControlPanel.right = this.indicatorVisibilityControlPanel.left - this.spacing;
+    springConstantControlPanel.right = this.referenceLinePanel.left - this.spacing;
 
     springHangerNode.top = springConstantControlPanel.top;
 
@@ -116,7 +116,7 @@ define( function( require ) {
       model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
       {
         right: this.rightPanelAlignment,
-        top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        top: this.referenceLinePanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: true
@@ -187,7 +187,7 @@ define( function( require ) {
     this.addChild( springHangerNode );
     this.addChild( massValueControlPanel );
     this.addChild( springConstantControlPanel );
-    this.addChild( this.indicatorVisibilityControlPanel );
+    this.addChild( this.referenceLinePanel );
     this.addChild( this.gravityAndDampingControlPanel );
     this.addChild( this.toolboxPanel );
     this.addChild( this.energyGraphNode );
@@ -212,7 +212,7 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
-      self.indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      self.referenceLinePanel.right = visibleBounds.right - self.spacing;
       self.gravityAndDampingControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;

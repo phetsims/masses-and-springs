@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
+  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -57,6 +57,7 @@ define( function( require ) {
 
     // Displacement arrows added for each springs
     var firstDisplacementArrowNode = new DisplacementArrowNode(
+      this.modelViewTransform,
       this.springNodes[ 0 ].spring.displacementProperty,
       model.displacementVisibleProperty,
       tandem
@@ -66,6 +67,7 @@ define( function( require ) {
     this.addChild( firstDisplacementArrowNode );
 
     var secondDisplacementArrowNode = new DisplacementArrowNode(
+      this.modelViewTransform,
       this.springNodes[ 1 ].spring.displacementProperty,
       model.displacementVisibleProperty,
       tandem
@@ -78,8 +80,8 @@ define( function( require ) {
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
-      self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+      vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
       vectorVisibilityControlPanel.top = self.gravityAndDampingControlPanel.bottom + self.spacing;
       self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
       self.toolboxPanel.top = vectorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
