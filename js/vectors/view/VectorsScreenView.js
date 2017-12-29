@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -32,11 +33,21 @@ define( function( require ) {
       massNode.vectorViewEnabled = true;
     } );
 
+    // Control Panel for display elements with varying visibility
+    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
+      model,
+      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
+        top: this.spacing,
+        right: this.rightPanelAlignment,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+      }
+    );
+    this.addChild( indicatorVisibilityControlPanel );
+
     var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),
       {
-        top: this.gravityAndDampingControlPanel.bottom + this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
       }
     );
@@ -58,7 +69,12 @@ define( function( require ) {
     this.toolboxPanel.top = vectorVisibilityControlPanel.bottom + this.spacing;
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-      vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
+      vectorVisibilityControlPanel.top = self.gravityAndDampingControlPanel.bottom + self.spacing;
+      self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+      self.toolboxPanel.top = vectorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
     } );
     this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
   }

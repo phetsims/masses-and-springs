@@ -14,7 +14,6 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
-  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -103,16 +102,6 @@ define( function( require ) {
     this.shelf.rectY = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) - this.shelf.rectHeight;
 
     this.addChild( this.shelf );
-
-    // Control Panel for display elements with varying visibility
-    this.indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
-        top: this.spacing,
-        right: this.rightPanelAlignment,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      }
-    );
 
     // Timer and Ruler
     this.timerNode = new DraggableTimerNode(

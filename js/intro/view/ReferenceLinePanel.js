@@ -24,7 +24,7 @@ define( function( require ) {
   // strings
   var equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
-  var displacementString = require( 'string!MASSES_AND_SPRINGS/displacement' );
+  var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
 
   // constants
   var LINE_LENGTH = 25;
@@ -35,7 +35,7 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function IndicatorVisibilityControlPanel( model, tandem, options ) {
+  function ReferenceLinePanel( model, tandem, options ) {
 
     /**
      * Creates line for visual representation within the panel.
@@ -62,13 +62,13 @@ define( function( require ) {
       {
         content: new HBox( {
           children: [ new Text(
-            displacementString,
-            { font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'displacementString' ) } )
+            naturalLengthString,
+            { font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'naturalLengthString' ) } )
           ],
-          tandem: tandem.createTandem( 'displacementHBox' )
+          tandem: tandem.createTandem( 'naturalLengthHBox' )
         } ),
-        property: model.displacementVisibleProperty,
-        label: displacementString
+        property: model.naturalLengthVisibleProperty,
+        label: naturalLengthString
       },
       {
         content: new HBox( {
@@ -95,12 +95,12 @@ define( function( require ) {
     ], { boxWidth: 15, spacing: 5, tandem: tandem.createTandem( 'indicatorVisibilityCheckBoxGroup' ) } );
     var titleToControlsVerticalSpace = 2;
     var indicatorVisibilityControlsVBox = new VBox( {
-      children: [
-        new VStrut( titleToControlsVerticalSpace ),
-        indicatorVisibilityCheckBoxGroup
-      ],
-      align: 'left',
-      tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
+        children: [
+          new VStrut( titleToControlsVerticalSpace ),
+          indicatorVisibilityCheckBoxGroup
+        ],
+        align: 'left',
+        tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
       }
     );
     var lineVBox = new VBox( {
@@ -128,14 +128,14 @@ define( function( require ) {
         xMargin: 10,
         fill: MassesAndSpringsConstants.PANEL_FILL,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'indicatorVisibilityControlPanel' ),
+        tandem: tandem.createTandem( 'ReferenceLinePanel' ),
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       }
     );
     this.mutate( options );
   }
 
-  massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );
+  massesAndSprings.register( 'ReferenceLinePanel', ReferenceLinePanel );
 
-  return inherit( Panel, IndicatorVisibilityControlPanel );
+  return inherit( Panel, ReferenceLinePanel );
 } );

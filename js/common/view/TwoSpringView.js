@@ -115,7 +115,6 @@ define( function( require ) {
       model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
       {
         right: this.rightPanelAlignment,
-        top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: false
@@ -130,7 +129,6 @@ define( function( require ) {
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ),
       {
-        top: this.gravityAndDampingControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         left: this.gravityAndDampingControlPanel.left,
         minWidth: this.gravityAndDampingControlPanel.width,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
@@ -149,7 +147,6 @@ define( function( require ) {
     // Adding Panels to scene graph
     this.addChild( this.firstSpringConstantControlPanel );
     this.addChild( this.secondSpringConstantControlPanel );
-    this.addChild( this.indicatorVisibilityControlPanel );
     this.addChild( this.gravityAndDampingControlPanel );
     this.addChild( this.toolboxPanel );
 
@@ -176,7 +173,6 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
-      self.indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
       self.gravityAndDampingControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;

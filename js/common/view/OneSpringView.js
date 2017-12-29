@@ -13,6 +13,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
+  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -47,6 +48,16 @@ define( function( require ) {
       {
         singleSpring: true
       } );
+
+    // Control Panel for display elements with varying visibility
+    this.indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
+      model,
+      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
+        top: this.spacing,
+        right: this.rightPanelAlignment,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+      }
+    );
 
     // Spring Constant Control Panel
     var springConstantControlPanel = this.createSpringConstantPanel( 0, tandem );
@@ -165,7 +176,6 @@ define( function( require ) {
     this.rulerNode.toolbox = this.toolboxPanel;
     this.timerNode.toolbox = this.toolboxPanel;
 
-    this.toolboxPanel.top = this.gravityAndDampingControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
     this.toolboxPanel.left = this.gravityAndDampingControlPanel.left;
     this.toolboxPanel.minWidth = this.gravityAndDampingControlPanel.width;
 

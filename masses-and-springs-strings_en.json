@@ -26,6 +26,9 @@
   "damping": {
     "value": "Damping"
   },
+  "displacement": {
+    "value": "Displacement"
+  },
   "elasticPotentialEnergy": {
     "value": "Elastic Potential Energy"
   },

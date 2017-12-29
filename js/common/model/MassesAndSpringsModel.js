@@ -112,6 +112,11 @@ define( function( require ) {
       tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
     } );
 
+    // @public {Property.<boolean>} determines visibility of displacement arrow node
+    this.displacementVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'displacementVisibleProperty' )
+    } );
+
     // @public {Property.<string>} name of planet selected
     this.bodyProperty = new Property( Body.EARTH, {
       tandem: tandem.createTandem( 'bodyProperty' ),
