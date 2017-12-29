@@ -12,7 +12,7 @@ define( function( require ) {
   // modules
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/ConstantsControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ReferenceLinePanel = require( 'MASSES_AND_SPRINGS/intro/view/ReferenceLinePanel' );
+  var ReferenceLinePanel = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLinePanel' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );

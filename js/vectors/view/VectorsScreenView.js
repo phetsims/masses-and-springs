@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/common/view/IndicatorVisibilityControlPanel' );
+  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
