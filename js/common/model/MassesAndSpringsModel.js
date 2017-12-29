@@ -113,7 +113,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<boolean>} determines visibility of displacement arrow node
-    this.displacementVisibleProperty = new BooleanProperty( true, {
+    this.displacementVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'displacementVisibleProperty' )
     } );
 
@@ -260,6 +260,7 @@ define( function( require ) {
       this.accelerationVectorVisibilityProperty.reset();
       this.gravityVectorVisibilityProperty.reset();
       this.springVectorVisibilityProperty.reset();
+      this.displacementVisibleProperty.reset();
       this.forcesModeProperty.reset();
       this.masses.forEach( function( mass ) { mass.reset(); } );
       this.springs.forEach( function( spring ) { spring.reset(); } );
