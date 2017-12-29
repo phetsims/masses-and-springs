@@ -1,7 +1,7 @@
 // Copyright 2017, University of Colorado Boulder
 
 /**
- * PhET-iO wrapper type for Masses-And-Springs built-in Spring type.
+ * IO type for Spring.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
