@@ -113,7 +113,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<boolean>} determines visibility of displacement arrow node
-    this.displacementVisibleProperty = new BooleanProperty( false, {
+    this.displacementVisibleProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'displacementVisibleProperty' )
     } );
 

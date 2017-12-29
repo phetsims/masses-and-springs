@@ -18,15 +18,15 @@ define( function( require ) {
 
   /**
    * @param {Property.<number>} displacementProperty units = m
+   * @param {Property.<boolean>} visibleProperty
    * @param {Tandem} tandem
    * @param {Object} [options]
    * @constructor
    */
-  function DisplacementArrowNode( displacementProperty, tandem, options ) {
+  function DisplacementArrowNode( displacementProperty, visibleProperty, tandem, options ) {
 
     options = _.extend( {
       verticalLineVisible: true,
-      valueVisibleProperty: new Property( true ), // {Property.<boolean>} determines whether the value is visible
       unitDisplacementLength: -100
     }, options );
 
@@ -42,14 +42,14 @@ define( function( require ) {
 
     options.children = [ verticalLine, displacementArrow ];
 
-    displacementProperty.link( function( displacement ) {
+    Property.multilink( [ displacementProperty, visibleProperty ], function( displacement, visible ) {
 
       // update the vector
-      displacementArrow.visible = ( displacement !== 0 ); // since we can't draw a zero-length arrow
+      displacementArrow.visible = ( displacement !== 0 ) && visible; // since we can't draw a zero-length arrow
+      verticalLine.visible = displacementArrow.visible && visible;
       if ( displacement !== 0 ) {
         displacementArrow.setTailAndTip( 0, 0, 0, options.unitDisplacementLength * displacement );
       }
-
     } );
     Node.call( this, options );
   }

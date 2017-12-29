@@ -56,12 +56,20 @@ define( function( require ) {
 
 
     // Displacement arrows added for each springs
-    var firstDisplacementArrowNode = new DisplacementArrowNode( this.springNodes[ 0 ].spring.displacementProperty, tandem );
+    var firstDisplacementArrowNode = new DisplacementArrowNode(
+      this.springNodes[ 0 ].spring.displacementProperty,
+      model.displacementVisibleProperty,
+      tandem
+    );
     firstDisplacementArrowNode.right = this.springNodes[ 0 ].left;
     firstDisplacementArrowNode.top = this.springNodes[ 0 ].bottom;
     this.addChild( firstDisplacementArrowNode );
 
-    var secondDisplacementArrowNode = new DisplacementArrowNode( this.springNodes[ 1 ].spring.displacementProperty, tandem );
+    var secondDisplacementArrowNode = new DisplacementArrowNode(
+      this.springNodes[ 1 ].spring.displacementProperty,
+      model.displacementVisibleProperty,
+      tandem
+    );
     secondDisplacementArrowNode.right = this.springNodes[ 1 ].left;
     secondDisplacementArrowNode.top = this.springNodes[ 1 ].bottom;
     this.addChild( secondDisplacementArrowNode );
