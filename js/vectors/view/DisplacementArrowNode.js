@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
@@ -23,7 +24,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function DisplacementArrowNode( displacementProperty, visibleProperty, tandem, options ) {
+  function DisplacementArrowNode( mvt, displacementProperty, visibleProperty, tandem, options ) {
 
     options = _.extend( {
       verticalLineVisible: true,
@@ -48,7 +49,7 @@ define( function( require ) {
       displacementArrow.visible = ( displacement !== 0 ) && visible; // since we can't draw a zero-length arrow
       verticalLine.visible = displacementArrow.visible && visible;
       if ( displacement !== 0 ) {
-        displacementArrow.setTailAndTip( 0, 0, 0, options.unitDisplacementLength * displacement );
+        displacementArrow.setTailAndTip( 0, 0, 0, -0.01 * mvt.modelToViewY( options.unitDisplacementLength * displacement ) );
       }
     } );
     Node.call( this, options );

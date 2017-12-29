@@ -57,6 +57,7 @@ define( function( require ) {
 
     // Displacement arrows added for each springs
     var firstDisplacementArrowNode = new DisplacementArrowNode(
+      this.modelViewTransform,
       this.springNodes[ 0 ].spring.displacementProperty,
       model.displacementVisibleProperty,
       tandem
@@ -66,6 +67,7 @@ define( function( require ) {
     this.addChild( firstDisplacementArrowNode );
 
     var secondDisplacementArrowNode = new DisplacementArrowNode(
+      this.modelViewTransform,
       this.springNodes[ 1 ].spring.displacementProperty,
       model.displacementVisibleProperty,
       tandem
