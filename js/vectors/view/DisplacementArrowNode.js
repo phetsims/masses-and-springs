@@ -24,10 +24,12 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function DisplacementArrowNode( mvt, displacementProperty, visibleProperty, tandem, options ) {
+  function DisplacementArrowNode( displacementProperty, visibleProperty, tandem, options ) {
 
     options = _.extend( {
+      modelViewTransform: null,
       verticalLineVisible: true,
+      symbolRepresentation: false,
       unitDisplacementLength: -92 // use this value to adjust the scale of the vector's length
     }, options );
 
@@ -39,27 +41,35 @@ define( function( require ) {
       tailLineWidth: 3
     };
 
-    var displacementArrow = new LineArrowNode( 0, 0, 1, 0, DISPLACEMENT_ARROW_OPTIONS );
+    // Creation of the symbol for the displacement vector.
+    var displacementArrow = new LineArrowNode( 0, 0, 30, 0, DISPLACEMENT_ARROW_OPTIONS );
+    options.children = [ displacementArrow ];
 
-    var verticalLine = new Line( -10, 0, 10, 0, {
-      stroke: 'black',
-      lineWidth: 2,
-      centerY: displacementArrow.centerY,
-      visible: options.verticalLineVisible,
-      rotate: Math.PI
-    } );
+    if ( !options.symbolRepresentation ) {
 
-    options.children = [ verticalLine, displacementArrow ];
+      assert && assert( options.modelViewTransform != null, ' options.modelViewTransform should be defined ' );
 
-    Property.multilink( [ displacementProperty, visibleProperty ], function( displacement, visible ) {
+      var verticalLine = new Line( -10, 0, 10, 0, {
+        stroke: 'black',
+        lineWidth: 2,
+        centerY: displacementArrow.centerY,
+        visible: options.verticalLineVisible,
+        rotate: Math.PI
+      } );
 
-      // update the vector
-      displacementArrow.visible = ( displacement !== 0 ) && visible; // since we can't draw a zero-length arrow
-      verticalLine.visible = displacementArrow.visible && visible;
-      if ( displacement !== 0 ) {
-        displacementArrow.setTailAndTip( 0, 0, 0, -0.01 * mvt.modelToViewY( options.unitDisplacementLength * displacement ) );
-      }
-    } );
+      Property.multilink( [ displacementProperty, visibleProperty ], function( displacement, visible ) {
+
+        // update the vector length
+        displacementArrow.visible = ( displacement !== 0 ) && visible; // since we can't draw a zero-length arrow
+        verticalLine.visible = displacementArrow.visible && visible;
+        if ( displacement !== 0 ) {
+          displacementArrow.setTailAndTip( 0, 0, 0, -0.01 * options.modelViewTransform.modelToViewY( options.unitDisplacementLength * displacement ) );
+        }
+      } );
+      options.children = [ displacementArrow, verticalLine ];
+
+    }
+
     Node.call( this, options );
   }
 

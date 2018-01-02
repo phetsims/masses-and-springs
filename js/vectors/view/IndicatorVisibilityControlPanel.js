@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -16,6 +17,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Panel = require( 'SUN/Panel' );
+  var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
@@ -55,7 +57,16 @@ define( function( require ) {
 
     // Lines added for reference in panel
     var greenLine = createLine( 'rgb( 93, 191, 142 )', tandem.createTandem( 'greenLine' ) );
-    var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
+    var displacementSymbol = new DisplacementArrowNode(
+      new Property( 10 ),
+      new Property( true ),
+      tandem,
+      {
+        modelViewTransform: this.modelViewTransform,
+        symbolRepresentation: true,
+      }
+    );
+    displacementSymbol.scale( .65 );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
     var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
@@ -106,10 +117,10 @@ define( function( require ) {
     var lineVBox = new VBox( {
       children: [
         new VStrut( titleToControlsVerticalSpace ),
-        blueLine,
-        new VStrut( 20 ),
+        displacementSymbol,
+        new VStrut( 17 ),
         greenLine,
-        new VStrut( 20 ),
+        new VStrut( 17 ),
         redLine,
         new VStrut( titleToControlsVerticalSpace )
       ]
