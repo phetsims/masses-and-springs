@@ -17,9 +17,11 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   var MassesAndSpringsConstants = {
+
     //TODO: Insert constants here
     MAX_TEXT_WIDTH: 80,
     DEFAULT_SPRING_LENGTH: 0.5,
+    RADIO_BUTTON_RADIUS: 6,
 
     // Ratio for dt when sim is in slow motion
     SIM_DT_RATIO: 8,

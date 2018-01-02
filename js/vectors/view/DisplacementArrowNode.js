@@ -47,7 +47,7 @@ define( function( require ) {
 
     if ( !options.symbolRepresentation ) {
 
-      assert && assert( options.modelViewTransform != null, ' options.modelViewTransform should be defined ' );
+      assert && assert( options.modelViewTransform !== null, ' options.modelViewTransform should be defined ' );
 
       var verticalLine = new Line( -10, 0, 10, 0, {
         stroke: 'black',

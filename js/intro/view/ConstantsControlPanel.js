@@ -52,8 +52,6 @@ define( function( require ) {
       maxWidth: MAX_TEXT_WIDTH
     };
 
-    // radius of button
-    var constantsSelectionButtonRadius = 6;
     var thicknessText = new Text(
       thicknessString,
       _.extend( { tandem: tandem.createTandem( 'thicknessText' ) },
@@ -61,7 +59,7 @@ define( function( require ) {
           constantsSelectionButtonOptions
         ) ) );
     var thicknessRadioButton = new AquaRadioButton( selectedConstantProperty, 'spring-thickness', thicknessText, {
-      radius: constantsSelectionButtonRadius,
+      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
       tandem: tandem.createTandem( 'thicknessRadioButton' )
     } );
 
@@ -70,7 +68,7 @@ define( function( require ) {
       _.extend( { tandem: tandem.createTandem( 'constantText' ) },
         constantsSelectionButtonOptions ) );
     var springConstantRadioButton = new AquaRadioButton( selectedConstantProperty, 'spring-constant', constantText, {
-      radius: constantsSelectionButtonRadius,
+      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
       tandem: tandem.createTandem( 'springConstantRadioButton' )
     } );
 

@@ -146,16 +146,15 @@ define( function( require ) {
       font: new PhetFont( 14 ),
       maxWidth: MAX_TEXT_WIDTH
     };
-    var speedSelectionButtonRadius = 8;
     var normalText = new Text( normalString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'normalString' ) } );
     this.normalRadioBox = new AquaRadioButton( model.simSpeedProperty, 'normal', normalText, {
-      radius: speedSelectionButtonRadius,
+      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
       tandem: tandem.createTandem( 'normalRadioBox' )
     } );
 
     var slowText = new Text( slowString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'slowText' ) } );
     this.slowRadioBox = new AquaRadioButton( model.simSpeedProperty, 'slow', slowText, {
-      radius: speedSelectionButtonRadius,
+      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
       tandem: tandem.createTandem( 'slowRadioBox' )
     } );
 
