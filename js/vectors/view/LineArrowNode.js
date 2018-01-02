@@ -5,6 +5,7 @@
  * An arrow that is composed of 3 line segments: one for the tail, and 2 for a V-shaped head
  *
  * @author Chris Malley (PixelZoom, Inc.)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';

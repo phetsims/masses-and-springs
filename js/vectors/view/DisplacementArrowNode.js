@@ -1,9 +1,9 @@
 // Copyright 2015, University of Colorado Boulder
 
 /**
- * Vector representation of displacement (x).
+ * Vector representation of displacement (y).
  *
- * @author Chris Malley (PixelZoom, Inc.)
+ * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
   'use strict';
@@ -28,7 +28,7 @@ define( function( require ) {
 
     options = _.extend( {
       verticalLineVisible: true,
-      unitDisplacementLength: -100
+      unitDisplacementLength: -92 // use this value to adjust the scale of the vector's length
     }, options );
 
     var DISPLACEMENT_ARROW_OPTIONS = {
