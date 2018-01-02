@@ -18,7 +18,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var LINEAR_LOOP_MAPPING = new LinearFunction( 0.1, 0.5, 1, 12 );
+  var LINEAR_LOOP_MAPPING = new LinearFunction( 0.1, 0.5, 2, 12 );
   var MAP_NUMBER_OF_LOOPS = function( springLength ) {
     return Util.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) );
   };
