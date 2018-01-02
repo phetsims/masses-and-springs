@@ -9,10 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Color = require( 'SCENERY/util/Color' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var LineArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/LineArrowNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
 
@@ -30,7 +31,15 @@ define( function( require ) {
       unitDisplacementLength: -100
     }, options );
 
-    var displacementArrow = new ForceVectorArrow( 'green', 'displacementArrow', tandem );
+    var DISPLACEMENT_ARROW_OPTIONS = {
+      stroke: new Color( 0, 180, 0 ),
+      headWidth: 20,
+      headHeight: 10,
+      headLineWidth: 3,
+      tailLineWidth: 3
+    };
+
+    var displacementArrow = new LineArrowNode( 0, 0, 1, 0, DISPLACEMENT_ARROW_OPTIONS );
 
     var verticalLine = new Line( -10, 0, 10, 0, {
       stroke: 'black',
