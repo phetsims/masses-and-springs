@@ -23,6 +23,7 @@ define( function( require ) {
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -33,6 +34,8 @@ define( function( require ) {
   // strings
   var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
   var lengthString = require( 'string!MASSES_AND_SPRINGS/length' );
+  var longString = require( 'string!MASSES_AND_SPRINGS/long' );
+  var shortString = require( 'string!MASSES_AND_SPRINGS/short' );
 
   /**
    * @param {IntroModel} model
@@ -45,11 +48,16 @@ define( function( require ) {
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
 
-    // Spring Constant Length Control Panel
+    // Spring Length Control Panel
+    var minMaxLabels = [
+      new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT } ),
+      new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT } )
+    ];
     this.springLengthControlPanel = new SpringControlPanel(
       model.spring1.naturalRestingLengthProperty,
       new RangeWithValue( 0.1, 0.5, 0.3 ),
       StringUtils.fillIn( lengthString, { spring: 1 } ),
+      minMaxLabels,
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         right: this.firstSpringStopperButtonNode.left - this.spacing,

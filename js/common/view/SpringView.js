@@ -218,15 +218,17 @@ define( function( require ) {
     /**
      * Creates a panel that controls the designated spring's spring constant value.
      *
-     * @param {Number} springIndex
+     * @param {number} springIndex
      * @param {Tandem} tandem
+     * @param {array.<Text>} labels
      * @returns {*}
      */
-    createSpringConstantPanel: function( springIndex, tandem ) {
+    createSpringConstantPanel: function( springIndex, labels, tandem ) {
       return new SpringControlPanel(
         this.model.springs[ springIndex ].springConstantProperty,
         new RangeWithValue( 5, 15, 9 ),
         StringUtils.fillIn( springConstantString, { spring: springIndex + 1 } ),
+        labels,
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
         {
           top: this.spacing,

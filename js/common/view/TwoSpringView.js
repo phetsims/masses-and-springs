@@ -19,12 +19,17 @@ define( function( require ) {
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var EQUILIBRIUM_LINE_FILL = 'rgb( 93, 191, 142 )';
   var NATURAL_LENGTH_LINE_FILL = 'rgb( 65, 66, 232 )';
+
+  // strings
+  var largeString = require( 'string!MASSES_AND_SPRINGS/large' );
+  var smallString = require( 'string!MASSES_AND_SPRINGS/small' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -53,10 +58,14 @@ define( function( require ) {
     this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
 
     // Spring Constant Control Panels
-    this.firstSpringConstantControlPanel = this.createSpringConstantPanel( 0, tandem );
+    var minMaxLabels = [
+      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT } ),
+      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT } )
+    ];
+    this.firstSpringConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
     this.firstSpringConstantControlPanel.right = this.springHangerNode.left - 40;
 
-    this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, tandem );
+    this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, minMaxLabels, tandem );
     this.secondSpringConstantControlPanel.left = this.secondSpringStopperButtonNode.right + this.spacing;
 
     // Initializes red movable reference line

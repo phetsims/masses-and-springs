@@ -15,25 +15,23 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Panel = require( 'SUN/Panel' );
-  var springConstantLargeString = require( 'string!MASSES_AND_SPRINGS/springConstant.large' );
-  var springConstantSmallString = require( 'string!MASSES_AND_SPRINGS/springConstant.small' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
-  var LABEL_FONT = MassesAndSpringsConstants.LABEL_FONT;
   var TITLE_FONT = MassesAndSpringsConstants.TITLE_FONT;
 
   /**
    * @param {Property.<number>} SpringProperty - Property to be adjusted by hSlider
    * @param {Range} PropertyRange - range of values for length
    * @param {string} title - string used to title the panel
+   * @param {array.<Text>} labels - formatted as: [ minLabel, maxLabel]
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function SpringControlPanel( SpringProperty, PropertyRange, title, tandem, options ) {
+  function SpringControlPanel( SpringProperty, PropertyRange, title, labels, tandem, options ) {
     options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 5,
@@ -58,15 +56,14 @@ define( function( require ) {
       tandem: tandem.createTandem( 'hSlider' )
     } );
 
-    hSlider.addMajorTick( PropertyRange.min, new Text( springConstantSmallString, { font: LABEL_FONT } ) );
+    hSlider.addMajorTick( PropertyRange.min, labels[ 0 ] );
     hSlider.addMajorTick( PropertyRange.min + ( PropertyRange.max - PropertyRange.min ) / 2 );
-    hSlider.addMajorTick( PropertyRange.max, new Text( springConstantLargeString, { font: LABEL_FONT } ) );
+    hSlider.addMajorTick( PropertyRange.max, labels[ 1 ] );
     for ( var i = 1; i < 10; i++ ) {
       if ( i !== 5 ) {
         hSlider.addMinorTick( PropertyRange.min + i * ( PropertyRange.max - PropertyRange.min ) / 10 );
       }
     }
-
     Panel.call( this, new VBox( {
       align: 'center',
       children: [

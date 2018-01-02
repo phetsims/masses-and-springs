@@ -31,6 +31,8 @@ define( function( require ) {
 
   // strings
   var heightEqualsZeroString = require( 'string!MASSES_AND_SPRINGS/heightEqualsZero' );
+  var largeString = require( 'string!MASSES_AND_SPRINGS/large' );
+  var smallString = require( 'string!MASSES_AND_SPRINGS/small' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -60,7 +62,11 @@ define( function( require ) {
     );
 
     // Spring Constant Control Panel
-    var springConstantControlPanel = this.createSpringConstantPanel( 0, tandem );
+    var minMaxLabels = [
+      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT } ),
+      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT } )
+    ];
+    var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
     springConstantControlPanel.right = this.referenceLinePanel.left - this.spacing;
 
     springHangerNode.top = springConstantControlPanel.top;
@@ -85,7 +91,6 @@ define( function( require ) {
         fixedPosition: true
       }
     );
-
 
     var springStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
     springStopperButtonNode.right = springConstantControlPanel.left - this.spacing;
@@ -254,7 +259,7 @@ define( function( require ) {
     /**
      * TODO: add documentation
      */
-    step: function(dt) {
+    step: function( dt ) {
       this.energyGraphNode.update();
     }
   } );

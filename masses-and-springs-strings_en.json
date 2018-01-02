@@ -74,8 +74,11 @@
   "kineticEnergy": {
     "value": "Kinetic Energy"
   },
-  "length": {
-    "value": "Spring Length {{spring}}"
+  "large": {
+    "value": "Large"
+  },
+  "long": {
+    "value": "Long"
   },
   "mass": {
     "value": "Mass"
@@ -119,6 +122,9 @@
   "screen.vectors": {
     "value": "Vectors"
   },
+  "short": {
+    "value": "Short"
+  },
   "slow": {
     "value": "Slow"
   },
@@ -128,10 +134,10 @@
   "springConstant": {
     "value": "Spring Constant {{spring}}"
   },
-  "springConstant.large": {
-    "value": "Large"
+  "length": {
+    "value": "Spring Length {{spring}}"
   },
-  "springConstant.small": {
+  "small": {
     "value": "Small"
   },
   "thermalEnergy": {
