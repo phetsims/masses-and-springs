@@ -9,18 +9,25 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
+
+
+  // strings
+  var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
+  var slowString = require( 'string!MASSES_AND_SPRINGS/slow' );
 
   // constants
-  var TOUCH_AREA_DILATION = 4;
-  var STROKE = 'black';
-  var FILL = '#005566';
   var PAUSE_SIZE_INCREASE_FACTOR = 1.25;
+  var FONT = new PhetFont( 14 )
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -31,28 +38,11 @@ define( function( require ) {
    */
   function TimeControlNode( model, visibleBounds, tandem, options ) {
     Node.call( this );
-    var modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( visibleBounds, 0.98 );
 
-    // Play/Pause Button
     var playPauseButton = new PlayPauseButton( model.playingProperty, {
-      right: visibleBounds.right * 0.65,
-      bottom: modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
-      radius: 18,
-      touchAreaDilation: TOUCH_AREA_DILATION,
+      radius: 20,
+      touchAreaDilation: 5,
       tandem: tandem.createTandem( 'playPauseButton' )
-    } );
-
-    // Step Forward Button
-    var stepForwardButton = new StepForwardButton( {
-      playingProperty: model.playingProperty,
-      listener: function() { model.stepForward( 0.01 ); },
-      radius: 12,
-      stroke: STROKE,
-      fill: FILL,
-      touchAreaDilation: TOUCH_AREA_DILATION,
-      centerX: playPauseButton.centerX + 50,
-      centerY: playPauseButton.centerY,
-      tandem: tandem.createTandem( 'stepForwardButton' )
     } );
 
     // Blow up the play/pause button slightly when paused.  The PhET convention is to do this for sims where interaction
@@ -60,8 +50,43 @@ define( function( require ) {
     model.playingProperty.lazyLink( function( isPlaying ) {
       playPauseButton.scale( isPlaying ? ( 1 / PAUSE_SIZE_INCREASE_FACTOR ) : PAUSE_SIZE_INCREASE_FACTOR );
     } );
-    this.addChild( playPauseButton );
-    this.addChild( stepForwardButton );
+
+    // Radio buttons for normal annd slow speed
+    var timeSpeedRadioNode = new VerticalAquaRadioButtonGroup( [ {
+      property: model.simSpeedProperty,
+      value: 'normal',
+      node: new Text( normalString, { font: FONT } )
+    }, {
+      property: model.simSpeedProperty,
+      value: 'slow',
+      node: new Text( slowString, { font: FONT } )
+    }
+    ], {
+      radius: new Text( 'test', { font: FONT } ).height / 2.2,
+      spacing: 9,
+      touchAreaXDilation: 10,
+      radioButtonOptions: { xSpacing: 5 },
+      maxWidth: 150
+    } );
+
+    // Sim play/pause buttons
+    var timeControlHBox = new HBox( {
+      spacing: 10,
+      children: [
+        playPauseButton,
+        new StepForwardButton( {
+          playingProperty: model.playingProperty,
+          listener: function() { model.stepForward( 0.01 ); },
+          radius: 15,
+          touchAreaDilation: 5,
+          tandem: tandem.createTandem( 'stepForwardButton' )
+        } )
+      ]
+    } );
+
+    timeSpeedRadioNode.left = timeControlHBox.right + 40
+    this.addChild( timeControlHBox );
+    this.addChild( timeSpeedRadioNode );
     this.mutate( options );
   }
 

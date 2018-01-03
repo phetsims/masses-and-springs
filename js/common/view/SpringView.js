@@ -132,41 +132,14 @@ define( function( require ) {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
-    // Play/Pause and Step Forward Button Control
+    // Sim speed controls
     this.timeControlPanel = new TimeControlNode(
       model,
       this.visibleBoundsProperty.get(),
       tandem.createTandem( 'timeControlPanel' ), {
-        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + 0.02 )
+        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + 0.02 ),
       }
     );
-
-    // Sim speed controls
-    var speedSelectionButtonOptions = {
-      font: new PhetFont( 14 ),
-      maxWidth: MAX_TEXT_WIDTH
-    };
-    var normalText = new Text( normalString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'normalString' ) } );
-    this.normalRadioBox = new AquaRadioButton( model.simSpeedProperty, 'normal', normalText, {
-      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
-      tandem: tandem.createTandem( 'normalRadioBox' )
-    } );
-
-    var slowText = new Text( slowString, speedSelectionButtonOptions, { tandem: tandem.createTandem( 'slowText' ) } );
-    this.slowRadioBox = new AquaRadioButton( model.simSpeedProperty, 'slow', slowText, {
-      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
-      tandem: tandem.createTandem( 'slowRadioBox' )
-    } );
-
-    var radioButtonSpacing = 4;
-    this.speedControl = new VBox( {
-      align: 'left',
-      spacing: radioButtonSpacing,
-      children: [ this.normalRadioBox, this.slowRadioBox ],
-      right: this.resetAllButton.left - 30,
-      centerY: this.resetAllButton.centerY,
-      tandem: tandem.createTandem( 'speedControl' )
-    } );
 
     // sound toggle button at bottom right
     var soundToggleButton = new SoundToggleButton( model.isSoundEnabledProperty, {

@@ -200,7 +200,6 @@ define( function( require ) {
     // Adding Buttons to scene graph
     this.addChild( this.resetAllButton );
     this.addChild( this.timeControlPanel );
-    this.addChild( this.speedControl );
     this.addChild( springStopperButtonNode );
 
     // Reference lines from indicator visibility box
@@ -221,8 +220,7 @@ define( function( require ) {
       self.gravityAndDampingControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;
-      self.speedControl.right = self.resetAllButton.left - self.spacing * 6;
-      self.timeControlPanel.right = self.speedControl.left - self.spacing * 6;
+      self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
       self.toolboxPanel.dragBounds = 3;
       self.energyGraphNode.left = visibleBounds.left + self.spacing;
       self.timerNode.updateBounds( visibleBounds.withOffsets(

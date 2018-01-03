@@ -162,7 +162,6 @@ define( function( require ) {
     // Adding Buttons to scene graph
     this.addChild( this.resetAllButton );
     this.addChild( this.timeControlPanel );
-    this.addChild( this.speedControl );
     this.addChild( this.firstSpringStopperButtonNode );
     this.addChild( this.secondSpringStopperButtonNode );
 
@@ -185,8 +184,7 @@ define( function( require ) {
       self.gravityAndDampingControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;
-      self.speedControl.right = self.resetAllButton.left - self.spacing * 6;
-      self.timeControlPanel.right = self.speedControl.left - self.spacing * 6;
+      self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
       self.toolboxPanel.dragBounds = 3;
       self.timerNode.updateBounds( visibleBounds.withOffsets(
         self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2
