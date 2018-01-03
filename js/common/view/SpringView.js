@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
@@ -20,7 +19,6 @@ define( function( require ) {
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -29,18 +27,11 @@ define( function( require ) {
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var TimeControlNode = require( 'MASSES_AND_SPRINGS/common/view/TimeControlNode' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
-  var slowString = require( 'string!MASSES_AND_SPRINGS/slow' );
   var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
-
-  // constants
-  var MAX_TEXT_WIDTH = 80;
 
   /**
    * @param {MassesAndSpringsModel} model

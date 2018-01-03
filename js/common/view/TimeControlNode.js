@@ -12,7 +12,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
@@ -27,7 +26,7 @@ define( function( require ) {
 
   // constants
   var PAUSE_SIZE_INCREASE_FACTOR = 1.25;
-  var FONT = new PhetFont( 14 )
+  var FONT = new PhetFont( 14 );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -84,7 +83,7 @@ define( function( require ) {
       ]
     } );
 
-    timeSpeedRadioNode.left = timeControlHBox.right + 40
+    timeSpeedRadioNode.left = timeControlHBox.right + 40;
     this.addChild( timeControlHBox );
     this.addChild( timeSpeedRadioNode );
     this.mutate( options );
