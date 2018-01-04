@@ -49,7 +49,7 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
     } );
-    this.gravityAndDampingControlPanel.options.readoutVisible = false;
+    this.gravityAndDampingControlPanel.options.hSliderTweakersEnabled = 0.5;
 
   }
 

@@ -20,6 +20,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
+  var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
@@ -52,7 +53,8 @@ define( function( require ) {
       align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       dampingVisible: false,
-      readoutVisible: false
+      readoutVisible: false,
+      hSliderTweakersScale: 0.0001
     }, options );
 
     //  Add gravity info for various planets
@@ -93,8 +95,6 @@ define( function( require ) {
       titleFont: new PhetFont( 14 ),
       trackSize: new Dimension2( 130, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
-      thumbFillEnabled: '#00b3b3',
-      thumbFillHighlighted: '#00e6e6',
       visible: true,
       align: 'left',
       stroke: null,
@@ -104,17 +104,43 @@ define( function( require ) {
       }
     };
 
-    // @private {read-only} manages the values associated with the gravity panel in a combo box
-    var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), sliderOptions );
+    var gravitySliderOptions = {
+      majorTickLength: 10,
+      titleFont: new PhetFont( 14 ),
+      trackSize: new Dimension2( 130, 0.1 ),
+      thumbSize: new Dimension2( 13, 24 ),
+      stroke: null,
+      sliderIndent: 7,
+      constrainValue: function( value ) {
+        return Number( Util.toFixed( value, 1 ) );
+      },
+      majorTicks: [
+        {
+          value: MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.min,
+          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.min ), { font: new PhetFont( 14 ) } )
+        },
+        {
+          value: MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max,
+          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max ), { font: new PhetFont( 12 ) } )
+        }
+      ],
+      layoutFunction: NumberControl.createLayoutFunction1( {
+        titleXSpacing: 70,
+        ySpacing: 5,
+        arrowButtonsXSpacing: 5
+      } ),
+      valuePattern: StringUtils.fillIn( gravityValueString, {
+        gravity: '{0}'
+      } ),
+      useRichText: true,
+      decimalPlaces: 1,
+      arrowButtonScale: this.options.hSliderTweakersScale
+    };
 
-    gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
-      font: MassesAndSpringsConstants.LABEL_FONT,
-      tandem: tandem.createTandem( 'gravityNoneString' )
-    } ) );
-    gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().max, new Text( lotsString, {
-      font: MassesAndSpringsConstants.LABEL_FONT,
-      tandem: tandem.createTandem( 'gravityLotsString' )
-    } ) );
+    // Manages the values associated with the gravity panel in a combo box
+    var gravityHSlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
+
+    // gravityHSlider.arrowButtonScale = this.options.hSliderTweakersEnabled ? 0.5 : 0
 
     this.gravityNumberDisplay = new NumberDisplay( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), {
       align: 'center',
@@ -133,6 +159,7 @@ define( function( require ) {
 
       var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get();
       var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, sliderOptions );
+      dampingHSlider.align = 'left';
 
       dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString ) );
       dampingHSlider.addMajorTick( dampingRange.min + ( dampingRange.max - dampingRange.min ) / 2 );
@@ -143,6 +170,7 @@ define( function( require ) {
         }
       }
 
+      // Used to format slider for damping
       var dampingControlPanel = new SpringControlPanel(
         model.dampingProperty,
         dampingRange,
@@ -156,15 +184,8 @@ define( function( require ) {
       );
       Panel.call( self, new VBox( {
         align: 'center',
-        spacing: 10,
+        spacing: 8,
           children: [
-            new HBox( {
-              spacing: 20,
-              children: [
-                new Text( gravityString, { font: MassesAndSpringsConstants.FONT } ),
-                this.gravityNumberDisplay
-              ]
-            } ),
             gravityHSlider,
             gravityComboBox,
             dampingControlPanel
@@ -176,15 +197,9 @@ define( function( require ) {
     else {
       Panel.call( self, new VBox( {
         align: 'center',
-        spacing: 10,
+        spacing: 8,
         children: [
-          new HBox( {
-            spacing: 10,
-            children: [
-              new Text( gravityString, { font: MassesAndSpringsConstants.FONT } ),
-              this.gravityNumberDisplay
-            ]
-          } ),
+          // this.gravityNumberDisplay,
           gravityHSlider,
           gravityComboBox
         ],
