@@ -30,7 +30,7 @@ define( function( require ) {
       modelViewTransform: null,
       verticalLineVisible: true,
       symbolRepresentation: false,
-      unitDisplacementLength: -92 // use this value to adjust the scale of the vector's length
+      unitDisplacementLength: -90 // use this value to adjust the scale of the vector's length
     }, options );
 
     var DISPLACEMENT_ARROW_OPTIONS = {
