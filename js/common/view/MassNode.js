@@ -49,7 +49,7 @@ define( function( require ) {
    */
   function MassNode( mass, modelViewTransform2, dragBoundsProperty, model, tandem, options ) {
     options = _.extend( {
-      vectorViewEnabled: false
+      vectorViewEnabled: false,
     }, options );
 
     Node.call( this, { cursor: 'pointer', pathBoundsMethod: 'none', renderer: 'canvas' } );
@@ -200,6 +200,15 @@ define( function( require ) {
       this.addChild( this.netForceArrow );
       this.addChild( forceNullLine );
 
+      // Used to position the vectors on the left of right side of the massNode depending on the attached spring.
+      var forcesOrientation = 1;
+      this.mass.springProperty.link( function( spring ) {
+        if ( spring ) {
+          forcesOrientation = spring.options.forcesOrientation;
+          console.log( forcesOrientation );
+        }
+      } );
+
       /**
        * Show/hide the velocity and acceleration arrows when appropriate
        * @param {Property.<boolean>} arrowVisibilityProperty
@@ -268,14 +277,15 @@ define( function( require ) {
       } );
 
       // When gravity changes, update the gravitational force arrow
-      Property.multilink( [ mass.gravityProperty, model.gravityVectorVisibilityProperty ], function( gravity, visible ) {
+      Property.multilink( [ mass.springProperty, mass.gravityProperty, model.gravityVectorVisibilityProperty ], function( spring, gravity, visible ) {
         if ( visible ) {
           var position = mass.positionProperty.get();
           var gravitationalAcceleration = mass.mass * gravity;
+          console.log( forcesOrientation )
           self.gravityForceArrow.setTailAndTip(
-            position.x + 45,
+            position.x + (forcesOrientation) * 45,
             position.y + rect.centerY,
-            position.x + 45,
+            position.x + (forcesOrientation) * 45,
             position.y + rect.centerY + ARROW_SIZE_DEFAULT * gravitationalAcceleration
           );
         }
@@ -286,9 +296,9 @@ define( function( require ) {
         if ( visible ) {
           var position = mass.positionProperty.get();
           self.springForceArrow.setTailAndTip(
-            position.x + 45,
+            position.x + (forcesOrientation) * 45,
             position.y + rect.centerY,
-            position.x + 45,
+            position.x + (forcesOrientation) * 45,
             position.y + rect.centerY - ARROW_SIZE_DEFAULT * springForce
           );
         }
@@ -306,9 +316,9 @@ define( function( require ) {
         if ( forcesMode === 'netForce' ) {
           if ( Math.abs( netForce ) > 1E-6 ) {
             self.netForceArrow.setTailAndTip(
-              position.x + 45,
+              position.x + (forcesOrientation) * 45,
               position.y + rect.centerY,
-              position.x + 45,
+              position.x + (forcesOrientation) * 45,
               position.y + rect.centerY - ARROW_SIZE_DEFAULT * netForce
             );
           }
@@ -333,7 +343,7 @@ define( function( require ) {
 
       // When the mass's position changes update the forces baseline marker
       mass.positionProperty.link( function( position ) {
-        forceNullLine.setLine( position.x + 40, position.y + rect.centerY, position.x + 50, position.y + rect.centerY );
+        forceNullLine.setLine( position.x + (forcesOrientation) * 40, position.y + rect.centerY, position.x + (forcesOrientation) * 50, position.y + rect.centerY );
       } );
     }
   }

@@ -60,7 +60,7 @@ define( function( require ) {
       model.displacementVisibleProperty,
       tandem,
       { modelViewTransform: this.modelViewTransform } );
-    firstDisplacementArrowNode.right = this.springNodes[ 0 ].left;
+    firstDisplacementArrowNode.left = this.springNodes[ 0 ].right;
     firstDisplacementArrowNode.top = this.springNodes[ 0 ].bottom;
     this.addChild( firstDisplacementArrowNode );
 
@@ -69,7 +69,7 @@ define( function( require ) {
       model.displacementVisibleProperty,
       tandem,
       { modelViewTransform: this.modelViewTransform } );
-    secondDisplacementArrowNode.right = this.springNodes[ 1 ].left;
+    secondDisplacementArrowNode.right = this.springNodes[ 1 ].left + secondDisplacementArrowNode.width / 2;
     secondDisplacementArrowNode.top = this.springNodes[ 1 ].bottom;
     this.addChild( secondDisplacementArrowNode );
 
@@ -84,6 +84,10 @@ define( function( require ) {
       self.toolboxPanel.top = vectorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
     } );
     this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
+
+    // Determines where we want the force vectors of the attached mass to be placed.
+    model.springs[ 0 ].options.forcesOrientation = -1;
+    model.springs[ 1 ].options.forcesOrientation = 1;
   }
 
   massesAndSprings.register( 'VectorsScreenView', VectorsScreenView );

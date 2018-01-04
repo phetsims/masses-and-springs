@@ -51,7 +51,8 @@ define( function( require ) {
     var self = this;
 
     this.options = _.extend( {
-      modelViewTransform: null
+      modelViewTransform: null,
+      forcesOrientation: 1  // Used to position massNode forces. Right side: 1, Left side: -1
     }, options );
 
     // range of natural resting length in meters (values used from design doc)
