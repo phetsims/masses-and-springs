@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -18,6 +19,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
 
   // strings
   var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
@@ -25,7 +27,7 @@ define( function( require ) {
 
   // constants
   var TITLE_FONT = MassesAndSpringsConstants.TITLE_FONT;
-  var MAX_TEXT_WIDTH = MassesAndSpringsConstants.MAX_TEXT_WIDTH;
+  var MAX_TEXT_WIDTH = MassesAndSpringsConstants.MAX_TEXT_WIDTH + 20;
   var FONT = MassesAndSpringsConstants.FONT;
   var RADIO_BUTTON_SPACING = 4;
 
@@ -77,8 +79,8 @@ define( function( require ) {
       spacing: RADIO_BUTTON_SPACING,
       children: [
         new Text( title, { font: TITLE_FONT, tandem: tandem } ),
-        springConstantRadioButton,
-        thicknessRadioButton
+        new HBox( { children: [ new HStrut( 10 ), springConstantRadioButton ] } ),
+        new HBox( { children: [ new HStrut( 10 ), thicknessRadioButton ] } ),
       ],
       tandem: tandem.createTandem( 'vBox' )
     } ), options );
