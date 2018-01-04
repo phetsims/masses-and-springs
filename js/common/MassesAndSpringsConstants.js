@@ -63,12 +63,12 @@ define( function( require ) {
 
     // Constants regarding panels
     PANEL_VERTICAL_SPACING: 10,
-    PANEL_CORNER_RADIUS: 7,
+    PANEL_CORNER_RADIUS: 5,
     PANEL_MAX_WIDTH: 170,
     PANEL_MIN_WIDTH: 170,
     FORCES_STRING: 'forces',
     NET_FORCE_STRING: 'netForce',
-    PANEL_FILL: 'rgb( 240, 240, 240 )',
+    PANEL_FILL: 'rgb(230,230,230)',
 
     RIGHT_SPRING_X: 0.975, // {number} X position of the spring node in screen coordinates
 

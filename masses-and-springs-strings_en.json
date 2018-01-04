@@ -59,12 +59,6 @@
   "gravity": {
     "value": "Gravity"
   },
-  "gravity.none": {
-    "value": "None"
-  },
-  "gravity.lots": {
-    "value": "Lots"
-  },
   "heightEqualsZero": {
     "value": "Height = 0"
   },
@@ -79,6 +73,9 @@
   },
   "long": {
     "value": "Long"
+  },
+  "lots": {
+    "value": "Lots"
   },
   "mass": {
     "value": "Mass"
@@ -100,6 +97,9 @@
   },
   "normal": {
     "value": "Normal"
+  },
+  "none": {
+    "value": "None"
   },
   "peElas": {
     "value": "PE<sub>elas</sub>"
