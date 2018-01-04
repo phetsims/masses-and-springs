@@ -92,7 +92,7 @@ define( function( require ) {
       majorTickLength: 10,
       minorTickLength: 5,
       titleFont: new PhetFont( 14 ),
-      trackSize: new Dimension2( 130, 0.1 ),
+      trackSize: new Dimension2( 120, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       visible: true,
       align: 'left',
@@ -125,7 +125,7 @@ define( function( require ) {
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
         titleXSpacing: 70,
-        ySpacing: 5,
+        ySpacing: 2,
         arrowButtonsXSpacing: 5
       } ),
       valuePattern: StringUtils.fillIn( gravityValueString, {
