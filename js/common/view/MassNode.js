@@ -281,7 +281,6 @@ define( function( require ) {
         if ( visible ) {
           var position = mass.positionProperty.get();
           var gravitationalAcceleration = mass.mass * gravity;
-          console.log( forcesOrientation )
           self.gravityForceArrow.setTailAndTip(
             position.x + (forcesOrientation) * 45,
             position.y + rect.centerY,

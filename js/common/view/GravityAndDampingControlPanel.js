@@ -13,7 +13,6 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var ComboBox = require( 'SUN/ComboBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
