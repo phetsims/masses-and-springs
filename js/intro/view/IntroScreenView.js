@@ -201,8 +201,6 @@ define( function( require ) {
     var referenceLinePanel = new ReferenceLinePanel(
       model,
       tandem.createTandem( 'ReferenceLinePanel' ), {
-        top: this.spacing,
-        right: this.rightPanelAlignment,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 0,
         yMargin: 0,
@@ -212,16 +210,14 @@ define( function( require ) {
 
     // Gravity Control Panel
     var gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
-      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
-      {
+      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ), {
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: false,
         xMargin: 0,
         yMargin: 0,
-        stroke: MassesAndSpringsConstants.PANEL_FILL
-      }
-    );
+        stroke: null
+      } );
 
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {

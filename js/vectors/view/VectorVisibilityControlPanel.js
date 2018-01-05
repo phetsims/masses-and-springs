@@ -40,7 +40,12 @@ define( function( require ) {
    */
   function VectorVisibilityControlPanel( model, tandem, options ) {
     options = _.extend( {
-      showForces: true
+      showForces: true,
+      minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+      xMargin: 10,
+      fill: MassesAndSpringsConstants.PANEL_FILL,
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+      tandem: tandem.createTandem( 'vectorVisibilityControlPanel' )
     }, options );
 
     var velocityArrow = new VectorArrow(
@@ -213,17 +218,8 @@ define( function( require ) {
         ]
       }
     );
-    Panel.call( this,
-      controlsHBox,
-      {
-        minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 10,
-        fill: MassesAndSpringsConstants.PANEL_FILL,
-        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'vectorVisibilityControlPanel' )
-      }
-    );
-    this.mutate( options );
+
+    Panel.call( this, controlsHBox, options );
   }
 
   massesAndSprings.register( 'VectorVisibilityControlPanel', VectorVisibilityControlPanel );

@@ -14,7 +14,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
+  var Panel = require( 'SUN/Panel' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
   var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlPanel' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
 
@@ -32,27 +35,6 @@ define( function( require ) {
     this.massNodes.forEach( function( massNode ) {
       massNode.vectorViewEnabled = true;
     } );
-
-    // Control Panel for display elements with varying visibility
-    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
-        top: this.spacing,
-        right: this.rightPanelAlignment,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      }
-    );
-    this.addChild( indicatorVisibilityControlPanel );
-
-    var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
-      model,
-      tandem.createTandem( 'vectorVisibilityControlPanel' ),
-      {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      }
-    );
-    this.addChild( vectorVisibilityControlPanel );
-    vectorVisibilityControlPanel.moveToBack();
 
     // Displacement arrows added for each springs
     var firstDisplacementArrowNode = new DisplacementArrowNode(
@@ -73,15 +55,67 @@ define( function( require ) {
     secondDisplacementArrowNode.top = this.springNodes[ 1 ].bottom;
     this.addChild( secondDisplacementArrowNode );
 
-    this.toolboxPanel.top = vectorVisibilityControlPanel.bottom + this.spacing;
+    // Contains visibility options for the reference lines and displacement arrow
+    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
+      model,
+      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null
+      } );
+
+    // Contains all of the display options for the vectors and forces
+    var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
+      model,
+      tandem.createTandem( 'vectorVisibilityControlPanel' ), {
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null
+      } );
+
+    // Gravity Control Panel
+    var gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
+      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ), {
+        minWidth: 1,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        dampingVisible: false,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null
+      } );
+
+    // VBox that contains all of the panel's content
+    var optionsVBox = new VBox( {
+      spacing: 10,
+      children: [
+        indicatorVisibilityControlPanel,
+        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        gravityAndDampingControlPanel,
+        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        vectorVisibilityControlPanel,
+        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        this.toolboxPanel
+      ]
+    } );
+
+    // Panel that will display all the toggleable options.
+    var optionsPanel = new Panel(
+      optionsVBox,
+      {
+        xMargin: 10,
+        fill: MassesAndSpringsConstants.PANEL_FILL,
+        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+        tandem: tandem.createTandem( 'ReferenceLinePanel' ),
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+      } );
+    this.addChild( optionsPanel );
+    optionsPanel.moveToBack();
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-      indicatorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
-      self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
-      vectorVisibilityControlPanel.right = visibleBounds.right - self.spacing;
-      vectorVisibilityControlPanel.top = self.gravityAndDampingControlPanel.bottom + self.spacing;
-      self.gravityAndDampingControlPanel.top = indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
-      self.toolboxPanel.top = vectorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+      optionsPanel.top = visibleBounds.top + self.spacing;
+      optionsPanel.right = visibleBounds.right - self.spacing;
     } );
     this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
 
