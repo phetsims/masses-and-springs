@@ -13,6 +13,7 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -69,6 +70,9 @@ define( function( require ) {
     FORCES_STRING: 'forces',
     NET_FORCE_STRING: 'netForce',
     PANEL_FILL: 'rgb(230,230,230)',
+    LINE_SEPARATOR: function() {
+      return new Line( 0, 0, 165, 0, { stroke: 'gray' } );
+    },
 
     RIGHT_SPRING_X: 0.975, // {number} X position of the spring node in screen coordinates
 

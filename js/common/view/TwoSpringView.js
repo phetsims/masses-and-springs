@@ -138,9 +138,10 @@ define( function( require ) {
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ),
       {
-        left: this.gravityAndDampingControlPanel.left,
-        minWidth: this.gravityAndDampingControlPanel.width,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: MassesAndSpringsConstants.PANEL_FILL
       }
     );
 
@@ -156,8 +157,6 @@ define( function( require ) {
     // Adding Panels to scene graph
     this.addChild( this.firstSpringConstantControlPanel );
     this.addChild( this.secondSpringConstantControlPanel );
-    this.addChild( this.gravityAndDampingControlPanel );
-    this.addChild( this.toolboxPanel );
 
     // Adding Buttons to scene graph
     this.addChild( this.resetAllButton );

@@ -36,6 +36,13 @@ define( function( require ) {
    * @constructor
    */
   function ReferenceLinePanel( model, tandem, options ) {
+    this.options = _.extend( {
+      xMargin: 10,
+      fill: MassesAndSpringsConstants.PANEL_FILL,
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+      tandem: tandem.createTandem( 'ReferenceLinePanel' ),
+      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+    }, options );
 
     /**
      * Creates line for visual representation within the panel.
@@ -122,17 +129,7 @@ define( function( require ) {
         new HStrut( 10 )
       ]
     } );
-    Panel.call( this,
-      controlBox,
-      {
-        xMargin: 10,
-        fill: MassesAndSpringsConstants.PANEL_FILL,
-        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'ReferenceLinePanel' ),
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
-      }
-    );
-    this.mutate( options );
+    Panel.call( this, controlBox, this.options );
   }
 
   massesAndSprings.register( 'ReferenceLinePanel', ReferenceLinePanel );

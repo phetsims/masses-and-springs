@@ -12,11 +12,13 @@ define( function( require ) {
   // modules
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/ConstantsControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
   var ReferenceLinePanel = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLinePanel' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
+  var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -26,6 +28,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
   var Util = require( 'DOT/Util' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -87,17 +90,6 @@ define( function( require ) {
       }
     );
     this.addChild( this.constantsControlPanel );
-
-    // Control Panel for display elements with varying visibility
-    var referenceLinePanel = new ReferenceLinePanel(
-      model,
-      tandem.createTandem( 'ReferenceLinePanel' ), {
-        top: this.spacing,
-        right: this.rightPanelAlignment,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
-      }
-    );
-    this.addChild( referenceLinePanel );
 
     // Link responsible for visibility of the length control panel.
     model.sceneModeProperty.lazyLink( function( mode ) {
@@ -205,13 +197,62 @@ define( function( require ) {
     this.addChild( sceneRadioButtonGroup );
     sceneRadioButtonGroup.moveToBack();
 
+    // Control Panel for display elements with varying visibility
+    var referenceLinePanel = new ReferenceLinePanel(
+      model,
+      tandem.createTandem( 'ReferenceLinePanel' ), {
+        top: this.spacing,
+        right: this.rightPanelAlignment,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null
+      }
+    );
+
+    // Gravity Control Panel
+    var gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
+      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
+      {
+        minWidth: 1,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        dampingVisible: false,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: MassesAndSpringsConstants.PANEL_FILL
+      }
+    );
+
+    // VBox that contains all of the panel's content
+    var optionsVBox = new VBox( {
+      spacing: 10,
+      children: [
+        referenceLinePanel,
+        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        gravityAndDampingControlPanel,
+        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        this.toolboxPanel
+      ]
+    } );
+
+    // Panel that will display all the toggleable options.
+    var optionsPanel = new Panel(
+      optionsVBox,
+      {
+        xMargin: 10,
+        fill: MassesAndSpringsConstants.PANEL_FILL,
+        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+        tandem: tandem.createTandem( 'ReferenceLinePanel' ),
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+      } );
+    this.addChild( optionsPanel );
+    optionsPanel.moveToBack();
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-      self.gravityAndDampingControlPanel.top = referenceLinePanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+      optionsPanel.top = visibleBounds.top + self.spacing;
+      optionsPanel.right = visibleBounds.right - self.spacing;
       sceneRadioButtonGroup.right = visibleBounds.right - self.spacing;
-      referenceLinePanel.right = visibleBounds.right - self.spacing;
-      self.toolboxPanel.top = self.gravityAndDampingControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
-      sceneRadioButtonGroup.top = self.toolboxPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+      sceneRadioButtonGroup.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
     } );
     this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
   }
