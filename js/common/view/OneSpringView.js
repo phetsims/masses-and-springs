@@ -55,9 +55,10 @@ define( function( require ) {
     this.referenceLinePanel = new ReferenceLinePanel(
       model,
       tandem.createTandem( 'referenceLinePanel' ), {
-        top: this.spacing,
-        right: this.rightPanelAlignment,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null
       }
     );
 
@@ -67,7 +68,6 @@ define( function( require ) {
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT } )
     ];
     var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
-    springConstantControlPanel.right = this.referenceLinePanel.left - this.spacing;
 
     springHangerNode.top = springConstantControlPanel.top;
 
@@ -93,7 +93,7 @@ define( function( require ) {
     );
 
     var springStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
-    springStopperButtonNode.right = springConstantControlPanel.left - this.spacing;
+    springStopperButtonNode.left = springHangerNode.right + this.spacing;
 
     this.energyGraphNode = new EnergyGraphNode( model, tandem );
     this.energyGraphNode.top = this.visibleBoundsProperty.get().top + this.spacing;
@@ -105,7 +105,7 @@ define( function( require ) {
     );
     massValueControlPanel.top = this.visibleBoundsProperty.get().getMinY() + this.spacing;
     massValueControlPanel.left = this.energyGraphNode.right + this.spacing;
-    springHangerNode.right = springStopperButtonNode.left - this.spacing;
+    springHangerNode.left = massValueControlPanel.right + 28;
 
     // Initializes movable line
     var movableLineNode = new MovableLineNode(
@@ -136,10 +136,10 @@ define( function( require ) {
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ),
       {
-        top: this.gravityAndDampingControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
-        left: this.gravityAndDampingControlPanel.left,
-        minWidth: this.gravityAndDampingControlPanel.width,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null
       }
     );
 
@@ -181,9 +181,6 @@ define( function( require ) {
     this.rulerNode.toolbox = this.toolboxPanel;
     this.timerNode.toolbox = this.toolboxPanel;
 
-    this.toolboxPanel.left = this.gravityAndDampingControlPanel.left;
-    this.toolboxPanel.minWidth = this.gravityAndDampingControlPanel.width;
-
     this.shelf.rectWidth = 140;
     this.shelf.left = massValueControlPanel.left;
 
@@ -192,9 +189,6 @@ define( function( require ) {
     this.addChild( springHangerNode );
     this.addChild( massValueControlPanel );
     this.addChild( springConstantControlPanel );
-    this.addChild( this.referenceLinePanel );
-    this.addChild( this.gravityAndDampingControlPanel );
-    this.addChild( this.toolboxPanel );
     this.addChild( this.energyGraphNode );
 
     // Adding Buttons to scene graph
@@ -216,12 +210,10 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
-      self.referenceLinePanel.right = visibleBounds.right - self.spacing;
-      self.gravityAndDampingControlPanel.right = visibleBounds.right - self.spacing;
-      self.toolboxPanel.right = visibleBounds.right - self.spacing;
+      springStopperButtonNode.left = springHangerNode.right + self.spacing;
+      springConstantControlPanel.left = springStopperButtonNode.right + self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;
       self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
-      self.toolboxPanel.dragBounds = 3;
       self.energyGraphNode.left = visibleBounds.left + self.spacing;
       self.timerNode.updateBounds( visibleBounds.withOffsets(
         self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2

@@ -10,8 +10,12 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Panel = require( 'SUN/Panel' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
   var OneSpringView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringView' );
 
   /**
@@ -24,7 +28,52 @@ define( function( require ) {
 
     // Calls common spring view
     OneSpringView.call( this, model, tandem );
-    this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
+    var self = this;
+
+    // Gravity Control Panel
+    var gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
+      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
+      {
+        minWidth: 1,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null,
+        dampingVisible: true
+      }
+    );
+    gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
+
+    // VBox that contains all of the panel's content
+    var optionsVBox = new VBox( {
+      spacing: 10,
+      children: [
+        this.referenceLinePanel,
+        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        gravityAndDampingControlPanel,
+        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        this.toolboxPanel
+      ]
+    } );
+
+    // Panel that will display all the toggleable options.
+    var optionsPanel = new Panel(
+      optionsVBox,
+      {
+        xMargin: 10,
+        fill: MassesAndSpringsConstants.PANEL_FILL,
+        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+        tandem: tandem.createTandem( 'ReferenceLinePanel' ),
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+      } );
+
+    this.addChild( optionsPanel );
+    optionsPanel.moveToBack();
+
+    this.visibleBoundsProperty.link( function( visibleBounds ) {
+      optionsPanel.top = visibleBounds.top + self.spacing;
+      optionsPanel.right = visibleBounds.right - self.spacing;
+    } );
   }
 
   massesAndSprings.register( 'EnergyScreenView', EnergyScreenView );
