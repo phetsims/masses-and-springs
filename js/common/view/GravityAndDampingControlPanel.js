@@ -52,8 +52,7 @@ define( function( require ) {
       align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       dampingVisible: false,
-      readoutVisible: false,
-      hSliderTweakersScale: 0.0001
+      hSlider: true
     }, options );
 
     //  Add gravity info for various planets
@@ -105,7 +104,7 @@ define( function( require ) {
     var gravitySliderOptions = {
       majorTickLength: 10,
       titleFont: new PhetFont( 14 ),
-      trackSize: new Dimension2( 130, 0.1 ),
+      trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       stroke: null,
       sliderIndent: 7,
@@ -132,13 +131,11 @@ define( function( require ) {
       } ),
       useRichText: true,
       decimalPlaces: 1,
-      arrowButtonScale: this.options.hSliderTweakersScale
+      arrowButtonScale: 0.5
     };
 
     // Manages the values associated with the gravity panel in a combo box
     var gravityHSlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
-
-    // gravityHSlider.arrowButtonScale = this.options.hSliderTweakersEnabled ? 0.5 : 0
 
     this.gravityNumberDisplay = new NumberDisplay( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), {
       align: 'center',
