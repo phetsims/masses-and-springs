@@ -1,4 +1,4 @@
-// Copyright 2015, University of Colorado Boulder
+// Copyright 2018, University of Colorado Boulder
 
 //TODO scenery-phet#165 reimplement as LineArrowShape and a Path subtype, move to scenery-phet
 /**
