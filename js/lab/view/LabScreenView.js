@@ -90,7 +90,7 @@ define( function( require ) {
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-      optionsPanel.top = visibleBounds.top + self.spacing;
+      optionsPanel.top = self.energyGraphNode.top;
       optionsPanel.right = visibleBounds.right - self.spacing;
     } );
     this.gravityAndDampingControlPanel.options.hSliderTweakersEnabled = 0.5;

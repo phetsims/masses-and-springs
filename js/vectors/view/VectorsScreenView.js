@@ -114,7 +114,7 @@ define( function( require ) {
     optionsPanel.moveToBack();
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-      optionsPanel.top = visibleBounds.top + self.spacing;
+      optionsPanel.top = self.secondSpringConstantControlPanel.top + self.spacing;
       optionsPanel.right = visibleBounds.right - self.spacing;
     } );
     this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;

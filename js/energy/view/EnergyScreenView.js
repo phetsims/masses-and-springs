@@ -71,7 +71,7 @@ define( function( require ) {
     optionsPanel.moveToBack();
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-      optionsPanel.top = visibleBounds.top + self.spacing;
+      optionsPanel.top = self.energyGraphNode.top;
       optionsPanel.right = visibleBounds.right - self.spacing;
     } );
   }
