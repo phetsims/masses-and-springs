@@ -459,7 +459,9 @@ define( function( require ) {
                                                                         ) / ( phi * k * m) );
         }
 
-        this.massAttachedProperty.get().positionProperty.set( new Vector2( this.positionProperty.get().x, this.bottomProperty.get() ) );
+        this.massAttachedProperty.get().positionProperty.set(
+          new Vector2( this.positionProperty.get().x, this.bottomProperty.get() + this.massAttachedProperty.get().hookHeight / 2 )
+        );
 
         this.massAttachedProperty.get().preserveThermalEnergy = true;
       }

@@ -288,7 +288,8 @@ define( function( require ) {
 
         // Update the position of the mass
         if ( mass.positionProperty.value.x !== mass.springProperty.get().positionProperty.get().x ) {
-          mass.positionProperty.set( mass.positionProperty.get().copy().setX( mass.springProperty.get().positionProperty.get().x ) );
+          mass.positionProperty.set(
+            new Vector2( mass.springProperty.get().positionProperty.get().x, mass.springProperty.get().bottomProperty.get() + mass.hookHeight / 2 ) );
         }
 
         // Update spring length
