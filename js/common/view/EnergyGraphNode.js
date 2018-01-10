@@ -172,7 +172,7 @@ define( function( require ) {
           entries: [ dEntry, cEntry, bEntry, aEntry ],
           labelString: eTotString
         }
-      ], new Property( new Range( -80, 380 ) ), {
+      ], new Property( new Range( -80, 415 ) ), {
         // TODO: Options here are not being used by sim. Why are common code options being used? Ask JO.
         barOptions: {
           totalRange: new Range( 0, 380 ),
@@ -277,7 +277,7 @@ define( function( require ) {
       } );
 
       // Background for bar graph
-      this.background = new Rectangle( 0, 0, 160, 480, {
+      this.background = new Rectangle( 0, 0, 160, 515, {
         fill: 'white',
         stroke: 'gray',
         lineWidth: 0.8, // Empirically determined
@@ -302,7 +302,7 @@ define( function( require ) {
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
       } );
-      this.maxHeight = 490;
+      this.maxHeight = 720;
     }
 
     massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
