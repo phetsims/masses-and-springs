@@ -51,7 +51,7 @@ define( function( require ) {
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
 
     // Helper function to derive the length as if the mass wasn't attached.
-    var lengthFunction = new LinearFunction( 0.1, 0.5, 1.13, 0.73 );
+    var lengthFunction = new LinearFunction( 0.1, 0.5, 1.47, 0.97 );
 
     var yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
     // @private {read-write} position of line in screen coordinates.
