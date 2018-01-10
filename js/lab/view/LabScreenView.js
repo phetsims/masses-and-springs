@@ -93,7 +93,6 @@ define( function( require ) {
       optionsPanel.top = self.energyGraphNode.top;
       optionsPanel.right = visibleBounds.right - self.spacing;
     } );
-    this.gravityAndDampingControlPanel.options.hSliderTweakersEnabled = 0.5;
   }
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );

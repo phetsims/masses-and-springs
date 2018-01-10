@@ -216,7 +216,8 @@ define( function( require ) {
         dampingVisible: false,
         xMargin: 0,
         yMargin: 0,
-        stroke: null
+        stroke: null,
+        hSlider: true
       } );
 
     // VBox that contains all of the panel's content
@@ -250,7 +251,6 @@ define( function( require ) {
       sceneRadioButtonGroup.right = visibleBounds.right - self.spacing;
       sceneRadioButtonGroup.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
     } );
-    this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
   }
 
   massesAndSprings.register( 'IntroScreenView', IntroScreenView );

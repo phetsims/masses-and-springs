@@ -39,10 +39,10 @@ define( function( require ) {
         xMargin: 0,
         yMargin: 0,
         stroke: null,
-        dampingVisible: true
+        dampingVisible: true,
+        hSlider: true
       }
     );
-    gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
 
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {

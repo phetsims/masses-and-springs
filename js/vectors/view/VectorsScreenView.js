@@ -83,7 +83,8 @@ define( function( require ) {
         dampingVisible: false,
         xMargin: 0,
         yMargin: 0,
-        stroke: null
+        stroke: null,
+        hSlider: true
       } );
 
     // VBox that contains all of the panel's content
@@ -117,7 +118,6 @@ define( function( require ) {
       optionsPanel.top = self.secondSpringConstantControlPanel.top;
       optionsPanel.right = visibleBounds.right - self.spacing;
     } );
-    this.gravityAndDampingControlPanel.gravityNumberDisplay.visible = false;
 
     // Determines where we want the force vectors of the attached mass to be placed.
     model.springs[ 0 ].options.forcesOrientation = -1;

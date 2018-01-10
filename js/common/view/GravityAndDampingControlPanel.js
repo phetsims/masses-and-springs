@@ -52,7 +52,7 @@ define( function( require ) {
       align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       dampingVisible: false,
-      hSlider: true
+      hSlider: false
     }, options );
 
     //  Add gravity info for various planets
@@ -135,20 +135,19 @@ define( function( require ) {
     };
 
     // Manages the values associated with the gravity panel in a combo box
-    var gravityHSlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
+    var gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
 
-    this.gravityNumberDisplay = new NumberDisplay( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), {
-      align: 'center',
-      valuePattern: StringUtils.fillIn( gravityValueString, {
-        gravity: '{0}'
-      } ),
-      useRichText: true,
-      font: MassesAndSpringsConstants.FONT,
-      decimalPlaces: 1,
-      xMargin: 3,
-      yMargin: 1,
-      numberFill: 'black'
-    } );
+    if ( options.hSlider ) {
+      var gravitySlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), gravitySliderOptions );
+      gravitySlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
+        font: MassesAndSpringsConstants.LABEL_FONT,
+        tandem: tandem.createTandem( 'gravityNoneString' )
+      } ) );
+      gravitySlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().max, new Text( lotsString, {
+        font: MassesAndSpringsConstants.LABEL_FONT,
+        tandem: tandem.createTandem( 'gravityLotsString' )
+      } ) );
+    }
 
     if ( options.dampingVisible ) {
 
@@ -177,11 +176,12 @@ define( function( require ) {
         tandem,
         sliderOptions
       );
+
       Panel.call( self, new VBox( {
         align: 'center',
         spacing: 8,
           children: [
-            gravityHSlider,
+            gravitySlider,
             gravityComboBox,
             dampingControlPanel
           ],
@@ -194,8 +194,7 @@ define( function( require ) {
         align: 'center',
         spacing: 8,
         children: [
-          // this.gravityNumberDisplay,
-          gravityHSlider,
+          gravitySlider,
           gravityComboBox
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
@@ -205,14 +204,14 @@ define( function( require ) {
     model.bodyProperty.link( function( newBody, previousBody ) {
       var body = _.find( self.bodies, newBody );
 
-      // Unhide the gravityHSlider if we are not using planetX
+      // Unhide the gravitySlider if we are not using planetX
       if ( newBody !== Body.PLANET_X ) {
-        gravityHSlider.visible = true;
+        gravitySlider.visible = true;
       }
 
       // If PlanetX hide the slider and update gravity
       if ( newBody === Body.PLANET_X ) {
-        gravityHSlider.visible = false;
+        gravitySlider.visible = false;
         self.gravityProperty.set( body.gravity );
       }
 
@@ -243,5 +242,4 @@ define( function( require ) {
   massesAndSprings.register( 'GravityAndDampingControlPanel', GravityAndDampingControlPanel );
 
   return inherit( Panel, GravityAndDampingControlPanel );
-} )
-;
+} );
