@@ -48,8 +48,10 @@ define( function( require ) {
     this.springHangerNode = new SpringHangerNode(
       model.springs,
       this.modelViewTransform,
-      tandem.createTandem( 'springHangerNode' )
-    );
+      tandem.createTandem( 'springHangerNode' ), {
+        centerX: this.modelViewTransform.modelToViewX(
+          model.springs[ 0 ].positionProperty.value.distance( model.springs[ 1 ].positionProperty.value ) ) * 4.7
+      } );
 
     this.firstSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
     this.firstSpringStopperButtonNode.right = this.springHangerNode.left - this.spacing;
@@ -63,7 +65,7 @@ define( function( require ) {
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT } )
     ];
     this.firstSpringConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
-    this.firstSpringConstantControlPanel.right = this.springHangerNode.left - 40;
+    this.firstSpringConstantControlPanel.right = this.firstSpringStopperButtonNode.left - this.spacing;
 
     this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, minMaxLabels, tandem );
     this.secondSpringConstantControlPanel.left = this.secondSpringStopperButtonNode.right + this.spacing;
@@ -149,8 +151,6 @@ define( function( require ) {
     this.rulerNode.toolbox = this.toolboxPanel;
     this.timerNode.toolbox = this.toolboxPanel;
 
-    this.springHangerNode.centerX = 336;
-
     // Adding all of the nodes to the scene graph
     this.addChild( this.springHangerNode );
 
@@ -180,6 +180,7 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
+      self.springHangerNode.top = model.springs[ 0 ].positionProperty.value.y + self.spacing;
       self.gravityAndDampingControlPanel.right = visibleBounds.right - self.spacing;
       self.toolboxPanel.right = visibleBounds.right - self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;

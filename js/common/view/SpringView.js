@@ -63,7 +63,7 @@ define( function( require ) {
     } );
 
     // Spacing used for the margin of layout bounds
-    this.spacing = 15;
+    this.spacing = 10;
 
     // Alignment for panels on most right side of sim view
     this.rightPanelAlignment = this.visibleBoundsProperty.get().right - this.spacing;

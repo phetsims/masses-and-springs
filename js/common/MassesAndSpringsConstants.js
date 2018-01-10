@@ -74,7 +74,7 @@ define( function( require ) {
       return new Line( 0, 0, 165, 0, { stroke: 'gray' } );
     },
 
-    RIGHT_SPRING_X: 0.975, // {number} X position of the spring node in screen coordinates
+    RIGHT_SPRING_X: 1.3, // {number} X position of the spring node in screen coordinates
 
     MODEL_VIEW_TRANSFORM: function( bounds, ratio ) {
         return ModelViewTransform2.createSinglePointScaleInvertedYMapping(
