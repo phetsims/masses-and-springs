@@ -31,7 +31,7 @@ define( function( require ) {
     FLOOR_Y: 0,
 
     // Y position of ceiling in meters. The ceiling is the top of the SpringHangerNode, just below the top of the dev view bounds
-    CEILING_Y: 1.23,
+    CEILING_Y: 1.48,
 
     // {Property.<number>} range of damping associated with sim
     DAMPING_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 1, .2 ) ),
