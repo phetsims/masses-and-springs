@@ -194,7 +194,7 @@ define( function( require ) {
      */
     createSpring: function( x, tandem ) {
       var spring = new Spring(
-        new Vector2( x, MassesAndSpringsConstants.CEILING_Y - 0.03 ),
+        new Vector2( x, MassesAndSpringsConstants.CEILING_Y - 0.01 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         this.dampingProperty.get(),
         tandem
