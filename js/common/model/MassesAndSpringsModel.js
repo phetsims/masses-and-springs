@@ -302,7 +302,7 @@ define( function( require ) {
                    OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
 
         // Constraints used to limit how much we can prime the spring's oscillation.
-        var upperConstraint = new LinearFunction( 20, 60, 1.112, 1.006 );
+        var upperConstraint = new LinearFunction( 20, 60, 1.353, 1.265 );
 
         // Max Y value in model coordinates
         var modelMaxY = upperConstraint( maxY );
