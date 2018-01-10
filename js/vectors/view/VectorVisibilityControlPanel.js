@@ -61,55 +61,50 @@ define( function( require ) {
     var netForceArrow = new ForceVectorArrow( 'black', 'panelNetForceArrow', tandem );
 
     // responsible for velocity and acceleration vectors checkboxes
-    var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
-      {
-        content: new HBox( {
-          children: [ new Text( velocityString, {
-            font: MassesAndSpringsConstants.FONT,
-            tandem: tandem.createTandem( 'velocityString' )
-          } ) ]
-        } ),
-        property: model.velocityVectorVisibilityProperty,
-        label: velocityString
-      },
-      {
-        content: new HBox( {
-          children: [ new Text( accelerationString, {
-            font: MassesAndSpringsConstants.FONT,
-            tandem: tandem.createTandem( 'accelerationString' )
-          } ) ]
-        } ),
-        property: model.accelerationVectorVisibilityProperty,
-        label: accelerationString
-      }
+    var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [ {
+      content: new HBox( {
+        children: [ new Text( velocityString, {
+          font: MassesAndSpringsConstants.FONT,
+          tandem: tandem.createTandem( 'velocityString' )
+        } ) ]
+      } ),
+      property: model.velocityVectorVisibilityProperty,
+      label: velocityString
+    }, {
+      content: new HBox( {
+        children: [ new Text( accelerationString, {
+          font: MassesAndSpringsConstants.FONT,
+          tandem: tandem.createTandem( 'accelerationString' )
+        } ) ]
+      } ),
+      property: model.accelerationVectorVisibilityProperty,
+      label: accelerationString
+    }
     ], {
       boxWidth: 15,
       tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
     } );
 
     // responsible for forces vectors checkboxes
-    var forcesVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
-      {
-        content: new HBox( {
-          children: [ new Text( gravityString, {
-            font: MassesAndSpringsConstants.FONT,
-            tandem: tandem.createTandem( 'gravityString' )
-          } ) ]
-        } ),
-        property: model.gravityVectorVisibilityProperty,
-        label: gravityString
-      },
-      {
-        content: new HBox( {
-          children: [ new Text( springString, {
-            font: MassesAndSpringsConstants.FONT,
-            tandem: tandem.createTandem( 'springString' )
-          } ) ]
-        } ),
-        property: model.springVectorVisibilityProperty,
-        label: springString
-      }
-    ], {
+    var forcesVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [ {
+      content: new HBox( {
+        children: [ new Text( gravityString, {
+          font: MassesAndSpringsConstants.FONT,
+          tandem: tandem.createTandem( 'gravityString' )
+        } ) ]
+      } ),
+      property: model.gravityVectorVisibilityProperty,
+      label: gravityString
+    }, {
+      content: new HBox( {
+        children: [ new Text( springString, {
+          font: MassesAndSpringsConstants.FONT,
+          tandem: tandem.createTandem( 'springString' )
+        } ) ]
+      } ),
+      property: model.springVectorVisibilityProperty,
+      label: springString
+    } ], {
       boxWidth: 15,
       xMargin: 20,
       tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
