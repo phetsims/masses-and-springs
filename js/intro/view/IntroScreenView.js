@@ -245,7 +245,7 @@ define( function( require ) {
     optionsPanel.moveToBack();
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-      optionsPanel.top = self.secondSpringConstantControlPanel.top + self.spacing;
+      optionsPanel.top = self.secondSpringConstantControlPanel.top;
       optionsPanel.right = visibleBounds.right - self.spacing;
       sceneRadioButtonGroup.right = visibleBounds.right - self.spacing;
       sceneRadioButtonGroup.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
