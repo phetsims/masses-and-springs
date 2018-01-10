@@ -206,6 +206,7 @@ define( function( require ) {
 
       //Update the bounds of view elements
       springHangerNode.top = self.spacing;
+      movableLineNode.centerX = springHangerNode.centerX;
       massValueControlPanel.top = self.visibleBoundsProperty.get().getMinY() + self.spacing;
       massValueControlPanel.right = springHangerNode.left - self.spacing;
       springHangerNode.centerX = self.modelViewTransform.modelToViewX( model.springs[ 0 ].positionProperty.value.x );
