@@ -177,7 +177,7 @@ define( function( require ) {
     this.timerNode.toolbox = this.toolboxPanel;
 
     this.shelf.rectWidth = 140;
-    this.shelf.left = massValueControlPanel.left;
+    this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 0 ].positionProperty.value.x );
 
     // Adding all of the nodes to the scene graph
     // Adding Panels to scene graph
