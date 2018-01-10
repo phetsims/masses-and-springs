@@ -100,9 +100,7 @@ define( function( require ) {
       model.masses[ 0 ],
       tandem.createTandem( 'massValueControlPanel' )
     );
-    massValueControlPanel.top = this.visibleBoundsProperty.get().getMinY() + this.spacing;
-    massValueControlPanel.left = this.energyGraphNode.right + this.spacing;
-    springHangerNode.left = massValueControlPanel.right + 28;
+
 
     // Initializes movable line
     var movableLineNode = new MovableLineNode(
@@ -208,6 +206,9 @@ define( function( require ) {
 
       //Update the bounds of view elements
       springHangerNode.top = self.spacing;
+      massValueControlPanel.top = self.visibleBoundsProperty.get().getMinY() + self.spacing;
+      massValueControlPanel.right = springHangerNode.left - self.spacing;
+      springHangerNode.centerX = self.modelViewTransform.modelToViewX( model.springs[ 0 ].positionProperty.value.x );
       springStopperButtonNode.left = springHangerNode.right + self.spacing;
       springConstantControlPanel.left = springStopperButtonNode.right + self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;
