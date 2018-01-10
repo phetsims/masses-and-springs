@@ -111,19 +111,19 @@ define( function( require ) {
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
     var springsIcon = [
       new Spring(
-        new Vector2( 0.65, MassesAndSpringsConstants.CEILING_Y ),
+        new Vector2( 0.65, 2 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         0,
         tandem.createTandem( 'firstIconSpring' )
       ),
       new Spring(
-        new Vector2( 0.85, MassesAndSpringsConstants.CEILING_Y ),
+        new Vector2( 0.85, 2 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         0,
         tandem.createTandem( 'secondIconSpring' )
       ),
       new Spring(
-        new Vector2( 0.65, MassesAndSpringsConstants.CEILING_Y + 0.17 ),
+        new Vector2( 0.65, 2.17 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         0,
         tandem.createTandem( 'thirdIconSpring' )
@@ -158,7 +158,7 @@ define( function( require ) {
     thirdSpringIcon.lineWidthProperty.set( 3 );
 
     // @private {read-only} White background for scene switching icons
-    var iconBackground = new Rectangle( firstSpringIcon.x - 40, 25, 160, 190, 2, 2, { fill: 'white' } );
+    var iconBackground = new Rectangle( firstSpringIcon.x - 40, -170, 160, 200, 2, 2, { fill: 'white' } );
 
     // @private {read-only} Creation of same length icon node
     var sameLengthIcon = new Node( { scale: IMAGE_SCALE } );
