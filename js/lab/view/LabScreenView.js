@@ -86,13 +86,14 @@ define( function( require ) {
     this.addChild( optionsPanel );
     optionsPanel.moveToBack();
 
+    this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 1 ].positionProperty.value.x );
+
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       optionsPanel.top = visibleBounds.top + self.spacing;
       optionsPanel.right = visibleBounds.right - self.spacing;
     } );
     this.gravityAndDampingControlPanel.options.hSliderTweakersEnabled = 0.5;
-
   }
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );
