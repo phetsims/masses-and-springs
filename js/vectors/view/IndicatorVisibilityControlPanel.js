@@ -75,41 +75,40 @@ define( function( require ) {
     displacementSymbol.scale( .65 );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
-    var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [
-      {
-        content: new HBox( {
-          children: [ new Text(
-            displacementString,
-            { font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'displacementString' ) } )
-          ],
-          tandem: tandem.createTandem( 'displacementHBox' )
-        } ),
-        property: model.displacementVisibleProperty,
-        label: displacementString
-      },
-      {
-        content: new HBox( {
-          children: [ new Text(
-            equilibriumPositionString,
-            { font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'equilibriumPositionString' ) } )
-          ],
-          tandem: tandem.createTandem( 'equilibriumPositionHBox' )
-        } ),
-        property: model.equilibriumPositionVisibleProperty,
-        label: equilibriumPositionString
-      },
-      {
-        content: new HBox( {
-          children: [ new Text(
-            movableLineString,
-            { font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'movableLineString' ) } )
-          ],
-          tandem: tandem.createTandem( 'movableLineHBox' )
-        } ),
-        property: model.movableLineVisibleProperty,
-        label: movableLineString
-      }
-    ], { boxWidth: 15, spacing: 5, tandem: tandem.createTandem( 'indicatorVisibilityCheckBoxGroup' ) } );
+    var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [ {
+      content: new HBox( {
+        children: [ new Text( displacementString, {
+          font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'displacementString' )
+        } ) ],
+        tandem: tandem.createTandem( 'displacementHBox' )
+      } ),
+      property: model.displacementVisibleProperty,
+      label: displacementString
+    }, {
+      content: new HBox( {
+        children: [ new Text( equilibriumPositionString, {
+          font: MassesAndSpringsConstants.FONT,
+          tandem: tandem.createTandem( 'equilibriumPositionString' )
+        } ) ],
+        tandem: tandem.createTandem( 'equilibriumPositionHBox' )
+      } ),
+      property: model.equilibriumPositionVisibleProperty,
+      label: equilibriumPositionString
+    }, {
+      content: new HBox( {
+        children: [ new Text( movableLineString, {
+          font: MassesAndSpringsConstants.FONT,
+          tandem: tandem.createTandem( 'movableLineString' )
+        } ) ],
+        tandem: tandem.createTandem( 'movableLineHBox' )
+      } ),
+      property: model.movableLineVisibleProperty,
+      label: movableLineString
+    } ], {
+      boxWidth: 15,
+      spacing: 5,
+      tandem: tandem.createTandem( 'indicatorVisibilityCheckBoxGroup' )
+    } );
     var titleToControlsVerticalSpace = 2;
     var indicatorVisibilityControlsVBox = new VBox( {
       children: [
