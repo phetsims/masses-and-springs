@@ -20,6 +20,7 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
@@ -138,15 +139,19 @@ define( function( require ) {
     var gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
 
     if ( options.hSlider ) {
-      var gravitySlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), gravitySliderOptions );
-      gravitySlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
+      var gravityText = new Text( gravityString, { font: new PhetFont( 14 ) } );
+
+      var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), gravitySliderOptions );
+      gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'gravityNoneString' )
       } ) );
-      gravitySlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().max, new Text( lotsString, {
+      gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().max, new Text( lotsString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'gravityLotsString' )
       } ) );
+
+      var gravitySlider = new VBox( { children: [ gravityText, gravityHSlider ] } )
     }
 
     if ( options.dampingVisible ) {
@@ -180,14 +185,13 @@ define( function( require ) {
       Panel.call( self, new VBox( {
         align: 'center',
         spacing: 8,
-          children: [
-            gravitySlider,
-            gravityComboBox,
-            dampingControlPanel
-          ],
-          tandem: tandem.createTandem( 'gravityPropertyVBox' )
-        }
-      ), self.options );
+        children: [
+          gravitySlider,
+          gravityComboBox,
+          dampingControlPanel
+        ],
+        tandem: tandem.createTandem( 'gravityPropertyVBox' )
+      } ), self.options );
     }
     else {
       Panel.call( self, new VBox( {
