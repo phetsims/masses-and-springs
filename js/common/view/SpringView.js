@@ -43,8 +43,9 @@ define( function( require ) {
       vectorViewEnabled: true
     }, options );
 
-    this.model = model; // Make model available for reset
-    ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    // TODO: Do we need to expose this model?
+    this.model = model;
+    ScreenView.call( this );
     var self = this;
 
     this.modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 );
@@ -62,7 +63,7 @@ define( function( require ) {
     } );
 
     // Spacing used for the margin of layout bounds
-    this.spacing = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.CEILING_Y );
+    this.spacing = 15;
 
     // Alignment for panels on most right side of sim view
     this.rightPanelAlignment = this.visibleBoundsProperty.get().right - this.spacing;

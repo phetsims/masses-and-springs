@@ -41,7 +41,7 @@ define( function( require ) {
    */
   function OneSpringView( model, tandem ) {
     this.model = model; // Make model available
-    SpringView.call( this, model, tandem, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    SpringView.call( this, model, tandem );
     var self = this;
 
     var springHangerNode = new SpringHangerNode( model.springs,
@@ -68,8 +68,6 @@ define( function( require ) {
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT } )
     ];
     var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
-
-    springHangerNode.top = springConstantControlPanel.top;
 
     // @public Initializes equilibrium line for the spring
     var springEquilibriumLineNode = new ReferenceLineNode(
@@ -210,6 +208,7 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
+      springHangerNode.top = self.spacing;
       springStopperButtonNode.left = springHangerNode.right + self.spacing;
       springConstantControlPanel.left = springStopperButtonNode.right + self.spacing;
       self.resetAllButton.right = visibleBounds.right - self.spacing;

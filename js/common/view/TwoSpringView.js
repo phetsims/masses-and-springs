@@ -38,7 +38,7 @@ define( function( require ) {
    */
   function TwoSpringView( model, tandem ) {
     this.model = model; // Make model available
-    SpringView.call( this, model, tandem, { layoutBounds: new Bounds2( 0, 0, 768, 504 ) } );
+    SpringView.call( this, model, tandem );
     var self = this;
 
     model.springs[ 0 ].options.modelViewTransform2 = this.modelViewTransform;
