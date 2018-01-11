@@ -71,7 +71,7 @@ define( function( require ) {
     var springEquilibriumLineNode = new ReferenceLineNode(
       MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
       model.springs[ 0 ],
-      model.springs[ 0 ].equilibriumYPositionProperty,
+      model.springs[ 0 ].massEquilibriumYPositionProperty,
       model.equilibriumPositionVisibleProperty, {
         stroke: 'rgb( 93, 191, 142 )'
       }
