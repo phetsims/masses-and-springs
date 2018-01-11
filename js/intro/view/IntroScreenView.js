@@ -20,6 +20,7 @@ define( function( require ) {
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
@@ -33,6 +34,7 @@ define( function( require ) {
 
   // constants
   var IMAGE_SCALE = 0.3;
+  var EQUILIBRIUM_LINE_FILL = 'rgb( 93, 191, 142 )';
 
   // strings
   var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
@@ -90,6 +92,29 @@ define( function( require ) {
       }
     );
     this.addChild( this.constantsControlPanel );
+
+    // Initializes equilibrium line for first spring
+    var firstSpringEquilibriumLineNode = new ReferenceLineNode(
+      this.modelViewTransform,
+      model.springs[ 0 ],
+      model.springs[ 0 ].equilibriumYPositionProperty,
+      model.equilibriumPositionVisibleProperty, {
+        stroke: EQUILIBRIUM_LINE_FILL
+      }
+    );
+
+    // Initializes equilibrium line for second spring
+    var secondSpringEquilibriumLineNode = new ReferenceLineNode(
+      this.modelViewTransform,
+      model.springs[ 1 ],
+      model.springs[ 1 ].equilibriumYPositionProperty,
+      model.equilibriumPositionVisibleProperty, {
+        stroke: EQUILIBRIUM_LINE_FILL
+      }
+    );
+    //Reference lines from indicator visibility box
+    this.addChild( firstSpringEquilibriumLineNode );
+    this.addChild( secondSpringEquilibriumLineNode );
 
     // Link responsible for visibility of the length control panel.
     model.sceneModeProperty.lazyLink( function( mode ) {

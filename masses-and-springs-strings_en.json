@@ -80,6 +80,9 @@
   "mass": {
     "value": "Mass"
   },
+  "massEquilibrium": {
+    "value": "Mass Equilibrium"
+  },
   "massValue": {
     "value": "{{mass}} g"
   },

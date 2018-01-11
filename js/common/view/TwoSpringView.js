@@ -22,7 +22,6 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var EQUILIBRIUM_LINE_FILL = 'rgb( 93, 191, 142 )';
   var NATURAL_LENGTH_LINE_FILL = 'rgb( 65, 66, 232 )';
 
   // strings
@@ -77,26 +76,6 @@ define( function( require ) {
       tandem.createTandem( 'movableLineNode' )
     );
 
-    // @public Initializes equilibrium line for first spring
-    var firstSpringEquilibriumLineNode = new ReferenceLineNode(
-      this.modelViewTransform,
-      model.springs[ 0 ],
-      model.springs[ 0 ].equilibriumYPositionProperty,
-      model.equilibriumPositionVisibleProperty, {
-        stroke: EQUILIBRIUM_LINE_FILL
-      }
-    );
-
-    // @public Initializes equilibrium line for second spring
-    var secondSpringEquilibriumLineNode = new ReferenceLineNode(
-      this.modelViewTransform,
-      model.springs[ 1 ],
-      model.springs[ 1 ].equilibriumYPositionProperty,
-      model.equilibriumPositionVisibleProperty, {
-        stroke: EQUILIBRIUM_LINE_FILL
-      }
-    );
-
     // @public Initializes natural line for first spring
     var firstNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
@@ -144,8 +123,6 @@ define( function( require ) {
     this.addChild( this.secondSpringStopperButtonNode );
 
     //Reference lines from indicator visibility box
-    this.addChild( firstSpringEquilibriumLineNode );
-    this.addChild( secondSpringEquilibriumLineNode );
     this.addChild( firstNaturalLengthLineNode );
     this.addChild( secondNaturalLengthLineNode );
     this.addChild( movableLineNode );

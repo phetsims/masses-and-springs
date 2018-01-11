@@ -1,7 +1,7 @@
 // Copyright 2017-2018, University of Colorado Boulder
 
 /**
- * Panel that manages options for visibility of reference lines.
+ * Panel that manages options for visibility of reference lines on vector screen.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -24,7 +24,7 @@ define( function( require ) {
   var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  var equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
+  var massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
   var displacementString = require( 'string!MASSES_AND_SPRINGS/displacement' );
 
@@ -86,14 +86,14 @@ define( function( require ) {
       label: displacementString
     }, {
       content: new HBox( {
-        children: [ new Text( equilibriumPositionString, {
+        children: [ new Text( massEquilibriumString, {
           font: MassesAndSpringsConstants.FONT,
-          tandem: tandem.createTandem( 'equilibriumPositionString' )
+          tandem: tandem.createTandem( 'massEquilibriumString' )
         } ) ],
-        tandem: tandem.createTandem( 'equilibriumPositionHBox' )
+        tandem: tandem.createTandem( 'massEquilibriumHBox' )
       } ),
       property: model.equilibriumPositionVisibleProperty,
-      label: equilibriumPositionString
+      label: massEquilibriumString
     }, {
       content: new HBox( {
         children: [ new Text( movableLineString, {

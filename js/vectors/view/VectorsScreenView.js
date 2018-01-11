@@ -17,9 +17,14 @@ define( function( require ) {
   var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
   var Panel = require( 'SUN/Panel' );
+  var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlPanel' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
+
+  // constants
+  var EQUILIBRIUM_LINE_FILL = 'rgb( 93, 191, 142 )';
+
 
   /**
    * @param {VectorsModel} model
@@ -54,6 +59,29 @@ define( function( require ) {
     secondDisplacementArrowNode.right = this.springNodes[ 1 ].left + secondDisplacementArrowNode.width / 2;
     secondDisplacementArrowNode.top = this.springNodes[ 1 ].bottom - 12;
     this.addChild( secondDisplacementArrowNode );
+
+    // Initializes equilibrium line for first spring
+    var firstSpringEquilibriumLineNode = new ReferenceLineNode(
+      this.modelViewTransform,
+      model.springs[ 0 ],
+      model.springs[ 0 ].massEquilibriumYPositionProperty,
+      model.equilibriumPositionVisibleProperty, {
+        stroke: EQUILIBRIUM_LINE_FILL
+      }
+    );
+
+    // Initializes equilibrium line for second spring
+    var secondSpringEquilibriumLineNode = new ReferenceLineNode(
+      this.modelViewTransform,
+      model.springs[ 1 ],
+      model.springs[ 1 ].massEquilibriumYPositionProperty,
+      model.equilibriumPositionVisibleProperty, {
+        stroke: EQUILIBRIUM_LINE_FILL
+      }
+    );
+    //Reference lines from indicator visibility box
+    this.addChild( firstSpringEquilibriumLineNode );
+    this.addChild( secondSpringEquilibriumLineNode );
 
     // Contains visibility options for the reference lines and displacement arrow
     var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(

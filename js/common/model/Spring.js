@@ -211,6 +211,24 @@ define( function( require ) {
         }
       } );
 
+    // @public {read-only} y position of the equilibrium position centered on mass's center of mass
+    this.massEquilibriumYPositionProperty = new Property( 0,
+      {
+        tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
+        units: 'meters',
+        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        phetioType: DerivedPropertyIO( NumberIO )
+      } );
+
+    // Set the equilibrium position when a mass is attached to the spring. We do a similar process in Mass.js when the mass value changes.
+    Property.multilink( [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
+      function( springConstant, gravity, mass, naturalRestingLength ) {
+        if ( mass ) {
+          var springExtensionValue = ( mass.massProperty.value * self.gravityProperty.value) / self.springConstantProperty.value;
+          self.massEquilibriumYPositionProperty.set( self.positionProperty.get().y - naturalRestingLength - springExtensionValue - mass.heightProperty.value / 2 );
+        }
+      } );
+
     this.springConstantProperty.link( function( springConstant ) {
       self.updateThickness( self.naturalRestingLengthProperty.get(), springConstant );
     } );
