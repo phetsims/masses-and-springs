@@ -83,6 +83,7 @@ define( function( require ) {
       buttonCornerRadius: 3,
       buttonYMargin: 0,
       itemYMargin: 3,
+      itemXMargin: 2,
       listYMargin: 3,
       tandem: tandem.createTandem( 'gravityComboBox' )
     } );
