@@ -110,9 +110,6 @@ define( function( require ) {
       thumbSize: new Dimension2( 13, 24 ),
       stroke: null,
       sliderIndent: 7,
-      constrainValue: function( value ) {
-        return Number( Util.toFixed( value, 1 ) );
-      },
       majorTicks: [
         {
           value: MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.min,

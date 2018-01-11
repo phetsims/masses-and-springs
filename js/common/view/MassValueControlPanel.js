@@ -16,6 +16,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -48,31 +49,30 @@ define( function( require ) {
     var numberControl = new NumberControl( massString, massInGramsProperty, range, {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
-      } ),
-      valueMaxWidth: 100,
-      majorTickLength: 10,
-      trackSize: new Dimension2( 100, 2 ),
-      thumbSize: new Dimension2( 13, 22 ),
-      titleFont: MassesAndSpringsConstants.TITLE_FONT,
-      titleMaxWidth: 100,
-      titleFontWeight: 'bold',
-      arrowButtonScale: 0.7,
-      layoutFunction: NumberControl.createLayoutFunction1( { arrowButtonsXSpacing: 5 } ),
+      } ), majorTickLength: 10,
+      titleFont: new PhetFont( 14 ),
+      trackSize: new Dimension2( 125, 0.1 ),
+      thumbSize: new Dimension2( 13, 24 ),
+      stroke: null,
+      sliderIndent: 7,
       majorTicks: [
         {
           value: range.min,
-          label: new Text( StringUtils.fillIn( massValueString, { mass: range.min } ), {
-            font: MassesAndSpringsConstants.LABEL_FONT
-          } )
+          label: new Text( String( range.min ), { font: new PhetFont( 14 ) } )
         },
         {
           value: range.max,
-          label: new Text( StringUtils.fillIn( massValueString, { mass: range.max } ), {
-            font: MassesAndSpringsConstants.LABEL_FONT
-          } )
-        } ],
-      delta: 1,
-      tandem: tandem
+          label: new Text( String( range.max ), { font: new PhetFont( 14 ) } )
+        }
+      ],
+      layoutFunction: NumberControl.createLayoutFunction1( {
+        ySpacing: 2,
+        arrowButtonsXSpacing: 5
+      } ),
+      useRichText: true,
+      decimalPlaces: 0,
+      arrowButtonScale: 0.45,
+      delta: 1
     } );
 
     mass.options.adjustable = true;
