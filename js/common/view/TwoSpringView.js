@@ -17,7 +17,7 @@ define( function( require ) {
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
-  var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
+  var SpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/SpringScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -36,7 +36,7 @@ define( function( require ) {
    */
   function TwoSpringView( model, tandem ) {
     this.model = model; // Make model available
-    SpringView.call( this, model, tandem );
+    SpringScreenView.call( this, model, tandem );
     var self = this;
 
     model.springs[ 0 ].options.modelViewTransform2 = this.modelViewTransform;
@@ -184,5 +184,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'TwoSpringView', TwoSpringView );
 
-  return inherit( SpringView, TwoSpringView );
+  return inherit( SpringScreenView, TwoSpringView );
 } );

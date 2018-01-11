@@ -38,7 +38,7 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @constructor
    */
-  function SpringView( model, tandem ) {
+  function SpringScreenView( model, tandem ) {
     var options = _.extend( {
       vectorViewEnabled: true
     }, options );
@@ -167,9 +167,9 @@ define( function( require ) {
     } );
   }
 
-  massesAndSprings.register( 'SpringView', SpringView );
+  massesAndSprings.register( 'SpringScreenView', SpringScreenView );
 
-  return inherit( ScreenView, SpringView, {
+  return inherit( ScreenView, SpringScreenView, {
 
     /**
      * Helper function to restore initial layering of the masses to prevent them from stacking over each other.

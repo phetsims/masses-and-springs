@@ -23,7 +23,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
-  var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
+  var SpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/SpringScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -39,7 +39,7 @@ define( function( require ) {
    */
   function OneSpringView( model, tandem ) {
     this.model = model; // Make model available
-    SpringView.call( this, model, tandem );
+    SpringScreenView.call( this, model, tandem );
     var self = this;
 
     var springHangerNode = new SpringHangerNode( model.springs,
@@ -214,7 +214,7 @@ define( function( require ) {
 
   massesAndSprings.register( 'OneSpringView', OneSpringView );
 
-  return inherit( SpringView, OneSpringView, {
+  return inherit( SpringScreenView, OneSpringView, {
     /**
      * TODO: add documentation
      */
