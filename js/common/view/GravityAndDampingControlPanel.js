@@ -19,7 +19,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -134,12 +133,9 @@ define( function( require ) {
     };
 
     // Manages the values associated with the gravity panel in a combo box
-    var gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
-
     if ( options.hSlider ) {
 
       var gravityText = new Text( gravityString, { font: new PhetFont( 14 ) } );
-
       var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), sliderOptions );
       gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
@@ -154,7 +150,10 @@ define( function( require ) {
         align: 'left',
         spacing: 2,
         children: [ gravityText, new HBox( { children: [ new HStrut( 5 ), gravityHSlider ] } ) ]
-      } )
+      } );
+    }
+    else {
+      gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
     }
 
     if ( options.dampingVisible ) {
