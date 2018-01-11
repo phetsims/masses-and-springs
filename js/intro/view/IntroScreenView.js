@@ -226,9 +226,7 @@ define( function( require ) {
       children: [
         referenceLinePanel,
         MassesAndSpringsConstants.LINE_SEPARATOR(),
-        gravityAndDampingControlPanel,
-        MassesAndSpringsConstants.LINE_SEPARATOR(),
-        this.toolboxPanel
+        gravityAndDampingControlPanel
       ]
     } );
 
@@ -247,9 +245,11 @@ define( function( require ) {
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       optionsPanel.top = self.secondSpringConstantControlPanel.top;
-      optionsPanel.right = visibleBounds.right - self.spacing;
-      sceneRadioButtonGroup.right = visibleBounds.right - self.spacing;
-      sceneRadioButtonGroup.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+      optionsPanel.right = self.panelRightSpacing;
+      self.toolboxPanel.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+      self.toolboxPanel.right = self.panelRightSpacing;
+      sceneRadioButtonGroup.right = self.panelRightSpacing;
+      sceneRadioButtonGroup.top = self.toolboxPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
     } );
   }
 

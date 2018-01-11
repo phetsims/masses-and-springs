@@ -66,9 +66,7 @@ define( function( require ) {
         MassesAndSpringsConstants.LINE_SEPARATOR(),
         gravityAndDampingControlPanel,
         MassesAndSpringsConstants.LINE_SEPARATOR(),
-        vectorVisibilityControlPanel,
-        MassesAndSpringsConstants.LINE_SEPARATOR(),
-        this.toolboxPanel
+        vectorVisibilityControlPanel
       ]
     } );
 
@@ -91,7 +89,9 @@ define( function( require ) {
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       optionsPanel.top = self.energyGraphNode.top;
-      optionsPanel.right = visibleBounds.right - self.spacing;
+      optionsPanel.right = self.panelRightSpacing;
+      self.toolboxPanel.top = optionsPanel.bottom + self.spacing;
+      self.toolboxPanel.right = self.panelRightSpacing;
     } );
   }
 

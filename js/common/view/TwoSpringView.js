@@ -19,7 +19,6 @@ define( function( require ) {
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -131,25 +130,6 @@ define( function( require ) {
       }
     );
 
-    // Toolbox Panel
-    this.toolboxPanel = new ToolboxPanel(
-      this.visibleBoundsProperty.get(),
-      this.rulerNode, this.timerNode,
-      model.rulerVisibleProperty,
-      model.timerVisibleProperty,
-      tandem.createTandem( 'toolboxPanel' ),
-      {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: MassesAndSpringsConstants.PANEL_FILL
-      }
-    );
-
-    // Done to for movableDragHandler handling intersecting bounds of panel and ruler
-    this.rulerNode.toolbox = this.toolboxPanel;
-    this.timerNode.toolbox = this.toolboxPanel;
-
     // Adding all of the nodes to the scene graph
     this.addChild( this.springHangerNode );
 
@@ -171,18 +151,14 @@ define( function( require ) {
     this.addChild( movableLineNode );
     this.addChild( this.massLayer );
 
-    // Adding Nodes in tool box
-    this.addChild( this.timerNode );
-    this.addChild( this.rulerNode );
-
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
       self.springHangerNode.top = model.springs[ 0 ].positionProperty.value.y + self.spacing;
-      self.gravityAndDampingControlPanel.right = visibleBounds.right - self.spacing;
-      self.toolboxPanel.right = visibleBounds.right - self.spacing;
-      self.resetAllButton.right = visibleBounds.right - self.spacing;
+      self.gravityAndDampingControlPanel.right = self.panelRightSpacing;
+      self.toolboxPanel.right = self.panelRightSpacing;
+      self.resetAllButton.right = self.panelRightSpacing;
       self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
       self.toolboxPanel.dragBounds = 3;
       self.timerNode.updateBounds( visibleBounds.withOffsets(

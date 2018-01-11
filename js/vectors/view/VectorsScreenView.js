@@ -95,9 +95,7 @@ define( function( require ) {
         MassesAndSpringsConstants.LINE_SEPARATOR(),
         gravityAndDampingControlPanel,
         MassesAndSpringsConstants.LINE_SEPARATOR(),
-        vectorVisibilityControlPanel,
-        MassesAndSpringsConstants.LINE_SEPARATOR(),
-        this.toolboxPanel
+        vectorVisibilityControlPanel
       ]
     } );
 
@@ -116,7 +114,9 @@ define( function( require ) {
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       optionsPanel.top = self.secondSpringConstantControlPanel.top;
-      optionsPanel.right = visibleBounds.right - self.spacing;
+      optionsPanel.right = self.panelRightSpacing;
+      self.toolboxPanel.top = optionsPanel.bottom + self.spacing;
+      self.toolboxPanel.right = self.panelRightSpacing;
     } );
 
     // Determines where we want the force vectors of the attached mass to be placed.

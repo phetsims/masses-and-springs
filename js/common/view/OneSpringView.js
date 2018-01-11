@@ -25,7 +25,6 @@ define( function( require ) {
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringView = require( 'MASSES_AND_SPRINGS/common/view/SpringView' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -123,21 +122,6 @@ define( function( require ) {
       }
     );
 
-    // Toolbox Panel
-    this.toolboxPanel = new ToolboxPanel(
-      this.visibleBoundsProperty.get(),
-      this.rulerNode, this.timerNode,
-      model.rulerVisibleProperty,
-      model.timerVisibleProperty,
-      tandem.createTandem( 'toolboxPanel' ),
-      {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null
-      }
-    );
-
     // Zero height reference line
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
     var zeroHeightLine = new ReferenceLineNode(
@@ -172,10 +156,6 @@ define( function( require ) {
     zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width);
     this.addChild( zeroHeightLabel );
 
-    // Done to for movableDragHandler handling intersecting bounds of panel and ruler
-    this.rulerNode.toolbox = this.toolboxPanel;
-    this.timerNode.toolbox = this.toolboxPanel;
-
     this.shelf.rectWidth = 140;
     this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 0 ].positionProperty.value.x );
 
@@ -197,10 +177,6 @@ define( function( require ) {
     this.addChild( movableLineNode );
     this.addChild( this.massLayer );
 
-    // Adding Nodes in tool box
-    this.addChild( this.timerNode );
-    this.addChild( this.rulerNode );
-
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
@@ -212,7 +188,7 @@ define( function( require ) {
       springHangerNode.centerX = self.modelViewTransform.modelToViewX( model.springs[ 0 ].positionProperty.value.x );
       springStopperButtonNode.left = springHangerNode.right + self.spacing;
       springConstantControlPanel.left = springStopperButtonNode.right + self.spacing;
-      self.resetAllButton.right = visibleBounds.right - self.spacing;
+      self.resetAllButton.right = self.panelRightSpacing;
       self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
       self.energyGraphNode.left = visibleBounds.left + self.spacing;
       self.timerNode.updateBounds( visibleBounds.withOffsets(

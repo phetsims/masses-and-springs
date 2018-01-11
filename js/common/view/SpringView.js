@@ -27,6 +27,7 @@ define( function( require ) {
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var TimeControlNode = require( 'MASSES_AND_SPRINGS/common/view/TimeControlNode' );
+  var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -139,10 +140,30 @@ define( function( require ) {
     soundToggleButton.scale( .9 );
     this.addChild( soundToggleButton );
 
+    // Toolbox Panel
+    this.toolboxPanel = new ToolboxPanel(
+      this.visibleBoundsProperty.get(),
+      this.rulerNode, this.timerNode,
+      model.rulerVisibleProperty,
+      model.timerVisibleProperty,
+      tandem.createTandem( 'toolboxPanel' ), {
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 30,
+        minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 20,
+      }
+    );
+
+    // Adding tools in tool box
+    this.addChild( this.toolboxPanel );
+    this.addChild( this.timerNode );
+    this.addChild( this.rulerNode );
+    this.rulerNode.toolbox = this.toolboxPanel;
+    this.timerNode.toolbox = this.toolboxPanel;
+
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
-      soundToggleButton.right = visibleBounds.right - self.spacing;
+      self.panelRightSpacing = visibleBounds.right - self.spacing;
+      soundToggleButton.right = self.panelRightSpacing;
     } );
   }
 
