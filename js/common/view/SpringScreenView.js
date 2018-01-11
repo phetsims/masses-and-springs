@@ -152,7 +152,7 @@ define( function( require ) {
       }
     );
 
-    // Adding tools in tool box
+    // Adding tools in toolbox
     this.addChild( this.toolboxPanel );
     this.addChild( this.timerNode );
     this.addChild( this.rulerNode );
