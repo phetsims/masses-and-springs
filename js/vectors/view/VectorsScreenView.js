@@ -43,7 +43,7 @@ define( function( require ) {
       tandem,
       { modelViewTransform: this.modelViewTransform } );
     firstDisplacementArrowNode.left = this.springNodes[ 0 ].right;
-    firstDisplacementArrowNode.top = this.springNodes[ 0 ].bottom;
+    firstDisplacementArrowNode.top = this.springNodes[ 0 ].bottom - 12;
     this.addChild( firstDisplacementArrowNode );
 
     var secondDisplacementArrowNode = new DisplacementArrowNode(
@@ -52,7 +52,7 @@ define( function( require ) {
       tandem,
       { modelViewTransform: this.modelViewTransform } );
     secondDisplacementArrowNode.right = this.springNodes[ 1 ].left + secondDisplacementArrowNode.width / 2;
-    secondDisplacementArrowNode.top = this.springNodes[ 1 ].bottom;
+    secondDisplacementArrowNode.top = this.springNodes[ 1 ].bottom - 12;
     this.addChild( secondDisplacementArrowNode );
 
     // Contains visibility options for the reference lines and displacement arrow
