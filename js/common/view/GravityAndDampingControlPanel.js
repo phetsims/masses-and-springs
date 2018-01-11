@@ -14,19 +14,20 @@ define( function( require ) {
   var ComboBox = require( 'SUN/ComboBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var Util = require( 'DOT/Util' );
 
   // strings
@@ -119,11 +120,11 @@ define( function( require ) {
         },
         {
           value: MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max,
-          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max ), { font: new PhetFont( 12 ) } )
+          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max ), { font: new PhetFont( 14 ) } )
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 70,
+        titleXSpacing: 48,
         ySpacing: 2,
         arrowButtonsXSpacing: 5
       } ),
@@ -132,16 +133,17 @@ define( function( require ) {
       } ),
       useRichText: true,
       decimalPlaces: 1,
-      arrowButtonScale: 0.5
+      arrowButtonScale: 0.45
     };
 
     // Manages the values associated with the gravity panel in a combo box
     var gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
 
     if ( options.hSlider ) {
+
       var gravityText = new Text( gravityString, { font: new PhetFont( 14 ) } );
 
-      var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), gravitySliderOptions );
+      var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), sliderOptions );
       gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'gravityNoneString' )
@@ -151,7 +153,11 @@ define( function( require ) {
         tandem: tandem.createTandem( 'gravityLotsString' )
       } ) );
 
-      var gravitySlider = new VBox( { children: [ gravityText, gravityHSlider ] } )
+      var gravitySlider = new VBox( {
+        align: 'left',
+        spacing: 2,
+        children: [ gravityText, new HBox( { children: [ new HStrut( 5 ), gravityHSlider ] } ) ]
+      } )
     }
 
     if ( options.dampingVisible ) {

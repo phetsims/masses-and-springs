@@ -34,7 +34,6 @@ define( function( require ) {
     var gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
       model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
       {
-        minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 0,
         yMargin: 0,
