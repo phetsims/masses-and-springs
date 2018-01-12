@@ -22,15 +22,15 @@ define( function( require ) {
   var HStrut = require( 'SCENERY/nodes/HStrut' );
 
   /**
-   * @param {Property.<number>} SpringProperty - Property to be adjusted by hSlider
-   * @param {Range} PropertyRange - range of values for length
+   * @param {Property.<number>} springProperty - Property to be adjusted by hSlider
+   * @param {Range} propertyRange - range of values for length
    * @param {string} title - string used to title the panel
    * @param {array.<Text>} labels - formatted as: [ minLabel, maxLabel]
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function SpringControlPanel( SpringProperty, PropertyRange, title, labels, tandem, options ) {
+  function SpringControlPanel( springProperty, propertyRange, title, labels, tandem, options ) {
     options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
@@ -48,7 +48,7 @@ define( function( require ) {
     }, options );
 
     // slider used to adjust value of natural resting length of spring
-    var hSlider = new HSlider( SpringProperty, PropertyRange, {
+    var hSlider = new HSlider( springProperty, propertyRange, {
       majorTickLength: 10,
       minorTickLength: 5,
       minorTickLineWidth: 0.5,
@@ -61,12 +61,12 @@ define( function( require ) {
       tandem: tandem.createTandem( 'hSlider' )
     } );
 
-    hSlider.addMajorTick( PropertyRange.min, labels[ 0 ] );
-    hSlider.addMajorTick( PropertyRange.min + ( PropertyRange.max - PropertyRange.min ) / 2 );
-    hSlider.addMajorTick( PropertyRange.max, labels[ 1 ] );
+    hSlider.addMajorTick( propertyRange.min, labels[ 0 ] );
+    hSlider.addMajorTick( propertyRange.min + ( propertyRange.max - propertyRange.min ) / 2 );
+    hSlider.addMajorTick( propertyRange.max, labels[ 1 ] );
     for ( var i = 1; i < 10; i++ ) {
       if ( i !== 5 && options.minorTickMarksVisible ) {
-        hSlider.addMinorTick( PropertyRange.min + i * ( PropertyRange.max - PropertyRange.min ) / 10 );
+        hSlider.addMinorTick( propertyRange.min + i * ( propertyRange.max - propertyRange.min ) / 10 );
       }
     }
     var hSliderTitle = new Text( title, { font: options.titleFont } );
