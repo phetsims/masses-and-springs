@@ -15,6 +15,7 @@ define( function( require ) {
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
     var BarChartNode = require( 'GRIDDLE/BarChartNode' );
     var ClearThermalButton = require( 'SCENERY_PHET/ClearThermalButton' );
+  var Color = require( 'SCENERY/util/Color' );
     var DerivedProperty = require( 'AXON/DerivedProperty' );
     var Dialog = require( 'JOIST/Dialog' );
     var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
@@ -186,6 +187,7 @@ define( function( require ) {
           },
           barWidth: 18
         },
+        labelBackgroundColor: new Color( 255, 255, 255, 0.7 ),
         barSpacing: 5
       } );
 
