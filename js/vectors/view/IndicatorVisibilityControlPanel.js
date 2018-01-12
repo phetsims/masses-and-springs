@@ -20,7 +20,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
+  var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
@@ -75,7 +75,7 @@ define( function( require ) {
     displacementSymbol.scale( .65 );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
-    var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [ {
+    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( displacementString, {
           font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'displacementString' )
@@ -107,13 +107,13 @@ define( function( require ) {
     } ], {
       boxWidth: 15,
       spacing: 5,
-      tandem: tandem.createTandem( 'indicatorVisibilityCheckBoxGroup' )
+      tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
     var titleToControlsVerticalSpace = 2;
     var indicatorVisibilityControlsVBox = new VBox( {
       children: [
         new VStrut( titleToControlsVerticalSpace ),
-        indicatorVisibilityCheckBoxGroup
+        indicatorVisibilityCheckboxGroup
       ],
       align: 'left',
       tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )

@@ -18,7 +18,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
+  var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
@@ -65,7 +65,7 @@ define( function( require ) {
     var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
-    var indicatorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [ {
+    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( naturalLengthString, {
           font: MassesAndSpringsConstants.FONT,
@@ -97,13 +97,13 @@ define( function( require ) {
     } ], {
       boxWidth: 15,
       spacing: 5,
-      tandem: tandem.createTandem( 'indicatorVisibilityCheckBoxGroup' )
+      tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
     var titleToControlsVerticalSpace = 2;
     var indicatorVisibilityControlsVBox = new VBox( {
         children: [
           new VStrut( titleToControlsVerticalSpace ),
-          indicatorVisibilityCheckBoxGroup
+          indicatorVisibilityCheckboxGroup
         ],
         align: 'left',
         tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )

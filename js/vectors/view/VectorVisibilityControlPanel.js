@@ -21,7 +21,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
-  var VerticalCheckBoxGroup = require( 'SUN/VerticalCheckBoxGroup' );
+  var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
   var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
@@ -61,7 +61,7 @@ define( function( require ) {
     var netForceArrow = new ForceVectorArrow( 'black', 'panelNetForceArrow', tandem );
 
     // responsible for velocity and acceleration vectors checkboxes
-    var vectorVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [ {
+    var vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( velocityString, {
           font: MassesAndSpringsConstants.FONT,
@@ -82,11 +82,11 @@ define( function( require ) {
     }
     ], {
       boxWidth: 15,
-      tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
+      tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
     } );
 
     // responsible for forces vectors checkboxes
-    var forcesVisibilityCheckBoxGroup = new VerticalCheckBoxGroup( [ {
+    var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( gravityString, {
           font: MassesAndSpringsConstants.FONT,
@@ -107,7 +107,7 @@ define( function( require ) {
     } ], {
       boxWidth: 15,
       xMargin: 20,
-      tandem: tandem.createTandem( 'vectorVisibilityCheckBoxGroup' )
+      tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
     } );
 
     // responsible for forces aquaRadioButton
@@ -137,12 +137,12 @@ define( function( require ) {
     // manages the mutability of the forces check boxes dependent on the forces and net force aquaRadioButton
     model.forcesModeProperty.link( function( mode ) {
       if ( mode === 'forces' ) {
-        forcesVisibilityCheckBoxGroup.pickable = true;
-        forcesVisibilityCheckBoxGroup.opacity = 1;
+        forcesVisibilityCheckboxGroup.pickable = true;
+        forcesVisibilityCheckboxGroup.opacity = 1;
       }
       else if ( mode === 'netForce' ) {
-        forcesVisibilityCheckBoxGroup.pickable = false;
-        forcesVisibilityCheckBoxGroup.opacity = 0.3;
+        forcesVisibilityCheckboxGroup.pickable = false;
+        forcesVisibilityCheckboxGroup.opacity = 0.3;
       }
     } );
 
@@ -156,11 +156,11 @@ define( function( require ) {
     if ( options.showForces ) {
       vectorVisibilityControlsVBox = new VBox( {
           children: [
-            vectorVisibilityCheckBoxGroup,
+            vectorVisibilityCheckboxGroup,
             new VStrut( 8 ),
             forcesVisibilityRadioButton,
             new VStrut( 8 ),
-            new AlignBox( forcesVisibilityCheckBoxGroup, { leftMargin: 15 } ),
+            new AlignBox( forcesVisibilityCheckboxGroup, { leftMargin: 15 } ),
             new VStrut( 8 ),
             netForceVisibilityRadioButton
           ],
@@ -188,7 +188,7 @@ define( function( require ) {
       vectorVisibilityControlsVBox = new VBox( {
         children: [
           new VStrut( 2 ),
-          vectorVisibilityCheckBoxGroup,
+          vectorVisibilityCheckboxGroup,
           new VStrut( 2 )
         ],
         align: 'left',
