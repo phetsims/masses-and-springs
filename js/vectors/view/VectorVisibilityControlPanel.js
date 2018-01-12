@@ -134,7 +134,7 @@ define( function( require ) {
       { radius: 7, spacing: 7 }
     );
 
-    // manages the mutability of the forces check boxes dependent on the forces and net force aquaRadioButton
+    // manages the mutability of the forces checkboxes dependent on the forces and net force aquaRadioButton
     model.forcesModeProperty.link( function( mode ) {
       if ( mode === 'forces' ) {
         forcesVisibilityCheckboxGroup.pickable = true;
@@ -146,7 +146,7 @@ define( function( require ) {
       }
     } );
 
-    //Contains all check boxes and radio buttons for vector visibility
+    //Contains all checkboxes and radio buttons for vector visibility
     var vectorVisibilityControlsVBox;
 
     // Contains all vectors for each force
