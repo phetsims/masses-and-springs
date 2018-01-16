@@ -296,7 +296,7 @@ define( function( require ) {
         ], spacing: 4
       } );
 
-      // REVIEW: Not having an option for the accordion box gives me a tandem error.
+      // TODO: Not having an option for the accordion box gives me a tandem error.
       AccordionBox.call( this, accordionBoxContent, {
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
@@ -307,13 +307,17 @@ define( function( require ) {
     massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
     return inherit( AccordionBox, EnergyGraphNode, {
       /**
-       * TODO: add documentation
+       * Resets the zoomLevelProperty of the zoom buttons.
+       *
+       * @public
        */
       reset: function() {
         this.zoomLevelProperty.reset();
       },
       /**
-       * TODO: add documentation
+       * Calls the update() for the barChartNode
+       *
+       * @public
        */
       update: function() {
         this.barChartNode.update();
