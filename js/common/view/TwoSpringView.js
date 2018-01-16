@@ -16,6 +16,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
+  var Property = require( 'AXON/Property' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/SpringScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -50,11 +51,20 @@ define( function( require ) {
           model.springs[ 0 ].positionProperty.value.distance( model.springs[ 1 ].positionProperty.value ) ) * 4.7
       } );
 
-    this.firstSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
+
+    var leftSpring = this.model.springs[ 0 ];
+    this.firstSpringStopperButtonNode = this.createStopperButton( leftSpring, tandem );
     this.firstSpringStopperButtonNode.right = this.springHangerNode.left - this.spacing;
 
-    this.secondSpringStopperButtonNode = this.createStopperButton( this.model.springs[ 1 ], tandem );
+    var rightSpring = this.model.springs[ 1 ];
+    this.secondSpringStopperButtonNode = this.createStopperButton( rightSpring, tandem );
     this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
+
+    Property.multilink( [ leftSpring.massAttachedProperty, rightSpring.massAttachedProperty ],
+      function( leftSpringMass, rightSpringMass ) {
+        self.firstSpringStopperButtonNode.enabled = !!leftSpringMass;
+        self.secondSpringStopperButtonNode.enabled = !!rightSpringMass;
+      } );
 
     // Spring Constant Control Panels
     var minMaxLabels = [
