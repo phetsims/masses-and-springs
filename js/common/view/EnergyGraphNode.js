@@ -128,7 +128,7 @@ define( function( require ) {
         maxWidth: 35
       } );
 
-      clearThermalButton.center = eThermText.center.plusXY( 0, eThermText.height * 0.85 );
+      clearThermalButton.center = eThermText.center.plusXY( 0, eThermText.height * 1 );
 
       var dEntryNode = new Node( { children: [ eThermText, clearThermalButton ] } );
 
@@ -170,7 +170,7 @@ define( function( require ) {
           entries: [ dEntry, cEntry, bEntry, aEntry ],
           labelString: eTotString
         }
-      ], new Property( new Range( -70, 415 ) ), {
+      ], new Property( new Range( -80, 415 ) ), {
         // TODO: Options here are not being used by sim. Why are common code options being used? Ask JO.
         barOptions: {
           totalRange: new Range( 0, 380 ),
@@ -282,7 +282,7 @@ define( function( require ) {
         lineWidth: 0.8, // Empirically determined
         cornerRadius: 7
       } );
-      this.barChartNode.center = this.background.center;
+      this.barChartNode.center = this.background.center.plusXY( 0, 5 );
 
       var chartNode = new Node( {
           children: [ this.background, this.barChartNode ]
