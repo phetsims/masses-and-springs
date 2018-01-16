@@ -114,8 +114,6 @@ define( function( require ) {
                                                  mass.elasticPotentialEnergyProperty.get() );
           }
         },
-        // centerX: buttonCenter,
-        // top: xAxis.centerY + this.labelLayer.height,
         scale: 0.7,
         enabled: false
       } );
@@ -126,11 +124,11 @@ define( function( require ) {
       var eThermText = new RichText( eThermString, {
         rotation: -Math.PI / 2,
         font: MassesAndSpringsConstants.TITLE_FONT,
-        fill: '#ee6f3e'
-        // maxWidth:40
+        fill: '#ee6f3e',
+        maxWidth: 35
       } );
 
-      clearThermalButton.center = eThermText.center.plusXY( 0, eThermText.height );
+      clearThermalButton.center = eThermText.center.plusXY( 0, eThermText.height * 0.85 );
 
       var dEntryNode = new Node( { children: [ eThermText, clearThermalButton ] } );
 
@@ -150,7 +148,6 @@ define( function( require ) {
         property: model.springs[ 0 ].thermalEnergyProperty,
         color: '#ee6f3e'
       };
-
 
       this.barChartNode = new BarChartNode( [
         {
@@ -173,7 +170,7 @@ define( function( require ) {
           entries: [ dEntry, cEntry, bEntry, aEntry ],
           labelString: eTotString
         }
-      ], new Property( new Range( -80, 415 ) ), {
+      ], new Property( new Range( -65, 415 ) ), {
         // TODO: Options here are not being used by sim. Why are common code options being used? Ask JO.
         barOptions: {
           totalRange: new Range( 0, 380 ),
