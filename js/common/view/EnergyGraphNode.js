@@ -170,7 +170,7 @@ define( function( require ) {
           entries: [ dEntry, cEntry, bEntry, aEntry ],
           labelString: eTotString
         }
-      ], new Property( new Range( -65, 415 ) ), {
+      ], new Property( new Range( -70, 415 ) ), {
         // TODO: Options here are not being used by sim. Why are common code options being used? Ask JO.
         barOptions: {
           totalRange: new Range( 0, 380 ),
@@ -276,13 +276,13 @@ define( function( require ) {
       } );
 
       // Background for bar graph
-      this.background = new Rectangle( 0, 0, 160, 515, {
+      this.background = new Rectangle( 0, 0, 160, 500, {
         fill: 'white',
         stroke: 'gray',
         lineWidth: 0.8, // Empirically determined
         cornerRadius: 7
       } );
-      this.barChartNode.center = this.background.center.plusXY( 0, 20 );
+      this.barChartNode.center = this.background.center;
 
       var chartNode = new Node( {
           children: [ this.background, this.barChartNode ]
