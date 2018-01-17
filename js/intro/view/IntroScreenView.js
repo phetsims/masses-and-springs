@@ -263,7 +263,8 @@ define( function( require ) {
         fill: MassesAndSpringsConstants.PANEL_FILL,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         tandem: tandem.createTandem( 'ReferenceLinePanel' ),
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
+        resize: false
       } );
     this.addChild( optionsPanel );
     optionsPanel.moveToBack();

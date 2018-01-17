@@ -154,5 +154,8 @@
   },
   "velocity": {
     "value": "Velocity"
+  },
+  "whatIsTheValueOfGravity": {
+    "value": "What is the value of gravity?"
   }
 }

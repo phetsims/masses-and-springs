@@ -15,6 +15,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var VStrut = require( 'SCENERY/nodes/VStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -35,6 +36,7 @@ define( function( require ) {
   var noneString = require( 'string!MASSES_AND_SPRINGS/none' );
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
   var gravityValueString = require( 'string!MASSES_AND_SPRINGS/gravityValue' );
+  var whatIsTheValueOfGravityString = require( 'string!MASSES_AND_SPRINGS/whatIsTheValueOfGravity' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -113,17 +115,17 @@ define( function( require ) {
       majorTicks: [
         {
           value: MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.min,
-          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.min ), { font: new PhetFont( 14 ) } )
+          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.min ), { font: MassesAndSpringsConstants.LABEL_FONT } )
         },
         {
           value: MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max,
-          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max ), { font: new PhetFont( 14 ) } )
+          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max ), { font: MassesAndSpringsConstants.LABEL_FONT } )
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 48,
-        ySpacing: 2,
-        arrowButtonsXSpacing: 5
+        titleXSpacing: 42,
+        ySpacing: 1,
+        arrowButtonsXSpacing: 2
       } ),
       valuePattern: StringUtils.fillIn( gravityValueString, {
         gravity: '{0}'
@@ -156,9 +158,18 @@ define( function( require ) {
     else {
       gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
     }
+    var questionTextNode = new VBox( {
+      children:
+        [
+          // TODO: Can we match the bounds of the questionText to the gravitySlider so the panel doesn't change size
+          new VStrut( 21.5 ),
+          new Text( whatIsTheValueOfGravityString, { font: new PhetFont( 14 ), maxWidth: this.maxWidth } ),
+          new VStrut( 21.5 )
+        ]
+    } );
+    questionTextNode.bounds.set( gravitySlider.bounds );
 
     if ( options.dampingVisible ) {
-
       var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get();
       var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, sliderOptions );
       dampingHSlider.align = 'left';
@@ -185,27 +196,29 @@ define( function( require ) {
         sliderOptions
       );
 
-      Panel.call( self, new VBox( {
+      var contentVBox = new VBox( {
         align: 'center',
         spacing: 8,
         children: [
-          gravitySlider,
+          questionTextNode,
           gravityComboBox,
           dampingControlPanel
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
-      } ), self.options );
+      } );
+      Panel.call( self, contentVBox, self.options );
     }
     else {
-      Panel.call( self, new VBox( {
+      var contentVBox = new VBox( {
         align: 'center',
         spacing: 8,
         children: [
-          gravitySlider,
+          questionTextNode,
           gravityComboBox
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
-      } ), self.options );
+      } );
+      Panel.call( self, contentVBox, self.options );
     }
 
     model.bodyProperty.link( function( newBody, previousBody ) {
@@ -213,13 +226,21 @@ define( function( require ) {
 
       // Unhide the gravitySlider if we are not using planetX
       if ( newBody !== Body.PLANET_X ) {
-        gravitySlider.visible = true;
+
+        // Removes the questionTextNode and replaces it with a gravity slider
+        contentVBox.removeChild( contentVBox.children[ 0 ] );
+        contentVBox.insertChild( 0, gravitySlider );
       }
 
       // If PlanetX hide the slider and update gravity
       if ( newBody === Body.PLANET_X ) {
-        gravitySlider.visible = false;
+
+        // Removes the gravity slider and replaces it with a questionTextNode
+        contentVBox.removeChild( contentVBox.children[ 0 ] );
+        contentVBox.insertChild( 0, questionTextNode );
+
         self.gravityProperty.set( body.gravity );
+
       }
 
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
