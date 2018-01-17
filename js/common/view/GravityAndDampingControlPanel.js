@@ -136,7 +136,7 @@ define( function( require ) {
       } ),
       useRichText: true,
       decimalPlaces: 1,
-      arrowButtonScale: 0.45
+      arrowButtonScale: 0.5
     };
 
     // Manages the values associated with the gravity panel in a combo box

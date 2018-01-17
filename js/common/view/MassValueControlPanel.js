@@ -74,7 +74,7 @@ define( function( require ) {
       } ),
       useRichText: true,
       decimalPlaces: 0,
-      arrowButtonScale: 0.45,
+      arrowButtonScale: 0.5,
       delta: 1
     } );
 
