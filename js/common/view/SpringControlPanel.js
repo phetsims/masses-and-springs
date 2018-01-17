@@ -54,8 +54,8 @@ define( function( require ) {
       minorTickLineWidth: 0.5,
       trackSize: new Dimension2( 120, 0.1 ),
       thumbSize: new Dimension2( 13, 22 ),
-      thumbFillEnabled: '#00b3b3',
-      thumbFillHighlighted: '#00e6e6',
+      thumbFillEnabled: '#00C4DF',
+      thumbFillHighlighted: '#71EDFF',
       align: 'center',
       constrainValue: options.constrainValue,
       tandem: tandem.createTandem( 'hSlider' )

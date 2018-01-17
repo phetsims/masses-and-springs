@@ -49,10 +49,13 @@ define( function( require ) {
     var numberControl = new NumberControl( massString, massInGramsProperty, range, {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
-      } ), majorTickLength: 10,
+      } ),
+      majorTickLength: 5,
       titleFont: new PhetFont( 14 ),
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
+      thumbFillEnabled: '#00C4DF',
+      thumbFillHighlighted: '#71EDFF',
       stroke: null,
       sliderIndent: 7,
       majorTicks: [
@@ -66,7 +69,7 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        ySpacing: 2,
+        ySpacing: 4,
         arrowButtonsXSpacing: 5
       } ),
       useRichText: true,

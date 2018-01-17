@@ -91,11 +91,13 @@ define( function( require ) {
     } );
 
     var sliderOptions = {
-      majorTickLength: 10,
+      majorTickLength: 5,
       minorTickLength: 5,
       titleFont: new PhetFont( 14 ),
       trackSize: new Dimension2( 120, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
+      thumbFillEnabled: '#00C4DF',
+      thumbFillHighlighted: '#71EDFF',
       visible: true,
       align: 'left',
       stroke: null,
@@ -106,10 +108,12 @@ define( function( require ) {
     };
 
     var gravitySliderOptions = {
-      majorTickLength: 10,
+      majorTickLength: 5,
       titleFont: new PhetFont( 14 ),
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
+      thumbFillEnabled: '#00C4DF',
+      thumbFillHighlighted: '#71EDFF',
       stroke: null,
       sliderIndent: 7,
       majorTicks: [
@@ -124,7 +128,7 @@ define( function( require ) {
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
         titleXSpacing: 42,
-        ySpacing: 1,
+        ySpacing: 2,
         arrowButtonsXSpacing: 2
       } ),
       valuePattern: StringUtils.fillIn( gravityValueString, {
