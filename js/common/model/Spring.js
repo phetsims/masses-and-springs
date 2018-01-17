@@ -390,9 +390,7 @@ define( function( require ) {
       if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() ) {
         this.massAttachedProperty.get().preserveThermalEnergy = false;
 
-        if ( this.massAttachedProperty.get() && this.massAttachedProperty.get().verticalVelocityProperty.get() !== 0 ) {
-          this.buttonEnabledProperty.set( true );
-        }
+        this.buttonEnabledProperty.set( this.massAttachedProperty.get() && this.massAttachedProperty.get().verticalVelocityProperty.get() !== 0 );
 
         // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
         // references that could be provided that describe where this came from?
