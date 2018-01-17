@@ -163,7 +163,7 @@ define( function( require ) {
         [
           // TODO: Can we match the bounds of the questionText to the gravitySlider so the panel doesn't change size
           new VStrut( 21.5 ),
-          new Text( whatIsTheValueOfGravityString, { font: new PhetFont( 14 ), maxWidth: this.maxWidth } ),
+          new Text( whatIsTheValueOfGravityString, { font: MassesAndSpringsConstants.FONT, maxWidth: this.maxWidth } ),
           new VStrut( 21.5 )
         ]
     } );
