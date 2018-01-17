@@ -156,6 +156,9 @@ define( function( require ) {
       defaultValue: 0
     } );
 
+    // @public {Property.boolean} Flag to enable the stop button for the spring.
+    this.buttonEnabledProperty = new BooleanProperty( false );
+
     // @public {number} (read-only) - distance from natural resting position to equilibrium position (units: m)
     this.springExtension = 0;
 
@@ -333,6 +336,7 @@ define( function( require ) {
       }
       this.displacementProperty.set( 0 );
       this.massAttachedProperty.set( null );
+      this.buttonEnabledProperty.set( false );
     },
 
     /**
@@ -372,6 +376,7 @@ define( function( require ) {
         mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() ) );
         mass.verticalVelocityProperty.set( 0 );
         mass.accelerationProperty.set( 0 );
+        this.buttonEnabledProperty.set( false );
       }
     },
 
@@ -384,6 +389,10 @@ define( function( require ) {
     step: function( dt ) {
       if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() ) {
         this.massAttachedProperty.get().preserveThermalEnergy = false;
+
+        if ( this.massAttachedProperty.get() && this.massAttachedProperty.get().verticalVelocityProperty.get() !== 0 ) {
+          this.buttonEnabledProperty.set( true );
+        }
 
         // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
         // references that could be provided that describe where this came from?

@@ -90,9 +90,9 @@ define( function( require ) {
 
     var springStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
     springStopperButtonNode.left = springHangerNode.right + this.spacing;
-    this.model.springs[ 0 ].massAttachedProperty.link(
-      function( mass ) {
-        springStopperButtonNode.enabled = !!mass;
+    this.model.springs[ 0 ].buttonEnabledProperty.link(
+      function( buttonEnabled ) {
+        springStopperButtonNode.enabled = buttonEnabled;
       } );
 
     this.energyGraphNode = new EnergyGraphNode( model, tandem );

@@ -60,10 +60,10 @@ define( function( require ) {
     this.secondSpringStopperButtonNode = this.createStopperButton( rightSpring, tandem );
     this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
 
-    Property.multilink( [ leftSpring.massAttachedProperty, rightSpring.massAttachedProperty ],
-      function( leftSpringMass, rightSpringMass ) {
-        self.firstSpringStopperButtonNode.enabled = !!leftSpringMass;
-        self.secondSpringStopperButtonNode.enabled = !!rightSpringMass;
+    Property.multilink( [ leftSpring.buttonEnabledProperty, rightSpring.buttonEnabledProperty ],
+      function( leftButtonEnabled, rightButtonEnabled ) {
+        self.firstSpringStopperButtonNode.enabled = leftButtonEnabled;
+        self.secondSpringStopperButtonNode.enabled = rightButtonEnabled;
       } );
 
     // Spring Constant Control Panels
