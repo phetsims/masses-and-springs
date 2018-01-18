@@ -213,7 +213,7 @@ define( function( require ) {
       Panel.call( self, contentVBox, self.options );
     }
     else {
-      var contentVBox = new VBox( {
+      contentVBox = new VBox( {
         align: 'center',
         spacing: 8,
         children: [
