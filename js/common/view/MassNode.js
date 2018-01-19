@@ -95,7 +95,7 @@ define( function( require ) {
 
       if ( mass.positionProperty.value.y < minY && !mass.springProperty.value ) {
         mass.positionProperty.set( new Vector2( mass.positionProperty.value.x, minY ) );
-        model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
+        // model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       }
     } );
 
