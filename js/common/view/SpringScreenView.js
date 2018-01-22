@@ -138,7 +138,7 @@ define( function( require ) {
       centerY: this.resetAllButton.centerY - 55
     } );
     soundToggleButton.scale( .9 );
-    this.addChild( soundToggleButton );
+    // this.addChild( soundToggleButton );
 
     // Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
