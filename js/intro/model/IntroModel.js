@@ -71,26 +71,30 @@ define( function( require ) {
 
     // Link that is responsible for switching the scenes
     this.sceneModeProperty.lazyLink( function( mode ) {
-
-      //Functions used to determine the inverse relationship between the length and springConstant/thickness
-      // Functions follow logic:
-      //  -SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
-      //  -Thickness = constant -->As length increases, spring constant decreases  (and vice versa)
-      // Restoring spring parameters when scenes are switched
       if ( mode === 'same-length' ) {
+
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
+
+        //reset the spring stop buttons
         self.spring1.buttonEnabledProperty.reset();
         self.spring2.buttonEnabledProperty.reset();
+
+        // save the state of the adjustable length scene
         adjustableLengthModeSpringState = self.getSpringState();
         self.setSpringState( sameLengthModeSpringState );
       }
 
       else if ( mode === 'adjustable-length' ) {
+
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
+
+        //reset the spring stop buttons
         self.spring1.buttonEnabledProperty.reset();
         self.spring2.buttonEnabledProperty.reset();
+
+        // save the state of the same length scene
         sameLengthModeSpringState = self.getSpringState();
         self.setSpringState( adjustableLengthModeSpringState );
       }
@@ -98,6 +102,10 @@ define( function( require ) {
 
     // Manages logic for updating spring thickness and spring constant
     self.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
+
+      //Functions used to determine the inverse relationship between the length and springConstant/thickness
+      //  SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
+      //  Thickness = constant --> As length increases, spring constant decreases  (and vice versa)
       if ( self.constantParameterProperty.get() === 'spring-constant' ) {
         self.spring1.updateThickness( naturalRestingLength, self.spring1.springConstantProperty.get() );
       }
