@@ -157,12 +157,10 @@ define( function( require ) {
         // Checks if mass should be attached/detached to spring and adjusts its position if so.
         model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       },
-
       startDrag: function() {
         mass.userControlledProperty.set( true );
         self.moveToFront();
       },
-
       endDrag: function() {
         mass.userControlledProperty.set( false );
       }

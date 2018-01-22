@@ -76,6 +76,9 @@ define( function( require ) {
     this.rulerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
       tandem: tandem.createTandem( 'dragHandler' ),
       dragBounds: dragBounds,
+      startDrag: function() {
+        self.moveToFront();
+      },
       endDrag: function() {
 
         // When a node is released, check if it is over the toolbox.  If so, drop it in.
