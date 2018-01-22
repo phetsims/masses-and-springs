@@ -80,6 +80,8 @@ define( function( require ) {
       if ( mode === 'same-length' ) {
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
+        self.spring1.buttonEnabledProperty.reset();
+        self.spring2.buttonEnabledProperty.reset();
         adjustableLengthModeSpringState = self.getSpringState();
         self.setSpringState( sameLengthModeSpringState );
       }
@@ -87,6 +89,8 @@ define( function( require ) {
       else if ( mode === 'adjustable-length' ) {
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
+        self.spring1.buttonEnabledProperty.reset();
+        self.spring2.buttonEnabledProperty.reset();
         sameLengthModeSpringState = self.getSpringState();
         self.setSpringState( adjustableLengthModeSpringState );
       }

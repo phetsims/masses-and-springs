@@ -252,6 +252,7 @@ define( function( require ) {
      * @public
      */
     reset: function() {
+      this.buttonEnabledProperty.reset();
       this.gravityProperty.reset();
       this.displacementProperty.reset();
       this.dampingCoefficientProperty.reset();
