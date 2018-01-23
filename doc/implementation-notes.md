@@ -12,19 +12,7 @@ The mass is responsible for its vector calculations regarding forces, velocity, 
 
 Some creative liberties were taken when deciding on limit for damping coefficients to make the oscillation look smooth. There are preset gravity values attributed its respective planet and all other gravity values are custom. 
 
-Energy values in the model are calculated for each spring independently. Energy values shown in the graph on the Lab and Energy screens are qualitative representations of the values and are unit less. Additionally, the energy values are only calculated when a spring has a mass attached. The methods for calculation are listed below:
-
-- Kinetic Energy = ½ mv^2
-
-- Gravitational Potential Energy = mgh
-
-- Elastic Potential Energy = ½ kx^2
-
-- Thermal Energy = Initial Total Energy - Current Total Energy
-
-- Total Energy = KE + GPE + EPE
-
-*k is the spring constant, m is mass value, h is distance from center of mass to sim floor, and x is displacement of the spring from its equilibrium position.*
+Energy values in the model are calculated for each spring independently. Energy values shown in the graph on the Lab and Energy screens are qualitative representations of the values and are unit less. Additionally, the energy values are only calculated when a spring has a mass attached. 
 
 The model is able to account for an adjustable mass value and responds dynamically.
 
