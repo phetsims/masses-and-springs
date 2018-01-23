@@ -6,13 +6,13 @@ This document contains notes that will be helpful to developers and future maint
 
 Start by reading the model description in https://github.com/phetsims/masses-and-springs/blob/master/doc/model.md
 
-The main model for this simulation is 'MassesAndSpringsModel', which contains the rest of the model components. The sim at its core has a set of mass and a set of spring objects. Once a mass is dragged near a spring’s bottom end it is attached and the spring oscillates once released.
+The main model for this simulation is 'MassesAndSpringsModel', which contains the rest of the model components. The sim at its core has a set of mass objects and a set of spring objects. Once a mass is dragged near a spring’s bottom end it is attached and the spring oscillates once released.
 
 The mass is responsible for its vector calculations regarding forces, velocity, and acceleration. The spring is responsible for calculating all energy values and oscillation patterns. During motion, the model will calculate new values in the mass and spring step functions. See model.md for an explanation of calculations.
 
-Some creative liberties were taken when deciding on limit for damping coefficients to make the oscillation look smooth. There are preset gravity values attributed its respective planet and all other gravity values are custom. 
+Some creative liberties were taken when deciding on limits for damping coefficients to make the oscillation look smooth. There are preset gravity values attributed its respective planet and all other gravity values are custom. 
 
-Energy values in the model are calculated for each spring independently. Energy values shown in the graph on the Lab and Energy screens are qualitative representations of the values and are unit less. Additionally, the energy values are only calculated when a spring has a mass attached. 
+Energy values in the model are calculated for each spring independently. Energy values shown in the graph on the Lab and Energy screens are qualitative representations of the values and are unit less. Additionally, the energy values are only calculated when a spring has a mass attached.
 
 The model is able to account for an adjustable mass value and responds dynamically.
 
@@ -22,7 +22,7 @@ There is a model view transform that is used throughout the sim to convert view 
 
 Vectors are used for visual representation only and are unitless.
 
-When a mass is dropped it falls as a free object at the rate of gravity and animates back to its home location on the mass shelf. This second animation back to its home location is completely independent from the model and is only in place to organize fallen masses. It will animate independent of sim playback speed as well.
+When a mass is dropped it falls as a free object at the rate of gravity and animates back to its home location on the mass's shelf. This second animation back to its home location is completely independent from the model and is only in place to organize fallen masses. It will animate independently of sim playback speed as well.
 
 ## Memory Management
 
