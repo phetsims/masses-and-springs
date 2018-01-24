@@ -23,6 +23,7 @@ define( function( require ) {
 
   // strings
   var equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
+  var massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
 
@@ -37,6 +38,7 @@ define( function( require ) {
    */
   function ReferenceLinePanel( model, tandem, options ) {
     this.options = _.extend( {
+      massEquilibrium: false,
       xMargin: 10,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
@@ -65,6 +67,19 @@ define( function( require ) {
     var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
+    var equilibriumText = new Text( equilibriumPositionString, {
+      font: MassesAndSpringsConstants.FONT,
+      tandem: tandem.createTandem( 'equilibriumPositionString' )
+    } );
+
+    if ( this.options.massEquilibrium ) {
+
+      equilibriumText = new Text( massEquilibriumString, {
+        font: MassesAndSpringsConstants.FONT,
+        tandem: tandem.createTandem( 'equilibriumPositionString' )
+      } );
+    }
+
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( naturalLengthString, {
@@ -77,10 +92,7 @@ define( function( require ) {
       label: naturalLengthString
     }, {
       content: new HBox( {
-        children: [ new Text( equilibriumPositionString, {
-          font: MassesAndSpringsConstants.FONT,
-          tandem: tandem.createTandem( 'equilibriumPositionString' )
-        } ) ],
+        children: [ equilibriumText ],
         tandem: tandem.createTandem( 'equilibriumPositionHBox' )
       } ),
       property: model.equilibriumPositionVisibleProperty,

@@ -53,6 +53,7 @@ define( function( require ) {
     this.referenceLinePanel = new ReferenceLinePanel(
       model,
       tandem.createTandem( 'referenceLinePanel' ), {
+        massEquilibrium: true,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 0,
         yMargin: 0,

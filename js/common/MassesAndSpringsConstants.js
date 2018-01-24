@@ -66,7 +66,7 @@ define( function( require ) {
     PANEL_VERTICAL_SPACING: 10,
     PANEL_CORNER_RADIUS: 5,
     PANEL_MAX_WIDTH: 175,
-    PANEL_MIN_WIDTH: 170,
+    PANEL_MIN_WIDTH: 190,
     FORCES_STRING: 'forces',
     NET_FORCE_STRING: 'netForce',
     PANEL_FILL: 'rgb(230,230,230)',
