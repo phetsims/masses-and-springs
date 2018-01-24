@@ -32,7 +32,7 @@ define( function( require ) {
       }
       return {
         position: spring.positionProperty.get(),
-        id: spring.phetioID
+        id: spring.phetioObjectTandem.phetioID
       };
     }
   } );
