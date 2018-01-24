@@ -44,12 +44,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'playPauseButton' )
     } );
 
-    // Blow up the play/pause button slightly when paused.  The PhET convention is to do this for sims where interaction
-    // does NOT unpause the sim, which is true for all usages in this sim.
-    model.playingProperty.lazyLink( function( isPlaying ) {
-      playPauseButton.scale( isPlaying ? ( 1 / PAUSE_SIZE_INCREASE_FACTOR ) : PAUSE_SIZE_INCREASE_FACTOR );
-    } );
-
     // Radio buttons for normal annd slow speed
     var timeSpeedRadioNode = new VerticalAquaRadioButtonGroup( [ {
       property: model.simSpeedProperty,
