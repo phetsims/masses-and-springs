@@ -202,8 +202,13 @@ define( function( require ) {
     this.initialTotalEnergyProperty = new Property( 0 );
 
     // @public {Property.<number>} Thermal energy of the mass
-    this.thermalEnergyProperty = new DerivedProperty( [ this.initialTotalEnergyProperty, this.totalEnergyProperty ],
-      function( initialEnergy, totalEnergy ) {
+    this.thermalEnergyProperty = new DerivedProperty( [ this.initialTotalEnergyProperty, this.totalEnergyProperty, ],
+      function( initialEnergy, totalEnergy, damping ) {
+
+        // Preserving energy here so when damping is zero the thermal energy doesn't change.
+        if ( self.springProperty.value && self.springProperty.value.dampingCoefficientProperty.value === 0 ) {
+          self.preserveThermalEnergy = true;
+        }
         return initialEnergy - totalEnergy;
       } );
 
@@ -299,24 +304,24 @@ define( function( require ) {
       // If we're not animating/controlled or attached to a spring, we'll fall due to gravity
       else if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
         var oldY = this.positionProperty.get().y;
-          var newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
-          var newY = oldY + ( this.verticalVelocityProperty.get() + newVerticalVelocity ) * dt / 2;
-          if ( newY < floorPosition ) {
+        var newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
+        var newY = oldY + ( this.verticalVelocityProperty.get() + newVerticalVelocity ) * dt / 2;
+        if ( newY < floorPosition ) {
 
-            // if we hit the ground stop falling
-            this.positionProperty.set( new Vector2( this.positionProperty.get().x, floorPosition ) );
-            this.verticalVelocityProperty.set( 0 );
+          // if we hit the ground stop falling
+          this.positionProperty.set( new Vector2( this.positionProperty.get().x, floorPosition ) );
+          this.verticalVelocityProperty.set( 0 );
 
-            // Responsible for animating the mass back to its initial position
-            this.animationProgress = 0;
-            this.animationStartPosition = this.positionProperty.value;
-            this.animationEndPosition = new Vector2( this.initialPosition.x, this.positionProperty.value.y );
-            this.isAnimatingProperty.set( true );
-          }
-          else {
-            this.verticalVelocityProperty.set( newVerticalVelocity );
-            this.positionProperty.set( new Vector2( this.positionProperty.get().x, newY ) );
-          }
+          // Responsible for animating the mass back to its initial position
+          this.animationProgress = 0;
+          this.animationStartPosition = this.positionProperty.value;
+          this.animationEndPosition = new Vector2( this.initialPosition.x, this.positionProperty.value.y );
+          this.isAnimatingProperty.set( true );
+        }
+        else {
+          this.verticalVelocityProperty.set( newVerticalVelocity );
+          this.positionProperty.set( new Vector2( this.positionProperty.get().x, newY ) );
+        }
       }
     },
 
