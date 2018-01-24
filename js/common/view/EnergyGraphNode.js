@@ -167,7 +167,7 @@ define( function( require ) {
           labelNode: dEntryNode
         },
         {
-          entries: [ dEntry, cEntry, bEntry, aEntry ],
+          entries: [ aEntry, bEntry, cEntry, dEntry ],
           labelString: eTotString
         }
       ], new Property( new Range( -75, 439 ) ), {
