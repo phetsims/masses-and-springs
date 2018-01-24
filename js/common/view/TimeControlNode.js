@@ -25,7 +25,6 @@ define( function( require ) {
   var slowString = require( 'string!MASSES_AND_SPRINGS/slow' );
 
   // constants
-  var PAUSE_SIZE_INCREASE_FACTOR = 1.25;
   var FONT = new PhetFont( 14 );
 
   /**
