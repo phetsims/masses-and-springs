@@ -121,17 +121,6 @@ define( function( require ) {
         clearThermalButton.enabled = ( value > 0.001);
       } );
 
-      var eThermText = new RichText( eThermString, {
-        rotation: -Math.PI / 2,
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        fill: '#ee6f3e',
-        maxWidth: 35
-      } );
-
-      clearThermalButton.center = eThermText.center.plusXY( 0, eThermText.height * 1 );
-
-      var dEntryNode = new Node( { children: [ eThermText, clearThermalButton ] } );
-
       var aEntry = {
         property: model.springs[ 0 ].kineticEnergyProperty,
         color: '#39d74e'
@@ -164,7 +153,8 @@ define( function( require ) {
         },
         {
           entries: [ dEntry ],
-          labelNode: dEntryNode
+          labelString: eThermString,
+          labelNode: clearThermalButton
         },
         {
           entries: [ aEntry, bEntry, cEntry, dEntry ],
