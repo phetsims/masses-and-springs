@@ -76,8 +76,8 @@ define( function( require ) {
       // Creation of zoom in/out buttons
       var zoomButtonOptions = {
         baseColor: ColorConstants.LIGHT_BLUE,
-        xMargin: 3,
-        yMargin: 3,
+        xMargin: 8,
+        yMargin: 4,
         radius: 7,
         touchAreaXDilation: 5,
         touchAreaYDilation: 5
@@ -160,7 +160,7 @@ define( function( require ) {
           entries: [ aEntry, bEntry, cEntry, dEntry ],
           labelString: eTotString
         }
-      ], new Property( new Range( -75, 439 ) ), {
+      ], new Property( new Range( -75, 435 ) ), {
         // TODO: Options here are not being used by sim. Why are common code options being used? Ask JO.
         barOptions: {
           totalRange: new Range( 0, 380 ),
@@ -230,8 +230,8 @@ define( function( require ) {
       var iconPadding = 1;
       var icon = new FontAwesomeNode( 'info_circle', {
         fill: 'hsl(208,60%,40%)',
-        maxWidth: zoomInButton.width - chromeBounds.width - 2 * iconPadding,
-        maxHeight: zoomInButton.height - chromeBounds.height - 2 * iconPadding
+        maxWidth: zoomInButton.width - chromeBounds.width + 2 * iconPadding,
+        maxHeight: zoomInButton.height - chromeBounds.height + 2 * iconPadding
       } );
       var infoButton = new RoundPushButton( {
         minXMargin: 5 + iconPadding,
@@ -252,7 +252,7 @@ define( function( require ) {
 
       // Display buttons at the bottom of the graph
       var displayButtons = new HBox( {
-        children: [ infoButton, new HStrut( 42 ), zoomOutButton, new HStrut( 3 ), zoomInButton ],
+        children: [ infoButton, new HStrut( 30 ), zoomOutButton, new HStrut( 3 ), zoomInButton ],
         spacing: 5
       } );
 
@@ -265,7 +265,7 @@ define( function( require ) {
       } );
 
       // Background for bar graph
-      this.background = new Rectangle( 0, 0, 160, 529, {
+      this.background = new Rectangle( 0, 0, 160, 524, {
         fill: 'white',
         stroke: 'gray',
         lineWidth: 0.8, // Empirically determined
