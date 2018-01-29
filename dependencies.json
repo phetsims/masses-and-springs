@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.0-dev.44 Mon Jan 29 2018 16:45:31 GMT-0500 (EST)",
+  "comment": "# masses-and-springs 1.0.0-dev.45 Mon Jan 29 2018 17:16:32 GMT-0500 (EST)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
@@ -33,7 +33,7 @@
     "branch": "master"
   },
   "masses-and-springs": {
-    "sha": "c6424438ac593eff31aa75ccf3b56f554eba78e5",
+    "sha": "d53f4bd8c7db2aa5256b82a7cff9b03cd5e0ad96",
     "branch": "master"
   },
   "phet-core": {
@@ -57,7 +57,7 @@
     "branch": "master"
   },
   "phet-io-wrapper-sonification": {
-    "sha": "19a33c5d25c77958bb0058561b74a5134ccadfb1",
+    "sha": "cf2dff3b8cebd43b39be127686ad89f1f05f93f9",
     "branch": "master"
   },
   "phet-io-wrapper-visualizing-engagement": {
@@ -81,7 +81,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "42b94b4fa2b32cb84f416653abf0a4f83854e628",
+    "sha": "bd233bf8f798e0db98a550c31bd7e73f48994b53",
     "branch": "master"
   },
   "sherpa": {
