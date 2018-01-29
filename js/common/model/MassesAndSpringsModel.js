@@ -220,7 +220,7 @@ define( function( require ) {
      * @param {Tandem} tandem
      */
     addDefaultSprings: function( tandem ) {
-      this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - 0.25, tandem.createTandem( 'leftSpring' ) );
+      this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - 0.3, tandem.createTandem( 'leftSpring' ) );
       this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) );
     },
 

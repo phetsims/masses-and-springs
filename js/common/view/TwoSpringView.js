@@ -80,7 +80,7 @@ define( function( require ) {
     // Initializes red movable reference line
     var movableLineNode = new MovableLineNode(
       this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 45, 0 ) ),
-      180,
+      210,
       model.movableLineVisibleProperty,
       this.springHangerNode.centerX + 5,
       tandem.createTandem( 'movableLineNode' )
