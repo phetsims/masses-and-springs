@@ -119,7 +119,7 @@ define( function( require ) {
       model.displacementVisibleProperty,
       tandem,
       { modelViewTransform: this.modelViewTransform } );
-    displacementArrowNode.left = this.springNodes[ 0 ].right;
+    displacementArrowNode.left = this.springNodes[ 0 ].right + 12;
     displacementArrowNode.top = this.springNodes[ 0 ].bottom - 12;
     this.addChild( displacementArrowNode );
 
