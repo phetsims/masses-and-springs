@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlPanel' );
@@ -103,7 +104,6 @@ define( function( require ) {
       tandem.createTandem( 'massValueControlPanel' )
     );
 
-
     // Initializes movable line
     var movableLineNode = new MovableLineNode(
       springHangerNode.getCenter().plus( new Vector2( 45, 200 ) ),
@@ -112,6 +112,16 @@ define( function( require ) {
       springHangerNode.centerX + 5,
       tandem.createTandem( 'movableLineNode' )
     );
+
+    // Displacement arrows added for each springs
+    var displacementArrowNode = new DisplacementArrowNode(
+      this.springNodes[ 0 ].spring.displacementProperty,
+      model.displacementVisibleProperty,
+      tandem,
+      { modelViewTransform: this.modelViewTransform } );
+    displacementArrowNode.left = this.springNodes[ 0 ].right;
+    displacementArrowNode.top = this.springNodes[ 0 ].bottom - 12;
+    this.addChild( displacementArrowNode );
 
     // Gravity Control Panel
     this.gravityAndDampingControlPanel = new GravityAndDampingControlPanel(

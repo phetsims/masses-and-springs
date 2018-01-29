@@ -25,7 +25,6 @@ define( function( require ) {
   // constants
   var EQUILIBRIUM_LINE_FILL = 'rgb( 93, 191, 142 )';
 
-
   /**
    * @param {VectorsModel} model
    * @param {Tandem} tandem
