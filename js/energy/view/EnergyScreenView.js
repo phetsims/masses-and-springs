@@ -47,7 +47,7 @@ define( function( require ) {
     var optionsVBox = new VBox( {
       spacing: 10,
       children: [
-        this.referenceLinePanel,
+        this.indicatorVisibilityControlPanel,
         MassesAndSpringsConstants.LINE_SEPARATOR(),
         gravityAndDampingControlPanel
       ]

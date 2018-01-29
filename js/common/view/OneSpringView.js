@@ -12,7 +12,7 @@ define( function( require ) {
   // modules
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
-  var ReferenceLinePanel = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLinePanel' );
+  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -50,16 +50,14 @@ define( function( require ) {
       } );
 
     // Control Panel for display elements with varying visibility
-    this.referenceLinePanel = new ReferenceLinePanel(
+    this.indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
       model,
-      tandem.createTandem( 'referenceLinePanel' ), {
-        massEquilibrium: true,
+      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 0,
         yMargin: 0,
         stroke: null
-      }
-    );
+      } );
 
     // Spring Constant Control Panel
     var minMaxLabels = [
@@ -120,7 +118,7 @@ define( function( require ) {
       model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
       {
         right: this.rightPanelAlignment,
-        top: this.referenceLinePanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
+        top: this.indicatorVisibilityControlPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: true
