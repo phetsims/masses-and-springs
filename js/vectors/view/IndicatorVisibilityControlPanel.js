@@ -62,7 +62,7 @@ define( function( require ) {
     };
 
     // Lines added for reference in panel
-    var greenLine = createLine( 'rgb( 93, 191, 142 )', tandem.createTandem( 'greenLine' ) );
+    var greenLine = createLine( 'black', tandem.createTandem( 'blackLine' ) );
     var displacementSymbol = new DisplacementArrowNode(
       new Property( 10 ),
       new Property( true ),

@@ -63,7 +63,7 @@ define( function( require ) {
     };
 
     // Lines added for reference in panel
-    var greenLine = createLine( 'rgb( 93, 191, 142 )', tandem.createTandem( 'greenLine' ) );
+    var greenLine = createLine( 'black', tandem.createTandem( 'blackLine' ) );
     var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
