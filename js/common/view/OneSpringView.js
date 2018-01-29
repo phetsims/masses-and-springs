@@ -73,7 +73,7 @@ define( function( require ) {
       model.springs[ 0 ],
       model.springs[ 0 ].massEquilibriumYPositionProperty,
       model.equilibriumPositionVisibleProperty, {
-        stroke: 'rgb( 93, 191, 142 )'
+        stroke: 'black'
       }
     );
 

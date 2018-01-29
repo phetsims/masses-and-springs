@@ -34,7 +34,7 @@ define( function( require ) {
 
   // constants
   var IMAGE_SCALE = 0.3;
-  var EQUILIBRIUM_LINE_FILL = 'black';
+  var EQUILIBRIUM_LINE_FILL = 'rgb(0, 180, 0)';
 
   // strings
   var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );

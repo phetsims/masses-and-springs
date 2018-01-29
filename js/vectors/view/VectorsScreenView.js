@@ -23,7 +23,7 @@ define( function( require ) {
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
 
   // constants
-  var EQUILIBRIUM_LINE_FILL = 'rgb( 93, 191, 142 )';
+  var EQUILIBRIUM_LINE_FILL = 'black';
 
   /**
    * @param {VectorsModel} model

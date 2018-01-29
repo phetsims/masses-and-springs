@@ -31,7 +31,7 @@ define( function( require ) {
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
 
     this.createMass( 0.100, MASS_X_POSITION, true, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ) );
-    this.createMass( 0.125, MASS_X_POSITION + MASS_OFFSET, true, 'red', null, tandem.createTandem( 'smallLabeledMass' ) );
+    this.createMass( 0.125, MASS_X_POSITION + MASS_OFFSET, true, 'rgb(255, 120, 120)', null, tandem.createTandem( 'smallLabeledMass' ) );
     this.createMass( 0.150, MASS_X_POSITION + MASS_OFFSET * 2, true, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'largeLabeledMass' ) );
 
     this.masses[ 0 ].adjustable = true;
