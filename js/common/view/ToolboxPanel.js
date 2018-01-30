@@ -88,7 +88,7 @@ define( function( require ) {
       // @private - visible option is used only for reset() in ToolboxPanel.js
       self.rulerIcon = new Image( image, {
         cursor: 'pointer',
-        renderer: 'webgl',
+        renderer: 'webgl', // TODO: document why, and look for another way
         pickable: true,
         scale: 0.1,
         tandem: tandem.createTandem( 'rulerIcon' )

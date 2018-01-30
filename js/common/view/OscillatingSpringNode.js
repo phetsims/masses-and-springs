@@ -46,7 +46,6 @@ define( function( require ) {
       rightEndLength: -15, // {number} length of the horizontal line added to the right end of the coil
       rotation: Math.PI / 2, // {number} angle in radians of rotation of spring,
       pathBoundsMethod: 'safePadding',
-      renderer: 'canvas',
       tandem: tandem
     }, options );
 
