@@ -20,8 +20,8 @@
   "cm": {
     "value": "cm"
   },
-  "constant": {
-    "value": "Constant"
+  "constantParameter": {
+    "value": "Constant Parameter"
   },
   "damping": {
     "value": "Damping"

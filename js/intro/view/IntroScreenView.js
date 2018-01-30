@@ -37,7 +37,7 @@ define( function( require ) {
   var EQUILIBRIUM_LINE_FILL = 'rgb(0, 180, 0)';
 
   // strings
-  var constantString = require( 'string!MASSES_AND_SPRINGS/constant' );
+  var constantParameterString = require( 'string!MASSES_AND_SPRINGS/constantParameter' );
   var lengthString = require( 'string!MASSES_AND_SPRINGS/length' );
   var longString = require( 'string!MASSES_AND_SPRINGS/long' );
   var shortString = require( 'string!MASSES_AND_SPRINGS/short' );
@@ -82,7 +82,7 @@ define( function( require ) {
     // @private panel that keeps thickness/spring constant at constant value
     this.constantsControlPanel = new ConstantsControlPanel(
       model.constantParameterProperty,
-      constantString,
+      constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
         left: this.firstSpringConstantControlPanel.left,
