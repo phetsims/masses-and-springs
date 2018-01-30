@@ -93,7 +93,7 @@ define( function( require ) {
     var sliderOptions = {
       majorTickLength: 5,
       minorTickLength: 5,
-      titleFont: new PhetFont( 14 ),
+      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
       trackSize: new Dimension2( 120, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -109,7 +109,7 @@ define( function( require ) {
 
     var gravitySliderOptions = {
       majorTickLength: 5,
-      titleFont: new PhetFont( 14 ),
+      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -127,7 +127,7 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 42,
+        titleXSpacing: 30,
         ySpacing: 2,
         arrowButtonsXSpacing: 2
       } ),
@@ -142,7 +142,7 @@ define( function( require ) {
     // Manages the values associated with the gravity panel in a combo box
     if ( options.hSlider ) {
 
-      var gravityText = new Text( gravityString, { font: new PhetFont( 14 ) } );
+      var gravityText = new Text( gravityString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } );
       var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), sliderOptions );
       gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
