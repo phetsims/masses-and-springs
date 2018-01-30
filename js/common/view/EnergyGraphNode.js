@@ -265,7 +265,7 @@ define( function( require ) {
       } );
 
       // Background for bar graph
-      this.background = new Rectangle( 0, 0, 160, 524, {
+      this.background = new Rectangle( 0, 0, 160, 520, {
         fill: 'white',
         stroke: 'gray',
         lineWidth: 0.8, // Empirically determined
@@ -287,6 +287,7 @@ define( function( require ) {
 
       // TODO: Not having an option for the accordion box gives me a tandem error.
       AccordionBox.call( this, accordionBoxContent, {
+        buttonYMargin: 4,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
       } );
