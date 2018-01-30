@@ -16,6 +16,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
@@ -48,14 +49,17 @@ define( function( require ) {
     ScreenView.call( this );
     var self = this;
 
-    this.modelViewTransform = MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 );
+    var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * 0.98 );
+
+    // @public {ModelViewTransform2}
+    this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, 397 );
 
     // @protected {Array.<OscillatingSpringNode>} Used to reference the created springs in the view.
     this.springNodes = [];
     model.springs.forEach( function( spring ) {
       var springNode = new OscillatingSpringNode(
         spring,
-        MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( self.visibleBoundsProperty.get(), 1 ),
+        self.modelViewTransform,
         tandem.createTandem( 'firstOscillatingSpringNode' )
       );
       self.addChild( springNode );

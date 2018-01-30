@@ -10,12 +10,10 @@ define( function( require ) {
 
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Line = require( 'SCENERY/nodes/Line' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   var MassesAndSpringsConstants = {
 
@@ -74,16 +72,8 @@ define( function( require ) {
       return new Line( 0, 0, 165, 0, { stroke: 'gray' } );
     },
 
-    RIGHT_SPRING_X: 1.3, // {number} X position of the spring node in screen coordinates
-
-    MODEL_VIEW_TRANSFORM: function( bounds, ratio ) {
-        return ModelViewTransform2.createSinglePointScaleInvertedYMapping(
-          Vector2.ZERO,
-          new Vector2( 0, bounds.height * 0.98 ),
-          397 );
-      }
-    }
-  ;
+    RIGHT_SPRING_X: 1.3 // {number} X position of the spring node in screen coordinates
+  };
 
   massesAndSprings.register( 'MassesAndSpringsConstants', MassesAndSpringsConstants );
 
