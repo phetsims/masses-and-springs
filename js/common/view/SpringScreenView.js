@@ -40,10 +40,6 @@ define( function( require ) {
    * @constructor
    */
   function SpringScreenView( model, tandem ) {
-    var options = _.extend( {
-      vectorViewEnabled: true
-    }, options );
-
     // TODO: Do we need to expose this model?
     this.model = model;
     ScreenView.call( this );
@@ -82,9 +78,7 @@ define( function( require ) {
         self.modelViewTransform,
         self.visibleBoundsProperty,
         model,
-        tandem.createTandem( mass.massTandem.tail + 'Node' ), {
-          vectorViewEnabled: options.vectorViewEnabled
-        } );
+        tandem.createTandem( mass.massTandem.tail + 'Node' ) );
       self.massLayer.addChild( massNode );
 
       // Keeps track of the mass node to restore original Z order.

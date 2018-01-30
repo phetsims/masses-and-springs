@@ -36,10 +36,6 @@ define( function( require ) {
     TwoSpringView.call( this, model, tandem );
     var self = this;
 
-    this.massNodes.forEach( function( massNode ) {
-      massNode.vectorViewEnabled = true;
-    } );
-
     // Displacement arrows added for each springs
     var firstDisplacementArrowNode = new DisplacementArrowNode(
       this.springNodes[ 0 ].spring.displacementProperty,
