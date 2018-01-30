@@ -87,8 +87,10 @@ define( function( require ) {
 
       // @private - visible option is used only for reset() in ToolboxPanel.js
       self.rulerIcon = new Image( image, {
+        // Instead of changing the rendering, we'll dynamically generate a mipmap so that the ruler icon appearance looks better.
+        // See https://github.com/phetsims/masses-and-springs/issues/199.
+        mipmap: true,
         cursor: 'pointer',
-        renderer: 'webgl', // TODO: document why, and look for another way
         pickable: true,
         scale: 0.1,
         tandem: tandem.createTandem( 'rulerIcon' )
