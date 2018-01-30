@@ -52,7 +52,7 @@ define( function( require ) {
       vectorViewEnabled: false,
     }, options );
 
-    Node.call( this, { cursor: 'pointer', pathBoundsMethod: 'none', renderer: 'canvas' } );
+    Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
     this.mass = mass;

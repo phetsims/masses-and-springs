@@ -69,7 +69,7 @@ define( function( require ) {
     this.rightPanelAlignment = this.visibleBoundsProperty.get().right - this.spacing;
 
     // Add masses
-    this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ) } );
+    this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ), preventFit: true } );
     this.massNodes = [];
 
     model.masses.forEach( function( mass ) {
