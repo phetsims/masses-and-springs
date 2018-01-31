@@ -32,9 +32,9 @@ define( function( require ) {
     this.addDefaultSprings( tandem );
     this.addDefaultMasses( tandem );
 
-    for ( var i = 4; i < this.masses.length; i++ ) {
-      this.masses[ i ].gradientEnabledProperty.set( false );
-    }
+    // for ( var i = 4; i < this.masses.length; i++ ) {
+    //   this.masses[ i ].gradientEnabledProperty.set( false );
+    // }
 
     // @public {Property.<string>} determines the scene selection for the intro screen
     this.sceneModeProperty = new Property( 'same-length', {
