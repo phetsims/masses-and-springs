@@ -74,6 +74,8 @@ define( function( require ) {
     // @public {string}
     this.color = color;
 
+    this.gradientEnabledProperty = new Property( true );
+
     // @public {Property.<number>} height in m
     this.cylinderHeightProperty = new DerivedProperty( [ this.radiusProperty ],
       function( radius ) {

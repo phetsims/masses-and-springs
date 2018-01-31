@@ -93,6 +93,17 @@ define( function( require ) {
         // model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       }
     } );
+    mass.gradientEnabledProperty.link( function( enabled ) {
+      if ( enabled ) {
+        rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 )
+          .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.1 ) )
+          .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.6 ) )
+          .addColorStop( 0.7, mass.color );
+      }
+      else {
+        rect.fill = mass.color;
+      }
+    } );
 
     var hookShape = new Shape();
     var radius = hookHeight / 4;

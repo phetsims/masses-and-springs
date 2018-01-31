@@ -234,9 +234,9 @@ define( function( require ) {
       this.createMass( 0.100, 0.20, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) );
       this.createMass( 0.100, 0.28, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) );
       this.createMass( 0.050, 0.33, true, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) );
-      this.createMass( 0.200, 0.63, false, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ) );
-      this.createMass( 0.150, 0.56, false, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ) );
-      this.createMass( 0.075, 0.49, false, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ) );
+      this.createMass( 0.200, 0.63, false, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), { gradientEnabled: false } );
+      this.createMass( 0.150, 0.56, false, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), { gradientEnabled: false } );
+      this.createMass( 0.075, 0.49, false, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { gradientEnabled: false } );
     },
 
     /**
