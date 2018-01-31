@@ -77,7 +77,7 @@ define( function( require ) {
     } );
 
     this.addInputListener( new MovableDragHandler( this.positionProperty, {
-      dragBounds: new Bounds2( xPosOfLine, 75, xPosOfLine, 410 ), // done so reference line is only draggable on the y-axis
+      dragBounds: new Bounds2( xPosOfLine, 55, xPosOfLine, 600 ), // done so reference line is only draggable on the y-axis
       tandem: tandem.createTandem( 'dragHandler' )
     } ) );
 
