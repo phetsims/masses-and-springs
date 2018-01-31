@@ -106,10 +106,10 @@ define( function( require ) {
 
     // Initializes movable line
     var movableLineNode = new MovableLineNode(
-      springHangerNode.getCenter().plus( new Vector2( 45, 200 ) ),
+      springHangerNode.center.plus( new Vector2( 45, 200 ) ),
       100,
       model.movableLineVisibleProperty,
-      springHangerNode.centerX + 5,
+      this.modelViewTransform.modelToViewX( this.model.springs[ 0 ].positionProperty.value.x ) + this.spacing,
       tandem.createTandem( 'movableLineNode' )
     );
 
