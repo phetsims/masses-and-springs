@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Bounds2 = require( 'DOT/Bounds2' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
@@ -105,11 +106,12 @@ define( function( require ) {
     );
 
     // Initializes movable line
+    var xBoundsLimit = this.modelViewTransform.modelToViewX( this.model.springs[ 0 ].positionProperty.value.x ) + this.spacing;
     var movableLineNode = new MovableLineNode(
       springHangerNode.center.plus( new Vector2( 45, 200 ) ),
       100,
       model.movableLineVisibleProperty,
-      this.modelViewTransform.modelToViewX( this.model.springs[ 0 ].positionProperty.value.x ) + this.spacing,
+      new Bounds2( xBoundsLimit, 85, xBoundsLimit, 600 ),
       tandem.createTandem( 'movableLineNode' )
     );
 

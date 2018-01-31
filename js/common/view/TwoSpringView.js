@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Bounds2 = require( 'DOT/Bounds2' );
   var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -78,11 +79,12 @@ define( function( require ) {
     this.secondSpringConstantControlPanel.left = this.secondSpringStopperButtonNode.right + this.spacing;
 
     // Initializes red movable reference line
+    var xBoundsLimit = this.springHangerNode.centerX + 5;
     var movableLineNode = new MovableLineNode(
       this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 45, 0 ) ),
       210,
       model.movableLineVisibleProperty,
-      this.springHangerNode.centerX + 5,
+      new Bounds2( xBoundsLimit, 55, xBoundsLimit, 600 ),
       tandem.createTandem( 'movableLineNode' )
     );
 

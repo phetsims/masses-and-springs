@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
@@ -27,11 +26,11 @@ define( function( require ) {
    * @param {Vector2} initialPosition - of the center of line
    * @param {number} length - in view coordinates
    * @param {boolean} visibleProperty
-   * @param {number} xPosOfLine - limits draggable bounds and position on the x-axis
+   * @param {Bounds2} dragBounds - limits draggable bounds of the line
    * @param {Tandem} tandem
    * @constructor
    */
-  function MovableLineNode( initialPosition, length, visibleProperty, xPosOfLine, tandem ) {
+  function MovableLineNode( initialPosition, length, visibleProperty, dragBounds, tandem ) {
     var self = this;
     Node.call( this );
 
@@ -63,7 +62,7 @@ define( function( require ) {
     line.touchArea = dilatedLineBounds;
 
     // @private {read-only} X coordinate for the position of the line
-    initialPosition.setX( xPosOfLine );
+    initialPosition.setX( dragBounds.minX );
 
     // @private {read-write} position of line in screen coordinates
     this.positionProperty = new Property( initialPosition, {
@@ -77,7 +76,7 @@ define( function( require ) {
     } );
 
     this.addInputListener( new MovableDragHandler( this.positionProperty, {
-      dragBounds: new Bounds2( xPosOfLine, 55, xPosOfLine, 600 ), // done so reference line is only draggable on the y-axis
+      dragBounds: dragBounds, // done so reference line is only draggable on the y-axis
       tandem: tandem.createTandem( 'dragHandler' )
     } ) );
 
