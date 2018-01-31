@@ -116,6 +116,11 @@ define( function( require ) {
     this.addChild( firstSpringEquilibriumLineNode );
     this.addChild( secondSpringEquilibriumLineNode );
 
+    //We do this to prevent overlap with the massNodes.
+    firstSpringEquilibriumLineNode.moveToBack();
+    secondSpringEquilibriumLineNode.moveToBack();
+
+
     // Link responsible for visibility of the length control panel.
     model.sceneModeProperty.lazyLink( function( mode ) {
       self.resetMassLayer();

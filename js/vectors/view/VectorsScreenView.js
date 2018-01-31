@@ -74,9 +74,14 @@ define( function( require ) {
         stroke: EQUILIBRIUM_LINE_FILL
       }
     );
+
     //Reference lines from indicator visibility box
     this.addChild( firstSpringEquilibriumLineNode );
     this.addChild( secondSpringEquilibriumLineNode );
+
+    //We do this to prevent overlap with the massNodes.
+    firstSpringEquilibriumLineNode.moveToBack();
+    secondSpringEquilibriumLineNode.moveToBack();
 
     // Contains visibility options for the reference lines and displacement arrow
     var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
