@@ -44,14 +44,9 @@ define( function( require ) {
    * @param {Property.<Bounds2>} dragBoundsProperty
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
-   * @param {Object} options
    * @constructor
    */
-  function MassNode( mass, modelViewTransform2, dragBoundsProperty, model, tandem, options ) {
-    options = _.extend( {
-      vectorViewEnabled: false,
-    }, options );
-
+  function MassNode( mass, modelViewTransform2, dragBoundsProperty, model, tandem ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
@@ -190,161 +185,158 @@ define( function( require ) {
     this.springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'springForceArrow', tandem );
     this.netForceArrow = new ForceVectorArrow( 'black', 'netForceArrow', tandem );
 
-    if ( options.vectorViewEnabled ) {
-      this.addChild( this.velocityArrow );
-      this.addChild( this.accelerationArrow );
-      this.addChild( this.gravityForceArrow );
-      this.addChild( this.springForceArrow );
-      this.addChild( this.netForceArrow );
-      this.addChild( forceNullLine );
+    this.addChild( this.velocityArrow );
+    this.addChild( this.accelerationArrow );
+    this.addChild( this.gravityForceArrow );
+    this.addChild( this.springForceArrow );
+    this.addChild( this.netForceArrow );
+    this.addChild( forceNullLine );
 
-      // Used to position the vectors on the left of right side of the massNode depending on the attached spring.
-      var forcesOrientation = 1;
-      this.mass.springProperty.link( function( spring ) {
-        if ( spring ) {
-          forcesOrientation = spring.options.forcesOrientation;
-        }
-      } );
+    // Used to position the vectors on the left of right side of the massNode depending on the attached spring.
+    var forcesOrientation = 1;
+    this.mass.springProperty.link( function( spring ) {
+      if ( spring ) {
+        forcesOrientation = spring.options.forcesOrientation;
+      }
+    } );
 
-      /**
-       * Show/hide the velocity and acceleration arrows when appropriate
-       * @param {Property.<boolean>} arrowVisibilityProperty
-       * @param {Node} arrowNode
-       *
-       * @private
-       */
-      var updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
-        Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
-          function( spring, vectorVisibility, userControlled ) {
-            arrowNode.visible = !!spring && vectorVisibility && !userControlled;
-          } );
-      };
-
-      /**
-       * Show/hide the spring and gravity force vectors when appropriate
-       * @param {Property.<boolean>} arrowVisibilityProperty
-       * @param {Node} arrowNode
-       *
-       * @private
-       */
-      var updateForceVisiblity = function( arrowVisibilityProperty, arrowNode ) {
-        Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
-          function( spring, springVectorVisibility, forcesMode ) {
-            arrowNode.visible = !!spring && springVectorVisibility && forcesMode === MassesAndSpringsConstants.FORCES_STRING;
-          } );
-      };
-
-      // Show/hide the velocity arrow
-      updateArrowVisibility( model.velocityVectorVisibilityProperty, self.velocityArrow );
-
-      // Show/hide the acceleration arrow
-      updateArrowVisibility( model.accelerationVectorVisibilityProperty, self.accelerationArrow );
-
-      // Show/hide the spring force arrow
-      updateForceVisiblity( model.springVectorVisibilityProperty, self.springForceArrow );
-
-      // Show/hide the gravity force arrow
-      updateForceVisiblity( model.gravityVectorVisibilityProperty, self.gravityForceArrow );
-
-      // Show/hide the net force arrow
-      Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
-        function( spring, forcesMode ) {
-          self.netForceArrow.visible = !!spring && forcesMode === MassesAndSpringsConstants.NET_FORCE_STRING;
-        }
-      );
-
-      // Show/hide line at base of vectors
-      Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
-        function( spring, gravityForceVisible, springForceVisible, forcesVisible ) {
-          forceNullLine.visible = !!spring && (gravityForceVisible || springForceVisible || forcesVisible === MassesAndSpringsConstants.NET_FORCE_STRING);
+    /**
+     * Show/hide the velocity and acceleration arrows when appropriate
+     * @param {Property.<boolean>} arrowVisibilityProperty
+     * @param {Node} arrowNode
+     *
+     * @private
+     */
+    var updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
+      Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
+        function( spring, vectorVisibility, userControlled ) {
+          arrowNode.visible = !!spring && vectorVisibility && !userControlled;
         } );
+    };
 
-      //Links for handling the length of the vectors in response to the system.
-      var scalingFactor = 3;
-      Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty ], function( velocity, visible ) {
-        if ( visible ) {
-          var position = mass.positionProperty.get();
-          self.velocityArrow.setTailAndTip(
-            position.x - 10,
-            position.y + rect.centerY,
-            position.x - 10,
-            position.y + rect.centerY - ARROW_SIZE_DEFAULT * velocity * scalingFactor
-          );
-        }
+    /**
+     * Show/hide the spring and gravity force vectors when appropriate
+     * @param {Property.<boolean>} arrowVisibilityProperty
+     * @param {Node} arrowNode
+     *
+     * @private
+     */
+    var updateForceVisiblity = function( arrowVisibilityProperty, arrowNode ) {
+      Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
+        function( spring, springVectorVisibility, forcesMode ) {
+          arrowNode.visible = !!spring && springVectorVisibility && forcesMode === MassesAndSpringsConstants.FORCES_STRING;
+        } );
+    };
+
+    // Show/hide the velocity arrow
+    updateArrowVisibility( model.velocityVectorVisibilityProperty, self.velocityArrow );
+
+    // Show/hide the acceleration arrow
+    updateArrowVisibility( model.accelerationVectorVisibilityProperty, self.accelerationArrow );
+
+    // Show/hide the spring force arrow
+    updateForceVisiblity( model.springVectorVisibilityProperty, self.springForceArrow );
+
+    // Show/hide the gravity force arrow
+    updateForceVisiblity( model.gravityVectorVisibilityProperty, self.gravityForceArrow );
+
+    // Show/hide the net force arrow
+    Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
+      function( spring, forcesMode ) {
+        self.netForceArrow.visible = !!spring && forcesMode === MassesAndSpringsConstants.NET_FORCE_STRING;
+      }
+    );
+
+    // Show/hide line at base of vectors
+    Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
+      function( spring, gravityForceVisible, springForceVisible, forcesVisible ) {
+        forceNullLine.visible = !!spring && (gravityForceVisible || springForceVisible || forcesVisible === MassesAndSpringsConstants.NET_FORCE_STRING);
       } );
 
-      // When gravity changes, update the gravitational force arrow
-      Property.multilink( [ mass.springProperty, mass.gravityProperty, model.gravityVectorVisibilityProperty ], function( spring, gravity, visible ) {
-        if ( visible ) {
-          var position = mass.positionProperty.get();
-          var gravitationalAcceleration = mass.mass * gravity;
-          self.gravityForceArrow.setTailAndTip(
-            position.x + (forcesOrientation) * 45,
-            position.y + rect.centerY,
-            position.x + (forcesOrientation) * 45,
-            position.y + rect.centerY + ARROW_SIZE_DEFAULT * gravitationalAcceleration
-          );
-        }
-      } );
-
-      // When the spring force changes, update the spring force arrow
-      Property.multilink( [ mass.springForceProperty, model.springVectorVisibilityProperty ], function( springForce, visible ) {
-        if ( visible ) {
-          var position = mass.positionProperty.get();
-          self.springForceArrow.setTailAndTip(
-            position.x + (forcesOrientation) * 45,
-            position.y + rect.centerY,
-            position.x + (forcesOrientation) * 45,
-            position.y + rect.centerY - ARROW_SIZE_DEFAULT * springForce
-          );
-        }
-      } );
-
-      // When net force changes changes, update the net force arrow
-      assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
-      Property.multilink( [
-        mass.netForceProperty,
-        model.forcesModeProperty,
-        model.accelerationVectorVisibilityProperty,
-        mass.accelerationProperty
-      ], function( netForce, forcesMode, accelerationVisible, netAcceleration ) {
+    //Links for handling the length of the vectors in response to the system.
+    var scalingFactor = 3;
+    Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty ], function( velocity, visible ) {
+      if ( visible ) {
         var position = mass.positionProperty.get();
-        if ( forcesMode === 'netForce' ) {
-          if ( Math.abs( netForce ) > 1E-6 ) {
-            self.netForceArrow.setTailAndTip(
-              position.x + (forcesOrientation) * 45,
-              position.y + rect.centerY,
-              position.x + (forcesOrientation) * 45,
-              position.y + rect.centerY - ARROW_SIZE_DEFAULT * netForce
-            );
-          }
-          else if ( netAcceleration === 0 ) {
-            self.netForceArrow.setTailAndTip( 0, 0, 0, 0 );
-          }
-        }
-        if ( accelerationVisible ) {
-          if ( Math.abs( netAcceleration ) > 1E-6 ) {
-            self.accelerationArrow.setTailAndTip(
-              position.x + 10,
-              position.y + rect.centerY,
-              position.x + 10,
-              position.y + rect.centerY - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
-            );
-          }
-          else if ( netAcceleration === 0 ) {
-            self.accelerationArrow.setTailAndTip( 0, 0, 0, 0 );
-          }
-        }
-      } );
+        self.velocityArrow.setTailAndTip(
+          position.x - 10,
+          position.y + rect.centerY,
+          position.x - 10,
+          position.y + rect.centerY - ARROW_SIZE_DEFAULT * velocity * scalingFactor
+        );
+      }
+    } );
 
-      // When the mass's position changes update the forces baseline marker
-      mass.positionProperty.link( function( position ) {
-        forceNullLine.setLine( position.x + (forcesOrientation) * 40, position.y + rect.centerY, position.x + (forcesOrientation) * 50, position.y + rect.centerY );
-      } );
-    }
+    // When gravity changes, update the gravitational force arrow
+    Property.multilink( [ mass.springProperty, mass.gravityProperty, model.gravityVectorVisibilityProperty ], function( spring, gravity, visible ) {
+      if ( visible ) {
+        var position = mass.positionProperty.get();
+        var gravitationalAcceleration = mass.mass * gravity;
+        self.gravityForceArrow.setTailAndTip(
+          position.x + (forcesOrientation) * 45,
+          position.y + rect.centerY,
+          position.x + (forcesOrientation) * 45,
+          position.y + rect.centerY + ARROW_SIZE_DEFAULT * gravitationalAcceleration
+        );
+      }
+    } );
+
+    // When the spring force changes, update the spring force arrow
+    Property.multilink( [ mass.springForceProperty, model.springVectorVisibilityProperty ], function( springForce, visible ) {
+      if ( visible ) {
+        var position = mass.positionProperty.get();
+        self.springForceArrow.setTailAndTip(
+          position.x + (forcesOrientation) * 45,
+          position.y + rect.centerY,
+          position.x + (forcesOrientation) * 45,
+          position.y + rect.centerY - ARROW_SIZE_DEFAULT * springForce
+        );
+      }
+    } );
+
+    // When net force changes changes, update the net force arrow
+    assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
+    Property.multilink( [
+      mass.netForceProperty,
+      model.forcesModeProperty,
+      model.accelerationVectorVisibilityProperty,
+      mass.accelerationProperty
+    ], function( netForce, forcesMode, accelerationVisible, netAcceleration ) {
+      var position = mass.positionProperty.get();
+      if ( forcesMode === 'netForce' ) {
+        if ( Math.abs( netForce ) > 1E-6 ) {
+          self.netForceArrow.setTailAndTip(
+            position.x + (forcesOrientation) * 45,
+            position.y + rect.centerY,
+            position.x + (forcesOrientation) * 45,
+            position.y + rect.centerY - ARROW_SIZE_DEFAULT * netForce
+          );
+        }
+        else if ( netAcceleration === 0 ) {
+          self.netForceArrow.setTailAndTip( 0, 0, 0, 0 );
+        }
+      }
+      if ( accelerationVisible ) {
+        if ( Math.abs( netAcceleration ) > 1E-6 ) {
+          self.accelerationArrow.setTailAndTip(
+            position.x + 10,
+            position.y + rect.centerY,
+            position.x + 10,
+            position.y + rect.centerY - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
+          );
+        }
+        else if ( netAcceleration === 0 ) {
+          self.accelerationArrow.setTailAndTip( 0, 0, 0, 0 );
+        }
+      }
+    } );
+
+    // When the mass's position changes update the forces baseline marker
+    mass.positionProperty.link( function( position ) {
+      forceNullLine.setLine( position.x + (forcesOrientation) * 40, position.y + rect.centerY, position.x + (forcesOrientation) * 50, position.y + rect.centerY );
+    } );
   }
 
   massesAndSprings.register( 'MassNode', MassNode );
   return inherit( Node, MassNode );
-} )
-;
+} );

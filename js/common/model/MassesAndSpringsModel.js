@@ -39,9 +39,8 @@ define( function( require ) {
    * @constructor
    *
    * @param {Tandem} tandem
-   * @param {Object} [options]
    */
-  function MassesAndSpringsModel( tandem, options ) {
+  function MassesAndSpringsModel( tandem ) {
 
     var self = this;
 

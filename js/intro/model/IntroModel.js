@@ -25,7 +25,7 @@ define( function( require ) {
    */
   function IntroModel( tandem ) {
 
-    MassesAndSpringsModel.call( this, tandem, { vectorViewEnabled: false } );
+    MassesAndSpringsModel.call( this, tandem );
 
     this.addDefaultSprings( tandem );
     this.addDefaultMasses( tandem );

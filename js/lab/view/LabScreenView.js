@@ -31,10 +31,6 @@ define( function( require ) {
     OneSpringView.call( this, model, tandem );
     var self = this;
 
-    this.massNodes.forEach( function( massNode ) {
-      massNode.vectorViewEnabled = true;
-    } );
-
     var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),

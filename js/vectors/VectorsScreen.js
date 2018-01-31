@@ -46,7 +46,7 @@ define( function( require ) {
     Screen.call( this,
       function() {
         var modelTandem = tandem.createTandem( 'model' );
-        var model = new MassesAndSpringsModel( modelTandem, { vectorViewEnabled: true } );
+        var model = new MassesAndSpringsModel( modelTandem );
         model.addDefaultSprings( modelTandem );
         model.addDefaultMasses( modelTandem );
         return model;

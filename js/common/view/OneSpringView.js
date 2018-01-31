@@ -69,7 +69,7 @@ define( function( require ) {
 
     // @public Initializes equilibrium line for the spring
     var springEquilibriumLineNode = new ReferenceLineNode(
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
+      this.modelViewTransform,
       model.springs[ 0 ],
       model.springs[ 0 ].massEquilibriumYPositionProperty,
       model.equilibriumPositionVisibleProperty, {
@@ -79,7 +79,7 @@ define( function( require ) {
 
     // @public Initializes natural line for the spring
     var naturalLengthLineNode = new ReferenceLineNode(
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
+      this.modelViewTransform,
       model.springs[ 0 ],
       model.springs[ 0 ].bottomProperty,
       model.naturalLengthVisibleProperty, {
@@ -138,7 +138,7 @@ define( function( require ) {
     // Zero height reference line
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
     var zeroHeightLine = new ReferenceLineNode(
-      MassesAndSpringsConstants.MODEL_VIEW_TRANSFORM( this.visibleBoundsProperty.get(), 0.98 ),
+      this.modelViewTransform,
       model.springs[ 0 ],
       zeroHeightProperty,
       new Property( true ), {
