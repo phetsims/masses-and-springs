@@ -92,7 +92,7 @@ define( function( require ) {
         mass.positionProperty.set( new Vector2( mass.positionProperty.value.x, minY ) );
         // model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       }
-      // } );
+    } );
       // mass.gradientEnabledProperty.link( function( enabled ) {
       //   if ( enabled ) {
       //     rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 )
