@@ -28,7 +28,6 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem );
     var self = this;
 
-
     this.addDefaultSprings( tandem );
     this.addDefaultMasses( tandem );
 

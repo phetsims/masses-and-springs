@@ -38,7 +38,7 @@ define( function( require ) {
 
   /**
    * @param {number} massValue:  mass in kg
-   * @param {Vector2} initialPosition: initial coordinates of the mass
+   * @param {number} xPosition - starting x-coordinate of the mass object, offset from the first spring position
    * @param {boolean} isLabeled: determines if the mass is labeled in the view
    * @param {string} color: color of shown mass
    * @param {Property.<number>} gravityProperty - the gravity property from the model
@@ -46,7 +46,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function Mass( massValue, initialPosition, isLabeled, color, gravityProperty, tandem, options ) {
+  function Mass( massValue, xPosition, isLabeled, color, gravityProperty, tandem, options ) {
 
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
 
@@ -94,17 +94,17 @@ define( function( require ) {
       return cylinderHeight + self.hookHeight;
     } );
 
-    // @private {Vector2}
-    this.initialPosition = initialPosition;
-
     // @public (read-only) Used for constructing tandems for corresponding view nodes.
     this.massTandem = tandem;
 
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
-    this.positionProperty = new Property( this.initialPosition, {
+    this.positionProperty = new Property( new Vector2( xPosition, this.heightProperty.value + .02 ), {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
     } );
+
+    // @private {Vector2}
+    this.initialPosition = this.positionProperty.initialValue;
 
     // @public {Property.<boolean>} indicates whether this mass is currently user controlled
     this.userControlledProperty = new BooleanProperty( false, {
