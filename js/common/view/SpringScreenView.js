@@ -154,8 +154,8 @@ define( function( require ) {
     this.addChild( this.toolboxPanel );
     this.addChild( this.timerNode );
     this.addChild( this.rulerNode );
-    this.rulerNode.toolbox = this.toolboxPanel;
     this.timerNode.toolbox = this.toolboxPanel;
+    this.rulerNode.toolbox = this.toolboxPanel;
 
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
