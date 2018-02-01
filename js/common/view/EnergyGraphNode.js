@@ -167,7 +167,6 @@ define( function( require ) {
           scaleProperty: scaleFactorProperty,
           xAxisOptions: {
             stroke: 'black',
-            lineWidth: 1,
             minPadding: 3,
             maxExtension: 4
           },

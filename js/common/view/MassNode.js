@@ -50,19 +50,18 @@ define( function( require ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
+    // TODO: public or private?
     this.mass = mass;
 
     var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
 
-    var rectOptions = {
+    var rect = new Rectangle( {
       stroke: 'black',
       lineWidth: 0.5
-    };
-
-    var rect = new Rectangle( rectOptions );
+    } );
     this.addChild( rect );
 
-    // @private {read-write} Bounds that limit where we can drag our mass should be dependent on how large our mass is
+    // {read-write} Bounds that limit where we can drag our mass should be dependent on how large our mass is
     var modelBoundsProperty = new DerivedProperty( [ dragBoundsProperty, mass.heightProperty ], function( dragBounds, massHeight ) {
       var modelBounds = modelViewTransform2.viewToModelBounds( dragBounds );
       modelBounds.minY += massHeight;
@@ -78,6 +77,8 @@ define( function( require ) {
         modelViewTransform2.modelToViewDeltaX( radiusValue ),
         modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeightProperty.get() ) + hookHeight );
 
+      // TODO (PERFORMANCE): If this is ever an issue (changing this every frame), try to create one object with the gradient, and then transform/scale it
+      // into place.
       rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 )
         .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.3 ) )
         .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.8 ) )
@@ -107,7 +108,7 @@ define( function( require ) {
 
     var hookShape = new Shape();
     var radius = hookHeight / 4;
-    hookShape.arc( 0, 0, radius, Math.PI, (1 / 2 * Math.PI) );
+    hookShape.arc( 0, 0, radius, Math.PI, ( 0.5 * Math.PI ) );
     hookShape.lineTo( 0, hookHeight / 2 );
     var hookNode = new Path( hookShape, {
       stroke: 'black',
@@ -118,35 +119,31 @@ define( function( require ) {
     } );
     this.addChild( hookNode );
 
-    var labelString;
-    var createLabel = function( labelString ) {
-      var label = new Text( labelString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        fill: 'black',
-        centerY: rect.centerY,
-        centerX: 0,
-        pickable: false,
-        maxWidth: 50,
-        tandem: tandem.createTandem( 'label' )
-      } );
+    var labelString = mass.options.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
+    var label = new Text( labelString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      fill: 'black',
+      centerY: rect.centerY,
+      centerX: 0,
+      pickable: false,
+      maxWidth: 50,
+      tandem: tandem.createTandem( 'label' )
+    } );
 
-      if ( mass.options.isLabeled ) {
-        self.addChild( label );
-      }
-      mass.massProperty.link( function() {
+    if ( mass.options.isLabeled ) {
+      self.addChild( label );
+    }
+    mass.massProperty.link( function() {
+      label.center = rect.center;
+    } );
+
+    // Adjust the mass label for adjustable masses.
+    if ( mass.adjustable ) {
+      self.mass.massProperty.link( function( massValue ) {
+        label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
         label.center = rect.center;
       } );
-
-      // Adjust the mass label for adjustable masses.
-      if ( mass.adjustable ) {
-        self.mass.massProperty.link( function( massValue ) {
-          label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
-          label.center = rect.center;
-        } );
-      }
-    };
-    labelString = mass.options.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
-    createLabel( labelString );
+    }
 
     // @public {read-write}
     this.movableDragHandler = new MovableDragHandler( this.mass.positionProperty, {
@@ -183,9 +180,8 @@ define( function( require ) {
 
     this.addInputListener( this.movableDragHandler );
 
-    var forceNullLine = new Line( 0, 0, 0, 0, {
+    var forceNullLine = new Line( {
       stroke: 'black',
-      lineWidth: 1,
       cursor: 'pointer'
     } );
 
@@ -210,6 +206,9 @@ define( function( require ) {
         forcesOrientation = spring.options.forcesOrientation;
       }
     } );
+
+    // TODO: It looks like the below functions could be refactored into a single multilink across 7+ properties that update the below 6 visibilities
+    // TODO: OR Move code into VectorArrow (or whatever the supertype for all of the arrows would be) so that you can update visibility and tail/tip using code there.
 
     /**
      * Show/hide the velocity and acceleration arrows when appropriate
@@ -263,6 +262,8 @@ define( function( require ) {
       function( spring, gravityForceVisible, springForceVisible, forcesVisible ) {
         forceNullLine.visible = !!spring && (gravityForceVisible || springForceVisible || forcesVisible === MassesAndSpringsConstants.NET_FORCE_STRING);
       } );
+
+    // TODO: Lots of similar code for setting arrow tail/tip. Ideally refactor to a function that can set tail/tip on all arrows (based on magnitude/etc.)
 
     //Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;

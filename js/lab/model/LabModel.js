@@ -22,6 +22,7 @@ define( function( require ) {
    * @constructor
    */
   function LabModel( tandem ) {
+    // TODO: Think about creating mass objects above, and then passing into the constructor (instead of having to function-call to create, and then index into to modify)
 
     MassesAndSpringsModel.call( this, tandem );
 

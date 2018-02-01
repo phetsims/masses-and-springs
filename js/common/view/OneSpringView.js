@@ -39,6 +39,7 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @constructor
    */
+  // TODO: Rename OneSpringScreenView (same for TwoSpringView)
   function OneSpringView( model, tandem ) {
     this.model = model; // Make model available
     SpringScreenView.call( this, model, tandem );
@@ -68,7 +69,7 @@ define( function( require ) {
     ];
     var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 
-    // @public Initializes equilibrium line for the spring
+    // Initializes equilibrium line for the spring
     var springEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
@@ -78,7 +79,7 @@ define( function( require ) {
       }
     );
 
-    // @public Initializes natural line for the spring
+    // Initializes natural line for the spring
     var naturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
@@ -195,6 +196,7 @@ define( function( require ) {
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
+      // TODO: Try to create container nodes for each section that gets repositioned as a unit. Then just move that container node.
       //Update the bounds of view elements
       springHangerNode.top = self.spacing;
       movableLineNode.centerX = springHangerNode.centerX;

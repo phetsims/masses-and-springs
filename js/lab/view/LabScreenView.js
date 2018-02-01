@@ -31,6 +31,7 @@ define( function( require ) {
     OneSpringView.call( this, model, tandem );
     var self = this;
 
+    // TODO: Make things that aren't really panels NOT panels.
     var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
       model,
       tandem.createTandem( 'vectorVisibilityControlPanel' ),

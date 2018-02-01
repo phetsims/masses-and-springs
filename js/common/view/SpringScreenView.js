@@ -40,10 +40,11 @@ define( function( require ) {
    * @constructor
    */
   function SpringScreenView( model, tandem ) {
-    // TODO: Do we need to expose this model?
-    this.model = model;
     ScreenView.call( this );
     var self = this;
+
+    // @public {MassesAndSpringsModel}
+    this.model = model;
 
     var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * 0.98 );
 
@@ -62,10 +63,10 @@ define( function( require ) {
       self.springNodes.push( springNode );
     } );
 
-    // Spacing used for the margin of layout bounds
+    // @protected {number} - Spacing used for the margin of layout bounds
     this.spacing = 10;
 
-    // Alignment for panels on most right side of sim view
+    // @protected {number} - Alignment for panels on most right side of sim view
     this.rightPanelAlignment = this.visibleBoundsProperty.get().right - this.spacing;
 
     // Add masses
@@ -96,7 +97,7 @@ define( function( require ) {
     // Timer and Ruler
     this.timerNode = new DraggableTimerNode(
       this.visibleBoundsProperty.get(),
-      new Vector2( 0, 0 ),
+      Vector2.ZERO,
       model.timerSecondsProperty,
       model.timerRunningProperty,
       model.timerVisibleProperty,
@@ -105,7 +106,7 @@ define( function( require ) {
     this.rulerNode = new DraggableRulerNode(
       this.modelViewTransform,
       this.visibleBoundsProperty.get(),
-      new Vector2( 0, 0 ),
+      Vector2.ZERO,
       model.rulerVisibleProperty,
       tandem.createTandem( 'rulerNode' )
     );
@@ -133,9 +134,9 @@ define( function( require ) {
 
     // sound toggle button at bottom right
     var soundToggleButton = new SoundToggleButton( model.isSoundEnabledProperty, {
-      centerY: this.resetAllButton.centerY - 55
+      centerY: this.resetAllButton.centerY - 55,
+      scale: 0.9
     } );
-    soundToggleButton.scale( .9 );
     // this.addChild( soundToggleButton );
 
     // Toolbox Panel
@@ -171,7 +172,6 @@ define( function( require ) {
 
     /**
      * Helper function to restore initial layering of the masses to prevent them from stacking over each other.
-     *
      * @public
      */
     resetMassLayer: function() {
@@ -201,9 +201,9 @@ define( function( require ) {
      * Creates a panel that controls the designated spring's spring constant value.
      *
      * @param {number} springIndex
-     * @param {Tandem} tandem
      * @param {array.<Text>} labels
-     * @returns {*}
+     * @param {Tandem} tandem
+     * @returns {SpringControlPanel}
      */
     createSpringConstantPanel: function( springIndex, labels, tandem ) {
       return new SpringControlPanel(
@@ -219,8 +219,7 @@ define( function( require ) {
           fill: 'white',
           stroke: 'gray'
         }
-      )
-        ;
+      );
     }
   } );
 } );

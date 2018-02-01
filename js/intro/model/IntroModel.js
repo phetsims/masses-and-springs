@@ -88,6 +88,7 @@ define( function( require ) {
         self.setSpringState( sameLengthModeSpringState );
       }
 
+      // TODO: Generally prefer enumerations, like AreaCalculationChoice.
       else if ( mode === 'adjustable-length' ) {
 
         // Manages stashing and applying parameters to each scene
