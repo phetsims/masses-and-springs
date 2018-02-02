@@ -65,11 +65,11 @@ define( function( require ) {
       minMaxLabels,
       tandem.createTandem( 'springLengthControlPanel' ),
       {
-        right: this.firstSpringStopperButtonNode.left - this.spacing,
         fill: 'white',
-        stroke: 'gray',
-        top: this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null,
         visible: false,
         constrainValue: function( value ) {
           value = Number( Util.toFixed( value, 2 ) );
@@ -77,7 +77,6 @@ define( function( require ) {
         }
       }
     );
-    this.addChild( this.springLengthControlPanel );
 
     // @private panel that keeps thickness/spring constant at constant value
     this.constantsControlPanel = new ConstantsControlPanel(
@@ -85,13 +84,41 @@ define( function( require ) {
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
-        left: this.firstSpringConstantControlPanel.left,
-        top: this.firstSpringConstantControlPanel.bottom + this.spacing,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null
       }
     );
-    this.addChild( this.constantsControlPanel );
+
+    // VBox that contains all of the spring options panel's content
+    var springOptionsVBox = new VBox( {
+      spacing: 10,
+      children: [
+        this.springLengthControlPanel,
+        MassesAndSpringsConstants.LINE_SEPARATOR( 130 ),
+        this.constantsControlPanel
+      ]
+    } );
+
+    // Panel that will display the options for a spring.
+    var springOptionsPanel = new Panel(
+      springOptionsVBox,
+      {
+        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+        right: this.firstSpringStopperButtonNode.left - this.spacing,
+        top: this.spacing,
+        tandem: tandem.createTandem( 'springOptionsPanel' ),
+        align: 'center',
+        fill: 'white',
+        xMargin: 10,
+        stroke: 'gray',
+        resize: false,
+        visible: false
+      } );
+    this.addChild( springOptionsPanel );
+    springOptionsPanel.moveToBack();
 
     // Initializes equilibrium line for first spring
     var firstSpringEquilibriumLineNode = new ReferenceLineNode(
@@ -136,6 +163,7 @@ define( function( require ) {
       self.constantsControlPanel.visible = self.springLengthControlPanel.visible;
       self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
+      springOptionsPanel.visible = self.springLengthControlPanel.visible;
     } );
 
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
@@ -243,10 +271,10 @@ define( function( require ) {
       model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ), {
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        dampingVisible: false,
         xMargin: 0,
         yMargin: 0,
         stroke: null,
+        dampingVisible: false,
         hSlider: true
       } );
 
@@ -255,7 +283,7 @@ define( function( require ) {
       spacing: 10,
       children: [
         referenceLinePanel,
-        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
         gravityAndDampingControlPanel
       ]
     } );

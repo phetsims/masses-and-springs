@@ -120,9 +120,9 @@ define( function( require ) {
       spacing: 10,
       children: [
         indicatorVisibilityControlPanel,
-        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
         gravityAndDampingControlPanel,
-        MassesAndSpringsConstants.LINE_SEPARATOR(),
+        MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
         vectorVisibilityControlPanel
       ]
     } );

@@ -68,8 +68,8 @@ define( function( require ) {
     FORCES_STRING: 'forces',
     NET_FORCE_STRING: 'netForce',
     PANEL_FILL: 'rgb(230,230,230)',
-    LINE_SEPARATOR: function() {
-      return new Line( 0, 0, 165, 0, { stroke: 'gray' } );
+    LINE_SEPARATOR: function( length ) {
+      return new Line( 0, 0, length, 0, { stroke: 'gray' } );
     },
 
     RIGHT_SPRING_X: 1.3 // {number} X position of the spring node in screen coordinates
