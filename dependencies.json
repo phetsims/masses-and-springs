@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.0-dev.52 Wed Jan 31 2018 21:39:35 GMT-0500 (EST)",
+  "comment": "# masses-and-springs 1.0.0-dev.53 Fri Feb 02 2018 11:00:44 GMT-0500 (EST)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "f616a059d415c0efaff83897ff937f1649c0235c",
+    "sha": "10125b6e274c1f89873a890218dbee0ad96e6dcd",
     "branch": "master"
   },
   "dot": {
@@ -25,7 +25,7 @@
     "branch": "master"
   },
   "joist": {
-    "sha": "caefa8e28d0922a31d7bf5807f54d9ff550186ca",
+    "sha": "2d67a94313f7d8313773d95765221142a6a41425",
     "branch": "master"
   },
   "kite": {
@@ -33,7 +33,7 @@
     "branch": "master"
   },
   "masses-and-springs": {
-    "sha": "695aff6150471f5f9142eb8e7b138a6a779fa8d7",
+    "sha": "3a9134ffed05a5dc4fbace9ee68986828cf865cc",
     "branch": "master"
   },
   "phet-core": {
@@ -57,7 +57,7 @@
     "branch": "master"
   },
   "phet-io-wrapper-sonification": {
-    "sha": "cf2dff3b8cebd43b39be127686ad89f1f05f93f9",
+    "sha": "475dfa747e7906d336ff777f89c6f75d45595249",
     "branch": "master"
   },
   "phet-io-wrapper-visualizing-engagement": {
@@ -65,7 +65,7 @@
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "d11aebf69543136a4bc26bc9993f2cec586b7998",
+    "sha": "095cf528aa8b9fde47d77cd3aab5b2000cc63cea",
     "branch": "master"
   },
   "phetcommon": {
@@ -77,11 +77,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "70cf829b42b65d6c4f58045f40ed6768b7b889a5",
+    "sha": "5819fecbf4dbeb6f8e508be9da26ee9e7bd66b2d",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "bd233bf8f798e0db98a550c31bd7e73f48994b53",
+    "sha": "700124797822663ab78f716988cecb413234083c",
     "branch": "master"
   },
   "sherpa": {
@@ -89,7 +89,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "56f146b17331e9bbef9105d4c65616f59f69c78e",
+    "sha": "de39c347facfe4575a45bb8aec8493f6ce77ed2d",
     "branch": "master"
   },
   "tandem": {
