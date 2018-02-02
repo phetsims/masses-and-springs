@@ -16,6 +16,8 @@ define( function( require ) {
   var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
   var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
@@ -106,13 +108,16 @@ define( function( require ) {
       tandem.createTandem( 'massValueControlPanel' )
     );
 
+    // Property that determines the zero height in the view.
+    var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
+
     // Initializes movable line
     var xBoundsLimit = this.modelViewTransform.modelToViewX( this.model.springs[ 0 ].positionProperty.value.x ) + this.spacing;
     var movableLineNode = new MovableLineNode(
       springHangerNode.center.plus( new Vector2( 45, 200 ) ),
       100,
       model.movableLineVisibleProperty,
-      new Bounds2( xBoundsLimit, 85, xBoundsLimit, 600 ),
+      new Bounds2( xBoundsLimit, 85, xBoundsLimit, zeroHeightProperty.value ),
       tandem.createTandem( 'movableLineNode' )
     );
 
@@ -139,7 +144,6 @@ define( function( require ) {
     );
 
     // Zero height reference line
-    var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
     var zeroHeightLine = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
@@ -156,11 +160,14 @@ define( function( require ) {
     // Label for zero height
     var zeroHeightLabel = new Node( {
       children: [
-        new Text( heightEqualsZeroString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          fill: zeroHeightLine.stroke
-        } )
-      ]
+        new HBox( {
+          children: [
+            new HStrut( 10 ),
+            new Text( heightEqualsZeroString, {
+              font: MassesAndSpringsConstants.TITLE_FONT,
+              fill: zeroHeightLine.stroke
+            } ) ]
+        } ) ]
     } );
 
     this.resetAllButton.addListener( function() {
