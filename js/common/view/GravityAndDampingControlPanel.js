@@ -195,8 +195,8 @@ define( function( require ) {
         dampingRange,
         dampingString,
         [
-          new Text( noneString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-          new Text( lotsString, { font: MassesAndSpringsConstants.TITLE_FONT } )
+          new Text( noneString, { font: MassesAndSpringsConstants.LABEL_FONT } ),
+          new Text( lotsString, { font: MassesAndSpringsConstants.LABEL_FONT } )
         ],
         tandem,
         sliderOptions
