@@ -64,7 +64,7 @@ define( function( require ) {
     var vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( velocityString, {
-          font: MassesAndSpringsConstants.FONT,
+          font: MassesAndSpringsConstants.TITLE_FONT,
           tandem: tandem.createTandem( 'velocityString' )
         } ) ]
       } ),
@@ -73,7 +73,7 @@ define( function( require ) {
     }, {
       content: new HBox( {
         children: [ new Text( accelerationString, {
-          font: MassesAndSpringsConstants.FONT,
+          font: MassesAndSpringsConstants.TITLE_FONT,
           tandem: tandem.createTandem( 'accelerationString' )
         } ) ]
       } ),
@@ -89,7 +89,7 @@ define( function( require ) {
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( gravityString, {
-          font: MassesAndSpringsConstants.FONT,
+          font: MassesAndSpringsConstants.TITLE_FONT,
           tandem: tandem.createTandem( 'gravityString' )
         } ) ]
       } ),
@@ -98,7 +98,7 @@ define( function( require ) {
     }, {
       content: new HBox( {
         children: [ new Text( springString, {
-          font: MassesAndSpringsConstants.FONT,
+          font: MassesAndSpringsConstants.TITLE_FONT,
           tandem: tandem.createTandem( 'springString' )
         } ) ]
       } ),
@@ -115,7 +115,7 @@ define( function( require ) {
       model.forcesModeProperty,
       'forces',
       new Text( forcesString, {
-        font: MassesAndSpringsConstants.FONT,
+        font: MassesAndSpringsConstants.TITLE_FONT,
         tandem: tandem.createTandem( 'forcesString' )
       } ),
       { radius: 7, spacing: 7 }
@@ -127,7 +127,7 @@ define( function( require ) {
       'netForce',
       new HBox( {
         children: [ new Text( netForceString, {
-          font: MassesAndSpringsConstants.FONT,
+          font: MassesAndSpringsConstants.TITLE_FONT,
           tandem: tandem.createTandem( 'netForceString' )
         } ) ]
       } ),

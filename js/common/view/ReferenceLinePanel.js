@@ -68,14 +68,14 @@ define( function( require ) {
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
     var equilibriumText = new Text( equilibriumPositionString, {
-      font: MassesAndSpringsConstants.FONT,
+      font: MassesAndSpringsConstants.TITLE_FONT,
       tandem: tandem.createTandem( 'equilibriumPositionString' )
     } );
 
     if ( this.options.massEquilibrium ) {
 
       equilibriumText = new Text( massEquilibriumString, {
-        font: MassesAndSpringsConstants.FONT,
+        font: MassesAndSpringsConstants.TITLE_FONT,
         tandem: tandem.createTandem( 'equilibriumPositionString' )
       } );
     }
@@ -83,7 +83,7 @@ define( function( require ) {
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( naturalLengthString, {
-          font: MassesAndSpringsConstants.FONT,
+          font: MassesAndSpringsConstants.TITLE_FONT,
           tandem: tandem.createTandem( 'naturalLengthString' )
         } ) ],
         tandem: tandem.createTandem( 'naturalLengthHBox' )
@@ -100,7 +100,7 @@ define( function( require ) {
     }, {
       content: new HBox( {
         children: [ new Text( movableLineString, {
-          font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'movableLineString' )
+          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
         } ) ],
         tandem: tandem.createTandem( 'movableLineHBox' )
       } ),

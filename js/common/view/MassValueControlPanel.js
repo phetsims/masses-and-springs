@@ -51,7 +51,7 @@ define( function( require ) {
         mass: '{0}'
       } ),
       majorTickLength: 5,
-      titleFont: new PhetFont( 14 ),
+      titleFont: MassesAndSpringsConstants.TITLE_FONT,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',

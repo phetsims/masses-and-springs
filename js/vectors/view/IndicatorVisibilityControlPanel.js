@@ -78,7 +78,7 @@ define( function( require ) {
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( displacementString, {
-          font: MassesAndSpringsConstants.FONT, tandem: tandem.createTandem( 'displacementString' )
+          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'displacementString' )
         } ) ],
         tandem: tandem.createTandem( 'displacementHBox' )
       } ),
@@ -87,7 +87,7 @@ define( function( require ) {
     }, {
       content: new HBox( {
         children: [ new Text( massEquilibriumString, {
-          font: MassesAndSpringsConstants.FONT,
+          font: MassesAndSpringsConstants.TITLE_FONT,
           tandem: tandem.createTandem( 'massEquilibriumString' )
         } ) ],
         tandem: tandem.createTandem( 'massEquilibriumHBox' )
@@ -97,7 +97,7 @@ define( function( require ) {
     }, {
       content: new HBox( {
         children: [ new Text( movableLineString, {
-          font: MassesAndSpringsConstants.FONT,
+          font: MassesAndSpringsConstants.TITLE_FONT,
           tandem: tandem.createTandem( 'movableLineString' )
         } ) ],
         tandem: tandem.createTandem( 'movableLineHBox' )

@@ -28,7 +28,6 @@ define( function( require ) {
   // constants
   var TITLE_FONT = MassesAndSpringsConstants.TITLE_FONT;
   var MAX_TEXT_WIDTH = MassesAndSpringsConstants.MAX_TEXT_WIDTH + 20;
-  var FONT = MassesAndSpringsConstants.FONT;
   var RADIO_BUTTON_SPACING = 4;
 
   /**
@@ -50,7 +49,7 @@ define( function( require ) {
     }, options );
 
     var constantsSelectionButtonOptions = {
-      font: FONT,
+      font: TITLE_FONT,
       maxWidth: MAX_TEXT_WIDTH
     };
 

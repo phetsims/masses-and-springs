@@ -179,11 +179,23 @@ define( function( require ) {
       // Manages the symbols used in the legend of the graph
       var symbolContent = new VBox( {
         children: [
-          new Text( keString, { font: MassesAndSpringsConstants.FONT, fill: '#39d74e', maxWidth: MAX_WIDTH } ),
-          new RichText( peGravString, { font: MassesAndSpringsConstants.FONT, fill: '#5798de', maxWidth: MAX_WIDTH } ),
-          new RichText( peElasString, { font: MassesAndSpringsConstants.FONT, fill: '#29d4ff', maxWidth: MAX_WIDTH } ),
-          new RichText( eThermString, { font: MassesAndSpringsConstants.FONT, fill: '#ff6e26', maxWidth: MAX_WIDTH } ),
-          new RichText( eTotString, { font: MassesAndSpringsConstants.FONT, maxWidth: MAX_WIDTH } )
+          new Text( keString, { font: MassesAndSpringsConstants.TITLE_FONT, fill: '#39d74e', maxWidth: MAX_WIDTH } ),
+          new RichText( peGravString, {
+            font: MassesAndSpringsConstants.TITLE_FONT,
+            fill: '#5798de',
+            maxWidth: MAX_WIDTH
+          } ),
+          new RichText( peElasString, {
+            font: MassesAndSpringsConstants.TITLE_FONT,
+            fill: '#29d4ff',
+            maxWidth: MAX_WIDTH
+          } ),
+          new RichText( eThermString, {
+            font: MassesAndSpringsConstants.TITLE_FONT,
+            fill: '#ff6e26',
+            maxWidth: MAX_WIDTH
+          } ),
+          new RichText( eTotString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
         ], align: 'left', spacing: 10
       } );
 

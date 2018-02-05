@@ -12,8 +12,8 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -23,9 +23,6 @@ define( function( require ) {
   // strings
   var normalString = require( 'string!MASSES_AND_SPRINGS/normal' );
   var slowString = require( 'string!MASSES_AND_SPRINGS/slow' );
-
-  // constants
-  var FONT = new PhetFont( 14 );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -47,14 +44,14 @@ define( function( require ) {
     var timeSpeedRadioNode = new VerticalAquaRadioButtonGroup( [ {
       property: model.simSpeedProperty,
       value: 'normal',
-      node: new Text( normalString, { font: FONT } )
+      node: new Text( normalString, { font: MassesAndSpringsConstants.TITLE_FONT } )
     }, {
       property: model.simSpeedProperty,
       value: 'slow',
-      node: new Text( slowString, { font: FONT } )
+      node: new Text( slowString, { font: MassesAndSpringsConstants.TITLE_FONT } )
     }
     ], {
-      radius: new Text( 'test', { font: FONT } ).height / 2.2,
+      radius: new Text( 'test', { font: MassesAndSpringsConstants.TITLE_FONT } ).height / 2.2,
       spacing: 9,
       touchAreaXDilation: 10,
       radioButtonOptions: { xSpacing: 5 },

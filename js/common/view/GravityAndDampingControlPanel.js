@@ -22,7 +22,6 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -93,7 +92,7 @@ define( function( require ) {
     var sliderOptions = {
       majorTickLength: 5,
       minorTickLength: 5,
-      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
+      titleFont: MassesAndSpringsConstants.TITLE_FONT,
       trackSize: new Dimension2( 120, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -109,7 +108,7 @@ define( function( require ) {
 
     var gravitySliderOptions = {
       majorTickLength: 5,
-      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
+      titleFont: MassesAndSpringsConstants.TITLE_FONT,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -142,7 +141,7 @@ define( function( require ) {
     // Manages the values associated with the gravity panel in a combo box
     if ( options.hSlider ) {
 
-      var gravityText = new Text( gravityString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } );
+      var gravityText = new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } );
       var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), sliderOptions );
       gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
@@ -167,7 +166,10 @@ define( function( require ) {
         [
           // TODO: Can we match the bounds of the questionText to the gravitySlider so the panel doesn't change size
           new VStrut( 21.5 ),
-          new Text( whatIsTheValueOfGravityString, { font: MassesAndSpringsConstants.FONT, maxWidth: this.maxWidth } ),
+          new Text( whatIsTheValueOfGravityString, {
+            font: MassesAndSpringsConstants.TITLE_FONT,
+            maxWidth: this.maxWidth
+          } ),
           new VStrut( 21.5 )
         ]
     } );
@@ -193,8 +195,8 @@ define( function( require ) {
         dampingRange,
         dampingString,
         [
-          new Text( noneString, { font: MassesAndSpringsConstants.FONT } ),
-          new Text( lotsString, { font: MassesAndSpringsConstants.FONT } )
+          new Text( noneString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          new Text( lotsString, { font: MassesAndSpringsConstants.TITLE_FONT } )
         ],
         tandem,
         sliderOptions

@@ -56,9 +56,8 @@ define( function( require ) {
     PLANET_X: 14.2,
 
     // Constants regarding fonts
-    FONT: new PhetFont( 12 ),
-    LABEL_FONT: new PhetFont( 10 ),
-    TITLE_FONT: new PhetFont( { size: 12, weight: 'bold' } ),
+    LABEL_FONT: new PhetFont( 12 ),
+    TITLE_FONT: new PhetFont( 14 ),
 
     // Constants regarding panels
     PANEL_VERTICAL_SPACING: 10,
