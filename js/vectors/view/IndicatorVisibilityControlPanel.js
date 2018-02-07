@@ -106,7 +106,7 @@ define( function( require ) {
       label: movableLineString
     } ], {
       boxWidth: 15,
-      spacing: 5,
+      spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
     var titleToControlsVerticalSpace = 2;
@@ -121,14 +121,12 @@ define( function( require ) {
     );
     var lineVBox = new VBox( {
       children: [
-        new VStrut( titleToControlsVerticalSpace ),
         displacementSymbol,
-        new VStrut( 17 ),
+        new VStrut( 18 ),
         greenLine,
-        new VStrut( 17 ),
+        new VStrut( 24 ),
         redLine,
-        new VStrut( titleToControlsVerticalSpace )
-      ]
+      ], yMargin: 0
     } );
     var controlBox = new HBox( {
       children: [
