@@ -31,6 +31,7 @@ define( function( require ) {
 
   // strings
   var dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
+  var dampingEqualsZeroString = require( 'string!MASSES_AND_SPRINGS/dampingEqualsZero' );
   var lotsString = require( 'string!MASSES_AND_SPRINGS/lots' );
   var noneString = require( 'string!MASSES_AND_SPRINGS/none' );
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
@@ -215,12 +216,20 @@ define( function( require ) {
       Panel.call( self, contentVBox, self.options );
     }
     else {
+
+      var dampingEqualsZeroText = new Text( dampingEqualsZeroString, {
+        align: 'left',
+        font: MassesAndSpringsConstants.LABEL_FONT,
+        maxWidth: this.maxWidth
+      } );
+
       contentVBox = new VBox( {
         align: 'center',
         spacing: 8,
         children: [
           questionTextNode,
-          gravityComboBox
+          gravityComboBox,
+          dampingEqualsZeroText
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } );
