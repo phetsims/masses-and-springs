@@ -57,10 +57,10 @@ define( function( require ) {
       rotation: Math.PI / 2,
       backgroundFill: 'rgb( 237, 225, 121 )',
       cursor: 'pointer',
-      majorTickFont: MassesAndSpringsConstants.TITLE_FONT,
+      majorTickFont: MassesAndSpringsConstants.LABEL_FONT,
       majorTickHeight: 10,
       minorTickHeight: 5,
-      unitsFont: MassesAndSpringsConstants.TITLE_FONT,
+      unitsFont: MassesAndSpringsConstants.LABEL_FONT,
       opacity: 0.8,
       tickMarksOnBottom: false
     }, { tandem: tandem.createTandem( 'ruler' ) } );
