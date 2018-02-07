@@ -128,7 +128,7 @@ define( function( require ) {
       layoutFunction: NumberControl.createLayoutFunction1( {
         titleXSpacing: 30,
         ySpacing: 2,
-        arrowButtonsXSpacing: 2
+        arrowButtonsXSpacing: 1
       } ),
       valuePattern: StringUtils.fillIn( gravityValueString, {
         gravity: '{0}'

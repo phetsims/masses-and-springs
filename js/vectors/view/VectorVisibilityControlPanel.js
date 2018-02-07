@@ -207,9 +207,8 @@ define( function( require ) {
     var controlsHBox = new HBox( {
         children: [
           vectorVisibilityControlsVBox,
-          new HStrut( 10 ),
+          new HStrut( 40 ),
           vectorVBox,
-          new HStrut( 10 )
         ]
       }
     );

@@ -131,9 +131,8 @@ define( function( require ) {
     var controlBox = new HBox( {
       children: [
         indicatorVisibilityControlsVBox,
-        new HStrut( 10 ),
+        new HStrut( 25 ),
         lineVBox,
-        new HStrut( 10 )
       ]
     } );
 
