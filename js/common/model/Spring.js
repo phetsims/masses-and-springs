@@ -147,7 +147,9 @@ define( function( require ) {
     // @public {Property.<number>} Elastic Potential Energy of the attached Mass
     this.elasticPotentialEnergyProperty = new DerivedProperty( [ this.springConstantProperty, this.displacementProperty ],
       function( springConstant, displacement ) {
-        return 0.5 * springConstant * Math.pow( displacement, 2 );
+        var number = 0.5 * springConstant * Math.pow( displacement, 2 );
+        console.log( number );
+        return number;
       } );
 
     // @public {Property.<number>} Thermal Energy of the attached Mass

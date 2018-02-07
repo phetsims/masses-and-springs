@@ -38,8 +38,8 @@ define( function( require ) {
     this.toolbox = null;
 
     // define ruler params in pixels
-    var rulerLength = mvt.modelToViewY( .245 ); // 1 meter
-    var rulerWidth = 0.1 * rulerLength;
+    var rulerLength = mvt.modelToViewY( .5 ); // 1 meter
+    var rulerWidth = 0.125 * rulerLength;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
       majorTickLabels.push( '' );
