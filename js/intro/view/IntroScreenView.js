@@ -23,6 +23,7 @@ define( function( require ) {
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var SceneSelectionButton = require( 'MASSES_AND_SPRINGS/intro/view/SceneSelectionButton' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -166,69 +167,11 @@ define( function( require ) {
       springOptionsPanel.visible = self.springLengthControlPanel.visible;
     } );
 
-    // @public {read-only} Springs created to be used in the icons for the scene selection tabs
-    var springsIcon = [
-      new Spring(
-        new Vector2( 0.65, 2 ),
-        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        0,
-        tandem.createTandem( 'firstIconSpring' )
-      ),
-      new Spring(
-        new Vector2( 0.85, 2 ),
-        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        0,
-        tandem.createTandem( 'secondIconSpring' )
-      ),
-      new Spring(
-        new Vector2( 0.65, 2.17 ),
-        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        0,
-        tandem.createTandem( 'thirdIconSpring' )
-      )
-    ];
-
-    // @private {read-only} Creation of spring for use in scene switching icons
-    var firstSpringIcon = new OscillatingSpringNode(
-      springsIcon[ 0 ],
-      this.modelViewTransform,
-      tandem.createTandem( 'firstSpringIcon' )
-    );
-    firstSpringIcon.loopsProperty.set( 10 );
-    firstSpringIcon.lineWidthProperty.set( 3 );
-
-    // @private {read-only} Creation of spring for use in scene switching icons
-    var secondSpringIcon = new OscillatingSpringNode(
-      springsIcon[ 1 ],
-      this.modelViewTransform,
-      tandem.createTandem( 'secondSpringIcon' )
-    );
-    secondSpringIcon.loopsProperty.set( 10 );
-    secondSpringIcon.lineWidthProperty.set( 3 );
-
-    // @private {read-only} Creation of spring for use in scene switching icons
-    var thirdSpringIcon = new OscillatingSpringNode(
-      springsIcon[ 2 ],
-      this.modelViewTransform,
-      tandem.createTandem( 'thirdSpringIcon' )
-    );
-    thirdSpringIcon.loopsProperty.set( 5 );
-    thirdSpringIcon.lineWidthProperty.set( 3 );
-
-    // @private {read-only} White background for scene switching icons
-    var iconBackground = new Rectangle( firstSpringIcon.x - 40, -170, 160, 200, 2, 2, { fill: 'white' } );
-
     // @private {read-only} Creation of same length icon node
-    var sameLengthIcon = new Node( { scale: IMAGE_SCALE } );
-    sameLengthIcon.addChild( iconBackground );
-    sameLengthIcon.addChild( firstSpringIcon );
-    sameLengthIcon.addChild( secondSpringIcon );
+    var sameLengthIcon = new SceneSelectionButton( 'same-length', this.modelViewTransform, tandem );
 
     // @private {read-only} Creation of adjustable length icon node
-    var differentLengthIcon = new Node( { scale: IMAGE_SCALE } );
-    differentLengthIcon.addChild( iconBackground );
-    differentLengthIcon.addChild( thirdSpringIcon );
-    differentLengthIcon.addChild( secondSpringIcon );
+    var differentLengthIcon = new SceneSelectionButton( 'adjustable-length', this.modelViewTransform, tandem );
 
     // @private {read-only} Creation of toggled modes for scene selection
     var toggleButtonsContent = [ {
