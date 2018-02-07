@@ -83,7 +83,7 @@ define( function( require ) {
     var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
       buttonCornerRadius: 3,
       buttonYMargin: 0,
-      itemYMargin: 3,
+      itemYMargin: 5,
       itemXMargin: 2,
       listYMargin: 3,
       tandem: tandem.createTandem( 'gravityComboBox' )
