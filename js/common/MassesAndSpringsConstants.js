@@ -32,7 +32,7 @@ define( function( require ) {
     CEILING_Y: 1.48,
 
     // {Property.<number>} range of damping associated with sim
-    DAMPING_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 1, .2 ) ),
+    DAMPING_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 0.5, 0.2 ) ),
 
     // {Property.<number>} range of gravitational acceleration associated with each planet
     GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),

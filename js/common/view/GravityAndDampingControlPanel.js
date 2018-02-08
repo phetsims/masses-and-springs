@@ -103,7 +103,9 @@ define( function( require ) {
       stroke: null,
       sliderIndent: 7,
       constrainValue: function( value ) {
-        return Number( Util.toFixed( value, 1 ) );
+        // debugger;
+        value = Math.round( value * 100 / 5 ) * 5;
+        return value / 100;
       }
     };
 

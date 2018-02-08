@@ -148,7 +148,7 @@ define( function( require ) {
     this.elasticPotentialEnergyProperty = new DerivedProperty( [ this.springConstantProperty, this.displacementProperty ],
       function( springConstant, displacement ) {
         var number = 0.5 * springConstant * Math.pow( displacement, 2 );
-        console.log( number );
+        // console.log( number );
         return number;
       } );
 
