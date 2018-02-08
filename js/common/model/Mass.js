@@ -29,7 +29,6 @@ define( function( require ) {
   // constants
   var HEIGHT_RATIO = 2.5;
   var HOOK_HEIGHT_RATIO = 0.75;
-  var DENSITY = 80; // Constant used to keep all of our masses consistent in the model.
   var SCALING_FACTOR = 4; // scales the radius to desired size
 
   // phet-io modules
@@ -58,6 +57,7 @@ define( function( require ) {
       adjustable: false,
       isLabeled: isLabeled,
       mysteryLabel: false,
+      densityProperty: new NumberProperty( 80 ), // Constant used to keep all of our masses consistent in the model.
       color: new Color( color ),
       zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf
     }, options );
@@ -66,8 +66,8 @@ define( function( require ) {
     this.massProperty = new NumberProperty( massValue );
 
     // @public {Property.<number>} (read-write) radius of the massNode dependent its mass value
-    this.radiusProperty = new DerivedProperty( [ this.massProperty ], function( massValue ) {
-      return Math.pow( ( massValue - .01 ) / ( DENSITY * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * SCALING_FACTOR;
+    this.radiusProperty = new DerivedProperty( [ this.massProperty, this.options.densityProperty ], function( massValue, density ) {
+      return Math.pow( ( massValue - .01 ) / ( density * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * SCALING_FACTOR;
     } );
 
     // @public {number}
@@ -89,11 +89,13 @@ define( function( require ) {
     } );
 
     // @public {number} hook height in m
-    this.hookHeight = this.radiusProperty.value * HOOK_HEIGHT_RATIO;
+    this.hookHeightProperty = new DerivedProperty( [ this.radiusProperty, this.options.densityProperty ], function( radius, density ) {
+      return radius * HOOK_HEIGHT_RATIO;
+    } );
 
     // @public {Property.<number>} total height of the mass, including its hook
-    this.heightProperty = new DerivedProperty( [ this.cylinderHeightProperty ], function( cylinderHeight ) {
-      return cylinderHeight + self.hookHeight;
+    this.heightProperty = new DerivedProperty( [ this.cylinderHeightProperty, this.hookHeightProperty ], function( cylinderHeight, hookHeight ) {
+      return cylinderHeight + hookHeight;
     } );
 
     // @public (read-only) Used for constructing tandems for corresponding view nodes.

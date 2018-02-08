@@ -178,6 +178,7 @@ define( function( require ) {
      * @param {string} color - color of the MassNode
      * @param {string} specifiedLabel - customized label for the MassNode
      * @param {Tandem} tandem
+     * @param {Object} [options]
      */
     createMass: function( mass, xPosition, color, specifiedLabel, tandem ) {
       this.masses.push( new Mass( mass, xPosition, true, color, this.gravityProperty, tandem ) );
@@ -298,7 +299,7 @@ define( function( require ) {
         mass.springProperty.get().displacementProperty.set(
           -( mass.springProperty.get().positionProperty.get().y -
           mass.springProperty.get().naturalRestingLengthProperty.get() ) +
-          massPosition.y - mass.hookHeight / 2 );
+          massPosition.y - mass.hookHeightProperty.value / 2 );
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         var maxY = mass.springProperty.get().thicknessProperty.get() *
@@ -320,7 +321,7 @@ define( function( require ) {
           mass.springProperty.get().displacementProperty.set(
             -( mass.springProperty.get().positionProperty.get().y -
             mass.springProperty.get().naturalRestingLengthProperty.get() ) +
-            modelMaxY - mass.hookHeight / 2 );
+            modelMaxY - mass.hookHeightProperty.value / 2 );
         }
       }
 
