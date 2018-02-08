@@ -27,7 +27,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var Util = require( 'DOT/Util' );
 
   // strings
   var dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
