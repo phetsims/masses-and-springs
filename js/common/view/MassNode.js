@@ -54,9 +54,7 @@ define( function( require ) {
     // TODO: public or private?
     this.mass = mass;
 
-    var hookHeightProperty = new DerivedProperty( [ mass.hookHeightProperty ], function( hookHeight ) {
-      return modelViewTransform2.modelToViewDeltaY( -hookHeight );
-    } );
+    var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
 
     var rect = new Rectangle( {
       stroke: 'black',
@@ -76,9 +74,9 @@ define( function( require ) {
 
       rect.rectBounds = new Bounds2(
         modelViewTransform2.modelToViewDeltaX( -radiusValue ),
-        hookHeightProperty.value,
+        hookHeight,
         modelViewTransform2.modelToViewDeltaX( radiusValue ),
-        modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeightProperty.get() ) + hookHeightProperty.value );
+        modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeightProperty.get() ) + hookHeight );
 
       // TODO (PERFORMANCE): If this is ever an issue (changing this every frame), try to create one object with the gradient, and then transform/scale it
       // into place.
@@ -110,9 +108,9 @@ define( function( require ) {
     // } );
 
     var hookShape = new Shape();
-    var radius = hookHeightProperty.value / 4;
+    var radius = hookHeight / 4;
     hookShape.arc( 0, 0, radius, Math.PI, ( 0.5 * Math.PI ) );
-    hookShape.lineTo( 0, hookHeightProperty.value / 2 );
+    hookShape.lineTo( 0, hookHeight / 2 );
     var hookNode = new Path( hookShape, {
       stroke: 'black',
       lineWidth: 1.5,
@@ -141,7 +139,7 @@ define( function( require ) {
     } );
 
     // Adjust the mass label for adjustable masses.
-    if ( mass.adjustable ) {
+    if ( mass.options.adjustable ) {
       self.mass.massProperty.link( function( massValue ) {
         label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
         label.center = rect.center;

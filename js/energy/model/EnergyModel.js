@@ -27,7 +27,7 @@ define( function( require ) {
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
     this.createMass( 0.1, 0.7, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ) );
 
-    this.masses[ 0 ].adjustable = true;
+    this.masses[ 0 ].options.adjustable = true;
   }
 
   massesAndSprings.register( 'EnergyModel', EnergyModel );

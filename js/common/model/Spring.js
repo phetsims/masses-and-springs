@@ -378,7 +378,7 @@ define( function( require ) {
         this.displacementProperty.set( -springExtensionValue );
 
         // place that mass at the correct location as well
-        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + mass.hookHeightProperty.value / 2 ) );
+        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + mass.hookHeight / 2 ) );
         mass.verticalVelocityProperty.set( 0 );
         mass.accelerationProperty.set( 0 );
         this.buttonEnabledProperty.set( false );
@@ -490,7 +490,7 @@ define( function( require ) {
         }
 
         this.massAttachedProperty.get().positionProperty.set(
-          new Vector2( this.positionProperty.get().x, this.bottomProperty.get() + this.massAttachedProperty.get().hookHeightProperty.value / 2 )
+          new Vector2( this.positionProperty.get().x, this.bottomProperty.get() + this.massAttachedProperty.get().hookHeight / 2 )
         );
 
         this.massAttachedProperty.get().preserveThermalEnergy = true;

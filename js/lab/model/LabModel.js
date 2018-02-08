@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
@@ -31,15 +32,17 @@ define( function( require ) {
 
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
 
-    this.createMass( 0.100, MASS_X_POSITION, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ) );
-    this.createMass( 0.300, MASS_X_POSITION + MASS_OFFSET, 'rgb(255, 120, 120)', null, tandem.createTandem( 'smallLabeledMass' ) );
-    this.createMass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2, 'rgb( 128, 197, 237)', null, tandem.createTandem( 'largeLabeledMass' ) );
-
-    this.masses[ 0 ].adjustable = true;
-    this.masses[ 1 ].options.mysteryLabel = true;
-    this.masses[ 2 ].options.mysteryLabel = true;
-    this.masses[ 1 ].options.densityProperty.set( 190 );
-    this.masses[ 2 ].options.densityProperty.set( 100 );
+    this.masses.push( new Mass( 0.100, MASS_X_POSITION, true, 'rgb(247,151,34)', this.gravityProperty, tandem.createTandem( 'adjustableMass' ), {
+      adjustable: true
+    } ) );
+    this.masses.push( new Mass( 0.300, MASS_X_POSITION + MASS_OFFSET, true, 'rgb(255, 120, 120)', this.gravityProperty, tandem.createTandem( 'smallLabeledMass' ), {
+      density: 190,
+      mysteryLabel: true
+    } ) );
+    this.masses.push( new Mass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2, true, 'rgb( 128, 197, 237)', this.gravityProperty, tandem.createTandem( 'largeLabeledMass' ), {
+      density: 100,
+      mysteryLabel: true
+    } ) );
   }
 
   massesAndSprings.register( 'LabModel', LabModel );
