@@ -57,7 +57,9 @@ define( function( require ) {
       var springNode = new OscillatingSpringNode(
         spring,
         self.modelViewTransform,
-        tandem.createTandem( 'firstOscillatingSpringNode' )
+        tandem.createTandem( 'firstOscillatingSpringNode' ), {
+          leftEndLength: -10
+        }
       );
       self.addChild( springNode );
       self.springNodes.push( springNode );
