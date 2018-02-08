@@ -67,8 +67,8 @@ define( function( require ) {
         stroke: null,
         visible: false,
         constrainValue: function( value ) {
-          value = Number( Util.toFixed( value, 2 ) );
-          return value;
+          value = Math.round( value * 100 / 5 ) * 5;
+          return value / 100;
         }
       }
     );
