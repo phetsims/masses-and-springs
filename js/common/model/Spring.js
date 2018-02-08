@@ -17,6 +17,7 @@ define( function( require ) {
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassIO = require( 'MASSES_AND_SPRINGS/common/model/MassIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
@@ -32,7 +33,6 @@ define( function( require ) {
 
   // constants
   var DEFAULT_THICKNESS = 3; // empirically determine
-  var DEFAULT_SPRING_CONSTANT_RANGE = new RangeWithValue( 5, 15, 9 );
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
@@ -73,10 +73,10 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} spring constant of spring
-    this.springConstantProperty = new NumberProperty( DEFAULT_SPRING_CONSTANT_RANGE.defaultValue, {
+    this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
       units: 'newtons/meters',
-      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9 )
+      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 5.5 )
     } );
 
     // @public {Property.<number>} spring force
@@ -165,7 +165,7 @@ define( function( require ) {
     this.springExtension = 0;
 
     // @public {Range} (read-only)
-    this.springConstantRange = DEFAULT_SPRING_CONSTANT_RANGE;
+    this.springConstantRange = MassesAndSpringsConstants.SPRING_CONSTANT_RANGE;
 
     //------------------------------------------------
     // Derived properties
@@ -307,8 +307,10 @@ define( function( require ) {
      * @param springConstant {number} current spring constant of spring
      */
     updateThickness: function( length, springConstant ) {
+
+      // We are increasing the significance of the spring constant term by adding an exponent, which is empirically determined.
       var thickness = this.thicknessProperty.initialValue
-                      * springConstant / this.springConstantProperty.initialValue
+                      * Math.pow( springConstant / this.springConstantProperty.initialValue, 5 )
                       * length / this.naturalRestingLengthProperty.initialValue;
       this.thicknessProperty.set( thickness );
     },

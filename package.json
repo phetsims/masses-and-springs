@@ -7,7 +7,7 @@
     "url": "https://github.com/phetsims/masses-and-springs.git"
   },
   "devDependencies": {
-    "grunt": "^1.0.1"
+    "grunt": "^1.0.2"
   },
   "phet": {
     "requirejsNamespace": "MASSES_AND_SPRINGS",

@@ -29,6 +29,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var TimeControlNode = require( 'MASSES_AND_SPRINGS/common/view/TimeControlNode' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
+  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -208,7 +209,7 @@ define( function( require ) {
     createSpringConstantPanel: function( springIndex, labels, tandem ) {
       return new SpringControlPanel(
         this.model.springs[ springIndex ].springConstantProperty,
-        new RangeWithValue( 5, 15, 9 ),
+        MassesAndSpringsConstants.SPRING_CONSTANT_RANGE,
         StringUtils.fillIn( springConstantString, { spring: springIndex + 1 } ),
         labels,
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
@@ -217,7 +218,10 @@ define( function( require ) {
           maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
           visible: true,
           fill: 'white',
-          stroke: 'gray'
+          stroke: 'gray',
+          constrainValue: function( value ) {
+            return Number( Util.toFixed( value, 1 ) );
+          }
         }
       );
     }
