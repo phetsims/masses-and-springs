@@ -175,13 +175,12 @@ define( function( require ) {
      *
      * @param {number} mass - mass in kg
      * @param {number} xPosition - starting x-coordinate of the mass object, offset from the first spring position
-     * @param {boolean} labelVisible - should a label be shown on the MassNode
      * @param {string} color - color of the MassNode
      * @param {string} specifiedLabel - customized label for the MassNode
      * @param {Tandem} tandem
      */
-    createMass: function( mass, xPosition, labelVisible, color, specifiedLabel, tandem ) {
-      this.masses.push( new Mass( mass, xPosition, labelVisible, color, this.gravityProperty, tandem ) );
+    createMass: function( mass, xPosition, color, specifiedLabel, tandem ) {
+      this.masses.push( new Mass( mass, xPosition, true, color, this.gravityProperty, tandem ) );
     },
 
     /**
@@ -230,13 +229,18 @@ define( function( require ) {
      * @param {Tandem} tandem
      */
     addDefaultMasses: function( tandem ) {
-      this.createMass( 0.250, 0.12, true, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) );
-      this.createMass( 0.100, 0.20, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) );
-      this.createMass( 0.100, 0.28, true, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) );
-      this.createMass( 0.050, 0.33, true, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) );
-      this.createMass( 0.200, 0.63, false, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), { gradientEnabled: false } );
-      this.createMass( 0.150, 0.56, false, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), { gradientEnabled: false } );
-      this.createMass( 0.075, 0.49, false, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { gradientEnabled: false } );
+      this.createMass( 0.250, 0.12, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) );
+      this.createMass( 0.100, 0.20, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) );
+      this.createMass( 0.100, 0.28, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) );
+      this.createMass( 0.050, 0.33, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) );
+      this.createMass( 0.200, 0.63, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), { gradientEnabled: false } );
+      this.createMass( 0.150, 0.56, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), { gradientEnabled: false } );
+      this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { gradientEnabled: false } );
+
+      // Mystery masses should have a question mark as their label.
+      for ( var i = 4; i < this.masses.length; i++ ) {
+        this.masses[ i ].options.mysteryLabel = true;
+      }
     },
 
     /**
