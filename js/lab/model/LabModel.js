@@ -35,13 +35,13 @@ define( function( require ) {
     this.masses.push( new Mass( 0.100, MASS_X_POSITION, true, 'rgb(247,151,34)', this.gravityProperty, tandem.createTandem( 'adjustableMass' ), {
       adjustable: true
     } ) );
-    this.masses.push( new Mass( 0.300, MASS_X_POSITION + MASS_OFFSET, true, 'rgb(255, 120, 120)', this.gravityProperty, tandem.createTandem( 'smallLabeledMass' ), {
-      density: 190,
-      mysteryLabel: true
+    this.masses.push( new Mass( 0.370, MASS_X_POSITION + MASS_OFFSET, true, 'rgb(255, 120, 120)', this.gravityProperty, tandem.createTandem( 'smallLabeledMass' ), {
+      density: 220,
+      mysteryLabel: false
     } ) );
     this.masses.push( new Mass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2, true, 'rgb( 128, 197, 237)', this.gravityProperty, tandem.createTandem( 'largeLabeledMass' ), {
-      density: 100,
-      mysteryLabel: true
+      density: 110,
+      mysteryLabel: false
     } ) );
   }
 

@@ -122,7 +122,7 @@ define( function( require ) {
 
     var labelString = mass.options.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
     var label = new Text( labelString, {
-      font: new PhetFont( { size: 14, weight: 'bold' } ),
+      font: new PhetFont( { size: 12, weight: 'bold' } ),
       fill: 'black',
       centerY: rect.centerY,
       centerX: 0,

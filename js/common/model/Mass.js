@@ -67,7 +67,7 @@ define( function( require ) {
 
     // @public {Property.<number>} (read-write) radius of the massNode dependent its mass value
     this.radiusProperty = new DerivedProperty( [ this.massProperty ], function( massValue ) {
-      return Math.pow( ( massValue - .01 ) / ( self.options.density * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * SCALING_FACTOR;
+      return Math.pow( ( massValue ) / ( self.options.density * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * SCALING_FACTOR;
     } );
 
     // @public {number}
