@@ -42,7 +42,7 @@ define( function( require ) {
       model.displacementVisibleProperty,
       tandem,
       { modelViewTransform: this.modelViewTransform } );
-    firstDisplacementArrowNode.left = this.springNodes[ 0 ].right + 7;
+    firstDisplacementArrowNode.left = this.springNodes[ 0 ].right + 11;
     firstDisplacementArrowNode.top = this.springNodes[ 0 ].bottom - 12;
     this.addChild( firstDisplacementArrowNode );
 
@@ -51,7 +51,7 @@ define( function( require ) {
       model.displacementVisibleProperty,
       tandem,
       { modelViewTransform: this.modelViewTransform } );
-    secondDisplacementArrowNode.right = this.springNodes[ 1 ].left + 13;
+    secondDisplacementArrowNode.right = this.springNodes[ 1 ].left + 12;
     secondDisplacementArrowNode.top = this.springNodes[ 1 ].bottom - 12;
     this.addChild( secondDisplacementArrowNode );
 
