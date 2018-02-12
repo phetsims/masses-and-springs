@@ -230,10 +230,10 @@ define( function( require ) {
      * @param {Tandem} tandem
      */
     addDefaultMasses: function( tandem ) {
-      this.createMass( 0.250, 0.12, 'grey', null, tandem.createTandem( 'largeLabeledMass' ) );
-      this.createMass( 0.100, 0.20, 'grey', null, tandem.createTandem( 'mediumLabeledMass1' ) );
-      this.createMass( 0.100, 0.28, 'grey', null, tandem.createTandem( 'mediumLabeledMass2' ) );
-      this.createMass( 0.050, 0.33, 'grey', null, tandem.createTandem( 'smallLabeledMass' ) );
+      this.createMass( 0.250, 0.12, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'largeLabeledMass' ) );
+      this.createMass( 0.100, 0.20, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass1' ) );
+      this.createMass( 0.100, 0.28, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass2' ) );
+      this.createMass( 0.050, 0.33, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'smallLabeledMass' ) );
       this.createMass( 0.200, 0.63, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), { gradientEnabled: false } );
       this.createMass( 0.150, 0.56, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), { gradientEnabled: false } );
       this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { gradientEnabled: false } );
