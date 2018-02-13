@@ -136,6 +136,7 @@ define( function( require ) {
       } ),
       useRichText: true,
       decimalPlaces: 1,
+      delta: 0.1,
       arrowButtonScale: 0.5
     };
 
