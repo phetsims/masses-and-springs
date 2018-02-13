@@ -107,7 +107,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<boolean>} determines visibility of natural length line node
-    this.naturalLengthVisibleProperty = new BooleanProperty( false, {
+    this.naturalLengthVisibleProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
     } );
 

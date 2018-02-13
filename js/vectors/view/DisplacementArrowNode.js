@@ -36,7 +36,7 @@ define( function( require ) {
     var DISPLACEMENT_ARROW_OPTIONS = {
       stroke: new Color( 0, 180, 0 ),
       headWidth: 20,
-      headHeight: 10,
+      headHeight: 0,
       headLineWidth: 3,
       tailLineWidth: 3
     };

@@ -111,7 +111,6 @@ define( function( require ) {
       range: naturalRestingLengthRange
     } );
 
-
     // @public {Property.<number> read-only} line width of oscillating spring node
     this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
