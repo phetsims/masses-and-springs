@@ -147,8 +147,9 @@ define( function( require ) {
     // @public {Property.<number>} Elastic Potential Energy of the attached Mass
     this.elasticPotentialEnergyProperty = new DerivedProperty( [ this.springConstantProperty, this.displacementProperty ],
       function( springConstant, displacement ) {
+        console.log( displacement )
         var number = 0.5 * springConstant * Math.pow( displacement, 2 );
-        // console.log( number );
+        console.log( number );
         return number;
       } );
 
@@ -356,8 +357,6 @@ define( function( require ) {
       }
       this.massAttachedProperty.set( mass );
       this.massAttachedProperty.get().springProperty.set( this );
-      this.displacementProperty.set( this.massAttachedProperty.get().positionProperty.get().y -
-                                     ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) );
       this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
     },
 
