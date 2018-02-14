@@ -128,8 +128,7 @@ define( function( require ) {
       tandem,
       { modelViewTransform: this.modelViewTransform } );
     displacementArrowNode.left = this.springNodes[ 0 ].right + 12;
-    displacementArrowNode.top = this.springNodes[ 0 ].bottom - 12;
-    this.addChild( displacementArrowNode );
+    displacementArrowNode.centerY = this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value );
 
     // Gravity Control Panel
     this.gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
@@ -197,6 +196,7 @@ define( function( require ) {
     // Reference lines from indicator visibility box
     this.addChild( springEquilibriumLineNode );
     this.addChild( naturalLengthLineNode );
+    this.addChild( displacementArrowNode );
     this.addChild( movableLineNode );
     this.addChild( this.massLayer );
 

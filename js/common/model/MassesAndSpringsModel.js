@@ -300,6 +300,7 @@ define( function( require ) {
           -( mass.springProperty.get().positionProperty.get().y -
           mass.springProperty.get().naturalRestingLengthProperty.get() ) +
           massPosition.y - mass.hookHeight / 2 );
+        // debugger;
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         var maxY = mass.springProperty.get().thicknessProperty.get() *

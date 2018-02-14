@@ -43,7 +43,7 @@ define( function( require ) {
       tandem,
       { modelViewTransform: this.modelViewTransform } );
     firstDisplacementArrowNode.left = this.springNodes[ 0 ].right + 8;
-    firstDisplacementArrowNode.top = this.springNodes[ 0 ].bottom - 12;
+    firstDisplacementArrowNode.centerY = this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value );
     this.addChild( firstDisplacementArrowNode );
 
     var secondDisplacementArrowNode = new DisplacementArrowNode(
@@ -52,7 +52,7 @@ define( function( require ) {
       tandem,
       { modelViewTransform: this.modelViewTransform } );
     secondDisplacementArrowNode.right = this.springNodes[ 1 ].left + 14;
-    secondDisplacementArrowNode.top = this.springNodes[ 1 ].bottom - 12;
+    secondDisplacementArrowNode.centerY = this.modelViewTransform.modelToViewY( this.springNodes[ 1 ].spring.bottomProperty.value );
     this.addChild( secondDisplacementArrowNode );
 
     // Initializes equilibrium line for first spring
