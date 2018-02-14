@@ -28,7 +28,7 @@ define( function( require ) {
 
   // constants
   var HEIGHT_RATIO = 2.5;
-  var HOOK_HEIGHT_RATIO = 0.75;
+  var HOOK_HEIGHT = 0.037; // empirically determined in meters.
   var SCALING_FACTOR = 4; // scales the radius to desired size
 
   // phet-io modules
@@ -89,7 +89,7 @@ define( function( require ) {
     } );
 
     // @public {number} hook height in m
-    this.hookHeight = this.radiusProperty.value * HOOK_HEIGHT_RATIO;
+    this.hookHeight = HOOK_HEIGHT;
 
     // @public {Property.<number>} total height of the mass, including its hook
     this.heightProperty = new DerivedProperty( [ this.cylinderHeightProperty ], function( cylinderHeight ) {
