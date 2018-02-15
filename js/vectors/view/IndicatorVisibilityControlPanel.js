@@ -27,6 +27,7 @@ define( function( require ) {
   var massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
   var displacementString = require( 'string!MASSES_AND_SPRINGS/displacement' );
+  var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
 
   // constants
   var LINE_LENGTH = 25;
@@ -63,6 +64,7 @@ define( function( require ) {
 
     // Lines added for reference in panel
     var greenLine = createLine( 'black', tandem.createTandem( 'blackLine' ) );
+    var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var displacementSymbol = new DisplacementArrowNode(
       new Property( 10 ),
       new Property( true ),
@@ -84,6 +86,16 @@ define( function( require ) {
       } ),
       property: model.displacementVisibleProperty,
       label: displacementString
+    }, {
+      content: new HBox( {
+        children: [ new Text( naturalLengthString, {
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          tandem: tandem.createTandem( 'naturalLengthString' )
+        } ) ],
+        tandem: tandem.createTandem( 'naturalLengthHBox' )
+      } ),
+      property: model.naturalLengthVisibleProperty,
+      label: naturalLengthString
     }, {
       content: new HBox( {
         children: [ new Text( massEquilibriumString, {
@@ -123,6 +135,8 @@ define( function( require ) {
       children: [
         displacementSymbol,
         new VStrut( 18 ),
+        blueLine,
+        new VStrut( 24 ),
         greenLine,
         new VStrut( 24 ),
         redLine,
