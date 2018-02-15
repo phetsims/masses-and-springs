@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.0-dev.65 Wed Feb 14 2018 10:48:08 GMT-0500 (EST)",
+  "comment": "# masses-and-springs 1.0.0-dev.66 Wed Feb 14 2018 19:28:49 GMT-0500 (EST)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
@@ -33,7 +33,7 @@
     "branch": "master"
   },
   "masses-and-springs": {
-    "sha": "70a2761c6ec7bf4f0452e437349a74924a79e20c",
+    "sha": "904bc7222fbed7ea3f8dee0a6651940275640106",
     "branch": "master"
   },
   "phet-core": {
