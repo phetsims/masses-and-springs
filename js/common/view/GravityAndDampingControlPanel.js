@@ -102,7 +102,7 @@ define( function( require ) {
       stroke: null,
       sliderIndent: 7,
       constrainValue: function( value ) {
-        value = Math.round( value * 100 / 5 ) * 5;
+        value = Math.round( value * 100 / 3 ) * 3;
         return value / 100;
       }
     };
