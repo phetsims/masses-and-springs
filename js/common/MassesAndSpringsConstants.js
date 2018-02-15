@@ -38,7 +38,7 @@ define( function( require ) {
     GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
 
     // {Property.<Range>} range of gravitational acceleration associated with each planet
-    SPRING_CONSTANT_RANGE: new RangeWithValue( 5, 6, 5.5 ),
+    SPRING_CONSTANT_RANGE: new RangeWithValue( 5, 10, 7.5 ),
 
     // Constants for vectors
     VECTOR_ARROW_LENGTH: 34,

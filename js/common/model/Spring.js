@@ -308,7 +308,7 @@ define( function( require ) {
 
       // We are increasing the significance of the spring constant term by adding an exponent, which is empirically determined.
       var thickness = this.thicknessProperty.initialValue
-                      * Math.pow( springConstant / this.springConstantProperty.initialValue, 5 )
+                      * springConstant / this.springConstantProperty.initialValue
                       * length / this.naturalRestingLengthProperty.initialValue;
       this.thicknessProperty.set( thickness );
     },
