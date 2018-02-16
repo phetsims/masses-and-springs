@@ -16,7 +16,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Panel = require( 'SUN/Panel' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -40,12 +40,13 @@ define( function( require ) {
    */
   function IndicatorVisibilityControlPanel( model, tandem, options ) {
     options = _.extend( {
-      xMargin: 10,
       fill: MassesAndSpringsConstants.PANEL_FILL,
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       tandem: tandem.createTandem( 'indicatorVisibilityControlPanel' ),
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
     }, options );
+
+    Node.call( this, options );
+
     /**
      * Creates line for visual representation within the panel.
      * @param {string} color
@@ -149,11 +150,10 @@ define( function( require ) {
         lineVBox,
       ]
     } );
-
-    Panel.call( this, controlBox, options );
+    this.addChild( controlBox );
   }
 
   massesAndSprings.register( 'IndicatorVisibilityControlPanel', IndicatorVisibilityControlPanel );
 
-  return inherit( Panel, IndicatorVisibilityControlPanel );
+  return inherit( Node, IndicatorVisibilityControlPanel );
 } );
