@@ -20,8 +20,8 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
-  var Panel = require( 'SUN/Panel' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -47,12 +47,7 @@ define( function( require ) {
    */
   function GravityAndDampingControlPanel( model, listNodeParent, tandem, options ) {
     var self = this;
-    this.options = _.extend( {
-      fill: MassesAndSpringsConstants.PANEL_FILL,
-      xMargin: 13,
-      yMargin: 10,
-      align: 'center',
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+    options = _.extend( {
       dampingVisible: false,
       hSlider: false
     }, options );
@@ -214,7 +209,7 @@ define( function( require ) {
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } );
-      Panel.call( self, contentVBox, self.options );
+      Node.call( this, { children: [ contentVBox ] } );
     }
     else {
 
@@ -234,7 +229,7 @@ define( function( require ) {
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } );
-      Panel.call( self, contentVBox, self.options );
+      Node.call( this, { children: [ contentVBox ] } );
     }
 
     model.bodyProperty.link( function( newBody, previousBody ) {
@@ -280,10 +275,10 @@ define( function( require ) {
         model.bodyProperty.set( Body.CUSTOM );
       }
     } );
-    this.mutate( this.options );
+    this.mutate( options );
   }
 
   massesAndSprings.register( 'GravityAndDampingControlPanel', GravityAndDampingControlPanel );
 
-  return inherit( Panel, GravityAndDampingControlPanel );
+  return inherit( Node, GravityAndDampingControlPanel );
 } );
