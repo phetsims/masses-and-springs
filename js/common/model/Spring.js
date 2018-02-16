@@ -354,6 +354,8 @@ define( function( require ) {
       }
       this.massAttachedProperty.set( mass );
       this.massAttachedProperty.get().springProperty.set( this );
+      this.displacementProperty.set( this.massAttachedProperty.get().positionProperty.get().y -
+                                     ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) - mass.hookHeight / 2 );
       this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
     },
 
