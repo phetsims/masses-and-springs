@@ -38,12 +38,12 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function VectorVisibilityControlPanel( model, tandem, options ) {
+  function VectorVisibilityControlNode( model, tandem, options ) {
     options = _.extend( {
       showForces: true,
       minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
       fill: MassesAndSpringsConstants.PANEL_FILL,
-      tandem: tandem.createTandem( 'vectorVisibilityControlPanel' )
+      tandem: tandem.createTandem( 'vectorVisibilityControlNode' )
     }, options );
 
     Node.call( this, options );
@@ -215,7 +215,7 @@ define( function( require ) {
     this.addChild( controlsHBox );
   }
 
-  massesAndSprings.register( 'VectorVisibilityControlPanel', VectorVisibilityControlPanel );
+  massesAndSprings.register( 'VectorVisibilityControlNode', VectorVisibilityControlNode );
 
-  return inherit( Node, VectorVisibilityControlPanel );
+  return inherit( Node, VectorVisibilityControlNode );
 } );

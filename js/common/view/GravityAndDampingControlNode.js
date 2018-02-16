@@ -45,7 +45,7 @@ define( function( require ) {
    *
    * @constructor
    */
-  function GravityAndDampingControlPanel( model, listNodeParent, tandem, options ) {
+  function GravityAndDampingControlNode( model, listNodeParent, tandem, options ) {
     var self = this;
     options = _.extend( {
       dampingVisible: false,
@@ -278,7 +278,7 @@ define( function( require ) {
     this.mutate( options );
   }
 
-  massesAndSprings.register( 'GravityAndDampingControlPanel', GravityAndDampingControlPanel );
+  massesAndSprings.register( 'GravityAndDampingControlNode', GravityAndDampingControlNode );
 
-  return inherit( Node, GravityAndDampingControlPanel );
+  return inherit( Node, GravityAndDampingControlNode );
 } );

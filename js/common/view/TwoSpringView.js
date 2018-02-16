@@ -11,7 +11,7 @@ define( function( require ) {
 
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
-  var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
+  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -111,8 +111,8 @@ define( function( require ) {
     );
 
     // Gravity Control Panel
-    this.gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
-      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
+    this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
+      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
       {
         right: this.rightPanelAlignment,
         minWidth: 1,
@@ -145,7 +145,7 @@ define( function( require ) {
 
       //Update the bounds of view elements
       self.springHangerNode.top = model.springs[ 0 ].positionProperty.value.y + self.spacing;
-      self.gravityAndDampingControlPanel.right = self.panelRightSpacing;
+      self.gravityAndDampingControlNode.right = self.panelRightSpacing;
       self.toolboxPanel.right = self.panelRightSpacing;
       self.resetAllButton.right = self.panelRightSpacing;
       self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;

@@ -11,11 +11,11 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
+  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var OneSpringView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringView' );
-  var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlPanel' );
+  var VectorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlNode' );
   var Panel = require( 'SUN/Panel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -32,9 +32,9 @@ define( function( require ) {
     var self = this;
 
     // TODO: Make things that aren't really panels NOT panels.
-    var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
+    var vectorVisibilityControlNode = new VectorVisibilityControlNode(
       model,
-      tandem.createTandem( 'vectorVisibilityControlPanel' ),
+      tandem.createTandem( 'vectorVisibilityControlNode' ),
       {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 0,
@@ -45,8 +45,8 @@ define( function( require ) {
     );
 
     // Gravity Control Panel
-    var gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
-      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ), {
+    var gravityAndDampingControlNode = new GravityAndDampingControlNode(
+      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: true,
@@ -59,11 +59,11 @@ define( function( require ) {
     var optionsVBox = new VBox( {
       spacing: 10,
       children: [
-        this.indicatorVisibilityControlPanel,
+        this.indicatorVisibilityControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        gravityAndDampingControlPanel,
+        gravityAndDampingControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        vectorVisibilityControlPanel
+        vectorVisibilityControlNode
       ]
     } );
 
@@ -74,7 +74,7 @@ define( function( require ) {
         xMargin: 10,
         fill: MassesAndSpringsConstants.PANEL_FILL,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'ReferenceLinePanel' ),
+        tandem: tandem.createTandem( 'LineVisibilityNode' ),
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       } );
 

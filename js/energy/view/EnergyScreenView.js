@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
+  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -31,8 +31,8 @@ define( function( require ) {
     var self = this;
 
     // Gravity Control Panel
-    var gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
-      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ),
+    var gravityAndDampingControlNode = new GravityAndDampingControlNode(
+      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
       {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 0,
@@ -47,9 +47,9 @@ define( function( require ) {
     var optionsVBox = new VBox( {
       spacing: 10,
       children: [
-        this.indicatorVisibilityControlPanel,
+        this.indicatorVisibilityControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        gravityAndDampingControlPanel
+        gravityAndDampingControlNode
       ]
     } );
 
@@ -60,7 +60,7 @@ define( function( require ) {
         xMargin: 10,
         fill: MassesAndSpringsConstants.PANEL_FILL,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'ReferenceLinePanel' ),
+        tandem: tandem.createTandem( 'LineVisibilityNode' ),
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       } );
 

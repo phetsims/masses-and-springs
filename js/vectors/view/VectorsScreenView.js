@@ -10,16 +10,16 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var IndicatorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlPanel' );
+  var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var GravityAndDampingControlPanel = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlPanel' );
+  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
   var Panel = require( 'SUN/Panel' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var VectorVisibilityControlPanel = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlPanel' );
+  var VectorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlNode' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
 
   // constants
@@ -84,9 +84,9 @@ define( function( require ) {
     secondSpringEquilibriumLineNode.moveToBack();
 
     // Contains visibility options for the reference lines and displacement arrow
-    var indicatorVisibilityControlPanel = new IndicatorVisibilityControlPanel(
+    var indicatorVisibilityControlNode = new IndicatorVisibilityControlNode(
       model,
-      tandem.createTandem( 'indicatorVisibilityControlPanel' ), {
+      tandem.createTandem( 'indicatorVisibilityControlNode' ), {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 0,
         yMargin: 0,
@@ -94,9 +94,9 @@ define( function( require ) {
       } );
 
     // Contains all of the display options for the vectors and forces
-    var vectorVisibilityControlPanel = new VectorVisibilityControlPanel(
+    var vectorVisibilityControlNode = new VectorVisibilityControlNode(
       model,
-      tandem.createTandem( 'vectorVisibilityControlPanel' ), {
+      tandem.createTandem( 'vectorVisibilityControlNode' ), {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 0,
         yMargin: 0,
@@ -104,8 +104,8 @@ define( function( require ) {
       } );
 
     // Gravity Control Panel
-    var gravityAndDampingControlPanel = new GravityAndDampingControlPanel(
-      model, this, tandem.createTandem( 'gravityAndDampingControlPanel' ), {
+    var gravityAndDampingControlNode = new GravityAndDampingControlNode(
+      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: false,
@@ -119,11 +119,11 @@ define( function( require ) {
     var optionsVBox = new VBox( {
       spacing: 10,
       children: [
-        indicatorVisibilityControlPanel,
+        indicatorVisibilityControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        gravityAndDampingControlPanel,
+        gravityAndDampingControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        vectorVisibilityControlPanel
+        vectorVisibilityControlNode
       ]
     } );
 
@@ -134,7 +134,7 @@ define( function( require ) {
         xMargin: 10,
         fill: MassesAndSpringsConstants.PANEL_FILL,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'ReferenceLinePanel' ),
+        tandem: tandem.createTandem( 'LineVisibilityNode' ),
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
       } );
     this.addChild( optionsPanel );
