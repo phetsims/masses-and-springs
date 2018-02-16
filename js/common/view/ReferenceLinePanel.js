@@ -15,7 +15,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Panel = require( 'SUN/Panel' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
@@ -37,14 +37,14 @@ define( function( require ) {
    * @constructor
    */
   function ReferenceLinePanel( model, tandem, options ) {
-    this.options = _.extend( {
+    options = _.extend( {
       massEquilibrium: false,
-      xMargin: 10,
       fill: MassesAndSpringsConstants.PANEL_FILL,
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       tandem: tandem.createTandem( 'ReferenceLinePanel' ),
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
     }, options );
+
+    Node.call( this, options );
 
     /**
      * Creates line for visual representation within the panel.
@@ -72,7 +72,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'equilibriumPositionString' )
     } );
 
-    if ( this.options.massEquilibrium ) {
+    if ( options.massEquilibrium ) {
 
       equilibriumText = new Text( massEquilibriumString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
@@ -138,10 +138,10 @@ define( function( require ) {
         new HStrut( 10 )
       ]
     } );
-    Panel.call( this, controlBox, this.options );
+    this.addChild( controlBox );
   }
 
   massesAndSprings.register( 'ReferenceLinePanel', ReferenceLinePanel );
 
-  return inherit( Panel, ReferenceLinePanel );
+  return inherit( Node, ReferenceLinePanel );
 } );
