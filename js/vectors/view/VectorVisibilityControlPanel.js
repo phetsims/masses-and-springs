@@ -17,7 +17,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Panel = require( 'SUN/Panel' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
@@ -42,11 +42,11 @@ define( function( require ) {
     options = _.extend( {
       showForces: true,
       minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-      xMargin: 10,
       fill: MassesAndSpringsConstants.PANEL_FILL,
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       tandem: tandem.createTandem( 'vectorVisibilityControlPanel' )
     }, options );
+
+    Node.call( this, options );
 
     var velocityArrow = new VectorArrow(
       MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'panelVelocityArrow', tandem
@@ -212,11 +212,10 @@ define( function( require ) {
         ]
       }
     );
-
-    Panel.call( this, controlsHBox, options );
+    this.addChild( controlsHBox );
   }
 
   massesAndSprings.register( 'VectorVisibilityControlPanel', VectorVisibilityControlPanel );
 
-  return inherit( Panel, VectorVisibilityControlPanel );
+  return inherit( Node, VectorVisibilityControlPanel );
 } );
