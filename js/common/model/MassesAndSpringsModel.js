@@ -106,14 +106,10 @@ define( function( require ) {
       tandem: tandem.createTandem( 'equilibriumPositionVisibleProperty' )
     } );
 
-    // @public {Property.<boolean>} determines visibility of natural length line node
+    // @public {Property.<boolean>} determines visibility of natural length line node. Note this is also used for the
+    // displacementArrowNode's visibility because they should both be visible at the same time.
     this.naturalLengthVisibleProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
-    } );
-
-    // @public {Property.<boolean>} determines visibility of displacement arrow node
-    this.displacementVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'displacementVisibleProperty' )
     } );
 
     // @public {Property.<string>} name of planet selected

@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BracketNode = require( 'SCENERY_PHET/BracketNode' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
@@ -78,45 +79,52 @@ define( function( require ) {
     displacementSymbol.scale( .65 );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
-    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new HBox( {
-        children: [ new Text( displacementString, {
+    // Labels for the displacement arrow and natural length line
+    var displacementLabels = new VBox( {
+      spacing: 8,
+      align: 'left',
+      children: [
+        new Text( displacementString, {
           font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'displacementString' )
-        } ) ],
-        tandem: tandem.createTandem( 'displacementHBox' )
-      } ),
-      property: model.displacementVisibleProperty,
-      label: displacementString
-    }, {
-      content: new HBox( {
-        children: [ new Text( naturalLengthString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          tandem: tandem.createTandem( 'naturalLengthString' )
-        } ) ],
-        tandem: tandem.createTandem( 'naturalLengthHBox' )
-      } ),
+        } ),
+        new Text( naturalLengthString, {
+          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'naturalLengthString' )
+        } )
+      ]
+    } );
+
+    // the bracket at the left - this is tweaked a bit for optimal appearance
+    var bracket = new VBox( {
+      children: [
+        new BracketNode( {
+          orientation: 'left',
+          bracketLength: displacementLabels.height,
+          bracketLineWidth: 2,
+          bracketStroke: 'black',
+          bracketTipLocation: 0.475
+        } )
+      ]
+    } );
+
+    var bracketToTextSpacing = 2;
+    var componentDisplacement = new HBox( {
+      spacing: bracketToTextSpacing,
+      children: [ bracket, displacementLabels ]
+    } );
+
+    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+      content: componentDisplacement,
       property: model.naturalLengthVisibleProperty,
-      label: naturalLengthString
     }, {
-      content: new HBox( {
-        children: [ new Text( massEquilibriumString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          tandem: tandem.createTandem( 'massEquilibriumString' )
-        } ) ],
-        tandem: tandem.createTandem( 'massEquilibriumHBox' )
+      content: new Text( massEquilibriumString, {
+        font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'massEquilibriumString' )
       } ),
       property: model.equilibriumPositionVisibleProperty,
-      label: massEquilibriumString
     }, {
-      content: new HBox( {
-        children: [ new Text( movableLineString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          tandem: tandem.createTandem( 'movableLineString' )
-        } ) ],
-        tandem: tandem.createTandem( 'movableLineHBox' )
+      content: new Text( movableLineString, {
+        font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
       } ),
       property: model.movableLineVisibleProperty,
-      label: movableLineString
     } ], {
       boxWidth: 15,
       spacing: 8,

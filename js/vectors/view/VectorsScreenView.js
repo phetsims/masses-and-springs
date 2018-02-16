@@ -39,7 +39,7 @@ define( function( require ) {
     // Displacement arrows added for each springs
     var firstDisplacementArrowNode = new DisplacementArrowNode(
       this.springNodes[ 0 ].spring.displacementProperty,
-      model.displacementVisibleProperty,
+      model.naturalLengthVisibleProperty,
       tandem,
       { modelViewTransform: this.modelViewTransform } );
     firstDisplacementArrowNode.left = this.springNodes[ 0 ].right + 8;
@@ -48,7 +48,7 @@ define( function( require ) {
 
     var secondDisplacementArrowNode = new DisplacementArrowNode(
       this.springNodes[ 1 ].spring.displacementProperty,
-      model.displacementVisibleProperty,
+      model.naturalLengthVisibleProperty,
       tandem,
       { modelViewTransform: this.modelViewTransform } );
     secondDisplacementArrowNode.right = this.springNodes[ 1 ].left + 14;
