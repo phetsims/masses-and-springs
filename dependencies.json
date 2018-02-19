@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.0-dev.71 Fri Feb 16 2018 13:00:03 GMT-0500 (EST)",
+  "comment": "# masses-and-springs 1.0.0-dev.72 Mon Feb 19 2018 11:18:57 GMT-0500 (EST)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
@@ -33,7 +33,7 @@
     "branch": "master"
   },
   "masses-and-springs": {
-    "sha": "cd091e1eb72a93c4e7de49e6e8f3b612005d434b",
+    "sha": "9ea615bd18fc9b6c231913c970df1da7058ec9f5",
     "branch": "master"
   },
   "phet-core": {
@@ -57,15 +57,15 @@
     "branch": "master"
   },
   "phet-io-wrapper-sonification": {
-    "sha": "a15512aac71854c63510df67b1c92d6e15e0b48e",
+    "sha": "c4cfb36f6deea1670faa78567d77c887647ba39d",
     "branch": "master"
   },
   "phet-io-wrapper-visualizing-engagement": {
-    "sha": "68238f089ea9147087a27ed9507a65060498bd47",
+    "sha": "a1f25c4a550bfb8f1b2b910b993e46afa71c83e9",
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "f9eb59985dc0fcca5361c34208f3d4ef72fe3144",
+    "sha": "8433fe7bc186e6c8564cd93c9af6b1721ca64604",
     "branch": "master"
   },
   "phetcommon": {
