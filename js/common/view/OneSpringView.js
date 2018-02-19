@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
@@ -71,12 +72,23 @@ define( function( require ) {
     ];
     var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 
+    // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
+    var equilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 0 ].massAttachedProperty ],
+      function( equilibriumPositionVisible, massAttached ) {
+        if ( massAttached ) {
+          return equilibriumPositionVisible;
+        }
+        else {
+          return false;
+        }
+      } );
+
     // Initializes equilibrium line for the spring
     var springEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
       model.springs[ 0 ].massEquilibriumYPositionProperty,
-      model.equilibriumPositionVisibleProperty, {
+      equilibriumVisibilityProperty, {
         stroke: 'black'
       }
     );

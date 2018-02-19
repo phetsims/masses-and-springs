@@ -10,6 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
+
   var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -55,12 +57,32 @@ define( function( require ) {
     secondDisplacementArrowNode.centerY = this.modelViewTransform.modelToViewY( this.springNodes[ 1 ].spring.bottomProperty.value );
     this.addChild( secondDisplacementArrowNode );
 
+    // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
+    var firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 0 ].massAttachedProperty ],
+      function( equilibriumPositionVisible, massAttached ) {
+        if ( massAttached ) {
+          return equilibriumPositionVisible;
+        }
+        else {
+          return false;
+        }
+      } );
+    var secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 1 ].massAttachedProperty ],
+      function( equilibriumPositionVisible, massAttached ) {
+        if ( massAttached ) {
+          return equilibriumPositionVisible;
+        }
+        else {
+          return false;
+        }
+      } );
+
     // Initializes equilibrium line for first spring
     var firstSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
       model.springs[ 0 ].massEquilibriumYPositionProperty,
-      model.equilibriumPositionVisibleProperty, {
+      firstMassEquilibriumVisibilityProperty, {
         stroke: EQUILIBRIUM_LINE_FILL
       }
     );
@@ -70,7 +92,7 @@ define( function( require ) {
       this.modelViewTransform,
       model.springs[ 1 ],
       model.springs[ 1 ].massEquilibriumYPositionProperty,
-      model.equilibriumPositionVisibleProperty, {
+      secondMassEquilibriumVisibilityProperty, {
         stroke: EQUILIBRIUM_LINE_FILL
       }
     );
