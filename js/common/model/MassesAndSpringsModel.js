@@ -260,7 +260,6 @@ define( function( require ) {
       this.accelerationVectorVisibilityProperty.reset();
       this.gravityVectorVisibilityProperty.reset();
       this.springVectorVisibilityProperty.reset();
-      this.displacementVisibleProperty.reset();
       this.forcesModeProperty.reset();
       this.masses.forEach( function( mass ) { mass.reset(); } );
       this.springs.forEach( function( spring ) { spring.reset(); } );
