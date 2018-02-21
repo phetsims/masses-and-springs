@@ -15,7 +15,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Panel = require( 'SUN/Panel' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -26,7 +27,7 @@ define( function( require ) {
   var thicknessString = require( 'string!MASSES_AND_SPRINGS/thickness' );
 
   // constants
-  var TITLE_FONT = MassesAndSpringsConstants.TITLE_FONT;
+  var TITLE_FONT = MassesAndSpringsConstants.LABEL_FONT;
   var MAX_TEXT_WIDTH = MassesAndSpringsConstants.MAX_TEXT_WIDTH + 20;
   var RADIO_BUTTON_SPACING = 4;
 
@@ -39,14 +40,14 @@ define( function( require ) {
    */
   function ConstantsControlPanel( selectedConstantProperty, title, tandem, options ) {
     options = _.extend( {
-      xMargin: 5,
-      yMargin: 5,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       visible: false,
       fill: 'white',
       stroke: 'gray',
       tandem: tandem
     }, options );
+
+    Node.call( this, options );
 
     var constantsSelectionButtonOptions = {
       font: TITLE_FONT,
@@ -73,7 +74,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'springConstantRadioButton' )
     } );
 
-    Panel.call( this, new VBox( {
+    var nodeContent = new VBox( {
       align: 'left',
       spacing: RADIO_BUTTON_SPACING,
       children: [
@@ -82,11 +83,11 @@ define( function( require ) {
         new HBox( { children: [ new HStrut( 10 ), thicknessRadioButton ] } ),
       ],
       tandem: tandem.createTandem( 'vBox' )
-    } ), options );
+    } );
+    this.addChild( nodeContent )
   }
 
   massesAndSprings.register( 'ConstantsControlPanel', ConstantsControlPanel );
-
-  return inherit( Panel, ConstantsControlPanel );
+  return inherit( Node, ConstantsControlPanel );
 
 } );

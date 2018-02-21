@@ -45,6 +45,7 @@ define( function( require ) {
   function IntroScreenView( model, tandem ) {
 
     var self = this;
+
     // Calls common two spring view
     TwoSpringView.call( this, model, tandem );
 
@@ -81,8 +82,6 @@ define( function( require ) {
       {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
         stroke: null
       }
     );
