@@ -37,6 +37,9 @@ define( function( require ) {
   var gravityValueString = require( 'string!MASSES_AND_SPRINGS/gravityValue' );
   var whatIsTheValueOfGravityString = require( 'string!MASSES_AND_SPRINGS/whatIsTheValueOfGravity' );
 
+  // constants
+  var TITLE_OFFSET = 125;
+
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Node} listNodeParent
@@ -122,7 +125,7 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 30,
+        titleXSpacing: 70,
         ySpacing: 2,
         arrowButtonsXSpacing: 1
       } ),
@@ -134,10 +137,18 @@ define( function( require ) {
       delta: 0.1,
       arrowButtonScale: 0.5
     };
+
     var questionTextOffset = 20;
     if ( options.hSlider ) {
 
-      var gravityText = new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } );
+      var gravityHSliderTitle = new HBox( {
+        align: 'left',
+        children: [
+          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          new HStrut( TITLE_OFFSET + 3 )
+        ]
+      } );
+
       var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), sliderOptions );
       gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
@@ -151,7 +162,7 @@ define( function( require ) {
       var gravitySlider = new VBox( {
         align: 'left',
         spacing: 2,
-        children: [ gravityText, new HBox( { children: [ new HStrut( 5 ), gravityHSlider ] } ) ]
+        children: [ gravityHSliderTitle, new HBox( { children: [ new HStrut( 15 ), gravityHSlider ] } ) ]
       } );
     }
     else {
@@ -176,30 +187,38 @@ define( function( require ) {
 
     if ( options.dampingVisible ) {
       var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get();
-      var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, sliderOptions );
-      dampingHSlider.align = 'left';
+      var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, {
+        majorTickLength: 10,
+        minorTickLength: 5,
+        minorTickLineWidth: 0.5,
+        trackSize: new Dimension2( 120, 0.1 ),
+        thumbSize: new Dimension2( 13, 22 ),
+        thumbFillEnabled: '#00C4DF',
+        thumbFillHighlighted: '#71EDFF',
+        align: 'center',
+        constrainValue: function( value ) {
+          value = Math.round( value * 100 / 3 ) * 3;
+          return value / 100;
+        },
+        tandem: tandem.createTandem( 'hSlider' )
+      } );
 
-      dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString ) );
+      dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
       dampingHSlider.addMajorTick( dampingRange.min + ( dampingRange.max - dampingRange.min ) / 2 );
-      dampingHSlider.addMajorTick( dampingRange.max, new Text( lotsString ) );
+      dampingHSlider.addMajorTick( dampingRange.max, new Text( lotsString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
       for ( var i = 1; i < 10; i++ ) {
         if ( i !== 5 ) {
           dampingHSlider.addMinorTick( dampingRange.min + i * ( dampingRange.max - dampingRange.min ) / 10 );
         }
       }
 
-      // Used to format slider for damping
-      var dampingControlPanel = new SpringControlPanel(
-        model.dampingProperty,
-        dampingRange,
-        dampingString,
-        [
-          new Text( noneString, { font: MassesAndSpringsConstants.LABEL_FONT } ),
-          new Text( lotsString, { font: MassesAndSpringsConstants.LABEL_FONT } )
-        ],
-        tandem,
-        sliderOptions
-      );
+      var dampingHSliderTitle = new HBox( {
+        align: 'left',
+        children: [
+          new Text( dampingString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          new HStrut( TITLE_OFFSET )
+        ]
+      } );
 
       var contentVBox = new VBox( {
         align: 'center',
@@ -207,7 +226,8 @@ define( function( require ) {
         children: [
           questionTextNode,
           gravityComboBox,
-          dampingControlPanel
+          dampingHSliderTitle,
+          dampingHSlider
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } );
@@ -215,10 +235,15 @@ define( function( require ) {
     }
     else {
 
-      var dampingEqualsZeroText = new Text( dampingEqualsZeroString, {
+      var dampingEqualsZeroText = new HBox( {
         align: 'left',
-        font: MassesAndSpringsConstants.LABEL_FONT,
-        maxWidth: this.maxWidth
+        children: [
+          new Text( dampingEqualsZeroString, {
+            font: MassesAndSpringsConstants.TITLE_FONT,
+            maxWidth: this.maxWidth
+          } ),
+          new HStrut( TITLE_OFFSET - 35 )
+        ]
       } );
 
       contentVBox = new VBox( {
