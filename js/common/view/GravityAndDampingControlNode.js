@@ -134,8 +134,7 @@ define( function( require ) {
       delta: 0.1,
       arrowButtonScale: 0.5
     };
-
-    // Manages the values associated with the gravity panel in a combo box
+    var questionTextOffset = 20;
     if ( options.hSlider ) {
 
       var gravityText = new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } );
@@ -157,17 +156,20 @@ define( function( require ) {
     }
     else {
       gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
+      questionTextOffset = 23.5;
     }
+
+    // Manages the values associated with the gravity panel in a combo box
     var questionTextNode = new VBox( {
       children:
         [
           // TODO: Can we match the bounds of the questionText to the gravitySlider so the panel doesn't change size
-          new VStrut( 21.5 ),
+          new VStrut( questionTextOffset ),
           new Text( whatIsTheValueOfGravityString, {
             font: MassesAndSpringsConstants.TITLE_FONT,
             maxWidth: this.maxWidth
           } ),
-          new VStrut( 21.5 )
+          new VStrut( questionTextOffset )
         ]
     } );
     questionTextNode.bounds.set( gravitySlider.bounds );
