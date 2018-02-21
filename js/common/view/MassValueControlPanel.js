@@ -86,7 +86,8 @@ define( function( require ) {
       maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 20,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       fill: 'white',
-      stroke: 'gray'
+      stroke: 'gray',
+      yMargin: 10
     } );
   }
 
