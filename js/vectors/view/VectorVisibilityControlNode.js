@@ -160,7 +160,7 @@ define( function( require ) {
             new VStrut( 8 ),
             forcesVisibilityRadioButton,
             new VStrut( 8 ),
-            new AlignBox( forcesVisibilityCheckboxGroup, { leftMargin: 15 } ),
+            new AlignBox( forcesVisibilityCheckboxGroup, { leftMargin: 22 } ),
             new VStrut( 8 ),
             netForceVisibilityRadioButton
           ],
