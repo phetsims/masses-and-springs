@@ -107,7 +107,7 @@ define( function( require ) {
     } );
 
     // @private {read-only} White background for scene switching icons
-    var iconBackground = new Rectangle( firstSpringIcon.x - 40, -170, 170, 200, 10, 10, {
+    var iconBackground = new Rectangle( firstSpringIcon.left - 20, -170, 180, 170, 10, 10, {
       fill: '#A8D2FF'
     } );
 

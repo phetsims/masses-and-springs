@@ -197,14 +197,12 @@ define( function( require ) {
 
     // @private {read-only} Creation of icons for scene selection
     var sceneRadioButtonGroup = new RadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
-      buttonContentXMargin: 2,
-      buttonContentYMargin: 2,
+      buttonContentXMargin: 1,
+      buttonContentYMargin: 1,
       right: this.gravityAndDampingControlNode.right,
       baseColor: 'black',
-      selectedStroke: 'yellow',
-      deselectedStroke: 'yellow',
-      selectedLineWidth: 1.3,
-      deselectedLineWidth: 0.6,
+      selectedLineWidth: 2,
+      deselectedLineWidth: .5,
       orientation: 'horizontal',
       spacing: 10
     } );
