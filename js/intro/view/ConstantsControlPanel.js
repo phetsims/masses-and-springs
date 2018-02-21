@@ -16,7 +16,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -84,7 +83,7 @@ define( function( require ) {
       ],
       tandem: tandem.createTandem( 'vBox' )
     } );
-    this.addChild( nodeContent )
+    this.addChild( nodeContent );
   }
 
   massesAndSprings.register( 'ConstantsControlPanel', ConstantsControlPanel );
