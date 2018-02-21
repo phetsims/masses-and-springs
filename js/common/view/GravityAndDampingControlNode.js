@@ -251,6 +251,7 @@ define( function( require ) {
         children: [
           questionTextNode,
           gravityComboBox,
+          new VStrut( 2 ),
           dampingEqualsZeroText
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
