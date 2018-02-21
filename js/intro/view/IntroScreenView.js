@@ -265,6 +265,7 @@ define( function( require ) {
       self.toolboxPanel.right = self.panelRightSpacing;
       sceneRadioButtonGroup.right = self.panelRightSpacing;
       sceneRadioButtonGroup.top = self.toolboxPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
+      sceneRadioButtonGroup.centerX = self.toolboxPanel.centerX;
     } );
   }
 
