@@ -22,6 +22,7 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -89,7 +90,7 @@ define( function( require ) {
     var sliderOptions = {
       majorTickLength: 5,
       minorTickLength: 5,
-      titleFont: MassesAndSpringsConstants.TITLE_FONT,
+      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
       trackSize: new Dimension2( 120, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -106,7 +107,7 @@ define( function( require ) {
 
     var gravitySliderOptions = {
       majorTickLength: 5,
-      titleFont: MassesAndSpringsConstants.TITLE_FONT,
+      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -143,7 +144,7 @@ define( function( require ) {
       var gravityHSliderTitle = new HBox( {
         align: 'left',
         children: [
-          new Text( gravityString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
+          new Text( gravityString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
           new HStrut( TITLE_OFFSET + 3 )
         ]
       } );
@@ -214,8 +215,8 @@ define( function( require ) {
       var dampingHSliderTitle = new HBox( {
         align: 'left',
         children: [
-          new Text( dampingString, { font: MassesAndSpringsConstants.TITLE_FONT } ),
-          new HStrut( TITLE_OFFSET )
+          new Text( dampingString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
+          new HStrut( TITLE_OFFSET - 7 )
         ]
       } );
 
