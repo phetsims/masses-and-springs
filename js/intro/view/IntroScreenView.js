@@ -166,7 +166,6 @@ define( function( require ) {
     // Link responsible for visibility of the length control panel.
     model.sceneModeProperty.lazyLink( function( mode ) {
       self.resetMassLayer();
-
       if ( mode === 'same-length' ) {
         self.springLengthControlPanel.visible = false;
       }
@@ -198,8 +197,8 @@ define( function( require ) {
 
     // @private {read-only} Creation of icons for scene selection
     var sceneRadioButtonGroup = new RadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
-      buttonContentXMargin: 4,
-      buttonContentYMargin: 4,
+      buttonContentXMargin: 2,
+      buttonContentYMargin: 2,
       right: this.gravityAndDampingControlNode.right,
       baseColor: 'black',
       selectedStroke: 'yellow',
@@ -207,7 +206,7 @@ define( function( require ) {
       selectedLineWidth: 1.3,
       deselectedLineWidth: 0.6,
       orientation: 'horizontal',
-      spacing: 13
+      spacing: 10
     } );
     this.addChild( sceneRadioButtonGroup );
     sceneRadioButtonGroup.moveToBack();

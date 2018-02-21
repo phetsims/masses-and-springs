@@ -16,6 +16,8 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
+  var Panel = require( 'SUN/Panel' );
+  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -24,14 +26,15 @@ define( function( require ) {
   var IMAGE_SCALE = 0.3;
 
   /**
-   * @param {Property.<string>} springLengthProperty
+   * @param {string} springLength
    * @param {Tandem} tandem
    * @constructor
    */
-  function SceneSelectionButton( springLengthProperty, mvt, tandem ) {
+  function SceneSelectionButton( springLength, mvt, tandem ) {
 
     Node.call( this, {
       scale: IMAGE_SCALE
+      // preventFit: true
     } );
 
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
@@ -47,12 +50,6 @@ define( function( require ) {
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         0,
         tandem.createTandem( 'secondIconSpring' )
-      ),
-      new Spring(
-        new Vector2( 0.85, 2.2 ),
-        MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        0,
-        tandem.createTandem( 'thirdIconSpring' )
       )
     ];
 
@@ -82,10 +79,10 @@ define( function( require ) {
     secondSpringIcon.loopsProperty.set( 6 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
-    if ( springLengthProperty === 'adjustable-length' ) {
+    if ( springLength === 'adjustable-length' ) {
 
-      secondSpringIcon = new OscillatingSpringNode(
-        springsIcon[ 2 ],
+      firstSpringIcon = new OscillatingSpringNode(
+        springsIcon[ 0 ],
         mvt,
         tandem.createTandem( 'secondSpringIcon' ),
         {
@@ -93,8 +90,9 @@ define( function( require ) {
           middleColor: '#636362',
           backColor: 'black',
         } );
-      secondSpringIcon.loopsProperty.set( 3 );
-      secondSpringIcon.lineWidthProperty.set( 3 );
+      firstSpringIcon.loopsProperty.set( 3 );
+      firstSpringIcon.lineWidthProperty.set( 3 );
+      firstSpringIcon.top = secondSpringIcon.top;
     }
     var firstVerticalLineNode = new Line( 60, 0, 0, 0, {
       stroke: 'black',
@@ -112,9 +110,7 @@ define( function( require ) {
 
     // @private {read-only} White background for scene switching icons
     var iconBackground = new Rectangle( firstSpringIcon.x - 40, -170, 170, 200, 10, 10, {
-      fill: '#A8D2FF',
-      xMargin: 0,
-      yMargin: 0
+      fill: '#A8D2FF'
     } );
 
     this.addChild( iconBackground );
