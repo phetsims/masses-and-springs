@@ -332,9 +332,9 @@ define( function( require ) {
       if ( accelerationVisible ) {
         if ( Math.abs( netAcceleration ) > 1E-6 ) {
           self.accelerationArrow.setTailAndTip(
-            position.x + 10,
+            position.x + 8,
             position.y + rect.centerY,
-            position.x + 10,
+            position.x + 8,
             position.y + rect.centerY - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
           );
         }
