@@ -75,7 +75,7 @@ define( function( require ) {
     else {
       hSlider.addMajorTick( propertyRange.min, labels[ 0 ] );
       hSlider.addMajorTick( propertyRange.max, labels[ 1 ] );
-      for ( var i = 1; i < 10; i++ ) {
+      for ( i = 1; i < 10; i++ ) {
         hSlider.addMinorTick( propertyRange.min + i * ( propertyRange.max - propertyRange.min ) / 9 );
       }
     }
