@@ -67,6 +67,7 @@ define( function( require ) {
         yMargin: 0,
         stroke: null,
         visible: false,
+        centerTick: true,
         constrainValue: function( value ) {
           value = Math.round( value * 100 / 5 ) * 5;
           return value / 100;

@@ -37,6 +37,7 @@ define( function( require ) {
       xMargin: 5,
       yMargin: 5,
       align: 'center',
+      centerTick: false,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       stroke: 'black',
       visible: false,
@@ -61,14 +62,24 @@ define( function( require ) {
       tandem: tandem.createTandem( 'hSlider' )
     } );
 
-    hSlider.addMajorTick( propertyRange.min, labels[ 0 ] );
-    hSlider.addMajorTick( propertyRange.min + ( propertyRange.max - propertyRange.min ) / 2 );
-    hSlider.addMajorTick( propertyRange.max, labels[ 1 ] );
-    for ( var i = 1; i < 10; i++ ) {
-      if ( i !== 5 && options.minorTickMarksVisible ) {
-        hSlider.addMinorTick( propertyRange.min + i * ( propertyRange.max - propertyRange.min ) / 10 );
+    if ( options.centerTick ) {
+      hSlider.addMajorTick( propertyRange.min, labels[ 0 ] );
+      hSlider.addMajorTick( propertyRange.min + ( propertyRange.max - propertyRange.min ) / 2 );
+      hSlider.addMajorTick( propertyRange.max, labels[ 1 ] );
+      for ( var i = 1; i < 10; i++ ) {
+        if ( i !== 5 && options.minorTickMarksVisible ) {
+          hSlider.addMinorTick( propertyRange.min + i * ( propertyRange.max - propertyRange.min ) / 10 );
+        }
       }
     }
+    else {
+      hSlider.addMajorTick( propertyRange.min, labels[ 0 ] );
+      hSlider.addMajorTick( propertyRange.max, labels[ 1 ] );
+      for ( var i = 1; i < 10; i++ ) {
+        hSlider.addMinorTick( propertyRange.min + i * ( propertyRange.max - propertyRange.min ) / 9 );
+      }
+    }
+
     var hSliderTitle = new Text( title, { font: options.titleFont } );
 
     Panel.call( this, new VBox( {
@@ -86,4 +97,5 @@ define( function( require ) {
 
   return inherit( Panel, SpringControlPanel );
 
-} );
+} )
+;

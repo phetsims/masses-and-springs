@@ -221,7 +221,7 @@ define( function( require ) {
           fill: 'white',
           stroke: 'gray',
           constrainValue: function( value ) {
-            return Number( Util.toFixed( value, 1 ) );
+            return Number( Util.toFixed( value, 0 ) );
           }
         }
       );
