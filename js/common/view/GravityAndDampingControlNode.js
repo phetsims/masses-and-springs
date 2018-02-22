@@ -197,7 +197,7 @@ define( function( require ) {
         thumbFillHighlighted: '#71EDFF',
         align: 'center',
         constrainValue: function( value ) {
-          value = Math.round( value * 100 / 3 ) * 3;
+          value = Math.round( value * 100 / 5.75 ) * 5.75;
           return value / 100;
         },
         tandem: tandem.createTandem( 'hSlider' )
@@ -206,9 +206,9 @@ define( function( require ) {
       dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
       dampingHSlider.addMajorTick( dampingRange.min + ( dampingRange.max - dampingRange.min ) / 2 );
       dampingHSlider.addMajorTick( dampingRange.max, new Text( lotsString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
-      for ( var i = 1; i < 10; i++ ) {
-        if ( i !== 5 ) {
-          dampingHSlider.addMinorTick( dampingRange.min + i * ( dampingRange.max - dampingRange.min ) / 10 );
+      for ( var i = 1; i < 6; i++ ) {
+        if ( i !== 3 ) {
+          dampingHSlider.addMinorTick( dampingRange.min + i * ( dampingRange.max - dampingRange.min ) / 6 );
         }
       }
 
