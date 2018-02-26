@@ -57,9 +57,6 @@ define( function( require ) {
         var massEquilibriumYPosition = modelViewTransform.modelToViewY(
           mass.springProperty.value.massEquilibriumYPositionProperty.value
         );
-        console.log( modelViewTransform.modelToViewY(
-          mass.userReleasedHeightProperty.value
-        ) )
 
         this.lineOne = new Line( massPosition.x, massEquilibriumYPosition, massPosition.x, massPosition.y, lineOptions );
         this.addChild( this.lineOne );

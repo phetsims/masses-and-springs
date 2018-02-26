@@ -49,7 +49,7 @@ define( function( require ) {
 
     // TODO:document
     // TODO: Can we initialize the trace with no mass? i.e. mass = null
-    this.periodTrace = new PeriodTrace( null );
+    this.periodTrace = new PeriodTrace( this.masses[ 0 ] );
 
     this.springs[ 0 ].massAttachedProperty.link( function( mass ) {
       self.periodTrace.massProperty.set( mass );

@@ -15,6 +15,7 @@ define( function( require ) {
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var Easing = require( 'TWIXT/Easing' );
+  var Emitter = require( 'AXON/Emitter' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var NumberProperty = require( 'AXON/NumberProperty' );
@@ -219,6 +220,26 @@ define( function( require ) {
         return initialEnergy - totalEnergy;
       } );
 
+    //@public used to determine when the period tracer should alternate directions
+    this.directionEmitter = new Emitter();
+    this.downwardEmitter = new Emitter();
+    this.staticEmitter = new Emitter();
+
+    this.positionProperty.link( function( oldPosition, newPosition ) {
+      if ( self.springProperty.value ) {
+        if ( oldPosition < newPosition ) {
+          console.log( 'positive' )
+          self.directionEmitter.emit2( newPosition, 1 );
+        }
+        if ( oldPosition > newPosition ) {
+          console.log( 'negative' )
+          self.directionEmitter.emit2( newPosition, -1 );
+        }
+        else {
+          self.directionEmitter.emit2( newPosition, null );
+        }
+      }
+    } )
 
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
