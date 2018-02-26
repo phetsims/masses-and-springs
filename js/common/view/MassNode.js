@@ -167,6 +167,7 @@ define( function( require ) {
       },
       endDrag: function() {
         mass.userControlledProperty.set( false );
+        mass.userReleasedHeightProperty.set( mass.heightProperty.value )
       }
     } );
 

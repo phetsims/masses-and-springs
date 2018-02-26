@@ -17,7 +17,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
-  var Shape = require( 'KITE/Shape' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -26,13 +26,8 @@ define( function( require ) {
    * @constructor
    */
   function PeriodTraceNode( periodTrace, modelViewTransform, options ) {
+    Node.call( this );
     var self = this;
-
-    Node.call( this, _.extend( {
-      pickable: false,
-      preventFit: true,
-      translation: modelViewTransform.modelToViewPosition( Vector2.ZERO )
-    }, options ) );
 
     // @protected
     this.periodTrace = periodTrace;
@@ -40,12 +35,7 @@ define( function( require ) {
     // @protected
     this.modelViewTransform = modelViewTransform;
 
-    // @protected create trace path path
-    this.pathNode = new Path( null, {
-      stroke: 'black',
-      lineWidth: 7,
-    } );
-    this.addChild( this.pathNode );
+    this.lineOne = new Line( 0, 0, 0, 0, { lineWidth: 0 } );
   }
 
   massesAndSprings.register( 'PeriodTraceNode', PeriodTraceNode );
@@ -53,21 +43,32 @@ define( function( require ) {
   return inherit( Node, PeriodTraceNode, {
     step: function() {
       if ( this.periodTrace.massProperty.value ) {
-        this.updateShape( this.periodTrace.massProperty.value, this.modelViewTransform );
+        this.updateTrace( this.periodTrace.massProperty.value, this.modelViewTransform );
       }
     },
 
     // TODO:documentation
-    updateShape: function( mass, modelViewTransform ) {
+    updateTrace: function( mass, modelViewTransform ) {
+      if ( !mass.userControlledProperty.value ) {
 
-      var massPosition = modelViewTransform.modelToViewPosition( mass.positionProperty.value );
-      var shape = new Shape();
+        var lineOptions = { lineWidth: 3, stroke: 'black' };
 
-      shape.lineTo( massPosition.x, -200 );
-      shape.lineTo( massPosition.x, massPosition.y );
+        var massPosition = modelViewTransform.modelToViewPosition( mass.positionProperty.value );
+        var massEquilibriumYPosition = modelViewTransform.modelToViewY(
+          mass.springProperty.value.massEquilibriumYPositionProperty.value
+        );
+        console.log( modelViewTransform.modelToViewY(
+          mass.userReleasedHeightProperty.value
+        ) )
 
+        this.lineOne = new Line( massPosition.x, massEquilibriumYPosition, massPosition.x, massPosition.y, lineOptions );
+        this.addChild( this.lineOne );
+      }
+      else {
 
-      this.pathNode.setShape( shape );
+        // Once the user drags a mass the lines should be be removed.
+        this.removeAllChildren();
+      }
     }
   } );
 } );

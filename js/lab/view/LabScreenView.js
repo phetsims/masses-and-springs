@@ -33,9 +33,10 @@ define( function( require ) {
     var self = this;
 
     // @protected
-    this.periodTraceNode = new PeriodTraceNode( model.periodTrace, this.modelViewTransform );
+    this.periodTraceNode = new PeriodTraceNode( model.periodTrace, this.modelViewTransform, {
+      center: this.springEquilibriumLineNode.center
+    } );
     this.addChild( this.periodTraceNode );
-    // periodTraceNode.centerX = this.springNodes[ 0 ].bottom - .10;
 
     // TODO: Make things that aren't really panels NOT panels.
     var vectorVisibilityControlNode = new VectorVisibilityControlNode(
@@ -102,6 +103,7 @@ define( function( require ) {
 
   return inherit( OneSpringView, LabScreenView, {
     step: function() {
+      this.energyGraphNode.update();
       this.periodTraceNode.step();
     }
   } );

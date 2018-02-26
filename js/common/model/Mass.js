@@ -65,7 +65,7 @@ define( function( require ) {
     // @public (read-only) {Property.<number>} mass of mass object in kg
     this.massProperty = new NumberProperty( massValue );
 
-    // @public {Property.<number>} (read-write) radius of the massNode dependent its mass value
+    // @public {Property.<number>} (read-write) radius of the massNode is dependent on its mass value
     this.radiusProperty = new DerivedProperty( [ this.massProperty ], function( massValue ) {
       return Math.pow( ( massValue ) / ( self.options.density * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * SCALING_FACTOR;
     } );
@@ -112,6 +112,9 @@ define( function( require ) {
     this.userControlledProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'userControlledProperty' )
     } );
+
+    // @public {Property.<number>} height in m that a user dropped the mass
+    this.userReleasedHeightProperty = new Property( 0 );
 
     // @private {Property.<boolean>} indicates whether the mass is animating after being released and not attached to s
     this.isAnimatingProperty = new BooleanProperty( false, {
