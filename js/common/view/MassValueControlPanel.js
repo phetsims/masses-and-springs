@@ -50,6 +50,7 @@ define( function( require ) {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
       } ),
+      valueFont: new PhetFont( 14 ),
       majorTickLength: 10,
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       trackSize: new Dimension2( 125, 0.1 ),
