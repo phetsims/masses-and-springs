@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
+  var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
@@ -28,7 +29,6 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
-  var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
   var StringIO = require( 'ifphetio!PHET_IO/types/StringIO' );
 
   // constants
