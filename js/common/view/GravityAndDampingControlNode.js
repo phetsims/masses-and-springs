@@ -106,7 +106,7 @@ define( function( require ) {
     };
 
     var gravitySliderOptions = {
-      majorTickLength: 5,
+      majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
@@ -167,7 +167,7 @@ define( function( require ) {
     }
     else {
       gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
-      questionTextOffset = 23.5;
+      questionTextOffset = 21.5;
     }
 
     // Manages the values associated with the gravity panel in a combo box
@@ -183,7 +183,6 @@ define( function( require ) {
           new VStrut( questionTextOffset )
         ]
     } );
-    questionTextNode.bounds.set( gravitySlider.bounds );
 
     if ( options.dampingVisible ) {
       var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get();

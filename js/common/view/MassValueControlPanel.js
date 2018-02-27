@@ -50,7 +50,7 @@ define( function( require ) {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
       } ),
-      majorTickLength: 5,
+      majorTickLength: 10,
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
@@ -87,7 +87,7 @@ define( function( require ) {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       fill: 'white',
       stroke: 'gray',
-      yMargin: 10
+      yMargin: 8
     } );
   }
 
