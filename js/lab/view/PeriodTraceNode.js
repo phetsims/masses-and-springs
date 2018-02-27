@@ -58,7 +58,13 @@ define( function( require ) {
           mass.springProperty.value.massEquilibriumYPositionProperty.value
         );
 
-        this.lineOne = new Line( massPosition.x, massEquilibriumYPosition, massPosition.x, massPosition.y, lineOptions );
+        this.lineOne = new Line(
+          massPosition.x + this.periodTrace.xOffsetProperty.value,
+          massEquilibriumYPosition,
+          massPosition.x + this.periodTrace.xOffsetProperty.value,
+          massPosition.y,
+          lineOptions
+        );
         this.addChild( this.lineOne );
       }
       else {

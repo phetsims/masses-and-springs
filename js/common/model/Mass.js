@@ -227,16 +227,14 @@ define( function( require ) {
 
     this.positionProperty.link( function( oldPosition, newPosition ) {
       if ( self.springProperty.value ) {
-        if ( oldPosition < newPosition ) {
-          console.log( 'positive' )
+        if ( oldPosition.y < newPosition.y ) {
+          // debugger;
+          // console.log( 'positive' )
           self.directionEmitter.emit2( newPosition, 1 );
         }
-        if ( oldPosition > newPosition ) {
-          console.log( 'negative' )
+        if ( oldPosition.y > newPosition.y ) {
+          // console.log( 'negative' )
           self.directionEmitter.emit2( newPosition, -1 );
-        }
-        else {
-          self.directionEmitter.emit2( newPosition, null );
         }
       }
     } )

@@ -46,16 +46,28 @@ define( function( require ) {
 
     mass.directionEmitter.addListener( function( position, direction ) {
       // debugger;
+      console.log( self.xOffsetProperty.value );
+
+      if ( (self.xOffsetProperty.value % 60 === 0) && (self.xOffsetProperty.value != 0) ) {
+        // debugger;
+        self.xOffsetProperty.reset();
+      }
+      if ( (self.crossingProperty.value % 3 === 0) && (self.crossingProperty.value != 0) ) {
+        // self.crossingProperty.reset();
+      }
       self.directionProperty.set( direction );
-      console.log();
+
+      // console.log(direction);
     } );
 
     this.directionProperty.link( function( oldValue, newValue ) {
       if ( oldValue !== newValue ) {
+        // debugger;
         self.xOffsetProperty.set( self.xOffsetProperty.value + 20 );
+        // debugger;
         self.crossingProperty.set( self.crossingProperty.value + 1 );
         console.log( self.xOffsetProperty.value )
-        console.log( self.crossingProperty.value )
+        // console.log( self.crossingProperty.value )
       }
     } )
 
@@ -67,12 +79,10 @@ define( function( require ) {
     } )
 
     Property.multilink( [ this.xOffsetProperty, this.crossingProperty ], function( xOffset, crossing ) {
-      if ( xOffset % 60 && xOffset != 0 ) {
-        self.xOffsetProperty.reset();
-      }
-      if ( crossing % 3 && crossing != 0 ) {
-        self.crossingProperty.reset();
-      }
+      // console.log(xOffset)
+      // console.log(crossing)
+
+
     } )
   }
 
