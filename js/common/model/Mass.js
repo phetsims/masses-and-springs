@@ -22,6 +22,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
@@ -79,7 +80,7 @@ define( function( require ) {
 
     this.gradientEnabledProperty = new Property( true );
 
-    // @public {Property.<number>} height in m
+    // @public {Property.<number>} height in meters. Measured from bottom of mass object not screen.
     this.cylinderHeightProperty = new DerivedProperty( [ this.radiusProperty ],
       function( radius ) {
         return radius * HEIGHT_RATIO;
@@ -89,7 +90,7 @@ define( function( require ) {
       self.options.zeroReferencePoint = -cylinderHeight / 2;
     } );
 
-    // @public {number} hook height in m
+    // @public {number} hook height in meters. Measured from the bottom of the hook not the screen.
     this.hookHeight = HOOK_HEIGHT;
 
     // @public {Property.<number>} total height of the mass, including its hook
@@ -220,24 +221,51 @@ define( function( require ) {
         return initialEnergy - totalEnergy;
       } );
 
-    //@public used to determine when the period tracer should alternate directions
-    this.directionEmitter = new Emitter();
-    this.downwardEmitter = new Emitter();
-    this.staticEmitter = new Emitter();
+    // @public used to determine when the period tracer should alternate directions
+    this.peekEmitter = new Emitter();
+
+    // @public used to determine when the mass has crossed over its equilibrium position while oscillating
+    this.crossEmitter = new Emitter();
+
+    var crossCount = 0
+
+    this.orientationProperty = new Property( null );
+    this.oldIOrientation = null;
 
     this.positionProperty.link( function( oldPosition, newPosition ) {
       if ( self.springProperty.value ) {
+        var massEquilibrium = self.springProperty.value.massEquilibriumYPositionProperty.value;
         if ( oldPosition.y < newPosition.y ) {
           // debugger;
           // console.log( 'positive' )
-          self.directionEmitter.emit2( newPosition, 1 );
+          self.peekEmitter.emit2( newPosition, 1 );
         }
         if ( oldPosition.y > newPosition.y ) {
           // console.log( 'negative' )
-          self.directionEmitter.emit2( newPosition, -1 );
+          self.peekEmitter.emit2( newPosition, -1 );
         }
+        if ( massEquilibrium > newPosition.y ) {
+          // debugger;
+          self.orientationProperty.set( 'below' );
+          // console.log(self.newOrientation);
+          // self.oldOrientation = self.newOrientation;
+        }
+        if ( massEquilibrium < newPosition.y ) {
+          // debugger;
+          self.orientationProperty.set( 'above' );
+          // console.log(self.newOrientation);
+          // self.oldOrientation = self.newOrientation;
+        }
+        // self.crossEmitter.emit2( self.oldOrientation, self.newOrientation );
+
       }
     } )
+
+    this.orientationProperty.link( function( oldValue, newValue ) {
+      if ( oldValue !== newValue ) {
+        self.crossEmitter.emit()
+      }
+    } );
 
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {

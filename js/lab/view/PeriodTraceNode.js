@@ -36,6 +36,8 @@ define( function( require ) {
     this.modelViewTransform = modelViewTransform;
 
     this.lineOne = new Line( 0, 0, 0, 0, { lineWidth: 0 } );
+
+
   }
 
   massesAndSprings.register( 'PeriodTraceNode', PeriodTraceNode );
@@ -58,14 +60,68 @@ define( function( require ) {
           mass.springProperty.value.massEquilibriumYPositionProperty.value
         );
 
-        this.lineOne = new Line(
-          massPosition.x + this.periodTrace.xOffsetProperty.value,
-          massEquilibriumYPosition,
-          massPosition.x + this.periodTrace.xOffsetProperty.value,
-          massPosition.y,
-          lineOptions
-        );
-        this.addChild( this.lineOne );
+
+//
+//
+//
+//
+// var originY = 0;
+//
+// function TraceNode( trace ) {
+// this.trace = trace;
+//
+//    this.path = new Path( null, { ... } );
+//    this.addChild( path );
+// }
+//
+// inherit( laknsrtlkanrst, {
+//  step: function( dt ) {
+//
+//    var firstY = trace.firstY; // when velocity first changes direction AFTER our first zero-crossing
+//    var secondY = trace.secondY; // when velocity changes direction after our SECOND zero-crossing
+//
+//    var state = trace.state; // 0 to 4
+//
+//    if ( state === 0 ) {
+//      this.visible = false;
+//    }
+//    else {
+//      this.visible = true;
+//      var shape = new Shape();
+//
+//      // first line
+//      shape.moveTo( originalX, originY );            // sets our current position
+//      shape.lineTo( originalX, state === 1 ? currentY : firstY ); // draws a line from our current position to a NEW position, then sets our current position to the NEW position
+//      if ( state > 1 ) {
+//        // first connector
+//        shape.lineTo( middleX, firstY );
+//        // second line
+//        shape.lineTo( middleX, state === 2 ? currentY : secondY );
+//        if ( state > 2 ) {
+//          // second connector
+//          shape.lineTo( lastX, secondY );
+//          // third line
+//          shape.lineTo( lastX, state === 3 ? currentY : originY );
+//        }
+//      }
+//    }
+//
+//    this.path.shape = shape;
+//  }
+// } );
+
+// updateShape()
+
+
+        //
+        // this.lineOne = new Line(
+        //   massPosition.x + this.periodTrace.xOffsetProperty.value,
+        //   massEquilibriumYPosition,
+        //   massPosition.x + this.periodTrace.xOffsetProperty.value,
+        //   massPosition.y,
+        //   lineOptions
+        // );
+        // this.addChild( this.lineOne );
       }
       else {
 

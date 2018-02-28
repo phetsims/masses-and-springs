@@ -38,6 +38,7 @@ define( function( require ) {
     } );
     this.addChild( this.periodTraceNode );
 
+
     // TODO: Make things that aren't really panels NOT panels.
     var vectorVisibilityControlNode = new VectorVisibilityControlNode(
       model,

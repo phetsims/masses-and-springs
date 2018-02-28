@@ -167,13 +167,19 @@ define( function( require ) {
       },
       endDrag: function() {
         mass.userControlledProperty.set( false );
-        mass.userReleasedHeightProperty.set( mass.heightProperty.value )
+        mass.userReleasedHeightProperty.set( mass.positionProperty.value.y )
+        // console.log(mass.userReleasedHeightProperty.value)
       }
     } );
 
 
     this.mass.positionProperty.link( function( position ) {
       self.translation = modelViewTransform2.modelToViewPosition( position );
+      // debugger;
+      // if(self.mass.springProperty.value &&
+      //   rect.centerX === self.mass.springProperty.value.massEquilibriumYPositionProperty.get()){
+      //   debugger;
+      // }
     } );
 
     modelBoundsProperty.link( function( modelDragBounds ) {
