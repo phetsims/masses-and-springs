@@ -184,6 +184,7 @@ define( function( require ) {
     this.resetAllButton.addListener( function() {
       self.model.reset();
       self.energyGraphNode.reset();
+      movableLineNode.reset();
     } );
 
     zeroHeightLabel.center = zeroHeightLine.center;

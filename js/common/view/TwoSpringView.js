@@ -17,6 +17,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
+  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var Property = require( 'AXON/Property' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/SpringScreenView' );
@@ -120,6 +121,10 @@ define( function( require ) {
         dampingVisible: false
       }
     );
+
+    this.resetAllButton.addListener( function() {
+      movableLineNode.reset();
+    } );
 
     // Adding all of the nodes to the scene graph
     this.addChild( this.springHangerNode );
