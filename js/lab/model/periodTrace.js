@@ -18,7 +18,6 @@ define( function( require ) {
 
 
   // constants
-  var X_OFFSET = 20;
 
 
   /**
@@ -28,15 +27,13 @@ define( function( require ) {
 
     var self = this;
 
-    var originalX = 0;
-    var middleX = originalX + X_OFFSET;
-    var lastX = originalX + 2 * X_OFFSET;
-    var originY = 0;
+    this.originalY = 300;
 
     //TODO: Use numberProperty when applicable
 
     // @public {Property} mass which is being tracked
     this.massProperty = new Property( mass );
+
 
     // @public {Property} orientation of the mass oscillation.
     this.directionProperty = new Property( null )
@@ -59,57 +56,23 @@ define( function( require ) {
     // 4: Pendulum trace completed.
     this.stateProperty = new Property( 0 );
 
-    this.firstPeekY = null;
-    this.secondPeekY = null;
+    this.firstPeekY = this.originalY + 50;
+    this.secondPeekY = this.originalY - 50;
 
     // optional parameter used to measure rate of trace fading
     this.alphaProperty = new Property( 1 );
 
 
-    // function Trace( model ) {
-    //   // this.stateProperty = new NumberProperty( 0 );
-    //   // this.firstY = null;
-    //   // this.secondY = null;
-    //
-    //   // optional
-    //   // this.alphaProperty = new NumberProperty( 1 );
-    //
-    //
-    //   // model.peakEmitter.addListener
-    //   // model.crossEmitter.addListener
-    // }
-    //
-    //
-    // inherit( alkrsntalskrt, {
-    //
-    //   step: function( dt ) {
-    //     if ( this.state === 4 ) {
-    //       this.alpha = Math.max( 0, this.alpha - FADE_SPEED * dt );
-    //     }
-    //     if ( this.state > 0 && this.state < 4 ) {
-    //
-    //     }
-    //   }
-    //
-    //   reset: function() {
-    //     this.state = 0;
-    //     this.alpha = 1;
-    //   }
-    // } );
+    mass.peekEmitter.addListener( function( direction ) {
 
-
-    mass.peekEmitter.addListener( function( position, direction ) {
-      // debugger;
-      // console.log( self.xOffsetProperty.value );
-
-      if ( (self.xOffsetProperty.value % 60 === 0) && (self.xOffsetProperty.value != 0) ) {
-        // debugger;
-        self.xOffsetProperty.set();
+      if ( self.stateProperty.value === 1 ) {
+        self.firstPeekY = mass.positionProperty.value.y
       }
-      if ( (self.crossingProperty.value % 3 === 0) && (self.crossingProperty.value != 0) ) {
-        // self.crossingProperty.reset();
+      if ( self.stateProperty.value === 3 ) {
+        self.secondPeekY = mass.positionProperty.value.y
       }
       self.directionProperty.set( direction );
+      // if (this)
 
       // console.log(direction);
     } );
@@ -117,7 +80,7 @@ define( function( require ) {
     mass.crossEmitter.addListener( function() {
       self.stateProperty.value += 1;
 
-      if ( (self.stateProperty.value % 5 === 0) && (self.stateProperty != 0) || mass.userControlledProperty.value ) {
+      if ( ((self.stateProperty.value % 5 === 0) && (self.stateProperty != 0)) || mass.userControlledProperty.value ) {
         self.stateProperty.reset();
       }
       // console.log(self.stateProperty.value);
@@ -130,23 +93,14 @@ define( function( require ) {
         self.xOffsetProperty.set( self.xOffsetProperty.value + 20 );
         // debugger;
         self.crossingProperty.set( self.crossingProperty.value + 1 );
-        // console.log( self.xOffsetProperty.value )
-        // console.log( self.crossingProperty.value )
       }
     } )
 
     mass.userControlledProperty.link( function( value ) {
       if ( !value ) {
-        self.xOffsetProperty.reset();
+        self.stateProperty.reset();
         self.crossingProperty.reset();
       }
-    } )
-
-    Property.multilink( [ this.xOffsetProperty, this.crossingProperty ], function( xOffset, crossing ) {
-      // console.log(xOffset)
-      // console.log(crossing)
-
-
     } )
   }
 

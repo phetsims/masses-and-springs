@@ -232,32 +232,16 @@ define( function( require ) {
     this.orientationProperty = new Property( null );
     this.oldIOrientation = null;
 
-    this.positionProperty.link( function( oldPosition, newPosition ) {
+    // Used to determine when a peek is hit.
+    this.verticalVelocityProperty.link( function( oldVelocity, newVelocity ) {
       if ( self.springProperty.value ) {
         var massEquilibrium = self.springProperty.value.massEquilibriumYPositionProperty.value;
-        if ( oldPosition.y < newPosition.y ) {
-          // debugger;
-          // console.log( 'positive' )
-          self.peekEmitter.emit2( newPosition, 1 );
+        if ( Math.sign( oldVelocity ) !== Math.sign( newVelocity ) && Math.sign( oldVelocity ) ) {
+          self.peekEmitter.emit1( 1 );
         }
-        if ( oldPosition.y > newPosition.y ) {
-          // console.log( 'negative' )
-          self.peekEmitter.emit2( newPosition, -1 );
+        if ( Math.sign( oldVelocity ) !== Math.sign( newVelocity.y ) && !Math.sign( oldVelocity ) ) {
+          self.peekEmitter.emit1( -1 );
         }
-        if ( massEquilibrium > newPosition.y ) {
-          // debugger;
-          self.orientationProperty.set( 'below' );
-          // console.log(self.newOrientation);
-          // self.oldOrientation = self.newOrientation;
-        }
-        if ( massEquilibrium < newPosition.y ) {
-          // debugger;
-          self.orientationProperty.set( 'above' );
-          // console.log(self.newOrientation);
-          // self.oldOrientation = self.newOrientation;
-        }
-        // self.crossEmitter.emit2( self.oldOrientation, self.newOrientation );
-
       }
     } )
 

@@ -166,9 +166,6 @@ define( function( require ) {
     // @public {Range} (read-only)
     this.springConstantRange = MassesAndSpringsConstants.SPRING_CONSTANT_RANGE;
 
-    //------------------------------------------------
-    // Derived properties
-
     // @public {Property.<number>} (read-only) length of the spring, units = m
     this.lengthProperty = new DerivedProperty(
       [ this.naturalRestingLengthProperty, this.displacementProperty ],
@@ -243,6 +240,12 @@ define( function( require ) {
         self.setMass( self.massAttachedProperty.get() );
       }
     } );
+
+    this.displacementProperty.link( function( oldValue, newValue ) {
+      if ( Math.sign( oldValue ) != Math.sign( newValue ) ) {
+        self.massAttachedProperty.value.crossEmitter.emit();
+      }
+    } )
   }
 
   massesAndSprings.register( 'Spring', Spring );

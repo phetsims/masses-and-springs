@@ -18,9 +18,11 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
+  var X_OFFSET = 20;
 
   /**
    * @constructor
@@ -35,9 +37,13 @@ define( function( require ) {
     // @protected
     this.modelViewTransform = modelViewTransform;
 
-    this.lineOne = new Line( 0, 0, 0, 0, { lineWidth: 0 } );
+    this.originalY = this.periodTrace.originalY;
+    this.originalX = 400;
+    this.middleX = this.originalX + X_OFFSET;
+    this.lastX = this.originalX + 2 * X_OFFSET;
 
-
+    this.path = new Path( null, { stroke: 'black', lineWidth: 3 } );
+    this.addChild( this.path );
   }
 
   massesAndSprings.register( 'PeriodTraceNode', PeriodTraceNode );
@@ -60,73 +66,42 @@ define( function( require ) {
           mass.springProperty.value.massEquilibriumYPositionProperty.value
         );
 
+        // debugger;
+        var firstY = this.periodTrace.firstPeekY; // when velocity first changes direction AFTER our first zero-crossing
+        var secondY = this.periodTrace.secondPeekY; // when velocity changes direction after our SECOND zero-crossing
 
-//
-//
-//
-//
-// var originY = 0;
-//
-// function TraceNode( trace ) {
-// this.trace = trace;
-//
-//    this.path = new Path( null, { ... } );
-//    this.addChild( path );
-// }
-//
-// inherit( laknsrtlkanrst, {
-//  step: function( dt ) {
-//
-//    var firstY = trace.firstY; // when velocity first changes direction AFTER our first zero-crossing
-//    var secondY = trace.secondY; // when velocity changes direction after our SECOND zero-crossing
-//
-//    var state = trace.state; // 0 to 4
-//
-//    if ( state === 0 ) {
-//      this.visible = false;
-//    }
-//    else {
-//      this.visible = true;
-//      var shape = new Shape();
-//
-//      // first line
-//      shape.moveTo( originalX, originY );            // sets our current position
-//      shape.lineTo( originalX, state === 1 ? currentY : firstY ); // draws a line from our current position to a NEW position, then sets our current position to the NEW position
-//      if ( state > 1 ) {
-//        // first connector
-//        shape.lineTo( middleX, firstY );
-//        // second line
-//        shape.lineTo( middleX, state === 2 ? currentY : secondY );
-//        if ( state > 2 ) {
-//          // second connector
-//          shape.lineTo( lastX, secondY );
-//          // third line
-//          shape.lineTo( lastX, state === 3 ? currentY : originY );
-//        }
-//      }
-//    }
-//
-//    this.path.shape = shape;
-//  }
-// } );
+        var state = this.periodTrace.stateProperty.value; // 0 to 4
+        // console.log(state);
+        // console.log(massPosition.y);
+        // debugger;
+        if ( state === 0 ) {
+          // debugger;
+          this.visible = false;
+        }
+        else {
+          this.visible = true;
+          var shape = new Shape();
 
-// updateShape()
+          // first line
+          console.log( massPosition.y )
 
+          shape.moveTo( this.originalX, this.originalY );            // sets our current position
+          shape.lineTo( this.originalX, massPosition.y ); // draws a line from our current position to a NEW position, then sets our current position to the NEW position
+          if ( state > 1 ) {
+            // first connector
+            shape.lineTo( this.middleX, firstY );
+            // second line
+            shape.lineTo( this.middleX, massPosition.y );
+            if ( state > 2 ) {
+              // second connector
+              shape.lineTo( this.lastX, state === 2 ? massPosition.y : secondY );
+              // third line
+              shape.lineTo( this.lastX, massPosition.y );
+            }
+          }
+          this.path.shape = shape;
 
-        //
-        // this.lineOne = new Line(
-        //   massPosition.x + this.periodTrace.xOffsetProperty.value,
-        //   massEquilibriumYPosition,
-        //   massPosition.x + this.periodTrace.xOffsetProperty.value,
-        //   massPosition.y,
-        //   lineOptions
-        // );
-        // this.addChild( this.lineOne );
-      }
-      else {
-
-        // Once the user drags a mass the lines should be be removed.
-        this.removeAllChildren();
+        }
       }
     }
   } );
