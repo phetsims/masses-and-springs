@@ -13,6 +13,7 @@ define( function( require ) {
     // modules
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
     var BarChartNode = require( 'GRIDDLE/BarChartNode' );
   var ButtonListener = require( 'SCENERY/input/ButtonListener' );
   var ClearThermalButton = require( 'SCENERY_PHET/ClearThermalButton' );
@@ -39,8 +40,8 @@ define( function( require ) {
     var PushButtonIO = require( 'SUN/buttons/PushButtonIO' );
 
     // constants
-    var LEGEND_DESCRIPTION_MAX_WIDTH = 250;
-    var MAX_WIDTH = 150;
+  var LEGEND_DESCRIPTION_MAX_WIDTH = 500;
+  var MAX_WIDTH = 100;
 
     // strings
     var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
@@ -177,55 +178,56 @@ define( function( require ) {
         barSpacing: 5
       } );
 
-      // Manages the symbols used in the legend of the graph
-      var symbolContent = new VBox( {
-        children: [
-          new Text( keString, { font: MassesAndSpringsConstants.TITLE_FONT, fill: '#39d74e', maxWidth: MAX_WIDTH } ),
-          new RichText( peGravString, {
-            font: MassesAndSpringsConstants.TITLE_FONT,
-            fill: '#5798de',
-            maxWidth: MAX_WIDTH
-          } ),
-          new RichText( peElasString, {
-            font: MassesAndSpringsConstants.TITLE_FONT,
-            fill: '#29d4ff',
-            maxWidth: MAX_WIDTH
-          } ),
-          new RichText( eThermString, {
-            font: MassesAndSpringsConstants.TITLE_FONT,
-            fill: '#ff6e26',
-            maxWidth: MAX_WIDTH
-          } ),
-          new RichText( eTotString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
-        ], align: 'left', spacing: 10
-      } );
+      var abbreviationGroup = new AlignGroup();
+      var descriptionGroup = new AlignGroup();
 
-      // Manages the description of the symbols
-      var descriptionContent = new VBox( {
-        children: [
-          new Text( kineticEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } ),
-          new Text( gravitationalPotentialEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } ),
-          new Text( elasticPotentialEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } ),
-          new Text( thermalEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } ),
-          new Text( totalEnergyString, { maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH } )
-        ], align: 'left', spacing: 15
-      } );
-
-      // Used to separate the symbols from their corresponding descriptions.
-      var content = new HBox( {
-        children: [
-          new AlignBox( symbolContent ),
-          new HStrut( 20 ),
-          new AlignBox( descriptionContent )
-        ]
-      } );
-
-      // Dialog that contains text for graph legend
       var dialogContent = new VBox( {
+        spacing: 15,
         children: [
-          new Text( energyLegendString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } ),
-          new AlignBox( content )
-        ], spacing: 10
+          {
+            abbreviation: keString,
+            description: kineticEnergyString,
+            color: '#39d74e'
+          },
+          {
+            abbreviation: peGravString,
+            description: gravitationalPotentialEnergyString,
+            color: '#5798de'
+          }, {
+            abbreviation: peElasString,
+            description: elasticPotentialEnergyString,
+            color: '#29d4ff'
+          }, {
+            abbreviation: eThermString,
+            description: thermalEnergyString,
+            color: '#ff6e26'
+          }, {
+            abbreviation: eTotString,
+            description: totalEnergyString,
+            color: 'black'
+          },
+        ].map( function( itemData ) {
+          return new HBox( {
+            spacing: 20,
+            children: [
+              new AlignBox( new RichText( itemData.abbreviation, {
+                font: MassesAndSpringsConstants.TITLE_FONT,
+                fill: itemData.color,
+                maxWidth: MAX_WIDTH
+              } ), {
+                group: abbreviationGroup,
+                xAlign: 'left'
+              } ),
+              new AlignBox( new Text( itemData.description, {
+                font: MassesAndSpringsConstants.TITLE_FONT
+              } ), {
+                group: descriptionGroup,
+                xAlign: 'left',
+                maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH
+              } )
+            ]
+          } );
+        } )
       } );
 
       // a placeholder for the dialog - constructed lazily so that Dialog has access to
@@ -253,7 +255,13 @@ define( function( require ) {
         centerY: zoomOutButton.centerY,
         listener: function() {
           if ( !dialog ) {
-            dialog = new Dialog( dialogContent, { modal: true } );
+            dialog = new Dialog( dialogContent, {
+              modal: true,
+              title: new Text( energyLegendString, {
+                font: MassesAndSpringsConstants.TITLE_FONT,
+                maxWidth: MAX_WIDTH
+              } )
+            } );
           }
           // close it on a click
           var closeListener = new ButtonListener( {
