@@ -268,13 +268,14 @@ define( function( require ) {
 
     //Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;
-    Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty ], function( velocity, visible ) {
+    Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty, model.accelerationVectorVisibilityProperty ], function( velocity, visible, accelerationVisible ) {
       if ( visible ) {
+        var xOffset = accelerationVisible ? 10 : 0;
         var position = mass.positionProperty.get();
         self.velocityArrow.setTailAndTip(
-          position.x - 10,
+          position.x - xOffset,
           position.y + rect.centerY,
-          position.x - 10,
+          position.x - xOffset,
           position.y + rect.centerY - ARROW_SIZE_DEFAULT * velocity * scalingFactor
         );
       }
@@ -313,8 +314,9 @@ define( function( require ) {
       mass.netForceProperty,
       model.forcesModeProperty,
       model.accelerationVectorVisibilityProperty,
-      mass.accelerationProperty
-    ], function( netForce, forcesMode, accelerationVisible, netAcceleration ) {
+      mass.accelerationProperty,
+      model.velocityVectorVisibilityProperty
+    ], function( netForce, forcesMode, accelerationVisible, netAcceleration, velocityVisible ) {
       var position = mass.positionProperty.get();
       if ( forcesMode === 'netForce' ) {
         if ( Math.abs( netForce ) > 1E-6 ) {
@@ -330,11 +332,12 @@ define( function( require ) {
         }
       }
       if ( accelerationVisible ) {
+        var xOffset = velocityVisible ? 8 : 0;
         if ( Math.abs( netAcceleration ) > 1E-6 ) {
           self.accelerationArrow.setTailAndTip(
-            position.x + 8,
+            position.x + xOffset,
             position.y + rect.centerY,
-            position.x + 8,
+            position.x + xOffset,
             position.y + rect.centerY - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
           );
         }
