@@ -14,7 +14,8 @@ define( function( require ) {
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
     var BarChartNode = require( 'GRIDDLE/BarChartNode' );
-    var ClearThermalButton = require( 'SCENERY_PHET/ClearThermalButton' );
+  var ButtonListener = require( 'SCENERY/input/ButtonListener' );
+  var ClearThermalButton = require( 'SCENERY_PHET/ClearThermalButton' );
   var Color = require( 'SCENERY/util/Color' );
     var DerivedProperty = require( 'AXON/DerivedProperty' );
     var Dialog = require( 'JOIST/Dialog' );
@@ -254,6 +255,11 @@ define( function( require ) {
           if ( !dialog ) {
             dialog = new Dialog( dialogContent, { modal: true } );
           }
+          // close it on a click
+          var closeListener = new ButtonListener( {
+            fire: dialog.hide.bind( dialog )
+          } )
+          dialog.addInputListener( closeListener );
           dialog.show();
         },
         phetioType: PushButtonIO,
