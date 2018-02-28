@@ -270,12 +270,12 @@ define( function( require ) {
     var scalingFactor = 3;
     Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty, model.accelerationVectorVisibilityProperty ], function( velocity, visible, accelerationVisible ) {
       if ( visible ) {
-        var xOffset = accelerationVisible ? 10 : 0;
+        var xOffset = accelerationVisible ? 8 : 0;
         var position = mass.positionProperty.get();
         self.velocityArrow.setTailAndTip(
-          position.x - xOffset,
+          rect.centerX - xOffset,
           position.y + rect.centerY,
-          position.x - xOffset,
+          rect.centerX - xOffset,
           position.y + rect.centerY - ARROW_SIZE_DEFAULT * velocity * scalingFactor
         );
       }
@@ -287,9 +287,9 @@ define( function( require ) {
         var position = mass.positionProperty.get();
         var gravitationalAcceleration = mass.mass * gravity;
         self.gravityForceArrow.setTailAndTip(
-          position.x + (forcesOrientation) * 45,
+          rect.centerX + (forcesOrientation) * 45,
           position.y + rect.centerY,
-          position.x + (forcesOrientation) * 45,
+          rect.centerX + (forcesOrientation) * 45,
           position.y + rect.centerY + ARROW_SIZE_DEFAULT * gravitationalAcceleration
         );
       }
@@ -300,9 +300,9 @@ define( function( require ) {
       if ( visible ) {
         var position = mass.positionProperty.get();
         self.springForceArrow.setTailAndTip(
-          position.x + (forcesOrientation) * 45,
+          rect.centerX + (forcesOrientation) * 45,
           position.y + rect.centerY,
-          position.x + (forcesOrientation) * 45,
+          rect.centerX + (forcesOrientation) * 45,
           position.y + rect.centerY - ARROW_SIZE_DEFAULT * springForce
         );
       }
@@ -321,9 +321,9 @@ define( function( require ) {
       if ( forcesMode === 'netForce' ) {
         if ( Math.abs( netForce ) > 1E-6 ) {
           self.netForceArrow.setTailAndTip(
-            position.x + (forcesOrientation) * 45,
+            rect.centerX + (forcesOrientation) * 45,
             position.y + rect.centerY,
-            position.x + (forcesOrientation) * 45,
+            rect.centerX + (forcesOrientation) * 45,
             position.y + rect.centerY - ARROW_SIZE_DEFAULT * netForce
           );
         }
@@ -335,9 +335,9 @@ define( function( require ) {
         var xOffset = velocityVisible ? 8 : 0;
         if ( Math.abs( netAcceleration ) > 1E-6 ) {
           self.accelerationArrow.setTailAndTip(
-            position.x + xOffset,
+            rect.centerX + xOffset,
             position.y + rect.centerY,
-            position.x + xOffset,
+            rect.centerX + xOffset,
             position.y + rect.centerY - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
           );
         }
@@ -349,7 +349,7 @@ define( function( require ) {
 
     // When the mass's position changes update the forces baseline marker
     mass.positionProperty.link( function( position ) {
-      forceNullLine.setLine( position.x + (forcesOrientation) * 40, position.y + rect.centerY, position.x + (forcesOrientation) * 50, position.y + rect.centerY );
+      forceNullLine.setLine( rect.centerX + (forcesOrientation) * 40, position.y + rect.centerY, rect.centerX + (forcesOrientation) * 50, position.y + rect.centerY );
     } );
   }
 
