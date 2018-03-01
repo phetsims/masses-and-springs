@@ -18,7 +18,6 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
 
   // strings
   var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
