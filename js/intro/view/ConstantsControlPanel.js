@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -77,9 +76,7 @@ define( function( require ) {
       align: 'left',
       spacing: RADIO_BUTTON_SPACING,
       children: [
-        new Text( title, { font: TITLE_FONT, tandem: tandem } ),
-        new HBox( { children: [ new HStrut( 10 ), springConstantRadioButton ] } ),
-        new HBox( { children: [ new HStrut( 10 ), thicknessRadioButton ] } ),
+        new Text( title, { font: TITLE_FONT, tandem: tandem } ), springConstantRadioButton, thicknessRadioButton
       ],
       tandem: tandem.createTandem( 'vBox' )
     } );

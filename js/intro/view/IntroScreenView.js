@@ -12,6 +12,8 @@ define( function( require ) {
   // modules
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/ConstantsControlPanel' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var LineVisibilityNode = require( 'MASSES_AND_SPRINGS/common/view/LineVisibilityNode' );
@@ -93,7 +95,7 @@ define( function( require ) {
       children: [
         this.springLengthControlPanel,
         MassesAndSpringsConstants.LINE_SEPARATOR( 130 ),
-        this.constantsControlPanel
+        new HBox( { children: [ this.constantsControlPanel, new HStrut( 32 ) ] } )
       ]
     } );
 
