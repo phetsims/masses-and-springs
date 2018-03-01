@@ -52,7 +52,7 @@ define( function( require ) {
       } ),
       valueFont: new PhetFont( 14 ),
       majorTickLength: 10,
-      titleFont: MassesAndSpringsConstants.TITLE_FONT,
+      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
