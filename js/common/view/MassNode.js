@@ -158,11 +158,19 @@ define( function( require ) {
       // Handler that moves the particle in model space.
       onDrag: function() {
 
+        if ( self.mass.springProperty.value ) {
+          self.mass.springProperty.value.buttonEnabledProperty.set( false );
+        }
+
         // Checks if mass should be attached/detached to spring and adjusts its position if so.
         model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       },
       startDrag: function() {
         mass.userControlledProperty.set( true );
+
+        if ( self.mass.springProperty.value ) {
+          self.mass.springProperty.value.buttonEnabledProperty.set( false );
+        }
         self.moveToFront();
       },
       endDrag: function() {
