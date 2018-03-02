@@ -205,6 +205,7 @@ define( function( require ) {
       baseColor: 'black',
       selectedLineWidth: 2,
       deselectedLineWidth: .5,
+      deselectedButtonOpacity: 0.25,
       orientation: 'horizontal',
       spacing: 10
     } );

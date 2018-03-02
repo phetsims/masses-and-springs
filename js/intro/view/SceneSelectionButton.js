@@ -31,8 +31,8 @@ define( function( require ) {
   function SceneSelectionButton( springLength, mvt, tandem ) {
 
     Node.call( this, {
-      scale: IMAGE_SCALE
-      // preventFit: true
+      scale: IMAGE_SCALE,
+      opacity: 0.9
     } );
 
     // @public {read-only} Springs created to be used in the icons for the scene selection tabs
@@ -60,6 +60,7 @@ define( function( require ) {
         frontColor: '#000000',
         middleColor: '#636362',
         backColor: 'black',
+        opacity: this.opacity
       } );
     firstSpringIcon.loopsProperty.set( 6 );
     firstSpringIcon.lineWidthProperty.set( 3 );
@@ -73,6 +74,7 @@ define( function( require ) {
         frontColor: '#000000',
         middleColor: '#636362',
         backColor: 'black',
+        opacity: this.opacity
       } );
     secondSpringIcon.loopsProperty.set( 6 );
     secondSpringIcon.lineWidthProperty.set( 3 );
@@ -96,14 +98,16 @@ define( function( require ) {
       stroke: 'black',
       lineWidth: 4,
       centerX: firstSpringIcon.centerX,
-      top: firstSpringIcon.top
+      top: firstSpringIcon.top,
+      opacity: this.opacity
     } );
 
     var secondVerticalLineNode = new Line( 60, 0, 0, 0, {
       stroke: 'black',
       lineWidth: 4,
       centerX: secondSpringIcon.centerX,
-      top: secondSpringIcon.top
+      top: secondSpringIcon.top,
+      opacity: this.opacity
     } );
 
     // @private {read-only} White background for scene switching icons
