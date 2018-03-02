@@ -393,8 +393,6 @@ define( function( require ) {
       if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() ) {
         this.massAttachedProperty.get().preserveThermalEnergy = false;
 
-        this.buttonEnabledProperty.set( this.massAttachedProperty.get().verticalVelocityProperty.get() !== 0 );
-
         // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
         // references that could be provided that describe where this came from?
 
@@ -491,6 +489,7 @@ define( function( require ) {
           new Vector2( this.positionProperty.get().x, this.bottomProperty.get() + this.massAttachedProperty.get().hookHeight / 2 )
         );
 
+        this.buttonEnabledProperty.set( this.massAttachedProperty.get().verticalVelocityProperty.get() !== 0 );
         this.massAttachedProperty.get().preserveThermalEnergy = true;
       }
     }
