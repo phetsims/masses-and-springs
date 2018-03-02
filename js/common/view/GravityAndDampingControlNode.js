@@ -167,21 +167,20 @@ define( function( require ) {
     }
     else {
       gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
-      questionTextOffset = 21.5;
     }
 
     // Manages the values associated with the gravity panel in a combo box
     var questionTextNode = new VBox( {
-      children:
-        [
-          // TODO: Can we match the bounds of the questionText to the gravitySlider so the panel doesn't change size
-          new VStrut( questionTextOffset ),
-          new Text( whatIsTheValueOfGravityString, {
-            font: MassesAndSpringsConstants.TITLE_FONT,
-            maxWidth: this.maxWidth
-          } ),
-          new VStrut( questionTextOffset )
-        ]
+
+      children: [
+        new VStrut( questionTextOffset ),
+        new Text( whatIsTheValueOfGravityString, {
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: this.maxWidth
+        } ),
+        new VStrut( questionTextOffset )
+      ],
+      localBounds: gravitySlider.localBounds
     } );
 
     if ( options.dampingVisible ) {
