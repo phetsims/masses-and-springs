@@ -97,7 +97,6 @@ define( function( require ) {
         self.zoomLevelProperty.value += 1;
       } );
 
-      // TODO: Can we move this into the bar node? Ask JO
       // {read-write} Responsible for adjusting the scaling of the barNode heights.
       var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
         return Math.pow( 2, zoomLevel ) * 20;
