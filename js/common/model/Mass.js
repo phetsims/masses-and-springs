@@ -61,7 +61,7 @@ define( function( require ) {
     // @public Non-property attributes
     this.isLabeled = isLabeled
     this.adjustable = options.adjustable;
-    this.mysteryLable = options.mysteryLabel;
+    this.mysteryLabel = options.mysteryLabel;
     this.color = color;
 
     // @public (read-only) {Property.<number>} mass of mass object in kg
