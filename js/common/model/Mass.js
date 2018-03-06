@@ -59,7 +59,7 @@ define( function( require ) {
     }, options );
 
     // @public Non-property attributes
-    this.isLabeled = isLabeled
+    this.isLabeled = isLabeled;
     this.adjustable = options.adjustable;
     this.mysteryLabel = options.mysteryLabel;
     this.color = color;
