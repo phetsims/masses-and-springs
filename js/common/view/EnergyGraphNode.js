@@ -309,7 +309,6 @@ define( function( require ) {
         ], spacing: 4
       } );
 
-      // TODO: Not having an option for the accordion box gives me a tandem error.
       AccordionBox.call( this, accordionBoxContent, {
         buttonYMargin: 4,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
