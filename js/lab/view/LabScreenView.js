@@ -75,7 +75,7 @@ define( function( require ) {
         fill: MassesAndSpringsConstants.PANEL_FILL,
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         tandem: tandem.createTandem( 'LineVisibilityNode' ),
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 5
       } );
 
     this.addChild( optionsPanel );

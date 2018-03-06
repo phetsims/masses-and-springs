@@ -180,7 +180,7 @@ define( function( require ) {
         } ),
         new VStrut( questionTextOffset )
       ],
-      localBounds: gravitySlider.localBounds
+      center: gravitySlider.center
     } );
 
     if ( options.dampingVisible ) {
@@ -218,11 +218,13 @@ define( function( require ) {
         ]
       } );
 
+      // Created so we can swap visibility of the questionTextNode and the gravitySlider for Planet X
+      var gravityNode = new Node( { children: [ questionTextNode, gravitySlider ] } );
       var contentVBox = new VBox( {
         align: 'center',
         spacing: 8,
         children: [
-          questionTextNode,
+          gravityNode,
           gravityComboBox,
           dampingHSliderTitle,
           dampingHSlider
@@ -244,11 +246,12 @@ define( function( require ) {
         ]
       } );
 
+      gravityNode = new Node( { children: [ questionTextNode, gravitySlider ] } );
       contentVBox = new VBox( {
         align: 'center',
         spacing: 8,
         children: [
-          questionTextNode,
+          gravityNode,
           gravityComboBox,
           new VStrut( 2 ),
           dampingEqualsZeroText
@@ -263,21 +266,15 @@ define( function( require ) {
 
       // Unhide the gravitySlider if we are not using planetX
       if ( newBody !== Body.PLANET_X ) {
-
-        // Removes the questionTextNode and replaces it with a gravity slider
-        contentVBox.removeChild( contentVBox.children[ 0 ] );
-        contentVBox.insertChild( 0, gravitySlider );
+        questionTextNode.visible = false;
+        gravitySlider.visible = !questionTextNode.visible;
       }
 
       // If PlanetX hide the slider and update gravity
       if ( newBody === Body.PLANET_X ) {
-
-        // Removes the gravity slider and replaces it with a questionTextNode
-        contentVBox.removeChild( contentVBox.children[ 0 ] );
-        contentVBox.insertChild( 0, questionTextNode );
-
+        questionTextNode.visible = true;
+        gravitySlider.visible = !questionTextNode.visible;
         self.gravityProperty.set( body.gravity );
-
       }
 
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
