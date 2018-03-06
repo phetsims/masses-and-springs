@@ -120,7 +120,7 @@ define( function( require ) {
     } );
     this.addChild( hookNode );
 
-    var labelString = mass.options.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
+    var labelString = mass.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
     var label = new Text( labelString, {
       font: new PhetFont( { size: 12, weight: 'bold' } ),
       fill: 'black',
@@ -131,7 +131,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'label' )
     } );
 
-    if ( isLabeled ) {
+    if ( mass.isLabeled ) {
       self.addChild( label );
     }
     mass.massProperty.link( function() {
@@ -139,7 +139,7 @@ define( function( require ) {
     } );
 
     // Adjust the mass label for adjustable masses.
-    if ( mass.options.adjustable ) {
+    if ( this.adjusable ) {
       self.mass.massProperty.link( function( massValue ) {
         label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
         label.center = rect.center;

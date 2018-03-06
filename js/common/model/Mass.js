@@ -50,8 +50,7 @@ define( function( require ) {
 
     var self = this;
 
-    // TODO: Usually options objects aren't exposed outside @private, why would we assign to this.options.
-    this.options = _.extend( {
+    options = _.extend( {
       adjustable: false,
       mysteryLabel: false,
       density: 80, // Constant used to keep all of our masses consistent in the model.
@@ -59,19 +58,22 @@ define( function( require ) {
       zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf
     }, options );
 
+    // @public Non-property attributes
+    this.isLabeled = isLabeled
+    this.adjustable = options.adjustable;
+    this.mysteryLable = options.mysteryLabel;
+    this.color = color;
+
     // @public (read-only) {Property.<number>} mass of mass object in kg
     this.massProperty = new NumberProperty( massValue );
 
     // @public {Property.<number>} (read-write) radius of the massNode dependent its mass value
     this.radiusProperty = new DerivedProperty( [ this.massProperty ], function( massValue ) {
-      return Math.pow( ( massValue ) / ( self.options.density * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * SCALING_FACTOR;
+      return Math.pow( ( massValue ) / ( options.density * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * SCALING_FACTOR;
     } );
 
     // @public {number}
     this.mass = massValue;
-
-    // @public {string}
-    this.color = color;
 
     this.gradientEnabledProperty = new Property( true );
 
@@ -82,7 +84,7 @@ define( function( require ) {
       } );
 
     this.cylinderHeightProperty.link( function( cylinderHeight ) {
-      self.options.zeroReferencePoint = -cylinderHeight / 2;
+      options.zeroReferencePoint = -cylinderHeight / 2;
     } );
 
     // @public {number} hook height in m
@@ -178,7 +180,7 @@ define( function( require ) {
       function( mass, gravity, position ) {
 
         // The height used is determined based on the height of the shelf the masses rest on.
-        var heightFromZero = position.y - self.options.zeroReferencePoint - self.heightProperty.value;
+        var heightFromZero = position.y - options.zeroReferencePoint - self.heightProperty.value;
         return ( mass * gravity * ( heightFromZero ) );
       } );
 
