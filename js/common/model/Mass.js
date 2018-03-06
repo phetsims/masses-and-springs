@@ -46,8 +46,6 @@ define( function( require ) {
    * @constructor
    */
   function Mass( massValue, xPosition, isLabeled, color, gravityProperty, tandem, options ) {
-    // TODO: isLabeled/color are in the parameters AND options, should only be one.
-
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
 
     var self = this;
@@ -55,7 +53,6 @@ define( function( require ) {
     // TODO: Usually options objects aren't exposed outside @private, why would we assign to this.options.
     this.options = _.extend( {
       adjustable: false,
-      isLabeled: isLabeled,
       mysteryLabel: false,
       density: 80, // Constant used to keep all of our masses consistent in the model.
       color: new Color( color ),

@@ -131,7 +131,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'label' )
     } );
 
-    if ( mass.options.isLabeled ) {
+    if ( isLabeled ) {
       self.addChild( label );
     }
     mass.massProperty.link( function() {
