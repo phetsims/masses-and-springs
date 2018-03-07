@@ -48,17 +48,11 @@ define( function( require ) {
 
     Node.call( this, options );
 
-    var velocityArrow = new VectorArrow(
-      MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'panelVelocityArrow', tandem
-    );
-    var accelerationArrow = new VectorArrow(
-      MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'panelAccelerationArrow', tandem
-    );
-    var gravityArrow = new ForceVectorArrow(
-      MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'panelGravityArrow', tandem
-    );
-    var springArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'panelSpringArrow', tandem );
-    var netForceArrow = new ForceVectorArrow( 'black', 'panelNetForceArrow', tandem );
+    var velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
+    var accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
+    var gravityArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
+    var springArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
+    var netForceArrow = new ForceVectorArrow( 'black' );
 
     // responsible for velocity and acceleration vectors checkboxes
     var vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {

@@ -20,19 +20,16 @@ define( function( require ) {
 
   /**
    * @param {Color} color
-   * @param {string} tandemID - string name of tandem
-   * @param {Tandem} tandem
    * @constructor
    */
   // REVIEW: We are creating different arrows. Should we have to pass in the tandem and tandem ID separately?
-  function VectorArrow( color, tandemID, tandem ) {
+  function VectorArrow( color ) {
     ArrowNode.call( this, 10, 0, VECTOR_ARROW_LENGTH, 0, {
       fill: color,
       stroke: 'black',
       centerY: 0,
       tailWidth: ARROW_TAIL_WIDTH,
-      headWidth: ARROW_HEAD_WIDTH,
-      tandem: tandem.createTandem( tandemID )
+      headWidth: ARROW_HEAD_WIDTH
     } );
   }
 

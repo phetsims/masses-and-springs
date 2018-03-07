@@ -195,11 +195,11 @@ define( function( require ) {
     } );
 
     //Arrows created for vectors associated with mass nodes
-    this.velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR, 'velocityArrow', tandem );
-    this.accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR, 'accelerationArrow', tandem );
-    this.gravityForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR, 'gravityForceArrow', tandem );
-    this.springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR, 'springForceArrow', tandem );
-    this.netForceArrow = new ForceVectorArrow( 'black', 'netForceArrow', tandem );
+    this.velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
+    this.accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
+    this.gravityForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
+    this.springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
+    this.netForceArrow = new ForceVectorArrow( 'black' );
 
     this.addChild( this.velocityArrow );
     this.addChild( this.accelerationArrow );
