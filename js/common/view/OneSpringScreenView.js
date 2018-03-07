@@ -215,7 +215,6 @@ define( function( require ) {
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
-      // TODO: Try to create container nodes for each section that gets repositioned as a unit. Then just move that container node.
       //Update the bounds of view elements
       springHangerNode.top = self.spacing;
       movableLineNode.centerX = springHangerNode.centerX;
