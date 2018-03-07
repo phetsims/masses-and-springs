@@ -162,7 +162,6 @@ define( function( require ) {
           labelString: eTotString
         }
       ], new Property( new Range( -75, 435 ) ), {
-        // TODO: Options here are not being used by sim. Why are common code options being used? Ask JO.
         barOptions: {
           totalRange: new Range( 0, 380 ),
           scaleProperty: scaleFactorProperty,
