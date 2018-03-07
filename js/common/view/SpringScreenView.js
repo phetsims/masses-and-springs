@@ -183,6 +183,13 @@ define( function( require ) {
     },
 
     /**
+     * Responsible for making sure the resetAllButton is in front of the scene graph at all times.
+     */
+    step: function() {
+      this.resetAllButton.moveToFront()
+    },
+
+    /**
      * Creates a stopper button that stops the oscillation of its referenced spring.
      *
      * @param {Spring} spring
