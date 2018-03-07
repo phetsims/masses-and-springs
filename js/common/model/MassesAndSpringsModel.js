@@ -236,7 +236,7 @@ define( function( require ) {
 
       // Mystery masses should have a question mark as their label.
       for ( var i = 4; i < this.masses.length; i++ ) {
-        this.masses[ i ].options.mysteryLabel = true;
+        this.masses[ i ].mysteryLabel = true;
       }
     },
 
