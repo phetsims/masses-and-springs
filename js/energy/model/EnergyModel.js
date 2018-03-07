@@ -33,10 +33,13 @@ define( function( require ) {
   massesAndSprings.register( 'EnergyModel', EnergyModel );
 
   return inherit( MassesAndSpringsModel, EnergyModel, {
-      reset: function() {
-        MassesAndSpringsModel.prototype.reset.call( this );
-        this.dampingProperty.set( 0.2 );
-      }
+    /**
+     * @public
+     */
+    reset: function() {
+      MassesAndSpringsModel.prototype.reset.call( this );
+      this.dampingProperty.set( 0.2 );
+    }
     }
   );
 } );

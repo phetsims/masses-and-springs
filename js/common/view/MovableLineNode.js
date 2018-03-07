@@ -88,6 +88,9 @@ define( function( require ) {
   massesAndSprings.register( 'MovableLineNode', MovableLineNode );
 
   return inherit( Node, MovableLineNode, {
+    /**
+     * @public
+     */
     reset: function() {
       this.positionProperty.reset();
     }

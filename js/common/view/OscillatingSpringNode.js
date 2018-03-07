@@ -91,6 +91,9 @@ define( function( require ) {
   massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );
 
   return inherit( ParametricSpringNode, OscillatingSpringNode, {
+      /**
+       * @public
+       */
       reset: function() {
         ParametricSpringNode.prototype.reset.call( this );
         this.spring.reset();

@@ -251,16 +251,18 @@ define( function( require ) {
 
   return inherit( SpringScreenView, OneSpringScreenView, {
     /**
-     * TODO: add documentation
+     * @public
      */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
       this.energyGraphNode.reset();
     },
     /**
-     * TODO: add documentation
+     * Responsible for updating the energy bar graph
+     *
+     * @public
      */
-    step: function( dt ) {
+    step: function() {
       this.energyGraphNode.update();
     }
   } );

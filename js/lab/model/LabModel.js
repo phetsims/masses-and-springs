@@ -48,6 +48,11 @@ define( function( require ) {
   massesAndSprings.register( 'LabModel', LabModel );
 
   return inherit( MassesAndSpringsModel, LabModel, {
+    /**
+     * @override
+     *
+     * @public
+     */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
       this.dampingProperty.set( 0.2 );
