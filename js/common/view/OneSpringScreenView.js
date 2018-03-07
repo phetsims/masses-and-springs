@@ -42,8 +42,7 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @constructor
    */
-  // TODO: Rename OneSpringScreenView (same for TwoSpringView)
-  function OneSpringView( model, tandem ) {
+  function OneSpringScreenView( model, tandem ) {
     this.model = model; // Make model available
     SpringScreenView.call( this, model, tandem );
     var self = this;
@@ -249,9 +248,9 @@ define( function( require ) {
     } );
   }
 
-  massesAndSprings.register( 'OneSpringView', OneSpringView );
+  massesAndSprings.register( 'OneSpringScreenView', OneSpringScreenView );
 
-  return inherit( SpringScreenView, OneSpringView, {
+  return inherit( SpringScreenView, OneSpringScreenView, {
     /**
      * TODO: add documentation
      */

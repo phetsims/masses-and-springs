@@ -17,7 +17,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
-  var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
+  var TwoSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringScreenView' );
   var Panel = require( 'SUN/Panel' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -35,7 +35,7 @@ define( function( require ) {
   function VectorsScreenView( model, tandem ) {
 
     // Calls common two spring view
-    TwoSpringView.call( this, model, tandem );
+    TwoSpringScreenView.call( this, model, tandem );
     var self = this;
 
     // Displacement arrows added for each springs
@@ -176,5 +176,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'VectorsScreenView', VectorsScreenView );
 
-  return inherit( TwoSpringView, VectorsScreenView );
+  return inherit( TwoSpringScreenView, VectorsScreenView );
 } );

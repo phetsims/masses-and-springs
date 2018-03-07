@@ -27,7 +27,7 @@ define( function( require ) {
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TwoSpringView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringView' );
+  var TwoSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringScreenView' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
@@ -49,7 +49,7 @@ define( function( require ) {
     var self = this;
 
     // Calls common two spring view
-    TwoSpringView.call( this, model, tandem );
+    TwoSpringScreenView.call( this, model, tandem );
 
     // Spring Length Control Panel
     var minMaxLabels = [
@@ -272,5 +272,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'IntroScreenView', IntroScreenView );
 
-  return inherit( TwoSpringView, IntroScreenView );
+  return inherit( TwoSpringScreenView, IntroScreenView );
 } );

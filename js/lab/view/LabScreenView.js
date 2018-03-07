@@ -14,7 +14,7 @@ define( function( require ) {
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var OneSpringView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringView' );
+  var OneSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringScreenView' );
   var VectorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlNode' );
   var Panel = require( 'SUN/Panel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -28,7 +28,7 @@ define( function( require ) {
   function LabScreenView( model, tandem ) {
 
     // Calls common spring view
-    OneSpringView.call( this, model, tandem );
+    OneSpringScreenView.call( this, model, tandem );
     var self = this;
 
     // TODO: Make things that aren't really panels NOT panels.
@@ -94,5 +94,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );
 
-  return inherit( OneSpringView, LabScreenView );
+  return inherit( OneSpringScreenView, LabScreenView );
 } );

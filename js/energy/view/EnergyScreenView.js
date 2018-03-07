@@ -16,7 +16,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Panel = require( 'SUN/Panel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-  var OneSpringView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringView' );
+  var OneSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringScreenView' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -27,7 +27,7 @@ define( function( require ) {
   function EnergyScreenView( model, tandem ) {
 
     // Calls common spring view
-    OneSpringView.call( this, model, tandem );
+    OneSpringScreenView.call( this, model, tandem );
     var self = this;
 
     // Gravity Control Panel
@@ -77,5 +77,5 @@ define( function( require ) {
 
   massesAndSprings.register( 'EnergyScreenView', EnergyScreenView );
 
-  return inherit( OneSpringView, EnergyScreenView );
+  return inherit( OneSpringScreenView, EnergyScreenView );
 } );

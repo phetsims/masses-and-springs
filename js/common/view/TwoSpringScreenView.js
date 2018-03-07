@@ -35,7 +35,7 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @constructor
    */
-  function TwoSpringView( model, tandem ) {
+  function TwoSpringScreenView( model, tandem ) {
     this.model = model; // Make model available
     SpringScreenView.call( this, model, tandem );
     var self = this;
@@ -175,7 +175,7 @@ define( function( require ) {
     } );
   }
 
-  massesAndSprings.register( 'TwoSpringView', TwoSpringView );
+  massesAndSprings.register( 'TwoSpringScreenView', TwoSpringScreenView );
 
-  return inherit( SpringScreenView, TwoSpringView );
+  return inherit( SpringScreenView, TwoSpringScreenView );
 } );
