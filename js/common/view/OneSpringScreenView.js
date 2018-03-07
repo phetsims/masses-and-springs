@@ -201,7 +201,6 @@ define( function( require ) {
     this.addChild( this.energyGraphNode );
 
     // Adding Buttons to scene graph
-    this.addChild( this.resetAllButton );
     this.addChild( this.timeControlPanel );
     this.addChild( springStopperButtonNode );
 
@@ -211,6 +210,9 @@ define( function( require ) {
     this.addChild( displacementArrowNode );
     this.addChild( movableLineNode );
     this.addChild( this.massLayer );
+    this.addChild( this.toolsLayer );
+
+    this.addChild( this.resetAllButton );
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {

@@ -133,7 +133,6 @@ define( function( require ) {
     this.addChild( this.secondSpringConstantControlPanel );
 
     // Adding Buttons to scene graph
-    this.addChild( this.resetAllButton );
     this.addChild( this.timeControlPanel );
     this.addChild( this.firstSpringStopperButtonNode );
     this.addChild( this.secondSpringStopperButtonNode );
@@ -143,6 +142,9 @@ define( function( require ) {
     this.addChild( secondNaturalLengthLineNode );
     this.addChild( movableLineNode );
     this.addChild( this.massLayer );
+    this.addChild( this.toolsLayer );
+
+    this.addChild( this.resetAllButton );
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {

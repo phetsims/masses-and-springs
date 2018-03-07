@@ -113,10 +113,18 @@ define( function( require ) {
       tandem.createTandem( 'rulerNode' )
     );
 
+    // Create specific layer for tools so they don't overlap the reset all button.
+    this.toolsLayer = new Node( {
+      children: [ this.timerNode, this.rulerNode ],
+      tandem: tandem.createTandem( 'massLayer' ),
+      preventFit: true
+    } );
+
     // Reset All button
     this.resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
+
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
         self.resetMassLayer();
       },
@@ -155,8 +163,6 @@ define( function( require ) {
 
     // Adding tools in toolbox
     this.addChild( this.toolboxPanel );
-    this.addChild( this.timerNode );
-    this.addChild( this.rulerNode );
     this.timerNode.toolbox = this.toolboxPanel;
     this.rulerNode.toolbox = this.toolboxPanel;
 
@@ -181,13 +187,13 @@ define( function( require ) {
         massNode.moveToFront();
       } );
     },
-
-    /**
-     * Responsible for making sure the resetAllButton is in front of the scene graph at all times.
-     */
-    step: function() {
-      this.resetAllButton.moveToFront();
-    },
+    //
+    // /**
+    //  * Responsible for making sure the resetAllButton is in front of the scene graph at all times.
+    //  */
+    // step: function() {
+    //   this.resetAllButton.moveToFront();
+    // },
 
     /**
      * Creates a stopper button that stops the oscillation of its referenced spring.
