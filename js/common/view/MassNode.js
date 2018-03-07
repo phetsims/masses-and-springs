@@ -51,7 +51,7 @@ define( function( require ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
-    // TODO: public or private?
+    // @public
     this.mass = mass;
 
     var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
