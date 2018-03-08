@@ -20,6 +20,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' )
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -238,7 +239,7 @@ define( function( require ) {
       var dampingEqualsZeroText = new HBox( {
         align: 'left',
         children: [
-          new Text( dampingEqualsZeroString, {
+          new Text( StringUtils.fillIn( dampingEqualsZeroString, { equalsZero: MathSymbols.EQUAL_TO + ' 0' } ), {
             font: MassesAndSpringsConstants.TITLE_FONT,
             maxWidth: this.maxWidth
           } ),

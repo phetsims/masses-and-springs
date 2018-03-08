@@ -27,7 +27,7 @@
     "value": "Damping"
   },
   "dampingEqualsZero": {
-    "value": "Damping = 0"
+    "value": "Damping {{equalsZero}}"
   },
   "displacement": {
     "value": "Displacement"
