@@ -73,6 +73,9 @@ define( function( require ) {
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
+    // @public {Property.<number>} distance from of the bottom of the spring from the massEquilibriumYPosition
+    this.massEquilibriumDisplacementProperty = new Property( 0 );
+
     // @public {Property.<number>} spring constant of spring
     this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
@@ -241,9 +244,18 @@ define( function( require ) {
       }
     } );
 
-    this.displacementProperty.link( function( oldValue, newValue ) {
+    // @public used to determine when the period tracer should alternate directions
+    this.peakEmitter = new Emitter();
+
+    // @public used to determine when the mass has crossed over its equilibrium position while oscillating
+    this.crossEmitter = new Emitter();
+
+    // @public used to determine when the mass is dropped
+    this.droppedEmitter = new Emitter();
+
+    this.massEquilibriumDisplacementProperty.link( function( oldValue, newValue ) {
       if ( Math.sign( oldValue ) != Math.sign( newValue ) ) {
-        self.massAttachedProperty.value.crossEmitter.emit();
+        self.crossEmitter.emit();
       }
     } )
   }

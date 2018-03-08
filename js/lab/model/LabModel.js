@@ -47,13 +47,8 @@ define( function( require ) {
       mysteryLabel: true
     } ) );
 
-    // TODO:document
-    // TODO: Can we initialize the trace with no mass? i.e. mass = null
-    this.periodTrace = new PeriodTrace( this.masses[ 0 ] );
-
-    this.springs[ 0 ].massAttachedProperty.link( function( mass ) {
-      self.periodTrace.massProperty.set( mass );
-    } );
+    // Initialize period trace.
+    this.periodTrace = new PeriodTrace( this.springs[ 0 ] );
   }
 
   massesAndSprings.register( 'LabModel', LabModel );

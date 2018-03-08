@@ -167,7 +167,9 @@ define( function( require ) {
       },
       endDrag: function() {
         mass.userControlledProperty.set( false );
-        mass.userReleasedHeightProperty.set( mass.positionProperty.value.y )
+        if ( mass.springProperty.value ) {
+          mass.springProperty.value.droppedEmitter.emit();
+        }
         // console.log(mass.userReleasedHeightProperty.value)
       }
     } );
@@ -175,11 +177,6 @@ define( function( require ) {
 
     this.mass.positionProperty.link( function( position ) {
       self.translation = modelViewTransform2.modelToViewPosition( position );
-      // debugger;
-      // if(self.mass.springProperty.value &&
-      //   rect.centerX === self.mass.springProperty.value.massEquilibriumYPositionProperty.get()){
-      //   debugger;
-      // }
     } );
 
     modelBoundsProperty.link( function( modelDragBounds ) {

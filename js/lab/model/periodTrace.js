@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Model for period trace of mass oscillation.
+ * Model for period trace of mass's oscillation.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -10,7 +10,6 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
@@ -23,19 +22,18 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function PeriodTrace( mass ) {
+  function PeriodTrace( spring ) {
 
     var self = this;
 
-    this.originalY = 300;
+    this.originalY = 0;
 
     //TODO: Use numberProperty when applicable
 
     // @public {Property} mass which is being tracked
-    this.massProperty = new Property( mass );
+    this.springProperty = new Property( spring );
 
-
-    // @public {Property} orientation of the mass oscillation.
+    // @public {Property} orientation of the spring's oscillation.
     this.directionProperty = new Property( null )
 
     // @public {Property} units the trace should be positioned away from the origin in the x direction
@@ -56,50 +54,63 @@ define( function( require ) {
     // 4: Pendulum trace completed.
     this.stateProperty = new Property( 0 );
 
-    this.firstPeekY = this.originalY + 50;
-    this.secondPeekY = this.originalY - 50;
+    this.firstPeakY = 0;
+    this.secondPeakY = 0;
 
     // optional parameter used to measure rate of trace fading
     this.alphaProperty = new Property( 1 );
 
+    // When a mass is attached the origin of the trace should be the mass equilibrium.
+    this.springProperty.value.massAttachedProperty.link( function() {
+      self.originalY = self.springProperty.value.massEquilibriumYPositionProperty.value;
+    } );
 
-    mass.peekEmitter.addListener( function( direction ) {
-
-      if ( self.stateProperty.value === 1 ) {
-        self.firstPeekY = mass.positionProperty.value.y
-      }
-      if ( self.stateProperty.value === 3 ) {
-        self.secondPeekY = mass.positionProperty.value.y
+    var peakListener = function( direction ) {
+      if ( self.stateProperty.value != 0 ) {
+        if ( crossingProperty.value > 1 ) {}
+        if ( self.stateProperty.value === 2 ) {
+          self.firstPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value
+        }
+        if ( self.stateProperty.value === 4 ) {
+          self.secondPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value
+        }
       }
       self.directionProperty.set( direction );
-      // if (this)
+    };
+    var crossListener = function() {
 
-      // console.log(direction);
-    } );
+      self.crossingProperty.value += 1;
 
-    mass.crossEmitter.addListener( function() {
-      self.stateProperty.value += 1;
-
-      if ( ((self.stateProperty.value % 5 === 0) && (self.stateProperty != 0)) || mass.userControlledProperty.value ) {
+      if ( ((self.stateProperty.value % 5 === 0) && (self.stateProperty != 0)) || self.springProperty.value.massAttachedProperty.value.userControlledProperty.value ) {
         self.stateProperty.reset();
       }
-      // console.log(self.stateProperty.value);
+    };
 
-    } );
+    var droppedListener = function() {
+      self.stateProperty.reset();
+      self.crossingProperty.reset();
 
-    this.directionProperty.link( function( oldValue, newValue ) {
+    };
+
+    this.springProperty.value.peakEmitter.addListener( peakListener );
+    this.springProperty.value.crossEmitter.addListener( crossListener );
+    this.springProperty.value.droppedEmitter.addListener( droppedListener );
+
+    // this.springProperty.value.massAttachedProperty.link( function( mass ) {
+    //   if ( mass && mass.userControlledProperty.value ) {
+    //     self.stateProperty.reset();
+    //     self.crossingProperty.reset();
+    //   }
+    // } )
+    if ( this.springProperty.value.massAttachedProperty.value ) {
+      value.userControlledProperty.link( userControlledListener );
+    }
+    this.directionProperty.lazyLink( function( oldValue, newValue ) {
       if ( oldValue !== newValue ) {
         // debugger;
         self.xOffsetProperty.set( self.xOffsetProperty.value + 20 );
         // debugger;
         self.crossingProperty.set( self.crossingProperty.value + 1 );
-      }
-    } )
-
-    mass.userControlledProperty.link( function( value ) {
-      if ( !value ) {
-        self.stateProperty.reset();
-        self.crossingProperty.reset();
       }
     } )
   }

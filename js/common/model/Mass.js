@@ -115,9 +115,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'userControlledProperty' )
     } );
 
-    // @public {Property.<number>} height in m that a user dropped the mass
-    this.userReleasedHeightProperty = new Property( 0 );
-
     // @private {Property.<boolean>} indicates whether the mass is animating after being released and not attached to s
     this.isAnimatingProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isAnimatingProperty' )
@@ -221,35 +218,23 @@ define( function( require ) {
         return initialEnergy - totalEnergy;
       } );
 
-    // @public used to determine when the period tracer should alternate directions
-    this.peekEmitter = new Emitter();
-
-    // @public used to determine when the mass has crossed over its equilibrium position while oscillating
-    this.crossEmitter = new Emitter();
-
     var crossCount = 0
 
     this.orientationProperty = new Property( null );
     this.oldIOrientation = null;
 
-    // Used to determine when a peek is hit.
-    this.verticalVelocityProperty.link( function( oldVelocity, newVelocity ) {
+    // Used to determine when a peak is hit.
+    this.verticalVelocityProperty.lazyLink( function( oldVelocity, newVelocity ) {
       if ( self.springProperty.value ) {
         var massEquilibrium = self.springProperty.value.massEquilibriumYPositionProperty.value;
         if ( Math.sign( oldVelocity ) !== Math.sign( newVelocity ) && Math.sign( oldVelocity ) ) {
-          self.peekEmitter.emit1( 1 );
+          self.springProperty.value.peakEmitter.emit1( 1 );
         }
         if ( Math.sign( oldVelocity ) !== Math.sign( newVelocity.y ) && !Math.sign( oldVelocity ) ) {
-          self.peekEmitter.emit1( -1 );
+          self.springProperty.value.peakEmitter.emit1( -1 );
         }
       }
     } )
-
-    this.orientationProperty.link( function( oldValue, newValue ) {
-      if ( oldValue !== newValue ) {
-        self.crossEmitter.emit()
-      }
-    } );
 
     this.userControlledProperty.link( function( userControlled ) {
       if ( !userControlled && self.springProperty.get() ) {
