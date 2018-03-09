@@ -17,7 +17,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
 
   // constants
-  var X_OFFSET = 20;
+  var X_OFFSET = 10;
   var FADE_OUT_SPEED = 1; // the speed at which the trace fades out.
 
 
@@ -46,7 +46,7 @@ define( function( require ) {
     this.middleX = this.originalX + X_OFFSET;
     this.lastX = this.originalX + 2 * X_OFFSET;
 
-    this.path = new Path( null, { stroke: this.traceColor, lineWidth: 3 } );
+    this.path = new Path( null, { stroke: this.traceColor, lineWidth: 2.5 } );
     this.addChild( this.path );
     this.periodTrace.stateProperty.link( function( state ) {
       if ( state === 1 ) {
@@ -94,7 +94,10 @@ define( function( require ) {
             this.visible = true && spring.periodTraceVisibilityProperty.value;
             var shape = new Shape();
             shape.moveTo( this.originalX, equilibriumYPosition ); // sets our current position
-            shape.lineTo( this.originalX, state === 1 ? currentYPosition : firstPeakYPosition ); // draws a line from our current position to a NEW position, then sets our current position to the NEW position
+
+            // draws a line from our current position to a NEW position, then sets our current position to the NEW position
+            shape.lineTo( this.originalX, state === 1 ? currentYPosition : firstPeakYPosition );
+
             if ( state > 1 ) {
 
               // first connector
