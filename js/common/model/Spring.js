@@ -25,7 +25,6 @@ define( function( require ) {
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
   var Vector2IO = require( 'DOT/Vector2IO' );
 
@@ -269,7 +268,7 @@ define( function( require ) {
       if ( (oldValue >= 0) !== (newValue >= 0) && oldValue !== null && newValue !== null ) {
         self.crossEmitter.emit();
       }
-    } )
+    } );
   }
 
   massesAndSprings.register( 'Spring', Spring );

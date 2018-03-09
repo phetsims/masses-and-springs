@@ -28,8 +28,6 @@ define( function( require ) {
 
     MassesAndSpringsModel.call( this, tandem );
 
-    var self = this;
-
     // Lab screen should have spring damping
     this.dampingProperty.set( 0.2 );
 

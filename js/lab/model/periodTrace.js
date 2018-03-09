@@ -11,13 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Property = require( 'AXON/Property' );
-
-
-  // constants
-
 
   /**
    * @constructor
@@ -81,10 +75,10 @@ define( function( require ) {
       if ( self.stateProperty.value !== 0 && self.stateProperty.value !== 4 ) {
           self.stateProperty.value += 1;
         if ( self.stateProperty.value === 2 ) {
-          self.firstPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value
+          self.firstPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value;
         }
         if ( self.stateProperty.value === 3 ) {
-          self.secondPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value
+          self.secondPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value;
         }
       }
       self.directionProperty.set( direction );
@@ -112,14 +106,11 @@ define( function( require ) {
     this.springProperty.value.crossEmitter.addListener( crossListener );
     this.springProperty.value.droppedEmitter.addListener( droppedListener );
 
-    if ( this.springProperty.value.massAttachedProperty.value ) {
-      value.userControlledProperty.link( userControlledListener );
-    }
     this.directionProperty.lazyLink( function( oldValue, newValue ) {
       if ( oldValue !== newValue ) {
         self.xOffsetProperty.set( self.xOffsetProperty.value + 20 );
       }
-    } )
+    } );
   }
 
   massesAndSprings.register( 'PeriodTrace', PeriodTrace );

@@ -15,7 +15,6 @@ define( function( require ) {
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var Easing = require( 'TWIXT/Easing' );
-  var Emitter = require( 'AXON/Emitter' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var NumberProperty = require( 'AXON/NumberProperty' );
@@ -234,11 +233,10 @@ define( function( require ) {
     // Used to determine when a peak is hit.
     this.verticalVelocityProperty.lazyLink( function( oldVelocity, newVelocity ) {
       if ( self.springProperty.value ) {
-        var massEquilibrium = self.springProperty.value.massEquilibriumYPositionProperty.value;
-        if ( Math.sign( oldVelocity ) !== Math.sign( newVelocity ) && Math.sign( oldVelocity ) ) {
+        if ( Util.sign( oldVelocity ) !== Util.sign( newVelocity ) && Util.sign( oldVelocity ) ) {
           self.springProperty.value.peakEmitter.emit1( 1 );
         }
-        if ( Math.sign( oldVelocity ) !== Math.sign( newVelocity.y ) && !Math.sign( oldVelocity ) ) {
+        if ( Util.sign( oldVelocity ) !== Util.sign( newVelocity.y ) && !Util.sign( oldVelocity ) ) {
           self.springProperty.value.peakEmitter.emit1( -1 );
         }
       }
