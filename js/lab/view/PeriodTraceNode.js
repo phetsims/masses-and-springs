@@ -87,11 +87,11 @@ define( function( require ) {
 
         var state = this.periodTrace.stateProperty.value; // 0 to 4
           if ( state === 0 ) {
-            this.visible = false;
+            this.visible = false && spring.periodTraceVisibilityProperty.value;
           }
           else {
             // this.visible = Math.abs(spring.massEquilibriumDisplacementProperty.value) > 0.1;
-            this.visible = true;
+            this.visible = true && spring.periodTraceVisibilityProperty.value;
             var shape = new Shape();
             shape.moveTo( this.originalX, equilibriumYPosition ); // sets our current position
             shape.lineTo( this.originalX, state === 1 ? currentYPosition : firstPeakYPosition ); // draws a line from our current position to a NEW position, then sets our current position to the NEW position
@@ -117,7 +117,7 @@ define( function( require ) {
         }
       }
       else {
-        this.visible = false;
+        this.visible = false && spring.periodTraceVisibilityProperty.value;
         this.periodTrace.stateProperty.reset();
         this.periodTrace.crossingProperty.reset();
       }

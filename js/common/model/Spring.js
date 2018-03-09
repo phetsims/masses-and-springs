@@ -215,7 +215,10 @@ define( function( require ) {
         }
       } );
 
-    // @public {read-only} y position of the equilibrium position centered on mass's center of mass
+    // @public {Property.<boolean>} Responsible for the visibility of the period trace.
+    this.periodTraceVisibilityProperty = new Property (false);
+
+    // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
     this.massEquilibriumYPositionProperty = new Property( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),

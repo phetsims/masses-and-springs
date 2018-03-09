@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var PeriodTraceNode = require( 'MASSES_AND_SPRINGS/lab/view/PeriodTraceNode' );
@@ -63,11 +64,21 @@ define( function( require ) {
         stroke: null
       } );
 
+    var indicatorVisibilityControlNode = new IndicatorVisibilityControlNode(
+      model,
+      tandem.createTandem( 'indicatorVisibilityControlNode' ), {
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null,
+        periodTraceOption:true
+      } );
+
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {
       spacing: 10,
       children: [
-        this.indicatorVisibilityControlNode,
+        indicatorVisibilityControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
         gravityAndDampingControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),

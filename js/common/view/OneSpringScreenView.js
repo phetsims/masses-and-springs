@@ -15,7 +15,6 @@ define( function( require ) {
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
-  var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
@@ -52,16 +51,6 @@ define( function( require ) {
       tandem.createTandem( 'springHangerNode' ),
       {
         singleSpring: true
-      } );
-
-    // Control Panel for display elements with varying visibility
-    this.indicatorVisibilityControlNode = new IndicatorVisibilityControlNode(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null
       } );
 
     // Spring Constant Control Panel
@@ -146,7 +135,6 @@ define( function( require ) {
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
       {
         right: this.rightPanelAlignment,
-        top: this.indicatorVisibilityControlNode.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING,
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: true

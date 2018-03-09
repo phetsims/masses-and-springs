@@ -43,7 +43,8 @@ define( function( require ) {
     options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'indicatorVisibilityControlNode' ),
-      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
+      periodTraceOption: false
     }, options );
 
     Node.call( this, options );
@@ -65,8 +66,10 @@ define( function( require ) {
     };
 
     // Lines added for reference in panel
-    var greenLine = createLine( 'black', tandem.createTandem( 'blackLine' ) );
+    var blackLine = createLine( 'black', tandem.createTandem( 'blackLine' ) );
     var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
+    var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
+    var grayLine = createLine( '#e6e6e6' ); // TODO: we shouldn't need this for spacing on lab screen.
     var displacementSymbol = new DisplacementArrowNode(
       new Property( 10 ),
       new Property( true ),
@@ -77,7 +80,6 @@ define( function( require ) {
       }
     );
     displacementSymbol.scale( .65 );
-    var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
 
     // Labels for the displacement arrow and natural length line
     var displacementLabels = new VBox( {
@@ -130,14 +132,40 @@ define( function( require ) {
       spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
+
+    if ( options.periodTraceOption ) {
+      indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+        content: componentDisplacement,
+        property: model.naturalLengthVisibleProperty,
+      }, {
+        content: new Text( massEquilibriumString, {
+          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'massEquilibriumString' )
+        } ),
+        property: model.equilibriumPositionVisibleProperty,
+      }, {
+        content: new Text( movableLineString, {
+          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
+        } ),
+        property: model.movableLineVisibleProperty,
+      }, {
+        content: new Text( 'Period Trace', {
+          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'periodTraceString' )
+        } ),
+        property: model.springs[ 0 ].periodTraceVisibilityProperty,
+      } ], {
+        boxWidth: 15,
+        spacing: 8,
+        tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
+      } );
+    }
     var titleToControlsVerticalSpace = 2;
     var indicatorVisibilityControlsVBox = new VBox( {
-      children: [
-        new VStrut( titleToControlsVerticalSpace ),
-        indicatorVisibilityCheckboxGroup
-      ],
-      align: 'left',
-      tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
+        children: [
+          new VStrut( titleToControlsVerticalSpace ),
+          indicatorVisibilityCheckboxGroup
+        ],
+        align: 'left',
+        tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
       }
     );
     var lineVBox = new VBox( {
@@ -146,11 +174,26 @@ define( function( require ) {
         new VStrut( 18 ),
         blueLine,
         new VStrut( 24 ),
-        greenLine,
+        blackLine,
         new VStrut( 24 ),
         redLine,
       ], yMargin: 0
     } );
+    if ( options.periodTraceOption ) {
+      lineVBox = new VBox( {
+        children: [
+          displacementSymbol,
+          new VStrut( 18 ),
+          blueLine,
+          new VStrut( 24 ),
+          blackLine,
+          new VStrut( 24 ),
+          redLine,
+          new VStrut( 24 ),
+          grayLine
+        ], yMargin: 0
+      } );
+    }
     var controlBox = new HBox( {
       children: [
         indicatorVisibilityControlsVBox,
