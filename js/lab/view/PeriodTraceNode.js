@@ -35,7 +35,7 @@ define( function( require ) {
     this.colorAlpha = 1;
 
     // @protected
-    this.traceColor = new Color( 255, 0, 0 );
+    this.traceColor = new Color( '#9360a0');
 
 
     // @protected
