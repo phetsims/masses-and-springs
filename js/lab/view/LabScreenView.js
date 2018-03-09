@@ -105,7 +105,7 @@ define( function( require ) {
   return inherit( OneSpringView, LabScreenView, {
     step: function( dt ) {
       this.energyGraphNode.update();
-      this.periodTraceNode.step();
+      this.periodTraceNode.step(dt);
     }
   } );
 } );

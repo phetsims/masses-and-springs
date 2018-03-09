@@ -41,10 +41,6 @@ define( function( require ) {
 
     // @public {Property.number} determines how many times the trace has gone over its original Y position
     this.crossingProperty = new Property( 0 );
-    this.crossingProperty.link( function( value ) {
-      console.log( 'crossingValue =' + value );
-    } );
-
 
     // @public {Property.boolean} a flag for whether the trace is fading or not
     this.fadingProperty = new Property( false );
@@ -57,9 +53,6 @@ define( function( require ) {
     // 3: Pendulum had second peak, but hasn't crossed the zero-line since.
     // 4: Pendulum trace completed.
     this.stateProperty = new Property( 0 );
-    this.stateProperty.link( function( value ) {
-      console.log( 'stateValue =' + value );
-    } );
 
     this.firstPeakY = 0;
     this.secondPeakY = 0;
@@ -79,9 +72,14 @@ define( function( require ) {
       }
     } );
 
+    // When the mass equilibrium position changes reset the trace.
+    spring.massEquilibriumYPositionProperty.link( function() {
+      self.onFaded();
+    } );
+
     var peakListener = function( direction ) {
       if ( self.stateProperty.value !== 0 && self.stateProperty.value !== 4 ) {
-        self.stateProperty.value += 1;
+          self.stateProperty.value += 1;
         if ( self.stateProperty.value === 2 ) {
           self.firstPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value
         }
@@ -92,11 +90,10 @@ define( function( require ) {
       self.directionProperty.set( direction );
     };
     var crossListener = function() {
-
-      self.crossingProperty.value += 1;
+        self.crossingProperty.value += 1;
 
       if ( self.crossingProperty.value === 1 || self.crossingProperty.value === 3 ) {
-        self.stateProperty.value += 1;
+          self.stateProperty.value += 1;
       }
 
       if ( ((self.stateProperty.value % 5 === 0) && (self.stateProperty !== 0)) ) {
@@ -110,33 +107,31 @@ define( function( require ) {
     var droppedListener = function() {
       self.stateProperty.reset();
       self.crossingProperty.reset();
-
     };
-
     this.springProperty.value.peakEmitter.addListener( peakListener );
     this.springProperty.value.crossEmitter.addListener( crossListener );
     this.springProperty.value.droppedEmitter.addListener( droppedListener );
 
-    // this.springProperty.value.massAttachedProperty.link( function( mass ) {
-    //   if ( mass && mass.userControlledProperty.value ) {
-    //     self.stateProperty.reset();
-    //     self.crossingProperty.reset();
-    //   }
-    // } )
     if ( this.springProperty.value.massAttachedProperty.value ) {
       value.userControlledProperty.link( userControlledListener );
     }
     this.directionProperty.lazyLink( function( oldValue, newValue ) {
       if ( oldValue !== newValue ) {
-        // debugger;
         self.xOffsetProperty.set( self.xOffsetProperty.value + 20 );
-        // debugger;
-        // self.crossingProperty.set( self.crossingProperty.value + 1 );
       }
     } )
   }
 
   massesAndSprings.register( 'PeriodTrace', PeriodTrace );
 
-  return inherit( Object, PeriodTrace );
+  return inherit( Object, PeriodTrace, {
+    /**
+     * Called when the trace has fully faded away.
+     * @public
+     */
+    onFaded: function() {
+      this.stateProperty.reset();
+      this.crossingProperty.reset();
+    }
+  } );
 } );

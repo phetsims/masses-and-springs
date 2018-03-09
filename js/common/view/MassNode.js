@@ -170,7 +170,6 @@ define( function( require ) {
         if ( mass.springProperty.value ) {
           mass.springProperty.value.droppedEmitter.emit();
         }
-        // console.log(mass.userReleasedHeightProperty.value)
       }
     } );
 

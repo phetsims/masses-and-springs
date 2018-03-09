@@ -107,6 +107,16 @@ define( function( require ) {
       phetioType: PropertyIO( Vector2IO )
     } );
 
+    // position of the mass's center of mass
+    this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ], function( positionProperty, cylinderHeight ){
+      return new Vector2(
+        self.positionProperty.value.x,
+        self.positionProperty.value.y -
+        self.cylinderHeightProperty.value / 2 -
+        self.hookHeight
+      );
+    } );
+
     // @private {Vector2}
     this.initialPosition = this.positionProperty.initialValue;
 
@@ -217,8 +227,6 @@ define( function( require ) {
         }
         return initialEnergy - totalEnergy;
       } );
-
-    var crossCount = 0;
 
     this.orientationProperty = new Property( null );
     this.oldIOrientation = null;

@@ -225,6 +225,17 @@ define( function( require ) {
         phetioType: DerivedPropertyIO( NumberIO )
       } );
 
+    var massCenterOfMassProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'centerOfMassPositionProperty',
+      defaultValue: null
+    } );
+
+    Property.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ], function( massEquilibriumYPosition, massCenterOfMass ) {
+      if ( massCenterOfMass !== null ) {
+        self.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition  );
+      }
+    } );
+
     // Set the equilibrium position when a mass is attached to the spring. We do a similar process in Mass.js when the mass value changes.
     Property.multilink( [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
