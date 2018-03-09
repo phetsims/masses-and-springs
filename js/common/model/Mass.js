@@ -218,7 +218,7 @@ define( function( require ) {
         return initialEnergy - totalEnergy;
       } );
 
-    var crossCount = 0
+    var crossCount = 0;
 
     this.orientationProperty = new Property( null );
     this.oldIOrientation = null;
@@ -234,9 +234,14 @@ define( function( require ) {
           self.springProperty.value.peakEmitter.emit1( -1 );
         }
       }
-    } )
+    } );
 
     this.userControlledProperty.link( function( userControlled ) {
+      if ( self.springProperty.value ) {
+
+        // If the user grabs an attached mass the mass displacement should reset. Used for period trace.
+        self.springProperty.value.massEquilibriumDisplacementProperty.reset();
+      }
       if ( !userControlled && self.springProperty.get() ) {
 
         // When a user drags an attached mass it is as if they are restarting the spring system

@@ -25,6 +25,7 @@ define( function( require ) {
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
   var Vector2IO = require( 'DOT/Vector2IO' );
 
@@ -74,7 +75,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} distance from of the bottom of the spring from the massEquilibriumYPosition
-    this.massEquilibriumDisplacementProperty = new Property( 0 );
+    this.massEquilibriumDisplacementProperty = new Property( null );
 
     // @public {Property.<number>} spring constant of spring
     this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
@@ -253,8 +254,8 @@ define( function( require ) {
     // @public used to determine when the mass is dropped
     this.droppedEmitter = new Emitter();
 
-    this.massEquilibriumDisplacementProperty.link( function( oldValue, newValue ) {
-      if ( Math.sign( oldValue ) != Math.sign( newValue ) ) {
+    this.massEquilibriumDisplacementProperty.link( function( newValue, oldValue ) {
+      if ( (oldValue >= 0) !== (newValue >= 0) && oldValue !== null && newValue !== null ) {
         self.crossEmitter.emit();
       }
     } )

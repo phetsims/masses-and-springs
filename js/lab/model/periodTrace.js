@@ -34,13 +34,17 @@ define( function( require ) {
     this.springProperty = new Property( spring );
 
     // @public {Property} orientation of the spring's oscillation.
-    this.directionProperty = new Property( null )
+    this.directionProperty = new Property( null );
 
     // @public {Property} units the trace should be positioned away from the origin in the x direction
     this.xOffsetProperty = new Property( 0 );
 
     // @public {Property.number} determines how many times the trace has gone over its original Y position
     this.crossingProperty = new Property( 0 );
+    this.crossingProperty.link( function( value ) {
+      console.log( 'crossingValue =' + value );
+    } );
+
 
     // @public {Property.boolean} a flag for whether the trace is fading or not
     this.fadingProperty = new Property( false );
@@ -53,6 +57,9 @@ define( function( require ) {
     // 3: Pendulum had second peak, but hasn't crossed the zero-line since.
     // 4: Pendulum trace completed.
     this.stateProperty = new Property( 0 );
+    this.stateProperty.link( function( value ) {
+      console.log( 'stateValue =' + value );
+    } );
 
     this.firstPeakY = 0;
     this.secondPeakY = 0;
@@ -61,17 +68,24 @@ define( function( require ) {
     this.alphaProperty = new Property( 1 );
 
     // When a mass is attached the origin of the trace should be the mass equilibrium.
-    this.springProperty.value.massAttachedProperty.link( function() {
-      self.originalY = self.springProperty.value.massEquilibriumYPositionProperty.value;
+    this.springProperty.value.massAttachedProperty.link( function( mass ) {
+      if ( !mass ) {
+
+        // If there isn't a mass attached then there is no mass displacement
+        self.springProperty.value.massEquilibriumDisplacementProperty.reset();
+      }
+      else {
+        self.originalY = self.springProperty.value.massEquilibriumYPositionProperty.value;
+      }
     } );
 
     var peakListener = function( direction ) {
-      if ( self.stateProperty.value != 0 ) {
-        if ( crossingProperty.value > 1 ) {}
+      if ( self.stateProperty.value !== 0 && self.stateProperty.value !== 4 ) {
+        self.stateProperty.value += 1;
         if ( self.stateProperty.value === 2 ) {
           self.firstPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value
         }
-        if ( self.stateProperty.value === 4 ) {
+        if ( self.stateProperty.value === 3 ) {
           self.secondPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value
         }
       }
@@ -81,8 +95,15 @@ define( function( require ) {
 
       self.crossingProperty.value += 1;
 
-      if ( ((self.stateProperty.value % 5 === 0) && (self.stateProperty != 0)) || self.springProperty.value.massAttachedProperty.value.userControlledProperty.value ) {
+      if ( self.crossingProperty.value === 1 || self.crossingProperty.value === 3 ) {
+        self.stateProperty.value += 1;
+      }
+
+      if ( ((self.stateProperty.value % 5 === 0) && (self.stateProperty !== 0)) ) {
         self.stateProperty.reset();
+      }
+      if ( ((self.crossingProperty.value % 4 === 0) && (self.crossingProperty !== 0)) ) {
+        self.crossingProperty.reset();
       }
     };
 
@@ -110,7 +131,7 @@ define( function( require ) {
         // debugger;
         self.xOffsetProperty.set( self.xOffsetProperty.value + 20 );
         // debugger;
-        self.crossingProperty.set( self.crossingProperty.value + 1 );
+        // self.crossingProperty.set( self.crossingProperty.value + 1 );
       }
     } )
   }
