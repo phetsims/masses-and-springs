@@ -83,7 +83,7 @@ define( function( require ) {
       } );
 
     // Initializes equilibrium line for the spring
-    var springEquilibriumLineNode = new ReferenceLineNode(
+    this.springEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
       model.springs[ 0 ].massEquilibriumYPositionProperty,
@@ -163,7 +163,7 @@ define( function( require ) {
         zeroPointLine: true
       }
     );
-    zeroHeightLine.x = springEquilibriumLineNode.x;
+    zeroHeightLine.x = this.springEquilibriumLineNode.x;
     zeroHeightLine.y = zeroHeightProperty.get();
     this.addChild( zeroHeightLine );
 
@@ -205,7 +205,7 @@ define( function( require ) {
     this.addChild( springStopperButtonNode );
 
     // Reference lines from indicator visibility box
-    this.addChild( springEquilibriumLineNode );
+    this.addChild( this.springEquilibriumLineNode );
     this.addChild( naturalLengthLineNode );
     this.addChild( displacementArrowNode );
     this.addChild( movableLineNode );

@@ -175,6 +175,9 @@ define( function( require ) {
       },
       endDrag: function() {
         mass.userControlledProperty.set( false );
+        if ( mass.springProperty.value ) {
+          mass.springProperty.value.droppedEmitter.emit();
+        }
       }
     } );
 

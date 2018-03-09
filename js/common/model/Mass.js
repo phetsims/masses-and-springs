@@ -21,6 +21,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
@@ -67,7 +68,7 @@ define( function( require ) {
     // @public (read-only) {Property.<number>} mass of mass object in kg
     this.massProperty = new NumberProperty( massValue );
 
-    // @public {Property.<number>} (read-write) radius of the massNode dependent its mass value
+    // @public {Property.<number>} (read-write) radius of the massNode is dependent on its mass value
     this.radiusProperty = new DerivedProperty( [ this.massProperty ], function( massValue ) {
       return Math.pow( ( massValue ) / ( options.density * HEIGHT_RATIO * Math.PI ), 1 / 2 ) * SCALING_FACTOR;
     } );
@@ -77,7 +78,7 @@ define( function( require ) {
 
     this.gradientEnabledProperty = new Property( true );
 
-    // @public {Property.<number>} height in m
+    // @public {Property.<number>} height in meters. Measured from bottom of mass object not screen.
     this.cylinderHeightProperty = new DerivedProperty( [ this.radiusProperty ],
       function( radius ) {
         return radius * HEIGHT_RATIO;
@@ -87,7 +88,7 @@ define( function( require ) {
       options.zeroReferencePoint = -cylinderHeight / 2;
     } );
 
-    // @public {number} hook height in m
+    // @public {number} hook height in meters. Measured from the bottom of the hook not the screen.
     this.hookHeight = HOOK_HEIGHT;
 
     // @public {Property.<number>} total height of the mass, including its hook
@@ -102,6 +103,16 @@ define( function( require ) {
     this.positionProperty = new Property( new Vector2( xPosition, this.heightProperty.value + .02 ), {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
+    } );
+
+    // position of the mass's center of mass
+    this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ], function( positionProperty, cylinderHeight ){
+      return new Vector2(
+        self.positionProperty.value.x,
+        self.positionProperty.value.y -
+        self.cylinderHeightProperty.value / 2 -
+        self.hookHeight
+      );
     } );
 
     // @private {Vector2}
@@ -215,8 +226,27 @@ define( function( require ) {
         return initialEnergy - totalEnergy;
       } );
 
+    this.orientationProperty = new Property( null );
+    this.oldIOrientation = null;
+
+    // Used to determine when a peak is hit.
+    this.verticalVelocityProperty.lazyLink( function( oldVelocity, newVelocity ) {
+      if ( self.springProperty.value ) {
+        if ( Util.sign( oldVelocity ) !== Util.sign( newVelocity ) && Util.sign( oldVelocity ) ) {
+          self.springProperty.value.peakEmitter.emit1( 1 );
+        }
+        if ( Util.sign( oldVelocity ) !== Util.sign( newVelocity.y ) && !Util.sign( oldVelocity ) ) {
+          self.springProperty.value.peakEmitter.emit1( -1 );
+        }
+      }
+    } );
 
     this.userControlledProperty.link( function( userControlled ) {
+      if ( self.springProperty.value ) {
+
+        // If the user grabs an attached mass the mass displacement should reset. Used for period trace.
+        self.springProperty.value.massEquilibriumDisplacementProperty.reset();
+      }
       if ( !userControlled && self.springProperty.get() ) {
 
         // When a user drags an attached mass it is as if they are restarting the spring system

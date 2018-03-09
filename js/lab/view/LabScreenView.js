@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
+  var PeriodTraceNode = require( 'MASSES_AND_SPRINGS/lab/view/PeriodTraceNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var OneSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringScreenView' );
@@ -20,7 +21,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
-   * @param {MassesAndSpringsModel} model
+   * @param {LabModel} model
    * @param {Tandem} tandem
    *
    * @constructor
@@ -30,6 +31,13 @@ define( function( require ) {
     // Calls common spring view
     OneSpringScreenView.call( this, model, tandem );
     var self = this;
+
+    // @protected
+    this.periodTraceNode = new PeriodTraceNode( model.periodTrace, this.modelViewTransform, {
+      center: this.springEquilibriumLineNode.center
+    } );
+    this.addChild( this.periodTraceNode );
+
 
     // TODO: Make things that aren't really panels NOT panels.
     var vectorVisibilityControlNode = new VectorVisibilityControlNode(
@@ -93,6 +101,10 @@ define( function( require ) {
   }
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );
-
-  return inherit( OneSpringScreenView, LabScreenView );
+  return inherit( OneSpringScreenView, LabScreenView, {
+    step: function( dt ) {
+      this.energyGraphNode.update();
+      this.periodTraceNode.step(dt);
+    }
+  } );
 } );

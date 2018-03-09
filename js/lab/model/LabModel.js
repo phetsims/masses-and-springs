@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
+  var PeriodTrace = require( 'MASSES_AND_SPRINGS/lab/model/PeriodTrace' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
@@ -43,6 +44,9 @@ define( function( require ) {
       density: 110,
       mysteryLabel: true
     } ) );
+
+    // Initialize period trace.
+    this.periodTrace = new PeriodTrace( this.springs[ 0 ] );
   }
 
   massesAndSprings.register( 'LabModel', LabModel );

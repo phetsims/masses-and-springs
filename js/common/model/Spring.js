@@ -15,6 +15,7 @@ define( function( require ) {
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var DerivedPropertyIO = require( 'AXON/DerivedPropertyIO' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
+  var Emitter = require( 'AXON/Emitter' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -71,6 +72,9 @@ define( function( require ) {
       units: 'meters',
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
+
+    // @public {Property.<number>} distance from of the bottom of the spring from the massEquilibriumYPosition
+    this.massEquilibriumDisplacementProperty = new Property( null );
 
     // @public {Property.<number>} spring constant of spring
     this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
@@ -165,9 +169,6 @@ define( function( require ) {
     // @public {Range} (read-only)
     this.springConstantRange = MassesAndSpringsConstants.SPRING_CONSTANT_RANGE;
 
-    //------------------------------------------------
-    // Derived properties
-
     // @public {Property.<number>} (read-only) length of the spring, units = m
     this.lengthProperty = new DerivedProperty(
       [ this.naturalRestingLengthProperty, this.displacementProperty ],
@@ -223,6 +224,17 @@ define( function( require ) {
         phetioType: DerivedPropertyIO( NumberIO )
       } );
 
+    var massCenterOfMassProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'centerOfMassPositionProperty',
+      defaultValue: null
+    } );
+
+    Property.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ], function( massEquilibriumYPosition, massCenterOfMass ) {
+      if ( massCenterOfMass !== null ) {
+        self.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition  );
+      }
+    } );
+
     // Set the equilibrium position when a mass is attached to the spring. We do a similar process in Mass.js when the mass value changes.
     Property.multilink( [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
@@ -240,6 +252,21 @@ define( function( require ) {
     this.naturalRestingLengthProperty.link( function() {
       if ( self.massAttachedProperty.value ) {
         self.setMass( self.massAttachedProperty.get() );
+      }
+    } );
+
+    // @public used to determine when the period tracer should alternate directions
+    this.peakEmitter = new Emitter();
+
+    // @public used to determine when the mass has crossed over its equilibrium position while oscillating
+    this.crossEmitter = new Emitter();
+
+    // @public used to determine when the mass is dropped
+    this.droppedEmitter = new Emitter();
+
+    this.massEquilibriumDisplacementProperty.link( function( newValue, oldValue ) {
+      if ( (oldValue >= 0) !== (newValue >= 0) && oldValue !== null && newValue !== null ) {
+        self.crossEmitter.emit();
       }
     } );
   }

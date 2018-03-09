@@ -52,16 +52,17 @@ define( function( require ) {
     ];
 
     // @private {read-only} Creation of spring for use in scene switching icons
+    var springNodeOptions = {
+      frontColor: '#000000',
+      middleColor: '#636362',
+      backColor: 'black',
+      opacity: 0.8
+    };
     var firstSpringIcon = new OscillatingSpringNode(
       springsIcon[ 0 ],
       mvt,
       tandem.createTandem( 'firstSpringIcon' ),
-      {
-        frontColor: '#000000',
-        middleColor: '#636362',
-        backColor: 'black',
-        opacity: this.opacity
-      } );
+      springNodeOptions );
     firstSpringIcon.loopsProperty.set( 6 );
     firstSpringIcon.lineWidthProperty.set( 3 );
 
@@ -70,12 +71,8 @@ define( function( require ) {
       springsIcon[ 1 ],
       mvt,
       tandem.createTandem( 'secondSpringIcon' ),
-      {
-        frontColor: '#000000',
-        middleColor: '#636362',
-        backColor: 'black',
-        opacity: this.opacity
-      } );
+      springNodeOptions
+    );
     secondSpringIcon.loopsProperty.set( 6 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
@@ -85,11 +82,8 @@ define( function( require ) {
         springsIcon[ 0 ],
         mvt,
         tandem.createTandem( 'secondSpringIcon' ),
-        {
-          frontColor: '#000000',
-          middleColor: '#636362',
-          backColor: 'black',
-        } );
+        springNodeOptions
+      );
       firstSpringIcon.loopsProperty.set( 3 );
       firstSpringIcon.lineWidthProperty.set( 3 );
       firstSpringIcon.top = secondSpringIcon.top;
