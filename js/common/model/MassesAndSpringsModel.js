@@ -183,7 +183,6 @@ define( function( require ) {
      * @param {string} color - color of the MassNode
      * @param {string} specifiedLabel - customized label for the MassNode
      * @param {Tandem} tandem
-     * @param {Object} [options]
      */
     createMass: function( mass, xPosition, color, specifiedLabel, tandem ) {
       this.masses.push( new Mass( mass, xPosition, true, color, this.gravityProperty, tandem ) );
@@ -287,10 +286,9 @@ define( function( require ) {
      * Based on new dragged position of mass, try to attach or detach mass if eligible and then update position.
      *
      * @param {Mass} mass
-     * @param {Bounds2} visibleBounds - visible bounds of the sim screen
      * @public
      */
-    adjustDraggedMassPosition: function( mass, visibleBounds ) {
+    adjustDraggedMassPosition: function( mass ) {
       var massPosition = mass.positionProperty.get();
 
       // Attempt to detach
@@ -315,7 +313,6 @@ define( function( require ) {
           -( mass.springProperty.get().positionProperty.get().y -
           mass.springProperty.get().naturalRestingLengthProperty.get() ) +
           massPosition.y - mass.hookHeight / 2 );
-        // debugger; REVIEW: Comments like these should be removed
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         var maxY = mass.springProperty.get().thicknessProperty.get() *

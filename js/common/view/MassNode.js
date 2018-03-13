@@ -94,7 +94,6 @@ define( function( require ) {
 
       if ( mass.positionProperty.value.y < minY && !mass.springProperty.value ) {
         mass.positionProperty.set( new Vector2( mass.positionProperty.value.x, minY ) );
-        // model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       }
     } );
     //REVIEW: Only usage is a read, can this be removed (such that it is always enabled, presumably?)
@@ -167,7 +166,7 @@ define( function( require ) {
         }
 
         // Checks if mass should be attached/detached to spring and adjusts its position if so.
-        model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
+        model.adjustDraggedMassPosition( self.mass );
       },
       startDrag: function() {
         mass.userControlledProperty.set( true );
