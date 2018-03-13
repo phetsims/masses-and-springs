@@ -200,15 +200,10 @@ define( function( require ) {
         new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         this.dampingProperty.get(),
+        this.gravityProperty,
         tandem
       );
       this.springs.push( spring );
-
-      // Links are used to set gravity property of each spring to the gravity property of the system
-      //REVIEW: Why not pass in the gravityProperty, like is done with masses?
-      this.gravityProperty.link( function( newGravity ) {
-        spring.gravityProperty.set( newGravity );
-      } );
 
       // Links are used to set damping property of each spring to the damping property of the system
       //REVIEW: Additionally, why not pass this reference in directly, so direct listeners can be added?

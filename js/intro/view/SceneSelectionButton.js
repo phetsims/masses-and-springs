@@ -16,6 +16,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
+  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -25,6 +26,7 @@ define( function( require ) {
 
   /**
    * @param {string} springLength
+   * @param {ModelViewTransform2} mvt
    * @param {Tandem} tandem
    * @constructor
    */
@@ -42,12 +44,14 @@ define( function( require ) {
         new Vector2( 0.65, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         0,
+        new Property(0),
         tandem.createTandem( 'firstIconSpring' )
       ),
       new Spring(
         new Vector2( 0.85, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         0,
+        new Property(0),
         tandem.createTandem( 'secondIconSpring' )
       )
     ];

@@ -39,13 +39,14 @@ define( function( require ) {
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
+   * @param {Property.<number>} gravityProperty - the gravity property from the model
    * @param {Tandem} tandem
    * @param {Object} [options]
    * REVIEW: Options are never used? (Correct me if wrong)
    *
    * @constructor
    */
-  function Spring( position, initialNaturalRestingLength, defaultDampingCoefficient, tandem, options ) {
+  function Spring( position, initialNaturalRestingLength, defaultDampingCoefficient, gravityProperty, tandem, options ) {
 
     // validate and save options
     assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : '
@@ -66,16 +67,12 @@ define( function( require ) {
     var naturalRestingLengthRange = new RangeWithValue( 0.1, 0.5, initialNaturalRestingLength );
 
     // @public {Property.<number>} gravitational acceleration
-    //REVIEW: Directly use MassesAndSpringsConstants.EARTH_GRAVITY?
-    //REVIEW: Don't use the massesAndSprings namespace to look things up. Just import Body (or the above type) directly)
-    this.gravityProperty = new NumberProperty( massesAndSprings.Body.EARTH.gravity, {
-      tandem: tandem.createTandem( 'gravityProperty' ),
-      units: 'meters/second/second',
-      //REVIEW: Directly use MassesAndSpringsConstants.EARTH_GRAVITY?
-      //REVIEW: Don't use the massesAndSprings namespace to look things up. Just import Body (or the above type) directly)
-      //REVIEW: Or, also, use Range instead and this issue goes away (RangeWithValue's added value not needed)
-      range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity )
-    } );
+    this.gravityProperty = new NumberProperty( gravityProperty.value );
+
+    // Link to manage gravity value for the spring object.
+    gravityProperty.link(function(gravity){
+      self.gravityProperty.set(gravity);
+    });
 
     //  @public {Property.<number>} distance from of the bottom of the spring from the natural resting position
     this.displacementProperty = new NumberProperty( 0, {
@@ -173,8 +170,7 @@ define( function( require ) {
     // @public {Property.<number>} Elastic Potential Energy of the attached Mass
     this.elasticPotentialEnergyProperty = new DerivedProperty( [ this.springConstantProperty, this.displacementProperty ],
       function( springConstant, displacement ) {
-        var number = 0.5 * springConstant * Math.pow( (displacement), 2 );
-        return number;
+        return 0.5 * springConstant * Math.pow( (displacement), 2 );
       } );
 
     // @public {Property.<number>} Thermal Energy of the attached Mass
@@ -268,7 +264,7 @@ define( function( require ) {
 
     Property.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ], function( massEquilibriumYPosition, massCenterOfMass ) {
       if ( massCenterOfMass !== null ) {
-        self.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition  );
+        self.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition );
       }
     } );
 
