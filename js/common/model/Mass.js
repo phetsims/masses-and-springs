@@ -364,6 +364,7 @@ define( function( require ) {
           this.isAnimatingProperty.set( false );
         }
       }
+      
       // If we're not animating/controlled or attached to a spring, we'll fall due to gravity
       else if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
         var oldY = this.positionProperty.get().y;

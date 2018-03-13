@@ -533,6 +533,7 @@ define( function( require ) {
           assert && assert( !isNaN( this.massAttachedProperty.get().verticalVelocityProperty.get() ), 'velocity must be a number' );
 
         }
+        
         // Critically damped case
         else {
           //TODO::  if needed decouple these objects

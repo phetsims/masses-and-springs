@@ -86,6 +86,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'dragHandler' )
     } ) );
 
+    //REVIEW: Use `this` instead of self here?
     visibleProperty.linkAttribute( self, 'visible' );
 
     this.addChild( line );

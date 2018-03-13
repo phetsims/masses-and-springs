@@ -115,6 +115,7 @@ define( function( require ) {
     } );
 
     // Manages logic for updating spring thickness and spring constant
+    //REVIEW: Use `this` instead of self here?
     self.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
 
       //REVIEW: Style guide wants one space after //
@@ -129,6 +130,7 @@ define( function( require ) {
       }
     } );
 
+    //REVIEW: Use `this` instead of self here?
     self.constantParameterProperty.link( function( selectedConstant ) {
       // Manages logic for changing between constant parameters
       // TODO: Enumerate these constants for checks

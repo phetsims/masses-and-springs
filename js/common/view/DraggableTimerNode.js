@@ -58,6 +58,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
     } );
+    //REVIEW: Use `this` instead of self here?
     this.positionProperty.linkAttribute( self, 'translation' );
 
     //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
@@ -79,6 +80,7 @@ define( function( require ) {
       }
     } );
     this.addInputListener( this.timerNodeMovableDragHandler );
+    //REVIEW: Use `this` instead of self here?
     visibleProperty.linkAttribute( self, 'visible' );
   }
 

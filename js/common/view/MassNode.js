@@ -137,6 +137,7 @@ define( function( require ) {
     } );
 
     if ( mass.isLabeled ) {
+      //REVIEW: Use `this` instead of self here?
       self.addChild( label );
     }
     mass.massProperty.link( function() {
@@ -145,6 +146,7 @@ define( function( require ) {
 
     // Adjust the mass label for adjustable masses.
     if ( this.mass.adjustable ) {
+      //REVIEW: Use `this` instead of self here?
       self.mass.massProperty.link( function( massValue ) {
         label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
         label.center = rect.center;
@@ -261,15 +263,19 @@ define( function( require ) {
     };
 
     // Show/hide the velocity arrow
+    //REVIEW: Use `this` instead of self here?
     updateArrowVisibility( model.velocityVectorVisibilityProperty, self.velocityArrow );
 
     // Show/hide the acceleration arrow
+    //REVIEW: Use `this` instead of self here?
     updateArrowVisibility( model.accelerationVectorVisibilityProperty, self.accelerationArrow );
 
     // Show/hide the spring force arrow
+    //REVIEW: Use `this` instead of self here?
     updateForceVisiblity( model.springVectorVisibilityProperty, self.springForceArrow );
 
     // Show/hide the gravity force arrow
+    //REVIEW: Use `this` instead of self here?
     updateForceVisiblity( model.gravityVectorVisibilityProperty, self.gravityForceArrow );
 
     // Show/hide the net force arrow

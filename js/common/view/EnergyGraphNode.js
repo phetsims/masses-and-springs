@@ -275,6 +275,7 @@ define( function( require ) {
               } )
             } );
           }
+          
           // close it on a click
           var closeListener = new ButtonListener( {
             fire: dialog.hide.bind( dialog )

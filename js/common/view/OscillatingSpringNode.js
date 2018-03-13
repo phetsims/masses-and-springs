@@ -106,7 +106,6 @@ define( function( require ) {
       }
     },
     {
-      // statics
       MAP_NUMBER_OF_LOOPS: MAP_NUMBER_OF_LOOPS
     } );
 } );
