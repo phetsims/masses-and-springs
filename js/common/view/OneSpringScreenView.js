@@ -1,7 +1,7 @@
 // Copyright 2016-2018, University of Colorado Boulder
 
 /**
- * Common ScreenView for  using one mass.
+ * Common ScreenView for using one mass.
  *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
@@ -42,6 +42,7 @@ define( function( require ) {
    * @constructor
    */
   function OneSpringScreenView( model, tandem ) {
+    //REVIEW: JSDOc
     this.model = model; // Make model available
     SpringScreenView.call( this, model, tandem );
     var self = this;
@@ -72,6 +73,7 @@ define( function( require ) {
       } );
 
     // Initializes equilibrium line for the spring
+    //REVIEW: JSDoc
     this.springEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
@@ -92,6 +94,7 @@ define( function( require ) {
       }
     );
 
+    //REVIEW: Is this something that HBox could be used for?
     var springStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
     springStopperButtonNode.left = springHangerNode.right + this.spacing;
     this.model.springs[ 0 ].buttonEnabledProperty.link(
@@ -99,7 +102,10 @@ define( function( require ) {
         springStopperButtonNode.enabled = buttonEnabled;
       } );
 
+    //REVIEW: JSDoc
     this.energyGraphNode = new EnergyGraphNode( model, tandem );
+    //REVIEW: Could inline topLeft: this.visibleBoundsProperty.get().topLeft.plus( new Vector2( this.spacing, this.spacing ) )
+    //REVIEW: Fine with this too
     this.energyGraphNode.top = this.visibleBoundsProperty.get().top + this.spacing;
     this.energyGraphNode.left = this.visibleBoundsProperty.get().left + this.spacing;
 
@@ -135,6 +141,7 @@ define( function( require ) {
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
       {
         right: this.rightPanelAlignment,
+        //REVIEW: Wait, what does minWidth do? It's not a Panel, right?
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: true
@@ -205,6 +212,8 @@ define( function( require ) {
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
+      //REVIEW: Lots of layout here. Can we use things like AlignBox/HBox/VBox to simplify? Might be worth collaboration.
+      //REVIEW: How much of this can be shared with TwoSpringScreenView (and moved to SpringScreenView?)
       //Update the bounds of view elements
       springHangerNode.top = self.spacing;
       movableLineNode.centerX = springHangerNode.centerX;

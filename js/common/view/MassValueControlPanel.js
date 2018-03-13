@@ -56,7 +56,7 @@ define( function( require ) {
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
-      thumbFillHighlighted: '#71EDFF',
+      thumbFillHighlighted: '#71EDFF', //REVIEW: Should we look at factoring out some of these colors?
       stroke: null,
       sliderIndent: 7,
       majorTicks: [
@@ -80,6 +80,9 @@ define( function( require ) {
       delta: 1
     } );
 
+    //REVIEW: Is it safe to change whether a mass is adjustable after it may have been passed to things?
+    //REVIEW: MassNode checks this, is there an order dependency where it has to be created before/after this node?
+    //REVIEW: Should this be an assertion that it is adjustable?
     mass.adjustable = true;
 
     Panel.call( this, numberControl, {

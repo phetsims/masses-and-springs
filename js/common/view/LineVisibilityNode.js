@@ -54,6 +54,7 @@ define( function( require ) {
      */
     var createLine = function( color, tandem ) {
       return new Line( 0, 0, LINE_LENGTH, 0, {
+        //REVIEW: It's only a slight shortcut, but you can omit all 4 parameters at the start, and just specify x2: LINE_LENGTH in the options
         stroke: color,
         lineDash: [ 6, 2.5 ],
         lineWidth: 2.0,
@@ -73,12 +74,13 @@ define( function( require ) {
     } );
 
     if ( options.massEquilibrium ) {
-
       equilibriumText = new Text( massEquilibriumString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         tandem: tandem.createTandem( 'equilibriumPositionString' )
       } );
     }
+
+    //REVIEW: I'm curious why HBoxes are getting tandems here?
 
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
@@ -123,6 +125,7 @@ define( function( require ) {
     );
     var lineVBox = new VBox( {
       children: [
+      //REVIEW: Use spacing here?
         blueLine,
         new VStrut( 24 ),
         greenLine,
@@ -132,6 +135,7 @@ define( function( require ) {
     } );
     var controlBox = new HBox( {
       children: [
+        //REVIEW: More struts, can we just use padding or other structuring instead of these?
         indicatorVisibilityControlsVBox,
         new HStrut( 10 ),
         lineVBox,

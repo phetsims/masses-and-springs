@@ -25,7 +25,7 @@ define( function( require ) {
    * @param {Property.<number>} springProperty - Property to be adjusted by hSlider
    * @param {Range} propertyRange - range of values for length
    * @param {string} title - string used to title the panel
-   * @param {array.<Text>} labels - formatted as: [ minLabel, maxLabel]
+   * @param {Array.<Text>} labels - formatted as: [ minLabel, maxLabel]
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
