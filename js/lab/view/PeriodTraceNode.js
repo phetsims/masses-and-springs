@@ -24,7 +24,7 @@ define( function( require ) {
   /**
    * @constructor
    */
-  function PeriodTraceNode( periodTrace, modelViewTransform, options ) {
+  function PeriodTraceNode( periodTrace, modelViewTransform ) {
     Node.call( this );
     var self = this;
 
@@ -35,7 +35,7 @@ define( function( require ) {
     this.colorAlpha = 1;
 
     // @protected
-    this.traceColor = new Color( '#9360a0');
+    this.traceColor = new Color( '#9360a0' );
 
 
     // @protected
@@ -86,35 +86,34 @@ define( function( require ) {
         var currentYPosition = modelViewTransform.modelToViewY( spring.massEquilibriumYPositionProperty.value + spring.massEquilibriumDisplacementProperty.value );
 
         var state = this.periodTrace.stateProperty.value; // 0 to 4
-          if ( state === 0 ) {
-            this.visible = false && spring.periodTraceVisibilityProperty.value;
-          }
-          else {
-            // this.visible = Math.abs(spring.massEquilibriumDisplacementProperty.value) > 0.1;
-            this.visible = true && spring.periodTraceVisibilityProperty.value;
-            var shape = new Shape();
-            shape.moveTo( this.originalX, equilibriumYPosition ); // sets our current position
+        if ( state === 0 ) {
+          this.visible = false && spring.periodTraceVisibilityProperty.value;
+        }
+        else {
+          this.visible = spring.periodTraceVisibilityProperty.value;
+          var shape = new Shape();
+          shape.moveTo( this.originalX, equilibriumYPosition ); // sets our current position
 
-            // draws a line from our current position to a NEW position, then sets our current position to the NEW position
-            shape.lineTo( this.originalX, state === 1 ? currentYPosition : firstPeakYPosition );
+          // draws a line from our current position to a NEW position, then sets our current position to the NEW position
+          shape.lineTo( this.originalX, state === 1 ? currentYPosition : firstPeakYPosition );
 
-            if ( state > 1 ) {
+          if ( state > 1 ) {
 
-              // first connector
-              shape.lineTo( this.middleX, firstPeakYPosition );
+            // first connector
+            shape.lineTo( this.middleX, firstPeakYPosition );
 
-              // second line
-              shape.lineTo( this.middleX, state === 2 ? currentYPosition : secondPeakYPosition );
-              if ( state > 2 ) {
+            // second line
+            shape.lineTo( this.middleX, state === 2 ? currentYPosition : secondPeakYPosition );
+            if ( state > 2 ) {
 
-                // second connector
-                shape.lineTo( this.lastX, secondPeakYPosition );
+              // second connector
+              shape.lineTo( this.lastX, secondPeakYPosition );
 
-                // third line
-                shape.lineTo( this.lastX, state === 3 ? currentYPosition : equilibriumYPosition );
-              }
+              // third line
+              shape.lineTo( this.lastX, state === 3 ? currentYPosition : equilibriumYPosition );
             }
-            this.path.shape = shape;
+          }
+          this.path.shape = shape;
 
 
         }
