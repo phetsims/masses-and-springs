@@ -149,6 +149,7 @@ define( function( require ) {
         align: 'left',
         children: [
           new Text( gravityString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
+          //REVIEW: Similarly why would HStrut be used here? Usually we can accomplish layouts without?
           new HStrut( TITLE_OFFSET + 3 )
         ]
       } );
@@ -166,6 +167,7 @@ define( function( require ) {
       var gravitySlider = new VBox( {
         align: 'left',
         spacing: 2,
+        //REVIEW: Usually HStruts wouldn't be needed for something like this. Why is it used here?
         children: [ gravityHSliderTitle, new HBox( { children: [ new HStrut( 15 ), gravityHSlider ] } ) ]
       } );
     }
@@ -177,6 +179,7 @@ define( function( require ) {
     var questionTextNode = new VBox( {
 
       children: [
+        //REVIEW: Can we apply padding elsewhere instead of using struts?
         new VStrut( questionTextOffset ),
         new Text( whatIsTheValueOfGravityString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
@@ -218,6 +221,8 @@ define( function( require ) {
         align: 'left',
         children: [
           new Text( dampingString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
+          //REVIEW: Lots of struts used for horizontal alignment, each with different offsets. Can we talk about layout
+          //REVIEW: and what needs to be accomplished here?
           new HStrut( TITLE_OFFSET - 7 )
         ]
       } );
@@ -246,6 +251,7 @@ define( function( require ) {
             font: MassesAndSpringsConstants.TITLE_FONT,
             maxWidth: this.maxWidth
           } ),
+          //REVIEW: Similar strut issue here
           new HStrut( TITLE_OFFSET - 35 )
         ]
       } );

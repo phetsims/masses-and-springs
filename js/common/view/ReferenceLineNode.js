@@ -24,7 +24,7 @@ define( function( require ) {
   /**
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Spring} spring - spring model object
-   * @param {Property} property - determines which property is being referenced
+   * @param {Property} property - determines which property is being referenced REVIEW: Property of what? If it can be anything, Property.<*>
    * @param {Property.<boolean>} visibleProperty
    * @param {Object} [options]
    *
@@ -87,6 +87,8 @@ define( function( require ) {
     } );
 
     visibleProperty.linkAttribute( self, 'visible' );
+
+    //REVIEW: Lots of similarities between this and MovableLineNode. Could be considered to be factored out.
 
   }
 

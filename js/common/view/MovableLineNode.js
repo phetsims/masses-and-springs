@@ -25,7 +25,7 @@ define( function( require ) {
   /**
    * @param {Vector2} initialPosition - of the center of line
    * @param {number} length - in view coordinates
-   * @param {boolean} visibleProperty
+   * @param {boolean} visibleProperty REVIEW: a Property?
    * @param {Bounds2} dragBounds - limits draggable bounds of the line
    * @param {Tandem} tandem
    * @constructor
@@ -46,7 +46,7 @@ define( function( require ) {
       buttonRadius: 5,
       buttonTouchAreaDilation: 10,
       cursor: 'pointer'
-      }
+      } //REVIEW: Format with `} );` on the same line
     );
     this.addChild( laserPointerNode );
 
@@ -76,6 +76,7 @@ define( function( require ) {
     //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @private {read-write} position of line in screen coordinates
     this.positionProperty.link( function( position ) {
+      //REVIEW: Could use .minusXY( length / 2, 0 ) to avoid creating an extra Vector2
       self.translation = position.minus( new Vector2( length / 2, 0 ) );
     } );
 

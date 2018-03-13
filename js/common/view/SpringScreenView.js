@@ -46,6 +46,7 @@ define( function( require ) {
     // @public {MassesAndSpringsModel}
     this.model = model;
 
+    //REVIEW: Is this another case where the 0.02 constant needs to be factored out?
     var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * 0.98 );
 
     // @public {ModelViewTransform2}
@@ -53,6 +54,7 @@ define( function( require ) {
 
     // @protected {Array.<OscillatingSpringNode>} Used to reference the created springs in the view.
     this.springNodes = [];
+    //REVIEW: Could do `this.springNodes = model.springs.map( ... )` with a function that returns it. Then separate pushes not needed
     model.springs.forEach( function( spring ) {
       var springNode = new OscillatingSpringNode(
         spring,

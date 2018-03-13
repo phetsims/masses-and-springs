@@ -51,7 +51,7 @@ define( function( require ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
-    // @public
+    // @public REVIEW: Type doc, since mass in the sim is either {number} or {Mass}
     this.mass = mass;
 
     var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
@@ -82,6 +82,7 @@ define( function( require ) {
 
       // TODO (PERFORMANCE): If this is ever an issue (changing this every frame), try to create one object with the gradient, and then transform/scale it
       // into place.
+      //REVIEW: Is this a performance issue? If not, the TODO should be removed
       rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 )
         .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.3 ) )
         .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.8 ) )
@@ -90,10 +91,12 @@ define( function( require ) {
       // We are constraining the draggable bounds on our massNodes except when the mass is attached to a spring.
       var minY = mass.userControlledProperty.value ?
                  modelBoundsProperty.value.minY :
+                 //REVIEW: Another case with the 0.02 constant, should be factored out
                  MassesAndSpringsConstants.FLOOR_Y + 0.02 + mass.heightProperty.value;
 
       if ( mass.positionProperty.value.y < minY && !mass.springProperty.value ) {
         mass.positionProperty.set( new Vector2( mass.positionProperty.value.x, minY ) );
+        //REVIEW: Can this commented-out code be removed?
         // model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       }
     } );
@@ -123,6 +126,7 @@ define( function( require ) {
     } );
     this.addChild( hookNode );
 
+    //REVIEW: I just wanted to point out that it was funny seeing `mass: mass.mass`. That's all. Remove this comment!
     var labelString = mass.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
     var label = new Text( labelString, {
       font: new PhetFont( { size: 12, weight: 'bold' } ),
@@ -191,6 +195,7 @@ define( function( require ) {
     } );
 
     modelBoundsProperty.link( function( modelDragBounds ) {
+      //REVIEW: That is reaching private state of the drag handler. Use setDragBounds instead.
       self.movableDragHandler._dragBounds = modelDragBounds;
     } );
 
@@ -202,6 +207,7 @@ define( function( require ) {
     } );
 
     //Arrows created for vectors associated with mass nodes
+    //REVIEW: JSDoc
     this.velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
     this.accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
     this.gravityForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
@@ -231,7 +237,7 @@ define( function( require ) {
      * @param {Property.<boolean>} arrowVisibilityProperty
      * @param {Node} arrowNode
      *
-     * @private
+     * @private REVIEW: Don't need visibility docs on a local variable
      */
     var updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
@@ -276,10 +282,11 @@ define( function( require ) {
     // Show/hide line at base of vectors
     Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
       function( spring, gravityForceVisible, springForceVisible, forcesVisible ) {
-        forceNullLine.visible = !!spring && (gravityForceVisible || springForceVisible || forcesVisible === MassesAndSpringsConstants.NET_FORCE_STRING);
+        forceNullLine.visible = !!spring && ( gravityForceVisible || springForceVisible || forcesVisible === MassesAndSpringsConstants.NET_FORCE_STRING );
       } );
 
     // TODO: Lots of similar code for setting arrow tail/tip. Ideally refactor to a function that can set tail/tip on all arrows (based on magnitude/etc.)
+    //REVIEW: Handle this TODO?
 
     //Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;

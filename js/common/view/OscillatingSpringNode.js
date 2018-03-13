@@ -24,7 +24,7 @@ define( function( require ) {
   };
 
   /**
-   * @param {spring} spring model object
+   * @param {spring} spring model object // REVIEW: {Spring}, and probably no further docs needed
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Tandem} tandem
    * @param {Object} [options]
@@ -50,11 +50,13 @@ define( function( require ) {
     }, options );
 
     ParametricSpringNode.call( this, options );
+
+    //REVIEW: JSDoc
     this.spring = spring;
     this.translation = modelViewTransform2.modelToViewPosition(
       new Vector2( spring.positionProperty.get().x,
         spring.positionProperty.get().y - length ) );
-    this.modelViewTransform2 = modelViewTransform2;
+    this.modelViewTransform2 = modelViewTransform2; //REVIEW: JSDoc
 
     function updateViewLength() {
 
@@ -68,6 +70,7 @@ define( function( require ) {
       //The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
       //Spring is rotated to be rotated so XScale relates to Y-direction in view
       //TODO There is possibly a better solution by setting the phase and deltaPhase.
+      //REVIEW: Handle the TODO?
       self.xScaleProperty.set( xScale );
       self.y = modelViewTransform2.modelToViewY( spring.positionProperty.get().y - spring.lengthProperty.get() );
     }
@@ -91,6 +94,7 @@ define( function( require ) {
   massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );
 
   return inherit( ParametricSpringNode, OscillatingSpringNode, {
+    //REVIEW: Indentation should be  here
       /**
        * @public
        */

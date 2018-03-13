@@ -150,6 +150,8 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
+      //REVIEW: Lots of layout here. Can we use things like AlignBox/HBox/VBox to simplify? Might be worth collaboration.
+      //REVIEW: How much of this can be shared with OneSpringScreenView (and moved to SpringScreenView?)
       self.springHangerNode.top = model.springs[ 0 ].positionProperty.value.y + self.spacing;
       self.gravityAndDampingControlNode.right = self.panelRightSpacing;
       self.toolboxPanel.right = self.panelRightSpacing;

@@ -21,8 +21,9 @@ define( function( require ) {
   // constants
   var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
   var SPRING_HANGER_FILL = 'rgb( 180, 180, 180 )';
+
   /**
-   * @param {Array} springs
+   * @param {Array} springs REVIEW: {Array.<Spring>}?
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Tandem} tandem
    * @param {Object} options
@@ -63,6 +64,7 @@ define( function( require ) {
         tandem: tandem.createTandem( '2' ),
         centerX: springsSeparation
       } ) );
+      //REVIEW: springHangerLabelNode.center = this.center;  -- works equivalently?
       springHangerLabelNode.centerX = this.width / 2;
       springHangerLabelNode.centerY = this.height / 2;
       this.addChild( springHangerLabelNode );
