@@ -197,10 +197,7 @@ define( function( require ) {
      */
     createSpring: function( x, tandem ) {
       var spring = new Spring(
-        //REVIEW: Is the 0.01 an important constant?
-        //REVIEW: Might be related to this comment in DisplacementArrowNode:
-        //REVIEW: TODO: We should find out why this -0.01 is outside the modelViewTransform. It can be negative but why is the number value there? @denz1994
-        new Vector2( x, MassesAndSpringsConstants.CEILING_Y - 0.01 ),
+        new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         this.dampingProperty.get(),
         tandem

@@ -30,7 +30,7 @@ define( function( require ) {
     FLOOR_Y: 0,
 
     // Y position of ceiling in meters. The ceiling is the top of the SpringHangerNode, just below the top of the dev view bounds
-    CEILING_Y: 1.48,
+    CEILING_Y: 1.47,
 
     // {Property.<Range>} range of damping associated with sim
     //RVEIEW: If exposing only Range, don't use a RangeWithValue? (or if used, document as such)
