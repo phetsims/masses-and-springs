@@ -50,9 +50,7 @@ define( function( require ) {
     } );
 
     //@public {Property.<boolean>} determines whether the sim is playing sound
-    //REVIEW: Reset doesn't reset this property?
-    //REVIEW: BooleanProperty?
-    this.isSoundEnabledProperty = new Property( true, {
+    this.isSoundEnabledProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isSoundEnabledProperty' )
     } );
 
@@ -268,6 +266,7 @@ define( function( require ) {
       this.bodyProperty.reset();
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
+      this.isSoundEnabledProperty.reset();
       this.rulerVisibleProperty.reset();
       this.timerVisibleProperty.reset();
       this.timerSecondsProperty.reset();
