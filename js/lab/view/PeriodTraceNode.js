@@ -20,7 +20,6 @@ define( function( require ) {
   var X_OFFSET = 10;
   var FADE_OUT_SPEED = 1; // the speed at which the trace fades out.
 
-
   /**
    * @constructor
    */
@@ -35,14 +34,13 @@ define( function( require ) {
     this.colorAlpha = 1;
 
     // @protected
-    this.traceColor = new Color( '#9360a0' );
+    this.traceColor = new Color( 'black' );
 
 
     // @protected
     this.modelViewTransform = modelViewTransform;
 
-
-    this.originalX = 400;
+    this.originalX = this.modelViewTransform.modelToViewX( this.periodTrace.springProperty.value.positionProperty.value.x - 0.2 );
     this.middleX = this.originalX + X_OFFSET;
     this.lastX = this.originalX + 2 * X_OFFSET;
 
@@ -70,7 +68,6 @@ define( function( require ) {
           this.colorAlpha = 1;
         }
       }
-
       this.updateTrace( this.periodTrace.springProperty.value, this.modelViewTransform );
     },
 
