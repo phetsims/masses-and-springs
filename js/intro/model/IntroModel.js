@@ -86,6 +86,7 @@ define( function( require ) {
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
 
+        //REVIEW: Style guide wants one space after //
         //reset the spring stop buttons
         self.spring1.buttonEnabledProperty.reset();
         self.spring2.buttonEnabledProperty.reset();
@@ -102,6 +103,7 @@ define( function( require ) {
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
 
+        //REVIEW: Style guide wants one space after //
         //reset the spring stop buttons
         self.spring1.buttonEnabledProperty.reset();
         self.spring2.buttonEnabledProperty.reset();
@@ -115,6 +117,7 @@ define( function( require ) {
     // Manages logic for updating spring thickness and spring constant
     self.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
 
+      //REVIEW: Style guide wants one space after //
       //Functions used to determine the inverse relationship between the length and springConstant/thickness
       //  SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
       //  Thickness = constant --> As length increases, spring constant decreases  (and vice versa)
@@ -199,6 +202,7 @@ define( function( require ) {
       } );
 
       // We are resetting the springs' displacement property to recalculate an appropriate length (derived property)
+      //REVIEW: Use capitalized Property to talk about Properties
       this.springs.forEach( function( spring ) {
         if ( spring.massAttachedProperty.get() ) {
           spring.massAttachedProperty.reset();

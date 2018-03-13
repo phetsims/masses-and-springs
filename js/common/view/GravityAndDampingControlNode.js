@@ -74,10 +74,10 @@ define( function( require ) {
       } );
     } );
 
-    // @public REVIEW: type docs, and why is this set as a property instead of a local var?
+    // @public REVIEW: type docs, and why is this set as a Property instead of a local var?
     this.gravityProperty = model.gravityProperty;
 
-    // @public REVIEW: type docs, and why is this set as a property instead of a local var?
+    // @public REVIEW: type docs, and why is this set as a Property instead of a local var?
     this.bodyProperty = model.bodyProperty;
 
     //REVIEW: Does not need visibility/read-only docs, as it's a local variable
@@ -104,6 +104,7 @@ define( function( require ) {
       stroke: null,
       sliderIndent: 7,
       constrainValue: function( value ) {
+        //REVIEW: Use Util.roundSymmetric, see https://github.com/phetsims/dot/issues/35#issuecomment-113587879
         value = Math.round( value * 100 / 3 ) * 3;
         return value / 100;
       }
@@ -202,6 +203,7 @@ define( function( require ) {
         thumbFillHighlighted: '#71EDFF',
         align: 'center',
         constrainValue: function( value ) {
+          //REVIEW: Use Util.roundSymmetric, see https://github.com/phetsims/dot/issues/35#issuecomment-113587879
           value = Math.round( value * 100 / 5.75 ) * 5.75;
           return value / 100;
         },

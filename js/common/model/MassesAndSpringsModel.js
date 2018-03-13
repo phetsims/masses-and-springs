@@ -49,6 +49,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'playingProperty' )
     } );
 
+    //REVIEW: Style guide wants one space after //
     //@public {Property.<boolean>} determines whether the sim is playing sound
     //REVIEW: Looks like nothing is listening to this? Can it be removed?
     this.isSoundEnabledProperty = new BooleanProperty( true, {
@@ -127,7 +128,7 @@ define( function( require ) {
       phetioType: PropertyIO( BodyIO )
     } );
 
-    // Visibility properties of vectors associated with each mass
+    // Visibility properties of vectors associated with each mass REVIEW: Use capitalized Property to talk about Properties
     // @public {Property.<boolean>} determines the visibility of the velocity vector
     this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
@@ -206,6 +207,7 @@ define( function( require ) {
       );
       this.springs.push( spring );
 
+      //REVIEW: Use capitalized Property to talk about Properties
       // Links are used to set damping property of each spring to the damping property of the system
       //REVIEW: Additionally, why not pass this reference in directly, so direct listeners can be added?
       this.dampingProperty.link( function( newDamping ) {
@@ -337,7 +339,7 @@ define( function( require ) {
 
       // Update mass position if unattached
       else {
-
+        //REVIEW: Style guide wants one space after //
         //Attempt to attach
         //REVIEW: Presumably springs are too far apart to have a mass attach to multiple springs? If so might doc.
         this.springs.forEach( function( spring ) {

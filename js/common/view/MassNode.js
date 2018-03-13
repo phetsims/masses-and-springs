@@ -204,6 +204,7 @@ define( function( require ) {
       cursor: 'pointer'
     } );
 
+    //REVIEW: Style guide wants one space after //
     //Arrows created for vectors associated with mass nodes
     //REVIEW: JSDoc
     this.velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
@@ -229,6 +230,7 @@ define( function( require ) {
 
     // TODO: It looks like the below functions could be refactored into a single multilink across 7+ properties that update the below 6 visibilities
     // TODO: OR Move code into VectorArrow (or whatever the supertype for all of the arrows would be) so that you can update visibility and tail/tip using code there.
+    //REVIEW: Handle TODOs?
 
     /**
      * Show/hide the velocity and acceleration arrows when appropriate
@@ -286,6 +288,7 @@ define( function( require ) {
     // TODO: Lots of similar code for setting arrow tail/tip. Ideally refactor to a function that can set tail/tip on all arrows (based on magnitude/etc.)
     //REVIEW: Handle this TODO?
 
+    //REVIEW: Style guide wants one space after //
     //Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;
     Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty, model.accelerationVectorVisibilityProperty ], function( velocity, visible, accelerationVisible ) {

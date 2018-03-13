@@ -65,7 +65,7 @@ define( function( require ) {
     this.secondSpringStopperButtonNode = this.createStopperButton( rightSpring, tandem );
     this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
 
-    //REVIEW: Not sure why these two properties are linked together. This looks like it could be handled with two
+    //REVIEW: Not sure why these two Properties are linked together. This looks like it could be handled with two
     //REVIEW: separate link statements?
     Property.multilink( [ leftSpring.buttonEnabledProperty, rightSpring.buttonEnabledProperty ],
       function( leftButtonEnabled, rightButtonEnabled ) {
@@ -150,6 +150,7 @@ define( function( require ) {
     this.addChild( this.firstSpringStopperButtonNode );
     this.addChild( this.secondSpringStopperButtonNode );
 
+    //REVIEW: Style guide wants one space after //
     //Reference lines from indicator visibility box
     this.addChild( firstNaturalLengthLineNode );
     this.addChild( secondNaturalLengthLineNode );
@@ -161,7 +162,7 @@ define( function( require ) {
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-
+      //REVIEW: Style guide wants one space after //
       //Update the bounds of view elements
       //REVIEW: Lots of layout here. Can we use things like AlignBox/HBox/VBox to simplify? Might be worth collaboration.
       //REVIEW: How much of this can be shared with OneSpringScreenView (and moved to SpringScreenView?)

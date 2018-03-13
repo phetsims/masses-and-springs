@@ -41,7 +41,7 @@ define( function( require ) {
     GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
 
     // {Property.<Range>} range of gravitational acceleration associated with each planet
-    //REVIEW: No property? Additionally, if you expose only a Range, no reason to use RangeWithValue instead.
+    //REVIEW: No Property? Additionally, if you expose only a Range, no reason to use RangeWithValue instead.
     SPRING_CONSTANT_RANGE: new RangeWithValue( 3, 12, 6 ),
 
     // Constants for vectors

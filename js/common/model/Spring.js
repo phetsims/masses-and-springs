@@ -39,7 +39,7 @@ define( function( require ) {
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
-   * @param {Property.<number>} gravityProperty - the gravity property from the model
+   * @param {Property.<number>} gravityProperty - the gravity property from the model REVIEW: Use capitalized Property to talk about Properties
    * @param {Tandem} tandem
    * @param {Object} [options]
    * REVIEW: Options are never used? (Correct me if wrong)
@@ -229,12 +229,12 @@ define( function( require ) {
     // @public {Property.<boolean>} Responsible for the visibility of the period trace.
     //REVIEW: BooleanProperty?
     //REVIEW: Why is this not reset?
-    //REVIEW: Wait, is this property never set a value?
+    //REVIEW: Wait, is this Property never set a value?
     this.periodTraceVisibilityProperty = new Property( false );
 
     //REVIEW: NumberProperty?
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-    //REVIEW: Can we try to turn this into a derived property, with a 0 or null if there is no mass attached?
+    //REVIEW: Can we try to turn this into a derived Property, with a 0 or null if there is no mass attached?
     this.massEquilibriumYPositionProperty = new Property( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
@@ -354,6 +354,7 @@ define( function( require ) {
     /**
      * Updates thickness of spring and sets its thickness property to calculated value. This is not handled internally
      * by the spring because the intro model determines the conditions for updating thickness.
+     * REVIEW: Use capitalized Property to talk about Properties
      * @public
      *
      * REVIEW: Type comes before the name in the type docs
@@ -372,6 +373,7 @@ define( function( require ) {
     /**
      * Updates springConstant of spring and sets its spring constant property to calculated value. This is not handled
      * internally by the spring because the intro model determines the conditions for updating spring constant.
+     * REVIEW: Use capitalized Property to talk about Properties
      * @public
      *
      * @param length {number} current natural resting length of spring
@@ -534,6 +536,7 @@ define( function( require ) {
         // Critically damped case
         else {
           //TODO::  if needed decouple these objects
+          //REVIEW: JO will handle
           var omega = Math.sqrt( k / m );
           var phi = Math.exp( dt * omega );
 

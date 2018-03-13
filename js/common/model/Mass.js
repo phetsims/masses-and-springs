@@ -42,7 +42,7 @@ define( function( require ) {
    * @param {number} xPosition - starting x-coordinate of the mass object, offset from the first spring position
    * @param {boolean} isLabeled: determines if the mass is labeled in the view
    * @param {string} color: color of shown mass
-   * @param {Property.<number>} gravityProperty - the gravity property from the model
+   * @param {Property.<number>} gravityProperty - the gravity property from the model REVIEW: Use capitalized Property to talk about Properties
    * @param {Tandem} tandem
    * @param {Object} [options]
    * @constructor
@@ -61,7 +61,7 @@ define( function( require ) {
       zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf REVIEW: units?
     }, options );
 
-    // @public Non-property attributes
+    // @public Non-property attributes REVIEW: These are properties, use capitalized 'Property' to talk about the type.
     this.isLabeled = isLabeled;
     this.adjustable = options.adjustable;
     this.mysteryLabel = options.mysteryLabel;
@@ -196,7 +196,7 @@ define( function( require ) {
         return springForce - massValue * gravity;
       } );
 
-    // Link that sets the acceleration property of the mass
+    // Link that sets the acceleration property of the mass REVIEW: Use capitalized Property to talk about Properties
     this.netForceProperty.link( function( netForce ) {
       self.accelerationProperty.set( netForce / self.mass );
     } );
@@ -291,6 +291,7 @@ define( function( require ) {
     // As the total energy changes we can derive the thermal energy as being the energy lost from the system
     this.totalEnergyProperty.link( function( newTotalEnergy, oldTotalEnergy ) {
       if ( self.userControlledProperty.get() ) {
+        //REVIEW: Style guide wants one space after //
         //If a user is dragging the mass we remove the thermal energy.
         self.initialTotalEnergyProperty.set( newTotalEnergy );
       }

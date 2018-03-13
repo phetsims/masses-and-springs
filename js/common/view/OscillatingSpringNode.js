@@ -67,6 +67,7 @@ define( function( require ) {
       - ( options.leftEndLength + options.rightEndLength) );
       var xScale = coilStretch / ( self.loopsProperty.get() * self.radiusProperty.get() );
 
+      //REVIEW: Style guide wants one space after //
       //The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
       //Spring is rotated to be rotated so XScale relates to Y-direction in view
       //TODO There is possibly a better solution by setting the phase and deltaPhase.
@@ -84,6 +85,7 @@ define( function( require ) {
       updateViewLength();
     } );
 
+    //REVIEW: Style guide wants one space after //
     //ParametricSpringNode width update
     //SpringConstant determines lineWidth
     spring.thicknessProperty.link( function( thickness ) {

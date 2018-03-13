@@ -74,6 +74,7 @@ define( function( require ) {
         visible: false,
         centerTick: true,
         constrainValue: function( value ) {
+          //REVIEW: Use Util.roundSymmetric, see https://github.com/phetsims/dot/issues/35#issuecomment-113587879
           value = Math.round( value * 100 / 5 ) * 5;
           return value / 100;
         }
@@ -164,6 +165,7 @@ define( function( require ) {
     this.addChild( firstSpringEquilibriumLineNode );
     this.addChild( secondSpringEquilibriumLineNode );
 
+    //REVIEW: Style guide wants one space after //
     //We do this to prevent overlap with the massNodes.
     firstSpringEquilibriumLineNode.moveToBack();
     secondSpringEquilibriumLineNode.moveToBack();
