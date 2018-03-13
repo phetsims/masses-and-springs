@@ -45,7 +45,7 @@ define( function( require ) {
       minorTickMarksVisible: true,
       constrainValue: function( value ) {
         return Util.roundSymmetric( value );
-      },
+      }
     }, options );
 
     // slider used to adjust value of natural resting length of spring

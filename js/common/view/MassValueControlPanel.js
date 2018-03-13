@@ -28,10 +28,9 @@ define( function( require ) {
 
   /**
    * @param {Mass} mass
-   * @param {Tandem} tandem
    * @constructor
    */
-  function MassValueControlPanel( mass, tandem ) {
+  function MassValueControlPanel( mass ) {
 
     // range for mass in kg
     var range = new Range( 50, 300 );

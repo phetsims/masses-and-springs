@@ -140,7 +140,7 @@ define( function( require ) {
       model,
       this.visibleBoundsProperty.get(),
       tandem.createTandem( 'timeControlPanel' ), {
-        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + 0.02 ),
+        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + 0.02 )
       }
     );
 
@@ -159,7 +159,7 @@ define( function( require ) {
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ), {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 30,
-        minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 20,
+        minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 20
       }
     );
 

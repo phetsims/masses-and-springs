@@ -130,7 +130,7 @@ define( function( require ) {
         new VStrut( 24 ),
         greenLine,
         new VStrut( 24 ),
-        redLine,
+        redLine
       ], yMargin: 0
     } );
     var controlBox = new HBox( {
