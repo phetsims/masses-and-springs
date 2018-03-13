@@ -44,14 +44,14 @@ define( function( require ) {
         new Vector2( 0.65, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         0,
-        new Property(0),
+        new Property(0), //REVIEW: NumberProperty? (Really don't care here, but it is the code style)
         tandem.createTandem( 'firstIconSpring' )
       ),
       new Spring(
         new Vector2( 0.85, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         0,
-        new Property(0),
+        new Property(0), //REVIEW: NumberProperty? (Really don't care here, but it is the code style)
         tandem.createTandem( 'secondIconSpring' )
       )
     ];
@@ -69,6 +69,7 @@ define( function( require ) {
       mvt,
       tandem.createTandem( 'firstSpringIcon' ),
       springNodeOptions );
+    //REVIEW: Can this be in the options?
     firstSpringIcon.loopsProperty.set( 6 );
     firstSpringIcon.lineWidthProperty.set( 3 );
 
@@ -80,6 +81,7 @@ define( function( require ) {
       tandem.createTandem( 'secondSpringIcon' ),
       springNodeOptions
     );
+    //REVIEW: Can this be in the options?
     secondSpringIcon.loopsProperty.set( 6 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
@@ -100,7 +102,7 @@ define( function( require ) {
       lineWidth: 4,
       centerX: firstSpringIcon.centerX,
       top: firstSpringIcon.top,
-      opacity: this.opacity
+      opacity: this.opacity // REVIEW: Nested opacity, so the true opacity here is 0.9 * 0.9? Is that desired?
     } );
 
     var secondVerticalLineNode = new Line( 60, 0, 0, 0, {
@@ -108,7 +110,7 @@ define( function( require ) {
       lineWidth: 4,
       centerX: secondSpringIcon.centerX,
       top: secondSpringIcon.top,
-      opacity: this.opacity
+      opacity: this.opacity // REVIEW: Nested opacity, so the true opacity here is 0.9 * 0.9? Is that desired?
     } );
 
     //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.

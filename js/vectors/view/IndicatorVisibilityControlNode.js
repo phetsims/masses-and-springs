@@ -55,6 +55,7 @@ define( function( require ) {
      * @param {Tandem} tandem
      * @returns {Line} line object with passed in color.
      */
+    //REVIEW: Looks suspiciously duplicated from LineVisibilityNode. Can/should some code be factored out?
     var createLine = function( color, tandem ) {
       return new Line( 0, 0, LINE_LENGTH, 0, {
         stroke: color,
@@ -66,19 +67,22 @@ define( function( require ) {
     };
 
     // Lines added for reference in panel
+    //REVIEW: Looks suspiciously duplicated from LineVisibilityNode. Can/should some code be factored out?
     var blackLine = createLine( 'black', tandem.createTandem( 'blackLine' ) );
     var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
     var grayLine = createLine( '#e6e6e6' ); // TODO: we shouldn't need this for spacing on lab screen.
     var displacementSymbol = new DisplacementArrowNode(
-      new Property( 10 ),
-      new Property( true ),
+      new Property( 10 ), //REVIEW: NumberProperty?
+      new Property( true ), //REVIEW: BooleanProperty?
+      //REVIEW: Or... can we maybe make a dev meeting note to see if we can just leave "never-changing" Properties like this as Property instead of using subtypes?
       tandem,
       {
         modelViewTransform: this.modelViewTransform,
         symbolRepresentation: true,
       }
     );
+    //REVIEW: Just pass these options into the DisplacementArrowNode options? ( e.g. scale: ... )
     displacementSymbol.scale( .65 );
 
     // Labels for the displacement arrow and natural length line
@@ -158,7 +162,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
       } );
     }
-    var titleToControlsVerticalSpace = 2;
+    var titleToControlsVerticalSpace = 2; //REVIEW: Can this be inlined?
     var indicatorVisibilityControlsVBox = new VBox( {
         children: [
           new VStrut( titleToControlsVerticalSpace ),
@@ -197,7 +201,7 @@ define( function( require ) {
     var controlBox = new HBox( {
       children: [
         indicatorVisibilityControlsVBox,
-        new HStrut( 25 ),
+        new HStrut( 25 ), //REVIEW: Use spacing instead?
         lineVBox,
       ]
     } );

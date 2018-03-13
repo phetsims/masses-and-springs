@@ -32,7 +32,7 @@ define( function( require ) {
    * @param {Property.<string>} selectedConstantProperty determines which value to hold constant, values are 'spring-constant' and 'spring-thickness'
    * @param {string} title: string used to title the panel
    * @param {tandem} tandem
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function ConstantsControlPanel( selectedConstantProperty, title, tandem, options ) {

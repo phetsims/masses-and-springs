@@ -44,6 +44,7 @@ define( function( require ) {
       model.naturalLengthVisibleProperty,
       tandem,
       { modelViewTransform: this.modelViewTransform } );
+    //REVIEW: Just pass these options into the DisplacementArrowNode options? ( e.g. left: ... )
     firstDisplacementArrowNode.left = this.springNodes[ 0 ].right + 8;
     firstDisplacementArrowNode.centerY = this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value );
     this.addChild( firstDisplacementArrowNode );
@@ -53,6 +54,7 @@ define( function( require ) {
       model.naturalLengthVisibleProperty,
       tandem,
       { modelViewTransform: this.modelViewTransform } );
+    //REVIEW: Just pass these options into the DisplacementArrowNode options? ( e.g. left: ... )
     secondDisplacementArrowNode.right = this.springNodes[ 1 ].left + 14;
     secondDisplacementArrowNode.centerY = this.modelViewTransform.modelToViewY( this.springNodes[ 1 ].spring.bottomProperty.value );
     this.addChild( secondDisplacementArrowNode );
@@ -60,6 +62,7 @@ define( function( require ) {
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
     var firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 0 ].massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
+        //REVIEW: return massAttached && equilibriumPositionVisible;
         if ( massAttached ) {
           return equilibriumPositionVisible;
         }
@@ -69,6 +72,7 @@ define( function( require ) {
       } );
     var secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 1 ].massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
+        //REVIEW: return massAttached && equilibriumPositionVisible;
         if ( massAttached ) {
           return equilibriumPositionVisible;
         }
@@ -76,6 +80,7 @@ define( function( require ) {
           return false;
         }
       } );
+    //REVIEW: Some duplication for things for each spring. Is there an easy/moderate way to remove this? If not no worries
 
     // Initializes equilibrium line for first spring
     var firstSpringEquilibriumLineNode = new ReferenceLineNode(
@@ -172,6 +177,7 @@ define( function( require ) {
     } );
 
     // Determines where we want the force vectors of the attached mass to be placed.
+    //REVIEW: Shouldn't directly change spring options. Also, can we do this on spring construction instead?
     model.springs[ 0 ].options.forcesOrientation = -1;
     model.springs[ 1 ].options.forcesOrientation = 1;
   }

@@ -28,6 +28,9 @@ define( function( require ) {
    */
   function LineArrowNode( tailX, tailY, tipX, tipY, options ) {
 
+    //REVIEW: This looks like a duplicated form of LineArrowNode from hookes-law, and it should be moved to common code.
+    //REVIEW: See TODO in the header above.
+
     // default options
     options = _.extend( {
       headHeight: 10,

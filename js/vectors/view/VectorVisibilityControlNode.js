@@ -48,6 +48,7 @@ define( function( require ) {
 
     Node.call( this, options );
 
+    // REVIEW: This has some duplication with MassNode. Is it something that can be factored out?
     var velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
     var accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
     var gravityArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
@@ -181,6 +182,7 @@ define( function( require ) {
     else {
       vectorVisibilityControlsVBox = new VBox( {
         children: [
+          //REVIEW: This is put into an HBox with centers vertically. Why would VStruts of equal size be needed?
           new VStrut( 2 ),
           vectorVisibilityCheckboxGroup,
           new VStrut( 2 )
@@ -201,7 +203,7 @@ define( function( require ) {
     var controlsHBox = new HBox( {
         children: [
           vectorVisibilityControlsVBox,
-          new HStrut( 40 ),
+          new HStrut( 40 ), //REVIEW: Use spacing?
           vectorVBox,
         ]
       }

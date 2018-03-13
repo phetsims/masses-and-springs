@@ -1,7 +1,7 @@
 // Copyright 2016-2018, University of Colorado Boulder
 
 /**
- * Common ScreenView for  using two masses.
+ * Common ScreenView for using two masses.
  *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
@@ -45,6 +45,7 @@ define( function( require ) {
     model.springs[ 1 ].options.modelViewTransform2 = this.modelViewTransform;
 
     // Spring Hanger Node
+    //REVIEW: JSDoc
     this.springHangerNode = new SpringHangerNode(
       model.springs,
       this.modelViewTransform,
@@ -55,13 +56,17 @@ define( function( require ) {
 
 
     var leftSpring = this.model.springs[ 0 ];
+    //REVIEW: JSDoc
     this.firstSpringStopperButtonNode = this.createStopperButton( leftSpring, tandem );
     this.firstSpringStopperButtonNode.right = this.springHangerNode.left - this.spacing;
 
     var rightSpring = this.model.springs[ 1 ];
+    //REVIEW: JSDoc
     this.secondSpringStopperButtonNode = this.createStopperButton( rightSpring, tandem );
     this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
 
+    //REVIEW: Not sure why these two properties are linked together. This looks like it could be handled with two
+    //REVIEW: separate link statements?
     Property.multilink( [ leftSpring.buttonEnabledProperty, rightSpring.buttonEnabledProperty ],
       function( leftButtonEnabled, rightButtonEnabled ) {
         self.firstSpringStopperButtonNode.enabled = leftButtonEnabled;
@@ -73,15 +78,18 @@ define( function( require ) {
       new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT } ),
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT } )
     ];
+    //REVIEW: JSDoc
     this.firstSpringConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
     this.firstSpringConstantControlPanel.right = this.firstSpringStopperButtonNode.left - this.spacing;
 
+    //REVIEW: JSDoc
     this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, minMaxLabels, tandem );
     this.secondSpringConstantControlPanel.left = this.secondSpringStopperButtonNode.right + this.spacing;
 
     // Initializes red movable reference line
     var xBoundsLimit = this.springHangerNode.centerX + 5;
     var movableLineNode = new MovableLineNode(
+      //REVIEW: If it's easier, you can use .center instead of .getCenter(), as it's slightly shorter
       this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 45, 0 ) ),
       210,
       model.movableLineVisibleProperty,
@@ -90,6 +98,8 @@ define( function( require ) {
     );
 
     // @public Initializes natural line for first spring
+    //REVIEW: Don't need visibility doc for local variable
+    //REVIEW: Lots of duplication with construction of these. Can we simplify?
     var firstNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 0 ],
@@ -101,6 +111,7 @@ define( function( require ) {
     );
 
     // @public Initializes natural line for second spring
+    //REVIEW: Don't need visibility doc for local variable
     var secondNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.springs[ 1 ],
@@ -112,6 +123,7 @@ define( function( require ) {
     );
 
     // Gravity Control Panel
+    //REVIEW: JSDoc
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
       {
@@ -158,7 +170,7 @@ define( function( require ) {
       self.toolboxPanel.right = self.panelRightSpacing;
       self.resetAllButton.right = self.panelRightSpacing;
       self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
-      self.toolboxPanel.dragBounds = 3;
+      self.toolboxPanel.dragBounds = 3; //REVIEW: Is this setting a {number} to a {Bounds2}?
       self.timerNode.updateBounds( visibleBounds.withOffsets(
         self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2
       ) );

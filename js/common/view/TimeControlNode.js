@@ -73,6 +73,7 @@ define( function( require ) {
       ]
     } );
 
+    //REVIEW: Do these need precise vertical alignment, or can we wrap these in an HBox (TimeControlNode could inherit HBox?)
     timeSpeedRadioNode.left = timeControlHBox.right + 40;
     this.addChild( timeControlHBox );
     this.addChild( timeSpeedRadioNode );

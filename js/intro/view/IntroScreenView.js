@@ -56,6 +56,8 @@ define( function( require ) {
       new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT } ),
       new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT } )
     ];
+
+    //REVIEW: JSDoc
     this.springLengthControlPanel = new SpringControlPanel(
       model.spring1.naturalRestingLengthProperty,
       //REVIEW: Only uses {Range} parts, so why specify a RangeWithValue?
@@ -79,6 +81,7 @@ define( function( require ) {
     );
 
     // @private panel that keeps thickness/spring constant at constant value
+    //REVIEW: JSDoc type
     this.constantsControlPanel = new ConstantsControlPanel(
       model.constantParameterProperty,
       constantParameterString,

@@ -44,6 +44,8 @@ define( function( require ) {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
 
+    //REVIEW: JSDoc
+    //REVIEW: The only usage I see of this is it being set to a {number} (constant 3) in TwoSpringScreenView. Can this be removed?
     this.dragBounds = options.dragBounds;
 
     var self = this;
@@ -82,10 +84,17 @@ define( function( require ) {
       { tandem: tandem.createTandem( 'ruler' ) } );
     ruler.rotate( 40, false );
 
+    //REVIEW: Since toImage is asynchronous, it looks like the ruler/timer callbacks could finish in any order. This could
+    //REVIEW: mean that sometimes when the sim loads, the timer will be on the other side of the ruler.
+    //REVIEW: Node.toDataURLNodeSynchronous could be used instead (potentially), so things can be removed from the callbacks.
+
     // Create timer icon
     ruler.toImage( function( image ) {
 
       // @private - visible option is used only for reset() in ToolboxPanel.js
+      //REVIEW: Not great form to declare properties inside callbacks. Hopefully when this is de-callbacked (see
+      //REVIEW above notes), this will be fine. Also JSDoc the type.
+      //REVIEW: Wait, why is this set as a property? Should be able to use a local variable instead?
       self.rulerIcon = new Image( image, {
         // Instead of changing the rendering, we'll dynamically generate a mipmap so that the ruler icon appearance looks better.
         // See https://github.com/phetsims/masses-and-springs/issues/199.
@@ -111,7 +120,9 @@ define( function( require ) {
 
         startDrag: function( event ) {
           // Toggle visibility
+          //REVIEW: Why would this be set to true here?
           rulerVisibleProperty.set( true );
+          //REVIEW: This looks like a potential memory leak, since every startDrag will add a listener that never goes away
           rulerVisibleProperty.link( function( visible ) {
             self.rulerIcon.visible = !visible;
           } );
@@ -134,6 +145,9 @@ define( function( require ) {
     timer.toImage( function( image ) {
 
       // @private - visible option is used only for reset() in ToolboxPanel.js
+      //REVIEW: Not great form to declare properties inside callbacks. Hopefully when this is de-callbacked (see
+      //REVIEW above notes), this will be fine. Also JSDoc the type.
+      //REVIEW: Wait, why is this set as a property? Should be able to use a local variable instead?
       self.timerIcon = new Image( image, {
         cursor: 'pointer',
         pickable: true,
@@ -153,7 +167,9 @@ define( function( require ) {
 
         startDrag: function( event ) {
           // Toggle visibility
+          //REVIEW: Why would this be set to true here?
           timerVisibleProperty.set( true );
+          //REVIEW: This looks like a potential memory leak, since every startDrag will add a listener that never goes away
           timerVisibleProperty.link( function( visible ) {
             self.timerIcon.visible = !visible;
           } );
