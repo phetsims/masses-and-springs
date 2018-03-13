@@ -176,10 +176,6 @@ define( function( require ) {
     // @public {Property.boolean} Flag to enable the stop button for the spring.
     this.buttonEnabledProperty = new BooleanProperty( false );
 
-    // @public {Range} (read-only)
-    //REVIEW: Is this used somewhere, or is it dead code?
-    this.springConstantRange = MassesAndSpringsConstants.SPRING_CONSTANT_RANGE;
-
     // @public {Property.<number>} (read-only) length of the spring, units = m
     this.lengthProperty = new DerivedProperty(
       [ this.naturalRestingLengthProperty, this.displacementProperty ],
