@@ -100,6 +100,8 @@ define( function( require ) {
       var rulerUnboundedPosition = new Vector2();
 
       // Drag listener for event forwarding: rulerIcon ---> rulerNode
+      //REVIEW: Forwarding should generally use SimpleDragHandler.createForwardingListener. I'll be available to help with it.
+      //REVIEW: Definitely don't need a full listener here, particularly a drag listener.
       self.rulerIcon.addInputListener( new MovableDragHandler( rulerNode.positionProperty, {
 
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
@@ -140,6 +142,8 @@ define( function( require ) {
       } );
 
       // Drag listener for event forwarding: timerIcon ---> timerNode
+      //REVIEW: Forwarding should generally use SimpleDragHandler.createForwardingListener. I'll be available to help with it.
+      //REVIEW: Definitely don't need a full listener here, particularly a drag listener.
       self.timerIcon.addInputListener( new MovableDragHandler( timerNode.positionProperty, {
 
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it

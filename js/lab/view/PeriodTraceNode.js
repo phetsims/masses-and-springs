@@ -22,22 +22,23 @@ define( function( require ) {
 
   /**
    * @constructor
+   * REVIEW: params
    */
   function PeriodTraceNode( periodTrace, modelViewTransform ) {
     Node.call( this );
     var self = this;
 
-    // @protected
+    // @protected PREVIEW: protected? what inherits from this?
     this.periodTrace = periodTrace;
 
     // @private {number} - The opacity of the trace (not using Node opacity for performance reasons)
     this.colorAlpha = 1;
 
-    // @protected
+    // @protected PREVIEW: protected? what inherits from this?
     this.traceColor = new Color( 'black' );
 
 
-    // @protected
+    // @protected PREVIEW: protected? what inherits from this?
     this.modelViewTransform = modelViewTransform;
 
     this.originalX = this.modelViewTransform.modelToViewX( this.periodTrace.springProperty.value.positionProperty.value.x - 0.2 );
@@ -72,6 +73,7 @@ define( function( require ) {
     },
 
     // TODO:documentation
+    //REVIEW: Looks private. Also since it's just called from step, it COULD be inlined. At least remove the passing in of the MVT and use this.modelViewTransform? (Same for the spring?)
     updateTrace: function( spring, modelViewTransform ) {
 
       var mass = spring.massAttachedProperty.value;

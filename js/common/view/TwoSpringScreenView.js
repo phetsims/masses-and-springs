@@ -36,7 +36,8 @@ define( function( require ) {
    * @constructor
    */
   function TwoSpringScreenView( model, tandem ) {
-    this.model = model; // Make model available
+    //REVIEW: JSDoc
+    this.model = model; // Make model available REVIEW: This is already done in the supertype, not necessary here
     SpringScreenView.call( this, model, tandem );
     var self = this;
 

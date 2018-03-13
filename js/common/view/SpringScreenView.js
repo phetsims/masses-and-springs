@@ -70,13 +70,16 @@ define( function( require ) {
     // @protected {number} - Spacing used for the margin of layout bounds
     this.spacing = 10;
 
-    // @protected {number} - Alignment for panels on most right side of sim view
+    // @protected {number} - Alignment for panels on most right side of sim view REVIEW: 'alignment' is usually like right/left/center. This is a padding between the right side of the screen and the panels, correct?
     this.rightPanelAlignment = this.visibleBoundsProperty.get().right - this.spacing;
 
     // Add masses
+    //REVIEW: JSDoc
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ), preventFit: true } );
+    //REVIEW: JSDoc
     this.massNodes = [];
 
+    //REVIEW: Could use `this.massNodes = model.masses.map( ... )`, returning the mass node at the end of the callback?
     model.masses.forEach( function( mass ) {
       var massNode = new MassNode(
         mass,
@@ -91,6 +94,7 @@ define( function( require ) {
     } );
 
     // Add shelf for to house massNodes
+    //REVIEW: JSDoc
     this.shelf = new Shelf( tandem, {
       rectHeight: 7
     } );
@@ -99,6 +103,7 @@ define( function( require ) {
     this.addChild( this.shelf );
 
     // Timer and Ruler
+    //REVIEW: JSDoc
     this.timerNode = new DraggableTimerNode(
       this.visibleBoundsProperty.get(),
       Vector2.ZERO,
@@ -107,6 +112,7 @@ define( function( require ) {
       model.timerVisibleProperty,
       tandem.createTandem( 'timerNode' )
     );
+    //REVIEW: JSDoc
     this.rulerNode = new DraggableRulerNode(
       this.modelViewTransform,
       this.visibleBoundsProperty.get(),
@@ -116,6 +122,7 @@ define( function( require ) {
     );
 
     // Create specific layer for tools so they don't overlap the reset all button.
+    //REVIEW: JSDoc
     this.toolsLayer = new Node( {
       children: [ this.timerNode, this.rulerNode ],
       tandem: tandem.createTandem( 'massLayer' ),
@@ -123,6 +130,7 @@ define( function( require ) {
     } );
 
     // Reset All button
+    //REVIEW: JSDoc
     this.resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
@@ -136,15 +144,18 @@ define( function( require ) {
     } );
 
     // Sim speed controls
+    //REVIEW: JSDoc
     this.timeControlPanel = new TimeControlNode(
       model,
       this.visibleBoundsProperty.get(),
       tandem.createTandem( 'timeControlPanel' ), {
+        //REVIEW: Another 0.02 constant to factor out
         bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + 0.02 )
       }
     );
 
     // sound toggle button at bottom right
+    //REVIEW: This is never added. Can it just be removed? Why do we have an isSoundEnabledProperty?
     var soundToggleButton = new SoundToggleButton( model.isSoundEnabledProperty, {
       centerY: this.resetAllButton.centerY - 55,
       scale: 0.9
@@ -152,8 +163,11 @@ define( function( require ) {
     // this.addChild( soundToggleButton );
 
     // Toolbox Panel
+    //REVIEW: JSDoc
     this.toolboxPanel = new ToolboxPanel(
       this.visibleBoundsProperty.get(),
+      //REVIEW: Usually we wouldn't need to pass in the rulerNode/TimerNode (and we wouldn't need to set the toolbox property on the nodes below).
+      //REVIEW: We can collaborate to remove this dependency?
       this.rulerNode, this.timerNode,
       model.rulerVisibleProperty,
       model.timerVisibleProperty,
@@ -165,9 +179,13 @@ define( function( require ) {
 
     // Adding tools in toolbox
     this.addChild( this.toolboxPanel );
+    //REVIEW: This can be removed presumably if the above is done?
     this.timerNode.toolbox = this.toolboxPanel;
     this.rulerNode.toolbox = this.toolboxPanel;
 
+    //REVIEW: It seems like there are listeners similar to this on subtypes. It's better to create a layout() method
+    //REVIEW: on the screenview and override/extend as necessary, as you are unintentionally depending on this listener
+    //REVIEW: being added before the other visibleBoundsProperty listeners are added (for layout)
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //Update the bounds of view elements
@@ -189,6 +207,8 @@ define( function( require ) {
         massNode.moveToFront();
       } );
     },
+
+    //REVIEW: This can be removed?
     //
     // /**
     //  * Responsible for making sure the resetAllButton is in front of the scene graph at all times.
@@ -218,7 +238,7 @@ define( function( require ) {
      * Creates a panel that controls the designated spring's spring constant value.
      *
      * @param {number} springIndex
-     * @param {array.<Text>} labels
+     * @param {Array.<Text>} labels
      * @param {Tandem} tandem
      * @returns {SpringControlPanel}
      */
