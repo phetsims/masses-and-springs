@@ -113,7 +113,5 @@ define( function( require ) {
     updateBounds: function( newBounds ) {
       this.rulerNodeMovableDragHandler.dragBounds = newBounds;
     }
-
   } );
-
 } );

@@ -126,7 +126,7 @@ define( function( require ) {
     var labelString = mass.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
     var label = new Text( labelString, {
       font: new PhetFont( { size: 12, weight: 'bold' } ),
-      fill: 'black',
+      fill: 'black', //REVIEW: Text defaults to black, no need to specify
       centerY: rect.centerY,
       centerX: 0,
       pickable: false,

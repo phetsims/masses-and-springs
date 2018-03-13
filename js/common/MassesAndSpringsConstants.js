@@ -17,8 +17,9 @@ define( function( require ) {
 
   var MassesAndSpringsConstants = {
 
+    //REVIEW: What is this TODO for?
     //TODO: Insert constants here
-    MAX_TEXT_WIDTH: 80,
+    MAX_TEXT_WIDTH: 80, //REVIEW: The one usage of this adds 20 to it? Usually a global isn't appropriate, just inline it.
     DEFAULT_SPRING_LENGTH: 0.5,
     RADIO_BUTTON_RADIUS: 6,
 
@@ -44,12 +45,13 @@ define( function( require ) {
     SPRING_CONSTANT_RANGE: new RangeWithValue( 3, 12, 6 ),
 
     // Constants for vectors
-    VECTOR_ARROW_LENGTH: 34,
-    FORCES_ARROW_LENGTH: 31,
-    ARROW_HEAD_WIDTH: 14,
-    ARROW_TAIL_WIDTH: 8,
-    SMALLER_ARROW_HEAD_WIDTH: 11,
-    SMALLER_ARROW_TAIL_WIDTH: 3,
+    //REVIEW: Lots of these.... aren't used?
+    VECTOR_ARROW_LENGTH: 34, //REVIEW: VectorArrow has a constant at the top of the file
+    FORCES_ARROW_LENGTH: 31, //REVIEW: ForceVectorArrow constant
+    ARROW_HEAD_WIDTH: 14, //REVIEW: VectorArrow constant at top of file
+    ARROW_TAIL_WIDTH: 8, //REVIEW: VectorArrow
+    SMALLER_ARROW_HEAD_WIDTH: 11, //REVIEW: ForceVectorArrow
+    SMALLER_ARROW_TAIL_WIDTH: 3, //REVIEW: ForceVectorArrow
     VELOCITY_ARROW_COLOR: 'rgb( 41, 253, 46 )',
     ACCELERATION_ARROW_COLOR: 'rgb( 255, 253, 56 )',
     GRAVITY_ARROW_COLOR: 'rgb( 236, 63, 71 )',
@@ -70,8 +72,8 @@ define( function( require ) {
     PANEL_CORNER_RADIUS: 5,
     PANEL_MAX_WIDTH: 175,
     PANEL_MIN_WIDTH: 190,
-    FORCES_STRING: 'forces',
-    NET_FORCE_STRING: 'netForce',
+    FORCES_STRING: 'forces', //REVIEW: Use enum instead
+    NET_FORCE_STRING: 'netForce', //REVIEW: Use enum instead
     PANEL_FILL: 'rgb(230,230,230)',
     LINE_SEPARATOR: function( length ) {
       return new Line( 0, 0, length, 0, { stroke: 'gray' } );

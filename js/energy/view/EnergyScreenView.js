@@ -20,7 +20,7 @@ define( function( require ) {
   var OneSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringScreenView' );
 
   /**
-   * @param {MassesAndSpringsModel} model
+   * @param {MassesAndSpringsModel} model REVIEW: Does this need to be an EnergyModel?
    * @param {Tandem} tandem
    *
    * @constructor
@@ -44,6 +44,7 @@ define( function( require ) {
       }
     );
 
+    //REVIEW: This is duplicated with the LabScreenView.
     var indicatorVisibilityControlNode = new IndicatorVisibilityControlNode(
       model,
       tandem.createTandem( 'indicatorVisibilityControlNode' ), {
@@ -51,7 +52,7 @@ define( function( require ) {
         xMargin: 0,
         yMargin: 0,
         stroke: null,
-        periodTraceOption:false
+        periodTraceOption: false
       } );
 
     // VBox that contains all of the panel's content
@@ -65,6 +66,9 @@ define( function( require ) {
     } );
 
     // Panel that will display all the toggleable options.
+    //REVIEW: Energy/Intro/Lab all create optionsPanels with fairly duplicated code. Support for this should be moved
+    //REVIEW: to SpringScreenView, and the optionsPanel should be layered correctly so that no moveToBack() is needed.
+    //REVIEW: Let me know if I can help with this.
     var optionsPanel = new Panel(
       optionsVBox,
       {

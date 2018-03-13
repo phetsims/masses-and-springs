@@ -13,7 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
 
-  // Constants
+  // Constants REVIEW: All used once, just inline?
   var FORCES_ARROW_LENGTH = 31;
   var SMALLER_ARROW_HEAD_WIDTH = 11;
   var SMALLER_ARROW_TAIL_WIDTH = 3;

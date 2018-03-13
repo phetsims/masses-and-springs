@@ -16,6 +16,7 @@ define( function( require ) {
 
   /**
    * @constructor
+   * REVIEW: JSDoc for param
    */
   function EnergyModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem );
@@ -38,6 +39,9 @@ define( function( require ) {
      */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
+
+      //REVIEW: The more "proper" way is to pass an initial value in to the supertype that is set as the property's
+      //REVIEW: actual initial value. Then it can be reset as normal.
       this.dampingProperty.set( 0.2 );
     }
     }

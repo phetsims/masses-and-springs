@@ -15,14 +15,17 @@ define( function( require ) {
 
   /**
    * @constructor
+   * REVIEW: doc param
    */
   function PeriodTrace( spring ) {
 
     var self = this;
 
+    //REVIEW: type/visibility docs
+    //REVIEW: Wait, this value is only set, never read from? Can this be removed?
     this.originalY = 0;
 
-    //TODO: Use numberProperty when applicable
+    //TODO: Use numberProperty when applicable REVIEW: I probably marked these where necessary, remove this TODO?
 
     //REVIEW: Type docs of the Property's value?
     // @public {Property} mass which is being tracked
@@ -57,6 +60,7 @@ define( function( require ) {
     //REVIEW: Type docs of the Property's value?
     this.stateProperty = new Property( 0 );
 
+    //REVIEW: type/visibility docs
     this.firstPeakY = 0;
     this.secondPeakY = 0;
 
@@ -82,6 +86,7 @@ define( function( require ) {
       self.onFaded();
     } );
 
+    //REVIEW: There is only one usage of this listener, so it could be inlined
     var peakListener = function( direction ) {
       if ( self.stateProperty.value !== 0 && self.stateProperty.value !== 4 ) {
           self.stateProperty.value += 1;
@@ -94,6 +99,7 @@ define( function( require ) {
       }
       self.directionProperty.set( direction );
     };
+    //REVIEW: There is only one usage of this listener, so it could be inlined
     var crossListener = function() {
         self.crossingProperty.value += 1;
 
@@ -101,6 +107,7 @@ define( function( require ) {
           self.stateProperty.value += 1;
       }
 
+      //REVIEW: Spaces should be inside parens. Might want to check all of the code to make sure the spaces are there.
       if ( ((self.stateProperty.value % 5 === 0) && (self.stateProperty !== 0)) ) {
         self.stateProperty.reset();
       }
@@ -108,7 +115,7 @@ define( function( require ) {
         self.crossingProperty.reset();
       }
     };
-
+    //REVIEW: There is only one usage of this listener, so it could be inlined
     var droppedListener = function() {
       self.stateProperty.reset();
       self.crossingProperty.reset();

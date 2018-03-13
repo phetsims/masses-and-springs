@@ -22,6 +22,7 @@ define( function( require ) {
 
   /**
    * @constructor
+   * REVIEW: JSDoc the param
    */
   function LabModel( tandem ) {
     // TODO: Think about creating mass objects above, and then passing into the constructor (instead of having to function-call to create, and then index into to modify)
@@ -29,8 +30,11 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem );
 
     // Lab screen should have spring damping
+    //REVIEW: Some other screen overrides this also, to the same value. use the same "initial value" instead of a
+    //REVIEW: custom reset.
     this.dampingProperty.set( 0.2 );
 
+    //REVIEW: the 0.01 should be refactored out (mention in another review comment)
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
 
     // REVIEW: Should these use MassesAndSpringsModel createMass? (or renamed method)?

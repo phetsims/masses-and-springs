@@ -58,12 +58,14 @@ define( function( require ) {
 
     //  Add gravity info for various planets
     var bodyListItems = [];
+    //REVIEW: JSDoc if stored? Is weird if this is changed externally. Can you explain why it is set as a property?
     this.bodies = MassesAndSpringsModel.BODIES;
     MassesAndSpringsModel.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'bodyLabel' )
       } );
+      //REVIEW: Hmm, maybe Bounds2 should have an includeX/includeY function that does this? Thoughts?
       bodyLabel.localBounds = bodyLabel.localBounds.withMaxX( Math.max( 50, bodyLabel.localBounds.maxX ) );
 
       bodyListItems.push( {
@@ -72,10 +74,10 @@ define( function( require ) {
       } );
     } );
 
-    // @public
+    // @public REVIEW: type docs, and why is this set as a property instead of a local var?
     this.gravityProperty = model.gravityProperty;
 
-    // @public
+    // @public REVIEW: type docs, and why is this set as a property instead of a local var?
     this.bodyProperty = model.bodyProperty;
 
     //REVIEW: Does not need visibility/read-only docs, as it's a local variable

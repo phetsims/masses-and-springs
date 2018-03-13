@@ -8,9 +8,11 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 define( function( require ) {
+  //REVIEW: Things should be aligned where this comment starts, (so 2 spaces in from the left, not 4). See note at bottom of file
     'use strict';
 
     // modules
+    //REVIEW: Whatever is happening with the alignment here should be fixed. See note at bottom of file
     var AccordionBox = require( 'SUN/AccordionBox' );
     var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
@@ -40,6 +42,7 @@ define( function( require ) {
     var PushButtonIO = require( 'SUN/buttons/PushButtonIO' );
 
     // constants
+    //REVIEW: Whatever is happening with the alignment here should be fixed. See note at bottom of file
   var LEGEND_DESCRIPTION_MAX_WIDTH = 500;
   var MAX_WIDTH = 100;
 
@@ -105,6 +108,7 @@ define( function( require ) {
       var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
         return Math.pow( 2, zoomLevel ) * 20;
       } );
+      //REVIEW: Can this comment be removed?
       // var buttonCenter = barNodes[ options.thermalEnergyIndex ].centerX;
 
       var clearThermalButton = new ClearThermalButton( {
@@ -120,12 +124,15 @@ define( function( require ) {
           }
         },
         scale: 0.7,
-        enabled: false
+        enabled: false //REVIEW: Can we change the below lazyLink to a link (and this will get set to false automatically?)
       } );
       model.springs[ 0 ].thermalEnergyProperty.lazyLink( function( value ) {
-        clearThermalButton.enabled = ( value > 0.001);
+        clearThermalButton.enabled = ( value > 0.001 );
       } );
 
+      //REVIEW: These color constants are duplicated below in dialogContent. Factor out to above?
+      //REVIEW: I'm seeing lots of model.springs[ 0 ]. Can we (on the model) call it firstSpring/mainSpring/etc. so it
+      //REVIEW: is a bit easier to read (and the model can make sure there is at least one spring?)
       var aEntry = {
         property: model.springs[ 0 ].kineticEnergyProperty,
         color: '#39d74e'
@@ -238,6 +245,8 @@ define( function( require ) {
 
       // Because zoom buttons don't support getting internal size, and other buttons don't resize, we need to do a
       // hacky workaround to get their content to be the same size.
+      //REVIEW: I always recognize my own hacks! Instead of copy-pasting this, we should try to figure out a better
+      //REVIEW: solution, or bring things up to the team. I'll be available to collaborate on it.
       var chromeBounds = new RoundPushButton( {
         content: new Node( { localBounds: new Bounds2( 0, 0, 0, 0 ) } )
       } ).bounds;
@@ -278,6 +287,8 @@ define( function( require ) {
       } );
 
       // Display buttons at the bottom of the graph
+      //REVIEW: This spacing seems inflexible. If the buttons change sizes, do things become unaligned?
+      //REVIEW: Ideally have the info button left-aligned, and an HBox with the zoom buttons right-aligned.
       var displayButtons = new HBox( {
         children: [ infoButton, new HStrut( 30 ), zoomOutButton, new HStrut( 3 ), zoomInButton ],
         spacing: 5
@@ -287,6 +298,8 @@ define( function( require ) {
 
       // Provides a limit on the scale
       scaleFactorProperty.link( function( value ) {
+        //REVIEW: What if a devious phet-io-person sets the zoom to something like 1.43. Hopefully it is their fault
+        //REVIEW: that the zoom in/out will always be enabled? Greater-than and less-than checks might be better.
         zoomOutButton.setEnabled( value !== MIN_SCALE );
         zoomInButton.setEnabled( value !== MAX_SCALE );
       } );
@@ -302,7 +315,7 @@ define( function( require ) {
 
       var chartNode = new Node( {
           children: [ this.background, this.barChartNode ]
-        }
+        } //REVIEW: Put the `} );` on one line, so it doesn't double-indent
       );
 
       var accordionBoxContent = new VBox( {
@@ -321,8 +334,11 @@ define( function( require ) {
     }
 
     massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
+    
     return inherit( AccordionBox, EnergyGraphNode, {
       /**
+       * REVIEW: I'd prefer just no description to something that repeats the code but can get out-of-date. Just leave
+       * REVIEW: with only the visibility identifier?
        * Resets the zoomLevelProperty of the zoom buttons.
        *
        * @public
@@ -331,6 +347,8 @@ define( function( require ) {
         this.zoomLevelProperty.reset();
       },
       /**
+       * REVIEW: I'd prefer just no description to something that repeats the code but can get out-of-date. Just leave
+       * REVIEW: with only the visibility identifier?
        * Calls the update() for the barChartNode
        *
        * @public
@@ -339,5 +357,5 @@ define( function( require ) {
         this.barChartNode.update();
       }
     } );
-  }
+  } //REVIEW: This is what is causing the formatting issues. Replace the end with a `} );` on the same line.
 );

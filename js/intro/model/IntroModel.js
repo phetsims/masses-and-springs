@@ -22,6 +22,7 @@ define( function( require ) {
 
   /**
    * @constructor
+   * REVIEW: JSDoc for param
    */
   function IntroModel( tandem ) {
 
@@ -37,6 +38,7 @@ define( function( require ) {
     // }
 
     // @public {Property.<string>} determines the scene selection for the intro screen
+    //REVIEW: Candidate for an enumeration (see other examples)
     this.sceneModeProperty = new Property( 'same-length', {
       tandem: tandem.createTandem( 'sceneModeProperty' ),
       phetioType: PropertyIO( StringIO ),
@@ -44,6 +46,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
+    //REVIEW: Candidate for an enumeration (see other examples). If done, would have a third value that represents what
+    //REVIEW: null currently does.
     this.constantParameterProperty = new Property( 'spring-constant', {
       tandem: tandem.createTandem( 'constantParameterProperty' ),
       phetioType: PropertyIO( StringIO ),
@@ -64,11 +68,11 @@ define( function( require ) {
     } );
 
     // initial parameters set for both scenes
-    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
+    //REVIEW: Don't need visibility/read-write for a local variable
     // @private {read-write} array of parameters for scene 1
     var sameLengthModeSpringState = this.getSpringState();
 
-    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
+    //REVIEW: Don't need visibility/read-write here
     // @private {read-write} array of parameters for scene 2
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
     var adjustableLengthModeSpringState = this.getSpringState();
@@ -92,6 +96,7 @@ define( function( require ) {
       }
 
       // TODO: Generally prefer enumerations, like AreaCalculationChoice.
+      //REVIEW: Yup, see this TODO. Recommended
       else if ( mode === 'adjustable-length' ) {
 
         // Manages stashing and applying parameters to each scene
@@ -156,7 +161,7 @@ define( function( require ) {
      * Responsible for preserving the properties of the masses and springs then stores them in a mutable object.
      * @private
      *
-     * @returns {Object}
+     * @returns {Object} REVIEW: More documentation for a bare object.
      */
     getSpringState: function() {
       return {

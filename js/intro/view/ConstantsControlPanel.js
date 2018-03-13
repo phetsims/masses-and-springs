@@ -53,6 +53,9 @@ define( function( require ) {
 
     var thicknessText = new Text(
       thicknessString,
+      //REVIEW: I'd review exactly how _.extend works (or at least its documentation). This looks like thicknessText
+      //REVIEW: gets overwritten by thicknessString, which probably isn't intended? There should also never be a need
+      //REVIEW: to next _.extend (or prove me wrong?)
       _.extend( { tandem: tandem.createTandem( 'thicknessText' ) },
         _.extend( { tandem: tandem.createTandem( 'thicknessString' ) },
           constantsSelectionButtonOptions

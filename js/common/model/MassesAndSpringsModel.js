@@ -149,7 +149,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'springVectorVisibilityProperty' )
     } );
 
-    //REVIEW: Another candidate to be turned into an enumeration
+    //REVIEW: Another candidate to be turned into an enumeration. Please do!
     // @public {Property.<string>} determines mode of the vectors to be viewed
     this.forcesModeProperty = new Property( MassesAndSpringsConstants.FORCES_STRING, {
       tandem: tandem.createTandem( 'forcesModeProperty' ),

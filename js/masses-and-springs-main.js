@@ -26,6 +26,7 @@ define( function( require ) {
 
   var simOptions = {
     credits: {
+      //REVIEW: I recommend making an issue about credits. Then you can't forget before deploying!
       //TODO fill in proper credits, all of these fields are optional, see joist.AboutDialog
       leadDesign: 'Amy Rouinfar',
       softwareDevelopment: 'Denzell Barnett, Matt Pennington',

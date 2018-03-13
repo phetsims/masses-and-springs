@@ -3,6 +3,9 @@
 /**
  * Responsible for the attributes and drag handlers associated with the timer node.
  *
+ * REVIEW: some duplication with this and the DraggableRulerNode. Consider (not forced) factoring this common behavior
+ * REVIEW: out into some "DraggableNode" that both can inherit from (then the TimerNode/etc. would be a child).
+ *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -23,9 +26,9 @@ define( function( require ) {
   /**
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition
-   * @param {number} timerSecondsProperty
-   * @param {boolean} timerRunningProperty
-   * @param {boolean} visibleProperty
+   * @param {number} timerSecondsProperty REVIEW: number, or Property.<number>?
+   * @param {boolean} timerRunningProperty REVIEW: boolean, or Property.<boolean>?
+   * @param {boolean} visibleProperty REVIEW: boolean, or Property.<boolean>?
    * @param {Tandem} tandem
    * @constructor
    */
@@ -91,6 +94,7 @@ define( function( require ) {
       this.positionProperty.reset();
     },
 
+    //REVIEW: JSDoc. Also why not use a Property.<Bounds2> so we don't need this method?
     updateBounds: function( newBounds ) {
       this.timerNodeMovableDragHandler.dragBounds = newBounds;
     }

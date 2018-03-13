@@ -106,9 +106,11 @@ define( function( require ) {
     secondSpringEquilibriumLineNode.moveToBack();
 
     // Contains visibility options for the reference lines and displacement arrow
+    //REVIEW: the margins/whatnot are somewhat duplicated.
     var indicatorVisibilityControlNode = new IndicatorVisibilityControlNode(
       model,
       tandem.createTandem( 'indicatorVisibilityControlNode' ), {
+        //REVIEW: this maxWidth/xMargin/yMargin combo is repeated a lot. If not too hard, can it be factored out?
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         xMargin: 0,
         yMargin: 0,
