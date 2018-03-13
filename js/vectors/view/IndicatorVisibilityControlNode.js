@@ -72,6 +72,7 @@ define( function( require ) {
     var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
     var grayLine = createLine( '#e6e6e6' ); // TODO: we shouldn't need this for spacing on lab screen.
+    //REVIEW: Handle TODO
     var displacementSymbol = new DisplacementArrowNode(
       new Property( 10 ), //REVIEW: NumberProperty?
       new Property( true ), //REVIEW: BooleanProperty?
@@ -152,6 +153,7 @@ define( function( require ) {
         } ),
         property: model.movableLineVisibleProperty,
       }, {
+        //REVIEW: i18nized this string
         content: new Text( 'Period Trace', {
           font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'periodTraceString' )
         } ),
