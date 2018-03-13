@@ -95,6 +95,7 @@ define( function( require ) {
         // model.adjustDraggedMassPosition( self.mass, dragBoundsProperty.value );
       }
     } );
+    //REVIEW: Only usage is a read, can this be removed (such that it is always enabled, presumably?)
     mass.gradientEnabledProperty.link( function( enabled ) {
       if ( enabled ) {
         rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 )

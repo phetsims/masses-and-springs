@@ -31,6 +31,7 @@ define( function( require ) {
     this.addDefaultSprings( tandem );
     this.addDefaultMasses( tandem );
 
+    //REVIEW: This commented-out code should presumably be removed (and gradientEnabledProperty in general)
     // for ( var i = 4; i < this.masses.length; i++ ) {
     //   this.masses[ i ].gradientEnabledProperty.set( false );
     // }

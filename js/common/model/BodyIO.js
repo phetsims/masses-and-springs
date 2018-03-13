@@ -27,6 +27,7 @@ define( function( require ) {
   }
 
   phetioInherit( ObjectIO, 'BodyIO', BodyIO, {}, {
+    //REVIEW: Needs JSDoc
     toStateObject: function( body ) {
       assert && assertInstanceOf( body, phet.massesAndSprings.Body );
       if ( body === null ) {

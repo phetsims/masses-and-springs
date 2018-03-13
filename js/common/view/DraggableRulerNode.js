@@ -65,6 +65,7 @@ define( function( require ) {
       tickMarksOnBottom: false
     }, { tandem: tandem.createTandem( 'ruler' ) } );
 
+    //REVIEW: Type docs
     // @private {read-only} position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
@@ -72,6 +73,7 @@ define( function( require ) {
     } );
     this.positionProperty.linkAttribute( this, 'translation' );
 
+    //REVIEW: Type docs
     // @private {read-only} handles ruler node drag events
     this.rulerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
       tandem: tandem.createTandem( 'dragHandler' ),

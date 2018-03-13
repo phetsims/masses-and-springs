@@ -22,7 +22,7 @@ define( function( require ) {
     DEFAULT_SPRING_LENGTH: 0.5,
     RADIO_BUTTON_RADIUS: 6,
 
-    // Ratio for dt when sim is in slow motion
+    // Ratio for dt when sim is in slow motion REVIEW: Could include "slow" in its name? Not obvious without reading docs here
     SIM_DT_RATIO: 8,
 
     // Y position of floor in meters. The floor is at the bottom bounds of the screen.
@@ -32,12 +32,15 @@ define( function( require ) {
     CEILING_Y: 1.48,
 
     // {Property.<Range>} range of damping associated with sim
+    //RVEIEW: If exposing only Range, don't use a RangeWithValue? (or if used, document as such)
     DAMPING_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 0.7, 0.3 ) ),
 
     // {Property.<Range>} range of gravitational acceleration associated with each planet
+    //RVEIEW: If exposing only Range, don't use a RangeWithValue? (or if used, document as such)
     GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
 
     // {Property.<Range>} range of gravitational acceleration associated with each planet
+    //REVIEW: No property? Additionally, if you expose only a Range, no reason to use RangeWithValue instead.
     SPRING_CONSTANT_RANGE: new RangeWithValue( 3, 12, 6 ),
 
     // Constants for vectors

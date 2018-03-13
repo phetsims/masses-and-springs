@@ -14,6 +14,7 @@ define( function( require ) {
   var MassesAndSpringsQueryParameters = QueryStringMachine.getAll( {
 
     // {boolean} print the spring constant and spring length, to the console.
+    //REVIEW: Is this going to be kept for the production sim, or should it be removed now?
     printSpringProperties: { type: 'flag' }
   } );
 

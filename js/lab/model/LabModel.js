@@ -33,6 +33,7 @@ define( function( require ) {
 
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
 
+    // REVIEW: Should these use MassesAndSpringsModel createMass? (or renamed method)?
     this.masses.push( new Mass( 0.100, MASS_X_POSITION, true, 'rgb(247,151,34)', this.gravityProperty, tandem.createTandem( 'adjustableMass' ), {
       adjustable: true
     } ) );

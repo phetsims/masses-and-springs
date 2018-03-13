@@ -24,19 +24,26 @@ define( function( require ) {
 
     //TODO: Use numberProperty when applicable
 
+    //REVIEW: Type docs of the Property's value?
     // @public {Property} mass which is being tracked
     this.springProperty = new Property( spring );
 
+    //REVIEW: Type docs of the Property's value?
     // @public {Property} orientation of the spring's oscillation.
     this.directionProperty = new Property( null );
 
+    //REVIEW: NumberProperty?
+    //REVIEW: Type docs of the Property's value?
     // @public {Property} units the trace should be positioned away from the origin in the x direction
     this.xOffsetProperty = new Property( 0 );
 
+    //REVIEW: NumberProperty?
+    //REVIEW: Type docs of the Property's value?
     // @public {Property.number} determines how many times the trace has gone over its original Y position
     this.crossingProperty = new Property( 0 );
 
     // @public {Property.boolean} a flag for whether the trace is fading or not
+    //REVIEW: Type docs of the Property's value?
     this.fadingProperty = new Property( false );
 
 
@@ -46,12 +53,16 @@ define( function( require ) {
     // 2: Pendulum reached first peak, and is swinging towards second peak.
     // 3: Pendulum had second peak, but hasn't crossed the zero-line since.
     // 4: Pendulum trace completed.
+    //REVIEW: NumberProperty?
+    //REVIEW: Type docs of the Property's value?
     this.stateProperty = new Property( 0 );
 
     this.firstPeakY = 0;
     this.secondPeakY = 0;
 
     // optional parameter used to measure rate of trace fading
+    //REVIEW: NumberProperty?
+    //REVIEW: JSDoc?
     this.alphaProperty = new Property( 1 );
 
     // When a mass is attached the origin of the trace should be the mass equilibrium.

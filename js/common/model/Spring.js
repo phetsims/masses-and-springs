@@ -33,7 +33,7 @@ define( function( require ) {
   var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
 
   // constants
-  var DEFAULT_THICKNESS = 3; // empirically determine
+  var DEFAULT_THICKNESS = 3; // empirically determined
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
@@ -41,6 +41,7 @@ define( function( require ) {
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
    * @param {Tandem} tandem
    * @param {Object} [options]
+   * REVIEW: Options are never used? (Correct me if wrong)
    *
    * @constructor
    */
@@ -51,18 +52,28 @@ define( function( require ) {
                                                        + initialNaturalRestingLength );
     var self = this;
 
+    //REVIEW: If things initialized with options should be stored for later access, break them out into their own
+    //REVIEW: properties set on the object.
+    //REVIEW: Also this, would need type docs (noting what is used, etc.)
+    //REVIEW: If options are never used, can this be removed, and these things can be turned into constants?
     this.options = _.extend( {
       modelViewTransform: null,
       forcesOrientation: 1  // Used to position massNode forces. Right side: 1, Left side: -1
     }, options );
 
     // range of natural resting length in meters (values used from design doc)
+    //REVIEW: One usage, so inline? And use Range instead of RangeWithValue.
     var naturalRestingLengthRange = new RangeWithValue( 0.1, 0.5, initialNaturalRestingLength );
 
     // @public {Property.<number>} gravitational acceleration
+    //REVIEW: Directly use MassesAndSpringsConstants.EARTH_GRAVITY?
+    //REVIEW: Don't use the massesAndSprings namespace to look things up. Just import Body (or the above type) directly)
     this.gravityProperty = new NumberProperty( massesAndSprings.Body.EARTH.gravity, {
       tandem: tandem.createTandem( 'gravityProperty' ),
       units: 'meters/second/second',
+      //REVIEW: Directly use MassesAndSpringsConstants.EARTH_GRAVITY?
+      //REVIEW: Don't use the massesAndSprings namespace to look things up. Just import Body (or the above type) directly)
+      //REVIEW: Or, also, use Range instead and this issue goes away (RangeWithValue's added value not needed)
       range: new RangeWithValue( 0, 30, massesAndSprings.Body.EARTH.gravity )
     } );
 
@@ -70,16 +81,22 @@ define( function( require ) {
     this.displacementProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'displacementProperty' ),
       units: 'meters',
+      //REVIEW: Only Range needed instead of RangeWithValue for NumberProperty's range option. Just use Range.
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
+    //REVIEW: null not noted in the type docs
     // @public {Property.<number>} distance from of the bottom of the spring from the massEquilibriumYPosition
+    //REVIEW: This might only depend on this.massEquilibriumYPositionProperty, massCenterOfMassProperty, I see a link
+    //REVIEW: below. Can we try this as a DerivedProperty?
+    //REVIEW: If not, why is it not reset directly?
     this.massEquilibriumDisplacementProperty = new Property( null );
 
     // @public {Property.<number>} spring constant of spring
     this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
       units: 'newtons/meters',
+      //REVIEW: Only Range needed instead of RangeWithValue for NumberProperty's range option. Just use Range.
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 5.5 )
     } );
 
@@ -99,6 +116,7 @@ define( function( require ) {
     this.dampingCoefficientProperty = new NumberProperty( defaultDampingCoefficient, {
       tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
       units: 'newtons-second/meters',
+      //REVIEW: Only Range needed instead of RangeWithValue for NumberProperty's range option. Just use Range.
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, defaultDampingCoefficient )
     } );
 
@@ -116,8 +134,10 @@ define( function( require ) {
     } );
 
     // @public {Property.<number> read-only} line width of oscillating spring node
+    //REVIEW: Does this need to be reset?
     this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
+      //REVIEW: Only Range needed instead of RangeWithValue for NumberProperty's range option. Just use Range.
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, DEFAULT_THICKNESS )
     } );
 
@@ -125,6 +145,7 @@ define( function( require ) {
     this.updateThickness( this.naturalRestingLengthProperty.get(), this.springConstantProperty.get() );
 
     // @public {Property.<boolean>} determines whether the animation for the spring is played or not
+    //REVIEW: Not reset?
     this.animatingProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'animatingProperty' )
     } );
@@ -136,12 +157,14 @@ define( function( require ) {
     } );
 
     // @public {Property.<number> read-write} Kinetic Energy of the attached Mass
+    //REVIEW: read-write? This property can't be written to
     this.kineticEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
       derive: 'kineticEnergyProperty',
       defaultValue: 0
     } );
 
     // @public {Property.<number> read-write} Gravitational Potential Energy of the attached Mass
+    //REVIEW: read-write? This property can't be written to
     this.gravitationalPotentialEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
       derive: 'gravitationalPotentialEnergyProperty',
       defaultValue: 0
@@ -164,9 +187,11 @@ define( function( require ) {
     this.buttonEnabledProperty = new BooleanProperty( false );
 
     // @public {number} (read-only) - distance from natural resting position to equilibrium position (units: m)
+    //REVIEW: Is this used somewhere, or is it dead code?
     this.springExtension = 0;
 
     // @public {Range} (read-only)
+    //REVIEW: Is this used somewhere, or is it dead code?
     this.springConstantRange = MassesAndSpringsConstants.SPRING_CONSTANT_RANGE;
 
     // @public {Property.<number>} (read-only) length of the spring, units = m
@@ -197,7 +222,10 @@ define( function( require ) {
       }
     );
 
+    //REVIEW: NumberProperty?
     // @public {read-only} y position of the equilibrium position
+    //REVIEW: Consider trying to make this a DerivedProperty. Also... why is its phetioType a DerivedPropertyIO?
+    //REVIEW: Maybe it can be null when there is no mass attached?
     this.equilibriumYPositionProperty = new Property( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
@@ -216,9 +244,14 @@ define( function( require ) {
       } );
 
     // @public {Property.<boolean>} Responsible for the visibility of the period trace.
-    this.periodTraceVisibilityProperty = new Property (false);
+    //REVIEW: BooleanProperty?
+    //REVIEW: Why is this not reset?
+    //REVIEW: Wait, is this property never set a value?
+    this.periodTraceVisibilityProperty = new Property( false );
 
+    //REVIEW: NumberProperty?
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
+    //REVIEW: Can we try to turn this into a derived property, with a 0 or null if there is no mass attached?
     this.massEquilibriumYPositionProperty = new Property( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
@@ -258,17 +291,21 @@ define( function( require ) {
       }
     } );
 
+    //REVIEW: Type doc
     // @public used to determine when the period tracer should alternate directions
+    //REVIEW: Since the emit() takes 1 argument, that should be documented (type, value/purpose)
     this.peakEmitter = new Emitter();
 
+    //REVIEW: Type doc
     // @public used to determine when the mass has crossed over its equilibrium position while oscillating
     this.crossEmitter = new Emitter();
 
+    //REVIEW: Type doc
     // @public used to determine when the mass is dropped
     this.droppedEmitter = new Emitter();
 
     this.massEquilibriumDisplacementProperty.link( function( newValue, oldValue ) {
-      if ( (oldValue >= 0) !== (newValue >= 0) && oldValue !== null && newValue !== null ) {
+      if ( ( oldValue >= 0 ) !== ( newValue >= 0 ) && oldValue !== null && newValue !== null ) {
         self.crossEmitter.emit();
       }
     } );
@@ -277,7 +314,6 @@ define( function( require ) {
   massesAndSprings.register( 'Spring', Spring );
 
   return inherit( Object, Spring, {
-
     /**
      * @public
      */
@@ -295,6 +331,9 @@ define( function( require ) {
     /**
      * Retains the properties of the spring in an object that can publicly accessed.
      * @public
+     *
+     * REVIEW: Fully document the return value. Maybe it should have its own type for this (SpringState.js). Did we
+     * REVIEW: discuss that?
      */
     getSpringState: function() {
       return {
@@ -312,6 +351,7 @@ define( function( require ) {
     /**
      * Sets the properties of the spring with previously stored properties.
      * @param {Object} springState - Sets the properties of the spring with previously stored properties.
+     * REVIEW: At least reference getSpringState for the param documentation (so things don't have to be repeated).
      *
      * @public
      */
@@ -331,6 +371,7 @@ define( function( require ) {
      * by the spring because the intro model determines the conditions for updating thickness.
      * @public
      *
+     * REVIEW: Type comes before the name in the type docs
      * @param length {number} current natural resting length of spring
      * @param springConstant {number} current spring constant of spring
      */
@@ -384,6 +425,8 @@ define( function( require ) {
       }
       this.massAttachedProperty.set( mass );
       this.massAttachedProperty.get().springProperty.set( this );
+      //REVIEW: I saw very similar code in Mass that included setting the displacementProperty. This should all be
+      //REVIEW: factored out into one place, so that the computation is not duplicated.
       this.displacementProperty.set( this.massAttachedProperty.get().positionProperty.get().y -
                                      ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) - mass.hookHeight / 2 );
       this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
@@ -406,9 +449,11 @@ define( function( require ) {
         this.displacementProperty.set( -springExtensionValue );
 
         // place that mass at the correct location as well
+        //REVIEW: Some place should have the factored-out usage of determing things, as I've seen tons of expressions
+        //REVIEW: that have to add/subtract mass.hookHeight / 2.
         mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + mass.hookHeight / 2 ) );
         mass.verticalVelocityProperty.set( 0 );
-        mass.accelerationProperty.set( 0 );
+        mass.accelerationProperty.set( 0 ); //REVIEW: How is its acceleration 0. Do we handle acceleration due to gravity?
         this.buttonEnabledProperty.set( false );
       }
     },
@@ -425,6 +470,7 @@ define( function( require ) {
 
         // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
         // references that could be provided that describe where this came from?
+        //REVIEW: JO will do this.
 
         var k = this.springConstantProperty.get();
         var m = this.massAttachedProperty.get().massProperty.get();

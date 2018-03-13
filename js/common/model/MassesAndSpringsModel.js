@@ -50,10 +50,13 @@ define( function( require ) {
     } );
 
     //@public {Property.<boolean>} determines whether the sim is playing sound
+    //REVIEW: Reset doesn't reset this property?
+    //REVIEW: BooleanProperty?
     this.isSoundEnabledProperty = new Property( true, {
       tandem: tandem.createTandem( 'isSoundEnabledProperty' )
     } );
 
+    //REVIEW: NumberProperty?
     // @public {Property.<number>} coefficient of damping applied to the system
     this.dampingProperty = new Property( 0, {
       units: 'newtons',
@@ -61,13 +64,18 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} gravitational acceleration associated with each planet
+    //REVIEW: Directly use MassesAndSpringsConstants.EARTH_GRAVITY?
+    //REVIEW: If Body.CUSTOM has null gravity, how does this not get null, or is that case handled? doc?
     this.gravityProperty = new NumberProperty( Body.EARTH.gravity, {
       tandem: tandem.createTandem( 'gravityProperty' ),
       units: 'meters/second/second',
+      //REVIEW: Directly use MassesAndSpringsConstants.EARTH_GRAVITY?
+      //REVIEW: Or... why is RangeWithValue provided? Just use Range and omit the value
       range: new RangeWithValue( 0, 30, Body.EARTH.gravity )
     } );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
+    //REVIEW: Consider an enumeration type, like PartialProductsChoice.js/etc.
     this.simSpeedProperty = new Property( 'normal', {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
       phetioType: PropertyIO( StringIO ),
@@ -86,6 +94,7 @@ define( function( require ) {
 
     // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
     this.timerSecondsProperty = new NumberProperty( 0, {
+      //REVIEW: Presumably use Range instead of RangeWithValue, since Property only uses the {Range} part
       range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
       tandem: tandem.createTandem( 'timerSecondsProperty' ),
       units: 'seconds'
@@ -112,6 +121,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
     } );
 
+    //REVIEW: Looks like a {Property.<string>}? (and not the name either)
     // @public {Property.<string>} name of planet selected
     this.bodyProperty = new Property( Body.EARTH, {
       tandem: tandem.createTandem( 'bodyProperty' ),
@@ -139,6 +149,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'springVectorVisibilityProperty' )
     } );
 
+    //REVIEW: Another candidate to be turned into an enumeration
     // @public {Property.<string>} determines mode of the vectors to be viewed
     this.forcesModeProperty = new Property( MassesAndSpringsConstants.FORCES_STRING, {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
@@ -189,6 +200,9 @@ define( function( require ) {
      */
     createSpring: function( x, tandem ) {
       var spring = new Spring(
+        //REVIEW: Is the 0.01 an important constant?
+        //REVIEW: Might be related to this comment in DisplacementArrowNode:
+        //REVIEW: TODO: We should find out why this -0.01 is outside the modelViewTransform. It can be negative but why is the number value there? @denz1994
         new Vector2( x, MassesAndSpringsConstants.CEILING_Y - 0.01 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         this.dampingProperty.get(),
@@ -197,11 +211,13 @@ define( function( require ) {
       this.springs.push( spring );
 
       // Links are used to set gravity property of each spring to the gravity property of the system
+      //REVIEW: Why not pass in the gravityProperty, like is done with masses?
       this.gravityProperty.link( function( newGravity ) {
         spring.gravityProperty.set( newGravity );
       } );
 
       // Links are used to set damping property of each spring to the damping property of the system
+      //REVIEW: Additionally, why not pass this reference in directly, so direct listeners can be added?
       this.dampingProperty.link( function( newDamping ) {
         assert && assert( newDamping >= 0, 'damping must be greater than or equal to 0: ' + newDamping );
         spring.dampingCoefficientProperty.set( newDamping );
@@ -235,6 +251,9 @@ define( function( require ) {
       this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { gradientEnabled: false } );
 
       // Mystery masses should have a question mark as their label.
+      //REVIEW: This is supported in Mass options, ideally we should pass it there. Not clear if these are the FIRST
+      //REVIEW: masses added or not, so I'm not for-sure which masses this should apply to. Passing in with createMass
+      //REVIEW: options would simplify a lot.
       for ( var i = 4; i < this.masses.length; i++ ) {
         this.masses[ i ].mysteryLabel = true;
       }
@@ -291,17 +310,21 @@ define( function( require ) {
         }
 
         // Update spring length
+        //REVIEW: This could be something like mass.springProperty.value.updateDisplacement()? Seems to have a lot of
+        //REVIEW: spring/mass logic. Not sure, it's a preference
         mass.springProperty.get().displacementProperty.set(
           -( mass.springProperty.get().positionProperty.get().y -
           mass.springProperty.get().naturalRestingLengthProperty.get() ) +
           massPosition.y - mass.hookHeight / 2 );
-        // debugger;
+        // debugger; REVIEW: Comments like these should be removed
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         var maxY = mass.springProperty.get().thicknessProperty.get() *
                    OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
 
         // Constraints used to limit how much we can prime the spring's oscillation.
+        //REVIEW: This could be moved out as a constant, so it doesn't have to be re-created each time (doesn't really
+        //REVIEW: matter unless it's performance-sensitive)
         var upperConstraint = new LinearFunction( 20, 60, 1.353, 1.265 );
 
         // Max Y value in model coordinates
@@ -314,6 +337,8 @@ define( function( require ) {
           mass.positionProperty.set( mass.positionProperty.get().copy().setY( modelMaxY ) );
 
           // Limit the length of the spring to based on the spring coils.
+          //REVIEW: This looks a lot like the above setter for displacementProperty. Definitely looks like it should be
+          //REVIEW: factored out.
           mass.springProperty.get().displacementProperty.set(
             -( mass.springProperty.get().positionProperty.get().y -
             mass.springProperty.get().naturalRestingLengthProperty.get() ) +
@@ -325,6 +350,7 @@ define( function( require ) {
       else {
 
         //Attempt to attach
+        //REVIEW: Presumably springs are too far apart to have a mass attach to multiple springs? If so might doc.
         this.springs.forEach( function( spring ) {
           if ( Math.abs( massPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
                Math.abs( massPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE &&
@@ -339,6 +365,7 @@ define( function( require ) {
      * Responsible for stepping through the model at a specified dt
      *
      * @public
+     * REVIEW: Missing dt param
      */
     stepForward: function( dt ) {
       this.modelStep( dt );// steps the nominal amount used by step forward button listener
@@ -357,6 +384,7 @@ define( function( require ) {
         this.modelStep( dt );
       }
     },
+
     /**
      * Steps in model time.
      *
@@ -371,12 +399,20 @@ define( function( require ) {
       if ( this.simSpeedProperty.get() === 'slow' && this.playingProperty.get() ) {
         dt = dt / MassesAndSpringsConstants.SIM_DT_RATIO;
       }
+      //REVIEW: _.values() not necessary, forEach is a function on the array itself.
+      //REVIEW: Also, iteration with a for-loop (instead of creating a closure) may be better in general for
+      //REVIEW: performance and GC jitteryness.
       _.values( this.masses ).forEach( function( mass ) {
 
         // Fall if not hung or grabbed
+        //REVIEW: Another usage of the 0.02 that should be factored out
         mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + .02, dt, animationDt );
       } );
       if ( this.timerRunningProperty.get() ) {
+        //REVIEW: This is a nice place to use .value instead of get/set. In general I REALLY prefer .value instead of
+        //REVIEW: get/set, and besides better nesting and less function calls, this is the most notable example.
+        //REVIEW: It's a personal preference, as many others prefer get/set.
+        //REVIEW: `this.timerSecondsProperty.value += dt`
         this.timerSecondsProperty.set( this.timerSecondsProperty.get() + dt );
       }
 
@@ -387,6 +423,8 @@ define( function( require ) {
     }
   }, {
     // Array of bodies that are referenced throughout the model.
+    //REVIEW: May better be located on Body.js?
+    //REVIEW: Wherever it is, it will need JSDoc
     BODIES: [ Body.MOON, Body.EARTH, Body.JUPITER, Body.PLANET_X, Body.CUSTOM ]
   } );
 } );

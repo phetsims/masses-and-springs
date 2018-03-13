@@ -33,6 +33,7 @@ define( function( require ) {
   var SCALING_FACTOR = 4; // scales the radius to desired size
 
   // phet-io modules
+  //REVIEW: These are not phet-io "modules" as they don't use the ifphetio plugin. Should be grouped with 'modules'
   var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
   var Vector2IO = require( 'DOT/Vector2IO' );
 
@@ -45,6 +46,7 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @param {Object} [options]
    * @constructor
+   * REVIEW: isLabeled is only set to true in usages I can find. Can it be removed as a parameter?
    */
   function Mass( massValue, xPosition, isLabeled, color, gravityProperty, tandem, options ) {
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
@@ -54,9 +56,9 @@ define( function( require ) {
     options = _.extend( {
       adjustable: false,
       mysteryLabel: false,
-      density: 80, // Constant used to keep all of our masses consistent in the model.
+      density: 80, // Constant used to keep all of our masses consistent in the model. REVIEW: units?
       color: new Color( color ),
-      zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf
+      zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf REVIEW: units?
     }, options );
 
     // @public Non-property attributes
@@ -76,6 +78,10 @@ define( function( require ) {
     // @public {number}
     this.mass = massValue;
 
+    //REVIEW: JSDoc
+    //REVIEW: Not reset in reset()
+    //REVIEW: Only usage is read, remove?
+    //REVIEW: BooleanProperty?
     this.gradientEnabledProperty = new Property( true );
 
     // @public {Property.<number>} height in meters. Measured from bottom of mass object not screen.
@@ -84,11 +90,14 @@ define( function( require ) {
         return radius * HEIGHT_RATIO;
       } );
 
+    //REVIEW: Generally don't mutate the options object. Have this.zeroReferencePoint be set initially from options,
+    //REVIEW: and then mutated there?
     this.cylinderHeightProperty.link( function( cylinderHeight ) {
       options.zeroReferencePoint = -cylinderHeight / 2;
     } );
 
     // @public {number} hook height in meters. Measured from the bottom of the hook not the screen.
+    //REVIEW: Would this need to change in the future? If not, consider using a constant in every place? Not sure.
     this.hookHeight = HOOK_HEIGHT;
 
     // @public {Property.<number>} total height of the mass, including its hook
@@ -96,16 +105,19 @@ define( function( require ) {
       return cylinderHeight + self.hookHeight;
     } );
 
+    //REVIEW: Add a type (presumably {Tandem}?)
     // @public (read-only) Used for constructing tandems for corresponding view nodes.
     this.massTandem = tandem;
 
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
+    //REVIEW: Why is there a 0.02? I see 4 usages of ".02", and it makes me concerned. Should be factored out and
+    //REVIEW: named as a proper constant if so.
     this.positionProperty = new Property( new Vector2( xPosition, this.heightProperty.value + .02 ), {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
     } );
 
-    // position of the mass's center of mass
+    // position of the mass's center of mass REVIEW: JSDoc
     this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ], function( positionProperty, cylinderHeight ){
       return new Vector2(
         self.positionProperty.value.x,
@@ -123,6 +135,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'userControlledProperty' )
     } );
 
+    //REVIEW: Comment cut off? "not attached to a spring" perhaps?
     // @private {Property.<boolean>} indicates whether the mass is animating after being released and not attached to s
     this.isAnimatingProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isAnimatingProperty' )
@@ -132,13 +145,18 @@ define( function( require ) {
     this.verticalVelocityProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
       units: 'meters/second',
+      //REVIEW: RangeWithValue seems (a) unneeded, and (b) requires a second duplicated constant. Just use Range?
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
     // @public {Property.<number>} vertical acceleration of the mass
+    //REVIEW: This looks like it depends on netForce and the mass. Can we make this a DerivedProperty?
+    //REVIEW: If it's not a DerivedProperty, should we reset it in reset()?
     this.accelerationProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'accelerationProperty' ),
       units: 'meters/second/second',
+      //REVIEW: RangeWithValue seems (a) unneeded, and (b) requires a second duplicated constant. Just use Range?
+      //REVIEW: Does this start at 0 or 9.8 (like the range-value says)?
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
     } );
 
@@ -152,13 +170,17 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} The force of the attached spring or 0 if unattached
+    //REVIEW: Replace with DynamicProperty( this.springProperty, { derive: 'springForceProperty', defaultValue: 0 } );
+    //REVIEW: No forwarding listeners will then be required
     this.springForceProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'springForceProperty' ),
       units: 'newtons/meters',
+      //REVIEW: RangeWithValue seems (a) unneeded, and (b) requires a second duplicated constant. Just use Range?
       range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0.0 )
     } );
 
     // Forward the value from the attached spring through to the mass's springForceProperty
+    //REVIEW: If springForceProperty above uses DynamicProperty, remove this section?
     var springForceListener = this.springForceProperty.set.bind( this.springForceProperty );
     this.springProperty.link( function( spring, oldSpring ) {
       oldSpring && oldSpring.springForceProperty.unlink( springForceListener );
@@ -201,6 +223,7 @@ define( function( require ) {
       defaultValue: 0
     } );
 
+    //REVIEW: Type doc
     // @public (read-only) Total energy of the mass
     this.totalEnergyProperty = new DerivedProperty( [
         this.kineticEnergyProperty,
@@ -212,6 +235,7 @@ define( function( require ) {
       }
     );
 
+    //REVIEW: {Property.<number>}? And consider NumberProperty?
     // @public {number} Total energy of our spring system when it is initialized
     this.initialTotalEnergyProperty = new Property( 0 );
 
@@ -226,8 +250,10 @@ define( function( require ) {
         return initialEnergy - totalEnergy;
       } );
 
+    //REVIEW: JSDoc on both of these. No clue what orientationProperty value-type is just while reading through
+    //REVIEW: I see no usages of orientationProperty. Can this be safely removed?
     this.orientationProperty = new Property( null );
-    this.oldIOrientation = null;
+    this.oldIOrientation = null; //REVIEW: I see no usages of this either. Can this be safely removed?
 
     // Used to determine when a peak is hit.
     this.verticalVelocityProperty.lazyLink( function( oldVelocity, newVelocity ) {
@@ -275,6 +301,7 @@ define( function( require ) {
       }
     } );
 
+    //REVIEW: Visibility docs. Consider a separate line of doc per each item?
     // Used for animating the motion of a mass being released and not attached to the spring
     this.animationStartPosition = null; // {Vector2|null}
     this.animationEndPosition = null; // {Vector2|null}
@@ -286,12 +313,14 @@ define( function( require ) {
     } );
 
     // Set the equilibrium position when a mass value changes. We do a similar process in Mass.js when the mass is attached to the spring.
+    //REVIEW: It mentions Mass.js. That is this file. Should reference Spring.js?
+    //REVIEW: Can this code be factored out?
     this.massProperty.link( function( value ) {
       var spring = self.springProperty.value;
       if ( spring ) {
 
         // springExtension = mg/k
-        var springExtensionValue = ( value * spring.gravityProperty.value) / spring.springConstantProperty.value;
+        var springExtensionValue = ( value * spring.gravityProperty.value ) / spring.springConstantProperty.value;
         spring.equilibriumYPositionProperty.set( spring.positionProperty.get().y - spring.naturalRestingLengthProperty.value - springExtensionValue );
         spring.massEquilibriumYPositionProperty.set( spring.positionProperty.get().y - spring.naturalRestingLengthProperty.value - springExtensionValue - self.heightProperty.value / 2 );
 
@@ -377,6 +406,9 @@ define( function( require ) {
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
       this.massProperty.reset();
+      //REVIEW: Don't see a reset on isAnimatingProperty. Is it needed?
+      //REVIEW: Don't see a reset on initialTotalEnergyProperty. Is it needed?
+      //REVIEW: Don't see a reset on orientationProperty. Is it needed?
     }
   } );
 } );

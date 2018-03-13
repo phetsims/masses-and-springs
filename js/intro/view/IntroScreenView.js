@@ -58,6 +58,7 @@ define( function( require ) {
     ];
     this.springLengthControlPanel = new SpringControlPanel(
       model.spring1.naturalRestingLengthProperty,
+      //REVIEW: Only uses {Range} parts, so why specify a RangeWithValue?
       new RangeWithValue( 0.1, 0.5, 0.3 ),
       StringUtils.fillIn( lengthString, { spring: 1 } ),
       minMaxLabels,
