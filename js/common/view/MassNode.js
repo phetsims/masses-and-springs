@@ -62,6 +62,8 @@ define( function( require ) {
     } );
     this.addChild( rect );
 
+    //REVIEW: Doesn't need read-write docs, as it's a local variable. Also it should be read-only (if ever doc'ed)
+    //REVIEW: since it is a DerivedProperty and can't be set
     // {read-write} Bounds that limit where we can drag our mass should be dependent on how large our mass is
     var modelBoundsProperty = new DerivedProperty( [ dragBoundsProperty, mass.heightProperty ], function( dragBounds, massHeight ) {
       var modelBounds = modelViewTransform2.viewToModelBounds( dragBounds );
@@ -147,6 +149,7 @@ define( function( require ) {
       } );
     }
 
+    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @public {read-write}
     this.movableDragHandler = new MovableDragHandler( this.mass.positionProperty, {
 

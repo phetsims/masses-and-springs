@@ -71,6 +71,7 @@ define( function( require ) {
       var MIN_SCALE = 1;
       var MAX_SCALE = 32;
 
+      //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here. Adn visibility
       // {read-write} Responsible for the zoom level in the bar graph. Is adjusted by the zoom buttons and used for the
       // scaling property of the barNodes.
       //REVIEW: JSDoc?
@@ -99,6 +100,7 @@ define( function( require ) {
         self.zoomLevelProperty.value += 1;
       } );
 
+      //REVIEW: Doesn't need read-write, since it's local. Also it should be read-only (DerivedProperty)
       // {read-write} Responsible for adjusting the scaling of the barNode heights.
       var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
         return Math.pow( 2, zoomLevel ) * 20;

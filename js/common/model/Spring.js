@@ -223,6 +223,7 @@ define( function( require ) {
     );
 
     //REVIEW: NumberProperty?
+    //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
     // @public {read-only} y position of the equilibrium position
     //REVIEW: Consider trying to make this a DerivedProperty. Also... why is its phetioType a DerivedPropertyIO?
     //REVIEW: Maybe it can be null when there is no mass attached?

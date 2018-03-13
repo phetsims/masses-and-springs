@@ -78,6 +78,7 @@ define( function( require ) {
     // @public
     this.bodyProperty = model.bodyProperty;
 
+    //REVIEW: Does not need visibility/read-only docs, as it's a local variable
     // @private {read-only} manages the items associated with the gravity panel in a combo box
     var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
       buttonCornerRadius: 3,

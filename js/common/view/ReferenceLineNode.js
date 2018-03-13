@@ -47,6 +47,7 @@ define( function( require ) {
     this.mouseArea = this.localBounds.dilatedY( 10 );
     this.touchArea = this.localBounds.dilatedY( 10 );
 
+    //REVIEW: Does not need read-write since it's a local variable
     // {read-write} prevents overlap with the equilibrium line
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
 
@@ -54,6 +55,8 @@ define( function( require ) {
     var lengthFunction = new LinearFunction( 0.1, 0.5, 1.37, 0.97 );
 
     var yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
+
+    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @private {read-write} position of line in screen coordinates.
     this.positionProperty = new Property( new Vector2( xPos, yPos ), {
       phetioType: PropertyIO( Vector2IO )

@@ -183,12 +183,15 @@ define( function( require ) {
       springOptionsPanel.visible = self.springLengthControlPanel.visible;
     } );
 
+    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
     // @private {read-only} Creation of same length icon node
     var sameLengthIcon = new SceneSelectionButton( 'same-length', this.modelViewTransform, tandem );
 
+    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
     // @private {read-only} Creation of adjustable length icon node
     var differentLengthIcon = new SceneSelectionButton( 'adjustable-length', this.modelViewTransform, tandem );
 
+    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
     // @private {read-only} Creation of toggled modes for scene selection
     var toggleButtonsContent = [ {
       value: 'same-length',
@@ -198,6 +201,7 @@ define( function( require ) {
       node: differentLengthIcon
     } ];
 
+    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
     // @private {read-only} Creation of icons for scene selection
     var sceneRadioButtonGroup = new RadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
       buttonContentXMargin: 1,

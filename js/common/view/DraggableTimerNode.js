@@ -44,10 +44,12 @@ define( function( require ) {
       tandem: tandem.createTandem( 'timer' )
     } );
 
+    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
 
     //REVIEW: type docs
+    //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
     // @private {read-only} position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
@@ -55,6 +57,7 @@ define( function( require ) {
     } );
     this.positionProperty.linkAttribute( self, 'translation' );
 
+    //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
     // @private {read-only} handles timer node drag events
     this.timerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
       tandem: tandem.createTandem( 'dragHandler' ),

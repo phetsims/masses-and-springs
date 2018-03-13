@@ -61,16 +61,19 @@ define( function( require ) {
     line.mouseArea = dilatedLineBounds;
     line.touchArea = dilatedLineBounds;
 
+    //REVIEW: This is a method call, visibility and read-only don't make sense on a setter method.
     // @private {read-only} X coordinate for the position of the line
     initialPosition.setX( dragBounds.minX );
 
     //REVIEW: type docs
+    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @private {read-write} position of line in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
     } );
 
+    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @private {read-write} position of line in screen coordinates
     this.positionProperty.link( function( position ) {
       self.translation = position.minus( new Vector2( length / 2, 0 ) );

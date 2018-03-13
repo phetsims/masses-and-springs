@@ -34,14 +34,17 @@ define( function( require ) {
   function DraggableRulerNode( mvt, dragBounds, initialPosition, visibleProperty, tandem ) {
     var self = this;
 
+    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
 
     // define ruler params in pixels
+    //REVIEW: How is converting 0.5 through the MVT 1 meter? Is it now 0.5 meters?
     var rulerLength = mvt.modelToViewY( .5 ); // 1 meter
     var rulerWidth = 0.125 * rulerLength;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
+      //REVIEW: Why the Math.floor usage on what seems to be whole integers? Should be no-ops?
       majorTickLabels.push( '' );
       majorTickLabels.push( '' + Math.floor( i * 10 ) );
       assert && assert( majorTickLabels[ i * 2 ] === '' + Math.floor( i * 10 ) );
@@ -66,6 +69,7 @@ define( function( require ) {
     }, { tandem: tandem.createTandem( 'ruler' ) } );
 
     //REVIEW: Type docs
+    //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
     // @private {read-only} position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
@@ -74,6 +78,7 @@ define( function( require ) {
     this.positionProperty.linkAttribute( this, 'translation' );
 
     //REVIEW: Type docs
+    //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
     // @private {read-only} handles ruler node drag events
     this.rulerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
       tandem: tandem.createTandem( 'dragHandler' ),
@@ -104,6 +109,7 @@ define( function( require ) {
       this.positionProperty.reset();
     },
 
+    //REVIEW: JSDoc. Also why not use a Property.<Bounds2> so we don't need this method?
     updateBounds: function( newBounds ) {
       this.rulerNodeMovableDragHandler.dragBounds = newBounds;
     }

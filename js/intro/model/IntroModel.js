@@ -64,9 +64,11 @@ define( function( require ) {
     } );
 
     // initial parameters set for both scenes
+    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @private {read-write} array of parameters for scene 1
     var sameLengthModeSpringState = this.getSpringState();
 
+    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @private {read-write} array of parameters for scene 2
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
     var adjustableLengthModeSpringState = this.getSpringState();
