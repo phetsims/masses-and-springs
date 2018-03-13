@@ -93,8 +93,7 @@ define( function( require ) {
     this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
       units: 'newtons/meters',
-      //REVIEW: Only Range needed instead of RangeWithValue for NumberProperty's range option. Just use Range.
-      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 5.5 )
+      range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
     // @public {Property.<number>} spring force
@@ -113,8 +112,7 @@ define( function( require ) {
     this.dampingCoefficientProperty = new NumberProperty( defaultDampingCoefficient, {
       tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
       units: 'newtons-second/meters',
-      //REVIEW: Only Range needed instead of RangeWithValue for NumberProperty's range option. Just use Range.
-      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, defaultDampingCoefficient )
+      range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
     // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
@@ -134,15 +132,13 @@ define( function( require ) {
     //REVIEW: Does this need to be reset?
     this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
-      //REVIEW: Only Range needed instead of RangeWithValue for NumberProperty's range option. Just use Range.
-      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, DEFAULT_THICKNESS )
+      range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
     // Calling this function here will set a calculated value for the thickness property.
     this.updateThickness( this.naturalRestingLengthProperty.get(), this.springConstantProperty.get() );
 
     // @public {Property.<boolean>} determines whether the animation for the spring is played or not
-    //REVIEW: Not reset?
     this.animatingProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'animatingProperty' )
     } );
@@ -153,15 +149,13 @@ define( function( require ) {
       phetioType: PropertyIO( NullableIO( MassIO ) )
     } );
 
-    // @public {Property.<number> read-write} Kinetic Energy of the attached Mass
-    //REVIEW: read-write? This property can't be written to
+    // @public {Property.<number>} Kinetic Energy of the attached Mass
     this.kineticEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
       derive: 'kineticEnergyProperty',
       defaultValue: 0
     } );
 
-    // @public {Property.<number> read-write} Gravitational Potential Energy of the attached Mass
-    //REVIEW: read-write? This property can't be written to
+    // @public {Property.<number>} Gravitational Potential Energy of the attached Mass
     this.gravitationalPotentialEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
       derive: 'gravitationalPotentialEnergyProperty',
       defaultValue: 0
@@ -181,10 +175,6 @@ define( function( require ) {
 
     // @public {Property.boolean} Flag to enable the stop button for the spring.
     this.buttonEnabledProperty = new BooleanProperty( false );
-
-    // @public {number} (read-only) - distance from natural resting position to equilibrium position (units: m)
-    //REVIEW: Is this used somewhere, or is it dead code?
-    this.springExtension = 0;
 
     // @public {Range} (read-only)
     //REVIEW: Is this used somewhere, or is it dead code?
@@ -323,6 +313,8 @@ define( function( require ) {
       this.naturalRestingLengthProperty.reset();
       this.massAttachedProperty.reset();
       this.springConstantProperty.reset();
+      this.animatingProperty.reset();
+      this.thicknessProperty.reset();
     },
 
     /**
