@@ -44,8 +44,7 @@ define( function( require ) {
   // A new tandem instance is required here since the bodies are created statically.
   var tandem = Tandem.rootTandem.createTandem( 'bodies' );
 
-  //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
-  // @public {read-only} body objects for gravity panel
+  // @public {Body} (read-only) body objects for gravity panel
   Body.MOON = new Body( bodyMoonString, MassesAndSpringsConstants.MOON_GRAVITY, tandem.createTandem( 'moon' ) );
   Body.EARTH = new Body( bodyEarthString, MassesAndSpringsConstants.EARTH_GRAVITY, tandem.createTandem( 'earth' ) );
   Body.JUPITER = new Body( bodyJupiterString, MassesAndSpringsConstants.JUPITER_GRAVITY, tandem.createTandem( 'jupiter' ) );
