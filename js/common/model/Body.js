@@ -13,7 +13,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   var bodyCustomString = require( 'string!MASSES_AND_SPRINGS/body.custom' );
@@ -39,9 +38,6 @@ define( function( require ) {
   massesAndSprings.register( 'Body', Body );
 
   inherit( Object, Body );
-
-  // A new tandem instance is required here since the bodies are created statically.
-  var tandem = Tandem.rootTandem.createTandem( 'bodies' );
 
   // @public {Body} (read-only) body objects for gravity panel
   Body.MOON = new Body( bodyMoonString, MassesAndSpringsConstants.MOON_GRAVITY );
