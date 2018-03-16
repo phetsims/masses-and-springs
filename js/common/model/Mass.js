@@ -18,6 +18,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var NumberProperty = require( 'AXON/NumberProperty' );
+  var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
@@ -32,10 +34,6 @@ define( function( require ) {
   var HOOK_HEIGHT = 0.037; // empirically determined in meters.
   var SCALING_FACTOR = 4; // scales the radius to desired size
 
-  // phet-io modules
-  //REVIEW: These are not phet-io "modules" as they don't use the ifphetio plugin. Should be grouped with 'modules'
-  var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
-  var Vector2IO = require( 'DOT/Vector2IO' );
 
   /**
    * @param {number} massValue:  mass in kg
