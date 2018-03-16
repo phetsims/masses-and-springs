@@ -25,10 +25,9 @@ define( function( require ) {
   /**
    * @param {string} title - name of body.
    * @param {number|null} gravity - gravitational acceleration of body.
-   * @param {Tandem} tandem
    * @constructor
    */
-  function Body( title, gravity, tandem ) {
+  function Body( title, gravity ) {
 
     // @public {string}
     this.title = title;
@@ -45,11 +44,11 @@ define( function( require ) {
   var tandem = Tandem.rootTandem.createTandem( 'bodies' );
 
   // @public {Body} (read-only) body objects for gravity panel
-  Body.MOON = new Body( bodyMoonString, MassesAndSpringsConstants.MOON_GRAVITY, tandem.createTandem( 'moon' ) );
-  Body.EARTH = new Body( bodyEarthString, MassesAndSpringsConstants.EARTH_GRAVITY, tandem.createTandem( 'earth' ) );
-  Body.JUPITER = new Body( bodyJupiterString, MassesAndSpringsConstants.JUPITER_GRAVITY, tandem.createTandem( 'jupiter' ) );
-  Body.PLANET_X = new Body( bodyPlanetXString, MassesAndSpringsConstants.PLANET_X, tandem.createTandem( 'planetX' ) );
-  Body.CUSTOM = new Body( bodyCustomString, null, tandem.createTandem( 'custom' ) );
+  Body.MOON = new Body( bodyMoonString, MassesAndSpringsConstants.MOON_GRAVITY );
+  Body.EARTH = new Body( bodyEarthString, MassesAndSpringsConstants.EARTH_GRAVITY );
+  Body.JUPITER = new Body( bodyJupiterString, MassesAndSpringsConstants.JUPITER_GRAVITY );
+  Body.PLANET_X = new Body( bodyPlanetXString, MassesAndSpringsConstants.PLANET_X );
+  Body.CUSTOM = new Body( bodyCustomString, null );
 
   return Body;
 } );
