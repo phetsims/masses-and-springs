@@ -32,11 +32,6 @@ define( function( require ) {
     this.addDefaultSprings( tandem );
     this.addDefaultMasses( tandem );
 
-    //REVIEW: This commented-out code should presumably be removed (and gradientEnabledProperty in general)
-    // for ( var i = 4; i < this.masses.length; i++ ) {
-    //   this.masses[ i ].gradientEnabledProperty.set( false );
-    // }
-
     // @public {Property.<string>} determines the scene selection for the intro screen
     //REVIEW: Candidate for an enumeration (see other examples)
     this.sceneModeProperty = new Property( 'same-length', {
