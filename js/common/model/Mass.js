@@ -39,7 +39,7 @@ define( function( require ) {
    * @param {number} massValue:  mass in kg
    * @param {number} xPosition - starting x-coordinate of the mass object, offset from the first spring position
    * @param {string} color: color of shown mass
-   * @param {Property.<number>} gravityProperty - the gravity property from the model REVIEW: Use capitalized Property to talk about Properties
+   * @param {Property.<number>} gravityProperty - the gravity Property from the model
    * @param {Tandem} tandem
    * @param {Object} [options]
    * @constructor
