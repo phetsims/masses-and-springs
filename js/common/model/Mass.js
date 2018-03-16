@@ -57,7 +57,7 @@ define( function( require ) {
       zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf (m).
     }, options );
 
-    // @public Non-property attributes REVIEW: These are properties, use capitalized 'Property' to talk about the type.
+    // @public Non-Property attributes
     this.adjustable = options.adjustable;
     this.mysteryLabel = options.mysteryLabel;
     this.color = color;
