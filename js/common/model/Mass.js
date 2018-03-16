@@ -73,12 +73,6 @@ define( function( require ) {
     // @public {number}
     this.mass = massValue;
 
-    //REVIEW: JSDoc
-    //REVIEW: Not reset in reset()
-    //REVIEW: Only usage is read, remove?
-    //REVIEW: BooleanProperty?
-    this.gradientEnabledProperty = new Property( true );
-
     // @public {Property.<number>} height in meters. Measured from bottom of mass object not screen.
     this.cylinderHeightProperty = new DerivedProperty( [ this.radiusProperty ],
       function( radius ) {
