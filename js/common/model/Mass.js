@@ -52,9 +52,9 @@ define( function( require ) {
     options = _.extend( {
       adjustable: false,
       mysteryLabel: false,
-      density: 80, // Constant used to keep all of our masses consistent in the model. REVIEW: units?
+      density: 80, // Constant used to keep all of our masses consistent in the model (kg/m^2).
       color: new Color( color ),
-      zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf REVIEW: units?
+      zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf (m).
     }, options );
 
     // @public Non-property attributes REVIEW: These are properties, use capitalized 'Property' to talk about the type.
