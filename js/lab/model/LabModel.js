@@ -39,14 +39,14 @@ define( function( require ) {
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
 
     // REVIEW: Should these use MassesAndSpringsModel createMass? (or renamed method)?
-    this.masses.push( new Mass( 0.100, MASS_X_POSITION, true, 'rgb(247,151,34)', this.gravityProperty, tandem.createTandem( 'adjustableMass' ), {
+    this.masses.push( new Mass( 0.100, MASS_X_POSITION, 'rgb(247,151,34)', this.gravityProperty, tandem.createTandem( 'adjustableMass' ), {
       adjustable: true
     } ) );
-    this.masses.push( new Mass( 0.370, MASS_X_POSITION + MASS_OFFSET, true, 'rgb(255, 120, 120)', this.gravityProperty, tandem.createTandem( 'smallLabeledMass' ), {
+    this.masses.push( new Mass( 0.370, MASS_X_POSITION + MASS_OFFSET, 'rgb(255, 120, 120)', this.gravityProperty, tandem.createTandem( 'smallLabeledMass' ), {
       density: 220,
       mysteryLabel: true
     } ) );
-    this.masses.push( new Mass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2, true, 'rgb( 128, 197, 237)', this.gravityProperty, tandem.createTandem( 'largeLabeledMass' ), {
+    this.masses.push( new Mass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2, 'rgb( 128, 197, 237)', this.gravityProperty, tandem.createTandem( 'largeLabeledMass' ), {
       density: 110,
       mysteryLabel: true
     } ) );

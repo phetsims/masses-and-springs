@@ -187,7 +187,7 @@ define( function( require ) {
      * @param {Tandem} tandem
      */
     createMass: function( mass, xPosition, color, specifiedLabel, tandem ) {
-      this.masses.push( new Mass( mass, xPosition, true, color, this.gravityProperty, tandem ) );
+      this.masses.push( new Mass( mass, xPosition, color, this.gravityProperty, tandem ) );
     },
 
     /**

@@ -136,10 +136,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'label' )
     } );
 
-    if ( mass.isLabeled ) {
-      //REVIEW: Use `this` instead of self here?
-      self.addChild( label );
-    }
+    this.addChild( label );
     mass.massProperty.link( function() {
       label.center = rect.center;
     } );

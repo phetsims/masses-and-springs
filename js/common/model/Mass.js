@@ -38,15 +38,13 @@ define( function( require ) {
   /**
    * @param {number} massValue:  mass in kg
    * @param {number} xPosition - starting x-coordinate of the mass object, offset from the first spring position
-   * @param {boolean} isLabeled: determines if the mass is labeled in the view
    * @param {string} color: color of shown mass
    * @param {Property.<number>} gravityProperty - the gravity property from the model REVIEW: Use capitalized Property to talk about Properties
    * @param {Tandem} tandem
    * @param {Object} [options]
    * @constructor
-   * REVIEW: isLabeled is only set to true in usages I can find. Can it be removed as a parameter?
    */
-  function Mass( massValue, xPosition, isLabeled, color, gravityProperty, tandem, options ) {
+  function Mass( massValue, xPosition, color, gravityProperty, tandem, options ) {
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
 
     var self = this;
@@ -60,7 +58,6 @@ define( function( require ) {
     }, options );
 
     // @public Non-property attributes REVIEW: These are properties, use capitalized 'Property' to talk about the type.
-    this.isLabeled = isLabeled;
     this.adjustable = options.adjustable;
     this.mysteryLabel = options.mysteryLabel;
     this.color = color;
