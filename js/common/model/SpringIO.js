@@ -27,6 +27,12 @@ define( function( require ) {
   }
 
   phetioInherit( ObjectIO, 'SpringIO', SpringIO, {}, {
+    /**
+     * Encodes a Spring instance to a state.
+     *
+     * @param spring
+     * @returns {*}
+     */
     toStateObject: function( spring ) {
       assert && assertInstanceOf( spring, phet.massesAndSprings.Spring );
       if ( spring === null ) {

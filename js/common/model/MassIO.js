@@ -27,6 +27,12 @@ define( function( require ) {
   }
 
   phetioInherit( ObjectIO, 'MassIO', MassIO, {}, {
+    /**
+     * Encodes a Mass instance to a state.
+     *
+     * @param mass
+     * @returns {*}
+     */
     toStateObject: function( mass ) {
       assert && assertInstanceOf( mass, phet.massesAndSprings.Mass );
       if ( mass === null ) {

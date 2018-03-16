@@ -27,7 +27,12 @@ define( function( require ) {
   }
 
   phetioInherit( ObjectIO, 'BodyIO', BodyIO, {}, {
-    //REVIEW: Needs JSDoc
+    /**
+     * Encodes a Body instance to a state.
+     *
+     * @param body
+     * @returns {*}
+     */
     toStateObject: function( body ) {
       assert && assertInstanceOf( body, phet.massesAndSprings.Body );
       if ( body === null ) {
