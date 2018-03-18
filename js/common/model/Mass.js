@@ -89,8 +89,7 @@ define( function( require ) {
       return cylinderHeight + MassesAndSpringsConstants.HOOK_HEIGHT;
     } );
 
-    //REVIEW: Add a type (presumably {Tandem}?)
-    // @public (read-only) Used for constructing tandems for corresponding view nodes.
+    // @public {Tandem} (read-only) Used for constructing tandems for corresponding view nodes.
     this.massTandem = tandem;
 
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
