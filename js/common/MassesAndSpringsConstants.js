@@ -32,6 +32,9 @@ define( function( require ) {
     // Y position of ceiling in meters. The ceiling is the top of the SpringHangerNode, just below the top of the dev view bounds
     CEILING_Y: 1.47,
 
+    // hook height in meters. Measured from the bottom of the hook not the screen
+    HOOK_HEIGHT:0.037,
+
     // {Property.<Range>} range of damping associated with sim
     //RVEIEW: If exposing only Range, don't use a RangeWithValue? (or if used, document as such)
     DAMPING_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 0.7, 0.3 ) ),

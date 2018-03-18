@@ -307,7 +307,7 @@ define( function( require ) {
         mass.springProperty.get().displacementProperty.set(
           -( mass.springProperty.get().positionProperty.get().y -
           mass.springProperty.get().naturalRestingLengthProperty.get() ) +
-          massPosition.y - mass.hookHeight / 2 );
+          massPosition.y - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         var maxY = mass.springProperty.get().thicknessProperty.get() *
@@ -333,7 +333,7 @@ define( function( require ) {
           mass.springProperty.get().displacementProperty.set(
             -( mass.springProperty.get().positionProperty.get().y -
             mass.springProperty.get().naturalRestingLengthProperty.get() ) +
-            modelMaxY - mass.hookHeight / 2 );
+            modelMaxY - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
         }
       }
 

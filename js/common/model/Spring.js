@@ -415,7 +415,7 @@ define( function( require ) {
       //REVIEW: I saw very similar code in Mass that included setting the displacementProperty. This should all be
       //REVIEW: factored out into one place, so that the computation is not duplicated.
       this.displacementProperty.set( this.massAttachedProperty.get().positionProperty.get().y -
-                                     ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) - mass.hookHeight / 2 );
+                                     ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
       this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
     },
 
@@ -438,7 +438,7 @@ define( function( require ) {
         // place that mass at the correct location as well
         //REVIEW: Some place should have the factored-out usage of determing things, as I've seen tons of expressions
         //REVIEW: that have to add/subtract mass.hookHeight / 2.
-        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + mass.hookHeight / 2 ) );
+        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + MassesAndSpringsConstants.HOOK_HEIGHT / 2 ) );
         mass.verticalVelocityProperty.set( 0 );
         mass.accelerationProperty.set( 0 ); //REVIEW: How is its acceleration 0. Do we handle acceleration due to gravity?
         this.buttonEnabledProperty.set( false );
@@ -551,7 +551,7 @@ define( function( require ) {
         }
 
         this.massAttachedProperty.get().positionProperty.set(
-          new Vector2( this.positionProperty.get().x, this.bottomProperty.get() + this.massAttachedProperty.get().hookHeight / 2 )
+          new Vector2( this.positionProperty.get().x, this.bottomProperty.get() + MassesAndSpringsConstants.HOOK_HEIGHT / 2 )
         );
 
         this.buttonEnabledProperty.set( this.massAttachedProperty.get().verticalVelocityProperty.get() !== 0 );

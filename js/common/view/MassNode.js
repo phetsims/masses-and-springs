@@ -54,7 +54,7 @@ define( function( require ) {
     // @public REVIEW: Type doc, since mass in the sim is either {number} or {Mass}
     this.mass = mass;
 
-    var hookHeight = modelViewTransform2.modelToViewDeltaY( -mass.hookHeight );
+    var hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT );
 
     var rect = new Rectangle( {
       stroke: 'black',

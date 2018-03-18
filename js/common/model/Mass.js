@@ -17,6 +17,7 @@ define( function( require ) {
   var Easing = require( 'TWIXT/Easing' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
   var Vector2IO = require( 'DOT/Vector2IO' );
@@ -31,9 +32,7 @@ define( function( require ) {
 
   // constants
   var HEIGHT_RATIO = 2.5;
-  var HOOK_HEIGHT = 0.037; // empirically determined in meters.
   var SCALING_FACTOR = 4; // scales the radius to desired size
-
 
   /**
    * @param {number} massValue:  mass in kg
@@ -85,13 +84,9 @@ define( function( require ) {
       options.zeroReferencePoint = -cylinderHeight / 2;
     } );
 
-    // @public {number} hook height in meters. Measured from the bottom of the hook not the screen.
-    //REVIEW: Would this need to change in the future? If not, consider using a constant in every place? Not sure.
-    this.hookHeight = HOOK_HEIGHT;
-
     // @public {Property.<number>} total height of the mass, including its hook
     this.heightProperty = new DerivedProperty( [ this.cylinderHeightProperty ], function( cylinderHeight ) {
-      return cylinderHeight + self.hookHeight;
+      return cylinderHeight + MassesAndSpringsConstants.HOOK_HEIGHT;
     } );
 
     //REVIEW: Add a type (presumably {Tandem}?)
@@ -112,7 +107,7 @@ define( function( require ) {
         self.positionProperty.value.x,
         self.positionProperty.value.y -
         self.cylinderHeightProperty.value / 2 -
-        self.hookHeight
+        MassesAndSpringsConstants.HOOK_HEIGHT
       );
     } );
 
