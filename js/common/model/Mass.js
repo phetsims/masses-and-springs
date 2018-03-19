@@ -23,6 +23,7 @@ define( function( require ) {
   var Vector2IO = require( 'DOT/Vector2IO' );
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
+  var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -125,8 +126,7 @@ define( function( require ) {
     this.verticalVelocityProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
       units: 'meters/second',
-      //REVIEW: RangeWithValue seems (a) unneeded, and (b) requires a second duplicated constant. Just use Range?
-      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
+      range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 
     // @public {Property.<number>} vertical acceleration of the mass
