@@ -98,12 +98,12 @@ define( function( require ) {
       phetioType: PropertyIO( Vector2IO )
     } );
 
-    // position of the mass's center of mass REVIEW: JSDoc
-    this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ], function( positionProperty, cylinderHeight ){
+    // @public {Property.<Vector2>} the position of the mass's center of mass.
+    this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ], function( position, cylinderHeight ){
       return new Vector2(
-        self.positionProperty.value.x,
-        self.positionProperty.value.y -
-        self.cylinderHeightProperty.value / 2 -
+        position.x,
+        position.y -
+        cylinderHeight / 2 -
         MassesAndSpringsConstants.HOOK_HEIGHT
       );
     } );
