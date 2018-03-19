@@ -116,8 +116,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'userControlledProperty' )
     } );
 
-    //REVIEW: Comment cut off? "not attached to a spring" perhaps?
-    // @private {Property.<boolean>} indicates whether the mass is animating after being released and not attached to s
+    // @private {Property.<boolean>} indicates whether the mass is animating after being released and not attached to a spring
     this.isAnimatingProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isAnimatingProperty' )
     } );
