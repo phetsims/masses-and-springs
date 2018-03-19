@@ -396,8 +396,7 @@ define( function( require ) {
       _.values( this.masses ).forEach( function( mass ) {
 
         // Fall if not hung or grabbed
-        //REVIEW: Another usage of the 0.02 that should be factored out
-        mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + .02, dt, animationDt );
+        mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT, dt, animationDt );
       } );
       if ( this.timerRunningProperty.get() ) {
         //REVIEW: This is a nice place to use .value instead of get/set. In general I REALLY prefer .value instead of

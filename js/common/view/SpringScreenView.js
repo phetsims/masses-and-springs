@@ -46,8 +46,7 @@ define( function( require ) {
     // @public {MassesAndSpringsModel}
     this.model = model;
 
-    //REVIEW: Is this another case where the 0.02 constant needs to be factored out?
-    var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * 0.98 );
+    var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * (1- MassesAndSpringsConstants.SHELF_HEIGHT) );
 
     // @public {ModelViewTransform2}
     this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, 397 );
@@ -149,8 +148,7 @@ define( function( require ) {
       model,
       this.visibleBoundsProperty.get(),
       tandem.createTandem( 'timeControlPanel' ), {
-        //REVIEW: Another 0.02 constant to factor out
-        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + 0.02 )
+        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT )
       }
     );
 

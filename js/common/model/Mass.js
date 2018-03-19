@@ -93,9 +93,7 @@ define( function( require ) {
     this.massTandem = tandem;
 
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
-    //REVIEW: Why is there a 0.02? I see 4 usages of ".02", and it makes me concerned. Should be factored out and
-    //REVIEW: named as a proper constant if so.
-    this.positionProperty = new Property( new Vector2( xPosition, this.heightProperty.value + .02 ), {
+    this.positionProperty = new Property( new Vector2( xPosition, this.heightProperty.value + MassesAndSpringsConstants.SHELF_HEIGHT ), {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
     } );

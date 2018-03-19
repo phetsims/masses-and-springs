@@ -32,6 +32,9 @@ define( function( require ) {
     // Y position of ceiling in meters. The ceiling is the top of the SpringHangerNode, just below the top of the dev view bounds
     CEILING_Y: 1.47,
 
+    // Shelf height, in meters, from the bottom and top of the shelf.
+    SHELF_HEIGHT: 0.02,
+
     // hook height in meters. Measured from the bottom of the hook not the screen
     HOOK_HEIGHT:0.037,
 

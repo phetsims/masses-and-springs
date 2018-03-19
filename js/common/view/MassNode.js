@@ -91,8 +91,7 @@ define( function( require ) {
       // We are constraining the draggable bounds on our massNodes except when the mass is attached to a spring.
       var minY = mass.userControlledProperty.value ?
                  modelBoundsProperty.value.minY :
-        //REVIEW: Another case with the 0.02 constant, should be factored out
-                 MassesAndSpringsConstants.FLOOR_Y + 0.02 + mass.heightProperty.value;
+                 MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT + mass.heightProperty.value;
 
       if ( mass.positionProperty.value.y < minY && !mass.springProperty.value ) {
         mass.positionProperty.set( new Vector2( mass.positionProperty.value.x, minY ) );
