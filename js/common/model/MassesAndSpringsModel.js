@@ -360,14 +360,10 @@ define( function( require ) {
       if ( this.simSpeedProperty.get() === SimSpeedChoice.SLOW && this.playingProperty.get() ) {
         dt = dt / MassesAndSpringsConstants.SIM_DT_RATIO;
       }
-      //REVIEW: _.values() not necessary, forEach is a function on the array itself.
-      //REVIEW: Also, iteration with a for-loop (instead of creating a closure) may be better in general for
-      //REVIEW: performance and GC jitteryness.
-      _.values( this.masses ).forEach( function( mass ) {
-
+      for ( var i = 0; i < this.masses.length; i++ ) {
         // Fall if not hung or grabbed
-        mass.step( self.gravityProperty.value, MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT, dt, animationDt );
-      } );
+        this.masses[i].step( self.gravityProperty.value, MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT, dt, animationDt );
+      }
       if ( this.timerRunningProperty.value ) {
         this.timerSecondsProperty.set( this.timerSecondsProperty.value + dt );
       }
