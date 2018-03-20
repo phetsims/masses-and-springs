@@ -139,24 +139,9 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} The force of the attached spring or 0 if unattached
-    //REVIEW: Replace with DynamicProperty( this.springProperty, { derive: 'springForceProperty', defaultValue: 0 } );
-    //REVIEW: No forwarding listeners will then be required
-    this.springForceProperty = new NumberProperty( 0, {
-      tandem: tandem.createTandem( 'springForceProperty' ),
-      units: 'newtons/meters',
-      //REVIEW: RangeWithValue seems (a) unneeded, and (b) requires a second duplicated constant. Just use Range?
-      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0.0 )
-    } );
-
-    // Forward the value from the attached spring through to the mass's springForceProperty
-    //REVIEW: If springForceProperty above uses DynamicProperty, remove this section?
-    var springForceListener = this.springForceProperty.set.bind( this.springForceProperty );
-    this.springProperty.link( function( spring, oldSpring ) {
-      oldSpring && oldSpring.springForceProperty.unlink( springForceListener );
-      spring && spring.springForceProperty.link( springForceListener );
-      if ( !spring ) {
-        self.springForceProperty.reset();
-      }
+    this.springForceProperty = new DynamicProperty( this.springProperty, {
+      derive: 'springForceProperty',
+      defaultValue: 0
     } );
 
     // @public {Property.<number>} Net force applied to mass
