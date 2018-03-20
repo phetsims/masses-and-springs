@@ -24,7 +24,6 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
