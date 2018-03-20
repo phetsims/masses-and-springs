@@ -100,7 +100,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<Vector2>} the position of the mass's center of mass.
-    this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ], function( position, cylinderHeight ){
+    this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ], function( position, cylinderHeight ) {
       return new Vector2(
         position.x,
         position.y -
@@ -127,17 +127,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
       units: 'meters/second',
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
-    } );
-
-    // @public {Property.<number>} vertical acceleration of the mass
-    //REVIEW: This looks like it depends on netForce and the mass. Can we make this a DerivedProperty?
-    //REVIEW: If it's not a DerivedProperty, should we reset it in reset()?
-    this.accelerationProperty = new NumberProperty( 0, {
-      tandem: tandem.createTandem( 'accelerationProperty' ),
-      units: 'meters/second/second',
-      //REVIEW: RangeWithValue seems (a) unneeded, and (b) requires a second duplicated constant. Just use Range?
-      //REVIEW: Does this start at 0 or 9.8 (like the range-value says)?
-      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 9.8 )
     } );
 
     // @public {Property.<number>} vertical acceleration of the mass
@@ -176,9 +165,9 @@ define( function( require ) {
         return springForce - massValue * gravity;
       } );
 
-    // Link that sets the acceleration property of the mass REVIEW: Use capitalized Property to talk about Properties
-    this.netForceProperty.link( function( netForce ) {
-      self.accelerationProperty.set( netForce / self.mass );
+    // @public {Property.<number>} vertical acceleration of the mass
+    this.accelerationProperty = new DerivedProperty( [ this.netForceProperty, this.massProperty ], function( netForce, mass ) {
+      return netForce / mass;
     } );
 
     // @public {Property.<number>} Kinetic energy of the mass
@@ -344,7 +333,7 @@ define( function( require ) {
           this.isAnimatingProperty.set( false );
         }
       }
-      
+
       // If we're not animating/controlled or attached to a spring, we'll fall due to gravity
       else if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
         var oldY = this.positionProperty.get().y;
