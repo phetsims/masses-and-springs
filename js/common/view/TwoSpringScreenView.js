@@ -41,9 +41,6 @@ define( function( require ) {
     SpringScreenView.call( this, model, tandem );
     var self = this;
 
-    model.springs[ 0 ].options.modelViewTransform2 = this.modelViewTransform;
-    model.springs[ 1 ].options.modelViewTransform2 = this.modelViewTransform;
-
     // Spring Hanger Node
     //REVIEW: JSDoc
     this.springHangerNode = new SpringHangerNode(

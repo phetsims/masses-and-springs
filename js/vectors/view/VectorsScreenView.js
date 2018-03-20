@@ -180,8 +180,8 @@ define( function( require ) {
 
     // Determines where we want the force vectors of the attached mass to be placed.
     //REVIEW: Shouldn't directly change spring options. Also, can we do this on spring construction instead?
-    model.springs[ 0 ].options.forcesOrientation = -1;
-    model.springs[ 1 ].options.forcesOrientation = 1;
+    model.springs[ 0 ].forcesOrientationProperty.set( -1 );
+    model.springs[ 1 ].forcesOrientationProperty.set( 1 );
   }
 
   massesAndSprings.register( 'VectorsScreenView', VectorsScreenView );

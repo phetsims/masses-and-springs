@@ -41,26 +41,18 @@ define( function( require ) {
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
    * @param {Property.<number>} gravityProperty - the gravity Property from the model
    * @param {Tandem} tandem
-   * @param {Object} [options]
-   * REVIEW: Options are never used? (Correct me if wrong)
    *
    * @constructor
    */
-  function Spring( position, initialNaturalRestingLength, defaultDampingCoefficient, gravityProperty, tandem, options ) {
+  function Spring( position, initialNaturalRestingLength, defaultDampingCoefficient, gravityProperty, tandem ) {
 
     // validate and save options
     assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : '
                                                        + initialNaturalRestingLength );
     var self = this;
 
-    //REVIEW: If things initialized with options should be stored for later access, break them out into their own
-    //REVIEW: properties set on the object.
-    //REVIEW: Also this, would need type docs (noting what is used, etc.)
-    //REVIEW: If options are never used, can this be removed, and these things can be turned into constants?
-    this.options = _.extend( {
-      modelViewTransform: null,
-      forcesOrientation: 1  // Used to position massNode forces. Right side: 1, Left side: -1
-    }, options );
+    // @public {Property.<number>} (read-write) Used to position massNode forces. Right side: 1, Left side: -1
+    this.forcesOrientationProperty = new NumberProperty( 1 );
 
     // @public {Property.<number>} gravitational acceleration
     this.gravityProperty = new NumberProperty( gravityProperty.value );

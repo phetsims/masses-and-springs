@@ -217,7 +217,7 @@ define( function( require ) {
     var forcesOrientation = 1;
     this.mass.springProperty.link( function( spring ) {
       if ( spring ) {
-        forcesOrientation = spring.options.forcesOrientation;
+        forcesOrientation = spring.forcesOrientationProperty.value;
       }
     } );
 
