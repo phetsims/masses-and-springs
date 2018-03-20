@@ -262,8 +262,7 @@ define( function( require ) {
       self.isAnimatingProperty.set( false );
     } );
 
-    // Set the equilibrium position when a mass value changes. We do a similar process in Mass.js when the mass is attached to the spring.
-    //REVIEW: It mentions Mass.js. That is this file. Should reference Spring.js?
+    // Set the equilibrium position when a mass value changes. We do a similar process in Spring.js when the mass is attached to the spring.
     //REVIEW: Can this code be factored out?
     this.massProperty.link( function( value ) {
       var spring = self.springProperty.value;

@@ -258,6 +258,8 @@ define( function( require ) {
     Property.multilink( [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
         if ( mass ) {
+
+          // springExtension = mg/k
           var springExtensionValue = ( mass.massProperty.value * self.gravityProperty.value) / self.springConstantProperty.value;
           self.massEquilibriumYPositionProperty.set( self.positionProperty.get().y - naturalRestingLength - springExtensionValue - mass.heightProperty.value / 2 );
         }
