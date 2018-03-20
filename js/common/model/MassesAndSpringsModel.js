@@ -36,6 +36,7 @@ define( function( require ) {
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
   var RELEASE_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
+  var UPPER_CONSTRAINT = new LinearFunction( 20, 60, 1.353, 1.265 ); // Limits how much we can prime the spring.
 
   /**
    * @constructor
@@ -293,13 +294,8 @@ define( function( require ) {
         var maxY = mass.springProperty.get().thicknessProperty.get() *
                    OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
 
-        // Constraints used to limit how much we can prime the spring's oscillation.
-        //REVIEW: This could be moved out as a constant, so it doesn't have to be re-created each time (doesn't really
-        //REVIEW: matter unless it's performance-sensitive)
-        var upperConstraint = new LinearFunction( 20, 60, 1.353, 1.265 );
-
         // Max Y value in model coordinates
-        var modelMaxY = upperConstraint( maxY );
+        var modelMaxY = UPPER_CONSTRAINT( maxY );
 
         // Update only the spring's length if we are lower than the max Y
         if ( mass.positionProperty.get().y > modelMaxY ) {
