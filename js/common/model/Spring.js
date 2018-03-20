@@ -115,7 +115,6 @@ define( function( require ) {
     } );
 
     // @public {Property.<number> read-only} line width of oscillating spring node
-    //REVIEW: Does this need to be reset?
     this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
       tandem: tandem.createTandem( 'thicknessProperty' ),
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
@@ -298,7 +297,6 @@ define( function( require ) {
       this.massAttachedProperty.reset();
       this.springConstantProperty.reset();
       this.animatingProperty.reset();
-      this.thicknessProperty.reset();
     },
 
     /**
