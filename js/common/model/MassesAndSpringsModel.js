@@ -66,7 +66,6 @@ define( function( require ) {
     } );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
-    //REVIEW: Consider an enumeration type, like PartialProductsChoice.js/etc.
     this.simSpeedProperty = new Property( SimSpeedChoice.NORMAL, {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
       phetioType: PropertyIO( StringIO ),
@@ -85,8 +84,7 @@ define( function( require ) {
 
     // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
     this.timerSecondsProperty = new NumberProperty( 0, {
-      //REVIEW: Presumably use Range instead of RangeWithValue, since Property only uses the {Range} part
-      range: new RangeWithValue( 0, Number.POSITIVE_INFINITY, 0 ),
+      range: new Range( 0, Number.POSITIVE_INFINITY ),
       tandem: tandem.createTandem( 'timerSecondsProperty' ),
       units: 'seconds'
     } );
