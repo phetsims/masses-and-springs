@@ -13,6 +13,7 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
   var SimSpeedChoice = require( 'MASSES_AND_SPRINGS/common/enum/SimSpeedChoice' );
+  var ForcesModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/ForcesModeChoice' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
@@ -139,10 +140,10 @@ define( function( require ) {
 
     //REVIEW: Another candidate to be turned into an enumeration. Please do!
     // @public {Property.<string>} determines mode of the vectors to be viewed
-    this.forcesModeProperty = new Property( MassesAndSpringsConstants.FORCES_STRING, {
+    this.forcesModeProperty = new Property( ForcesModeChoice.FORCES, {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
       phetioType: PropertyIO( StringIO ),
-      validValues: [ MassesAndSpringsConstants.FORCES_STRING, MassesAndSpringsConstants.NET_FORCE_STRING ]
+      validValues: [ ForcesModeChoice.FORCES, ForcesModeChoice.NET_FORCES ]
     } );
 
     // @public {Spring[]} Array that will contain all of the springs.

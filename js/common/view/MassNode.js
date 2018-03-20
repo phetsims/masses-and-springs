@@ -14,6 +14,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
+  var ForcesModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/ForcesModeChoice' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
@@ -248,7 +249,7 @@ define( function( require ) {
     var updateForceVisiblity = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
         function( spring, springVectorVisibility, forcesMode ) {
-          arrowNode.visible = !!spring && springVectorVisibility && forcesMode === MassesAndSpringsConstants.FORCES_STRING;
+          arrowNode.visible = !!spring && springVectorVisibility && forcesMode === ForcesModeChoice.FORCES;
         } );
     };
 
@@ -271,14 +272,14 @@ define( function( require ) {
     // Show/hide the net force arrow
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
       function( spring, forcesMode ) {
-        self.netForceArrow.visible = !!spring && forcesMode === MassesAndSpringsConstants.NET_FORCE_STRING;
+        self.netForceArrow.visible = !!spring && forcesMode === ForcesModeChoice.NET_FORCES;
       }
     );
 
     // Show/hide line at base of vectors
     Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
-      function( spring, gravityForceVisible, springForceVisible, forcesVisible ) {
-        forceNullLine.visible = !!spring && ( gravityForceVisible || springForceVisible || forcesVisible === MassesAndSpringsConstants.NET_FORCE_STRING );
+      function( spring, gravityForceVisible, springForceVisible, forcesMode ) {
+        forceNullLine.visible = !!spring && ( gravityForceVisible || springForceVisible || forcesMode === ForcesModeChoice.NET_FORCES );
       } );
 
     // TODO: Lots of similar code for setting arrow tail/tip. Ideally refactor to a function that can set tail/tip on all arrows (based on magnitude/etc.)
@@ -337,7 +338,7 @@ define( function( require ) {
       model.velocityVectorVisibilityProperty
     ], function( netForce, forcesMode, accelerationVisible, netAcceleration, velocityVisible ) {
       var position = mass.positionProperty.get();
-      if ( forcesMode === 'netForce' ) {
+      if ( forcesMode === ForcesModeChoice.NET_FORCES ) {
         if ( Math.abs( netForce ) > 1E-6 ) {
           self.netForceArrow.setTailAndTip(
             rect.centerX + (forcesOrientation) * 45,
