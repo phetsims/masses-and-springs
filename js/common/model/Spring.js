@@ -440,7 +440,6 @@ define( function( require ) {
         //REVIEW: that have to add/subtract mass.hookHeight / 2.
         mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + MassesAndSpringsConstants.HOOK_HEIGHT / 2 ) );
         mass.verticalVelocityProperty.set( 0 );
-        mass.accelerationProperty.reset();
         this.buttonEnabledProperty.set( false );
       }
     },
