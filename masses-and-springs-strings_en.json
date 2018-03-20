@@ -113,6 +113,9 @@
   "peGrav": {
     "value": "PE<sub>grav</sub>"
   },
+  "periodTrace": {
+    "value": "Period Trace"
+  },
   "questionMark": {
     "value": "?"
   },

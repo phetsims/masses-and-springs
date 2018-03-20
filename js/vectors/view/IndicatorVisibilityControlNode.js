@@ -29,6 +29,7 @@ define( function( require ) {
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
   var displacementString = require( 'string!MASSES_AND_SPRINGS/displacement' );
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
+  var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
   // constants
   var LINE_LENGTH = 25;
@@ -153,8 +154,7 @@ define( function( require ) {
         } ),
         property: model.movableLineVisibleProperty,
       }, {
-        //REVIEW: i18nized this string
-        content: new Text( 'Period Trace', {
+        content: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'periodTraceString' )
         } ),
         property: model.springs[ 0 ].periodTraceVisibilityProperty,
