@@ -192,8 +192,7 @@ define( function( require ) {
       defaultValue: 0
     } );
 
-    //REVIEW: Type doc
-    // @public (read-only) Total energy of the mass
+    // @public {Property.<Number>} (read-only) Total energy of the mass
     this.totalEnergyProperty = new DerivedProperty( [
         this.kineticEnergyProperty,
         this.gravitationalPotentialEnergyProperty,
