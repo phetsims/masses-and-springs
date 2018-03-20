@@ -373,8 +373,8 @@ define( function( require ) {
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();
       this.massProperty.reset();
-      //REVIEW: Don't see a reset on isAnimatingProperty. Is it needed?
-      //REVIEW: Don't see a reset on initialTotalEnergyProperty. Is it needed?
+      this.isAnimatingProperty.reset();
+      this.initialTotalEnergyProperty.reset();
     }
   } );
 } );
