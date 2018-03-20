@@ -366,14 +366,10 @@ define( function( require ) {
       _.values( this.masses ).forEach( function( mass ) {
 
         // Fall if not hung or grabbed
-        mass.step( self.gravityProperty.get(), MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT, dt, animationDt );
+        mass.step( self.gravityProperty.value, MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT, dt, animationDt );
       } );
-      if ( this.timerRunningProperty.get() ) {
-        //REVIEW: This is a nice place to use .value instead of get/set. In general I REALLY prefer .value instead of
-        //REVIEW: get/set, and besides better nesting and less function calls, this is the most notable example.
-        //REVIEW: It's a personal preference, as many others prefer get/set.
-        //REVIEW: `this.timerSecondsProperty.value += dt`
-        this.timerSecondsProperty.set( this.timerSecondsProperty.get() + dt );
+      if ( this.timerRunningProperty.value ) {
+        this.timerSecondsProperty.set( this.timerSecondsProperty.value + dt );
       }
 
       // Oscillate springs
