@@ -69,8 +69,7 @@ define( function( require ) {
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
-    //REVIEW: null not noted in the type docs
-    // @public {Property.<number>} distance from of the bottom of the spring from the massEquilibriumYPosition
+    // @public {Property.<number|null>} distance from of the bottom of the spring from the massEquilibriumYPosition
     //REVIEW: This might only depend on this.massEquilibriumYPositionProperty, massCenterOfMassProperty, I see a link
     //REVIEW: below. Can we try this as a DerivedProperty?
     //REVIEW: If not, why is it not reset directly?
