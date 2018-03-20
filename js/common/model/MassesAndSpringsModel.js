@@ -315,8 +315,7 @@ define( function( require ) {
 
       // Update mass position if unattached
       else {
-        //REVIEW: Style guide wants one space after //
-        //Attempt to attach
+        // Attempt to attach
         //REVIEW: Presumably springs are too far apart to have a mass attach to multiple springs? If so might doc.
         this.springs.forEach( function( spring ) {
           if ( Math.abs( massPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
