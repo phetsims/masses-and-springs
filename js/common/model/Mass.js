@@ -253,8 +253,7 @@ define( function( require ) {
     // As the total energy changes we can derive the thermal energy as being the energy lost from the system
     this.totalEnergyProperty.link( function( newTotalEnergy, oldTotalEnergy ) {
       if ( self.userControlledProperty.get() ) {
-        //REVIEW: Style guide wants one space after //
-        //If a user is dragging the mass we remove the thermal energy.
+        // If a user is dragging the mass we remove the thermal energy.
         self.initialTotalEnergyProperty.set( newTotalEnergy );
       }
 
@@ -264,11 +263,15 @@ define( function( require ) {
       }
     } );
 
-    //REVIEW: Visibility docs. Consider a separate line of doc per each item?
     // Used for animating the motion of a mass being released and not attached to the spring
-    this.animationStartPosition = null; // {Vector2|null}
-    this.animationEndPosition = null; // {Vector2|null}
-    this.animationProgress = 0; // {number} Valid values 0 <= x <= 1. Used to adjust rate of animation completion.
+    // @private {Vector2|null}
+    this.animationStartPosition = null;
+
+    // @private {Vector2|null}
+    this.animationEndPosition = null;
+
+    // @private {number} Valid values 0 <= x <= 1. Used to adjust rate of animation completion.
+    this.animationProgress = 0;
 
     // The mass is considered to be animating if we are not controlling it and it isn't attached to a spring.
     Property.lazyMultilink( [ this.userControlledProperty, this.springProperty ], function() {
