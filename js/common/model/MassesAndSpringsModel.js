@@ -288,7 +288,7 @@ define( function( require ) {
         }
 
         // Update spring displacementProperty so correct spring length is used.
-        mass.springProperty.value.updateDisplacement(massPosition);
+        mass.springProperty.value.updateDisplacement( massPosition.y );
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         var maxY = mass.springProperty.get().thicknessProperty.get() *
@@ -304,12 +304,7 @@ define( function( require ) {
           mass.positionProperty.set( mass.positionProperty.get().copy().setY( modelMaxY ) );
 
           // Limit the length of the spring to based on the spring coils.
-          //REVIEW: This looks a lot like the above setter for displacementProperty. Definitely looks like it should be
-          //REVIEW: factored out.
-          mass.springProperty.get().displacementProperty.set(
-            -( mass.springProperty.get().positionProperty.get().y -
-            mass.springProperty.get().naturalRestingLengthProperty.get() ) +
-            modelMaxY - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
+          mass.springProperty.value.updateDisplacement( modelMaxY );
         }
       }
 

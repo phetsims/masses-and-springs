@@ -422,13 +422,13 @@ define( function( require ) {
     },
 
     /** Updates the displacement Property of the spring.
-     * @param {Vector2} massPosition
+     * @param {Number} yPosition
      *
      * @public
      */
-    updateDisplacement: function( massPosition ) {
+    updateDisplacement: function( yPosition ) {
       this.displacementProperty.set( -( this.positionProperty.value.y - this.naturalRestingLengthProperty.value )
-                                     + massPosition.y - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
+                                     + yPosition - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
     },
 
     /**
