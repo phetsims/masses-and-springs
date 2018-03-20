@@ -110,8 +110,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
     } );
 
-    //REVIEW: Looks like a {Property.<string>}? (and not the name either)
-    // @public {Property.<string>} name of planet selected
+    // @public {Property.<string>} body of planet selected
     this.bodyProperty = new Property( Body.EARTH, {
       tandem: tandem.createTandem( 'bodyProperty' ),
       phetioType: PropertyIO( BodyIO )
