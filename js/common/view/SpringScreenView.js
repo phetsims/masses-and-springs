@@ -152,14 +152,6 @@ define( function( require ) {
       }
     );
 
-    // sound toggle button at bottom right
-    //REVIEW: This is never added. Can it just be removed? Why do we have an isSoundEnabledProperty?
-    var soundToggleButton = new SoundToggleButton( model.isSoundEnabledProperty, {
-      centerY: this.resetAllButton.centerY - 55,
-      scale: 0.9
-    } );
-    // this.addChild( soundToggleButton );
-
     // Toolbox Panel
     //REVIEW: JSDoc
     this.toolboxPanel = new ToolboxPanel(

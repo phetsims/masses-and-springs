@@ -49,12 +49,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'playingProperty' )
     } );
 
-    // @public {Property.<boolean>} determines whether the sim is playing sound
-    //REVIEW: Looks like nothing is listening to this? Can it be removed?
-    this.isSoundEnabledProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'isSoundEnabledProperty' )
-    } );
-
     //REVIEW: NumberProperty?
     // @public {Property.<number>} coefficient of damping applied to the system
     this.dampingProperty = new Property( 0, {
@@ -259,7 +253,6 @@ define( function( require ) {
       this.bodyProperty.reset();
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
-      this.isSoundEnabledProperty.reset();
       this.rulerVisibleProperty.reset();
       this.timerVisibleProperty.reset();
       this.timerSecondsProperty.reset();
