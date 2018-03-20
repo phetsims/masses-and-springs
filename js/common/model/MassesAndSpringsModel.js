@@ -56,9 +56,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} gravitational acceleration associated with each planet
-    //REVIEW: Directly use MassesAndSpringsConstants.EARTH_GRAVITY?
     //REVIEW: If Body.CUSTOM has null gravity, how does this not get null, or is that case handled? doc?
-    this.gravityProperty = new NumberProperty( Body.EARTH.gravity, {
+    this.gravityProperty = new NumberProperty( MassesAndSpringsConstants.EARTH_GRAVITY, {
       tandem: tandem.createTandem( 'gravityProperty' ),
       units: 'meters/second/second',
       //REVIEW: Directly use MassesAndSpringsConstants.EARTH_GRAVITY?
