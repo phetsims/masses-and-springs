@@ -324,9 +324,9 @@ define( function( require ) {
 
     /**
      * Responsible for stepping through the model at a specified dt
+     * @param {number} dt
      *
      * @public
-     * REVIEW: Missing dt param
      */
     stepForward: function( dt ) {
       this.modelStep( dt );// steps the nominal amount used by step forward button listener

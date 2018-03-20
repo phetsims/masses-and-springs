@@ -422,7 +422,7 @@ define( function( require ) {
     },
 
     /** Updates the displacement Property of the spring.
-     * @param {Number} yPosition
+     * @param {number} yPosition
      *
      * @public
      */
