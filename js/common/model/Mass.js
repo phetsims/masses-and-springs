@@ -192,7 +192,7 @@ define( function( require ) {
       defaultValue: 0
     } );
 
-    // @public {Property.<Number>} (read-only) Total energy of the mass
+    // @public {Property.<number>} (read-only) Total energy of the mass
     this.totalEnergyProperty = new DerivedProperty( [
         this.kineticEnergyProperty,
         this.gravitationalPotentialEnergyProperty,
@@ -203,9 +203,8 @@ define( function( require ) {
       }
     );
 
-    //REVIEW: {Property.<number>}? And consider NumberProperty?
-    // @public {number} Total energy of our spring system when it is initialized
-    this.initialTotalEnergyProperty = new Property( 0 );
+    // @public {Property.<number>} Total energy of our spring system when it is initialized
+    this.initialTotalEnergyProperty = new NumberProperty( 0 );
 
     // @public {Property.<number>} Thermal energy of the mass
     this.thermalEnergyProperty = new DerivedProperty( [ this.initialTotalEnergyProperty, this.totalEnergyProperty, ],
