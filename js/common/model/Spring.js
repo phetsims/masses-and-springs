@@ -39,7 +39,7 @@ define( function( require ) {
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
    * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
-   * @param {Property.<number>} gravityProperty - the gravity property from the model REVIEW: Use capitalized Property to talk about Properties
+   * @param {Property.<number>} gravityProperty - the gravity Property from the model
    * @param {Tandem} tandem
    * @param {Object} [options]
    * REVIEW: Options are never used? (Correct me if wrong)
