@@ -22,7 +22,6 @@ define( function( require ) {
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Shelf = require( 'MASSES_AND_SPRINGS/common/view/Shelf' );
-  var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -180,7 +179,6 @@ define( function( require ) {
       //REVIEW: Style guide wants one space after //
       //Update the bounds of view elements
       self.panelRightSpacing = visibleBounds.right - self.spacing;
-      soundToggleButton.right = self.panelRightSpacing;
     } );
   }
 
