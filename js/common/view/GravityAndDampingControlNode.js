@@ -59,8 +59,8 @@ define( function( require ) {
     //  Add gravity info for various planets
     var bodyListItems = [];
     //REVIEW: JSDoc if stored? Is weird if this is changed externally. Can you explain why it is set as a property?
-    this.bodies = MassesAndSpringsModel.BODIES;
-    MassesAndSpringsModel.BODIES.forEach( function( body ) {
+    this.bodies = Body.BODIES;
+    Body.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'bodyLabel' )

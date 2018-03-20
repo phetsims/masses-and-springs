@@ -45,6 +45,7 @@ define( function( require ) {
   Body.JUPITER = new Body( bodyJupiterString, MassesAndSpringsConstants.JUPITER_GRAVITY );
   Body.PLANET_X = new Body( bodyPlanetXString, MassesAndSpringsConstants.PLANET_X );
   Body.CUSTOM = new Body( bodyCustomString, null );
+  Body.BODIES = [ Body.MOON, Body.EARTH, Body.JUPITER, Body.PLANET_X, Body.CUSTOM ];
 
   return Body;
 } );

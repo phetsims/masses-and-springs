@@ -361,8 +361,9 @@ define( function( require ) {
         dt = dt / MassesAndSpringsConstants.SIM_DT_RATIO;
       }
       for ( var i = 0; i < this.masses.length; i++ ) {
+
         // Fall if not hung or grabbed
-        this.masses[i].step( self.gravityProperty.value, MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT, dt, animationDt );
+        this.masses[ i ].step( self.gravityProperty.value, MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT, dt, animationDt );
       }
       if ( this.timerRunningProperty.value ) {
         this.timerSecondsProperty.set( this.timerSecondsProperty.value + dt );
@@ -373,10 +374,5 @@ define( function( require ) {
         spring.step( dt );
       } );
     }
-  }, {
-    // Array of bodies that are referenced throughout the model.
-    //REVIEW: May better be located on Body.js?
-    //REVIEW: Wherever it is, it will need JSDoc
-    BODIES: [ Body.MOON, Body.EARTH, Body.JUPITER, Body.PLANET_X, Body.CUSTOM ]
   } );
 } );
