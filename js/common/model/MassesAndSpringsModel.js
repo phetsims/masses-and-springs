@@ -49,8 +49,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'playingProperty' )
     } );
 
-    //REVIEW: Style guide wants one space after //
-    //@public {Property.<boolean>} determines whether the sim is playing sound
+    // @public {Property.<boolean>} determines whether the sim is playing sound
     //REVIEW: Looks like nothing is listening to this? Can it be removed?
     this.isSoundEnabledProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'isSoundEnabledProperty' )
