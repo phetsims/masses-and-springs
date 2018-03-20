@@ -217,11 +217,6 @@ define( function( require ) {
         return initialEnergy - totalEnergy;
       } );
 
-    //REVIEW: JSDoc on both of these. No clue what orientationProperty value-type is just while reading through
-    //REVIEW: I see no usages of orientationProperty. Can this be safely removed?
-    this.orientationProperty = new Property( null );
-    this.oldIOrientation = null; //REVIEW: I see no usages of this either. Can this be safely removed?
-
     // Used to determine when a peak is hit.
     this.verticalVelocityProperty.lazyLink( function( oldVelocity, newVelocity ) {
       if ( self.springProperty.value ) {
@@ -377,7 +372,6 @@ define( function( require ) {
       this.massProperty.reset();
       //REVIEW: Don't see a reset on isAnimatingProperty. Is it needed?
       //REVIEW: Don't see a reset on initialTotalEnergyProperty. Is it needed?
-      //REVIEW: Don't see a reset on orientationProperty. Is it needed?
     }
   } );
 } );
