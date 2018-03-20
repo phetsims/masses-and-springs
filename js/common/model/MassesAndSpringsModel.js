@@ -310,8 +310,8 @@ define( function( require ) {
 
       // Update mass position if unattached
       else {
-        // Attempt to attach
-        //REVIEW: Presumably springs are too far apart to have a mass attach to multiple springs? If so might doc.
+
+        // Attempt to attach. Assumes springs are far enough apart where one mass can't attach to multiple springs.
         this.springs.forEach( function( spring ) {
           if ( Math.abs( massPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
                Math.abs( massPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE &&
