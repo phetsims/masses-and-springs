@@ -23,6 +23,7 @@ define( function( require ) {
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
+  var Range = require( 'DOT/Range' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Util = require( 'DOT/Util' );
@@ -60,9 +61,7 @@ define( function( require ) {
     this.gravityProperty = new NumberProperty( MassesAndSpringsConstants.EARTH_GRAVITY, {
       tandem: tandem.createTandem( 'gravityProperty' ),
       units: 'meters/second/second',
-      //REVIEW: Directly use MassesAndSpringsConstants.EARTH_GRAVITY?
-      //REVIEW: Or... why is RangeWithValue provided? Just use Range and omit the value
-      range: new RangeWithValue( 0, 30, Body.EARTH.gravity )
+      range: new Range( 0, 30 )
     } );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
