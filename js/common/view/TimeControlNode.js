@@ -15,6 +15,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
+  var SimSpeedChoice = require( 'MASSES_AND_SPRINGS/common/enum/SimSpeedChoice' );
   var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VerticalAquaRadioButtonGroup = require( 'SUN/VerticalAquaRadioButtonGroup' );
@@ -40,14 +41,14 @@ define( function( require ) {
       tandem: tandem.createTandem( 'playPauseButton' )
     } );
 
-    // Radio buttons for normal annd slow speed
+    // Radio buttons for normal and slow speed
     var timeSpeedRadioNode = new VerticalAquaRadioButtonGroup( [ {
       property: model.simSpeedProperty,
-      value: 'normal',
+      value: SimSpeedChoice.NORMAL,
       node: new Text( normalString, { font: MassesAndSpringsConstants.TITLE_FONT } )
     }, {
       property: model.simSpeedProperty,
-      value: 'slow',
+      value: SimSpeedChoice.SLOW,
       node: new Text( slowString, { font: MassesAndSpringsConstants.TITLE_FONT } )
     }
     ], {

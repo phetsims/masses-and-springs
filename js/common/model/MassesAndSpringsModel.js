@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
+  var SimSpeedChoice = require( 'MASSES_AND_SPRINGS/common/enum/SimSpeedChoice' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
@@ -66,10 +67,10 @@ define( function( require ) {
 
     // @public {Property.<string>} determines the speed at which the sim plays.
     //REVIEW: Consider an enumeration type, like PartialProductsChoice.js/etc.
-    this.simSpeedProperty = new Property( 'normal', {
+    this.simSpeedProperty = new Property( SimSpeedChoice.NORMAL, {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
       phetioType: PropertyIO( StringIO ),
-      validValues: [ 'slow', 'normal' ]
+      validValues: [ SimSpeedChoice.SLOW, SimSpeedChoice.NORMAL ]
     } );
 
     // @public {Property.<boolean>} determines visibility of ruler node
@@ -376,7 +377,7 @@ define( function( require ) {
       var animationDt = dt;
 
       // Change the dt value if we are playing in slow motion.
-      if ( this.simSpeedProperty.get() === 'slow' && this.playingProperty.get() ) {
+      if ( this.simSpeedProperty.get() === SimSpeedChoice.SLOW && this.playingProperty.get() ) {
         dt = dt / MassesAndSpringsConstants.SIM_DT_RATIO;
       }
       //REVIEW: _.values() not necessary, forEach is a function on the array itself.
