@@ -137,7 +137,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'springVectorVisibilityProperty' )
     } );
 
-    //REVIEW: Another candidate to be turned into an enumeration. Please do!
     // @public {Property.<string>} determines mode of the vectors to be viewed
     this.forcesModeProperty = new Property( ForcesModeChoice.FORCES, {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
@@ -195,8 +194,7 @@ define( function( require ) {
       );
       this.springs.push( spring );
 
-      //REVIEW: Use capitalized Property to talk about Properties
-      // Links are used to set damping property of each spring to the damping property of the system
+      // Links are used to set damping Property of each spring to the damping property of the system
       //REVIEW: Additionally, why not pass this reference in directly, so direct listeners can be added?
       this.dampingProperty.link( function( newDamping ) {
         assert && assert( newDamping >= 0, 'damping must be greater than or equal to 0: ' + newDamping );
@@ -288,13 +286,8 @@ define( function( require ) {
           mass.positionProperty.set( mass.positionProperty.get().copy().setX( mass.springProperty.get().positionProperty.get().x ) );
         }
 
-        // Update spring length
-        //REVIEW: This could be something like mass.springProperty.value.updateDisplacement()? Seems to have a lot of
-        //REVIEW: spring/mass logic. Not sure, it's a preference
-        mass.springProperty.get().displacementProperty.set(
-          -( mass.springProperty.get().positionProperty.get().y -
-          mass.springProperty.get().naturalRestingLengthProperty.get() ) +
-          massPosition.y - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
+        // Update spring displacementProperty so correct spring length is used.
+        mass.springProperty.value.updateDisplacement(massPosition);
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         var maxY = mass.springProperty.get().thicknessProperty.get() *

@@ -70,9 +70,9 @@ define( function( require ) {
     this.gravityProperty = new NumberProperty( gravityProperty.value );
 
     // Link to manage gravity value for the spring object.
-    gravityProperty.link(function(gravity){
-      self.gravityProperty.set(gravity);
-    });
+    gravityProperty.link( function( gravity ) {
+      self.gravityProperty.set( gravity );
+    } );
 
     //  @public {Property.<number>} distance from of the bottom of the spring from the natural resting position
     this.displacementProperty = new NumberProperty( 0, {
@@ -421,6 +421,16 @@ define( function( require ) {
       this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
     },
 
+    /** Updates the displacement Property of the spring.
+     * @param {Vector2} massPosition
+     *
+     * @public
+     */
+    updateDisplacement: function( massPosition ) {
+      this.displacementProperty.set( -( this.positionProperty.value.y - this.naturalRestingLengthProperty.value )
+                                     + massPosition.y - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
+    },
+
     /**
      * Stop spring motion by setting the displacement to the spring's extension, which is the length from the natural
      * resting position. This will also stop the spring from further oscillation.
@@ -534,7 +544,7 @@ define( function( require ) {
           assert && assert( !isNaN( this.massAttachedProperty.get().verticalVelocityProperty.get() ), 'velocity must be a number' );
 
         }
-        
+
         // Critically damped case
         else {
           //TODO::  if needed decouple these objects
