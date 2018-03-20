@@ -66,8 +66,7 @@ define( function( require ) {
     this.displacementProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'displacementProperty' ),
       units: 'meters',
-      //REVIEW: Only Range needed instead of RangeWithValue for NumberProperty's range option. Just use Range.
-      range: new RangeWithValue( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
+      range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
     //REVIEW: null not noted in the type docs
