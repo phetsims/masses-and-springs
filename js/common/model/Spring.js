@@ -62,10 +62,6 @@ define( function( require ) {
       forcesOrientation: 1  // Used to position massNode forces. Right side: 1, Left side: -1
     }, options );
 
-    // range of natural resting length in meters (values used from design doc)
-    //REVIEW: One usage, so inline? And use Range instead of RangeWithValue.
-    var naturalRestingLengthRange = new RangeWithValue( 0.1, 0.5, initialNaturalRestingLength );
-
     // @public {Property.<number>} gravitational acceleration
     this.gravityProperty = new NumberProperty( gravityProperty.value );
 
@@ -125,7 +121,7 @@ define( function( require ) {
     this.naturalRestingLengthProperty = new NumberProperty( initialNaturalRestingLength, {
       tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
       units: 'meters',
-      range: naturalRestingLengthRange
+      range: new Range( 0.1, 0.5 )
     } );
 
     // @public {Property.<number> read-only} line width of oscillating spring node
