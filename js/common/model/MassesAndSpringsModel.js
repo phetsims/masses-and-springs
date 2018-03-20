@@ -116,7 +116,7 @@ define( function( require ) {
       phetioType: PropertyIO( BodyIO )
     } );
 
-    // Visibility properties of vectors associated with each mass REVIEW: Use capitalized Property to talk about Properties
+    // Visibility Properties of vectors associated with each mass
     // @public {Property.<boolean>} determines the visibility of the velocity vector
     this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
