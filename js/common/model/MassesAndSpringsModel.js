@@ -49,9 +49,8 @@ define( function( require ) {
       tandem: tandem.createTandem( 'playingProperty' )
     } );
 
-    //REVIEW: NumberProperty?
     // @public {Property.<number>} coefficient of damping applied to the system
-    this.dampingProperty = new Property( 0, {
+    this.dampingProperty = new NumberProperty( 0, {
       units: 'newtons',
       tandem: tandem.createTandem( 'dampingProperty' )
     } );
