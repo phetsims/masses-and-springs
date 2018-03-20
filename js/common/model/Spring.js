@@ -260,17 +260,14 @@ define( function( require ) {
       }
     } );
 
-    //REVIEW: Type doc
-    // @public used to determine when the period tracer should alternate directions
+    // @public {Emitter} used to determine when the period tracer should alternate directions
     //REVIEW: Since the emit() takes 1 argument, that should be documented (type, value/purpose)
     this.peakEmitter = new Emitter();
 
-    //REVIEW: Type doc
-    // @public used to determine when the mass has crossed over its equilibrium position while oscillating
+    // @public {Emitter} used to determine when the mass has crossed over its equilibrium position while oscillating
     this.crossEmitter = new Emitter();
 
-    //REVIEW: Type doc
-    // @public used to determine when the mass is dropped
+    // @public {Emitter} used to determine when the mass is dropped
     this.droppedEmitter = new Emitter();
 
     this.massEquilibriumDisplacementProperty.link( function( newValue, oldValue ) {
