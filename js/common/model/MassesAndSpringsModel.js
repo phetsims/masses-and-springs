@@ -218,10 +218,9 @@ define( function( require ) {
       this.createMass( 0.100, 0.20, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass1' ) );
       this.createMass( 0.100, 0.28, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass2' ) );
       this.createMass( 0.050, 0.33, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'smallLabeledMass' ) );
-      this.createMass( 0.200, 0.63, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), { gradientEnabled: false, mysteryLabel: true  } );
-      this.createMass( 0.150, 0.56, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), { gradientEnabled: false, mysteryLabel: true } );
-      this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { gradientEnabled: false, mysteryLabel: true  } );
-
+      this.createMass( 0.200, 0.63, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), { mysteryLabel: true } );
+      this.createMass( 0.150, 0.56, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), { mysteryLabel: true } );
+      this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { mysteryLabel: true } );
     },
 
     /**
