@@ -37,13 +37,13 @@ define( function( require ) {
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
    * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
-   * @param {number} defaultDampingCoefficient N.s/m - viscous damping coefficient of the system
+   * @param {Property.<number>} dampingProperty - used for viscous damping coefficient (N.s/m) of the system
    * @param {Property.<number>} gravityProperty - the gravity Property from the model
    * @param {Tandem} tandem
    *
    * @constructor
    */
-  function Spring( position, initialNaturalRestingLength, defaultDampingCoefficient, gravityProperty, tandem ) {
+  function Spring( position, initialNaturalRestingLength, dampingProperty, gravityProperty, tandem ) {
 
     // validate and save options
     assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : '
@@ -94,7 +94,7 @@ define( function( require ) {
     );
 
     // @public {Property.<number>} viscous damping coefficient of the system
-    this.dampingCoefficientProperty = new NumberProperty( defaultDampingCoefficient, {
+    this.dampingCoefficientProperty = new NumberProperty( dampingProperty.value, {
       tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
       units: 'newtons-second/meters',
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
@@ -187,6 +187,12 @@ define( function( require ) {
         phetioType: DerivedPropertyIO( NumberIO )
       }
     );
+
+    // Links are used to set damping Property of each spring to the damping property of the system
+    dampingProperty.link( function( newDamping ) {
+      assert && assert( newDamping >= 0, 'damping must be greater than or equal to 0: ' + newDamping );
+      self.dampingCoefficientProperty.set( newDamping );
+    } );
 
     //REVIEW: NumberProperty?
     //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.

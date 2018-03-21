@@ -43,14 +43,14 @@ define( function( require ) {
       new Spring(
         new Vector2( 0.65, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        0,
+        new Property (0),
         new Property(0), //REVIEW: NumberProperty? (Really don't care here, but it is the code style)
         tandem.createTandem( 'firstIconSpring' )
       ),
       new Spring(
         new Vector2( 0.85, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        0,
+        new Property (0),
         new Property(0), //REVIEW: NumberProperty? (Really don't care here, but it is the code style)
         tandem.createTandem( 'secondIconSpring' )
       )

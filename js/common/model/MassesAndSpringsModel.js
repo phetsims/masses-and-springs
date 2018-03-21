@@ -188,18 +188,11 @@ define( function( require ) {
       var spring = new Spring(
         new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        this.dampingProperty.get(),
+        this.dampingProperty,
         this.gravityProperty,
         tandem
       );
       this.springs.push( spring );
-
-      // Links are used to set damping Property of each spring to the damping property of the system
-      //REVIEW: Additionally, why not pass this reference in directly, so direct listeners can be added?
-      this.dampingProperty.link( function( newDamping ) {
-        assert && assert( newDamping >= 0, 'damping must be greater than or equal to 0: ' + newDamping );
-        spring.dampingCoefficientProperty.set( newDamping );
-      } );
     },
 
     /**
