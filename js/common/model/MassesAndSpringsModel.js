@@ -172,9 +172,10 @@ define( function( require ) {
      * @param {string} color - color of the MassNode
      * @param {string} specifiedLabel - customized label for the MassNode
      * @param {Tandem} tandem
+     * @param {Object} options
      */
-    createMass: function( mass, xPosition, color, specifiedLabel, tandem ) {
-      this.masses.push( new Mass( mass, xPosition, color, this.gravityProperty, tandem ) );
+    createMass: function( mass, xPosition, color, specifiedLabel, tandem, options ) {
+      this.masses.push( new Mass( mass, xPosition, color, this.gravityProperty, tandem, options ) );
     },
 
     /**
@@ -217,17 +218,10 @@ define( function( require ) {
       this.createMass( 0.100, 0.20, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass1' ) );
       this.createMass( 0.100, 0.28, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass2' ) );
       this.createMass( 0.050, 0.33, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'smallLabeledMass' ) );
-      this.createMass( 0.200, 0.63, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), { gradientEnabled: false } );
-      this.createMass( 0.150, 0.56, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), { gradientEnabled: false } );
-      this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { gradientEnabled: false } );
+      this.createMass( 0.200, 0.63, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), { gradientEnabled: false, mysteryLabel: true  } );
+      this.createMass( 0.150, 0.56, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), { gradientEnabled: false, mysteryLabel: true } );
+      this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { gradientEnabled: false, mysteryLabel: true  } );
 
-      // Mystery masses should have a question mark as their label.
-      //REVIEW: This is supported in Mass options, ideally we should pass it there. Not clear if these are the FIRST
-      //REVIEW: masses added or not, so I'm not for-sure which masses this should apply to. Passing in with createMass
-      //REVIEW: options would simplify a lot.
-      for ( var i = 4; i < this.masses.length; i++ ) {
-        this.masses[ i ].mysteryLabel = true;
-      }
     },
 
     /**
