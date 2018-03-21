@@ -58,8 +58,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'dampingProperty' )
     } );
 
-    // @public {Property.<number>} gravitational acceleration associated with each planet
-    //REVIEW: If Body.CUSTOM has null gravity, how does this not get null, or is that case handled? doc?
+    // @public {Property.<number>} gravitational acceleration association with the spring system
     this.gravityProperty = new NumberProperty( MassesAndSpringsConstants.EARTH_GRAVITY, {
       tandem: tandem.createTandem( 'gravityProperty' ),
       units: 'meters/second/second',
