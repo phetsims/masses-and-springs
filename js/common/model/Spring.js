@@ -68,11 +68,38 @@ define( function( require ) {
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
+    //REVIEW: NumberProperty?
+    // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
+    //REVIEW: Can we try to turn this into a derived Property, with a 0 or null if there is no mass attached?
+    this.massEquilibriumYPositionProperty = new Property( 0,
+      {
+        tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
+        units: 'meters',
+        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        phetioType: DerivedPropertyIO( NumberIO )
+      } );
+
+    // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
+    this.massAttachedProperty = new Property( null, {
+      tandem: tandem.createTandem( 'massAttachedProperty' ),
+      phetioType: PropertyIO( NullableIO( MassIO ) )
+    } );
+
     // @public {Property.<number|null>} distance from of the bottom of the spring from the massEquilibriumYPosition
     //REVIEW: This might only depend on this.massEquilibriumYPositionProperty, massCenterOfMassProperty, I see a link
     //REVIEW: below. Can we try this as a DerivedProperty?
     //REVIEW: If not, why is it not reset directly?
-    this.massEquilibriumDisplacementProperty = new Property( null );
+    var massCenterOfMassProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'centerOfMassPositionProperty',
+      defaultValue: null
+    } );
+
+    this.massEquilibriumDisplacementProperty = new DerivedProperty( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ],
+      function( massEquilibriumYPosition, massCenterOfMass ) {
+        if ( massCenterOfMass !== null ) {
+          return  massCenterOfMass.y - massEquilibriumYPosition ;
+        }
+      } );
 
     // @public {Property.<number>} spring constant of spring
     this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
@@ -125,12 +152,6 @@ define( function( require ) {
     // @public {Property.<boolean>} determines whether the animation for the spring is played or not
     this.animatingProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'animatingProperty' )
-    } );
-
-    // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
-    this.massAttachedProperty = new Property( null, {
-      tandem: tandem.createTandem( 'massAttachedProperty' ),
-      phetioType: PropertyIO( NullableIO( MassIO ) )
     } );
 
     // @public {Property.<number>} Kinetic Energy of the attached Mass
@@ -221,28 +242,6 @@ define( function( require ) {
     //REVIEW: Why is this not reset?
     //REVIEW: Wait, is this Property never set a value?
     this.periodTraceVisibilityProperty = new Property( false );
-
-    //REVIEW: NumberProperty?
-    // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-    //REVIEW: Can we try to turn this into a derived Property, with a 0 or null if there is no mass attached?
-    this.massEquilibriumYPositionProperty = new Property( 0,
-      {
-        tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
-        units: 'meters',
-        range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioType: DerivedPropertyIO( NumberIO )
-      } );
-
-    var massCenterOfMassProperty = new DynamicProperty( this.massAttachedProperty, {
-      derive: 'centerOfMassPositionProperty',
-      defaultValue: null
-    } );
-
-    Property.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ], function( massEquilibriumYPosition, massCenterOfMass ) {
-      if ( massCenterOfMass !== null ) {
-        self.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition );
-      }
-    } );
 
     // Set the equilibrium position when a mass is attached to the spring. We do a similar process in Mass.js when the mass value changes.
     Property.multilink( [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],

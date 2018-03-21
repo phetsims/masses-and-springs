@@ -71,12 +71,7 @@ define( function( require ) {
 
     // When a mass is attached the origin of the trace should be the mass equilibrium.
     this.springProperty.value.massAttachedProperty.link( function( mass ) {
-      if ( !mass ) {
-
-        // If there isn't a mass attached then there is no mass displacement
-        self.springProperty.value.massEquilibriumDisplacementProperty.reset();
-      }
-      else {
+      if ( mass ) {
         self.originalY = self.springProperty.value.massEquilibriumYPositionProperty.value;
       }
     } );

@@ -214,11 +214,6 @@ define( function( require ) {
     } );
 
     this.userControlledProperty.link( function( userControlled ) {
-      if ( self.springProperty.value ) {
-
-        // If the user grabs an attached mass the mass displacement should reset. Used for period trace.
-        self.springProperty.value.massEquilibriumDisplacementProperty.reset();
-      }
       if ( !userControlled && self.springProperty.get() ) {
 
         // When a user drags an attached mass it is as if they are restarting the spring system
