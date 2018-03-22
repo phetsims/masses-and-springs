@@ -271,6 +271,8 @@ define( function( require ) {
         // springExtension = mg/k
         var springExtensionValue = ( value * spring.gravityProperty.value ) / spring.springConstantProperty.value;
         spring.equilibriumYPositionProperty.set( spring.positionProperty.get().y - spring.naturalRestingLengthProperty.value - springExtensionValue );
+        spring.massEquilibriumYPositionProperty.set( spring.positionProperty.get().y - spring.naturalRestingLengthProperty.value - springExtensionValue - self.heightProperty.value / 2 );
+
       }
     } );
   }

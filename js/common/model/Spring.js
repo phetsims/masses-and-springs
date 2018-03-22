@@ -68,6 +68,17 @@ define( function( require ) {
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
+    //REVIEW: NumberProperty?
+    // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
+    //REVIEW: Can we try to turn this into a derived Property, with a 0 or null if there is no mass attached?
+    this.massEquilibriumYPositionProperty = new Property( 0,
+      {
+        tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
+        units: 'meters',
+        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        phetioType: DerivedPropertyIO( NumberIO )
+      } );
+
     // @public {Property.<number|null>} distance from of the bottom of the spring from the massEquilibriumYPosition
     //REVIEW: This might only depend on this.massEquilibriumYPositionProperty, massCenterOfMassProperty, I see a link
     //REVIEW: below. Can we try this as a DerivedProperty?
