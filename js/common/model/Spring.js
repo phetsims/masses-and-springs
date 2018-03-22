@@ -218,9 +218,10 @@ define( function( require ) {
         }
       } );
 
-    // @public {Property.<boolean>} Responsible for the visibility of the period trace. Used in verticalCheckboxGroup
+    // @public {Property.<boolean>} Responsible for the visibility of the period trace. Used in a verticalCheckboxGroup
     this.periodTraceVisibilityProperty = new BooleanProperty( false );
 
+    // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
     this.massEquilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
