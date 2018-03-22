@@ -163,7 +163,7 @@ define( function( require ) {
       defaultValue: 0
     } );
 
-    // @public {Property.boolean} Flag to enable the stop button for the spring.
+    // @public {Property.<boolean>} Flag to enable the stop button for the spring.
     this.buttonEnabledProperty = new BooleanProperty( false );
 
     // @public {Property.<number>} (read-only) length of the spring, units = m
@@ -180,7 +180,7 @@ define( function( require ) {
       }
     );
 
-    // @public {Property.<number} (read-only) y position of the bottom end of the spring, units = m
+    // @public {Property.<number>} (read-only) y position of the bottom end of the spring, units = m
     this.bottomProperty = new DerivedProperty(
       [ this.positionProperty, this.lengthProperty ],
       function( position, length ) {
@@ -200,12 +200,8 @@ define( function( require ) {
       self.dampingCoefficientProperty.set( newDamping );
     } );
 
-    //REVIEW: NumberProperty?
-    //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
-    // @public {read-only} y position of the equilibrium position
-    //REVIEW: Consider trying to make this a DerivedProperty. Also... why is its phetioType a DerivedPropertyIO?
-    //REVIEW: Maybe it can be null when there is no mass attached?
-    this.equilibriumYPositionProperty = new Property( 0,
+    // @public {Property.<number>}(read-only) y position of the equilibrium position
+    this.equilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
