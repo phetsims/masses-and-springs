@@ -221,10 +221,7 @@ define( function( require ) {
     // @public {Property.<boolean>} Responsible for the visibility of the period trace. Used in verticalCheckboxGroup
     this.periodTraceVisibilityProperty = new BooleanProperty( false );
 
-    //REVIEW: NumberProperty?
-    // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-    //REVIEW: Can we try to turn this into a derived Property, with a 0 or null if there is no mass attached?
-    this.massEquilibriumYPositionProperty = new Property( 0,
+    this.massEquilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
