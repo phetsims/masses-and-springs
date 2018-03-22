@@ -339,9 +339,8 @@ define( function( require ) {
      * by the spring because the intro model determines the conditions for updating thickness.
      * @public
      *
-     * REVIEW: Type comes before the name in the type docs
-     * @param length {number} current natural resting length of spring
-     * @param springConstant {number} current spring constant of spring
+     * @param {number} length  natural resting length of spring
+     * @param {number} springConstant current spring constant of spring
      */
     updateThickness: function( length, springConstant ) {
 
