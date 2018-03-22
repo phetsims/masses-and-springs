@@ -76,11 +76,11 @@ define( function( require ) {
 
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
     this.massEquilibriumYPositionProperty = new DerivedProperty( [ this.massAttachedProperty ], function( mass ) {
-        if ( mass ) {
+        if ( mass!==null ) {
 
           // springExtension = mg/k
           var springExtensionValue = ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
-          return self.positionProperty.get().y - self.naturalRestingLengthProperty.value - springExtensionValue - mass.heightProperty.value / 2
+          return self.positionProperty.get().y - self.naturalRestingLengthProperty.value - springExtensionValue - mass.heightProperty.value / 2;
         }
         else {
           return 0;
