@@ -68,10 +68,8 @@ define( function( require ) {
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
-    //REVIEW: NumberProperty?
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-    //REVIEW: Can we try to turn this into a derived Property, with a 0 or null if there is no mass attached?
-    this.massEquilibriumYPositionProperty = new Property( 0,
+    this.massEquilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
@@ -80,9 +78,6 @@ define( function( require ) {
       } );
 
     // @public {Property.<number|null>} distance from of the bottom of the spring from the massEquilibriumYPosition
-    //REVIEW: This might only depend on this.massEquilibriumYPositionProperty, massCenterOfMassProperty, I see a link
-    //REVIEW: below. Can we try this as a DerivedProperty?
-    //REVIEW: If not, why is it not reset directly?
     this.massEquilibriumDisplacementProperty = new Property( null );
 
     // @public {Property.<number>} spring constant of spring
@@ -310,6 +305,7 @@ define( function( require ) {
       this.massAttachedProperty.reset();
       this.springConstantProperty.reset();
       this.animatingProperty.reset();
+      this.massEquilibriumDisplacementProperty.reset();
     },
 
     /**
