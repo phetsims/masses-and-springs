@@ -218,11 +218,8 @@ define( function( require ) {
         }
       } );
 
-    // @public {Property.<boolean>} Responsible for the visibility of the period trace.
-    //REVIEW: BooleanProperty?
-    //REVIEW: Why is this not reset?
-    //REVIEW: Wait, is this Property never set a value?
-    this.periodTraceVisibilityProperty = new Property( false );
+    // @public {Property.<boolean>} Responsible for the visibility of the period trace. Used in verticalCheckboxGroup
+    this.periodTraceVisibilityProperty = new BooleanProperty( false );
 
     //REVIEW: NumberProperty?
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
