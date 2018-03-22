@@ -335,9 +335,8 @@ define( function( require ) {
     },
 
     /**
-     * Updates thickness of spring and sets its thickness property to calculated value. This is not handled internally
+     * Updates thickness of spring and sets its thickness Property to calculated value. This is not handled internally
      * by the spring because the intro model determines the conditions for updating thickness.
-     * REVIEW: Use capitalized Property to talk about Properties
      * @public
      *
      * REVIEW: Type comes before the name in the type docs
