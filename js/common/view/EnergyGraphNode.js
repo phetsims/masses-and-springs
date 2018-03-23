@@ -301,9 +301,8 @@ define( function( require ) {
     this.barChartNode.center = this.background.center.plusXY( 0, 5 );
 
     var chartNode = new Node( {
-        children: [ this.background, this.barChartNode ]
-      } //REVIEW: Put the `} );` on one line, so it doesn't double-indent
-    );
+      children: [ this.background, this.barChartNode ]
+    } );
 
     var accordionBoxContent = new VBox( {
       children: [
