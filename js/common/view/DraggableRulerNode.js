@@ -66,9 +66,7 @@ define( function( require ) {
       tickMarksOnBottom: false
     }, { tandem: tandem.createTandem( 'ruler' ) } );
 
-    //REVIEW: Type docs
-    //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
-    // @private {read-only} position of ruler node in screen coordinates
+    // @private {Vector2} (read-only) position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
