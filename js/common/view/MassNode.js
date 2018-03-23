@@ -136,8 +136,7 @@ define( function( require ) {
 
     // Adjust the mass label for adjustable masses.
     if ( this.mass.adjustable ) {
-      //REVIEW: Use `this` instead of self here?
-      self.mass.massProperty.link( function( massValue ) {
+      this.mass.massProperty.link( function( massValue ) {
         label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
         label.center = rect.center;
       } );
