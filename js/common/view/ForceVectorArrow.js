@@ -13,22 +13,17 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
 
-  // Constants REVIEW: All used once, just inline?
-  var FORCES_ARROW_LENGTH = 31;
-  var SMALLER_ARROW_HEAD_WIDTH = 11;
-  var SMALLER_ARROW_TAIL_WIDTH = 3;
-
   /**
    * @param {Color} color
    * @constructor
    */
   function ForceVectorArrow( color ) {
-    ArrowNode.call( this, 5, 0, FORCES_ARROW_LENGTH, 0, {
+    ArrowNode.call( this, 5, 0, 31, 0, {
       fill: color,
       stroke: color,
       centerY: 0,
-      tailWidth: SMALLER_ARROW_TAIL_WIDTH,
-      headWidth: SMALLER_ARROW_HEAD_WIDTH
+      tailWidth: 3,
+      headWidth: 11
     } );
   }
 
