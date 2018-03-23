@@ -125,13 +125,12 @@ define( function( require ) {
     );
     var lineVBox = new VBox( {
       children: [
-      //REVIEW: Use spacing here?
         blueLine,
-        new VStrut( 24 ),
         greenLine,
-        new VStrut( 24 ),
         redLine
-      ], yMargin: 0
+      ],
+      yMargin: 0,
+      spacing: 24
     } );
     var controlBox = new HBox( {
       children: [
