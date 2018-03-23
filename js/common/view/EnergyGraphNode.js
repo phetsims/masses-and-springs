@@ -71,11 +71,6 @@ define( function( require ) {
   function EnergyGraphNode( model, tandem ) {
     var self = this;
 
-    // Zoom levels are based on powers of two (i.e. 1x, 2x, 4x, 8x, 16x). The Min/Max scales and scale factor
-    // must always be a power of two.
-    var MIN_SCALE = 1;
-    var MAX_SCALE = 32;
-
     // @private {Property.<number>} (read-write) Responsible for the zoom level in the bar graph.
     // This is adjusted by the zoom buttons and used for the scaling Property of the barNodes.
     this.zoomLevelProperty = new NumberProperty( 3 );
@@ -207,7 +202,7 @@ define( function( require ) {
           abbreviation: eTotString,
           description: totalEnergyString,
           color: 'black'
-        },
+        }
       ].map( function( itemData ) {
         return new HBox( {
           spacing: 20,
@@ -295,14 +290,6 @@ define( function( require ) {
     } );
 
     displayButtons.left = this.barChartNode.left;
-
-    // Provides a limit on the scale
-    scaleFactorProperty.link( function( value ) {
-      //REVIEW: What if a devious phet-io-person sets the zoom to something like 1.43. Hopefully it is their fault
-      //REVIEW: that the zoom in/out will always be enabled? Greater-than and less-than checks might be better.
-      zoomOutButton.setEnabled( value !== MIN_SCALE );
-      zoomInButton.setEnabled( value !== MAX_SCALE );
-    } );
 
     // Background for bar graph
     this.background = new Rectangle( 0, 0, 160, 520, {
