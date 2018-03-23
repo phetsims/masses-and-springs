@@ -205,6 +205,8 @@ define( function( require ) {
     addDefaultSprings: function( tandem ) {
       this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - 0.3, tandem.createTandem( 'leftSpring' ) );
       this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) );
+      this.firstSpring = this.springs[0];
+      this.secondSpring = this.springs[1];
     },
 
     /**

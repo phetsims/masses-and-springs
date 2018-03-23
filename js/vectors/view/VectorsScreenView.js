@@ -60,7 +60,7 @@ define( function( require ) {
     this.addChild( secondDisplacementArrowNode );
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
-    var firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 0 ].massAttachedProperty ],
+    var firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         //REVIEW: return massAttached && equilibriumPositionVisible;
         if ( massAttached ) {
@@ -70,7 +70,7 @@ define( function( require ) {
           return false;
         }
       } );
-    var secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 1 ].massAttachedProperty ],
+    var secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.secondSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         //REVIEW: return massAttached && equilibriumPositionVisible;
         if ( massAttached ) {
@@ -85,8 +85,8 @@ define( function( require ) {
     // Initializes equilibrium line for first spring
     var firstSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
-      model.springs[ 0 ],
-      model.springs[ 0 ].massEquilibriumYPositionProperty,
+      model.firstSpring,
+      model.firstSpring.massEquilibriumYPositionProperty,
       firstMassEquilibriumVisibilityProperty, {
         stroke: EQUILIBRIUM_LINE_FILL
       }
@@ -95,8 +95,8 @@ define( function( require ) {
     // Initializes equilibrium line for second spring
     var secondSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
-      model.springs[ 1 ],
-      model.springs[ 1 ].massEquilibriumYPositionProperty,
+      model.secondSpring,
+      model.secondSpring.massEquilibriumYPositionProperty,
       secondMassEquilibriumVisibilityProperty, {
         stroke: EQUILIBRIUM_LINE_FILL
       }
@@ -180,8 +180,8 @@ define( function( require ) {
 
     // Determines where we want the force vectors of the attached mass to be placed.
     //REVIEW: Shouldn't directly change spring options. Also, can we do this on spring construction instead?
-    model.springs[ 0 ].forcesOrientationProperty.set( -1 );
-    model.springs[ 1 ].forcesOrientationProperty.set( 1 );
+    model.firstSpring.forcesOrientationProperty.set( -1 );
+    model.secondSpring.forcesOrientationProperty.set( 1 );
   }
 
   massesAndSprings.register( 'VectorsScreenView', VectorsScreenView );

@@ -62,7 +62,7 @@ define( function( require ) {
     var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
-    var equilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 0 ].massAttachedProperty ],
+    var equilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         if ( massAttached ) {
           return equilibriumPositionVisible;
@@ -76,8 +76,8 @@ define( function( require ) {
     //REVIEW: JSDoc
     this.springEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
-      model.springs[ 0 ],
-      model.springs[ 0 ].massEquilibriumYPositionProperty,
+      model.firstSpring,
+      model.firstSpring.massEquilibriumYPositionProperty,
       equilibriumVisibilityProperty, {
         stroke: 'black'
       }
@@ -86,8 +86,8 @@ define( function( require ) {
     // Initializes natural line for the spring
     var naturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
-      model.springs[ 0 ],
-      model.springs[ 0 ].bottomProperty,
+      model.firstSpring,
+      model.firstSpring.bottomProperty,
       model.naturalLengthVisibleProperty, {
         stroke: 'rgb( 65, 66, 232 )',
         fixedPosition: true
@@ -95,9 +95,9 @@ define( function( require ) {
     );
 
     //REVIEW: Is this something that HBox could be used for?
-    var springStopperButtonNode = this.createStopperButton( this.model.springs[ 0 ], tandem );
+    var springStopperButtonNode = this.createStopperButton( this.model.firstSpring, tandem );
     springStopperButtonNode.left = springHangerNode.right + this.spacing;
-    this.model.springs[ 0 ].buttonEnabledProperty.link(
+    this.model.firstSpring.buttonEnabledProperty.link(
       function( buttonEnabled ) {
         springStopperButtonNode.enabled = buttonEnabled;
       } );
@@ -118,7 +118,7 @@ define( function( require ) {
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
 
     // Initializes movable line
-    var xBoundsLimit = this.modelViewTransform.modelToViewX( this.model.springs[ 0 ].positionProperty.value.x ) + this.spacing;
+    var xBoundsLimit = this.modelViewTransform.modelToViewX( this.model.firstSpring.positionProperty.value.x ) + this.spacing;
     var movableLineNode = new MovableLineNode(
       springHangerNode.center.plus( new Vector2( 45, 200 ) ),
       100,
@@ -152,7 +152,7 @@ define( function( require ) {
     // Zero height reference line
     var zeroHeightLine = new ReferenceLineNode(
       this.modelViewTransform,
-      model.springs[ 0 ],
+      model.firstSpring,
       zeroHeightProperty,
       new Property( true ), {
         stroke: '#5798de',
@@ -221,7 +221,7 @@ define( function( require ) {
       movableLineNode.centerX = springHangerNode.centerX;
       massValueControlPanel.top = springHangerNode.top;
       massValueControlPanel.right = springHangerNode.left - self.spacing;
-      springHangerNode.centerX = self.modelViewTransform.modelToViewX( model.springs[ 0 ].positionProperty.value.x );
+      springHangerNode.centerX = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
       springStopperButtonNode.left = springHangerNode.right + self.spacing;
       springConstantControlPanel.left = springStopperButtonNode.right + self.spacing;
       self.resetAllButton.right = self.panelRightSpacing;

@@ -26,6 +26,8 @@ define( function( require ) {
 
     // Creation of masses and springs specific for this screen
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
+    this.firstSpring = this.springs[ 0 ];
+
     this.createMass( 0.1, 0.7, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ) );
 
     this.masses[ 0 ].adjustable = true;

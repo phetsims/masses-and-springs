@@ -48,16 +48,16 @@ define( function( require ) {
       this.modelViewTransform,
       tandem.createTandem( 'springHangerNode' ), {
         centerX: this.modelViewTransform.modelToViewX(
-          model.springs[ 0 ].positionProperty.value.distance( model.springs[ 1 ].positionProperty.value ) ) * 4.7
+          model.firstSpring.positionProperty.value.distance( model.secondSpring.positionProperty.value ) ) * 4.7
       } );
 
 
-    var leftSpring = this.model.springs[ 0 ];
+    var leftSpring = this.model.firstSpring;
     //REVIEW: JSDoc
     this.firstSpringStopperButtonNode = this.createStopperButton( leftSpring, tandem );
     this.firstSpringStopperButtonNode.right = this.springHangerNode.left - this.spacing;
 
-    var rightSpring = this.model.springs[ 1 ];
+    var rightSpring = this.model.secondSpring;
     //REVIEW: JSDoc
     this.secondSpringStopperButtonNode = this.createStopperButton( rightSpring, tandem );
     this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
@@ -99,8 +99,8 @@ define( function( require ) {
     //REVIEW: Lots of duplication with construction of these. Can we simplify?
     var firstNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
-      model.springs[ 0 ],
-      model.springs[ 0 ].bottomProperty,
+      model.firstSpring,
+      model.firstSpring.bottomProperty,
       model.naturalLengthVisibleProperty, {
         stroke: NATURAL_LENGTH_LINE_FILL,
         fixedPosition: true
@@ -111,8 +111,8 @@ define( function( require ) {
     //REVIEW: Don't need visibility doc for local variable
     var secondNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
-      model.springs[ 1 ],
-      model.springs[ 1 ].bottomProperty,
+      model.secondSpring,
+      model.secondSpring.bottomProperty,
       model.naturalLengthVisibleProperty, {
         stroke: NATURAL_LENGTH_LINE_FILL,
         fixedPosition: true
@@ -162,7 +162,7 @@ define( function( require ) {
       // Update the bounds of view elements
       //REVIEW: Lots of layout here. Can we use things like AlignBox/HBox/VBox to simplify? Might be worth collaboration.
       //REVIEW: How much of this can be shared with OneSpringScreenView (and moved to SpringScreenView?)
-      self.springHangerNode.top = model.springs[ 0 ].positionProperty.value.y + self.spacing;
+      self.springHangerNode.top = model.firstSpring.positionProperty.value.y + self.spacing;
       self.gravityAndDampingControlNode.right = self.panelRightSpacing;
       self.toolboxPanel.right = self.panelRightSpacing;
       self.resetAllButton.right = self.panelRightSpacing;

@@ -123,7 +123,7 @@ define( function( require ) {
     springOptionsPanel.moveToBack();
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
-    var firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 0 ].massAttachedProperty ],
+    var firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         if ( massAttached ) {
           return equilibriumPositionVisible;
@@ -132,7 +132,7 @@ define( function( require ) {
           return false;
         }
       } );
-    var secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.springs[ 1 ].massAttachedProperty ],
+    var secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.secondSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         if ( massAttached ) {
           return equilibriumPositionVisible;
@@ -145,8 +145,8 @@ define( function( require ) {
     // Initializes equilibrium line for first spring
     var firstSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
-      model.springs[ 0 ],
-      model.springs[ 0 ].equilibriumYPositionProperty,
+      model.firstSpring,
+      model.firstSpring.equilibriumYPositionProperty,
       firstMassEquilibriumVisibilityProperty, {
         stroke: EQUILIBRIUM_LINE_FILL
       }
@@ -155,8 +155,8 @@ define( function( require ) {
     // Initializes equilibrium line for second spring
     var secondSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
-      model.springs[ 1 ],
-      model.springs[ 1 ].equilibriumYPositionProperty,
+      model.secondSpring,
+      model.secondSpring.equilibriumYPositionProperty,
       secondMassEquilibriumVisibilityProperty, {
         stroke: EQUILIBRIUM_LINE_FILL
       }

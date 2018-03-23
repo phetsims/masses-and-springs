@@ -37,6 +37,7 @@ define( function( require ) {
 
     //REVIEW: the 0.01 should be refactored out (mention in another review comment)
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X - .01, tandem.createTandem( 'spring' ) );
+    this.firstSpring = this.springs[ 0 ];
 
     // REVIEW: Should these use MassesAndSpringsModel createMass? (or renamed method)?
     this.masses.push( new Mass( 0.100, MASS_X_POSITION, 'rgb(247,151,34)', this.gravityProperty, tandem.createTandem( 'adjustableMass' ), {

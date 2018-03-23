@@ -157,7 +157,7 @@ define( function( require ) {
         content: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'periodTraceString' )
         } ),
-        property: model.springs[ 0 ].periodTraceVisibilityProperty,
+        property: model.firstSpring.periodTraceVisibilityProperty,
       } ], {
         boxWidth: 15,
         spacing: 8,

@@ -108,7 +108,7 @@ define( function( require ) {
 
         // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
         // has been reset. Thermal energy is the only value that is dependent on initial total energy.
-        var mass = model.springs[ 0 ].massAttachedProperty.get();
+        var mass = model.firstSpring.massAttachedProperty.get();
         if ( mass ) {
           mass.initialTotalEnergyProperty.set( mass.kineticEnergyProperty.get() +
                                                mass.gravitationalPotentialEnergyProperty.get() +
@@ -117,28 +117,26 @@ define( function( require ) {
       },
       scale: 0.7
     } );
-    model.springs[ 0 ].thermalEnergyProperty.link( function( value ) {
+    model.firstSpring.thermalEnergyProperty.link( function( value ) {
       clearThermalButton.enabled = ( value > 0.001 );
       clearThermalButton.pickable = ( value > 0.001 );
     } );
 
     //REVIEW: These color constants are duplicated below in dialogContent. Factor out to above?
-    //REVIEW: I'm seeing lots of model.springs[ 0 ]. Can we (on the model) call it firstSpring/mainSpring/etc. so it
-    //REVIEW: is a bit easier to read (and the model can make sure there is at least one spring?)
     var aEntry = {
-      property: model.springs[ 0 ].kineticEnergyProperty,
+      property: model.firstSpring.kineticEnergyProperty,
       color: '#39d74e'
     };
     var bEntry = {
-      property: model.springs[ 0 ].gravitationalPotentialEnergyProperty,
+      property: model.firstSpring.gravitationalPotentialEnergyProperty,
       color: '#5798de'
     };
     var cEntry = {
-      property: model.springs[ 0 ].elasticPotentialEnergyProperty,
+      property: model.firstSpring.elasticPotentialEnergyProperty,
       color: '#29d4ff'
     };
     var dEntry = {
-      property: model.springs[ 0 ].thermalEnergyProperty,
+      property: model.firstSpring.thermalEnergyProperty,
       color: '#ee6f3e'
     };
 
