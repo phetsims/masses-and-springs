@@ -73,7 +73,7 @@ define( function( require ) {
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
-        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY ),
         phetioType: DerivedPropertyIO( NumberIO )
       } );
 
@@ -382,6 +382,25 @@ define( function( require ) {
       this.buttonEnabledProperty.set( false );
     },
 
+    /** Updates the displacement Property of the spring.
+     * @param {number} yPosition
+     * @param {boolean} factorNaturalLength
+     *
+     * @public
+     */
+    updateDisplacement: function( yPosition, factorNaturalLength ) {
+      if ( factorNaturalLength ) {
+        this.displacementProperty.set( this.massAttachedProperty.value.positionProperty.value.y -
+                                       ( yPosition - this.naturalRestingLengthProperty.value )
+                                       - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
+      }
+      else {
+
+        this.displacementProperty.set( -( this.positionProperty.value.y - this.naturalRestingLengthProperty.value )
+                                       + yPosition - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
+      }
+    },
+
     /**
      * Sets mass on spring
      * @param {Mass} mass
@@ -396,19 +415,8 @@ define( function( require ) {
       this.massAttachedProperty.get().springProperty.set( this );
       //REVIEW: I saw very similar code in Mass that included setting the displacementProperty. This should all be
       //REVIEW: factored out into one place, so that the computation is not duplicated.
-      this.displacementProperty.set( this.massAttachedProperty.get().positionProperty.get().y -
-                                     ( this.positionProperty.get().y - this.naturalRestingLengthProperty.get() ) - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
+      this.updateDisplacement( this.positionProperty.value.y, true );
       this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
-    },
-
-    /** Updates the displacement Property of the spring.
-     * @param {number} yPosition
-     *
-     * @public
-     */
-    updateDisplacement: function( yPosition ) {
-      this.displacementProperty.set( -( this.positionProperty.value.y - this.naturalRestingLengthProperty.value )
-                                     + yPosition - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
     },
 
     /**
