@@ -52,7 +52,7 @@ define( function( require ) {
     Node.call( this, { cursor: 'pointer' } );
     var self = this;
 
-    // @public REVIEW: Type doc, since mass in the sim is either {number} or {Mass}
+    // @public {Mass} (read-only)
     this.mass = mass;
 
     var hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT );
