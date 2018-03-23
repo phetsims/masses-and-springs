@@ -43,6 +43,10 @@ define( function( require ) {
   // constants
   var LEGEND_DESCRIPTION_MAX_WIDTH = 500;
   var MAX_WIDTH = 100;
+  var GREEN_COLOR = '#39d74e';
+  var BLUE_COLOR = '#5798de';
+  var CYAN_COLOR = '#29d4ff';
+  var ORANGE_COLOR = '#ee6f3e';
 
   // strings
   var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
@@ -122,22 +126,21 @@ define( function( require ) {
       clearThermalButton.pickable = ( value > 0.001 );
     } );
 
-    //REVIEW: These color constants are duplicated below in dialogContent. Factor out to above?
     var aEntry = {
       property: model.firstSpring.kineticEnergyProperty,
-      color: '#39d74e'
+      color: GREEN_COLOR
     };
     var bEntry = {
       property: model.firstSpring.gravitationalPotentialEnergyProperty,
-      color: '#5798de'
+      color: BLUE_COLOR
     };
     var cEntry = {
       property: model.firstSpring.elasticPotentialEnergyProperty,
-      color: '#29d4ff'
+      color: CYAN_COLOR
     };
     var dEntry = {
       property: model.firstSpring.thermalEnergyProperty,
-      color: '#ee6f3e'
+      color: ORANGE_COLOR
     };
 
     this.barChartNode = new BarChartNode( [
@@ -186,20 +189,20 @@ define( function( require ) {
         {
           abbreviation: keString,
           description: kineticEnergyString,
-          color: '#39d74e'
+          color: GREEN_COLOR
         },
         {
           abbreviation: peGravString,
           description: gravitationalPotentialEnergyString,
-          color: '#5798de'
+          color: BLUE_COLOR
         }, {
           abbreviation: peElasString,
           description: elasticPotentialEnergyString,
-          color: '#29d4ff'
+          color: CYAN_COLOR
         }, {
           abbreviation: eThermString,
           description: thermalEnergyString,
-          color: '#ff6e26'
+          color: ORANGE_COLOR
         }, {
           abbreviation: eTotString,
           description: totalEnergyString,
