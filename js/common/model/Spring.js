@@ -354,9 +354,8 @@ define( function( require ) {
     },
 
     /**
-     * Updates springConstant of spring and sets its spring constant property to calculated value. This is not handled
+     * Updates springConstant of spring and sets its spring constant Property to calculated value. This is not handled
      * internally by the spring because the intro model determines the conditions for updating spring constant.
-     * REVIEW: Use capitalized Property to talk about Properties
      * @public
      *
      * @param length {number} current natural resting length of spring
