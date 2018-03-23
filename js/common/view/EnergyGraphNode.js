@@ -115,11 +115,11 @@ define( function( require ) {
                                                mass.elasticPotentialEnergyProperty.get() );
         }
       },
-      scale: 0.7,
-      enabled: false //REVIEW: Can we change the below lazyLink to a link (and this will get set to false automatically?)
+      scale: 0.7
     } );
-    model.springs[ 0 ].thermalEnergyProperty.lazyLink( function( value ) {
+    model.springs[ 0 ].thermalEnergyProperty.link( function( value ) {
       clearThermalButton.enabled = ( value > 0.001 );
+      clearThermalButton.pickable = ( value > 0.001 );
     } );
 
     //REVIEW: These color constants are duplicated below in dialogContent. Factor out to above?
