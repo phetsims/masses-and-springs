@@ -47,8 +47,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'timer' )
     } );
 
-    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
-    // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
+    // @public {Panel|null} (read-write) Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
 
     //REVIEW: type docs
