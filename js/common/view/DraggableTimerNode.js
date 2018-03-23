@@ -50,15 +50,12 @@ define( function( require ) {
     // @public {Panel|null} (read-write) Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
 
-    //REVIEW: type docs
-    //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
-    // @private {read-only} position of ruler node in screen coordinates
+    // @private {Vector2} (read-only) position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
     } );
-    //REVIEW: Use `this` instead of self here?
-    this.positionProperty.linkAttribute( self, 'translation' );
+    this.positionProperty.linkAttribute( this, 'translation' );
 
     //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
     // @private {read-only} handles timer node drag events
@@ -79,8 +76,7 @@ define( function( require ) {
       }
     } );
     this.addInputListener( this.timerNodeMovableDragHandler );
-    //REVIEW: Use `this` instead of self here?
-    visibleProperty.linkAttribute( self, 'visible' );
+    visibleProperty.linkAttribute( this, 'visible' );
   }
 
   massesAndSprings.register( 'DraggableTimerNode', DraggableTimerNode );
