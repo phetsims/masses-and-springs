@@ -28,7 +28,7 @@ define( function( require ) {
    * @param {Vector2} initialPosition
    * @param {Property.<number>} timerSecondsProperty
    * @param {Property.<boolean>} timerRunningProperty
-   * @param {boolean} visibleProperty REVIEW: boolean, or Property.<boolean>?
+   * @param {Property.<boolean>} visibleProperty
    * @param {Tandem} tandem
    * @constructor
    */
