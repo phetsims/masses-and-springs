@@ -73,9 +73,7 @@ define( function( require ) {
     } );
     this.positionProperty.linkAttribute( this, 'translation' );
 
-    //REVIEW: Type docs
-    //REVIEW: Specify read-write as (read-only) AFTER the type docs. Add type docs here.
-    // @private {read-only} handles ruler node drag events
+    // @private {MovableDragHandler} (read-only) handles ruler node drag events
     this.rulerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
       tandem: tandem.createTandem( 'dragHandler' ),
       dragBounds: dragBounds,
