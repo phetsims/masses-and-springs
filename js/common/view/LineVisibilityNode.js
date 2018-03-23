@@ -27,9 +27,6 @@ define( function( require ) {
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
 
-  // constants
-  var LINE_LENGTH = 25;
-
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
@@ -53,8 +50,8 @@ define( function( require ) {
      * @returns {Line} line object with passed in color.
      */
     var createLine = function( color, tandem ) {
-      return new Line( 0, 0, LINE_LENGTH, 0, {
-        //REVIEW: It's only a slight shortcut, but you can omit all 4 parameters at the start, and just specify x2: LINE_LENGTH in the options
+      return new Line( {
+        x2: 25,
         stroke: color,
         lineDash: [ 6, 2.5 ],
         lineWidth: 2.0,
