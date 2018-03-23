@@ -80,22 +80,17 @@ define( function( require ) {
       } );
     }
 
-    //REVIEW: I'm curious why HBoxes are getting tandems here?
-
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( naturalLengthString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          tandem: tandem.createTandem( 'naturalLengthString' )
-        } ) ],
-        tandem: tandem.createTandem( 'naturalLengthHBox' )
+          font: MassesAndSpringsConstants.TITLE_FONT
+        } ) ]
       } ),
       property: model.naturalLengthVisibleProperty,
       label: naturalLengthString
     }, {
       content: new HBox( {
-        children: [ equilibriumText ],
-        tandem: tandem.createTandem( 'equilibriumPositionHBox' )
+        children: [ equilibriumText ]
       } ),
       property: model.equilibriumPositionVisibleProperty,
       label: equilibriumPositionString
@@ -103,8 +98,7 @@ define( function( require ) {
       content: new HBox( {
         children: [ new Text( movableLineString, {
           font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
-        } ) ],
-        tandem: tandem.createTandem( 'movableLineHBox' )
+        } ) ]
       } ),
       property: model.movableLineVisibleProperty,
       label: movableLineString
