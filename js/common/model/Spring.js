@@ -205,7 +205,7 @@ define( function( require ) {
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
-        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY ),
         phetioType: DerivedPropertyIO( NumberIO )
       } );
 
@@ -226,7 +226,7 @@ define( function( require ) {
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
-        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY ),
         phetioType: DerivedPropertyIO( NumberIO )
       } );
 
