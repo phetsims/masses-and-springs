@@ -281,11 +281,17 @@ define( function( require ) {
     } );
 
     // Display buttons at the bottom of the graph
-    //REVIEW: This spacing seems inflexible. If the buttons change sizes, do things become unaligned?
-    //REVIEW: Ideally have the info button left-aligned, and an HBox with the zoom buttons right-aligned.
     var displayButtons = new HBox( {
-      children: [ infoButton, new HStrut( 30 ), zoomOutButton, new HStrut( 3 ), zoomInButton ],
-      spacing: 5
+      children: [
+        new HBox( {
+          children: [ infoButton ],
+          align: 'left'
+        } ),
+        new HBox( {
+          children: [ zoomOutButton, new HStrut( 7 ), zoomInButton ],
+          align: 'right'
+        } ) ],
+      spacing: 35
     } );
 
     displayButtons.left = this.barChartNode.left;
