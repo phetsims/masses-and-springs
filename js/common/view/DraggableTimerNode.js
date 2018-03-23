@@ -94,11 +94,6 @@ define( function( require ) {
      */
     reset: function() {
       this.positionProperty.reset();
-    },
-
-    //REVIEW: JSDoc. Also why not use a Property.<Bounds2> so we don't need this method?
-    updateBounds: function( newBounds ) {
-      this.timerNodeMovableDragHandler.dragBounds = newBounds;
     }
   } );
 } );

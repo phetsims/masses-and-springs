@@ -168,12 +168,12 @@ define( function( require ) {
       self.resetAllButton.right = self.panelRightSpacing;
       self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
       self.toolboxPanel.dragBounds = 3; //REVIEW: Is this setting a {number} to a {Bounds2}?
-      self.timerNode.updateBounds( visibleBounds.withOffsets(
+      self.timerNode.timerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
         self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2
-      ) );
-      self.rulerNode.updateBounds( visibleBounds.withOffsets(
+      );
+      self.rulerNode.rulerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
         -self.rulerNode.width / 2, self.rulerNode.height / 2, self.rulerNode.width / 2, -self.rulerNode.height / 2
-      ) );
+      );
       self.massNodes.forEach( function( massNode ) {
         if ( massNode.centerX > visibleBounds.maxX ) {
           massNode.mass.positionProperty.set(
