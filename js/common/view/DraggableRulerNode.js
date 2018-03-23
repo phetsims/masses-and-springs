@@ -43,9 +43,8 @@ define( function( require ) {
     var rulerWidth = 0.125 * rulerLength;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
-      //REVIEW: Why the Math.floor usage on what seems to be whole integers? Should be no-ops?
       majorTickLabels.push( '' );
-      majorTickLabels.push( '' + Math.floor( i * 10 ) );
+      majorTickLabels.push( '' + i * 10 );
       assert && assert( majorTickLabels[ i * 2 ] === '' + Math.floor( i * 10 ) );
     }
     majorTickLabels.push( '' );
