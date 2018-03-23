@@ -98,8 +98,7 @@ define( function( require ) {
       self.zoomLevelProperty.value += 1;
     } );
 
-    //REVIEW: Doesn't need read-write, since it's local. Also it should be read-only (DerivedProperty)
-    // {read-write} Responsible for adjusting the scaling of the barNode heights.
+    // {DerivedProperty.<number>} Responsible for adjusting the scaling of the barNode heights.
     var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
       return Math.pow( 2, zoomLevel ) * 20;
     } );
