@@ -26,7 +26,7 @@ define( function( require ) {
   /**
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition
-   * @param {number} timerSecondsProperty REVIEW: number, or Property.<number>?
+   * @param {Property.<number>} timerSecondsProperty
    * @param {boolean} timerRunningProperty REVIEW: boolean, or Property.<boolean>?
    * @param {boolean} visibleProperty REVIEW: boolean, or Property.<boolean>?
    * @param {Tandem} tandem
