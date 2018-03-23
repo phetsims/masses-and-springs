@@ -34,6 +34,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var ColorConstants = require( 'SUN/ColorConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
@@ -71,13 +72,9 @@ define( function( require ) {
     var MIN_SCALE = 1;
     var MAX_SCALE = 32;
 
-    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here. Adn visibility
-    // {read-write} Responsible for the zoom level in the bar graph. Is adjusted by the zoom buttons and used for the
-    // scaling property of the barNodes.
-    //REVIEW: Use capitalized Property to talk about Properties
-    //REVIEW: JSDoc?
-    //REVIEW: NumberProperty?
-    this.zoomLevelProperty = new Property( 3 );
+    // @private {Property.<number>} (read-write) Responsible for the zoom level in the bar graph.
+    // This is adjusted by the zoom buttons and used for the scaling Property of the barNodes.
+    this.zoomLevelProperty = new NumberProperty( 3 );
 
     // Creation of zoom in/out buttons
     var zoomButtonOptions = {
