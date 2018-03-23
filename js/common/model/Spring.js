@@ -264,7 +264,6 @@ define( function( require ) {
     } );
 
     // @public {Emitter} used to determine when the period tracer should alternate directions
-    //REVIEW: Since the emit() takes 1 argument, that should be documented (type, value/purpose)
     this.peakEmitter = new Emitter();
 
     // @public {Emitter} used to determine when the mass has crossed over its equilibrium position while oscillating
