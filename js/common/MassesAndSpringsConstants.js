@@ -35,8 +35,11 @@ define( function( require ) {
     // Shelf height, in meters, from the bottom and top of the shelf.
     SHELF_HEIGHT: 0.02,
 
-    // hook height in meters. Measured from the bottom of the hook not the screen
-    HOOK_HEIGHT:0.037,
+    // Hook height in meters. Measured from the bottom of the hook not the screen
+    HOOK_HEIGHT: 0.037,
+
+    // Center of the hook. Used as an attachment point for the massNodes
+    HOOK_CENTER: 0.037 / 2,
 
     // {Property.<Range>} range of damping associated with sim
     //RVEIEW: If exposing only Range, don't use a RangeWithValue? (or if used, document as such)

@@ -392,12 +392,12 @@ define( function( require ) {
       if ( factorNaturalLength ) {
         this.displacementProperty.set( this.massAttachedProperty.value.positionProperty.value.y -
                                        ( yPosition - this.naturalRestingLengthProperty.value )
-                                       - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
+                                       - MassesAndSpringsConstants.HOOK_CENTER );
       }
       else {
 
         this.displacementProperty.set( -( this.positionProperty.value.y - this.naturalRestingLengthProperty.value )
-                                       + yPosition - MassesAndSpringsConstants.HOOK_HEIGHT / 2 );
+                                       + yPosition - MassesAndSpringsConstants.HOOK_CENTER );
       }
     },
 
@@ -413,8 +413,6 @@ define( function( require ) {
       }
       this.massAttachedProperty.set( mass );
       this.massAttachedProperty.get().springProperty.set( this );
-      //REVIEW: I saw very similar code in Mass that included setting the displacementProperty. This should all be
-      //REVIEW: factored out into one place, so that the computation is not duplicated.
       this.updateDisplacement( this.positionProperty.value.y, true );
       this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
     },
@@ -436,9 +434,7 @@ define( function( require ) {
         this.displacementProperty.set( -springExtensionValue );
 
         // place that mass at the correct location as well
-        //REVIEW: Some place should have the factored-out usage of determing things, as I've seen tons of expressions
-        //REVIEW: that have to add/subtract mass.hookHeight / 2.
-        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + MassesAndSpringsConstants.HOOK_HEIGHT / 2 ) );
+        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + MassesAndSpringsConstants.HOOK_CENTER ) );
         mass.verticalVelocityProperty.set( 0 );
         this.buttonEnabledProperty.set( false );
       }
@@ -550,7 +546,7 @@ define( function( require ) {
         }
 
         this.massAttachedProperty.get().positionProperty.set(
-          new Vector2( this.positionProperty.get().x, this.bottomProperty.get() + MassesAndSpringsConstants.HOOK_HEIGHT / 2 )
+          new Vector2( this.positionProperty.get().x, this.bottomProperty.get() + MassesAndSpringsConstants.HOOK_CENTER )
         );
 
         this.buttonEnabledProperty.set( this.massAttachedProperty.get().verticalVelocityProperty.get() !== 0 );
