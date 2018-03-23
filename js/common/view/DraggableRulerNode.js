@@ -34,8 +34,7 @@ define( function( require ) {
   function DraggableRulerNode( mvt, dragBounds, initialPosition, visibleProperty, tandem ) {
     var self = this;
 
-    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
-    // @public {read-write} Used for returning ruler to toolbox. Set this if needed to be returned.
+    // @public {Panel|null} (read-write) Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
 
     // define ruler params in pixels
