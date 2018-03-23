@@ -103,8 +103,6 @@ define( function( require ) {
     var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
       return Math.pow( 2, zoomLevel ) * 20;
     } );
-    //REVIEW: Can this comment be removed?
-    // var buttonCenter = barNodes[ options.thermalEnergyIndex ].centerX;
 
     var clearThermalButton = new ClearThermalButton( {
       listener: function() {
