@@ -323,20 +323,12 @@ define( function( require ) {
 
   return inherit( AccordionBox, EnergyGraphNode, {
     /**
-     * REVIEW: I'd prefer just no description to something that repeats the code but can get out-of-date. Just leave
-     * REVIEW: with only the visibility identifier?
-     * Resets the zoomLevelProperty of the zoom buttons.
-     *
      * @public
      */
     reset: function() {
       this.zoomLevelProperty.reset();
     },
     /**
-     * REVIEW: I'd prefer just no description to something that repeats the code but can get out-of-date. Just leave
-     * REVIEW: with only the visibility identifier?
-     * Calls the update() for the barChartNode
-     *
      * @public
      */
     update: function() {
