@@ -177,8 +177,7 @@ define( function( require ) {
     } );
 
     modelBoundsProperty.link( function( modelDragBounds ) {
-      //REVIEW: That is reaching private state of the drag handler. Use setDragBounds instead.
-      self.movableDragHandler._dragBounds = modelDragBounds;
+      self.movableDragHandler.setDragBounds(modelDragBounds);
     } );
 
     this.addInputListener( this.movableDragHandler );
