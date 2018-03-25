@@ -71,9 +71,7 @@ define( function( require ) {
         value: body
       } );
     } );
-
-    // @public REVIEW: type docs, and why is this set as a Property instead of a local var?
-    this.gravityProperty = model.gravityProperty;
+    var gravityProperty = model.gravityProperty;
 
     // @public REVIEW: type docs, and why is this set as a Property instead of a local var?
     this.bodyProperty = model.bodyProperty;
@@ -299,7 +297,7 @@ define( function( require ) {
       }
     } );
 
-    this.gravityProperty.link( function( newGravity ) {
+    gravityProperty.link( function( newGravity ) {
 
       // If the user manually changed the gravity then change the body to CUSTOM.
       var selectedBody = model.bodyProperty.get();
