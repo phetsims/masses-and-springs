@@ -73,9 +73,6 @@ define( function( require ) {
     } );
     var gravityProperty = model.gravityProperty;
 
-    // @public REVIEW: type docs, and why is this set as a Property instead of a local var?
-    this.bodyProperty = model.bodyProperty;
-
     //REVIEW: Does not need visibility/read-only docs, as it's a local variable
     // @private {read-only} manages the items associated with the gravity panel in a combo box
     var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
@@ -282,18 +279,18 @@ define( function( require ) {
       if ( newBody === Body.PLANET_X ) {
         questionTextNode.visible = true;
         gravitySlider.visible = !questionTextNode.visible;
-        self.gravityProperty.set( body.gravity );
+        gravityProperty.set( body.gravity );
       }
 
       //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
       else if ( previousBody === Body.PLANET_X && newBody === Body.CUSTOM ) {
-        self.gravityProperty.set( previousBody.gravity );
+        gravityProperty.set( previousBody.gravity );
       }
 
       // Update gravity
       //REVIEW: Body.ZERO_G is ... undefined? Don't see a reference
       else if ( body.gravity || body === Body.ZERO_G ) {
-        self.gravityProperty.set( body.gravity );
+        gravityProperty.set( body.gravity );
       }
     } );
 
