@@ -73,7 +73,7 @@ define( function( require ) {
     } );
     var gravityProperty = model.gravityProperty;
 
-    // {read-only} manages the items associated with the gravity panel in a combo box
+    // Manages the items associated with the gravity panel in a combo box
     var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
       buttonCornerRadius: 3,
       buttonYMargin: 0,
@@ -243,7 +243,7 @@ define( function( require ) {
             font: MassesAndSpringsConstants.TITLE_FONT,
             maxWidth: this.maxWidth
           } ),
-          //REVIEW: Similar strut issue here
+          // REVIEW: Similar strut issue here
           new HStrut( TITLE_OFFSET - 35 )
         ]
       } );
