@@ -79,9 +79,6 @@ define( function( require ) {
         modelViewTransform2.modelToViewDeltaX( radiusValue ),
         modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeightProperty.get() ) + hookHeight );
 
-      // TODO (PERFORMANCE): If this is ever an issue (changing this every frame), try to create one object with the gradient, and then transform/scale it
-      // into place.
-      //REVIEW: Is this a performance issue? If not, the TODO should be removed
       rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 )
         .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.3 ) )
         .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.8 ) )
@@ -116,7 +113,6 @@ define( function( require ) {
     } );
     this.addChild( hookNode );
 
-    //REVIEW: I just wanted to point out that it was funny seeing `mass: mass.mass`. That's all. Remove this comment!
     var labelString = mass.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
     var label = new Text( labelString, {
       font: new PhetFont( { size: 12, weight: 'bold' } ),
