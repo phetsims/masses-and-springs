@@ -57,8 +57,7 @@ define( function( require ) {
 
     //  Add gravity info for various planets
     var bodyListItems = [];
-    //REVIEW: JSDoc if stored? Is weird if this is changed externally. Can you explain why it is set as a property?
-    this.bodies = Body.BODIES;
+    var bodies = Body.BODIES;
     Body.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
@@ -273,7 +272,7 @@ define( function( require ) {
     }
 
     model.bodyProperty.link( function( newBody, previousBody ) {
-      var body = _.find( self.bodies, newBody );
+      var body = _.find( bodies, newBody );
 
       // Unhide the gravitySlider if we are not using planetX
       if ( newBody !== Body.PLANET_X ) {
