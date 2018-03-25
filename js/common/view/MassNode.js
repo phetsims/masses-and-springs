@@ -188,7 +188,7 @@ define( function( require ) {
     } );
 
     //REVIEW: Style guide wants one space after //
-    //Arrows created for vectors associated with mass nodes
+    // Arrows created for vectors associated with mass nodes
     //REVIEW: JSDoc
     this.velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
     this.accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
@@ -220,7 +220,6 @@ define( function( require ) {
      * @param {Property.<boolean>} arrowVisibilityProperty
      * @param {Node} arrowNode
      *
-     * @private REVIEW: Don't need visibility docs on a local variable
      */
     var updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
