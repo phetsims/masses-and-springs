@@ -288,8 +288,7 @@ define( function( require ) {
       }
 
       // Update gravity
-      //REVIEW: Body.ZERO_G is ... undefined? Don't see a reference
-      else if ( body.gravity || body === Body.ZERO_G ) {
+      else if ( body.gravity ) {
         gravityProperty.set( body.gravity );
       }
     } );
