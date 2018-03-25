@@ -187,20 +187,18 @@ define( function( require ) {
       cursor: 'pointer'
     } );
 
-    //REVIEW: Style guide wants one space after //
     // Arrows created for vectors associated with mass nodes
-    //REVIEW: JSDoc
-    this.velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
-    this.accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
-    this.gravityForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
-    this.springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
-    this.netForceArrow = new ForceVectorArrow( 'black' );
+    var velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
+    var accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
+    var gravityForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
+    var springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
+    var netForceArrow = new ForceVectorArrow( 'black' );
 
-    this.addChild( this.velocityArrow );
-    this.addChild( this.accelerationArrow );
-    this.addChild( this.gravityForceArrow );
-    this.addChild( this.springForceArrow );
-    this.addChild( this.netForceArrow );
+    this.addChild( velocityArrow );
+    this.addChild( accelerationArrow );
+    this.addChild( gravityForceArrow );
+    this.addChild( springForceArrow );
+    this.addChild( netForceArrow );
     this.addChild( forceNullLine );
 
     // Used to position the vectors on the left of right side of the massNode depending on the attached spring.
@@ -243,21 +241,21 @@ define( function( require ) {
     };
 
     // Show/hide the velocity arrow
-    updateArrowVisibility( model.velocityVectorVisibilityProperty, this.velocityArrow );
+    updateArrowVisibility( model.velocityVectorVisibilityProperty, velocityArrow );
 
     // Show/hide the acceleration arrow
-    updateArrowVisibility( model.accelerationVectorVisibilityProperty, this.accelerationArrow );
+    updateArrowVisibility( model.accelerationVectorVisibilityProperty, accelerationArrow );
 
     // Show/hide the spring force arrow
-    updateForceVisiblity( model.springVectorVisibilityProperty, this.springForceArrow );
+    updateForceVisiblity( model.springVectorVisibilityProperty, springForceArrow );
 
     // Show/hide the gravity force arrow
-    updateForceVisiblity( model.gravityVectorVisibilityProperty, this.gravityForceArrow );
+    updateForceVisiblity( model.gravityVectorVisibilityProperty, gravityForceArrow );
 
     // Show/hide the net force arrow
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
       function( spring, forcesMode ) {
-        self.netForceArrow.visible = !!spring && forcesMode === ForcesModeChoice.NET_FORCES;
+        netForceArrow.visible = !!spring && forcesMode === ForcesModeChoice.NET_FORCES;
       }
     );
 
@@ -270,14 +268,13 @@ define( function( require ) {
     // TODO: Lots of similar code for setting arrow tail/tip. Ideally refactor to a function that can set tail/tip on all arrows (based on magnitude/etc.)
     //REVIEW: Handle this TODO?
 
-    //REVIEW: Style guide wants one space after //
-    //Links for handling the length of the vectors in response to the system.
+    // Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;
     Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty, model.accelerationVectorVisibilityProperty ], function( velocity, visible, accelerationVisible ) {
       if ( visible ) {
         var xOffset = accelerationVisible ? 8 : 0;
         var position = mass.positionProperty.get();
-        self.velocityArrow.setTailAndTip(
+        velocityArrow.setTailAndTip(
           rect.centerX - xOffset,
           position.y + rect.centerY,
           rect.centerX - xOffset,
@@ -291,7 +288,7 @@ define( function( require ) {
       if ( visible ) {
         var position = mass.positionProperty.get();
         var gravitationalAcceleration = mass.mass * gravity;
-        self.gravityForceArrow.setTailAndTip(
+        gravityForceArrow.setTailAndTip(
           rect.centerX + (forcesOrientation) * 45,
           position.y + rect.centerY,
           rect.centerX + (forcesOrientation) * 45,
@@ -304,7 +301,7 @@ define( function( require ) {
     Property.multilink( [ mass.springForceProperty, model.springVectorVisibilityProperty ], function( springForce, visible ) {
       if ( visible ) {
         var position = mass.positionProperty.get();
-        self.springForceArrow.setTailAndTip(
+        springForceArrow.setTailAndTip(
           rect.centerX + (forcesOrientation) * 45,
           position.y + rect.centerY,
           rect.centerX + (forcesOrientation) * 45,
@@ -325,7 +322,7 @@ define( function( require ) {
       var position = mass.positionProperty.get();
       if ( forcesMode === ForcesModeChoice.NET_FORCES ) {
         if ( Math.abs( netForce ) > 1E-6 ) {
-          self.netForceArrow.setTailAndTip(
+          netForceArrow.setTailAndTip(
             rect.centerX + (forcesOrientation) * 45,
             position.y + rect.centerY,
             rect.centerX + (forcesOrientation) * 45,
@@ -333,13 +330,13 @@ define( function( require ) {
           );
         }
         else if ( netAcceleration === 0 ) {
-          self.netForceArrow.setTailAndTip( 0, 0, 0, 0 );
+          netForceArrow.setTailAndTip( 0, 0, 0, 0 );
         }
       }
       if ( accelerationVisible ) {
         var xOffset = velocityVisible ? 8 : 0;
         if ( Math.abs( netAcceleration ) > 1E-6 ) {
-          self.accelerationArrow.setTailAndTip(
+          accelerationArrow.setTailAndTip(
             rect.centerX + xOffset,
             position.y + rect.centerY,
             rect.centerX + xOffset,
@@ -347,7 +344,7 @@ define( function( require ) {
           );
         }
         else if ( netAcceleration === 0 ) {
-          self.accelerationArrow.setTailAndTip( 0, 0, 0, 0 );
+          accelerationArrow.setTailAndTip( 0, 0, 0, 0 );
         }
       }
     } );
