@@ -136,8 +136,7 @@ define( function( require ) {
       } );
     }
 
-    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
-    // @public {read-write}
+    // @public {MovableDragHandler} (read-write)
     this.movableDragHandler = new MovableDragHandler( this.mass.positionProperty, {
 
       // Allow moving a finger (touch) across a node to pick it up.
