@@ -243,20 +243,16 @@ define( function( require ) {
     };
 
     // Show/hide the velocity arrow
-    //REVIEW: Use `this` instead of self here?
-    updateArrowVisibility( model.velocityVectorVisibilityProperty, self.velocityArrow );
+    updateArrowVisibility( model.velocityVectorVisibilityProperty, this.velocityArrow );
 
     // Show/hide the acceleration arrow
-    //REVIEW: Use `this` instead of self here?
-    updateArrowVisibility( model.accelerationVectorVisibilityProperty, self.accelerationArrow );
+    updateArrowVisibility( model.accelerationVectorVisibilityProperty, this.accelerationArrow );
 
     // Show/hide the spring force arrow
-    //REVIEW: Use `this` instead of self here?
-    updateForceVisiblity( model.springVectorVisibilityProperty, self.springForceArrow );
+    updateForceVisiblity( model.springVectorVisibilityProperty, this.springForceArrow );
 
     // Show/hide the gravity force arrow
-    //REVIEW: Use `this` instead of self here?
-    updateForceVisiblity( model.gravityVectorVisibilityProperty, self.gravityForceArrow );
+    updateForceVisiblity( model.gravityVectorVisibilityProperty, this.gravityForceArrow );
 
     // Show/hide the net force arrow
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
