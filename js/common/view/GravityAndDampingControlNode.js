@@ -194,8 +194,7 @@ define( function( require ) {
         thumbFillHighlighted: '#71EDFF',
         align: 'center',
         constrainValue: function( value ) {
-          //REVIEW: Use Util.roundSymmetric, see https://github.com/phetsims/dot/issues/35#issuecomment-113587879
-          value = Math.round( value * 100 / 5.75 ) * 5.75;
+          value = Util.roundSymmetric( value * 100 / 5.75 ) * 5.75;
           return value / 100;
         },
         tandem: tandem.createTandem( 'hSlider' )
