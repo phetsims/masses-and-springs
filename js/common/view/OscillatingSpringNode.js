@@ -51,7 +51,7 @@ define( function( require ) {
 
     ParametricSpringNode.call( this, options );
 
-    //REVIEW: JSDoc
+    // @public {Spring} (read-only)
     this.spring = spring;
     this.translation = modelViewTransform2.modelToViewPosition(
       new Vector2( spring.positionProperty.get().x,
