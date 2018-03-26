@@ -19,8 +19,8 @@ define( function( require ) {
     DEFAULT_SPRING_LENGTH: 0.5,
     RADIO_BUTTON_RADIUS: 6,
 
-    // Ratio for dt when sim is in slow motion REVIEW: Could include "slow" in its name? Not obvious without reading docs here
-    SIM_DT_RATIO: 8,
+    // Ratio for dt when sim is in slow motion
+    SLOW_SIM_DT_RATIO: 8,
 
     // Y position of floor in meters. The floor is at the bottom bounds of the screen.
     FLOOR_Y: 0,

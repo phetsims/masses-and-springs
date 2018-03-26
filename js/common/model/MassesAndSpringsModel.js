@@ -345,7 +345,7 @@ define( function( require ) {
 
       // Change the dt value if we are playing in slow motion.
       if ( this.simSpeedProperty.get() === SimSpeedChoice.SLOW && this.playingProperty.get() ) {
-        dt = dt / MassesAndSpringsConstants.SIM_DT_RATIO;
+        dt = dt / MassesAndSpringsConstants.SLOW_SIM_DT_RATIO;
       }
       for ( var i = 0; i < this.masses.length; i++ ) {
 
