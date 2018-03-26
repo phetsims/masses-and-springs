@@ -46,8 +46,7 @@ define( function( require ) {
       buttonRadius: 5,
       buttonTouchAreaDilation: 10,
       cursor: 'pointer'
-      } //REVIEW: Format with `} );` on the same line
-    );
+    } );
     this.addChild( laserPointerNode );
 
     var line = new Line( 0, 0, length, 0, {
