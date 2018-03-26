@@ -84,8 +84,7 @@ define( function( require ) {
       self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
     } );
 
-    //REVIEW: Use `this` instead of self here?
-    visibleProperty.linkAttribute( self, 'visible' );
+    visibleProperty.linkAttribute( this, 'visible' );
 
     //REVIEW: Lots of similarities between this and MovableLineNode. Could be considered to be factored out.
 
