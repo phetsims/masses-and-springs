@@ -42,7 +42,6 @@ define( function( require ) {
    * @constructor
    */
   function OneSpringScreenView( model, tandem ) {
-    //REVIEW: JSDOc
     SpringScreenView.call( this, model, tandem );
     var self = this;
 
