@@ -11,9 +11,8 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Property = require( 'AXON/Property' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   var MassesAndSpringsConstants = {
     DEFAULT_SPRING_LENGTH: 0.5,
@@ -37,16 +36,14 @@ define( function( require ) {
     // Center of the hook. Used as an attachment point for the massNodes
     HOOK_CENTER: 0.037 / 2,
 
-    // {Property.<Range>} range of damping associated with sim
-    //RVEIEW: If exposing only Range, don't use a RangeWithValue? (or if used, document as such)
-    DAMPING_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 0.7, 0.3 ) ),
+    // {RangeWithValue} range of damping associated with sim
+    DAMPING_RANGE: new RangeWithValue( 0, 0.7, 0.3 ),
 
-    // {Property.<Range>} range of gravitational acceleration associated with each planet
-    //RVEIEW: If exposing only Range, don't use a RangeWithValue? (or if used, document as such)
-    GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
+    // {RangeWithValue} range of gravitational acceleration associated with each planet
+    GRAVITY_RANGE: new RangeWithValue( 0, 30, 9.8 ),
 
-    // {Property.<Range>} range of gravitational acceleration associated with each planet
-    SPRING_CONSTANT_RANGE: new Range( 3, 12, 6 ),
+    // {RangeWithValue} range of gravitational acceleration associated with each planet
+    SPRING_CONSTANT_RANGE: new RangeWithValue( 3, 12, 6 ),
 
     // Constants for vectors
     //REVIEW: Lots of these.... aren't used?

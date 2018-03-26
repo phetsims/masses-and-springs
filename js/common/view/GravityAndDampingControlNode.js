@@ -112,12 +112,12 @@ define( function( require ) {
       sliderIndent: 7,
       majorTicks: [
         {
-          value: MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.min,
-          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.min ), { font: MassesAndSpringsConstants.LABEL_FONT } )
+          value: MassesAndSpringsConstants.GRAVITY_RANGE.min,
+          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE.min ), { font: MassesAndSpringsConstants.LABEL_FONT } )
         },
         {
-          value: MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max,
-          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value.max ), { font: MassesAndSpringsConstants.LABEL_FONT } )
+          value: MassesAndSpringsConstants.GRAVITY_RANGE.max,
+          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE.max ), { font: MassesAndSpringsConstants.LABEL_FONT } )
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
@@ -146,12 +146,12 @@ define( function( require ) {
         ]
       } );
 
-      var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get(), sliderOptions );
-      gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().min, new Text( noneString, {
+      var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE, sliderOptions );
+      gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'gravityNoneString' )
       } ) );
-      gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.get().max, new Text( lotsString, {
+      gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.max, new Text( lotsString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'gravityLotsString' )
       } ) );
@@ -164,7 +164,7 @@ define( function( require ) {
       } );
     }
     else {
-      gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE_PROPERTY.value, gravitySliderOptions );
+      gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE, gravitySliderOptions );
     }
 
     // Manages the values associated with the gravity panel in a combo box
@@ -183,7 +183,7 @@ define( function( require ) {
     } );
 
     if ( options.dampingVisible ) {
-      var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE_PROPERTY.get();
+      var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE;
       var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, {
         majorTickLength: 10,
         minorTickLength: 5,
