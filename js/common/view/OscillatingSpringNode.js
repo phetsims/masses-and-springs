@@ -62,8 +62,8 @@ define( function( require ) {
       // ParametricSpringNode calculations
       // Value of coilStretch is in view coordinates and doesn't have model units.
       var coilStretch = (
-      modelViewTransform2.modelToViewDeltaY( spring.lengthProperty.get() )
-      - ( options.leftEndLength + options.rightEndLength) );
+        modelViewTransform2.modelToViewDeltaY( spring.lengthProperty.get() )
+        - ( options.leftEndLength + options.rightEndLength) );
       var xScale = coilStretch / ( self.loopsProperty.get() * self.radiusProperty.get() );
 
       // The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
@@ -81,9 +81,7 @@ define( function( require ) {
       updateViewLength();
     } );
 
-    //REVIEW: Style guide wants one space after //
-    //ParametricSpringNode width update
-    //SpringConstant determines lineWidth
+    // ParametricSpringNode width update. SpringConstant determines lineWidth
     spring.thicknessProperty.link( function( thickness ) {
       self.lineWidthProperty.set( thickness );
     } );
@@ -92,16 +90,14 @@ define( function( require ) {
   massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );
 
   return inherit( ParametricSpringNode, OscillatingSpringNode, {
-    //REVIEW: Indentation should be  here
-      /**
-       * @public
-       */
-      reset: function() {
-        ParametricSpringNode.prototype.reset.call( this );
-        this.spring.reset();
-      }
-    },
-    {
-      MAP_NUMBER_OF_LOOPS: MAP_NUMBER_OF_LOOPS
-    } );
+    /**
+     * @public
+     */
+    reset: function() {
+      ParametricSpringNode.prototype.reset.call( this );
+      this.spring.reset();
+    }
+  }, {
+    MAP_NUMBER_OF_LOOPS: MAP_NUMBER_OF_LOOPS
+  } );
 } );
