@@ -177,7 +177,7 @@ define( function( require ) {
     } );
 
     modelBoundsProperty.link( function( modelDragBounds ) {
-      self.movableDragHandler.setDragBounds(modelDragBounds);
+      self.movableDragHandler.setDragBounds( modelDragBounds );
     } );
 
     this.addInputListener( this.movableDragHandler );
@@ -265,48 +265,55 @@ define( function( require ) {
         forceNullLine.visible = !!spring && ( gravityForceVisible || springForceVisible || forcesMode === ForcesModeChoice.NET_FORCES );
       } );
 
-    // TODO: Lots of similar code for setting arrow tail/tip. Ideally refactor to a function that can set tail/tip on all arrows (based on magnitude/etc.)
-    //REVIEW: Handle this TODO?
+    /**
+     * Updates the arrow by using .setTailAndTip(). Used to make code concise.
+     *
+     * @param {VectorArrow|ForceVectorArrow} arrow - arrow to be updated
+     * @param {Vector2} position
+     * @param {number} xOffset
+     * @param {number} y2 - number that will be used for y2 value in setTailAndTip()
+     */
+    var updateArrow = function( arrow, position, xOffset, y2 ) {
+      arrow.setTailAndTip(
+        rect.centerX + xOffset,
+        position.y + rect.centerY,
+        rect.centerX + xOffset,
+        position.y + rect.centerY + y2
+      );
+    };
 
     // Links for handling the length of the vectors in response to the system.
     var scalingFactor = 3;
+    var xOffset;
+    var y2;
+    var position;
     Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty, model.accelerationVectorVisibilityProperty ], function( velocity, visible, accelerationVisible ) {
       if ( visible ) {
-        var xOffset = accelerationVisible ? 8 : 0;
-        var position = mass.positionProperty.get();
-        velocityArrow.setTailAndTip(
-          rect.centerX - xOffset,
-          position.y + rect.centerY,
-          rect.centerX - xOffset,
-          position.y + rect.centerY - ARROW_SIZE_DEFAULT * velocity * scalingFactor
-        );
+        xOffset = accelerationVisible ? -8 : 0;
+        position = mass.positionProperty.get();
+        y2 = -ARROW_SIZE_DEFAULT * velocity * scalingFactor;
+        updateArrow( velocityArrow, position, xOffset, y2 );
       }
     } );
 
     // When gravity changes, update the gravitational force arrow
     Property.multilink( [ mass.springProperty, mass.gravityProperty, model.gravityVectorVisibilityProperty ], function( spring, gravity, visible ) {
       if ( visible ) {
-        var position = mass.positionProperty.get();
         var gravitationalAcceleration = mass.mass * gravity;
-        gravityForceArrow.setTailAndTip(
-          rect.centerX + (forcesOrientation) * 45,
-          position.y + rect.centerY,
-          rect.centerX + (forcesOrientation) * 45,
-          position.y + rect.centerY + ARROW_SIZE_DEFAULT * gravitationalAcceleration
-        );
+        position = mass.positionProperty.get();
+        xOffset = (forcesOrientation) * 45;
+        y2 = ARROW_SIZE_DEFAULT * gravitationalAcceleration;
+        updateArrow( gravityForceArrow, position, xOffset, y2 );
       }
     } );
 
     // When the spring force changes, update the spring force arrow
     Property.multilink( [ mass.springForceProperty, model.springVectorVisibilityProperty ], function( springForce, visible ) {
       if ( visible ) {
-        var position = mass.positionProperty.get();
-        springForceArrow.setTailAndTip(
-          rect.centerX + (forcesOrientation) * 45,
-          position.y + rect.centerY,
-          rect.centerX + (forcesOrientation) * 45,
-          position.y + rect.centerY - ARROW_SIZE_DEFAULT * springForce
-        );
+        position = mass.positionProperty.get();
+        xOffset = (forcesOrientation) * 45;
+        y2 = ARROW_SIZE_DEFAULT * springForce;
+        updateArrow( springForceArrow, position, xOffset, y2 );
       }
     } );
 
@@ -319,29 +326,22 @@ define( function( require ) {
       mass.accelerationProperty,
       model.velocityVectorVisibilityProperty
     ], function( netForce, forcesMode, accelerationVisible, netAcceleration, velocityVisible ) {
-      var position = mass.positionProperty.get();
+      position = mass.positionProperty.get();
       if ( forcesMode === ForcesModeChoice.NET_FORCES ) {
         if ( Math.abs( netForce ) > 1E-6 ) {
-          netForceArrow.setTailAndTip(
-            rect.centerX + (forcesOrientation) * 45,
-            position.y + rect.centerY,
-            rect.centerX + (forcesOrientation) * 45,
-            position.y + rect.centerY - ARROW_SIZE_DEFAULT * netForce
-          );
+          xOffset = (forcesOrientation) * 45;
+          y2 = -ARROW_SIZE_DEFAULT * netForce;
+          updateArrow( netForceArrow, position, xOffset, y2 );
         }
         else if ( netAcceleration === 0 ) {
           netForceArrow.setTailAndTip( 0, 0, 0, 0 );
         }
       }
       if ( accelerationVisible ) {
-        var xOffset = velocityVisible ? 8 : 0;
         if ( Math.abs( netAcceleration ) > 1E-6 ) {
-          accelerationArrow.setTailAndTip(
-            rect.centerX + xOffset,
-            position.y + rect.centerY,
-            rect.centerX + xOffset,
-            position.y + rect.centerY - ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor
-          );
+          xOffset = velocityVisible ? 8 : 0;
+          y2 = -ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor;
+          updateArrow( accelerationArrow, position, xOffset, y2 );
         }
         else if ( netAcceleration === 0 ) {
           accelerationArrow.setTailAndTip( 0, 0, 0, 0 );
