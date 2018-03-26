@@ -43,7 +43,6 @@ define( function( require ) {
    */
   function OneSpringScreenView( model, tandem ) {
     //REVIEW: JSDOc
-    this.model = model; // Make model available REVIEW: This is already done in the supertype, not necessary here
     SpringScreenView.call( this, model, tandem );
     var self = this;
 
