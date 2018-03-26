@@ -24,8 +24,7 @@ define( function( require ) {
   /**
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Spring} spring - spring model object
-   * @param {Property} property - determines which property is being referenced REVIEW: Property of what? If it can be anything, Property.<*>
-   * REVIEW: Use capitalized Property to talk about Properties
+   * @param {Property.<*>} property - determines which Property is being referenced
    * @param {Property.<boolean>} visibleProperty
    * @param {Object} [options]
    *
