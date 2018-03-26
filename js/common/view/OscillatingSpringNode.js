@@ -56,7 +56,6 @@ define( function( require ) {
     this.translation = modelViewTransform2.modelToViewPosition(
       new Vector2( spring.positionProperty.get().x,
         spring.positionProperty.get().y - length ) );
-    this.modelViewTransform2 = modelViewTransform2; //REVIEW: JSDoc
 
     function updateViewLength() {
 
