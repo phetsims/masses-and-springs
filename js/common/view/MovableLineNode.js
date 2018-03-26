@@ -78,10 +78,7 @@ define( function( require ) {
       dragBounds: dragBounds, // done so reference line is only draggable on the y-axis
       tandem: tandem.createTandem( 'dragHandler' )
     } ) );
-
-    //REVIEW: Use `this` instead of self here?
-    visibleProperty.linkAttribute( self, 'visible' );
-
+    visibleProperty.linkAttribute( this, 'visible' );
     this.addChild( line );
   }
 
