@@ -25,7 +25,7 @@ define( function( require ) {
   /**
    * @param {Vector2} initialPosition - of the center of line
    * @param {number} length - in view coordinates
-   * @param {boolean} visibleProperty REVIEW: a Property?
+   * @param {Property.<boolean>} visibleProperty
    * @param {Bounds2} dragBounds - limits draggable bounds of the line
    * @param {Tandem} tandem
    * @constructor
