@@ -206,8 +206,7 @@ define( function( require ) {
 
       //REVIEW: Lots of layout here. Can we use things like AlignBox/HBox/VBox to simplify? Might be worth collaboration.
       //REVIEW: How much of this can be shared with TwoSpringScreenView (and moved to SpringScreenView?)
-      //REVIEW: Style guide wants one space after //
-      //Update the bounds of view elements
+      // Update the bounds of view elements
       springHangerNode.top = self.spacing;
       movableLineNode.centerX = springHangerNode.centerX;
       massValueControlPanel.top = springHangerNode.top;
