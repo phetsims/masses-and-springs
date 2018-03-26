@@ -32,6 +32,8 @@ define( function( require ) {
    */
   function MassValueControlPanel( mass ) {
 
+    assert && assert( mass.adjustable === true, 'MassValueControlPanel should only adjust a mass that is adjustable.' );
+
     // range for mass in kg
     var range = new Range( 50, 300 );
 
@@ -78,11 +80,6 @@ define( function( require ) {
       arrowButtonScale: 0.5,
       delta: 1
     } );
-
-    //REVIEW: Is it safe to change whether a mass is adjustable after it may have been passed to things?
-    //REVIEW: MassNode checks this, is there an order dependency where it has to be created before/after this node?
-    //REVIEW: Should this be an assertion that it is adjustable?
-    mass.adjustable = true;
 
     Panel.call( this, numberControl, {
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
