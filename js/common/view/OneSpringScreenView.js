@@ -91,9 +91,7 @@ define( function( require ) {
       }
     );
 
-    //REVIEW: Is this something that HBox could be used for?
     var springStopperButtonNode = this.createStopperButton( this.model.firstSpring, tandem );
-    springStopperButtonNode.left = springHangerNode.right + this.spacing;
     this.model.firstSpring.buttonEnabledProperty.link(
       function( buttonEnabled ) {
         springStopperButtonNode.enabled = buttonEnabled;
