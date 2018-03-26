@@ -70,8 +70,7 @@ define( function( require ) {
         }
       } );
 
-    // Initializes equilibrium line for the spring
-    //REVIEW: JSDoc
+    // @public {ReferenceLineNode} Initializes equilibrium line for the spring
     this.springEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.firstSpring,
