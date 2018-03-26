@@ -23,7 +23,7 @@ define( function( require ) {
   var SPRING_HANGER_FILL = 'rgb( 180, 180, 180 )';
 
   /**
-   * @param {Array} springs REVIEW: {Array.<Spring>}?
+   * @param {Array.<Spring>} spring
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Tandem} tandem
    * @param {Object} options
