@@ -47,8 +47,7 @@ define( function( require ) {
     this.mouseArea = this.localBounds.dilatedY( 10 );
     this.touchArea = this.localBounds.dilatedY( 10 );
 
-    //REVIEW: Does not need read-write since it's a local variable
-    // {read-write} prevents overlap with the equilibrium line
+    // Prevents overlap with the equilibrium line
     var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
 
     // Helper function to derive the length as if the mass wasn't attached.
