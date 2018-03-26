@@ -35,8 +35,7 @@ define( function( require ) {
     Node.call( this );
 
     // Creates laser pointer tip for reference line
-    // Laser should never have a button in this sim, but a property is needed for the LaserPointerNode to work
-    //REVIEW: Use capitalized Property to talk about Properties
+    // Laser should never have a button in this sim, but a Property is needed for the LaserPointerNode to work
     var laserEnabledProperty = new Property( false, { validValues: [ false ] } );
     var laserPointerNode = new LaserPointerNode( laserEnabledProperty, {
       bodySize: new Dimension2( 12, 14 ),
