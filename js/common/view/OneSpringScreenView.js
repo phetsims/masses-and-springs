@@ -124,10 +124,11 @@ define( function( require ) {
       this.springNodes[ 0 ].spring.displacementProperty,
       model.naturalLengthVisibleProperty,
       tandem,
-      { modelViewTransform: this.modelViewTransform } );
-    //REVIEW: Just pass these options into the DisplacementArrowNode options? ( e.g. left: ... )
-    displacementArrowNode.left = this.springNodes[ 0 ].right + 12;
-    displacementArrowNode.centerY = this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value );
+      {
+        modelViewTransform: this.modelViewTransform,
+        left: this.springNodes[ 0 ].right + 12,
+        centerY:this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value)
+      } );
 
     // Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
