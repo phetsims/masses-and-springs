@@ -134,8 +134,6 @@ define( function( require ) {
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
       {
         right: this.rightPanelAlignment,
-        //REVIEW: Wait, what does minWidth do? It's not a Panel, right?
-        minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: true
       }
