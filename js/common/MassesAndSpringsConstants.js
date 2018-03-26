@@ -13,7 +13,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Line = require( 'SCENERY/nodes/Line' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
 
   var MassesAndSpringsConstants = {
     DEFAULT_SPRING_LENGTH: 0.5,
@@ -46,8 +46,7 @@ define( function( require ) {
     GRAVITY_RANGE_PROPERTY: new Property( new RangeWithValue( 0, 30, 9.8 ) ),
 
     // {Property.<Range>} range of gravitational acceleration associated with each planet
-    //REVIEW: No Property? Additionally, if you expose only a Range, no reason to use RangeWithValue instead.
-    SPRING_CONSTANT_RANGE: new RangeWithValue( 3, 12, 6 ),
+    SPRING_CONSTANT_RANGE: new Range( 3, 12, 6 ),
 
     // Constants for vectors
     //REVIEW: Lots of these.... aren't used?
