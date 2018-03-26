@@ -69,8 +69,7 @@ define( function( require ) {
       phetioType: PropertyIO( Vector2IO )
     } );
 
-    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
-    // @private {read-write} position of line in screen coordinates
+    // Position the line in screen coordinates
     this.positionProperty.link( function( position ) {
       self.translation = position.minusXY( length / 2, 0  );
     } );
