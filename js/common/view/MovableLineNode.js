@@ -72,8 +72,7 @@ define( function( require ) {
     //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
     // @private {read-write} position of line in screen coordinates
     this.positionProperty.link( function( position ) {
-      //REVIEW: Could use .minusXY( length / 2, 0 ) to avoid creating an extra Vector2
-      self.translation = position.minus( new Vector2( length / 2, 0 ) );
+      self.translation = position.minusXY( length / 2, 0  );
     } );
 
     this.addInputListener( new MovableDragHandler( this.positionProperty, {
