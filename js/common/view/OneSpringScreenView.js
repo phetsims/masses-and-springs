@@ -99,10 +99,7 @@ define( function( require ) {
 
     // @public {EnergyGraphNode} energy graph that displays energy values for the spring system.
     this.energyGraphNode = new EnergyGraphNode( model, tandem );
-    //REVIEW: Could inline topLeft: this.visibleBoundsProperty.get().topLeft.plus( new Vector2( this.spacing, this.spacing ) )
-    //REVIEW: Fine with this too
-    this.energyGraphNode.top = this.visibleBoundsProperty.get().top + this.spacing;
-    this.energyGraphNode.left = this.visibleBoundsProperty.get().left + this.spacing;
+    this.energyGraphNode.leftTop = this.visibleBoundsProperty.value.leftTop.plus( new Vector2( this.spacing, this.spacing ) );
 
     var massValueControlPanel = new MassValueControlPanel(
       model.masses[ 0 ],
