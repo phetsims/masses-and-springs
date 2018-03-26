@@ -24,7 +24,7 @@ define( function( require ) {
   };
 
   /**
-   * @param {spring} spring model object // REVIEW: {Spring}, and probably no further docs needed
+   * @param {Spring} spring
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Tandem} tandem
    * @param {Object} [options]

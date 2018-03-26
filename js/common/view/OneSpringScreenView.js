@@ -127,7 +127,7 @@ define( function( require ) {
       {
         modelViewTransform: this.modelViewTransform,
         left: this.springNodes[ 0 ].right + 12,
-        centerY:this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value)
+        centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value )
       } );
 
     // Gravity Control Panel
