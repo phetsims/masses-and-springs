@@ -55,8 +55,7 @@ define( function( require ) {
 
     var yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
 
-    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
-    // @private {read-write} position of line in screen coordinates.
+    // @private {Vector2} (read-write) position of line in screen coordinates.
     this.positionProperty = new Property( new Vector2( xPos, yPos ), {
       phetioType: PropertyIO( Vector2IO )
     } );
