@@ -90,7 +90,7 @@ define( function( require ) {
       trackSize: new Dimension2( 120, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
-      thumbFillHighlighted: '#71EDFF',
+      thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       visible: true,
       align: 'left',
       stroke: null,
@@ -107,7 +107,7 @@ define( function( require ) {
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
-      thumbFillHighlighted: '#71EDFF',
+      thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       stroke: null,
       sliderIndent: 7,
       majorTicks: [
@@ -191,7 +191,7 @@ define( function( require ) {
         trackSize: new Dimension2( 120, 0.1 ),
         thumbSize: new Dimension2( 13, 22 ),
         thumbFillEnabled: '#00C4DF',
-        thumbFillHighlighted: '#71EDFF',
+        thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
         align: 'center',
         constrainValue: function( value ) {
           value = Util.roundSymmetric( value * 100 / 5.75 ) * 5.75;

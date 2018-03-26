@@ -84,6 +84,7 @@ define( function( require ) {
     FORCES_STRING: 'forces', //REVIEW: Use enum instead
     NET_FORCE_STRING: 'netForce', //REVIEW: Use enum instead
     PANEL_FILL: 'rgb(230,230,230)',
+    THUMB_HIGHLIGHT: '#71EDFF',
     LINE_SEPARATOR: function( length ) {
       return new Line( 0, 0, length, 0, { stroke: 'gray' } );
     },

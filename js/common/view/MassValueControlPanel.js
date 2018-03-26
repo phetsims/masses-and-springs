@@ -55,7 +55,7 @@ define( function( require ) {
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
-      thumbFillHighlighted: '#71EDFF', //REVIEW: Should we look at factoring out some of these colors?
+      thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       stroke: null,
       sliderIndent: 7,
       majorTicks: [

@@ -56,7 +56,7 @@ define( function( require ) {
       trackSize: new Dimension2( 120, 0.1 ),
       thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00C4DF',
-      thumbFillHighlighted: '#71EDFF',
+      thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       align: 'center',
       constrainValue: options.constrainValue,
       tandem: tandem.createTandem( 'hSlider' )
