@@ -46,13 +46,6 @@ define( function( require ) {
     SPRING_CONSTANT_RANGE: new RangeWithValue( 3, 12, 6 ),
 
     // Constants for vectors
-    //REVIEW: Lots of these.... aren't used?
-    VECTOR_ARROW_LENGTH: 34, //REVIEW: VectorArrow has a constant at the top of the file
-    FORCES_ARROW_LENGTH: 31, //REVIEW: ForceVectorArrow constant
-    ARROW_HEAD_WIDTH: 14, //REVIEW: VectorArrow constant at top of file
-    ARROW_TAIL_WIDTH: 8, //REVIEW: VectorArrow
-    SMALLER_ARROW_HEAD_WIDTH: 11, //REVIEW: ForceVectorArrow
-    SMALLER_ARROW_TAIL_WIDTH: 3, //REVIEW: ForceVectorArrow
     VELOCITY_ARROW_COLOR: 'rgb( 41, 253, 46 )',
     ACCELERATION_ARROW_COLOR: 'rgb( 255, 253, 56 )',
     GRAVITY_ARROW_COLOR: 'rgb( 236, 63, 71 )',
