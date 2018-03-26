@@ -60,8 +60,7 @@ define( function( require ) {
     line.mouseArea = dilatedLineBounds;
     line.touchArea = dilatedLineBounds;
 
-    //REVIEW: This is a method call, visibility and read-only don't make sense on a setter method.
-    // @private {read-only} X coordinate for the position of the line
+    // Setting x coordinate for the position of the line.
     initialPosition.setX( dragBounds.minX );
 
     //REVIEW: type docs
