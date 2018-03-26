@@ -60,6 +60,7 @@ define( function( require ) {
     this.adjustable = options.adjustable;
     this.mysteryLabel = options.mysteryLabel;
     this.color = color;
+    this.zeroReferencePoint= options.zeroReferencePoint;
 
     // @public (read-only) {Property.<number>} mass of mass object in kg
     this.massProperty = new NumberProperty( massValue );
@@ -78,10 +79,8 @@ define( function( require ) {
         return radius * HEIGHT_RATIO;
       } );
 
-    //REVIEW: Generally don't mutate the options object. Have this.zeroReferencePoint be set initially from options,
-    //REVIEW: and then mutated there?
     this.cylinderHeightProperty.link( function( cylinderHeight ) {
-      options.zeroReferencePoint = -cylinderHeight / 2;
+      self.zeroReferencePoint = -cylinderHeight / 2;
     } );
 
     // @public {Property.<number>} total height of the mass, including its hook
