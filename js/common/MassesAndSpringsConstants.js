@@ -17,8 +17,6 @@ define( function( require ) {
 
   var MassesAndSpringsConstants = {
 
-    //REVIEW: What is this TODO for?
-    //TODO: Insert constants here
     MAX_TEXT_WIDTH: 80, //REVIEW: The one usage of this adds 20 to it? Usually a global isn't appropriate, just inline it.
     DEFAULT_SPRING_LENGTH: 0.5,
     RADIO_BUTTON_RADIUS: 6,
