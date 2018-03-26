@@ -63,9 +63,7 @@ define( function( require ) {
     // Setting x coordinate for the position of the line.
     initialPosition.setX( dragBounds.minX );
 
-    //REVIEW: type docs
-    //REVIEW: Specify read-write as (read-write) AFTER the type docs. Add type docs here.
-    // @private {read-write} position of line in screen coordinates
+    // @private {Vector2} (read-write) position of line in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
