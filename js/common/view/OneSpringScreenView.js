@@ -97,7 +97,7 @@ define( function( require ) {
         springStopperButtonNode.enabled = buttonEnabled;
       } );
 
-    //REVIEW: JSDoc
+    // @public {EnergyGraphNode} energy graph that displays energy values for the spring system.
     this.energyGraphNode = new EnergyGraphNode( model, tandem );
     //REVIEW: Could inline topLeft: this.visibleBoundsProperty.get().topLeft.plus( new Vector2( this.spacing, this.spacing ) )
     //REVIEW: Fine with this too
