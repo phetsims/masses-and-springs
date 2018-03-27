@@ -89,8 +89,7 @@ define( function( require ) {
       return massNode;
     } );
 
-    // Add shelf for to house massNodes
-    //REVIEW: JSDoc
+    // @public {Shelf} Add shelf for to house massNodes
     this.shelf = new Shelf( tandem, {
       rectHeight: 7
     } );
