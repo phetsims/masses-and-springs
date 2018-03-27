@@ -1,7 +1,7 @@
 // Copyright 2017-2018, University of Colorado Boulder
 
 /**
- * Object that combines the play/pause button and the stepforward button.
+ * HBox that combines the play/pause button and the stepforward button with the sim speed controls.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
@@ -13,7 +13,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var SimSpeedChoice = require( 'MASSES_AND_SPRINGS/common/enum/SimSpeedChoice' );
   var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
@@ -31,8 +30,8 @@ define( function( require ) {
    * @param {Object} options
    * @constructor
    */
-  function TimeControlNode( model, tandem, options ) {
-    Node.call( this );
+  function TimeControlHBox( model, tandem, options ) {
+    HBox.call( this, { spacing: 40 } );
 
     var playPauseButton = new PlayPauseButton( model.playingProperty, {
       radius: 20,
@@ -74,13 +73,12 @@ define( function( require ) {
     } );
 
     //REVIEW: Do these need precise vertical alignment, or can we wrap these in an HBox (TimeControlNode could inherit HBox?)
-    timeSpeedRadioNode.left = timeControlHBox.right + 40;
     this.addChild( timeControlHBox );
     this.addChild( timeSpeedRadioNode );
     this.mutate( options );
   }
 
-  massesAndSprings.register( 'TimeControlNode', TimeControlNode );
+  massesAndSprings.register( 'TimeControlHBox', TimeControlHBox );
 
-  return inherit( Node, TimeControlNode );
+  return inherit( HBox, TimeControlHBox );
 } );

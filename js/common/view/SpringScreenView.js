@@ -25,7 +25,7 @@ define( function( require ) {
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var TimeControlNode = require( 'MASSES_AND_SPRINGS/common/view/TimeControlNode' );
+  var TimeControlHBox = require( 'MASSES_AND_SPRINGS/common/view/TimeControlHBox' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -136,8 +136,8 @@ define( function( require ) {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
-    // @public {TimeControlNode} Sim speed controls
-    this.timeControlPanel = new TimeControlNode(
+    // @public {TimeControlHBox} Sim speed controls
+    this.timeControlPanel = new TimeControlHBox(
       model,
       tandem.createTandem( 'timeControlPanel' ), {
         bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT )
