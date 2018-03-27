@@ -17,7 +17,6 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
-  var Property = require( 'AXON/Property' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
   var SpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/SpringScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -113,8 +112,7 @@ define( function( require ) {
       }
     );
 
-    // Gravity Control Panel
-    //REVIEW: JSDoc
+    // @public {GravityAndDampingControlNode} Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
       {
