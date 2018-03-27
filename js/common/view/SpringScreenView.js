@@ -97,8 +97,7 @@ define( function( require ) {
 
     this.addChild( this.shelf );
 
-    // Timer and Ruler
-    //REVIEW: JSDoc
+    // @public {DraggableTimerNode}
     this.timerNode = new DraggableTimerNode(
       this.visibleBoundsProperty.get(),
       Vector2.ZERO,
@@ -107,7 +106,8 @@ define( function( require ) {
       model.timerVisibleProperty,
       tandem.createTandem( 'timerNode' )
     );
-    //REVIEW: JSDoc
+
+    // @public {DraggableRulerNode}
     this.rulerNode = new DraggableRulerNode(
       this.modelViewTransform,
       this.visibleBoundsProperty.get(),
@@ -116,17 +116,15 @@ define( function( require ) {
       tandem.createTandem( 'rulerNode' )
     );
 
-    // Create specific layer for tools so they don't overlap the reset all button.
-    //REVIEW: JSDoc
+    // @public {Node} Create specific layer for tools so they don't overlap the reset all button.
     this.toolsLayer = new Node( {
       children: [ this.timerNode, this.rulerNode ],
       tandem: tandem.createTandem( 'massLayer' ),
       preventFit: true
     } );
 
-    // Reset All button
-    //REVIEW: JSDoc
-    this.resetAllButton = new ResetAllButton( {
+    // @public {ResetAllButton} Reset All button
+    this.resetAllButton = new ( {
       listener: function() {
         model.reset();
 
@@ -138,8 +136,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
-    // Sim speed controls
-    //REVIEW: JSDoc
+    // @public {TimeControlNode} Sim speed controls
     this.timeControlPanel = new TimeControlNode(
       model,
       this.visibleBoundsProperty.get(),
@@ -148,8 +145,7 @@ define( function( require ) {
       }
     );
 
-    // Toolbox Panel
-    //REVIEW: JSDoc
+    // @public {ToolboxPanel} Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
       this.visibleBoundsProperty.get(),
       //REVIEW: Usually we wouldn't need to pass in the rulerNode/TimerNode (and we wouldn't need to set the toolbox property on the nodes below).
