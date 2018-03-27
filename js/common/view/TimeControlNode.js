@@ -27,12 +27,11 @@ define( function( require ) {
 
   /**
    * @param {MassesAndSpringsModel} model
-   * @param {Bounds2} visibleBounds - Bounds of screenview in screenview coordinates
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function TimeControlNode( model, visibleBounds, tandem, options ) {
+  function TimeControlNode( model, tandem, options ) {
     Node.call( this );
 
     var playPauseButton = new PlayPauseButton( model.playingProperty, {

@@ -124,7 +124,7 @@ define( function( require ) {
     } );
 
     // @public {ResetAllButton} Reset All button
-    this.resetAllButton = new ( ResetAllButton({
+    this.resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
 
@@ -139,7 +139,6 @@ define( function( require ) {
     // @public {TimeControlNode} Sim speed controls
     this.timeControlPanel = new TimeControlNode(
       model,
-      this.visibleBoundsProperty.get(),
       tandem.createTandem( 'timeControlPanel' ), {
         bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT )
       }
