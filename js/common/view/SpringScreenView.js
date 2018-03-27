@@ -45,15 +45,14 @@ define( function( require ) {
     // @public {MassesAndSpringsModel}
     this.model = model;
 
-    var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * (1- MassesAndSpringsConstants.SHELF_HEIGHT) );
+    var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * (1 - MassesAndSpringsConstants.SHELF_HEIGHT) );
 
     // @public {ModelViewTransform2}
     this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, 397 );
 
     // @protected {Array.<OscillatingSpringNode>} Used to reference the created springs in the view.
     this.springNodes = [];
-    //REVIEW: Could do `this.springNodes = model.springs.map( ... )` with a function that returns it. Then separate pushes not needed
-    model.springs.forEach( function( spring ) {
+    self.springNodes = model.springs.map( function( spring ) {
       var springNode = new OscillatingSpringNode(
         spring,
         self.modelViewTransform,
@@ -62,7 +61,7 @@ define( function( require ) {
         }
       );
       self.addChild( springNode );
-      self.springNodes.push( springNode );
+      return springNode;
     } );
 
     // @protected {number} - Spacing used for the margin of layout bounds
