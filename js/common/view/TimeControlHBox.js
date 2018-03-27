@@ -71,14 +71,10 @@ define( function( require ) {
         } )
       ]
     } );
-
-    //REVIEW: Do these need precise vertical alignment, or can we wrap these in an HBox (TimeControlNode could inherit HBox?)
     this.addChild( timeControlHBox );
     this.addChild( timeSpeedRadioNode );
     this.mutate( options );
   }
-
   massesAndSprings.register( 'TimeControlHBox', TimeControlHBox );
-
   return inherit( HBox, TimeControlHBox );
 } );
