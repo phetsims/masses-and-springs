@@ -124,7 +124,7 @@ define( function( require ) {
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
       {
-        right: this.rightPanelAlignment,
+        right: this.rightPanelPadding,
         minWidth: 1,
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: false
