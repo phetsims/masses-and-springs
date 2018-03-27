@@ -124,7 +124,7 @@ define( function( require ) {
     } );
 
     // @public {ResetAllButton} Reset All button
-    this.resetAllButton = new ( {
+    this.resetAllButton = new ( ResetAllButton({
       listener: function() {
         model.reset();
 
@@ -169,7 +169,6 @@ define( function( require ) {
     //REVIEW: on the screenview and override/extend as necessary, as you are unintentionally depending on this listener
     //REVIEW: being added before the other visibleBoundsProperty listeners are added (for layout)
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-      //REVIEW: Style guide wants one space after //
       // Update the bounds of view elements
       self.panelRightSpacing = visibleBounds.right - self.spacing;
     } );
