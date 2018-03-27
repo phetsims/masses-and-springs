@@ -20,7 +20,6 @@ define( function( require ) {
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MassesAndSpringsQueryParameters = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsQueryParameters' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Property = require( 'AXON/Property' );
@@ -149,15 +148,6 @@ define( function( require ) {
 
     // @public {Mass[]} Array that will contain all of the masses.
     this.masses = [];
-
-    // Used for testing purposes
-    if ( MassesAndSpringsQueryParameters.printSpringProperties ) {
-      Property.multilink( [ self.springs[ 0 ].springConstantProperty, self.springs[ 0 ].thicknessProperty ], function( springConstant, springThickness ) {
-
-        console.log( 'springConstant = ' + Util.toFixed( springConstant, 3 ) + '\t\t' + 'thickness = ' + Util.toFixed( springThickness, 3 ) );
-      } );
-    }
-  }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
 

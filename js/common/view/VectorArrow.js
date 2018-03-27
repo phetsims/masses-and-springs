@@ -17,7 +17,6 @@ define( function( require ) {
    * @param {Color} color
    * @constructor
    */
-  // REVIEW: We are creating different arrows. Should we have to pass in the tandem and tandem ID separately?
   function VectorArrow( color ) {
     ArrowNode.call( this, 10, 0, 34, 0, {
       fill: color,
