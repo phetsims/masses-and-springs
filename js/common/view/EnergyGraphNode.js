@@ -232,6 +232,7 @@ define( function( require ) {
     var infoButton = new InfoButton( {
       maxHeight: 1.1 * zoomInButton.height,
       centerY: zoomOutButton.centerY,
+      iconFill: 'rgb( 41, 106, 163 )',
       listener: function() {
         if ( !dialog ) {
           dialog = new Dialog( dialogContent, {
