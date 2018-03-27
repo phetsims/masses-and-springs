@@ -39,8 +39,7 @@ define( function( require ) {
     SpringScreenView.call( this, model, tandem );
     var self = this;
 
-    // Spring Hanger Node
-    //REVIEW: JSDoc
+    // @public {SpringHangerNode} Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
       model.springs,
       this.modelViewTransform,
@@ -48,15 +47,14 @@ define( function( require ) {
         centerX: this.modelViewTransform.modelToViewX(
           model.firstSpring.positionProperty.value.distance( model.secondSpring.positionProperty.value ) ) * 4.7
       } );
-
-
     var leftSpring = this.model.firstSpring;
-    //REVIEW: JSDoc
+    var rightSpring = this.model.secondSpring;
+
+    // @public {StopperButtonNode}
     this.firstSpringStopperButtonNode = this.createStopperButton( leftSpring, tandem );
     this.firstSpringStopperButtonNode.right = this.springHangerNode.left - this.spacing;
 
-    var rightSpring = this.model.secondSpring;
-    //REVIEW: JSDoc
+    // @public {StopperButtonNode}
     this.secondSpringStopperButtonNode = this.createStopperButton( rightSpring, tandem );
     this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
 
@@ -73,11 +71,12 @@ define( function( require ) {
       new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT } ),
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT } )
     ];
-    //REVIEW: JSDoc
+
+    // @public {SpringConstantPanel}
     this.firstSpringConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
     this.firstSpringConstantControlPanel.right = this.firstSpringStopperButtonNode.left - this.spacing;
 
-    //REVIEW: JSDoc
+    // @public {SpringConstantPanel}
     this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, minMaxLabels, tandem );
     this.secondSpringConstantControlPanel.left = this.secondSpringStopperButtonNode.right + this.spacing;
 
