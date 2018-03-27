@@ -20,9 +20,9 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dialog = require( 'JOIST/Dialog' );
-  var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var InfoButton = require( 'SCENERY_PHET/buttons/InfoButton' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Range = require( 'DOT/Range' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -31,14 +31,11 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
-  var Bounds2 = require( 'DOT/Bounds2' );
   var ColorConstants = require( 'SUN/ColorConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RoundPushButton = require( 'SUN/buttons/RoundPushButton' );
-  var PushButtonIO = require( 'SUN/buttons/PushButtonIO' );
 
   // constants
   var LEGEND_DESCRIPTION_MAX_WIDTH = 500;
@@ -231,26 +228,9 @@ define( function( require ) {
     // sim bounds
     var dialog = null;
 
-    // Because zoom buttons don't support getting internal size, and other buttons don't resize, we need to do a
-    // hacky workaround to get their content to be the same size.
-    //REVIEW: I always recognize my own hacks! Instead of copy-pasting this, we should try to figure out a better
-    //REVIEW: solution, or bring things up to the team. I'll be available to collaborate on it.
-    var chromeBounds = new RoundPushButton( {
-      content: new Node( { localBounds: new Bounds2( 0, 0, 0, 0 ) } )
-    } ).bounds;
-
     // Button that pops up dialog box for the graph's legend
-    var iconPadding = 1;
-    var icon = new FontAwesomeNode( 'info_circle', {
-      fill: 'hsl(208,60%,40%)',
-      maxWidth: zoomInButton.width - chromeBounds.width + 2 * iconPadding,
-      maxHeight: zoomInButton.height - chromeBounds.height + 2 * iconPadding
-    } );
-    var infoButton = new RoundPushButton( {
-      minXMargin: 5 + iconPadding,
-      minYMargin: 5 + iconPadding,
-      content: icon,
-      baseColor: '#eee',
+    var infoButton = new InfoButton( {
+      maxHeight: 1.1 * zoomInButton.height,
       centerY: zoomOutButton.centerY,
       listener: function() {
         if ( !dialog ) {
@@ -269,24 +249,13 @@ define( function( require ) {
         } );
         dialog.addInputListener( closeListener );
         dialog.show();
-      },
-      phetioType: PushButtonIO,
-      touchAreaXDilation: 10,
-      touchAreaYDilation: 5
+      }
     } );
 
     // Display buttons at the bottom of the graph
     var displayButtons = new HBox( {
-      children: [
-        new HBox( {
-          children: [ infoButton ],
-          align: 'left'
-        } ),
-        new HBox( {
-          children: [ zoomOutButton, new HStrut( 7 ), zoomInButton ],
-          align: 'right'
-        } ) ],
-      spacing: 35
+      spacing: 12,
+      children: [ infoButton, new HStrut( 18 ), zoomOutButton, zoomInButton ]
     } );
 
     displayButtons.left = this.barChartNode.left;
