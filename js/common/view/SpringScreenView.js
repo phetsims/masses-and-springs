@@ -72,11 +72,11 @@ define( function( require ) {
 
     // @public {Node} Specific layer for massNodes. Used for setting layering order of massNodes.
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ), preventFit: true } );
-    //REVIEW: JSDoc
+
+    // @public {Array.<Node>}
     this.massNodes = [];
 
-    //REVIEW: Could use `this.massNodes = model.masses.map( ... )`, returning the mass node at the end of the callback?
-    model.masses.forEach( function( mass ) {
+    this.massNodes = model.masses.map( function( mass ) {
       var massNode = new MassNode(
         mass,
         self.modelViewTransform,
@@ -86,7 +86,7 @@ define( function( require ) {
       self.massLayer.addChild( massNode );
 
       // Keeps track of the mass node to restore original Z order.
-      self.massNodes.push( massNode );
+      return massNode;
     } );
 
     // Add shelf for to house massNodes
