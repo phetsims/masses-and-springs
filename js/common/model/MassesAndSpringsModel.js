@@ -26,7 +26,6 @@ define( function( require ) {
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // phet-io modules
@@ -43,8 +42,6 @@ define( function( require ) {
    * @param {Tandem} tandem
    */
   function MassesAndSpringsModel( tandem ) {
-
-    var self = this;
 
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
@@ -148,6 +145,7 @@ define( function( require ) {
 
     // @public {Mass[]} Array that will contain all of the masses.
     this.masses = [];
+  }
 
   massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
 
