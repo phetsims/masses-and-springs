@@ -70,8 +70,7 @@ define( function( require ) {
     // @protected {number} - Alignment for panels on most right side of sim view REVIEW: 'alignment' is usually like right/left/center. This is a padding between the right side of the screen and the panels, correct?
     this.rightPanelAlignment = this.visibleBoundsProperty.get().right - this.spacing;
 
-    // Add masses
-    //REVIEW: JSDoc
+    // @public {Node} Specific layer for massNodes. Used for setting layering order of massNodes.
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ), preventFit: true } );
     //REVIEW: JSDoc
     this.massNodes = [];
