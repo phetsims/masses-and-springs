@@ -170,7 +170,7 @@ define( function( require ) {
     //REVIEW: being added before the other visibleBoundsProperty listeners are added (for layout)
     this.visibleBoundsProperty.link( function( visibleBounds ) {
       //REVIEW: Style guide wants one space after //
-      //Update the bounds of view elements
+      // Update the bounds of view elements
       self.panelRightSpacing = visibleBounds.right - self.spacing;
     } );
   }
@@ -188,15 +188,6 @@ define( function( require ) {
         massNode.moveToFront();
       } );
     },
-
-    //REVIEW: This can be removed?
-    //
-    // /**
-    //  * Responsible for making sure the resetAllButton is in front of the scene graph at all times.
-    //  */
-    // step: function() {
-    //   this.resetAllButton.moveToFront();
-    // },
 
     /**
      * Creates a stopper button that stops the oscillation of its referenced spring.
