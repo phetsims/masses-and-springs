@@ -58,13 +58,13 @@ define( function( require ) {
     this.secondSpringStopperButtonNode = this.createStopperButton( rightSpring, tandem );
     this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
 
-    //REVIEW: Not sure why these two Properties are linked together. This looks like it could be handled with two
-    //REVIEW: separate link statements?
-    Property.multilink( [ leftSpring.buttonEnabledProperty, rightSpring.buttonEnabledProperty ],
-      function( leftButtonEnabled, rightButtonEnabled ) {
-        self.firstSpringStopperButtonNode.enabled = leftButtonEnabled;
-        self.secondSpringStopperButtonNode.enabled = rightButtonEnabled;
-      } );
+    leftSpring.buttonEnabledProperty.link( function( enabled ) {
+      self.firstSpringStopperButtonNode.enabled = enabled;
+    } );
+
+    rightSpring.buttonEnabledProperty.link( function( enabled ) {
+      self.secondSpringStopperButtonNode.enabled = enabled;
+    } );
 
     // Spring Constant Control Panels
     var minMaxLabels = [
