@@ -136,8 +136,7 @@ define( function( require ) {
     this.addChild( this.firstSpringStopperButtonNode );
     this.addChild( this.secondSpringStopperButtonNode );
 
-    //REVIEW: Style guide wants one space after //
-    //Reference lines from indicator visibility box
+    // Reference lines from indicator visibility box
     this.addChild( firstNaturalLengthLineNode );
     this.addChild( secondNaturalLengthLineNode );
     this.addChild( movableLineNode );
@@ -156,7 +155,6 @@ define( function( require ) {
       self.toolboxPanel.right = self.panelRightSpacing;
       self.resetAllButton.right = self.panelRightSpacing;
       self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
-      self.toolboxPanel.dragBounds = 3; //REVIEW: Is this setting a {number} to a {Bounds2}?
       self.timerNode.timerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
         self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2
       );
