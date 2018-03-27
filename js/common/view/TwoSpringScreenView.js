@@ -89,28 +89,25 @@ define( function( require ) {
       tandem.createTandem( 'movableLineNode' )
     );
 
-    // Initializes natural line for first spring
-    //REVIEW: Lots of duplication with construction of these. Can we simplify?
-    var firstNaturalLengthLineNode = new ReferenceLineNode(
-      this.modelViewTransform,
-      model.firstSpring,
-      model.firstSpring.bottomProperty,
-      model.naturalLengthVisibleProperty, {
-        stroke: NATURAL_LENGTH_LINE_FILL,
-        fixedPosition: true
-      }
-    );
+    /**
+     * @param {Spring} spring
+     * @returns {ReferenceLineNode}
+     */
+    var createNaturalLineNode = function( spring ) {
+      return new ReferenceLineNode(
+        self.modelViewTransform,
+        spring,
+        spring.bottomProperty,
+        model.naturalLengthVisibleProperty, {
+          stroke: NATURAL_LENGTH_LINE_FILL,
+          fixedPosition: true
+        }
+      );
+    };
 
-    // Initializes natural line for second spring
-    var secondNaturalLengthLineNode = new ReferenceLineNode(
-      this.modelViewTransform,
-      model.secondSpring,
-      model.secondSpring.bottomProperty,
-      model.naturalLengthVisibleProperty, {
-        stroke: NATURAL_LENGTH_LINE_FILL,
-        fixedPosition: true
-      }
-    );
+    // Initializes natural line for springs
+    var firstNaturalLengthLineNode = createNaturalLineNode( model.firstSpring );
+    var secondNaturalLengthLineNode = createNaturalLineNode( model.secondSpring );
 
     // @public {GravityAndDampingControlNode} Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
