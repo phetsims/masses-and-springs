@@ -83,8 +83,7 @@ define( function( require ) {
     // Initializes red movable reference line
     var xBoundsLimit = this.springHangerNode.centerX + 5;
     var movableLineNode = new MovableLineNode(
-      //REVIEW: If it's easier, you can use .center instead of .getCenter(), as it's slightly shorter
-      this.visibleBoundsProperty.get().getCenter().minus( new Vector2( 45, 0 ) ),
+      this.visibleBoundsProperty.value.center.minus( new Vector2( 45, 0 ) ),
       210,
       model.movableLineVisibleProperty,
       new Bounds2( xBoundsLimit, 55, xBoundsLimit, 600 ),
