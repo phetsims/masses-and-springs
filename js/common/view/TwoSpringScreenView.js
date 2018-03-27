@@ -90,8 +90,7 @@ define( function( require ) {
       tandem.createTandem( 'movableLineNode' )
     );
 
-    // @public Initializes natural line for first spring
-    //REVIEW: Don't need visibility doc for local variable
+    // Initializes natural line for first spring
     //REVIEW: Lots of duplication with construction of these. Can we simplify?
     var firstNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
@@ -103,8 +102,7 @@ define( function( require ) {
       }
     );
 
-    // @public Initializes natural line for second spring
-    //REVIEW: Don't need visibility doc for local variable
+    // Initializes natural line for second spring
     var secondNaturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.secondSpring,
