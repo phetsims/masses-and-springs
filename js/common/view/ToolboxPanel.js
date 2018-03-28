@@ -115,9 +115,6 @@ define( function( require ) {
         tandem: tandem.createTandem( 'dragHandler' ),
 
         startDrag: function( event ) {
-          // Toggle visibility
-          //REVIEW: Why would this be set to true here?
-          rulerVisibleProperty.set( true );
           //REVIEW: This looks like a potential memory leak, since every startDrag will add a listener that never goes away
           rulerVisibleProperty.link( function( visible ) {
             self.rulerIcon.visible = !visible;
