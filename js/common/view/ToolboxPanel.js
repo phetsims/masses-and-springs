@@ -115,10 +115,8 @@ define( function( require ) {
         tandem: tandem.createTandem( 'dragHandler' ),
 
         startDrag: function( event ) {
-          //REVIEW: This looks like a potential memory leak, since every startDrag will add a listener that never goes away
-          rulerVisibleProperty.link( function( visible ) {
-            self.rulerIcon.visible = !visible;
-          } );
+          rulerVisibleProperty.set(true);
+          self.rulerIcon.visible = !rulerVisibleProperty.value;
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
