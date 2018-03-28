@@ -16,7 +16,7 @@ define( function( require ) {
 
   /**
    * @constructor
-   * REVIEW: JSDoc for param
+   * @param {Tandem} tandem
    */
   function EnergyModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem );
