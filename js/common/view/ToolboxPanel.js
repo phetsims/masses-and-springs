@@ -44,10 +44,6 @@ define( function( require ) {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
 
-    //REVIEW: JSDoc
-    //REVIEW: The only usage I see of this is it being set to a {number} (constant 3) in TwoSpringScreenView. Can this be removed?
-    this.dragBounds = options.dragBounds;
-
     var self = this;
     var toolbox = new HBox( {
       align: 'center',
