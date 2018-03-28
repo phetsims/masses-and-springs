@@ -22,7 +22,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
   var SceneSelectionButton = require( 'MASSES_AND_SPRINGS/intro/view/SceneSelectionButton' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -59,8 +59,7 @@ define( function( require ) {
 
     this.springLengthControlPanel = new SpringControlPanel(
       model.spring1.naturalRestingLengthProperty,
-      //REVIEW: Only uses {Range} parts, so why specify a RangeWithValue?
-      new RangeWithValue( 0.1, 0.5, 0.3 ),
+      new Range( 0.1, 0.5),
       StringUtils.fillIn( lengthString, { spring: 1 } ),
       minMaxLabels,
       tandem.createTandem( 'springLengthControlPanel' ),
