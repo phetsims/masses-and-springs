@@ -199,8 +199,7 @@ define( function( require ) {
       node: differentLengthIcon
     } ];
 
-    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
-    // @private {read-only} Creation of icons for scene selection
+    // Creation of icons for scene selection
     var sceneRadioButtonGroup = new RadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
       buttonContentXMargin: 1,
       buttonContentYMargin: 1,
