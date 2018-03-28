@@ -57,7 +57,6 @@ define( function( require ) {
       new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT } )
     ];
 
-    //REVIEW: JSDoc
     this.springLengthControlPanel = new SpringControlPanel(
       model.spring1.naturalRestingLengthProperty,
       //REVIEW: Only uses {Range} parts, so why specify a RangeWithValue?
@@ -165,8 +164,7 @@ define( function( require ) {
     this.addChild( firstSpringEquilibriumLineNode );
     this.addChild( secondSpringEquilibriumLineNode );
 
-    //REVIEW: Style guide wants one space after //
-    //We do this to prevent overlap with the massNodes.
+    // We do this to prevent overlap with the massNodes.
     firstSpringEquilibriumLineNode.moveToBack();
     secondSpringEquilibriumLineNode.moveToBack();
 
@@ -188,16 +186,13 @@ define( function( require ) {
       springOptionsPanel.visible = self.springLengthControlPanel.visible;
     } );
 
-    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
-    // @private {read-only} Creation of same length icon node
+    // Creation of same length icon node
     var sameLengthIcon = new SceneSelectionButton( 'same-length', this.modelViewTransform, tandem );
 
-    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
-    // @private {read-only} Creation of adjustable length icon node
+    // Creation of adjustable length icon node
     var differentLengthIcon = new SceneSelectionButton( 'adjustable-length', this.modelViewTransform, tandem );
 
-    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
-    // @private {read-only} Creation of toggled modes for scene selection
+    //  Creation of toggled modes for scene selection
     var toggleButtonsContent = [ {
       value: 'same-length',
       node: sameLengthIcon
