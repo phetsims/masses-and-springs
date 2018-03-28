@@ -16,7 +16,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
-  var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -42,15 +42,15 @@ define( function( require ) {
       new Spring(
         new Vector2( 0.65, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        new Property (0),
-        new Property(0), //REVIEW: NumberProperty? (Really don't care here, but it is the code style)
+        new NumberProperty (0),
+        new NumberProperty(0),
         tandem.createTandem( 'firstIconSpring' )
       ),
       new Spring(
         new Vector2( 0.85, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        new Property (0),
-        new Property(0), //REVIEW: NumberProperty? (Really don't care here, but it is the code style)
+        new NumberProperty (0),
+        new NumberProperty(0),
         tandem.createTandem( 'secondIconSpring' )
       )
     ];
@@ -120,7 +120,6 @@ define( function( require ) {
     this.addChild( firstVerticalLineNode );
     this.addChild( secondSpringIcon );
     this.addChild( secondVerticalLineNode );
-
   }
 
   massesAndSprings.register( 'SceneSelectionButton', SceneSelectionButton );
