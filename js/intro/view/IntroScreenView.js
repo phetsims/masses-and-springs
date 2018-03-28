@@ -79,9 +79,8 @@ define( function( require ) {
       }
     );
 
-    // @private panel that keeps thickness/spring constant at constant value
-    //REVIEW: JSDoc type
-    this.constantsControlPanel = new ConstantsControlPanel(
+    // Panel that keeps thickness/spring constant at constant value
+    var constantsControlPanel = new ConstantsControlPanel(
       model.constantParameterProperty,
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
@@ -98,7 +97,7 @@ define( function( require ) {
       children: [
         this.springLengthControlPanel,
         MassesAndSpringsConstants.LINE_SEPARATOR( 130 ),
-        new HBox( { children: [ this.constantsControlPanel, new HStrut( 32 ) ] } )
+        new HBox( { children: [ constantsControlPanel, new HStrut( 32 ) ] } )
       ]
     } );
 
@@ -179,7 +178,7 @@ define( function( require ) {
       }
 
       // Manages visibility of panels for spring constant and thickness
-      self.constantsControlPanel.visible = self.springLengthControlPanel.visible;
+      constantsControlPanel.visible = self.springLengthControlPanel.visible;
       self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
       self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
       springOptionsPanel.visible = self.springLengthControlPanel.visible;
