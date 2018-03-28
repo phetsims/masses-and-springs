@@ -20,7 +20,7 @@ define( function( require ) {
   var OneSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringScreenView' );
 
   /**
-   * @param {MassesAndSpringsModel} model REVIEW: Does this need to be an EnergyModel?
+   * @param {EnergyModel} model
    * @param {Tandem} tandem
    *
    * @constructor
