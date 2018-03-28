@@ -28,6 +28,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TwoSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringScreenView' );
+  var Util = require( 'DOT/Util' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // constants
@@ -72,8 +73,7 @@ define( function( require ) {
         visible: false,
         centerTick: true,
         constrainValue: function( value ) {
-          //REVIEW: Use Util.roundSymmetric, see https://github.com/phetsims/dot/issues/35#issuecomment-113587879
-          value = Math.round( value * 100 / 5 ) * 5;
+          value = Util.roundSymmetric( value * 100 / 5 ) * 5;
           return value / 100;
         }
       }
