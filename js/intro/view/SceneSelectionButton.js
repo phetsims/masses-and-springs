@@ -42,15 +42,15 @@ define( function( require ) {
       new Spring(
         new Vector2( 0.65, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        new NumberProperty (0),
-        new NumberProperty(0),
+        new NumberProperty( 0 ),
+        new NumberProperty( 0 ),
         tandem.createTandem( 'firstIconSpring' )
       ),
       new Spring(
         new Vector2( 0.85, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
-        new NumberProperty (0),
-        new NumberProperty(0),
+        new NumberProperty( 0 ),
+        new NumberProperty( 0 ),
         tandem.createTandem( 'secondIconSpring' )
       )
     ];
@@ -94,21 +94,23 @@ define( function( require ) {
       firstSpringIcon.lineWidthProperty.set( 3 );
       firstSpringIcon.top = secondSpringIcon.top;
     }
-    var firstVerticalLineNode = new Line( 60, 0, 0, 0, {
-      stroke: 'black',
-      lineWidth: 4,
-      centerX: firstSpringIcon.centerX,
-      top: firstSpringIcon.top,
-      opacity: this.opacity // REVIEW: Nested opacity, so the true opacity here is 0.9 * 0.9? Is that desired?
-    } );
 
-    var secondVerticalLineNode = new Line( 60, 0, 0, 0, {
-      stroke: 'black',
-      lineWidth: 4,
-      centerX: secondSpringIcon.centerX,
-      top: secondSpringIcon.top,
-      opacity: this.opacity // REVIEW: Nested opacity, so the true opacity here is 0.9 * 0.9? Is that desired?
-    } );
+    /**
+     * @param {OscillatingSpringNode} springIcon
+     *
+     * @returns {Line}
+     */
+    var createVerticalLineNode = function( springIcon ) {
+      return new Line( 60, 0, 0, 0, {
+        stroke: 'black',
+        lineWidth: 4,
+        centerX: springIcon.centerX,
+        top: springIcon.top,
+        opacity: 0.8
+      } );
+    };
+    var firstVerticalLineNode = createVerticalLineNode( firstSpringIcon );
+    var secondVerticalLineNode = createVerticalLineNode( secondSpringIcon );
 
     // White background for scene switching icons
     var iconBackground = new Rectangle( firstSpringIcon.left - 20, -170, 180, 170, 10, 10, {
