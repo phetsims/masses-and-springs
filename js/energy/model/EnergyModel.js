@@ -47,6 +47,5 @@ define( function( require ) {
       //REVIEW: actual initial value. Then it can be reset as normal.
       this.dampingProperty.set( 0.2 );
     }
-    }
-  );
+  } );
 } );

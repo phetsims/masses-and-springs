@@ -31,9 +31,6 @@ define( function( require ) {
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
   var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
-  // constants
-  var LINE_LENGTH = 25;
-
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
@@ -58,7 +55,7 @@ define( function( require ) {
      */
     //REVIEW: Looks suspiciously duplicated from LineVisibilityNode. Can/should some code be factored out?
     var createLine = function( color, tandem ) {
-      return new Line( 0, 0, LINE_LENGTH, 0, {
+      return new Line( 0, 0, 25, 0, {
         stroke: color,
         lineDash: [ 6, 2.5 ],
         lineWidth: 2.0,
@@ -81,7 +78,7 @@ define( function( require ) {
       tandem,
       {
         modelViewTransform: this.modelViewTransform,
-        symbolRepresentation: true,
+        symbolRepresentation: true
       }
     );
     //REVIEW: Just pass these options into the DisplacementArrowNode options? ( e.g. scale: ... )
@@ -122,17 +119,17 @@ define( function( require ) {
 
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: componentDisplacement,
-      property: model.naturalLengthVisibleProperty,
+      property: model.naturalLengthVisibleProperty
     }, {
       content: new Text( massEquilibriumString, {
         font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'massEquilibriumString' )
       } ),
-      property: model.equilibriumPositionVisibleProperty,
+      property: model.equilibriumPositionVisibleProperty
     }, {
       content: new Text( movableLineString, {
         font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
       } ),
-      property: model.movableLineVisibleProperty,
+      property: model.movableLineVisibleProperty
     } ], {
       boxWidth: 15,
       spacing: 8,
@@ -142,22 +139,22 @@ define( function( require ) {
     if ( options.periodTraceOption ) {
       indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
         content: componentDisplacement,
-        property: model.naturalLengthVisibleProperty,
+        property: model.naturalLengthVisibleProperty
       }, {
         content: new Text( massEquilibriumString, {
           font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'massEquilibriumString' )
         } ),
-        property: model.equilibriumPositionVisibleProperty,
+        property: model.equilibriumPositionVisibleProperty
       }, {
         content: new Text( movableLineString, {
           font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
         } ),
-        property: model.movableLineVisibleProperty,
+        property: model.movableLineVisibleProperty
       }, {
         content: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'periodTraceString' )
         } ),
-        property: model.firstSpring.periodTraceVisibilityProperty,
+        property: model.firstSpring.periodTraceVisibilityProperty
       } ], {
         boxWidth: 15,
         spacing: 8,
@@ -182,7 +179,7 @@ define( function( require ) {
         new VStrut( 24 ),
         blackLine,
         new VStrut( 24 ),
-        redLine,
+        redLine
       ], yMargin: 0
     } );
     if ( options.periodTraceOption ) {

@@ -143,7 +143,7 @@ define( function( require ) {
     } );
 
     //REVIEW: Style guide wants one space after //
-    //Contains all checkboxes and radio buttons for vector visibility
+    // Contains all checkboxes and radio buttons for vector visibility
     var vectorVisibilityControlsVBox;
 
     // Contains all vectors for each force
