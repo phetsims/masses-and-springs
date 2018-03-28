@@ -79,8 +79,7 @@ define( function( require ) {
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
 
-        //REVIEW: Style guide wants one space after //
-        //reset the spring stop buttons
+        // reset the spring stop buttons
         self.spring1.buttonEnabledProperty.reset();
         self.spring2.buttonEnabledProperty.reset();
 
@@ -96,8 +95,7 @@ define( function( require ) {
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
 
-        //REVIEW: Style guide wants one space after //
-        //reset the spring stop buttons
+        // Reset the spring stop buttons
         self.spring1.buttonEnabledProperty.reset();
         self.spring2.buttonEnabledProperty.reset();
 
@@ -108,11 +106,9 @@ define( function( require ) {
     } );
 
     // Manages logic for updating spring thickness and spring constant
-    //REVIEW: Use `this` instead of self here?
-    self.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
+    this.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
 
-      //REVIEW: Style guide wants one space after //
-      //Functions used to determine the inverse relationship between the length and springConstant/thickness
+      // Functions used to determine the inverse relationship between the length and springConstant/thickness
       //  SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
       //  Thickness = constant --> As length increases, spring constant decreases  (and vice versa)
       if ( self.constantParameterProperty.get() === 'spring-constant' ) {
@@ -123,8 +119,7 @@ define( function( require ) {
       }
     } );
 
-    //REVIEW: Use `this` instead of self here?
-    self.constantParameterProperty.link( function( selectedConstant ) {
+    this.constantParameterProperty.link( function( selectedConstant ) {
       // Manages logic for changing between constant parameters
       // TODO: Enumerate these constants for checks
       if ( selectedConstant === 'spring-constant' ) {
@@ -157,9 +152,8 @@ define( function( require ) {
 
     /**
      * Responsible for preserving the properties of the masses and springs then stores them in a mutable object.
-     * @private
      *
-     * @returns {Object} REVIEW: More documentation for a bare object.
+     * @private
      */
     getSpringState: function() {
       return {
@@ -196,8 +190,7 @@ define( function( require ) {
         mass.reset();
       } );
 
-      // We are resetting the springs' displacement property to recalculate an appropriate length (derived property)
-      //REVIEW: Use capitalized Property to talk about Properties
+      // We are resetting the springs' displacement Property to recalculate an appropriate length (derived property)
       this.springs.forEach( function( spring ) {
         if ( spring.massAttachedProperty.get() ) {
           spring.massAttachedProperty.reset();
