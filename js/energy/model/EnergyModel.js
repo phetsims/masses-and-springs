@@ -15,8 +15,9 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
 
   /**
-   * @constructor
    * @param {Tandem} tandem
+   *
+   * @constructor
    */
   function EnergyModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem );

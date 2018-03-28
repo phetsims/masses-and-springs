@@ -21,8 +21,9 @@ define( function( require ) {
   var StringIO = require( 'ifphetio!PHET_IO/types/StringIO' );
 
   /**
+   * @param {Tandem} tandem
+   *
    * @constructor
-   * REVIEW: JSDoc for param
    */
   function IntroModel( tandem ) {
 
