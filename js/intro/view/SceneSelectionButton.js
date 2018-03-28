@@ -37,8 +37,7 @@ define( function( require ) {
       opacity: 0.9
     } );
 
-    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
-    // @public {read-only} Springs created to be used in the icons for the scene selection tabs
+    // Springs created to be used in the icons for the scene selection tabs
     var springsIcon = [
       new Spring(
         new Vector2( 0.65, 2.1 ),
@@ -56,8 +55,7 @@ define( function( require ) {
       )
     ];
 
-    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
-    // @private {read-only} Creation of spring for use in scene switching icons
+    // Creation of spring for use in scene switching icons
     var springNodeOptions = {
       frontColor: '#000000',
       middleColor: '#636362',
@@ -73,8 +71,7 @@ define( function( require ) {
     firstSpringIcon.loopsProperty.set( 6 );
     firstSpringIcon.lineWidthProperty.set( 3 );
 
-    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
-    // @private {read-only} Creation of spring for use in scene switching icons
+    // Creation of spring for use in scene switching icons
     var secondSpringIcon = new OscillatingSpringNode(
       springsIcon[ 1 ],
       mvt,
@@ -113,8 +110,7 @@ define( function( require ) {
       opacity: this.opacity // REVIEW: Nested opacity, so the true opacity here is 0.9 * 0.9? Is that desired?
     } );
 
-    //REVIEW: Local variables shouldn't have visibility docs, and don't need read-only docs.
-    // @private {read-only} White background for scene switching icons
+    // White background for scene switching icons
     var iconBackground = new Rectangle( firstSpringIcon.left - 20, -170, 180, 170, 10, 10, {
       fill: '#A8D2FF'
     } );
