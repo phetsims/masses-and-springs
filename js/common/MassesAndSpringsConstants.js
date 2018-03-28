@@ -66,8 +66,6 @@ define( function( require ) {
     PANEL_CORNER_RADIUS: 5,
     PANEL_MAX_WIDTH: 175,
     PANEL_MIN_WIDTH: 190,
-    FORCES_STRING: 'forces', //REVIEW: Use enum instead
-    NET_FORCE_STRING: 'netForce', //REVIEW: Use enum instead
     PANEL_FILL: 'rgb(230,230,230)',
     THUMB_HIGHLIGHT: '#71EDFF',
     LINE_SEPARATOR: function( length ) {
