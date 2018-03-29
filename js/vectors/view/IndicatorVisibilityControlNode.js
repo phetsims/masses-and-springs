@@ -54,16 +54,16 @@ define( function( require ) {
      * @param {Tandem} tandem
      * @returns {Line} line object with passed in color.
      */
-    //REVIEW: Looks suspiciously duplicated from LineVisibilityNode. Can/should some code be factored out?
+      //REVIEW: Looks suspiciously duplicated from LineVisibilityNode. Can/should some code be factored out?
     var createLine = function( color, tandem ) {
-      return new Line( 0, 0, 25, 0, {
-        stroke: color,
-        lineDash: [ 6, 2.5 ],
-        lineWidth: 2.0,
-        cursor: 'pointer',
-        tandem: tandem
-      } );
-    };
+        return new Line( 0, 0, 25, 0, {
+          stroke: color,
+          lineDash: [ 6, 2.5 ],
+          lineWidth: 2.0,
+          cursor: 'pointer',
+          tandem: tandem
+        } );
+      };
 
     // Lines added for reference in panel
     //REVIEW: Looks suspiciously duplicated from LineVisibilityNode. Can/should some code be factored out?
@@ -198,10 +198,10 @@ define( function( require ) {
       } );
     }
     var controlBox = new HBox( {
+      spacing: 25,
       children: [
         indicatorVisibilityControlsVBox,
-        new HStrut( 25 ), //REVIEW: Use spacing instead?
-        lineVBox,
+        lineVBox
       ]
     } );
     this.addChild( controlBox );
