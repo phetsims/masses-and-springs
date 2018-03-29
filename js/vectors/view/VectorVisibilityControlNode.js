@@ -142,7 +142,6 @@ define( function( require ) {
       }
     } );
 
-    //REVIEW: Style guide wants one space after //
     // Contains all checkboxes and radio buttons for vector visibility
     var vectorVisibilityControlsVBox;
 
@@ -162,7 +161,7 @@ define( function( require ) {
             netForceVisibilityRadioButton
           ],
           align: 'left',
-        tandem: tandem.createTandem( 'spacingUnit' )
+          tandem: tandem.createTandem( 'spacingUnit' )
         }
       );
       vectorVBox = new VBox( {
@@ -203,13 +202,12 @@ define( function( require ) {
       } );
     }
     var controlsHBox = new HBox( {
-        children: [
-          vectorVisibilityControlsVBox,
-          new HStrut( 40 ), //REVIEW: Use spacing?
-          vectorVBox,
-        ]
-      }
-    );
+      spacing: 40,
+      children: [
+        vectorVisibilityControlsVBox,
+        vectorVBox
+      ]
+    } );
     this.addChild( controlsHBox );
   }
 
