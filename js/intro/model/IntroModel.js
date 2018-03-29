@@ -16,6 +16,7 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
+  var SceneModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/SceneModeChoice' );
 
   // phet-io modules
   var StringIO = require( 'ifphetio!PHET_IO/types/StringIO' );
@@ -34,11 +35,10 @@ define( function( require ) {
     this.addDefaultMasses( tandem );
 
     // @public {Property.<string>} determines the scene selection for the intro screen
-    //REVIEW: Candidate for an enumeration (see other examples)
-    this.sceneModeProperty = new Property( 'same-length', {
+    this.sceneModeProperty = new Property( SceneModeChoice.SAME_LENGTH, {
       tandem: tandem.createTandem( 'sceneModeProperty' ),
       phetioType: PropertyIO( StringIO ),
-      validValues: [ 'same-length', 'adjustable-length' ]
+      validValues: [ SceneModeChoice.SAME_LENGTH, SceneModeChoice.ADJUSTABLE_LENGTH ]
     } );
 
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel

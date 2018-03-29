@@ -20,8 +20,8 @@ define( function( require ) {
 
   // @public {Array.<ForcesModeChoice>} - All values the enumeration can take.
   ForcesModeChoice.VALUES = [
-    ForcesModeChoice.FORCES, // e.g. sim steps with dt
-    ForcesModeChoice.NET_FORCES // e.g. sim steps with dt/8
+    ForcesModeChoice.FORCES,
+    ForcesModeChoice.NET_FORCES
   ];
 
   // verify that enum is immutable, without the runtime penalty in production code
