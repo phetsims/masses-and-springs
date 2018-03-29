@@ -21,8 +21,10 @@ define( function( require ) {
   var FADE_OUT_SPEED = 1; // the speed at which the trace fades out.
 
   /**
+   * @param {PeriodTrace} periodTrace
+   * @param {ModelViewTransform2} modelViewTransform
+   *
    * @constructor
-   * REVIEW: params
    */
   function PeriodTraceNode( periodTrace, modelViewTransform ) {
     Node.call( this );
