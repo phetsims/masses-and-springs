@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var ConstantModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/ConstantModeChoice' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -28,7 +29,7 @@ define( function( require ) {
   var RADIO_BUTTON_SPACING = 4;
 
   /**
-   * @param {Property.<string>} selectedConstantProperty determines which value to hold constant, values are 'spring-constant' and 'spring-thickness'
+   * @param {Property.<string>} selectedConstantProperty determines which value to hold constant
    * @param {string} title: string used to title the panel
    * @param {tandem} tandem
    * @param {Object} [options]
@@ -51,7 +52,7 @@ define( function( require ) {
     };
 
     var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
-    var thicknessRadioButton = new AquaRadioButton( selectedConstantProperty, 'spring-thickness', thicknessText, {
+    var thicknessRadioButton = new AquaRadioButton( selectedConstantProperty, ConstantModeChoice.SPRING_THICKNESS, thicknessText, {
       radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
       tandem: tandem.createTandem( 'thicknessRadioButton' )
     } );
@@ -60,7 +61,7 @@ define( function( require ) {
       StringUtils.fillIn( springConstantString, { spring: '' } ),
       _.extend( { font: TITLE_FONT, tandem: tandem.createTandem( 'constantText' ) },
         constantsSelectionButtonOptions ) );
-    var springConstantRadioButton = new AquaRadioButton( selectedConstantProperty, 'spring-constant', constantText, {
+    var springConstantRadioButton = new AquaRadioButton( selectedConstantProperty, ConstantModeChoice.SPRING_CONSTANT, constantText, {
       radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
       tandem: tandem.createTandem( 'springConstantRadioButton' )
     } );

@@ -1,7 +1,7 @@
 // Copyright 2018, University of Colorado Boulder
 
 /**
- * Enumeration for scene mode choices intro Screen.
+ * Enumeration for scene mode choices intro screen.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */

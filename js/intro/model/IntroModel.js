@@ -10,13 +10,14 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ConstantModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/ConstantModeChoice' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
-  var SceneModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/SceneModeChoice' );
+  var SceneModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/SceneModeChoice' );
 
   // phet-io modules
   var StringIO = require( 'ifphetio!PHET_IO/types/StringIO' );
@@ -42,12 +43,10 @@ define( function( require ) {
     } );
 
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
-    //REVIEW: Candidate for an enumeration (see other examples). If done, would have a third value that represents what
-    //REVIEW: null currently does.
-    this.constantParameterProperty = new Property( 'spring-constant', {
+    this.constantParameterProperty = new Property( ConstantModeChoice.SPRING_CONSTANT, {
       tandem: tandem.createTandem( 'constantParameterProperty' ),
       phetioType: PropertyIO( StringIO ),
-      validValues: [ 'spring-constant', 'spring-thickness', null ]
+      validValues: [ ConstantModeChoice.SPRING_CONSTANT, ConstantModeChoice.SPRING_THICKNESS, ConstantModeChoice.NULL ]
     } );
 
     // @public {Spring} Renamed for readability. Springs are constantly referenced.
@@ -57,7 +56,7 @@ define( function( require ) {
     // We are updating the spring thickness for each spring, whenever we are on the first scene
     this.springs.forEach( function( spring ) {
       spring.springConstantProperty.link( function( springConstant ) {
-        if ( self.sceneModeProperty.get() === 'same-length' ) {
+        if ( self.sceneModeProperty.get() === SceneModeChoice.SAME_LENGTH ) {
           spring.updateThickness( spring.naturalRestingLengthProperty.get(), springConstant );
         }
       } );
@@ -74,7 +73,7 @@ define( function( require ) {
 
     // Link that is responsible for switching the scenes
     this.sceneModeProperty.lazyLink( function( mode ) {
-      if ( mode === 'same-length' ) {
+      if ( mode === SceneModeChoice.SAME_LENGTH ) {
 
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
@@ -90,7 +89,7 @@ define( function( require ) {
 
       // TODO: Generally prefer enumerations, like AreaCalculationChoice.
       //REVIEW: Yup, see this TODO. Recommended
-      else if ( mode === 'adjustable-length' ) {
+      else if ( mode === SceneModeChoice.ADJUSTABLE_LENGTH ) {
 
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
@@ -109,24 +108,23 @@ define( function( require ) {
     this.spring1.naturalRestingLengthProperty.link( function( naturalRestingLength ) {
 
       // Functions used to determine the inverse relationship between the length and springConstant/thickness
-      //  SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
-      //  Thickness = constant --> As length increases, spring constant decreases  (and vice versa)
-      if ( self.constantParameterProperty.get() === 'spring-constant' ) {
+      // SpringConstant = constant --> As length increases, spring thickness decreases (and vice versa)
+      // Thickness = constant --> As length increases, spring constant decreases  (and vice versa)
+      if ( self.constantParameterProperty.get() === ConstantModeChoice.SPRING_CONSTANT ) {
         self.spring1.updateThickness( naturalRestingLength, self.spring1.springConstantProperty.get() );
       }
-      else if ( self.constantParameterProperty.get() === 'spring-thickness' ) {
+      else if ( self.constantParameterProperty.get() === ConstantModeChoice.SPRING_THICKNESS ) {
         self.spring1.updateSpringConstant( naturalRestingLength, self.spring1.thicknessProperty.get() );
       }
     } );
 
     this.constantParameterProperty.link( function( selectedConstant ) {
       // Manages logic for changing between constant parameters
-      // TODO: Enumerate these constants for checks
-      if ( selectedConstant === 'spring-constant' ) {
+      if ( selectedConstant === ConstantModeChoice.SPRING_CONSTANT ) {
         self.spring1.springConstantProperty.reset();
         self.spring1.updateThickness( self.spring1.naturalRestingLengthProperty.get(), self.spring1.springConstantProperty.get() );
       }
-      else if ( selectedConstant === 'spring-thickness' ) {
+      else if ( selectedConstant === ConstantModeChoice.SPRING_THICKNESS ) {
         self.spring1.thicknessProperty.reset();
         self.spring1.updateSpringConstant( self.spring1.naturalRestingLengthProperty.get(), self.spring1.thicknessProperty.get() );
       }
@@ -206,12 +204,12 @@ define( function( require ) {
      * @private
      */
     initializeScenes: function() {
-      this.sceneModeProperty.set( 'adjustable-length' );
+      this.sceneModeProperty.set( SceneModeChoice.ADJUSTABLE_LENGTH );
       this.resetScene( false );
       this.spring1.naturalRestingLengthProperty.set( 0.25 );
 
       // initial parameters set for both scenes
-      this.sceneModeProperty.set( 'same-length' );
+      this.sceneModeProperty.set( SceneModeChoice.SAME_LENGTH );
       this.resetScene( false );
     }
   } );

@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/ConstantsControlPanel' );
+  var ConstantModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/ConstantModeChoice' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
@@ -24,6 +25,7 @@ define( function( require ) {
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var Range = require( 'DOT/Range' );
   var SceneSelectionButton = require( 'MASSES_AND_SPRINGS/intro/view/SceneSelectionButton' );
+  var SceneModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/SceneModeChoice' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -170,10 +172,10 @@ define( function( require ) {
     // Link responsible for visibility of the length control panel.
     model.sceneModeProperty.lazyLink( function( mode ) {
       self.resetMassLayer();
-      if ( mode === 'same-length' ) {
+      if ( mode === SceneModeChoice.SAME_LENGTH ) {
         self.springLengthControlPanel.visible = false;
       }
-      else if ( mode === 'adjustable-length' ) {
+      else if ( mode === SceneModeChoice.ADJUSTABLE_LENGTH ) {
         self.springLengthControlPanel.visible = true;
       }
 
@@ -185,17 +187,17 @@ define( function( require ) {
     } );
 
     // Creation of same length icon node
-    var sameLengthIcon = new SceneSelectionButton( 'same-length', this.modelViewTransform, tandem );
+    var sameLengthIcon = new SceneSelectionButton( SceneModeChoice.SAME_LENGTH, this.modelViewTransform, tandem );
 
     // Creation of adjustable length icon node
-    var differentLengthIcon = new SceneSelectionButton( 'adjustable-length', this.modelViewTransform, tandem );
+    var differentLengthIcon = new SceneSelectionButton( SceneModeChoice.ADJUSTABLE_LENGTH, this.modelViewTransform, tandem );
 
     //  Creation of toggled modes for scene selection
     var toggleButtonsContent = [ {
-      value: 'same-length',
+      value: SceneModeChoice.SAME_LENGTH,
       node: sameLengthIcon
     }, {
-      value: 'adjustable-length',
+      value: SceneModeChoice.ADJUSTABLE_LENGTH,
       node: differentLengthIcon
     } ];
 

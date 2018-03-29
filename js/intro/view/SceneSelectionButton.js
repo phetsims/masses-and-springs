@@ -18,6 +18,7 @@ define( function( require ) {
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var SceneModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/SceneModeChoice' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -82,8 +83,7 @@ define( function( require ) {
     secondSpringIcon.loopsProperty.set( 6 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
-    if ( springLength === 'adjustable-length' ) {
-
+    if ( springLength === SceneModeChoice.ADJUSTABLE_LENGTH ) {
       firstSpringIcon = new OscillatingSpringNode(
         springsIcon[ 0 ],
         mvt,
