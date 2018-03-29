@@ -72,7 +72,10 @@ define( function( require ) {
       return new Line( 0, 0, length, 0, { stroke: 'gray' } );
     },
 
-    RIGHT_SPRING_X: 1.3 // {number} X position of the spring node in screen coordinates
+    // {number} X position of the spring node in screen coordinates
+    RIGHT_SPRING_X: 1.3,
+    LEFT_SPRING_X: 1.0,
+    SPRING_X: 1.2
   };
 
   massesAndSprings.register( 'MassesAndSpringsConstants', MassesAndSpringsConstants );
