@@ -36,8 +36,7 @@ define( function( require ) {
     //REVIEW: custom reset.
     this.dampingProperty.set( 0.2 );
 
-    //REVIEW: the 0.01 should be refactored out (mention in another review comment)
-    this.createSpring( MassesAndSpringsConstants.SPRING_X - .01, tandem.createTandem( 'spring' ) );
+    this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
 
     // REVIEW: Should these use MassesAndSpringsModel createMass? (or renamed method)?
