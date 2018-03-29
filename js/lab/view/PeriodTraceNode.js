@@ -28,10 +28,10 @@ define( function( require ) {
     Node.call( this );
     var self = this;
 
-    // @protected PREVIEW: protected? what inherits from this?
+    // @public {PeriodTrace} Model element for the period trace.
     this.periodTrace = periodTrace;
 
-    // @private {number} - The opacity of the trace (not using Node opacity for performance reasons)
+    // @private {number} The opacity of the trace (not using Node opacity for performance reasons)
     this.colorAlpha = 1;
 
     // @protected PREVIEW: protected? what inherits from this?
