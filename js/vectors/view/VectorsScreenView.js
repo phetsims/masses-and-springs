@@ -92,13 +92,11 @@ define( function( require ) {
       }
     );
 
-    //REVIEW: Style guide wants one space after //
-    //Reference lines from indicator visibility box
+    // Reference lines from indicator visibility box
     this.addChild( firstSpringEquilibriumLineNode );
     this.addChild( secondSpringEquilibriumLineNode );
 
-    //REVIEW: Style guide wants one space after //
-    //We do this to prevent overlap with the massNodes.
+    // We do this to prevent overlap with the massNodes.
     firstSpringEquilibriumLineNode.moveToBack();
     secondSpringEquilibriumLineNode.moveToBack();
 
