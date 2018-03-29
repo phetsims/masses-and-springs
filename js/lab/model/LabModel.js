@@ -21,8 +21,9 @@ define( function( require ) {
   var MASS_OFFSET = 0.075;
 
   /**
+   * @param {Tandem} tandem
+   *
    * @constructor
-   * REVIEW: JSDoc the param
    */
   function LabModel( tandem ) {
     // TODO: Think about creating mass objects above, and then passing into the constructor (instead of having to function-call to create, and then index into to modify)
