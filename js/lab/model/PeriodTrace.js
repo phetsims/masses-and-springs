@@ -63,10 +63,9 @@ define( function( require ) {
       self.onFaded();
     } );
 
-    //REVIEW: There is only one usage of this listener, so it could be inlined
-    var peakListener = function( direction ) {
+    this.springProperty.value.peakEmitter.addListener( function( direction ) {
       if ( self.stateProperty.value !== 0 && self.stateProperty.value !== 4 ) {
-          self.stateProperty.value += 1;
+        self.stateProperty.value += 1;
         if ( self.stateProperty.value === 2 ) {
           self.firstPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value;
         }
@@ -75,31 +74,27 @@ define( function( require ) {
         }
       }
       self.directionProperty.set( direction );
-    };
-    //REVIEW: There is only one usage of this listener, so it could be inlined
-    var crossListener = function() {
-        self.crossingProperty.value += 1;
+    } );
+
+    this.springProperty.value.crossEmitter.addListener( function() {
+      self.crossingProperty.value += 1;
 
       if ( self.crossingProperty.value === 1 || self.crossingProperty.value === 3 ) {
-          self.stateProperty.value += 1;
+        self.stateProperty.value += 1;
       }
 
-      //REVIEW: Spaces should be inside parens. Might want to check all of the code to make sure the spaces are there.
-      if ( ((self.stateProperty.value % 5 === 0) && (self.stateProperty !== 0)) ) {
+      if ( (( self.stateProperty.value % 5 === 0 ) && ( self.stateProperty !== 0 )) ) {
         self.stateProperty.reset();
       }
-      if ( ((self.crossingProperty.value % 4 === 0) && (self.crossingProperty !== 0)) ) {
+      if ( (( self.crossingProperty.value % 4 === 0 ) && ( self.crossingProperty !== 0 )) ) {
         self.crossingProperty.reset();
       }
-    };
-    //REVIEW: There is only one usage of this listener, so it could be inlined
-    var droppedListener = function() {
+    } );
+
+    this.springProperty.value.droppedEmitter.addListener( function() {
       self.stateProperty.reset();
       self.crossingProperty.reset();
-    };
-    this.springProperty.value.peakEmitter.addListener( peakListener );
-    this.springProperty.value.crossEmitter.addListener( crossListener );
-    this.springProperty.value.droppedEmitter.addListener( droppedListener );
+    } );
 
     this.directionProperty.lazyLink( function( oldValue, newValue ) {
       if ( oldValue !== newValue ) {
