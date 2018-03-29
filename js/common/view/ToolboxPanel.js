@@ -116,8 +116,6 @@ define( function( require ) {
 
         startDrag: function( event ) {
           rulerVisibleProperty.set( true );
-          self.rulerIcon.visible = !rulerVisibleProperty.value;
-
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
           var initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
@@ -130,7 +128,11 @@ define( function( require ) {
         }
       } ) );
       toolbox.addChild( self.rulerIcon );
+      rulerVisibleProperty.link( function( visible ) {
+        self.rulerIcon.visible = !visible;
+      } );
     } );
+
 
     // Create timer icon
     timer.toImage( function( image ) {
@@ -157,9 +159,10 @@ define( function( require ) {
         tandem: tandem.createTandem( 'dragHandler' ),
 
         startDrag: function( event ) {
+
           // Toggle visibility
           timerVisibleProperty.set( true );
-          self.timerIcon.visible = !timerVisibleProperty.value;
+
 
           // Now determine the initial position where this element should move to after it's created, which corresponds
           // to the location of the mouse or touch event.
@@ -173,6 +176,9 @@ define( function( require ) {
         }
       } ) );
       toolbox.addChild( self.timerIcon );
+      timerVisibleProperty.link( function( visible ) {
+        self.timerIcon.visible = !visible;
+      } );
     } );
   }
 
