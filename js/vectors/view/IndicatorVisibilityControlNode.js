@@ -161,10 +161,9 @@ define( function( require ) {
         tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
       } );
     }
-    var titleToControlsVerticalSpace = 2; //REVIEW: Can this be inlined?
     var indicatorVisibilityControlsVBox = new VBox( {
         children: [
-          new VStrut( titleToControlsVerticalSpace ),
+          new VStrut( 2 ),
           indicatorVisibilityCheckboxGroup
         ],
         align: 'left',
