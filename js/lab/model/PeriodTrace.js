@@ -11,44 +11,28 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
 
   /**
+   * @param {Spring} spring
+   *
    * @constructor
-   * REVIEW: doc param
    */
   function PeriodTrace( spring ) {
-
     var self = this;
 
-    //REVIEW: type/visibility docs
-    //REVIEW: Wait, this value is only set, never read from? Can this be removed?
-    this.originalY = 0;
-
-    //TODO: Use numberProperty when applicable REVIEW: I probably marked these where necessary, remove this TODO?
-
-    //REVIEW: Type docs of the Property's value?
-    // @public {Property} mass which is being tracked
+    // @public {Property.<Spring>} mass which is being tracked
     this.springProperty = new Property( spring );
 
-    //REVIEW: Type docs of the Property's value?
-    // @public {Property} orientation of the spring's oscillation.
+    // @public {Property.<number>} orientation of the spring's oscillation.
     this.directionProperty = new Property( null );
 
-    //REVIEW: NumberProperty?
-    //REVIEW: Type docs of the Property's value?
-    // @public {Property} units the trace should be positioned away from the origin in the x direction
-    this.xOffsetProperty = new Property( 0 );
+    // @public {Property.<number>} units the trace should be positioned away from the origin in the x direction
+    this.xOffsetProperty = new NumberProperty( 0 );
 
-    //REVIEW: NumberProperty?
-    //REVIEW: Type docs of the Property's value?
-    // @public {Property.number} determines how many times the trace has gone over its original Y position
-    this.crossingProperty = new Property( 0 );
-
-    // @public {Property.boolean} a flag for whether the trace is fading or not
-    //REVIEW: Type docs of the Property's value?
-    this.fadingProperty = new Property( false );
-
+    // @public {Property.<number>} determines how many times the trace has gone over its original Y position
+    this.crossingProperty = new NumberProperty( 0 );
 
     // @public {Property.<number>} Follows pattern in Pendulum-Lab
     // 0: Trace hasn't started recording.
@@ -56,18 +40,14 @@ define( function( require ) {
     // 2: Pendulum reached first peak, and is swinging towards second peak.
     // 3: Pendulum had second peak, but hasn't crossed the zero-line since.
     // 4: Pendulum trace completed.
-    //REVIEW: NumberProperty?
-    //REVIEW: Type docs of the Property's value?
-    this.stateProperty = new Property( 0 );
+    this.stateProperty = new NumberProperty( 0 );
 
-    //REVIEW: type/visibility docs
+    // @public {number}
     this.firstPeakY = 0;
     this.secondPeakY = 0;
 
-    // optional parameter used to measure rate of trace fading
-    //REVIEW: NumberProperty?
-    //REVIEW: JSDoc?
-    this.alphaProperty = new Property( 1 );
+    // @public {Property.<number>} optional parameter used to measure rate of trace fading
+    this.alphaProperty = new NumberProperty( 1 );
 
     // When a mass is attached the origin of the trace should be the mass equilibrium.
     this.springProperty.value.massAttachedProperty.link( function( mass ) {
@@ -75,9 +55,6 @@ define( function( require ) {
 
         // If there isn't a mass attached then there is no mass displacement
         self.springProperty.value.massEquilibriumDisplacementProperty.reset();
-      }
-      else {
-        self.originalY = self.springProperty.value.massEquilibriumYPositionProperty.value;
       }
     } );
 
