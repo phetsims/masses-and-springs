@@ -91,7 +91,7 @@ define( function( require ) {
         lineWidth: 2.0,
         cursor: 'pointer',
         tandem: tandem
-      } )
+      } );
     },
 
     // {number} X position of the spring node in screen coordinates

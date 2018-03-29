@@ -12,7 +12,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -42,23 +41,6 @@ define( function( require ) {
     }, options );
 
     Node.call( this, options );
-
-    /**
-     * Creates line for visual representation within the panel.
-     * @param {string} color
-     * @param {Tandem} tandem
-     * @returns {Line} line object with passed in color.
-     */
-    var createLine = function( color, tandem ) {
-      return new Line( {
-        x2: 25,
-        stroke: color,
-        lineDash: [ 6, 2.5 ],
-        lineWidth: 2.0,
-        cursor: 'pointer',
-        tandem: tandem
-      } );
-    };
 
     // Lines added for reference in panel
     var greenLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb(0, 180, 0)', tandem.createTandem( 'greenLine' ) );
