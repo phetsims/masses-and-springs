@@ -69,8 +69,6 @@ define( function( require ) {
     var blackLine = createLine( 'black', tandem.createTandem( 'blackLine' ) );
     var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
-    var grayLine = createLine( '#e6e6e6' ); // TODO: we shouldn't need this for spacing on lab screen.
-    //REVIEW: Handle TODO
     var displacementSymbol = new DisplacementArrowNode(
       new NumberProperty( 10 ),
       new BooleanProperty( true ),
@@ -190,8 +188,7 @@ define( function( require ) {
           blackLine,
           new VStrut( 24 ),
           redLine,
-          new VStrut( 24 ),
-          grayLine
+          new VStrut( 24 )
         ], yMargin: 0
       } );
     }
