@@ -18,7 +18,8 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
@@ -72,8 +73,8 @@ define( function( require ) {
     var grayLine = createLine( '#e6e6e6' ); // TODO: we shouldn't need this for spacing on lab screen.
     //REVIEW: Handle TODO
     var displacementSymbol = new DisplacementArrowNode(
-      new Property( 10 ), //REVIEW: NumberProperty?
-      new Property( true ), //REVIEW: BooleanProperty?
+      new NumberProperty( 10 ),
+      new BooleanProperty( true ),
       //REVIEW: Or... can we maybe make a dev meeting note to see if we can just leave "never-changing" Properties like this as Property instead of using subtypes?
       tandem,
       {
