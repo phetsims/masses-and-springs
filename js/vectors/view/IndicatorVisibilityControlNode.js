@@ -79,11 +79,10 @@ define( function( require ) {
       tandem,
       {
         modelViewTransform: this.modelViewTransform,
-        symbolRepresentation: true
+        symbolRepresentation: true,
+        scale: 0.65
       }
     );
-    //REVIEW: Just pass these options into the DisplacementArrowNode options? ( e.g. scale: ... )
-    displacementSymbol.scale( .65 );
 
     // Labels for the displacement arrow and natural length line
     var displacementLabels = new VBox( {
