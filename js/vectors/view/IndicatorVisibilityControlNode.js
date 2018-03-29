@@ -48,7 +48,6 @@ define( function( require ) {
     Node.call( this, options );
 
     // Lines added for reference in panel
-    //REVIEW: Looks suspiciously duplicated from LineVisibilityNode. Can/should some code be factored out?
     var blackLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'black', tandem.createTandem( 'blackLine' ) );
     var blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
@@ -91,10 +90,8 @@ define( function( require ) {
       ]
     } );
 
-    // REVIEW: Only used once. Inline.
-    var bracketToTextSpacing = 2;
     var componentDisplacement = new HBox( {
-      spacing: bracketToTextSpacing,
+      spacing: 2,
       children: [ bracket, displacementLabels ]
     } );
 
