@@ -71,13 +71,9 @@ define( function( require ) {
           this.colorAlpha = 1;
         }
       }
-      this.updateTrace( this.periodTrace.springProperty.value, this.modelViewTransform );
-    },
 
-    // TODO:documentation
-    //REVIEW: Looks private. Also since it's just called from step, it COULD be inlined. At least remove the passing in of the MVT and use this.modelViewTransform? (Same for the spring?)
-    updateTrace: function( spring, modelViewTransform ) {
-
+      var spring = this.periodTrace.springProperty.value;
+      var modelViewTransform = this.modelViewTransform;
       var mass = spring.massAttachedProperty.value;
       if ( mass && !mass.userControlledProperty.value ) {
 
