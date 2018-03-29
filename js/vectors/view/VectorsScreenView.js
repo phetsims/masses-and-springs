@@ -166,10 +166,6 @@ define( function( require ) {
       self.toolboxPanel.right = self.panelRightSpacing;
     } );
 
-    // Determines where we want the force vectors of the attached mass to be placed.
-    //REVIEW: Shouldn't directly change spring options. Also, can we do this on spring construction instead?
-    model.firstSpring.forcesOrientationProperty.set( -1 );
-    model.secondSpring.forcesOrientationProperty.set( 1 );
   }
 
   massesAndSprings.register( 'VectorsScreenView', VectorsScreenView );
