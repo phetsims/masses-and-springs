@@ -43,20 +43,22 @@ define( function( require ) {
       this.springNodes[ 0 ].spring.displacementProperty,
       model.naturalLengthVisibleProperty,
       tandem,
-      { modelViewTransform: this.modelViewTransform } );
-    //REVIEW: Just pass these options into the DisplacementArrowNode options? ( e.g. left: ... )
-    firstDisplacementArrowNode.left = this.springNodes[ 0 ].right + 8;
-    firstDisplacementArrowNode.centerY = this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value );
+      {
+        modelViewTransform: this.modelViewTransform,
+        left: this.springNodes[ 0 ].right + 8,
+        centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value )
+      } );
     this.addChild( firstDisplacementArrowNode );
 
     var secondDisplacementArrowNode = new DisplacementArrowNode(
       this.springNodes[ 1 ].spring.displacementProperty,
       model.naturalLengthVisibleProperty,
       tandem,
-      { modelViewTransform: this.modelViewTransform } );
-    //REVIEW: Just pass these options into the DisplacementArrowNode options? ( e.g. left: ... )
-    secondDisplacementArrowNode.right = this.springNodes[ 1 ].left + 14;
-    secondDisplacementArrowNode.centerY = this.modelViewTransform.modelToViewY( this.springNodes[ 1 ].spring.bottomProperty.value );
+      {
+        modelViewTransform: this.modelViewTransform,
+        right: this.springNodes[ 1 ].left + 14,
+        centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 1 ].spring.bottomProperty.value )
+      } );
     this.addChild( secondDisplacementArrowNode );
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
