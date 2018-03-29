@@ -68,8 +68,30 @@ define( function( require ) {
     PANEL_MIN_WIDTH: 190,
     PANEL_FILL: 'rgb(230,230,230)',
     THUMB_HIGHLIGHT: '#71EDFF',
+
+    /**
+     * Creates line for visual representation within the panel.
+     * @param {number} length
+     * @returns {Line}
+     */
     LINE_SEPARATOR: function( length ) {
       return new Line( 0, 0, length, 0, { stroke: 'gray' } );
+    },
+
+    /**
+     * Creates line for visual representation within the panel.
+     * @param {string} color
+     * @param {Tandem} tandem
+     * @returns {Line}
+     */
+    CREATE_LINE_ICON: function( color, tandem ) {
+      return new Line( 0, 0, 25, 0, {
+        stroke: color,
+        lineDash: [ 6, 2.5 ],
+        lineWidth: 2.0,
+        cursor: 'pointer',
+        tandem: tandem
+      } )
     },
 
     // {number} X position of the spring node in screen coordinates

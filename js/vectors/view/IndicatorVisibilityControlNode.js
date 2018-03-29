@@ -47,28 +47,11 @@ define( function( require ) {
 
     Node.call( this, options );
 
-    /**
-     * Creates line for visual representation within the panel.
-     * @param {string} color
-     * @param {Tandem} tandem
-     * @returns {Line} line object with passed in color.
-     */
-      //REVIEW: Looks suspiciously duplicated from LineVisibilityNode. Can/should some code be factored out?
-    var createLine = function( color, tandem ) {
-        return new Line( 0, 0, 25, 0, {
-          stroke: color,
-          lineDash: [ 6, 2.5 ],
-          lineWidth: 2.0,
-          cursor: 'pointer',
-          tandem: tandem
-        } );
-      };
-
     // Lines added for reference in panel
     //REVIEW: Looks suspiciously duplicated from LineVisibilityNode. Can/should some code be factored out?
-    var blackLine = createLine( 'black', tandem.createTandem( 'blackLine' ) );
-    var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
-    var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
+    var blackLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'black', tandem.createTandem( 'blackLine' ) );
+    var blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
+    var redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
     var displacementSymbol = new DisplacementArrowNode(
       new NumberProperty( 10 ),
       new BooleanProperty( true ),
@@ -108,6 +91,7 @@ define( function( require ) {
       ]
     } );
 
+    // REVIEW: Only used once. Inline.
     var bracketToTextSpacing = 2;
     var componentDisplacement = new HBox( {
       spacing: bracketToTextSpacing,

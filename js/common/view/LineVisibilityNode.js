@@ -61,9 +61,9 @@ define( function( require ) {
     };
 
     // Lines added for reference in panel
-    var greenLine = createLine( 'rgb(0, 180, 0)', tandem.createTandem( 'greenLine' ) );
-    var blueLine = createLine( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
-    var redLine = createLine( 'red', tandem.createTandem( 'redLine' ) );
+    var greenLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb(0, 180, 0)', tandem.createTandem( 'greenLine' ) );
+    var blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
+    var redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
 
     var equilibriumText = new Text( equilibriumPositionString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
