@@ -12,7 +12,6 @@ define( function( require ) {
   var BracketNode = require( 'SCENERY_PHET/BracketNode' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
