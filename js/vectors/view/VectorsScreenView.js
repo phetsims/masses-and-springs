@@ -64,11 +64,11 @@ define( function( require ) {
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
     var firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
-        return massAttached && equilibriumPositionVisible;
+        return !!massAttached && equilibriumPositionVisible;
       } );
     var secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.secondSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
-        return massAttached && equilibriumPositionVisible;
+        return !!massAttached && equilibriumPositionVisible;
       } );
     //REVIEW: Some duplication for things for each spring. Is there an easy/moderate way to remove this? If not no worries
 
