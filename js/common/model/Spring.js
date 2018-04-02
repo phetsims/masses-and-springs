@@ -320,8 +320,7 @@ define( function( require ) {
 
     /**
      * Sets the properties of the spring with previously stored properties.
-     * @param {Object} springState - Sets the properties of the spring with previously stored properties.
-     * REVIEW: At least reference getSpringState for the param documentation (so things don't have to be repeated).
+     * @param {Object} springState - Sets the properties of the spring with previously stored properties. See getSpringState
      *
      * @public
      */
