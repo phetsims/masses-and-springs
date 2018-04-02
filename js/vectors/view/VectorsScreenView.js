@@ -70,7 +70,6 @@ define( function( require ) {
       function( equilibriumPositionVisible, massAttached ) {
         return !!massAttached && equilibriumPositionVisible;
       } );
-    //REVIEW: Some duplication for things for each spring. Is there an easy/moderate way to remove this? If not no worries
 
     // Initializes equilibrium line for first spring
     var firstSpringEquilibriumLineNode = new ReferenceLineNode(
