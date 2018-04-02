@@ -209,10 +209,6 @@ define( function( require ) {
       }
     } );
 
-    // TODO: It looks like the below functions could be refactored into a single multilink across 7+ properties that update the below 6 visibilities
-    // TODO: OR Move code into VectorArrow (or whatever the supertype for all of the arrows would be) so that you can update visibility and tail/tip using code there.
-    //REVIEW: Handle TODOs?
-
     /**
      * Show/hide the velocity and acceleration arrows when appropriate
      * @param {Property.<boolean>} arrowVisibilityProperty
