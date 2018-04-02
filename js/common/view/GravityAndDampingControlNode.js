@@ -64,6 +64,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'bodyLabel' )
       } );
       //REVIEW: Hmm, maybe Bounds2 should have an includeX/includeY function that does this? Thoughts?
+      // @JO Not following why we would call the function includeX()/includeY(). Would updateLocalBounds() be more useful?
       bodyLabel.localBounds = bodyLabel.localBounds.withMaxX( Math.max( 50, bodyLabel.localBounds.maxX ) );
 
       bodyListItems.push( {
