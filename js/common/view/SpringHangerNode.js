@@ -64,7 +64,6 @@ define( function( require ) {
         tandem: tandem.createTandem( '2' ),
         centerX: springsSeparation
       } ) );
-      //REVIEW: springHangerLabelNode.center = this.center;  -- works equivalently?
       springHangerLabelNode.centerX = this.width / 2;
       springHangerLabelNode.centerY = this.height / 2;
       this.addChild( springHangerLabelNode );
