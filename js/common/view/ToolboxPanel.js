@@ -101,8 +101,6 @@ define( function( require ) {
         tandem: tandem.createTandem( 'rulerIcon' )
       } );
 
-      // Input listeners for the ruler icon
-      var rulerUnboundedPosition = new Vector2();
 
       // Drag listener for event forwarding: rulerIcon ---> rulerNode
       //REVIEW: Forwarding should generally use SimpleDragHandler.createForwardingListener. I'll be available to help with it.
@@ -121,7 +119,6 @@ define( function( require ) {
           var initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
             .minus( new Vector2( -rulerNode.width * 0.5, rulerNode.height * 0.4 ) );
           rulerNode.positionProperty.set( initialPosition );
-          rulerUnboundedPosition.set( initialPosition );
 
           // Sending through the startDrag from icon to rulerNode causes it to receive all subsequent drag events.
           rulerNode.rulerNodeMovableDragHandler.startDrag( event );
