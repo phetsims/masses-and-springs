@@ -85,9 +85,6 @@ define( function( require ) {
     } );
 
     visibleProperty.linkAttribute( this, 'visible' );
-
-    //REVIEW: Lots of similarities between this and MovableLineNode. Could be considered to be factored out.
-
   }
 
   massesAndSprings.register( 'ReferenceLineNode', ReferenceLineNode );
