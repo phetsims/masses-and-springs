@@ -147,8 +147,6 @@ define( function( require ) {
     // @public {ToolboxPanel} Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
       this.visibleBoundsProperty.get(),
-      //REVIEW: Usually we wouldn't need to pass in the rulerNode/TimerNode (and we wouldn't need to set the toolbox property on the nodes below).
-      //REVIEW: We can collaborate to remove this dependency?
       this.rulerNode, this.timerNode,
       model.rulerVisibleProperty,
       model.timerVisibleProperty,
