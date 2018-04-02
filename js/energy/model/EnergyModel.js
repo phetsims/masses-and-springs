@@ -23,7 +23,7 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem );
 
     // Energy screen should have spring damping
-    this.dampingProperty.set( 0.2 );
+    this.dampingProperty.set( 0.0575 );
 
     // Creation of masses and springs specific for this screen
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
@@ -45,7 +45,7 @@ define( function( require ) {
 
       //REVIEW: The more "proper" way is to pass an initial value in to the supertype that is set as the Property's
       //REVIEW: actual initial value. Then it can be reset as normal.
-      this.dampingProperty.set( 0.2 );
+      this.dampingProperty.set( 0.0575 );
     }
   } );
 } );

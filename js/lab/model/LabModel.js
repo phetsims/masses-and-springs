@@ -34,7 +34,7 @@ define( function( require ) {
     // Lab screen should have spring damping
     //REVIEW: Some other screen overrides this also, to the same value. use the same "initial value" instead of a
     //REVIEW: custom reset.
-    this.dampingProperty.set( 0.2 );
+    this.dampingProperty.set( 0.0575 );
 
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
@@ -66,7 +66,7 @@ define( function( require ) {
      */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
-      this.dampingProperty.set( 0.2 );
+      this.dampingProperty.set( 0.0575 );
     }
   } );
 } );
