@@ -26,10 +26,11 @@ define( function( require ) {
    * @param {Property.<number>} timerSecondsProperty
    * @param {Property.<boolean>} timerRunningProperty
    * @param {Property.<boolean>} visibleProperty
+   * @param {function} endDragCallback
    * @param {Tandem} tandem
    * @constructor
    */
-  function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty, tandem ) {
+  function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty, endDragCallback, tandem ) {
     var self = this;
 
     // Readout value that is used for the timerNode. We are rounding the value in the view component.
@@ -44,8 +45,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'timer' )
     } );
 
-    // @public {Panel|null} (read-write) Used for returning ruler to toolbox. Set this if needed to be returned.
-    this.toolbox = null;
 
     // @private {Vector2} (read-only) position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
@@ -62,13 +61,7 @@ define( function( require ) {
         self.moveToFront();
       },
       endDrag: function() {
-
-        // When a node is released, check if it is over the toolbox.  If so, drop it in.
-        if ( self.toolbox && self.getGlobalBounds().intersectsBounds( self.toolbox.getGlobalBounds() ) ) {
-          visibleProperty.set( false );
-          timerSecondsProperty.reset();
-          timerRunningProperty.reset();
-        }
+        endDragCallback();
       }
     } );
     this.addInputListener( this.timerNodeMovableDragHandler );

@@ -104,6 +104,15 @@ define( function( require ) {
       model.timerSecondsProperty,
       model.timerRunningProperty,
       model.timerVisibleProperty,
+      function() {
+
+        // When a node is released, check if it is over the toolbox.  If so, drop it in.
+        if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.timerNode.getGlobalBounds() ) ) {
+          model.timerVisibleProperty.set( false );
+          model.timerSecondsProperty.reset();
+          model.timerRunningProperty.reset();
+        }
+      },
       tandem.createTandem( 'timerNode' )
     );
 
@@ -113,6 +122,13 @@ define( function( require ) {
       this.visibleBoundsProperty.get(),
       Vector2.ZERO,
       model.rulerVisibleProperty,
+      function(){
+
+        // When a node is released, check if it is over the toolbox.  If so, drop it in.
+        if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.rulerNode.getGlobalBounds() ) ) {
+          model.rulerVisibleProperty.set( false );
+        }
+      },
       tandem.createTandem( 'rulerNode' )
     );
 
@@ -158,14 +174,12 @@ define( function( require ) {
 
     // Adding tools in toolbox
     this.addChild( this.toolboxPanel );
-    //REVIEW: This can be removed presumably if the above is done?
-    this.timerNode.toolbox = this.toolboxPanel;
-    this.rulerNode.toolbox = this.toolboxPanel;
 
     //REVIEW: It seems like there are listeners similar to this on subtypes. It's better to create a layout() method
     //REVIEW: on the screenview and override/extend as necessary, as you are unintentionally depending on this listener
     //REVIEW: being added before the other visibleBoundsProperty listeners are added (for layout)
     this.visibleBoundsProperty.link( function( visibleBounds ) {
+
       // Update the bounds of view elements
       self.panelRightSpacing = visibleBounds.right - self.spacing;
     } );

@@ -27,11 +27,12 @@ define( function( require ) {
    * @param {Bounds2} dragBounds
    * @param {Vector2} initialPosition
    * @param {Property.<boolean>} visibleProperty
+   * @param {function} endDragCallback
    * @param {Tandem} tandem
    *
    * @constructor
    */
-  function DraggableRulerNode( mvt, dragBounds, initialPosition, visibleProperty, tandem ) {
+  function DraggableRulerNode( mvt, dragBounds, initialPosition, visibleProperty, endDragCallback, tandem ) {
     var self = this;
 
     // @public {Panel|null} (read-write) Used for returning ruler to toolbox. Set this if needed to be returned.
@@ -80,11 +81,7 @@ define( function( require ) {
         self.moveToFront();
       },
       endDrag: function() {
-
-        // When a node is released, check if it is over the toolbox.  If so, drop it in.
-        if ( self.toolbox && self.getGlobalBounds().intersectsBounds( self.toolbox.getGlobalBounds() ) ) {
-          visibleProperty.set( false );
-        }
+        endDragCallback();
       }
     } );
     this.addInputListener( this.rulerNodeMovableDragHandler );
