@@ -37,9 +37,8 @@ define( function( require ) {
     // @public {Panel|null} (read-write) Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
 
-    // define ruler params in pixels
-    //REVIEW: How is converting 0.5 through the MVT 1 meter? Is it now 0.5 meters?
-    var rulerLength = mvt.modelToViewY( .5 ); // 1 meter
+    // define ruler params view units
+    var rulerLength = mvt.modelToViewDeltaY( -1 ); // 1 meter
     var rulerWidth = 0.125 * rulerLength;
     var majorTickLabels = [ '' ];
     for ( var i = 1; i < 10; i++ ) {
