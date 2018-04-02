@@ -17,7 +17,7 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
 
   // constants
-  var MASS_X_POSITION = 0.625;
+  var MASS_X_POSITION = 0.65;
   var MASS_OFFSET = 0.075;
 
   /**
@@ -47,7 +47,7 @@ define( function( require ) {
       density: 220,
       mysteryLabel: true
     } ) );
-    this.masses.push( new Mass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2, 'rgb( 128, 197, 237)', this.gravityProperty, tandem.createTandem( 'largeLabeledMass' ), {
+    this.masses.push( new Mass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2.25, 'rgb( 128, 197, 237)', this.gravityProperty, tandem.createTandem( 'largeLabeledMass' ), {
       density: 110,
       mysteryLabel: true
     } ) );

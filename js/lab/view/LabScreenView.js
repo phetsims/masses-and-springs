@@ -102,6 +102,7 @@ define( function( require ) {
     this.addChild( optionsPanel );
     optionsPanel.moveToBack();
 
+    this.shelf.rectWidth = 160;
     this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 1 ].positionProperty.value.x );
 
     // Adjust the floating panels to the visibleBounds of the screen.
@@ -117,7 +118,7 @@ define( function( require ) {
   return inherit( OneSpringScreenView, LabScreenView, {
     step: function( dt ) {
       this.energyGraphNode.update();
-      this.periodTraceNode.step(dt);
+      this.periodTraceNode.step( dt );
     }
   } );
 } );
