@@ -48,7 +48,6 @@ define( function( require ) {
 
     Node.call( this, options );
 
-    // REVIEW: This has some duplication with MassNode. Is it something that can be factored out?
     var velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
     var accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
     var gravityArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
