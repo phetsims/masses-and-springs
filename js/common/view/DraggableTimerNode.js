@@ -3,9 +3,6 @@
 /**
  * Responsible for the attributes and drag handlers associated with the timer node.
  *
- * REVIEW: some duplication with this and the DraggableRulerNode. Consider (not forced) factoring this common behavior
- * REVIEW: out into some "DraggableNode" that both can inherit from (then the TimerNode/etc. would be a child).
- *
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
