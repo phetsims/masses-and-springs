@@ -182,10 +182,7 @@ define( function( require ) {
     else {
       vectorVisibilityControlsVBox = new VBox( {
         children: [
-          //REVIEW: This is put into an HBox with centers vertically. Why would VStruts of equal size be needed?
-          new VStrut( 2 ),
-          vectorVisibilityCheckboxGroup,
-          new VStrut( 2 )
+          vectorVisibilityCheckboxGroup
         ],
         align: 'left',
         tandem: tandem.createTandem( 'spacingUnit' )
