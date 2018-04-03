@@ -10,7 +10,6 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var PeriodTrace = require( 'MASSES_AND_SPRINGS/lab/model/PeriodTrace' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -43,11 +42,11 @@ define( function( require ) {
     this.createMass( 0.370, MASS_X_POSITION + MASS_OFFSET, 'rgb(255, 120, 120)', null, tandem.createTandem( 'smallLabeledMass' ), {
       density: 220,
       mysteryLabel: true
-    } ) ;
+    } );
     this.createMass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2.25, 'rgb( 128, 197, 237)', null, tandem.createTandem( 'largeLabeledMass' ), {
       density: 110,
       mysteryLabel: true
-    } ) ;
+    } );
 
     // Initialize period trace.
     this.periodTrace = new PeriodTrace( this.springs[ 0 ] );
