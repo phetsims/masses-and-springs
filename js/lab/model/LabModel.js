@@ -39,18 +39,17 @@ define( function( require ) {
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
 
-    // REVIEW: Should these use MassesAndSpringsModel createMass? (or renamed method)?
-    this.masses.push( new Mass( 0.100, MASS_X_POSITION, 'rgb(247,151,34)', this.gravityProperty, tandem.createTandem( 'adjustableMass' ), {
+    this.createMass( 0.100, MASS_X_POSITION, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ), {
       adjustable: true
-    } ) );
-    this.masses.push( new Mass( 0.370, MASS_X_POSITION + MASS_OFFSET, 'rgb(255, 120, 120)', this.gravityProperty, tandem.createTandem( 'smallLabeledMass' ), {
+    } );
+    this.createMass( 0.370, MASS_X_POSITION + MASS_OFFSET, 'rgb(255, 120, 120)', null, tandem.createTandem( 'smallLabeledMass' ), {
       density: 220,
       mysteryLabel: true
-    } ) );
-    this.masses.push( new Mass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2.25, 'rgb( 128, 197, 237)', this.gravityProperty, tandem.createTandem( 'largeLabeledMass' ), {
+    } ) ;
+    this.createMass( 0.230, MASS_X_POSITION + MASS_OFFSET * 2.25, 'rgb( 128, 197, 237)', null, tandem.createTandem( 'largeLabeledMass' ), {
       density: 110,
       mysteryLabel: true
-    } ) );
+    } ) ;
 
     // Initialize period trace.
     this.periodTrace = new PeriodTrace( this.springs[ 0 ] );
