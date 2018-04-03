@@ -12,13 +12,14 @@ define( function( require ) {
   // modules
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Vector2IO = require( 'DOT/Vector2IO' );
 
   /**
@@ -34,19 +35,39 @@ define( function( require ) {
     Node.call( this );
 
     // Creates laser pointer tip for reference line
-    // Laser should never have a button in this sim, but a Property is needed for the LaserPointerNode to work
-    var laserEnabledProperty = new Property( false, { validValues: [ false ] } );
-    var laserPointerNode = new LaserPointerNode( laserEnabledProperty, {
-      bodySize: new Dimension2( 12, 14 ),
-      nozzleSize: new Dimension2( 8, 9 ),
-      cornerRadius: 1,
-      tandem: tandem.createTandem( 'laserPointerNode' ),
-      hasButton: false,
-      buttonRadius: 5,
-      buttonTouchAreaDilation: 10,
-      cursor: 'pointer'
+    var bodySize = new Dimension2( 12, 14 );
+    var nozzleSize = new Dimension2( 8, 9 );
+    var cornerRadius = 1;
+    var topColor = 'rgb( 170, 170, 170 )';
+    var bottomColor = 'rgb( 40, 40, 40 )';
+    var highlightColor = 'rgb( 245, 245, 245 )';
+    var highlightColorStop = 0.3;
+
+    // the narrow part of the handle
+    var nozzleNode = new Rectangle( 0, 0, nozzleSize.width + cornerRadius, nozzleSize.height, {
+      cornerRadius: cornerRadius,
+      fill: new LinearGradient( 0, 0, 0, nozzleSize.height )
+        .addColorStop( 0, topColor )
+        .addColorStop( highlightColorStop, highlightColor )
+        .addColorStop( 1, bottomColor ),
+      stroke: 'black',
+      right: 0,
+      centerY: 0
     } );
-    this.addChild( laserPointerNode );
+    this.addChild( nozzleNode );
+
+    // the main body of the handle
+    var bodyNode = new Rectangle( 0, 0, bodySize.width, bodySize.height, {
+      cornerRadius: cornerRadius,
+      fill: new LinearGradient( 0, 0, 0, bodySize.height )
+        .addColorStop( 0, topColor )
+        .addColorStop( highlightColorStop, highlightColor )
+        .addColorStop( 1, bottomColor ),
+      stroke: 'black',
+      right: nozzleNode.left + cornerRadius, // overlap to hide corner radius
+      centerY: nozzleNode.centerY
+    } );
+    this.addChild( bodyNode );
 
     var line = new Line( 0, 0, length, 0, {
       stroke: 'red',
@@ -70,7 +91,7 @@ define( function( require ) {
 
     // Position the line in screen coordinates
     this.positionProperty.link( function( position ) {
-      self.translation = position.minusXY( length / 2, 0  );
+      self.translation = position.minusXY( length / 2, 0 );
     } );
 
     this.addInputListener( new MovableDragHandler( this.positionProperty, {
