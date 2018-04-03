@@ -56,6 +56,9 @@ define( function( require ) {
     this.mass = mass;
 
     var hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT );
+    if ( mass.icon ) {
+      hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT * .4 );
+    }
 
     var rect = new Rectangle( {
       stroke: 'black',
@@ -113,27 +116,30 @@ define( function( require ) {
     } );
     this.addChild( hookNode );
 
-    var labelString = mass.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
-    var label = new Text( labelString, {
-      font: new PhetFont( { size: 12, weight: 'bold' } ),
-      centerY: rect.centerY,
-      centerX: 0,
-      pickable: false,
-      maxWidth: 50,
-      tandem: tandem.createTandem( 'label' )
-    } );
+    if ( !mass.icon ) {
+      var labelString = mass.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
+      var label = new Text( labelString, {
+        font: new PhetFont( { size: 12, weight: 'bold' } ),
+        centerY: rect.centerY,
+        centerX: 0,
+        pickable: false,
+        maxWidth: 50,
+        tandem: tandem.createTandem( 'label' )
+      } );
 
-    this.addChild( label );
-    mass.massProperty.link( function() {
-      label.center = rect.center;
-    } );
+      this.addChild( label );
 
-    // Adjust the mass label for adjustable masses.
-    if ( this.mass.adjustable ) {
-      this.mass.massProperty.link( function( massValue ) {
-        label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
+      mass.massProperty.link( function() {
         label.center = rect.center;
       } );
+
+      // Adjust the mass label for adjustable masses.
+      if ( this.mass.adjustable ) {
+        this.mass.massProperty.link( function( massValue ) {
+          label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
+          label.center = rect.center;
+        } );
+      }
     }
 
     // @public {MovableDragHandler} (read-write)

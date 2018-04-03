@@ -51,6 +51,7 @@ define( function( require ) {
     options = _.extend( {
       adjustable: false,
       mysteryLabel: false,
+      icon: false, // Determines whether this mass will be displayed as an icon.
       density: 80, // Constant used to keep all of our masses consistent in the model (kg/m^2).
       color: new Color( color ),
       zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf (m).
@@ -59,8 +60,9 @@ define( function( require ) {
     // @public Non-Property attributes
     this.adjustable = options.adjustable;
     this.mysteryLabel = options.mysteryLabel;
+    this.icon = options.icon;
     this.color = color;
-    this.zeroReferencePoint= options.zeroReferencePoint;
+    this.zeroReferencePoint = options.zeroReferencePoint;
 
     // @public (read-only) {Property.<number>} mass of mass object in kg
     this.massProperty = new NumberProperty( massValue );

@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -28,9 +29,10 @@ define( function( require ) {
 
   /**
    * @param {Mass} mass
+   * @param {Node} massNodeIcon: icon that represents the mass to be adjusted
    * @constructor
    */
-  function MassValueControlPanel( mass ) {
+  function MassValueControlPanel( mass, massNodeIcon ) {
 
     assert && assert( mass.adjustable === true, 'MassValueControlPanel should only adjust a mass that is adjustable.' );
 
@@ -48,6 +50,7 @@ define( function( require ) {
     } );
 
     var numberControl = new NumberControl( massString, massInGramsProperty, range, {
+      titleMaxWidth:35 ,
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
       } ),
@@ -71,7 +74,7 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 65,
+        titleXSpacing: 60,
         ySpacing: 4,
         arrowButtonsXSpacing: 5
       } ),
@@ -81,14 +84,21 @@ define( function( require ) {
       delta: 1
     } );
 
-    Panel.call( this, numberControl, {
+    var contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
+
+    Panel.call( this, contentNode, {
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
       maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 20,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       fill: 'white',
       stroke: 'gray',
-      yMargin: 8
+      yMargin: 4,
+      xMargin: 6
     } );
+
+    massNodeIcon.left= this.bounds.left;
+    massNodeIcon.top = numberControl.top-7;
+    massNodeIcon.pickable = false;
   }
 
   massesAndSprings.register( 'MassValueControlPanel', MassValueControlPanel );

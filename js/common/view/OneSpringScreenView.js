@@ -18,9 +18,11 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var MassValueControlPanel = require( 'MASSES_AND_SPRINGS/common/view/MassValueControlPanel' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -101,8 +103,16 @@ define( function( require ) {
     this.energyGraphNode = new EnergyGraphNode( model, tandem );
     this.energyGraphNode.leftTop = this.visibleBoundsProperty.value.leftTop.plus( new Vector2( this.spacing, this.spacing ) );
 
+    var massNodeIcon = new MassNode(
+      new Mass( 0.005, 0, model.masses[ 0 ].color, model.gravityProperty, tandem, { icon: true } ),
+      this.modelViewTransform,
+      this.visibleBoundsProperty,
+      model,
+      tandem.createTandem( 'massIcon' ) );
+
     var massValueControlPanel = new MassValueControlPanel(
       model.masses[ 0 ],
+      massNodeIcon,
       tandem.createTandem( 'massValueControlPanel' )
     );
 
