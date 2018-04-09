@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var PeriodTrace = require( 'MASSES_AND_SPRINGS/lab/model/PeriodTrace' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -29,9 +30,7 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem );
 
     // Lab screen should have spring damping
-    //REVIEW: Some other screen overrides this also, to the same value. use the same "initial value" instead of a
-    //REVIEW: custom reset.
-    this.dampingProperty.set( 0.0575 );
+    this.dampingProperty = new NumberProperty( 0.0575 );
 
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
@@ -56,13 +55,11 @@ define( function( require ) {
 
   return inherit( MassesAndSpringsModel, LabModel, {
     /**
-     * @override
      *
      * @public
      */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
-      this.dampingProperty.set( 0.0575 );
     }
   } );
 } );

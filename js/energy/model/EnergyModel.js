@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
@@ -23,7 +24,7 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem );
 
     // Energy screen should have spring damping
-    this.dampingProperty.set( 0.0575 );
+    this.dampingProperty = new NumberProperty( 0.0575 );
 
     // Creation of masses and springs specific for this screen
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
@@ -42,10 +43,6 @@ define( function( require ) {
      */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
-
-      //REVIEW: The more "proper" way is to pass an initial value in to the supertype that is set as the Property's
-      //REVIEW: actual initial value. Then it can be reset as normal.
-      this.dampingProperty.set( 0.0575 );
     }
   } );
 } );
