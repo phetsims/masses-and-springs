@@ -192,8 +192,8 @@ define( function( require ) {
     this.initialTotalEnergyProperty = new NumberProperty( 0 );
 
     // @public {Property.<number>} Thermal energy of the mass
-    this.thermalEnergyProperty = new DerivedProperty( [ this.initialTotalEnergyProperty, this.totalEnergyProperty, ],
-      function( initialEnergy, totalEnergy, damping ) {
+    this.thermalEnergyProperty = new DerivedProperty( [ this.initialTotalEnergyProperty, this.totalEnergyProperty ],
+      function( initialEnergy, totalEnergy ) {
 
         // Preserving energy here so when damping is zero the thermal energy doesn't change.
         if ( self.springProperty.value && self.springProperty.value.dampingCoefficientProperty.value === 0 ) {
@@ -268,7 +268,6 @@ define( function( require ) {
     } );
 
     // Set the equilibrium position when a mass value changes. We do a similar process in Spring.js when the mass is attached to the spring.
-    //REVIEW: Can this code be factored out?
     this.massProperty.link( function( value ) {
       var spring = self.springProperty.value;
       if ( spring ) {
