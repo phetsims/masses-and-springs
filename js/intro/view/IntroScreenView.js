@@ -249,23 +249,11 @@ define( function( require ) {
     } );
 
     // Panel that will display all the toggleable options.
-    //REVIEW: Energy/Intro/Lab all create optionsPanels with fairly duplicated code. Support for this should be moved
-    //REVIEW: to SpringScreenView, and the optionsPanel should be layered correctly so that no moveToBack() is needed.
-    //REVIEW: Let me know if I can help with this.
-    var optionsPanel = new Panel(
-      optionsVBox,
-      {
-        xMargin: 10,
-        fill: MassesAndSpringsConstants.PANEL_FILL,
-        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'LineVisibilityNode' ),
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
-        resize: false
-      } );
+    var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
     this.addChild( optionsPanel );
     optionsPanel.moveToBack();
 
-    this.visibleBoundsProperty.link( function( visibleBounds ) {
+    this.visibleBoundsProperty.link( function(  ) {
       optionsPanel.top = self.secondSpringConstantControlPanel.top;
       optionsPanel.right = self.panelRightSpacing;
       self.toolboxPanel.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;

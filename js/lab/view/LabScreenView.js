@@ -17,7 +17,6 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var OneSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringScreenView' );
   var VectorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlNode' );
-  var Panel = require( 'SUN/Panel' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
@@ -76,19 +75,7 @@ define( function( require ) {
     } );
 
     // Panel that will display all the toggleable options.
-    //REVIEW: Energy/Intro/Lab all create optionsPanels with fairly duplicated code. Support for this should be moved
-    //REVIEW: to SpringScreenView, and the optionsPanel should be layered correctly so that no moveToBack() is needed.
-    //REVIEW: Let me know if I can help with this.
-    var optionsPanel = new Panel(
-      optionsVBox,
-      {
-        xMargin: 10,
-        fill: MassesAndSpringsConstants.PANEL_FILL,
-        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'LineVisibilityNode' ),
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 5
-      } );
-
+    var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
     this.addChild( optionsPanel );
     optionsPanel.moveToBack();
 
@@ -96,7 +83,7 @@ define( function( require ) {
     this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 1 ].positionProperty.value.x );
 
     // Adjust the floating panels to the visibleBounds of the screen.
-    this.visibleBoundsProperty.link( function(  ) {
+    this.visibleBoundsProperty.link( function() {
       optionsPanel.top = self.energyGraphNode.top;
       optionsPanel.right = self.panelRightSpacing;
       self.toolboxPanel.top = optionsPanel.bottom + self.spacing;

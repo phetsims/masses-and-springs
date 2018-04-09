@@ -16,7 +16,6 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var TwoSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringScreenView' );
-  var Panel = require( 'SUN/Panel' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VectorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlNode' );
@@ -135,15 +134,8 @@ define( function( require ) {
     } );
 
     // Panel that will display all the toggleable options.
-    var optionsPanel = new Panel(
-      optionsVBox,
-      {
-        xMargin: 10,
-        fill: MassesAndSpringsConstants.PANEL_FILL,
-        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        tandem: tandem.createTandem( 'LineVisibilityNode' ),
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
-      } );
+    var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
+
     this.addChild( optionsPanel );
     optionsPanel.moveToBack();
 

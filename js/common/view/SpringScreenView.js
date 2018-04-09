@@ -20,6 +20,7 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
+  var Panel = require( 'SUN/Panel' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Shelf = require( 'MASSES_AND_SPRINGS/common/view/Shelf' );
@@ -246,6 +247,7 @@ define( function( require ) {
         }
       );
     },
+
     /**
      * Creates a panel that displays visible indicators for reference lines, displacement arrow, and period trace.
      * @public
@@ -265,6 +267,27 @@ define( function( require ) {
           stroke: null,
           periodTraceOption: displayPeriodTrace
         } );
+    },
+
+    /**
+     * Creates a panel that displays all of the right hand panels on the screen.
+     * @public
+     *
+     * @param optionsContent
+     * @param tandem
+     * @return {Panel}
+     */
+    createOptionsPanel: function( optionsContent, tandem ) {
+      var optionsPanel = new Panel(
+        optionsContent, {
+          xMargin: 10,
+          fill: MassesAndSpringsConstants.PANEL_FILL,
+          cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+          tandem: tandem.createTandem( 'LineVisibilityNode' ),
+          minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 5
+        } );
+      optionsPanel.moveToBack();
+      return optionsPanel;
     }
   } );
 } );
