@@ -16,7 +16,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Panel = require( 'SUN/Panel' );
   var Range = require( 'DOT/Range' );
@@ -101,28 +101,23 @@ define( function( require ) {
         tandem: tandem.createTandem( 'rulerIcon' )
       } );
 
-
       // Drag listener for event forwarding: rulerIcon ---> rulerNode
-      //REVIEW: Forwarding should generally use SimpleDragHandler.createForwardingListener. I'll be available to help with it.
-      //REVIEW: Definitely don't need a full listener here, particularly a drag listener.
-      self.rulerIcon.addInputListener( new MovableDragHandler( rulerNode.positionProperty, {
+      self.rulerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( function( event ) {
+        rulerVisibleProperty.set( true );
+        // Now determine the initial position where this element should move to after it's created, which corresponds
+        // to the location of the mouse or touch event.
+        var initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
+          .minus( new Vector2( -rulerNode.width * 0.5, rulerNode.height * 0.4 ) );
+        rulerNode.positionProperty.set( initialPosition );
+
+        // Sending through the startDrag from icon to rulerNode causes it to receive all subsequent drag events.
+        rulerNode.rulerNodeMovableDragHandler.startDrag( event );
+      }, {
 
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
         dragBounds: dragBounds,
-        tandem: tandem.createTandem( 'dragHandler' ),
-
-        startDrag: function( event ) {
-          rulerVisibleProperty.set( true );
-          // Now determine the initial position where this element should move to after it's created, which corresponds
-          // to the location of the mouse or touch event.
-          var initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
-            .minus( new Vector2( -rulerNode.width * 0.5, rulerNode.height * 0.4 ) );
-          rulerNode.positionProperty.set( initialPosition );
-
-          // Sending through the startDrag from icon to rulerNode causes it to receive all subsequent drag events.
-          rulerNode.rulerNodeMovableDragHandler.startDrag( event );
-        }
+        tandem: tandem.createTandem( 'dragHandler' )
       } ) );
       toolbox.addChild( self.rulerIcon );
       rulerVisibleProperty.link( function( visible ) {
@@ -146,31 +141,26 @@ define( function( require ) {
       } );
 
       // Drag listener for event forwarding: timerIcon ---> timerNode
-      //REVIEW: Forwarding should generally use SimpleDragHandler.createForwardingListener. I'll be available to help with it.
-      //REVIEW: Definitely don't need a full listener here, particularly a drag listener.
-      self.timerIcon.addInputListener( new MovableDragHandler( timerNode.positionProperty, {
+      self.timerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( function( event ) {
+
+        // Toggle visibility
+        timerVisibleProperty.set( true );
+
+        // Now determine the initial position where this element should move to after it's created, which corresponds
+        // to the location of the mouse or touch event.
+        var initialPosition = timerNode.globalToParentPoint( event.pointer.point )
+          .minus( new Vector2( timerNode.width / 2, timerNode.height * 0.4 ) );
+
+        timerNode.positionProperty.set( initialPosition );
+
+        // Sending through the startDrag from icon to timerNode causes it to receive all subsequent drag events.
+        timerNode.timerNodeMovableDragHandler.startDrag( event );
+      }, {
 
         // allow moving a finger (on a touchscreen) dragged across this node to interact with it
         allowTouchSnag: true,
         dragBounds: dragBounds,
-        tandem: tandem.createTandem( 'dragHandler' ),
-
-        startDrag: function( event ) {
-
-          // Toggle visibility
-          timerVisibleProperty.set( true );
-
-
-          // Now determine the initial position where this element should move to after it's created, which corresponds
-          // to the location of the mouse or touch event.
-          var initialPosition = timerNode.globalToParentPoint( event.pointer.point )
-            .minus( new Vector2( timerNode.width / 2, timerNode.height * 0.4 ) );
-
-          timerNode.positionProperty.set( initialPosition );
-
-          // Sending through the startDrag from icon to timerNode causes it to receive all subsequent drag events.
-          timerNode.timerNodeMovableDragHandler.startDrag( event );
-        }
+        tandem: tandem.createTandem( 'dragHandler' )
       } ) );
       toolbox.addChild( self.timerIcon );
       timerVisibleProperty.link( function( visible ) {
