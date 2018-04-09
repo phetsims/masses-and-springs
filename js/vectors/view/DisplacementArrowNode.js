@@ -63,9 +63,10 @@ define( function( require ) {
         displacementArrow.visible = ( displacement !== 0 ) && visible; // since we can't draw a zero-length arrow
         verticalLine.visible = displacementArrow.visible && visible;
         if ( displacement !== 0 ) {
-          //REVIEW: Is this because springs are offset by 0.01 in createSpring in MassesAndSpringsModel
-          // TODO: We should find out why this -0.01 is outside the modelViewTransform. It can be negative but why is the number value there? @denz1994
-          displacementArrow.setTailAndTip( 0, 0, 0, -0.01 * options.modelViewTransform.modelToViewDeltaY( options.unitDisplacementLength * displacement ) );
+
+          // Used because springs are offset slightly below dev bounds.
+          var ceilingOffset = -0.01;
+          displacementArrow.setTailAndTip( 0, 0, 0, ceilingOffset * options.modelViewTransform.modelToViewDeltaY( options.unitDisplacementLength * displacement ) );
         }
       } );
       options.children = [ displacementArrow, verticalLine ];
