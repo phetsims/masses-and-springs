@@ -11,8 +11,6 @@ define( function( require ) {
 
   // modules
   var DerivedProperty = require( 'AXON/DerivedProperty' );
-
-  var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -100,16 +98,7 @@ define( function( require ) {
     secondSpringEquilibriumLineNode.moveToBack();
 
     // Contains visibility options for the reference lines and displacement arrow
-    //REVIEW: the margins/whatnot are somewhat duplicated.
-    var indicatorVisibilityControlNode = new IndicatorVisibilityControlNode(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlNode' ), {
-        //REVIEW: this maxWidth/xMargin/yMargin combo is repeated a lot. If not too hard, can it be factored out?
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null
-      } );
+    var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
 
     // Contains all of the display options for the vectors and forces
     var vectorVisibilityControlNode = new VectorVisibilityControlNode(
@@ -158,7 +147,7 @@ define( function( require ) {
     this.addChild( optionsPanel );
     optionsPanel.moveToBack();
 
-    this.visibleBoundsProperty.link( function( visibleBounds ) {
+    this.visibleBoundsProperty.link( function(  ) {
       optionsPanel.top = self.secondSpringConstantControlPanel.top;
       optionsPanel.right = self.panelRightSpacing;
       self.toolboxPanel.top = optionsPanel.bottom + self.spacing;

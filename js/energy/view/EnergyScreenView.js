@@ -12,7 +12,6 @@ define( function( require ) {
   // modules
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Panel = require( 'SUN/Panel' );
@@ -45,15 +44,7 @@ define( function( require ) {
     );
 
     //REVIEW: This is duplicated with the LabScreenView.
-    var indicatorVisibilityControlNode = new IndicatorVisibilityControlNode(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null,
-        periodTraceOption: false
-      } );
+    var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
 
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {
@@ -82,7 +73,7 @@ define( function( require ) {
     this.addChild( optionsPanel );
     optionsPanel.moveToBack();
 
-    this.visibleBoundsProperty.link( function( visibleBounds ) {
+    this.visibleBoundsProperty.link( function(  ) {
       optionsPanel.top = self.energyGraphNode.top;
       optionsPanel.right = self.panelRightSpacing;
       self.toolboxPanel.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;

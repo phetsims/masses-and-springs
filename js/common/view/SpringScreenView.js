@@ -13,6 +13,7 @@ define( function( require ) {
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
@@ -122,7 +123,7 @@ define( function( require ) {
       this.visibleBoundsProperty.get(),
       Vector2.ZERO,
       model.rulerVisibleProperty,
-      function(){
+      function() {
 
         // When a node is released, check if it is over the toolbox.  If so, drop it in.
         if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.rulerNode.getGlobalBounds() ) ) {
@@ -201,6 +202,7 @@ define( function( require ) {
 
     /**
      * Creates a stopper button that stops the oscillation of its referenced spring.
+     * @public
      *
      * @param {Spring} spring
      * @param {Tandem} tandem
@@ -218,6 +220,7 @@ define( function( require ) {
 
     /**
      * Creates a panel that controls the designated spring's spring constant value.
+     * @public
      *
      * @param {number} springIndex
      * @param {Array.<Text>} labels
@@ -242,6 +245,26 @@ define( function( require ) {
           }
         }
       );
+    },
+    /**
+     * Creates a panel that displays visible indicators for reference lines, displacement arrow, and period trace.
+     * @public
+     *
+     * @param model {MassesAndSpringsModel} model
+     * @param displayPeriodTrace {Boolean}
+     * @param {Tandem} tandem
+     * @return {IndicatorVisibilityControlNode}
+     */
+    createIndicatorVisibilityPanel: function( model, displayPeriodTrace, tandem ) {
+      return new IndicatorVisibilityControlNode(
+        model,
+        tandem.createTandem( 'indicatorVisibilityControlNode' ), {
+          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+          xMargin: 0,
+          yMargin: 0,
+          stroke: null,
+          periodTraceOption: displayPeriodTrace
+        } );
     }
   } );
 } );

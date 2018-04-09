@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var PeriodTraceNode = require( 'MASSES_AND_SPRINGS/lab/view/PeriodTraceNode' );
@@ -63,15 +62,7 @@ define( function( require ) {
       } );
 
     //REVIEW: This is duplicated with the EnergyScreenView.
-    var indicatorVisibilityControlNode = new IndicatorVisibilityControlNode(
-      model,
-      tandem.createTandem( 'indicatorVisibilityControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null,
-        periodTraceOption: true
-      } );
+    var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, true, tandem );
 
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {
@@ -106,7 +97,7 @@ define( function( require ) {
     this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 1 ].positionProperty.value.x );
 
     // Adjust the floating panels to the visibleBounds of the screen.
-    this.visibleBoundsProperty.link( function( visibleBounds ) {
+    this.visibleBoundsProperty.link( function(  ) {
       optionsPanel.top = self.energyGraphNode.top;
       optionsPanel.right = self.panelRightSpacing;
       self.toolboxPanel.top = optionsPanel.bottom + self.spacing;
