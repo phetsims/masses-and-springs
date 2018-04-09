@@ -302,8 +302,7 @@ define( function( require ) {
      * Retains the properties of the spring in an object that can publicly accessed.
      * @public
      *
-     * REVIEW: Fully document the return value. Maybe it should have its own type for this (SpringState.js). Did we
-     * REVIEW: discuss that?
+     * @return {Object}
      */
     getSpringState: function() {
       return {
@@ -323,6 +322,7 @@ define( function( require ) {
      * @param {Object} springState - Sets the properties of the spring with previously stored properties. See getSpringState
      *
      * @public
+     * @return {Object}
      */
     setSpringState: function( springState ) {
       this.displacementProperty.set( springState.displacement );
