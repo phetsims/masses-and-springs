@@ -61,7 +61,6 @@ define( function( require ) {
         stroke: null
       } );
 
-    //REVIEW: This is duplicated with the EnergyScreenView.
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, true, tandem );
 
     // VBox that contains all of the panel's content

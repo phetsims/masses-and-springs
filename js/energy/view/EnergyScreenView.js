@@ -42,8 +42,6 @@ define( function( require ) {
         hSlider: true
       }
     );
-
-    //REVIEW: This is duplicated with the LabScreenView.
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
 
     // VBox that contains all of the panel's content
