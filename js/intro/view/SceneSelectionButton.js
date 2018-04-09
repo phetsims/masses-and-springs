@@ -68,7 +68,6 @@ define( function( require ) {
       mvt,
       tandem.createTandem( 'firstSpringIcon' ),
       springNodeOptions );
-    //REVIEW: Can this be in the options?
     firstSpringIcon.loopsProperty.set( 6 );
     firstSpringIcon.lineWidthProperty.set( 3 );
 
@@ -79,7 +78,6 @@ define( function( require ) {
       tandem.createTandem( 'secondSpringIcon' ),
       springNodeOptions
     );
-    //REVIEW: Can this be in the options?
     secondSpringIcon.loopsProperty.set( 6 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
