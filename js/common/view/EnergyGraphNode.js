@@ -19,7 +19,7 @@ define( function( require ) {
   var ClearThermalButton = require( 'SCENERY_PHET/ClearThermalButton' );
   var Color = require( 'SCENERY/util/Color' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var Dialog = require( 'JOIST/Dialog' );
+  var Dialog = require( 'SUN/Dialog' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var InfoButton = require( 'SCENERY_PHET/buttons/InfoButton' );
