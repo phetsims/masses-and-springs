@@ -50,7 +50,7 @@ define( function( require ) {
     } );
 
     var numberControl = new NumberControl( massString, massInGramsProperty, range, {
-      titleMaxWidth:35 ,
+      titleMaxWidth: 35,
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
       } ),
@@ -74,7 +74,7 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 60,
+        titleXSpacing: 65,
         ySpacing: 4,
         arrowButtonsXSpacing: 5
       } ),
@@ -84,7 +84,7 @@ define( function( require ) {
       delta: 1
     } );
 
-    var contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
+    var contentNode = new Node( { children: [ numberControl, massNodeIcon ], resize: false, preventFit: true } );
 
     Panel.call( this, contentNode, {
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
@@ -96,8 +96,8 @@ define( function( require ) {
       xMargin: 6
     } );
 
-    massNodeIcon.left= this.bounds.left;
-    massNodeIcon.top = numberControl.top-7;
+    massNodeIcon.left = this.bounds.left;
+    massNodeIcon.top = numberControl.top - 3;
     massNodeIcon.pickable = false;
   }
 

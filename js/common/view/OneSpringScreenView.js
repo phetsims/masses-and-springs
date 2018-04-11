@@ -104,7 +104,7 @@ define( function( require ) {
     this.energyGraphNode.leftTop = this.visibleBoundsProperty.value.leftTop.plus( new Vector2( this.spacing, this.spacing ) );
 
     var massNodeIcon = new MassNode(
-      new Mass( 0.005, 0, model.masses[ 0 ].color, model.gravityProperty, tandem, { icon: true } ),
+      new Mass( 0.0055, 0, model.masses[ 0 ].color, model.gravityProperty, tandem, { icon: true } ),
       this.modelViewTransform,
       this.visibleBoundsProperty,
       model,
