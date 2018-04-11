@@ -92,12 +92,12 @@ define( function( require ) {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       fill: 'white',
       stroke: 'gray',
-      yMargin: 4,
+      yMargin: 3.5,
       xMargin: 6
     } );
 
     massNodeIcon.left = this.bounds.left;
-    massNodeIcon.centerY = numberControl.top + 8;
+    massNodeIcon.centerY = numberControl.top + 6.5;
     massNodeIcon.pickable = false;
   }
 
