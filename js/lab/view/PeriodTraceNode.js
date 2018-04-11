@@ -36,11 +36,10 @@ define( function( require ) {
     // @private {number} The opacity of the trace (not using Node opacity for performance reasons)
     this.colorAlpha = 1;
 
-    // @protected PREVIEW: protected? what inherits from this?
+    // @private
     this.traceColor = new Color( 'black' );
 
-
-    // @protected PREVIEW: protected? what inherits from this?
+    // @private
     this.modelViewTransform = modelViewTransform;
 
     this.originalX = this.modelViewTransform.modelToViewX( this.periodTrace.springProperty.value.positionProperty.value.x - 0.2 );
@@ -60,8 +59,8 @@ define( function( require ) {
   massesAndSprings.register( 'PeriodTraceNode', PeriodTraceNode );
 
   return inherit( Node, PeriodTraceNode, {
-    step: function( dt ) {
-      if ( this.periodTrace.stateProperty.value === 4 ) {
+    step: function( dt , playingProperty) {
+      if ( this.periodTrace.stateProperty.value === 4 && playingProperty.value ) {
         this.colorAlpha = Math.max( 0, this.colorAlpha - FADE_OUT_SPEED * dt );
         this.traceColor.alpha = this.colorAlpha;
 
