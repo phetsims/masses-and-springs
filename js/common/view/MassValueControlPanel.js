@@ -84,7 +84,7 @@ define( function( require ) {
       delta: 1
     } );
 
-    var contentNode = new Node( { children: [ numberControl, massNodeIcon ], resize: false, preventFit: true } );
+    var contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
 
     Panel.call( this, contentNode, {
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
@@ -97,7 +97,7 @@ define( function( require ) {
     } );
 
     massNodeIcon.left = this.bounds.left;
-    massNodeIcon.top = numberControl.top - 3;
+    massNodeIcon.centerY = numberControl.top + 8;
     massNodeIcon.pickable = false;
   }
 
