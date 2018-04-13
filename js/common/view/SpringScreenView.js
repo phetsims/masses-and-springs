@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var DynamicProperty = require( 'AXON/DynamicProperty' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -21,13 +22,15 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Panel = require( 'SUN/Panel' );
+  var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Shelf = require( 'MASSES_AND_SPRINGS/common/view/Shelf' );
+  var SimSpeedChoice = require( 'MASSES_AND_SPRINGS/common/enum/SimSpeedChoice' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var TimeControlHBox = require( 'MASSES_AND_SPRINGS/common/view/TimeControlHBox' );
+  var TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -154,13 +157,22 @@ define( function( require ) {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
-    // @public {TimeControlHBox} Sim speed controls
-    this.timeControlPanel = new TimeControlHBox(
-      model,
-      tandem.createTandem( 'timeControlPanel' ), {
-        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT )
-      }
-    );
+    // @public {TimeControlNode} Sim speed controls
+    this.timeControlPanel = new TimeControlNode(
+      model.playingProperty,
+      new DynamicProperty( new Property( model.simSpeedProperty ), {
+        map: function( simSpeed ) {
+          return simSpeed === SimSpeedChoice.SLOW;
+        },
+        inverseMap: function( isSlow ) {
+          return isSlow ? SimSpeedChoice.SLOW : SimSpeedChoice.NORMAL;
+        },
+        bidirectional: true
+      } ), {
+      stepCallback: function() { model.stepForward( 0.01 ); },
+      tandem: tandem.createTandem( 'timeControlPanel' ),
+      bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT )
+    } );
 
     // @public {ToolboxPanel} Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
