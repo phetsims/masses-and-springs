@@ -10,6 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var ComboBox = require( 'SUN/ComboBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
@@ -134,14 +136,18 @@ define( function( require ) {
     };
 
     var questionTextOffset = 20;
+    var sliderTitleGroup = new AlignGroup();
     if ( options.hSlider ) {
 
       var gravityHSliderTitle = new HBox( {
         align: 'left',
         children: [
-          new Text( gravityString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
           //REVIEW: Similarly why would HStrut be used here? Usually we can accomplish layouts without?
-          new HStrut( TITLE_OFFSET + 3 )
+          new AlignBox( new Text( gravityString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ), {
+            group: sliderTitleGroup,
+            xAlign: 'left',
+            maxWidth: TITLE_OFFSET+3
+          } )
         ]
       } );
 
@@ -235,16 +241,9 @@ define( function( require ) {
     }
     else {
 
-      var dampingEqualsZeroText = new HBox( {
-        align: 'left',
-        children: [
-          new Text( StringUtils.fillIn( dampingEqualsZeroString, { equalsZero: MathSymbols.EQUAL_TO + ' 0' } ), {
-            font: MassesAndSpringsConstants.TITLE_FONT,
-            maxWidth: this.maxWidth
-          } ),
-          // REVIEW: Similar strut issue here
-          new HStrut( TITLE_OFFSET - 35 )
-        ]
+      var dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, { equalsZero: MathSymbols.EQUAL_TO + ' 0' } ), {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: this.maxWidth
       } );
 
       gravityNode = new Node( { children: [ questionTextNode, gravitySlider ] } );
