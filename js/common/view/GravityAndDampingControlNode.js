@@ -41,7 +41,8 @@ define( function( require ) {
   var whatIsTheValueOfGravityString = require( 'string!MASSES_AND_SPRINGS/whatIsTheValueOfGravity' );
 
   // constants
-  var TITLE_OFFSET = 125;
+  var SPACING = 7;
+  var TITLE_INDENT = -35;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -74,16 +75,6 @@ define( function( require ) {
     } );
     var gravityProperty = model.gravityProperty;
 
-    // Manages the items associated with the gravity panel in a combo box
-    var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
-      buttonCornerRadius: 3,
-      buttonYMargin: 0,
-      itemYMargin: 5,
-      itemXMargin: 2,
-      listYMargin: 3,
-      tandem: tandem.createTandem( 'gravityComboBox' )
-    } );
-
     var sliderOptions = {
       majorTickLength: 5,
       minorTickLength: 5,
@@ -103,6 +94,7 @@ define( function( require ) {
     };
 
     var gravitySliderOptions = {
+      left: TITLE_INDENT,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
       trackSize: new Dimension2( 125, 0.1 ),
@@ -136,21 +128,14 @@ define( function( require ) {
     };
 
     var questionTextOffset = 20;
-    var sliderTitleGroup = new AlignGroup();
     if ( options.hSlider ) {
 
-      var gravityHSliderTitle = new HBox( {
-        align: 'left',
-        children: [
-          //REVIEW: Similarly why would HStrut be used here? Usually we can accomplish layouts without?
-          new AlignBox( new Text( gravityString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ), {
-            group: sliderTitleGroup,
-            xAlign: 'left',
-            maxWidth: TITLE_OFFSET+3
-          } )
-        ]
+      // Create title for gravity slider
+      var gravityHSliderTitle = new Text( gravityString, {
+        font: new PhetFont( { size: 14, weight: 'bold' } )
       } );
 
+      // Create gravity slider
       var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE, sliderOptions );
       gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
@@ -161,12 +146,15 @@ define( function( require ) {
         tandem: tandem.createTandem( 'gravityLotsString' )
       } ) );
 
-      var gravitySlider = new VBox( {
-        align: 'left',
-        spacing: 2,
+      var gravitySlider = new Node( {
+
         //REVIEW: Usually HStruts wouldn't be needed for something like this. Why is it used here?
-        children: [ gravityHSliderTitle, new HBox( { children: [ new HStrut( 15 ), gravityHSlider ] } ) ]
+        xMargin: 0,
+        yMargin: 0,
+        children: [ gravityHSliderTitle, gravityHSlider ]
       } );
+      gravityHSlider.left = gravityHSliderTitle.centerX - 10;
+      gravityHSlider.top = gravityHSliderTitle.bottom + SPACING;
     }
     else {
       gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE, gravitySliderOptions );
@@ -180,16 +168,37 @@ define( function( require ) {
         new VStrut( questionTextOffset ),
         new Text( whatIsTheValueOfGravityString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: this.maxWidth
+          maxWidth: gravitySlider.width
         } ),
         new VStrut( questionTextOffset )
       ],
       center: gravitySlider.center
     } );
 
+    // Manages the items associated with the gravity panel in a combo box
+    var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
+      top: gravitySlider.bottom + SPACING,
+      centerX: gravitySlider.centerX + 15,
+      buttonCornerRadius: 3,
+      buttonYMargin: 0,
+      itemYMargin: 5,
+      itemXMargin: 2,
+      listYMargin: 3,
+      tandem: tandem.createTandem( 'gravityComboBox' )
+    } );
+
     if ( options.dampingVisible ) {
+
+      var dampingHSliderTitle = new Text( dampingString, {
+        font: new PhetFont( { size: 14, weight: 'bold' } ),
+        top: gravityComboBox.bottom + SPACING,
+        left: TITLE_INDENT
+      } );
+
       var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE;
       var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, {
+        top: dampingHSliderTitle.bottom + SPACING * 3,
+        left: dampingHSliderTitle.centerX,
         majorTickLength: 10,
         minorTickLength: 5,
         minorTickLineWidth: 0.5,
@@ -214,21 +223,9 @@ define( function( require ) {
         }
       }
 
-      var dampingHSliderTitle = new HBox( {
-        align: 'left',
-        children: [
-          new Text( dampingString, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
-          //REVIEW: Lots of struts used for horizontal alignment, each with different offsets. Can we talk about layout
-          //REVIEW: and what needs to be accomplished here?
-          new HStrut( TITLE_OFFSET - 7 )
-        ]
-      } );
-
       // Created so we can swap visibility of the questionTextNode and the gravitySlider for Planet X
       var gravityNode = new Node( { children: [ questionTextNode, gravitySlider ] } );
-      var contentVBox = new VBox( {
-        align: 'center',
-        spacing: 8,
+      var contentNode = new Node( {
         children: [
           gravityNode,
           gravityComboBox,
@@ -237,28 +234,40 @@ define( function( require ) {
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } );
-      Node.call( this, { children: [ contentVBox ] } );
+      Node.call( this, { children: [ contentNode ] } );
+
+      // Alignment of Node contents
+      gravitySlider.left = this.left;
+      questionTextNode.centerX = this.centerX-10;
+      gravityComboBox.centerX = this.centerX;
+      dampingHSliderTitle.left = this.left;
+      dampingHSlider.centerX = this.centerX;
     }
     else {
 
       var dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, { equalsZero: MathSymbols.EQUAL_TO + ' 0' } ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: this.maxWidth
+        maxWidth: this.maxWidth,
+        top: gravityComboBox.bottom + SPACING,
+        centerX: gravityComboBox.centerX
       } );
 
       gravityNode = new Node( { children: [ questionTextNode, gravitySlider ] } );
-      contentVBox = new VBox( {
-        align: 'center',
-        spacing: 8,
+      contentNode = new Node( {
         children: [
           gravityNode,
           gravityComboBox,
-          new VStrut( 2 ),
           dampingEqualsZeroText
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } );
-      Node.call( this, { children: [ contentVBox ] } );
+      Node.call( this, { children: [ contentNode ] } );
+
+      // Alignment of Node contents
+      gravitySlider.left = this.left-15;
+      questionTextNode.centerX = this.centerX;
+      gravityComboBox.centerX = gravitySlider.centerX+12;
+      dampingEqualsZeroText.centerX = gravityComboBox.centerX;
     }
 
     model.bodyProperty.link( function( newBody, previousBody ) {
