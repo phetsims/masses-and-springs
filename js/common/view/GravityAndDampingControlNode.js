@@ -37,6 +37,7 @@ define( function( require ) {
   // constants
   var SPACING = 7;
   var TITLE_INDENT = -35;
+  var MAX_WIDTH = 80;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -58,6 +59,7 @@ define( function( require ) {
     Body.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
+        maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'bodyLabel' )
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withX( 50 );
@@ -89,6 +91,7 @@ define( function( require ) {
 
     var gravitySliderOptions = {
       left: TITLE_INDENT,
+      xMargin:0,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
       trackSize: new Dimension2( 125, 0.1 ),
@@ -125,18 +128,21 @@ define( function( require ) {
 
       // Create title for gravity slider
       var gravityHSliderTitle = new Text( gravityString, {
-        font: new PhetFont( { size: 14, weight: 'bold' } )
+        font: new PhetFont( { size: 14, weight: 'bold' } ),
+        maxWidth: MAX_WIDTH
       } );
 
       // Create gravity slider
       var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE, sliderOptions );
       gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
-        tandem: tandem.createTandem( 'gravityNoneString' )
+        tandem: tandem.createTandem( 'gravityNoneString' ),
+        maxWidth: MAX_WIDTH
       } ) );
       gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.max, new Text( lotsString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
-        tandem: tandem.createTandem( 'gravityLotsString' )
+        tandem: tandem.createTandem( 'gravityLotsString' ),
+        maxWidth: MAX_WIDTH
       } ) );
 
       var gravitySlider = new Node( {
@@ -179,6 +185,7 @@ define( function( require ) {
       // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
+        maxWidth: MAX_WIDTH,
         top: gravityComboBox.bottom + SPACING,
         left: TITLE_INDENT
       } );
@@ -205,9 +212,15 @@ define( function( require ) {
         tandem: tandem.createTandem( 'hSlider' )
       } );
 
-      dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
+      dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString, {
+        font: MassesAndSpringsConstants.LABEL_FONT,
+        maxWidth: MAX_WIDTH
+      } ) );
       dampingHSlider.addMajorTick( dampingRange.min + ( dampingRange.max - dampingRange.min ) / 2 );
-      dampingHSlider.addMajorTick( dampingRange.max, new Text( lotsString, { font: MassesAndSpringsConstants.LABEL_FONT } ) );
+      dampingHSlider.addMajorTick( dampingRange.max, new Text( lotsString, {
+        font: MassesAndSpringsConstants.LABEL_FONT,
+        maxWidth: MAX_WIDTH
+      } ) );
       for ( var i = 1; i < 6; i++ ) {
         if ( i !== 3 ) {
           dampingHSlider.addMinorTick( dampingRange.min + i * ( dampingRange.max - dampingRange.min ) / 6 );
@@ -233,6 +246,8 @@ define( function( require ) {
       gravitySlider.left = this.left;
       questionTextNode.centerX = this.centerX - 10;
       gravityComboBox.centerX = this.centerX;
+      questionTextNode.centerX = gravityComboBox.centerX-10;
+
       dampingHSliderTitle.left = this.left;
       dampingHSlider.centerX = this.centerX;
     }
