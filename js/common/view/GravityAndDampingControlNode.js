@@ -10,14 +10,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var ComboBox = require( 'SUN/ComboBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -27,8 +23,6 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
   var Util = require( 'DOT/Util' );
 
   // strings
