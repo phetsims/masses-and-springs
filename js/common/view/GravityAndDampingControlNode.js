@@ -244,10 +244,8 @@ define( function( require ) {
 
       // Alignment of Node contents
       gravitySlider.left = this.left;
-      questionTextNode.centerX = this.centerX - 10;
+      questionTextNode.centerX = gravitySlider.centerX+5;
       gravityComboBox.centerX = this.centerX;
-      questionTextNode.centerX = gravityComboBox.centerX-10;
-
       dampingHSliderTitle.left = this.left;
       dampingHSlider.centerX = this.centerX;
     }
