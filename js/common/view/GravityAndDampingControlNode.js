@@ -179,7 +179,8 @@ define( function( require ) {
       // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
-        top: gravityComboBox.bottom + SPACING
+        top: gravityComboBox.bottom + SPACING,
+        left: TITLE_INDENT
       } );
 
       // {Range} Range for hSlider
