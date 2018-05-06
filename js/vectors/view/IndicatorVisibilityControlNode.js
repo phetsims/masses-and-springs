@@ -53,7 +53,6 @@ define( function( require ) {
     var displacementSymbol = new DisplacementArrowNode(
       new NumberProperty( 10 ),
       new BooleanProperty( true ),
-      //REVIEW: Or... can we maybe make a dev meeting note to see if we can just leave "never-changing" Properties like this as Property instead of using subtypes?
       tandem,
       {
         modelViewTransform: this.modelViewTransform,

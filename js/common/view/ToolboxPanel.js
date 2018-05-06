@@ -80,18 +80,11 @@ define( function( require ) {
       { tandem: tandem.createTandem( 'ruler' ) } );
     ruler.rotate( 40, false );
 
-    //REVIEW: Since toImage is asynchronous, it looks like the ruler/timer callbacks could finish in any order. This could
-    //REVIEW: mean that sometimes when the sim loads, the timer will be on the other side of the ruler.
-    //REVIEW: Node.toDataURLNodeSynchronous could be used instead (potentially), so things can be removed from the callbacks.
+    // {Image} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
+    var rulerIcon;
+    ruler.toDataURL( function( image ) {
 
-    // Create timer icon
-    ruler.toImage( function( image ) {
-
-      // @private - visible option is used only for reset() in ToolboxPanel.js
-      //REVIEW: Not great form to declare properties inside callbacks. Hopefully when this is de-callbacked (see
-      //REVIEW above notes), this will be fine. Also JSDoc the type.
-      //REVIEW: Wait, why is this set as a property? Should be able to use a local variable instead?
-      self.rulerIcon = new Image( image, {
+      rulerIcon = new Image( image, {
         // Instead of changing the rendering, we'll dynamically generate a mipmap so that the ruler icon appearance looks better.
         // See https://github.com/phetsims/masses-and-springs/issues/199.
         mipmap: true,
@@ -100,72 +93,71 @@ define( function( require ) {
         scale: 0.1,
         tandem: tandem.createTandem( 'rulerIcon' )
       } );
-
-      // Drag listener for event forwarding: rulerIcon ---> rulerNode
-      self.rulerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( function( event ) {
-        rulerVisibleProperty.set( true );
-        // Now determine the initial position where this element should move to after it's created, which corresponds
-        // to the location of the mouse or touch event.
-        var initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
-          .minus( new Vector2( -rulerNode.width * 0.5, rulerNode.height * 0.4 ) );
-        rulerNode.positionProperty.set( initialPosition );
-
-        // Sending through the startDrag from icon to rulerNode causes it to receive all subsequent drag events.
-        rulerNode.rulerNodeMovableDragHandler.startDrag( event );
-      }, {
-
-        // allow moving a finger (on a touchscreen) dragged across this node to interact with it
-        allowTouchSnag: true,
-        dragBounds: dragBounds,
-        tandem: tandem.createTandem( 'dragHandler' )
-      } ) );
-      toolbox.addChild( self.rulerIcon );
-      rulerVisibleProperty.link( function( visible ) {
-        self.rulerIcon.visible = !visible;
-      } );
     } );
 
+    // Drag listener for event forwarding: rulerIcon ---> rulerNode
+    rulerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( function( event ) {
+      rulerVisibleProperty.set( true );
 
-    // Create timer icon
-    timer.toImage( function( image ) {
+      // Now determine the initial position where this element should move to after it's created, which corresponds
+      // to the location of the mouse or touch event.
+      var initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
+        .minus( new Vector2( -rulerNode.width * 0.5, rulerNode.height * 0.4 ) );
+      rulerNode.positionProperty.set( initialPosition );
 
-      // @private - visible option is used only for reset() in ToolboxPanel.js
-      //REVIEW: Not great form to declare properties inside callbacks. Hopefully when this is de-callbacked (see
-      //REVIEW above notes), this will be fine. Also JSDoc the type.
-      //REVIEW: Wait, why is this set as a property? Should be able to use a local variable instead?
-      self.timerIcon = new Image( image, {
+      // Sending through the startDrag from icon to rulerNode causes it to receive all subsequent drag events.
+      rulerNode.rulerNodeMovableDragHandler.startDrag( event );
+    }, {
+
+      // allow moving a finger (on a touchscreen) dragged across this node to interact with it
+      allowTouchSnag: true,
+      dragBounds: dragBounds,
+      tandem: tandem.createTandem( 'dragHandler' )
+    } ) );
+    toolbox.addChild( rulerIcon );
+
+    rulerVisibleProperty.link( function( visible ) {
+      rulerIcon.visible = !visible;
+    } );
+
+    // {Image} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
+    var timerIcon;
+    timer.toDataURL( function( image ) {
+
+      timerIcon = new Image( image, {
         cursor: 'pointer',
         pickable: true,
         scale: 0.4,
         tandem: tandem.createTandem( 'timerIcon' )
       } );
 
-      // Drag listener for event forwarding: timerIcon ---> timerNode
-      self.timerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( function( event ) {
+    } );
 
-        // Toggle visibility
-        timerVisibleProperty.set( true );
+    // Drag listener for event forwarding: timerIcon ---> timerNode
+    timerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( function( event ) {
 
-        // Now determine the initial position where this element should move to after it's created, which corresponds
-        // to the location of the mouse or touch event.
-        var initialPosition = timerNode.globalToParentPoint( event.pointer.point )
-          .minus( new Vector2( timerNode.width / 2, timerNode.height * 0.4 ) );
+      // Toggle visibility
+      timerVisibleProperty.set( true );
 
-        timerNode.positionProperty.set( initialPosition );
+      // Now determine the initial position where this element should move to after it's created, which corresponds
+      // to the location of the mouse or touch event.
+      var initialPosition = timerNode.globalToParentPoint( event.pointer.point )
+        .minus( new Vector2( timerNode.width / 2, timerNode.height * 0.4 ) );
 
-        // Sending through the startDrag from icon to timerNode causes it to receive all subsequent drag events.
-        timerNode.timerNodeMovableDragHandler.startDrag( event );
-      }, {
+      timerNode.positionProperty.set( initialPosition );
 
-        // allow moving a finger (on a touchscreen) dragged across this node to interact with it
-        allowTouchSnag: true,
-        dragBounds: dragBounds,
-        tandem: tandem.createTandem( 'dragHandler' )
-      } ) );
-      toolbox.addChild( self.timerIcon );
-      timerVisibleProperty.link( function( visible ) {
-        self.timerIcon.visible = !visible;
-      } );
+      // Sending through the startDrag from icon to timerNode causes it to receive all subsequent drag events.
+      timerNode.timerNodeMovableDragHandler.startDrag( event );
+    }, {
+
+      // allow moving a finger (on a touchscreen) dragged across this node to interact with it
+      allowTouchSnag: true,
+      dragBounds: dragBounds,
+      tandem: tandem.createTandem( 'dragHandler' )
+    } ) );
+    toolbox.addChild( timerIcon );
+    timerVisibleProperty.link( function( visible ) {
+      timerIcon.visible = !visible;
     } );
   }
 
