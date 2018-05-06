@@ -94,6 +94,7 @@ define( function( require ) {
       xMargin:0,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
+      titleMaxWidth:MAX_WIDTH,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -120,6 +121,7 @@ define( function( require ) {
       } ),
       useRichText: true,
       decimalPlaces: 1,
+      valueMaxWidth: MAX_WIDTH,
       delta: 0.1,
       arrowButtonScale: 0.5
     };
@@ -254,7 +256,7 @@ define( function( require ) {
       // Creating text that reads Damping = 0
       var dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, { equalsZero: MathSymbols.EQUAL_TO + ' 0' } ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: this.maxWidth,
+        maxWidth: MAX_WIDTH,
         top: gravityComboBox.bottom + SPACING,
         centerX: gravityComboBox.centerX
       } );
