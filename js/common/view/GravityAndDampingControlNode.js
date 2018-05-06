@@ -147,8 +147,6 @@ define( function( require ) {
       } ) );
 
       var gravitySlider = new Node( {
-
-        //REVIEW: Usually HStruts wouldn't be needed for something like this. Why is it used here?
         xMargin: 0,
         yMargin: 0,
         children: [ gravityHSliderTitle, gravityHSlider ]
@@ -161,17 +159,13 @@ define( function( require ) {
     }
 
     // Manages the values associated with the gravity panel in a combo box
-    var questionTextNode = new VBox( {
-
-      children: [
-        //REVIEW: Can we apply padding elsewhere instead of using struts?
-        new VStrut( questionTextOffset ),
-        new Text( whatIsTheValueOfGravityString, {
+    var questionTextNode = new Node( {
+      children: [ new Text( whatIsTheValueOfGravityString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: gravitySlider.width
-        } ),
-        new VStrut( questionTextOffset )
+        } )
       ],
+      yMargin: questionTextOffset,
       center: gravitySlider.center
     } );
 
@@ -238,7 +232,7 @@ define( function( require ) {
 
       // Alignment of Node contents
       gravitySlider.left = this.left;
-      questionTextNode.centerX = this.centerX-10;
+      questionTextNode.centerX = this.centerX - 10;
       gravityComboBox.centerX = this.centerX;
       dampingHSliderTitle.left = this.left;
       dampingHSlider.centerX = this.centerX;
@@ -264,9 +258,9 @@ define( function( require ) {
       Node.call( this, { children: [ contentNode ] } );
 
       // Alignment of Node contents
-      gravitySlider.left = this.left-15;
+      gravitySlider.left = this.left - 15;
       questionTextNode.centerX = this.centerX;
-      gravityComboBox.centerX = gravitySlider.centerX+12;
+      gravityComboBox.centerX = gravitySlider.centerX + 12;
       dampingEqualsZeroText.centerX = gravityComboBox.centerX;
     }
 
