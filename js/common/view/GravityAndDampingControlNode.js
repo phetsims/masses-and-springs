@@ -121,7 +121,6 @@ define( function( require ) {
       arrowButtonScale: 0.5
     };
 
-    var questionTextOffset = 20;
     if ( options.hSlider ) {
 
       // Create title for gravity slider
@@ -155,11 +154,11 @@ define( function( require ) {
     // Manages the values associated with the gravity panel in a combo box
     var questionTextNode = new Node( {
       children: [ new Text( whatIsTheValueOfGravityString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: gravitySlider.width
-        } )
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: gravitySlider.width
+      } )
       ],
-      yMargin: questionTextOffset,
+      yMargin: 20,
       center: gravitySlider.center
     } );
 
@@ -177,13 +176,16 @@ define( function( require ) {
 
     if ( options.dampingVisible ) {
 
+      // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
-        top: gravityComboBox.bottom + SPACING,
-        left: TITLE_INDENT
+        top: gravityComboBox.bottom + SPACING
       } );
 
+      // {Range} Range for hSlider
       var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE;
+
+      // Creating damping hSlider
       var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, {
         top: dampingHSliderTitle.bottom + SPACING * 3,
         left: dampingHSliderTitle.centerX,
@@ -222,6 +224,8 @@ define( function( require ) {
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } );
+
+      // Content to be added to parent node
       Node.call( this, { children: [ contentNode ] } );
 
       // Alignment of Node contents
@@ -233,14 +237,16 @@ define( function( require ) {
     }
     else {
 
+      // Creating text that reads Damping = 0
       var dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, { equalsZero: MathSymbols.EQUAL_TO + ' 0' } ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: this.maxWidth,
         top: gravityComboBox.bottom + SPACING,
         centerX: gravityComboBox.centerX
       } );
-
       gravityNode = new Node( { children: [ questionTextNode, gravitySlider ] } );
+
+      // Content to be added to parent node
       contentNode = new Node( {
         children: [
           gravityNode,
@@ -258,6 +264,7 @@ define( function( require ) {
       dampingEqualsZeroText.centerX = gravityComboBox.centerX;
     }
 
+    // Responsible for managing bodies and question text visibility
     model.bodyProperty.link( function( newBody, previousBody ) {
       var body = _.find( bodies, newBody );
 
