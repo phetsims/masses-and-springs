@@ -106,12 +106,10 @@ define( function( require ) {
       spacing: 24
     } );
     var controlBox = new HBox( {
+      spacing: 10,
       children: [
-        //REVIEW: More struts, can we just use padding or other structuring instead of these?
         indicatorVisibilityControlsVBox,
-        new HStrut( 10 ),
-        lineVBox,
-        new HStrut( 10 )
+        lineVBox
       ]
     } );
     this.addChild( controlBox );
