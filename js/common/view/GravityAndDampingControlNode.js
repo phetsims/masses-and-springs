@@ -91,10 +91,10 @@ define( function( require ) {
 
     var gravitySliderOptions = {
       left: TITLE_INDENT,
-      xMargin:0,
+      xMargin: 0,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-      titleMaxWidth:MAX_WIDTH,
+      titleMaxWidth: MAX_WIDTH,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -246,7 +246,7 @@ define( function( require ) {
 
       // Alignment of Node contents
       gravitySlider.left = this.left;
-      questionTextNode.centerX = gravitySlider.centerX+5;
+      questionTextNode.centerX = gravitySlider.centerX + 5;
       gravityComboBox.centerX = this.centerX;
       dampingHSliderTitle.left = this.left;
       dampingHSlider.centerX = this.centerX;
@@ -277,7 +277,7 @@ define( function( require ) {
       gravitySlider.left = this.left - 15;
       questionTextNode.centerX = this.centerX;
       gravityComboBox.centerX = gravitySlider.centerX + 12;
-      dampingEqualsZeroText.centerX = gravityComboBox.centerX;
+      dampingEqualsZeroText.centerX = gravityComboBox.centerX - 50;
     }
 
     // Responsible for managing bodies and question text visibility

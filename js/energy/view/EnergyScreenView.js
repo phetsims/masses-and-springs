@@ -42,6 +42,7 @@ define( function( require ) {
         stroke: null,
         hSlider: true
       } );
+
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {
       spacing: 10,
