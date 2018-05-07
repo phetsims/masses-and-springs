@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PeriodTraceNode = require( 'MASSES_AND_SPRINGS/lab/view/PeriodTraceNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -47,7 +48,20 @@ define( function( require ) {
         showForces: false
       }
     );
+
+    // Contains visibility options for the reference lines and displacement arrow
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, true, tandem );
+
+    // Gravity Control Panel
+    var gravityAndDampingControlNode = new GravityAndDampingControlNode(
+      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        dampingVisible: true,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null,
+        hSlider: false
+      } );
 
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {
@@ -55,7 +69,7 @@ define( function( require ) {
       children: [
         indicatorVisibilityControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        this.gravityAndDampingControlNode,
+        gravityAndDampingControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
         vectorVisibilityControlNode
       ]

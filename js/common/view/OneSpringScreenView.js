@@ -140,17 +140,6 @@ define( function( require ) {
         centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value )
       } );
 
-    // Gravity Control Panel
-    this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
-      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        dampingVisible: false,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null,
-        hSlider: true
-      } );
-
     // Zero height reference line
     var zeroHeightLine = new ReferenceLineNode(
       this.modelViewTransform,
