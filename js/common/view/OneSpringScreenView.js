@@ -142,13 +142,14 @@ define( function( require ) {
 
     // Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
-      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
-      {
-        right: this.rightPanelPadding,
+      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        dampingVisible: true
-      }
-    );
+        dampingVisible: false,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null,
+        hSlider: true
+      } );
 
     // Zero height reference line
     var zeroHeightLine = new ReferenceLineNode(

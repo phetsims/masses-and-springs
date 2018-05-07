@@ -39,7 +39,6 @@ define( function( require ) {
 
   // constants
   var ARROW_SIZE_DEFAULT = 25;
-  var LABEL_MAX_WIDTH = 50;
 
   /**
    * @param {Mass} mass - model object

@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -28,19 +27,6 @@ define( function( require ) {
     // Calls common spring view
     OneSpringScreenView.call( this, model, tandem );
     var self = this;
-
-    // Gravity Control Panel
-    var gravityAndDampingControlNode = new GravityAndDampingControlNode(
-      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
-      {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null,
-        dampingVisible: true,
-        hSlider: true
-      }
-    );
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
 
     // VBox that contains all of the panel's content
@@ -49,7 +35,7 @@ define( function( require ) {
       children: [
         indicatorVisibilityControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        gravityAndDampingControlNode
+        this.gravityAndDampingControlNode
       ]
     } );
 

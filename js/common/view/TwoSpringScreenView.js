@@ -111,14 +111,14 @@ define( function( require ) {
 
     // @public {GravityAndDampingControlNode} Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
-      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ),
-      {
-        right: this.rightPanelPadding,
-        minWidth: 1,
+      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        dampingVisible: false
-      }
-    );
+        dampingVisible: false,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null,
+        hSlider: true
+      } );
 
     this.resetAllButton.addListener( function() {
       movableLineNode.reset();

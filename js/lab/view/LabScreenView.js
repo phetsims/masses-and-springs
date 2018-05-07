@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var PeriodTraceNode = require( 'MASSES_AND_SPRINGS/lab/view/PeriodTraceNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -31,7 +30,7 @@ define( function( require ) {
     OneSpringScreenView.call( this, model, tandem );
     var self = this;
 
-    // @protected
+    // @protected {PeriodTraceNode}
     this.periodTraceNode = new PeriodTraceNode( model.periodTrace, this.modelViewTransform, {
       center: this.springEquilibriumLineNode.center
     } );
@@ -48,18 +47,6 @@ define( function( require ) {
         showForces: false
       }
     );
-
-    // Gravity Control Panel
-    var gravityAndDampingControlNode = new GravityAndDampingControlNode(
-      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-        minWidth: 1,
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        dampingVisible: true,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null
-      } );
-
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, true, tandem );
 
     // VBox that contains all of the panel's content
@@ -68,7 +55,7 @@ define( function( require ) {
       children: [
         indicatorVisibilityControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        gravityAndDampingControlNode,
+        this.gravityAndDampingControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
         vectorVisibilityControlNode
       ]
