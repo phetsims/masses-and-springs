@@ -39,6 +39,7 @@ define( function( require ) {
 
   // constants
   var ARROW_SIZE_DEFAULT = 25;
+  var LABEL_MAX_WIDTH = 50;
 
   /**
    * @param {Mass} mass - model object
@@ -123,10 +124,9 @@ define( function( require ) {
         centerY: rect.centerY,
         centerX: 0,
         pickable: false,
-        maxWidth: 50,
+        maxWidth: !mass.adjustable ? rect.width : 30, // Adjustable masses require smaller label maxWidth.
         tandem: tandem.createTandem( 'label' )
       } );
-
       this.addChild( label );
 
       mass.massProperty.link( function() {
