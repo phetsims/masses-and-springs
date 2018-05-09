@@ -14,12 +14,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
 
   /**
    * @param {Property.<number>} springProperty - Property to be adjusted by hSlider
@@ -48,8 +46,11 @@ define( function( require ) {
       }
     }, options );
 
+    var hSliderTitle = new Text( title, { font: options.titleFont, maxWidth:150 } );
+
     // slider used to adjust value of natural resting length of spring
     var hSlider = new HSlider( springProperty, propertyRange, {
+      top: hSliderTitle.bottom+ 20,
       majorTickLength: 10,
       minorTickLength: 5,
       minorTickLineWidth: 0.5,
@@ -80,14 +81,10 @@ define( function( require ) {
       }
     }
 
-    var hSliderTitle = new Text( title, { font: options.titleFont, maxWidth:150 } );
-
-    Panel.call( this, new VBox( {
-      align: options.align,
-      spacing: 5,
+    Panel.call( this, new Node( {
       children: [
         hSliderTitle,
-        new HBox( { children: [ new HStrut( options.sliderIndent ), hSlider ] } )
+        hSlider
       ]
     } ), options );
 
