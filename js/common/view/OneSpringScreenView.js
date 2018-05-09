@@ -15,8 +15,6 @@ define( function( require ) {
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -55,8 +53,8 @@ define( function( require ) {
 
     // Spring Constant Control Panel
     var minMaxLabels = [
-      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth:40 } ),
-      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth:40 } )
+      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
+      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
     ];
     var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 
@@ -156,13 +154,9 @@ define( function( require ) {
     // Label for zero height
     var zeroHeightLabel = new Node( {
       children: [
-        new HBox( {
-          children: [
-            new HStrut( 10 ),
-            new Text( heightEqualsZeroString, {
-              font: MassesAndSpringsConstants.TITLE_FONT,
-              fill: zeroHeightLine.stroke
-            } ) ]
+        new Text( heightEqualsZeroString, {
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          fill: zeroHeightLine.stroke
         } ) ]
     } );
 
@@ -173,7 +167,7 @@ define( function( require ) {
     } );
 
     zeroHeightLabel.center = zeroHeightLine.center;
-    zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width);
+    zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width + 10);
     this.addChild( zeroHeightLabel );
 
     this.shelf.rectWidth = 140;
