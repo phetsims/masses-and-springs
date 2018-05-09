@@ -55,8 +55,8 @@ define( function( require ) {
 
     // Spring Constant Control Panel
     var minMaxLabels = [
-      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT } ),
-      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT } )
+      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth:40 } ),
+      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth:40 } )
     ];
     var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 

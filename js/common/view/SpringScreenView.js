@@ -169,10 +169,10 @@ define( function( require ) {
         },
         bidirectional: true
       } ), {
-      stepCallback: function() { model.stepForward( 0.01 ); },
-      tandem: tandem.createTandem( 'timeControlPanel' ),
-      bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT )
-    } );
+        stepCallback: function() { model.stepForward( 0.01 ); },
+        tandem: tandem.createTandem( 'timeControlPanel' ),
+        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT )
+      } );
 
     // @public {ToolboxPanel} Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
@@ -244,7 +244,7 @@ define( function( require ) {
       return new SpringControlPanel(
         this.model.springs[ springIndex ].springConstantProperty,
         MassesAndSpringsConstants.SPRING_CONSTANT_RANGE,
-        StringUtils.fillIn( springConstantString, { spring: springIndex + 1 } ),
+        StringUtils.fillIn( springConstantString, { spring: springIndex + 1, maxWidth: 40 } ),
         labels,
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
         {

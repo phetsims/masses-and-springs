@@ -70,7 +70,11 @@ define( function( require ) {
       align: 'left',
       spacing: RADIO_BUTTON_SPACING,
       children: [
-        new Text( title, { font: TITLE_FONT, tandem: tandem } ), springConstantRadioButton, thicknessRadioButton
+        new Text( title, {
+          font: TITLE_FONT,
+          maxWidth: 150,
+          tandem: tandem
+        } ), springConstantRadioButton, thicknessRadioButton
       ],
       tandem: tandem.createTandem( 'vBox' )
     } );

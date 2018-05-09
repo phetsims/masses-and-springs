@@ -80,7 +80,7 @@ define( function( require ) {
       }
     }
 
-    var hSliderTitle = new Text( title, { font: options.titleFont } );
+    var hSliderTitle = new Text( title, { font: options.titleFont, maxWidth:150 } );
 
     Panel.call( this, new VBox( {
       align: options.align,
