@@ -168,7 +168,7 @@ define( function( require ) {
           new VStrut( 24 ),
           redLine,
           new VStrut( 24 )
-        ], yMargin: 0
+        ], yMargin: 0,
       } );
     }
     var controlBox = new HBox( {

@@ -151,13 +151,11 @@ define( function( require ) {
       vectorVisibilityControlsVBox = new VBox( {
           children: [
             vectorVisibilityCheckboxGroup,
-            new VStrut( 8 ),
             forcesVisibilityRadioButton,
-            new VStrut( 8 ),
             new AlignBox( forcesVisibilityCheckboxGroup, { leftMargin: 22 } ),
-            new VStrut( 8 ),
             netForceVisibilityRadioButton
           ],
+          spacing: 8,
           align: 'left',
           tandem: tandem.createTandem( 'spacingUnit' )
         }
