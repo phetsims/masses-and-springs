@@ -38,7 +38,7 @@ define( function( require ) {
   function ConstantsControlPanel( selectedConstantProperty, title, tandem, options ) {
     options = _.extend( {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      visible: false,
+      visible: true,
       fill: 'white',
       stroke: 'gray',
       tandem: tandem

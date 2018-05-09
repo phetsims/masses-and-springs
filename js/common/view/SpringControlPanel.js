@@ -62,6 +62,7 @@ define( function( require ) {
       constrainValue: options.constrainValue,
       tandem: tandem.createTandem( 'hSlider' )
     } );
+    hSliderTitle.centerX = hSlider.centerX ;
 
     if ( options.centerTick ) {
       hSlider.addMajorTick( propertyRange.min, labels[ 0 ] );
@@ -82,6 +83,7 @@ define( function( require ) {
     }
 
     Panel.call( this, new Node( {
+      align:'center',
       children: [
         hSliderTitle,
         hSlider

@@ -18,6 +18,7 @@ define( function( require ) {
   var LineVisibilityNode = require( 'MASSES_AND_SPRINGS/common/view/LineVisibilityNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
@@ -54,13 +55,13 @@ define( function( require ) {
 
     // Spring Length Control Panel
     var minMaxLabels = [
-      new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth:40 } ),
-      new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth:40 } )
+      new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
+      new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
     ];
 
     this.springLengthControlPanel = new SpringControlPanel(
       model.spring1.naturalRestingLengthProperty,
-      new Range( 0.1, 0.5),
+      new Range( 0.1, 0.5 ),
       StringUtils.fillIn( lengthString, { spring: 1 } ),
       minMaxLabels,
       tandem.createTandem( 'springLengthControlPanel' ),
@@ -94,10 +95,11 @@ define( function( require ) {
     // VBox that contains all of the spring options panel's content
     var springOptionsVBox = new VBox( {
       spacing: 10,
+      align: 'left',
       children: [
         this.springLengthControlPanel,
         MassesAndSpringsConstants.LINE_SEPARATOR( 130 ),
-        new HBox( { children: [ constantsControlPanel, new HStrut( 32 ) ] } )
+        constantsControlPanel
       ]
     } );
 
@@ -240,7 +242,7 @@ define( function( require ) {
     this.addChild( optionsPanel );
     optionsPanel.moveToBack();
 
-    this.visibleBoundsProperty.link( function(  ) {
+    this.visibleBoundsProperty.link( function() {
       optionsPanel.top = self.secondSpringConstantControlPanel.top;
       optionsPanel.right = self.panelRightSpacing;
       self.toolboxPanel.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
