@@ -50,18 +50,19 @@ define( function( require ) {
     } );
 
     var numberControl = new NumberControl( massString, massInGramsProperty, range, {
-      titleMaxWidth: 35,
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
       } ),
       valueFont: new PhetFont( 14 ),
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
+      titleMaxWidth: 55,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
       thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       stroke: null,
+      valueMaxWidth:40,
       sliderIndent: 7,
       majorTicks: [
         {
