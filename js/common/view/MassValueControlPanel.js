@@ -53,7 +53,7 @@ define( function( require ) {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
       } ),
-      valueFont: new PhetFont( 16 ),
+      valueFont: new PhetFont( 12 ),
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
       titleMaxWidth: 55,
@@ -62,16 +62,16 @@ define( function( require ) {
       thumbFillEnabled: '#00C4DF',
       thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       stroke: null,
-      valueMaxWidth: 40,
+      valueMaxWidth: 100,
       sliderIndent: 7,
       majorTicks: [
         {
           value: range.min,
-          label: new Text( String( range.min ), { font: new PhetFont( 14 ) } )
+          label: new Text( String( range.min ), { font: new PhetFont( 12 ) } )
         },
         {
           value: range.max,
-          label: new Text( String( range.max ), { font: new PhetFont( 14 ) } )
+          label: new Text( String( range.max ), { font: new PhetFont( 12 ) } )
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
