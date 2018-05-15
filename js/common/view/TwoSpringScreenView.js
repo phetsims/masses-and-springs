@@ -43,10 +43,7 @@ define( function( require ) {
     this.springHangerNode = new SpringHangerNode(
       model.springs,
       this.modelViewTransform,
-      tandem.createTandem( 'springHangerNode' ), {
-        centerX: this.modelViewTransform.modelToViewX(
-          model.firstSpring.positionProperty.value.distance( model.secondSpring.positionProperty.value ) ) * 4.7
-      } );
+      tandem.createTandem( 'springHangerNode' ) );
     var leftSpring = this.model.firstSpring;
     var rightSpring = this.model.secondSpring;
 
@@ -68,8 +65,8 @@ define( function( require ) {
 
     // Spring Constant Control Panels
     var minMaxLabels = [
-      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth:40 } ),
-      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth:40 } )
+      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
+      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
     ];
 
     // @public {SpringConstantPanel}
@@ -125,16 +122,21 @@ define( function( require ) {
       movableLineNode.reset();
     } );
 
-    // Adding all of the nodes to the scene graph
-    this.addChild( this.springHangerNode );
+    // Contains Panels/Nodes that hover near the spring system at the center of the screen.
+    var springSystemControlsNode = new HBox( {
+      children: [
+        this.firstSpringConstantControlPanel,
+        this.firstSpringStopperButtonNode,
+        this.springHangerNode,
+        this.secondSpringStopperButtonNode,
+        this.secondSpringConstantControlPanel
+      ],
+      spacing: this.spacing,
+      align: 'top'
+    } );
 
-    // Adding Panels to scene graph
-    this.addChild( this.firstSpringConstantControlPanel );
-    this.addChild( this.secondSpringConstantControlPanel );
-
-    // Adding Buttons to scene graph
-    this.addChild( this.firstSpringStopperButtonNode );
-    this.addChild( this.secondSpringStopperButtonNode );
+    // Adding system controls to scene graph
+    this.addChild( springSystemControlsNode );
 
     // Reference lines from indicator visibility box
     this.addChild( firstNaturalLengthLineNode );
@@ -143,18 +145,20 @@ define( function( require ) {
     this.addChild( this.massLayer );
     this.addChild( this.toolsLayer );
 
+    // {Number} Used in determining springSystemControlsNode's placement
+    var distanceBetweenSprings = (self.modelViewTransform.modelToViewX(
+      model.firstSpring.positionProperty.value.distance( model.secondSpring.positionProperty.value ) ) / 2);
+    var leftSpringXPosition = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
+
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       // Update the bounds of view elements
       self.panelRightSpacing = visibleBounds.right - self.spacing;
 
-      //REVIEW: Lots of layout here. Can we use things like AlignBox/HBox/VBox to simplify? Might be worth collaboration.
-      //REVIEW: How much of this can be shared with OneSpringScreenView (and moved to SpringScreenView?)
-      self.springHangerNode.top = model.firstSpring.positionProperty.value.y + self.spacing;
-      self.gravityAndDampingControlNode.right = self.panelRightSpacing;
-      self.toolboxPanel.right = self.panelRightSpacing;
-      self.resetAllButton.right = self.panelRightSpacing;
+      // Alignment of layout
+      springSystemControlsNode.centerX = leftSpringXPosition + distanceBetweenSprings;
+      springSystemControlsNode.top = visibleBounds.top + self.spacing;
       self.simControlHBox.rightBottom = visibleBounds.rightBottom.minus( new Vector2( self.spacing, self.spacing ) );
 
       // Adjusting drag bounds of draggable objects based on visible bounds.

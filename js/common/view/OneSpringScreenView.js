@@ -188,7 +188,7 @@ define( function( require ) {
       align: 'top'
     } );
 
-    // Adding Buttons to scene graph
+    // Adding system controls and energy graph to scene graph
     this.addChild( springSystemControlsNode );
     this.addChild( this.energyGraphNode );
 
@@ -205,8 +205,6 @@ define( function( require ) {
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
-      //REVIEW: Lots of layout here. Can we use things like AlignBox/HBox/VBox to simplify? Might be worth collaboration.
-      //REVIEW: How much of this can be shared with TwoSpringScreenView (and moved to SpringScreenView?)
       self.panelRightSpacing = visibleBounds.right - self.spacing;
 
       // Alignment of layout
