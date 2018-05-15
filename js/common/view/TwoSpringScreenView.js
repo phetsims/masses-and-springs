@@ -145,7 +145,7 @@ define( function( require ) {
     this.addChild( this.massLayer );
     this.addChild( this.toolsLayer );
 
-    // {Number} Used in determining springSystemControlsNode's placement
+    // {number} Used in determining springSystemControlsNode's placement
     var distanceBetweenSprings = (self.modelViewTransform.modelToViewX(
       model.firstSpring.positionProperty.value.distance( model.secondSpring.positionProperty.value ) ) / 2);
     var leftSpringXPosition = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
