@@ -205,14 +205,14 @@ define( function( require ) {
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-
       self.panelRightSpacing = visibleBounds.right - self.spacing;
 
       // Alignment of layout
-      self.energyGraphNode.leftTop = visibleBounds.leftTop.plus( new Vector2( self.spacing, self.spacing ) );
       springSystemControlsNode.centerX = springCenter + self.spacing;
-      springSystemControlsNode.top = visibleBounds.top + self.spacing;
-      self.simControlHBox.rightBottom = visibleBounds.rightBottom.minus( new Vector2( self.spacing, self.spacing ) );
+      springSystemControlsNode.top = self.spacing;
+      self.energyGraphNode.leftTop = new Vector2( self.spacing, springSystemControlsNode.top ) ;
+      self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
+
       movableLineNode.centerX = springCenter;
 
       // Adjusting drag bounds of draggable objects based on visible bounds.

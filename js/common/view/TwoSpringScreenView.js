@@ -146,8 +146,8 @@ define( function( require ) {
 
       // Alignment of layout
       springSystemControlsNode.x = leftSpringXPosition + distanceBetweenSprings - self.springHangerNode.centerX;
-      springSystemControlsNode.top = visibleBounds.top + self.spacing;
-      self.simControlHBox.rightBottom = visibleBounds.rightBottom.minus( new Vector2( self.spacing, self.spacing ) );
+      springSystemControlsNode.top =  self.spacing;
+      self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
 
       // Adjusting drag bounds of draggable objects based on visible bounds.
       self.timerNode.timerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
