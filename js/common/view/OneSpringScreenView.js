@@ -22,7 +22,7 @@ define( function( require ) {
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var MassValueControlPanel = require( 'MASSES_AND_SPRINGS/common/view/MassValueControlPanel' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
-  var Node = require( 'SCENERY/nodes/Node' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var Property = require( 'AXON/Property' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
@@ -44,19 +44,11 @@ define( function( require ) {
     SpringScreenView.call( this, model, tandem );
     var self = this;
 
-    var springHangerNode = new SpringHangerNode( model.springs,
-      this.modelViewTransform,
-      tandem.createTandem( 'springHangerNode' ),
-      {
-        singleSpring: true
-      } );
-
     // Spring Constant Control Panel
     var minMaxLabels = [
       new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
     ];
-    var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
     var equilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
@@ -68,6 +60,29 @@ define( function( require ) {
           return false;
         }
       } );
+
+    // Icon used in massValueControlPanel
+    var massNodeIcon = new MassNode(
+      new Mass( 0.0055, 0, model.masses[ 0 ].color, model.gravityProperty, tandem, { icon: true } ),
+      this.modelViewTransform,
+      this.visibleBoundsProperty,
+      model,
+      tandem.createTandem( 'massIcon' ) );
+
+    var massValueControlPanel = new MassValueControlPanel(
+      model.masses[ 0 ],
+      massNodeIcon,
+      tandem.createTandem( 'massValueControlPanel' )
+    );
+
+    var springHangerNode = new SpringHangerNode( model.springs,
+      this.modelViewTransform,
+      tandem.createTandem( 'springHangerNode' ),
+      {
+        singleSpring: true
+      } );
+    var springStopperButtonNode = this.createStopperButton( this.model.firstSpring, tandem );
+    var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 
     // @public {ReferenceLineNode} Initializes equilibrium line for the spring
     this.springEquilibriumLineNode = new ReferenceLineNode(
@@ -90,7 +105,6 @@ define( function( require ) {
       }
     );
 
-    var springStopperButtonNode = this.createStopperButton( this.model.firstSpring, tandem );
     this.model.firstSpring.buttonEnabledProperty.link(
       function( buttonEnabled ) {
         springStopperButtonNode.enabled = buttonEnabled;
@@ -98,20 +112,6 @@ define( function( require ) {
 
     // @public {EnergyGraphNode} energy graph that displays energy values for the spring system.
     this.energyGraphNode = new EnergyGraphNode( model, tandem );
-    this.energyGraphNode.leftTop = this.visibleBoundsProperty.value.leftTop.plus( new Vector2( this.spacing, this.spacing ) );
-
-    var massNodeIcon = new MassNode(
-      new Mass( 0.0055, 0, model.masses[ 0 ].color, model.gravityProperty, tandem, { icon: true } ),
-      this.modelViewTransform,
-      this.visibleBoundsProperty,
-      model,
-      tandem.createTandem( 'massIcon' ) );
-
-    var massValueControlPanel = new MassValueControlPanel(
-      model.masses[ 0 ],
-      massNodeIcon,
-      tandem.createTandem( 'massValueControlPanel' )
-    );
 
     // Property that determines the zero height in the view.
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
@@ -152,7 +152,7 @@ define( function( require ) {
     this.addChild( zeroHeightLine );
 
     // Label for zero height
-    var zeroHeightLabel = new Node( {
+    var zeroHeightLabel = new HBox( {
       children: [
         new Text( heightEqualsZeroString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
@@ -173,43 +173,55 @@ define( function( require ) {
     this.shelf.rectWidth = 140;
     this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 0 ].positionProperty.value.x );
 
-    // Adding all of the nodes to the scene graph
-    // Adding Panels to scene graph
-    this.addChild( springHangerNode );
-    this.addChild( massValueControlPanel );
-    this.addChild( springConstantControlPanel );
-    this.addChild( this.energyGraphNode );
+    // Buttons controlling the speed of the sim, play/pause button, and the reset button
+    var simControlHBox = new HBox( {
+      spacing: this.spacing * 6,
+      children: [ this.timeControlPanel, this.resetAllButton ]
+    } );
+
+    // Contains Panels/Nodes that hover near the spring system at the center of the screen.
+    var springSystemControlsNode = new HBox( {
+      children: [
+        massValueControlPanel,
+        springHangerNode,
+        springStopperButtonNode,
+        springConstantControlPanel
+      ],
+      spacing: this.spacing,
+      align: 'top'
+    } );
 
     // Adding Buttons to scene graph
-    this.addChild( this.timeControlPanel );
-    this.addChild( springStopperButtonNode );
+    this.addChild( simControlHBox );
+    this.addChild( springSystemControlsNode );
+    this.addChild( this.energyGraphNode );
+
 
     // Reference lines from indicator visibility box
     this.addChild( this.springEquilibriumLineNode );
     this.addChild( naturalLengthLineNode );
     this.addChild( displacementArrowNode );
     this.addChild( movableLineNode );
+
+    // Adding layers for draggable objects
     this.addChild( this.massLayer );
     this.addChild( this.toolsLayer );
-
-    this.addChild( this.resetAllButton );
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
 
       //REVIEW: Lots of layout here. Can we use things like AlignBox/HBox/VBox to simplify? Might be worth collaboration.
       //REVIEW: How much of this can be shared with TwoSpringScreenView (and moved to SpringScreenView?)
-      // Update the bounds of view elements
-      springHangerNode.top = self.spacing;
-      movableLineNode.centerX = springHangerNode.centerX;
-      massValueControlPanel.top = springHangerNode.top;
-      massValueControlPanel.right = springHangerNode.left - self.spacing;
-      springHangerNode.centerX = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
-      springStopperButtonNode.left = springHangerNode.right + self.spacing;
-      springConstantControlPanel.left = springStopperButtonNode.right + self.spacing;
-      self.resetAllButton.right = self.panelRightSpacing;
-      self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
-      self.energyGraphNode.left = visibleBounds.left + self.spacing;
+      self.panelRightSpacing = visibleBounds.right - self.spacing;
+
+      // Alignment of layout
+      self.energyGraphNode.leftTop = visibleBounds.leftTop.plus( new Vector2( self.spacing, self.spacing ) );
+      springSystemControlsNode.centerX = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x ) + self.spacing;
+      springSystemControlsNode.top = visibleBounds.top + self.spacing;
+      simControlHBox.rightBottom = visibleBounds.rightBottom.minus( new Vector2( self.spacing, self.spacing ) );
+      movableLineNode.centerX = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
+
+      // Adjusting drag bounds of draggable objects based on visible bounds.
       self.timerNode.timerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
         self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2
       );

@@ -152,8 +152,6 @@ define( function( require ) {
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
         self.resetMassLayer();
       },
-      right: this.visibleBoundsProperty.get().right - 10,
-      bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ),
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
@@ -170,8 +168,7 @@ define( function( require ) {
         bidirectional: true
       } ), {
         stepCallback: function() { model.stepForward( 0.01 ); },
-        tandem: tandem.createTandem( 'timeControlPanel' ),
-        bottom: this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT )
+        tandem: tandem.createTandem( 'timeControlPanel' )
       } );
 
     // @public {ToolboxPanel} Toolbox Panel
@@ -188,15 +185,6 @@ define( function( require ) {
 
     // Adding tools in toolbox
     this.addChild( this.toolboxPanel );
-
-    //REVIEW: It seems like there are listeners similar to this on subtypes. It's better to create a layout() method
-    //REVIEW: on the screenview and override/extend as necessary, as you are unintentionally depending on this listener
-    //REVIEW: being added before the other visibleBoundsProperty listeners are added (for layout)
-    this.visibleBoundsProperty.link( function( visibleBounds ) {
-
-      // Update the bounds of view elements
-      self.panelRightSpacing = visibleBounds.right - self.spacing;
-    } );
   }
 
   massesAndSprings.register( 'SpringScreenView', SpringScreenView );

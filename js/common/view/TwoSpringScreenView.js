@@ -147,7 +147,10 @@ define( function( require ) {
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
+
       // Update the bounds of view elements
+      self.panelRightSpacing = visibleBounds.right - self.spacing;
+
       //REVIEW: Lots of layout here. Can we use things like AlignBox/HBox/VBox to simplify? Might be worth collaboration.
       //REVIEW: How much of this can be shared with OneSpringScreenView (and moved to SpringScreenView?)
       self.springHangerNode.top = model.firstSpring.positionProperty.value.y + self.spacing;
