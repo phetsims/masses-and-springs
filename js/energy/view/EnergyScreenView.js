@@ -15,6 +15,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var Vector2 = require( 'DOT/Vector2' );
   var OneSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringScreenView' );
 
   /**
@@ -55,17 +56,16 @@ define( function( require ) {
 
     // Panel that will display all the toggleable options.
     var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
-    this.addChild( optionsPanel );
-    optionsPanel.moveToBack();
 
-    this.visibleBoundsProperty.link( function(  ) {
-      optionsPanel.top = self.energyGraphNode.top;
-      optionsPanel.right = self.panelRightSpacing;
-      self.toolboxPanel.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
-      self.toolboxPanel.right = self.panelRightSpacing;
+    // Contains all of the options for the reference lines, gravity, damping, and toolBox
+    var rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing } );
+    this.addChild( rightPanelsVBox );
+    rightPanelsVBox.moveToBack();
+
+    this.visibleBoundsProperty.link( function( visibleBounds ) {
+      rightPanelsVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
     } );
   }
-
   massesAndSprings.register( 'EnergyScreenView', EnergyScreenView );
 
   return inherit( OneSpringScreenView, EnergyScreenView );

@@ -125,16 +125,14 @@ define( function( require ) {
     var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolBox
-    var rightPanelVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing } );
-    this.addChild( rightPanelVBox );
-    rightPanelVBox.moveToBack();
+    var rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing } );
+    this.addChild( rightPanelsVBox );
+    rightPanelsVBox.moveToBack();
 
     this.visibleBoundsProperty.link( function(visibleBounds) {
-      rightPanelVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
+      rightPanelsVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
     } );
-
   }
-
   massesAndSprings.register( 'VectorsScreenView', VectorsScreenView );
 
   return inherit( TwoSpringScreenView, VectorsScreenView );

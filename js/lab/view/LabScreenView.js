@@ -18,6 +18,7 @@ define( function( require ) {
   var OneSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/OneSpringScreenView' );
   var VectorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlNode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {LabModel} model
@@ -77,19 +78,19 @@ define( function( require ) {
 
     // Panel that will display all the toggleable options.
     var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
-    this.addChild( optionsPanel );
-    optionsPanel.moveToBack();
+
+    // Contains all of the options for the reference lines, gravity, damping, and toolBox
+    var rightPanelVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing } );
+    this.addChild( rightPanelVBox );
+    rightPanelVBox.moveToBack();
+
+    this.visibleBoundsProperty.link( function(visibleBounds) {
+      rightPanelVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
+    } );
 
     this.shelf.rectWidth = 160;
     this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 1 ].positionProperty.value.x );
 
-    // Adjust the floating panels to the visibleBounds of the screen.
-    this.visibleBoundsProperty.link( function() {
-      optionsPanel.top = self.energyGraphNode.top;
-      optionsPanel.right = self.panelRightSpacing;
-      self.toolboxPanel.top = optionsPanel.bottom + self.spacing;
-      self.toolboxPanel.right = self.panelRightSpacing;
-    } );
   }
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );

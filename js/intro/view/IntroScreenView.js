@@ -28,6 +28,7 @@ define( function( require ) {
   var TwoSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringScreenView' );
   var Util = require( 'DOT/Util' );
   var VBox = require( 'SCENERY/nodes/VBox' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var EQUILIBRIUM_LINE_FILL = 'rgb(0, 180, 0)';
@@ -210,8 +211,6 @@ define( function( require ) {
       orientation: 'horizontal',
       spacing: 10
     } );
-    this.addChild( sceneRadioButtonGroup );
-    sceneRadioButtonGroup.moveToBack();
 
     // Control Panel for display elements with varying visibility
     var lineVisibilityNode = new LineVisibilityNode(
@@ -236,17 +235,17 @@ define( function( require ) {
 
     // Panel that will display all the toggleable options.
     var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
-    this.addChild( optionsPanel );
-    optionsPanel.moveToBack();
 
-    this.visibleBoundsProperty.link( function() {
-      optionsPanel.top = self.secondSpringConstantControlPanel.top;
-      optionsPanel.right = self.panelRightSpacing;
-      self.toolboxPanel.top = optionsPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
-      self.toolboxPanel.right = self.panelRightSpacing;
-      sceneRadioButtonGroup.right = self.panelRightSpacing;
-      sceneRadioButtonGroup.top = self.toolboxPanel.bottom + MassesAndSpringsConstants.PANEL_VERTICAL_SPACING;
-      sceneRadioButtonGroup.centerX = self.toolboxPanel.centerX;
+    // Contains all of the options for the reference lines, gravity, damping, and toolBox
+    var rightPanelsVBox = new VBox( {
+      children: [ optionsPanel, self.toolboxPanel, sceneRadioButtonGroup ],
+      spacing: this.spacing
+    } );
+    this.addChild( rightPanelsVBox );
+    rightPanelsVBox.moveToBack();
+
+    this.visibleBoundsProperty.link( function(visibleBounds) {
+      rightPanelsVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
     } );
   }
 
