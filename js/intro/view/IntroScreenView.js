@@ -246,6 +246,7 @@ define( function( require ) {
 
     this.visibleBoundsProperty.link( function() {
       rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.springSystemControlsNode.top );
+      springOptionsPanel.leftTop = self.springSystemControlsNode.leftTop.minus( new Vector2( self.spacing * 2, 0 ) );
     } );
   }
 
