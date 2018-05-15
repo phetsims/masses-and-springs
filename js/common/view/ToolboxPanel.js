@@ -12,7 +12,6 @@ define( function( require ) {
   // modules
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -61,6 +60,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'isRunningProperty' )
     } );
     var timer = new TimerNode( secondsProperty, isRunningProperty );
+    timer.scale( 0.4 );
 
     // Create ruler to be turned into icon
     var rulerWidth = 397; // 1 meter
@@ -78,20 +78,16 @@ define( function( require ) {
       '',
       { tandem: tandem.createTandem( 'ruler' ) } );
     ruler.rotate( 40, false );
+    ruler.scale( 0.1 );
 
-    // {Image} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
-    var rulerIcon;
-    ruler.toDataURL( function( image ) {
-
-      rulerIcon = new Image( image, {
-        // Instead of changing the rendering, we'll dynamically generate a mipmap so that the ruler icon appearance looks better.
-        // See https://github.com/phetsims/masses-and-springs/issues/199.
-        mipmap: true,
-        cursor: 'pointer',
-        pickable: true,
-        scale: 0.1,
-        tandem: tandem.createTandem( 'rulerIcon' )
-      } );
+    // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
+    var rulerIcon = ruler.rasterized( {
+      // Instead of changing the rendering, we'll dynamically generate a mipmap so that the ruler icon appearance looks better.
+      // See https://github.com/phetsims/masses-and-springs/issues/199.
+      mipmap: true,
+      cursor: 'pointer',
+      resolution: 5,
+      tandem: tandem.createTandem( 'rulerIcon' )
     } );
 
     // Drag listener for event forwarding: rulerIcon ---> rulerNode
@@ -119,17 +115,11 @@ define( function( require ) {
       rulerIcon.visible = !visible;
     } );
 
-    // {Image} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
-    var timerIcon;
-    timer.toDataURL( function( image ) {
-
-      timerIcon = new Image( image, {
-        cursor: 'pointer',
-        pickable: true,
-        scale: 0.4,
-        tandem: tandem.createTandem( 'timerIcon' )
-      } );
-
+    // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
+    var timerIcon = timer.rasterized( {
+      cursor: 'pointer',
+      resolution: 5,
+      tandem: tandem.createTandem( 'timerIcon' )
     } );
 
     // Drag listener for event forwarding: timerIcon ---> timerNode
