@@ -13,6 +13,7 @@ define( function( require ) {
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -182,6 +183,13 @@ define( function( require ) {
         minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 20
       }
     );
+
+    // Buttons controlling the speed of the sim, play/pause button, and the reset button
+    this.simControlHBox = new HBox( {
+      spacing: this.spacing * 6,
+      children: [ this.timeControlPanel, this.resetAllButton ]
+    } );
+    this.addChild( this.simControlHBox );
 
     // Adding tools in toolbox
     this.addChild( this.toolboxPanel );

@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -132,7 +133,6 @@ define( function( require ) {
     this.addChild( this.secondSpringConstantControlPanel );
 
     // Adding Buttons to scene graph
-    this.addChild( this.timeControlPanel );
     this.addChild( this.firstSpringStopperButtonNode );
     this.addChild( this.secondSpringStopperButtonNode );
 
@@ -142,8 +142,6 @@ define( function( require ) {
     this.addChild( movableLineNode );
     this.addChild( this.massLayer );
     this.addChild( this.toolsLayer );
-
-    this.addChild( this.resetAllButton );
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
@@ -157,7 +155,9 @@ define( function( require ) {
       self.gravityAndDampingControlNode.right = self.panelRightSpacing;
       self.toolboxPanel.right = self.panelRightSpacing;
       self.resetAllButton.right = self.panelRightSpacing;
-      self.timeControlPanel.right = self.resetAllButton.left - self.spacing * 6;
+      self.simControlHBox.rightBottom = visibleBounds.rightBottom.minus( new Vector2( self.spacing, self.spacing ) );
+
+      // Adjusting drag bounds of draggable objects based on visible bounds.
       self.timerNode.timerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
         self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2
       );

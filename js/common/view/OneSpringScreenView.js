@@ -44,6 +44,9 @@ define( function( require ) {
     SpringScreenView.call( this, model, tandem );
     var self = this;
 
+    // {Number} centerX of the spring in view cordinates
+    var springCenter = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
+
     // Spring Constant Control Panel
     var minMaxLabels = [
       new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
@@ -173,12 +176,6 @@ define( function( require ) {
     this.shelf.rectWidth = 140;
     this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 0 ].positionProperty.value.x );
 
-    // Buttons controlling the speed of the sim, play/pause button, and the reset button
-    var simControlHBox = new HBox( {
-      spacing: this.spacing * 6,
-      children: [ this.timeControlPanel, this.resetAllButton ]
-    } );
-
     // Contains Panels/Nodes that hover near the spring system at the center of the screen.
     var springSystemControlsNode = new HBox( {
       children: [
@@ -192,10 +189,8 @@ define( function( require ) {
     } );
 
     // Adding Buttons to scene graph
-    this.addChild( simControlHBox );
     this.addChild( springSystemControlsNode );
     this.addChild( this.energyGraphNode );
-
 
     // Reference lines from indicator visibility box
     this.addChild( this.springEquilibriumLineNode );
@@ -216,10 +211,10 @@ define( function( require ) {
 
       // Alignment of layout
       self.energyGraphNode.leftTop = visibleBounds.leftTop.plus( new Vector2( self.spacing, self.spacing ) );
-      springSystemControlsNode.centerX = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x ) + self.spacing;
+      springSystemControlsNode.centerX = springCenter + self.spacing;
       springSystemControlsNode.top = visibleBounds.top + self.spacing;
-      simControlHBox.rightBottom = visibleBounds.rightBottom.minus( new Vector2( self.spacing, self.spacing ) );
-      movableLineNode.centerX = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
+      self.simControlHBox.rightBottom = visibleBounds.rightBottom.minus( new Vector2( self.spacing, self.spacing ) );
+      movableLineNode.centerX = springCenter;
 
       // Adjusting drag bounds of draggable objects based on visible bounds.
       self.timerNode.timerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
