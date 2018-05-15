@@ -199,12 +199,14 @@ define( function( require ) {
     var springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
     var netForceArrow = new ForceVectorArrow( 'black' );
 
-    this.addChild( velocityArrow );
-    this.addChild( accelerationArrow );
-    this.addChild( gravityForceArrow );
-    this.addChild( springForceArrow );
-    this.addChild( netForceArrow );
-    this.addChild( forceNullLine );
+    if ( !mass.icon ) {
+      this.addChild( velocityArrow );
+      this.addChild( accelerationArrow );
+      this.addChild( gravityForceArrow );
+      this.addChild( springForceArrow );
+      this.addChild( netForceArrow );
+      this.addChild( forceNullLine );
+    }
 
     // Used to position the vectors on the left of right side of the massNode depending on the attached spring.
     var forcesOrientation = 1;

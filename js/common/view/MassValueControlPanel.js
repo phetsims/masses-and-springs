@@ -53,16 +53,16 @@ define( function( require ) {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
       } ),
-      valueFont: new PhetFont( 14 ),
+      valueFont: new PhetFont( 16 ),
       majorTickLength: 10,
-      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
+      titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
       titleMaxWidth: 55,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
       thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       stroke: null,
-      valueMaxWidth:40,
+      valueMaxWidth: 40,
       sliderIndent: 7,
       majorTicks: [
         {
@@ -97,8 +97,7 @@ define( function( require ) {
       xMargin: 6
     } );
 
-    massNodeIcon.left = this.bounds.left;
-    massNodeIcon.centerY = numberControl.top + 6.5;
+    massNodeIcon.leftTop = numberControl.leftTop;
     massNodeIcon.pickable = false;
   }
 
