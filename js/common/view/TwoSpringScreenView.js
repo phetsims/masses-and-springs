@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
-  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -106,17 +105,6 @@ define( function( require ) {
     // Initializes natural line for springs
     var firstNaturalLengthLineNode = createNaturalLineNode( model.firstSpring );
     var secondNaturalLengthLineNode = createNaturalLineNode( model.secondSpring );
-
-    // @public {GravityAndDampingControlNode} Gravity Control Panel
-    this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
-      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        dampingVisible: false,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null,
-        hSlider: true
-      } );
 
     this.resetAllButton.addListener( function() {
       movableLineNode.reset();

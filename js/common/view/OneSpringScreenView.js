@@ -38,10 +38,11 @@ define( function( require ) {
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
+   * @param {Object} [options]
    * @constructor
    */
-  function OneSpringScreenView( model, tandem ) {
-    SpringScreenView.call( this, model, tandem );
+  function OneSpringScreenView( model, tandem, options ) {
+    SpringScreenView.call( this, model, tandem, options );
     var self = this;
 
     // {Number} centerX of the spring in view cordinates

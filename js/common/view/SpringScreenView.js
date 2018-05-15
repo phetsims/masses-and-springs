@@ -13,6 +13,7 @@ define( function( require ) {
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
+  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
@@ -42,10 +43,17 @@ define( function( require ) {
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
+   * @param {Object} [options]
    * @constructor
    */
-  function SpringScreenView( model, tandem ) {
+  function SpringScreenView( model, tandem, options ) {
     ScreenView.call( this );
+
+    options = _.extend( {
+      gravityHSlider: true,
+      dampingVisible: false
+    }, options );
+
     var self = this;
 
     // @public {MassesAndSpringsModel}
@@ -102,6 +110,18 @@ define( function( require ) {
     this.shelf.rectY = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) - this.shelf.rectHeight;
 
     this.addChild( this.shelf );
+
+
+    // @public {GravityAndDampingControlNode} Gravity Control Panel
+    this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
+      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        dampingVisible: options.dampingVisible,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null,
+        hSlider: options.gravityHSlider
+      } );
 
     // @public {DraggableTimerNode}
     this.timerNode = new DraggableTimerNode(

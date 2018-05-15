@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PeriodTraceNode = require( 'MASSES_AND_SPRINGS/lab/view/PeriodTraceNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -29,7 +28,10 @@ define( function( require ) {
   function LabScreenView( model, tandem ) {
 
     // Calls common spring view
-    OneSpringScreenView.call( this, model, tandem );
+    OneSpringScreenView.call( this, model, tandem, {
+      gravityHSlider: false,
+      dampingVisible: true
+    } );
     var self = this;
 
     // @protected {PeriodTraceNode}
@@ -53,24 +55,13 @@ define( function( require ) {
     // Contains visibility options for the reference lines and displacement arrow
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, true, tandem );
 
-    // Gravity Control Panel
-    var gravityAndDampingControlNode = new GravityAndDampingControlNode(
-      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        dampingVisible: true,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null,
-        hSlider: false
-      } );
-
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {
       spacing: 10,
       children: [
         indicatorVisibilityControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        gravityAndDampingControlNode,
+        this.gravityAndDampingControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
         vectorVisibilityControlNode
       ]
@@ -84,7 +75,7 @@ define( function( require ) {
     this.addChild( rightPanelVBox );
     rightPanelVBox.moveToBack();
 
-    this.visibleBoundsProperty.link( function(visibleBounds) {
+    this.visibleBoundsProperty.link( function( visibleBounds ) {
       rightPanelVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
     } );
 

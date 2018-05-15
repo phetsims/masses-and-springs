@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -27,22 +26,13 @@ define( function( require ) {
   function EnergyScreenView( model, tandem ) {
 
     // Calls common spring view
-    OneSpringScreenView.call( this, model, tandem );
+    OneSpringScreenView.call( this, model, tandem, {
+      dampingVisible: true
+    } );
     var self = this;
 
     // Contains visibility options for the reference lines and displacement arrow
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
-
-    // Gravity Control Panel
-    var gravityAndDampingControlNode = new GravityAndDampingControlNode(
-      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        dampingVisible: true,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null,
-        hSlider: true
-      } );
 
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {
@@ -50,7 +40,7 @@ define( function( require ) {
       children: [
         indicatorVisibilityControlNode,
         MassesAndSpringsConstants.LINE_SEPARATOR( 165 ),
-        gravityAndDampingControlNode
+        this.gravityAndDampingControlNode
       ]
     } );
 
@@ -66,6 +56,7 @@ define( function( require ) {
       rightPanelsVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
     } );
   }
+
   massesAndSprings.register( 'EnergyScreenView', EnergyScreenView );
 
   return inherit( OneSpringScreenView, EnergyScreenView );
