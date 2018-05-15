@@ -122,6 +122,11 @@ define( function( require ) {
       tandem: tandem.createTandem( 'isAnimatingProperty' )
     } );
 
+    // @public {Property.<boolean>} indicates whether the mass is resting on its shelf.
+    this.onShelfProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'onShelfProperty' )
+    } );
+
     // @public {Property.<number>} vertical velocity of mass
     this.verticalVelocityProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
@@ -232,6 +237,7 @@ define( function( require ) {
                                              self.elasticPotentialEnergyProperty.get() );
       }
       if ( userControlled ) {
+        self.onShelfProperty.set(false);
         self.verticalVelocityProperty.reset();
       }
     } );
@@ -313,6 +319,7 @@ define( function( require ) {
           this.animationProgress = 1;
         }
         if ( this.animationProgress === 1 ) {
+          this.onShelfProperty.set(true);
           this.isAnimatingProperty.set( false );
         }
       }
@@ -332,7 +339,12 @@ define( function( require ) {
           this.animationProgress = 0;
           this.animationStartPosition = this.positionProperty.value;
           this.animationEndPosition = new Vector2( this.initialPosition.x, this.positionProperty.value.y );
-          this.isAnimatingProperty.set( true );
+          if ( this.animationStartPosition.distance( this.animationEndPosition ) >= 1e-7 ) {
+            this.isAnimatingProperty.set( true );
+          }
+          else {
+            this.onShelfProperty.set( true );
+          }
         }
         else {
           this.verticalVelocityProperty.set( newVerticalVelocity );
@@ -356,6 +368,7 @@ define( function( require ) {
      */
     reset: function() {
       this.positionProperty.reset();
+      this.onShelfProperty.reset();
       this.userControlledProperty.reset();
       this.springProperty.reset();
       this.verticalVelocityProperty.reset();

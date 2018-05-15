@@ -99,6 +99,13 @@ define( function( require ) {
         tandem.createTandem( mass.massTandem.tail + 'Node' ) );
       self.massLayer.addChild( massNode );
 
+      // If we are the shelf reset the mass layers.
+      mass.onShelfProperty.lazyLink( function( onShelf ) {
+        if ( onShelf ) {
+          self.resetMassLayer();
+        }
+      } );
+
       // Keeps track of the mass node to restore original Z order.
       return massNode;
     } );
