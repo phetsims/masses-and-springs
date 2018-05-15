@@ -52,8 +52,8 @@ define( function( require ) {
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
 
-    this.visibleBoundsProperty.link( function( visibleBounds ) {
-      rightPanelsVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
+    this.visibleBoundsProperty.link( function() {
+      rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphNode.top );
     } );
   }
 

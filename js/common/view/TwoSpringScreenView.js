@@ -110,8 +110,8 @@ define( function( require ) {
       movableLineNode.reset();
     } );
 
-    // Contains Panels/Nodes that hover near the spring system at the center of the screen.
-    var springSystemControlsNode = new HBox( {
+    // @public {HBox} Contains Panels/Nodes that hover near the spring system at the center of the screen.
+    this.springSystemControlsNode = new HBox( {
       children: [
         this.firstSpringConstantControlPanel,
         this.firstSpringStopperButtonNode,
@@ -124,7 +124,7 @@ define( function( require ) {
     } );
 
     // Adding system controls to scene graph
-    this.addChild( springSystemControlsNode );
+    this.addChild( this.springSystemControlsNode );
 
     // Reference lines from indicator visibility box
     this.addChild( firstNaturalLengthLineNode );
@@ -145,8 +145,8 @@ define( function( require ) {
       self.panelRightSpacing = visibleBounds.right - self.spacing;
 
       // Alignment of layout
-      springSystemControlsNode.x = leftSpringXPosition + distanceBetweenSprings - self.springHangerNode.centerX;
-      springSystemControlsNode.top =  self.spacing;
+      self.springSystemControlsNode.x = leftSpringXPosition + distanceBetweenSprings - self.springHangerNode.centerX;
+      self.springSystemControlsNode.top =  self.spacing;
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
 
       // Adjusting drag bounds of draggable objects based on visible bounds.

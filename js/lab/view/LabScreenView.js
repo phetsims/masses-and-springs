@@ -71,12 +71,12 @@ define( function( require ) {
     var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolBox
-    var rightPanelVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing } );
-    this.addChild( rightPanelVBox );
-    rightPanelVBox.moveToBack();
+    var rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing } );
+    this.addChild( rightPanelsVBox );
+    rightPanelsVBox.moveToBack();
 
-    this.visibleBoundsProperty.link( function( visibleBounds ) {
-      rightPanelVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
+    this.visibleBoundsProperty.link( function( ) {
+      rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphNode.top );
     } );
 
     this.shelf.rectWidth = 160;
