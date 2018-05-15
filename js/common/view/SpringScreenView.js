@@ -184,7 +184,7 @@ define( function( require ) {
     } );
 
     // @public {TimeControlNode} Sim speed controls
-    this.timeControlPanel = new TimeControlNode(
+    this.timeControlNode = new TimeControlNode(
       model.playingProperty,
       new DynamicProperty( new Property( model.simSpeedProperty ), {
         map: function( simSpeed ) {
@@ -196,7 +196,7 @@ define( function( require ) {
         bidirectional: true
       } ), {
         stepCallback: function() { model.stepForward( 0.01 ); },
-        tandem: tandem.createTandem( 'timeControlPanel' )
+        tandem: tandem.createTandem( 'timeControlNode' )
       } );
 
     // @public {ToolboxPanel} Toolbox Panel
@@ -214,7 +214,7 @@ define( function( require ) {
     // Buttons controlling the speed of the sim, play/pause button, and the reset button
     this.simControlHBox = new HBox( {
       spacing: this.spacing * 6,
-      children: [ this.timeControlPanel, this.resetAllButton ]
+      children: [ this.timeControlNode, this.resetAllButton ]
     } );
     this.addChild( this.simControlHBox );
   }
