@@ -190,9 +190,6 @@ define( function( require ) {
       children: [ this.timeControlPanel, this.resetAllButton ]
     } );
     this.addChild( this.simControlHBox );
-
-    // Adding tools in toolbox
-    this.addChild( this.toolboxPanel );
   }
 
   massesAndSprings.register( 'SpringScreenView', SpringScreenView );

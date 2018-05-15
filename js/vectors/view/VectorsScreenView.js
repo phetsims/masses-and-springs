@@ -19,6 +19,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VectorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/VectorVisibilityControlNode' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var EQUILIBRIUM_LINE_FILL = 'black';
@@ -123,14 +124,13 @@ define( function( require ) {
     // Panel that will display all the toggleable options.
     var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
 
-    this.addChild( optionsPanel );
-    optionsPanel.moveToBack();
+    // Contains all of the options for the reference lines, gravity, damping, and toolBox
+    var rightPanelVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing } );
+    this.addChild( rightPanelVBox );
+    rightPanelVBox.moveToBack();
 
-    this.visibleBoundsProperty.link( function(  ) {
-      optionsPanel.top = self.secondSpringConstantControlPanel.top;
-      optionsPanel.right = self.panelRightSpacing;
-      self.toolboxPanel.top = optionsPanel.bottom + self.spacing;
-      self.toolboxPanel.right = self.panelRightSpacing;
+    this.visibleBoundsProperty.link( function(visibleBounds) {
+      rightPanelVBox.rightTop = visibleBounds.rightTop.plus( new Vector2( -self.spacing, self.spacing ) );
     } );
 
   }
