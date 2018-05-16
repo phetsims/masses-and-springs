@@ -174,9 +174,6 @@ define( function( require ) {
     zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width + 10);
     this.addChild( zeroHeightLabel );
 
-    this.shelf.rectWidth = 140;
-    this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 0 ].positionProperty.value.x );
-
     // Contains Panels/Nodes that hover near the spring system at the center of the screen.
     var springSystemControlsNode = new HBox( {
       children: [

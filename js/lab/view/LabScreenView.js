@@ -80,8 +80,7 @@ define( function( require ) {
     } );
 
     this.shelf.rectWidth = 160;
-    this.shelf.centerX = this.modelViewTransform.modelToViewX( model.masses[ 1 ].positionProperty.value.x );
-
+    this.shelf.left = this.energyGraphNode.right + this.spacing;
   }
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );

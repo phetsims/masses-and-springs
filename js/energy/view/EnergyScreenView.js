@@ -55,6 +55,9 @@ define( function( require ) {
     this.visibleBoundsProperty.link( function() {
       rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphNode.top );
     } );
+
+    this.shelf.rectWidth = 140;
+    this.shelf.left = this.energyGraphNode.right + this.spacing;
   }
 
   massesAndSprings.register( 'EnergyScreenView', EnergyScreenView );
