@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.0-dev.96 Tue May 15 2018 16:44:21 GMT-0400 (EDT)",
+  "comment": "# masses-and-springs 1.0.0-dev.97 Wed May 16 2018 18:44:26 GMT-0400 (EDT)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "fcbbda10a911353edc9e6880a020e5190eecc865",
+    "sha": "aaa0d77a7d5b0efa7f33c26bc59547733b623195",
     "branch": "master"
   },
   "dot": {
@@ -25,7 +25,7 @@
     "branch": "master"
   },
   "joist": {
-    "sha": "be29f65ce78069b7dcf069dc39ff019d669124f5",
+    "sha": "0d2b102dc75a49340c916bd5cdab0501ba801164",
     "branch": "master"
   },
   "kite": {
@@ -33,7 +33,7 @@
     "branch": "master"
   },
   "masses-and-springs": {
-    "sha": "b9e6d7e4f4b2ec4b7be2003610f8a758c7876994",
+    "sha": "54ba1976a60c5faae59ffac1eae8637058bd9c48",
     "branch": "master"
   },
   "phet-core": {
@@ -41,7 +41,7 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "c544c8bde2ba9e47ee9d4482fde6c10d9fd35ade",
+    "sha": "545d86c9ac5bbffcc3afdaa213b8f61045089fea",
     "branch": "master"
   },
   "phet-io-wrapper-classroom-activity": {
@@ -53,7 +53,7 @@
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "3025fb6463f1b7b0232d33c5d2c1828f97f7888d",
+    "sha": "1b254bcf18879190d4465e1cda9ff0505ac28028",
     "branch": "master"
   },
   "phetcommon": {
@@ -65,11 +65,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "7b46dc00c3539d88d0e6bdb654932edd33feaa22",
+    "sha": "8ff0fa73e1134d0ff634a4297d7644b5b4c63152",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "8ea468dc3ff86d59b8a8d3d2ad65fc5fd3078016",
+    "sha": "b31317ca2d9582c3777a6432a91d3c7e429c46d2",
     "branch": "master"
   },
   "sherpa": {
@@ -77,7 +77,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "835774262ecf2424ec11fb48311d3fb5d2cfbf0b",
+    "sha": "26d015d8fcf96c5268e6ec68102e7afd63378aac",
     "branch": "master"
   },
   "tandem": {
