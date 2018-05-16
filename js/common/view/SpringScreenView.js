@@ -90,10 +90,6 @@ define( function( require ) {
     // @protected {number} - Spacing used for the margin of layout bounds
     this.spacing = 10;
 
-    //TODO: Are we using this?
-    // @protected {number} - Padding for panels on most right side of sim view
-    this.rightPanelPadding = this.visibleBoundsProperty.get().right - this.spacing;
-
     // @public {Node} Specific layer for massNodes. Used for setting layering order of massNodes.
     this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ), preventFit: true } );
 
