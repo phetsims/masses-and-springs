@@ -60,11 +60,11 @@ define( function( require ) {
       hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT * 0.34 );
     }
 
-    var rect = new Rectangle( {
+    this.rect = new Rectangle( {
       stroke: 'black',
       lineWidth: 0.5
     } );
-    this.addChild( rect );
+    this.addChild( this.rect );
 
     // Bounds that limit where we can drag our mass should be dependent on how large our mass is
     var modelBoundsProperty = new DerivedProperty( [ dragBoundsProperty, mass.heightProperty ], function( dragBounds, massHeight ) {
@@ -76,13 +76,13 @@ define( function( require ) {
     // Update the size of the massNode
     mass.radiusProperty.link( function( radiusValue ) {
 
-      rect.rectBounds = new Bounds2(
+      self.rect.rectBounds = new Bounds2(
         modelViewTransform2.modelToViewDeltaX( -radiusValue ),
         hookHeight,
         modelViewTransform2.modelToViewDeltaX( radiusValue ),
         modelViewTransform2.modelToViewDeltaY( -mass.cylinderHeightProperty.get() ) + hookHeight );
 
-      rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 )
+      self.rect.fill = new LinearGradient( -self.rect.width / 2, 0, self.rect.width / 2, 0 )
         .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.3 ) )
         .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.8 ) )
         .addColorStop( 0.7, mass.color );
@@ -97,8 +97,8 @@ define( function( require ) {
       }
     } );
 
-    // Sets the gradient on the massNode.
-    rect.fill = new LinearGradient( -rect.width / 2, 0, rect.width / 2, 0 )
+    // @public Sets the gradient on the massNode.
+    this.rect.fill = new LinearGradient( -this.rect.width / 2, 0, this.rect.width / 2, 0 )
       .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.1 ) )
       .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.6 ) )
       .addColorStop( 0.7, mass.color );
@@ -107,36 +107,38 @@ define( function( require ) {
     var radius = hookHeight / 4;
     hookShape.arc( 0, 0, radius, Math.PI, ( 0.5 * Math.PI ) );
     hookShape.lineTo( 0, hookHeight / 2 );
-    var hookNode = new Path( hookShape, {
+
+    // @public Used for hook on massNode.
+    this.hookNode = new Path( hookShape, {
       stroke: 'black',
       lineWidth: 1.5,
       lineCap: 'round',
-      centerX: rect.centerX,
-      bottom: rect.top
+      centerX: this.rect.centerX,
+      bottom: this.rect.top
     } );
-    this.addChild( hookNode );
+    this.addChild( this.hookNode );
 
     if ( !mass.icon ) {
       var labelString = mass.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
       var label = new Text( labelString, {
         font: new PhetFont( { size: 12, weight: 'bold' } ),
-        centerY: rect.centerY,
+        centerY: this.rect.centerY,
         centerX: 0,
         pickable: false,
-        maxWidth: !mass.adjustable ? rect.width : 30, // Adjustable masses require smaller label maxWidth.
+        maxWidth: !mass.adjustable ? this.rect.width : 30, // Adjustable masses require smaller label maxWidth.
         tandem: tandem.createTandem( 'label' )
       } );
       this.addChild( label );
 
       mass.massProperty.link( function() {
-        label.center = rect.center;
+        label.center = self.rect.center;
       } );
 
       // Adjust the mass label for adjustable masses.
       if ( this.mass.adjustable ) {
         this.mass.massProperty.link( function( massValue ) {
           label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
-          label.center = rect.center;
+          label.center = self.rect.center;
         } );
       }
     }
@@ -175,7 +177,6 @@ define( function( require ) {
         }
       }
     } );
-
 
     this.mass.positionProperty.link( function( position ) {
       self.translation = modelViewTransform2.modelToViewPosition( position );
@@ -278,10 +279,10 @@ define( function( require ) {
      */
     var updateArrow = function( arrow, position, xOffset, y2 ) {
       arrow.setTailAndTip(
-        rect.centerX + xOffset,
-        position.y + rect.centerY,
-        rect.centerX + xOffset,
-        position.y + rect.centerY + y2
+        this.rect.centerX + xOffset,
+        position.y + this.rect.centerY,
+        this.rect.centerX + xOffset,
+        position.y + this.rect.centerY + y2
       );
     };
 
@@ -354,7 +355,7 @@ define( function( require ) {
 
     // When the mass's position changes update the forces baseline marker
     mass.positionProperty.link( function( position ) {
-      forceNullLine.setLine( rect.centerX + (forcesOrientation) * 40, position.y + rect.centerY, rect.centerX + (forcesOrientation) * 50, position.y + rect.centerY );
+      forceNullLine.setLine( self.rect.centerX + (forcesOrientation) * 40, position.y + self.rect.centerY, self.rect.centerX + (forcesOrientation) * 50, position.y + self.rect.centerY );
     } );
   }
 

@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ClosestDragListener = require( 'SUN/ClosestDragListener' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
@@ -24,6 +25,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Panel = require( 'SUN/Panel' );
+  var Plane = require( 'SCENERY/nodes/Plane' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -56,6 +58,13 @@ define( function( require ) {
 
     var self = this;
 
+    // Support for expanding touchAreas near massNodes.
+    var backgroundDragNode = new Plane();
+    var closestDragListener = new ClosestDragListener( 30, 0 );
+
+    backgroundDragNode.addInputListener( closestDragListener );
+    this.addChild( backgroundDragNode );
+
     // @public {MassesAndSpringsModel}
     this.model = model;
 
@@ -81,6 +90,7 @@ define( function( require ) {
     // @protected {number} - Spacing used for the margin of layout bounds
     this.spacing = 10;
 
+    //TODO: Are we using this?
     // @protected {number} - Padding for panels on most right side of sim view
     this.rightPanelPadding = this.visibleBoundsProperty.get().right - this.spacing;
 
@@ -105,6 +115,29 @@ define( function( require ) {
           self.resetMassLayer();
         }
       } );
+      closestDragListener.addDraggableItem( {
+        startDrag: massNode.movableDragHandler.startDrag.bind( massNode.movableDragHandler ),
+
+        // globalPoint is the position of our pointer.
+        computeDistance: function( globalPoint ) {
+
+          // The mass position is recognized as being really far away.
+          if ( mass.userControlledProperty.value ) {
+            return Number.POSITIVE_INFINITY;
+          }
+          else {
+            var cursorViewPosition = self.globalToLocalPoint( globalPoint );
+            var massRectBounds = massNode.localToParentBounds( massNode.rect.bounds );
+            var massHookBounds = massNode.localToParentBounds( massNode.hookNode.bounds );
+
+            return Math.sqrt( Math.min(
+              massRectBounds.minimumDistanceToPointSquared( cursorViewPosition ),
+              massHookBounds.minimumDistanceToPointSquared( cursorViewPosition )
+            ) );
+          }
+        }
+      } );
+
 
       // Keeps track of the mass node to restore original Z order.
       return massNode;
