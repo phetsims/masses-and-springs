@@ -244,6 +244,9 @@ define( function( require ) {
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
 
+    // Move this plane to the back of the scene graph
+    this.backgroundDragNode.moveToBack();
+
     this.visibleBoundsProperty.link( function() {
       rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.springSystemControlsNode.top );
       springOptionsPanel.leftTop = self.springSystemControlsNode.leftTop.minus( new Vector2( self.spacing * 2, 0 ) );

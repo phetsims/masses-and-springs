@@ -59,11 +59,11 @@ define( function( require ) {
     var self = this;
 
     // Support for expanding touchAreas near massNodes.
-    var backgroundDragNode = new Plane();
+    this.backgroundDragNode = new Plane();
     var closestDragListener = new ClosestDragListener( 30, 0 );
 
-    backgroundDragNode.addInputListener( closestDragListener );
-    this.addChild( backgroundDragNode );
+    this.addInputListener( closestDragListener );
+    this.addChild( this.backgroundDragNode );
 
     // @public {MassesAndSpringsModel}
     this.model = model;
