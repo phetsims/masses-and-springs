@@ -279,10 +279,10 @@ define( function( require ) {
      */
     var updateArrow = function( arrow, position, xOffset, y2 ) {
       arrow.setTailAndTip(
-        this.rect.centerX + xOffset,
-        position.y + this.rect.centerY,
-        this.rect.centerX + xOffset,
-        position.y + this.rect.centerY + y2
+        self.rect.centerX + xOffset,
+        position.y + self.rect.centerY,
+        self.rect.centerX + xOffset,
+        position.y + self.rect.centerY + y2
       );
     };
 
