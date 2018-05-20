@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  var LineArrowNode = require( 'SCENERY_PHET/LineArrowNode' );
   var Color = require( 'SCENERY/util/Color' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -37,12 +37,13 @@ define( function( require ) {
       stroke: new Color( 0, 180, 0 ),
       headWidth: 20,
       headHeight: 10,
-      lineWidth: 3,
+      tailLineWidth: 3,
+      headLineWidth: 3,
       useArrowShape:false
     };
 
     // Creation of the symbol for the displacement vector.
-    var displacementArrow = new ArrowNode( 0, 0, 30, 0, DISPLACEMENT_ARROW_OPTIONS );
+    var displacementArrow = new LineArrowNode( 0, 0, 30, 0, DISPLACEMENT_ARROW_OPTIONS );
     options.children = [ displacementArrow ];
 
     if ( !options.symbolRepresentation ) {
