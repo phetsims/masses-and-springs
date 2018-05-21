@@ -237,7 +237,7 @@ define( function( require ) {
                                              self.elasticPotentialEnergyProperty.get() );
       }
       if ( userControlled ) {
-        self.onShelfProperty.set(false);
+        self.onShelfProperty.set( false );
         self.verticalVelocityProperty.reset();
       }
     } );
@@ -319,7 +319,7 @@ define( function( require ) {
           this.animationProgress = 1;
         }
         if ( this.animationProgress === 1 ) {
-          this.onShelfProperty.set(true);
+          this.onShelfProperty.set( true );
           this.isAnimatingProperty.set( false );
         }
       }

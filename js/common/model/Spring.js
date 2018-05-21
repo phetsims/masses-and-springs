@@ -61,7 +61,7 @@ define( function( require ) {
       self.gravityProperty.set( gravity );
     } );
 
-    //  @public {Property.<number>} distance from of the bottom of the spring from the natural resting position
+    //  @public {Property.<number>} distance from the bottom of the spring from the natural resting position
     this.displacementProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'displacementProperty' ),
       units: 'meters',

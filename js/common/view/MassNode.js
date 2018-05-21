@@ -316,7 +316,7 @@ define( function( require ) {
       if ( visible ) {
         position = mass.positionProperty.get();
         xOffset = (forcesOrientation) * 45;
-        y2 = ARROW_SIZE_DEFAULT * springForce;
+        y2 = -ARROW_SIZE_DEFAULT * springForce;
         updateArrow( springForceArrow, position, xOffset, y2 );
       }
     } );
