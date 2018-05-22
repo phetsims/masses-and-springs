@@ -11,7 +11,6 @@ define( function( require ) {
   // modules
   var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LineStyles = require( 'KITE/util/LineStyles' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
