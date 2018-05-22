@@ -32,7 +32,7 @@ define( function( require ) {
    */
   function MovableLineNode( initialPosition, length, visibleProperty, dragBounds, tandem ) {
     var self = this;
-    Node.call( this );
+    Node.call( this, { pickable: true, cursor: 'pointer' } );
 
     // Creates laser pointer tip for reference line
     var bodySize = new Dimension2( 12, 14 );
