@@ -296,6 +296,7 @@ define( function( require ) {
       this.springConstantProperty.reset();
       this.animatingProperty.reset();
       this.massEquilibriumDisplacementProperty.reset();
+      this.periodTraceVisibilityProperty.reset();
     },
 
     /**
