@@ -61,7 +61,6 @@ define( function( require ) {
   return inherit( Node, PeriodTraceNode, {
 
     /**
-     *
      * @param {number} dt
      * @param {Property.<boolean>} playingProperty: whether the sim is playing or not
      */
@@ -69,15 +68,8 @@ define( function( require ) {
       var spring = this.periodTrace.springProperty.value;
       var mass = spring.massAttachedProperty.value;
       if ( mass && !mass.userControlledProperty.value && spring.periodTraceVisibilityProperty.value ) {
-        if ( this.periodTrace.stateProperty.value === 4 && playingProperty.value ) {
-          this.colorAlpha = Math.max( 0, this.colorAlpha - FADE_OUT_SPEED * dt );
-          this.traceColor.alpha = this.colorAlpha;
-
-          if ( this.colorAlpha === 0 ) {
-            this.periodTrace.onFaded();
-            this.traceColor.alpha = 1;
-            this.colorAlpha = 1;
-          }
+        if ( this.periodTrace.stateProperty.value === 4 && playingProperty.value || mass.verticalVelocityProperty.value ===0 ) {
+         this.fade(dt);
         }
 
         var modelViewTransform = this.modelViewTransform;
@@ -124,6 +116,22 @@ define( function( require ) {
         this.visible = false && spring.periodTraceVisibilityProperty.value;
         this.periodTrace.stateProperty.reset();
         this.periodTrace.crossingProperty.reset();
+      }
+    },
+    /**
+     * Fades the period trace.
+     * @param dt
+     *
+     * @private
+     */
+    fade: function(dt){
+      this.colorAlpha = Math.max( 0, this.colorAlpha - FADE_OUT_SPEED * dt );
+      this.traceColor.alpha = this.colorAlpha;
+
+      if ( this.colorAlpha === 0 ) {
+        this.periodTrace.onFaded();
+        this.traceColor.alpha = 1;
+        this.colorAlpha = 1;
       }
     }
   } );
