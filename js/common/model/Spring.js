@@ -442,17 +442,65 @@ define( function( require ) {
 
     /**
      * Responsible for oscillatory motion of spring system.
-     * @param {number} dt - animation time step
-     *
      * @public
+     *
+     * The motion is based off of a driven harmonic oscillator
+     * (https://en.wikipedia.org/wiki/Harmonic_oscillator#Driven_harmonic_oscillators), which satisfies the
+     * differential equation:
+     *
+     * x''(t) + 2ζω₀ x'(t) + ω₀² x(t) = -g
+     *
+     * where `t` is the time, `g` is the gravitational acceleration constant, and for our case we apply the
+     * substitutions:
+     *
+     * ζ = sqrt(k/m)
+     * ω₀ = c/(2 * sqrt(m*k))
+     *
+     * The solution to the differential equation gives essentially two different cases:
+     * - Underdamped/overdamped (c²-4km != 0) where we can actually solve both with the same code by using complex
+     *   numbers.
+     * - Critically damped (c²-4km = 0), which would cause division by zero in the above case, so a different formula
+     *   is needed.
+     *
+     * The formulas were easiest to compute in Mathematica (see assets/mass-spring-lab.nb), but essentially we use the
+     * built-in solver and simplifier for both cases:
+     *
+     * For the overdamped/underdamped case:
+     *   FullSimplify[
+     *    DSolve[{(x''[t] + 2*zeta*omega0*x'[t] + omega0^2*x[t] == -g) /. subs,
+     *       x'[0] == v1, x[0] == x1}, x[t], t], {Element[t, Reals],
+     *     Element[v1, Reals], Element[x1, Reals], Element[m, Reals],
+     *     Element[g, Reals], Element[c, Reals], Element[k, Reals], m > 0,
+     *     g > 0, c >= 0, k > 0, c^2 < 4*k*m}]
+     *
+     * Resulting in:
+     *   1/(2 k^(3/2) Sqrt[c^2-4 k m]) E^(-((t (c+I Sqrt[4 k m-c^2]))/(2 m))) (c Sqrt[k] (-1+E^((I t Sqrt[4 k m-c^2])/m))
+     *   (g m+k x1)+I g m Sqrt[k (4 k m-c^2)] (E^((I t Sqrt[4 k m-c^2])/m)-2 E^((t (c+I Sqrt[4 k m-c^2]))/(2 m))+1)+2
+     *   k^(3/2) m v1 E^((I t Sqrt[4 k m-c^2])/m)+I x1 Sqrt[k^3 (4 k m-c^2)] E^((I t Sqrt[4 k m-c^2])/m)+I x1 Sqrt[k^3
+     *   (4 k m-c^2)]-2 k^(3/2) m v1)
+     *
+     * For the critically damped case:
+     *   FullSimplify[
+     *    DSolve[{(x''[t] + 2*zeta*omega0*x'[t] + omega0^2*x[t] == -g) /.
+     *        subs /. {c -> Sqrt[4*k*m]}, x'[0] == v1, x[0] == x1}, x[t],
+     *     t], {Element[t, Reals], Element[v1, Reals], Element[x1, Reals],
+     *     Element[m, Reals], Element[g, Reals], Element[k, Reals], m > 0,
+     *     g > 0, k > 0}]
+     *
+     * Resulting in:
+     *   (E^(t (-Sqrt[(k/m)])) (g (m (-E^(t Sqrt[k/m]))+t Sqrt[k m]+m)+k (t (x1 Sqrt[k/m]+v1)+x1)))/k
+     *
+     * The code below basically factors out common subexpressions of these formulas, making them more efficient to
+     * compute.
+     *
+     * We can use them by essentially using `t` as the timestep (dt), to compute the change for any arbitrary dt.
+     * Only the constants need to be plugged in, and only the position/velocity are smoothly varying over time.
+     *
+     * @param {number} dt - animation time step
      */
     step: function( dt ) {
       if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() ) {
         this.massAttachedProperty.get().preserveThermalEnergy = false;
-
-        // REVIEW: This is a pretty complex algorithm and would be difficult to dig into on its own.  Is there some
-        // references that could be provided that describe where this came from?
-        //REVIEW: JO will do this.
 
         var k = this.springConstantProperty.get();
         var m = this.massAttachedProperty.get().massProperty.get();
@@ -463,12 +511,7 @@ define( function( require ) {
 
         // Underdamped and Overdamped case
         if ( ( c * c - 4 * k * m ) !== 0 ) {
-          // TODO::  possibly decouple any constants or terms not dependent on t, x, or v as we don't need a new object
-          //         for example k, c, and g may change, but not with every update.
-          // TODO:: improve readability of variables
-
-          // Precompute expressions used more than twice
-          // TODO:: document what algorithm is being used here
+          // Precompute expressions used more than twice (for performance).
           var km = k * m;
           var gm = g * m;
           var tDm = dt / m;
@@ -507,7 +550,6 @@ define( function( require ) {
           var newVelocity = A.add( B ).multiply( coef ).real;
 
           //  Stop the alternation between +/- in overdamped displacement
-          // TODO:: This is probably a bug in the model equation. Are we missing an i somewhere?
           if ( ( c * c - 4 * k * m ) > 0 ) {
             newDisplacement = ( this.displacementProperty.get() > 0 ) ? Math.abs( newDisplacement ) : -Math.abs( newDisplacement );
           }
@@ -531,11 +573,8 @@ define( function( require ) {
 
         // Critically damped case
         else {
-          //TODO::  if needed decouple these objects
-          //REVIEW: JO will handle
           var omega = Math.sqrt( k / m );
           var phi = Math.exp( dt * omega );
-
 
           this.displacementProperty.set( ( g * ( -m * phi + dt * Math.sqrt( k * m ) + m ) +
                                            k * (  dt * ( x * omega + v ) + x )
