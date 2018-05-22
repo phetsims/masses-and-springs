@@ -121,7 +121,7 @@ define( function( require ) {
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
 
     // Initializes movable line
-    var xBoundsLimit = this.modelViewTransform.modelToViewX( this.model.firstSpring.positionProperty.value.x ) + this.spacing;
+    var xBoundsLimit = springCenter + this.spacing * 1.1;
     var movableLineNode = new MovableLineNode(
       springHangerNode.center.plus( new Vector2( 45, 200 ) ),
       100,
