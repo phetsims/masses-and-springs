@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LineStyles = require( 'KITE/util/LineStyles' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -67,7 +68,8 @@ define( function( require ) {
      */
     step: function( dt, playingProperty ) {
       var spring = this.periodTrace.springProperty.value;
-      if ( spring.periodTraceVisibilityProperty.value ) {
+      var mass = spring.massAttachedProperty.value;
+      if ( mass && !mass.userControlledProperty.value && spring.periodTraceVisibilityProperty.value ) {
         if ( this.periodTrace.stateProperty.value === 4 && playingProperty.value ) {
           this.colorAlpha = Math.max( 0, this.colorAlpha - FADE_OUT_SPEED * dt );
           this.traceColor.alpha = this.colorAlpha;
@@ -80,7 +82,6 @@ define( function( require ) {
         }
 
         var modelViewTransform = this.modelViewTransform;
-        var mass = spring.massAttachedProperty.value;
         if ( mass && !mass.userControlledProperty.value ) {
 
           var equilibriumYPosition = modelViewTransform.modelToViewY( spring.massEquilibriumYPositionProperty.value );
@@ -98,25 +99,25 @@ define( function( require ) {
             shape.moveTo( this.originalX, equilibriumYPosition ); // sets our current position
 
             // draws a line from our current position to a NEW position, then sets our current position to the NEW position
-            shape.lineTo( this.originalX, state === 1 ? currentYPosition : firstPeakYPosition );
+            shape.verticalLineTo( state === 1 ? currentYPosition : firstPeakYPosition );
 
             if ( state > 1 ) {
 
               // first connector
-              shape.lineTo( this.middleX, firstPeakYPosition );
+              shape.horizontalLineTo( this.middleX );
 
               // second line
-              shape.lineTo( this.middleX, state === 2 ? currentYPosition : secondPeakYPosition );
+              shape.verticalLineTo( state === 2 ? currentYPosition : secondPeakYPosition + this.path.lineWidth / 2 );
               if ( state > 2 ) {
 
                 // second connector
-                shape.lineTo( this.lastX, secondPeakYPosition );
+                shape.horizontalLineTo( this.lastX );
 
                 // third line
-                shape.lineTo( this.lastX, state === 3 ? currentYPosition : equilibriumYPosition );
+                shape.verticalLineTo( state === 3 ? currentYPosition : equilibriumYPosition - this.path.lineWidth / 2 );
               }
             }
-            this.path.shape = shape;
+            this.path.setShape( shape );
           }
         }
       }
