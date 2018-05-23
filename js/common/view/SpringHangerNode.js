@@ -23,7 +23,7 @@ define( function( require ) {
   var SPRING_HANGER_FILL = 'rgb( 180, 180, 180 )';
 
   /**
-   * @param {Array.<Spring>} spring
+   * @param {Array.<Spring>} springs
    * @param {ModelViewTransform2} modelViewTransform2
    * @param {Tandem} tandem
    * @param {Object} options
@@ -57,6 +57,7 @@ define( function( require ) {
       var springHangerLabelNode = new Node( { tandem: tandem.createTandem( 'springHangerLabelNode' ) } );
       springHangerLabelNode.addChild( new Text( '1', {
         font: SPRING_HANGER_FONT,
+        centerX:springs[ 0 ].positionProperty.get().x,
         tandem: tandem.createTandem( '1' )
       } ) );
       springHangerLabelNode.addChild( new Text( '2', {
