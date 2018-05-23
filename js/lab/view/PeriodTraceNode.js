@@ -67,11 +67,16 @@ define( function( require ) {
     step: function( dt, playingProperty ) {
       var spring = this.periodTrace.springProperty.value;
       var mass = spring.massAttachedProperty.value;
-      if ( mass && !mass.userControlledProperty.value && spring.periodTraceVisibilityProperty.value ) {
-        if ( this.periodTrace.stateProperty.value === 4 && playingProperty.value || mass.verticalVelocityProperty.value ===0 ) {
+
+      // The period trace should only be drawn when a mass is oscillating on a spring and its checkbox is toggled on.
+      if ( mass && !mass.userControlledProperty.value && spring.periodTraceVisibilityProperty.value && !(mass.verticalVelocityProperty.value ===0) ) {
+
+        // Responsible for fading the period trace.
+        if ( this.periodTrace.stateProperty.value === 4 && playingProperty.value ) {
          this.fade(dt);
         }
 
+        // Responsible for drawing the period trace based on the state of the trace.
         var modelViewTransform = this.modelViewTransform;
         if ( mass && !mass.userControlledProperty.value ) {
 
@@ -87,7 +92,9 @@ define( function( require ) {
           else {
             this.visible = spring.periodTraceVisibilityProperty.value;
             var shape = new Shape();
-            shape.moveTo( this.originalX, equilibriumYPosition ); // sets our current position
+
+            // sets our initial position
+            shape.moveTo( this.originalX, equilibriumYPosition );
 
             // draws a line from our current position to a NEW position, then sets our current position to the NEW position
             shape.verticalLineTo( state === 1 ? currentYPosition : firstPeakYPosition );
@@ -112,6 +119,8 @@ define( function( require ) {
           }
         }
       }
+
+      // Responsible for restarting the period trace.
       else {
         this.visible = false && spring.periodTraceVisibilityProperty.value;
         this.periodTrace.stateProperty.reset();
