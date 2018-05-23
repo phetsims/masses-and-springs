@@ -82,6 +82,9 @@ define( function( require ) {
     this.shelf.rectWidth = 160;
     this.shelf.left = this.energyGraphNode.right + this.spacing;
 
+    // Move tools layer so ruler is always in front.
+    this.toolsLayer.moveToFront();
+
     // Move this plane to the back of the scene graph
     this.backgroundDragNode.moveToBack();
   }
