@@ -69,21 +69,27 @@ define( function( require ) {
       var mass = spring.massAttachedProperty.value;
 
       // The period trace should only be drawn when a mass is oscillating on a spring and its checkbox is toggled on.
-      if ( mass && !mass.userControlledProperty.value && spring.periodTraceVisibilityProperty.value && !(mass.verticalVelocityProperty.value ===0) ) {
+      if ( mass && !mass.userControlledProperty.value &&
+           spring.periodTraceVisibilityProperty.value &&
+           !(mass.verticalVelocityProperty.value === 0) ) {
 
-        // Responsible for fading the period trace.
-        if ( this.periodTrace.stateProperty.value === 4 && playingProperty.value ) {
-         this.fade(dt);
+        // Responsible for fading the period trace.We want to fade only when the sim is playing and
+        // the state is either 4 or when the trace has begun fading already.
+        if ( (this.periodTrace.stateProperty.value === 4|| this.colorAlpha!==1) && playingProperty.value ) {
+            this.fade( dt );
         }
 
         // Responsible for drawing the period trace based on the state of the trace.
         var modelViewTransform = this.modelViewTransform;
         if ( mass && !mass.userControlledProperty.value ) {
 
-          var equilibriumYPosition = modelViewTransform.modelToViewY( spring.massEquilibriumYPositionProperty.value );
-          var firstPeakYPosition = modelViewTransform.modelToViewY( spring.massEquilibriumYPositionProperty.value + this.periodTrace.firstPeakY );
-          var secondPeakYPosition = modelViewTransform.modelToViewY( spring.massEquilibriumYPositionProperty.value + this.periodTrace.secondPeakY );
-          var currentYPosition = modelViewTransform.modelToViewY( spring.massEquilibriumYPositionProperty.value + spring.massEquilibriumDisplacementProperty.value );
+          // Transforming our model positions into view positions.
+          var massEquilibrium = spring.massEquilibriumYPositionProperty.value;
+          var equilibriumYPosition = modelViewTransform.modelToViewY( massEquilibrium );
+          var firstPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.firstPeakY );
+          var secondPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.secondPeakY );
+          var currentYPosition = modelViewTransform.modelToViewY( massEquilibrium +
+                                                                  spring.massEquilibriumDisplacementProperty.value );
 
           var state = this.periodTrace.stateProperty.value; // 0 to 4
           if ( state === 0 ) {
@@ -123,8 +129,7 @@ define( function( require ) {
       // Responsible for restarting the period trace.
       else {
         this.visible = false && spring.periodTraceVisibilityProperty.value;
-        this.periodTrace.stateProperty.reset();
-        this.periodTrace.crossingProperty.reset();
+        this.periodTrace.onFaded();
       }
     },
     /**
@@ -133,7 +138,7 @@ define( function( require ) {
      *
      * @private
      */
-    fade: function(dt){
+    fade: function( dt ) {
       this.colorAlpha = Math.max( 0, this.colorAlpha - FADE_OUT_SPEED * dt );
       this.traceColor.alpha = this.colorAlpha;
 

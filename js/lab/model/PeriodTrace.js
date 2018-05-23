@@ -16,10 +16,11 @@ define( function( require ) {
 
   /**
    * @param {Spring} spring
+   * @param {Property.<boolean>} simPlaying: is the sim playing or not
    *
    * @constructor
    */
-  function PeriodTrace( spring ) {
+  function PeriodTrace( spring, simPlaying ) {
     var self = this;
 
     // @public {Property.<Spring>} mass which is being tracked
@@ -83,17 +84,16 @@ define( function( require ) {
         self.stateProperty.value += 1;
       }
 
-      if ( (( self.stateProperty.value % 5 === 0 ) && ( self.stateProperty !== 0 )) ) {
+      if ( (( self.stateProperty.value % 5 === 0 ) && ( self.stateProperty !== 0 )) && simPlaying.value ) {
         self.stateProperty.reset();
       }
-      if ( (( self.crossingProperty.value % 4 === 0 ) && ( self.crossingProperty !== 0 )) ) {
+      if ( (( self.crossingProperty.value % 4 === 0 ) && ( self.crossingProperty !== 0 )) && simPlaying.value ) {
         self.crossingProperty.reset();
       }
     } );
 
     this.springProperty.value.droppedEmitter.addListener( function() {
-      self.stateProperty.reset();
-      self.crossingProperty.reset();
+      self.onFaded();
     } );
 
     this.directionProperty.lazyLink( function( oldValue, newValue ) {

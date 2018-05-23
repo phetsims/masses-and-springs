@@ -48,7 +48,7 @@ define( function( require ) {
     } );
 
     // Initialize period trace.
-    this.periodTrace = new PeriodTrace( this.springs[ 0 ] );
+    this.periodTrace = new PeriodTrace( this.springs[ 0 ], this.playingProperty );
   }
 
   massesAndSprings.register( 'LabModel', LabModel );
