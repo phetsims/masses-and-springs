@@ -57,7 +57,7 @@ define( function( require ) {
       var springHangerLabelNode = new Node( { tandem: tandem.createTandem( 'springHangerLabelNode' ) } );
       springHangerLabelNode.addChild( new Text( '1', {
         font: SPRING_HANGER_FONT,
-        centerX:springs[ 0 ].positionProperty.get().x,
+        centerX: springs[ 0 ].positionProperty.get().x - 1.5, // Slightly shifted so tail of the number one is drawn above spring anchor
         tandem: tandem.createTandem( '1' )
       } ) );
       springHangerLabelNode.addChild( new Text( '2', {
