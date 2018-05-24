@@ -42,7 +42,8 @@ define( function( require ) {
       stroke: options.stroke,
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      pickable: false
     } );
     this.mouseArea = this.localBounds.dilatedY( 10 );
     this.touchArea = this.localBounds.dilatedY( 10 );
