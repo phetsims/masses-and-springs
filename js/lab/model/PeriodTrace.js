@@ -23,7 +23,7 @@ define( function( require ) {
   function PeriodTrace( spring, simPlaying ) {
     var self = this;
 
-    // @public {Property.<Spring>} mass which is being tracked
+    // @public {Property.<Spring>} spring which is being tracked
     this.springProperty = new Property( spring );
 
     // @public {Property.<number>} orientation of the spring's oscillation.
@@ -34,6 +34,9 @@ define( function( require ) {
 
     // @public {Property.<number>} determines how many times the trace has gone over its original Y position
     this.crossingProperty = new NumberProperty( 0 );
+
+    // @public {read-write} determines if the mass's velocity is below a specific value, so the period trace is hidden.
+    this.thresholdReached = false;
 
     // @public {Property.<number>} Follows pattern in Pendulum-Lab
     // 0: Trace hasn't started recording.
@@ -78,6 +81,9 @@ define( function( require ) {
     } );
 
     this.springProperty.value.crossEmitter.addListener( function() {
+
+      // If the mass crosses the mid point below a certain velocity, we don't want to show the trace.
+      self.thresholdReached = Math.abs( spring.massAttachedProperty.value.verticalVelocityProperty.value ) <= 0.15;
       self.crossingProperty.value += 1;
 
       if ( self.crossingProperty.value === 1 || self.crossingProperty.value === 3 ) {

@@ -14,6 +14,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Shape = require( 'KITE/Shape' );
 
   // constants
@@ -75,8 +76,8 @@ define( function( require ) {
 
         // Responsible for fading the period trace.We want to fade only when the sim is playing and
         // the state is either 4 or when the trace has begun fading already.
-        if ( (this.periodTrace.stateProperty.value === 4|| this.colorAlpha!==1) && playingProperty.value ) {
-            this.fade( dt );
+        if ( (this.periodTrace.stateProperty.value === 4 || this.colorAlpha !== 1) && playingProperty.value ) {
+          this.fade( dt );
         }
 
         // Responsible for drawing the period trace based on the state of the trace.
@@ -91,37 +92,42 @@ define( function( require ) {
           var currentYPosition = modelViewTransform.modelToViewY( massEquilibrium +
                                                                   spring.massEquilibriumDisplacementProperty.value );
 
+          this.shape = new Shape();
+
           var state = this.periodTrace.stateProperty.value; // 0 to 4
           if ( state === 0 ) {
             this.visible = false && spring.periodTraceVisibilityProperty.value;
           }
           else {
-            this.visible = spring.periodTraceVisibilityProperty.value;
-            var shape = new Shape();
+            if ( !this.periodTrace.thresholdReached ) {
+              this.visible = spring.periodTraceVisibilityProperty.value;
 
-            // sets our initial position
-            shape.moveTo( this.originalX, equilibriumYPosition );
+              // sets our initial position
+              this.shape.moveTo( this.originalX, equilibriumYPosition );
 
-            // draws a line from our current position to a NEW position, then sets our current position to the NEW position
-            shape.verticalLineTo( state === 1 ? currentYPosition : firstPeakYPosition );
-
-            if ( state > 1 ) {
+              // draws a line from our current position to a NEW position, then sets our current position to the NEW position
+              this.shape.verticalLineTo( state === 1 ? currentYPosition : firstPeakYPosition );
+            }
+            else {
+              // this.shape = null
+            }
+            if ( state > 1 && !this.periodTrace.thresholdReached ) {
 
               // first connector
-              shape.horizontalLineTo( this.middleX );
+              this.shape.horizontalLineTo( this.middleX );
 
               // second line
-              shape.verticalLineTo( state === 2 ? currentYPosition : secondPeakYPosition + this.path.lineWidth / 2 );
-              if ( state > 2 ) {
-
+              this.shape.verticalLineTo( state === 2 ? currentYPosition : secondPeakYPosition + this.path.lineWidth / 2 );
+              if ( state > 2 && !this.periodTrace.thresholdReached ) {
                 // second connector
-                shape.horizontalLineTo( this.lastX );
+                this.shape.horizontalLineTo( this.lastX );
 
                 // third line
-                shape.verticalLineTo( state === 3 ? currentYPosition : equilibriumYPosition - this.path.lineWidth / 2 );
+                this.shape.verticalLineTo( state === 3 ? currentYPosition : equilibriumYPosition - this.path.lineWidth / 2 );
               }
             }
-            this.path.setShape( shape );
+
+            this.path.setShape( this.shape );
           }
         }
       }
