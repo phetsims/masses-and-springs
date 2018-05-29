@@ -14,7 +14,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Shape = require( 'KITE/Shape' );
 
   // constants
