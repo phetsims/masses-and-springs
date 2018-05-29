@@ -118,6 +118,7 @@ define( function( require ) {
               // second line
               this.shape.verticalLineTo( state === 2 ? currentYPosition : secondPeakYPosition + this.path.lineWidth / 2 );
               if ( state > 2 && !this.periodTrace.thresholdReached ) {
+
                 // second connector
                 this.shape.horizontalLineTo( this.lastX );
 

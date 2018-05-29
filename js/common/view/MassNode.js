@@ -121,6 +121,10 @@ define( function( require ) {
     } );
     this.addChild( this.hookNode );
 
+    // Background added so all of svg elements are painted. See https://github.com/phetsims/masses-and-springs/issues/278
+    this.background = new Rectangle( this.bounds.dilated( 1.10 ), { pickable: false } );
+    this.addChild( this.background );
+
     if ( !mass.icon ) {
       var labelString = mass.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
       var label = new Text( labelString, {
