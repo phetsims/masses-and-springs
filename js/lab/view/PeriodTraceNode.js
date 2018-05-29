@@ -43,7 +43,7 @@ define( function( require ) {
     // @private
     this.modelViewTransform = modelViewTransform;
 
-    this.originalX = this.modelViewTransform.modelToViewX( this.periodTrace.springProperty.value.positionProperty.value.x - 0.2 );
+    this.originalX = this.modelViewTransform.modelToViewX( this.periodTrace.spring.positionProperty.value.x - 0.2 );
     this.middleX = this.originalX + X_OFFSET;
     this.lastX = this.originalX + 2 * X_OFFSET;
 
@@ -66,7 +66,7 @@ define( function( require ) {
      * @param {Property.<boolean>} playingProperty: whether the sim is playing or not
      */
     step: function( dt, playingProperty ) {
-      var spring = this.periodTrace.springProperty.value;
+      var spring = this.periodTrace.spring;
       var mass = spring.massAttachedProperty.value;
 
       // The period trace should only be drawn when a mass is oscillating on a spring and its checkbox is toggled on.

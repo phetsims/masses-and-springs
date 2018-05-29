@@ -55,6 +55,9 @@ define( function( require ) {
     // @public {Mass} (read-only)
     this.mass = mass;
 
+    // @public (read-write) determines if the mass's velocity is below a specific value, so the period trace is hidden.
+    this.thresholdReached = false;
+
     var hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT );
     if ( mass.icon ) {
       hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT * 0.34 );
@@ -237,7 +240,7 @@ define( function( require ) {
      *
      * @private
      */
-    var updateForceVisiblity = function( arrowVisibilityProperty, arrowNode ) {
+    var updateForceVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
         function( spring, springVectorVisibility, forcesMode ) {
           arrowNode.visible = !!spring && springVectorVisibility && forcesMode === ForcesModeChoice.FORCES;
@@ -251,10 +254,10 @@ define( function( require ) {
     updateArrowVisibility( model.accelerationVectorVisibilityProperty, accelerationArrow );
 
     // Show/hide the spring force arrow
-    updateForceVisiblity( model.springVectorVisibilityProperty, springForceArrow );
+    updateForceVisibility( model.springVectorVisibilityProperty, springForceArrow );
 
     // Show/hide the gravity force arrow
-    updateForceVisiblity( model.gravityVectorVisibilityProperty, gravityForceArrow );
+    updateForceVisibility( model.gravityVectorVisibilityProperty, gravityForceArrow );
 
     // Show/hide the net force arrow
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],

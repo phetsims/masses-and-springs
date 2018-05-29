@@ -23,8 +23,8 @@ define( function( require ) {
   function PeriodTrace( spring, simPlaying ) {
     var self = this;
 
-    // @public {Property.<Spring>} spring which is being tracked
-    this.springProperty = new Property( spring );
+    // @public (read-only) spring which is being tracked
+    this.spring = spring;
 
     // @public {Property.<number>} orientation of the spring's oscillation.
     this.directionProperty = new Property( null );
@@ -34,9 +34,6 @@ define( function( require ) {
 
     // @public {Property.<number>} determines how many times the trace has gone over its original Y position
     this.crossingProperty = new NumberProperty( 0 );
-
-    // @public {read-write} determines if the mass's velocity is below a specific value, so the period trace is hidden.
-    this.thresholdReached = false;
 
     // @public {Property.<number>} Follows pattern in Pendulum-Lab
     // 0: Trace hasn't started recording.
@@ -54,11 +51,11 @@ define( function( require ) {
     this.alphaProperty = new NumberProperty( 1 );
 
     // When a mass is attached the origin of the trace should be the mass equilibrium.
-    this.springProperty.value.massAttachedProperty.link( function( mass ) {
+    this.spring.massAttachedProperty.link( function( mass ) {
       if ( !mass ) {
 
         // If there isn't a mass attached then there is no mass displacement
-        self.springProperty.value.massEquilibriumDisplacementProperty.reset();
+        self.spring.massEquilibriumDisplacementProperty.reset();
       }
     } );
 
@@ -67,20 +64,20 @@ define( function( require ) {
       self.onFaded();
     } );
 
-    this.springProperty.value.peakEmitter.addListener( function( direction ) {
+    this.spring.peakEmitter.addListener( function( direction ) {
       if ( self.stateProperty.value !== 0 && self.stateProperty.value !== 4 ) {
         self.stateProperty.value += 1;
         if ( self.stateProperty.value === 2 ) {
-          self.firstPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value;
+          self.firstPeakY = self.spring.massEquilibriumDisplacementProperty.value;
         }
         if ( self.stateProperty.value === 3 ) {
-          self.secondPeakY = self.springProperty.value.massEquilibriumDisplacementProperty.value;
+          self.secondPeakY = self.spring.massEquilibriumDisplacementProperty.value;
         }
       }
       self.directionProperty.set( direction );
     } );
 
-    this.springProperty.value.crossEmitter.addListener( function() {
+    this.spring.crossEmitter.addListener( function() {
 
       // If the mass crosses the mid point below a certain velocity, we don't want to show the trace.
       self.thresholdReached = Math.abs( spring.massAttachedProperty.value.verticalVelocityProperty.value ) <= 0.15;
@@ -98,7 +95,7 @@ define( function( require ) {
       }
     } );
 
-    this.springProperty.value.droppedEmitter.addListener( function() {
+    this.spring.droppedEmitter.addListener( function() {
       self.onFaded();
     } );
 
