@@ -98,7 +98,6 @@ define( function( require ) {
             this.visible = false && spring.periodTraceVisibilityProperty.value;
           }
           else {
-            if ( !this.periodTrace.thresholdReached ) {
               this.visible = spring.periodTraceVisibilityProperty.value;
 
               // sets our initial position
@@ -106,18 +105,14 @@ define( function( require ) {
 
               // draws a line from our current position to a NEW position, then sets our current position to the NEW position
               this.shape.verticalLineTo( state === 1 ? currentYPosition : firstPeakYPosition );
-            }
-            else {
-              // this.shape = null
-            }
-            if ( state > 1 && !this.periodTrace.thresholdReached ) {
+            if ( state > 1 ) {
 
               // first connector
               this.shape.horizontalLineTo( this.middleX );
 
               // second line
               this.shape.verticalLineTo( state === 2 ? currentYPosition : secondPeakYPosition + this.path.lineWidth / 2 );
-              if ( state > 2 && !this.periodTrace.thresholdReached ) {
+              if ( state > 2 ) {
 
                 // second connector
                 this.shape.horizontalLineTo( this.lastX );
