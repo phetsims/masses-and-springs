@@ -23,7 +23,8 @@ define( function( require ) {
       stroke: color,
       centerY: 0,
       tailWidth: 3,
-      headWidth: 11
+      headWidth: 11,
+      pickable: false
     } );
   }
 
