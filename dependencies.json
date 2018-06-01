@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.0-dev.107 Fri Jun 01 2018 10:52:47 GMT-0400 (EDT)",
+  "comment": "# masses-and-springs 1.0.0-dev.108 Fri Jun 01 2018 13:40:21 GMT-0400 (EDT)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "9f6172d00a9150bad952f6357742c95f4fd211d9",
+    "sha": "8dde1ae97bbb9bde71c33f50170dff7d0cab9f23",
     "branch": "master"
   },
   "dot": {
@@ -33,7 +33,7 @@
     "branch": "master"
   },
   "masses-and-springs": {
-    "sha": "3a5395a3c073131fecfc40bce842df04f82d9ba2",
+    "sha": "677304b01158c46036c02fc58a555e504a619d6d",
     "branch": "master"
   },
   "phet-core": {
