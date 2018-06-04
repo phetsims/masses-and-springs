@@ -55,7 +55,8 @@ define( function( require ) {
     ];
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
-    var equilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
+    var equilibriumVisibilityProperty = new DerivedProperty(
+      [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         if ( massAttached ) {
           return equilibriumPositionVisible;
@@ -222,12 +223,18 @@ define( function( require ) {
       self.massNodes.forEach( function( massNode ) {
         if ( massNode.centerX > visibleBounds.maxX ) {
           massNode.mass.positionProperty.set(
-            new Vector2( self.modelViewTransform.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
+            new Vector2(
+              self.modelViewTransform.viewToModelX( visibleBounds.maxX ),
+              massNode.mass.positionProperty.get().y
+            )
           );
         }
         if ( massNode.centerX < visibleBounds.minX ) {
           massNode.mass.positionProperty.set(
-            new Vector2( self.modelViewTransform.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
+            new Vector2(
+              self.modelViewTransform.viewToModelX( visibleBounds.minX ),
+              massNode.mass.positionProperty.get().y
+            )
           );
         }
       } );

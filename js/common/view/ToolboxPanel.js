@@ -82,7 +82,7 @@ define( function( require ) {
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
     var rulerIcon = ruler.rasterized( {
-      // Instead of changing the rendering, we'll dynamically generate a mipmap so that the ruler icon appearance looks better.
+      // Instead of changing the rendering, we'll dynamically generate a mipmap so the ruler icon appearance looks better.
       // See https://github.com/phetsims/masses-and-springs/issues/199.
       mipmap: true,
       cursor: 'pointer',

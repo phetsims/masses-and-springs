@@ -71,9 +71,7 @@ define( function( require ) {
         }
       } );
       options.children = [ displacementArrow, verticalLine ];
-
     }
-
     Node.call( this, options );
   }
 

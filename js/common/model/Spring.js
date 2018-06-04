@@ -152,7 +152,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} Elastic Potential Energy of the attached Mass
-    this.elasticPotentialEnergyProperty = new DerivedProperty( [ this.springConstantProperty, this.displacementProperty ],
+    this.elasticPotentialEnergyProperty = new DerivedProperty(
+      [ this.springConstantProperty, this.displacementProperty ],
       function( springConstant, displacement ) {
         return 0.5 * springConstant * Math.pow( (displacement), 2 );
       } );
@@ -209,12 +210,20 @@ define( function( require ) {
         phetioType: DerivedPropertyIO( NumberIO )
       } );
 
-    // Set the equilibrium position when a mass is attached to the spring. We do a similar process in Mass.js when the mass value changes.
-    Property.multilink( [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
+    // Set the equilibrium position when a mass is attached to the spring.
+    // We do a similar process in Mass.js when the mass value changes.
+    Property.multilink( [
+        this.springConstantProperty,
+        this.gravityProperty,
+        this.massAttachedProperty,
+        this.naturalRestingLengthProperty
+      ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
         if ( mass ) {
-          var springExtensionValue = ( mass.massProperty.value * self.gravityProperty.value) / self.springConstantProperty.value;
-          self.equilibriumYPositionProperty.set( self.positionProperty.get().y - naturalRestingLength - springExtensionValue );
+          var springExtensionValue =
+            ( mass.massProperty.value * self.gravityProperty.value) / self.springConstantProperty.value;
+          self.equilibriumYPositionProperty.set(
+            self.positionProperty.get().y - naturalRestingLength - springExtensionValue );
         }
       } );
 
@@ -235,20 +244,30 @@ define( function( require ) {
       defaultValue: null
     } );
 
-    Property.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ], function( massEquilibriumYPosition, massCenterOfMass ) {
-      if ( massCenterOfMass !== null ) {
-        self.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition );
-      }
-    } );
+    Property.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ],
+      function( massEquilibriumYPosition, massCenterOfMass ) {
+        if ( massCenterOfMass !== null ) {
+          self.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition );
+        }
+      } );
 
-    // Set the equilibrium position when a mass is attached to the spring. We do a similar process in Mass.js when the mass value changes.
-    Property.multilink( [ this.springConstantProperty, this.gravityProperty, this.massAttachedProperty, this.naturalRestingLengthProperty ],
+    // Set the equilibrium position when a mass is attached to the spring.
+    // We do a similar process in Mass.js when the mass value changes.
+    Property.multilink( [
+        this.springConstantProperty,
+        this.gravityProperty,
+        this.massAttachedProperty,
+        this.naturalRestingLengthProperty
+      ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
         if ( mass ) {
 
           // springExtension = mg/k
-          var springExtensionValue = ( mass.massProperty.value * self.gravityProperty.value) / self.springConstantProperty.value;
-          self.massEquilibriumYPositionProperty.set( self.positionProperty.get().y - naturalRestingLength - springExtensionValue - mass.heightProperty.value / 2 );
+          var springExtensionValue =
+            ( mass.massProperty.value * self.gravityProperty.value) / self.springConstantProperty.value;
+          self.massEquilibriumYPositionProperty.set(
+            self.positionProperty.get().y - naturalRestingLength - springExtensionValue - mass.heightProperty.value / 2
+          );
         }
       } );
 
@@ -320,7 +339,7 @@ define( function( require ) {
 
     /**
      * Sets the properties of the spring with previously stored properties.
-     * @param {Object} springState - Sets the properties of the spring with previously stored properties. See getSpringState
+     * @param {Object} springState - Sets the springs's properties with previously stored properties. See getSpringState
      *
      * @public
      * @return {Object}
@@ -346,7 +365,8 @@ define( function( require ) {
      */
     updateThickness: function( length, springConstant ) {
 
-      // We are increasing the significance of the spring constant term by adding an exponent, which is empirically determined.
+      // We are increasing the significance of the spring constant term by adding an exponent,
+      // which is empirically determined.
       var thickness = this.thicknessProperty.initialValue
                       * springConstant / this.springConstantProperty.initialValue
                       * length / this.naturalRestingLengthProperty.initialValue;
@@ -434,7 +454,9 @@ define( function( require ) {
         this.displacementProperty.set( -springExtensionValue );
 
         // place that mass at the correct location as well
-        mass.positionProperty.set( new Vector2( this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + MassesAndSpringsConstants.HOOK_CENTER ) );
+        mass.positionProperty.set( new Vector2(
+          this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + MassesAndSpringsConstants.HOOK_CENTER
+        ) );
         mass.verticalVelocityProperty.set( 0 );
         this.buttonEnabledProperty.set( false );
       }
@@ -551,7 +573,8 @@ define( function( require ) {
 
           //  Stop the alternation between +/- in overdamped displacement
           if ( ( c * c - 4 * k * m ) > 0 ) {
-            newDisplacement = ( this.displacementProperty.get() > 0 ) ? Math.abs( newDisplacement ) : -Math.abs( newDisplacement );
+            newDisplacement =
+              ( this.displacementProperty.get() > 0 ) ? Math.abs( newDisplacement ) : -Math.abs( newDisplacement );
           }
 
           // In this case ( c * c - 4 * k m < 0 ) and we are underdamped.

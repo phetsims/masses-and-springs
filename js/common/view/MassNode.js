@@ -67,11 +67,12 @@ define( function( require ) {
     this.addChild( this.rect );
 
     // Bounds that limit where we can drag our mass should be dependent on how large our mass is
-    var modelBoundsProperty = new DerivedProperty( [ dragBoundsProperty, mass.heightProperty ], function( dragBounds, massHeight ) {
-      var modelBounds = modelViewTransform2.viewToModelBounds( dragBounds );
-      modelBounds.minY += massHeight;
-      return modelBounds;
-    } );
+    var modelBoundsProperty = new DerivedProperty( [ dragBoundsProperty, mass.heightProperty ],
+      function( dragBounds, massHeight ) {
+        var modelBounds = modelViewTransform2.viewToModelBounds( dragBounds );
+        modelBounds.minY += massHeight;
+        return modelBounds;
+      } );
 
     // Update the size of the massNode
     mass.radiusProperty.link( function( radiusValue ) {
@@ -118,12 +119,14 @@ define( function( require ) {
     } );
     this.addChild( this.hookNode );
 
-    // Background added so all of svg elements are painted. See https://github.com/phetsims/masses-and-springs/issues/278
+    // Background added so all of svg elements are painted.
+    // See https://github.com/phetsims/masses-and-springs/issues/278
     this.background = new Rectangle( this.bounds.dilated( 1.25 ), { pickable: false, fill: 'transparent' } );
     this.addChild( this.background );
 
     if ( !mass.icon ) {
-      var labelString = mass.mysteryLabel ? questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
+      var labelString = mass.mysteryLabel ?
+                        questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
       var label = new Text( labelString, {
         font: new PhetFont( { size: 12, weight: 'bold' } ),
         centerY: this.rect.centerY,
@@ -268,7 +271,12 @@ define( function( require ) {
     );
 
     // Show/hide line at base of vectors
-    Property.multilink( [ mass.springProperty, model.gravityVectorVisibilityProperty, model.springVectorVisibilityProperty, model.forcesModeProperty ],
+    Property.multilink( [
+        mass.springProperty,
+        model.gravityVectorVisibilityProperty,
+        model.springVectorVisibilityProperty,
+        model.forcesModeProperty
+      ],
       function( spring, gravityForceVisible, springForceVisible, forcesMode ) {
         forceNullLine.visible = !!spring && ( gravityForceVisible || springForceVisible || forcesMode === ForcesModeChoice.NET_FORCES );
       } );
@@ -295,7 +303,11 @@ define( function( require ) {
     var xOffset;
     var y2;
     var position;
-    Property.multilink( [ mass.verticalVelocityProperty, model.velocityVectorVisibilityProperty, model.accelerationVectorVisibilityProperty ], function( velocity, visible, accelerationVisible ) {
+    Property.multilink( [
+      mass.verticalVelocityProperty,
+      model.velocityVectorVisibilityProperty,
+      model.accelerationVectorVisibilityProperty
+    ], function( velocity, visible, accelerationVisible ) {
       if ( visible ) {
         xOffset = accelerationVisible ? -8 : 0;
         position = mass.positionProperty.get();
@@ -305,25 +317,27 @@ define( function( require ) {
     } );
 
     // When gravity changes, update the gravitational force arrow
-    Property.multilink( [ mass.springProperty, mass.gravityProperty, model.gravityVectorVisibilityProperty ], function( spring, gravity, visible ) {
-      if ( visible ) {
-        var gravitationalAcceleration = mass.mass * gravity;
-        position = mass.positionProperty.get();
-        xOffset = (forcesOrientation) * 45;
-        y2 = ARROW_SIZE_DEFAULT * gravitationalAcceleration;
-        updateArrow( gravityForceArrow, position, xOffset, y2 );
-      }
-    } );
+    Property.multilink( [ mass.springProperty, mass.gravityProperty, model.gravityVectorVisibilityProperty ],
+      function( spring, gravity, visible ) {
+        if ( visible ) {
+          var gravitationalAcceleration = mass.mass * gravity;
+          position = mass.positionProperty.get();
+          xOffset = (forcesOrientation) * 45;
+          y2 = ARROW_SIZE_DEFAULT * gravitationalAcceleration;
+          updateArrow( gravityForceArrow, position, xOffset, y2 );
+        }
+      } );
 
     // When the spring force changes, update the spring force arrow
-    Property.multilink( [ mass.springForceProperty, model.springVectorVisibilityProperty ], function( springForce, visible ) {
-      if ( visible ) {
-        position = mass.positionProperty.get();
-        xOffset = (forcesOrientation) * 45;
-        y2 = -ARROW_SIZE_DEFAULT * springForce;
-        updateArrow( springForceArrow, position, xOffset, y2 );
-      }
-    } );
+    Property.multilink( [ mass.springForceProperty, model.springVectorVisibilityProperty ],
+      function( springForce, visible ) {
+        if ( visible ) {
+          position = mass.positionProperty.get();
+          xOffset = (forcesOrientation) * 45;
+          y2 = -ARROW_SIZE_DEFAULT * springForce;
+          updateArrow( springForceArrow, position, xOffset, y2 );
+        }
+      } );
 
     // When net force changes changes, update the net force arrow
     assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
@@ -359,7 +373,10 @@ define( function( require ) {
 
     // When the mass's position changes update the forces baseline marker
     mass.positionProperty.link( function( position ) {
-      forceNullLine.setLine( self.rect.centerX + (forcesOrientation) * 40, position.y + self.rect.centerY, self.rect.centerX + (forcesOrientation) * 50, position.y + self.rect.centerY );
+      forceNullLine.setLine(
+        self.rect.centerX + (forcesOrientation) * 40, position.y + self.rect.centerY,
+        self.rect.centerX + (forcesOrientation) * 50, position.y + self.rect.centerY
+      );
     } );
   }
 

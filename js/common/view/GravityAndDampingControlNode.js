@@ -104,11 +104,15 @@ define( function( require ) {
       majorTicks: [
         {
           value: MassesAndSpringsConstants.GRAVITY_RANGE.min,
-          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE.min ), { font: MassesAndSpringsConstants.LABEL_FONT } )
+          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE.min ), {
+            font: MassesAndSpringsConstants.LABEL_FONT
+          } )
         },
         {
           value: MassesAndSpringsConstants.GRAVITY_RANGE.max,
-          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE.max ), { font: MassesAndSpringsConstants.LABEL_FONT } )
+          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE.max ), {
+            font: MassesAndSpringsConstants.LABEL_FONT
+          } )
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
@@ -156,7 +160,12 @@ define( function( require ) {
       gravityHSlider.top = gravityHSliderTitle.bottom + SPACING;
     }
     else {
-      gravitySlider = new NumberControl( gravityString, model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE, gravitySliderOptions );
+      gravitySlider = new NumberControl(
+        gravityString,
+        model.gravityProperty,
+        MassesAndSpringsConstants.GRAVITY_RANGE,
+        gravitySliderOptions
+      );
     }
 
     // Manages the values associated with the gravity panel in a combo box
@@ -254,7 +263,9 @@ define( function( require ) {
     else {
 
       // Creating text that reads Damping = 0
-      var dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, { equalsZero: MathSymbols.EQUAL_TO + ' 0' } ), {
+      var dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, {
+        equalsZero: MathSymbols.EQUAL_TO + ' 0'
+      } ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
         top: gravityComboBox.bottom + SPACING,

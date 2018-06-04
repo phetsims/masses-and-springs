@@ -94,20 +94,22 @@ define( function( require ) {
     this.massTandem = tandem;
 
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
-    this.positionProperty = new Property( new Vector2( xPosition, this.heightProperty.value + MassesAndSpringsConstants.SHELF_HEIGHT ), {
-      tandem: tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( Vector2IO )
-    } );
+    this.positionProperty = new Property(
+      new Vector2( xPosition, this.heightProperty.value + MassesAndSpringsConstants.SHELF_HEIGHT ), {
+        tandem: tandem.createTandem( 'positionProperty' ),
+        phetioType: PropertyIO( Vector2IO )
+      } );
 
     // @public {Property.<Vector2>} the position of the mass's center of mass.
-    this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ], function( position, cylinderHeight ) {
-      return new Vector2(
-        position.x,
-        position.y -
-        cylinderHeight / 2 -
-        MassesAndSpringsConstants.HOOK_HEIGHT
-      );
-    } );
+    this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ],
+      function( position, cylinderHeight ) {
+        return new Vector2(
+          position.x,
+          position.y -
+          cylinderHeight / 2 -
+          MassesAndSpringsConstants.HOOK_HEIGHT
+        );
+      } );
 
     // @private {Vector2}
     this.initialPosition = this.positionProperty.initialValue;
@@ -117,7 +119,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'userControlledProperty' )
     } );
 
-    // @private {Property.<boolean>} indicates whether the mass is animating after being released and not attached to a spring
+    // @private {Property.<boolean>} whether the mass is animating after being released and not attached to a spring
     this.isAnimatingProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isAnimatingProperty' )
     } );
@@ -156,12 +158,14 @@ define( function( require ) {
       } );
 
     // @public {Property.<number>} vertical acceleration of the mass
-    this.accelerationProperty = new DerivedProperty( [ this.netForceProperty, this.massProperty ], function( netForce, mass ) {
-      return netForce / mass;
-    } );
+    this.accelerationProperty = new DerivedProperty( [ this.netForceProperty, this.massProperty ],
+      function( netForce, mass ) {
+        return netForce / mass;
+      } );
 
     // @public {Property.<number>} Kinetic energy of the mass
-    this.kineticEnergyProperty = new DerivedProperty( [ this.massProperty, this.verticalVelocityProperty, this.userControlledProperty ],
+    this.kineticEnergyProperty = new DerivedProperty(
+      [ this.massProperty, this.verticalVelocityProperty, this.userControlledProperty ],
       function( mass, velocity, userControlled ) {
         return userControlled ? 0 : 0.5 * mass * Math.pow( velocity, 2 );
       } );
@@ -252,7 +256,8 @@ define( function( require ) {
         self.initialTotalEnergyProperty.set( newTotalEnergy );
       }
 
-      // We can preserve thermal energy by adding any change to total energy to the initial energy, as long as it is not in its natural oscillation
+      // We can preserve thermal energy by adding any change to total energy to the initial energy,
+      // as long as it is not in its natural oscillation
       else if ( self.preserveThermalEnergy ) {
         self.initialTotalEnergyProperty.value += newTotalEnergy - oldTotalEnergy;
       }
@@ -273,15 +278,24 @@ define( function( require ) {
       self.isAnimatingProperty.set( false );
     } );
 
-    // Set the equilibrium position when a mass value changes. We do a similar process in Spring.js when the mass is attached to the spring.
+    // Set the equilibrium position when a mass value changes.
+    // We do a similar process in Spring.js when the mass is attached to the spring.
     this.massProperty.link( function( value ) {
       var spring = self.springProperty.value;
       if ( spring ) {
 
         // springExtension = mg/k
         var springExtensionValue = ( value * spring.gravityProperty.value ) / spring.springConstantProperty.value;
-        spring.equilibriumYPositionProperty.set( spring.positionProperty.get().y - spring.naturalRestingLengthProperty.value - springExtensionValue );
-        spring.massEquilibriumYPositionProperty.set( spring.positionProperty.get().y - spring.naturalRestingLengthProperty.value - springExtensionValue - self.heightProperty.value / 2 );
+        spring.equilibriumYPositionProperty.set(
+          spring.positionProperty.get().y -
+          spring.naturalRestingLengthProperty.value -
+          springExtensionValue
+        );
+        spring.massEquilibriumYPositionProperty.set(
+          spring.positionProperty.get().y -
+          spring.naturalRestingLengthProperty.value -
+          springExtensionValue -
+          self.heightProperty.value / 2 );
 
       }
     } );
@@ -313,7 +327,8 @@ define( function( require ) {
           // Responsible for animating a horizontal motion when the mass is released and not attached to a spring.
           this.animationProgress = Math.min( 1, this.animationProgress + animationDt * animationSpeed );
           var ratio = Easing.CUBIC_IN_OUT.value( this.animationProgress );
-          this.positionProperty.set( new Vector2( this.animationStartPosition.blend( this.animationEndPosition, ratio ).x, floorPosition ) );
+          this.positionProperty.set(
+            new Vector2( this.animationStartPosition.blend( this.animationEndPosition, ratio ).x, floorPosition ) );
         }
         else {
           this.animationProgress = 1;

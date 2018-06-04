@@ -52,19 +52,21 @@ define( function( require ) {
     };
 
     var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
-    var thicknessRadioButton = new AquaRadioButton( selectedConstantProperty, ConstantModeChoice.SPRING_THICKNESS, thicknessText, {
-      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
-      tandem: tandem.createTandem( 'thicknessRadioButton' )
-    } );
+    var thicknessRadioButton = new AquaRadioButton(
+      selectedConstantProperty, ConstantModeChoice.SPRING_THICKNESS, thicknessText, {
+        radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
+        tandem: tandem.createTandem( 'thicknessRadioButton' )
+      } );
 
     var constantText = new Text(
       StringUtils.fillIn( springConstantString, { spring: '' } ),
       _.extend( { font: TITLE_FONT, tandem: tandem.createTandem( 'constantText' ) },
         constantsSelectionButtonOptions ) );
-    var springConstantRadioButton = new AquaRadioButton( selectedConstantProperty, ConstantModeChoice.SPRING_CONSTANT, constantText, {
-      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
-      tandem: tandem.createTandem( 'springConstantRadioButton' )
-    } );
+    var springConstantRadioButton = new AquaRadioButton(
+      selectedConstantProperty, ConstantModeChoice.SPRING_CONSTANT, constantText, {
+        radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
+        tandem: tandem.createTandem( 'springConstantRadioButton' )
+      } );
 
     var nodeContent = new VBox( {
       align: 'left',

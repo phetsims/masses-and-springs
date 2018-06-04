@@ -193,9 +193,9 @@ define( function( require ) {
     addDefaultSprings: function( tandem ) {
       this.createSpring( MassesAndSpringsConstants.LEFT_SPRING_X, tandem.createTandem( 'leftSpring' ) );
       this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) );
-      this.firstSpring = this.springs[0];
+      this.firstSpring = this.springs[ 0 ];
       this.firstSpring.forcesOrientationProperty.set( -1 );
-      this.secondSpring = this.springs[1];
+      this.secondSpring = this.springs[ 1 ];
       this.secondSpring.forcesOrientationProperty.set( 1 );
     },
 
@@ -210,9 +210,17 @@ define( function( require ) {
       this.createMass( 0.100, 0.20, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass1' ) );
       this.createMass( 0.100, 0.28, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass2' ) );
       this.createMass( 0.050, 0.33, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'smallLabeledMass' ) );
-      this.createMass( 0.200, 0.63, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), { mysteryLabel: true } );
-      this.createMass( 0.150, 0.56, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), { mysteryLabel: true } );
-      this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), { mysteryLabel: true } );
+
+      // Mystery masses
+      this.createMass( 0.200, 0.63, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), {
+        mysteryLabel: true
+      } );
+      this.createMass( 0.150, 0.56, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), {
+        mysteryLabel: true
+      } );
+      this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), {
+        mysteryLabel: true
+      } );
     },
 
     /**
@@ -261,7 +269,8 @@ define( function( require ) {
 
         // Update the position of the mass
         if ( mass.positionProperty.value.x !== mass.springProperty.get().positionProperty.get().x ) {
-          mass.positionProperty.set( mass.positionProperty.get().copy().setX( mass.springProperty.get().positionProperty.get().x ) );
+          mass.positionProperty.set( mass.positionProperty.get().copy().setX(
+            mass.springProperty.get().positionProperty.get().x ) );
         }
 
         // Update spring displacementProperty so correct spring length is used.
@@ -269,7 +278,8 @@ define( function( require ) {
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         var maxY = mass.springProperty.get().thicknessProperty.get() *
-                   OscillatingSpringNode.MAP_NUMBER_OF_LOOPS( mass.springProperty.get().naturalRestingLengthProperty.get() );
+                   OscillatingSpringNode.MAP_NUMBER_OF_LOOPS(
+                     mass.springProperty.get().naturalRestingLengthProperty.get() );
 
         // Max Y value in model coordinates
         var modelMaxY = UPPER_CONSTRAINT( maxY );
@@ -340,7 +350,12 @@ define( function( require ) {
       for ( var i = 0; i < this.masses.length; i++ ) {
 
         // Fall if not hung or grabbed
-        this.masses[ i ].step( self.gravityProperty.value, MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT, dt, animationDt );
+        this.masses[ i ].step(
+          self.gravityProperty.value,
+          MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT,
+          dt,
+          animationDt
+        );
       }
       if ( this.timerRunningProperty.value ) {
         this.timerSecondsProperty.set( this.timerSecondsProperty.value + dt );

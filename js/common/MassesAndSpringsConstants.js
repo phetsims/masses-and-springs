@@ -24,7 +24,8 @@ define( function( require ) {
     // Y position of floor in meters. The floor is at the bottom bounds of the screen.
     FLOOR_Y: 0,
 
-    // Y position of ceiling in meters. The ceiling is the top of the SpringHangerNode, just below the top of the dev view bounds
+    // Y position of ceiling (meters). The ceiling is the top of the SpringHangerNode,
+    // just below the top of the dev view bounds
     CEILING_Y: 1.47,
 
     // Shelf height, in meters, from the bottom and top of the shelf.
