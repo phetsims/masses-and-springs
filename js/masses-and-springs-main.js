@@ -29,7 +29,7 @@ define( function( require ) {
       leadDesign: 'Amy Rouinfar',
       softwareDevelopment: 'Denzell Barnett, Matt Pennington',
       team: 'Ariel Paul, Kathy Perkins, Mike Dubson',
-      qualityAssurance: 'Steele Dalton'
+      qualityAssurance: 'Steele Dalton, Arnab Purkayastha, Liam Mulhall'
     }
   };
 
