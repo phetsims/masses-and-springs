@@ -38,8 +38,7 @@ define( function( require ) {
       headWidth: 20,
       headHeight: 10,
       tailLineWidth: 3,
-      headLineWidth: 3,
-      useArrowShape:false
+      headLineWidth: 3
     };
 
     // Creation of the symbol for the displacement vector.
