@@ -55,6 +55,9 @@ define( function( require ) {
     // @public {Mass} (read-only)
     this.mass = mass;
 
+    // @public (read-write) determines if the mass's velocity is below a specific value, so the period trace is hidden.
+    this.thresholdReached = false;
+
     var hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT );
     if ( mass.icon ) {
       hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT * 0.34 );

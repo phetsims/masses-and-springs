@@ -80,6 +80,8 @@ define( function( require ) {
     this.spring.crossEmitter.addListener( function() {
 
       // If the mass crosses the mid point below a certain velocity, we don't want to show the trace.
+      self.thresholdReached = Math.abs( spring.massAttachedProperty.value.verticalVelocityProperty.value ) <= 0.06;
+
       self.crossingProperty.value += 1;
 
       if ( self.crossingProperty.value === 1 || self.crossingProperty.value === 3 ) {

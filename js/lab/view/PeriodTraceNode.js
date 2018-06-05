@@ -98,13 +98,13 @@ define( function( require ) {
             this.visible = false && spring.periodTraceVisibilityProperty.value;
           }
           else {
-              this.visible = spring.periodTraceVisibilityProperty.value;
+            this.visible = spring.periodTraceVisibilityProperty.value;
 
-              // sets our initial position
-              this.shape.moveTo( this.originalX, equilibriumYPosition );
+            // sets our initial position
+            this.shape.moveTo( this.originalX, equilibriumYPosition );
 
-              // draws a line from our current position to a NEW position, then sets our current position to the NEW position
-              this.shape.verticalLineTo( state === 1 ? currentYPosition : firstPeakYPosition );
+            // draws a line from our current position to a NEW position, then sets our current position to the NEW position
+            this.shape.verticalLineTo( state === 1 ? currentYPosition : firstPeakYPosition );
             if ( state > 1 ) {
 
               // first connector
@@ -121,7 +121,7 @@ define( function( require ) {
                 this.shape.verticalLineTo( state === 3 ? currentYPosition : equilibriumYPosition - this.path.lineWidth / 2 );
               }
             }
-
+            this.path.lineWidth = this.periodTrace.thresholdReached ? 0.5 : 2.5;
             this.path.setShape( this.shape );
           }
         }
