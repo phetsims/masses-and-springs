@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.0-dev.109 Mon Jun 04 2018 14:26:34 GMT-0400 (EDT)",
+  "comment": "# masses-and-springs 1.0.0-dev.110 Tue Jun 05 2018 16:34:41 GMT-0400 (EDT)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "7d12527d4489798ede76256734ca6c88ba755dd1",
+    "sha": "ba994b71b758c8686a8edf5a31b95a83b2f7608c",
     "branch": "master"
   },
   "dot": {
@@ -33,7 +33,7 @@
     "branch": "master"
   },
   "masses-and-springs": {
-    "sha": "ff22d8d542d6bb32b5ffa85e4c3d25b3c13d2b3f",
+    "sha": "ff7a1700ce1206f71505dc2a956f4ace6e828c67",
     "branch": "master"
   },
   "phet-core": {
@@ -41,7 +41,7 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "851c0e4c5dd58f6eb18fb70ee955a861d6158c9d",
+    "sha": "9ca8975206caded77af0d40a4d8b3a844d882aef",
     "branch": "master"
   },
   "phet-io-wrapper-classroom-activity": {
@@ -53,11 +53,11 @@
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "d4607c3673651cb7064a2e026b5589dadac01e32",
+    "sha": "3d2c81db9b4a967cab34a27fe80a056be74c09d4",
     "branch": "master"
   },
   "phetcommon": {
-    "sha": "ddb76c0cc894fc9ef328bab0e00a0ac969eebf5c",
+    "sha": "80414edbe26f41b5f5544377c2dae03a8cca9922",
     "branch": "master"
   },
   "query-string-machine": {
@@ -69,7 +69,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "4d7195385d12bc4c7d36c32b8658898f720f3277",
+    "sha": "600c417139cc8722ae07eced9f6d96bb5e6ca9ac",
     "branch": "master"
   },
   "sherpa": {
@@ -77,7 +77,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "7addb3e6fa2869c0dd66d3f0526d34ad9130fee5",
+    "sha": "52ae79c7b2fa78950bc647835503492da8c503cb",
     "branch": "master"
   },
   "tandem": {
