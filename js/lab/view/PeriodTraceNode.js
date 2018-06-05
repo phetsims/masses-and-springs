@@ -121,7 +121,17 @@ define( function( require ) {
                 this.shape.verticalLineTo( state === 3 ? currentYPosition : equilibriumYPosition - this.path.lineWidth / 2 );
               }
             }
-            this.path.lineWidth = this.periodTrace.thresholdReached ? 0.5 : 2.5;
+
+            // Thin the line width once it reaches a certain threshold at a rate of delta.
+            // Variables are extracted for readability.
+            var delta = 0.025;          // Rate at which the line is being thinned. Empirically determined.
+            var maxLineWidth = 2.5;     // Maximum line width of the trace.
+            var minLineWidth = 0.5;     // Minimum line width of the trace.
+
+            this.path.lineWidth = this.periodTrace.thresholdReached ? (this.path.lineWidth - delta) : maxLineWidth;
+            if ( this.path.lineWidth <= minLineWidth ) {
+              this.path.lineWidth = minLineWidth;
+            }
             this.path.setShape( this.shape );
           }
         }
