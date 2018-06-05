@@ -448,6 +448,7 @@ define( function( require ) {
       // check if mass attached on spring
       if ( this.massAttachedProperty.get() ) {
         var mass = this.massAttachedProperty.get();
+        mass.initialTotalEnergyProperty.set(mass.totalEnergyProperty.value);
 
         // set displacement and stop further animation
         var springExtensionValue = ( mass.massProperty.value * this.gravityProperty.value) / this.springConstantProperty.value;
