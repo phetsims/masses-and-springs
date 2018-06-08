@@ -26,9 +26,9 @@ define( function( require ) {
 
   var simOptions = {
     credits: {
-      leadDesign: 'Amy Rouinfar',
+      leadDesign: 'Amy Rouinfar, Mike Dubson',
       softwareDevelopment: 'Denzell Barnett, Matt Pennington',
-      team: 'Ariel Paul, Kathy Perkins, Mike Dubson',
+      team: 'Wendy Adams, Ariel Paul, Kathy Perkins',
       qualityAssurance: 'Steele Dalton, Arnab Purkayastha, Liam Mulhall'
     }
   };
