@@ -19,7 +19,7 @@ define( function( require ) {
   var PropertyIO = require( 'AXON/PropertyIO' );
   var SceneModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/SceneModeChoice' );
 
-  // phet-io modules
+  // ifphetio
   var StringIO = require( 'ifphetio!PHET_IO/types/StringIO' );
 
   /**
