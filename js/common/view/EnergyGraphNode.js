@@ -237,6 +237,8 @@ define( function( require ) {
         if ( !dialog ) {
           dialog = new Dialog( dialogContent, {
             modal: true,
+            ySpacing: 20,
+            bottomMargin: 20,
             title: new Text( energyLegendString, {
               font: MassesAndSpringsConstants.TITLE_FONT,
               maxWidth: MAX_WIDTH
