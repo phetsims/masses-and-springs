@@ -54,11 +54,10 @@ define( function( require ) {
       tandem: tandem.createTandem( 'dampingProperty' )
     } );
 
-    // @public {Property.<number>} gravitational acceleration association with the spring system
-    this.gravityProperty = new NumberProperty( MassesAndSpringsConstants.EARTH_GRAVITY, {
+    // @public {Property.<number|null>} gravitational acceleration association with the spring system
+    this.gravityProperty = new Property( MassesAndSpringsConstants.EARTH_GRAVITY, {
       tandem: tandem.createTandem( 'gravityProperty' ),
-      units: 'meters/second/second',
-      range: new Range( 0, 30 )
+      units: 'meters/second/second'
     } );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
