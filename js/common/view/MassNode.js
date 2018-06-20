@@ -192,9 +192,17 @@ define( function( require ) {
       self.translation = modelViewTransform2.modelToViewPosition( position );
     } );
 
-    modelBoundsProperty.link( function( modelDragBounds ) {
-      self.movableDragHandler.setDragBounds( modelDragBounds );
-    } );
+    Property.multilink( [ mass.userControlledProperty, modelBoundsProperty ], ( function( userControlled, modelDragBounds ) {
+
+      // Masses won't jump back into the model bounds attached to spring.
+      // See https://github.com/phetsims/masses-and-springs/issues/291
+      if ( mass.springProperty.value && !userControlled ) {
+        self.movableDragHandler.setDragBounds( Bounds2.EVERYTHING );
+      }
+      else {
+        self.movableDragHandler.setDragBounds( modelDragBounds );
+      }
+    } ) );
 
     this.addInputListener( this.movableDragHandler );
 
