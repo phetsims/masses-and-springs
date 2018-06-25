@@ -320,7 +320,7 @@ define( function( require ) {
       // If PlanetX hide the slider and update gravity
       if ( newBody === Body.PLANET_X ) {
         questionTextNode.visible = true;
-        gravitySliderTitle.visible = true
+        gravitySliderTitle.visible = true;
         gravitySlider.visible = !questionTextNode.visible;
         gravityProperty.set( body.gravity );
       }
