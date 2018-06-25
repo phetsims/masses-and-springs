@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var ComboBox = require( 'SUN/ComboBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
@@ -117,7 +118,7 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 70,
+        titleXSpacing: 75,
         ySpacing: 2,
         arrowButtonsXSpacing: 1
       } ),
@@ -126,7 +127,7 @@ define( function( require ) {
       } ),
       useRichText: true,
       decimalPlaces: 1,
-      valueMaxWidth: MAX_WIDTH,
+      valueMaxWidth: MAX_WIDTH * 0.8,
       delta: 0.1,
       arrowButtonScale: 0.5
     };
@@ -168,7 +169,7 @@ define( function( require ) {
     var questionTextNode = new Node( {
       children: [ new Text( whatIsTheValueOfGravityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: gravitySlider.width * 1.10
+        maxWidth: gravitySlider.width * 1.1
       } )
       ],
       yMargin: 20,
@@ -251,24 +252,30 @@ define( function( require ) {
       Node.call( this, { children: [ contentNode ] } );
 
       // Alignment of Node contents for panel with damping
-      gravitySliderTitle.leftTop = new Vector2( this.left, this.top + 15.5 );
       if ( gravitySlider instanceof NumberControl ) {
+        gravitySliderTitle.leftTop = new Vector2( this.left, this.top + 22 );
         gravitySlider.centerX = this.centerX;
-        gravitySlider.top = this.top;
+        gravitySlider.left = this.left;
+        gravitySlider.top = this.top + 7;
         questionTextNode.centerX = this.centerX;
+        gravityComboBox.top = gravitySlider.bottom + 10;
       }
       else {
+        gravitySliderTitle.leftTop = new Vector2( this.left, this.top + 16 );
         gravitySliderTitle.centerX = this.centerX - 70;
         gravitySliderTitle.top = this.top - 12;
         gravitySlider.centerX = this.centerX;
         questionTextNode.centerX = gravitySlider.centerX - 5;
+        questionTextNode.top = this.top - 12;
+        gravityComboBox.top = gravitySlider.bottom + 10;
 
       }
       questionTextNode.top = gravitySlider.bottom - 30;
       gravityComboBox.centerX = gravitySlider.centerX;
-      gravityComboBox.top = gravitySlider.bottom + 7;
       dampingHSliderTitle.left = gravitySliderTitle.left;
+      dampingHSliderTitle.top = gravityComboBox.bottom + 5;
       dampingHSlider.centerX = gravitySlider.centerX;
+      dampingHSlider.top = dampingHSliderTitle.bottom + 5;
     }
     else {
 
