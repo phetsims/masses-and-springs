@@ -30,6 +30,9 @@ define( function( require ) {
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
   var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
+  // constants
+  var MAX_WIDTH = 140;
+
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
@@ -67,10 +70,14 @@ define( function( require ) {
       align: 'left',
       children: [
         new Text( displacementString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'displacementString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
+          tandem: tandem.createTandem( 'displacementString' )
         } ),
         new Text( naturalLengthString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'naturalLengthString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
+          tandem: tandem.createTandem( 'naturalLengthString' )
         } )
       ]
     } );
@@ -98,12 +105,16 @@ define( function( require ) {
       property: model.naturalLengthVisibleProperty
     }, {
       content: new Text( massEquilibriumString, {
-        font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'massEquilibriumString' )
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'massEquilibriumString' )
       } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
       content: new Text( movableLineString, {
-        font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'movableLineString' )
       } ),
       property: model.movableLineVisibleProperty
     } ], {
@@ -118,17 +129,23 @@ define( function( require ) {
         property: model.naturalLengthVisibleProperty
       }, {
         content: new Text( massEquilibriumString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'massEquilibriumString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
+          tandem: tandem.createTandem( 'massEquilibriumString' )
         } ),
         property: model.equilibriumPositionVisibleProperty
       }, {
         content: new Text( movableLineString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
+          tandem: tandem.createTandem( 'movableLineString' )
         } ),
         property: model.movableLineVisibleProperty
       }, {
         content: new Text( periodTraceString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'periodTraceString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
+          tandem: tandem.createTandem( 'periodTraceString' )
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       } ], {
