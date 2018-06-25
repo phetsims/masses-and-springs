@@ -22,6 +22,7 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
@@ -56,7 +57,7 @@ define( function( require ) {
       valueFont: new PhetFont( 12 ),
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
-      titleMaxWidth: 55,
+      titleMaxWidth: 45,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -74,10 +75,10 @@ define( function( require ) {
           label: new Text( String( range.max ), { font: new PhetFont( 12 ) } )
         }
       ],
-      layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 65,
-        ySpacing: 4,
-        arrowButtonsXSpacing: 5
+      layoutFunction: NumberControl.createLayoutFunction4( {
+        verticalSpacing: 4,
+        arrowButtonsXSpacing: 5,
+        hasReadoutProperty: new Property( true )
       } ),
       useRichText: true,
       decimalPlaces: 0,
@@ -97,7 +98,7 @@ define( function( require ) {
       xMargin: 6
     } );
 
-    massNodeIcon.leftTop = numberControl.leftTop;
+    massNodeIcon.leftTop = numberControl.leftTop.plus( new Vector2( 45 , -2 ) );
     massNodeIcon.pickable = false;
   }
 
