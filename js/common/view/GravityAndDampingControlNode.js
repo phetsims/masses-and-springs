@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var ComboBox = require( 'SUN/ComboBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );

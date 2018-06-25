@@ -32,6 +32,9 @@ define( function( require ) {
   var springString = require( 'string!MASSES_AND_SPRINGS/spring' );
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
 
+  // constants
+  var MAX_WIDTH =130;
+
   /**
    * @param {VectorModel} model
    * @param {Tandem} tandem
@@ -59,6 +62,7 @@ define( function( require ) {
       content: new HBox( {
         children: [ new Text( velocityString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
           tandem: tandem.createTandem( 'velocityString' )
         } ) ]
       } ),
@@ -68,6 +72,7 @@ define( function( require ) {
       content: new HBox( {
         children: [ new Text( accelerationString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
           tandem: tandem.createTandem( 'accelerationString' )
         } ) ]
       } ),
@@ -84,6 +89,7 @@ define( function( require ) {
       content: new HBox( {
         children: [ new Text( gravityString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
           tandem: tandem.createTandem( 'gravityString' )
         } ) ]
       } ),
@@ -93,6 +99,7 @@ define( function( require ) {
       content: new HBox( {
         children: [ new Text( springString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
           tandem: tandem.createTandem( 'springString' )
         } ) ]
       } ),
@@ -110,6 +117,7 @@ define( function( require ) {
       ForcesModeChoice.FORCES,
       new Text( forcesString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'forcesString' )
       } ),
       { radius: 7, spacing: 7 }
@@ -122,6 +130,7 @@ define( function( require ) {
       new HBox( {
         children: [ new Text( netForceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
           tandem: tandem.createTandem( 'netForceString' )
         } ) ]
       } ),
