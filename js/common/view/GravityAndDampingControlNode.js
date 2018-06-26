@@ -181,7 +181,7 @@ define( function( require ) {
       centerX: gravitySlider.centerX + 15,
       buttonCornerRadius: 3,
       buttonYMargin: 0,
-      itemYMargin: 5,
+      itemYMargin: 3,
       itemXMargin: 2,
       listYMargin: 3,
       tandem: tandem.createTandem( 'gravityComboBox' )
