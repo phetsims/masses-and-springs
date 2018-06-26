@@ -257,7 +257,6 @@ define( function( require ) {
         gravitySlider.left = this.left;
         gravitySlider.top = this.top + 7;
         questionTextNode.centerX = this.centerX;
-        gravityComboBox.top = gravitySlider.bottom + 10;
       }
       else {
         gravitySliderTitle.top = this.top + 16;
@@ -271,8 +270,9 @@ define( function( require ) {
       }
       questionTextNode.top = gravitySlider.bottom - 30;
       gravityComboBox.centerX = gravitySlider.centerX;
+      gravityComboBox.top = gravitySlider.bottom + 10;
       dampingHSliderTitle.left = gravitySliderTitle.left;
-      dampingHSliderTitle.top = gravityComboBox.bottom + 5;
+      dampingHSliderTitle.top = gravityComboBox.bottom + 10;
       dampingHSlider.centerX = gravitySlider.centerX;
       dampingHSlider.top = dampingHSliderTitle.bottom + 5;
     }
@@ -309,6 +309,7 @@ define( function( require ) {
       questionTextNode.top = gravitySlider.bottom - 30;
       gravityComboBox.centerX = gravitySlider.centerX;
       gravityComboBox.top = gravitySlider.bottom + 10;
+      dampingEqualsZeroText.top = gravityComboBox.bottom + 10;
       dampingEqualsZeroText.left = gravitySliderTitle.left;
     }
 
