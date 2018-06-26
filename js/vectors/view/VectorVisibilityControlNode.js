@@ -33,7 +33,7 @@ define( function( require ) {
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
 
   // constants
-  var MAX_WIDTH =205;
+  var MAX_WIDTH = 205;
 
   /**
    * @param {VectorModel} model
@@ -59,22 +59,18 @@ define( function( require ) {
 
     // responsible for velocity and acceleration vectors checkboxes
     var vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new HBox( {
-        children: [ new Text( velocityString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
-          tandem: tandem.createTandem( 'velocityString' )
-        } ) ]
+      content: new Text( velocityString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'velocityString' )
       } ),
       property: model.velocityVectorVisibilityProperty,
       label: velocityString
     }, {
-      content: new HBox( {
-        children: [ new Text( accelerationString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
-          tandem: tandem.createTandem( 'accelerationString' )
-        } ) ]
+      content: new Text( accelerationString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'accelerationString' )
       } ),
       property: model.accelerationVectorVisibilityProperty,
       label: accelerationString
@@ -86,22 +82,18 @@ define( function( require ) {
 
     // responsible for forces vectors checkboxes
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new HBox( {
-        children: [ new Text( gravityString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH-22,
-          tandem: tandem.createTandem( 'gravityString' )
-        } ) ]
+      content: new Text( gravityString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH - 22,
+        tandem: tandem.createTandem( 'gravityString' )
       } ),
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
     }, {
-      content: new HBox( {
-        children: [ new Text( springString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH-22,
-          tandem: tandem.createTandem( 'springString' )
-        } ) ]
+      content: new Text( springString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH - 22,
+        tandem: tandem.createTandem( 'springString' )
       } ),
       property: model.springVectorVisibilityProperty,
       label: springString
