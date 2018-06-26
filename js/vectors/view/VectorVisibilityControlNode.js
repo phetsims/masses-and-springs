@@ -100,7 +100,7 @@ define( function( require ) {
     } ], {
       boxWidth: 15,
       xMargin: 20,
-      tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
+      tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
     } );
 
     // responsible for forces aquaRadioButton
@@ -173,6 +173,7 @@ define( function( require ) {
           new VStrut( 15 ),
           netForceArrow
         ],
+        yMargin:0,
         align: 'left',
         tandem: tandem.createTandem( 'spacingUnit' )
       } );
@@ -196,7 +197,7 @@ define( function( require ) {
       } );
     }
     var controlsHBox = new HBox( {
-      spacing: 40,
+      spacing: 25,
       children: [
         vectorVisibilityControlsVBox,
         vectorVBox

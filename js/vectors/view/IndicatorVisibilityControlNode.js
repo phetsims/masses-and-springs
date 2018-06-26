@@ -153,7 +153,6 @@ define( function( require ) {
     }
     var indicatorVisibilityControlsVBox = new VBox( {
         children: [
-          new VStrut( 2 ),
           indicatorVisibilityCheckboxGroup
         ],
         align: 'left',
