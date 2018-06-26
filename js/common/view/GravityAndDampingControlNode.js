@@ -123,7 +123,7 @@ define( function( require ) {
       } ),
       valuePattern: StringUtils.fillIn( gravityValueString, {
         gravity: '{0}'
-      } ),
+      }, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
       useRichText: true,
       decimalPlaces: 1,
       valueMaxWidth: MAX_WIDTH * 2,
