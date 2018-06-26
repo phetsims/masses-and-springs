@@ -168,7 +168,7 @@ define( function( require ) {
     var questionTextNode = new Node( {
       children: [ new Text( whatIsTheValueOfGravityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH*3
+        maxWidth: MAX_WIDTH * 2.6
       } )
       ],
       yMargin: 20,
@@ -260,9 +260,9 @@ define( function( require ) {
         gravityComboBox.top = gravitySlider.bottom + 10;
       }
       else {
-        gravitySliderTitle.top= this.top + 16;
-        gravitySliderTitle.centerX = this.centerX - 80;
-        gravitySliderTitle.top = this.top - 12;
+        gravitySliderTitle.top = this.top + 16;
+        gravitySliderTitle.centerX = this.centerX - 72;
+        gravitySliderTitle.top = this.top - 12.5;
         gravitySlider.centerX = this.centerX;
         questionTextNode.centerX = gravitySlider.centerX - 5;
         questionTextNode.top = this.top - 12;
@@ -270,7 +270,7 @@ define( function( require ) {
 
       }
       questionTextNode.top = gravitySlider.bottom - 30;
-      gravityComboBox.centerX = gravitySlider.centerX+1;
+      gravityComboBox.centerX = gravitySlider.centerX;
       dampingHSliderTitle.left = gravitySliderTitle.left;
       dampingHSliderTitle.top = gravityComboBox.bottom + 5;
       dampingHSlider.centerX = gravitySlider.centerX;
@@ -283,7 +283,7 @@ define( function( require ) {
         equalsZero: MathSymbols.EQUAL_TO + ' 0'
       } ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH*2,
+        maxWidth: MAX_WIDTH * 2,
         top: gravityComboBox.bottom + SPACING,
         centerX: gravityComboBox.centerX
       } );
