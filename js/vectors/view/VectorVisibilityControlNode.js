@@ -197,7 +197,7 @@ define( function( require ) {
       } );
     }
     var controlsHBox = new HBox( {
-      spacing: 25,
+      spacing: 40,
       children: [
         vectorVisibilityControlsVBox,
         vectorVBox

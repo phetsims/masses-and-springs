@@ -239,7 +239,7 @@ define( function( require ) {
     // Contains all of the options for the reference lines, gravity, damping, and toolBox
     var rightPanelsVBox = new VBox( {
       children: [ optionsPanel, self.toolboxPanel, sceneRadioButtonGroup ],
-      spacing: this.spacing
+      spacing: this.spacing * 0.9
     } );
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();

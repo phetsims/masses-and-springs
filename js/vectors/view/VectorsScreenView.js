@@ -125,7 +125,7 @@ define( function( require ) {
     var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolBox
-    var rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing } );
+    var rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing * 0.9 } );
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
 
@@ -136,6 +136,7 @@ define( function( require ) {
       rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.springSystemControlsNode.top );
     } );
   }
+
   massesAndSprings.register( 'VectorsScreenView', VectorsScreenView );
 
   return inherit( TwoSpringScreenView, VectorsScreenView );
