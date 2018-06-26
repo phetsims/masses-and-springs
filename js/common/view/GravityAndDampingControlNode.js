@@ -95,7 +95,7 @@ define( function( require ) {
       xMargin: 0,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-      titleMaxWidth: MAX_WIDTH * 2,
+      titleMaxWidth: MAX_WIDTH * 3,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -134,7 +134,7 @@ define( function( require ) {
     // Create title for gravity slider
     var gravitySliderTitle = new Text( gravityString, {
       font: new PhetFont( { size: 14, weight: 'bold' } ),
-      maxWidth: MAX_WIDTH * 2
+      maxWidth: MAX_WIDTH * 3
     } );
 
     if ( options.hSlider ) {
@@ -192,7 +192,7 @@ define( function( require ) {
       // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
-        maxWidth: MAX_WIDTH * 2,
+        maxWidth: MAX_WIDTH * 3,
         top: gravityComboBox.bottom + SPACING,
         left: TITLE_INDENT
       } );
@@ -260,8 +260,8 @@ define( function( require ) {
         gravityComboBox.top = gravitySlider.bottom + 10;
       }
       else {
-        gravitySliderTitle.leftTop = new Vector2( this.left, this.top + 16 );
-        gravitySliderTitle.centerX = this.centerX - 70;
+        gravitySliderTitle.top= this.top + 16;
+        gravitySliderTitle.centerX = this.centerX - 80;
         gravitySliderTitle.top = this.top - 12;
         gravitySlider.centerX = this.centerX;
         questionTextNode.centerX = gravitySlider.centerX - 5;
@@ -270,7 +270,7 @@ define( function( require ) {
 
       }
       questionTextNode.top = gravitySlider.bottom - 30;
-      gravityComboBox.centerX = gravitySlider.centerX;
+      gravityComboBox.centerX = gravitySlider.centerX+1;
       dampingHSliderTitle.left = gravitySliderTitle.left;
       dampingHSliderTitle.top = gravityComboBox.bottom + 5;
       dampingHSlider.centerX = gravitySlider.centerX;
@@ -304,11 +304,11 @@ define( function( require ) {
       // Alignment of Node contents for panel without damping
       gravitySliderTitle.centerX = this.centerX - 80;
       gravitySliderTitle.top = this.top + 3.5;
-      gravitySlider.centerX = this.centerX - 0;
+      gravitySlider.centerX = this.centerX;
       questionTextNode.centerX = gravitySlider.centerX - 5;
       questionTextNode.top = gravitySlider.bottom - 30;
       gravityComboBox.centerX = gravitySlider.centerX;
-      gravityComboBox.top = gravitySlider.bottom + 7;
+      gravityComboBox.top = gravitySlider.bottom + 10;
       dampingEqualsZeroText.left = gravitySliderTitle.left;
     }
 

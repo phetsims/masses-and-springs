@@ -161,7 +161,8 @@ define( function( require ) {
       children: [
         new Text( heightEqualsZeroString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          fill: zeroHeightLine.stroke
+          fill: zeroHeightLine.stroke,
+          maxWidth: 125
         } ) ]
     } );
 

@@ -33,7 +33,7 @@ define( function( require ) {
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
 
   // constants
-  var MAX_WIDTH =130;
+  var MAX_WIDTH =205;
 
   /**
    * @param {VectorModel} model
@@ -89,7 +89,7 @@ define( function( require ) {
       content: new HBox( {
         children: [ new Text( gravityString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
+          maxWidth: MAX_WIDTH-22,
           tandem: tandem.createTandem( 'gravityString' )
         } ) ]
       } ),
@@ -99,7 +99,7 @@ define( function( require ) {
       content: new HBox( {
         children: [ new Text( springString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
+          maxWidth: MAX_WIDTH-22,
           tandem: tandem.createTandem( 'springString' )
         } ) ]
       } ),

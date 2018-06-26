@@ -98,6 +98,7 @@ define( function( require ) {
       xMargin: 6
     } );
 
+    debugger;
     massNodeIcon.leftTop = numberControl.leftTop.plus( new Vector2( 45 , -2 ) );
     massNodeIcon.pickable = false;
   }

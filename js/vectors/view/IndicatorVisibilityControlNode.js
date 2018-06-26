@@ -30,9 +30,6 @@ define( function( require ) {
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
   var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
-  // constants
-  var MAX_WIDTH = 140;
-
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
@@ -71,12 +68,12 @@ define( function( require ) {
       children: [
         new Text( displacementString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
+          maxWidth: 190,
           tandem: tandem.createTandem( 'displacementString' )
         } ),
         new Text( naturalLengthString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
+          maxWidth: 190,
           tandem: tandem.createTandem( 'naturalLengthString' )
         } )
       ]
@@ -106,14 +103,14 @@ define( function( require ) {
     }, {
       content: new Text( massEquilibriumString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH,
+        maxWidth: 205,
         tandem: tandem.createTandem( 'massEquilibriumString' )
       } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
       content: new Text( movableLineString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH,
+        maxWidth: 205,
         tandem: tandem.createTandem( 'movableLineString' )
       } ),
       property: model.movableLineVisibleProperty
@@ -130,21 +127,21 @@ define( function( require ) {
       }, {
         content: new Text( massEquilibriumString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
+          maxWidth: 205,
           tandem: tandem.createTandem( 'massEquilibriumString' )
         } ),
         property: model.equilibriumPositionVisibleProperty
       }, {
         content: new Text( movableLineString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
+          maxWidth: 205,
           tandem: tandem.createTandem( 'movableLineString' )
         } ),
         property: model.movableLineVisibleProperty
       }, {
         content: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
+          maxWidth: 205,
           tandem: tandem.createTandem( 'periodTraceString' )
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
