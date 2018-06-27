@@ -17,7 +17,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
@@ -66,14 +65,13 @@ define( function( require ) {
       minMaxLabels,
       tandem.createTandem( 'springLengthControlPanel' ),
       {
-        fill: 'white',
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
-        xMargin: 0,
+        fill: 'transparent',
+        maxWidth: 144,
+        xMargin: 5,
         yMargin: 0,
         stroke: null,
         visible: false,
         centerTick: true,
-        layoutFunction: NumberControl.createLayoutFunction1( { ySpacing: 3 } ),
         constrainValue: function( value ) {
           value = Util.roundSymmetric( value * 100 / 5 ) * 5;
           return value / 100;
@@ -87,22 +85,27 @@ define( function( require ) {
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
+        maxWidth: 135,
         stroke: null
       }
     );
 
+    var lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 130 );
+
     // VBox that contains all of the spring options panel's content
-    var springOptionsVBox = new VBox( {
-      spacing: 10,
-      align: 'left',
+    var springOptionsVBox = new Node( {
       children: [
         this.springLengthControlPanel,
-        MassesAndSpringsConstants.LINE_SEPARATOR( 140 ),
+        lineSeparator,
         constantsControlPanel
       ]
     } );
+
+    this.springLengthControlPanel.centerX = this.centerX;
+    lineSeparator.centerX = this.centerX;
+    lineSeparator.top = this.springLengthControlPanel.bottom + 10;
+    constantsControlPanel.centerX = this.centerX;
+    constantsControlPanel.top = lineSeparator.bottom + 10;
 
     // Panel that will display the options for a spring.
     var springOptionsPanel = new Panel(
@@ -114,7 +117,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'springOptionsPanel' ),
         align: 'center',
         fill: 'white',
-        xMargin: 10,
+        xMargin: 0,
         stroke: 'gray',
         resize: false,
         visible: false
@@ -252,7 +255,7 @@ define( function( require ) {
 
     this.visibleBoundsProperty.link( function() {
       rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.springSystemControlsNode.top );
-      springOptionsPanel.leftTop = self.springSystemControlsNode.leftTop.minus( new Vector2( self.spacing * 2, 0 ) );
+      springOptionsPanel.leftTop = self.springSystemControlsNode.leftTop.minus( new Vector2( 0, 0 ) );
     } );
   }
 

@@ -14,10 +14,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * @param {Property.<number>} springProperty - Property to be adjusted by hSlider
@@ -34,10 +34,10 @@ define( function( require ) {
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       xMargin: 5,
       yMargin: 5,
+      minWidth:135,
       align: 'center',
       centerTick: false,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      stroke: 'black',
       visible: false,
       sliderIndent: 0,
       minorTickMarksVisible: true,
@@ -82,8 +82,9 @@ define( function( require ) {
       }
     }
 
-    Panel.call( this, new Node( {
+    Panel.call( this, new VBox( {
       align:'center',
+      spacing:3,
       children: [
         hSliderTitle,
         hSlider
