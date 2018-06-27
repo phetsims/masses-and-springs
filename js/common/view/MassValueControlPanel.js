@@ -68,11 +68,11 @@ define( function( require ) {
       majorTicks: [
         {
           value: range.min,
-          label: new Text( String( range.min ), { font: new PhetFont( 12 ) } )
+          label: new Text( String( range.min ), { font: new PhetFont( 14 ) } )
         },
         {
           value: range.max,
-          label: new Text( String( range.max ), { font: new PhetFont( 12 ) } )
+          label: new Text( String( range.max ), { font: new PhetFont( 14 ) } )
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction4( {
