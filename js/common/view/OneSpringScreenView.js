@@ -184,7 +184,7 @@ define( function( require ) {
         springStopperButtonNode,
         springConstantControlPanel
       ],
-      spacing: this.spacing,
+      spacing: this.spacing*1.40,
       align: 'top'
     } );
 
