@@ -15,7 +15,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineVisibilityNode = require( 'MASSES_AND_SPRINGS/common/view/LineVisibilityNode' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
@@ -71,6 +73,7 @@ define( function( require ) {
         stroke: null,
         visible: false,
         centerTick: true,
+        layoutFunction: NumberControl.createLayoutFunction1( { ySpacing: 3 } ),
         constrainValue: function( value ) {
           value = Util.roundSymmetric( value * 100 / 5 ) * 5;
           return value / 100;
@@ -96,7 +99,7 @@ define( function( require ) {
       align: 'left',
       children: [
         this.springLengthControlPanel,
-        MassesAndSpringsConstants.LINE_SEPARATOR( 130 ),
+        MassesAndSpringsConstants.LINE_SEPARATOR( 140 ),
         constantsControlPanel
       ]
     } );
