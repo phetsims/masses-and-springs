@@ -76,7 +76,7 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction4( {
-        verticalSpacing: 4,
+        verticalSpacing: 8,
         arrowButtonsXSpacing: 5,
         hasReadoutProperty: new Property( true )
       } ),
@@ -94,7 +94,7 @@ define( function( require ) {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       fill: 'white',
       stroke: 'gray',
-      yMargin: 3.5,
+      yMargin: 6,
       xMargin: 6
     } );
 
