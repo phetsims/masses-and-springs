@@ -53,7 +53,7 @@ define( function( require ) {
     var numberControl = new NumberControl( massString, massInGramsProperty, range, {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
-      } ),
+      }, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
       valueFont: new PhetFont( 12 ),
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
