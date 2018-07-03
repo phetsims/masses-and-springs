@@ -115,7 +115,7 @@ define( function( require ) {
       } ),
       property: model.movableLineVisibleProperty
     } ], {
-      boxWidth: 15,
+      boxWidth: 16,
       spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
@@ -146,7 +146,7 @@ define( function( require ) {
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       } ], {
-        boxWidth: 15,
+        boxWidth: 16,
         spacing: 8,
         tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
       } );
