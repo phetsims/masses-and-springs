@@ -54,7 +54,7 @@ define( function( require ) {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
       }, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
-      valueFont: new PhetFont( 12 ),
+      valueFont: new PhetFont( 14 ),
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
       titleMaxWidth: 45,
