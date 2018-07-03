@@ -69,6 +69,7 @@ define( function( require ) {
         maxWidth: 144,
         xMargin: 5,
         yMargin: 0,
+        spacing:2,
         stroke: null,
         visible: false,
         centerTick: true,
@@ -93,7 +94,7 @@ define( function( require ) {
     var lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 130 );
 
     // VBox that contains all of the spring options panel's content
-    var springOptionsVBox = new Node( {
+    var springOptionsNode = new Node( {
       children: [
         this.springLengthControlPanel,
         lineSeparator,
@@ -109,7 +110,7 @@ define( function( require ) {
 
     // Panel that will display the options for a spring.
     var springOptionsPanel = new Panel(
-      springOptionsVBox,
+      springOptionsNode,
       {
         cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
         right: this.firstSpringStopperButtonNode.left - this.spacing,

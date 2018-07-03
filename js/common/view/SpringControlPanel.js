@@ -34,6 +34,7 @@ define( function( require ) {
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       xMargin: 5,
       yMargin: 5,
+      spacing:3,
       minWidth:135,
       align: 'center',
       centerTick: false,
@@ -84,7 +85,7 @@ define( function( require ) {
 
     Panel.call( this, new VBox( {
       align:'center',
-      spacing:3,
+      spacing:options.spacing,
       children: [
         hSliderTitle,
         hSlider
