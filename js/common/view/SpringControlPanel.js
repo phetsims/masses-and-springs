@@ -35,7 +35,7 @@ define( function( require ) {
       xMargin: 5,
       yMargin: 5,
       spacing:3,
-      minWidth:135,
+      minWidth:165,
       align: 'center',
       centerTick: false,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
