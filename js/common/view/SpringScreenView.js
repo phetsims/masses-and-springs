@@ -153,9 +153,6 @@ define( function( require ) {
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: options.dampingVisible,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null,
         hSlider: options.gravityHSlider
       } );
 
