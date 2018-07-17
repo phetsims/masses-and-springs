@@ -44,13 +44,8 @@ define( function( require ) {
       model,
       tandem.createTandem( 'vectorVisibilityControlNode' ),
       {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH+50,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null,
         showForces: false
-      }
-    );
+      } );
 
     // Contains visibility options for the reference lines and displacement arrow
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, true, tandem );

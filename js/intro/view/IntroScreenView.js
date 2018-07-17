@@ -69,7 +69,7 @@ define( function( require ) {
         maxWidth: 144,
         xMargin: 5,
         yMargin: 0,
-        spacing:2,
+        spacing: 2,
         stroke: null,
         visible: false,
         centerTick: true,
@@ -105,7 +105,7 @@ define( function( require ) {
     this.springLengthControlPanel.centerX = this.centerX;
     lineSeparator.centerX = this.centerX;
     lineSeparator.top = this.springLengthControlPanel.bottom + 10;
-    constantsControlPanel.centerX = this.centerX-10;
+    constantsControlPanel.centerX = this.centerX - 10;
     constantsControlPanel.top = lineSeparator.bottom + 10;
 
     // Panel that will display the options for a spring.
@@ -220,15 +220,7 @@ define( function( require ) {
     } );
 
     // Control Panel for display elements with varying visibility
-    var lineVisibilityNode = new LineVisibilityNode(
-      model,
-      tandem.createTandem( 'LineVisibilityNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null
-      }
-    );
+    var lineVisibilityNode = new LineVisibilityNode( model, tandem.createTandem( 'LineVisibilityNode' ) );
 
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {

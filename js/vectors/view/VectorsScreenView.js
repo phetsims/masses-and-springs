@@ -102,12 +102,8 @@ define( function( require ) {
     // Contains all of the display options for the vectors and forces
     var vectorVisibilityControlNode = new VectorVisibilityControlNode(
       model,
-      tandem.createTandem( 'vectorVisibilityControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-        xMargin: 0,
-        yMargin: 0,
-        stroke: null
-      } );
+      tandem.createTandem( 'vectorVisibilityControlNode' )
+    );
 
     // VBox that contains all of the panel's content
     var optionsVBox = new VBox( {

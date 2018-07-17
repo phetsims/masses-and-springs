@@ -36,7 +36,6 @@ define( function( require ) {
       massEquilibrium: false,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'LineVisibilityNode' ),
-      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
     }, options );
 
     Node.call( this, options );

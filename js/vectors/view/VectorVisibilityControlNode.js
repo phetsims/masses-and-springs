@@ -44,7 +44,6 @@ define( function( require ) {
   function VectorVisibilityControlNode( model, tandem, options ) {
     options = _.extend( {
       showForces: true,
-      minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'vectorVisibilityControlNode' )
     }, options );
