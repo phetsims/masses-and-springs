@@ -110,7 +110,7 @@ define( function( require ) {
     }, {
       content: new Text( movableLineString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: 205,
+        maxWidth: 225,
         tandem: tandem.createTandem( 'movableLineString' )
       } ),
       property: model.movableLineVisibleProperty
@@ -134,7 +134,7 @@ define( function( require ) {
       }, {
         content: new Text( movableLineString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: 205,
+          maxWidth: 225,
           tandem: tandem.createTandem( 'movableLineString' )
         } ),
         property: model.movableLineVisibleProperty

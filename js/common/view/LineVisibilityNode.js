@@ -74,7 +74,7 @@ define( function( require ) {
     }, {
       content: new HBox( {
         children: [ new Text( movableLineString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
+          font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 225, tandem: tandem.createTandem( 'movableLineString' )
         } ) ]
       } ),
       property: model.movableLineVisibleProperty,
