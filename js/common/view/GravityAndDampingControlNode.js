@@ -253,7 +253,7 @@ define( function( require ) {
 
       // Alignment of Node contents for panel with damping
       if ( gravitySlider instanceof NumberControl ) {
-        gravitySliderTitle.leftTop = new Vector2( this.left, this.top + 22.5 );
+        gravitySliderTitle.leftTop = new Vector2( this.left, this.top + 23.5 );
         gravitySlider.centerX = this.centerX;
         gravitySlider.left = this.left;
         gravitySlider.top = this.top + 7;
