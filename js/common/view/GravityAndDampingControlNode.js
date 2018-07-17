@@ -95,7 +95,7 @@ define( function( require ) {
       xMargin: 0,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-      titleMaxWidth: MAX_WIDTH ,
+      titleMaxWidth: MAX_WIDTH * 3,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -117,7 +117,7 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 58,
+        titleXSpacing: 75,
         ySpacing: 2,
         arrowButtonsXSpacing: 1
       } ),
@@ -127,7 +127,7 @@ define( function( require ) {
       valueFont: new PhetFont( { size: 14} ),
       useRichText: true,
       decimalPlaces: 1,
-      valueMaxWidth: MAX_WIDTH ,
+      valueMaxWidth: MAX_WIDTH * 2,
       delta: 0.1,
       arrowButtonScale: 0.5
     };
@@ -193,7 +193,7 @@ define( function( require ) {
       // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
-        maxWidth: MAX_WIDTH,
+        maxWidth: MAX_WIDTH * 3,
         top: gravityComboBox.bottom + SPACING,
         left: TITLE_INDENT
       } );
@@ -253,7 +253,7 @@ define( function( require ) {
 
       // Alignment of Node contents for panel with damping
       if ( gravitySlider instanceof NumberControl ) {
-        gravitySliderTitle.leftTop = new Vector2( this.left-10, this.top + 22.5 );
+        gravitySliderTitle.leftTop = new Vector2( this.left, this.top + 22.5 );
         gravitySlider.centerX = this.centerX;
         gravitySlider.left = this.left;
         gravitySlider.top = this.top + 7;
