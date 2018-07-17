@@ -318,7 +318,9 @@ define( function( require ) {
      * @return {IndicatorVisibilityControlNode}
      */
     createIndicatorVisibilityPanel: function( model, displayPeriodTrace, tandem ) {
-      return new IndicatorVisibilityControlNode( model, tandem.createTandem( 'indicatorVisibilityControlNode' ) );
+      return new IndicatorVisibilityControlNode( model, tandem.createTandem( 'indicatorVisibilityControlNode' ),{
+        periodTraceOption: displayPeriodTrace
+      } );
     },
 
     /**

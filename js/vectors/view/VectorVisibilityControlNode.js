@@ -83,7 +83,7 @@ define( function( require ) {
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new Text( gravityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH - 22,
+        maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'gravityString' )
       } ),
       property: model.gravityVectorVisibilityProperty,
@@ -91,7 +91,7 @@ define( function( require ) {
     }, {
       content: new Text( springString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH - 22,
+        maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'springString' )
       } ),
       property: model.springVectorVisibilityProperty,
@@ -196,7 +196,7 @@ define( function( require ) {
       } );
     }
     var controlsHBox = new HBox( {
-      spacing: 40,
+      spacing: 55,
       children: [
         vectorVisibilityControlsVBox,
         vectorVBox

@@ -124,10 +124,10 @@ define( function( require ) {
       valuePattern: StringUtils.fillIn( gravityValueString, {
         gravity: '{0}'
       } ),
-      valueFont: new PhetFont( { size: 14} ),
+      valueFont: new PhetFont( { size: 14 } ),
       useRichText: true,
       decimalPlaces: 1,
-      valueMaxWidth: MAX_WIDTH * 2,
+      valueMaxWidth: MAX_WIDTH * 3,
       delta: 0.1,
       arrowButtonScale: 0.5
     };

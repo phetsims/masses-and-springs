@@ -110,7 +110,7 @@ define( function( require ) {
     }, {
       content: new Text( movableLineString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: 225,
+        maxWidth: 215,
         tandem: tandem.createTandem( 'movableLineString' )
       } ),
       property: model.movableLineVisibleProperty
@@ -134,7 +134,7 @@ define( function( require ) {
       }, {
         content: new Text( movableLineString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: 225,
+          maxWidth: 215,
           tandem: tandem.createTandem( 'movableLineString' )
         } ),
         property: model.movableLineVisibleProperty
@@ -185,7 +185,7 @@ define( function( require ) {
       } );
     }
     var controlBox = new HBox( {
-      spacing: 25,
+      spacing: 23,
       children: [
         indicatorVisibilityControlsVBox,
         lineVBox

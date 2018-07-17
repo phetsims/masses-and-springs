@@ -35,7 +35,7 @@ define( function( require ) {
     options = _.extend( {
       massEquilibrium: false,
       fill: MassesAndSpringsConstants.PANEL_FILL,
-      tandem: tandem.createTandem( 'LineVisibilityNode' ),
+      tandem: tandem.createTandem( 'LineVisibilityNode' )
     }, options );
 
     Node.call( this, options );
