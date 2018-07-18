@@ -127,7 +127,7 @@ define( function( require ) {
       valueFont: new PhetFont( { size: 14 } ),
       useRichText: true,
       decimalPlaces: 1,
-      valueMaxWidth: MAX_WIDTH * 3,
+      valueMaxWidth: MAX_WIDTH * 2,
       delta: 0.1,
       arrowButtonScale: 0.5
     };
@@ -169,7 +169,7 @@ define( function( require ) {
     var questionTextNode = new Node( {
       children: [ new Text( whatIsTheValueOfGravityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH * 2.6
+        maxWidth: MAX_WIDTH * 3
       } )
       ],
       yMargin: 20,
@@ -361,4 +361,3 @@ define( function( require ) {
 
   return inherit( Node, GravityAndDampingControlNode );
 } );
-

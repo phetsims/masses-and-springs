@@ -151,7 +151,7 @@ define( function( require ) {
     // @public {GravityAndDampingControlNode} Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 50,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
         dampingVisible: options.dampingVisible,
         xMargin: 0,
         yMargin: 0,
@@ -318,9 +318,12 @@ define( function( require ) {
      * @return {IndicatorVisibilityControlNode}
      */
     createIndicatorVisibilityPanel: function( model, displayPeriodTrace, tandem ) {
-      return new IndicatorVisibilityControlNode( model, tandem.createTandem( 'indicatorVisibilityControlNode' ),{
-        periodTraceOption: displayPeriodTrace
-      } );
+      return new IndicatorVisibilityControlNode(
+        model,
+        tandem.createTandem( 'indicatorVisibilityControlNode' ), {
+          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+          periodTraceOption: displayPeriodTrace
+        } );
     },
 
     /**
@@ -336,8 +339,8 @@ define( function( require ) {
         optionsContent, {
           xMargin: 10,
           fill: MassesAndSpringsConstants.PANEL_FILL,
+          align:'center',
           cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-          align: 'center',
           tandem: tandem.createTandem( 'LineVisibilityNode' ),
           minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 20,
           maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 40
