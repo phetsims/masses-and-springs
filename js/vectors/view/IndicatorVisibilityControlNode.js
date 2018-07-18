@@ -40,7 +40,8 @@ define( function( require ) {
     options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'indicatorVisibilityControlNode' ),
-      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
+      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH+10,
+      maxWidth:MassesAndSpringsConstants.PANEL_MAX_WIDTH+25,
       periodTraceOption: false
     }, options );
 
@@ -185,7 +186,7 @@ define( function( require ) {
       } );
     }
     var controlBox = new HBox( {
-      spacing: 23,
+      spacing: 27,
       children: [
         indicatorVisibilityControlsVBox,
         lineVBox

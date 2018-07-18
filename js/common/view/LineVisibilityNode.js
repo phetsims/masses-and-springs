@@ -34,7 +34,7 @@ define( function( require ) {
   function LineVisibilityNode( model, tandem, options ) {
     options = _.extend( {
       massEquilibrium: false,
-      maxWidth:MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+      maxWidth:MassesAndSpringsConstants.PANEL_MAX_WIDTH+20,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'LineVisibilityNode' )
     }, options );

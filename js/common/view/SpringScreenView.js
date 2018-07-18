@@ -321,7 +321,7 @@ define( function( require ) {
       return new IndicatorVisibilityControlNode(
         model,
         tandem.createTandem( 'indicatorVisibilityControlNode' ), {
-          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH+30,
           periodTraceOption: displayPeriodTrace
         } );
     },

@@ -117,7 +117,7 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 75,
+        titleXSpacing: 55,
         ySpacing: 2,
         arrowButtonsXSpacing: 1
       } ),

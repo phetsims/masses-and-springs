@@ -44,7 +44,7 @@ define( function( require ) {
       model,
       tandem.createTandem( 'vectorVisibilityControlNode' ),
       {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 30,
         showForces: false
       } );
 
