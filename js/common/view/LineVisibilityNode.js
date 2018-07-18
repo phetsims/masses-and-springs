@@ -81,7 +81,7 @@ define( function( require ) {
       property: model.movableLineVisibleProperty,
       label: movableLineString
     } ], {
-      boxWidth: 15,
+      boxWidth: 16,
       spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
