@@ -103,7 +103,7 @@ define( function( require ) {
     var vectorVisibilityControlNode = new VectorVisibilityControlNode(
       model,
       tandem.createTandem( 'vectorVisibilityControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH+30
       } );
 
     // VBox that contains all of the panel's content
