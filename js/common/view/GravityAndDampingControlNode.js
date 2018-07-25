@@ -95,7 +95,7 @@ define( function( require ) {
       xMargin: 0,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-      titleMaxWidth: MAX_WIDTH ,
+      titleMaxWidth: MAX_WIDTH * 2,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -135,7 +135,7 @@ define( function( require ) {
     // Create title for gravity slider
     var gravitySliderTitle = new Text( gravityString, {
       font: new PhetFont( { size: 14, weight: 'bold' } ),
-      maxWidth: MAX_WIDTH
+      maxWidth: MAX_WIDTH * 2
     } );
 
     if ( options.hSlider ) {
@@ -193,7 +193,7 @@ define( function( require ) {
       // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
-        maxWidth: MAX_WIDTH ,
+        maxWidth: MAX_WIDTH * 2,
         top: gravityComboBox.bottom + SPACING,
         left: TITLE_INDENT
       } );
@@ -315,21 +315,33 @@ define( function( require ) {
     }
 
     // Responsible for managing bodies and question text visibility
-    model.bodyProperty.link( function( newBody ) {
+    model.bodyProperty.link( function( newBody, previousBody ) {
       var body = _.find( bodies, newBody );
 
       // Unhide the gravitySlider if we are not using planetX
       if ( newBody !== Body.PLANET_X ) {
+        gravitySliderTitle.visible = !(gravitySlider instanceof NumberControl);
         questionTextNode.visible = false;
         gravitySlider.visible = !questionTextNode.visible;
       }
 
       // If PlanetX hide the slider and update gravity
-      else {
+      if ( newBody === Body.PLANET_X ) {
         questionTextNode.visible = true;
+        gravitySliderTitle.visible = true;
         gravitySlider.visible = !questionTextNode.visible;
+        gravityProperty.set( body.gravity );
       }
-      gravityProperty.set( body.gravity );
+
+      //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
+      else if ( previousBody === Body.PLANET_X && newBody === Body.CUSTOM ) {
+        gravityProperty.set( previousBody.gravity );
+      }
+
+      // Update gravity
+      else if ( body.gravity ) {
+        gravityProperty.set( body.gravity );
+      }
     } );
 
     gravityProperty.link( function( newGravity ) {
@@ -343,8 +355,8 @@ define( function( require ) {
       }
 
       // Prevents viewing PLANET_X gravity after switching from planet X to custom.
-      if (newGravity!==Body.PLANET_X.gravity){
-        Body.CUSTOM.gravity=newGravity;
+      if ( newGravity !== Body.PLANET_X.gravity ) {
+        Body.CUSTOM.gravity = newGravity;
       }
     } );
     this.mutate( options );
