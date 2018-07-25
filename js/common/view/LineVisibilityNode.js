@@ -48,12 +48,14 @@ define( function( require ) {
 
     var equilibriumText = new Text( equilibriumPositionString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: 225,
       tandem: tandem.createTandem( 'equilibriumPositionString' )
     } );
 
     if ( options.massEquilibrium ) {
       equilibriumText = new Text( massEquilibriumString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: 225,
         tandem: tandem.createTandem( 'equilibriumPositionString' )
       } );
     }
@@ -61,7 +63,7 @@ define( function( require ) {
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
         children: [ new Text( naturalLengthString, {
-          font: MassesAndSpringsConstants.TITLE_FONT
+          font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 225
         } ) ]
       } ),
       property: model.naturalLengthVisibleProperty,
