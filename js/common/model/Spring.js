@@ -27,7 +27,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Vector2IO = require( 'DOT/Vector2IO' );
 
-  // phet-io modules
+  // ifphetio
   var NullableIO = require( 'ifphetio!PHET_IO/types/NullableIO' );
   var NumberIO = require( 'ifphetio!PHET_IO/types/NumberIO' );
 
@@ -53,8 +53,8 @@ define( function( require ) {
     // @public {Property.<number>} (read-write) Used to position massNode forces. Right side: 1, Left side: -1
     this.forcesOrientationProperty = new NumberProperty( 1 );
 
-    // @public {Property.<number>} gravitational acceleration
-    this.gravityProperty = new NumberProperty( gravityProperty.value );
+    // @public {Property.<number|null>} gravitational acceleration
+    this.gravityProperty = new Property( gravityProperty.value );
 
     // Link to manage gravity value for the spring object.
     gravityProperty.link( function( gravity ) {

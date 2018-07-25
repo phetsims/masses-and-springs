@@ -235,8 +235,7 @@ define( function( require ) {
       model.rulerVisibleProperty,
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 30,
-        minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 20
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 21
       }
     );
 
@@ -322,10 +321,7 @@ define( function( require ) {
       return new IndicatorVisibilityControlNode(
         model,
         tandem.createTandem( 'indicatorVisibilityControlNode' ), {
-          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
-          xMargin: 0,
-          yMargin: 0,
-          stroke: null,
+          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH+30,
           periodTraceOption: displayPeriodTrace
         } );
     },
@@ -343,9 +339,11 @@ define( function( require ) {
         optionsContent, {
           xMargin: 10,
           fill: MassesAndSpringsConstants.PANEL_FILL,
+          align:'center',
           cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
           tandem: tandem.createTandem( 'LineVisibilityNode' ),
-          minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 5
+          minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 20,
+          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 40
         } );
       optionsPanel.moveToBack();
       return optionsPanel;

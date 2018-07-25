@@ -24,6 +24,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
@@ -94,7 +95,7 @@ define( function( require ) {
       xMargin: 0,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-      titleMaxWidth: MAX_WIDTH,
+      titleMaxWidth: MAX_WIDTH * 3,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -116,48 +117,44 @@ define( function( require ) {
         }
       ],
       layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 70,
+        titleXSpacing: 55,
         ySpacing: 2,
         arrowButtonsXSpacing: 1
       } ),
       valuePattern: StringUtils.fillIn( gravityValueString, {
         gravity: '{0}'
       } ),
+      valueFont: new PhetFont( { size: 14 } ),
       useRichText: true,
       decimalPlaces: 1,
-      valueMaxWidth: MAX_WIDTH,
+      valueMaxWidth: MAX_WIDTH * 2,
       delta: 0.1,
       arrowButtonScale: 0.5
     };
 
+    // Create title for gravity slider
+    var gravitySliderTitle = new Text( gravityString, {
+      font: new PhetFont( { size: 14, weight: 'bold' } ),
+      maxWidth: MAX_WIDTH * 3
+    } );
+
     if ( options.hSlider ) {
 
-      // Create title for gravity slider
-      var gravityHSliderTitle = new Text( gravityString, {
-        font: new PhetFont( { size: 14, weight: 'bold' } ),
-        maxWidth: MAX_WIDTH
-      } );
-
       // Create gravity slider
-      var gravityHSlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE, sliderOptions );
-      gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.min, new Text( noneString, {
+      var gravitySlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE, sliderOptions );
+      gravitySlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.min, new Text( noneString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'gravityNoneString' ),
         maxWidth: MAX_WIDTH
       } ) );
-      gravityHSlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.max, new Text( lotsString, {
+      gravitySlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.max, new Text( lotsString, {
         font: MassesAndSpringsConstants.LABEL_FONT,
         tandem: tandem.createTandem( 'gravityLotsString' ),
         maxWidth: MAX_WIDTH
       } ) );
 
-      var gravitySlider = new Node( {
-        xMargin: 0,
-        yMargin: 0,
-        children: [ gravityHSliderTitle, gravityHSlider ]
-      } );
-      gravityHSlider.left = gravityHSliderTitle.centerX - 10;
-      gravityHSlider.top = gravityHSliderTitle.bottom + SPACING;
+      gravitySlider.left = gravitySliderTitle.centerX - 10;
+      gravitySlider.top = gravitySliderTitle.bottom + SPACING;
     }
     else {
       gravitySlider = new NumberControl(
@@ -172,7 +169,7 @@ define( function( require ) {
     var questionTextNode = new Node( {
       children: [ new Text( whatIsTheValueOfGravityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: gravitySlider.width
+        maxWidth: MAX_WIDTH * 3
       } )
       ],
       yMargin: 20,
@@ -185,7 +182,7 @@ define( function( require ) {
       centerX: gravitySlider.centerX + 15,
       buttonCornerRadius: 3,
       buttonYMargin: 0,
-      itemYMargin: 5,
+      itemYMargin: 3,
       itemXMargin: 2,
       listYMargin: 3,
       tandem: tandem.createTandem( 'gravityComboBox' )
@@ -196,7 +193,7 @@ define( function( require ) {
       // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
-        maxWidth: MAX_WIDTH,
+        maxWidth: MAX_WIDTH * 3,
         top: gravityComboBox.bottom + SPACING,
         left: TITLE_INDENT
       } );
@@ -242,6 +239,7 @@ define( function( require ) {
       var gravityNode = new Node( { children: [ questionTextNode, gravitySlider ] } );
       var contentNode = new Node( {
         children: [
+          gravitySliderTitle,
           gravityNode,
           gravityComboBox,
           dampingHSliderTitle,
@@ -253,12 +251,31 @@ define( function( require ) {
       // Content to be added to parent node
       Node.call( this, { children: [ contentNode ] } );
 
-      // Alignment of Node contents
-      gravitySlider.left = this.left;
-      questionTextNode.centerX = gravitySlider.centerX + 5;
-      gravityComboBox.centerX = this.centerX;
-      dampingHSliderTitle.left = this.left;
-      dampingHSlider.centerX = this.centerX;
+      // Alignment of Node contents for panel with damping
+      if ( gravitySlider instanceof NumberControl ) {
+        gravitySliderTitle.leftTop = new Vector2( this.left, this.top + 23.5 );
+        gravitySlider.centerX = this.centerX;
+        gravitySlider.left = this.left;
+        gravitySlider.top = this.top + 7;
+        questionTextNode.centerX = this.centerX;
+      }
+      else {
+        gravitySliderTitle.top = this.top + 16;
+        gravitySliderTitle.centerX = this.centerX - 72;
+        gravitySliderTitle.top = this.top - 12.5;
+        gravitySlider.centerX = this.centerX;
+        questionTextNode.centerX = gravitySlider.centerX - 5;
+        questionTextNode.top = this.top - 12;
+        gravityComboBox.top = gravitySlider.bottom + 10;
+
+      }
+      questionTextNode.top = gravitySlider.bottom - 30;
+      gravityComboBox.centerX = gravitySlider.centerX;
+      gravityComboBox.top = gravitySlider.bottom + 10;
+      dampingHSliderTitle.left = gravitySliderTitle.left;
+      dampingHSliderTitle.top = gravityComboBox.bottom + 10;
+      dampingHSlider.centerX = gravitySlider.centerX;
+      dampingHSlider.top = dampingHSliderTitle.bottom + 5;
     }
     else {
 
@@ -267,7 +284,7 @@ define( function( require ) {
         equalsZero: MathSymbols.EQUAL_TO + ' 0'
       } ), {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH,
+        maxWidth: MAX_WIDTH * 2,
         top: gravityComboBox.bottom + SPACING,
         centerX: gravityComboBox.centerX
       } );
@@ -276,6 +293,7 @@ define( function( require ) {
       // Content to be added to parent node
       contentNode = new Node( {
         children: [
+          gravitySliderTitle,
           gravityNode,
           gravityComboBox,
           dampingEqualsZeroText
@@ -284,11 +302,16 @@ define( function( require ) {
       } );
       Node.call( this, { children: [ contentNode ] } );
 
-      // Alignment of Node contents
-      gravitySlider.left = this.left - 15;
-      questionTextNode.centerX = this.centerX;
-      gravityComboBox.centerX = gravitySlider.centerX + 12;
-      dampingEqualsZeroText.centerX = gravityComboBox.centerX - 50;
+      // Alignment of Node contents for panel without damping
+      gravitySliderTitle.centerX = this.centerX - 80;
+      gravitySliderTitle.top = this.top + 3.5;
+      gravitySlider.centerX = this.centerX;
+      questionTextNode.centerX = gravitySlider.centerX - 5;
+      questionTextNode.top = gravitySlider.bottom - 30;
+      gravityComboBox.centerX = gravitySlider.centerX;
+      gravityComboBox.top = gravitySlider.bottom + 10;
+      dampingEqualsZeroText.top = gravityComboBox.bottom + 10;
+      dampingEqualsZeroText.left = gravitySliderTitle.left;
     }
 
     // Responsible for managing bodies and question text visibility
@@ -297,6 +320,7 @@ define( function( require ) {
 
       // Unhide the gravitySlider if we are not using planetX
       if ( newBody !== Body.PLANET_X ) {
+        gravitySliderTitle.visible = !(gravitySlider instanceof NumberControl);
         questionTextNode.visible = false;
         gravitySlider.visible = !questionTextNode.visible;
       }
@@ -304,6 +328,7 @@ define( function( require ) {
       // If PlanetX hide the slider and update gravity
       if ( newBody === Body.PLANET_X ) {
         questionTextNode.visible = true;
+        gravitySliderTitle.visible = true;
         gravitySlider.visible = !questionTextNode.visible;
         gravityProperty.set( body.gravity );
       }

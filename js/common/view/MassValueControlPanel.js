@@ -22,6 +22,7 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var massString = require( 'string!MASSES_AND_SPRINGS/mass' );
@@ -52,11 +53,11 @@ define( function( require ) {
     var numberControl = new NumberControl( massString, massInGramsProperty, range, {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
-      } ),
-      valueFont: new PhetFont( 12 ),
+      }, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
+      valueFont: new PhetFont( 14 ),
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
-      titleMaxWidth: 55,
+      titleMaxWidth: 45,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -67,17 +68,17 @@ define( function( require ) {
       majorTicks: [
         {
           value: range.min,
-          label: new Text( String( range.min ), { font: new PhetFont( 12 ) } )
+          label: new Text( String( range.min ), { font: new PhetFont( 14 ) } )
         },
         {
           value: range.max,
-          label: new Text( String( range.max ), { font: new PhetFont( 12 ) } )
+          label: new Text( String( range.max ), { font: new PhetFont( 14 ) } )
         }
       ],
-      layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 65,
-        ySpacing: 4,
-        arrowButtonsXSpacing: 5
+      layoutFunction: NumberControl.createLayoutFunction4( {
+        verticalSpacing: 8,
+        arrowButtonsXSpacing: 5,
+        hasReadoutProperty: new Property( true )
       } ),
       useRichText: true,
       decimalPlaces: 0,
@@ -93,11 +94,11 @@ define( function( require ) {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       fill: 'white',
       stroke: 'gray',
-      yMargin: 3.5,
+      yMargin: 6,
       xMargin: 6
     } );
 
-    massNodeIcon.leftTop = numberControl.leftTop;
+    massNodeIcon.leftTop = numberControl.leftTop.plus( new Vector2( 45 , -2 ) );
     massNodeIcon.pickable = false;
   }
 

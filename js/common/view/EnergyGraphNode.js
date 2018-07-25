@@ -27,6 +27,7 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RichText = require( 'SCENERY/nodes/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -205,7 +206,7 @@ define( function( require ) {
           spacing: 20,
           children: [
             new AlignBox( new RichText( itemData.abbreviation, {
-              font: MassesAndSpringsConstants.TITLE_FONT,
+              font: MassesAndSpringsConstants.LEGEND_ABBREVIATION_FONT,
               fill: itemData.color,
               maxWidth: MAX_WIDTH
             } ), {
@@ -213,7 +214,7 @@ define( function( require ) {
               xAlign: 'left'
             } ),
             new AlignBox( new Text( itemData.description, {
-              font: MassesAndSpringsConstants.TITLE_FONT
+              font: MassesAndSpringsConstants.LEGEND_DESCRIPTION_FONT
             } ), {
               group: descriptionGroup,
               xAlign: 'left',
@@ -237,9 +238,11 @@ define( function( require ) {
         if ( !dialog ) {
           dialog = new Dialog( dialogContent, {
             modal: true,
+            ySpacing: 20,
+            bottomMargin: 20,
             title: new Text( energyLegendString, {
-              font: MassesAndSpringsConstants.TITLE_FONT,
-              maxWidth: MAX_WIDTH
+              font: new PhetFont( 22 ),
+              maxWidth: MAX_WIDTH*2
             } )
           } );
         }
@@ -284,7 +287,7 @@ define( function( require ) {
     AccordionBox.call( this, accordionBoxContent, {
       buttonYMargin: 4,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH } )
+      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH+40 } )
     } );
     this.maxHeight = 720;
   }

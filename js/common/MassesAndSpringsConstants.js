@@ -61,6 +61,8 @@ define( function( require ) {
     // Constants regarding fonts
     LABEL_FONT: new PhetFont( 12 ),
     TITLE_FONT: new PhetFont( 14 ),
+    LEGEND_ABBREVIATION_FONT: new PhetFont( { size: 16, weight: 'bold' } ),
+    LEGEND_DESCRIPTION_FONT: new PhetFont( 16 ),
 
     // Constants regarding panels
     PANEL_VERTICAL_SPACING: 10,

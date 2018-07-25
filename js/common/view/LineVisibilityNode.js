@@ -34,9 +34,9 @@ define( function( require ) {
   function LineVisibilityNode( model, tandem, options ) {
     options = _.extend( {
       massEquilibrium: false,
+      maxWidth:MassesAndSpringsConstants.PANEL_MAX_WIDTH+20,
       fill: MassesAndSpringsConstants.PANEL_FILL,
-      tandem: tandem.createTandem( 'LineVisibilityNode' ),
-      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH
+      tandem: tandem.createTandem( 'LineVisibilityNode' )
     }, options );
 
     Node.call( this, options );
@@ -75,13 +75,13 @@ define( function( require ) {
     }, {
       content: new HBox( {
         children: [ new Text( movableLineString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
+          font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 225, tandem: tandem.createTandem( 'movableLineString' )
         } ) ]
       } ),
       property: model.movableLineVisibleProperty,
       label: movableLineString
     } ], {
-      boxWidth: 15,
+      boxWidth: 16,
       spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );

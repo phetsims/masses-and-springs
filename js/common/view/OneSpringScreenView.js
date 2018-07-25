@@ -161,7 +161,8 @@ define( function( require ) {
       children: [
         new Text( heightEqualsZeroString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          fill: zeroHeightLine.stroke
+          fill: zeroHeightLine.stroke,
+          maxWidth: 125
         } ) ]
     } );
 
@@ -183,7 +184,7 @@ define( function( require ) {
         springStopperButtonNode,
         springConstantControlPanel
       ],
-      spacing: this.spacing,
+      spacing: this.spacing * 1.4,
       align: 'top'
     } );
 

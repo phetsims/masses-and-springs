@@ -40,7 +40,8 @@ define( function( require ) {
     options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'indicatorVisibilityControlNode' ),
-      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
+      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH+10,
+      maxWidth:MassesAndSpringsConstants.PANEL_MAX_WIDTH+25,
       periodTraceOption: false
     }, options );
 
@@ -67,10 +68,14 @@ define( function( require ) {
       align: 'left',
       children: [
         new Text( displacementString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'displacementString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: 190,
+          tandem: tandem.createTandem( 'displacementString' )
         } ),
         new Text( naturalLengthString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'naturalLengthString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: 190,
+          tandem: tandem.createTandem( 'naturalLengthString' )
         } )
       ]
     } );
@@ -98,16 +103,20 @@ define( function( require ) {
       property: model.naturalLengthVisibleProperty
     }, {
       content: new Text( massEquilibriumString, {
-        font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'massEquilibriumString' )
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: 205,
+        tandem: tandem.createTandem( 'massEquilibriumString' )
       } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
       content: new Text( movableLineString, {
-        font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: 215,
+        tandem: tandem.createTandem( 'movableLineString' )
       } ),
       property: model.movableLineVisibleProperty
     } ], {
-      boxWidth: 15,
+      boxWidth: 16,
       spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
@@ -118,28 +127,33 @@ define( function( require ) {
         property: model.naturalLengthVisibleProperty
       }, {
         content: new Text( massEquilibriumString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'massEquilibriumString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: 205,
+          tandem: tandem.createTandem( 'massEquilibriumString' )
         } ),
         property: model.equilibriumPositionVisibleProperty
       }, {
         content: new Text( movableLineString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'movableLineString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: 215,
+          tandem: tandem.createTandem( 'movableLineString' )
         } ),
         property: model.movableLineVisibleProperty
       }, {
         content: new Text( periodTraceString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, tandem: tandem.createTandem( 'periodTraceString' )
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: 205,
+          tandem: tandem.createTandem( 'periodTraceString' )
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       } ], {
-        boxWidth: 15,
+        boxWidth: 16,
         spacing: 8,
         tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
       } );
     }
     var indicatorVisibilityControlsVBox = new VBox( {
         children: [
-          new VStrut( 2 ),
           indicatorVisibilityCheckboxGroup
         ],
         align: 'left',
@@ -168,11 +182,11 @@ define( function( require ) {
           new VStrut( 24 ),
           redLine,
           new VStrut( 24 )
-        ], yMargin: 0,
+        ], yMargin: 0
       } );
     }
     var controlBox = new HBox( {
-      spacing: 25,
+      spacing: 27,
       children: [
         indicatorVisibilityControlsVBox,
         lineVBox

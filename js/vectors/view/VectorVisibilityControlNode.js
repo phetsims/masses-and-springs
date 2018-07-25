@@ -32,6 +32,9 @@ define( function( require ) {
   var springString = require( 'string!MASSES_AND_SPRINGS/spring' );
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
 
+  // constants
+  var MAX_WIDTH = 205;
+
   /**
    * @param {VectorModel} model
    * @param {Tandem} tandem
@@ -41,7 +44,6 @@ define( function( require ) {
   function VectorVisibilityControlNode( model, tandem, options ) {
     options = _.extend( {
       showForces: true,
-      minWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'vectorVisibilityControlNode' )
     }, options );
@@ -56,52 +58,48 @@ define( function( require ) {
 
     // responsible for velocity and acceleration vectors checkboxes
     var vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new HBox( {
-        children: [ new Text( velocityString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          tandem: tandem.createTandem( 'velocityString' )
-        } ) ]
+      content: new Text( velocityString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'velocityString' )
       } ),
       property: model.velocityVectorVisibilityProperty,
       label: velocityString
     }, {
-      content: new HBox( {
-        children: [ new Text( accelerationString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          tandem: tandem.createTandem( 'accelerationString' )
-        } ) ]
+      content: new Text( accelerationString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'accelerationString' )
       } ),
       property: model.accelerationVectorVisibilityProperty,
       label: accelerationString
     }
     ], {
-      boxWidth: 15,
+      boxWidth: 16,
       tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
     } );
 
     // responsible for forces vectors checkboxes
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new HBox( {
-        children: [ new Text( gravityString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          tandem: tandem.createTandem( 'gravityString' )
-        } ) ]
+      content: new Text( gravityString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'gravityString' )
       } ),
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
     }, {
-      content: new HBox( {
-        children: [ new Text( springString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          tandem: tandem.createTandem( 'springString' )
-        } ) ]
+      content: new Text( springString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'springString' )
       } ),
       property: model.springVectorVisibilityProperty,
       label: springString
     } ], {
-      boxWidth: 15,
+      boxWidth: 16,
       xMargin: 20,
-      tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
+      tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
     } );
 
     // responsible for forces aquaRadioButton
@@ -110,6 +108,7 @@ define( function( require ) {
       ForcesModeChoice.FORCES,
       new Text( forcesString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'forcesString' )
       } ),
       { radius: 7, spacing: 7 }
@@ -122,6 +121,7 @@ define( function( require ) {
       new HBox( {
         children: [ new Text( netForceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
           tandem: tandem.createTandem( 'netForceString' )
         } ) ]
       } ),
@@ -172,6 +172,7 @@ define( function( require ) {
           new VStrut( 15 ),
           netForceArrow
         ],
+        yMargin:0,
         align: 'left',
         tandem: tandem.createTandem( 'spacingUnit' )
       } );
@@ -195,7 +196,7 @@ define( function( require ) {
       } );
     }
     var controlsHBox = new HBox( {
-      spacing: 40,
+      spacing: 55,
       children: [
         vectorVisibilityControlsVBox,
         vectorVBox
