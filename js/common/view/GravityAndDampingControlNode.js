@@ -332,7 +332,7 @@ define( function( require ) {
       gravityProperty.set( body.gravity );
     } );
 
-    gravityProperty.link( function( newGravity, oldGravity ) {
+    gravityProperty.link( function( newGravity ) {
 
       // If the user manually changed the gravity then change the body to CUSTOM.
       var selectedBody = model.bodyProperty.get();
@@ -341,10 +341,10 @@ define( function( require ) {
         //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
         model.bodyProperty.set( Body.CUSTOM );
       }
-      if(newGravity===Body.PLANET_X.gravity){
 
-        // Prevents viewing PLANET_X gravity after switching from planet X to custom.
-        Body.CUSTOM.gravity= oldGravity;
+      // Prevents viewing PLANET_X gravity after switching from planet X to custom.
+      if (newGravity!==Body.PLANET_X.gravity){
+        Body.CUSTOM.gravity=newGravity;
       }
     } );
     this.mutate( options );
