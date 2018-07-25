@@ -95,7 +95,7 @@ define( function( require ) {
       xMargin: 0,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-      titleMaxWidth: MAX_WIDTH * 3,
+      titleMaxWidth: MAX_WIDTH ,
       trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
@@ -135,7 +135,7 @@ define( function( require ) {
     // Create title for gravity slider
     var gravitySliderTitle = new Text( gravityString, {
       font: new PhetFont( { size: 14, weight: 'bold' } ),
-      maxWidth: MAX_WIDTH * 3
+      maxWidth: MAX_WIDTH
     } );
 
     if ( options.hSlider ) {
@@ -193,7 +193,7 @@ define( function( require ) {
       // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
-        maxWidth: MAX_WIDTH * 3,
+        maxWidth: MAX_WIDTH ,
         top: gravityComboBox.bottom + SPACING,
         left: TITLE_INDENT
       } );
