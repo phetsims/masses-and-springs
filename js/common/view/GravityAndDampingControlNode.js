@@ -127,7 +127,7 @@ define( function( require ) {
       valueFont: new PhetFont( { size: 14 } ),
       useRichText: true,
       decimalPlaces: 1,
-      valueMaxWidth: MAX_WIDTH * 2,
+      valueMaxWidth: MAX_WIDTH * 1.5,
       delta: 0.1,
       arrowButtonScale: 0.5
     };
