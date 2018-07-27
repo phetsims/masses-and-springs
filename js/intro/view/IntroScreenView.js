@@ -86,7 +86,7 @@ define( function( require ) {
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
-        maxWidth: 135,
+        maxWidth: 122,
         stroke: null
       }
     );
@@ -105,7 +105,7 @@ define( function( require ) {
     this.springLengthControlPanel.centerX = this.centerX;
     lineSeparator.centerX = this.centerX;
     lineSeparator.top = this.springLengthControlPanel.bottom + 10;
-    constantsControlPanel.centerX = this.centerX - 10;
+    constantsControlPanel.centerX = this.centerX - 8;
     constantsControlPanel.top = lineSeparator.bottom + 10;
 
     // Panel that will display the options for a spring.
