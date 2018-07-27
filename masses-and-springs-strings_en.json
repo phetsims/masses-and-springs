@@ -101,9 +101,6 @@
   "netForce": {
     "value": "Net Force"
   },
-  "normal": {
-    "value": "Normal"
-  },
   "none": {
     "value": "None"
   },
@@ -133,9 +130,6 @@
   },
   "short": {
     "value": "Short"
-  },
-  "slow": {
-    "value": "Slow"
   },
   "spring": {
     "value": "Spring"
