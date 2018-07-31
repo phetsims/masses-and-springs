@@ -9,6 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -25,6 +27,9 @@ define( function( require ) {
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
 
+  // constants
+  var CONTENT_SPACING = 22;
+
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
@@ -34,7 +39,7 @@ define( function( require ) {
   function LineVisibilityNode( model, tandem, options ) {
     options = _.extend( {
       massEquilibrium: false,
-      maxWidth:MassesAndSpringsConstants.PANEL_MAX_WIDTH+20,
+      maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 20,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'LineVisibilityNode' )
     }, options );
@@ -60,26 +65,30 @@ define( function( require ) {
       } );
     }
 
+
+    // Align group used for label align boxes
+    var alignGroup = new AlignGroup( { matchVertical: false } );
+
+    // Align boxes used for labels
+    var naturalLengthVisibleAlignBox = new AlignBox( new Text( naturalLengthString, {
+      font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 225
+    } ), { group: alignGroup, xAlign: 'left' } );
+    var equilibriumAlignBox = new AlignBox( equilibriumText, { group: alignGroup, xAlign: 'left' } );
+    var movableAlignBox = new AlignBox( new Text( movableLineString, {
+      font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 225, tandem: tandem.createTandem( 'movableLineString' )
+    } ), { group: alignGroup, xAlign: 'left' } );
+
+    // Create checkboxes using align boxes above
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new HBox( {
-        children: [ new Text( naturalLengthString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 225
-        } ) ]
-      } ),
+      content: new HBox( { children: [ naturalLengthVisibleAlignBox, blueLine ], spacing: CONTENT_SPACING } ),
       property: model.naturalLengthVisibleProperty,
       label: naturalLengthString
     }, {
-      content: new HBox( {
-        children: [ equilibriumText ]
-      } ),
+      content: new HBox( { children: [ equilibriumAlignBox, greenLine ], spacing: CONTENT_SPACING } ),
       property: model.equilibriumPositionVisibleProperty,
       label: equilibriumPositionString
     }, {
-      content: new HBox( {
-        children: [ new Text( movableLineString, {
-          font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 225, tandem: tandem.createTandem( 'movableLineString' )
-        } ) ]
-      } ),
+      content: new HBox( { children: [ movableAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty,
       label: movableLineString
     } ], {
@@ -109,8 +118,7 @@ define( function( require ) {
     var controlBox = new HBox( {
       spacing: 10,
       children: [
-        indicatorVisibilityControlsVBox,
-        lineVBox
+        indicatorVisibilityControlsVBox
       ]
     } );
     this.addChild( controlBox );

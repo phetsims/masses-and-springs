@@ -9,6 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var BracketNode = require( 'SCENERY_PHET/BracketNode' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
@@ -30,6 +32,10 @@ define( function( require ) {
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
   var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
+  // constants
+  var CONTENT_MAX_WIDTH = 205;
+  var CONTENT_SPACING = 22;
+
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
@@ -37,11 +43,12 @@ define( function( require ) {
    * @constructor
    */
   function IndicatorVisibilityControlNode( model, tandem, options ) {
+
     options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'indicatorVisibilityControlNode' ),
-      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH+10,
-      maxWidth:MassesAndSpringsConstants.PANEL_MAX_WIDTH+25,
+      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 10,
+      maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 25,
       periodTraceOption: false
     }, options );
 
@@ -51,6 +58,7 @@ define( function( require ) {
     var blackLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'black', tandem.createTandem( 'blackLine' ) );
     var blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
+
     var displacementSymbol = new DisplacementArrowNode(
       new NumberProperty( 10 ),
       new BooleanProperty( true ),
@@ -61,6 +69,7 @@ define( function( require ) {
         scale: 0.65
       }
     );
+    var alignGroup = new AlignGroup( { matchVertical: false } );
 
     // Labels for the displacement arrow and natural length line
     var displacementLabels = new VBox( {
@@ -76,8 +85,7 @@ define( function( require ) {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: 190,
           tandem: tandem.createTandem( 'naturalLengthString' )
-        } )
-      ]
+        } ) ]
     } );
 
     // the bracket at the left - this is tweaked a bit for optimal appearance
@@ -93,27 +101,34 @@ define( function( require ) {
       ]
     } );
 
-    var componentDisplacement = new HBox( {
+    var componentDisplacement = new AlignBox( new HBox( {
       spacing: 2,
       children: [ bracket, displacementLabels ]
-    } );
+    } ), { xAlign: 'left', group: alignGroup } );
 
+    var massEquilibriumAlignBox = new AlignBox( new Text( massEquilibriumString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: CONTENT_MAX_WIDTH,
+      tandem: tandem.createTandem( 'massEquilibriumString' )
+    } ), { xAlign: 'left', group: alignGroup } );
+    var movalbeLineAlignBox = new AlignBox( new Text( movableLineString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: CONTENT_MAX_WIDTH,
+      tandem: tandem.createTandem( 'movableLineString' )
+    } ), { xAlign: 'left', group: alignGroup } );
+
+    // Create checkboxes using align boxes above
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: componentDisplacement,
+      content: new HBox( {
+        children: [ componentDisplacement, new VBox( { children: [ displacementSymbol, blueLine ], spacing: 15 } ) ],
+        spacing: CONTENT_SPACING
+      } ),
       property: model.naturalLengthVisibleProperty
     }, {
-      content: new Text( massEquilibriumString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: 205,
-        tandem: tandem.createTandem( 'massEquilibriumString' )
-      } ),
+      content:  new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
-      content: new Text( movableLineString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: 205,
-        tandem: tandem.createTandem( 'movableLineString' )
-      } ),
+      content: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty
     } ], {
       boxWidth: 16,
@@ -126,23 +141,15 @@ define( function( require ) {
         content: componentDisplacement,
         property: model.naturalLengthVisibleProperty
       }, {
-        content: new Text( massEquilibriumString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: 205,
-          tandem: tandem.createTandem( 'massEquilibriumString' )
-        } ),
+        content:  new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
         property: model.equilibriumPositionVisibleProperty
       }, {
-        content: new Text( movableLineString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: 205,
-          tandem: tandem.createTandem( 'movableLineString' )
-        } ),
+        content:  new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
         property: model.movableLineVisibleProperty
       }, {
         content: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: 205,
+          maxWidth: CONTENT_MAX_WIDTH,
           tandem: tandem.createTandem( 'periodTraceString' )
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
@@ -160,36 +167,10 @@ define( function( require ) {
         tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
       }
     );
-    var lineVBox = new VBox( {
-      children: [
-        displacementSymbol,
-        new VStrut( 18 ),
-        blueLine,
-        new VStrut( 24 ),
-        blackLine,
-        new VStrut( 24 ),
-        redLine
-      ], yMargin: 0
-    } );
-    if ( options.periodTraceOption ) {
-      lineVBox = new VBox( {
-        children: [
-          displacementSymbol,
-          new VStrut( 18 ),
-          blueLine,
-          new VStrut( 24 ),
-          blackLine,
-          new VStrut( 24 ),
-          redLine,
-          new VStrut( 24 )
-        ], yMargin: 0
-      } );
-    }
     var controlBox = new HBox( {
       spacing: 27,
       children: [
-        indicatorVisibilityControlsVBox,
-        lineVBox
+        indicatorVisibilityControlsVBox
       ]
     } );
     this.addChild( controlBox );
