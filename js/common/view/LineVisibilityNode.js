@@ -106,15 +106,15 @@ define( function( require ) {
         tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
       }
     );
-    var lineVBox = new VBox( {
-      children: [
-        blueLine,
-        greenLine,
-        redLine
-      ],
-      yMargin: 0,
-      spacing: 24
-    } );
+    // var lineVBox = new VBox( {
+    //   children: [
+    //     blueLine,
+    //     greenLine,
+    //     redLine
+    //   ],
+    //   yMargin: 0,
+    //   spacing: 24
+    // } );
     var controlBox = new HBox( {
       spacing: 10,
       children: [
