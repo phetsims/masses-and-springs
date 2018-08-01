@@ -66,7 +66,7 @@ define( function( require ) {
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         fill: 'transparent',
-        maxWidth: 144,
+        maxWidth: 210,
         xMargin: 5,
         yMargin: 0,
         spacing: 2,
@@ -86,7 +86,7 @@ define( function( require ) {
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
-        maxWidth: 122,
+        maxWidth: 210,
         stroke: null
       }
     );
@@ -118,6 +118,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'springOptionsPanel' ),
         align: 'center',
         fill: 'white',
+        maxWidth: 250,
         xMargin: 0,
         stroke: 'gray',
         resize: false,
@@ -248,7 +249,8 @@ define( function( require ) {
 
     this.visibleBoundsProperty.link( function() {
       rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.springSystemControlsNode.top );
-      springOptionsPanel.leftTop = self.springSystemControlsNode.leftTop.minus( new Vector2( 0, 0 ) );
+      springOptionsPanel.right = self.firstSpringStopperButtonNode.left + 168;
+      springOptionsPanel.top = self.springSystemControlsNode.top;
     } );
   }
 
