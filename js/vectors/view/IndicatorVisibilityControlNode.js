@@ -138,7 +138,10 @@ define( function( require ) {
 
     if ( options.periodTraceOption ) {
       indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-        content: componentDisplacement,
+        content: new HBox( {
+          children: [ componentDisplacement, new VBox( { children: [ displacementSymbol, blueLine ], spacing: 15 } ) ],
+          spacing: CONTENT_SPACING
+        } ),
         property: model.naturalLengthVisibleProperty
       }, {
         content:  new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
