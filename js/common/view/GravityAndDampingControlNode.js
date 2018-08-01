@@ -209,7 +209,7 @@ define( function( require ) {
         minorTickLength: 5,
         minorTickLineWidth: 0.5,
         trackSize: new Dimension2( 120, 0.1 ),
-        thumbSize: new Dimension2( 13, 22 ),
+        thumbSize: new Dimension2( 13, 20 ),
         thumbFillEnabled: '#00C4DF',
         thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
         align: 'center',
