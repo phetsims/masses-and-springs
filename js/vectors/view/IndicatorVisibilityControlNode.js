@@ -34,7 +34,7 @@ define( function( require ) {
 
   // constants
   var CONTENT_MAX_WIDTH = 205;
-  var CONTENT_SPACING = 22;
+  var CONTENT_SPACING = 33;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -167,13 +167,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
       }
     );
-    var controlBox = new HBox( {
-      spacing: 27,
-      children: [
-        indicatorVisibilityControlsVBox
-      ]
-    } );
-    this.addChild( controlBox );
+    this.addChild( indicatorVisibilityControlsVBox );
   }
 
   massesAndSprings.register( 'IndicatorVisibilityControlNode', IndicatorVisibilityControlNode );
