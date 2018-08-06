@@ -60,7 +60,7 @@ define( function( require ) {
     Body.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
-        maxWidth: MAX_WIDTH,
+        maxWidth: MAX_WIDTH*2,
         tandem: tandem.createTandem( 'bodyLabel' )
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withX( 50 );
