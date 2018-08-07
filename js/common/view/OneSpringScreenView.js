@@ -207,7 +207,7 @@ define( function( require ) {
       self.panelRightSpacing = visibleBounds.right - self.spacing;
 
       // Alignment of layout
-      springSystemControlsNode.centerX = springCenter + self.spacing * 0.85; // centering springHangerNode over spring
+      springSystemControlsNode.centerX = springCenter + self.spacing * 1.95; // centering springHangerNode over spring
       springSystemControlsNode.top = self.spacing;
       self.energyGraphNode.leftTop = new Vector2( visibleBounds.left + self.spacing, springSystemControlsNode.top );
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );

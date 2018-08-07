@@ -297,7 +297,6 @@ define( function( require ) {
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
         {
           top: this.spacing,
-          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
           visible: true,
           fill: 'white',
           stroke: 'gray',

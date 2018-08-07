@@ -66,7 +66,7 @@ define( function( require ) {
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         fill: 'transparent',
-        maxWidth: 210,
+        // maxWidth: 144,
         xMargin: 5,
         yMargin: 0,
         spacing: 2,
@@ -86,12 +86,12 @@ define( function( require ) {
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
-        maxWidth: 210,
+        maxWidth: 122,
         stroke: null
       }
     );
 
-    var lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 130 );
+    var lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 140 );
 
     // VBox that contains all of the spring options panel's content
     var springOptionsNode = new Node( {
@@ -105,7 +105,7 @@ define( function( require ) {
     this.springLengthControlPanel.centerX = this.centerX;
     lineSeparator.centerX = this.centerX;
     lineSeparator.top = this.springLengthControlPanel.bottom + 10;
-    constantsControlPanel.centerX = this.centerX - 8;
+    constantsControlPanel.centerX = this.centerX - 16;
     constantsControlPanel.top = lineSeparator.bottom + 10;
 
     // Panel that will display the options for a spring.
@@ -118,7 +118,6 @@ define( function( require ) {
         tandem: tandem.createTandem( 'springOptionsPanel' ),
         align: 'center',
         fill: 'white',
-        maxWidth: 250,
         xMargin: 0,
         stroke: 'gray',
         resize: false,
@@ -249,8 +248,7 @@ define( function( require ) {
 
     this.visibleBoundsProperty.link( function() {
       rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.springSystemControlsNode.top );
-      springOptionsPanel.right = self.firstSpringStopperButtonNode.left + 168;
-      springOptionsPanel.top = self.springSystemControlsNode.top;
+      springOptionsPanel.leftTop = self.springSystemControlsNode.leftTop.minus( new Vector2( 0, 0 ) );
     } );
   }
 
