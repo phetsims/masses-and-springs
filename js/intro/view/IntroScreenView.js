@@ -54,8 +54,8 @@ define( function( require ) {
 
     // Spring Length Control Panel
     var minMaxLabels = [
-      new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
-      new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
+      new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } ),
+      new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } )
     ];
 
     this.springLengthControlPanel = new SpringControlPanel(
@@ -66,7 +66,6 @@ define( function( require ) {
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         fill: 'transparent',
-        // maxWidth: 144,
         xMargin: 5,
         yMargin: 0,
         spacing: 2,
@@ -86,7 +85,7 @@ define( function( require ) {
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
-        maxWidth: 122,
+        maxWidth: 160,
         stroke: null
       }
     );
