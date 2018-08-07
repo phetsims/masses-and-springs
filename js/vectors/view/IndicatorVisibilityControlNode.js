@@ -23,7 +23,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
-  // var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
   var massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
