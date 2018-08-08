@@ -26,7 +26,6 @@ define( function( require ) {
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var TwoSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringScreenView' );
   var Util = require( 'DOT/Util' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -235,20 +234,9 @@ define( function( require ) {
     // Panel that will display all the toggleable options.
     var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
 
-    // @private {ToolboxPanel} Toolbox Panel
-    var toolboxPanel = new ToolboxPanel(
-      this.visibleBoundsProperty.get(),
-      this.rulerNode, this.timerNode,
-      model.rulerVisibleProperty,
-      model.timerVisibleProperty,
-      tandem.createTandem( 'toolboxPanel' ), {
-        minWidth: optionsPanel.width
-      }
-    );
-
     // Contains all of the options for the reference lines, gravity, damping, and toolBox
     var rightPanelsVBox = new VBox( {
-      children: [ optionsPanel, toolboxPanel, sceneRadioButtonGroup ],
+      children: [ optionsPanel, self.toolboxPanel, sceneRadioButtonGroup ],
       spacing: this.spacing * 0.9
     } );
     this.addChild( rightPanelsVBox );

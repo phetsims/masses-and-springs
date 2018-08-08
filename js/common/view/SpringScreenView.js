@@ -35,6 +35,7 @@ define( function( require ) {
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
+  var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -226,6 +227,17 @@ define( function( require ) {
         stepCallback: function() { model.stepForward( 0.01 ); },
         tandem: tandem.createTandem( 'timeControlNode' )
       } );
+
+    // @public {ToolboxPanel} Toolbox Panel
+    this.toolboxPanel = new ToolboxPanel(
+      this.visibleBoundsProperty.get(),
+      this.rulerNode, this.timerNode,
+      model.rulerVisibleProperty,
+      model.timerVisibleProperty,
+      tandem.createTandem( 'toolboxPanel' ), {
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 32
+      }
+    );
 
     // Buttons controlling the speed of the sim, play/pause button, and the reset button
     this.simControlHBox = new HBox( {
