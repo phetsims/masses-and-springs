@@ -119,14 +119,16 @@ define( function( require ) {
     } ), { xAlign: 'left', group: alignGroup } );
 
     // Create checkboxes using align boxes above
+    var componentDisplacementVBox = new VBox( { children: [ displacementSymbol, blueLine ] } );
+    componentDisplacementVBox.spacing = componentDisplacementVBox.height * 0.75;
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       content: new HBox( {
-        children: [ componentDisplacement, new VBox( { children: [ displacementSymbol, blueLine ], spacing: 15 } ) ],
+        children: [ componentDisplacement, componentDisplacementVBox ],
         spacing: CONTENT_SPACING
       } ),
       property: model.naturalLengthVisibleProperty
     }, {
-      content:  new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
+      content: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
       content: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
@@ -140,15 +142,15 @@ define( function( require ) {
     if ( options.periodTraceOption ) {
       indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
         content: new HBox( {
-          children: [ componentDisplacement, new VBox( { children: [ displacementSymbol, blueLine ], spacing: 15 } ) ],
+          children: [ componentDisplacement, new VBox( { children: [ displacementSymbol, blueLine ] } ) ],
           spacing: CONTENT_SPACING
         } ),
         property: model.naturalLengthVisibleProperty
       }, {
-        content:  new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
+        content: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
         property: model.equilibriumPositionVisibleProperty
       }, {
-        content:  new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+        content: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
         property: model.movableLineVisibleProperty
       }, {
         content: new Text( periodTraceString, {
