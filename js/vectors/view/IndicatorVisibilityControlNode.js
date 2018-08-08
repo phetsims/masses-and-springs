@@ -32,7 +32,7 @@ define( function( require ) {
   var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
   // constants
-  var CONTENT_MAX_WIDTH = 205;
+  var CONTENT_MAX_WIDTH = 115;
   var CONTENT_SPACING = 33;
 
   /**
@@ -47,7 +47,6 @@ define( function( require ) {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'indicatorVisibilityControlNode' ),
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 10,
-      maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 25,
       periodTraceOption: false
     }, options );
 
@@ -77,12 +76,12 @@ define( function( require ) {
       children: [
         new Text( displacementString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: 190,
+          maxWidth: 110,
           tandem: tandem.createTandem( 'displacementString' )
         } ),
         new Text( naturalLengthString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: 190,
+          maxWidth: 110,
           tandem: tandem.createTandem( 'naturalLengthString' )
         } ) ]
     } );
@@ -95,7 +94,10 @@ define( function( require ) {
           bracketLength: displacementLabels.height,
           bracketLineWidth: 2,
           bracketStroke: 'black',
-          bracketTipLocation: 0.475
+          bracketTipLocation: 0.475,
+          bracketEndRadius: 4,
+          bracketTipRadius: 4
+
         } )
       ]
     } );

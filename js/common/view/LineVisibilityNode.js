@@ -29,6 +29,7 @@ define( function( require ) {
 
   // constants
   var CONTENT_SPACING = 22;
+  var TEXT_MAX_WIDTH = 130;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -39,7 +40,6 @@ define( function( require ) {
   function LineVisibilityNode( model, tandem, options ) {
     options = _.extend( {
       massEquilibrium: false,
-      maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 20,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'LineVisibilityNode' )
     }, options );
@@ -53,29 +53,28 @@ define( function( require ) {
 
     var equilibriumText = new Text( equilibriumPositionString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: 225,
+      maxWidth: TEXT_MAX_WIDTH,
       tandem: tandem.createTandem( 'equilibriumPositionString' )
     } );
 
     if ( options.massEquilibrium ) {
       equilibriumText = new Text( massEquilibriumString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: 225,
+        maxWidth: TEXT_MAX_WIDTH,
         tandem: tandem.createTandem( 'equilibriumPositionString' )
       } );
     }
-
 
     // Align group used for label align boxes
     var alignGroup = new AlignGroup( { matchVertical: false } );
 
     // Align boxes used for labels
     var naturalLengthVisibleAlignBox = new AlignBox( new Text( naturalLengthString, {
-      font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 225
+      font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: TEXT_MAX_WIDTH
     } ), { group: alignGroup, xAlign: 'left' } );
     var equilibriumAlignBox = new AlignBox( equilibriumText, { group: alignGroup, xAlign: 'left' } );
     var movableAlignBox = new AlignBox( new Text( movableLineString, {
-      font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: 225, tandem: tandem.createTandem( 'movableLineString' )
+      font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: TEXT_MAX_WIDTH, tandem: tandem.createTandem( 'movableLineString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // Create checkboxes using align boxes above
