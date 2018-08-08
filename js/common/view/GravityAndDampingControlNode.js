@@ -60,7 +60,7 @@ define( function( require ) {
     Body.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
-        maxWidth: MAX_WIDTH,
+        maxWidth: MAX_WIDTH*2,
         tandem: tandem.createTandem( 'bodyLabel' )
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withX( 50 );
@@ -77,7 +77,7 @@ define( function( require ) {
       minorTickLength: 5,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
       trackSize: new Dimension2( 120, 0.1 ),
-      thumbSize: new Dimension2( 13, 24 ),
+      thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00C4DF',
       thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       visible: true,
@@ -95,9 +95,9 @@ define( function( require ) {
       xMargin: 0,
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-      titleMaxWidth: MAX_WIDTH * 3,
+      titleMaxWidth: MAX_WIDTH * 2,
       trackSize: new Dimension2( 125, 0.1 ),
-      thumbSize: new Dimension2( 13, 24 ),
+      thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00C4DF',
       thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       stroke: null,
@@ -127,7 +127,7 @@ define( function( require ) {
       valueFont: new PhetFont( { size: 14 } ),
       useRichText: true,
       decimalPlaces: 1,
-      valueMaxWidth: MAX_WIDTH * 2,
+      valueMaxWidth: MAX_WIDTH * 1.5,
       delta: 0.1,
       arrowButtonScale: 0.5
     };
@@ -135,7 +135,7 @@ define( function( require ) {
     // Create title for gravity slider
     var gravitySliderTitle = new Text( gravityString, {
       font: new PhetFont( { size: 14, weight: 'bold' } ),
-      maxWidth: MAX_WIDTH * 3
+      maxWidth: MAX_WIDTH * 2
     } );
 
     if ( options.hSlider ) {
@@ -193,7 +193,7 @@ define( function( require ) {
       // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
-        maxWidth: MAX_WIDTH * 3,
+        maxWidth: MAX_WIDTH * 2,
         top: gravityComboBox.bottom + SPACING,
         left: TITLE_INDENT
       } );
@@ -352,6 +352,11 @@ define( function( require ) {
 
         //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
         model.bodyProperty.set( Body.CUSTOM );
+      }
+
+      // Prevents viewing PLANET_X gravity after switching from planet X to custom.
+      if ( newGravity !== Body.PLANET_X.gravity ) {
+        Body.CUSTOM.gravity = newGravity;
       }
     } );
     this.mutate( options );

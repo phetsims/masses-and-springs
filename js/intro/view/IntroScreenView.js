@@ -54,8 +54,8 @@ define( function( require ) {
 
     // Spring Length Control Panel
     var minMaxLabels = [
-      new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
-      new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
+      new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } ),
+      new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } )
     ];
 
     this.springLengthControlPanel = new SpringControlPanel(
@@ -66,7 +66,6 @@ define( function( require ) {
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         fill: 'transparent',
-        maxWidth: 144,
         xMargin: 5,
         yMargin: 0,
         spacing: 2,
@@ -86,12 +85,12 @@ define( function( require ) {
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
-        maxWidth: 135,
+        maxWidth: 160,
         stroke: null
       }
     );
 
-    var lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 130 );
+    var lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 140 );
 
     // VBox that contains all of the spring options panel's content
     var springOptionsNode = new Node( {
@@ -105,7 +104,7 @@ define( function( require ) {
     this.springLengthControlPanel.centerX = this.centerX;
     lineSeparator.centerX = this.centerX;
     lineSeparator.top = this.springLengthControlPanel.bottom + 10;
-    constantsControlPanel.centerX = this.centerX - 10;
+    constantsControlPanel.centerX = this.centerX - 16;
     constantsControlPanel.top = lineSeparator.bottom + 10;
 
     // Panel that will display the options for a spring.

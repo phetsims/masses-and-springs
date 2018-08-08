@@ -48,7 +48,7 @@ define( function( require ) {
 
     var constantsSelectionButtonOptions = {
       font: TITLE_FONT,
-      maxWidth: 100
+      maxWidth: 130
     };
 
     var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );

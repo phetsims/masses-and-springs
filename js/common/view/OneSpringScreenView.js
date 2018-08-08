@@ -50,8 +50,8 @@ define( function( require ) {
 
     // Spring Constant Control Panel
     var minMaxLabels = [
-      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
-      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
+      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } ),
+      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } )
     ];
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
@@ -181,8 +181,7 @@ define( function( require ) {
       children: [
         massValueControlPanel,
         springHangerNode,
-        springStopperButtonNode,
-        springConstantControlPanel
+        springStopperButtonNode
       ],
       spacing: this.spacing * 1.4,
       align: 'top'
@@ -190,6 +189,7 @@ define( function( require ) {
 
     // Adding system controls and energy graph to scene graph
     this.addChild( springSystemControlsNode );
+    this.addChild( springConstantControlPanel );
     this.addChild( this.energyGraphNode );
 
     // Reference lines from indicator visibility box
@@ -207,7 +207,10 @@ define( function( require ) {
       self.panelRightSpacing = visibleBounds.right - self.spacing;
 
       // Alignment of layout
-      springSystemControlsNode.centerX = springCenter + self.spacing * 0.85; // centering springHangerNode over spring
+      springSystemControlsNode.centerX = springCenter * 0.85; // centering springHangerNode over spring
+      springSystemControlsNode.top = self.spacing;
+      springConstantControlPanel.top = springSystemControlsNode.top;
+      springConstantControlPanel.left = springSystemControlsNode.right + self.spacing;
       springSystemControlsNode.top = self.spacing;
       self.energyGraphNode.leftTop = new Vector2( visibleBounds.left + self.spacing, springSystemControlsNode.top );
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );

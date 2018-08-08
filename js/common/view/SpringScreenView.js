@@ -151,7 +151,7 @@ define( function( require ) {
     // @public {GravityAndDampingControlNode} Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH +20,
         dampingVisible: options.dampingVisible,
         xMargin: 0,
         yMargin: 0,
@@ -235,7 +235,7 @@ define( function( require ) {
       model.rulerVisibleProperty,
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ), {
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 21
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 32
       }
     );
 
@@ -297,7 +297,6 @@ define( function( require ) {
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
         {
           top: this.spacing,
-          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 30,
           visible: true,
           fill: 'white',
           stroke: 'gray',
@@ -321,7 +320,6 @@ define( function( require ) {
       return new IndicatorVisibilityControlNode(
         model,
         tandem.createTandem( 'indicatorVisibilityControlNode' ), {
-          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH+30,
           periodTraceOption: displayPeriodTrace
         } );
     },
@@ -342,8 +340,7 @@ define( function( require ) {
           align:'center',
           cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
           tandem: tandem.createTandem( 'LineVisibilityNode' ),
-          minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 20,
-          maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 40
+          minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 20
         } );
       optionsPanel.moveToBack();
       return optionsPanel;

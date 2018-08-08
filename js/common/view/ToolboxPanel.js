@@ -45,6 +45,7 @@ define( function( require ) {
 
     var toolbox = new HBox( {
       align: 'center',
+      xMargin: 500,
       spacing: 30,
       tandem: tandem.createTandem( 'toolbox' )
     } );
