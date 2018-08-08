@@ -315,7 +315,7 @@ define( function( require ) {
     }
 
     // Responsible for managing bodies and question text visibility
-    model.bodyProperty.link( function( newBody, previousBody ) {
+    model.bodyProperty.link( function( newBody ) {
       var body = _.find( bodies, newBody );
 
       // Unhide the gravitySlider if we are not using planetX
@@ -332,16 +332,7 @@ define( function( require ) {
         gravitySlider.visible = !questionTextNode.visible;
         gravityProperty.set( body.gravity );
       }
-
-      //  If we switched from PlanetX to Custom, display the last known non-planetX gravity.
-      else if ( previousBody === Body.PLANET_X && newBody === Body.CUSTOM ) {
-        gravityProperty.set( previousBody.gravity );
-      }
-
-      // Update gravity
-      else if ( body.gravity ) {
-        gravityProperty.set( body.gravity );
-      }
+      gravityProperty.set( body.gravity );
     } );
 
     gravityProperty.link( function( newGravity ) {
@@ -355,8 +346,8 @@ define( function( require ) {
       }
 
       // Prevents viewing PLANET_X gravity after switching from planet X to custom.
-      if ( newGravity !== Body.PLANET_X.gravity ) {
-        Body.CUSTOM.gravity = newGravity;
+      if (newGravity!==Body.PLANET_X.gravity){
+        Body.CUSTOM.gravity=newGravity;
       }
     } );
     this.mutate( options );
