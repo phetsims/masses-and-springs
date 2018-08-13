@@ -38,7 +38,7 @@ define( function( require ) {
       dragBounds: dragBounds,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 5,
-      yMargin: 8,
+      yMargin: 7,
       align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
@@ -61,7 +61,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'isRunningProperty' )
     } );
     var timer = new TimerNode( secondsProperty, isRunningProperty );
-    timer.scale( 0.4 );
+    timer.scale( 0.5 );
 
     // Create ruler to be turned into icon
     var rulerWidth = 397; // 1 meter
@@ -79,7 +79,7 @@ define( function( require ) {
       '',
       { tandem: tandem.createTandem( 'ruler' ) } );
     ruler.rotate( 40, false );
-    ruler.scale( 0.1 );
+    ruler.scale( 0.12 );
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
     var rulerIcon = ruler.rasterized( {
