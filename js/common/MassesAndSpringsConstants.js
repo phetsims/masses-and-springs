@@ -69,7 +69,7 @@ define( function( require ) {
     PANEL_CORNER_RADIUS: 5,
     PANEL_MAX_WIDTH: 175,
     PANEL_MIN_WIDTH: 190,
-    PANEL_FILL: 'rgb(230,230,230)',
+    PANEL_FILL: '#EEEEEE',
     THUMB_HIGHLIGHT: '#71EDFF',
 
     /**
