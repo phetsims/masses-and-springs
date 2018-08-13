@@ -33,7 +33,7 @@ define( function( require ) {
 
   // constants
   var CONTENT_MAX_WIDTH = 115;
-  var CONTENT_SPACING = 33;
+  var CONTENT_SPACING = 37;
 
   /**
    * @param {MassesAndSpringsModel} model
