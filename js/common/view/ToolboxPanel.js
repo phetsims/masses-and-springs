@@ -38,7 +38,7 @@ define( function( require ) {
       dragBounds: dragBounds,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 5,
-      yMargin: 5,
+      yMargin: 8,
       align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
