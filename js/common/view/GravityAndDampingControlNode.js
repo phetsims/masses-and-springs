@@ -60,7 +60,7 @@ define( function( require ) {
     Body.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: MassesAndSpringsConstants.LABEL_FONT,
-        maxWidth: MAX_WIDTH*2,
+        maxWidth: MAX_WIDTH * 2,
         tandem: tandem.createTandem( 'bodyLabel' )
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withX( 50 );
@@ -315,39 +315,50 @@ define( function( require ) {
     }
 
     // Responsible for managing bodies and question text visibility
-    model.bodyProperty.link( function( newBody ) {
-      var body = _.find( bodies, newBody );
+    model.bodyProperty.link( function( newBody, oldBody ) {
+        var body = _.find( bodies, newBody );
 
-      // Unhide the gravitySlider if we are not using planetX
-      if ( newBody !== Body.PLANET_X ) {
-        gravitySliderTitle.visible = !(gravitySlider instanceof NumberControl);
-        questionTextNode.visible = false;
-        gravitySlider.visible = !questionTextNode.visible;
+        // Unhide the gravitySlider if we are not using planetX
+        if ( newBody !== Body.PLANET_X ) {
+          gravitySliderTitle.visible = !(gravitySlider instanceof NumberControl);
+          questionTextNode.visible = false;
+          gravitySlider.visible = !questionTextNode.visible;
+        }
+
+        // If PlanetX hide the slider and update gravity
+        if ( newBody === Body.PLANET_X ) {
+          questionTextNode.visible = true;
+          gravitySliderTitle.visible = true;
+          gravitySlider.visible = !questionTextNode.visible;
+        }
+
+        // If it's not custom, set it to its value
+        if ( body !== Body.CUSTOM ) {
+          gravityProperty.set( body.gravity );
+        }
+        else {
+          // If we are switching from Planet X to Custom, don't let them cheat (go back to last custom value)
+          if ( oldBody === Body.PLANET_X ) {
+            gravityProperty.value = Body.CUSTOM.gravity;
+          }
+
+          // For non-Planet X, update our internal custom gravity
+          else {
+            Body.CUSTOM.gravity = gravityProperty.value;
+          }
+        }
       }
+    );
 
-      // If PlanetX hide the slider and update gravity
-      if ( newBody === Body.PLANET_X ) {
-        questionTextNode.visible = true;
-        gravitySliderTitle.visible = true;
-        gravitySlider.visible = !questionTextNode.visible;
-        gravityProperty.set( body.gravity );
+    // change body to custom if gravity was changed by user using tweakers or slider
+    model.gravityProperty.lazyLink( function( gravity ) {
+
+      // Checks if the new gravity value is a gravity value of a body
+      if ( !_.some( Body.BODIES, function( body ) { return body.gravity === gravity; } ) ) {
+        model.bodyProperty.value = Body.CUSTOM;
       }
-      gravityProperty.set( body.gravity );
-    } );
-
-    gravityProperty.link( function( newGravity ) {
-
-      // If the user manually changed the gravity then change the body to CUSTOM.
-      var selectedBody = model.bodyProperty.get();
-      if ( selectedBody !== Body.CUSTOM && selectedBody.gravity !== newGravity ) {
-
-        //  Since the current gravity didn't match any existing bodies, the user must have set gravity manually.
-        model.bodyProperty.set( Body.CUSTOM );
-      }
-
-      // Prevents viewing PLANET_X gravity after switching from planet X to custom.
-      if (newGravity!==Body.PLANET_X.gravity){
-        Body.CUSTOM.gravity=newGravity;
+      if ( model.bodyProperty.value === Body.CUSTOM ) {
+        Body.CUSTOM.gravity = gravity;
       }
     } );
     this.mutate( options );
