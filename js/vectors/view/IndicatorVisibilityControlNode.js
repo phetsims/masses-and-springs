@@ -134,7 +134,7 @@ define( function( require ) {
       node: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty
     } ], {
-      boxWidth: 16,
+      checkboxOptions: { boxWidth: 16 },
       spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );

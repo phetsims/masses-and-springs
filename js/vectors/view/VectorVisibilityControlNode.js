@@ -75,7 +75,7 @@ define( function( require ) {
       label: accelerationString
     }
     ], {
-      boxWidth: 16,
+      checkboxOptions: { boxWidth: 16 },
       tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
     } );
 
