@@ -97,7 +97,6 @@ define( function( require ) {
           bracketTipLocation: 0.475,
           bracketEndRadius: 4,
           bracketTipRadius: 4
-
         } )
       ]
     } );
@@ -160,7 +159,7 @@ define( function( require ) {
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       } ], {
-        boxWidth: 16,
+        checkboxOptions: { boxWidth: 16 },
         spacing: 8,
         tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
       } );
