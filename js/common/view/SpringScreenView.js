@@ -340,7 +340,7 @@ define( function( require ) {
           align:'center',
           cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
           tandem: tandem.createTandem( 'LineVisibilityNode' ),
-          minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 20
+          minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 32
         } );
       optionsPanel.moveToBack();
       return optionsPanel;
