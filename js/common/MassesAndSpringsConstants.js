@@ -53,9 +53,9 @@ define( function( require ) {
     SPRING_ARROW_COLOR: 'rgb( 36, 36, 255 )',
 
     // Constants for planets' gravity
-    EARTH_GRAVITY: 9.81,
-    MOON_GRAVITY: 1.62,
-    JUPITER_GRAVITY: 24.79,
+    EARTH_GRAVITY: 9.8,
+    MOON_GRAVITY: 1.6,
+    JUPITER_GRAVITY: 24.8,
     PLANET_X: 14.2,
 
     // Constants regarding fonts
@@ -69,7 +69,7 @@ define( function( require ) {
     PANEL_CORNER_RADIUS: 5,
     PANEL_MAX_WIDTH: 175,
     PANEL_MIN_WIDTH: 190,
-    PANEL_FILL: 'rgb(230,230,230)',
+    PANEL_FILL: '#EEEEEE',
     THUMB_HIGHLIGHT: '#71EDFF',
 
     /**

@@ -58,7 +58,7 @@ define( function( require ) {
 
     // responsible for velocity and acceleration vectors checkboxes
     var vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new Text( velocityString, {
+      node: new Text( velocityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'velocityString' )
@@ -66,7 +66,7 @@ define( function( require ) {
       property: model.velocityVectorVisibilityProperty,
       label: velocityString
     }, {
-      content: new Text( accelerationString, {
+      node: new Text( accelerationString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'accelerationString' )
@@ -75,13 +75,13 @@ define( function( require ) {
       label: accelerationString
     }
     ], {
-      boxWidth: 16,
+      checkboxOptions: { boxWidth: 16 },
       tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
     } );
 
     // responsible for forces vectors checkboxes
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new Text( gravityString, {
+      node: new Text( gravityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'gravityString' )
@@ -89,7 +89,7 @@ define( function( require ) {
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
     }, {
-      content: new Text( springString, {
+      node: new Text( springString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'springString' )
@@ -97,7 +97,7 @@ define( function( require ) {
       property: model.springVectorVisibilityProperty,
       label: springString
     } ], {
-      boxWidth: 16,
+      checkboxOptions: { boxWidth: 16 },
       xMargin: 20,
       tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
     } );
@@ -172,7 +172,7 @@ define( function( require ) {
           new VStrut( 15 ),
           netForceArrow
         ],
-        yMargin:0,
+        yMargin: 0,
         align: 'left',
         tandem: tandem.createTandem( 'spacingUnit' )
       } );

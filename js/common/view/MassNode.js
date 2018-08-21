@@ -65,6 +65,7 @@ define( function( require ) {
 
     this.rect = new Rectangle( {
       stroke: 'black',
+      boundsMethod: 'unstroked',
       lineWidth: 0.5
     } );
     this.addChild( this.rect );
@@ -118,6 +119,7 @@ define( function( require ) {
       lineWidth: 1.5,
       lineCap: 'round',
       centerX: this.rect.centerX,
+      boundsMethod:'unstroked',
       bottom: this.rect.top
     } );
     this.addChild( this.hookNode );

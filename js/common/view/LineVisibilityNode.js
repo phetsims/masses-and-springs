@@ -79,19 +79,19 @@ define( function( require ) {
 
     // Create checkboxes using align boxes above
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new HBox( { children: [ naturalLengthVisibleAlignBox, blueLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ naturalLengthVisibleAlignBox, blueLine ], spacing: CONTENT_SPACING } ),
       property: model.naturalLengthVisibleProperty,
       label: naturalLengthString
     }, {
-      content: new HBox( { children: [ equilibriumAlignBox, greenLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ equilibriumAlignBox, greenLine ], spacing: CONTENT_SPACING } ),
       property: model.equilibriumPositionVisibleProperty,
       label: equilibriumPositionString
     }, {
-      content: new HBox( { children: [ movableAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ movableAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty,
       label: movableLineString
     } ], {
-      boxWidth: 16,
+      checkboxOptions: { boxWidth: 16 },
       spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );

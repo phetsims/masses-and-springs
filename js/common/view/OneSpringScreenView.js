@@ -207,7 +207,7 @@ define( function( require ) {
       self.panelRightSpacing = visibleBounds.right - self.spacing;
 
       // Alignment of layout
-      springSystemControlsNode.centerX = springCenter * 0.85; // centering springHangerNode over spring
+      springSystemControlsNode.centerX = springCenter * 0.855; // centering springHangerNode over spring
       springSystemControlsNode.top = self.spacing;
       springConstantControlPanel.top = springSystemControlsNode.top;
       springConstantControlPanel.left = springSystemControlsNode.right + self.spacing;

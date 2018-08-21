@@ -33,7 +33,7 @@ define( function( require ) {
 
   // constants
   var CONTENT_MAX_WIDTH = 115;
-  var CONTENT_SPACING = 33;
+  var CONTENT_SPACING = 37;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -97,7 +97,6 @@ define( function( require ) {
           bracketTipLocation: 0.475,
           bracketEndRadius: 4,
           bracketTipRadius: 4
-
         } )
       ]
     } );
@@ -122,45 +121,45 @@ define( function( require ) {
     var componentDisplacementVBox = new VBox( { children: [ displacementSymbol, blueLine ] } );
     componentDisplacementVBox.spacing = componentDisplacementVBox.height * 0.75;
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      content: new HBox( {
+      node: new HBox( {
         children: [ componentDisplacement, componentDisplacementVBox ],
         spacing: CONTENT_SPACING
       } ),
       property: model.naturalLengthVisibleProperty
     }, {
-      content: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
-      content: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty
     } ], {
-      boxWidth: 16,
+      checkboxOptions: { boxWidth: 16 },
       spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
 
     if ( options.periodTraceOption ) {
       indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-        content: new HBox( {
+        node: new HBox( {
           children: [ componentDisplacement, new VBox( { children: [ displacementSymbol, blueLine ] } ) ],
           spacing: CONTENT_SPACING
         } ),
         property: model.naturalLengthVisibleProperty
       }, {
-        content: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
+        node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
         property: model.equilibriumPositionVisibleProperty
       }, {
-        content: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+        node: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
         property: model.movableLineVisibleProperty
       }, {
-        content: new Text( periodTraceString, {
+        node: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: CONTENT_MAX_WIDTH,
           tandem: tandem.createTandem( 'periodTraceString' )
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       } ], {
-        boxWidth: 16,
+        checkboxOptions: { boxWidth: 16 },
         spacing: 8,
         tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
       } );
