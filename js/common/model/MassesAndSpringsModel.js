@@ -81,7 +81,8 @@ define( function( require ) {
     this.timerSecondsProperty = new NumberProperty( 0, {
       range: new Range( 0, Number.POSITIVE_INFINITY ),
       tandem: tandem.createTandem( 'timerSecondsProperty' ),
-      units: 'seconds'
+      units: 'seconds',
+      reentrant: true
     } );
 
     // @public {Property.<boolean>} determines whether timer is active or not
