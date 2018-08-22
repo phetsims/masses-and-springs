@@ -47,7 +47,7 @@ define( function( require ) {
     // Panel that will display all the toggleable options.
     var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
 
-    // Contains all of the options for the reference lines, gravity, damping, and toolBox
+    // Contains all of the options for the reference lines, gravity, damping, and toolbox
     var rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing * 0.9 } );
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
