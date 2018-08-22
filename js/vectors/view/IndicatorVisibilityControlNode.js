@@ -91,7 +91,7 @@ define( function( require ) {
       children: [
         new BracketNode( {
           orientation: 'left',
-          bracketLength: displacementLabels.height,
+          bracketLength: displacementLabels.height < 17 ? 17 : displacementLabels.height,
           bracketLineWidth: 2,
           bracketStroke: 'black',
           bracketTipLocation: 0.475,
@@ -163,7 +163,7 @@ define( function( require ) {
       } ], {
         checkboxOptions: {
           boxWidth: 16,
-          spacing:8
+          spacing: 8
         },
         tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
       } );
