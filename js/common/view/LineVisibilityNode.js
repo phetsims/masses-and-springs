@@ -74,7 +74,9 @@ define( function( require ) {
     } ), { group: alignGroup, xAlign: 'left' } );
     var equilibriumAlignBox = new AlignBox( equilibriumText, { group: alignGroup, xAlign: 'left' } );
     var movableAlignBox = new AlignBox( new Text( movableLineString, {
-      font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: TEXT_MAX_WIDTH, tandem: tandem.createTandem( 'movableLineString' )
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: TEXT_MAX_WIDTH,
+      tandem: tandem.createTandem( 'movableLineString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // Create checkboxes using align boxes above
@@ -91,8 +93,7 @@ define( function( require ) {
       property: model.movableLineVisibleProperty,
       label: movableLineString
     } ], {
-      checkboxOptions: { boxWidth: 16 },
-      spacing: 8,
+      checkboxOptions: { spacing: 8, boxWidth: 16 },
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
     var titleToControlsVerticalSpace = 2;
