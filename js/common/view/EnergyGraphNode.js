@@ -104,7 +104,7 @@ define( function( require ) {
       listener: function() {
 
         // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
-        // has been reset. Thermal energy is the only value that is dependent on initial total energy.
+        // been reset. Thermal energy is the only value that is dependent on initial total energy.
         var mass = model.firstSpring.massAttachedProperty.get();
         if ( mass ) {
           mass.initialTotalEnergyProperty.set( mass.kineticEnergyProperty.get() +
