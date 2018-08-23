@@ -115,8 +115,8 @@ define( function( require ) {
       scale: 0.7
     } );
     model.firstSpring.thermalEnergyProperty.link( function( value ) {
-      clearThermalButton.enabled = ( value > 0.001 );
-      clearThermalButton.pickable = ( value > 0.001 );
+      clearThermalButton.enabled = ( value > 0 );
+      clearThermalButton.pickable = ( value > 0 );
     } );
 
     var aEntry = {
