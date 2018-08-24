@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.0-rc.4 Wed Aug 22 2018 14:22:27 GMT-0400 (EDT)",
+  "comment": "# masses-and-springs 1.0.0-rc.3 Wed Aug 08 2018 16:55:04 GMT-0400 (EDT)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -77,7 +77,7 @@
     "branch": "HEAD"
   },
   "sun": {
-    "sha": "00b9c74c4b94ea7b5871a3afe5b59d49d9ea2fca",
+    "sha": "dbf9cb407c79d664c47710efac44581a3e6b71ff",
     "branch": "HEAD"
   },
   "tandem": {
