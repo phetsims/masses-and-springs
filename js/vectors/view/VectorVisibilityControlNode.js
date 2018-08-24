@@ -58,7 +58,7 @@ define( function( require ) {
 
     // responsible for velocity and acceleration vectors checkboxes
     var vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new Text( velocityString, {
+      content: new Text( velocityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'velocityString' )
@@ -66,7 +66,7 @@ define( function( require ) {
       property: model.velocityVectorVisibilityProperty,
       label: velocityString
     }, {
-      node: new Text( accelerationString, {
+      content: new Text( accelerationString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'accelerationString' )
@@ -84,7 +84,7 @@ define( function( require ) {
 
     // responsible for forces vectors checkboxes
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new Text( gravityString, {
+      content: new Text( gravityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'gravityString' )
@@ -92,7 +92,7 @@ define( function( require ) {
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
     }, {
-      node: new Text( springString, {
+      content: new Text( springString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
         tandem: tandem.createTandem( 'springString' )

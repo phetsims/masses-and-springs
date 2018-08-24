@@ -121,16 +121,16 @@ define( function( require ) {
     var componentDisplacementVBox = new VBox( { children: [ displacementSymbol, blueLine ] } );
     componentDisplacementVBox.spacing = componentDisplacementVBox.height * 0.75;
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new HBox( {
+      content: new HBox( {
         children: [ componentDisplacement, componentDisplacementVBox ],
         spacing: CONTENT_SPACING
       } ),
       property: model.naturalLengthVisibleProperty
     }, {
-      node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
+      content: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
-      node: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+      content: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty
     } ], {
       checkboxOptions: {
@@ -142,19 +142,19 @@ define( function( require ) {
 
     if ( options.periodTraceOption ) {
       indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-        node: new HBox( {
+        content: new HBox( {
           children: [ componentDisplacement, new VBox( { children: [ displacementSymbol, blueLine ] } ) ],
           spacing: CONTENT_SPACING
         } ),
         property: model.naturalLengthVisibleProperty
       }, {
-        node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
+        content: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
         property: model.equilibriumPositionVisibleProperty
       }, {
-        node: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+        content: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
         property: model.movableLineVisibleProperty
       }, {
-        node: new Text( periodTraceString, {
+        content: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: CONTENT_MAX_WIDTH,
           tandem: tandem.createTandem( 'periodTraceString' )
