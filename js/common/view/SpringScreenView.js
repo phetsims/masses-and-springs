@@ -235,7 +235,7 @@ define( function( require ) {
       model.rulerVisibleProperty,
       model.timerVisibleProperty,
       tandem.createTandem( 'toolboxPanel' ), {
-        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 32
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 30
       }
     );
 
