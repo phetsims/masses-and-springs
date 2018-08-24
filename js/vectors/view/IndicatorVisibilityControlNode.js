@@ -133,10 +133,8 @@ define( function( require ) {
       content: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty
     } ], {
-      checkboxOptions: {
-        boxWidth: 16,
-        spacing: 8
-      },
+      boxWidth: 16,
+      spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
 
@@ -161,10 +159,8 @@ define( function( require ) {
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       } ], {
-        checkboxOptions: {
-          boxWidth: 16,
-          spacing: 8
-        },
+        boxWidth: 16,
+        spacing: 8,
         tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
       } );
     }

@@ -75,10 +75,8 @@ define( function( require ) {
       label: accelerationString
     }
     ], {
-      checkboxOptions: {
-        boxWidth: 16,
-        spacing:8
-      },
+      boxWidth: 16,
+      spacing: 8,
       tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
     } );
 
@@ -100,9 +98,8 @@ define( function( require ) {
       property: model.springVectorVisibilityProperty,
       label: springString
     } ], {
-      checkboxOptions: {
-        boxWidth: 16
-      },
+      boxWidth: 16,
+      spacing: 8,
       xMargin: 20,
       tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
     } );

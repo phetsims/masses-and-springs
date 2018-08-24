@@ -93,7 +93,8 @@ define( function( require ) {
       property: model.movableLineVisibleProperty,
       label: movableLineString
     } ], {
-      checkboxOptions: { spacing: 8, boxWidth: 16 },
+      boxWidth: 16,
+      spacing: 8,
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
     var titleToControlsVerticalSpace = 2;
