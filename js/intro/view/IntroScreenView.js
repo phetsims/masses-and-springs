@@ -199,10 +199,12 @@ define( function( require ) {
     //  Creation of toggled modes for scene selection
     var toggleButtonsContent = [ {
       value: SceneModeChoice.SAME_LENGTH,
-      node: sameLengthIcon
+      node: sameLengthIcon,
+      labelContent: 'Same Length'
     }, {
       value: SceneModeChoice.ADJUSTABLE_LENGTH,
-      node: differentLengthIcon
+      node: differentLengthIcon,
+      labelContent: 'Different Length'
     } ];
 
     // Creation of icons for scene selection
@@ -249,6 +251,23 @@ define( function( require ) {
       rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.springSystemControlsNode.top );
       springOptionsPanel.leftTop = self.springSystemControlsNode.leftTop.minus( new Vector2( 0, 0 ) );
     } );
+
+    // add items in order to the "Play Area" section, "Control Area" items ordered in supertype
+    this.playAreaNode.accessibleOrder = [
+
+      // only visible in "variable length" scene
+      this.springLengthControlPanel,
+      constantsControlPanel,
+
+      this.firstSpringConstantControlPanel,
+      this.firstSpringStopperButtonNode,
+      this.secondSpringStopperButtonNode,
+
+      // only visible in "constant length" scene
+      this.secondSpringConstantControlPanel,
+
+      rightPanelsVBox
+    ];
   }
 
   massesAndSprings.register( 'IntroScreenView', IntroScreenView );

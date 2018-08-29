@@ -28,7 +28,7 @@ define( function( require ) {
   var Plane = require( 'SCENERY/nodes/Plane' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ScreenView = require( 'JOIST/ScreenView' );
+  var AccessibleScreenView = require( 'JOIST/AccessibleScreenView' );
   var Shelf = require( 'MASSES_AND_SPRINGS/common/view/Shelf' );
   var SimSpeedChoice = require( 'MASSES_AND_SPRINGS/common/enum/SimSpeedChoice' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
@@ -49,7 +49,7 @@ define( function( require ) {
    * @constructor
    */
   function SpringScreenView( model, tandem, options ) {
-    ScreenView.call( this );
+    AccessibleScreenView.call( this );
 
     options = _.extend( {
       gravityHSlider: true,
@@ -245,11 +245,14 @@ define( function( require ) {
       children: [ this.timeControlNode, this.resetAllButton ]
     } );
     this.addChild( this.simControlHBox );
+
+    // contents of the simControlHBox should be placed under the "Control Area" section
+    this.controlAreaNode.accessibleOrder = [ this.simControlHBox ];
   }
 
   massesAndSprings.register( 'SpringScreenView', SpringScreenView );
 
-  return inherit( ScreenView, SpringScreenView, {
+  return inherit( AccessibleScreenView, SpringScreenView, {
 
     /**
      * Helper function to restore initial layering of the masses to prevent them from stacking over each other.
