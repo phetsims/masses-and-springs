@@ -65,6 +65,7 @@ define( function( require ) {
     LEGEND_DESCRIPTION_FONT: new PhetFont( 16 ),
 
     // Constants regarding panels
+    // REVIEW: Consider making an object to pass into options.
     PANEL_VERTICAL_SPACING: 10,
     PANEL_CORNER_RADIUS: 5,
     PANEL_MAX_WIDTH: 175,

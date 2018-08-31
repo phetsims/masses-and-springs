@@ -10,6 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -29,16 +31,17 @@ define( function( require ) {
    * @param {DraggableTimerNode} timerNode
    * @param {Property.<boolean>} rulerVisibleProperty
    * @param {Property.<boolean>} timerVisibleProperty
+   * @param {AlignGroup} alignGroup
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, tandem, options ) {
+  function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, alignGroup, tandem, options ) {
     options = _.extend( {
       dragBounds: dragBounds,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 5,
-      yMargin: 8,
+      yMargin: 7,
       align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
@@ -49,7 +52,10 @@ define( function( require ) {
       spacing: 30,
       tandem: tandem.createTandem( 'toolbox' )
     } );
-    Panel.call( this, toolbox, options );
+
+    var toolboxAlignBox = new AlignBox( toolbox, { group: alignGroup } );
+    Panel.call( this, toolboxAlignBox, options );
+
 
     // Create timer to be turned into icon
     var secondsProperty = new NumberProperty( 0, {
@@ -61,7 +67,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'isRunningProperty' )
     } );
     var timer = new TimerNode( secondsProperty, isRunningProperty );
-    timer.scale( 0.4 );
+    timer.scale( 0.5 );
 
     // Create ruler to be turned into icon
     var rulerWidth = 397; // 1 meter
@@ -79,7 +85,7 @@ define( function( require ) {
       '',
       { tandem: tandem.createTandem( 'ruler' ) } );
     ruler.rotate( 40, false );
-    ruler.scale( 0.1 );
+    ruler.scale( 0.12 );
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
     var rulerIcon = ruler.rasterized( {
