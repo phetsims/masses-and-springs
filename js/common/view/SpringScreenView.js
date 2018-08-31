@@ -10,6 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var ClosestDragListener = require( 'SUN/ClosestDragListener' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
@@ -151,7 +153,7 @@ define( function( require ) {
     // @public {GravityAndDampingControlNode} Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH +20,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 20,
         dampingVisible: options.dampingVisible,
         xMargin: 0,
         yMargin: 0,
@@ -228,12 +230,17 @@ define( function( require ) {
         tandem: tandem.createTandem( 'timeControlNode' )
       } );
 
+    // @public
+    this.rightPanelAlignGroup = new AlignGroup( { matchVertical: false } );
+
+    // REVIEW: Track margins, paddings, and minWidth of optionPanels in screenViews.
     // @public {ToolboxPanel} Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
       this.visibleBoundsProperty.get(),
       this.rulerNode, this.timerNode,
       model.rulerVisibleProperty,
       model.timerVisibleProperty,
+      this.rightPanelAlignGroup,
       tandem.createTandem( 'toolboxPanel' ), {
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 32
       }
@@ -311,8 +318,8 @@ define( function( require ) {
      * Creates a panel that displays visible indicators for reference lines, displacement arrow, and period trace.
      * @public
      *
-     * @param model {MassesAndSpringsModel} model
-     * @param displayPeriodTrace {Boolean}
+     * @param {MassesAndSpringsModel} model
+     * @param {Boolean} displayPeriodTrace
      * @param {Tandem} tandem
      * @return {IndicatorVisibilityControlNode}
      */
@@ -328,16 +335,18 @@ define( function( require ) {
      * Creates a panel that displays all of the right hand panels on the screen.
      * @public
      *
-     * @param optionsContent
-     * @param tandem
+     * @param {Node} optionsContent
+     * @param {AlignGroup} alignGroup
+     * @param {Tandem } tandem
      * @return {Panel}
      */
-    createOptionsPanel: function( optionsContent, tandem ) {
+    createOptionsPanel: function( optionsContent, alignGroup, tandem ) {
+      var optionsContentAlignBox = new AlignBox( optionsContent, { group: alignGroup } );
       var optionsPanel = new Panel(
-        optionsContent, {
+        optionsContentAlignBox, {
           xMargin: 10,
           fill: MassesAndSpringsConstants.PANEL_FILL,
-          align:'center',
+          align: 'center',
           cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
           tandem: tandem.createTandem( 'LineVisibilityNode' ),
           minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 30

@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/ConstantsControlPanel' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -232,7 +233,7 @@ define( function( require ) {
     } );
 
     // Panel that will display all the toggleable options.
-    var optionsPanel = this.createOptionsPanel( optionsVBox, tandem );
+    var optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolbox
     var rightPanelsVBox = new VBox( {

@@ -10,6 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -29,15 +31,16 @@ define( function( require ) {
    * @param {DraggableTimerNode} timerNode
    * @param {Property.<boolean>} rulerVisibleProperty
    * @param {Property.<boolean>} timerVisibleProperty
+   * @param {AlignGroup} alignGroup
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, tandem, options ) {
+  function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, alignGroup, tandem, options ) {
     options = _.extend( {
       dragBounds: dragBounds,
       fill: MassesAndSpringsConstants.PANEL_FILL,
-      xMargin: 5,
+      xMargin: 0,
       yMargin: 7,
       align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
@@ -49,7 +52,10 @@ define( function( require ) {
       spacing: 30,
       tandem: tandem.createTandem( 'toolbox' )
     } );
-    Panel.call( this, toolbox, options );
+
+    var toolboxAlignBox = new AlignBox( toolbox, { group: alignGroup } );
+    Panel.call( this, toolboxAlignBox, options );
+
 
     // Create timer to be turned into icon
     var secondsProperty = new NumberProperty( 0, {
