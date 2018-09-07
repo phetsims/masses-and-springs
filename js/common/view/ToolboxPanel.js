@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -40,7 +39,7 @@ define( function( require ) {
     options = _.extend( {
       dragBounds: dragBounds,
       fill: MassesAndSpringsConstants.PANEL_FILL,
-      xMargin: 5,
+      xMargin: 0,
       yMargin: 7,
       align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
@@ -55,7 +54,6 @@ define( function( require ) {
 
     var toolboxAlignBox = new AlignBox( toolbox, { group: alignGroup } );
     Panel.call( this, toolboxAlignBox, options );
-
 
     // Create timer to be turned into icon
     var secondsProperty = new NumberProperty( 0, {

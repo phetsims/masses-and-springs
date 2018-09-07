@@ -233,7 +233,6 @@ define( function( require ) {
     // @public
     this.rightPanelAlignGroup = new AlignGroup( { matchVertical: false } );
 
-    // REVIEW: Track margins, paddings, and minWidth of optionPanels in screenViews.
     // @public {ToolboxPanel} Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
       this.visibleBoundsProperty.get(),
