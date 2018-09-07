@@ -116,7 +116,8 @@ define( function( require ) {
       }
     } );
 
-    Property.multilink( [ this.constantParameterProperty, this.sceneModeProperty ], function( selectedConstant ) {
+    Property.multilink( [ this.constantParameterProperty ], function( selectedConstant ) {
+
       // Manages logic for changing between constant parameters
       if ( selectedConstant === ConstantModeChoice.SPRING_CONSTANT ) {
         self.spring1.springConstantProperty.reset();
