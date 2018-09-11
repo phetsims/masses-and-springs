@@ -119,7 +119,7 @@ define( function( require ) {
       lineWidth: 1.5,
       lineCap: 'round',
       centerX: this.rect.centerX,
-      boundsMethod:'unstroked',
+      boundsMethod: 'unstroked',
       bottom: this.rect.top
     } );
     this.addChild( this.hookNode );
@@ -280,8 +280,7 @@ define( function( require ) {
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
       function( spring, forcesMode ) {
         netForceArrow.visible = !!spring && forcesMode === ForcesModeChoice.NET_FORCES;
-      }
-    );
+      } );
 
     // Show/hide line at base of vectors
     Property.multilink( [
@@ -318,69 +317,57 @@ define( function( require ) {
     var position;
     Property.multilink( [
       mass.verticalVelocityProperty,
-      model.velocityVectorVisibilityProperty,
       model.accelerationVectorVisibilityProperty
-    ], function( velocity, visible, accelerationVisible ) {
-      if ( visible ) {
-        xOffset = accelerationVisible ? -8 : 0;
-        position = mass.positionProperty.get();
-        y2 = -ARROW_SIZE_DEFAULT * velocity * scalingFactor;
-        updateArrow( velocityArrow, position, xOffset, y2 );
-      }
+    ], function( velocity, accelerationVisible ) {
+      xOffset = accelerationVisible ? -8 : 0;
+      position = mass.positionProperty.get();
+      y2 = -ARROW_SIZE_DEFAULT * velocity * scalingFactor;
+      updateArrow( velocityArrow, position, xOffset, y2 );
     } );
 
     // When gravity changes, update the gravitational force arrow
-    Property.multilink( [ mass.springProperty, mass.gravityProperty, model.gravityVectorVisibilityProperty ],
-      function( spring, gravity, visible ) {
-        if ( visible ) {
-          var gravitationalAcceleration = mass.mass * gravity;
-          position = mass.positionProperty.get();
-          xOffset = (forcesOrientation) * 45;
-          y2 = ARROW_SIZE_DEFAULT * gravitationalAcceleration;
-          updateArrow( gravityForceArrow, position, xOffset, y2 );
-        }
+    Property.multilink( [ mass.springProperty, mass.gravityProperty ],
+      function( spring, gravity ) {
+        var gravitationalAcceleration = mass.mass * gravity;
+        position = mass.positionProperty.get();
+        xOffset = (forcesOrientation) * 45;
+        y2 = ARROW_SIZE_DEFAULT * gravitationalAcceleration;
+        updateArrow( gravityForceArrow, position, xOffset, y2 );
       } );
 
     // When the spring force changes, update the spring force arrow
-    Property.multilink( [ mass.springForceProperty, model.springVectorVisibilityProperty ],
-      function( springForce, visible ) {
-        if ( visible ) {
-          position = mass.positionProperty.get();
-          xOffset = (forcesOrientation) * 45;
-          y2 = -ARROW_SIZE_DEFAULT * springForce;
-          updateArrow( springForceArrow, position, xOffset, y2 );
-        }
+    Property.multilink( [ mass.springForceProperty ],
+      function( springForce ) {
+        position = mass.positionProperty.get();
+        xOffset = (forcesOrientation) * 45;
+        y2 = -ARROW_SIZE_DEFAULT * springForce;
+        updateArrow( springForceArrow, position, xOffset, y2 );
       } );
 
     // When net force changes changes, update the net force arrow
     assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
     Property.multilink( [
       mass.netForceProperty,
-      model.forcesModeProperty,
       model.accelerationVectorVisibilityProperty,
       mass.accelerationProperty,
       model.velocityVectorVisibilityProperty
-    ], function( netForce, forcesMode, accelerationVisible, netAcceleration, velocityVisible ) {
+    ], function( netForce, accelerationVisible, netAcceleration, velocityVisible ) {
       position = mass.positionProperty.get();
-      if ( forcesMode === ForcesModeChoice.NET_FORCES ) {
-        if ( Math.abs( netForce ) > 1E-6 ) {
-          xOffset = (forcesOrientation) * 45;
-          y2 = -ARROW_SIZE_DEFAULT * netForce;
-          updateArrow( netForceArrow, position, xOffset, y2 );
-        }
-        else if ( netAcceleration === 0 ) {
-          netForceArrow.setTailAndTip( 0, 0, 0, 0 );
-        }
+      if ( Math.abs( netForce ) > 1E-6 ) {
+        xOffset = (forcesOrientation) * 45;
+        y2 = -ARROW_SIZE_DEFAULT * netForce;
+        updateArrow( netForceArrow, position, xOffset, y2 );
       }
-      if ( accelerationVisible ) {
-        if ( Math.abs( netAcceleration ) > 1E-6 ) {
-          xOffset = velocityVisible ? 8 : 0;
-          y2 = -ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor;
-          updateArrow( accelerationArrow, position, xOffset, y2 );
-        }
-        else if ( netAcceleration === 0 ) {
-          accelerationArrow.setTailAndTip( 0, 0, 0, 0 );
-        }
+      else {
+        netForceArrow.setTailAndTip( 0, 0, 0, 0 );
+      }
+      if ( Math.abs( netAcceleration ) > 1E-6 ) {
+        xOffset = velocityVisible ? 8 : 0;
+        y2 = -ARROW_SIZE_DEFAULT * netAcceleration / scalingFactor;
+        updateArrow( accelerationArrow, position, xOffset, y2 );
+      }
+      else {
+        accelerationArrow.setTailAndTip( 0, 0, 0, 0 );
       }
     } );
 
