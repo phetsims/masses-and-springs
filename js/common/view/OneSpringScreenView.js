@@ -45,7 +45,7 @@ define( function( require ) {
     SpringScreenView.call( this, model, tandem, options );
     var self = this;
 
-    // {Number} centerX of the spring in view cordinates
+    // {Number} centerX of the spring in view coordinates
     var springCenter = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
 
     // Spring Constant Control Panel
