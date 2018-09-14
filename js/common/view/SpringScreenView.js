@@ -54,7 +54,7 @@ define( function( require ) {
     ScreenView.call( this );
 
     options = _.extend( {
-      gravityHSlider: true,
+      useSliderLabels: true,
       dampingVisible: false
     }, options );
 
@@ -153,12 +153,12 @@ define( function( require ) {
     // @public {GravityAndDampingControlNode} Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
       model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 20,
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 25,
         dampingVisible: options.dampingVisible,
         xMargin: 0,
         yMargin: 0,
         stroke: null,
-        hSlider: options.gravityHSlider
+        useSliderLabels: options.useSliderLabels
       } );
 
     // @public {DraggableTimerNode}

@@ -146,7 +146,7 @@ define( function( require ) {
 
       // Alignment of layout
       self.springSystemControlsNode.x = leftSpringXPosition + distanceBetweenSprings - self.springHangerNode.centerX;
-      self.springSystemControlsNode.top =  self.spacing;
+      self.springSystemControlsNode.top = self.spacing;
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
 
       // Adjusting drag bounds of draggable objects based on visible bounds.

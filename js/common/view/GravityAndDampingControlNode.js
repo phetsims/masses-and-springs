@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var ComboBox = require( 'SUN/ComboBox' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -37,7 +38,6 @@ define( function( require ) {
 
   // constants
   var SPACING = 7;
-  var TITLE_INDENT = -35;
   var MAX_WIDTH = 80;
 
   /**
@@ -50,8 +50,8 @@ define( function( require ) {
    */
   function GravityAndDampingControlNode( model, listNodeParent, tandem, options ) {
     options = _.extend( {
-      dampingVisible: false,
-      hSlider: false
+      useSliderLabels: true,
+      dampingVisible: false
     }, options );
 
     //  Add gravity info for various planets
@@ -72,114 +72,79 @@ define( function( require ) {
     } );
     var gravityProperty = model.gravityProperty;
 
-    var sliderOptions = {
-      majorTickLength: 5,
-      minorTickLength: 5,
-      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-      trackSize: new Dimension2( 120, 0.1 ),
-      thumbSize: new Dimension2( 13, 22 ),
-      thumbFillEnabled: '#00C4DF',
-      thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
-      visible: true,
-      align: 'left',
-      stroke: null,
-      sliderIndent: 7,
-      constrainValue: function( value ) {
-        value = Util.roundSymmetric( value * 100 / 3 ) * 3;
-        return value / 100;
-      }
-    };
-
-    var gravitySliderOptions = {
-      left: TITLE_INDENT,
-      xMargin: 0,
-      majorTickLength: 10,
-      titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-      titleMaxWidth: MAX_WIDTH * 2,
-      trackSize: new Dimension2( 125, 0.1 ),
-      thumbSize: new Dimension2( 13, 22 ),
-      thumbFillEnabled: '#00C4DF',
-      thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
-      stroke: null,
-      sliderIndent: 7,
-      majorTicks: [
-        {
-          value: MassesAndSpringsConstants.GRAVITY_RANGE.min,
-          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE.min ), {
-            font: MassesAndSpringsConstants.LABEL_FONT
-          } )
-        },
-        {
-          value: MassesAndSpringsConstants.GRAVITY_RANGE.max,
-          label: new Text( String( MassesAndSpringsConstants.GRAVITY_RANGE.max ), {
-            font: MassesAndSpringsConstants.LABEL_FONT
-          } )
-        }
-      ],
-      layoutFunction: NumberControl.createLayoutFunction1( {
-        titleXSpacing: 55,
-        ySpacing: 2,
-        arrowButtonsXSpacing: 1
-      } ),
-      valuePattern: StringUtils.fillIn( gravityValueString, {
-        gravity: '{0}'
-      } ),
-      valueFont: new PhetFont( { size: 14 } ),
-      useRichText: true,
-      decimalPlaces: 1,
-      valueMaxWidth: MAX_WIDTH * 1.5,
-      delta: 0.1,
-      arrowButtonScale: 0.5
-    };
-
-    // Create title for gravity slider
-    var gravitySliderTitle = new Text( gravityString, {
-      font: new PhetFont( { size: 14, weight: 'bold' } ),
-      maxWidth: MAX_WIDTH * 2
-    } );
-
-    if ( options.hSlider ) {
-
-      // Create gravity slider
-      var gravitySlider = new HSlider( model.gravityProperty, MassesAndSpringsConstants.GRAVITY_RANGE, sliderOptions );
-      gravitySlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.min, new Text( noneString, {
-        font: MassesAndSpringsConstants.LABEL_FONT,
-        tandem: tandem.createTandem( 'gravityNoneString' ),
-        maxWidth: MAX_WIDTH
-      } ) );
-      gravitySlider.addMajorTick( MassesAndSpringsConstants.GRAVITY_RANGE.max, new Text( lotsString, {
-        font: MassesAndSpringsConstants.LABEL_FONT,
-        tandem: tandem.createTandem( 'gravityLotsString' ),
-        maxWidth: MAX_WIDTH
-      } ) );
-
-      gravitySlider.left = gravitySliderTitle.centerX - 10;
-      gravitySlider.top = gravitySliderTitle.bottom + SPACING;
-    }
-    else {
-      gravitySlider = new NumberControl(
-        gravityString,
-        model.gravityProperty,
-        MassesAndSpringsConstants.GRAVITY_RANGE,
-        gravitySliderOptions
-      );
-    }
-
-    // Manages the values associated with the gravity panel in a combo box
+    // Text that reads "What is the value of gravity?"
     var questionTextNode = new Node( {
       children: [ new Text( whatIsTheValueOfGravityString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH * 3
-      } )
-      ],
-      yMargin: 20,
-      center: gravitySlider.center
+        font: MassesAndSpringsConstants.TITLE_FONT
+      } ) ]
     } );
+
+    var gravityNumberControl = new NumberControl(
+      gravityString,
+      model.gravityProperty,
+      MassesAndSpringsConstants.GRAVITY_RANGE, {
+        xMargin: 0,
+        yMargin: 0,
+        majorTickLength: 10,
+        titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
+        titleMaxWidth: MAX_WIDTH * 1.5,
+        trackSize: options.useSliderLabels ? new Dimension2( 125, 0.1 ) : new Dimension2( 115, 0.1 ),
+        thumbSize: new Dimension2( 13, 22 ),
+        thumbFillEnabled: '#00C4DF',
+        thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
+        majorTicks: [
+          {
+            value: MassesAndSpringsConstants.GRAVITY_RANGE.min,
+            label: new Text( options.useSliderLabels ? noneString : MassesAndSpringsConstants.GRAVITY_RANGE.min, {
+              font: MassesAndSpringsConstants.LABEL_FONT,
+              maxWidth: MAX_WIDTH
+            } )
+          },
+          {
+            value: MassesAndSpringsConstants.GRAVITY_RANGE.max,
+            label: new Text( options.useSliderLabels ? lotsString : MassesAndSpringsConstants.GRAVITY_RANGE.max, {
+              font: MassesAndSpringsConstants.LABEL_FONT,
+              maxWidth: MAX_WIDTH
+            } )
+          }
+        ],
+        layoutFunction: NumberControl.createLayoutFunction4( {
+          excludeTweakers: options.useSliderLabels,
+          sliderPadding: options.useTextSliderLabels ? 0 : 13,
+          hasReadoutProperty: new DerivedProperty( [ model.bodyProperty ], function( body ) {
+            return !options.useSliderLabels && (body !== Body.PLANET_X);
+          } ),
+          createBottomContent: function( bottomBox ) {
+
+            var bottomContent = new Node( {
+              children: [
+                questionTextNode,
+                bottomBox
+              ]
+            } );
+            questionTextNode.maxWidth = bottomBox.width*1.25;
+            questionTextNode.center = bottomBox.center;
+            questionTextNode.onStatic( 'visibility', function() {
+              bottomBox.visible = !questionTextNode.visible;
+            } );
+            return bottomContent;
+          }
+        } ),
+        valuePattern: StringUtils.fillIn( gravityValueString, {
+          gravity: '{0}'
+        } ),
+        valueFont: new PhetFont( { size: 14 } ),
+        useRichText: true,
+        decimalPlaces: 1,
+        valueMaxWidth: MAX_WIDTH,
+        delta: 0.1,
+        arrowButtonScale: 0.55
+      } );
 
     // Manages the items associated with the gravity panel in a combo box
     var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
-      top: gravitySlider.bottom + SPACING,
-      centerX: gravitySlider.centerX + 15,
+      top: gravityNumberControl.bottom + SPACING,
+      centerX: gravityNumberControl.centerX + 15,
       buttonCornerRadius: 3,
       buttonYMargin: 0,
       itemYMargin: 3,
@@ -193,9 +158,8 @@ define( function( require ) {
       // Creating title for damping hSlider
       var dampingHSliderTitle = new Text( dampingString, {
         font: new PhetFont( { size: 14, weight: 'bold' } ),
-        maxWidth: MAX_WIDTH * 2,
-        top: gravityComboBox.bottom + SPACING,
-        left: TITLE_INDENT
+        maxWidth: MAX_WIDTH * 1.5,
+        top: gravityComboBox.bottom + SPACING
       } );
 
       // {Range} Range for hSlider
@@ -235,12 +199,9 @@ define( function( require ) {
         }
       }
 
-      // Created so we can swap visibility of the questionTextNode and the gravitySlider for Planet X
-      var gravityNode = new Node( { children: [ questionTextNode, gravitySlider ] } );
       var contentNode = new Node( {
         children: [
-          gravitySliderTitle,
-          gravityNode,
+          gravityNumberControl,
           gravityComboBox,
           dampingHSliderTitle,
           dampingHSlider
@@ -252,29 +213,12 @@ define( function( require ) {
       Node.call( this, { children: [ contentNode ] } );
 
       // Alignment of Node contents for panel with damping
-      if ( gravitySlider instanceof NumberControl ) {
-        gravitySliderTitle.leftTop = new Vector2( this.left, this.top + 23.5 );
-        gravitySlider.centerX = this.centerX;
-        gravitySlider.left = this.left;
-        gravitySlider.top = this.top + 7;
-        questionTextNode.centerX = this.centerX;
-      }
-      else {
-        gravitySliderTitle.top = this.top + 16;
-        gravitySliderTitle.centerX = this.centerX - 72;
-        gravitySliderTitle.top = this.top - 12.5;
-        gravitySlider.centerX = this.centerX;
-        questionTextNode.centerX = gravitySlider.centerX - 5;
-        questionTextNode.top = this.top - 12;
-        gravityComboBox.top = gravitySlider.bottom + 10;
-
-      }
-      questionTextNode.top = gravitySlider.bottom - 30;
-      gravityComboBox.centerX = gravitySlider.centerX;
-      gravityComboBox.top = gravitySlider.bottom + 10;
-      dampingHSliderTitle.left = gravitySliderTitle.left;
-      dampingHSliderTitle.top = gravityComboBox.bottom + 10;
-      dampingHSlider.centerX = gravitySlider.centerX;
+      gravityNumberControl.top = this.top;
+      gravityNumberControl.centerX = this.centerX;
+      gravityComboBox.top = gravityNumberControl.bottom + 10;
+      gravityComboBox.centerX = gravityNumberControl.centerX;
+      dampingHSliderTitle.leftTop = new Vector2( gravityNumberControl.left, gravityComboBox.bottom + 10 );
+      dampingHSlider.centerX = gravityNumberControl.centerX;
       dampingHSlider.top = dampingHSliderTitle.bottom + 5;
     }
     else {
@@ -288,13 +232,11 @@ define( function( require ) {
         top: gravityComboBox.bottom + SPACING,
         centerX: gravityComboBox.centerX
       } );
-      gravityNode = new Node( { children: [ questionTextNode, gravitySlider ] } );
 
       // Content to be added to parent node
       contentNode = new Node( {
         children: [
-          gravitySliderTitle,
-          gravityNode,
+          gravityNumberControl,
           gravityComboBox,
           dampingEqualsZeroText
         ],
@@ -302,35 +244,18 @@ define( function( require ) {
       } );
       Node.call( this, { children: [ contentNode ] } );
 
-      // Alignment of Node contents for panel without damping
-      gravitySliderTitle.centerX = this.centerX - 80;
-      gravitySliderTitle.top = this.top + 3.5;
-      gravitySlider.centerX = this.centerX;
-      questionTextNode.centerX = gravitySlider.centerX - 5;
-      questionTextNode.top = gravitySlider.bottom - 30;
-      gravityComboBox.centerX = gravitySlider.centerX;
-      gravityComboBox.top = gravitySlider.bottom + 10;
-      dampingEqualsZeroText.top = gravityComboBox.bottom + 10;
-      dampingEqualsZeroText.left = gravitySliderTitle.left;
+      // Alignment of Node contents for panel without damping on intro and vector screen
+      gravityComboBox.centerX = gravityNumberControl.centerX;
+      gravityComboBox.top = gravityNumberControl.bottom + 10;
+      dampingEqualsZeroText.leftTop = new Vector2( gravityNumberControl.left, gravityComboBox.bottom + 10 );
     }
 
-    // Responsible for managing bodies and question text visibility
+    // Responsible for managing bodies
     model.bodyProperty.link( function( newBody, oldBody ) {
         var body = _.find( bodies, newBody );
 
-        // Unhide the gravitySlider if we are not using planetX
-        if ( newBody !== Body.PLANET_X ) {
-          gravitySliderTitle.visible = !(gravitySlider instanceof NumberControl);
-          questionTextNode.visible = false;
-          gravitySlider.visible = !questionTextNode.visible;
-        }
-
-        // If PlanetX hide the slider and update gravity
-        if ( newBody === Body.PLANET_X ) {
-          questionTextNode.visible = true;
-          gravitySliderTitle.visible = true;
-          gravitySlider.visible = !questionTextNode.visible;
-        }
+        // Set visibility of question node
+        questionTextNode.visible = body === Body.PLANET_X;
 
         // If it's not custom, set it to its value
         if ( body !== Body.CUSTOM ) {
