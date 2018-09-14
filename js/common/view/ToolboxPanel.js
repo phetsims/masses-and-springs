@@ -39,7 +39,7 @@ define( function( require ) {
     options = _.extend( {
       dragBounds: dragBounds,
       fill: MassesAndSpringsConstants.PANEL_FILL,
-      xMargin: 0,
+      xMargin: 10,
       yMargin: 7,
       align: 'center',
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
