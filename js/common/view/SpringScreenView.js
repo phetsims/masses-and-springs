@@ -237,7 +237,8 @@ define( function( require ) {
     // @public {ToolboxPanel} Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
       this.visibleBoundsProperty.get(),
-      this.rulerNode, this.timerNode,
+      this.rulerNode,
+      this.timerNode,
       model.rulerVisibleProperty,
       model.timerVisibleProperty,
       this.rightPanelAlignGroup,
