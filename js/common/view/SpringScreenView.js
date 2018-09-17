@@ -136,7 +136,6 @@ define( function( require ) {
         }
       } );
 
-
       // Keeps track of the mass node to restore original Z order.
       return massNode;
     } );

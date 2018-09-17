@@ -50,8 +50,8 @@ define( function( require ) {
 
     // Spring Constant Control Panel
     var minMaxLabels = [
-      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } ),
-      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } )
+      new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 50 } ),
+      new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 50 } )
     ];
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
