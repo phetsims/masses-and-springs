@@ -72,8 +72,8 @@ define( function( require ) {
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
 
     // Link that is responsible for switching the scenes
-    this.sceneModeProperty.lazyLink( function( mode ) {
-      if ( mode === SceneModeChoice.SAME_LENGTH ) {
+    this.sceneModeProperty.lazyLink( function( scene ) {
+      if ( scene === SceneModeChoice.SAME_LENGTH ) {
 
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
@@ -87,7 +87,7 @@ define( function( require ) {
         self.setSpringState( sameLengthModeSpringState );
       }
 
-      else if ( mode === SceneModeChoice.ADJUSTABLE_LENGTH ) {
+      else if ( scene === SceneModeChoice.ADJUSTABLE_LENGTH ) {
 
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
@@ -116,15 +116,20 @@ define( function( require ) {
       }
     } );
 
-    Property.multilink( [ this.constantParameterProperty, this.sceneModeProperty ], function( selectedConstant ) {
-      // Manages logic for changing between constant parameters
-      if ( selectedConstant === ConstantModeChoice.SPRING_CONSTANT ) {
-        self.spring1.springConstantProperty.reset();
-        self.spring1.updateThickness( self.spring1.naturalRestingLengthProperty.get(), self.spring1.springConstantProperty.get() );
-      }
-      else if ( selectedConstant === ConstantModeChoice.SPRING_THICKNESS ) {
-        self.spring1.thicknessProperty.reset();
-        self.spring1.updateSpringConstant( self.spring1.naturalRestingLengthProperty.get(), self.spring1.thicknessProperty.get() );
+    Property.multilink( [ this.constantParameterProperty, this.sceneModeProperty ], function( selectedConstant, scene ) {
+
+      // Only adjust thickness/springConstant on adjustableLength scene
+      if ( scene === SceneModeChoice.ADJUSTABLE_LENGTH ) {
+
+        // Manages logic for changing between constant parameters
+        if ( selectedConstant === ConstantModeChoice.SPRING_CONSTANT ) {
+          self.spring1.springConstantProperty.reset();
+          self.spring1.updateThickness( self.spring1.naturalRestingLengthProperty.get(), self.spring1.springConstantProperty.get() );
+        }
+        else if ( selectedConstant === ConstantModeChoice.SPRING_THICKNESS ) {
+          self.spring1.thicknessProperty.reset();
+          self.spring1.updateSpringConstant( self.spring1.naturalRestingLengthProperty.get(), self.spring1.thicknessProperty.get() );
+        }
       }
     } );
   }
