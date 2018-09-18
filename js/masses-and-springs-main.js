@@ -30,7 +30,7 @@ define( function( require ) {
       softwareDevelopment: 'Denzell Barnett, Matt Pennington',
       team: 'Wendy Adams, Ariel Paul, Kathy Perkins',
       qualityAssurance:
-        'Steele Dalton, Bryce Griebenow, Ethan Johnson, Megan Lai, Liam Mulhall, Arnab Purkayastha, Benjamin Roberts, Jacob Romero, Kathryn Woessner'
+        'Steele Dalton, Bryce Griebenow, Ethan Johnson, Megan Lai, Liam Mulhall, Arnab Purkayastha, Benjamin Roberts, Jacob Romero, Clara Wilson, Kathryn Woessner'
     }
   };
 
