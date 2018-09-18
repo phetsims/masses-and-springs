@@ -29,7 +29,8 @@ define( function( require ) {
       leadDesign: 'Amy Rouinfar, Mike Dubson',
       softwareDevelopment: 'Denzell Barnett, Matt Pennington',
       team: 'Wendy Adams, Ariel Paul, Kathy Perkins',
-      qualityAssurance: 'Steele Dalton, Bryce Griebenow, Ethan Johnson, Liam Mulhall, Arnab Purkayastha, Benjamin Roberts, Jacob Romero'
+      qualityAssurance:
+        'Steele Dalton, Bryce Griebenow, Ethan Johnson, Megan Lai, Liam Mulhall, Arnab Purkayastha, Benjamin Roberts, Jacob Romero, Kathryn Woessner'
     }
   };
 
