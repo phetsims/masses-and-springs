@@ -42,7 +42,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
+  var springStiffnessString = require( 'string!MASSES_AND_SPRINGS/springStiffness' );
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -300,7 +300,7 @@ define( function( require ) {
       return new SpringControlPanel(
         this.model.springs[ springIndex ].springConstantProperty,
         MassesAndSpringsConstants.SPRING_CONSTANT_RANGE,
-        StringUtils.fillIn( springConstantString, { spring: springIndex + 1, maxWidth: 40 } ),
+        StringUtils.fillIn( springStiffnessString, { spring: springIndex + 1, maxWidth: 40 } ),
         labels,
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
         {
@@ -322,13 +322,18 @@ define( function( require ) {
      * @param {MassesAndSpringsModel} model
      * @param {Boolean} displayPeriodTrace
      * @param {Tandem} tandem
+     * @param {object} options
      * @return {IndicatorVisibilityControlNode}
      */
-    createIndicatorVisibilityPanel: function( model, displayPeriodTrace, tandem ) {
+    createIndicatorVisibilityPanel: function( model, displayPeriodTrace, tandem, options ) {
+      options = _.extend( {
+        enableMovableLine: true
+      }, options );
       return new IndicatorVisibilityControlNode(
         model,
         tandem.createTandem( 'indicatorVisibilityControlNode' ), {
-          periodTraceOption: displayPeriodTrace
+          enableMovableLine: options.enableMovableLine,
+          enablePeriodTrace: displayPeriodTrace
         } );
     },
 

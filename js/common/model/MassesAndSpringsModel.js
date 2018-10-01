@@ -40,8 +40,18 @@ define( function( require ) {
    * @constructor
    *
    * @param {Tandem} tandem
+   * @param {object} options
    */
-  function MassesAndSpringsModel( tandem ) {
+  function MassesAndSpringsModel( tandem, options ) {
+    options = _.extend( {
+      basicsVersion: false
+    }, options );
+
+    this.options = options;
+
+    if(options.basicsVersion) {
+      console.log( 'basics version' );
+    }
 
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
@@ -56,7 +66,7 @@ define( function( require ) {
 
     // @public {Property.<number|null>} gravitational acceleration association with the spring system
     this.gravityProperty = new Property( MassesAndSpringsConstants.EARTH_GRAVITY, {
-      reentrant:true,
+      reentrant: true,
       tandem: tandem.createTandem( 'gravityProperty' ),
       units: 'meters/second/second'
     } );
@@ -81,7 +91,7 @@ define( function( require ) {
     // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
     this.timerSecondsProperty = new NumberProperty( 0, {
       range: new Range( 0, Number.POSITIVE_INFINITY ),
-      reentrant:true,
+      reentrant: true,
       tandem: tandem.createTandem( 'timerSecondsProperty' ),
       units: 'seconds'
     } );

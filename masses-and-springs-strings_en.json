@@ -44,6 +44,9 @@
   "equilibriumPosition": {
     "value": "Equilibrium Position"
   },
+  "restingPosition": {
+    "value": "Resting Position"
+  },
   "eTherm": {
     "value": "E<sub>therm</sub>"
   },
@@ -98,6 +101,9 @@
   "naturalLength": {
     "value": "Natural Length"
   },
+  "unstretchedLength": {
+    "value": "Unstretched Length"
+  },
   "netForce": {
     "value": "Net Force"
   },
@@ -133,6 +139,9 @@
   },
   "spring": {
     "value": "Spring"
+  },
+  "springStiffness": {
+    "value": " Spring Stiffness {{spring}}"
   },
   "springConstant": {
     "value": "Spring Constant {{spring}}"

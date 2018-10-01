@@ -22,10 +22,10 @@ define( function( require ) {
   var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  var equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
+  var restingPositionString = require( 'string!MASSES_AND_SPRINGS/restingPosition' );
   var massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
-  var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
+  var unstretchedLengthString = require( 'string!MASSES_AND_SPRINGS/unstretchedLength' );
 
   // constants
   var CONTENT_SPACING = 22;
@@ -51,17 +51,17 @@ define( function( require ) {
     var blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     var redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
 
-    var equilibriumText = new Text( equilibriumPositionString, {
+    var equilibriumText = new Text( restingPositionString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: TEXT_MAX_WIDTH,
-      tandem: tandem.createTandem( 'equilibriumPositionString' )
+      tandem: tandem.createTandem( 'restingPositionString' )
     } );
 
     if ( options.massEquilibrium ) {
       equilibriumText = new Text( massEquilibriumString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: TEXT_MAX_WIDTH,
-        tandem: tandem.createTandem( 'equilibriumPositionString' )
+        tandem: tandem.createTandem( 'restingPositionString' )
       } );
     }
 
@@ -69,7 +69,7 @@ define( function( require ) {
     var alignGroup = new AlignGroup( { matchVertical: false } );
 
     // Align boxes used for labels
-    var naturalLengthVisibleAlignBox = new AlignBox( new Text( naturalLengthString, {
+    var naturalLengthVisibleAlignBox = new AlignBox( new Text( unstretchedLengthString, {
       font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: TEXT_MAX_WIDTH
     } ), { group: alignGroup, xAlign: 'left' } );
     var equilibriumAlignBox = new AlignBox( equilibriumText, { group: alignGroup, xAlign: 'left' } );
@@ -83,11 +83,11 @@ define( function( require ) {
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new HBox( { children: [ naturalLengthVisibleAlignBox, blueLine ], spacing: CONTENT_SPACING } ),
       property: model.naturalLengthVisibleProperty,
-      label: naturalLengthString
+      label: unstretchedLengthString
     }, {
       node: new HBox( { children: [ equilibriumAlignBox, greenLine ], spacing: CONTENT_SPACING } ),
       property: model.equilibriumPositionVisibleProperty,
-      label: equilibriumPositionString
+      label: restingPositionString
     }, {
       node: new HBox( { children: [ movableAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty,
