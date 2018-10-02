@@ -42,6 +42,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
+  var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
   var springStiffnessString = require( 'string!MASSES_AND_SPRINGS/springStiffness' );
 
   /**
@@ -296,10 +297,13 @@ define( function( require ) {
      * @returns {SpringControlPanel}
      */
     createSpringConstantPanel: function( springIndex, labels, tandem ) {
+
+      // Additional logic for compatibility with Masses and Springs: Basics
+      var string = this.model.options.basicsVersion ? springStiffnessString : springConstantString;
       return new SpringControlPanel(
         this.model.springs[ springIndex ].springConstantProperty,
         MassesAndSpringsConstants.SPRING_CONSTANT_RANGE,
-        StringUtils.fillIn( springStiffnessString, { spring: springIndex + 1, maxWidth: 40 } ),
+        StringUtils.fillIn( string, { spring: springIndex + 1, maxWidth: 40 } ),
         labels,
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
         {
