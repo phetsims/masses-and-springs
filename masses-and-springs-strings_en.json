@@ -44,9 +44,6 @@
   "equilibriumPosition": {
     "value": "Equilibrium Position"
   },
-  "restingPosition": {
-    "value": "Resting Position"
-  },
   "eTherm": {
     "value": "E<sub>therm</sub>"
   },
@@ -95,14 +92,11 @@
   "masses-and-springs.title": {
     "value": "Masses and Springs"
   },
-  "movableLine": {
-    "value": "Movable Line"
-  },
   "naturalLength": {
     "value": "Natural Length"
   },
-  "unstretchedLength": {
-    "value": "Unstretched Length"
+  "movableLine": {
+    "value": "Movable Line"
   },
   "netForce": {
     "value": "Net Force"
@@ -115,9 +109,6 @@
   },
   "peGrav": {
     "value": "PE<sub>grav</sub>"
-  },
-  "periodTrace": {
-    "value": "Period Trace"
   },
   "questionMark": {
     "value": "?"
@@ -148,6 +139,9 @@
   },
   "length": {
     "value": "Spring Length {{spring}}"
+  },
+  "periodTrace": {
+    "value": "Period Trace"
   },
   "small": {
     "value": "Small"
