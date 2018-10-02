@@ -122,7 +122,7 @@ define( function( require ) {
                 bottomBox
               ]
             } );
-            questionTextNode.maxWidth = bottomBox.width*1.25;
+            questionTextNode.maxWidth = bottomBox.width * 1.25;
             questionTextNode.center = bottomBox.center;
             questionTextNode.onStatic( 'visibility', function() {
               bottomBox.visible = !questionTextNode.visible;
@@ -151,92 +151,112 @@ define( function( require ) {
       tandem: tandem.createTandem( 'gravityComboBox' )
     } );
 
-    if ( options.dampingVisible ) {
+    // Added logic for compatibility with Masses and Springs: Basics
+    if ( !model.options.basicsVersion ) {
+      if ( options.dampingVisible ) {
 
-      // Creating title for damping hSlider
-      var dampingHSliderTitle = new Text( dampingString, {
-        font: new PhetFont( { size: 14, weight: 'bold' } ),
-        maxWidth: MAX_WIDTH * 1.5,
-        top: gravityComboBox.bottom + SPACING
-      } );
+        // Creating title for damping hSlider
+        var dampingHSliderTitle = new Text( dampingString, {
+          font: new PhetFont( { size: 14, weight: 'bold' } ),
+          maxWidth: MAX_WIDTH * 1.5,
+          top: gravityComboBox.bottom + SPACING
+        } );
 
-      // {Range} Range for hSlider
-      var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE;
+        // {Range} Range for hSlider
+        var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE;
 
-      // Creating damping hSlider
-      var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, {
-        top: dampingHSliderTitle.bottom + SPACING * 3,
-        left: dampingHSliderTitle.centerX,
-        majorTickLength: 10,
-        minorTickLength: 5,
-        minorTickLineWidth: 0.5,
-        trackSize: new Dimension2( 120, 0.1 ),
-        thumbSize: new Dimension2( 13, 22 ),
-        thumbFillEnabled: '#00C4DF',
-        thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
-        align: 'center',
-        constrainValue: function( value ) {
-          value = Util.roundSymmetric( value * 100 / 5.75 ) * 5.75;
-          return value / 100;
-        },
-        tandem: tandem.createTandem( 'hSlider' )
-      } );
+        // Creating damping hSlider
+        var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, {
+          top: dampingHSliderTitle.bottom + SPACING * 3,
+          left: dampingHSliderTitle.centerX,
+          majorTickLength: 10,
+          minorTickLength: 5,
+          minorTickLineWidth: 0.5,
+          trackSize: new Dimension2( 120, 0.1 ),
+          thumbSize: new Dimension2( 13, 22 ),
+          thumbFillEnabled: '#00C4DF',
+          thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
+          align: 'center',
+          constrainValue: function( value ) {
+            value = Util.roundSymmetric( value * 100 / 5.75 ) * 5.75;
+            return value / 100;
+          },
+          tandem: tandem.createTandem( 'hSlider' )
+        } );
 
-      dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString, {
-        font: MassesAndSpringsConstants.LABEL_FONT,
-        maxWidth: MAX_WIDTH
-      } ) );
-      dampingHSlider.addMajorTick( dampingRange.min + ( dampingRange.max - dampingRange.min ) / 2 );
-      dampingHSlider.addMajorTick( dampingRange.max, new Text( lotsString, {
-        font: MassesAndSpringsConstants.LABEL_FONT,
-        maxWidth: MAX_WIDTH
-      } ) );
-      for ( var i = 1; i < 6; i++ ) {
-        if ( i !== 3 ) {
-          dampingHSlider.addMinorTick( dampingRange.min + i * ( dampingRange.max - dampingRange.min ) / 6 );
+        dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString, {
+          font: MassesAndSpringsConstants.LABEL_FONT,
+          maxWidth: MAX_WIDTH
+        } ) );
+        dampingHSlider.addMajorTick( dampingRange.min + ( dampingRange.max - dampingRange.min ) / 2 );
+        dampingHSlider.addMajorTick( dampingRange.max, new Text( lotsString, {
+          font: MassesAndSpringsConstants.LABEL_FONT,
+          maxWidth: MAX_WIDTH
+        } ) );
+        for ( var i = 1; i < 6; i++ ) {
+          if ( i !== 3 ) {
+            dampingHSlider.addMinorTick( dampingRange.min + i * ( dampingRange.max - dampingRange.min ) / 6 );
+          }
         }
+
+        var contentNode = new Node( {
+          children: [
+            gravityNumberControl,
+            gravityComboBox,
+            dampingHSliderTitle,
+            dampingHSlider
+          ],
+          tandem: tandem.createTandem( 'gravityPropertyVBox' )
+        } );
+
+        // Content to be added to parent node
+        Node.call( this, { children: [ contentNode ] } );
+
+        // Alignment of Node contents for panel with damping
+        gravityNumberControl.top = this.top;
+        gravityNumberControl.centerX = this.centerX;
+        gravityComboBox.top = gravityNumberControl.bottom + 10;
+        gravityComboBox.centerX = gravityNumberControl.centerX;
+        dampingHSliderTitle.leftTop = new Vector2( gravityNumberControl.left, gravityComboBox.bottom + 10 );
+        dampingHSlider.centerX = gravityNumberControl.centerX;
+        dampingHSlider.top = dampingHSliderTitle.bottom + 5;
       }
+      else {
 
-      var contentNode = new Node( {
-        children: [
-          gravityNumberControl,
-          gravityComboBox,
-          dampingHSliderTitle,
-          dampingHSlider
-        ],
-        tandem: tandem.createTandem( 'gravityPropertyVBox' )
-      } );
+        // Creating text that reads Damping = 0
+        var dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, {
+          equalsZero: MathSymbols.EQUAL_TO + ' 0'
+        } ), {
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH * 2,
+          top: gravityComboBox.bottom + SPACING,
+          centerX: gravityComboBox.centerX
+        } );
 
-      // Content to be added to parent node
-      Node.call( this, { children: [ contentNode ] } );
+        // Content to be added to parent node
+        contentNode = new Node( {
+          children: [
+            gravityNumberControl,
+            gravityComboBox,
+            dampingEqualsZeroText
+          ],
+          tandem: tandem.createTandem( 'gravityPropertyVBox' )
+        } );
+        Node.call( this, { children: [ contentNode ] } );
 
-      // Alignment of Node contents for panel with damping
-      gravityNumberControl.top = this.top;
-      gravityNumberControl.centerX = this.centerX;
-      gravityComboBox.top = gravityNumberControl.bottom + 10;
-      gravityComboBox.centerX = gravityNumberControl.centerX;
-      dampingHSliderTitle.leftTop = new Vector2( gravityNumberControl.left, gravityComboBox.bottom + 10 );
-      dampingHSlider.centerX = gravityNumberControl.centerX;
-      dampingHSlider.top = dampingHSliderTitle.bottom + 5;
+        // Alignment of Node contents for panel without damping on intro and vector screen
+        gravityComboBox.centerX = gravityNumberControl.centerX;
+        gravityComboBox.top = gravityNumberControl.bottom + 10;
+        dampingEqualsZeroText.leftTop = new Vector2( gravityNumberControl.left, gravityComboBox.bottom + 10 );
+      }
     }
-    else {
-
-      // Creating text that reads Damping = 0
-      var dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, {
-        equalsZero: MathSymbols.EQUAL_TO + ' 0'
-      } ), {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH * 2,
-        top: gravityComboBox.bottom + SPACING,
-        centerX: gravityComboBox.centerX
-      } );
+    else{
 
       // Content to be added to parent node
       contentNode = new Node( {
         children: [
           gravityNumberControl,
-          gravityComboBox,
-          dampingEqualsZeroText
+          gravityComboBox
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } );
@@ -245,7 +265,6 @@ define( function( require ) {
       // Alignment of Node contents for panel without damping on intro and vector screen
       gravityComboBox.centerX = gravityNumberControl.centerX;
       gravityComboBox.top = gravityNumberControl.bottom + 10;
-      dampingEqualsZeroText.leftTop = new Vector2( gravityNumberControl.left, gravityComboBox.bottom + 10 );
     }
 
     // Responsible for managing bodies

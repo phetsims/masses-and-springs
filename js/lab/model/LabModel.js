@@ -22,12 +22,13 @@ define( function( require ) {
 
   /**
    * @param {Tandem} tandem
+   * @param {object} options
    *
    * @constructor
    */
-  function LabModel( tandem ) {
+  function LabModel( tandem, options ) {
 
-    MassesAndSpringsModel.call( this, tandem );
+    MassesAndSpringsModel.call( this, tandem, options );
 
     // Lab screen should have spring damping
     this.dampingProperty = new NumberProperty( 0.0575 );
