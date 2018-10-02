@@ -115,8 +115,11 @@ define( function( require ) {
         springStopperButtonNode.enabled = buttonEnabled;
       } );
 
-    // @public {EnergyGraphNode} energy graph that displays energy values for the spring system.
-    this.energyGraphNode = new EnergyGraphNode( model, tandem );
+    if ( !model.options.basicsVersion ) {
+      // @public {EnergyGraphNode} energy graph that displays energy values for the spring system.
+      this.energyGraphNode = new EnergyGraphNode( model, tandem );
+      this.addChild( this.energyGraphNode );
+    }
 
     // Property that determines the zero height in the view.
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
@@ -176,8 +179,8 @@ define( function( require ) {
     zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width + 10);
     this.addChild( zeroHeightLabel );
 
-    // Contains Panels/Nodes that hover near the spring system at the center of the screen.
-    var springSystemControlsNode = new HBox( {
+    // @public {HBox} Contains Panels/Nodes that hover near the spring system at the center of the screen.
+    this.springSystemControlsNode = new HBox( {
       children: [
         massValueControlPanel,
         springHangerNode,
@@ -188,9 +191,8 @@ define( function( require ) {
     } );
 
     // Adding system controls and energy graph to scene graph
-    this.addChild( springSystemControlsNode );
+    this.addChild( this.springSystemControlsNode );
     this.addChild( springConstantControlPanel );
-    this.addChild( this.energyGraphNode );
 
     // Reference lines from indicator visibility box
     this.addChild( this.springEquilibriumLineNode );
@@ -207,15 +209,17 @@ define( function( require ) {
       self.panelRightSpacing = visibleBounds.right - self.spacing;
 
       // Alignment of layout
-      springSystemControlsNode.centerX = springCenter * 0.855; // centering springHangerNode over spring
-      springSystemControlsNode.top = self.spacing;
-      springConstantControlPanel.top = springSystemControlsNode.top;
-      springConstantControlPanel.left = springSystemControlsNode.right + self.spacing;
-      springSystemControlsNode.top = self.spacing;
-      self.energyGraphNode.leftTop = new Vector2( visibleBounds.left + self.spacing, springSystemControlsNode.top );
+      self.springSystemControlsNode.centerX = springCenter * 0.855; // centering springHangerNode over spring
+      self.springSystemControlsNode.top = self.spacing;
+      springConstantControlPanel.top = self.springSystemControlsNode.top;
+      springConstantControlPanel.left = self.springSystemControlsNode.right + self.spacing;
+      self.springSystemControlsNode.top = self.spacing;
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
-
       movableLineNode.centerX = springCenter;
+
+      if (!model.options.basicsVersion){
+        self.energyGraphNode.leftTop = new Vector2( visibleBounds.left + self.spacing, self.springSystemControlsNode.top );
+      }
 
       // Adjusting drag bounds of draggable objects based on visible bounds.
       self.timerNode.timerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(

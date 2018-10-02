@@ -29,7 +29,7 @@ define( function( require ) {
 
     // Calls common spring view
     OneSpringScreenView.call( this, model, tandem, {
-      useSliderLabels:false,
+      useSliderLabels: false,
       dampingVisible: true
     } );
     var self = this;
