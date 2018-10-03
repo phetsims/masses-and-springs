@@ -49,7 +49,7 @@ define( function( require ) {
       default: new Color( 'rgb( 0, 180, 0 )' )
     },
     movableLine: {
-      default: new Color( 'rgb( 0, 180, 0 )' )
+      default: new Color( 'rgb( 255, 0, 0 )' )
     },
     velocityVector: {
       default: new Color('rgb( 41, 253, 46 )')

@@ -15,6 +15,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
@@ -70,7 +71,7 @@ define( function( require ) {
     this.addChild( bodyNode );
 
     var line = new Line( 0, 0, length, 0, {
-      stroke: 'red',
+      stroke: MassesAndSpringsColorProfile.movableLineProperty,
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
       cursor: 'pointer',
