@@ -8,15 +8,12 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
-  var ColorIO = require( 'SCENERY/util/ColorIO' );
   var EnergyModel = require( 'MASSES_AND_SPRINGS/energy/model/EnergyModel' );
   var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var Screen = require( 'JOIST/Screen' );
 
   // strings
@@ -34,10 +31,7 @@ define( function( require ) {
 
     var options = {
       name: screenEnergyString,
-      backgroundColorProperty: new Property( new Color( 'white' ), {
-        tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioType: PropertyIO( ColorIO )
-      } ),
+      backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
       homeScreenIcon: new Image( energyHomeScreenImage ),
       tandem: tandem
     };

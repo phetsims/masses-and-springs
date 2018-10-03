@@ -9,15 +9,12 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
-  var ColorIO = require( 'SCENERY/util/ColorIO' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LabModel = require( 'MASSES_AND_SPRINGS/lab/model/LabModel' );
   var LabScreenView = require( 'MASSES_AND_SPRINGS/lab/view/LabScreenView' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var Screen = require( 'JOIST/Screen' );
 
   // strings
@@ -35,10 +32,7 @@ define( function( require ) {
 
     var options = {
       name: screenLabString,
-      backgroundColorProperty: new Property( new Color( 'white' ), {
-        tandem: tandem.createTandem( 'backgroundColorProperty' ),
-        phetioType: PropertyIO( ColorIO )
-      } ),
+      backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
       homeScreenIcon: new Image( labHomeScreenImage ),
       tandem: tandem
     };
