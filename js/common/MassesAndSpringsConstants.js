@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Line = require( 'SCENERY/nodes/Line' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
@@ -47,8 +48,8 @@ define( function( require ) {
     SPRING_CONSTANT_RANGE: new RangeWithValue( 3, 12, 6 ),
 
     // Constants for vectors
-    VELOCITY_ARROW_COLOR: 'rgb( 41, 253, 46 )',
-    ACCELERATION_ARROW_COLOR: 'rgb( 255, 253, 56 )',
+    VELOCITY_ARROW_COLOR: MassesAndSpringsColorProfile.velocityVectorProperty,
+    ACCELERATION_ARROW_COLOR: MassesAndSpringsColorProfile.accelerationVectorProperty,
     GRAVITY_ARROW_COLOR: 'rgb( 236, 63, 71 )',
     SPRING_ARROW_COLOR: 'rgb( 36, 36, 255 )',
 
@@ -65,7 +66,6 @@ define( function( require ) {
     LEGEND_DESCRIPTION_FONT: new PhetFont( 16 ),
 
     // Constants regarding panels
-    // REVIEW: Consider making an object to pass into options.
     PANEL_VERTICAL_SPACING: 10,
     PANEL_CORNER_RADIUS: 5,
     PANEL_MAX_WIDTH: 175,
