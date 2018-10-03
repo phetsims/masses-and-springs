@@ -145,6 +145,9 @@ define( function( require ) {
         centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value )
       } );
 
+    // Masses and Springs:Basics should not include a zero height reference line
+    if (!model.options.basicsVersion){
+
     // Zero height reference line
     var zeroHeightLine = new ReferenceLineNode(
       this.modelViewTransform,
@@ -180,6 +183,7 @@ define( function( require ) {
     zeroHeightLabel.center = zeroHeightLine.center;
     zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width + 10);
     this.addChild( zeroHeightLabel );
+  }
 
     // @public {HBox} Contains Panels/Nodes that hover near the spring system at the center of the screen.
     this.springSystemControlsNode = new HBox( {
