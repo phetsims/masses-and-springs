@@ -171,8 +171,10 @@ define( function( require ) {
 
     this.resetAllButton.addListener( function() {
       self.model.reset();
-      self.energyGraphNode.reset();
       movableLineNode.reset();
+      if ( !model.options.basicsVersion ) {
+        self.energyGraphNode.reset();
+      }
     } );
 
     zeroHeightLabel.center = zeroHeightLine.center;
@@ -217,7 +219,7 @@ define( function( require ) {
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
       movableLineNode.centerX = springCenter;
 
-      if (!model.options.basicsVersion){
+      if ( !model.options.basicsVersion ) {
         self.energyGraphNode.leftTop = new Vector2( visibleBounds.left + self.spacing, self.springSystemControlsNode.top );
       }
 
