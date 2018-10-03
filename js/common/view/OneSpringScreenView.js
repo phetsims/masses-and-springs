@@ -135,56 +135,56 @@ define( function( require ) {
       tandem.createTandem( 'movableLineNode' )
     );
 
-    // Displacement arrows added for each springs
-    var displacementArrowNode = new DisplacementArrowNode(
-      this.springNodes[ 0 ].spring.displacementProperty,
-      model.naturalLengthVisibleProperty,
-      tandem,
-      {
-        modelViewTransform: this.modelViewTransform,
-        left: this.springNodes[ 0 ].right + 12,
-        centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value )
+    // Masses and Springs:Basics should not include a zero height reference line
+    if ( !model.options.basicsVersion ) {
+
+      // Displacement arrows added for each springs
+      var displacementArrowNode = new DisplacementArrowNode(
+        this.springNodes[ 0 ].spring.displacementProperty,
+        model.naturalLengthVisibleProperty,
+        tandem,
+        {
+          modelViewTransform: this.modelViewTransform,
+          left: this.springNodes[ 0 ].right + 12,
+          centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value )
+        } );
+
+      // Zero height reference line
+      var zeroHeightLine = new ReferenceLineNode(
+        this.modelViewTransform,
+        model.firstSpring,
+        zeroHeightProperty,
+        new Property( true ), {
+          stroke: '#5798de',
+          zeroPointLine: true
+        }
+      );
+      zeroHeightLine.x = this.massEquilibriumLineNode.x;
+      zeroHeightLine.y = zeroHeightProperty.get();
+      this.addChild( zeroHeightLine );
+
+      // Label for zero height
+      var zeroHeightLabel = new HBox( {
+        children: [
+          new Text( heightEqualsZeroString, {
+            font: MassesAndSpringsConstants.TITLE_FONT,
+            fill: zeroHeightLine.stroke,
+            maxWidth: 125
+          } ) ]
       } );
 
-    // Masses and Springs:Basics should not include a zero height reference line
-    if (!model.options.basicsVersion){
+      this.resetAllButton.addListener( function() {
+        self.model.reset();
+        movableLineNode.reset();
+        if ( !model.options.basicsVersion ) {
+          self.energyGraphNode.reset();
+        }
+      } );
 
-    // Zero height reference line
-    var zeroHeightLine = new ReferenceLineNode(
-      this.modelViewTransform,
-      model.firstSpring,
-      zeroHeightProperty,
-      new Property( true ), {
-        stroke: '#5798de',
-        zeroPointLine: true
-      }
-    );
-    zeroHeightLine.x = this.massEquilibriumLineNode.x;
-    zeroHeightLine.y = zeroHeightProperty.get();
-    this.addChild( zeroHeightLine );
-
-    // Label for zero height
-    var zeroHeightLabel = new HBox( {
-      children: [
-        new Text( heightEqualsZeroString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          fill: zeroHeightLine.stroke,
-          maxWidth: 125
-        } ) ]
-    } );
-
-    this.resetAllButton.addListener( function() {
-      self.model.reset();
-      movableLineNode.reset();
-      if ( !model.options.basicsVersion ) {
-        self.energyGraphNode.reset();
-      }
-    } );
-
-    zeroHeightLabel.center = zeroHeightLine.center;
-    zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width + 10);
-    this.addChild( zeroHeightLabel );
-  }
+      zeroHeightLabel.center = zeroHeightLine.center;
+      zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width + 10);
+      this.addChild( zeroHeightLabel );
+    }
 
     // @public {HBox} Contains Panels/Nodes that hover near the spring system at the center of the screen.
     this.springSystemControlsNode = new HBox( {
@@ -204,7 +204,11 @@ define( function( require ) {
     // Reference lines from indicator visibility box
     this.addChild( this.massEquilibriumLineNode );
     this.addChild( naturalLengthLineNode );
-    this.addChild( displacementArrowNode );
+
+    // This is handled here to maintain line node layering order
+    if ( !model.options.basicsVersion ) {
+      this.addChild( displacementArrowNode );
+    }
     this.addChild( movableLineNode );
 
     // Adding layers for draggable objects
