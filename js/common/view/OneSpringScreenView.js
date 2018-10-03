@@ -106,7 +106,7 @@ define( function( require ) {
       model.firstSpring,
       model.firstSpring.bottomProperty,
       model.naturalLengthVisibleProperty, {
-        stroke: 'rgb( 65, 66, 232 )',
+        stroke: MassesAndSpringsColorProfile.unstretchedLengthProperty, // Naming convention pulled from basics version.
         fixedPosition: true
       }
     );

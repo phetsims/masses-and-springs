@@ -43,8 +43,7 @@ define( function( require ) {
       basics: new Color( 'rgb( 247, 151, 34 )' )
     },
     unstretchedLength: {
-      default: new Color( 'rgb( 65, 66, 232 )' ),
-      basics: new Color( 'rgb( 65, 66, 232 )' )
+      default: new Color( 'rgb( 65, 66, 232 )' )
     },
     restingPosition: {
       default: new Color( 'rgb( 0, 180, 0 )' ),

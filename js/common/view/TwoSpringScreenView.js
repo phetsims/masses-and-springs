@@ -15,6 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
@@ -22,8 +23,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // constants
-  var NATURAL_LENGTH_LINE_FILL = 'rgb( 65, 66, 232 )';
 
   // strings
   var largeString = require( 'string!MASSES_AND_SPRINGS/large' );
@@ -96,7 +95,7 @@ define( function( require ) {
         spring,
         spring.bottomProperty,
         model.naturalLengthVisibleProperty, {
-          stroke: NATURAL_LENGTH_LINE_FILL,
+          stroke: MassesAndSpringsColorProfile.unstretchedLengthProperty, // Naming convention pulled from basics version.
           fixedPosition: true
         }
       );
