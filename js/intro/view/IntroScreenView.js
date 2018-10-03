@@ -17,6 +17,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
@@ -30,9 +31,6 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Vector2 = require( 'DOT/Vector2' );
-
-  // constants
-  var EQUILIBRIUM_LINE_FILL = 'rgb(0, 180, 0)';
 
   // strings
   var constantParameterString = require( 'string!MASSES_AND_SPRINGS/constantParameter' );
@@ -151,7 +149,7 @@ define( function( require ) {
       model.firstSpring,
       model.firstSpring.equilibriumYPositionProperty,
       firstMassEquilibriumVisibilityProperty, {
-        stroke: EQUILIBRIUM_LINE_FILL
+        stroke: MassesAndSpringsColorProfile.restingPositionProperty
       }
     );
 
@@ -161,7 +159,7 @@ define( function( require ) {
       model.secondSpring,
       model.secondSpring.equilibriumYPositionProperty,
       secondMassEquilibriumVisibilityProperty, {
-        stroke: EQUILIBRIUM_LINE_FILL
+        stroke: MassesAndSpringsColorProfile.restingPositionProperty
       }
     );
     //Reference lines from indicator visibility box

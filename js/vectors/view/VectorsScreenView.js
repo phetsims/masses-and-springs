@@ -69,7 +69,7 @@ define( function( require ) {
       } );
 
     // Initializes equilibrium line for first spring
-    var firstSpringEquilibriumLineNode = new ReferenceLineNode(
+    var firstMassEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.firstSpring,
       model.firstSpring.massEquilibriumYPositionProperty,
@@ -79,7 +79,7 @@ define( function( require ) {
     );
 
     // Initializes equilibrium line for second spring
-    var secondSpringEquilibriumLineNode = new ReferenceLineNode(
+    var secondMassEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.secondSpring,
       model.secondSpring.massEquilibriumYPositionProperty,
@@ -89,12 +89,12 @@ define( function( require ) {
     );
 
     // Reference lines from indicator visibility box
-    this.addChild( firstSpringEquilibriumLineNode );
-    this.addChild( secondSpringEquilibriumLineNode );
+    this.addChild( firstMassEquilibriumLineNode );
+    this.addChild( secondMassEquilibriumLineNode );
 
     // We do this to prevent overlap with the massNodes.
-    firstSpringEquilibriumLineNode.moveToBack();
-    secondSpringEquilibriumLineNode.moveToBack();
+    firstMassEquilibriumLineNode.moveToBack();
+    secondMassEquilibriumLineNode.moveToBack();
 
     // Contains visibility options for the reference lines and displacement arrow
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );

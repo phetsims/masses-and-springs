@@ -36,7 +36,7 @@ define( function( require ) {
 
     // @protected {PeriodTraceNode}
     this.periodTraceNode = new PeriodTraceNode( model.periodTrace, this.modelViewTransform, {
-      center: this.springEquilibriumLineNode.center
+      center: this.massEquilibriumLineNode.center
     } );
     this.addChild( this.periodTraceNode );
 
