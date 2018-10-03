@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var ParametricSpringNode = require( 'SCENERY_PHET/ParametricSpringNode' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );

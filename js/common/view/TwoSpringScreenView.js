@@ -32,10 +32,9 @@ define( function( require ) {
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
-   * @param {object} options
    * @constructor
    */
-  function TwoSpringScreenView( model, tandem, options ) {
+  function TwoSpringScreenView( model, tandem ) {
     SpringScreenView.call( this, model, tandem );
     var self = this;
 

@@ -20,18 +20,7 @@ define( function( require ) {
   var MassesAndSpringsColorProfile = new ColorProfile( {
     background: {
       default: Color.white,
-      basics: new Color('rgb( 255, 250, 227 )')
-    },
-    centralAtom: {
-      default: new Color( 159, 102, 218 ),
-      basics: new Color( 153, 90, 216 )
-    },
-    atom: {
-      default: new Color( 255, 255, 255 )
-    },
-    bond: {
-      default: new Color( 255, 255, 255 ),
-      basics: new Color( 230, 230, 230 )
+      basics: new Color( 'rgb( 255, 250, 227 )' )
     },
     controlPanelBorder: {
       default: new Color( 210, 210, 210 ),
