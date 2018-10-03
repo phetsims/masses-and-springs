@@ -46,20 +46,16 @@ define( function( require ) {
       default: new Color( 'rgb( 65, 66, 232 )' )
     },
     restingPosition: {
-      default: new Color( 'rgb( 0, 180, 0 )' ),
-      basics: new Color( 'rgb( 0, 180, 0 )' )
+      default: new Color( 'rgb( 0, 180, 0 )' )
     },
     movableLine: {
-      default: new Color( 'rgb( 0, 180, 0 )' ),
-      basics: new Color( 'rgb( 0, 180, 0 )' )
+      default: new Color( 'rgb( 0, 180, 0 )' )
     },
     velocityVector: {
-      default: new Color('rgb( 41, 253, 46 )'),
-      basics: new Color('rgb( 41, 253, 46 )')
+      default: new Color('rgb( 41, 253, 46 )')
     },
     accelerationVector: {
-      default: new Color('rgb( 255, 253, 56 )'),
-      basics: new Color('rgb( 255, 253, 56 )')
+      default: new Color('rgb( 255, 253, 56 )')
     }
   }, [ 'default', 'basics' ] );
 
