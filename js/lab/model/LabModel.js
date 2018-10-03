@@ -40,19 +40,24 @@ define( function( require ) {
       adjustable: true
     } );
 
-    if (this.options.basicsVersion){
-      this.createMass( 0.330, MASS_X_POSITION + MASS_OFFSET * 2, 'rgb( 0, 104, 55 )', null, tandem.createTandem( 'largeLabeledMass' ), {
-        density: 120,
+    // {boolean} Flag used to determine if this is the basics version.
+    var basicsVersion = this.options.basicsVersion;
+    var massValue;
+
+    if ( basicsVersion ) {
+      this.createMass( 0.20, MASS_X_POSITION + MASS_OFFSET * 2, 'rgb( 0, 104, 55 )', null, tandem.createTandem( 'largeLabeledMass' ), {
+        density: basicsVersion ? 80 : 120,
         mysteryLabel: true
       } );
     }
-
-    this.createMass( 0.230, MASS_X_POSITION + MASS_OFFSET * 1.5, 'rgb( 128, 197, 237)', null, tandem.createTandem( 'largeLabeledMass' ), {
-      density: 110,
+    massValue = basicsVersion ? 0.15 : 0.23;
+    this.createMass( massValue, MASS_X_POSITION + MASS_OFFSET * 1.5, 'rgb( 128, 197, 237)', null, tandem.createTandem( 'largeLabeledMass' ), {
+      density: basicsVersion ? 80 : 110,
       mysteryLabel: true
     } );
-    this.createMass( 0.370, MASS_X_POSITION + MASS_OFFSET, 'rgb(255, 120, 120)', null, tandem.createTandem( 'smallLabeledMass' ), {
-      density: 220,
+    massValue = basicsVersion ? 0.075 : 0.37;
+    this.createMass( massValue, MASS_X_POSITION + MASS_OFFSET, 'rgb(255, 120, 120)', null, tandem.createTandem( 'smallLabeledMass' ), {
+      density: basicsVersion ? 80 : 220,
       mysteryLabel: true
     } );
 
