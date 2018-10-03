@@ -22,66 +22,45 @@ define( function( require ) {
       default: Color.white,
       basics: new Color( 'rgb( 255, 250, 227 )' )
     },
-    controlPanelBorder: {
-      default: new Color( 210, 210, 210 ),
-      basics: new Color( 30, 30, 30 )
+    smallMysteryMass: {
+      default: new Color( 'rgb( 246, 164, 255 )' ),
+      basics: new Color( 'rgb( 185, 0, 38 )' )
     },
-    controlPanelTitle: {
-      default: new Color( 240, 240, 240 ),
-      basics: new Color( 0, 0, 0 )
+    mediumMysteryMass: {
+      default: new Color( 'rgb( 0, 222, 224 )' ),
+      basics: new Color( 'rgb( 0, 107, 161 )' )
     },
-    controlPanelText: {
-      default: new Color( 230, 230, 230 ),
-      basics: new Color( 0, 0, 0 )
+    largeMysteryMass: {
+      default: new Color( 'rgb( 250, 186, 75)' ),
+      basics: new Color( 'rgb( 0, 104, 55 )' )
     },
-    realExampleFormula: {
-      default: new Color( 230, 230, 230 )
+    labeledMass: {
+      default: new Color( 'rgb( 153, 153, 153 )' ),
+      basics: new Color( 'rgb( 153, 153, 153 )' )
     },
-    realExampleBorder: {
-      default: new Color( 60, 60, 60 )
+    adjustableMass: {
+      default: new Color( 'rgb( 247, 151, 34 )' ),
+      basics: new Color( 'rgb( 247, 151, 34 )' )
     },
-    lonePairShell: {
-      default: new Color( 255, 255, 255, 0.7 )
+    unstretchedLength: {
+      default: new Color( 'rgb( 65, 66, 232 )' ),
+      basics: new Color( 'rgb( 65, 66, 232 )' )
     },
-    lonePairElectron: {
-      default: new Color( 255, 255, 0, 0.8 )
+    restingPosition: {
+      default: new Color( 'rgb( 0, 180, 0 )' ),
+      basics: new Color( 'rgb( 0, 180, 0 )' )
     },
-    moleculeGeometryName: {
-      default: new Color( 255, 255, 140 ),
-      basics: new Color( 0, 0, 0 )
+    movableLine: {
+      default: new Color( 'rgb( 0, 180, 0 )' ),
+      basics: new Color( 'rgb( 0, 180, 0 )' )
     },
-    electronGeometryName: {
-      default: new Color( 255, 204, 102 ),
-      basics: new Color( 0, 0, 0 )
+    velocityVector: {
+      default: new Color('rgb( 41, 253, 46 )'),
+      basics: new Color('rgb( 41, 253, 46 )')
     },
-    bondAngleReadout: {
-      default: new Color( 255, 255, 255 ),
-      basics: new Color( 0, 0, 0 )
-    },
-    bondAngleSweep: {
-      default: new Color( 128, 128, 128 ),
-      basics: new Color( 84, 122, 165 )
-    },
-    bondAngleArc: {
-      default: new Color( 255, 0, 0 ),
-      basics: new Color( 0, 0, 0 )
-    },
-    removeButtonText: {
-      default: new Color( 0, 0, 0 )
-    },
-    removeButtonBackground: {
-      default: new Color( 255, 200, 0 )
-    },
-    checkbox: {
-      default: new Color( 230, 230, 230 ),
-      basics: new Color( 0, 0, 0 )
-    },
-    checkboxBackground: {
-      default: new Color( 30, 30, 30 ),
-      basics: new Color( 255, 255, 255 )
-    },
-    removePairGroup: {
-      default: new Color( '#d00' )
+    accelerationVector: {
+      default: new Color('rgb( 255, 253, 56 )'),
+      basics: new Color('rgb( 255, 253, 56 )')
     }
   }, [ 'default', 'basics' ] );
 

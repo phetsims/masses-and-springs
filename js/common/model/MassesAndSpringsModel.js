@@ -19,6 +19,7 @@ define( function( require ) {
   var LinearFunction = require( 'DOT/LinearFunction' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
@@ -49,7 +50,7 @@ define( function( require ) {
 
     this.options = options;
 
-    if(options.basicsVersion) {
+    if ( options.basicsVersion ) {
       console.log( 'basics version' );
     }
 
@@ -168,7 +169,7 @@ define( function( require ) {
      *
      * @param {number} mass - mass in kg
      * @param {number} xPosition - starting x-coordinate of the mass object, offset from the first spring position
-     * @param {string} color - color of the MassNode
+     * @param {Color} color - color of the MassNode
      * @param {string} specifiedLabel - customized label for the MassNode
      * @param {Tandem} tandem
      * @param {Object} options
@@ -217,19 +218,19 @@ define( function( require ) {
      * @param {Tandem} tandem
      */
     addDefaultMasses: function( tandem ) {
-      this.createMass( 0.250, 0.12, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'largeLabeledMass' ) );
-      this.createMass( 0.100, 0.20, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass1' ) );
-      this.createMass( 0.100, 0.28, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'mediumLabeledMass2' ) );
-      this.createMass( 0.050, 0.33, 'rgb( 153, 153, 153 )', null, tandem.createTandem( 'smallLabeledMass' ) );
+      this.createMass( 0.250, 0.12, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass' ) );
+      this.createMass( 0.100, 0.20, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
+      this.createMass( 0.100, 0.28, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
+      this.createMass( 0.050, 0.33, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass' ) );
 
       // Mystery masses
-      this.createMass( 0.200, 0.63, 'rgb( 250, 186, 75)', null, tandem.createTandem( 'largeUnlabeledMass' ), {
+      this.createMass( 0.200, 0.63, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeMysteryMass' ), {
         mysteryLabel: true
       } );
-      this.createMass( 0.150, 0.56, 'rgb( 0, 222, 224 )', null, tandem.createTandem( 'mediumUnlabeledMass' ), {
+      this.createMass( 0.150, 0.56, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
         mysteryLabel: true
       } );
-      this.createMass( 0.075, 0.49, 'rgb( 246, 164, 255 )', null, tandem.createTandem( 'smallUnlabeledMass' ), {
+      this.createMass( 0.075, 0.49, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
         mysteryLabel: true
       } );
     },

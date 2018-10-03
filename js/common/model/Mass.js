@@ -37,7 +37,7 @@ define( function( require ) {
   /**
    * @param {number} massValue:  mass in kg
    * @param {number} xPosition - starting x-coordinate of the mass object, offset from the first spring position
-   * @param {string} color: color of shown mass
+   * @param {Color} color: color of shown mass
    * @param {Property.<number>} gravityProperty - the gravity Property from the model
    * @param {Tandem} tandem
    * @param {Object} [options]
@@ -53,7 +53,7 @@ define( function( require ) {
       mysteryLabel: false,
       icon: false, // Determines whether this mass will be displayed as an icon.
       density: 80, // Constant used to keep all of our masses consistent in the model (kg/m^2).
-      color: new Color( color ),
+      color: color,
       zeroReferencePoint: 0 // Height of the mass when it is resting on the shelf (m).
     }, options );
 
@@ -61,7 +61,7 @@ define( function( require ) {
     this.adjustable = options.adjustable;
     this.mysteryLabel = options.mysteryLabel;
     this.icon = options.icon;
-    this.color = color;
+    this.color = color.value;
     this.zeroReferencePoint = options.zeroReferencePoint;
 
     // @public (read-only) {Property.<number>} mass of mass object in kg

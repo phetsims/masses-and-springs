@@ -19,6 +19,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var MassValueControlPanel = require( 'MASSES_AND_SPRINGS/common/view/MassValueControlPanel' );
   var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
@@ -68,7 +69,7 @@ define( function( require ) {
 
     // Icon used in massValueControlPanel
     var massNodeIcon = new MassNode(
-      new Mass( 0.0055, 0, model.masses[ 0 ].color, model.gravityProperty, tandem, { icon: true } ),
+      new Mass( 0.0055, 0, MassesAndSpringsColorProfile.adjustableMassProperty, model.gravityProperty, tandem, { icon: true } ),
       this.modelViewTransform,
       this.visibleBoundsProperty,
       model,
