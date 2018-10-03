@@ -39,12 +39,12 @@ define( function( require ) {
     this.createMass( 0.100, MASS_X_POSITION, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ), {
       adjustable: true
     } );
-    this.createMass( 0.370, MASS_X_POSITION + MASS_OFFSET, 'rgb(255, 120, 120)', null, tandem.createTandem( 'smallLabeledMass' ), {
-      density: 220,
-      mysteryLabel: true
-    } );
     this.createMass( 0.230, MASS_X_POSITION + MASS_OFFSET * 1.5, 'rgb( 128, 197, 237)', null, tandem.createTandem( 'largeLabeledMass' ), {
       density: 110,
+      mysteryLabel: true
+    } );
+    this.createMass( 0.370, MASS_X_POSITION + MASS_OFFSET, 'rgb(255, 120, 120)', null, tandem.createTandem( 'smallLabeledMass' ), {
+      density: 220,
       mysteryLabel: true
     } );
 
