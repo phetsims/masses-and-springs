@@ -39,6 +39,14 @@ define( function( require ) {
     this.createMass( 0.100, MASS_X_POSITION, 'rgb(247,151,34)', null, tandem.createTandem( 'adjustableMass' ), {
       adjustable: true
     } );
+
+    if (this.options.basicsVersion){
+      this.createMass( 0.330, MASS_X_POSITION + MASS_OFFSET * 2, 'rgb( 0, 104, 55 )', null, tandem.createTandem( 'largeLabeledMass' ), {
+        density: 120,
+        mysteryLabel: true
+      } );
+    }
+
     this.createMass( 0.230, MASS_X_POSITION + MASS_OFFSET * 1.5, 'rgb( 128, 197, 237)', null, tandem.createTandem( 'largeLabeledMass' ), {
       density: 110,
       mysteryLabel: true
@@ -47,6 +55,7 @@ define( function( require ) {
       density: 220,
       mysteryLabel: true
     } );
+
 
     // Initialize period trace.
     this.periodTrace = new PeriodTrace( this.springs[ 0 ], this.playingProperty );

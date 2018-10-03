@@ -154,7 +154,7 @@ define( function( require ) {
     // @public {Spring[]} Array that will contain all of the springs.
     this.springs = [];
 
-    // @public {Mass[]} Array that will contain all of the masses.
+    // @public {Mass[]} Array that will contain all of the masses. Order of masses depends on order in array.
     this.masses = [];
   }
 
