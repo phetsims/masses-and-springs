@@ -10,6 +10,7 @@
     "grunt": "^1.0.3"
   },
   "phet": {
+    "colorProfile": true,
     "requirejsNamespace": "MASSES_AND_SPRINGS",
     "phetLibs": [
       "griddle",
