@@ -96,7 +96,7 @@ define( function( require ) {
       model.firstSpring,
       model.firstSpring.massEquilibriumYPositionProperty,
       equilibriumVisibilityProperty, {
-        stroke: 'black'
+        stroke: model.options.basicsVersion ? MassesAndSpringsColorProfile.restingPositionProperty : 'black'
       }
     );
 
