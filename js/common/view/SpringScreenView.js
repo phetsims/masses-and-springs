@@ -148,8 +148,9 @@ define( function( require ) {
     } );
     this.shelf.rectY = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) - this.shelf.rectHeight;
 
-    this.addChild( this.shelf );
-
+    if ( !model.options.basicsVersion ) {
+      this.addChild( this.shelf );
+    }
 
     // @public {GravityAndDampingControlNode} Gravity Control Panel
     this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
