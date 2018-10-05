@@ -31,8 +31,8 @@ define( function( require ) {
 
     MassesAndSpringsModel.call( this, tandem, options );
 
-    // Lab screen should have spring damping
-    this.dampingProperty = new NumberProperty( 0.0575 );
+    // Lab screen shouldn't have spring damping for non-basics version
+    this.dampingProperty = new NumberProperty( this.options.basicsVersion ? 0 : 0.0575 );
 
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
