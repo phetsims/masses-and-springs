@@ -212,27 +212,50 @@ define( function( require ) {
     },
 
     /**
-     * Mass set that contains seven standard masses. Used on the Intro and Vector screens.
+     * Mass set that contains a set of standard masses. Used for several screens in basics and non-basics version.
      * @protected
      *
      * @param {Tandem} tandem
      */
     addDefaultMasses: function( tandem ) {
-      this.createMass( 0.250, 0.12, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass' ) );
-      this.createMass( 0.100, 0.20, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
-      this.createMass( 0.100, 0.28, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
-      this.createMass( 0.050, 0.33, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass' ) );
+      if ( this.options.basicsVersion ) {
+        this.createMass( 0.250, 0.12, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass1' ) );
+        this.createMass( 0.250, 0.16, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass2' ) );
+        this.createMass( 0.100, 0.31, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
+        this.createMass( 0.100, 0.34, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
+        this.createMass( 0.050, 0.45, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass1' ) );
+        this.createMass( 0.050, 0.47, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass2' ) );
 
-      // Mystery masses
-      this.createMass( 0.200, 0.63, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeMysteryMass' ), {
-        mysteryLabel: true
-      } );
-      this.createMass( 0.150, 0.56, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
-        mysteryLabel: true
-      } );
-      this.createMass( 0.075, 0.49, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
-        mysteryLabel: true
-      } );
+
+        // Mystery masses
+        this.createMass( 0.200, 0.79, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeMysteryMass' ), {
+          mysteryLabel: true
+        } );
+        this.createMass( 0.150, 0.72, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
+          mysteryLabel: true
+        } );
+        this.createMass( 0.075, 0.65, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
+          mysteryLabel: true
+        } );
+      }
+      else {
+        this.createMass( 0.250, 0.12, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass' ) );
+        this.createMass( 0.100, 0.20, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
+        this.createMass( 0.100, 0.28, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
+        this.createMass( 0.050, 0.33, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass' ) );
+
+
+        // Mystery masses
+        this.createMass( 0.200, 0.63, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeMysteryMass' ), {
+          mysteryLabel: true
+        } );
+        this.createMass( 0.150, 0.56, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
+          mysteryLabel: true
+        } );
+        this.createMass( 0.075, 0.49, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
+          mysteryLabel: true
+        } );
+      }
     },
 
     /**
