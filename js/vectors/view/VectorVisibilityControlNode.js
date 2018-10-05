@@ -82,7 +82,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
     } );
 
-    // responsible for forces vectors checkboxes
+    // Responsible for forces vectors checkboxes
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new Text( gravityString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
