@@ -221,10 +221,10 @@ define( function( require ) {
       if ( this.options.basicsVersion ) {
         this.createMass( 0.250, 0.12, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass1' ) );
         this.createMass( 0.250, 0.16, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass2' ) );
-        this.createMass( 0.100, 0.31, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
-        this.createMass( 0.100, 0.34, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
-        this.createMass( 0.050, 0.45, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass1' ) );
-        this.createMass( 0.050, 0.47, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass2' ) );
+        this.createMass( 0.100, 0.30, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
+        this.createMass( 0.100, 0.33, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
+        this.createMass( 0.050, 0.425, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass1' ) );
+        this.createMass( 0.050, 0.445, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass2' ) );
 
 
         // Mystery masses
