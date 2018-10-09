@@ -55,8 +55,8 @@ define( function( require ) {
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } )
     ];
 
-    // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
-    var equilibriumVisibilityProperty = new DerivedProperty(
+    // @public {DerivedProperty.<boolean>} Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
+    this.equilibriumVisibilityProperty = new DerivedProperty(
       [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         if ( massAttached ) {
@@ -95,7 +95,7 @@ define( function( require ) {
       this.modelViewTransform,
       model.firstSpring,
       model.firstSpring.massEquilibriumYPositionProperty,
-      equilibriumVisibilityProperty, {
+      this.equilibriumVisibilityProperty, {
         stroke: model.options.basicsVersion ? MassesAndSpringsColorProfile.restingPositionProperty : 'black'
       }
     );
@@ -202,7 +202,9 @@ define( function( require ) {
     this.addChild( springConstantControlPanel );
 
     // Reference lines from indicator visibility box
-    this.addChild( this.massEquilibriumLineNode );
+    if ( !model.options.basicsVersion ) {
+      this.addChild( this.massEquilibriumLineNode );
+    }
     this.addChild( naturalLengthLineNode );
 
     // This is handled here to maintain line node layering order
