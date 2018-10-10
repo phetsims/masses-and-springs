@@ -72,7 +72,7 @@ define( function( require ) {
       model.firstSpring,
       model.firstSpring.massEquilibriumYPositionProperty,
       firstMassEquilibriumVisibilityProperty, {
-        stroke: MassesAndSpringsColorProfile.restingPositionProperty
+        stroke: 'black'
       }
     );
 
@@ -82,7 +82,7 @@ define( function( require ) {
       model.secondSpring,
       model.secondSpring.massEquilibriumYPositionProperty,
       secondMassEquilibriumVisibilityProperty, {
-        stroke: MassesAndSpringsColorProfile.restingPositionProperty
+        stroke: 'black'
       }
     );
 
