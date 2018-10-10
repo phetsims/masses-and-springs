@@ -47,7 +47,6 @@ define( function( require ) {
       adjustable: true
     } );
 
-
     if ( basicsVersion ) {
       this.createMass( 0.20, massXPosition + MASS_OFFSET * 2, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass2' ), {
         density: basicsVersion ? 80 : 120,
@@ -64,7 +63,6 @@ define( function( require ) {
       density: basicsVersion ? 80 : 220,
       mysteryLabel: true
     } );
-
 
     // Initialize period trace.
     this.periodTrace = new PeriodTrace( this.springs[ 0 ], this.playingProperty );

@@ -23,23 +23,27 @@ define( function( require ) {
   /**
    * @param {PeriodTrace} periodTrace
    * @param {ModelViewTransform2} modelViewTransform
+   * @param {boolean} basicsVersion
    *
    * @constructor
    */
-  function PeriodTraceNode( periodTrace, modelViewTransform ) {
+  function PeriodTraceNode( periodTrace, modelViewTransform, basicsVersion ) {
     Node.call( this );
     var self = this;
 
-    // @public {PeriodTrace} Model element for the period trace.
+    // @public {PeriodTrace} Model element for the period trace
     this.periodTrace = periodTrace;
+
+    // @private {boolean} Flag used for basics or non-basics version of the sim
+    this.basicsVersion = basicsVersion;
 
     // @private {number} The opacity of the trace (not using Node opacity for performance reasons)
     this.colorAlpha = 1;
 
-    // @private
+    // @private {Color}
     this.traceColor = new Color( 'black' );
 
-    // @private
+    // @private {ModelViewTransForm}
     this.modelViewTransform = modelViewTransform;
 
     this.originalX = this.modelViewTransform.modelToViewX( this.periodTrace.spring.positionProperty.value.x - 0.2 );
@@ -84,7 +88,7 @@ define( function( require ) {
         if ( mass && !mass.userControlledProperty.value ) {
 
           // Transforming our model positions into view positions.
-          var massEquilibrium = spring.massEquilibriumYPositionProperty.value;
+          var massEquilibrium = this.basicsVersion ? spring.equilibriumYPositionProperty.value : spring.massEquilibriumYPositionProperty.value;
           var equilibriumYPosition = modelViewTransform.modelToViewY( massEquilibrium );
           var firstPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.firstPeakY );
           var secondPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.secondPeakY );
@@ -103,7 +107,7 @@ define( function( require ) {
             // sets our initial position
             this.shape.moveTo( this.originalX, equilibriumYPosition );
 
-            // draws a line from our current position to a NEW position, then sets our current position to the NEW position
+            // draws a line from our current position to a new position, then sets our current position to the new position
             this.shape.verticalLineTo( state === 1 ? currentYPosition : firstPeakYPosition );
             if ( state > 1 ) {
 
