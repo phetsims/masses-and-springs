@@ -14,7 +14,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var TwoSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringScreenView' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -86,13 +85,17 @@ define( function( require ) {
       }
     );
 
+    // Adding system controls to scene graph
+    this.addChild( this.springSystemControlsNode );
+
     // Reference lines from indicator visibility box
+    this.addChild( this.firstNaturalLengthLineNode );
+    this.addChild( this.secondNaturalLengthLineNode );
     this.addChild( firstMassEquilibriumLineNode );
     this.addChild( secondMassEquilibriumLineNode );
-
-    // We do this to prevent overlap with the massNodes.
-    firstMassEquilibriumLineNode.moveToBack();
-    secondMassEquilibriumLineNode.moveToBack();
+    this.addChild( this.movableLineNode );
+    this.addChild( this.massLayer );
+    this.addChild( this.toolsLayer );
 
     // Contains visibility options for the reference lines and displacement arrow
     var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );

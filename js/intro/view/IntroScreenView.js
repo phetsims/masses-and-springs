@@ -162,14 +162,18 @@ define( function( require ) {
         stroke: MassesAndSpringsColorProfile.restingPositionProperty
       }
     );
-    //Reference lines from indicator visibility box
+
+    // Adding system controls to scene graph
+    this.addChild( this.springSystemControlsNode );
+
+    // Reference lines from indicator visibility box
+    this.addChild( this.firstNaturalLengthLineNode );
+    this.addChild( this.secondNaturalLengthLineNode );
     this.addChild( firstSpringEquilibriumLineNode );
     this.addChild( secondSpringEquilibriumLineNode );
-
-    // We do this to prevent overlap with the massNodes.
-    firstSpringEquilibriumLineNode.moveToBack();
-    secondSpringEquilibriumLineNode.moveToBack();
-
+    this.addChild( this.movableLineNode );
+    this.addChild( this.massLayer );
+    this.addChild( this.toolsLayer );
 
     // Link responsible for visibility of the length control panel.
     model.sceneModeProperty.lazyLink( function( mode ) {

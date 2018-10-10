@@ -75,9 +75,10 @@ define( function( require ) {
     this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, minMaxLabels, tandem );
     this.secondSpringConstantControlPanel.left = this.secondSpringStopperButtonNode.right + this.spacing;
 
-    // Initializes red movable reference line
     var xBoundsLimit = this.springHangerNode.centerX + 5;
-    var movableLineNode = new MovableLineNode(
+
+    // @public {MovableLineNode} Initializes red movable reference line
+    this.movableLineNode = new MovableLineNode(
       this.visibleBoundsProperty.value.center.minus( new Vector2( 45, 0 ) ),
       210,
       model.movableLineVisibleProperty,
@@ -101,12 +102,12 @@ define( function( require ) {
       );
     };
 
-    // Initializes natural line for springs
-    var firstNaturalLengthLineNode = createNaturalLineNode( model.firstSpring );
-    var secondNaturalLengthLineNode = createNaturalLineNode( model.secondSpring );
+    // @public {ReferenceLineNode} Initializes natural line for springs
+    this.firstNaturalLengthLineNode = createNaturalLineNode( model.firstSpring );
+    this.secondNaturalLengthLineNode = createNaturalLineNode( model.secondSpring );
 
     this.resetAllButton.addListener( function() {
-      movableLineNode.reset();
+      self.movableLineNode.reset();
     } );
 
     // @public {HBox} Contains Panels/Nodes that hover near the spring system at the center of the screen.
@@ -121,16 +122,6 @@ define( function( require ) {
       spacing: this.spacing,
       align: 'top'
     } );
-
-    // Adding system controls to scene graph
-    this.addChild( this.springSystemControlsNode );
-
-    // Reference lines from indicator visibility box
-    this.addChild( firstNaturalLengthLineNode );
-    this.addChild( secondNaturalLengthLineNode );
-    this.addChild( movableLineNode );
-    this.addChild( this.massLayer );
-    this.addChild( this.toolsLayer );
 
     // {number} Used in determining springSystemControlsNode's placement
     var distanceBetweenSprings = (self.modelViewTransform.modelToViewX(
