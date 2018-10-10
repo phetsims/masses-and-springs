@@ -336,8 +336,7 @@ define( function( require ) {
       return new IndicatorVisibilityControlNode(
         model,
         tandem.createTandem( 'indicatorVisibilityControlNode' ), {
-          enableMovableLine: options.enableMovableLine,
-          enablePeriodTrace: displayPeriodTrace
+          periodTraceOption: displayPeriodTrace
         } );
     },
 
