@@ -18,7 +18,6 @@ define( function( require ) {
   var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
 
   // constants
-  var MASS_X_POSITION = 0.625;
   var MASS_OFFSET = 0.15;
 
   /**
@@ -37,27 +36,31 @@ define( function( require ) {
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
 
-    this.createMass( 0.100, MASS_X_POSITION, MassesAndSpringsColorProfile.adjustableMassProperty, null, tandem.createTandem( 'adjustableMass' ), {
-      adjustable: true
-    } );
 
     // {boolean} Flag used to determine if this is the basics version.
     var basicsVersion = this.options.basicsVersion;
+    var massXPosition = basicsVersion ? 0.13 : 0.625;
     var massValue;
 
+
+    this.createMass( 0.100, massXPosition, MassesAndSpringsColorProfile.adjustableMassProperty, null, tandem.createTandem( 'adjustableMass' ), {
+      adjustable: true
+    } );
+
+
     if ( basicsVersion ) {
-      this.createMass( 0.20, MASS_X_POSITION + MASS_OFFSET * 2, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass2' ), {
+      this.createMass( 0.20, massXPosition + MASS_OFFSET * 2, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass2' ), {
         density: basicsVersion ? 80 : 120,
         mysteryLabel: true
       } );
     }
     massValue = basicsVersion ? 0.15 : 0.23;
-    this.createMass( massValue, MASS_X_POSITION + MASS_OFFSET * 1.5, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass' ), {
+    this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass' ), {
       density: basicsVersion ? 80 : 110,
       mysteryLabel: true
     } );
     massValue = basicsVersion ? 0.075 : 0.37;
-    this.createMass( massValue, MASS_X_POSITION + MASS_OFFSET, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallLabeledMass' ), {
+    this.createMass( massValue, massXPosition + MASS_OFFSET, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallLabeledMass' ), {
       density: basicsVersion ? 80 : 220,
       mysteryLabel: true
     } );
