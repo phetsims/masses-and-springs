@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
   var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   var ForcesModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/ForcesModeChoice' );
@@ -34,6 +35,7 @@ define( function( require ) {
 
   // constants
   var MAX_WIDTH = 205;
+  var CONTENT_SPACING = 73;
 
   /**
    * @param {VectorModel} model
@@ -56,47 +58,57 @@ define( function( require ) {
     var springArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
     var netForceArrow = new ForceVectorArrow( 'black' );
 
+    // Align group used for label align boxes
+    var alignGroup = new AlignGroup( { matchVertical: false } );
+
+    var velocityAlignBox = new AlignBox( new Text( velocityString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: MAX_WIDTH,
+      tandem: tandem.createTandem( 'velocityString' )
+    } ), { group: alignGroup, xAlign: 'left' } );
+
+    var accelerationAlignBox = new AlignBox( new Text( accelerationString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: MAX_WIDTH,
+      tandem: tandem.createTandem( 'accelerationString' )
+    } ), { group: alignGroup, xAlign: 'left' } );
+
     // responsible for velocity and acceleration vectors checkboxes
     var vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new Text( velocityString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH,
-        tandem: tandem.createTandem( 'velocityString' )
-      } ),
+      node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
       property: model.velocityVectorVisibilityProperty,
       label: velocityString
     }, {
-      node: new Text( accelerationString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH,
-        tandem: tandem.createTandem( 'accelerationString' )
-      } ),
+      node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
       property: model.accelerationVectorVisibilityProperty,
       label: accelerationString
     }
     ], {
       checkboxOptions: {
         boxWidth: 16,
-        spacing:8
+        spacing: 8
       },
       tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
     } );
 
+    var gravityAlignBox = new AlignBox( new Text( gravityString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: MAX_WIDTH,
+      tandem: tandem.createTandem( 'gravityString' )
+    } ), { group: alignGroup, xAlign: 'left' } );
+    var springAlignBox = new AlignBox( new Text( springString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: MAX_WIDTH,
+      tandem: tandem.createTandem( 'springString' )
+    } ), { group: alignGroup, xAlign: 'left' } );
+
     // Responsible for forces vectors checkboxes
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new Text( gravityString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH,
-        tandem: tandem.createTandem( 'gravityString' )
-      } ),
+      node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: CONTENT_SPACING-22 } ),
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
     }, {
-      node: new Text( springString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH,
-        tandem: tandem.createTandem( 'springString' )
-      } ),
+      node: new HBox( { children: [ springAlignBox, springArrow ], spacing: CONTENT_SPACING-22 } ),
       property: model.springVectorVisibilityProperty,
       label: springString
     } ], {
@@ -120,16 +132,15 @@ define( function( require ) {
     );
 
     // responsible for net force aquaRadioButton
+    var netForceAlignBox = new AlignBox( new Text( netForceString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: MAX_WIDTH,
+      tandem: tandem.createTandem( 'netForceString' )
+    } ), { group: alignGroup, xAlign: 'left' } );
     var netForceVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
       ForcesModeChoice.NET_FORCES,
-      new HBox( {
-        children: [ new Text( netForceString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
-          tandem: tandem.createTandem( 'netForceString' )
-        } ) ]
-      } ),
+      new HBox( { children: [ netForceAlignBox, netForceArrow ], spacing: CONTENT_SPACING } ),
       { radius: 7, spacing: 7 }
     );
 
@@ -148,9 +159,6 @@ define( function( require ) {
     // Contains all checkboxes and radio buttons for vector visibility
     var vectorVisibilityControlsVBox;
 
-    // Contains all vectors for each force
-    var vectorVBox;
-
     // groups the checkboxes and forces aquaRadioButton
     if ( options.showForces ) {
       vectorVisibilityControlsVBox = new VBox( {
@@ -165,22 +173,6 @@ define( function( require ) {
           tandem: tandem.createTandem( 'spacingUnit' )
         }
       );
-      vectorVBox = new VBox( {
-        children: [
-          velocityArrow,
-          new VStrut( 8 ),
-          accelerationArrow,
-          new VStrut( 35 ),
-          gravityArrow,
-          new VStrut( 10 ),
-          springArrow,
-          new VStrut( 15 ),
-          netForceArrow
-        ],
-        yMargin: 0,
-        align: 'left',
-        tandem: tandem.createTandem( 'spacingUnit' )
-      } );
     }
     else {
       vectorVisibilityControlsVBox = new VBox( {
@@ -190,21 +182,11 @@ define( function( require ) {
         align: 'left',
         tandem: tandem.createTandem( 'spacingUnit' )
       } );
-      vectorVBox = new VBox( {
-        children: [
-          velocityArrow,
-          new VStrut( 12 ),
-          accelerationArrow
-        ],
-        align: 'left',
-        tandem: tandem.createTandem( 'spacingUnit' )
-      } );
     }
     var controlsHBox = new HBox( {
-      spacing: 55,
+      spacing: 65,
       children: [
-        vectorVisibilityControlsVBox,
-        vectorVBox
+        vectorVisibilityControlsVBox
       ]
     } );
     this.addChild( controlsHBox );
