@@ -23,7 +23,6 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
   var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
   var accelerationString = require( 'string!MASSES_AND_SPRINGS/acceleration' );
