@@ -125,9 +125,9 @@ define( function( require ) {
     // Property that determines the zero height in the view.
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
 
-    // Initializes movable line
+    // @public {MovableLineNode} Initializes movable line
     var xBoundsLimit = springCenter + this.spacing * 1.1;
-    var movableLineNode = new MovableLineNode(
+    this.movableLineNode = new MovableLineNode(
       springHangerNode.center.plus( new Vector2( 45, 200 ) ),
       100,
       model.movableLineVisibleProperty,
@@ -175,7 +175,7 @@ define( function( require ) {
 
       this.resetAllButton.addListener( function() {
         self.model.reset();
-        movableLineNode.reset();
+        self.movableLineNode.reset();
         if ( !model.options.basicsVersion ) {
           self.energyGraphNode.reset();
         }
@@ -211,7 +211,7 @@ define( function( require ) {
     if ( !model.options.basicsVersion ) {
       this.addChild( displacementArrowNode );
     }
-    this.addChild( movableLineNode );
+    this.addChild( this.movableLineNode );
 
     // Adding layers for draggable objects
     this.addChild( this.massLayer );
@@ -228,7 +228,7 @@ define( function( require ) {
       springConstantControlPanel.left = self.springSystemControlsNode.right + self.spacing;
       self.springSystemControlsNode.top = self.spacing;
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
-      movableLineNode.centerX = springCenter;
+      self.movableLineNode.centerX = springCenter;
 
       if ( !model.options.basicsVersion ) {
         self.energyGraphNode.leftTop = new Vector2( visibleBounds.left + self.spacing, self.springSystemControlsNode.top );
