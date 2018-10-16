@@ -229,13 +229,13 @@ define( function( require ) {
 
         // Mystery masses
         this.createMass( 0.200, 0.76, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeMysteryMass' ), {
-          mysteryLabel: false
+          mysteryLabel: true
         } );
         this.createMass( 0.100, 0.69, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
-          mysteryLabel: false
+          mysteryLabel: true
         } );
         this.createMass( 0.075, 0.62, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
-          mysteryLabel: false
+          mysteryLabel: true
         } );
       }
       else {

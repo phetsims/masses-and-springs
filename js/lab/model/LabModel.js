@@ -48,18 +48,18 @@ define( function( require ) {
     if ( basicsVersion ) {
       this.createMass( 0.180, massXPosition + MASS_OFFSET * 2, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass2' ), {
         density: basicsVersion ? 80 : 120,
-        mysteryLabel: false
+        mysteryLabel: true
       } );
     }
     massValue = basicsVersion ? 0.12 : 0.23;
     this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass' ), {
       density: basicsVersion ? 80 : 110,
-      mysteryLabel: false
+      mysteryLabel: true
     } );
     massValue = basicsVersion ? 0.060 : 0.37;
     this.createMass( massValue, massXPosition + MASS_OFFSET, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallLabeledMass' ), {
       density: basicsVersion ? 80 : 220,
-      mysteryLabel: false
+      mysteryLabel: true
     } );
 
     // Initialize period trace.
