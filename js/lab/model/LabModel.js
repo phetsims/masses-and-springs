@@ -47,18 +47,18 @@ define( function( require ) {
 
     if ( basicsVersion ) {
       this.createMass( 0.20, massXPosition + MASS_OFFSET * 2, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass2' ), {
-        density: basicsVersion ? 60 : 120,
+        density: basicsVersion ? 80 : 120,
         mysteryLabel: false
       } );
     }
     massValue = basicsVersion ? 0.15 : 0.23;
     this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass' ), {
-      density: basicsVersion ? 120 : 110,
+      density: basicsVersion ? 80 : 110,
       mysteryLabel: false
     } );
     massValue = basicsVersion ? 0.075 : 0.37;
     this.createMass( massValue, massXPosition + MASS_OFFSET, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallLabeledMass' ), {
-      density: basicsVersion ? 180 : 220,
+      density: basicsVersion ? 80 : 220,
       mysteryLabel: false
     } );
 
