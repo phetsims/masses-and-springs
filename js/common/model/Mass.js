@@ -27,7 +27,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // ifphetio
-  var NullableIO = require( 'ifphetio!PHET_IO/types/NullableIO' );
+  var NullableIO = require( 'TANDEM/types/NullableIO' );
 
   // constants
   var HEIGHT_RATIO = 2.5;
