@@ -29,6 +29,7 @@ define( function( require ) {
   var forcesString = require( 'string!MASSES_AND_SPRINGS/forces' );
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
   var netForceString = require( 'string!MASSES_AND_SPRINGS/netForce' );
+  var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
   var springString = require( 'string!MASSES_AND_SPRINGS/spring' );
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
 
@@ -72,23 +73,51 @@ define( function( require ) {
       tandem: tandem.createTandem( 'accelerationString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
-    // responsible for velocity and acceleration vectors checkboxes
-    var vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
-      property: model.velocityVectorVisibilityProperty,
-      label: velocityString
-    }, {
-      node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
-      property: model.accelerationVectorVisibilityProperty,
-      label: accelerationString
+    // Responsible for velocity and acceleration vectors checkboxes and period trace in basics version
+    var vectorVisibilityCheckboxGroup;
+
+    if ( !model.options.basicsVersion ) {
+      vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+        node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
+        property: model.velocityVectorVisibilityProperty,
+        label: velocityString
+      }, {
+        node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
+        property: model.accelerationVectorVisibilityProperty,
+        label: accelerationString
+      } ], {
+        checkboxOptions: {
+          boxWidth: 16,
+          spacing: 8
+        },
+        tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
+      } );
     }
-    ], {
-      checkboxOptions: {
-        boxWidth: 16,
-        spacing: 8
-      },
-      tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
-    } );
+    else {
+      vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+        node: new Text( periodTraceString, {
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: MAX_WIDTH,
+          tandem: tandem.createTandem( 'periodTraceString' )
+        } ),
+        property: model.firstSpring.periodTraceVisibilityProperty
+      }, {
+        node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
+        property: model.velocityVectorVisibilityProperty,
+        label: velocityString
+      }, {
+        node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
+        property: model.accelerationVectorVisibilityProperty,
+        label: accelerationString
+      }
+      ], {
+        checkboxOptions: {
+          boxWidth: 16,
+          spacing: 8
+        },
+        tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
+      } );
+    }
 
     var gravityAlignBox = new AlignBox( new Text( gravityString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
@@ -103,11 +132,11 @@ define( function( require ) {
 
     // Responsible for forces vectors checkboxes
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: CONTENT_SPACING-22 } ),
+      node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: CONTENT_SPACING - 22 } ),
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
     }, {
-      node: new HBox( { children: [ springAlignBox, springArrow ], spacing: CONTENT_SPACING-22 } ),
+      node: new HBox( { children: [ springAlignBox, springArrow ], spacing: CONTENT_SPACING - 22 } ),
       property: model.springVectorVisibilityProperty,
       label: springString
     } ], {
