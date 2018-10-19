@@ -22,6 +22,7 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -65,6 +66,9 @@ define( function( require ) {
       stroke: null,
       valueMaxWidth: 100,
       sliderIndent: 7,
+      constrainValue: function( value ) {
+        return ( Util.roundSymmetric( value / 10 ) * 10);
+      },
       majorTicks: [
         {
           value: range.min,
@@ -98,7 +102,7 @@ define( function( require ) {
       xMargin: 6
     } );
 
-    massNodeIcon.leftTop = numberControl.leftTop.plus( new Vector2( 45 , -2 ) );
+    massNodeIcon.leftTop = numberControl.leftTop.plus( new Vector2( 45, -2 ) );
     massNodeIcon.pickable = false;
   }
 
