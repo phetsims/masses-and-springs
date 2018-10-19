@@ -21,7 +21,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var springStiffnessString = require( 'string!MASSES_AND_SPRINGS/springStiffness' );
+  var springStrengthString = require( 'string!MASSES_AND_SPRINGS/springStrength' );
   var thicknessString = require( 'string!MASSES_AND_SPRINGS/thickness' );
 
   // constants
@@ -59,7 +59,7 @@ define( function( require ) {
       } );
 
     var constantText = new Text(
-      StringUtils.fillIn( springStiffnessString, { spring: '' } ),
+      StringUtils.fillIn( springStrengthString, { spring: '' } ),
       _.extend( { font: TITLE_FONT, tandem: tandem.createTandem( 'constantText' ) },
         constantsSelectionButtonOptions ) );
     var springConstantRadioButton = new AquaRadioButton(

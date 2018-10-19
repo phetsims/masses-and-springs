@@ -131,8 +131,8 @@
   "spring": {
     "value": "Spring"
   },
-  "springStiffness": {
-    "value": " Spring Stiffness {{spring}}"
+  "springStrength": {
+    "value": " Spring Strength {{spring}}"
   },
   "springConstant": {
     "value": "Spring Constant {{spring}}"
