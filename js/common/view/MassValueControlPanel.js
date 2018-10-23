@@ -105,7 +105,6 @@ define( function( require ) {
 
     // TODO: Is there a better way of doing this outside of redeclaring the numberControl just to change a few options?
     if ( options.basicsVersion ) {
-      debugger;
       numberControl = new NumberControl( massString, massInGramsProperty, range, {
         valuePattern: StringUtils.fillIn( massValueString, {
           mass: '{0}'
