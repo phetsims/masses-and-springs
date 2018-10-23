@@ -41,7 +41,6 @@ define( function( require ) {
 
     options = _.extend( {
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
-      maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 8,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       fill: 'white',
       align: 'center',
@@ -106,6 +105,7 @@ define( function( require ) {
 
     // TODO: Is there a better way of doing this outside of redeclaring the numberControl just to change a few options?
     if ( options.basicsVersion ) {
+      debugger;
       numberControl = new NumberControl( massString, massInGramsProperty, range, {
         valuePattern: StringUtils.fillIn( massValueString, {
           mass: '{0}'
