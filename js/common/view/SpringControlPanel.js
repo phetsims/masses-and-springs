@@ -42,6 +42,8 @@ define( function( require ) {
       visible: false,
       sliderIndent: 0,
       minorTickMarksVisible: true,
+      sliderTrackSize: new Dimension2( 120, 0.1 ),
+      tickLabelSpacing: 6,
       constrainValue: function( value ) {
         return Util.roundSymmetric( value );
       }
@@ -55,7 +57,8 @@ define( function( require ) {
       majorTickLength: 10,
       minorTickLength: 5,
       minorTickLineWidth: 0.5,
-      trackSize: new Dimension2( 120, 0.1 ),
+      tickLabelSpacing: options.tickLabelSpacing,
+      trackSize: options.sliderTrackSize,
       thumbSize: new Dimension2( 13, 22 ),
       thumbFillEnabled: '#00C4DF',
       thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,

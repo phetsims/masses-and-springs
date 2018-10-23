@@ -13,6 +13,7 @@ define( function( require ) {
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var ClosestDragListener = require( 'SUN/ClosestDragListener' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var DynamicProperty = require( 'AXON/DynamicProperty' );
   var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
   var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
@@ -295,16 +296,25 @@ define( function( require ) {
      * @param {number} springIndex
      * @param {Array.<Text>} labels
      * @param {Tandem} tandem
+     * @param {object} options
+     *
      * @returns {SpringControlPanel}
      */
-    createSpringConstantPanel: function( springIndex, labels, tandem ) {
+    createSpringConstantPanel: function( springIndex, labels, tandem, options ) {
 
-      // Additional logic for compatibility with Masses and Springs: Basics
-      var string = this.model.options.basicsVersion ? springStrengthString : springConstantString;
+      // Additional options for compatibility with Masses and Springs: Basics
+      options = _.extend( {
+        string: this.model.options.basicsVersion ? springStrengthString : springConstantString,
+        sliderTrackSize: new Dimension2( 120, 0.1 ),
+        yMargin: 5,
+        spacing: 3,
+        tickLabelSpacing: 6
+      }, options );
+
       return new SpringControlPanel(
         this.model.springs[ springIndex ].springConstantProperty,
         MassesAndSpringsConstants.SPRING_CONSTANT_RANGE,
-        StringUtils.fillIn( string, { spring: springIndex + 1, maxWidth: 40 } ),
+        StringUtils.fillIn( options.string, { spring: springIndex + 1, maxWidth: 40 } ),
         labels,
         tandem.createTandem( 'firstSpringConstantControlPanel' ),
         {
@@ -312,6 +322,10 @@ define( function( require ) {
           visible: true,
           fill: 'white',
           stroke: 'gray',
+          spacing: options.spacing,
+          yMargin: options.yMargin,
+          sliderTrackSize: options.sliderTrackSize,
+          tickLabelSpacing: options.tickLabelSpacing,
           constrainValue: function( value ) {
             return Number( Util.toFixed( value, 0 ) );
           }

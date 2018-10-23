@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var EnergyGraphNode = require( 'MASSES_AND_SPRINGS/common/view/EnergyGraphNode' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -78,7 +79,10 @@ define( function( require ) {
     var massValueControlPanel = new MassValueControlPanel(
       model.masses[ 0 ],
       this.massNodeIcon,
-      tandem.createTandem( 'massValueControlPanel' )
+      tandem.createTandem( 'massValueControlPanel' ), {
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 8,
+        yMargin: 5
+      }
     );
 
     this.springHangerNode = new SpringHangerNode( model.springs,
@@ -88,7 +92,15 @@ define( function( require ) {
         singleSpring: true
       } );
     this.springStopperButtonNode = this.createStopperButton( this.model.firstSpring, tandem );
-    var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
+
+    // TODO: Is there a better way to refactor this?
+    // @public {SpringControlPanel} Accessed in Basics version
+    this.springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem, {
+      sliderTrackSize: model.options.basicsVersion ? new Dimension2( 140, 0.1 ) : new Dimension2( 120, 0.1 ),
+      yMargin: model.options.basicsVersion ? 8 : 5,
+      spacing: model.options.basicsVersion ? 7 : 3,
+      tickLabelSpacing: model.options.basicsVersion ? 9 : 6
+    } );
 
     // @public {ReferenceLineNode} Initializes equilibrium line for an attached mass
     this.massEquilibriumLineNode = new ReferenceLineNode(
@@ -199,7 +211,7 @@ define( function( require ) {
 
     // Adding system controls and energy graph to scene graph
     this.addChild( this.springSystemControlsNode );
-    this.addChild( springConstantControlPanel );
+    this.addChild( this.springConstantControlPanel );
 
     // Reference lines from indicator visibility box
     if ( !model.options.basicsVersion ) {
@@ -224,8 +236,8 @@ define( function( require ) {
       // Alignment of layout
       self.springSystemControlsNode.centerX = self.springCenter * 0.855; // centering springHangerNode over spring
       self.springSystemControlsNode.top = self.spacing;
-      springConstantControlPanel.top = self.springSystemControlsNode.top;
-      springConstantControlPanel.left = self.springSystemControlsNode.right + self.spacing;
+      self.springConstantControlPanel.top = self.springSystemControlsNode.top;
+      self.springConstantControlPanel.left = self.springSystemControlsNode.right + self.spacing;
       self.springSystemControlsNode.top = self.spacing;
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
       self.movableLineNode.centerX = self.springCenter;
