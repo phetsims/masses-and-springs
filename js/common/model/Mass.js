@@ -17,6 +17,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var NullableIO = require( 'TANDEM/types/NullableIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
   var Vector2IO = require( 'DOT/Vector2IO' );
@@ -25,9 +26,6 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
-
-  // ifphetio
-  var NullableIO = require( 'TANDEM/types/NullableIO' );
 
   // constants
   var HEIGHT_RATIO = 2.5;

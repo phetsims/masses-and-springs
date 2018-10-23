@@ -27,10 +27,8 @@ define( function( require ) {
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var Vector2 = require( 'DOT/Vector2' );
-
-  // ifphetio
   var StringIO = require( 'TANDEM/types/StringIO' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
