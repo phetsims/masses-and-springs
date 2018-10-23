@@ -32,11 +32,25 @@ define( function( require ) {
   /**
    * @param {Mass} mass
    * @param {Node} massNodeIcon: icon that represents the mass to be adjusted
+   * @param {Tandem} tandem
+   * @param {object} options
    * @constructor
    */
-  function MassValueControlPanel( mass, massNodeIcon ) {
-
+  function MassValueControlPanel( mass, massNodeIcon, tandem, options ) {
     assert && assert( mass.adjustable === true, 'MassValueControlPanel should only adjust a mass that is adjustable.' );
+
+    options = _.extend( {
+      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
+      maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 8,
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+      fill: 'white',
+      align: 'center',
+      stroke: 'gray',
+      yMargin: 6,
+      xMargin: 6,
+      basicsVersion: false,
+      tandem: tandem
+    }, options );
 
     // range for mass in kg
     var range = new Range( 50, 300 );
@@ -90,17 +104,51 @@ define( function( require ) {
       delta: 1
     } );
 
+    // TODO: Is there a better way of doing this outside of redeclaring the numberControl just to change a few options?
+    if ( options.basicsVersion ) {
+      numberControl = new NumberControl( massString, massInGramsProperty, range, {
+        valuePattern: StringUtils.fillIn( massValueString, {
+          mass: '{0}'
+        }, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
+        valueFont: new PhetFont( 14 ),
+        majorTickLength: 10,
+        titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
+        titleMaxWidth: 45,
+        trackSize: new Dimension2( 140, 0.1 ),
+        thumbSize: new Dimension2( 13, 24 ),
+        thumbFillEnabled: '#00C4DF',
+        thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
+        stroke: null,
+        valueMaxWidth: 100,
+        sliderIndent: 7,
+        constrainValue: function( value ) {
+          return ( Util.roundSymmetric( value / 10 ) * 10);
+        },
+        majorTicks: [
+          {
+            value: range.min,
+            label: new Text( String( range.min ), { font: new PhetFont( 14 ) } )
+          },
+          {
+            value: range.max,
+            label: new Text( String( range.max ), { font: new PhetFont( 14 ) } )
+          }
+        ],
+        layoutFunction: NumberControl.createLayoutFunction4( {
+          verticalSpacing: 8,
+          arrowButtonsXSpacing: 5,
+          hasReadoutProperty: new Property( true )
+        } ),
+        useRichText: true,
+        decimalPlaces: 0,
+        arrowButtonScale: 0.5,
+        delta: 1
+      } );
+    }
+
     var contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
 
-    Panel.call( this, contentNode, {
-      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
-      maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 8,
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      fill: 'white',
-      stroke: 'gray',
-      yMargin: 6,
-      xMargin: 6
-    } );
+    Panel.call( this, contentNode, options );
 
     massNodeIcon.leftTop = numberControl.leftTop.plus( new Vector2( 45, -2 ) );
     massNodeIcon.pickable = false;

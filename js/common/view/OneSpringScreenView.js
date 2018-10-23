@@ -46,8 +46,8 @@ define( function( require ) {
     SpringScreenView.call( this, model, tandem, options );
     var self = this;
 
-    // {Number} centerX of the spring in view coordinates
-    var springCenter = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
+    // @public {Number} centerX of the spring in view coordinates
+    this.springCenter = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
 
     // Spring Constant Control Panel
     var minMaxLabels = [
@@ -67,8 +67,8 @@ define( function( require ) {
         }
       } );
 
-    // Icon used in massValueControlPanel
-    var massNodeIcon = new MassNode(
+    // @public {MassNode} Icon used in massValueControlPanel in both Basics and non-Basics version
+    this.massNodeIcon = new MassNode(
       new Mass( 0.0055, 0, MassesAndSpringsColorProfile.adjustableMassProperty, model.gravityProperty, tandem, { icon: true } ),
       this.modelViewTransform,
       this.visibleBoundsProperty,
@@ -77,17 +77,17 @@ define( function( require ) {
 
     var massValueControlPanel = new MassValueControlPanel(
       model.masses[ 0 ],
-      massNodeIcon,
+      this.massNodeIcon,
       tandem.createTandem( 'massValueControlPanel' )
     );
 
-    var springHangerNode = new SpringHangerNode( model.springs,
+    this.springHangerNode = new SpringHangerNode( model.springs,
       this.modelViewTransform,
       tandem.createTandem( 'springHangerNode' ),
       {
         singleSpring: true
       } );
-    var springStopperButtonNode = this.createStopperButton( this.model.firstSpring, tandem );
+    this.springStopperButtonNode = this.createStopperButton( this.model.firstSpring, tandem );
     var springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 
     // @public {ReferenceLineNode} Initializes equilibrium line for an attached mass
@@ -113,7 +113,7 @@ define( function( require ) {
 
     this.model.firstSpring.buttonEnabledProperty.link(
       function( buttonEnabled ) {
-        springStopperButtonNode.enabled = buttonEnabled;
+        self.springStopperButtonNode.enabled = buttonEnabled;
       } );
 
     if ( !model.options.basicsVersion ) {
@@ -126,9 +126,9 @@ define( function( require ) {
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
 
     // @public {MovableLineNode} Initializes movable line
-    var xBoundsLimit = springCenter + this.spacing * 1.1;
+    var xBoundsLimit = this.springCenter + this.spacing * 1.1;
     this.movableLineNode = new MovableLineNode(
-      springHangerNode.center.plus( new Vector2( 45, 200 ) ),
+      this.springHangerNode.center.plus( new Vector2( 45, 200 ) ),
       100,
       model.movableLineVisibleProperty,
       new Bounds2( xBoundsLimit, 85, xBoundsLimit, zeroHeightProperty.value ),
@@ -190,8 +190,8 @@ define( function( require ) {
     this.springSystemControlsNode = new HBox( {
       children: [
         massValueControlPanel,
-        springHangerNode,
-        springStopperButtonNode
+        this.springHangerNode,
+        this.springStopperButtonNode
       ],
       spacing: this.spacing * 1.4,
       align: 'top'
@@ -222,13 +222,13 @@ define( function( require ) {
       self.panelRightSpacing = visibleBounds.right - self.spacing;
 
       // Alignment of layout
-      self.springSystemControlsNode.centerX = springCenter * 0.855; // centering springHangerNode over spring
+      self.springSystemControlsNode.centerX = self.springCenter * 0.855; // centering springHangerNode over spring
       self.springSystemControlsNode.top = self.spacing;
       springConstantControlPanel.top = self.springSystemControlsNode.top;
       springConstantControlPanel.left = self.springSystemControlsNode.right + self.spacing;
       self.springSystemControlsNode.top = self.spacing;
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
-      self.movableLineNode.centerX = springCenter;
+      self.movableLineNode.centerX = self.springCenter;
 
       if ( !model.options.basicsVersion ) {
         self.energyGraphNode.leftTop = new Vector2( visibleBounds.left + self.spacing, self.springSystemControlsNode.top );
