@@ -113,7 +113,7 @@ define( function( require ) {
         majorTickLength: 10,
         titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
         titleMaxWidth: 45,
-        trackSize: new Dimension2( 140, 0.1 ),
+        trackSize: new Dimension2( 132, 0.1 ),
         thumbSize: new Dimension2( 13, 24 ),
         thumbFillEnabled: '#00C4DF',
         thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,

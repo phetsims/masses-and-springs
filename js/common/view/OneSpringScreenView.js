@@ -97,7 +97,7 @@ define( function( require ) {
     // @public {SpringControlPanel} Accessed in Basics version
     this.springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem, {
       sliderTrackSize: model.options.basicsVersion ? new Dimension2( 140, 0.1 ) : new Dimension2( 120, 0.1 ),
-      yMargin: model.options.basicsVersion ? 8 : 5,
+      yMargin: model.options.basicsVersion ? 8.5 : 5,
       spacing: model.options.basicsVersion ? 7 : 3,
       tickLabelSpacing: model.options.basicsVersion ? 9 : 6
     } );
