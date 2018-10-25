@@ -16,9 +16,9 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -28,12 +28,12 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
   var dampingEqualsZeroString = require( 'string!MASSES_AND_SPRINGS/dampingEqualsZero' );
-  var lotsString = require( 'string!MASSES_AND_SPRINGS/lots' );
-  var noneString = require( 'string!MASSES_AND_SPRINGS/none' );
+  var dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
   var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
   var gravityValueString = require( 'string!MASSES_AND_SPRINGS/gravityValue' );
+  var lotsString = require( 'string!MASSES_AND_SPRINGS/lots' );
+  var noneString = require( 'string!MASSES_AND_SPRINGS/none' );
   var whatIsTheValueOfGravityString = require( 'string!MASSES_AND_SPRINGS/whatIsTheValueOfGravity' );
 
   // constants

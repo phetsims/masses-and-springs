@@ -14,8 +14,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var IntroModel = require( 'MASSES_AND_SPRINGS/intro/model/IntroModel' );
   var IntroScreenView = require( 'MASSES_AND_SPRINGS/intro/view/IntroScreenView' );
-  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var Screen = require( 'JOIST/Screen' );
 
   // strings

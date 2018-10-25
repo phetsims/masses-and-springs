@@ -9,10 +9,10 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Line = require( 'SCENERY/nodes/Line' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Line = require( 'SCENERY/nodes/Line' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   var MassesAndSpringsConstants = {

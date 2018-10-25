@@ -18,25 +18,25 @@ define( function( require ) {
   var ButtonListener = require( 'SCENERY/input/ButtonListener' );
   var ClearThermalButton = require( 'SCENERY_PHET/ClearThermalButton' );
   var Color = require( 'SCENERY/util/Color' );
+  var ColorConstants = require( 'SUN/ColorConstants' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dialog = require( 'SUN/Dialog' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var InfoButton = require( 'SCENERY_PHET/buttons/InfoButton' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Range = require( 'DOT/Range' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Property = require( 'AXON/Property' );
+  var Range = require( 'DOT/Range' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RichText = require( 'SCENERY/nodes/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
-  var ColorConstants = require( 'SUN/ColorConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var Property = require( 'AXON/Property' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
   var LEGEND_DESCRIPTION_MAX_WIDTH = 500;
@@ -51,6 +51,7 @@ define( function( require ) {
   var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
   var energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
   var eThermString = require( 'string!MASSES_AND_SPRINGS/eTherm' );
+  var eTotString = require( 'string!MASSES_AND_SPRINGS/eTot' );
   var gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
   var keString = require( 'string!MASSES_AND_SPRINGS/ke' );
   var kineticEnergyString = require( 'string!MASSES_AND_SPRINGS/kineticEnergy' );
@@ -58,7 +59,6 @@ define( function( require ) {
   var peGravString = require( 'string!MASSES_AND_SPRINGS/peGrav' );
   var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
   var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
-  var eTotString = require( 'string!MASSES_AND_SPRINGS/eTot' );
 
   /**
    *

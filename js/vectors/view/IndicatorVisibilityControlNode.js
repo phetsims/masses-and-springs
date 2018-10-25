@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var BracketNode = require( 'SCENERY_PHET/BracketNode' );
   var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
   var HBox = require( 'SCENERY/nodes/HBox' );
@@ -19,15 +20,14 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberProperty = require( 'AXON/NumberProperty' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
 
   // strings
+  var displacementString = require( 'string!MASSES_AND_SPRINGS/displacement' );
   var massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
   var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
-  var displacementString = require( 'string!MASSES_AND_SPRINGS/displacement' );
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
   var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
