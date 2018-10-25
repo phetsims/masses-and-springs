@@ -35,7 +35,7 @@ define( function( require ) {
     var self = this;
 
     // @protected {PeriodTraceNode}
-    this.periodTraceNode = new PeriodTraceNode( model.periodTrace, this.modelViewTransform, model.options.basicsVersion, {
+    this.periodTraceNode = new PeriodTraceNode( model.periodTrace, this.modelViewTransform, {
       center: this.massEquilibriumLineNode.center
     } );
     this.addChild( this.periodTraceNode );
