@@ -95,12 +95,7 @@ define( function( require ) {
 
     // TODO: Is there a better way to refactor this?
     // @public {SpringControlPanel} Accessed in Basics version
-    this.springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem, {
-      sliderTrackSize: model.options.basicsVersion ? new Dimension2( 140, 0.1 ) : new Dimension2( 120, 0.1 ),
-      yMargin: model.options.basicsVersion ? 7 : 5,
-      spacing: model.options.basicsVersion ? 5 : 3,
-      tickLabelSpacing: model.options.basicsVersion ? 7 : 6
-    } );
+    this.springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 
     // @public {ReferenceLineNode} Initializes equilibrium line for an attached mass
     this.massEquilibriumLineNode = new ReferenceLineNode(

@@ -305,10 +305,10 @@ define( function( require ) {
       // Additional options for compatibility with Masses and Springs: Basics
       options = _.extend( {
         string: this.model.options.basicsVersion ? springStrengthString : springConstantString,
-        sliderTrackSize: new Dimension2( 120, 0.1 ),
-        yMargin: 5,
-        spacing: 3,
-        tickLabelSpacing: 6
+        sliderTrackSize: this.model.options.basicsVersion ? new Dimension2( 140, 0.1 ) : new Dimension2( 120, 0.1 ),
+        yMargin: this.model.options.basicsVersion ? 7 : 5,
+        spacing: this.model.options.basicsVersion ? 5 : 3,
+        tickLabelSpacing: this.model.options.basicsVersion ? 7 : 6
       }, options );
 
       return new SpringControlPanel(
