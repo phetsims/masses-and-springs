@@ -24,11 +24,11 @@ define( function( require ) {
     },
     smallMysteryMass: {
       default: new Color( 'rgb( 246, 164, 255 )' ),
-      basics: new Color( 'rgb( 10, 198, 157 )' )
+      basics: new Color( 'rgb( 185, 0, 38 )' )
     },
     mediumMysteryMass: {
       default: new Color( 'rgb( 0, 222, 224 )' ),
-      basics: new Color( 'rgb( 9, 19, 174 )' )
+      basics: new Color( 'rgb( 0, 107, 161 )' )
     },
     largeMysteryMass: {
       default: new Color( 'rgb( 250, 186, 75)' ),
@@ -52,10 +52,10 @@ define( function( require ) {
       default: new Color( 'rgb( 255, 0, 0 )' )
     },
     velocityVector: {
-      default: new Color('rgb( 41, 253, 46 )')
+      default: new Color( 'rgb( 41, 253, 46 )' )
     },
     accelerationVector: {
-      default: new Color('rgb( 255, 253, 56 )')
+      default: new Color( 'rgb( 255, 253, 56 )' )
     }
   }, [ 'default', 'basics' ] );
 

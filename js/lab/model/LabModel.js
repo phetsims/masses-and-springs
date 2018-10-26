@@ -54,12 +54,12 @@ define( function( require ) {
       } );
     }
     massValue = basicsVersion ? 0.12 : 0.23;
-    this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
+    this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, new Property( new Color( 'rgb( 9, 19, 174 )' ) ), null, tandem.createTandem( 'mediumMysteryMass' ), {
       density: basicsVersion ? 80 : 110,
       mysteryLabel: true
     } );
     massValue = basicsVersion ? 0.060 : 0.37;
-    this.createMass( massValue, massXPosition + MASS_OFFSET, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
+    this.createMass( massValue, massXPosition + MASS_OFFSET, new Property( new Color( 'rgb( 10, 198, 157 )' ) ), null, tandem.createTandem( 'smallMysteryMass' ), {
       density: basicsVersion ? 80 : 220,
       mysteryLabel: true
     } );
