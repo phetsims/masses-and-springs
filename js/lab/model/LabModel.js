@@ -9,12 +9,14 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var NumberProperty = require( 'AXON/NumberProperty' );
+  var Property = require( 'AXON/Property' );
   var PeriodTrace = require( 'MASSES_AND_SPRINGS/lab/model/PeriodTrace' );
 
   // constants
@@ -46,18 +48,18 @@ define( function( require ) {
     } );
 
     if ( basicsVersion ) {
-      this.createMass( 0.180, massXPosition + MASS_OFFSET * 2, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass2' ), {
+      this.createMass( 0.180, massXPosition + MASS_OFFSET * 2, new Property( new Color( 'rgb( 195, 51, 115 )' ) ), null, tandem.createTandem( 'largeMysteryMass' ), {
         density: basicsVersion ? 80 : 120,
         mysteryLabel: true
       } );
     }
     massValue = basicsVersion ? 0.12 : 0.23;
-    this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'largeLabeledMass' ), {
+    this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
       density: basicsVersion ? 80 : 110,
       mysteryLabel: true
     } );
     massValue = basicsVersion ? 0.060 : 0.37;
-    this.createMass( massValue, massXPosition + MASS_OFFSET, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallLabeledMass' ), {
+    this.createMass( massValue, massXPosition + MASS_OFFSET, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
       density: basicsVersion ? 80 : 220,
       mysteryLabel: true
     } );

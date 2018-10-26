@@ -24,11 +24,11 @@ define( function( require ) {
     },
     smallMysteryMass: {
       default: new Color( 'rgb( 246, 164, 255 )' ),
-      basics: new Color( 'rgb( 185, 0, 38 )' )
+      basics: new Color( 'rgb( 10, 198, 157 )' )
     },
     mediumMysteryMass: {
       default: new Color( 'rgb( 0, 222, 224 )' ),
-      basics: new Color( 'rgb( 0, 107, 161 )' )
+      basics: new Color( 'rgb( 9, 19, 174 )' )
     },
     largeMysteryMass: {
       default: new Color( 'rgb( 250, 186, 75)' ),
