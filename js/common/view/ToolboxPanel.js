@@ -16,11 +16,11 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Panel = require( 'SUN/Panel' );
   var Range = require( 'DOT/Range' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var Vector2 = require( 'DOT/Vector2' );
 

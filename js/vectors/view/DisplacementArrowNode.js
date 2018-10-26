@@ -9,11 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var LineArrowNode = require( 'SCENERY_PHET/LineArrowNode' );
   var Color = require( 'SCENERY/util/Color' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
+  var LineArrowNode = require( 'SCENERY_PHET/LineArrowNode' );
+  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
 

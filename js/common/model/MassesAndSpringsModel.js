@@ -12,9 +12,8 @@ define( function( require ) {
   // modules
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
-  var SimSpeedChoice = require( 'MASSES_AND_SPRINGS/common/enum/SimSpeedChoice' );
-  var ForcesModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/ForcesModeChoice' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
+  var ForcesModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/ForcesModeChoice' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
@@ -26,6 +25,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
+  var SimSpeedChoice = require( 'MASSES_AND_SPRINGS/common/enum/SimSpeedChoice' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var StringIO = require( 'TANDEM/types/StringIO' );
   var Vector2 = require( 'DOT/Vector2' );

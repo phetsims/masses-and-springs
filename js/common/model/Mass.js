@@ -19,13 +19,13 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var NullableIO = require( 'TANDEM/types/NullableIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
-  var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
-  var Vector2IO = require( 'DOT/Vector2IO' );
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
+  var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2IO = require( 'DOT/Vector2IO' );
 
   // constants
   var HEIGHT_RATIO = 2.5;
