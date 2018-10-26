@@ -102,7 +102,7 @@ define( function( require ) {
       model.firstSpring,
       model.firstSpring.massEquilibriumYPositionProperty,
       this.equilibriumVisibilityProperty, {
-        stroke: model.options.basicsVersion ? MassesAndSpringsColorProfile.restingPositionProperty : 'black'
+        stroke: 'black'
       }
     );
 
@@ -208,9 +208,8 @@ define( function( require ) {
     this.addChild( this.springConstantControlPanel );
 
     // Reference lines from indicator visibility box
-    if ( !model.options.basicsVersion ) {
-      this.addChild( this.massEquilibriumLineNode );
-    }
+    this.addChild( this.massEquilibriumLineNode );
+
     this.addChild( naturalLengthLineNode );
 
     // This is handled here to maintain line node layering order

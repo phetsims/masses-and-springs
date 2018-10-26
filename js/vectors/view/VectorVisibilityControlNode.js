@@ -1,7 +1,7 @@
 // Copyright 2017-2018, University of Colorado Boulder
 
 /**
- * Panel that manages options visibility for vectors.
+ * Panel that manages options visibility for vectors and period trace in Basics version.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */

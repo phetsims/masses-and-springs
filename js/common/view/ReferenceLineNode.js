@@ -34,7 +34,8 @@ define( function( require ) {
     options = _.extend( {
       fixedPosition: false, // flag for a line that remain at a target location
       zeroPointLine: false, // flag for a line that remains at the zero reference point of the sim
-      stroke: 'black'
+      stroke: 'black',
+      label: null
     }, options );
 
     var self = this;
@@ -61,6 +62,10 @@ define( function( require ) {
       phetioType: PropertyIO( Vector2IO )
     } );
 
+    if ( options.label ) {
+      this.addChild( options.label );
+    }
+
     // updates the position of the reference line as the system changes
     Property.multilink( [ spring.massAttachedProperty, spring.naturalRestingLengthProperty, property ],
       function( mass, restingLength, monitoredProperty ) {
@@ -77,12 +82,19 @@ define( function( require ) {
         // Y position of line in screen coordinates with an attached mass
         yPos = modelViewTransform2.modelToViewY( monitoredProperty );
       }
-      self.positionProperty.set( new Vector2( xPos, yPos ) );
-    } );
+        self.positionProperty.set( new Vector2( xPos, yPos ) );
+      } );
+
 
     // Link that handles the change in the lines position in screen coordinates
     this.positionProperty.link( function( position ) {
       self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
+      if ( options.label ) {
+        options.label.centerY = 0;
+        options.label.left = LINE_LENGTH * 1.25;
+        // options.label.centerY = self.translation.y;
+        console.log( options.label.y );
+      }
     } );
 
     visibleProperty.linkAttribute( this, 'visible' );
