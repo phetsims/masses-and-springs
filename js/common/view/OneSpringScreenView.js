@@ -162,22 +162,17 @@ define( function( require ) {
         zeroHeightProperty,
         new Property( true ), {
           stroke: '#5798de',
-          zeroPointLine: true
-        }
-      );
+          zeroPointLine: true,
+          label: new Text( heightEqualsZeroString, {
+            font: MassesAndSpringsConstants.TITLE_FONT,
+            fill: '#5798de',
+            maxWidth: 125
+          } )
+        } );
+
       zeroHeightLine.x = this.massEquilibriumLineNode.x;
       zeroHeightLine.y = zeroHeightProperty.get();
       this.addChild( zeroHeightLine );
-
-      // Label for zero height
-      var zeroHeightLabel = new HBox( {
-        children: [
-          new Text( heightEqualsZeroString, {
-            font: MassesAndSpringsConstants.TITLE_FONT,
-            fill: zeroHeightLine.stroke,
-            maxWidth: 125
-          } ) ]
-      } );
 
       this.resetAllButton.addListener( function() {
         self.model.reset();
@@ -186,10 +181,6 @@ define( function( require ) {
           self.energyGraphNode.reset();
         }
       } );
-
-      zeroHeightLabel.center = zeroHeightLine.center;
-      zeroHeightLabel.x = zeroHeightLine.x + (zeroHeightLine.width + 10);
-      this.addChild( zeroHeightLabel );
     }
 
     // @public {HBox} Contains Panels/Nodes that hover near the spring system at the center of the screen.
