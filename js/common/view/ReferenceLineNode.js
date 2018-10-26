@@ -62,6 +62,7 @@ define( function( require ) {
       phetioType: PropertyIO( Vector2IO )
     } );
 
+    // Add a label if it exists
     if ( options.label ) {
       this.addChild( options.label );
     }
@@ -89,10 +90,11 @@ define( function( require ) {
     // Link that handles the change in the lines position in screen coordinates
     this.positionProperty.link( function( position ) {
       self.translation = position.minus( new Vector2( LINE_LENGTH / 2, 0 ) );
+
+      // Adjust the position of the label
       if ( options.label ) {
         options.label.centerY = 0;
         options.label.left = LINE_LENGTH * 1.25;
-        // options.label.centerY = self.translation.y;
         console.log( options.label.y );
       }
     } );
