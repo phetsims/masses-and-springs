@@ -94,8 +94,7 @@ define( function( require ) {
       // Adjust the position of the label
       if ( options.label ) {
         options.label.centerY = 0;
-        options.label.left = LINE_LENGTH * 1.25;
-        console.log( options.label.y );
+        options.label.x = (LINE_LENGTH + 10);
       }
     } );
 
