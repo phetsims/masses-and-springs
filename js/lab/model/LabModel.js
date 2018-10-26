@@ -42,6 +42,7 @@ define( function( require ) {
     var basicsVersion = this.options.basicsVersion;
     var massXPosition = basicsVersion ? 0.13 : 0.625;
     var massValue;
+    var color;
 
     this.createMass( 0.100, massXPosition, MassesAndSpringsColorProfile.adjustableMassProperty, null, tandem.createTandem( 'adjustableMass' ), {
       adjustable: true
@@ -54,12 +55,15 @@ define( function( require ) {
       } );
     }
     massValue = basicsVersion ? 0.12 : 0.23;
-    this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, new Property( new Color( 'rgb( 9, 19, 174 )' ) ), null, tandem.createTandem( 'mediumMysteryMass' ), {
+    color = basicsVersion ? new Color( 'rgb( 9, 19, 174 )' ) : new Color( 'rgb( 0, 222, 224 )' );
+    this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, new Property( color ), null, tandem.createTandem( 'mediumMysteryMass' ), {
       density: basicsVersion ? 80 : 110,
       mysteryLabel: true
     } );
+
     massValue = basicsVersion ? 0.060 : 0.37;
-    this.createMass( massValue, massXPosition + MASS_OFFSET, new Property( new Color( 'rgb( 10, 198, 157 )' ) ), null, tandem.createTandem( 'smallMysteryMass' ), {
+    color = basicsVersion ? new Color( 'rgb( 10, 198, 157 )' ) : new Color( 'rgb( 246, 164, 255 )' );
+    this.createMass( massValue, massXPosition + MASS_OFFSET, new Property( color ), null, tandem.createTandem( 'smallMysteryMass' ), {
       density: basicsVersion ? 80 : 220,
       mysteryLabel: true
     } );
