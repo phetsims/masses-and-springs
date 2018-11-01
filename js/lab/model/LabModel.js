@@ -16,8 +16,8 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var NumberProperty = require( 'AXON/NumberProperty' );
-  var Property = require( 'AXON/Property' );
   var PeriodTrace = require( 'MASSES_AND_SPRINGS/lab/model/PeriodTrace' );
+  var Property = require( 'AXON/Property' );
 
   // constants
   var MASS_OFFSET = 0.15;
