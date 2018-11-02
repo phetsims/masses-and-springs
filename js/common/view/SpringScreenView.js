@@ -340,13 +340,9 @@ define( function( require ) {
      * @param {MassesAndSpringsModel} model
      * @param {Boolean} displayPeriodTrace
      * @param {Tandem} tandem
-     * @param {object} options
      * @return {IndicatorVisibilityControlNode}
      */
-    createIndicatorVisibilityPanel: function( model, displayPeriodTrace, tandem, options ) {
-      options = _.extend( {
-        enableMovableLine: true
-      }, options );
+    createIndicatorVisibilityPanel: function( model, displayPeriodTrace, tandem ) {
       return new IndicatorVisibilityControlNode(
         model,
         tandem.createTandem( 'indicatorVisibilityControlNode' ), {
@@ -371,7 +367,7 @@ define( function( require ) {
           fill: MassesAndSpringsConstants.PANEL_FILL,
           align: 'center',
           cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-          tandem: tandem.createTandem( 'LineVisibilityNode' ),
+          tandem: tandem.createTandem( 'optionsPanel' ),
           minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 30
         } );
       optionsPanel.moveToBack();

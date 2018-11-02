@@ -23,6 +23,7 @@ define( function( require ) {
   var NullableIO = require( 'TANDEM/types/NullableIO' );
   var NumberIO = require( 'TANDEM/types/NumberIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
+  var NumberPropertyIO = require( 'AXON/NumberPropertyIO' );
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
