@@ -73,7 +73,6 @@ define( function( require ) {
       tandem: tandem.createTandem( 'accelerationString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
-    // Responsible for velocity and acceleration vectors checkboxes and period trace in basics version
     var vectorVisibilityCheckboxGroup;
 
     if ( !model.options.basicsVersion ) {
@@ -93,6 +92,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
       } );
     }
+    // Responsible for velocity and acceleration vectors checkboxes and period trace in basics version
     else {
       vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
         node: new Text( periodTraceString, {
@@ -102,11 +102,11 @@ define( function( require ) {
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       }, {
-        node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
+        node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING * 0.8 } ),
         property: model.velocityVectorVisibilityProperty,
         label: velocityString
       }, {
-        node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
+        node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING * 0.8 } ),
         property: model.accelerationVectorVisibilityProperty,
         label: accelerationString
       }
