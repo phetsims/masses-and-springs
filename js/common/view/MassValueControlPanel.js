@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var MutableOptionsNode = require( 'SUN/MutableOptionsNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
@@ -64,7 +65,10 @@ define( function( require ) {
       }
     } );
 
-    var numberControl = new NumberControl( massString, massInGramsProperty, range, {
+    // @public {Property.<Dimension2>}
+    var trackSizeProperty = new Property( options.basics ? new Dimension2( 132, 0.1 ) : new Dimension2( 125, 0.1 ) );
+
+    var numberControl = new MutableOptionsNode( NumberControl, [ massString, massInGramsProperty, range ], {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
       }, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
@@ -72,7 +76,6 @@ define( function( require ) {
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
       titleMaxWidth: 45,
-      trackSize: new Dimension2( 125, 0.1 ),
       thumbSize: new Dimension2( 13, 24 ),
       thumbFillEnabled: '#00C4DF',
       thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
@@ -101,50 +104,9 @@ define( function( require ) {
       decimalPlaces: 0,
       arrowButtonScale: 0.5,
       delta: 1
+    }, {
+      trackSize: trackSizeProperty
     } );
-
-    // TODO: Is there a better way of doing this outside of redeclaring the numberControl just to change a few options?
-    if ( options.basicsVersion ) {
-      numberControl = new NumberControl( massString, massInGramsProperty, range, {
-        valuePattern: StringUtils.fillIn( massValueString, {
-          mass: '{0}'
-        }, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
-        valueFont: new PhetFont( 14 ),
-        majorTickLength: 10,
-        titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
-        titleMaxWidth: 45,
-        trackSize: new Dimension2( 132, 0.1 ),
-        thumbSize: new Dimension2( 13, 24 ),
-        thumbFillEnabled: '#00C4DF',
-        thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
-        stroke: null,
-        valueMaxWidth: 100,
-        sliderIndent: 7,
-        constrainValue: function( value ) {
-          return ( Util.roundSymmetric( value / 10 ) * 10);
-        },
-        majorTicks: [
-          {
-            value: range.min,
-            label: new Text( String( range.min ), { font: new PhetFont( 14 ) } )
-          },
-          {
-            value: range.max,
-            label: new Text( String( range.max ), { font: new PhetFont( 14 ) } )
-          }
-        ],
-        layoutFunction: NumberControl.createLayoutFunction4( {
-          verticalSpacing: 8,
-          arrowButtonsXSpacing: 5,
-          hasReadoutProperty: new Property( true )
-        } ),
-        useRichText: true,
-        decimalPlaces: 0,
-        arrowButtonScale: 0.5,
-        delta: 1
-      } );
-    }
-
     var contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
 
     Panel.call( this, contentNode, options );
