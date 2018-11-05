@@ -34,24 +34,24 @@ define( function( require ) {
 
     // Displacement arrows added for each springs
     var firstDisplacementArrowNode = new DisplacementArrowNode(
-      this.springNodes[ 0 ].spring.displacementProperty,
+      this.springNodes[ 0 ].nodeProperty.value.spring.displacementProperty,
       model.naturalLengthVisibleProperty,
       tandem,
       {
         modelViewTransform: this.modelViewTransform,
-        left: this.springNodes[ 0 ].right + 8,
-        centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value )
+        left: this.springNodes[ 0 ].nodeProperty.value.right + 8,
+        centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].nodeProperty.value.spring.bottomProperty.value )
       } );
     this.addChild( firstDisplacementArrowNode );
 
     var secondDisplacementArrowNode = new DisplacementArrowNode(
-      this.springNodes[ 1 ].spring.displacementProperty,
+      this.springNodes[ 1 ].nodeProperty.value.spring.displacementProperty,
       model.naturalLengthVisibleProperty,
       tandem,
       {
         modelViewTransform: this.modelViewTransform,
-        right: this.springNodes[ 1 ].left + 14,
-        centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 1 ].spring.bottomProperty.value )
+        right: this.springNodes[ 1 ].nodeProperty.value.left + 14,
+        centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 1 ].nodeProperty.value.spring.bottomProperty.value )
       } );
     this.addChild( secondDisplacementArrowNode );
 

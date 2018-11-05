@@ -146,13 +146,13 @@ define( function( require ) {
 
       // Displacement arrows added for each springs
       var displacementArrowNode = new DisplacementArrowNode(
-        this.springNodes[ 0 ].spring.displacementProperty,
+        this.springNodes[ 0 ].nodeProperty.value.spring.displacementProperty,
         model.naturalLengthVisibleProperty,
         tandem,
         {
           modelViewTransform: this.modelViewTransform,
-          left: this.springNodes[ 0 ].right + 12,
-          centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].spring.bottomProperty.value )
+          left: this.springNodes[ 0 ].nodeProperty.value.right + 12,
+          centerY: this.modelViewTransform.modelToViewY( this.springNodes[ 0 ].nodeProperty.value.spring.bottomProperty.value )
         } );
 
       // Zero height reference line
