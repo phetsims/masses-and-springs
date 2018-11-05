@@ -25,8 +25,10 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  var MutableOptionsNode = require( 'SUN/MutableOptionsNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
+  var PaintColorProperty = require( 'SCENERY/util/PaintColorProperty' );
   var Panel = require( 'SUN/Panel' );
   var Plane = require( 'SCENERY/nodes/Plane' );
   var Property = require( 'AXON/Property' );
@@ -77,16 +79,22 @@ define( function( require ) {
     // @public {ModelViewTransform2}
     this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, 397 );
 
-    // @protected {Array.<OscillatingSpringNode>} Used to reference the created springs in the view.
+    // @public {PaintColorProperty} Colors for OscillatingSpringNode
+    this.springFrontColorProperty = new PaintColorProperty( 'lightGray' );
+    this.springMiddleColorProperty = new PaintColorProperty( 'gray' );
+    this.springBackColorProperty = new PaintColorProperty( 'black' );
+
+    // @private {Array.<MutableOptionsNode>} Used to reference the created springs in the view.
     this.springNodes = [];
     self.springNodes = model.springs.map( function( spring ) {
-      var springNode = new OscillatingSpringNode(
-        spring,
-        self.modelViewTransform,
-        tandem.createTandem( 'firstOscillatingSpringNode' ), {
-          leftEndLength: -10
-        }
-      );
+      var springNode = new MutableOptionsNode( OscillatingSpringNode,
+        [ spring, self.modelViewTransform, tandem.createTandem( 'oscillatingSpringNode' ) ],
+        { leftEndLength: -10 },
+        {
+          frontColor: self.springFrontColorProperty,
+          middleColor: self.springMiddleColorProperty,
+          backColor: self.springBackColorProperty
+        } );
       self.addChild( springNode );
       return springNode;
     } );
