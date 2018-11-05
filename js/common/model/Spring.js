@@ -71,8 +71,7 @@ define( function( require ) {
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
-        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY ),
-        phetioType: DerivedPropertyIO( NumberIO )
+        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
       } );
 
     // @public {Property.<number|null>} distance from of the bottom of the spring from the massEquilibriumYPosition
@@ -204,8 +203,7 @@ define( function( require ) {
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
-        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY ),
-        phetioType: DerivedPropertyIO( NumberIO )
+        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
       } );
 
     // Set the equilibrium position when a mass is attached to the spring.
@@ -233,8 +231,7 @@ define( function( require ) {
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'meters',
-        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY ),
-        phetioType: DerivedPropertyIO( NumberIO )
+        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
       } );
 
     var massCenterOfMassProperty = new DynamicProperty( this.massAttachedProperty, {
