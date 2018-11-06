@@ -10,6 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/ConstantsControlPanel' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -50,6 +52,8 @@ define( function( require ) {
     // Calls common two spring view
     TwoSpringScreenView.call( this, model, tandem );
 
+    var optionsContentAlignBox = new AlignGroup( { matchVertical: false } );
+
     // Spring Length Control Panel
     var minMaxLabels = [
       new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
@@ -64,6 +68,7 @@ define( function( require ) {
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         fill: 'transparent',
+        alignGroup: optionsContentAlignBox,
         xMargin: 5,
         yMargin: 0,
         spacing: 2,
@@ -78,48 +83,45 @@ define( function( require ) {
     );
 
     // Panel that keeps thickness/spring constant at constant value
-    var constantsControlPanel = new ConstantsControlPanel(
+    var constantsControlPanel = new AlignBox( new ConstantsControlPanel(
       model.constantParameterProperty,
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {
         maxWidth: 160,
+        alignGroup: optionsContentAlignBox,
         stroke: null
       }
-    );
+    ) );
 
     var lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 140 );
 
     // VBox that contains all of the spring options panel's content
-    var springOptionsNode = new Node( {
+    var springOptionsVBox = new VBox( {
+      spacing: 10,
       children: [
         this.springLengthControlPanel,
         lineSeparator,
-        constantsControlPanel
+        new AlignBox( constantsControlPanel, { group: optionsContentAlignBox, xAlign: 'left', leftMargin: 10 } )
       ]
     } );
 
-    this.springLengthControlPanel.centerX = this.centerX;
-    lineSeparator.centerX = this.centerX;
-    lineSeparator.top = this.springLengthControlPanel.bottom + 10;
-    constantsControlPanel.centerX = this.centerX - 16;
-    constantsControlPanel.top = lineSeparator.bottom + 10;
+    // AlignGroup to align components for spring options
+    var optionsContentAlignBox = new AlignBox( springOptionsVBox, { group: optionsContentAlignBox } );
 
-    // Panel that will display the options for a spring.
-    var springOptionsPanel = new Panel(
-      springOptionsNode,
-      {
-        cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-        right: this.firstSpringStopperButtonNode.left - this.spacing,
-        top: this.spacing,
-        tandem: tandem.createTandem( 'springOptionsPanel' ),
-        align: 'center',
-        fill: 'white',
-        xMargin: 0,
-        stroke: 'gray',
-        resize: false,
-        visible: false
-      } );
+    // Panel that contains all the left sided options for the springs
+    var springOptionsPanel = new Panel( optionsContentAlignBox, {
+      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+      right: this.firstSpringStopperButtonNode.left - this.spacing,
+      top: this.spacing,
+      tandem: tandem.createTandem( 'springOptionsPanel' ),
+      align: 'left',
+      fill: 'white',
+      xMargin: 0,
+      stroke: 'gray',
+      resize: false,
+      visible: false
+    } );
     this.addChild( springOptionsPanel );
     springOptionsPanel.moveToBack();
 
