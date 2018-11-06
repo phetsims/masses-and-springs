@@ -52,7 +52,7 @@ define( function( require ) {
     TwoSpringScreenView.call( this, model, tandem );
 
     // AlignGroup to align components for spring options
-    var optionsContentAlignBox = new AlignGroup( { matchVertical: false } );
+    var optionsContentAlignGroup = new AlignGroup( { matchVertical: false } );
 
     // Spring Length Control Panel
     var minMaxLabels = [
@@ -68,7 +68,7 @@ define( function( require ) {
       tandem.createTandem( 'springLengthControlPanel' ),
       {
         fill: 'transparent',
-        alignGroup: optionsContentAlignBox,
+        alignGroup: optionsContentAlignGroup,
         xMargin: 5,
         yMargin: 0,
         spacing: 2,
@@ -89,7 +89,7 @@ define( function( require ) {
       tandem.createTandem( 'constantsControlPanel' ),
       {
         maxWidth: 160,
-        alignGroup: optionsContentAlignBox,
+        alignGroup: optionsContentAlignGroup,
         stroke: null
       }
     ) );
@@ -102,12 +102,14 @@ define( function( require ) {
       children: [
         this.springLengthControlPanel,
         lineSeparator,
-        new AlignBox( constantsControlPanel, { group: optionsContentAlignBox, xAlign: 'left' } )
+        new AlignBox( constantsControlPanel, { group: optionsContentAlignGroup, xAlign: 'left', leftMargin: 10 } )
       ]
     } );
 
+    var optionsContentAlignBox = new AlignBox( springOptionsVBox, { group: optionsContentAlignGroup } );
+
     // Panel that contains all the left sided options for the springs
-    var springOptionsPanel = new Panel( springOptionsVBox, {
+    var springOptionsPanel = new Panel( optionsContentAlignBox, {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       right: this.firstSpringStopperButtonNode.left - this.spacing,
       top: this.spacing,
