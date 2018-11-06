@@ -102,12 +102,12 @@ define( function( require ) {
       children: [
         this.springLengthControlPanel,
         lineSeparator,
-        new AlignBox( constantsControlPanel, { group: optionsContentAlignBox, xAlign: 'left', leftMargin: 10 } )
+        new AlignBox( constantsControlPanel, { group: optionsContentAlignBox, xAlign: 'left' } )
       ]
     } );
 
     // Panel that contains all the left sided options for the springs
-    var springOptionsPanel = new Panel( optionsContentAlignBox, {
+    var springOptionsPanel = new Panel( springOptionsVBox, {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       right: this.firstSpringStopperButtonNode.left - this.spacing,
       top: this.spacing,
