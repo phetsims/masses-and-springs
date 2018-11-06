@@ -52,8 +52,8 @@ define( function( require ) {
 
     // Spring Length Control Panel
     var minMaxLabels = [
-      new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } ),
-      new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } )
+      new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
+      new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
     ];
 
     this.springLengthControlPanel = new SpringControlPanel(
