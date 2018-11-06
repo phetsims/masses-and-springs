@@ -19,7 +19,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Range = require( 'DOT/Range' );
@@ -52,6 +51,7 @@ define( function( require ) {
     // Calls common two spring view
     TwoSpringScreenView.call( this, model, tandem );
 
+    // AlignGroup to align components for spring options
     var optionsContentAlignBox = new AlignGroup( { matchVertical: false } );
 
     // Spring Length Control Panel
@@ -105,9 +105,6 @@ define( function( require ) {
         new AlignBox( constantsControlPanel, { group: optionsContentAlignBox, xAlign: 'left', leftMargin: 10 } )
       ]
     } );
-
-    // AlignGroup to align components for spring options
-    var optionsContentAlignBox = new AlignBox( springOptionsVBox, { group: optionsContentAlignBox } );
 
     // Panel that contains all the left sided options for the springs
     var springOptionsPanel = new Panel( optionsContentAlignBox, {
