@@ -52,7 +52,9 @@ define( function( require ) {
     this.forcesOrientationProperty = new NumberProperty( 1 );
 
     // @public {Property.<number|null>} gravitational acceleration
-    this.gravityProperty = new Property( gravityProperty.value, { reentrant: true } );
+    this.gravityProperty = new Property( gravityProperty.value, {
+      reentrant: true // used due to extremely small rounding
+    } );
 
     // Link to manage gravity value for the spring object.
     gravityProperty.link( function( gravity ) {
