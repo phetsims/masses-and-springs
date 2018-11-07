@@ -14,6 +14,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );
 
   // constants
@@ -36,8 +37,8 @@ define( function( require ) {
     // @private {number} The opacity of the trace (not using Node opacity for performance reasons)
     this.colorAlpha = 1;
 
-    // @private {Color}
-    this.traceColor = new Color( 'black' );
+    // @private {Property.<Color>}
+    this.traceColorProperty = new Property( new Color( 'black' ) );
 
     // @private {ModelViewTransForm}
     this.modelViewTransform = modelViewTransform;
@@ -46,11 +47,11 @@ define( function( require ) {
     this.middleX = this.originalX + X_OFFSET;
     this.lastX = this.originalX + 2 * X_OFFSET;
 
-    this.path = new Path( null, { stroke: this.traceColor, lineWidth: 2.5 } );
+    this.path = new Path( null, { stroke: this.traceColorProperty, lineWidth: 2.5 } );
     this.addChild( this.path );
     this.periodTrace.stateProperty.link( function( state ) {
       if ( state === 1 ) {
-        self.traceColor.alpha = 1;
+        self.traceColorProperty.value = self.traceColorProperty.value.withAlpha( 1 );
         self.colorAlpha = 1;
       }
     } );
@@ -151,11 +152,11 @@ define( function( require ) {
      */
     fade: function( dt ) {
       this.colorAlpha = Math.max( 0, this.colorAlpha - FADE_OUT_SPEED * dt );
-      this.traceColor.alpha = this.colorAlpha;
+      this.traceColorProperty.value = this.traceColorProperty.value.withAlpha( this.colorAlpha );
 
       if ( this.colorAlpha === 0 ) {
         this.periodTrace.onFaded();
-        this.traceColor.alpha = 1;
+        this.traceColorProperty.value = this.traceColorProperty.value.withAlpha( 1 );
         this.colorAlpha = 1;
       }
     }
