@@ -102,11 +102,11 @@ define( function( require ) {
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       }, {
-        node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING * 0.8 } ),
+        node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
         property: model.velocityVectorVisibilityProperty,
         label: velocityString
       }, {
-        node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING * 0.8 } ),
+        node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
         property: model.accelerationVectorVisibilityProperty,
         label: accelerationString
       }
