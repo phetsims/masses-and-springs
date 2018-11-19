@@ -32,7 +32,7 @@ define( function( require ) {
 
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
-  var RELEASE_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be released
+  var RELEASE_DISTANCE = 0.12; // {number} horizontal distance in meters from a mass where a spring will be released
   var UPPER_CONSTRAINT = new LinearFunction( 20, 60, 1.353, 1.265 ); // Limits how much we can prime the spring.
 
   /**
