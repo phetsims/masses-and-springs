@@ -34,12 +34,6 @@ define( function( require ) {
     } );
     var self = this;
 
-    // @protected {PeriodTraceNode}
-    this.periodTraceNode = new PeriodTraceNode( model.periodTrace, this.modelViewTransform, {
-      center: this.massEquilibriumLineNode.center
-    } );
-    this.addChild( this.periodTraceNode );
-
     var vectorVisibilityControlNode = new VectorVisibilityControlNode(
       model,
       tandem.createTandem( 'vectorVisibilityControlNode' ),
@@ -62,6 +56,13 @@ define( function( require ) {
         vectorVisibilityControlNode
       ]
     } );
+
+    // @protected {PeriodTraceNode}
+    this.periodTraceNode = new PeriodTraceNode( model.periodTrace, this.modelViewTransform, {
+      center: this.massEquilibriumLineNode.center
+    } );
+    this.addChild( this.periodTraceNode );
+    this.periodTraceNode.moveToBack();
 
     // Panel that will display all the toggleable options.
     var optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
