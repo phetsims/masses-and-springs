@@ -17,7 +17,7 @@ define( function( require ) {
 
   // Initialize colors for each profile, by string key. If a basics color is not defined, it will take the
   // 'default' value provided.
-  var MassesAndSpringsColorProfile = new ColorProfile( {
+  var MassesAndSpringsColorProfile = new ColorProfile( [ 'default', 'basics' ], {
     background: {
       default: Color.white,
       basics: new Color( 'rgb( 255, 250, 227 )' )
@@ -57,7 +57,7 @@ define( function( require ) {
     accelerationVector: {
       default: new Color( 'rgb( 255, 253, 56 )' )
     }
-  }, [ 'default', 'basics' ] );
+  } );
 
   massesAndSprings.register( 'MassesAndSpringsColorProfile', MassesAndSpringsColorProfile );
 
