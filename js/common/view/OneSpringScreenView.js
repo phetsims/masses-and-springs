@@ -199,7 +199,9 @@ define( function( require ) {
     this.addChild( this.springConstantControlPanel );
 
     // Reference lines from indicator visibility box
-    this.addChild( this.massEquilibriumLineNode );
+    if ( !model.options.basicsVersion ) {
+      this.addChild( this.massEquilibriumLineNode );
+    }
 
     this.addChild( naturalLengthLineNode );
 
