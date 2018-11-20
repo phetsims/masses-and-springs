@@ -19,7 +19,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MassIO = require( 'MASSES_AND_SPRINGS/common/model/MassIO' );
+  // var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
+  // var MassIO = require( 'MASSES_AND_SPRINGS/common/model/MassIO' );
   var NullableIO = require( 'TANDEM/types/NullableIO' );
   var NumberIO = require( 'TANDEM/types/NumberIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
@@ -135,7 +136,7 @@ define( function( require ) {
     // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
       tandem: tandem.createTandem( 'massAttachedProperty' ),
-      phetioType: PropertyIO( NullableIO( MassIO ) )
+      // phetioType: PropertyIO( NullableIO( MassIO ) )
     } );
 
     // @public {Property.<number>} Kinetic Energy of the attached Mass
