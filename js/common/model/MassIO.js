@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var ObjectIO = require( 'TANDEM/types/ObjectIO' );
   var phetioInherit = require( 'TANDEM/phetioInherit' );
@@ -22,7 +23,7 @@ define( function( require ) {
    * @constructor
    */
   function MassIO( mass, phetioID ) {
-    assert && assertInstanceOf( mass, phet.massesAndSprings.Mass );
+    assert && assertInstanceOf( mass, Mass );
     ObjectIO.call( this, mass, phetioID );
   }
 
@@ -34,7 +35,7 @@ define( function( require ) {
      * @returns {*}
      */
     toStateObject: function( mass ) {
-      assert && assertInstanceOf( mass, phet.massesAndSprings.Mass );
+      assert && assertInstanceOf( mass, Mass );
       if ( mass === null ) {
         return null;
       }

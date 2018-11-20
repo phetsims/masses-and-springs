@@ -12,6 +12,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var ObjectIO = require( 'TANDEM/types/ObjectIO' );
   var phetioInherit = require( 'TANDEM/phetioInherit' );
+  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
 
   // ifphetio
   var assertInstanceOf = require( 'ifphetio!PHET_IO/assertInstanceOf' );
@@ -22,7 +23,7 @@ define( function( require ) {
    * @constructor
    */
   function SpringIO( spring, phetioID ) {
-    assert && assertInstanceOf( spring, phet.massesAndSprings.Spring );
+    assert && assertInstanceOf( spring, Spring );
     ObjectIO.call( this, spring, phetioID );
   }
 
@@ -34,7 +35,7 @@ define( function( require ) {
      * @returns {*}
      */
     toStateObject: function( spring ) {
-      assert && assertInstanceOf( spring, phet.massesAndSprings.Spring );
+      assert && assertInstanceOf( spring, Spring );
       if ( spring === null ) {
         return null;
       }
