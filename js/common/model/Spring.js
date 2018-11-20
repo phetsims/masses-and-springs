@@ -21,7 +21,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   // var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   // var MassIO = require( 'MASSES_AND_SPRINGS/common/model/MassIO' );
-  var NullableIO = require( 'TANDEM/types/NullableIO' );
+  // var NullableIO = require( 'TANDEM/types/NullableIO' );
   var NumberIO = require( 'TANDEM/types/NumberIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
@@ -135,7 +135,7 @@ define( function( require ) {
 
     // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
-      tandem: tandem.createTandem( 'massAttachedProperty' ),
+      tandem: tandem.createTandem( 'massAttachedProperty' )
       // phetioType: PropertyIO( NullableIO( MassIO ) )
     } );
 
