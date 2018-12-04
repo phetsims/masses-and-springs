@@ -84,7 +84,7 @@ define( function( require ) {
     this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
       units: 'newtons/meters',
-      range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
+      range: MassesAndSpringsConstants.SPRING_CONSTANT_RANGE
     } );
 
     // @public {Property.<number>} spring force
