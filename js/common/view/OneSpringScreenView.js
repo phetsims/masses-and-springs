@@ -92,7 +92,6 @@ define( function( require ) {
       } );
     this.springStopperButtonNode = this.createStopperButton( this.model.firstSpring, tandem );
 
-    // TODO: Is there a better way to refactor this?
     // @public {SpringControlPanel} Accessed in Basics version
     this.springConstantControlPanel = this.createSpringConstantPanel( 0, minMaxLabels, tandem );
 
