@@ -323,7 +323,7 @@ define( function( require ) {
           // set mass position to maximum y position based on spring coils
           mass.positionProperty.set( mass.positionProperty.get().copy().setY( modelMaxY ) );
 
-          // Limit the length of the spring to based on the spring coils.
+          // Limit the length of the spring based on the spring coils.
           mass.springProperty.value.updateDisplacement( modelMaxY, false );
         }
       }
