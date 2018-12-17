@@ -83,7 +83,7 @@ define( function( require ) {
     this.toolsLayer.moveToFront();
 
     // Move this plane to the back of the scene graph
-    this.backgroundDragNode.moveToBack();
+    this.backgroundDragPlane.moveToBack();
   }
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );

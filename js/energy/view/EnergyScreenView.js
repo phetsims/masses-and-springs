@@ -60,7 +60,7 @@ define( function( require ) {
     this.shelf.left = this.energyGraphNode.right + this.spacing;
 
     // Move this plane to the back of the scene graph
-    this.backgroundDragNode.moveToBack();
+    this.backgroundDragPlane.moveToBack();
   }
 
   massesAndSprings.register( 'EnergyScreenView', EnergyScreenView );
