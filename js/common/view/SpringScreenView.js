@@ -68,7 +68,7 @@ define( function( require ) {
     this.backgroundDragNode = new Plane();
     var closestDragListener = new ClosestDragListener( 30, 0 );
 
-    this.addInputListener( closestDragListener );
+    this.backgroundDragNode.addInputListener( closestDragListener );
     this.addChild( this.backgroundDragNode );
 
     // @public {MassesAndSpringsModel}
