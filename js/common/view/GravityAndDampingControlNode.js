@@ -138,7 +138,7 @@ define( function( require ) {
         decimalPlaces: 1,
         valueMaxWidth: MAX_WIDTH,
         delta: 0.1,
-        arrowButtonScale: 0.55
+        arrowButtonOptions: { scale: 0.55 }
       } );
 
     // Manages the items associated with the gravity panel in a combo box

@@ -102,7 +102,7 @@ define( function( require ) {
       } ),
       useRichText: true,
       decimalPlaces: 0,
-      arrowButtonScale: 0.5,
+      arrowButtonOptions: { arrowButtonScale: 0.5 },
       delta: 1
     }, {
       trackSize: trackSizeProperty
