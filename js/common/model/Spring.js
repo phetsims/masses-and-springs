@@ -384,10 +384,6 @@ define( function( require ) {
                            * thickness / this.thicknessProperty.initialValue
                            * this.springConstantProperty.initialValue;
 
-      // if ( !(new Range( 3, 30 ).contains( springConstant )) ) {
-      //   debugger;
-      // }
-
       this.springConstantProperty.set( springConstant );
     },
 
