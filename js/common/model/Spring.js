@@ -84,7 +84,7 @@ define( function( require ) {
     this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
       units: 'newtons/meters',
-      range: new Range( 3, 30 )
+      range: new Range( 3, 60 )
     } );
 
     // @public {Property.<number>} spring force
@@ -383,6 +383,11 @@ define( function( require ) {
       var springConstant = this.naturalRestingLengthProperty.initialValue / length
                            * thickness / this.thicknessProperty.initialValue
                            * this.springConstantProperty.initialValue;
+
+      // if ( !(new Range( 3, 30 ).contains( springConstant )) ) {
+      //   debugger;
+      // }
+
       this.springConstantProperty.set( springConstant );
     },
 
