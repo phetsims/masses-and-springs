@@ -65,10 +65,7 @@ define( function( require ) {
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withX( 50 );
 
-      bodyListItems.push( {
-        node: bodyLabel,
-        value: body
-      } );
+      bodyListItems.push( ComboBox.createItem( bodyLabel, body ) );
     } );
     var gravityProperty = model.gravityProperty;
 
