@@ -11,9 +11,9 @@ define( function( require ) {
 
   // modules
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
-  var ComboBox = require( 'SUN/ComboBox' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var GravityComboBox = require( 'MASSES_AND_SPRINGS/common/view/GravityComboBox' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -54,26 +54,15 @@ define( function( require ) {
       dampingVisible: false
     }, options );
 
-    //  Add gravity info for various planets
-    var bodyListItems = [];
-    var bodies = Body.BODIES;
-    Body.BODIES.forEach( function( body ) {
-      var bodyLabel = new Text( body.title, {
-        font: MassesAndSpringsConstants.LABEL_FONT,
-        maxWidth: MAX_WIDTH * 2,
-        tandem: tandem.createTandem( 'bodyLabel' )
-      } );
-      bodyLabel.localBounds = bodyLabel.localBounds.withX( 50 );
-      bodyListItems.push( ComboBox.createItem( bodyLabel, body ) );
-    } );
-
     // Manages the items associated with the gravity panel in a combo box
-    var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
+    var gravityComboBox = new GravityComboBox( model.bodyProperty, listNodeParent, tandem, {
       buttonCornerRadius: 3,
       buttonYMargin: 0,
       itemYMargin: 3,
       itemXMargin: 2,
       listYMargin: 3,
+      xOffset: 50,
+      bodyMaxWidth: 160,
       tandem: tandem.createTandem( 'gravityComboBox' )
     } );
 
@@ -247,7 +236,7 @@ define( function( require ) {
         dampingEqualsZeroText.leftTop = new Vector2( gravityNumberControl.left, gravityComboBox.bottom + 10 );
       }
     }
-    else{
+    else {
 
       // Content to be added to parent node
       contentNode = new Node( {
@@ -266,7 +255,7 @@ define( function( require ) {
 
     // Responsible for managing bodies
     model.bodyProperty.link( function( newBody, oldBody ) {
-        var body = _.find( bodies, newBody );
+      var body = _.find( Body.BODIES, newBody );
 
         // Set visibility of question node
         questionTextNode.visible = body === Body.PLANET_X;
