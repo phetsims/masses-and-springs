@@ -25,11 +25,12 @@ define( function( require ) {
    */
   function GravityComboBox( bodyProperty, listNodeParent, tandem, options ) {
     options = _.extend( {
-      fill: '#e6c29a',
-      stroke: 'black',
-      rectHeight: 10,
-      rectX: 6,
-      rectWidth: 280,
+      buttonCornerRadius: 3,
+      buttonYMargin: 0,
+      itemYMargin: 3,
+      itemXMargin: 2,
+      listYMargin: 3,
+      tandem: tandem.createTandem( 'gravityComboBox' ),
 
       // options for body text
       bodyFont: MassesAndSpringsConstants.LABEL_FONT,
@@ -39,7 +40,6 @@ define( function( require ) {
 
     //  Add gravity info for various planets
     var bodyListItems = [];
-    this.bodies = Body.BODIES;
     Body.BODIES.forEach( function( body ) {
       var bodyLabel = new Text( body.title, {
         font: options.bodyFont,
@@ -50,14 +50,7 @@ define( function( require ) {
       bodyListItems.push( ComboBox.createItem( bodyLabel, body ) );
     } );
 
-    ComboBox.call( this, bodyListItems, bodyProperty, listNodeParent, {
-      buttonCornerRadius: 3,
-      buttonYMargin: 0,
-      itemYMargin: 3,
-      itemXMargin: 2,
-      listYMargin: 3,
-      tandem: tandem.createTandem( 'gravityComboBox' )
-    } );
+    ComboBox.call( this, bodyListItems, bodyProperty, listNodeParent, options );
   }
 
   massesAndSprings.register( 'GravityComboBox', GravityComboBox );
