@@ -64,9 +64,19 @@ define( function( require ) {
         tandem: tandem.createTandem( 'bodyLabel' )
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withX( 50 );
-
       bodyListItems.push( ComboBox.createItem( bodyLabel, body ) );
     } );
+
+    // Manages the items associated with the gravity panel in a combo box
+    var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
+      buttonCornerRadius: 3,
+      buttonYMargin: 0,
+      itemYMargin: 3,
+      itemXMargin: 2,
+      listYMargin: 3,
+      tandem: tandem.createTandem( 'gravityComboBox' )
+    } );
+
     var gravityProperty = model.gravityProperty;
 
     // Text that reads "What is the value of gravity?"
@@ -137,16 +147,6 @@ define( function( require ) {
         delta: 0.1,
         arrowButtonOptions: { scale: 0.55 }
       } );
-
-    // Manages the items associated with the gravity panel in a combo box
-    var gravityComboBox = new ComboBox( bodyListItems, model.bodyProperty, listNodeParent, {
-      buttonCornerRadius: 3,
-      buttonYMargin: 0,
-      itemYMargin: 3,
-      itemXMargin: 2,
-      listYMargin: 3,
-      tandem: tandem.createTandem( 'gravityComboBox' )
-    } );
 
     // Added logic for compatibility with Masses and Springs: Basics
     if ( !model.options.basicsVersion ) {
