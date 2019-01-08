@@ -10,22 +10,11 @@ define( function( require ) {
 
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var Enumeration = require( 'PHET_CORE/Enumeration' );
 
-  var SimSpeedChoice = {
-    NORMAL: 'NORMAL',
-    SLOW: 'SLOW'
-  };
+  var SimSpeedChoice = new Enumeration( [ 'NORMAL', 'SLOW' ] );
 
   massesAndSprings.register( 'SimSpeedChoice', SimSpeedChoice );
-
-  // @public {Array.<SimSpeedChoice>} - All values the enumeration can take.
-  SimSpeedChoice.VALUES = [
-    SimSpeedChoice.NORMAL, // e.g. sim steps with dt
-    SimSpeedChoice.SLOW // e.g. sim steps with dt/8
-  ];
-
-  // verify that enum is immutable, without the runtime penalty in production code
-  if ( assert ) { Object.freeze( SimSpeedChoice ); }
 
   return SimSpeedChoice;
 } );

@@ -10,24 +10,12 @@ define( function( require ) {
 
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  var Enumeration = require( 'PHET_CORE/Enumeration' );
 
-  var ConstantModeChoice = {
-    SPRING_CONSTANT: 'SPRING_CONSTANT',
-    SPRING_THICKNESS: 'SPRING_THICKNESS',
-    NULL: null
-  };
+
+  var ConstantModeChoice = new Enumeration( [ 'SPRING_CONSTANT', 'SPRING_THICKNESS' ] );
 
   massesAndSprings.register( 'ConstantModeChoice', ConstantModeChoice );
-
-  // @public {Array.<SpringModeChoice>} - All values the enumeration can take.
-  ConstantModeChoice.VALUES = [
-    ConstantModeChoice.SPRING_CONSTANT,
-    ConstantModeChoice.SPRING_THICKNESS,
-    ConstantModeChoice.NULL
-  ];
-
-  // verify that enum is immutable, without the runtime penalty in production code
-  if ( assert ) { Object.freeze( ConstantModeChoice ); }
 
   return ConstantModeChoice;
 } );
