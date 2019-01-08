@@ -320,7 +320,7 @@ define( function( require ) {
      * Retains the properties of the spring in an object that can publicly accessed.
      * @public
      *
-     * @return {Object}
+     * @returns {Object}
      */
     getSpringState: function() {
       return {
@@ -340,7 +340,7 @@ define( function( require ) {
      * @param {Object} springState - Sets the springs's properties with previously stored properties. See getSpringState
      *
      * @public
-     * @return {Object}
+     * @returns {Object}
      */
     setSpringState: function( springState ) {
       this.displacementProperty.set( springState.displacement );

@@ -349,7 +349,7 @@ define( function( require ) {
      * @param {MassesAndSpringsModel} model
      * @param {Boolean} displayPeriodTrace
      * @param {Tandem} tandem
-     * @return {IndicatorVisibilityControlNode}
+     * @returns {IndicatorVisibilityControlNode}
      */
     createIndicatorVisibilityPanel: function( model, displayPeriodTrace, tandem ) {
       return new IndicatorVisibilityControlNode(
@@ -366,7 +366,7 @@ define( function( require ) {
      * @param {Node} optionsContent
      * @param {AlignGroup} alignGroup
      * @param {Tandem } tandem
-     * @return {Panel}
+     * @returns {Panel}
      */
     createOptionsPanel: function( optionsContent, alignGroup, tandem ) {
       var optionsContentAlignBox = new AlignBox( optionsContent, { group: alignGroup } );
