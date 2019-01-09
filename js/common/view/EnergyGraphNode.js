@@ -100,6 +100,7 @@ define( function( require ) {
     } );
 
     var clearThermalButton = new MoveToTrashButton( {
+      arrowColor: ORANGE_COLOR,
       listener: function() {
 
         // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
