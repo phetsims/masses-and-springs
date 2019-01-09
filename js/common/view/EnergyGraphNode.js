@@ -15,7 +15,6 @@ define( function( require ) {
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var BarChartNode = require( 'GRIDDLE/BarChartNode' );
-  var ClearThermalButton = require( 'SCENERY_PHET/ClearThermalButton' );
   var Color = require( 'SCENERY/util/Color' );
   var ColorConstants = require( 'SUN/ColorConstants' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
@@ -26,6 +25,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  var MoveToTrashButton = require( 'SCENERY_PHET/MoveToTrashButton' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -99,7 +99,8 @@ define( function( require ) {
       return Math.pow( 2, zoomLevel ) * 20;
     } );
 
-    var clearThermalButton = new ClearThermalButton( {
+    var clearThermalButton = new MoveToTrashButton( {
+      arrowColor: ORANGE_COLOR,
       listener: function() {
 
         // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
