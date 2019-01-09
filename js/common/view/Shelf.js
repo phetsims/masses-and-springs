@@ -24,7 +24,8 @@ define( function( require ) {
       stroke: 'black',
       rectHeight: 10,
       rectX: 6,
-      rectWidth: 280
+      rectWidth: 280,
+      tandem: tandem
     }, options );
     Rectangle.call( this, options );
   }
