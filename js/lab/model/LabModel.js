@@ -16,6 +16,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var NumberProperty = require( 'AXON/NumberProperty' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var PeriodTrace = require( 'MASSES_AND_SPRINGS/lab/model/PeriodTrace' );
   var Property = require( 'AXON/Property' );
 
@@ -38,9 +39,9 @@ define( function( require ) {
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
 
-    // {boolean} Flag used to determine if this is the basics version.
-    var basicsVersion = this.options.basicsVersion;
-    var massXPosition = basicsVersion ? 0.13 : 0.625;
+    // @private {boolean} Flag used to determine if this is the basics version.
+    this.basicsVersion = this.options.basicsVersion;
+    var massXPosition = this.basicsVersion ? 0.13 : 0.625;
     var massValue;
     var color;
 
@@ -48,23 +49,30 @@ define( function( require ) {
       adjustable: true
     } );
 
-    if ( basicsVersion ) {
+    // Initialize additional mass for basics version
+    if ( this.basicsVersion ) {
+
+      // @public {BooleanProperty}
+      this.gravityAccordionBoxExpandedProperty = new BooleanProperty( false );
+
       this.createMass( 0.180, massXPosition + MASS_OFFSET * 2, new Property( new Color( 'rgb( 195, 51, 115 )' ) ), null, tandem.createTandem( 'largeMysteryMass' ), {
-        density: basicsVersion ? 80 : 120,
+        density: this.basicsVersion ? 80 : 120,
         mysteryLabel: true
       } );
     }
-    massValue = basicsVersion ? 0.12 : 0.23;
-    color = basicsVersion ? new Color( 'rgb( 9, 19, 174 )' ) : new Color( 'rgb( 0, 222, 224 )' );
+
+    // Initialize masses for non-basics version
+    massValue = this.basicsVersion ? 0.12 : 0.23;
+    color = this.basicsVersion ? new Color( 'rgb( 9, 19, 174 )' ) : new Color( 'rgb( 0, 222, 224 )' );
     this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, new Property( color ), null, tandem.createTandem( 'mediumMysteryMass' ), {
-      density: basicsVersion ? 80 : 110,
+      density: this.basicsVersion ? 80 : 110,
       mysteryLabel: true
     } );
 
-    massValue = basicsVersion ? 0.060 : 0.37;
-    color = basicsVersion ? new Color( 'rgb( 10, 198, 157 )' ) : new Color( 'rgb( 246, 164, 255 )' );
+    massValue = this.basicsVersion ? 0.060 : 0.37;
+    color = this.basicsVersion ? new Color( 'rgb( 10, 198, 157 )' ) : new Color( 'rgb( 246, 164, 255 )' );
     this.createMass( massValue, massXPosition + MASS_OFFSET, new Property( color ), null, tandem.createTandem( 'smallMysteryMass' ), {
-      density: basicsVersion ? 80 : 220,
+      density: this.basicsVersion ? 80 : 220,
       mysteryLabel: true
     } );
 
@@ -81,6 +89,9 @@ define( function( require ) {
      */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
+      if ( this.basicsVersion ) {
+        this.gravityAccordionBoxExpandedProperty.reset();
+      }
     }
   } );
 } );
