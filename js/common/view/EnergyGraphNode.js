@@ -29,6 +29,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -40,10 +41,6 @@ define( function( require ) {
   // constants
   var LEGEND_DESCRIPTION_MAX_WIDTH = 500;
   var MAX_WIDTH = 100;
-  var GREEN_COLOR = '#39d74e';
-  var BLUE_COLOR = '#5798de';
-  var CYAN_COLOR = '#29d4ff';
-  var ORANGE_COLOR = '#ee6f3e';
 
   // strings
   var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
@@ -121,19 +118,19 @@ define( function( require ) {
 
     var aEntry = {
       property: model.firstSpring.kineticEnergyProperty,
-      color: GREEN_COLOR
+      color: PhetColorScheme.KINETIC_ENERGY
     };
     var bEntry = {
       property: model.firstSpring.gravitationalPotentialEnergyProperty,
-      color: BLUE_COLOR
+      color: PhetColorScheme.GRAVITATIONAL_POTENTIAL_ENERGY
     };
     var cEntry = {
       property: model.firstSpring.elasticPotentialEnergyProperty,
-      color: CYAN_COLOR
+      color: PhetColorScheme.ELASTIC_POTENTIAL_ENERGY
     };
     var dEntry = {
       property: model.firstSpring.thermalEnergyProperty,
-      color: ORANGE_COLOR
+      color: PhetColorScheme.HEAT_THERMAL_ENERGY
     };
 
     this.barChartNode = new BarChartNode( [
@@ -182,20 +179,20 @@ define( function( require ) {
         {
           abbreviation: keString,
           description: kineticEnergyString,
-          color: GREEN_COLOR
+          color: PhetColorScheme.KINETIC_ENERGY
         },
         {
           abbreviation: peGravString,
           description: gravitationalPotentialEnergyString,
-          color: BLUE_COLOR
+          color: PhetColorScheme.GRAVITATIONAL_POTENTIAL_ENERGY
         }, {
           abbreviation: peElasString,
           description: elasticPotentialEnergyString,
-          color: CYAN_COLOR
+          color: PhetColorScheme.ELASTIC_POTENTIAL_ENERGY
         }, {
           abbreviation: eThermString,
           description: thermalEnergyString,
-          color: ORANGE_COLOR
+          color: PhetColorScheme.HEAT_THERMAL_ENERGY
         }, {
           abbreviation: eTotString,
           description: totalEnergyString,
