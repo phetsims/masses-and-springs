@@ -41,6 +41,7 @@ define( function( require ) {
   // constants
   var LEGEND_DESCRIPTION_MAX_WIDTH = 500;
   var MAX_WIDTH = 100;
+  var ORANGE_COLOR = '#ee6f3e';
 
   // strings
   var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
