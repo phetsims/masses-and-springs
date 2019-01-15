@@ -25,11 +25,9 @@ define( function( require ) {
    */
   function GravityComboBox( bodyProperty, listNodeParent, tandem, options ) {
     options = _.extend( {
-      buttonCornerRadius: 3,
-      buttonYMargin: 0,
-      itemYMargin: 3,
-      itemXMargin: 2,
-      listYMargin: 3,
+      cornerRadius: 3,
+      xMargin: 10,
+      yMargin: 4,
       tandem: tandem.createTandem( 'gravityComboBox' ),
 
       // options for body text

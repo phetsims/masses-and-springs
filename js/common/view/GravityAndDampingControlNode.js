@@ -56,7 +56,7 @@ define( function( require ) {
 
     // Manages the items associated with the gravity panel in a combo box
     var gravityComboBox = new GravityComboBox( model.bodyProperty, listNodeParent, tandem, {
-      buttonCornerRadius: 3,
+      cornerRadius: 3,
       buttonYMargin: 0,
       itemYMargin: 3,
       itemXMargin: 2,
