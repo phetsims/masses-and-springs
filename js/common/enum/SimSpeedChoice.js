@@ -12,9 +12,5 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Enumeration = require( 'PHET_CORE/Enumeration' );
 
-  var SimSpeedChoice = new Enumeration( [ 'NORMAL', 'SLOW' ] );
-
-  massesAndSprings.register( 'SimSpeedChoice', SimSpeedChoice );
-
-  return SimSpeedChoice;
+  return massesAndSprings.register( 'SimSpeedChoice', new Enumeration( [ 'NORMAL', 'SLOW' ] ) );
 } );
