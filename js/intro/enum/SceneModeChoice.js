@@ -12,10 +12,5 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Enumeration = require( 'PHET_CORE/Enumeration' );
 
-  var SceneModeChoice = new Enumeration( [ 'SAME_LENGTH', 'ADJUSTABLE_LENGTH' ] );
-
-  massesAndSprings.register( 'SceneModeChoice', SceneModeChoice );
-
-
-  return SceneModeChoice;
+  return massesAndSprings.register( 'SceneModeChoice', new Enumeration( [ 'SAME_LENGTH', 'ADJUSTABLE_LENGTH' ] ) );
 } );
