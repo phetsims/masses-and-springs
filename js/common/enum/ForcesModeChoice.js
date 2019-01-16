@@ -13,5 +13,4 @@ define( function( require ) {
   var Enumeration = require( 'PHET_CORE/Enumeration' );
 
   return massesAndSprings.register( 'ForcesModeChoice', new Enumeration( [ 'FORCES', 'NET_FORCES' ] ) );
-  ;
 } );
