@@ -13,6 +13,7 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var ComboBox = require( 'SUN/ComboBox' );
+  var ComboBoxItem = require( 'SUN/ComboBoxItem' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
 
@@ -27,7 +28,7 @@ define( function( require ) {
     options = _.extend( {
       cornerRadius: 3,
       xMargin: 10,
-      yMargin: 4,
+      yMargin: 6,
       tandem: tandem.createTandem( 'gravityComboBox' ),
 
       // options for body text
@@ -45,7 +46,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'bodyLabel' )
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withX( options.xOffset );
-      bodyListItems.push( ComboBox.createItem( bodyLabel, body ) );
+      bodyListItems.push( new ComboBoxItem( bodyLabel, body ) );
     } );
 
     ComboBox.call( this, bodyListItems, bodyProperty, listNodeParent, options );
