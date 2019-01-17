@@ -46,9 +46,11 @@ define( function( require ) {
       basicsVersion: false
     }, options );
 
+    // REVIEW: Don't store the options object, but just whether it is a basicsVersion or not. (this.basicsVersion = ...)
     this.options = options;
 
     if ( options.basicsVersion ) {
+      // REVIEW: Shouldn't have a console.log for this.
       console.log( 'basics version' );
     }
 

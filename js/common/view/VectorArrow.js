@@ -29,5 +29,6 @@ define( function( require ) {
   }
 
   massesAndSprings.register( 'VectorArrow', VectorArrow );
+
   return inherit( ArrowNode, VectorArrow );
 } );

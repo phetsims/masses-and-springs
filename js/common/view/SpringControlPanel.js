@@ -34,8 +34,8 @@ define( function( require ) {
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       xMargin: 5,
       yMargin: 5,
-      spacing:3,
-      minWidth:165,
+      spacing: 3,
+      minWidth: 165,
       align: 'center',
       centerTick: false,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
@@ -44,6 +44,7 @@ define( function( require ) {
       minorTickMarksVisible: true,
       sliderTrackSize: new Dimension2( 120, 0.1 ),
       tickLabelSpacing: 6,
+      // REVIEW: Just pass `constrainValue: Util.roundSymmetric`?
       constrainValue: function( value ) {
         return Util.roundSymmetric( value );
       }
@@ -94,12 +95,9 @@ define( function( require ) {
         hSlider
       ]
     } ), options );
-
   }
 
   massesAndSprings.register( 'SpringControlPanel', SpringControlPanel );
 
   return inherit( Panel, SpringControlPanel );
-
-} )
-;
+} );

@@ -40,7 +40,7 @@ define( function( require ) {
     this.firstSpring = this.springs[ 0 ];
 
     // @private {boolean} Flag used to determine if this is the basics version.
-    this.basicsVersion = this.options.basicsVersion;
+    this.basicsVersion = this.options.basicsVersion; // REVIEW: Don't have `this.options` in general
     var massXPosition = this.basicsVersion ? 0.13 : 0.625;
     var massValue;
     var color;
@@ -62,6 +62,7 @@ define( function( require ) {
     }
 
     // Initialize masses for non-basics version
+    // REVIEW: This code seems to be running for both versions. Is that correct?
     massValue = this.basicsVersion ? 0.12 : 0.23;
     color = this.basicsVersion ? new Color( 'rgb( 9, 19, 174 )' ) : new Color( 'rgb( 0, 222, 224 )' );
     this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, new Property( color ), null, tandem.createTandem( 'mediumMysteryMass' ), {
@@ -70,6 +71,7 @@ define( function( require ) {
     } );
 
     massValue = this.basicsVersion ? 0.060 : 0.37;
+    // REVIEW: `new Color( 'rgb(a,b,c)' )` is equivalent to `new Color( a, b, c )` if that's more helpful.
     color = this.basicsVersion ? new Color( 'rgb( 10, 198, 157 )' ) : new Color( 'rgb( 246, 164, 255 )' );
     this.createMass( massValue, massXPosition + MASS_OFFSET, new Property( color ), null, tandem.createTandem( 'smallMysteryMass' ), {
       density: this.basicsVersion ? 80 : 220,
@@ -84,11 +86,12 @@ define( function( require ) {
 
   return inherit( MassesAndSpringsModel, LabModel, {
     /**
-     *
      * @public
      */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
+
+      // REVIEW: Usually just check `this.someProperty && this.someProperty.reset();`
       if ( this.basicsVersion ) {
         this.gravityAccordionBoxExpandedProperty.reset();
       }

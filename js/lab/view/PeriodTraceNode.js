@@ -64,6 +64,7 @@ define( function( require ) {
     /**
      * @param {number} dt
      * @param {Property.<boolean>} playingProperty: whether the sim is playing or not
+     * REVIEW: visibility (public?)
      */
     step: function( dt, playingProperty ) {
       var spring = this.periodTrace.spring;
@@ -72,11 +73,11 @@ define( function( require ) {
       // The period trace should only be drawn when a mass is oscillating on a spring and its checkbox is toggled on.
       if ( mass && !mass.userControlledProperty.value &&
            spring.periodTraceVisibilityProperty.value &&
-           !(mass.verticalVelocityProperty.value === 0) ) {
+           !( mass.verticalVelocityProperty.value === 0 ) ) {
 
         // Responsible for fading the period trace.We want to fade only when the sim is playing and
         // the state is either 4 or when the trace has begun fading already.
-        if ( (this.periodTrace.stateProperty.value === 4 || this.colorAlpha !== 1) && playingProperty.value ) {
+        if ( ( this.periodTrace.stateProperty.value === 4 || this.colorAlpha !== 1 ) && playingProperty.value ) {
           this.fade( dt );
         }
 
@@ -91,7 +92,7 @@ define( function( require ) {
           var secondPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.secondPeakY );
           var currentYPosition = modelViewTransform.modelToViewY( massEquilibrium +
                                                                   spring.massEquilibriumDisplacementProperty.value );
-
+          // REVIEW: Why setting this here? JSDoc it also, and maybe declare in constructor IF NEEDED.
           this.shape = new Shape();
 
           var state = this.periodTrace.stateProperty.value; // 0 to 4
@@ -144,9 +145,10 @@ define( function( require ) {
         this.periodTrace.onFaded();
       }
     },
+
     /**
      * Fades the period trace.
-     * @param dt
+     * @param {number} dt
      *
      * @private
      */

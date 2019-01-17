@@ -63,6 +63,7 @@ define( function( require ) {
       hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT * 0.34 );
     }
 
+    // REVIEW: JSDoc?
     this.rect = new Rectangle( {
       stroke: 'black',
       boundsMethod: 'unstroked',
@@ -102,6 +103,7 @@ define( function( require ) {
       }
     } );
 
+    // REVIEW: Why JSDoc here?
     // @public Sets the gradient on the massNode.
     this.rect.fill = new LinearGradient( -this.rect.width / 2, 0, this.rect.width / 2, 0 )
       .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.1 ) )
@@ -113,6 +115,7 @@ define( function( require ) {
     hookShape.arc( 0, 0, radius, Math.PI, ( 0.5 * Math.PI ) );
     hookShape.lineTo( 0, hookHeight / 2 );
 
+    // REVIEW: Type doc?
     // @public Used for hook on massNode.
     this.hookNode = new Path( hookShape, {
       stroke: 'black',
@@ -255,7 +258,7 @@ define( function( require ) {
      * @param {Property.<boolean>} arrowVisibilityProperty
      * @param {Node} arrowNode
      *
-     * @private
+     * @private REVIEW: No visibility for a local variable
      */
     var updateForceVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
@@ -330,7 +333,7 @@ define( function( require ) {
       function( spring, gravity ) {
         var gravitationalAcceleration = mass.mass * gravity;
         position = mass.positionProperty.get();
-        xOffset = (forcesOrientation) * 45;
+        xOffset = forcesOrientation * 45;
         y2 = ARROW_SIZE_DEFAULT * gravitationalAcceleration;
         updateArrow( gravityForceArrow, position, xOffset, y2 );
       } );
@@ -339,7 +342,7 @@ define( function( require ) {
     Property.multilink( [ mass.springForceProperty ],
       function( springForce ) {
         position = mass.positionProperty.get();
-        xOffset = (forcesOrientation) * 45;
+        xOffset = forcesOrientation * 45;
         y2 = -ARROW_SIZE_DEFAULT * springForce;
         updateArrow( springForceArrow, position, xOffset, y2 );
       } );
@@ -354,7 +357,7 @@ define( function( require ) {
     ], function( netForce, accelerationVisible, netAcceleration, velocityVisible ) {
       position = mass.positionProperty.get();
       if ( Math.abs( netForce ) > 1E-6 ) {
-        xOffset = (forcesOrientation) * 45;
+        xOffset = forcesOrientation * 45;
         y2 = -ARROW_SIZE_DEFAULT * netForce;
         updateArrow( netForceArrow, position, xOffset, y2 );
       }
@@ -374,12 +377,13 @@ define( function( require ) {
     // When the mass's position changes update the forces baseline marker
     mass.positionProperty.link( function( position ) {
       forceNullLine.setLine(
-        self.rect.centerX + (forcesOrientation) * 40, position.y + self.rect.centerY,
-        self.rect.centerX + (forcesOrientation) * 50, position.y + self.rect.centerY
+        self.rect.centerX + forcesOrientation * 40, position.y + self.rect.centerY,
+        self.rect.centerX + forcesOrientation * 50, position.y + self.rect.centerY
       );
     } );
   }
 
   massesAndSprings.register( 'MassNode', MassNode );
+
   return inherit( Node, MassNode );
 } );

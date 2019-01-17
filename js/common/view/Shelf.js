@@ -17,6 +17,7 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @param {Object} [options]
    * @constructor
+   * REVIEW: ShelfNode might be a better name? `Shelf` seems like the model name
    */
   function Shelf( tandem, options ) {
     options = _.extend( {

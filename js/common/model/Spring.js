@@ -19,6 +19,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  // REVIEW: Can we remove commented-out lines?
   // var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   // var MassIO = require( 'MASSES_AND_SPRINGS/common/model/MassIO' );
   // var NullableIO = require( 'TANDEM/types/NullableIO' );
@@ -218,9 +219,11 @@ define( function( require ) {
         this.naturalRestingLengthProperty
       ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
+        // REVIEW: Is it possible to combine this with the multilink that sets massEquilibriumYPositionProperty?
+        // REVIEW: The springExtensionValue is computed in both.
         if ( mass ) {
           var springExtensionValue =
-            ( mass.massProperty.value * self.gravityProperty.value) / self.springConstantProperty.value;
+            ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
           self.equilibriumYPositionProperty.set(
             self.positionProperty.get().y - naturalRestingLength - springExtensionValue );
         }
@@ -262,7 +265,7 @@ define( function( require ) {
 
           // springExtension = mg/k
           var springExtensionValue =
-            ( mass.massProperty.value * self.gravityProperty.value) / self.springConstantProperty.value;
+            ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
           self.massEquilibriumYPositionProperty.set(
             self.positionProperty.get().y - naturalRestingLength - springExtensionValue - mass.heightProperty.value / 2
           );
@@ -340,7 +343,7 @@ define( function( require ) {
      * @param {Object} springState - Sets the springs's properties with previously stored properties. See getSpringState
      *
      * @public
-     * @returns {Object}
+     * @returns {Object} REVIEW: I don't see a return value here
      */
     setSpringState: function( springState ) {
       this.displacementProperty.set( springState.displacement );
@@ -401,7 +404,8 @@ define( function( require ) {
       this.buttonEnabledProperty.set( false );
     },
 
-    /** Updates the displacement Property of the spring.
+    /**
+     * Updates the displacement Property of the spring.
      * @param {number} yPosition
      * @param {boolean} factorNaturalLength
      *

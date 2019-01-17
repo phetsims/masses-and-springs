@@ -85,6 +85,7 @@ define( function( require ) {
     initialPosition.setX( dragBounds.minX );
 
     // @private {Vector2} (read-write) position of line in screen coordinates
+    // REVIEW: Incorrect JSDoc
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )
@@ -113,5 +114,4 @@ define( function( require ) {
       this.positionProperty.reset();
     }
   } );
-
 } );

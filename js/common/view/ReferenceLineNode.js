@@ -58,6 +58,7 @@ define( function( require ) {
     var yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
 
     // @private {Vector2} (read-write) position of line in screen coordinates.
+    // REVIEW: Incorrect JSDoc
     this.positionProperty = new Property( new Vector2( xPos, yPos ), {
       phetioType: PropertyIO( Vector2IO )
     } );
@@ -94,7 +95,7 @@ define( function( require ) {
       // Adjust the position of the label
       if ( options.label ) {
         options.label.centerY = 0;
-        options.label.x = (LINE_LENGTH + 10);
+        options.label.x = LINE_LENGTH + 10;
       }
     } );
 

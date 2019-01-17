@@ -58,7 +58,6 @@ define( function( require ) {
   var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
 
   /**
-   *
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @constructor
@@ -92,7 +91,7 @@ define( function( require ) {
       self.zoomLevelProperty.value += 1;
     } );
 
-    // {DerivedProperty.<number>} Responsible for adjusting the scaling of the barNode heights.
+    // {Property.<number>} Responsible for adjusting the scaling of the barNode heights.
     var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
       return Math.pow( 2, zoomLevel ) * 20;
     } );
@@ -294,6 +293,7 @@ define( function( require ) {
     reset: function() {
       this.zoomLevelProperty.reset();
     },
+
     /**
      * @public
      */

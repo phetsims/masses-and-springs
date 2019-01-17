@@ -94,6 +94,8 @@ define( function( require ) {
     }
     // Responsible for velocity and acceleration vectors checkboxes and period trace in basics version
     else {
+      // REVIEW: Looks like some duplication here, where there is just an added title. Can we reduce that by
+      // REVIEW: conditionally adding the node?
       vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
         node: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,

@@ -48,7 +48,7 @@ define( function( require ) {
       stroke: 'gray',
       yMargin: 6,
       xMargin: 6,
-      basicsVersion: false,
+      basicsVersion: false, // REVIEW: Where is this used?
       tandem: tandem
     }, options );
 
@@ -65,7 +65,7 @@ define( function( require ) {
       }
     } );
 
-    // @public {Property.<Dimension2>}
+    // @public {Property.<Dimension2>} REVIEW: No JSDoc on local variable?
     var trackSizeProperty = new Property( options.basics ? new Dimension2( 132, 0.1 ) : new Dimension2( 125, 0.1 ) );
 
     var numberControl = new MutableOptionsNode( NumberControl, [ massString, massInGramsProperty, range ], {
@@ -116,5 +116,6 @@ define( function( require ) {
   }
 
   massesAndSprings.register( 'MassValueControlPanel', MassValueControlPanel );
+
   return inherit( Panel, MassValueControlPanel );
 } );

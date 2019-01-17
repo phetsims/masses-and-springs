@@ -25,6 +25,7 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem );
 
     // Energy screen should have spring damping
+    // REVIEW: This looks like we should pass in the initial value of damping, instead of overwriting the Property.
     this.dampingProperty = new NumberProperty( 0.0575 );
 
     // Creation of masses and springs specific for this screen

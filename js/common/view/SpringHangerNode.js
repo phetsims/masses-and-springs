@@ -24,7 +24,7 @@ define( function( require ) {
 
   /**
    * @param {Array.<Spring>} springs
-   * @param {ModelViewTransform2} modelViewTransform2
+   * @param {ModelViewTransform2} modelViewTransform2 REVIEW: Usually just name modelViewTransform or mvt
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
@@ -41,8 +41,8 @@ define( function( require ) {
       var springHangerNodeWidth = springsSeparation * 1.4;
 
       // X coordinate of middle of springs
-      var middleOfSprings = modelViewTransform2.modelToViewX( (springs[ 0 ].positionProperty.get().x +
-                                                               springs[ 1 ].positionProperty.get().x) / 2 );
+      var middleOfSprings = modelViewTransform2.modelToViewX( ( springs[ 0 ].positionProperty.get().x +
+                                                                springs[ 1 ].positionProperty.get().x ) / 2 );
 
       // derived from x positions of springs.
       Rectangle.call( this, 0, 0, springHangerNodeWidth, 20, 8, 8, {

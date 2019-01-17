@@ -64,6 +64,7 @@ define( function( require ) {
 
     var self = this;
 
+    // REVIEW: JSDoc type
     // @public Support for expanding touchAreas near massNodes.
     this.backgroundDragPlane = new Plane();
     var closestDragListener = new ClosestDragListener( 30, 0 );
@@ -74,7 +75,7 @@ define( function( require ) {
     // @public {MassesAndSpringsModel}
     this.model = model;
 
-    var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * (1 - MassesAndSpringsConstants.SHELF_HEIGHT) );
+    var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * ( 1 - MassesAndSpringsConstants.SHELF_HEIGHT ) );
 
     // @public {ModelViewTransform2}
     this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, 397 );
@@ -86,6 +87,7 @@ define( function( require ) {
 
     // @private {Array.<MutableOptionsNode>} Used to reference the created springs in the view.
     this.springNodes = [];
+    // REVIEW: Don't use `self`, and can we just combine this into the "declaration" above?
     self.springNodes = model.springs.map( function( spring ) {
       var springNode = new MutableOptionsNode( OscillatingSpringNode,
         [ spring, self.modelViewTransform, tandem.createTandem( 'oscillatingSpringNode' ) ],
@@ -242,7 +244,7 @@ define( function( require ) {
         tandem: tandem.createTandem( 'timeControlNode' )
       } );
 
-    // @public
+    // @public {AlignGroup}
     this.rightPanelAlignGroup = new AlignGroup( { matchVertical: false } );
 
     // @public {ToolboxPanel} Toolbox Panel
@@ -258,6 +260,7 @@ define( function( require ) {
       }
     );
 
+    // REVIEW: JSDoc
     // Buttons controlling the speed of the sim, play/pause button, and the reset button
     this.simControlHBox = new HBox( {
       spacing: this.spacing * 6,
@@ -336,6 +339,7 @@ define( function( require ) {
           sliderTrackSize: options.sliderTrackSize,
           tickLabelSpacing: options.tickLabelSpacing,
           constrainValue: function( value ) {
+            // REVIEW: Why using Number? To cast to a number, just do a unary plus `+` at the start
             return Number( Util.toFixed( value, 0 ) );
           }
         }

@@ -111,6 +111,7 @@ define( function( require ) {
       maxWidth: CONTENT_MAX_WIDTH,
       tandem: tandem.createTandem( 'massEquilibriumString' )
     } ), { xAlign: 'left', group: alignGroup } );
+    // REVIEW: typo, should be "movable"?
     var movalbeLineAlignBox = new AlignBox( new Text( movableLineString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: CONTENT_MAX_WIDTH,
@@ -141,6 +142,8 @@ define( function( require ) {
     } );
 
     if ( options.periodTraceOption ) {
+      // REVIEW: Seems like some code duplication here. Can we just adjust the array beforehand (by inserting elements),
+      // REVIEW: and create the VerticalCheckboxGroup once?
       indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
         node: new HBox( {
           children: [ componentDisplacement, new VBox( { children: [ displacementSymbol, blueLine ] } ) ],

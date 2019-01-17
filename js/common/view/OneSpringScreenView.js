@@ -46,7 +46,7 @@ define( function( require ) {
     SpringScreenView.call( this, model, tandem, options );
     var self = this;
 
-    // @public {Number} centerX of the spring in view coordinates
+    // @public {number} centerX of the spring in view coordinates
     this.springCenter = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
 
     // Spring Constant Control Panel
@@ -55,7 +55,7 @@ define( function( require ) {
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } )
     ];
 
-    // @public {DerivedProperty.<boolean>} Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
+    // @public {Property.<boolean>} Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
     this.equilibriumVisibilityProperty = new DerivedProperty(
       [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
@@ -121,6 +121,7 @@ define( function( require ) {
         self.springStopperButtonNode.enabled = buttonEnabled;
       } );
 
+    // REVIEW: Turn this into model.basicsVersion, and properly document it.
     if ( !model.options.basicsVersion ) {
       // @public {EnergyGraphNode} energy graph that displays energy values for the spring system.
       this.energyGraphNode = new EnergyGraphNode( model, tandem );
@@ -130,7 +131,7 @@ define( function( require ) {
     // Property that determines the zero height in the view.
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
 
-    // @public {MovableLineNode} Initializes movable line
+    // @public {MovableLineNode} Initializes movable line REVIEW: No JSDoc on local variable
     var xBoundsLimit = this.springCenter + this.spacing * 1.1;
     this.movableLineNode = new MovableLineNode(
       this.springHangerNode.center.plus( new Vector2( 45, 200 ) ),
@@ -176,6 +177,8 @@ define( function( require ) {
       this.resetAllButton.addListener( function() {
         self.model.reset();
         self.movableLineNode.reset();
+        // REVIEW: Generally prefer `self.energyGraphNode && self.energyGraphNode.reset` if it is optional, instead of
+        // REVIEW: repeating the same constraints.
         if ( !model.options.basicsVersion ) {
           self.energyGraphNode.reset();
         }
@@ -269,6 +272,7 @@ define( function( require ) {
       MassesAndSpringsModel.prototype.reset.call( this );
       this.energyGraphNode.reset();
     },
+
     /**
      * Responsible for updating the energy bar graph
      *

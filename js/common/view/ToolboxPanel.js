@@ -159,5 +159,4 @@ define( function( require ) {
   massesAndSprings.register( 'ToolboxPanel', ToolboxPanel );
 
   return inherit( Panel, ToolboxPanel );
-
 } );

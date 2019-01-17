@@ -53,6 +53,7 @@ define( function( require ) {
 
     // @public {Spring} (read-only)
     this.spring = spring;
+
     this.translation = modelViewTransform2.modelToViewPosition(
       new Vector2( spring.positionProperty.get().x,
         spring.positionProperty.get().y - length ) );

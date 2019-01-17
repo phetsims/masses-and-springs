@@ -76,6 +76,7 @@ define( function( require ) {
         visible: false,
         centerTick: true,
         constrainValue: function( value ) {
+          // REVIEW: Could actually use Util.roundToInterval now?
           value = Util.roundSymmetric( value * 100 / 5 ) * 5;
           return value / 100;
         }
@@ -89,6 +90,7 @@ define( function( require ) {
       tandem.createTandem( 'constantsControlPanel' ),
       {
         maxWidth: 160,
+        // REVIEW: Am I missing usage of this value?
         alignGroup: optionsContentAlignGroup,
         stroke: null
       }
