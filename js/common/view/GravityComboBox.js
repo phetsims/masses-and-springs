@@ -1,4 +1,4 @@
-// Copyright 2017, University of Colorado Boulder
+// Copyright 2017-2019, University of Colorado Boulder
 
 /**
  * ComboBox used for selecting planets.
@@ -9,50 +9,49 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var ComboBox = require( 'SUN/ComboBox' );
-  var ComboBoxItem = require( 'SUN/ComboBoxItem' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const ComboBox = require( 'SUN/ComboBox' );
+  const ComboBoxItem = require( 'SUN/ComboBoxItem' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
-  /**
-   * @param {Property.<string>} bodyProperty
-   * @param {Node} listNodeParent
-   * @param {Tandem} tandem
-   * @param {Object} [options]
-   * @constructor
-   */
-  function GravityComboBox( bodyProperty, listNodeParent, tandem, options ) {
-    options = _.extend( {
-      cornerRadius: 3,
-      xMargin: 10,
-      yMargin: 6,
-      tandem: tandem.createTandem( 'gravityComboBox' ),
+  class GravityComboBox extends ComboBox {
 
-      // options for body text
-      bodyFont: MassesAndSpringsConstants.LABEL_FONT,
-      bodyMaxWidth: 140,
-      xOffset: 107
-    }, options );
+    /**
+     * @param {Property.<string>} bodyProperty
+     * @param {Node} listNodeParent
+     * @param {Tandem} tandem
+     * @param {Object} [options]
+     * @constructor
+     */
+    constructor( bodyProperty, listNodeParent, tandem, options ) {
+      options = _.extend( {
+        cornerRadius: 3,
+        xMargin: 10,
+        yMargin: 6,
+        tandem: tandem.createTandem( 'gravityComboBox' ),
 
-    //  Add gravity info for various planets
-    var bodyListItems = [];
-    Body.BODIES.forEach( function( body ) {
-      var bodyLabel = new Text( body.title, {
-        font: options.bodyFont,
-        maxWidth: options.bodyMaxWidth,
-        tandem: tandem.createTandem( 'bodyLabel' )
+        // options for body text
+        bodyFont: MassesAndSpringsConstants.LABEL_FONT,
+        bodyMaxWidth: 140,
+        xOffset: 107
+      }, options );
+
+      // {ComboBoxItem[]}
+      const items = Body.BODIES.map( body => {
+        const bodyLabel = new Text( body.title, {
+          font: options.bodyFont,
+          maxWidth: options.bodyMaxWidth,
+          tandem: tandem.createTandem( 'bodyLabel' )
+        } );
+        bodyLabel.localBounds = bodyLabel.localBounds.withX( options.xOffset );
+        return new ComboBoxItem( bodyLabel, body );
       } );
-      bodyLabel.localBounds = bodyLabel.localBounds.withX( options.xOffset );
-      bodyListItems.push( new ComboBoxItem( bodyLabel, body ) );
-    } );
 
-    ComboBox.call( this, bodyListItems, bodyProperty, listNodeParent, options );
+      super( items, bodyProperty, listNodeParent, options );
+    }
   }
 
-  massesAndSprings.register( 'GravityComboBox', GravityComboBox );
-
-  return inherit( ComboBox, GravityComboBox );
+  return massesAndSprings.register( 'GravityComboBox', GravityComboBox );
 } );
