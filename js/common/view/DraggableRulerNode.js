@@ -66,8 +66,7 @@ define( function( require ) {
       tickMarksOnBottom: false
     }, { tandem: tandem.createTandem( 'ruler' ) } );
 
-    // @private {Vector2} (read-only) position of ruler node in screen coordinates
-    // REVIEW: JSDoc looks incorrect
+    // @private {Property.<Vector2>} (read-only) position of ruler node in screen coordinates
     this.positionProperty = new Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' ),
       phetioType: PropertyIO( Vector2IO )

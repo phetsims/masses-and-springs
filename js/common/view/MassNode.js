@@ -63,7 +63,7 @@ define( function( require ) {
       hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT * 0.34 );
     }
 
-    // REVIEW: JSDoc?
+    // @public {Rectangle}
     this.rect = new Rectangle( {
       stroke: 'black',
       boundsMethod: 'unstroked',
@@ -103,8 +103,7 @@ define( function( require ) {
       }
     } );
 
-    // REVIEW: Why JSDoc here?
-    // @public Sets the gradient on the massNode.
+    // Sets the gradient on the massNode.
     this.rect.fill = new LinearGradient( -this.rect.width / 2, 0, this.rect.width / 2, 0 )
       .addColorStop( 0, Color.toColor( mass.color ).colorUtilsBrighter( 0.1 ) )
       .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.6 ) )
@@ -115,8 +114,7 @@ define( function( require ) {
     hookShape.arc( 0, 0, radius, Math.PI, ( 0.5 * Math.PI ) );
     hookShape.lineTo( 0, hookHeight / 2 );
 
-    // REVIEW: Type doc?
-    // @public Used for hook on massNode.
+    // @public {Path} Used for hook on massNode.
     this.hookNode = new Path( hookShape, {
       stroke: 'black',
       lineWidth: 1.5,
@@ -258,7 +256,6 @@ define( function( require ) {
      * @param {Property.<boolean>} arrowVisibilityProperty
      * @param {Node} arrowNode
      *
-     * @private REVIEW: No visibility for a local variable
      */
     var updateForceVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],

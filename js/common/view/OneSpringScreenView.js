@@ -131,7 +131,7 @@ define( function( require ) {
     // Property that determines the zero height in the view.
     var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
 
-    // @public {MovableLineNode} Initializes movable line REVIEW: No JSDoc on local variable
+    // Initializes movable line
     var xBoundsLimit = this.springCenter + this.spacing * 1.1;
     this.movableLineNode = new MovableLineNode(
       this.springHangerNode.center.plus( new Vector2( 45, 200 ) ),

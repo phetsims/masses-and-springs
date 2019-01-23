@@ -64,9 +64,7 @@ define( function( require ) {
       }
     } );
 
-    // @public {Property.<Dimension2>} REVIEW: No JSDoc on local variable?
     var trackSizeProperty = new Property( options.basics ? new Dimension2( 132, 0.1 ) : new Dimension2( 125, 0.1 ) );
-
     var numberControl = new MutableOptionsNode( NumberControl, [ massString, massInGramsProperty, range ], {
       valuePattern: StringUtils.fillIn( massValueString, {
         mass: '{0}'
