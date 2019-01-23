@@ -48,7 +48,6 @@ define( function( require ) {
       stroke: 'gray',
       yMargin: 6,
       xMargin: 6,
-      basicsVersion: false, // REVIEW: Where is this used?
       tandem: tandem
     }, options );
 
