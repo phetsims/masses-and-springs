@@ -70,7 +70,9 @@ define( function( require ) {
     var closestDragListener = new ClosestDragListener( 30, 0 );
 
     this.backgroundDragPlane.addInputListener( closestDragListener );
-    this.addChild( this.backgroundDragPlane );
+
+    // @protected {Node} Layer that gets moved to the back of the scene graph to handle z-ordering of subtypes.
+    this.backLayer = new Node();
 
     // @public {MassesAndSpringsModel}
     this.model = model;
