@@ -226,7 +226,6 @@ define( function( require ) {
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
         self.resetMassLayer();
       },
-      touchAreaDilation: 12,
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
