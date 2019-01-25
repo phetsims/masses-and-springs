@@ -44,10 +44,7 @@ define( function( require ) {
       minorTickMarksVisible: true,
       sliderTrackSize: new Dimension2( 120, 0.1 ),
       tickLabelSpacing: 6,
-      // REVIEW: Just pass `constrainValue: Util.roundSymmetric`?
-      constrainValue: function( value ) {
-        return Util.roundSymmetric( value );
-      }
+      constrainValue: Util.roundSymmetric( value )
     }, options );
 
     var hSliderTitle = new Text( title, { font: options.titleFont, maxWidth:150 } );
