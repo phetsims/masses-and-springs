@@ -89,8 +89,6 @@ define( function( require ) {
       tandem.createTandem( 'constantsControlPanel' ),
       {
         maxWidth: 160,
-        // REVIEW: Am I missing usage of this value?
-        alignGroup: optionsContentAlignGroup,
         stroke: null
       }
     ) );
