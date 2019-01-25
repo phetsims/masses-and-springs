@@ -24,32 +24,32 @@ define( function( require ) {
 
   /**
    * @param {Array.<Spring>} springs
-   * @param {ModelViewTransform2} modelViewTransform2 REVIEW: Usually just name modelViewTransform or mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function SpringHangerNode( springs, modelViewTransform2, tandem, options ) {
+  function SpringHangerNode( springs, modelViewTransform, tandem, options ) {
 
     options = _.extend( {
       singleSpring: false
     }, options );
     if ( options.singleSpring === false ) {
       var springsSeparation =
-        modelViewTransform2.modelToViewDeltaX( Math.abs( springs[ 0 ].positionProperty.get().x -
-                                                         springs[ 1 ].positionProperty.get().x ) );
+        modelViewTransform.modelToViewDeltaX( Math.abs( springs[ 0 ].positionProperty.get().x -
+                                                        springs[ 1 ].positionProperty.get().x ) );
       var springHangerNodeWidth = springsSeparation * 1.4;
 
       // X coordinate of middle of springs
-      var middleOfSprings = modelViewTransform2.modelToViewX( ( springs[ 0 ].positionProperty.get().x +
-                                                                springs[ 1 ].positionProperty.get().x ) / 2 );
+      var middleOfSprings = modelViewTransform.modelToViewX( ( springs[ 0 ].positionProperty.get().x +
+                                                               springs[ 1 ].positionProperty.get().x ) / 2 );
 
       // derived from x positions of springs.
       Rectangle.call( this, 0, 0, springHangerNodeWidth, 20, 8, 8, {
         fill: SPRING_HANGER_FILL,
         stroke: 'grey',
         centerX: middleOfSprings,
-        top: modelViewTransform2.modelToViewY( MassesAndSpringsConstants.CEILING_Y ),
+        top: modelViewTransform.modelToViewY( MassesAndSpringsConstants.CEILING_Y ),
         tandem: tandem.createTandem( 'springHangerNode' )
       } );
 

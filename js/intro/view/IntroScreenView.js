@@ -78,20 +78,17 @@ define( function( require ) {
         constrainValue: function( value ) {
           return Util.roundToInterval( value, .05 );
         }
-      }
-    );
+      } );
 
     // Panel that keeps thickness/spring constant at constant value
     var constantsControlPanel = new AlignBox( new ConstantsControlPanel(
       model.constantParameterProperty,
       model.constantModeChoice,
       constantParameterString,
-      tandem.createTandem( 'constantsControlPanel' ),
-      {
+      tandem.createTandem( 'constantsControlPanel' ), {
         maxWidth: 160,
         stroke: null
-      }
-    ) );
+      } ) );
 
     var lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 140 );
 
