@@ -56,7 +56,7 @@ define( function( require ) {
       this.gravityAccordionBoxExpandedProperty = new BooleanProperty( false );
 
       this.createMass( 0.180, massXPosition + MASS_OFFSET * 2, new Property( new Color( 'rgb( 195, 51, 115 )' ) ), null, tandem.createTandem( 'largeMysteryMass' ), {
-        density: this.basicsVersion ? 80 : 120, // TODO: this is always basicsVersion
+        density: 80,
         mysteryLabel: true
       } );
     }
