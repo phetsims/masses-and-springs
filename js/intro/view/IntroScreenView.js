@@ -76,7 +76,7 @@ define( function( require ) {
         visible: false,
         centerTick: true,
         constrainValue: function( value ) {
-          return Util.roundToInterval( value / 100, .05 );
+          return Util.roundToInterval( value, .05 );
         }
       }
     );
