@@ -63,6 +63,7 @@ define( function( require ) {
 
     // Initialize masses for non-basics version
     // REVIEW: This code seems to be running for both versions. Is that correct?
+    // REVIEW: Both sims uses the same mass. I'm adjusting the massValue and density based on the sim. So this should run for both sims.
     massValue = this.basicsVersion ? 0.12 : 0.23;
     color = this.basicsVersion ? new Color( 'rgb( 9, 19, 174 )' ) : new Color( 'rgb( 0, 222, 224 )' );
     this.createMass( massValue, massXPosition + MASS_OFFSET * 1.5, new Property( color ), null, tandem.createTandem( 'mediumMysteryMass' ), {
@@ -71,8 +72,7 @@ define( function( require ) {
     } );
 
     massValue = this.basicsVersion ? 0.060 : 0.37;
-    // REVIEW: `new Color( 'rgb(a,b,c)' )` is equivalent to `new Color( a, b, c )` if that's more helpful.
-    color = this.basicsVersion ? new Color( 'rgb( 10, 198, 157 )' ) : new Color( 'rgb( 246, 164, 255 )' );
+    color = this.basicsVersion ? new Color( 10, 198, 157 ) : new Color( 246, 164, 255 );
     this.createMass( massValue, massXPosition + MASS_OFFSET, new Property( color ), null, tandem.createTandem( 'smallMysteryMass' ), {
       density: this.basicsVersion ? 80 : 220,
       mysteryLabel: true
