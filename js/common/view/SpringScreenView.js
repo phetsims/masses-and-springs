@@ -71,8 +71,6 @@ define( function( require ) {
 
     this.backgroundDragPlane.addInputListener( closestDragListener );
 
-    // @protected {Node} Layer that gets moved to the back of the scene graph to handle z-ordering of subtypes.
-    this.backLayer = new Node();
 
     // @public {MassesAndSpringsModel}
     this.model = model;
@@ -269,6 +267,11 @@ define( function( require ) {
       children: [ this.timeControlNode, this.resetAllButton ]
     } );
     this.addChild( this.simControlHBox );
+
+    // @protected {Node} Layer that gets moved to the back of the scene graph to handle z-ordering of subtypes.
+    this.backLayer = new Node();
+    this.addChild( this.backLayer );
+
   }
 
   massesAndSprings.register( 'SpringScreenView', SpringScreenView );
