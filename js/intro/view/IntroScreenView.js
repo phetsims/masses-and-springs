@@ -76,9 +76,7 @@ define( function( require ) {
         visible: false,
         centerTick: true,
         constrainValue: function( value ) {
-          // REVIEW: Could actually use Util.roundToInterval now?
-          value = Util.roundSymmetric( value * 100 / 5 ) * 5;
-          return value / 100;
+          return Util.roundToInterval( value / 100, .05 );
         }
       }
     );
