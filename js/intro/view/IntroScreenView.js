@@ -86,6 +86,7 @@ define( function( require ) {
     // Panel that keeps thickness/spring constant at constant value
     var constantsControlPanel = new AlignBox( new ConstantsControlPanel(
       model.constantParameterProperty,
+      model.constantModeChoice,
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ),
       {

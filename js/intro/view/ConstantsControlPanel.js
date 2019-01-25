@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var ConstantModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/ConstantModeChoice' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -29,13 +28,14 @@ define( function( require ) {
   var RADIO_BUTTON_SPACING = 4;
 
   /**
-   * @param {Property.<string>} selectedConstantProperty determines which value to hold constant
-   * @param {string} title: string used to title the panel
+   * @param {Property.<string>} selectedConstantProperty - determines which value to hold constant
+   * @param {Enumeration} constantEnumeration - Choices for constant parameter
+   * @param {string} title - string used to title the panel
    * @param {tandem} tandem
    * @param {Object} [options]
    * @constructor
    */
-  function ConstantsControlPanel( selectedConstantProperty, title, tandem, options ) {
+  function ConstantsControlPanel( selectedConstantProperty, constantEnumeration, title, tandem, options ) {
     options = _.extend( {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       visible: true,
@@ -53,7 +53,7 @@ define( function( require ) {
 
     var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
     var thicknessRadioButton = new AquaRadioButton(
-      selectedConstantProperty, ConstantModeChoice.SPRING_THICKNESS, thicknessText, {
+      selectedConstantProperty, constantEnumeration.SPRING_THICKNESS, thicknessText, {
         radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
         tandem: tandem.createTandem( 'thicknessRadioButton' )
       } );
@@ -63,7 +63,7 @@ define( function( require ) {
       _.extend( { font: TITLE_FONT, tandem: tandem.createTandem( 'constantText' ) },
         constantsSelectionButtonOptions ) );
     var springConstantRadioButton = new AquaRadioButton(
-      selectedConstantProperty, ConstantModeChoice.SPRING_CONSTANT, constantText, {
+      selectedConstantProperty, constantEnumeration.SPRING_CONSTANT, constantText, {
         radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
         tandem: tandem.createTandem( 'springConstantRadioButton' )
       } );
