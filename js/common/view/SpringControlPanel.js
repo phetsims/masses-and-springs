@@ -44,7 +44,7 @@ define( function( require ) {
       minorTickMarksVisible: true,
       sliderTrackSize: new Dimension2( 120, 0.1 ),
       tickLabelSpacing: 6,
-      constrainValue: Util.roundSymmetric( value )
+      constrainValue: Util.roundSymmetric( springProperty.value )
     }, options );
 
     var hSliderTitle = new Text( title, { font: options.titleFont, maxWidth:150 } );
