@@ -111,8 +111,7 @@ define( function( require ) {
       maxWidth: CONTENT_MAX_WIDTH,
       tandem: tandem.createTandem( 'massEquilibriumString' )
     } ), { xAlign: 'left', group: alignGroup } );
-    // REVIEW: typo, should be "movable"?
-    var movalbeLineAlignBox = new AlignBox( new Text( movableLineString, {
+    var movableLineAlignBox = new AlignBox( new Text( movableLineString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: CONTENT_MAX_WIDTH,
       tandem: tandem.createTandem( 'movableLineString' )
@@ -131,7 +130,7 @@ define( function( require ) {
       node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
-      node: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ movableLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty
     } ], {
       checkboxOptions: {
@@ -154,7 +153,7 @@ define( function( require ) {
         node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
         property: model.equilibriumPositionVisibleProperty
       }, {
-        node: new HBox( { children: [ movalbeLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+        node: new HBox( { children: [ movableLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
         property: model.movableLineVisibleProperty
       }, {
         node: new Text( periodTraceString, {
