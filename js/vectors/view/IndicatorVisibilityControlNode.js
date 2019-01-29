@@ -120,7 +120,9 @@ define( function( require ) {
     // Create checkboxes using align boxes above
     var componentDisplacementVBox = new VBox( { children: [ displacementSymbol, blueLine ] } );
     componentDisplacementVBox.spacing = componentDisplacementVBox.height * 0.75;
-    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+
+    // Used for
+    var checkboxContent = [ {
       node: new HBox( {
         children: [ componentDisplacement, componentDisplacementVBox ],
         spacing: CONTENT_SPACING
@@ -132,7 +134,8 @@ define( function( require ) {
     }, {
       node: new HBox( { children: [ movableLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
       property: model.movableLineVisibleProperty
-    } ], {
+    } ];
+    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( checkboxContent, {
       checkboxOptions: {
         boxWidth: 16,
         spacing: 8
@@ -141,28 +144,18 @@ define( function( require ) {
     } );
 
     if ( options.periodTraceOption ) {
-      // REVIEW: Seems like some code duplication here. Can we just adjust the array beforehand (by inserting elements),
-      // REVIEW: and create the VerticalCheckboxGroup once?
-      indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-        node: new HBox( {
-          children: [ componentDisplacement, new VBox( { children: [ displacementSymbol, blueLine ] } ) ],
-          spacing: CONTENT_SPACING
-        } ),
-        property: model.naturalLengthVisibleProperty
-      }, {
-        node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
-        property: model.equilibriumPositionVisibleProperty
-      }, {
-        node: new HBox( { children: [ movableLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
-        property: model.movableLineVisibleProperty
-      }, {
+
+      // Push period trace content into checkboxContent
+      checkboxContent.push( {
         node: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: CONTENT_MAX_WIDTH,
           tandem: tandem.createTandem( 'periodTraceString' )
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
-      } ], {
+      } );
+
+      indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( checkboxContent, {
         checkboxOptions: {
           boxWidth: 16,
           spacing: 8
