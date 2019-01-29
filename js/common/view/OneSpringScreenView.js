@@ -176,11 +176,7 @@ define( function( require ) {
       this.resetAllButton.addListener( function() {
         self.model.reset();
         self.movableLineNode.reset();
-        // REVIEW: Generally prefer `self.energyGraphNode && self.energyGraphNode.reset` if it is optional, instead of
-        // REVIEW: repeating the same constraints.
-        if ( !model.basicsVersion ) {
-          self.energyGraphNode.reset();
-        }
+        self.energyGraphNode && self.energyGraphNode.reset();
       } );
     }
 
