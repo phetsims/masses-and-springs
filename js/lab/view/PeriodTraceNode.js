@@ -64,7 +64,7 @@ define( function( require ) {
     /**
      * @param {number} dt
      * @param {Property.<boolean>} playingProperty: whether the sim is playing or not
-     * REVIEW: visibility (public?)
+     * @public
      */
     step: function( dt, playingProperty ) {
       var spring = this.periodTrace.spring;
