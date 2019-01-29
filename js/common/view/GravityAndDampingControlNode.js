@@ -138,7 +138,7 @@ define( function( require ) {
       } );
 
     // Added logic for compatibility with Masses and Springs: Basics
-    if ( !model.options.basicsVersion ) {
+    if ( !model.basicsVersion ) {
       if ( options.dampingVisible ) {
 
         // Creating title for damping hSlider

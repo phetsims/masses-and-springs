@@ -39,17 +39,13 @@ define( function( require ) {
    * @constructor
    *
    * @param {Tandem} tandem
-   * @param {object} options
    */
-  function MassesAndSpringsModel( tandem, options ) {
-    options = _.extend( {
-      basicsVersion: false
-    }, options );
+  function MassesAndSpringsModel( tandem ) {
 
-    // REVIEW: Don't store the options object, but just whether it is a basicsVersion or not. (this.basicsVersion = ...)
-    this.options = options;
+    // Flag used to differentiate basics and non-basics version
+    this.basicsVersion = false;
 
-    if ( options.basicsVersion ) {
+    if ( this.basicsVersion ) {
       // REVIEW: Shouldn't have a console.log for this.
       console.log( 'basics version' );
     }
@@ -218,7 +214,7 @@ define( function( require ) {
      * @param {Tandem} tandem
      */
     addDefaultMasses: function( tandem ) {
-      if ( this.options.basicsVersion ) {
+      if ( this.basicsVersion ) {
         this.createMass( 0.250, 0.12, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass1' ) );
         this.createMass( 0.250, 0.16, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass2' ) );
         this.createMass( 0.100, 0.30, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );

@@ -75,7 +75,7 @@ define( function( require ) {
 
     var vectorVisibilityCheckboxGroup;
 
-    if ( !model.options.basicsVersion ) {
+    if ( !model.basicsVersion ) {
       vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
         node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
         property: model.velocityVectorVisibilityProperty,

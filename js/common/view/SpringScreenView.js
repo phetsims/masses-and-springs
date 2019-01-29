@@ -159,7 +159,7 @@ define( function( require ) {
     } );
     this.shelf.rectY = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) - this.shelf.rectHeight;
 
-    if ( !model.options.basicsVersion ) {
+    if ( !model.basicsVersion ) {
       this.addChild( this.shelf );
     }
 
@@ -321,11 +321,11 @@ define( function( require ) {
 
       // Additional options for compatibility with Masses and Springs: Basics
       options = _.extend( {
-        string: this.model.options.basicsVersion ? springStrengthString : springConstantString,
-        sliderTrackSize: this.model.options.basicsVersion ? new Dimension2( 140, 0.1 ) : new Dimension2( 120, 0.1 ),
-        yMargin: this.model.options.basicsVersion ? 7 : 5,
-        spacing: this.model.options.basicsVersion ? 5 : 3,
-        tickLabelSpacing: this.model.options.basicsVersion ? 7 : 6
+        string: this.model.basicsVersion ? springStrengthString : springConstantString,
+        sliderTrackSize: this.model.basicsVersion ? new Dimension2( 140, 0.1 ) : new Dimension2( 120, 0.1 ),
+        yMargin: this.model.basicsVersion ? 7 : 5,
+        spacing: this.model.basicsVersion ? 5 : 3,
+        tickLabelSpacing: this.model.basicsVersion ? 7 : 6
       }, options );
 
       return new SpringControlPanel(

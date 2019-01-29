@@ -121,8 +121,7 @@ define( function( require ) {
         self.springStopperButtonNode.enabled = buttonEnabled;
       } );
 
-    // REVIEW: Turn this into model.basicsVersion, and properly document it.
-    if ( !model.options.basicsVersion ) {
+    if ( !model.basicsVersion ) {
       // @public {EnergyGraphNode} energy graph that displays energy values for the spring system.
       this.energyGraphNode = new EnergyGraphNode( model, tandem );
       this.addChild( this.energyGraphNode );
@@ -142,7 +141,7 @@ define( function( require ) {
     );
 
     // Masses and Springs:Basics should not include a zero height reference line
-    if ( !model.options.basicsVersion ) {
+    if ( !model.basicsVersion ) {
 
       // Displacement arrows added for each springs
       var displacementArrowNode = new DisplacementArrowNode(
@@ -179,7 +178,7 @@ define( function( require ) {
         self.movableLineNode.reset();
         // REVIEW: Generally prefer `self.energyGraphNode && self.energyGraphNode.reset` if it is optional, instead of
         // REVIEW: repeating the same constraints.
-        if ( !model.options.basicsVersion ) {
+        if ( !model.basicsVersion ) {
           self.energyGraphNode.reset();
         }
       } );
@@ -201,14 +200,14 @@ define( function( require ) {
     this.addChild( this.springConstantControlPanel );
 
     // Reference lines from indicator visibility box
-    if ( !model.options.basicsVersion ) {
+    if ( !model.basicsVersion ) {
       this.addChild( this.massEquilibriumLineNode );
     }
 
     this.addChild( naturalLengthLineNode );
 
     // This is handled here to maintain line node layering order
-    if ( !model.options.basicsVersion ) {
+    if ( !model.basicsVersion ) {
       this.addChild( displacementArrowNode );
     }
     this.addChild( this.movableLineNode );
@@ -230,7 +229,7 @@ define( function( require ) {
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
       self.movableLineNode.centerX = self.springCenter;
 
-      if ( !model.options.basicsVersion ) {
+      if ( !model.basicsVersion ) {
         self.energyGraphNode.leftTop = new Vector2( visibleBounds.left + self.spacing, self.springSystemControlsNode.top );
       }
 

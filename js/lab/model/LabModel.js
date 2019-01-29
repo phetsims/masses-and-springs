@@ -34,13 +34,13 @@ define( function( require ) {
     MassesAndSpringsModel.call( this, tandem, options );
 
     // Lab screen shouldn't have spring damping for non-basics version
-    this.dampingProperty = new NumberProperty( this.options.basicsVersion ? 0 : 0.0575 );
+    this.dampingProperty = new NumberProperty( this.basicsVersion ? 0 : 0.0575 );
 
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
 
     // @private {boolean} Flag used to determine if this is the basics version.
-    this.basicsVersion = this.options.basicsVersion; // REVIEW: Don't have `this.options` in general
+    this.basicsVersion = this.basicsVersion;
     var massXPosition = this.basicsVersion ? 0.13 : 0.625;
     var massValue;
     var color;
