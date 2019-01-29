@@ -39,8 +39,6 @@ define( function( require ) {
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
 
-    // @private {boolean} Flag used to determine if this is the basics version.
-    this.basicsVersion = this.basicsVersion;
     var massXPosition = this.basicsVersion ? 0.13 : 0.625;
     var massValue;
     var color;
