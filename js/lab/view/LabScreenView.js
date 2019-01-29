@@ -88,7 +88,10 @@ define( function( require ) {
 
   massesAndSprings.register( 'LabScreenView', LabScreenView );
   return inherit( OneSpringScreenView, LabScreenView, {
-    // REVIEW: JSDoc
+    /**
+     * @param {number} dt
+     * @public
+     */
     step: function( dt ) {
       this.energyGraphNode.update();
       this.periodTraceNode.step( dt, this.model.playingProperty );
