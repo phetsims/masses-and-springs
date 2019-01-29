@@ -90,11 +90,7 @@ define( function( require ) {
      */
     reset: function() {
       MassesAndSpringsModel.prototype.reset.call( this );
-
-      // REVIEW: Usually just check `this.someProperty && this.someProperty.reset();`
-      if ( this.basicsVersion ) {
-        this.gravityAccordionBoxExpandedProperty.reset();
-      }
+      this.gravityAccordionBoxExpandedProperty && this.gravityAccordionBoxExpandedProperty.reset();
     }
   } );
 } );
