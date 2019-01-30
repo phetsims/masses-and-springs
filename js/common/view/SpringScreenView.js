@@ -255,8 +255,7 @@ define( function( require ) {
       }
     );
 
-    // REVIEW: JSDoc
-    // Buttons controlling the speed of the sim, play/pause button, and the reset button
+    // @public {HBox} Buttons controlling the speed of the sim, play/pause button, and the reset button
     this.simControlHBox = new HBox( {
       spacing: this.spacing * 6,
       children: [ this.timeControlNode, this.resetAllButton ]
