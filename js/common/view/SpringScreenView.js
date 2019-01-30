@@ -63,8 +63,7 @@ define( function( require ) {
 
     var self = this;
 
-    // REVIEW: JSDoc type
-    // @public Support for expanding touchAreas near massNodes.
+    // @public {Plane} Support for expanding touchAreas near massNodes.
     this.backgroundDragPlane = new Plane();
     var closestDragListener = new ClosestDragListener( 30, 0 );
 
