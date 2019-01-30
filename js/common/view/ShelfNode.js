@@ -17,9 +17,8 @@ define( function( require ) {
    * @param {Tandem} tandem
    * @param {Object} [options]
    * @constructor
-   * REVIEW: ShelfNode might be a better name? `Shelf` seems like the model name
    */
-  function Shelf( tandem, options ) {
+  function ShelfNode( tandem, options ) {
     options = _.extend( {
       fill: '#e6c29a',
       stroke: 'black',
@@ -31,7 +30,7 @@ define( function( require ) {
     Rectangle.call( this, options );
   }
 
-  massesAndSprings.register( 'Shelf', Shelf );
+  massesAndSprings.register( 'ShelfNode', ShelfNode );
 
-  return inherit( Rectangle, Shelf );
+  return inherit( Rectangle, ShelfNode );
 } );
