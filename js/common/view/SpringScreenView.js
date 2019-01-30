@@ -340,7 +340,7 @@ define( function( require ) {
           sliderTrackSize: options.sliderTrackSize,
           tickLabelSpacing: options.tickLabelSpacing,
           constrainValue: function( value ) {
-            return Util.toFixed( value, 0 );
+            return +Util.toFixed( value, 0 );
           }
         }
       );
