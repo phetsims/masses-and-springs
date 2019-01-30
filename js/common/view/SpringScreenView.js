@@ -84,9 +84,7 @@ define( function( require ) {
     this.springBackColorProperty = new PaintColorProperty( 'black' );
 
     // @private {Array.<MutableOptionsNode>} Used to reference the created springs in the view.
-    this.springNodes = [];
-    // REVIEW: Don't use `self`, and can we just combine this into the "declaration" above?
-    self.springNodes = model.springs.map( function( spring ) {
+    this.springNodes = model.springs.map( function( spring ) {
       var springNode = new MutableOptionsNode( OscillatingSpringNode,
         [ spring, self.modelViewTransform, tandem.createTandem( 'oscillatingSpringNode' ) ],
         { leftEndLength: -10 },
