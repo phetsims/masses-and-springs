@@ -19,10 +19,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  // REVIEW: Can we remove commented-out lines?
-  // var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
-  // var MassIO = require( 'MASSES_AND_SPRINGS/common/model/MassIO' );
-  // var NullableIO = require( 'TANDEM/types/NullableIO' );
   var NumberIO = require( 'TANDEM/types/NumberIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
