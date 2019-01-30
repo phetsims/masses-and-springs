@@ -38,7 +38,7 @@ define( function( require ) {
   var CONTENT_SPACING = 73;
 
   /**
-   * @param {VectorModel} model
+   * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
