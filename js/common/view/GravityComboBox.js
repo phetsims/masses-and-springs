@@ -1,4 +1,4 @@
-// Copyright 2017-2019, University of Colorado Boulder
+// Copyright 2019, University of Colorado Boulder
 
 /**
  * ComboBox used for selecting planets.
