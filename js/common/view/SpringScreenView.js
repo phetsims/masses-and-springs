@@ -340,8 +340,7 @@ define( function( require ) {
           sliderTrackSize: options.sliderTrackSize,
           tickLabelSpacing: options.tickLabelSpacing,
           constrainValue: function( value ) {
-            // REVIEW: Why using Number? To cast to a number, just do a unary plus `+` at the start
-            return Number( Util.toFixed( value, 0 ) );
+            return Util.toFixed( value, 0 );
           }
         }
       );
