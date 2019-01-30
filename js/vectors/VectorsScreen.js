@@ -41,6 +41,7 @@ define( function( require ) {
       function() {
         var modelTandem = tandem.createTandem( 'model' );
         var model = new MassesAndSpringsModel( modelTandem );
+        model.basicsVersion = false;
         model.addDefaultSprings( modelTandem );
         model.addDefaultMasses( modelTandem );
         return model;

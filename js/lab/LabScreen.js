@@ -39,7 +39,7 @@ define( function( require ) {
 
     Screen.call( this,
       function() {
-        return new LabModel( tandem.createTandem( 'model' ) );
+        return new LabModel( tandem.createTandem( 'model' ), false );
       },
       function( model ) {
         return new LabScreenView( model, tandem.createTandem( 'view' ) );

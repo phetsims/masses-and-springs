@@ -42,7 +42,7 @@ define( function( require ) {
   function MassesAndSpringsModel( tandem ) {
 
     // Flag used to differentiate basics and non-basics version
-    this.basicsVersion = false;
+    this.basicsVersion = true;
 
     // @public {Enumeration}
     this.forcesModeChoice = new Enumeration( [ 'FORCES', 'NET_FORCES' ] );

@@ -29,6 +29,7 @@ define( function( require ) {
 
     MassesAndSpringsModel.call( this, tandem );
     var self = this;
+    this.basicsVersion = false;
 
     // @public {Enumeration} Choices for constant parameter
     this.constantModeChoice = new Enumeration( [ 'SPRING_CONSTANT', 'SPRING_THICKNESS' ] );

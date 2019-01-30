@@ -52,6 +52,7 @@ define( function( require ) {
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
 
+
     this.visibleBoundsProperty.link( function() {
       rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphNode.top );
     } );

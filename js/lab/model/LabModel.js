@@ -24,14 +24,16 @@ define( function( require ) {
   var MASS_OFFSET = 0.15;
 
   /**
+   * @param {Boolean} basicsVersion
    * @param {Tandem} tandem
    * @param {object} options
    *
    * @constructor
    */
-  function LabModel( tandem, options ) {
+  function LabModel( tandem, basicsVersion, options ) {
 
     MassesAndSpringsModel.call( this, tandem, options );
+    this.basicsVersion = basicsVersion;
 
     // Lab screen shouldn't have spring damping for non-basics version
     this.dampingProperty = new NumberProperty( this.basicsVersion ? 0 : 0.0575 );

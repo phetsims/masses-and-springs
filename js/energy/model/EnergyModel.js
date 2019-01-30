@@ -23,6 +23,7 @@ define( function( require ) {
    */
   function EnergyModel( tandem ) {
     MassesAndSpringsModel.call( this, tandem );
+    this.basicsVersion = false;
 
     // Energy screen should have spring damping
     // REVIEW: This looks like we should pass in the initial value of damping, instead of overwriting the Property.
