@@ -215,13 +215,19 @@ define( function( require ) {
         this.naturalRestingLengthProperty
       ],
       function( springConstant, gravity, mass, naturalRestingLength ) {
-        // REVIEW: Is it possible to combine this with the multilink that sets massEquilibriumYPositionProperty?
-        // REVIEW: The springExtensionValue is computed in both.
         if ( mass ) {
-          var springExtensionValue =
-            ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
+
+          // springExtension = mg/k
+          var springExtension = ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
+
+          //Set equilibrium y position
           self.equilibriumYPositionProperty.set(
-            self.positionProperty.get().y - naturalRestingLength - springExtensionValue );
+            self.positionProperty.get().y - naturalRestingLength - springExtension );
+
+          // Set mass equilibrium y position
+          self.massEquilibriumYPositionProperty.set(
+            self.positionProperty.get().y - naturalRestingLength - springExtension - mass.heightProperty.value / 2
+          );
         }
       } );
 
