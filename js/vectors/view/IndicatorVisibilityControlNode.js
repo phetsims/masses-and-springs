@@ -1,4 +1,4 @@
-// Copyright 2017-2018, University of Colorado Boulder
+// Copyright 2017-2019, University of Colorado Boulder
 
 /**
  * Panel that manages options for visibility of reference lines on vector screen.

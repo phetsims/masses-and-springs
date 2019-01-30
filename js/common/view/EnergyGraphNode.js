@@ -1,4 +1,4 @@
-// Copyright 2017-2018, University of Colorado Boulder
+// Copyright 2017-2019, University of Colorado Boulder
 
 /**
  * Bar graph that represents the kinetic, potential, elastic potential, thermal, and total energy of the mass attached
@@ -111,6 +111,9 @@ define( function( require ) {
       },
       scale: 0.7
     } );
+
+    // REVIEW: Probably good to mention the lifetime of this, since this would be a memory leak if many of these are
+    // REVIEW: created.
     model.firstSpring.thermalEnergyProperty.link( function( value ) {
       clearThermalButton.enabled = ( value > 0 );
       clearThermalButton.pickable = ( value > 0 );

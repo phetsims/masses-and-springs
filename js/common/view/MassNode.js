@@ -1,4 +1,4 @@
-// Copyright 2017-2018, University of Colorado Boulder
+// Copyright 2017-2019, University of Colorado Boulder
 
 /**
  * Node responsible for representing the mass object.
@@ -79,6 +79,8 @@ define( function( require ) {
       } );
 
     // Update the size of the massNode
+    // REVIEW: Probably good to mention the lifetime of this, since this would be a memory leak if many of these are
+    // REVIEW: created for a single mass
     mass.radiusProperty.link( function( radiusValue ) {
 
       self.rect.rectBounds = new Bounds2(

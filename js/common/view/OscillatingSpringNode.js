@@ -1,4 +1,4 @@
-// Copyright 2017-2018, University of Colorado Boulder
+// Copyright 2017-2019, University of Colorado Boulder
 
 /**
  * Node for handling the representation of an oscillating spring.
@@ -73,6 +73,7 @@ define( function( require ) {
       self.y = modelViewTransform2.modelToViewY( spring.positionProperty.get().y - spring.lengthProperty.get() );
     }
 
+    // REVIEW: Probably worth noting that this type creates permanent listeners.
     spring.naturalRestingLengthProperty.link( function( springLength ) {
       self.loopsProperty.set( MAP_NUMBER_OF_LOOPS( springLength ) );
       updateViewLength();

@@ -1,4 +1,4 @@
-// Copyright 2017-2018, University of Colorado Boulder
+// Copyright 2017-2019, University of Colorado Boulder
 
 /**
  * Node for the gravity control panel and combo box for planet gravity options.
@@ -254,6 +254,8 @@ define( function( require ) {
     }
 
     // Responsible for managing bodies
+    // REVIEW: Probably good to mention the lifetime of this, since this would be a memory leak if many of these are
+    // REVIEW: created.
     model.bodyProperty.link( function( newBody, oldBody ) {
       var body = _.find( Body.BODIES, newBody );
 

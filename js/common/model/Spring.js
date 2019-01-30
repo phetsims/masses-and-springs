@@ -1,4 +1,4 @@
-// Copyright 2016-2018, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
  * Responsible for the attributes associated with each spring.
@@ -55,6 +55,8 @@ define( function( require ) {
     } );
 
     // Link to manage gravity value for the spring object.
+    // REVIEW: This would be a leak if springs keep sharing one gravity property (and springs could be created).
+    // REVIEW: Probably a good place to mention object lifetimes.
     gravityProperty.link( function( gravity ) {
       self.gravityProperty.set( gravity );
     } );
@@ -621,5 +623,4 @@ define( function( require ) {
       }
     }
   } );
-} )
-;
+} );

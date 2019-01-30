@@ -1,4 +1,4 @@
-// Copyright 2017-2018, University of Colorado Boulder
+// Copyright 2017-2019, University of Colorado Boulder
 
 /**
  * Panel responsible for keeping the spring constant and spring thickness constant.
@@ -59,6 +59,7 @@ define( function( require ) {
       } );
 
     var constantText = new Text(
+      // REVIEW: Why the fill in with an empty string? Looks suspicious
       StringUtils.fillIn( springConstantString, { spring: '' } ),
       _.extend( { font: TITLE_FONT, tandem: tandem.createTandem( 'constantText' ) },
         constantsSelectionButtonOptions ) );
