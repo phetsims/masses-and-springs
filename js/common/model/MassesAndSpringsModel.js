@@ -45,11 +45,6 @@ define( function( require ) {
     // Flag used to differentiate basics and non-basics version
     this.basicsVersion = false;
 
-    if ( this.basicsVersion ) {
-      // REVIEW: Shouldn't have a console.log for this.
-      console.log( 'basics version' );
-    }
-
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'playingProperty' )
