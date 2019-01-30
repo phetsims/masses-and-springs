@@ -13,7 +13,6 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var Color = require( 'SCENERY/util/Color' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var ForcesModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/ForcesModeChoice' );
   var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
@@ -260,7 +259,7 @@ define( function( require ) {
     var updateForceVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
         function( spring, springVectorVisibility, forcesMode ) {
-          arrowNode.visible = !!spring && springVectorVisibility && forcesMode === ForcesModeChoice.FORCES;
+          arrowNode.visible = !!spring && springVectorVisibility && forcesMode === model.forcesModeChoice.FORCES;
         } );
     };
 
@@ -279,7 +278,7 @@ define( function( require ) {
     // Show/hide the net force arrow
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
       function( spring, forcesMode ) {
-        netForceArrow.visible = !!spring && forcesMode === ForcesModeChoice.NET_FORCES;
+        netForceArrow.visible = !!spring && forcesMode === model.forcesModeChoice.NET_FORCES;
       } );
 
     // Show/hide line at base of vectors
@@ -290,7 +289,7 @@ define( function( require ) {
         model.forcesModeProperty
       ],
       function( spring, gravityForceVisible, springForceVisible, forcesMode ) {
-        forceNullLine.visible = !!spring && ( gravityForceVisible || springForceVisible || forcesMode === ForcesModeChoice.NET_FORCES );
+        forceNullLine.visible = !!spring && ( gravityForceVisible || springForceVisible || forcesMode === model.forcesModeChoice.NET_FORCES );
       } );
 
     /**

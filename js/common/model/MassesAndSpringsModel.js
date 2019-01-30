@@ -13,7 +13,7 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var ForcesModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/ForcesModeChoice' );
+  var Enumeration = require( 'PHET_CORE/Enumeration' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
@@ -44,6 +44,9 @@ define( function( require ) {
 
     // Flag used to differentiate basics and non-basics version
     this.basicsVersion = false;
+
+    // @public {Enumeration}
+    this.forcesModeChoice = new Enumeration( [ 'FORCES', 'NET_FORCES' ] );
 
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
@@ -137,10 +140,10 @@ define( function( require ) {
     } );
 
     // @public {Property.<string>} determines mode of the vectors to be viewed
-    this.forcesModeProperty = new Property( ForcesModeChoice.FORCES, {
+    this.forcesModeProperty = new Property( this.forcesModeChoice.FORCES, {
       tandem: tandem.createTandem( 'forcesModeProperty' ),
       phetioType: PropertyIO( StringIO ),
-      validValues: [ ForcesModeChoice.FORCES, ForcesModeChoice.NET_FORCES ]
+      validValues: [ this.forcesModeChoice.FORCES, this.forcesModeChoice.NET_FORCES ]
     } );
 
     // @public {Spring[]} Array that will contain all of the springs.

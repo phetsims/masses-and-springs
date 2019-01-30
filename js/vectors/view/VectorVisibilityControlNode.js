@@ -12,7 +12,6 @@ define( function( require ) {
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var ForcesModeChoice = require( 'MASSES_AND_SPRINGS/common/enum/ForcesModeChoice' );
   var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -152,7 +151,7 @@ define( function( require ) {
     // responsible for forces aquaRadioButton
     var forcesVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
-      ForcesModeChoice.FORCES,
+      model.forcesModeChoice.FORCES,
       new Text( forcesString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
@@ -169,18 +168,18 @@ define( function( require ) {
     } ), { group: alignGroup, xAlign: 'left' } );
     var netForceVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
-      ForcesModeChoice.NET_FORCES,
+      model.forcesModeChoice.NET_FORCES,
       new HBox( { children: [ netForceAlignBox, netForceArrow ], spacing: CONTENT_SPACING } ),
       { radius: 7, spacing: 7 }
     );
 
     // manages the mutability of the forces checkboxes dependent on the forces and net force aquaRadioButton
     model.forcesModeProperty.link( function( mode ) {
-      if ( mode === ForcesModeChoice.FORCES ) {
+      if ( mode === model.forcesModeChoice.FORCES ) {
         forcesVisibilityCheckboxGroup.pickable = true;
         forcesVisibilityCheckboxGroup.opacity = 1;
       }
-      else if ( mode === ForcesModeChoice.NET_FORCES ) {
+      else if ( mode === model.forcesModeChoice.NET_FORCES ) {
         forcesVisibilityCheckboxGroup.pickable = false;
         forcesVisibilityCheckboxGroup.opacity = 0.3;
       }
