@@ -59,6 +59,7 @@ define( function( require ) {
       } );
 
     var constantText = new Text(
+      // REVIEW: Why the fill in with an empty string? Looks suspicious
       StringUtils.fillIn( springConstantString, { spring: '' } ),
       _.extend( { font: TITLE_FONT, tandem: tandem.createTandem( 'constantText' ) },
         constantsSelectionButtonOptions ) );

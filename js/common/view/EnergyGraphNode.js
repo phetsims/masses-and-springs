@@ -111,6 +111,9 @@ define( function( require ) {
       },
       scale: 0.7
     } );
+
+    // REVIEW: Probably good to mention the lifetime of this, since this would be a memory leak if many of these are
+    // REVIEW: created.
     model.firstSpring.thermalEnergyProperty.link( function( value ) {
       clearThermalButton.enabled = ( value > 0 );
       clearThermalButton.pickable = ( value > 0 );

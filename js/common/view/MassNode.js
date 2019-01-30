@@ -80,6 +80,8 @@ define( function( require ) {
       } );
 
     // Update the size of the massNode
+    // REVIEW: Probably good to mention the lifetime of this, since this would be a memory leak if many of these are
+    // REVIEW: created for a single mass
     mass.radiusProperty.link( function( radiusValue ) {
 
       self.rect.rectBounds = new Bounds2(

@@ -73,6 +73,7 @@ define( function( require ) {
       self.y = modelViewTransform2.modelToViewY( spring.positionProperty.get().y - spring.lengthProperty.get() );
     }
 
+    // REVIEW: Probably worth noting that this type creates permanent listeners.
     spring.naturalRestingLengthProperty.link( function( springLength ) {
       self.loopsProperty.set( MAP_NUMBER_OF_LOOPS( springLength ) );
       updateViewLength();
