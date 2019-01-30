@@ -345,7 +345,6 @@ define( function( require ) {
      * @param {Object} springState - Sets the springs's properties with previously stored properties. See getSpringState
      *
      * @public
-     * @returns {Object} REVIEW: I don't see a return value here
      */
     setSpringState: function( springState ) {
       this.displacementProperty.set( springState.displacement );
