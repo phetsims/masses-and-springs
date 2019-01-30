@@ -232,10 +232,10 @@ define( function( require ) {
       model.playingProperty,
       new DynamicProperty( new Property( model.simSpeedProperty ), {
         map: function( simSpeed ) {
-          return simSpeed === SimSpeedChoice.SLOW;
+          return simSpeed === model.simSpeedChoice.SLOW;
         },
         inverseMap: function( isSlow ) {
-          return isSlow ? SimSpeedChoice.SLOW : SimSpeedChoice.NORMAL;
+          return isSlow ? model.simSpeedChoice.SLOW : model.simSpeedChoice.NORMAL;
         },
         bidirectional: true
       } ), {

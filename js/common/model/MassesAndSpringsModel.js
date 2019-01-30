@@ -25,7 +25,6 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
-  var SimSpeedChoice = require( 'MASSES_AND_SPRINGS/common/enum/SimSpeedChoice' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var StringIO = require( 'TANDEM/types/StringIO' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -47,6 +46,7 @@ define( function( require ) {
 
     // @public {Enumeration}
     this.forcesModeChoice = new Enumeration( [ 'FORCES', 'NET_FORCES' ] );
+    this.simSpeedChoice = new Enumeration( [ 'NORMAL', 'SLOW' ] );
 
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
@@ -67,10 +67,10 @@ define( function( require ) {
     } );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
-    this.simSpeedProperty = new Property( SimSpeedChoice.NORMAL, {
+    this.simSpeedProperty = new Property( this.simSpeedChoice.NORMAL, {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
       phetioType: PropertyIO( StringIO ),
-      validValues: [ SimSpeedChoice.SLOW, SimSpeedChoice.NORMAL ]
+      validValues: [ this.simSpeedChoice.SLOW, this.simSpeedChoice.NORMAL ]
     } );
 
     // @public {Property.<boolean>} determines visibility of ruler node
@@ -373,7 +373,7 @@ define( function( require ) {
       var animationDt = dt;
 
       // Change the dt value if we are playing in slow motion.
-      if ( this.simSpeedProperty.get() === SimSpeedChoice.SLOW && this.playingProperty.get() ) {
+      if ( this.simSpeedProperty.get() === this.simSpeedChoice.SLOW && this.playingProperty.get() ) {
         dt = dt / MassesAndSpringsConstants.SLOW_SIM_DT_RATIO;
       }
       for ( var i = 0; i < this.masses.length; i++ ) {
