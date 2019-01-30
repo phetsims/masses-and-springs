@@ -34,7 +34,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var Shelf = require( 'MASSES_AND_SPRINGS/common/view/Shelf' );
+  var ShelfNode = require( 'MASSES_AND_SPRINGS/common/view/ShelfNode' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -153,7 +153,7 @@ define( function( require ) {
     } );
 
     // @public {Shelf} Add shelf for to house massNodes
-    this.shelf = new Shelf( tandem, {
+    this.shelf = new ShelfNode( tandem, {
       rectHeight: 7
     } );
     this.shelf.rectY = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) - this.shelf.rectHeight;
