@@ -81,8 +81,7 @@ define( function( require ) {
       tandem.createTandem( 'massValueControlPanel' ), {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH - 8,
         yMargin: 5
-      }
-    );
+      } );
 
     this.springHangerNode = new SpringHangerNode( model.springs,
       this.modelViewTransform,

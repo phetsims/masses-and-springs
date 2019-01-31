@@ -65,10 +65,11 @@ define( function( require ) {
     } );
 
     var trackSizeProperty = new Property( options.basics ? new Dimension2( 132, 0.1 ) : new Dimension2( 125, 0.1 ) );
-    var numberControl = new MutableOptionsNode( NumberControl, [ massString, massInGramsProperty, range ], {
-      valuePattern: StringUtils.fillIn( massValueString, {
-        mass: '{0}'
-      }, { font: new PhetFont( { size: 14, weight: 'bold' } ) } ),
+    var valuePattern = StringUtils.fillIn( massValueString, { mass: '{0}' }, {
+      font: new PhetFont( { size: 14, weight: 'bold' } )
+    } );
+    var numberControl = new NumberControl( massString, massInGramsProperty, range, {
+      valuePattern: valuePattern,
       valueFont: new PhetFont( 14 ),
       majorTickLength: 10,
       titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
@@ -79,9 +80,7 @@ define( function( require ) {
       stroke: null,
       valueMaxWidth: 100,
       sliderIndent: 7,
-      constrainValue: function( value ) {
-        return ( Util.roundSymmetric( value / 10 ) * 10);
-      },
+      constrainValue: function( value ) { return ( Util.roundSymmetric( value / 10 ) * 10); },
       majorTicks: [
         {
           value: range.min,
@@ -100,9 +99,8 @@ define( function( require ) {
       useRichText: true,
       decimalPlaces: 0,
       arrowButtonOptions: { arrowButtonScale: 0.5 },
-      delta: 1
-    }, {
-      trackSize: trackSizeProperty
+      delta: 1,
+      trackSize: trackSizeProperty.value
     } );
     var contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
 
