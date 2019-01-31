@@ -18,7 +18,6 @@ define( function( require ) {
   var NumberProperty = require( 'AXON/NumberProperty' );
   var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SceneModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/SceneModeChoice' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -27,11 +26,12 @@ define( function( require ) {
 
   /**
    * @param {string} springLength
+   * @param {Enumeration} sceneModeChoice
    * @param {ModelViewTransform2} mvt
    * @param {Tandem} tandem
    * @constructor
    */
-  function SceneSelectionButton( springLength, mvt, tandem ) {
+  function SceneSelectionButton( springLength, sceneModeChoice, mvt, tandem ) {
 
     Node.call( this, {
       scale: IMAGE_SCALE,
@@ -81,7 +81,7 @@ define( function( require ) {
     secondSpringIcon.loopsProperty.set( 6 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
-    if ( springLength === SceneModeChoice.ADJUSTABLE_LENGTH ) {
+    if ( springLength === sceneModeChoice.ADJUSTABLE_LENGTH ) {
       firstSpringIcon = new OscillatingSpringNode(
         springsIcon[ 0 ],
         mvt,

@@ -23,7 +23,6 @@ define( function( require ) {
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Range = require( 'DOT/Range' );
   var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
-  var SceneModeChoice = require( 'MASSES_AND_SPRINGS/intro/enum/SceneModeChoice' );
   var SceneSelectionButton = require( 'MASSES_AND_SPRINGS/intro/view/SceneSelectionButton' );
   var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -175,10 +174,10 @@ define( function( require ) {
     // Link responsible for visibility of the length control panel.
     model.sceneModeProperty.lazyLink( function( mode ) {
       self.resetMassLayer();
-      if ( mode === SceneModeChoice.SAME_LENGTH ) {
+      if ( mode === model.sceneModeChoice.SAME_LENGTH ) {
         self.springLengthControlPanel.visible = false;
       }
-      else if ( mode === SceneModeChoice.ADJUSTABLE_LENGTH ) {
+      else if ( mode === model.sceneModeChoice.ADJUSTABLE_LENGTH ) {
         self.springLengthControlPanel.visible = true;
       }
 
@@ -190,17 +189,17 @@ define( function( require ) {
     } );
 
     // Creation of same length icon node
-    var sameLengthIcon = new SceneSelectionButton( SceneModeChoice.SAME_LENGTH, this.modelViewTransform, tandem );
+    var sameLengthIcon = new SceneSelectionButton( model.sceneModeChoice.SAME_LENGTH, model.sceneModeChoice, this.modelViewTransform, tandem );
 
     // Creation of adjustable length icon node
-    var differentLengthIcon = new SceneSelectionButton( SceneModeChoice.ADJUSTABLE_LENGTH, this.modelViewTransform, tandem );
+    var differentLengthIcon = new SceneSelectionButton( model.sceneModeChoice.ADJUSTABLE_LENGTH, model.sceneModeChoice, this.modelViewTransform, tandem );
 
     //  Creation of toggled modes for scene selection
     var toggleButtonsContent = [ {
-      value: SceneModeChoice.SAME_LENGTH,
+      value: model.sceneModeChoice.SAME_LENGTH,
       node: sameLengthIcon
     }, {
-      value: SceneModeChoice.ADJUSTABLE_LENGTH,
+      value: model.sceneModeChoice.ADJUSTABLE_LENGTH,
       node: differentLengthIcon
     } ];
 
