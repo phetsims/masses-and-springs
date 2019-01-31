@@ -54,9 +54,7 @@ define( function( require ) {
       reentrant: true // used due to extremely small rounding
     } );
 
-    // Link to manage gravity value for the spring object.
-    // REVIEW: This would be a leak if springs keep sharing one gravity property (and springs could be created).
-    // REVIEW: Probably a good place to mention object lifetimes.
+    // Link to manage gravity value for the spring object. Springs exists throughout sim lifetime so no need for unlink.
     gravityProperty.link( function( gravity ) {
       self.gravityProperty.set( gravity );
     } );
