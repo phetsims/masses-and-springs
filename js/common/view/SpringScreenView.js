@@ -44,7 +44,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
+  var springConstantPatternString = require( 'string!MASSES_AND_SPRINGS/springConstantPattern' );
   var springStrengthString = require( 'string!MASSES_AND_SPRINGS/springStrength' );
 
   /**
@@ -316,7 +316,7 @@ define( function( require ) {
 
       // Additional options for compatibility with Masses and Springs: Basics
       options = _.extend( {
-        string: this.model.basicsVersion ? springStrengthString : springConstantString,
+        string: this.model.basicsVersion ? springStrengthString : springConstantPatternString,
         sliderTrackSize: this.model.basicsVersion ? new Dimension2( 140, 0.1 ) : new Dimension2( 120, 0.1 ),
         yMargin: this.model.basicsVersion ? 7 : 5,
         spacing: this.model.basicsVersion ? 5 : 3,

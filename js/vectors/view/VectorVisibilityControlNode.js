@@ -72,18 +72,21 @@ define( function( require ) {
       tandem: tandem.createTandem( 'accelerationString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
+    // Handle options for checkbox group
     var vectorVisibilityCheckboxGroup;
+    var velocityCheckboxObject = {
+      node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
+      property: model.velocityVectorVisibilityProperty,
+      label: velocityString
+    };
+    var accelerationCheckboxObject = {
+      node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
+      property: model.accelerationVectorVisibilityProperty,
+      label: accelerationString
+    };
 
     if ( !model.basicsVersion ) {
-      vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-        node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
-        property: model.velocityVectorVisibilityProperty,
-        label: velocityString
-      }, {
-        node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
-        property: model.accelerationVectorVisibilityProperty,
-        label: accelerationString
-      } ], {
+      vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ velocityCheckboxObject, accelerationCheckboxObject ], {
         checkboxOptions: {
           boxWidth: 16,
           spacing: 8
@@ -91,10 +94,9 @@ define( function( require ) {
         tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
       } );
     }
+
     // Responsible for velocity and acceleration vectors checkboxes and period trace in basics version
     else {
-      // REVIEW: Looks like some duplication here, where there is just an added title. Can we reduce that by
-      // REVIEW: conditionally adding the node?
       vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
         node: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
@@ -102,15 +104,9 @@ define( function( require ) {
           tandem: tandem.createTandem( 'periodTraceString' )
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
-      }, {
-        node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
-        property: model.velocityVectorVisibilityProperty,
-        label: velocityString
-      }, {
-        node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
-        property: model.accelerationVectorVisibilityProperty,
-        label: accelerationString
-      }
+      },
+        velocityCheckboxObject,
+        accelerationCheckboxObject
       ], {
         checkboxOptions: {
           boxWidth: 16,
@@ -148,7 +144,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
     } );
 
-    // responsible for forces aquaRadioButton
+    // Responsible for forces aquaRadioButton
     var forcesVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
       model.forcesModeChoice.FORCES,

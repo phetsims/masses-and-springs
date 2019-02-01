@@ -135,6 +135,9 @@
     "value": " Spring Strength {{spring}}"
   },
   "springConstant": {
+    "value": "Spring Constant"
+  },
+  "springConstantPattern": {
     "value": "Spring Constant {{spring}}"
   },
   "length": {

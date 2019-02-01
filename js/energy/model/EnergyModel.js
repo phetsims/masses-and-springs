@@ -14,7 +14,6 @@ define( function( require ) {
   var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
 
   /**
    * @param {Tandem} tandem
@@ -22,12 +21,12 @@ define( function( require ) {
    * @constructor
    */
   function EnergyModel( tandem ) {
-    MassesAndSpringsModel.call( this, tandem );
+    MassesAndSpringsModel.call( this, tandem, {
+      damping: 0.0575     // Energy screen should have spring damping
+    } );
     this.basicsVersion = false;
 
     // Energy screen should have spring damping
-    // REVIEW: This looks like we should pass in the initial value of damping, instead of overwriting the Property.
-    this.dampingProperty = new NumberProperty( 0.0575 );
 
     // Creation of masses and springs specific for this screen
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );

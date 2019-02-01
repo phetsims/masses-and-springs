@@ -38,8 +38,12 @@ define( function( require ) {
    * @constructor
    *
    * @param {Tandem} tandem
+   * @param {Object} [options]
    */
-  function MassesAndSpringsModel( tandem ) {
+  function MassesAndSpringsModel( tandem, options ) {
+    options = _.extend( {
+      damping: 0
+    }, options );
 
     // Flag used to differentiate basics and non-basics version
     this.basicsVersion = true;
@@ -54,7 +58,7 @@ define( function( require ) {
     } );
 
     // @public {Property.<number>} coefficient of damping applied to the system
-    this.dampingProperty = new NumberProperty( 0, {
+    this.dampingProperty = new NumberProperty( options.damping, {
       units: 'newtons',
       tandem: tandem.createTandem( 'dampingProperty' )
     } );

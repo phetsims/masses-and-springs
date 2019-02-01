@@ -33,6 +33,8 @@ define( function( require ) {
 
     // @public {PeriodTrace} Model element for the period trace
     this.periodTrace = periodTrace;
+
+    // @public {Shape}
     this.shape = new Shape();
 
     // @private {number} The opacity of the trace (not using Node opacity for performance reasons)
@@ -93,8 +95,7 @@ define( function( require ) {
           var secondPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.secondPeakY );
           var currentYPosition = modelViewTransform.modelToViewY( massEquilibrium +
                                                                   spring.massEquilibriumDisplacementProperty.value );
-          // REVIEW: Why setting this here? JSDoc it also, and maybe declare in constructor IF NEEDED.
-          // *REVIEW: The shape needs to be reset here? Thoughts on best way to do this?
+
           this.shape = new Shape();
 
           var state = this.periodTrace.stateProperty.value; // 0 to 4

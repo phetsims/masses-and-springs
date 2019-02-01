@@ -15,7 +15,6 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -58,13 +57,10 @@ define( function( require ) {
         tandem: tandem.createTandem( 'thicknessRadioButton' )
       } );
 
-    var constantText = new Text(
-      // REVIEW: Why the fill in with an empty string? Looks suspicious
-      // *REVIEW: SpringConstant is a string that is used elsewhere but has a placeholder.
-      // *REVIEW: Alternatively, I can create a springConstantString without a placeholder.
-      StringUtils.fillIn( springConstantString, { spring: '' } ),
-      _.extend( { font: TITLE_FONT, tandem: tandem.createTandem( 'constantText' ) },
-        constantsSelectionButtonOptions ) );
+    var constantText = new Text( springConstantString, {
+      font: TITLE_FONT,
+      tandem: tandem.createTandem( 'constantText' )
+    } );
     var springConstantRadioButton = new AquaRadioButton(
       selectedConstantProperty, constantEnumeration.SPRING_CONSTANT, constantText, {
         radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
