@@ -73,17 +73,19 @@ define( function( require ) {
       self.y = modelViewTransform2.modelToViewY( spring.positionProperty.get().y - spring.lengthProperty.get() );
     }
 
-    // REVIEW: Probably worth noting that this type creates permanent listeners.
+    // Link exists for sim duration. No need to unlink.
     spring.naturalRestingLengthProperty.link( function( springLength ) {
       self.loopsProperty.set( MAP_NUMBER_OF_LOOPS( springLength ) );
       updateViewLength();
     } );
 
+    // Link exists for sim duration. No need to unlink.
     spring.lengthProperty.link( function() {
       updateViewLength();
     } );
 
     // ParametricSpringNode width update. SpringConstant determines lineWidth
+    // Link exists for sim duration. No need to unlink.
     spring.thicknessProperty.link( function( thickness ) {
       self.lineWidthProperty.set( thickness );
     } );

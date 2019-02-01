@@ -78,9 +78,7 @@ define( function( require ) {
         return modelBounds;
       } );
 
-    // Update the size of the massNode
-    // REVIEW: Probably good to mention the lifetime of this, since this would be a memory leak if many of these are
-    // REVIEW: created for a single mass
+    // Update the size of the massNode. Link exists for sim duration. No need to unlink.
     mass.radiusProperty.link( function( radiusValue ) {
 
       self.rect.rectBounds = new Bounds2(

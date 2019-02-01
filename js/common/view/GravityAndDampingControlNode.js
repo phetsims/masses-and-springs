@@ -253,9 +253,7 @@ define( function( require ) {
       gravityComboBox.top = gravityNumberControl.bottom + 10;
     }
 
-    // Responsible for managing bodies
-    // REVIEW: Probably good to mention the lifetime of this, since this would be a memory leak if many of these are
-    // REVIEW: created.
+    // Responsible for managing bodies. Link exists for sim duration. No need to unlink.
     model.bodyProperty.link( function( newBody, oldBody ) {
       var body = _.find( Body.BODIES, newBody );
 
