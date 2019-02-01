@@ -53,6 +53,8 @@ define( function( require ) {
     } );
     this.positionProperty.linkAttribute( this, 'translation' );
     // REVIEW: Also seems like a lot of code duplicated with DraggableRulerNode. Is there anything that can be deduplicated?
+    // *REVIEW: Similarities are the use of a position property and the start/end callbacks of the MovableDragHandler.
+    // *REVIEW: I'm don't mind the duplication here because it is readable.
 
     // @private {MovableDragHandler} (read-only) handles timer node drag events
     this.timerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {

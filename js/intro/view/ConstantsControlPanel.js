@@ -60,6 +60,8 @@ define( function( require ) {
 
     var constantText = new Text(
       // REVIEW: Why the fill in with an empty string? Looks suspicious
+      // *REVIEW: SpringConstant is a string that is used elsewhere but has a placeholder.
+      // *REVIEW: Alternatively, I can create a springConstantString without a placeholder.
       StringUtils.fillIn( springConstantString, { spring: '' } ),
       _.extend( { font: TITLE_FONT, tandem: tandem.createTandem( 'constantText' ) },
         constantsSelectionButtonOptions ) );
