@@ -68,38 +68,46 @@ define( function( require ) {
       font: new PhetFont( { size: 14, weight: 'bold' } )
     } );
     var numberControl = new NumberControl( massString, massInGramsProperty, range, {
-      valuePattern: valuePattern,
-      valueFont: new PhetFont( 14 ),
-      majorTickLength: 10,
-      titleFont: new PhetFont( { size: 16, weight: 'bold' } ),
-      titleMaxWidth: 45,
-      thumbSize: new Dimension2( 13, 24 ),
-      thumbFillEnabled: '#00C4DF',
-      thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       stroke: null,
-      valueMaxWidth: 100,
       sliderIndent: 7,
-      constrainValue: function( value ) { return ( Util.roundSymmetric( value / 10 ) * 10); },
-      majorTicks: [
-        {
-          value: range.min,
-          label: new Text( String( range.min ), { font: new PhetFont( 14 ) } )
-        },
-        {
-          value: range.max,
-          label: new Text( String( range.max ), { font: new PhetFont( 14 ) } )
-        }
-      ],
       layoutFunction: NumberControl.createLayoutFunction4( {
         verticalSpacing: 8,
         arrowButtonsXSpacing: 5,
         hasReadoutProperty: new Property( true )
       } ),
-      useRichText: true,
-      decimalPlaces: 0,
-      arrowButtonOptions: { arrowButtonScale: 0.5 },
       delta: 1,
-      trackSize: trackSizeProperty.value
+
+      // subcomponent options
+      numberDisplayOptions: {
+        valuePattern: valuePattern,
+        font: new PhetFont( 14 ),
+        maxWidth: 100,
+        useRichText: true,
+        decimalPlaces: 0
+      },
+      titleNodeOptions: {
+        font: new PhetFont( { size: 16, weight: 'bold' } ),
+        maxWidth: 45
+      },
+      sliderOptions: {
+        majorTickLength: 10,
+        thumbSize: new Dimension2( 13, 24 ),
+        thumbFillEnabled: '#00C4DF',
+        thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
+        constrainValue: function( value ) { return ( Util.roundSymmetric( value / 10 ) * 10); },
+        majorTicks: [
+          {
+            value: range.min,
+            label: new Text( String( range.min ), { font: new PhetFont( 14 ) } )
+          },
+          {
+            value: range.max,
+            label: new Text( String( range.max ), { font: new PhetFont( 14 ) } )
+          }
+        ],
+        trackSize: trackSizeProperty.value
+      },
+      arrowButtonOptions: { scale: 0.5 }
     } );
     var contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
 

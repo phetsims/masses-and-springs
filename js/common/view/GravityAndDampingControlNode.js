@@ -81,29 +81,6 @@ define( function( require ) {
       MassesAndSpringsConstants.GRAVITY_RANGE, {
         xMargin: 0,
         yMargin: 0,
-        majorTickLength: 10,
-        titleFont: new PhetFont( { size: 14, weight: 'bold' } ),
-        titleMaxWidth: MAX_WIDTH * 1.5,
-        trackSize: options.useSliderLabels ? new Dimension2( 125, 0.1 ) : new Dimension2( 115, 0.1 ),
-        thumbSize: new Dimension2( 13, 22 ),
-        thumbFillEnabled: '#00C4DF',
-        thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
-        majorTicks: [
-          {
-            value: MassesAndSpringsConstants.GRAVITY_RANGE.min,
-            label: new Text( options.useSliderLabels ? noneString : MassesAndSpringsConstants.GRAVITY_RANGE.min, {
-              font: MassesAndSpringsConstants.LABEL_FONT,
-              maxWidth: MAX_WIDTH
-            } )
-          },
-          {
-            value: MassesAndSpringsConstants.GRAVITY_RANGE.max,
-            label: new Text( options.useSliderLabels ? lotsString : MassesAndSpringsConstants.GRAVITY_RANGE.max, {
-              font: MassesAndSpringsConstants.LABEL_FONT,
-              maxWidth: MAX_WIDTH
-            } )
-          }
-        ],
         layoutFunction: NumberControl.createLayoutFunction4( {
           excludeTweakers: options.useSliderLabels,
           sliderPadding: options.useTextSliderLabels ? 0 : 13,
@@ -126,14 +103,45 @@ define( function( require ) {
             return bottomContent;
           }
         } ),
-        valuePattern: StringUtils.fillIn( gravityValueString, {
-          gravity: '{0}'
-        } ),
-        valueFont: new PhetFont( { size: 14 } ),
-        useRichText: true,
-        decimalPlaces: 1,
-        valueMaxWidth: MAX_WIDTH,
         delta: 0.1,
+
+        // subcomponent options
+        titleNodeOptions: {
+          font: new PhetFont( { size: 14, weight: 'bold' } ),
+          maxWidth: MAX_WIDTH * 1.5
+        },
+        numberDisplayOptions: {
+          valuePattern: StringUtils.fillIn( gravityValueString, {
+            gravity: '{0}'
+          } ),
+          font: new PhetFont( { size: 14 } ),
+          useRichText: true,
+          decimalPlaces: 1,
+          maxWidth: MAX_WIDTH
+        },
+        sliderOptions: {
+          majorTickLength: 10,
+          trackSize: options.useSliderLabels ? new Dimension2( 125, 0.1 ) : new Dimension2( 115, 0.1 ),
+          thumbSize: new Dimension2( 13, 22 ),
+          thumbFillEnabled: '#00C4DF',
+          thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
+          majorTicks: [
+            {
+              value: MassesAndSpringsConstants.GRAVITY_RANGE.min,
+              label: new Text( options.useSliderLabels ? noneString : MassesAndSpringsConstants.GRAVITY_RANGE.min, {
+                font: MassesAndSpringsConstants.LABEL_FONT,
+                maxWidth: MAX_WIDTH
+              } )
+            },
+            {
+              value: MassesAndSpringsConstants.GRAVITY_RANGE.max,
+              label: new Text( options.useSliderLabels ? lotsString : MassesAndSpringsConstants.GRAVITY_RANGE.max, {
+                font: MassesAndSpringsConstants.LABEL_FONT,
+                maxWidth: MAX_WIDTH
+              } )
+            }
+          ]
+        },
         arrowButtonOptions: { scale: 0.55 }
       } );
 
