@@ -21,6 +21,7 @@ define( function( require ) {
   var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
+  var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -112,7 +113,7 @@ define( function( require ) {
         },
         numberDisplayOptions: {
           valuePattern: StringUtils.fillIn( gravityValueString, {
-            gravity: '{0}'
+            gravity: NumberDisplay.NAMED_PLACEHOLDER
           } ),
           font: new PhetFont( { size: 14 } ),
           useRichText: true,

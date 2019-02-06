@@ -16,6 +16,7 @@ define( function( require ) {
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
+  var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
@@ -64,7 +65,7 @@ define( function( require ) {
     } );
 
     var trackSizeProperty = new Property( options.basics ? new Dimension2( 132, 0.1 ) : new Dimension2( 125, 0.1 ) );
-    var valuePattern = StringUtils.fillIn( massValueString, { mass: '{0}' }, {
+    var valuePattern = StringUtils.fillIn( massValueString, { mass: NumberDisplay.NAMED_PLACEHOLDER }, {
       font: new PhetFont( { size: 14, weight: 'bold' } )
     } );
     var numberControl = new NumberControl( massString, massInGramsProperty, range, {
