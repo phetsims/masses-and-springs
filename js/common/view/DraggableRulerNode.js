@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
@@ -37,6 +38,9 @@ define( function( require ) {
 
     // @public {Panel|null} (read-write) Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
+
+    // @public {Property.<Boolean>} Flag used to determine if the user has dragged the ruler from its starting position.
+    this.draggedProperty = new BooleanProperty( false );
 
     // define ruler params view units
     var rulerLength = mvt.modelToViewDeltaY( -1 ); // 1 meter
@@ -78,6 +82,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'dragHandler' ),
       dragBounds: dragBounds,
       startDrag: function() {
+        self.draggedProperty.set( true );
         self.moveToFront();
       },
       endDrag: function() {
