@@ -13,9 +13,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var ObjectIO = require( 'TANDEM/types/ObjectIO' );
   var phetioInherit = require( 'TANDEM/phetioInherit' );
-
-  // ifphetio
-  var assertInstanceOf = require( 'ifphetio!PHET_IO/assertInstanceOf' );
+  var validate = require( 'AXON/validate' );
 
   /**
    * @param {Body} body
@@ -23,11 +21,11 @@ define( function( require ) {
    * @constructor
    */
   function BodyIO( body, phetioID ) {
-    assert && assertInstanceOf( body, Body );
     ObjectIO.call( this, body, phetioID );
   }
 
   phetioInherit( ObjectIO, 'BodyIO', BodyIO, {}, {
+    validator: { valueType: Body },
     /**
      * Encodes a Body instance to a state.
      *
@@ -35,7 +33,7 @@ define( function( require ) {
      * @returns {*}
      */
     toStateObject: function( body ) {
-      assert && assertInstanceOf( body, Body );
+      validate( body, this.validator );
       if ( body === null ) {
         return null;
       }
