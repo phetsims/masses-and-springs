@@ -214,12 +214,12 @@ define( function( require ) {
         if ( Util.sign( oldVelocity ) !== Util.sign( newVelocity ) && Util.sign( oldVelocity ) ) {
 
           // @param {number} Emitter for peek during first upwards peek
-          self.springProperty.value.peakEmitter.emit1( 1 );
+          self.springProperty.value.peakEmitter.emit( 1 );
         }
         if ( Util.sign( oldVelocity ) !== Util.sign( newVelocity.y ) && !Util.sign( oldVelocity ) ) {
 
           // @param {number} Emitter for peek during second downwards peek
-          self.springProperty.value.peakEmitter.emit1( -1 );
+          self.springProperty.value.peakEmitter.emit( -1 );
         }
       }
     } );
