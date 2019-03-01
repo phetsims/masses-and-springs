@@ -286,7 +286,7 @@ define( function( require ) {
     } );
 
     // @public {Emitter} used to determine when the period tracer should alternate directions
-    this.peakEmitter = new Emitter( { validationEnabled: false } );
+    this.peakEmitter = new Emitter( { validators: [ { valueType: "number" } ] } );
 
     // @public {Emitter} used to determine when the mass has crossed over its equilibrium position while oscillating
     this.crossEmitter = new Emitter();
