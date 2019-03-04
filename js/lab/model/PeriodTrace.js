@@ -96,7 +96,7 @@ define( function( require ) {
       }
     } );
 
-    this.spring.droppedEmitter.addListener( function() {
+    this.spring.periodTraceResetEmitter.addListener( function() {
       self.onFaded();
     } );
 

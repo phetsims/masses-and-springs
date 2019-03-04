@@ -349,7 +349,15 @@ define( function( require ) {
      * @public
      */
     stepForward: function( dt ) {
-      this.modelStep( dt );// steps the nominal amount used by step forward button listener
+
+      // steps the nominal amount used by step forward button listener
+      this.modelStep( dt );
+
+      // Reset the period trace for each spring.
+      // See https://github.com/phetsims/masses-and-springs-basics/issues/58#issuecomment-462860440
+      this.springs.forEach( function( spring ) {
+        spring.periodTraceResetEmitter.emit();
+      } );
     },
 
     /**

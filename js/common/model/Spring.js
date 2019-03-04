@@ -291,8 +291,8 @@ define( function( require ) {
     // @public {Emitter} used to determine when the mass has crossed over its equilibrium position while oscillating
     this.crossEmitter = new Emitter();
 
-    // @public {Emitter} used to determine when the mass is dropped
-    this.droppedEmitter = new Emitter();
+    // @public {Emitter} used to determine when to reset the periodTrace state
+    this.periodTraceResetEmitter = new Emitter();
 
     this.massEquilibriumDisplacementProperty.link( function( newValue, oldValue ) {
       if ( ( oldValue >= 0 ) !== ( newValue >= 0 ) && oldValue !== null && newValue !== null ) {
