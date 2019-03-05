@@ -93,7 +93,7 @@ define( function( require ) {
       sliderOptions: {
         majorTickLength: 10,
         thumbSize: new Dimension2( 13, 24 ),
-        thumbFillEnabled: '#00C4DF',
+        thumbFill: '#00C4DF',
         thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
         constrainValue: function( value ) { return ( Util.roundSymmetric( value / 10 ) * 10); },
         majorTicks: [
