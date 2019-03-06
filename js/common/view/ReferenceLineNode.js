@@ -14,9 +14,8 @@ define( function( require ) {
   var LinearFunction = require( 'DOT/LinearFunction' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Vector2IO = require( 'DOT/Vector2IO' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   // constants
   var LINE_LENGTH = 100;
@@ -58,9 +57,7 @@ define( function( require ) {
     var yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
 
     // @private {Property.<Vector2>} (read-write) position of line in screen coordinates.
-    this.positionProperty = new Property( new Vector2( xPos, yPos ), {
-      phetioType: PropertyIO( Vector2IO )
-    } );
+    this.positionProperty = new Vector2Property( new Vector2( xPos, yPos ) );
 
     // Add a label if it exists
     if ( options.label ) {
@@ -70,19 +67,19 @@ define( function( require ) {
     // updates the position of the reference line as the system changes
     Property.multilink( [ spring.massAttachedProperty, spring.naturalRestingLengthProperty, property ],
       function( mass, restingLength, monitoredProperty ) {
-      if ( options.zeroPointLine ) {
-        return;
-      }
-      if ( options.fixedPosition || !mass ) {
+        if ( options.zeroPointLine ) {
+          return;
+        }
+        if ( options.fixedPosition || !mass ) {
 
-        // Y position of line in screen coordinates as if a mass isn't attached
-        yPos = modelViewTransform2.modelToViewY( lengthFunction( restingLength ) );
-      }
-      else {
+          // Y position of line in screen coordinates as if a mass isn't attached
+          yPos = modelViewTransform2.modelToViewY( lengthFunction( restingLength ) );
+        }
+        else {
 
-        // Y position of line in screen coordinates with an attached mass
-        yPos = modelViewTransform2.modelToViewY( monitoredProperty );
-      }
+          // Y position of line in screen coordinates with an attached mass
+          yPos = modelViewTransform2.modelToViewY( monitoredProperty );
+        }
         self.positionProperty.set( new Vector2( xPos, yPos ) );
       } );
 

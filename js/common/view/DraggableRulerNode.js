@@ -15,10 +15,8 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
-  var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
   var RulerNode = require( 'SCENERY_PHET/RulerNode' );
-  var Vector2IO = require( 'DOT/Vector2IO' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   // strings
   var cmString = require( 'string!MASSES_AND_SPRINGS/cm' );
@@ -71,9 +69,8 @@ define( function( require ) {
     }, { tandem: tandem.createTandem( 'ruler' ) } );
 
     // @private {Property.<Vector2>} (read-only) position of ruler node in screen coordinates
-    this.positionProperty = new Property( initialPosition, {
-      tandem: tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( Vector2IO )
+    this.positionProperty = new Vector2Property( initialPosition, {
+      tandem: tandem.createTandem( 'positionProperty' )
     } );
     this.positionProperty.linkAttribute( this, 'translation' );
 

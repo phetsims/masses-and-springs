@@ -25,7 +25,7 @@ define( function( require ) {
   var SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Vector2IO = require( 'DOT/Vector2IO' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   // constants
   var HEIGHT_RATIO = 2.5;
@@ -91,10 +91,9 @@ define( function( require ) {
     this.massTandem = tandem;
 
     // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
-    this.positionProperty = new Property(
+    this.positionProperty = new Vector2Property(
       new Vector2( xPosition, this.heightProperty.value + MassesAndSpringsConstants.SHELF_HEIGHT ), {
-        tandem: tandem.createTandem( 'positionProperty' ),
-        phetioType: PropertyIO( Vector2IO )
+        tandem: tandem.createTandem( 'positionProperty' )
       } );
 
     // @public {Property.<Vector2>} the position of the mass's center of mass.
