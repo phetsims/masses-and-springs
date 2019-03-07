@@ -46,7 +46,7 @@ define( function( require ) {
     // @private {ModelViewTransForm}
     this.modelViewTransform = modelViewTransform;
 
-    this.originalX = this.modelViewTransform.modelToViewX( this.periodTrace.spring.positionProperty.value.x - 0.2 );
+    this.originalX = this.modelViewTransform.modelToViewX( periodTrace.spring.positionProperty.value.x - 0.2 );
     this.middleX = this.originalX + X_OFFSET;
     this.lastX = this.originalX + 2 * X_OFFSET;
 
