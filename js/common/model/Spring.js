@@ -231,9 +231,6 @@ define( function( require ) {
         }
       } );
 
-    // @public {Property.<boolean>} Responsible for the visibility of the period trace. Used in a verticalCheckboxGroup
-    this.periodTraceVisibilityProperty = new BooleanProperty( false );
-
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
     this.massEquilibriumYPositionProperty = new NumberProperty( 0,
       {
@@ -284,6 +281,13 @@ define( function( require ) {
         self.setMass( self.massAttachedProperty.get() );
       }
     } );
+
+    // @public {null|PeriodTrace} The spring should be aware of its period trace.
+    // See https://github.com/phetsims/masses-and-springs-basics/issues/58
+    this.periodTrace = null;
+
+    // @public {Property.<boolean>} Responsible for the visibility of the period trace. Used in a verticalCheckboxGroup
+    this.periodTraceVisibilityProperty = new BooleanProperty( false );
 
     // @public {Emitter} used to determine when the period tracer should alternate directions
     this.peakEmitter = new Emitter();
