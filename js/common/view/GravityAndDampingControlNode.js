@@ -124,7 +124,7 @@ define( function( require ) {
           majorTickLength: 10,
           trackSize: options.useSliderLabels ? new Dimension2( 125, 0.1 ) : new Dimension2( 115, 0.1 ),
           thumbSize: new Dimension2( 13, 22 ),
-          thumbFillEnabled: '#00C4DF',
+          thumbFill: '#00C4DF',
           thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
           majorTicks: [
             {
@@ -169,7 +169,7 @@ define( function( require ) {
           minorTickLineWidth: 0.5,
           trackSize: new Dimension2( 120, 0.1 ),
           thumbSize: new Dimension2( 13, 22 ),
-          thumbFillEnabled: '#00C4DF',
+          thumbFill: '#00C4DF',
           thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
           align: 'center',
           constrainValue: function( value ) {

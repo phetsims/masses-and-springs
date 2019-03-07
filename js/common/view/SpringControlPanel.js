@@ -58,7 +58,7 @@ define( function( require ) {
       tickLabelSpacing: options.tickLabelSpacing,
       trackSize: options.sliderTrackSize,
       thumbSize: new Dimension2( 13, 22 ),
-      thumbFillEnabled: '#00C4DF',
+      thumbFill: '#00C4DF',
       thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
       align: 'center',
       constrainValue: options.constrainValue,

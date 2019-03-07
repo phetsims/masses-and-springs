@@ -15,10 +15,9 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
   var TimerNode = require( 'SCENERY_PHET/TimerNode' );
   var Util = require( 'DOT/Util' );
-  var Vector2IO = require( 'DOT/Vector2IO' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param {Bounds2} dragBounds
@@ -47,9 +46,8 @@ define( function( require ) {
 
 
     // @private {Property.<Vector2>} (read-only) position of ruler node in screen coordinates
-    this.positionProperty = new Property( initialPosition, {
-      tandem: tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( Vector2IO )
+    this.positionProperty = new Vector2Property( initialPosition, {
+      tandem: tandem.createTandem( 'positionProperty' )
     } );
     this.positionProperty.linkAttribute( this, 'translation' );
 

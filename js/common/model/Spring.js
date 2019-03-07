@@ -22,10 +22,9 @@ define( function( require ) {
   var NumberIO = require( 'TANDEM/types/NumberIO' );
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Vector2IO = require( 'DOT/Vector2IO' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   // constants
   var DEFAULT_THICKNESS = 3; // empirically determined
@@ -104,9 +103,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
-    this.positionProperty = new Property( position, {
-      tandem: tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( Vector2IO )
+    this.positionProperty = new Vector2Property( position, {
+      tandem: tandem.createTandem( 'positionProperty' )
     } );
 
     // @public {Property.<number>} length of the spring without mass attached

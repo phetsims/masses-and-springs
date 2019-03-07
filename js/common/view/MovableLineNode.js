@@ -18,10 +18,8 @@ define( function( require ) {
   var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var Vector2IO = require( 'DOT/Vector2IO' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param {Vector2} initialPosition - of the center of line
@@ -85,9 +83,8 @@ define( function( require ) {
     initialPosition.setX( dragBounds.minX );
 
     // @private {Property.<Vector2>} (read-write) position of line in screen coordinates
-    this.positionProperty = new Property( initialPosition, {
-      tandem: tandem.createTandem( 'positionProperty' ),
-      phetioType: PropertyIO( Vector2IO )
+    this.positionProperty = new Vector2Property( initialPosition, {
+      tandem: tandem.createTandem( 'positionProperty' )
     } );
 
     // Position the line in screen coordinates
