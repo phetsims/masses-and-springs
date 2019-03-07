@@ -90,13 +90,13 @@ define( function( require ) {
     // @public {Tandem} (read-only) Used for constructing tandems for corresponding view nodes.
     this.massTandem = tandem;
 
-    // @public {Property.<Vector2>} the position of a mass is the center top of the model object.
+    // @public - the position of a mass is the center top of the model object.
     this.positionProperty = new Vector2Property(
       new Vector2( xPosition, this.heightProperty.value + MassesAndSpringsConstants.SHELF_HEIGHT ), {
         tandem: tandem.createTandem( 'positionProperty' )
       } );
 
-    // @public {Property.<Vector2>} the position of the mass's center of mass.
+    // @public {DerivedProperty.<Vector2>} the position of the mass's center of mass.
     this.centerOfMassPositionProperty = new DerivedProperty( [ this.positionProperty, this.cylinderHeightProperty ],
       function( position, cylinderHeight ) {
         return new Vector2(

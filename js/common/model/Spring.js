@@ -102,7 +102,7 @@ define( function( require ) {
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
-    // @public {Property.<Vector2>} position of the spring, originated at the top-center of the spring node
+    // @public - position of the spring, originated at the top-center of the spring node
     this.positionProperty = new Vector2Property( position, {
       tandem: tandem.createTandem( 'positionProperty' )
     } );

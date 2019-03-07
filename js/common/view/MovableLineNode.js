@@ -82,7 +82,7 @@ define( function( require ) {
     // Setting x coordinate for the position of the line.
     initialPosition.setX( dragBounds.minX );
 
-    // @private {Property.<Vector2>} (read-write) position of line in screen coordinates
+    // @private (read-write) - position of line in screen coordinates
     this.positionProperty = new Vector2Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' )
     } );

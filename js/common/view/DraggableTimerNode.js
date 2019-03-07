@@ -45,7 +45,7 @@ define( function( require ) {
     } );
 
 
-    // @private {Property.<Vector2>} (read-only) position of ruler node in screen coordinates
+    // @private (read-only) - position of ruler node in screen coordinates
     this.positionProperty = new Vector2Property( initialPosition, {
       tandem: tandem.createTandem( 'positionProperty' )
     } );

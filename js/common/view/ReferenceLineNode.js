@@ -56,7 +56,7 @@ define( function( require ) {
 
     var yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
 
-    // @private {Property.<Vector2>} (read-write) position of line in screen coordinates.
+    // @private (read-write) - position of line in screen coordinates.
     this.positionProperty = new Vector2Property( new Vector2( xPos, yPos ) );
 
     // Add a label if it exists
