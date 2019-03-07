@@ -356,7 +356,9 @@ define( function( require ) {
       // Reset the period trace for each spring.
       // See https://github.com/phetsims/masses-and-springs-basics/issues/58#issuecomment-462860440
       this.springs.forEach( function( spring ) {
-        spring.periodTraceResetEmitter.emit();
+        if ( spring.periodTrace && spring.periodTrace.stateProperty.value === 4 ) {
+          spring.periodTraceResetEmitter.emit();
+        }
       } );
     },
 

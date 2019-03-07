@@ -76,8 +76,8 @@ define( function( require ) {
       mysteryLabel: true
     } );
 
-    // Initialize period trace.
-    this.periodTrace = new PeriodTrace( this.springs[ 0 ], this.playingProperty );
+    // The lab model spring is the only spring with a period trace.
+    this.firstSpring.periodTrace = new PeriodTrace( this.firstSpring, this.playingProperty );
   }
 
   massesAndSprings.register( 'LabModel', LabModel );
