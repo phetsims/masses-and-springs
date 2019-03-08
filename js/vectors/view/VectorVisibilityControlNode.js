@@ -33,8 +33,8 @@ define( function( require ) {
   var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
 
   // constants
-  var MAX_WIDTH = 205;
-  var CONTENT_SPACING = 73;
+  var MAX_WIDTH = 140;
+  var DEFAULT_CONTENT_SPACING = 155;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -60,6 +60,7 @@ define( function( require ) {
     // Align group used for label align boxes
     var alignGroup = new AlignGroup( { matchVertical: false } );
 
+    // Members of the attributed to the alignGroup are declared in order as they appear in the sim.
     var velocityAlignBox = new AlignBox( new Text( velocityString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH,
@@ -72,15 +73,56 @@ define( function( require ) {
       tandem: tandem.createTandem( 'accelerationString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
+    // Responsible for forces aquaRadioButton
+    var forcesVisibilityRadioButton = new AquaRadioButton(
+      model.forcesModeProperty,
+      model.forcesModeChoice.FORCES,
+      new Text( forcesString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'forcesString' )
+      } ),
+      { radius: 7, spacing: 7 }
+    );
+
+    // Sub group of check boxes indented under forces radio button
+    var gravityAlignBox = new AlignBox( new Text( gravityString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: MAX_WIDTH,
+      tandem: tandem.createTandem( 'gravityString' )
+    } ), { group: alignGroup, xAlign: 'left' } );
+    var springAlignBox = new AlignBox( new Text( springString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: MAX_WIDTH,
+      tandem: tandem.createTandem( 'springString' )
+    } ), { group: alignGroup, xAlign: 'left' } );
+
+    // responsible for net force aquaRadioButton
+    var netForceAlignBox = new AlignBox( new Text( netForceString, {
+      font: MassesAndSpringsConstants.TITLE_FONT,
+      maxWidth: MAX_WIDTH,
+      tandem: tandem.createTandem( 'netForceString' )
+    } ), { group: alignGroup, xAlign: 'left' } );
+
+    // Max width must be set to the maxWidth of the alignGroup based on its content.
+    var contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
+
+    var netForceVisibilityRadioButton = new AquaRadioButton(
+      model.forcesModeProperty,
+      model.forcesModeChoice.NET_FORCES,
+      new HBox( { children: [ netForceAlignBox, netForceArrow ], spacing: contentSpacing } ),
+      { radius: 7, spacing: 7 }
+    );
+
     // Handle options for checkbox group
     var vectorVisibilityCheckboxGroup;
     var velocityCheckboxObject = {
-      node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: contentSpacing } ),
       property: model.velocityVectorVisibilityProperty,
       label: velocityString
     };
     var accelerationCheckboxObject = {
-      node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: contentSpacing } ),
       property: model.accelerationVectorVisibilityProperty,
       label: accelerationString
     };
@@ -116,24 +158,14 @@ define( function( require ) {
       } );
     }
 
-    var gravityAlignBox = new AlignBox( new Text( gravityString, {
-      font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: MAX_WIDTH,
-      tandem: tandem.createTandem( 'gravityString' )
-    } ), { group: alignGroup, xAlign: 'left' } );
-    var springAlignBox = new AlignBox( new Text( springString, {
-      font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: MAX_WIDTH,
-      tandem: tandem.createTandem( 'springString' )
-    } ), { group: alignGroup, xAlign: 'left' } );
-
     // Responsible for forces vectors checkboxes
+    var indentation = 22;
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: CONTENT_SPACING - 22 } ),
+      node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
     }, {
-      node: new HBox( { children: [ springAlignBox, springArrow ], spacing: CONTENT_SPACING - 22 } ),
+      node: new HBox( { children: [ springAlignBox, springArrow ], spacing: contentSpacing - indentation } ),
       property: model.springVectorVisibilityProperty,
       label: springString
     } ], {
@@ -144,31 +176,8 @@ define( function( require ) {
       tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
     } );
 
-    // Responsible for forces aquaRadioButton
-    var forcesVisibilityRadioButton = new AquaRadioButton(
-      model.forcesModeProperty,
-      model.forcesModeChoice.FORCES,
-      new Text( forcesString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH,
-        tandem: tandem.createTandem( 'forcesString' )
-      } ),
-      { radius: 7, spacing: 7 }
-    );
 
-    // responsible for net force aquaRadioButton
-    var netForceAlignBox = new AlignBox( new Text( netForceString, {
-      font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: MAX_WIDTH,
-      tandem: tandem.createTandem( 'netForceString' )
-    } ), { group: alignGroup, xAlign: 'left' } );
-    var netForceVisibilityRadioButton = new AquaRadioButton(
-      model.forcesModeProperty,
-      model.forcesModeChoice.NET_FORCES,
-      new HBox( { children: [ netForceAlignBox, netForceArrow ], spacing: CONTENT_SPACING } ),
-      { radius: 7, spacing: 7 }
-    );
-
+    // TODO: Check if we can use checkboxOptions.contentAppearanceStrategy()
     // manages the mutability of the forces checkboxes dependent on the forces and net force aquaRadioButton
     model.forcesModeProperty.link( function( mode ) {
       if ( mode === model.forcesModeChoice.FORCES ) {
