@@ -28,7 +28,7 @@ define( function( require ) {
   var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
 
   // constants
-  var CONTENT_SPACING = 22;
+  var DEFAULT_CONTENT_SPACING = 155;
   var TEXT_MAX_WIDTH = 130;
 
   /**
@@ -79,17 +79,20 @@ define( function( require ) {
       tandem: tandem.createTandem( 'movableLineString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
+    // Max width must be set to the maxWidth of the alignGroup based on its content.
+    var contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
+
     // Create checkboxes using align boxes above
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new HBox( { children: [ naturalLengthVisibleAlignBox, blueLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ naturalLengthVisibleAlignBox, blueLine ], spacing: contentSpacing } ),
       property: model.naturalLengthVisibleProperty,
       label: naturalLengthString
     }, {
-      node: new HBox( { children: [ equilibriumAlignBox, greenLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ equilibriumAlignBox, greenLine ], spacing: contentSpacing } ),
       property: model.equilibriumPositionVisibleProperty,
       label: equilibriumPositionString
     }, {
-      node: new HBox( { children: [ movableAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ movableAlignBox, redLine ], spacing: contentSpacing } ),
       property: model.movableLineVisibleProperty,
       label: movableLineString
     } ], {

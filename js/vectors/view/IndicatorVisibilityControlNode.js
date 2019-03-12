@@ -42,7 +42,6 @@ define( function( require ) {
    * @constructor
    */
   function IndicatorVisibilityControlNode( model, tandem, options ) {
-
     options = _.extend( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'indicatorVisibilityControlNode' ),
@@ -121,7 +120,7 @@ define( function( require ) {
     var componentDisplacementVBox = new VBox( { children: [ displacementSymbol, blueLine ] } );
     componentDisplacementVBox.spacing = componentDisplacementVBox.height * 0.75;
 
-    // Used for
+    // Used for indicator visibility
     var checkboxContent = [ {
       node: new HBox( {
         children: [ componentDisplacement, componentDisplacementVBox ],
