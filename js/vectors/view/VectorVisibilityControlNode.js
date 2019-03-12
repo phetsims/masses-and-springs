@@ -85,15 +85,18 @@ define( function( require ) {
       { radius: 7, spacing: 7 }
     );
 
+    // Indention used for gravity and spring checkbox
+    var indentation = 22;
+
     // Sub group of check boxes indented under forces radio button
     var gravityAlignBox = new AlignBox( new Text( gravityString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: MAX_WIDTH,
+      maxWidth: MAX_WIDTH - indentation,
       tandem: tandem.createTandem( 'gravityString' )
     } ), { group: alignGroup, xAlign: 'left' } );
     var springAlignBox = new AlignBox( new Text( springString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: MAX_WIDTH,
+      maxWidth: MAX_WIDTH - indentation,
       tandem: tandem.createTandem( 'springString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
@@ -159,7 +162,6 @@ define( function( require ) {
     }
 
     // Responsible for forces vectors checkboxes
-    var indentation = 22;
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
       property: model.gravityVectorVisibilityProperty,
