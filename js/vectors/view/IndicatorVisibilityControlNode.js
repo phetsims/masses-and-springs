@@ -32,8 +32,8 @@ define( function( require ) {
   var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
   // constants
+  var DEFAULT_CONTENT_SPACING = 155;
   var CONTENT_MAX_WIDTH = 115;
-  var CONTENT_SPACING = 44;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -116,6 +116,9 @@ define( function( require ) {
       tandem: tandem.createTandem( 'movableLineString' )
     } ), { xAlign: 'left', group: alignGroup } );
 
+    // Max width must be set to the maxWidth of the alignGroup based on its content.
+    var contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
+
     // Create checkboxes using align boxes above
     var componentDisplacementVBox = new VBox( { children: [ displacementSymbol, blueLine ] } );
     componentDisplacementVBox.spacing = componentDisplacementVBox.height * 0.75;
@@ -124,14 +127,14 @@ define( function( require ) {
     var checkboxContent = [ {
       node: new HBox( {
         children: [ componentDisplacement, componentDisplacementVBox ],
-        spacing: CONTENT_SPACING
+        spacing: contentSpacing
       } ),
       property: model.naturalLengthVisibleProperty
     }, {
-      node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: contentSpacing } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
-      node: new HBox( { children: [ movableLineAlignBox, redLine ], spacing: CONTENT_SPACING } ),
+      node: new HBox( { children: [ movableLineAlignBox, redLine ], spacing: contentSpacing } ),
       property: model.movableLineVisibleProperty
     } ];
     var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( checkboxContent, {
