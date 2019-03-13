@@ -95,6 +95,7 @@ define( function( require ) {
         thumbSize: new Dimension2( 13, 24 ),
         thumbFill: '#00C4DF',
         thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
+        thumbTouchAreaXDilation: 6,
         constrainValue: function( value ) { return ( Util.roundSymmetric( value / 10 ) * 10); },
         majorTicks: [
           {
