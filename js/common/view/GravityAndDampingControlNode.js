@@ -23,6 +23,7 @@ define( function( require ) {
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var SunConstants = require( 'SUN/SunConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -127,7 +128,7 @@ define( function( require ) {
           }
         } ),
         valuePattern: StringUtils.fillIn( gravityValueString, {
-          gravity: '{0}'
+          gravity: SunConstants.VALUE_NAMED_PLACEHOLDER
         } ),
         valueFont: new PhetFont( { size: 14 } ),
         useRichText: true,
