@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.1 Fri Mar 08 2019 13:46:19 GMT-0500 (EST)",
+  "comment": "# masses-and-springs 1.0.1 Tue Mar 19 2019 16:58:59 GMT-0400 (EDT)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -10,11 +10,11 @@
   },
   "brand": {
     "sha": "f60dd7f1a457b0dca827a35f371187d8d7420a5e",
-    "branch": "masses-and-springs-1.0"
+    "branch": "HEAD"
   },
   "chipper": {
-    "sha": "bc1f66fea88338fb61de4aad469470909a0e2281",
-    "branch": "HEAD"
+    "sha": "8436e5f4211985c7635f1961e92f9d55a1ae04c4",
+    "branch": "masses-and-springs-1.0"
   },
   "dot": {
     "sha": "bd4d703525b862fef1633d6fda144c47c8827945",
@@ -26,14 +26,14 @@
   },
   "joist": {
     "sha": "319dc8a23e3b49f85ded627f6e302eaf2e69ebb6",
-    "branch": "masses-and-springs-1.0"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "3b76b24ad32130fff69790f1a595a4a0b9d6dd1f",
     "branch": "HEAD"
   },
   "masses-and-springs": {
-    "sha": "612f59419ee1c49c9b2856f92635e1bf85c369f1",
+    "sha": "073696554471b6add92b8ef3791d45b86117c640",
     "branch": "1.0"
   },
   "phet-core": {
@@ -58,6 +58,10 @@
   },
   "phetcommon": {
     "sha": "80414edbe26f41b5f5544377c2dae03a8cca9922",
+    "branch": "HEAD"
+  },
+  "phetmarks": {
+    "sha": "af2640bcd6bd3e918f78b82fb8968d169c72dc31",
     "branch": "HEAD"
   },
   "query-string-machine": {
@@ -87,9 +91,5 @@
   "twixt": {
     "sha": "050e8f19b2368497931bce2e5429825aa0938eff",
     "branch": "HEAD"
-  },
-  "phetmarks": {
-    "branch": "master",
-    "sha": "af2640bcd6bd3e918f78b82fb8968d169c72dc31"
   }
 }
