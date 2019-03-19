@@ -87,5 +87,9 @@
   "twixt": {
     "sha": "050e8f19b2368497931bce2e5429825aa0938eff",
     "branch": "HEAD"
+  },
+  "phetmarks": {
+    "branch": "master",
+    "sha": "0900cbe3b2c732fbbd4d58b31519f46264e54c23"
   }
 }
