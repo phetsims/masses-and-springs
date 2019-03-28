@@ -18,6 +18,7 @@ define( function( require ) {
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var SunConstants = require( 'SUN/SunConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
@@ -188,7 +189,7 @@ define( function( require ) {
       }
       else if ( mode === model.forcesModeChoice.NET_FORCES ) {
         forcesVisibilityCheckboxGroup.pickable = false;
-        forcesVisibilityCheckboxGroup.opacity = 0.3;
+        forcesVisibilityCheckboxGroup.opacity = SunConstants.DISABLED_OPACITY;
       }
     } );
 
