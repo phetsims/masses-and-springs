@@ -179,7 +179,7 @@ define( function( require ) {
     } );
 
 
-    // TODO: Check if we can use checkboxOptions.contentAppearanceStrategy()
+    // TODO #346 replace this with checkboxOptions.enabledProperty
     // manages the mutability of the forces checkboxes dependent on the forces and net force aquaRadioButton
     model.forcesModeProperty.link( function( mode ) {
       if ( mode === model.forcesModeChoice.FORCES ) {
