@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.2-rc.1 Thu Mar 28 2019 14:13:39 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# masses-and-springs 1.0.2-rc.1 Thu Mar 28 2019 23:10:54 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -9,12 +9,12 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "f60dd7f1a457b0dca827a35f371187d8d7420a5e",
-    "branch": "HEAD"
+    "sha": "af0b5f66cddd058932b7de24b3228b604d303aeb",
+    "branch": "masses-and-springs-1.0"
   },
   "chipper": {
     "sha": "24ffe6b212e6d33cb3ada9d86c55cfc3f488147f",
-    "branch": "masses-and-springs-1.0"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "bd4d703525b862fef1633d6fda144c47c8827945",
@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "masses-and-springs": {
-    "sha": "f38ede8a7f1c285d4bd089439054ae5e69297e0a",
+    "sha": "0b96926bf406818b53be0daf95a745530480c1d6",
     "branch": "1.0"
   },
   "phet-core": {
