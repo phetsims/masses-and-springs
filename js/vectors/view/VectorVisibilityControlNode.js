@@ -12,6 +12,7 @@ define( function( require ) {
   var AlignBox = require( 'SCENERY/nodes/AlignBox' );
   var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -161,6 +162,9 @@ define( function( require ) {
       } );
     }
 
+    // Property that toggles whether the gravity and spring force checkboxes are enabled
+    var enabledProperty = new BooleanProperty( model.forcesModeProperty.value === model.forcesModeChoice.FORCES );
+
     // Responsible for forces vectors checkboxes
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
@@ -172,24 +176,16 @@ define( function( require ) {
       label: springString
     } ], {
       checkboxOptions: {
+        enabledProperty: enabledProperty,
         boxWidth: 16
       },
       xMargin: 20,
       tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
     } );
 
-
-    // TODO #346 replace this with checkboxOptions.enabledProperty
     // manages the mutability of the forces checkboxes dependent on the forces and net force aquaRadioButton
     model.forcesModeProperty.link( function( mode ) {
-      if ( mode === model.forcesModeChoice.FORCES ) {
-        forcesVisibilityCheckboxGroup.pickable = true;
-        forcesVisibilityCheckboxGroup.opacity = 1;
-      }
-      else if ( mode === model.forcesModeChoice.NET_FORCES ) {
-        forcesVisibilityCheckboxGroup.pickable = false;
-        forcesVisibilityCheckboxGroup.opacity = 0.3;
-      }
+      enabledProperty.set( mode === model.forcesModeChoice.FORCES );
     } );
 
     // Contains all checkboxes and radio buttons for vector visibility
