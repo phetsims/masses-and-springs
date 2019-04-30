@@ -143,7 +143,11 @@ define( function( require ) {
             }
           ]
         },
-        arrowButtonOptions: { scale: 0.55 }
+        arrowButtonOptions: {
+          scale: 0.55,
+          touchAreaXDilation: 22,
+          touchAreaYDilation: 18
+        }
       } );
 
     // Added logic for compatibility with Masses and Springs: Basics
