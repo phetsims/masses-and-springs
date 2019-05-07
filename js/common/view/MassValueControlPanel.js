@@ -112,7 +112,7 @@ define( function( require ) {
       arrowButtonOptions: {
         scale: 0.5,
         touchAreaXDilation: 16,
-        touchAreaYDilation: 16
+        touchAreaYDilation: 26
       }
     } );
     var contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
