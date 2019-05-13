@@ -224,9 +224,8 @@ define( function( require ) {
     } );
 
     // @public {TimeControlNode} Sim speed controls
-    this.timeControlNode = new TimeControlNode(
-      model.playingProperty,
-      new DynamicProperty( new Property( model.simSpeedProperty ), {
+    this.timeControlNode = new TimeControlNode( model.playingProperty, {
+      isSlowMotionProperty: new DynamicProperty( new Property( model.simSpeedProperty ), {
         map: function( simSpeed ) {
           return simSpeed === model.simSpeedChoice.SLOW;
         },
@@ -234,10 +233,12 @@ define( function( require ) {
           return isSlow ? model.simSpeedChoice.SLOW : model.simSpeedChoice.NORMAL;
         },
         bidirectional: true
-      } ), {
-        stepCallback: function() { model.stepForward( 0.01 ); },
-        tandem: tandem.createTandem( 'timeControlNode' )
-      } );
+      } ),
+      stepOptions: {
+        listener: function() { model.stepForward( 0.01 ); }
+      },
+      tandem: tandem.createTandem( 'timeControlNode' )
+    } );
 
     // @public {AlignGroup}
     this.rightPanelAlignGroup = new AlignGroup( { matchVertical: false } );
