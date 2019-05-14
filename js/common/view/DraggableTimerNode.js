@@ -44,6 +44,7 @@ define( function( require ) {
       tandem: tandem.createTandem( 'timer' )
     } );
 
+    this.touchArea = this.localBounds.dilated( 10 );
 
     // @private (read-only) - position of ruler node in screen coordinates
     this.positionProperty = new Vector2Property( initialPosition, {
