@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.3 Wed Apr 24 2019 16:22:31 GMT-0800 (Alaskan Daylight Time)",
+  "comment": "# masses-and-springs 1.0.3 Fri May 24 2019 14:55:57 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -13,8 +13,8 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "1eb23dcf73b0ad7b1d234d84473a4047d48f0c13",
-    "branch": "HEAD"
+    "sha": "0b1a94cca78e40ca9f68925d5511bb39efc81db6",
+    "branch": "masses-and-springs-1.0"
   },
   "dot": {
     "sha": "bd4d703525b862fef1633d6fda144c47c8827945",
@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "masses-and-springs": {
-    "sha": "cf7572a36c610b299def9fb1f7b7e7a4b6fbe36b",
+    "sha": "4342a10b386cc59597d51f9fe3aa0cd0fdb0bcac",
     "branch": "1.0"
   },
   "phet-core": {
@@ -42,14 +42,6 @@
   },
   "phet-io": {
     "sha": "e5c7148f3344b343b57fe7108a902facd1d875ec",
-    "branch": "HEAD"
-  },
-  "phet-io-wrapper-classroom-activity": {
-    "sha": "5204ea8e3d83eabff4d8b877f49171a90d704585",
-    "branch": "HEAD"
-  },
-  "phet-io-wrapper-lab-book": {
-    "sha": "ccaaaa4b4b36fb8ae30d033262443965077649f2",
     "branch": "HEAD"
   },
   "phet-io-wrappers": {
