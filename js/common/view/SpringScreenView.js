@@ -112,7 +112,7 @@ define( function( require ) {
         self.modelViewTransform,
         self.visibleBoundsProperty,
         model,
-        tandem.createTandem( mass.massTandem.tail + 'Node' ) );
+        tandem.createTandem( mass.massTandem.name + 'Node' ) );
       self.massLayer.addChild( massNode );
 
       // If the mass is on the shelf reset the mass layers.
