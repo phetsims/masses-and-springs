@@ -163,7 +163,9 @@ define( function( require ) {
     }
 
     // Property that toggles whether the gravity and spring force checkboxes are enabled
-    var enabledProperty = new BooleanProperty( model.forcesModeProperty.value === model.forcesModeChoice.FORCES );
+    var enabledProperty = new BooleanProperty( model.forcesModeProperty.value === model.forcesModeChoice.FORCES, {
+      phetioFeatured: true
+    } );
 
     // Responsible for forces vectors checkboxes
     var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
