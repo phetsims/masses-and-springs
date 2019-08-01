@@ -288,7 +288,7 @@ define( function( require ) {
     this.periodTraceVisibilityProperty = new BooleanProperty( false );
 
     // @public {Emitter} used to determine when the period tracer should alternate directions
-    this.peakEmitter = new Emitter( { validators: [ { valueType: 'number' } ] } );
+    this.peakEmitter = new Emitter( { parameters: [ { valueType: 'number' } ] } );
 
     // @public {Emitter} used to determine when the mass has crossed over its equilibrium position while oscillating
     this.crossEmitter = new Emitter();
