@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   var Enumeration = require( 'PHET_CORE/Enumeration' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
@@ -40,17 +41,13 @@ define( function( require ) {
     this.addDefaultMasses( tandem );
 
     // @public {Property.<string>} determines the scene selection for the intro screen
-    this.sceneModeProperty = new Property( this.sceneModeChoice.SAME_LENGTH, {
-      tandem: tandem.createTandem( 'sceneModeProperty' ),
-      phetioType: PropertyIO( StringIO ),
-      validValues: [ this.sceneModeChoice.SAME_LENGTH, this.sceneModeChoice.ADJUSTABLE_LENGTH ]
+    this.sceneModeProperty = new EnumerationProperty( this.sceneModeChoice, this.sceneModeChoice.SAME_LENGTH, {
+      tandem: tandem.createTandem( 'sceneModeProperty' )
     } );
 
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
-    this.constantParameterProperty = new Property( this.constantModeChoice.SPRING_CONSTANT, {
-      tandem: tandem.createTandem( 'constantParameterProperty' ),
-      phetioType: PropertyIO( StringIO ),
-      validValues: [ this.constantModeChoice.SPRING_CONSTANT, this.constantModeChoice.SPRING_THICKNESS, this.constantModeChoice.NULL ]
+    this.constantParameterProperty = new EnumerationProperty( this.constantModeChoice, this.constantModeChoice.SPRING_CONSTANT, {
+      tandem: tandem.createTandem( 'constantParameterProperty' )
     } );
 
     // @public {Spring} Renamed for readability. Springs are constantly referenced.

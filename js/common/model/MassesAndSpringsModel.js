@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
@@ -71,10 +72,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
-    this.simSpeedProperty = new Property( this.simSpeedChoice.NORMAL, {
-      tandem: tandem.createTandem( 'simSpeedProperty' ),
-      phetioType: PropertyIO( StringIO ),
-      validValues: [ this.simSpeedChoice.SLOW, this.simSpeedChoice.NORMAL ]
+    this.simSpeedProperty = new EnumerationProperty( this.simSpeedChoice, this.simSpeedChoice.NORMAL, {
+      tandem: tandem.createTandem( 'simSpeedProperty' )
     } );
 
     // @public {Property.<boolean>} determines visibility of ruler node
@@ -144,10 +143,8 @@ define( function( require ) {
     } );
 
     // @public {Property.<string>} determines mode of the vectors to be viewed
-    this.forcesModeProperty = new Property( this.forcesModeChoice.FORCES, {
-      tandem: tandem.createTandem( 'forcesModeProperty' ),
-      phetioType: PropertyIO( StringIO ),
-      validValues: [ this.forcesModeChoice.FORCES, this.forcesModeChoice.NET_FORCES ]
+    this.forcesModeProperty = new EnumerationProperty( this.forcesModeChoice, this.forcesModeChoice.FORCES, {
+      tandem: tandem.createTandem( 'forcesModeProperty' )
     } );
 
     // @public {Spring[]} Array that will contain all of the springs.
