@@ -10,15 +10,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   var Enumeration = require( 'PHET_CORE/Enumeration' );
+  var EnumerationProperty = require( 'AXON/EnumerationProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
-  var StringIO = require( 'TANDEM/types/StringIO' );
 
   /**
    * @param {Tandem} tandem

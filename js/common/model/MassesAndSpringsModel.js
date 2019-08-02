@@ -10,11 +10,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
   var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Enumeration = require( 'PHET_CORE/Enumeration' );
+  var EnumerationProperty = require( 'AXON/EnumerationProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
@@ -27,7 +27,6 @@ define( function( require ) {
   var PropertyIO = require( 'AXON/PropertyIO' );
   var Range = require( 'DOT/Range' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var StringIO = require( 'TANDEM/types/StringIO' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
