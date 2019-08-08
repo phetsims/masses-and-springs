@@ -26,6 +26,8 @@ define( function( require ) {
 
   phetioInherit( ObjectIO, 'BodyIO', BodyIO, {}, {
     validator: { valueType: Body },
+    documentation: 'Planet which determines the force of gravity.',
+
     /**
      * Encodes a Body instance to a state.
      *

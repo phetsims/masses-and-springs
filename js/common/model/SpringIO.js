@@ -25,6 +25,7 @@ define( function( require ) {
   }
 
   phetioInherit( ObjectIO, 'SpringIO', SpringIO, {}, {
+    documentation: 'Hangs from the ceiling and applies a force to any attached BodyIO',
 
     validator: { valueType: Spring },
     /**
