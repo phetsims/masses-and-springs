@@ -18,6 +18,9 @@ define( function( require ) {
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Property = require( 'AXON/Property' );
 
+  // constants
+  var SceneModeEnum = new Enumeration( [ 'SAME_LENGTH', 'ADJUSTABLE_LENGTH' ] );
+
   /**
    * @param {Tandem} tandem
    *
@@ -29,19 +32,20 @@ define( function( require ) {
     var self = this;
     this.basicsVersion = false;
 
-    // @public {Enumeration}
-    this.sceneModeChoice = new Enumeration( [ 'SAME_LENGTH', 'ADJUSTABLE_LENGTH' ] );
+    // Set initial springs and masses
+    this.addDefaultSprings( tandem );
+    this.addDefaultMasses( tandem );
 
     // @public {Enumeration} Choices for constant parameter
     this.constantModeChoice = new Enumeration( [ 'SPRING_CONSTANT', 'SPRING_THICKNESS' ] );
 
-    this.addDefaultSprings( tandem );
-    this.addDefaultMasses( tandem );
-
-    // @public {Property.<string>} determines the scene selection for the intro screen
-    this.sceneModeProperty = new EnumerationProperty( this.sceneModeChoice, this.sceneModeChoice.SAME_LENGTH, {
-      tandem: tandem.createTandem( 'sceneModeProperty' )
-    } );
+    // @public {EnumerationProperty.<SceneModeEnum>} determines the scene selection for the intro screen
+    this.sceneModeProperty = new EnumerationProperty( SceneModeEnum, SceneModeEnum.SAME_LENGTH, {
+        tandem: tandem.createTandem( 'sceneModeProperty' ),
+        phetioType: PropertyIO( StringIO ),
+        validValues: LengthTypeEnum.VALUES
+      }
+    );
 
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
     this.constantParameterProperty = new EnumerationProperty( this.constantModeChoice, this.constantModeChoice.SPRING_CONSTANT, {
@@ -55,7 +59,7 @@ define( function( require ) {
     // We are updating the spring thickness for each spring, whenever we are on the first scene
     this.springs.forEach( function( spring ) {
       spring.springConstantProperty.link( function( springConstant ) {
-        if ( self.sceneModeProperty.get() === self.sceneModeChoice.SAME_LENGTH ) {
+        if ( self.sceneModeProperty.get() === SceneModeEnum.SAME_LENGTH ) {
           spring.updateThickness( spring.naturalRestingLengthProperty.get(), springConstant );
         }
       } );
@@ -72,7 +76,7 @@ define( function( require ) {
 
     // Link that is responsible for switching the scenes
     this.sceneModeProperty.lazyLink( function( scene ) {
-      if ( scene === self.sceneModeChoice.SAME_LENGTH ) {
+      if ( scene === SceneModeEnum.SAME_LENGTH ) {
 
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
@@ -86,7 +90,7 @@ define( function( require ) {
         self.setSpringState( sameLengthModeSpringState );
       }
 
-      else if ( scene === self.sceneModeChoice.ADJUSTABLE_LENGTH ) {
+      else if ( scene === SceneModeEnum.ADJUSTABLE_LENGTH ) {
 
         // Manages stashing and applying parameters to each scene
         self.resetScene( true );
@@ -118,7 +122,7 @@ define( function( require ) {
     Property.multilink( [ this.constantParameterProperty, this.sceneModeProperty ], function( selectedConstant, scene ) {
 
       // Only adjust thickness/springConstant on adjustableLength scene
-      if ( scene === self.sceneModeChoice.ADJUSTABLE_LENGTH ) {
+      if ( scene === SceneModeEnum.ADJUSTABLE_LENGTH ) {
 
         // Manages logic for changing between constant parameters
         if ( selectedConstant === self.constantModeChoice.SPRING_CONSTANT ) {
@@ -206,12 +210,12 @@ define( function( require ) {
      * @private
      */
     initializeScenes: function() {
-      this.sceneModeProperty.set( this.sceneModeChoice.ADJUSTABLE_LENGTH );
+      this.sceneModeProperty.set( SceneModeEnum.ADJUSTABLE_LENGTH );
       this.resetScene( false );
       this.spring1.naturalRestingLengthProperty.set( 0.25 );
 
       // initial parameters set for both scenes
-      this.sceneModeProperty.set( this.sceneModeChoice.SAME_LENGTH );
+      this.sceneModeProperty.set( SceneModeEnum.SAME_LENGTH );
       this.resetScene( false );
     }
   } );
