@@ -26,12 +26,12 @@ define( function( require ) {
 
   /**
    * @param {string} springLength
-   * @param {Enumeration} sceneModeChoice
+   * @param {EnumerationProperty} sceneModeProperty
    * @param {ModelViewTransform2} mvt
    * @param {Tandem} tandem
    * @constructor
    */
-  function SceneSelectionButton( springLength, sceneModeChoice, mvt, tandem ) {
+  function SceneSelectionButton( springLength, sceneModeProperty, mvt, tandem ) {
 
     Node.call( this, {
       scale: IMAGE_SCALE,
@@ -81,7 +81,7 @@ define( function( require ) {
     secondSpringIcon.loopsProperty.set( 6 );
     secondSpringIcon.lineWidthProperty.set( 3 );
 
-    if ( springLength === sceneModeChoice.ADJUSTABLE_LENGTH ) {
+    if ( springLength === MassesAndSpringsConstants.SCENE_MODE_ENUM.ADJUSTABLE_LENGTH ) {
       firstSpringIcon = new OscillatingSpringNode(
         springsIcon[ 0 ],
         mvt,

@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Enumeration = require( 'PHET_CORE/Enumeration' );
   var Line = require( 'SCENERY/nodes/Line' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
@@ -72,6 +73,10 @@ define( function( require ) {
     PANEL_MIN_WIDTH: 190,
     PANEL_FILL: '#EEEEEE',
     THUMB_HIGHLIGHT: '#71EDFF',
+
+    // Enumerations
+    SCENE_MODE_ENUM: new Enumeration( [ 'SAME_LENGTH', 'ADJUSTABLE_LENGTH' ] ),
+    CONSTANT_MODE_ENUM: new Enumeration( [ 'SPRING_CONSTANT', 'SPRING_THICKNESS' ] ),
 
     /**
      * Creates line for visual representation within the panel.

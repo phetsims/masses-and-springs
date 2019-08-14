@@ -81,8 +81,8 @@ define( function( require ) {
 
     // Panel that keeps thickness/spring constant at constant value
     var constantsControlPanel = new AlignBox( new ConstantsControlPanel(
-      model.constantParameterProperty,
-      model.constantModeChoice,
+      model.constantModeProperty,
+      MassesAndSpringsConstants.CONSTANT_MODE_ENUM,
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ), {
         maxWidth: 160,
@@ -174,10 +174,10 @@ define( function( require ) {
     // Link responsible for visibility of the length control panel.
     model.sceneModeProperty.lazyLink( function( mode ) {
       self.resetMassLayer();
-      if ( mode === model.sceneModeChoice.SAME_LENGTH ) {
+      if ( mode === MassesAndSpringsConstants.SCENE_MODE_ENUM.SAME_LENGTH ) {
         self.springLengthControlPanel.visible = false;
       }
-      else if ( mode === model.sceneModeChoice.ADJUSTABLE_LENGTH ) {
+      else if ( mode === MassesAndSpringsConstants.SCENE_MODE_ENUM.ADJUSTABLE_LENGTH ) {
         self.springLengthControlPanel.visible = true;
       }
 
@@ -189,17 +189,17 @@ define( function( require ) {
     } );
 
     // Creation of same length icon node
-    var sameLengthIcon = new SceneSelectionButton( model.sceneModeChoice.SAME_LENGTH, model.sceneModeChoice, this.modelViewTransform, tandem );
+    var sameLengthIcon = new SceneSelectionButton( MassesAndSpringsConstants.SCENE_MODE_ENUM.SAME_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
 
     // Creation of adjustable length icon node
-    var differentLengthIcon = new SceneSelectionButton( model.sceneModeChoice.ADJUSTABLE_LENGTH, model.sceneModeChoice, this.modelViewTransform, tandem );
+    var differentLengthIcon = new SceneSelectionButton( MassesAndSpringsConstants.SCENE_MODE_ENUM.ADJUSTABLE_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
 
     //  Creation of toggled modes for scene selection
     var toggleButtonsContent = [ {
-      value: model.sceneModeChoice.SAME_LENGTH,
+      value: MassesAndSpringsConstants.SCENE_MODE_ENUM.SAME_LENGTH,
       node: sameLengthIcon
     }, {
-      value: model.sceneModeChoice.ADJUSTABLE_LENGTH,
+      value: MassesAndSpringsConstants.SCENE_MODE_ENUM.ADJUSTABLE_LENGTH,
       node: differentLengthIcon
     } ];
 
