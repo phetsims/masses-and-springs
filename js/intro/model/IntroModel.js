@@ -10,15 +10,12 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Enumeration = require( 'PHET_CORE/Enumeration' );
   var EnumerationProperty = require( 'AXON/EnumerationProperty' );
   var inherit = require( 'PHET_CORE/inherit' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
   var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
-  var StringIO = require( 'TANDEM/types/StringIO' );
 
   /**
    * @param {Tandem} tandem
@@ -37,7 +34,7 @@ define( function( require ) {
 
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
     this.constantModeProperty = new EnumerationProperty( MassesAndSpringsConstants.CONSTANT_MODE_ENUM, MassesAndSpringsConstants.CONSTANT_MODE_ENUM.SPRING_CONSTANT, {
-      tandem: tandem.createTandem( 'constantModeProperty' ),
+      tandem: tandem.createTandem( 'constantModeProperty' )
     } );
 
     // @public {EnumerationProperty.<SceneModeEnum>} determines the scene selection for the intro screen
