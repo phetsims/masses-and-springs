@@ -12,21 +12,9 @@ define( function( require ) {
   var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var ObjectIO = require( 'TANDEM/types/ObjectIO' );
-  var phetioInherit = require( 'TANDEM/phetioInherit' );
   var validate = require( 'AXON/validate' );
 
-  /**
-   * @param {Body} body
-   * @param {string} phetioID
-   * @constructor
-   */
-  function BodyIO( body, phetioID ) {
-    ObjectIO.call( this, body, phetioID );
-  }
-
-  phetioInherit( ObjectIO, 'BodyIO', BodyIO, {}, {
-    validator: { valueType: Body },
-    documentation: 'Planet which determines the force of gravity.',
+  class BodyIO extends ObjectIO {
 
     /**
      * Encodes a Body instance to a state.
@@ -34,7 +22,7 @@ define( function( require ) {
      * @param body
      * @returns {*}
      */
-    toStateObject: function( body ) {
+    static toStateObject( body ) {
       validate( body, this.validator );
       if ( body === null ) {
         return null;
@@ -43,9 +31,12 @@ define( function( require ) {
         body: body
       };
     }
-  } );
+  }
 
-  massesAndSprings.register( 'BodyIO', BodyIO );
+  BodyIO.validator = { valueType: Body };
+  BodyIO.documentation = 'Planet which determines the force of gravity.';
+  BodyIO.typeName = 'BodyIO';
+  ObjectIO.validateSubtype( BodyIO );
 
-  return BodyIO;
+  return massesAndSprings.register( 'BodyIO', BodyIO );
 } );

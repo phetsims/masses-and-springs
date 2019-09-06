@@ -12,27 +12,16 @@ define( function( require ) {
   var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var ObjectIO = require( 'TANDEM/types/ObjectIO' );
-  var phetioInherit = require( 'TANDEM/phetioInherit' );
   var validate = require( 'AXON/validate' );
 
-  /**
-   * @param {Mass} mass
-   * @param {string} phetioID
-   * @constructor
-   */
-  function MassIO( mass, phetioID ) {
-    ObjectIO.call( this, mass, phetioID );
-  }
-
-  phetioInherit( ObjectIO, 'MassIO', MassIO, {}, {
-    validator: { valueType: Mass },
+  class MassIO extends ObjectIO {
     /**
      * Encodes a Mass instance to a state.
      *
      * @param mass
      * @returns {*}
      */
-    toStateObject: function( mass ) {
+    toStateObject( mass ) {
       validate( mass, this.validator );
       if ( mass === null ) {
         return null;
@@ -42,9 +31,12 @@ define( function( require ) {
         color: mass.color
       };
     }
-  } );
+  }
 
-  massesAndSprings.register( 'MassIO', MassIO );
+  MassIO.validator = { valueType: Mass };
+  MassIO.typeName = 'MassIO';
+  MassIO.documentation = 'Model element for one of the masses';
+  ObjectIO.validateSubtype( MassIO );
 
-  return MassIO;
+  return massesAndSprings.register( 'MassIO', MassIO );
 } );

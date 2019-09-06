@@ -11,30 +11,18 @@ define( function( require ) {
   // modules
   var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   var ObjectIO = require( 'TANDEM/types/ObjectIO' );
-  var phetioInherit = require( 'TANDEM/phetioInherit' );
   var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   var validate = require( 'AXON/validate' );
 
-  /**
-   * @param {Spring} spring
-   * @param {string} phetioID
-   * @constructor
-   */
-  function SpringIO( spring, phetioID ) {
-    ObjectIO.call( this, spring, phetioID );
-  }
+  class SpringIO extends ObjectIO {
 
-  phetioInherit( ObjectIO, 'SpringIO', SpringIO, {}, {
-    documentation: 'Hangs from the ceiling and applies a force to any attached BodyIO',
-
-    validator: { valueType: Spring },
     /**
      * Encodes a Spring instance to a state.
      *
      * @param spring
      * @returns {*}
      */
-    toStateObject: function( spring ) {
+    static toStateObject( spring ) {
       validate( spring, this.validator );
       if ( spring === null ) {
         return null;
@@ -44,9 +32,12 @@ define( function( require ) {
         id: spring.tandem.phetioID
       };
     }
-  } );
+  }
 
-  massesAndSprings.register( 'SpringIO', SpringIO );
+  SpringIO.documentation = 'Hangs from the ceiling and applies a force to any attached BodyIO';
+  SpringIO.validator = { valueType: Spring };
+  SpringIO.typeName = 'SpringIO';
+  ObjectIO.validateSubtype( SpringIO );
 
-  return SpringIO;
+  return massesAndSprings.register( 'SpringIO', SpringIO );
 } );
