@@ -7,36 +7,36 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AccordionBox = require( 'SUN/AccordionBox' );
-  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
-  var BarChartNode = require( 'GRIDDLE/BarChartNode' );
-  var Color = require( 'SCENERY/util/Color' );
-  var ColorConstants = require( 'SUN/ColorConstants' );
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var Dialog = require( 'SUN/Dialog' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var InfoButton = require( 'SCENERY_PHET/buttons/InfoButton' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MoveToTrashButton = require( 'SCENERY_PHET/MoveToTrashButton' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
-  var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RichText = require( 'SCENERY/nodes/RichText' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
+  const AccordionBox = require( 'SUN/AccordionBox' );
+  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
+  const BarChartNode = require( 'GRIDDLE/BarChartNode' );
+  const Color = require( 'SCENERY/util/Color' );
+  const ColorConstants = require( 'SUN/ColorConstants' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const Dialog = require( 'SUN/Dialog' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const InfoButton = require( 'SCENERY_PHET/buttons/InfoButton' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const MoveToTrashButton = require( 'SCENERY_PHET/MoveToTrashButton' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
+  const Property = require( 'AXON/Property' );
+  const Range = require( 'DOT/Range' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const RichText = require( 'SCENERY/nodes/RichText' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
 
   // constants
   var LEGEND_DESCRIPTION_MAX_WIDTH = 500;
@@ -44,18 +44,18 @@ define( function( require ) {
   var ORANGE_COLOR = '#ee6f3e';
 
   // strings
-  var elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
-  var energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
-  var energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
-  var eThermString = require( 'string!MASSES_AND_SPRINGS/eTherm' );
-  var eTotString = require( 'string!MASSES_AND_SPRINGS/eTot' );
-  var gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
-  var keString = require( 'string!MASSES_AND_SPRINGS/ke' );
-  var kineticEnergyString = require( 'string!MASSES_AND_SPRINGS/kineticEnergy' );
-  var peElasString = require( 'string!MASSES_AND_SPRINGS/peElas' );
-  var peGravString = require( 'string!MASSES_AND_SPRINGS/peGrav' );
-  var thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
-  var totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
+  const elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
+  const energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
+  const energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
+  const eThermString = require( 'string!MASSES_AND_SPRINGS/eTherm' );
+  const eTotString = require( 'string!MASSES_AND_SPRINGS/eTot' );
+  const gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
+  const keString = require( 'string!MASSES_AND_SPRINGS/ke' );
+  const kineticEnergyString = require( 'string!MASSES_AND_SPRINGS/kineticEnergy' );
+  const peElasString = require( 'string!MASSES_AND_SPRINGS/peElas' );
+  const peGravString = require( 'string!MASSES_AND_SPRINGS/peGrav' );
+  const thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
+  const totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
 
   /**
    * @param {MassesAndSpringsModel} model

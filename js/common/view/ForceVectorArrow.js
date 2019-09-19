@@ -5,13 +5,13 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
 
   /**
    * @param {Color} color

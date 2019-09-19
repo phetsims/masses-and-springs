@@ -6,46 +6,46 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
-  var ClosestDragListener = require( 'SUN/ClosestDragListener' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
-  var DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
-  var DynamicProperty = require( 'AXON/DynamicProperty' );
-  var GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var MutableOptionsNode = require( 'SUN/MutableOptionsNode' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
-  var PaintColorProperty = require( 'SCENERY/util/PaintColorProperty' );
-  var Panel = require( 'SUN/Panel' );
-  var Plane = require( 'SCENERY/nodes/Plane' );
-  var Property = require( 'AXON/Property' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var ShelfNode = require( 'MASSES_AND_SPRINGS/common/view/ShelfNode' );
-  var SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
-  var StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
-  var ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
-  var Util = require( 'DOT/Util' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
+  const ClosestDragListener = require( 'SUN/ClosestDragListener' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
+  const DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
+  const DynamicProperty = require( 'AXON/DynamicProperty' );
+  const GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const IndicatorVisibilityControlNode = require( 'MASSES_AND_SPRINGS/vectors/view/IndicatorVisibilityControlNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const MutableOptionsNode = require( 'SUN/MutableOptionsNode' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
+  const PaintColorProperty = require( 'SCENERY/util/PaintColorProperty' );
+  const Panel = require( 'SUN/Panel' );
+  const Plane = require( 'SCENERY/nodes/Plane' );
+  const Property = require( 'AXON/Property' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const ShelfNode = require( 'MASSES_AND_SPRINGS/common/view/ShelfNode' );
+  const SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
+  const StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
+  const ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
+  const Util = require( 'DOT/Util' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var springConstantPatternString = require( 'string!MASSES_AND_SPRINGS/springConstantPattern' );
-  var springStrengthString = require( 'string!MASSES_AND_SPRINGS/springStrength' );
+  const springConstantPatternString = require( 'string!MASSES_AND_SPRINGS/springConstantPattern' );
+  const springStrengthString = require( 'string!MASSES_AND_SPRINGS/springStrength' );
 
   /**
    * @param {MassesAndSpringsModel} model

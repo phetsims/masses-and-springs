@@ -5,16 +5,16 @@
  *
  * @author Denzell Barnett
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Enumeration = require( 'PHET_CORE/Enumeration' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  const Enumeration = require( 'PHET_CORE/Enumeration' );
+  const Line = require( 'SCENERY/nodes/Line' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const RangeWithValue = require( 'DOT/RangeWithValue' );
 
   var MassesAndSpringsConstants = {
     DEFAULT_SPRING_LENGTH: 0.5,

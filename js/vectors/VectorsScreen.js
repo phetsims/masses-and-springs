@@ -5,23 +5,23 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  var Screen = require( 'JOIST/Screen' );
-  var VectorsScreenView = require( 'MASSES_AND_SPRINGS/vectors/view/VectorsScreenView' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
+  const MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  const Screen = require( 'JOIST/Screen' );
+  const VectorsScreenView = require( 'MASSES_AND_SPRINGS/vectors/view/VectorsScreenView' );
 
   // strings
-  var screenVectorsString = require( 'string!MASSES_AND_SPRINGS/screen.vectors' );
+  const screenVectorsString = require( 'string!MASSES_AND_SPRINGS/screen.vectors' );
 
   // image
-  var vectorHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/vectors_screen_icon.png' );
+  const vectorHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/vectors_screen_icon.png' );
 
   /**
    * @param {Tandem} tandem

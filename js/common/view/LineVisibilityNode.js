@@ -5,27 +5,27 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
+  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
+  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  var equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
-  var massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
-  var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
-  var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
+  const equilibriumPositionString = require( 'string!MASSES_AND_SPRINGS/equilibriumPosition' );
+  const massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
+  const movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
+  const naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
 
   // constants
   var DEFAULT_CONTENT_SPACING = 155;

@@ -5,20 +5,20 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var PeriodTrace = require( 'MASSES_AND_SPRINGS/lab/model/PeriodTrace' );
-  var Property = require( 'AXON/Property' );
+  const Color = require( 'SCENERY/util/Color' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const PeriodTrace = require( 'MASSES_AND_SPRINGS/lab/model/PeriodTrace' );
+  const Property = require( 'AXON/Property' );
 
   // constants
   var MASS_OFFSET = 0.15;

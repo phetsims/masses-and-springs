@@ -6,27 +6,27 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
-  var ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
-  var SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
-  var SpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/SpringScreenView' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const MovableLineNode = require( 'MASSES_AND_SPRINGS/common/view/MovableLineNode' );
+  const ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
+  const SpringHangerNode = require( 'MASSES_AND_SPRINGS/common/view/SpringHangerNode' );
+  const SpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/SpringScreenView' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Vector2 = require( 'DOT/Vector2' );
 
 
   // strings
-  var largeString = require( 'string!MASSES_AND_SPRINGS/large' );
-  var smallString = require( 'string!MASSES_AND_SPRINGS/small' );
+  const largeString = require( 'string!MASSES_AND_SPRINGS/large' );
+  const smallString = require( 'string!MASSES_AND_SPRINGS/small' );
 
   /**
    * @param {MassesAndSpringsModel} model

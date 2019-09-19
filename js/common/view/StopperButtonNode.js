@@ -5,15 +5,15 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
-  var StopSignNode = require( 'SCENERY_PHET/StopSignNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
+  const StopSignNode = require( 'SCENERY_PHET/StopSignNode' );
 
   /**
    * Constructor for return button

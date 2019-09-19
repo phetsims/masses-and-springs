@@ -5,31 +5,31 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var BracketNode = require( 'SCENERY_PHET/BracketNode' );
-  var DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
+  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const BracketNode = require( 'SCENERY_PHET/BracketNode' );
+  const DisplacementArrowNode = require( 'MASSES_AND_SPRINGS/vectors/view/DisplacementArrowNode' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
 
   // strings
-  var displacementString = require( 'string!MASSES_AND_SPRINGS/displacement' );
-  var massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
-  var movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
-  var naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
-  var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
+  const displacementString = require( 'string!MASSES_AND_SPRINGS/displacement' );
+  const massEquilibriumString = require( 'string!MASSES_AND_SPRINGS/massEquilibrium' );
+  const movableLineString = require( 'string!MASSES_AND_SPRINGS/movableLine' );
+  const naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
+  const periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
   // constants
   var DEFAULT_CONTENT_SPACING = 155;

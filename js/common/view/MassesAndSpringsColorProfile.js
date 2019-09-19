@@ -7,13 +7,13 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
-  var ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const Color = require( 'SCENERY/util/Color' );
+  const ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
 
   // Initialize colors for each profile, by string key. If a basics color is not defined, it will take the
   // 'default' value provided.

@@ -6,20 +6,20 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  * @author Matt Pennington (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
 
   // strings
-  var bodyCustomString = require( 'string!MASSES_AND_SPRINGS/body.custom' );
-  var bodyEarthString = require( 'string!MASSES_AND_SPRINGS/body.earth' );
-  var bodyJupiterString = require( 'string!MASSES_AND_SPRINGS/body.jupiter' );
-  var bodyMoonString = require( 'string!MASSES_AND_SPRINGS/body.moon' );
-  var bodyPlanetXString = require( 'string!MASSES_AND_SPRINGS/body.planetX' );
+  const bodyCustomString = require( 'string!MASSES_AND_SPRINGS/body.custom' );
+  const bodyEarthString = require( 'string!MASSES_AND_SPRINGS/body.earth' );
+  const bodyJupiterString = require( 'string!MASSES_AND_SPRINGS/body.jupiter' );
+  const bodyMoonString = require( 'string!MASSES_AND_SPRINGS/body.moon' );
+  const bodyPlanetXString = require( 'string!MASSES_AND_SPRINGS/body.planetX' );
 
   /**
    * @param {string} title - name of body.

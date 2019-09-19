@@ -4,23 +4,23 @@
  * main file for the "Energy" screen
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var EnergyModel = require( 'MASSES_AND_SPRINGS/energy/model/EnergyModel' );
-  var EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  var Screen = require( 'JOIST/Screen' );
+  const EnergyModel = require( 'MASSES_AND_SPRINGS/energy/model/EnergyModel' );
+  const EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
+  const Screen = require( 'JOIST/Screen' );
 
   // strings
-  var screenEnergyString = require( 'string!MASSES_AND_SPRINGS/screen.energy' );
+  const screenEnergyString = require( 'string!MASSES_AND_SPRINGS/screen.energy' );
 
   // image
-  var energyHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/energy_screen_icon.png' );
+  const energyHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/energy_screen_icon.png' );
 
   /**
    * @param {Tandem} tandem

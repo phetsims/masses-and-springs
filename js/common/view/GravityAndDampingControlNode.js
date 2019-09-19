@@ -6,36 +6,36 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var GravityComboBox = require( 'MASSES_AND_SPRINGS/common/view/GravityComboBox' );
-  var HSlider = require( 'SUN/HSlider' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var NumberControl = require( 'SCENERY_PHET/NumberControl' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var SunConstants = require( 'SUN/SunConstants' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const GravityComboBox = require( 'MASSES_AND_SPRINGS/common/view/GravityComboBox' );
+  const HSlider = require( 'SUN/HSlider' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const NumberControl = require( 'SCENERY_PHET/NumberControl' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const SunConstants = require( 'SUN/SunConstants' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var dampingEqualsZeroString = require( 'string!MASSES_AND_SPRINGS/dampingEqualsZero' );
-  var dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
-  var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
-  var gravityValueString = require( 'string!MASSES_AND_SPRINGS/gravityValue' );
-  var lotsString = require( 'string!MASSES_AND_SPRINGS/lots' );
-  var noneString = require( 'string!MASSES_AND_SPRINGS/none' );
-  var whatIsTheValueOfGravityString = require( 'string!MASSES_AND_SPRINGS/whatIsTheValueOfGravity' );
+  const dampingEqualsZeroString = require( 'string!MASSES_AND_SPRINGS/dampingEqualsZero' );
+  const dampingString = require( 'string!MASSES_AND_SPRINGS/damping' );
+  const gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
+  const gravityValueString = require( 'string!MASSES_AND_SPRINGS/gravityValue' );
+  const lotsString = require( 'string!MASSES_AND_SPRINGS/lots' );
+  const noneString = require( 'string!MASSES_AND_SPRINGS/none' );
+  const whatIsTheValueOfGravityString = require( 'string!MASSES_AND_SPRINGS/whatIsTheValueOfGravity' );
 
   // constants
   var SPACING = 7;

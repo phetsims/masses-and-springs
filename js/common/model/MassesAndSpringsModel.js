@@ -6,28 +6,28 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
-  var BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var Enumeration = require( 'PHET_CORE/Enumeration' );
-  var EnumerationProperty = require( 'AXON/EnumerationProperty' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LinearFunction = require( 'DOT/LinearFunction' );
-  var Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
-  var Property = require( 'AXON/Property' );
-  var PropertyIO = require( 'AXON/PropertyIO' );
-  var Range = require( 'DOT/Range' );
-  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
+  const BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const Enumeration = require( 'PHET_CORE/Enumeration' );
+  const EnumerationProperty = require( 'AXON/EnumerationProperty' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LinearFunction = require( 'DOT/LinearFunction' );
+  const Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
+  const Property = require( 'AXON/Property' );
+  const PropertyIO = require( 'AXON/PropertyIO' );
+  const Range = require( 'DOT/Range' );
+  const Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected

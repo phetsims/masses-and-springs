@@ -6,20 +6,20 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  * @author Matt Pennington (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
-  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
-  var Vector2Property = require( 'DOT/Vector2Property' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
+  const RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  const Vector2Property = require( 'DOT/Vector2Property' );
 
   // strings
-  var cmString = require( 'string!MASSES_AND_SPRINGS/cm' );
+  const cmString = require( 'string!MASSES_AND_SPRINGS/cm' );
 
   /**
    * @param {ModelViewTransform2} mvt

@@ -5,33 +5,33 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
-  var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
-  var VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
+  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
+  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
+  const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
 
   // strings
-  var accelerationString = require( 'string!MASSES_AND_SPRINGS/acceleration' );
-  var forcesString = require( 'string!MASSES_AND_SPRINGS/forces' );
-  var gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
-  var netForceString = require( 'string!MASSES_AND_SPRINGS/netForce' );
-  var periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
-  var springString = require( 'string!MASSES_AND_SPRINGS/spring' );
-  var velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
+  const accelerationString = require( 'string!MASSES_AND_SPRINGS/acceleration' );
+  const forcesString = require( 'string!MASSES_AND_SPRINGS/forces' );
+  const gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
+  const netForceString = require( 'string!MASSES_AND_SPRINGS/netForce' );
+  const periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
+  const springString = require( 'string!MASSES_AND_SPRINGS/spring' );
+  const velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
 
   // constants
   var MAX_WIDTH = 140;

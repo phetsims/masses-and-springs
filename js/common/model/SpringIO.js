@@ -5,14 +5,14 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var ObjectIO = require( 'TANDEM/types/ObjectIO' );
-  var Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  var validate = require( 'AXON/validate' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const ObjectIO = require( 'TANDEM/types/ObjectIO' );
+  const Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
+  const validate = require( 'AXON/validate' );
 
   class SpringIO extends ObjectIO {
 

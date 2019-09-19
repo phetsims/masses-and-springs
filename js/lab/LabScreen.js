@@ -5,23 +5,23 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LabModel = require( 'MASSES_AND_SPRINGS/lab/model/LabModel' );
-  var LabScreenView = require( 'MASSES_AND_SPRINGS/lab/view/LabScreenView' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  var Screen = require( 'JOIST/Screen' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LabModel = require( 'MASSES_AND_SPRINGS/lab/model/LabModel' );
+  const LabScreenView = require( 'MASSES_AND_SPRINGS/lab/view/LabScreenView' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
+  const Screen = require( 'JOIST/Screen' );
 
   // strings
-  var screenLabString = require( 'string!MASSES_AND_SPRINGS/screen.lab' );
+  const screenLabString = require( 'string!MASSES_AND_SPRINGS/screen.lab' );
 
   // image
-  var labHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/lab_screen_icon.png' );
+  const labHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/lab_screen_icon.png' );
 
   /**
    * @param {Tandem} tandem

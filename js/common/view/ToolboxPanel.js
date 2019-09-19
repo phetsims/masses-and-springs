@@ -6,23 +6,23 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var Panel = require( 'SUN/Panel' );
-  var Range = require( 'DOT/Range' );
-  var RulerNode = require( 'SCENERY_PHET/RulerNode' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const Panel = require( 'SUN/Panel' );
+  const Range = require( 'DOT/Range' );
+  const RulerNode = require( 'SCENERY_PHET/RulerNode' );
+  const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  const TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Bounds2} dragBounds

@@ -6,18 +6,18 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var DynamicProperty = require( 'AXON/DynamicProperty' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  var MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
-  var Property = require( 'AXON/Property' );
-  var TimerNode = require( 'SCENERY_PHET/TimerNode' );
-  var Util = require( 'DOT/Util' );
-  var Vector2Property = require( 'DOT/Vector2Property' );
+  const DynamicProperty = require( 'AXON/DynamicProperty' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const MovableDragHandler = require( 'SCENERY_PHET/input/MovableDragHandler' );
+  const Property = require( 'AXON/Property' );
+  const TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  const Util = require( 'DOT/Util' );
+  const Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param {Bounds2} dragBounds
