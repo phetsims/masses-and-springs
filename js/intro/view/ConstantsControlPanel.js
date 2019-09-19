@@ -23,8 +23,8 @@ define( require => {
   const thicknessString = require( 'string!MASSES_AND_SPRINGS/thickness' );
 
   // constants
-  var TITLE_FONT = MassesAndSpringsConstants.LABEL_FONT;
-  var RADIO_BUTTON_SPACING = 4;
+  const TITLE_FONT = MassesAndSpringsConstants.LABEL_FONT;
+  const RADIO_BUTTON_SPACING = 4;
 
   /**
    * @param {Property.<string>} selectedConstantProperty - determines which value to hold constant
@@ -45,29 +45,29 @@ define( require => {
 
     Node.call( this, options );
 
-    var constantsSelectionButtonOptions = {
+    const constantsSelectionButtonOptions = {
       font: TITLE_FONT,
       maxWidth: 130
     };
 
-    var thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
-    var thicknessRadioButton = new AquaRadioButton(
+    const thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
+    const thicknessRadioButton = new AquaRadioButton(
       selectedConstantProperty, constantEnumeration.SPRING_THICKNESS, thicknessText, {
         radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
         tandem: tandem.createTandem( 'thicknessRadioButton' )
       } );
 
-    var constantText = new Text( springConstantString, {
+    const constantText = new Text( springConstantString, {
       font: TITLE_FONT,
       tandem: tandem.createTandem( 'constantText' )
     } );
-    var springConstantRadioButton = new AquaRadioButton(
+    const springConstantRadioButton = new AquaRadioButton(
       selectedConstantProperty, constantEnumeration.SPRING_CONSTANT, constantText, {
         radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
         tandem: tandem.createTandem( 'springConstantRadioButton' )
       } );
 
-    var nodeContent = new VBox( {
+    const nodeContent = new VBox( {
       align: 'left',
       spacing: RADIO_BUTTON_SPACING,
       children: [

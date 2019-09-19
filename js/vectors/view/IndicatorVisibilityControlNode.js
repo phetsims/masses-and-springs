@@ -32,8 +32,8 @@ define( require => {
   const periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
 
   // constants
-  var DEFAULT_CONTENT_SPACING = 155;
-  var CONTENT_MAX_WIDTH = 115;
+  const DEFAULT_CONTENT_SPACING = 155;
+  const CONTENT_MAX_WIDTH = 115;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -52,11 +52,11 @@ define( require => {
     Node.call( this, options );
 
     // Lines added for reference in panel
-    var blackLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'black', tandem.createTandem( 'blackLine' ) );
-    var blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
-    var redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
+    const blackLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'black', tandem.createTandem( 'blackLine' ) );
+    const blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
+    const redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
 
-    var displacementSymbol = new DisplacementArrowNode(
+    const displacementSymbol = new DisplacementArrowNode(
       new NumberProperty( 10 ),
       new BooleanProperty( true ),
       tandem,
@@ -66,10 +66,10 @@ define( require => {
         scale: 0.65
       }
     );
-    var alignGroup = new AlignGroup( { matchVertical: false } );
+    const alignGroup = new AlignGroup( { matchVertical: false } );
 
     // Labels for the displacement arrow and natural length line
-    var displacementLabels = new VBox( {
+    const displacementLabels = new VBox( {
       spacing: 8,
       align: 'left',
       children: [
@@ -86,7 +86,7 @@ define( require => {
     } );
 
     // the bracket at the left - this is tweaked a bit for optimal appearance
-    var bracket = new VBox( {
+    const bracket = new VBox( {
       children: [
         new BracketNode( {
           orientation: 'left',
@@ -100,31 +100,31 @@ define( require => {
       ]
     } );
 
-    var componentDisplacement = new AlignBox( new HBox( {
+    const componentDisplacement = new AlignBox( new HBox( {
       spacing: 2,
       children: [ bracket, displacementLabels ]
     } ), { xAlign: 'left', group: alignGroup } );
 
-    var massEquilibriumAlignBox = new AlignBox( new Text( massEquilibriumString, {
+    const massEquilibriumAlignBox = new AlignBox( new Text( massEquilibriumString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: CONTENT_MAX_WIDTH,
       tandem: tandem.createTandem( 'massEquilibriumString' )
     } ), { xAlign: 'left', group: alignGroup } );
-    var movableLineAlignBox = new AlignBox( new Text( movableLineString, {
+    const movableLineAlignBox = new AlignBox( new Text( movableLineString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: CONTENT_MAX_WIDTH,
       tandem: tandem.createTandem( 'movableLineString' )
     } ), { xAlign: 'left', group: alignGroup } );
 
     // Max width must be set to the maxWidth of the alignGroup based on its content.
-    var contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
+    const contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
 
     // Create checkboxes using align boxes above
-    var componentDisplacementVBox = new VBox( { children: [ displacementSymbol, blueLine ] } );
+    const componentDisplacementVBox = new VBox( { children: [ displacementSymbol, blueLine ] } );
     componentDisplacementVBox.spacing = componentDisplacementVBox.height * 0.75;
 
     // Used for indicator visibility
-    var checkboxContent = [ {
+    const checkboxContent = [ {
       node: new HBox( {
         children: [ componentDisplacement, componentDisplacementVBox ],
         spacing: contentSpacing
@@ -137,7 +137,7 @@ define( require => {
       node: new HBox( { children: [ movableLineAlignBox, redLine ], spacing: contentSpacing } ),
       property: model.movableLineVisibleProperty
     } ];
-    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( checkboxContent, {
+    let indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( checkboxContent, {
       checkboxOptions: {
         boxWidth: 16,
         spacing: 8
@@ -165,7 +165,7 @@ define( require => {
         tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
       } );
     }
-    var indicatorVisibilityControlsVBox = new VBox( {
+    const indicatorVisibilityControlsVBox = new VBox( {
         children: [
           indicatorVisibilityCheckboxGroup
         ],

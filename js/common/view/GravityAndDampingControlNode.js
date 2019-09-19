@@ -38,8 +38,8 @@ define( require => {
   const whatIsTheValueOfGravityString = require( 'string!MASSES_AND_SPRINGS/whatIsTheValueOfGravity' );
 
   // constants
-  var SPACING = 7;
-  var MAX_WIDTH = 80;
+  const SPACING = 7;
+  const MAX_WIDTH = 80;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -56,7 +56,7 @@ define( require => {
     }, options );
 
     // Manages the items associated with the gravity panel in a combo box
-    var gravityComboBox = new GravityComboBox( model.bodyProperty, listNodeParent, tandem, {
+    const gravityComboBox = new GravityComboBox( model.bodyProperty, listNodeParent, tandem, {
       cornerRadius: 3,
       buttonYMargin: 0,
       itemYMargin: 3,
@@ -67,16 +67,16 @@ define( require => {
       tandem: tandem.createTandem( 'gravityComboBox' )
     } );
 
-    var gravityProperty = model.gravityProperty;
+    const gravityProperty = model.gravityProperty;
 
     // Text that reads "What is the value of gravity?"
-    var questionTextNode = new Node( {
+    const questionTextNode = new Node( {
       children: [ new Text( whatIsTheValueOfGravityString, {
         font: MassesAndSpringsConstants.TITLE_FONT
       } ) ]
     } );
 
-    var gravityNumberControl = new NumberControl(
+    const gravityNumberControl = new NumberControl(
       gravityString,
       model.gravityProperty,
       MassesAndSpringsConstants.GRAVITY_RANGE, {
@@ -90,7 +90,7 @@ define( require => {
           } ),
           createBottomContent: function( bottomBox ) {
 
-            var bottomContent = new Node( {
+            const bottomContent = new Node( {
               children: [
                 questionTextNode,
                 bottomBox
@@ -155,17 +155,17 @@ define( require => {
       if ( options.dampingVisible ) {
 
         // Creating title for damping hSlider
-        var dampingHSliderTitle = new Text( dampingString, {
+        const dampingHSliderTitle = new Text( dampingString, {
           font: new PhetFont( { size: 14, weight: 'bold' } ),
           maxWidth: MAX_WIDTH * 1.5,
           top: gravityComboBox.bottom + SPACING
         } );
 
         // {Range} Range for hSlider
-        var dampingRange = MassesAndSpringsConstants.DAMPING_RANGE;
+        const dampingRange = MassesAndSpringsConstants.DAMPING_RANGE;
 
         // Creating damping hSlider
-        var dampingHSlider = new HSlider( model.dampingProperty, dampingRange, {
+        const dampingHSlider = new HSlider( model.dampingProperty, dampingRange, {
           top: dampingHSliderTitle.bottom + SPACING * 3,
           left: dampingHSliderTitle.centerX,
           majorTickLength: 10,
@@ -192,7 +192,7 @@ define( require => {
           font: MassesAndSpringsConstants.LABEL_FONT,
           maxWidth: MAX_WIDTH
         } ) );
-        for ( var i = 1; i < 6; i++ ) {
+        for ( let i = 1; i < 6; i++ ) {
           if ( i !== 3 ) {
             dampingHSlider.addMinorTick( dampingRange.min + i * ( dampingRange.max - dampingRange.min ) / 6 );
           }
@@ -223,7 +223,7 @@ define( require => {
       else {
 
         // Creating text that reads Damping = 0
-        var dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, {
+        const dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, {
           equalsZero: MathSymbols.EQUAL_TO + ' 0'
         } ), {
           font: MassesAndSpringsConstants.TITLE_FONT,
@@ -268,7 +268,7 @@ define( require => {
 
     // Responsible for managing bodies. Link exists for sim duration. No need to unlink.
     model.bodyProperty.link( function( newBody, oldBody ) {
-      var body = _.find( Body.BODIES, newBody );
+      const body = _.find( Body.BODIES, newBody );
 
         // Set visibility of question node
         questionTextNode.visible = body === Body.PLANET_X;

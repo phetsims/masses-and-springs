@@ -17,7 +17,7 @@ define( require => {
 
   // Initialize colors for each profile, by string key. If a basics color is not defined, it will take the
   // 'default' value provided.
-  var MassesAndSpringsColorProfile = new ColorProfile( [ 'default', 'basics' ], {
+  const MassesAndSpringsColorProfile = new ColorProfile( [ 'default', 'basics' ], {
     background: {
       default: Color.white,
       basics: new Color( 'rgb( 255, 250, 227 )' )

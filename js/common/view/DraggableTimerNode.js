@@ -30,10 +30,10 @@ define( require => {
    * @constructor
    */
   function DraggableTimerNode( dragBounds, initialPosition, timerSecondsProperty, timerRunningProperty, visibleProperty, endDragCallback, tandem ) {
-    var self = this;
+    const self = this;
 
     // Readout value that is used for the timerNode. We are rounding the value in the view component.
-    var timerReadoutProperty = new DynamicProperty( new Property( timerSecondsProperty ), {
+    const timerReadoutProperty = new DynamicProperty( new Property( timerSecondsProperty ), {
       bidirectional: true,
       map: function( seconds ) {
         return Util.roundSymmetric( seconds * 1e5 ) / 1e5;

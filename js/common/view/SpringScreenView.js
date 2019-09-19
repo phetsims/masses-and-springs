@@ -61,11 +61,11 @@ define( require => {
       dampingVisible: false
     }, options );
 
-    var self = this;
+    const self = this;
 
     // @public {Plane} Support for expanding touchAreas near massNodes.
     this.backgroundDragPlane = new Plane();
-    var closestDragListener = new ClosestDragListener( 30, 0 );
+    const closestDragListener = new ClosestDragListener( 30, 0 );
 
     this.backgroundDragPlane.addInputListener( closestDragListener );
 
@@ -73,7 +73,7 @@ define( require => {
     // @public {MassesAndSpringsModel}
     this.model = model;
 
-    var viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * ( 1 - MassesAndSpringsConstants.SHELF_HEIGHT ) );
+    const viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * ( 1 - MassesAndSpringsConstants.SHELF_HEIGHT ) );
 
     // @public {ModelViewTransform2}
     this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, 397 );
@@ -85,7 +85,7 @@ define( require => {
 
     // @private {Array.<MutableOptionsNode>} Used to reference the created springs in the view.
     this.springNodes = model.springs.map( function( spring ) {
-      var springNode = new MutableOptionsNode( OscillatingSpringNode,
+      const springNode = new MutableOptionsNode( OscillatingSpringNode,
         [ spring, self.modelViewTransform, tandem.createTandem( 'oscillatingSpringNode' ) ],
         { leftEndLength: -10 },
         {
@@ -107,7 +107,7 @@ define( require => {
     this.massNodes = [];
 
     this.massNodes = model.masses.map( function( mass ) {
-      var massNode = new MassNode(
+      const massNode = new MassNode(
         mass,
         self.modelViewTransform,
         self.visibleBoundsProperty,
@@ -132,9 +132,9 @@ define( require => {
             return Number.POSITIVE_INFINITY;
           }
           else {
-            var cursorViewPosition = self.globalToLocalPoint( globalPoint );
-            var massRectBounds = massNode.localToParentBounds( massNode.rect.bounds );
-            var massHookBounds = massNode.localToParentBounds( massNode.hookNode.bounds );
+            const cursorViewPosition = self.globalToLocalPoint( globalPoint );
+            const massRectBounds = massNode.localToParentBounds( massNode.rect.bounds );
+            const massHookBounds = massNode.localToParentBounds( massNode.hookNode.bounds );
 
             return Math.sqrt( Math.min(
               massRectBounds.minimumDistanceToPointSquared( cursorViewPosition ),
@@ -373,8 +373,8 @@ define( require => {
      * @returns {Panel}
      */
     createOptionsPanel: function( optionsContent, alignGroup, tandem ) {
-      var optionsContentAlignBox = new AlignBox( optionsContent, { group: alignGroup } );
-      var optionsPanel = new Panel(
+      const optionsContentAlignBox = new AlignBox( optionsContent, { group: alignGroup } );
+      const optionsPanel = new Panel(
         optionsContentAlignBox, {
           xMargin: 10,
           fill: MassesAndSpringsConstants.PANEL_FILL,

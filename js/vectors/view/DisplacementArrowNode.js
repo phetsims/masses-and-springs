@@ -33,7 +33,7 @@ define( require => {
       unitDisplacementLength: -100 // use this value to adjust the scale of the vector's length
     }, options );
 
-    var DISPLACEMENT_ARROW_OPTIONS = {
+    const DISPLACEMENT_ARROW_OPTIONS = {
       stroke: new Color( 0, 180, 0 ),
       headWidth: 20,
       headHeight: 10,
@@ -42,14 +42,14 @@ define( require => {
     };
 
     // Creation of the symbol for the displacement vector.
-    var displacementArrow = new LineArrowNode( 0, 0, 30, 0, DISPLACEMENT_ARROW_OPTIONS );
+    const displacementArrow = new LineArrowNode( 0, 0, 30, 0, DISPLACEMENT_ARROW_OPTIONS );
     options.children = [ displacementArrow ];
 
     if ( !options.symbolRepresentation ) {
 
       assert && assert( options.modelViewTransform !== null, ' options.modelViewTransform should be defined ' );
 
-      var verticalLine = new Line( -10, 0, 10, 0, {
+      const verticalLine = new Line( -10, 0, 10, 0, {
         stroke: 'black',
         lineWidth: 2,
         centerY: displacementArrow.centerY,
@@ -65,7 +65,7 @@ define( require => {
         if ( displacement !== 0 ) {
 
           // Used because springs are offset slightly below dev bounds.
-          var ceilingOffset = -0.01;
+          const ceilingOffset = -0.01;
           displacementArrow.setTailAndTip( 0, 0, 0, ceilingOffset * options.modelViewTransform.modelToViewDeltaY( options.unitDisplacementLength * displacement ) );
         }
       } );

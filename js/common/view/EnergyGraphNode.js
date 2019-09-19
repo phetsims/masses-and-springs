@@ -39,9 +39,9 @@ define( require => {
   const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
 
   // constants
-  var LEGEND_DESCRIPTION_MAX_WIDTH = 500;
-  var MAX_WIDTH = 100;
-  var ORANGE_COLOR = '#ee6f3e';
+  const LEGEND_DESCRIPTION_MAX_WIDTH = 500;
+  const MAX_WIDTH = 100;
+  const ORANGE_COLOR = '#ee6f3e';
 
   // strings
   const elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
@@ -63,14 +63,14 @@ define( require => {
    * @constructor
    */
   function EnergyGraphNode( model, tandem ) {
-    var self = this;
+    const self = this;
 
     // @private {Property.<number>} (read-write) Responsible for the zoom level in the bar graph.
     // This is adjusted by the zoom buttons and used for the scaling Property of the barNodes.
     this.zoomLevelProperty = new NumberProperty( 3 );
 
     // Creation of zoom in/out buttons
-    var zoomButtonOptions = {
+    const zoomButtonOptions = {
       baseColor: ColorConstants.LIGHT_BLUE,
       xMargin: 8,
       yMargin: 4,
@@ -78,8 +78,8 @@ define( require => {
       touchAreaXDilation: 5,
       touchAreaYDilation: 5
     };
-    var zoomInButton = new ZoomButton( _.extend( { in: true }, zoomButtonOptions ) );
-    var zoomOutButton = new ZoomButton( _.extend( { in: false }, zoomButtonOptions ) );
+    const zoomInButton = new ZoomButton( _.extend( { in: true }, zoomButtonOptions ) );
+    const zoomOutButton = new ZoomButton( _.extend( { in: false }, zoomButtonOptions ) );
 
     // Zooming out means bars and zoom level gets smaller.
     zoomOutButton.addListener( function() {
@@ -92,17 +92,17 @@ define( require => {
     } );
 
     // {Property.<number>} Responsible for adjusting the scaling of the barNode heights.
-    var scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
+    const scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
       return Math.pow( 2, zoomLevel ) * 20;
     } );
 
-    var clearThermalButton = new MoveToTrashButton( {
+    const clearThermalButton = new MoveToTrashButton( {
       arrowColor: ORANGE_COLOR,
       listener: function() {
 
         // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
         // been reset. Thermal energy is the only value that is dependent on initial total energy.
-        var mass = model.firstSpring.massAttachedProperty.get();
+        const mass = model.firstSpring.massAttachedProperty.get();
         if ( mass ) {
           mass.initialTotalEnergyProperty.set( mass.kineticEnergyProperty.get() +
                                                mass.gravitationalPotentialEnergyProperty.get() +
@@ -118,19 +118,19 @@ define( require => {
       clearThermalButton.pickable = ( value > 0 );
     } );
 
-    var aEntry = {
+    const aEntry = {
       property: model.firstSpring.kineticEnergyProperty,
       color: PhetColorScheme.KINETIC_ENERGY
     };
-    var bEntry = {
+    const bEntry = {
       property: model.firstSpring.gravitationalPotentialEnergyProperty,
       color: PhetColorScheme.GRAVITATIONAL_POTENTIAL_ENERGY
     };
-    var cEntry = {
+    const cEntry = {
       property: model.firstSpring.elasticPotentialEnergyProperty,
       color: PhetColorScheme.ELASTIC_POTENTIAL_ENERGY
     };
-    var dEntry = {
+    const dEntry = {
       property: model.firstSpring.thermalEnergyProperty,
       color: PhetColorScheme.HEAT_THERMAL_ENERGY
     };
@@ -172,10 +172,10 @@ define( require => {
       barSpacing: 5
     } );
 
-    var abbreviationGroup = new AlignGroup();
-    var descriptionGroup = new AlignGroup();
+    const abbreviationGroup = new AlignGroup();
+    const descriptionGroup = new AlignGroup();
 
-    var dialogContent = new VBox( {
+    const dialogContent = new VBox( {
       spacing: 15,
       children: [
         {
@@ -226,10 +226,10 @@ define( require => {
 
     // a placeholder for the dialog - constructed lazily so that Dialog has access to
     // sim bounds
-    var dialog = null;
+    let dialog = null;
 
     // Button that pops up dialog box for the graph's legend
-    var infoButton = new InfoButton( {
+    const infoButton = new InfoButton( {
       maxHeight: 1.1 * zoomInButton.height,
       centerY: zoomOutButton.centerY,
       iconFill: 'rgb( 41, 106, 163 )',
@@ -251,7 +251,7 @@ define( require => {
     } );
 
     // Display buttons at the bottom of the graph
-    var displayButtons = new HBox( {
+    const displayButtons = new HBox( {
       spacing: 12,
       children: [ infoButton, new HStrut( 18 ), zoomOutButton, zoomInButton ]
     } );
@@ -267,11 +267,11 @@ define( require => {
     } );
     this.barChartNode.center = this.background.center.plusXY( 0, 5 );
 
-    var chartNode = new Node( {
+    const chartNode = new Node( {
       children: [ this.background, this.barChartNode ]
     } );
 
-    var accordionBoxContent = new VBox( {
+    const accordionBoxContent = new VBox( {
       children: [
         chartNode,
         displayButtons

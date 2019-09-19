@@ -34,8 +34,8 @@ define( require => {
   const velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
 
   // constants
-  var MAX_WIDTH = 140;
-  var DEFAULT_CONTENT_SPACING = 155;
+  const MAX_WIDTH = 140;
+  const DEFAULT_CONTENT_SPACING = 155;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -52,30 +52,30 @@ define( require => {
 
     Node.call( this, options );
 
-    var velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
-    var accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
-    var gravityArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
-    var springArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
-    var netForceArrow = new ForceVectorArrow( 'black' );
+    const velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
+    const accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
+    const gravityArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
+    const springArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
+    const netForceArrow = new ForceVectorArrow( 'black' );
 
     // Align group used for label align boxes
-    var alignGroup = new AlignGroup( { matchVertical: false } );
+    const alignGroup = new AlignGroup( { matchVertical: false } );
 
     // Members of the attributed to the alignGroup are declared in order as they appear in the sim.
-    var velocityAlignBox = new AlignBox( new Text( velocityString, {
+    const velocityAlignBox = new AlignBox( new Text( velocityString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH,
       tandem: tandem.createTandem( 'velocityString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
-    var accelerationAlignBox = new AlignBox( new Text( accelerationString, {
+    const accelerationAlignBox = new AlignBox( new Text( accelerationString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH,
       tandem: tandem.createTandem( 'accelerationString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // Responsible for forces aquaRadioButton
-    var forcesVisibilityRadioButton = new AquaRadioButton(
+    const forcesVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
       model.forcesModeChoice.FORCES,
       new Text( forcesString, {
@@ -87,31 +87,31 @@ define( require => {
     );
 
     // Indention used for gravity and spring checkbox
-    var indentation = 22;
+    const indentation = 22;
 
     // Sub group of check boxes indented under forces radio button
-    var gravityAlignBox = new AlignBox( new Text( gravityString, {
+    const gravityAlignBox = new AlignBox( new Text( gravityString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH - indentation,
       tandem: tandem.createTandem( 'gravityString' )
     } ), { group: alignGroup, xAlign: 'left' } );
-    var springAlignBox = new AlignBox( new Text( springString, {
+    const springAlignBox = new AlignBox( new Text( springString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH - indentation,
       tandem: tandem.createTandem( 'springString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // responsible for net force aquaRadioButton
-    var netForceAlignBox = new AlignBox( new Text( netForceString, {
+    const netForceAlignBox = new AlignBox( new Text( netForceString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH,
       tandem: tandem.createTandem( 'netForceString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // Max width must be set to the maxWidth of the alignGroup based on its content.
-    var contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
+    const contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
 
-    var netForceVisibilityRadioButton = new AquaRadioButton(
+    const netForceVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
       model.forcesModeChoice.NET_FORCES,
       new HBox( { children: [ netForceAlignBox, netForceArrow ], spacing: contentSpacing } ),
@@ -119,13 +119,13 @@ define( require => {
     );
 
     // Handle options for checkbox group
-    var vectorVisibilityCheckboxGroup;
-    var velocityCheckboxObject = {
+    let vectorVisibilityCheckboxGroup;
+    const velocityCheckboxObject = {
       node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: contentSpacing } ),
       property: model.velocityVectorVisibilityProperty,
       label: velocityString
     };
-    var accelerationCheckboxObject = {
+    const accelerationCheckboxObject = {
       node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: contentSpacing } ),
       property: model.accelerationVectorVisibilityProperty,
       label: accelerationString
@@ -163,12 +163,12 @@ define( require => {
     }
 
     // Property that toggles whether the gravity and spring force checkboxes are enabled
-    var enabledProperty = new BooleanProperty( model.forcesModeProperty.value === model.forcesModeChoice.FORCES, {
+    const enabledProperty = new BooleanProperty( model.forcesModeProperty.value === model.forcesModeChoice.FORCES, {
       phetioFeatured: true
     } );
 
     // Responsible for forces vectors checkboxes
-    var forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+    const forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
@@ -191,7 +191,7 @@ define( require => {
     } );
 
     // Contains all checkboxes and radio buttons for vector visibility
-    var vectorVisibilityControlsVBox;
+    let vectorVisibilityControlsVBox;
 
     // groups the checkboxes and forces aquaRadioButton
     if ( options.showForces ) {
@@ -217,7 +217,7 @@ define( require => {
         tandem: tandem.createTandem( 'spacingUnit' )
       } );
     }
-    var controlsHBox = new HBox( {
+    const controlsHBox = new HBox( {
       spacing: 65,
       children: [
         vectorVisibilityControlsVBox

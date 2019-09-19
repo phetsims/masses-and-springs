@@ -45,38 +45,38 @@ define( require => {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS
     }, options );
 
-    var toolbox = new HBox( {
+    const toolbox = new HBox( {
       align: 'center',
       xMargin: 500,
       spacing: 30,
       tandem: tandem.createTandem( 'toolbox' )
     } );
 
-    var toolboxAlignBox = new AlignBox( toolbox, { group: alignGroup } );
+    const toolboxAlignBox = new AlignBox( toolbox, { group: alignGroup } );
     Panel.call( this, toolboxAlignBox, options );
 
 
     // Create timer to be turned into icon
-    var secondsProperty = new NumberProperty( 0, {
+    const secondsProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'secondsProperty' ),
       units: 'seconds',
       range: new Range( 0, Number.POSITIVE_INFINITY )
     } );
-    var isRunningProperty = new BooleanProperty( false, {
+    const isRunningProperty = new BooleanProperty( false, {
       tandem: tandem.createTandem( 'isRunningProperty' )
     } );
-    var timer = new TimerNode( secondsProperty, isRunningProperty );
+    const timer = new TimerNode( secondsProperty, isRunningProperty );
     timer.scale( 0.5 );
 
     // Create ruler to be turned into icon
-    var rulerWidth = 397; // 1 meter
-    var rulerLength = 0.175 * rulerWidth;
-    var majorTickLabels = [ '' ];
-    for ( var i = 1; i < 10; i++ ) { // create 10 empty strings for labels
+    const rulerWidth = 397; // 1 meter
+    const rulerLength = 0.175 * rulerWidth;
+    const majorTickLabels = [ '' ];
+    for ( let i = 1; i < 10; i++ ) { // create 10 empty strings for labels
       majorTickLabels.push( '' );
     }
-    var majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
-    var ruler = new RulerNode(
+    const majorTickWidth = rulerWidth / ( majorTickLabels.length - 1 );
+    const ruler = new RulerNode(
       rulerWidth,
       rulerLength,
       majorTickWidth,
@@ -87,7 +87,7 @@ define( require => {
     ruler.scale( 0.12 );
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
-    var rulerIcon = ruler.rasterized( {
+    const rulerIcon = ruler.rasterized( {
       // Instead of changing the rendering, we'll dynamically generate a mipmap so the ruler icon appearance looks better.
       // See https://github.com/phetsims/masses-and-springs/issues/199.
       mipmap: true,
@@ -102,7 +102,7 @@ define( require => {
 
       // Now determine the initial position where this element should move to after it's created, which corresponds
       // to the location of the mouse or touch event.
-      var initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
+      const initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
         .minus( new Vector2( -rulerNode.width * 0.5, rulerNode.height * 0.4 ) );
       rulerNode.positionProperty.set( initialPosition );
 
@@ -122,7 +122,7 @@ define( require => {
     } );
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
-    var timerIcon = timer.rasterized( {
+    const timerIcon = timer.rasterized( {
       cursor: 'pointer',
       resolution: 5,
       tandem: tandem.createTandem( 'timerIcon' )
@@ -136,7 +136,7 @@ define( require => {
 
       // Now determine the initial position where this element should move to after it's created, which corresponds
       // to the location of the mouse or touch event.
-      var initialPosition = timerNode.globalToParentPoint( event.pointer.point )
+      const initialPosition = timerNode.globalToParentPoint( event.pointer.point )
         .minus( new Vector2( timerNode.width / 2, timerNode.height * 0.4 ) );
 
       timerNode.positionProperty.set( initialPosition );

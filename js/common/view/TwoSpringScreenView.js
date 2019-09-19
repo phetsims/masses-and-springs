@@ -35,15 +35,15 @@ define( require => {
    */
   function TwoSpringScreenView( model, tandem ) {
     SpringScreenView.call( this, model, tandem );
-    var self = this;
+    const self = this;
 
     // @public {SpringHangerNode} Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
       model.springs,
       this.modelViewTransform,
       tandem.createTandem( 'springHangerNode' ) );
-    var leftSpring = this.model.firstSpring;
-    var rightSpring = this.model.secondSpring;
+    const leftSpring = this.model.firstSpring;
+    const rightSpring = this.model.secondSpring;
 
     // @public {StopperButtonNode}
     this.firstSpringStopperButtonNode = this.createStopperButton( leftSpring, tandem );
@@ -62,7 +62,7 @@ define( require => {
     } );
 
     // Spring Constant Control Panels
-    var minMaxLabels = [
+    const minMaxLabels = [
       new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
     ];
@@ -75,7 +75,7 @@ define( require => {
     this.secondSpringConstantControlPanel = this.createSpringConstantPanel( 1, minMaxLabels, tandem );
     this.secondSpringConstantControlPanel.left = this.secondSpringStopperButtonNode.right + this.spacing;
 
-    var xBoundsLimit = this.springHangerNode.centerX + 5;
+    const xBoundsLimit = this.springHangerNode.centerX + 5;
 
     // @public {MovableLineNode} Initializes red movable reference line
     this.movableLineNode = new MovableLineNode(
@@ -90,7 +90,7 @@ define( require => {
      * @param {Spring} spring
      * @returns {ReferenceLineNode}
      */
-    var createNaturalLineNode = function( spring ) {
+    const createNaturalLineNode = function( spring ) {
       return new ReferenceLineNode(
         self.modelViewTransform,
         spring,
@@ -124,9 +124,9 @@ define( require => {
     } );
 
     // {number} Used in determining springSystemControlsNode's placement
-    var distanceBetweenSprings = (self.modelViewTransform.modelToViewX(
+    const distanceBetweenSprings = (self.modelViewTransform.modelToViewX(
       model.firstSpring.positionProperty.value.distance( model.secondSpring.positionProperty.value ) ) / 2);
-    var leftSpringXPosition = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
+    const leftSpringXPosition = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {

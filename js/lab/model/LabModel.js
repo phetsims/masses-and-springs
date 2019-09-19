@@ -21,7 +21,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
 
   // constants
-  var MASS_OFFSET = 0.15;
+  const MASS_OFFSET = 0.15;
 
   /**
    * @param {Boolean} basicsVersion
@@ -41,9 +41,9 @@ define( require => {
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
 
-    var massXPosition = this.basicsVersion ? 0.13 : 0.625;
-    var massValue;
-    var color;
+    const massXPosition = this.basicsVersion ? 0.13 : 0.625;
+    let massValue;
+    let color;
 
     this.createMass( 0.100, massXPosition, MassesAndSpringsColorProfile.adjustableMassProperty, null, tandem.createTandem( 'adjustableMass' ), {
       adjustable: true

@@ -18,7 +18,7 @@ define( require => {
   const Vector2Property = require( 'DOT/Vector2Property' );
 
   // constants
-  var LINE_LENGTH = 100;
+  const LINE_LENGTH = 100;
 
   /**
    * @param {ModelViewTransform2} modelViewTransform2
@@ -37,7 +37,7 @@ define( require => {
       label: null
     }, options );
 
-    var self = this;
+    const self = this;
     Line.call( this, 0, 0, LINE_LENGTH, 0, {
       stroke: options.stroke,
       lineDash: [ 12, 8 ],
@@ -49,12 +49,12 @@ define( require => {
     this.touchArea = this.localBounds.dilatedY( 10 );
 
     // Prevents overlap with the equilibrium line
-    var xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
+    const xPos = modelViewTransform2.modelToViewX( spring.positionProperty.get().x );
 
     // Helper function to derive the length as if the mass wasn't attached.
-    var lengthFunction = new LinearFunction( 0.1, 0.5, 1.37, 0.97 );
+    const lengthFunction = new LinearFunction( 0.1, 0.5, 1.37, 0.97 );
 
-    var yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
+    let yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
 
     // @private (read-write) - position of line in screen coordinates.
     this.positionProperty = new Vector2Property( new Vector2( xPos, yPos ) );

@@ -28,8 +28,8 @@ define( require => {
   const naturalLengthString = require( 'string!MASSES_AND_SPRINGS/naturalLength' );
 
   // constants
-  var DEFAULT_CONTENT_SPACING = 155;
-  var TEXT_MAX_WIDTH = 130;
+  const DEFAULT_CONTENT_SPACING = 155;
+  const TEXT_MAX_WIDTH = 130;
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -47,11 +47,11 @@ define( require => {
     Node.call( this, options );
 
     // Lines added for reference in panel
-    var greenLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb(0, 180, 0)', tandem.createTandem( 'greenLine' ) );
-    var blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
-    var redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
+    const greenLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb(0, 180, 0)', tandem.createTandem( 'greenLine' ) );
+    const blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
+    const redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
 
-    var equilibriumText = new Text( equilibriumPositionString, {
+    let equilibriumText = new Text( equilibriumPositionString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: TEXT_MAX_WIDTH,
       tandem: tandem.createTandem( 'equilibriumPositionString' )
@@ -66,24 +66,24 @@ define( require => {
     }
 
     // Align group used for label align boxes
-    var alignGroup = new AlignGroup( { matchVertical: false } );
+    const alignGroup = new AlignGroup( { matchVertical: false } );
 
     // Align boxes used for labels
-    var naturalLengthVisibleAlignBox = new AlignBox( new Text( naturalLengthString, {
+    const naturalLengthVisibleAlignBox = new AlignBox( new Text( naturalLengthString, {
       font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: TEXT_MAX_WIDTH
     } ), { group: alignGroup, xAlign: 'left' } );
-    var equilibriumAlignBox = new AlignBox( equilibriumText, { group: alignGroup, xAlign: 'left' } );
-    var movableAlignBox = new AlignBox( new Text( movableLineString, {
+    const equilibriumAlignBox = new AlignBox( equilibriumText, { group: alignGroup, xAlign: 'left' } );
+    const movableAlignBox = new AlignBox( new Text( movableLineString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: TEXT_MAX_WIDTH,
       tandem: tandem.createTandem( 'movableLineString' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // Max width must be set to the maxWidth of the alignGroup based on its content.
-    var contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
+    const contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
 
     // Create checkboxes using align boxes above
-    var indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+    const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
       node: new HBox( { children: [ naturalLengthVisibleAlignBox, blueLine ], spacing: contentSpacing } ),
       property: model.naturalLengthVisibleProperty,
       label: naturalLengthString
@@ -99,8 +99,8 @@ define( require => {
       checkboxOptions: { spacing: 8, boxWidth: 16 },
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
-    var titleToControlsVerticalSpace = 2;
-    var indicatorVisibilityControlsVBox = new VBox( {
+    const titleToControlsVerticalSpace = 2;
+    const indicatorVisibilityControlsVBox = new VBox( {
         children: [
           new VStrut( titleToControlsVerticalSpace ),
           indicatorVisibilityCheckboxGroup
@@ -109,7 +109,7 @@ define( require => {
         tandem: tandem.createTandem( 'indicatorVisibilityControlsVBox' )
       }
     );
-    var controlBox = new HBox( {
+    const controlBox = new HBox( {
       spacing: 10,
       children: [
         indicatorVisibilityControlsVBox

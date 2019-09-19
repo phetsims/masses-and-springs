@@ -29,7 +29,7 @@ define( require => {
    */
   function EnergyScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: screenEnergyString,
       backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
       homeScreenIcon: new Image( energyHomeScreenImage ),

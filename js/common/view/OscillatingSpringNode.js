@@ -18,8 +18,8 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var LINEAR_LOOP_MAPPING = new LinearFunction( 0.1, 0.5, 2, 12 );
-  var MAP_NUMBER_OF_LOOPS = function( springLength ) {
+  const LINEAR_LOOP_MAPPING = new LinearFunction( 0.1, 0.5, 2, 12 );
+  const MAP_NUMBER_OF_LOOPS = function( springLength ) {
     return Util.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) );
   };
 
@@ -31,7 +31,7 @@ define( require => {
    * @constructor
    */
   function OscillatingSpringNode( spring, modelViewTransform2, tandem, options ) {
-    var self = this;
+    const self = this;
 
     options = _.extend( {
       deltaPhase: 3 * Math.PI / 2,
@@ -62,10 +62,10 @@ define( require => {
 
       // ParametricSpringNode calculations
       // Value of coilStretch is in view coordinates and doesn't have model units.
-      var coilStretch = (
+      const coilStretch = (
         modelViewTransform2.modelToViewDeltaY( spring.lengthProperty.get() )
         - ( options.leftEndLength + options.rightEndLength) );
-      var xScale = coilStretch / ( self.loopsProperty.get() * self.radiusProperty.get() );
+      const xScale = coilStretch / ( self.loopsProperty.get() * self.radiusProperty.get() );
 
       // The wrong side of the PSN is static, so we have to put the spring in reverse and update the length AND position.
       // Spring is rotated to be rotated so XScale relates to Y-direction in view

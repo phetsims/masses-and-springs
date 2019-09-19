@@ -16,7 +16,7 @@ define( require => {
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
 
-  var MassesAndSpringsConstants = {
+  const MassesAndSpringsConstants = {
     DEFAULT_SPRING_LENGTH: 0.5,
     RADIO_BUTTON_RADIUS: 6,
 

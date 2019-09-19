@@ -28,8 +28,8 @@ define( require => {
   const Vector2Property = require( 'DOT/Vector2Property' );
 
   // constants
-  var HEIGHT_RATIO = 2.5;
-  var SCALING_FACTOR = 4; // scales the radius to desired size
+  const HEIGHT_RATIO = 2.5;
+  const SCALING_FACTOR = 4; // scales the radius to desired size
 
   /**
    * @param {number} massValue:  mass in kg
@@ -43,7 +43,7 @@ define( require => {
   function Mass( massValue, xPosition, color, gravityProperty, tandem, options ) {
     assert && assert( massValue > 0, 'Mass must be greater than 0' ); // To prevent divide by 0 errors
 
-    var self = this;
+    const self = this;
 
     options = _.extend( {
       adjustable: false,
@@ -172,7 +172,7 @@ define( require => {
       function( mass, gravity, position ) {
 
         // The height used is determined based on the height of the shelf the masses rest on.
-        var heightFromZero = position.y - options.zeroReferencePoint - self.heightProperty.value;
+        const heightFromZero = position.y - options.zeroReferencePoint - self.heightProperty.value;
         return ( mass * gravity * ( heightFromZero ) );
       } );
 
@@ -277,11 +277,11 @@ define( require => {
     // Set the equilibrium position when a mass value changes.
     // We do a similar process in Spring.js when the mass is attached to the spring.
     this.massProperty.link( function( value ) {
-      var spring = self.springProperty.value;
+      const spring = self.springProperty.value;
       if ( spring ) {
 
         // springExtension = mg/k
-        var springExtensionValue = ( value * spring.gravityProperty.value ) / spring.springConstantProperty.value;
+        const springExtensionValue = ( value * spring.gravityProperty.value ) / spring.springConstantProperty.value;
         spring.equilibriumYPositionProperty.set(
           spring.positionProperty.get().y -
           spring.naturalRestingLengthProperty.value -
@@ -311,18 +311,18 @@ define( require => {
      * @public
      */
     step: function( gravity, floorY, dt, animationDt ) {
-      var floorPosition = floorY + this.heightProperty.value;
+      const floorPosition = floorY + this.heightProperty.value;
 
       if ( this.isAnimatingProperty.value ) {
-        var distance = this.animationStartPosition.distance( this.animationEndPosition );
+        const distance = this.animationStartPosition.distance( this.animationEndPosition );
         if ( distance > 0 ) {
 
           // Adjust the speed of animation depending on the distance between the start and end
-          var animationSpeed = Math.sqrt( 2 / distance );
+          const animationSpeed = Math.sqrt( 2 / distance );
 
           // Responsible for animating a horizontal motion when the mass is released and not attached to a spring.
           this.animationProgress = Math.min( 1, this.animationProgress + animationDt * animationSpeed );
-          var ratio = Easing.CUBIC_IN_OUT.value( this.animationProgress );
+          const ratio = Easing.CUBIC_IN_OUT.value( this.animationProgress );
           this.positionProperty.set(
             new Vector2( this.animationStartPosition.blend( this.animationEndPosition, ratio ).x, floorPosition ) );
         }
@@ -337,9 +337,9 @@ define( require => {
 
       // If we're not animating/controlled or attached to a spring, we'll fall due to gravity
       else if ( this.springProperty.get() === null && !this.userControlledProperty.get() ) {
-        var oldY = this.positionProperty.get().y;
-        var newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
-        var newY = oldY + ( this.verticalVelocityProperty.get() + newVerticalVelocity ) * dt / 2;
+        const oldY = this.positionProperty.get().y;
+        const newVerticalVelocity = this.verticalVelocityProperty.get() - gravity * dt;
+        const newY = oldY + ( this.verticalVelocityProperty.get() + newVerticalVelocity ) * dt / 2;
         if ( newY < floorPosition ) {
 
           // if we hit the ground stop falling

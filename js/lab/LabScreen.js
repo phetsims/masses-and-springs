@@ -30,7 +30,7 @@ define( require => {
    */
   function LabScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: screenLabString,
       backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
       homeScreenIcon: new Image( labHomeScreenImage ),

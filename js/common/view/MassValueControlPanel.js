@@ -52,9 +52,9 @@ define( require => {
     }, options );
 
     // range for mass in kg
-    var range = new Range( 50, 300 );
+    const range = new Range( 50, 300 );
 
-    var massInGramsProperty = new DynamicProperty( new Property( mass.massProperty ), {
+    const massInGramsProperty = new DynamicProperty( new Property( mass.massProperty ), {
       bidirectional: true,
       map: function( mass ) {
         return mass * 1000;
@@ -64,11 +64,11 @@ define( require => {
       }
     } );
 
-    var trackSizeProperty = new Property( options.basics ? new Dimension2( 132, 0.1 ) : new Dimension2( 125, 0.1 ) );
-    var valuePattern = StringUtils.fillIn( massValueString, { mass: SunConstants.VALUE_NAMED_PLACEHOLDER }, {
+    const trackSizeProperty = new Property( options.basics ? new Dimension2( 132, 0.1 ) : new Dimension2( 125, 0.1 ) );
+    const valuePattern = StringUtils.fillIn( massValueString, { mass: SunConstants.VALUE_NAMED_PLACEHOLDER }, {
       font: new PhetFont( { size: 14, weight: 'bold' } )
     } );
-    var numberControl = new NumberControl( massString, massInGramsProperty, range, {
+    const numberControl = new NumberControl( massString, massInGramsProperty, range, {
       stroke: null,
       sliderIndent: 7,
       layoutFunction: NumberControl.createLayoutFunction4( {
@@ -115,7 +115,7 @@ define( require => {
         touchAreaYDilation: 26
       }
     } );
-    var contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
+    const contentNode = new Node( { children: [ numberControl, massNodeIcon ] } );
 
     Panel.call( this, contentNode, options );
 

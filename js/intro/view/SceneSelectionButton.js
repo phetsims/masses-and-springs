@@ -22,7 +22,7 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var IMAGE_SCALE = 0.3;
+  const IMAGE_SCALE = 0.3;
 
   /**
    * @param {string} springLength
@@ -39,7 +39,7 @@ define( require => {
     } );
 
     // Springs created to be used in the icons for the scene selection tabs
-    var springsIcon = [
+    const springsIcon = [
       new Spring(
         new Vector2( 0.65, 2.1 ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
@@ -57,13 +57,13 @@ define( require => {
     ];
 
     // Creation of spring for use in scene switching icons
-    var springNodeOptions = {
+    const springNodeOptions = {
       frontColor: '#000000',
       middleColor: '#636362',
       backColor: 'black',
       opacity: 0.8
     };
-    var firstSpringIcon = new OscillatingSpringNode(
+    let firstSpringIcon = new OscillatingSpringNode(
       springsIcon[ 0 ],
       mvt,
       tandem.createTandem( 'firstSpringIcon' ),
@@ -72,7 +72,7 @@ define( require => {
     firstSpringIcon.lineWidthProperty.set( 3 );
 
     // Creation of spring for use in scene switching icons
-    var secondSpringIcon = new OscillatingSpringNode(
+    const secondSpringIcon = new OscillatingSpringNode(
       springsIcon[ 1 ],
       mvt,
       tandem.createTandem( 'secondSpringIcon' ),
@@ -98,7 +98,7 @@ define( require => {
      *
      * @returns {Line}
      */
-    var createVerticalLineNode = function( springIcon ) {
+    const createVerticalLineNode = function( springIcon ) {
       return new Line( 60, 0, 0, 0, {
         stroke: 'black',
         lineWidth: 4,
@@ -107,11 +107,11 @@ define( require => {
         opacity: 0.8
       } );
     };
-    var firstVerticalLineNode = createVerticalLineNode( firstSpringIcon );
-    var secondVerticalLineNode = createVerticalLineNode( secondSpringIcon );
+    const firstVerticalLineNode = createVerticalLineNode( firstSpringIcon );
+    const secondVerticalLineNode = createVerticalLineNode( secondSpringIcon );
 
     // White background for scene switching icons
-    var iconBackground = new Rectangle( firstSpringIcon.left - 20, -170, 180, 170, 10, 10, {
+    const iconBackground = new Rectangle( firstSpringIcon.left - 20, -170, 180, 170, 10, 10, {
       fill: '#A8D2FF'
     } );
 

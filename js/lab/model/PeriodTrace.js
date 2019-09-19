@@ -21,7 +21,7 @@ define( require => {
    * @constructor
    */
   function PeriodTrace( spring, simPlaying ) {
-    var self = this;
+    const self = this;
 
     // @public (read-only) spring which is being tracked
     this.spring = spring;

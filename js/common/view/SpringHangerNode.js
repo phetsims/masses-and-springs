@@ -19,8 +19,8 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
-  var SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
-  var SPRING_HANGER_FILL = 'rgb( 180, 180, 180 )';
+  const SPRING_HANGER_FONT = new PhetFont( { size: 16, weight: 'bold' } );
+  const SPRING_HANGER_FILL = 'rgb( 180, 180, 180 )';
 
   /**
    * @param {Array.<Spring>} springs
@@ -35,13 +35,13 @@ define( require => {
       singleSpring: false
     }, options );
     if ( options.singleSpring === false ) {
-      var springsSeparation =
+      const springsSeparation =
         modelViewTransform.modelToViewDeltaX( Math.abs( springs[ 0 ].positionProperty.get().x -
                                                         springs[ 1 ].positionProperty.get().x ) );
-      var springHangerNodeWidth = springsSeparation * 1.4;
+      const springHangerNodeWidth = springsSeparation * 1.4;
 
       // X coordinate of middle of springs
-      var middleOfSprings = modelViewTransform.modelToViewX( ( springs[ 0 ].positionProperty.get().x +
+      const middleOfSprings = modelViewTransform.modelToViewX( ( springs[ 0 ].positionProperty.get().x +
                                                                springs[ 1 ].positionProperty.get().x ) / 2 );
 
       // derived from x positions of springs.
@@ -54,7 +54,7 @@ define( require => {
       } );
 
       // Node for hanger text label
-      var springHangerLabelNode = new Node( { tandem: tandem.createTandem( 'springHangerLabelNode' ) } );
+      const springHangerLabelNode = new Node( { tandem: tandem.createTandem( 'springHangerLabelNode' ) } );
       springHangerLabelNode.addChild( new Text( '1', {
         font: SPRING_HANGER_FONT,
         centerX: springs[ 0 ].positionProperty.get().x - 1.5, // Slightly shifted so tail of the number one is drawn above spring anchor

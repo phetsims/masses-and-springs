@@ -30,20 +30,20 @@ define( require => {
    * @constructor
    */
   function MovableLineNode( initialPosition, length, visibleProperty, dragBounds, tandem ) {
-    var self = this;
+    const self = this;
     Node.call( this, { pickable: true, cursor: 'pointer' } );
 
     // Creates laser pointer tip for reference line
-    var bodySize = new Dimension2( 12, 14 );
-    var nozzleSize = new Dimension2( 8, 9 );
-    var cornerRadius = 1;
-    var topColor = 'rgb( 170, 170, 170 )';
-    var bottomColor = 'rgb( 40, 40, 40 )';
-    var highlightColor = 'rgb( 245, 245, 245 )';
-    var highlightColorStop = 0.3;
+    const bodySize = new Dimension2( 12, 14 );
+    const nozzleSize = new Dimension2( 8, 9 );
+    const cornerRadius = 1;
+    const topColor = 'rgb( 170, 170, 170 )';
+    const bottomColor = 'rgb( 40, 40, 40 )';
+    const highlightColor = 'rgb( 245, 245, 245 )';
+    const highlightColorStop = 0.3;
 
     // the narrow part of the handle
-    var nozzleNode = new Rectangle( 0, 0, nozzleSize.width + cornerRadius, nozzleSize.height, {
+    const nozzleNode = new Rectangle( 0, 0, nozzleSize.width + cornerRadius, nozzleSize.height, {
       cornerRadius: cornerRadius,
       fill: new LinearGradient( 0, 0, 0, nozzleSize.height )
         .addColorStop( 0, topColor )
@@ -56,7 +56,7 @@ define( require => {
     this.addChild( nozzleNode );
 
     // the main body of the handle
-    var bodyNode = new Rectangle( 0, 0, bodySize.width, bodySize.height, {
+    const bodyNode = new Rectangle( 0, 0, bodySize.width, bodySize.height, {
       cornerRadius: cornerRadius,
       fill: new LinearGradient( 0, 0, 0, bodySize.height )
         .addColorStop( 0, topColor )
@@ -68,14 +68,14 @@ define( require => {
     } );
     this.addChild( bodyNode );
 
-    var line = new Line( 0, 0, length, 0, {
+    const line = new Line( 0, 0, length, 0, {
       stroke: MassesAndSpringsColorProfile.movableLineProperty,
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
       cursor: 'pointer',
       tandem: tandem.createTandem( 'line' )
     } );
-    var dilatedLineBounds = line.localBounds.dilated( 10 );
+    const dilatedLineBounds = line.localBounds.dilated( 10 );
     line.mouseArea = dilatedLineBounds;
     line.touchArea = dilatedLineBounds;
 

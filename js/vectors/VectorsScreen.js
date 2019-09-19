@@ -30,7 +30,7 @@ define( require => {
    */
   function VectorsScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: screenVectorsString,
       backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
       homeScreenIcon: new Image( vectorHomeScreenImage ),
@@ -39,8 +39,8 @@ define( require => {
 
     Screen.call( this,
       function() {
-        var modelTandem = tandem.createTandem( 'model' );
-        var model = new MassesAndSpringsModel( modelTandem );
+        const modelTandem = tandem.createTandem( 'model' );
+        const model = new MassesAndSpringsModel( modelTandem );
         model.basicsVersion = false;
         model.addDefaultSprings( modelTandem );
         model.addDefaultMasses( modelTandem );

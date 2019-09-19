@@ -44,13 +44,13 @@ define( require => {
    */
   function OneSpringScreenView( model, tandem, options ) {
     SpringScreenView.call( this, model, tandem, options );
-    var self = this;
+    const self = this;
 
     // @public {number} centerX of the spring in view coordinates
     this.springCenter = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
 
     // Spring Constant Control Panel
-    var minMaxLabels = [
+    const minMaxLabels = [
       new Text( smallString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } ),
       new Text( largeString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 60 } )
     ];
@@ -75,7 +75,7 @@ define( require => {
       model,
       tandem.createTandem( 'massIcon' ) );
 
-    var massValueControlPanel = new MassValueControlPanel(
+    const massValueControlPanel = new MassValueControlPanel(
       model.masses[ 0 ],
       this.massNodeIcon,
       tandem.createTandem( 'massValueControlPanel' ), {
@@ -105,7 +105,7 @@ define( require => {
     );
 
     // Initializes natural line for the spring
-    var naturalLengthLineNode = new ReferenceLineNode(
+    const naturalLengthLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.firstSpring,
       model.firstSpring.bottomProperty,
@@ -127,10 +127,10 @@ define( require => {
     }
 
     // Property that determines the zero height in the view.
-    var zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
+    const zeroHeightProperty = new Property( this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) );
 
     // Initializes movable line
-    var xBoundsLimit = this.springCenter + this.spacing * 1.1;
+    const xBoundsLimit = this.springCenter + this.spacing * 1.1;
     this.movableLineNode = new MovableLineNode(
       this.springHangerNode.center.plus( new Vector2( 45, 200 ) ),
       100,
@@ -154,7 +154,7 @@ define( require => {
         } );
 
       // Zero height reference line
-      var zeroHeightLine = new ReferenceLineNode(
+      const zeroHeightLine = new ReferenceLineNode(
         this.modelViewTransform,
         model.firstSpring,
         zeroHeightProperty,

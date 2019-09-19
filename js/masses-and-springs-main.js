@@ -22,9 +22,9 @@ define( require => {
   const massesAndSpringsTitleString = require( 'string!MASSES_AND_SPRINGS/masses-and-springs.title' );
 
   // constants
-  var tandem = Tandem.rootTandem;
+  const tandem = Tandem.rootTandem;
 
-  var simOptions = {
+  const simOptions = {
     credits: {
       leadDesign: 'Amy Rouinfar, Mike Dubson',
       softwareDevelopment: 'Denzell Barnett, Matt Pennington',
@@ -35,7 +35,7 @@ define( require => {
   };
 
   SimLauncher.launch( function() {
-    var sim = new Sim( massesAndSpringsTitleString, [
+    const sim = new Sim( massesAndSpringsTitleString, [
       new IntroScreen( tandem.createTandem( 'introScreen' ) ),
       new VectorsScreen( tandem.createTandem( 'vectorsScreen' ) ),
       new EnergyScreen( tandem.createTandem( 'energyScreen' ) ),

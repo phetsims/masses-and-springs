@@ -47,10 +47,10 @@ define( require => {
       constrainValue: Util.roundSymmetric( springProperty.value )
     }, options );
 
-    var hSliderTitle = new Text( title, { font: options.titleFont, maxWidth:150 } );
+    const hSliderTitle = new Text( title, { font: options.titleFont, maxWidth:150 } );
 
     // slider used to adjust value of property attributed to the spring
-    var hSlider = new HSlider( springProperty, propertyRange, {
+    const hSlider = new HSlider( springProperty, propertyRange, {
       top: hSliderTitle.bottom+ 20,
       majorTickLength: 10,
       minorTickLength: 5,

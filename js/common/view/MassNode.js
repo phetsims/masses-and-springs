@@ -37,7 +37,7 @@ define( require => {
   const questionMarkString = require( 'string!MASSES_AND_SPRINGS/questionMark' );
 
   // constants
-  var ARROW_SIZE_DEFAULT = 25;
+  const ARROW_SIZE_DEFAULT = 25;
 
   /**
    * @param {Mass} mass - model object
@@ -49,7 +49,7 @@ define( require => {
    */
   function MassNode( mass, modelViewTransform2, dragBoundsProperty, model, tandem ) {
     Node.call( this, { cursor: 'pointer' } );
-    var self = this;
+    const self = this;
 
     // @public {Mass} (read-only)
     this.mass = mass;
@@ -57,7 +57,7 @@ define( require => {
     // @public (read-write) determines if the mass's velocity is below a specific value, so the period trace is hidden.
     this.thresholdReached = false;
 
-    var hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT );
+    let hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT );
     if ( mass.icon ) {
       hookHeight = modelViewTransform2.modelToViewDeltaY( -MassesAndSpringsConstants.HOOK_HEIGHT * 0.34 );
     }
@@ -71,9 +71,9 @@ define( require => {
     this.addChild( this.rect );
 
     // Bounds that limit where we can drag our mass should be dependent on how large our mass is
-    var modelBoundsProperty = new DerivedProperty( [ dragBoundsProperty, mass.heightProperty ],
+    const modelBoundsProperty = new DerivedProperty( [ dragBoundsProperty, mass.heightProperty ],
       function( dragBounds, massHeight ) {
-        var modelBounds = modelViewTransform2.viewToModelBounds( dragBounds );
+        const modelBounds = modelViewTransform2.viewToModelBounds( dragBounds );
         modelBounds.minY += massHeight;
         return modelBounds;
       } );
@@ -93,7 +93,7 @@ define( require => {
         .addColorStop( 0.7, mass.color );
 
       // We are constraining the draggable bounds on our massNodes except when the mass is attached to a spring.
-      var minY = mass.userControlledProperty.value ?
+      const minY = mass.userControlledProperty.value ?
                  modelBoundsProperty.value.minY :
                  MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT + mass.heightProperty.value;
 
@@ -108,8 +108,8 @@ define( require => {
       .addColorStop( 0.2, Color.toColor( mass.color ).colorUtilsBrighter( 0.6 ) )
       .addColorStop( 0.7, mass.color );
 
-    var hookShape = new Shape();
-    var radius = hookHeight / 4;
+    const hookShape = new Shape();
+    const radius = hookHeight / 4;
     hookShape.arc( 0, 0, radius, Math.PI, ( 0.5 * Math.PI ) );
     hookShape.lineTo( 0, hookHeight / 2 );
 
@@ -130,9 +130,9 @@ define( require => {
     this.addChild( this.background );
 
     if ( !mass.icon ) {
-      var labelString = mass.mysteryLabel ?
+      const labelString = mass.mysteryLabel ?
                         questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
-      var label = new Text( labelString, {
+      const label = new Text( labelString, {
         font: new PhetFont( { size: 12, weight: 'bold' } ),
         centerY: this.rect.centerY,
         centerX: 0,
@@ -208,17 +208,17 @@ define( require => {
 
     this.addInputListener( this.movableDragHandler );
 
-    var forceNullLine = new Line( {
+    const forceNullLine = new Line( {
       stroke: 'black',
       cursor: 'pointer'
     } );
 
     // Arrows created for vectors associated with mass nodes
-    var velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
-    var accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
-    var gravityForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
-    var springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
-    var netForceArrow = new ForceVectorArrow( 'black' );
+    const velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
+    const accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
+    const gravityForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
+    const springForceArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
+    const netForceArrow = new ForceVectorArrow( 'black' );
 
     if ( !mass.icon ) {
       this.addChild( velocityArrow );
@@ -230,7 +230,7 @@ define( require => {
     }
 
     // Used to position the vectors on the left of right side of the massNode depending on the attached spring.
-    var forcesOrientation = 1;
+    let forcesOrientation = 1;
     this.mass.springProperty.link( function( spring ) {
       if ( spring ) {
         forcesOrientation = spring.forcesOrientationProperty.value;
@@ -243,7 +243,7 @@ define( require => {
      * @param {Node} arrowNode
      *
      */
-    var updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
+    const updateArrowVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
         function( spring, vectorVisibility, userControlled ) {
           arrowNode.visible = !!spring && vectorVisibility && !userControlled;
@@ -256,7 +256,7 @@ define( require => {
      * @param {Node} arrowNode
      *
      */
-    var updateForceVisibility = function( arrowVisibilityProperty, arrowNode ) {
+    const updateForceVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
         function( spring, springVectorVisibility, forcesMode ) {
           arrowNode.visible = !!spring && springVectorVisibility && forcesMode === model.forcesModeChoice.FORCES;
@@ -300,7 +300,7 @@ define( require => {
      * @param {number} xOffset
      * @param {number} y2 - number that will be used for y2 value in setTailAndTip()
      */
-    var updateArrow = function( arrow, position, xOffset, y2 ) {
+    const updateArrow = function( arrow, position, xOffset, y2 ) {
       arrow.setTailAndTip(
         self.rect.centerX + xOffset,
         position.y + self.rect.centerY,
@@ -310,10 +310,10 @@ define( require => {
     };
 
     // Links for handling the length of the vectors in response to the system.
-    var scalingFactor = 3;
-    var xOffset;
-    var y2;
-    var position;
+    const scalingFactor = 3;
+    let xOffset;
+    let y2;
+    let position;
     Property.multilink( [
       mass.verticalVelocityProperty,
       model.accelerationVectorVisibilityProperty
@@ -327,7 +327,7 @@ define( require => {
     // When gravity changes, update the gravitational force arrow
     Property.multilink( [ mass.springProperty, mass.gravityProperty ],
       function( spring, gravity ) {
-        var gravitationalAcceleration = mass.mass * gravity;
+        const gravitationalAcceleration = mass.mass * gravity;
         position = mass.positionProperty.get();
         xOffset = forcesOrientation * 45;
         y2 = ARROW_SIZE_DEFAULT * gravitationalAcceleration;

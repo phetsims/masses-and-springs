@@ -29,13 +29,13 @@ define( require => {
     OneSpringScreenView.call( this, model, tandem, {
       dampingVisible: true
     } );
-    var self = this;
+    const self = this;
 
     // Contains visibility options for the reference lines and displacement arrow
-    var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
+    const indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
 
     // VBox that contains all of the panel's content
-    var optionsVBox = new VBox( {
+    const optionsVBox = new VBox( {
       spacing: 10,
       children: [
         indicatorVisibilityControlNode,
@@ -45,10 +45,10 @@ define( require => {
     } );
 
     // Panel that will display all the toggleable options.
-    var optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
+    const optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolbox
-    var rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing * 0.9 } );
+    const rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing * 0.9 } );
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
 

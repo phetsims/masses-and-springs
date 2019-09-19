@@ -30,9 +30,9 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
-  var RELEASE_DISTANCE = 0.12; // {number} horizontal distance in meters from a mass where a spring will be released
-  var UPPER_CONSTRAINT = new LinearFunction( 20, 60, 1.353, 1.265 ); // Limits how much we can prime the spring.
+  const GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a mass where a spring will be connected
+  const RELEASE_DISTANCE = 0.12; // {number} horizontal distance in meters from a mass where a spring will be released
+  const UPPER_CONSTRAINT = new LinearFunction( 20, 60, 1.353, 1.265 ); // Limits how much we can prime the spring.
 
   /**
    * @constructor
@@ -180,7 +180,7 @@ define( require => {
      * @param {Tandem} tandem
      */
     createSpring: function( x, tandem ) {
-      var spring = new Spring(
+      const spring = new Spring(
         new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
         MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
         this.dampingProperty,
@@ -284,7 +284,7 @@ define( require => {
      * @public
      */
     adjustDraggedMassPosition: function( mass ) {
-      var massPosition = mass.positionProperty.get();
+      const massPosition = mass.positionProperty.get();
 
       // Attempt to detach
       if ( mass.springProperty.get()
@@ -306,12 +306,12 @@ define( require => {
         mass.springProperty.value.updateDisplacement( massPosition.y, false );
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
-        var maxY = mass.springProperty.get().thicknessProperty.get() *
+        const maxY = mass.springProperty.get().thicknessProperty.get() *
                    OscillatingSpringNode.MAP_NUMBER_OF_LOOPS(
                      mass.springProperty.get().naturalRestingLengthProperty.get() );
 
         // Max Y value in model coordinates
-        var modelMaxY = UPPER_CONSTRAINT( maxY );
+        const modelMaxY = UPPER_CONSTRAINT( maxY );
 
         // Update only the spring's length if we are lower than the max Y
         if ( mass.positionProperty.get().y > modelMaxY ) {
@@ -379,14 +379,14 @@ define( require => {
      * @private
      */
     modelStep: function( dt ) {
-      var self = this;
-      var animationDt = dt;
+      const self = this;
+      const animationDt = dt;
 
       // Change the dt value if we are playing in slow motion.
       if ( this.simSpeedProperty.get() === this.simSpeedChoice.SLOW && this.playingProperty.get() ) {
         dt = dt / MassesAndSpringsConstants.SLOW_SIM_DT_RATIO;
       }
-      for ( var i = 0; i < this.masses.length; i++ ) {
+      for ( let i = 0; i < this.masses.length; i++ ) {
 
         // Fall if not hung or grabbed
         this.masses[ i ].step(

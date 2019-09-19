@@ -18,8 +18,8 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  var X_OFFSET = 10;
-  var FADE_OUT_SPEED = 1; // the speed at which the trace fades out.
+  const X_OFFSET = 10;
+  const FADE_OUT_SPEED = 1; // the speed at which the trace fades out.
 
   /**
    * @param {PeriodTrace} periodTrace
@@ -29,7 +29,7 @@ define( require => {
    */
   function PeriodTraceNode( periodTrace, modelViewTransform ) {
     Node.call( this );
-    var self = this;
+    const self = this;
 
     // @public {PeriodTrace} Model element for the period trace
     this.periodTrace = periodTrace;
@@ -70,8 +70,8 @@ define( require => {
      * @public
      */
     step: function( dt, playingProperty ) {
-      var spring = this.periodTrace.spring;
-      var mass = spring.massAttachedProperty.value;
+      const spring = this.periodTrace.spring;
+      const mass = spring.massAttachedProperty.value;
 
       // The period trace should only be drawn when a mass is oscillating on a spring and its checkbox is toggled on.
       if ( mass && !mass.userControlledProperty.value &&
@@ -85,20 +85,20 @@ define( require => {
         }
 
         // Responsible for drawing the period trace based on the state of the trace.
-        var modelViewTransform = this.modelViewTransform;
+        const modelViewTransform = this.modelViewTransform;
         if ( mass && !mass.userControlledProperty.value ) {
 
           // Transforming our model positions into view positions.
-          var massEquilibrium = spring.massEquilibriumYPositionProperty.value;
-          var equilibriumYPosition = modelViewTransform.modelToViewY( massEquilibrium );
-          var firstPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.firstPeakY );
-          var secondPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.secondPeakY );
-          var currentYPosition = modelViewTransform.modelToViewY( massEquilibrium +
+          const massEquilibrium = spring.massEquilibriumYPositionProperty.value;
+          const equilibriumYPosition = modelViewTransform.modelToViewY( massEquilibrium );
+          const firstPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.firstPeakY );
+          const secondPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.secondPeakY );
+          const currentYPosition = modelViewTransform.modelToViewY( massEquilibrium +
                                                                   spring.massEquilibriumDisplacementProperty.value );
 
           this.shape = new Shape();
 
-          var state = this.periodTrace.stateProperty.value; // 0 to 4
+          const state = this.periodTrace.stateProperty.value; // 0 to 4
           if ( state === 0 ) {
             this.visible = false && spring.periodTraceVisibilityProperty.value;
           }
@@ -129,9 +129,9 @@ define( require => {
 
             // Thin the line width once it reaches a certain threshold at a rate of delta.
             // Variables are extracted for readability.
-            var delta = 0.025;          // Rate at which the line is being thinned. Empirically determined.
-            var maxLineWidth = 2.5;     // Maximum line width of the trace.
-            var minLineWidth = 0.5;     // Minimum line width of the trace.
+            const delta = 0.025;          // Rate at which the line is being thinned. Empirically determined.
+            const maxLineWidth = 2.5;     // Maximum line width of the trace.
+            const minLineWidth = 0.5;     // Minimum line width of the trace.
 
             this.path.lineWidth = this.periodTrace.thresholdReached ? (this.path.lineWidth - delta) : maxLineWidth;
             if ( this.path.lineWidth <= minLineWidth ) {

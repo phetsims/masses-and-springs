@@ -27,7 +27,7 @@ define( require => {
   const Vector2Property = require( 'DOT/Vector2Property' );
 
   // constants
-  var DEFAULT_THICKNESS = 3; // empirically determined
+  const DEFAULT_THICKNESS = 3; // empirically determined
 
   /**
    * @param {Vector2} position - coordinates of the top center of the spring
@@ -43,7 +43,7 @@ define( require => {
     // validate and save options
     assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : '
                                                        + initialNaturalRestingLength );
-    var self = this;
+    const self = this;
 
     // @public {Property.<number>} (read-write) Used to position massNode forces. Right side: 1, Left side: -1
     this.forcesOrientationProperty = new NumberProperty( 1 );
@@ -216,7 +216,7 @@ define( require => {
         if ( mass ) {
 
           // springExtension = mg/k
-          var springExtension = ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
+          const springExtension = ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
 
           //Set equilibrium y position
           self.equilibriumYPositionProperty.set(
@@ -237,7 +237,7 @@ define( require => {
         range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
       } );
 
-    var massCenterOfMassProperty = new DynamicProperty( this.massAttachedProperty, {
+    const massCenterOfMassProperty = new DynamicProperty( this.massAttachedProperty, {
       derive: 'centerOfMassPositionProperty',
       defaultValue: null
     } );
@@ -261,7 +261,7 @@ define( require => {
         if ( mass ) {
 
           // springExtension = mg/k
-          var springExtensionValue =
+          const springExtensionValue =
             ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
           self.massEquilibriumYPositionProperty.set(
             self.positionProperty.get().y - naturalRestingLength - springExtensionValue - mass.heightProperty.value / 2
@@ -371,7 +371,7 @@ define( require => {
 
       // We are increasing the significance of the spring constant term by adding an exponent,
       // which is empirically determined.
-      var thickness = this.thicknessProperty.initialValue
+      const thickness = this.thicknessProperty.initialValue
                       * springConstant / this.springConstantProperty.initialValue
                       * length / this.naturalRestingLengthProperty.initialValue;
       this.thicknessProperty.set( thickness );
@@ -386,7 +386,7 @@ define( require => {
      * @param thickness number {number} current thickness of spring
      */
     updateSpringConstant: function( length, thickness ) {
-      var springConstant = this.naturalRestingLengthProperty.initialValue / length
+      const springConstant = this.naturalRestingLengthProperty.initialValue / length
                            * thickness / this.thicknessProperty.initialValue
                            * this.springConstantProperty.initialValue;
 
@@ -453,11 +453,11 @@ define( require => {
 
       // check if mass attached on spring
       if ( this.massAttachedProperty.get() ) {
-        var mass = this.massAttachedProperty.get();
+        const mass = this.massAttachedProperty.get();
         mass.initialTotalEnergyProperty.set( mass.totalEnergyProperty.value );
 
         // set displacement and stop further animation
-        var springExtensionValue = ( mass.massProperty.value * this.gravityProperty.value) / this.springConstantProperty.value;
+        const springExtensionValue = ( mass.massProperty.value * this.gravityProperty.value) / this.springConstantProperty.value;
         this.displacementProperty.set( -springExtensionValue );
 
         // place that mass at the correct location as well
@@ -531,42 +531,42 @@ define( require => {
       if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() ) {
         this.massAttachedProperty.get().preserveThermalEnergy = false;
 
-        var k = this.springConstantProperty.get();
-        var m = this.massAttachedProperty.get().massProperty.get();
-        var c = this.dampingCoefficientProperty.get();
-        var v = this.massAttachedProperty.get().verticalVelocityProperty.get();
-        var x = this.displacementProperty.get();
-        var g = this.gravityProperty.get();
+        const k = this.springConstantProperty.get();
+        const m = this.massAttachedProperty.get().massProperty.get();
+        const c = this.dampingCoefficientProperty.get();
+        const v = this.massAttachedProperty.get().verticalVelocityProperty.get();
+        const x = this.displacementProperty.get();
+        const g = this.gravityProperty.get();
 
         // Underdamped and Overdamped case
         if ( ( c * c - 4 * k * m ) !== 0 ) {
           // Precompute expressions used more than twice (for performance).
-          var km = k * m;
-          var gm = g * m;
-          var tDm = dt / m;
-          var kx = k * x;
-          var c2 = c * c;
-          var kR2 = Math.sqrt( k );
-          var k3R2 = k * kR2;
-          var twok3R2mv = Complex.real( 2 * k3R2 * m * v );
-          var alpha = Complex.real( 4 * km - c2 ).sqrt();
-          var alphaI = alpha.times( Complex.I );
-          var alphaPrime = Complex.real( c2 - 4 * km ).sqrt();
-          var alphatD2m = Complex.real( tDm / 2 ).multiply( alpha );
-          var beta = Complex.real( tDm ).multiply( alphaI ).exponentiate();
-          var eta = Complex.real( c ).add( alphaI ).multiply( Complex.real( tDm / 2 ) ).exponentiate()
+          const km = k * m;
+          const gm = g * m;
+          const tDm = dt / m;
+          const kx = k * x;
+          const c2 = c * c;
+          const kR2 = Math.sqrt( k );
+          const k3R2 = k * kR2;
+          const twok3R2mv = Complex.real( 2 * k3R2 * m * v );
+          const alpha = Complex.real( 4 * km - c2 ).sqrt();
+          const alphaI = alpha.times( Complex.I );
+          const alphaPrime = Complex.real( c2 - 4 * km ).sqrt();
+          const alphatD2m = Complex.real( tDm / 2 ).multiply( alpha );
+          const beta = Complex.real( tDm ).multiply( alphaI ).exponentiate();
+          const eta = Complex.real( c ).add( alphaI ).multiply( Complex.real( tDm / 2 ) ).exponentiate()
             .multiply( Complex.real( 2 ) );
 
           // Calculate new displacement
-          var coef = Complex.ONE.dividedBy( Complex.real( k3R2 ).multiply( alphaPrime ).multiply( eta ) );
-          var A = beta.minus( Complex.ONE ).multiply( Complex.real( c * kR2 * ( gm + kx ) ) );
-          var B = Complex.real( gm * kR2 ).multiply( alphaI ).multiply(
+          let coef = Complex.ONE.dividedBy( Complex.real( k3R2 ).multiply( alphaPrime ).multiply( eta ) );
+          let A = beta.minus( Complex.ONE ).multiply( Complex.real( c * kR2 * ( gm + kx ) ) );
+          let B = Complex.real( gm * kR2 ).multiply( alphaI ).multiply(
             beta.minus( eta ).add( Complex.ONE )
           );
-          var C = twok3R2mv.times( beta );
-          var D = Complex.real( k3R2 * x ).multiply( alphaI );
-          var E = D.times( beta );
-          var newDisplacement = coef.multiply( A.add( B ).add( C ).add( D ).add( E ).subtract( twok3R2mv ) ).real;
+          const C = twok3R2mv.times( beta );
+          const D = Complex.real( k3R2 * x ).multiply( alphaI );
+          const E = D.times( beta );
+          let newDisplacement = coef.multiply( A.add( B ).add( C ).add( D ).add( E ).subtract( twok3R2mv ) ).real;
 
           // Calculate new velocity
           coef = Complex.real( -( Math.exp( ( -c * dt ) / ( 2 * m ) ) ) / ( 2 * k3R2 * m ) ).divide( alphaPrime )
@@ -576,7 +576,7 @@ define( require => {
               .multiply( alpha.squared().add( Complex.real( c2 ) ) )
               .add( twok3R2mv.times( Complex.real( c ) ) ) );
           B = alphatD2m.cos().multiply( twok3R2mv ).multiply( alpha ).multiply( Complex.real( -1 ) );
-          var newVelocity = A.add( B ).multiply( coef ).real;
+          const newVelocity = A.add( B ).multiply( coef ).real;
 
           //  Stop the alternation between +/- in overdamped displacement
           if ( ( c * c - 4 * k * m ) > 0 ) {
@@ -603,8 +603,8 @@ define( require => {
 
         // Critically damped case
         else {
-          var omega = Math.sqrt( k / m );
-          var phi = Math.exp( dt * omega );
+          const omega = Math.sqrt( k / m );
+          const phi = Math.exp( dt * omega );
 
           this.displacementProperty.set( ( g * ( -m * phi + dt * Math.sqrt( k * m ) + m ) +
                                            k * (  dt * ( x * omega + v ) + x )

@@ -31,7 +31,7 @@ define( require => {
    */
   function IntroScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: screenIntroString,
       backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
       homeScreenIcon: new Image( introHomeScreenImage ),

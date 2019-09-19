@@ -32,7 +32,7 @@ define( require => {
    * @constructor
    */
   function DraggableRulerNode( mvt, dragBounds, initialPosition, visibleProperty, endDragCallback, tandem ) {
-    var self = this;
+    const self = this;
 
     // @public {Panel|null} (read-write) Used for returning ruler to toolbox. Set this if needed to be returned.
     this.toolbox = null;
@@ -41,17 +41,17 @@ define( require => {
     this.draggedProperty = new BooleanProperty( false );
 
     // define ruler params view units
-    var rulerLength = mvt.modelToViewDeltaY( -1 ); // 1 meter
-    var rulerWidth = 0.125 * rulerLength;
-    var majorTickLabels = [ '' ];
-    for ( var i = 1; i < 10; i++ ) {
+    const rulerLength = mvt.modelToViewDeltaY( -1 ); // 1 meter
+    const rulerWidth = 0.125 * rulerLength;
+    const majorTickLabels = [ '' ];
+    for ( let i = 1; i < 10; i++ ) {
       majorTickLabels.push( '' );
       majorTickLabels.push( '' + i * 10 );
       assert && assert( majorTickLabels[ i * 2 ] === '' + Math.floor( i * 10 ) );
     }
     majorTickLabels.push( '' );
     majorTickLabels.push( '' );
-    var majorTickWidth = rulerLength / ( majorTickLabels.length - 1 );
+    const majorTickWidth = rulerLength / ( majorTickLabels.length - 1 );
 
     RulerNode.call( this, rulerLength, rulerWidth, majorTickWidth, majorTickLabels, cmString, {
       insetsWidth: 0,

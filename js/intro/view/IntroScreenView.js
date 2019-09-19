@@ -45,16 +45,16 @@ define( require => {
    */
   function IntroScreenView( model, tandem ) {
 
-    var self = this;
+    const self = this;
 
     // Calls common two spring view
     TwoSpringScreenView.call( this, model, tandem );
 
     // AlignGroup to align components for spring options
-    var optionsContentAlignGroup = new AlignGroup( { matchVertical: false } );
+    const optionsContentAlignGroup = new AlignGroup( { matchVertical: false } );
 
     // Spring Length Control Panel
-    var minMaxLabels = [
+    const minMaxLabels = [
       new Text( shortString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } ),
       new Text( longString, { font: MassesAndSpringsConstants.LABEL_FONT, maxWidth: 40 } )
     ];
@@ -80,7 +80,7 @@ define( require => {
       } );
 
     // Panel that keeps thickness/spring constant at constant value
-    var constantsControlPanel = new AlignBox( new ConstantsControlPanel(
+    const constantsControlPanel = new AlignBox( new ConstantsControlPanel(
       model.constantModeProperty,
       MassesAndSpringsConstants.CONSTANT_MODE_ENUM,
       constantParameterString,
@@ -89,10 +89,10 @@ define( require => {
         stroke: null
       } ) );
 
-    var lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 140 );
+    const lineSeparator = MassesAndSpringsConstants.LINE_SEPARATOR( 140 );
 
     // VBox that contains all of the spring options panel's content
-    var springOptionsVBox = new VBox( {
+    const springOptionsVBox = new VBox( {
       spacing: 10,
       children: [
         this.springLengthControlPanel,
@@ -101,10 +101,10 @@ define( require => {
       ]
     } );
 
-    var optionsContentAlignBox = new AlignBox( springOptionsVBox, { group: optionsContentAlignGroup } );
+    const optionsContentAlignBox = new AlignBox( springOptionsVBox, { group: optionsContentAlignGroup } );
 
     // Panel that contains all the left sided options for the springs
-    var springOptionsPanel = new Panel( optionsContentAlignBox, {
+    const springOptionsPanel = new Panel( optionsContentAlignBox, {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       right: this.firstSpringStopperButtonNode.left - this.spacing,
       top: this.spacing,
@@ -120,7 +120,7 @@ define( require => {
     springOptionsPanel.moveToBack();
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
-    var firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
+    const firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         if ( massAttached ) {
           return equilibriumPositionVisible;
@@ -129,7 +129,7 @@ define( require => {
           return false;
         }
       } );
-    var secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.secondSpring.massAttachedProperty ],
+    const secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.secondSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         if ( massAttached ) {
           return equilibriumPositionVisible;
@@ -140,7 +140,7 @@ define( require => {
       } );
 
     // Initializes equilibrium line for first spring
-    var firstSpringEquilibriumLineNode = new ReferenceLineNode(
+    const firstSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.firstSpring,
       model.firstSpring.equilibriumYPositionProperty,
@@ -150,7 +150,7 @@ define( require => {
     );
 
     // Initializes equilibrium line for second spring
-    var secondSpringEquilibriumLineNode = new ReferenceLineNode(
+    const secondSpringEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.secondSpring,
       model.secondSpring.equilibriumYPositionProperty,
@@ -189,13 +189,13 @@ define( require => {
     } );
 
     // Creation of same length icon node
-    var sameLengthIcon = new SceneSelectionButton( MassesAndSpringsConstants.SCENE_MODE_ENUM.SAME_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
+    const sameLengthIcon = new SceneSelectionButton( MassesAndSpringsConstants.SCENE_MODE_ENUM.SAME_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
 
     // Creation of adjustable length icon node
-    var differentLengthIcon = new SceneSelectionButton( MassesAndSpringsConstants.SCENE_MODE_ENUM.ADJUSTABLE_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
+    const differentLengthIcon = new SceneSelectionButton( MassesAndSpringsConstants.SCENE_MODE_ENUM.ADJUSTABLE_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
 
     //  Creation of toggled modes for scene selection
-    var toggleButtonsContent = [ {
+    const toggleButtonsContent = [ {
       value: MassesAndSpringsConstants.SCENE_MODE_ENUM.SAME_LENGTH,
       node: sameLengthIcon
     }, {
@@ -204,7 +204,7 @@ define( require => {
     } ];
 
     // Creation of icons for scene selection
-    var sceneRadioButtonGroup = new RadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
+    const sceneRadioButtonGroup = new RadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
       buttonContentXMargin: 1,
       buttonContentYMargin: 1,
       right: this.gravityAndDampingControlNode.right,
@@ -217,10 +217,10 @@ define( require => {
     } );
 
     // Control Panel for display elements with varying visibility
-    var lineVisibilityNode = new LineVisibilityNode( model, tandem.createTandem( 'LineVisibilityNode' ) );
+    const lineVisibilityNode = new LineVisibilityNode( model, tandem.createTandem( 'LineVisibilityNode' ) );
 
     // VBox that contains all of the panel's content
-    var optionsVBox = new VBox( {
+    const optionsVBox = new VBox( {
       spacing: 10,
       children: [
         lineVisibilityNode,
@@ -230,10 +230,10 @@ define( require => {
     } );
 
     // Panel that will display all the toggleable options.
-    var optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
+    const optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolbox
-    var rightPanelsVBox = new VBox( {
+    const rightPanelsVBox = new VBox( {
       children: [ optionsPanel, self.toolboxPanel, sceneRadioButtonGroup ],
       spacing: this.spacing * 0.9
     } );

@@ -30,10 +30,10 @@ define( require => {
 
     // Calls common two spring view
     TwoSpringScreenView.call( this, model, tandem );
-    var self = this;
+    const self = this;
 
     // Displacement arrows added for each springs
-    var firstDisplacementArrowNode = new DisplacementArrowNode(
+    const firstDisplacementArrowNode = new DisplacementArrowNode(
       this.springNodes[ 0 ].nodeProperty.value.spring.displacementProperty,
       model.naturalLengthVisibleProperty,
       tandem,
@@ -44,7 +44,7 @@ define( require => {
       } );
     this.addChild( firstDisplacementArrowNode );
 
-    var secondDisplacementArrowNode = new DisplacementArrowNode(
+    const secondDisplacementArrowNode = new DisplacementArrowNode(
       this.springNodes[ 1 ].nodeProperty.value.spring.displacementProperty,
       model.naturalLengthVisibleProperty,
       tandem,
@@ -56,17 +56,17 @@ define( require => {
     this.addChild( secondDisplacementArrowNode );
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
-    var firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
+    const firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         return !!massAttached && equilibriumPositionVisible;
       } );
-    var secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.secondSpring.massAttachedProperty ],
+    const secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.secondSpring.massAttachedProperty ],
       function( equilibriumPositionVisible, massAttached ) {
         return !!massAttached && equilibriumPositionVisible;
       } );
 
     // Initializes equilibrium line for first spring
-    var firstMassEquilibriumLineNode = new ReferenceLineNode(
+    const firstMassEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.firstSpring,
       model.firstSpring.massEquilibriumYPositionProperty,
@@ -76,7 +76,7 @@ define( require => {
     );
 
     // Initializes equilibrium line for second spring
-    var secondMassEquilibriumLineNode = new ReferenceLineNode(
+    const secondMassEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.secondSpring,
       model.secondSpring.massEquilibriumYPositionProperty,
@@ -98,17 +98,17 @@ define( require => {
     this.addChild( this.toolsLayer );
 
     // Contains visibility options for the reference lines and displacement arrow
-    var indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
+    const indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
 
     // Contains all of the display options for the vectors and forces
-    var vectorVisibilityControlNode = new VectorVisibilityControlNode(
+    const vectorVisibilityControlNode = new VectorVisibilityControlNode(
       model,
       tandem.createTandem( 'vectorVisibilityControlNode' ), {
         maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH+30
       } );
 
     // VBox that contains all of the panel's content
-    var optionsVBox = new VBox( {
+    const optionsVBox = new VBox( {
       spacing: 10,
       children: [
         indicatorVisibilityControlNode,
@@ -120,10 +120,10 @@ define( require => {
     } );
 
     // Panel that will display all the toggleable options.
-    var optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
+    const optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolbox
-    var rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing * 0.9 } );
+    const rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing * 0.9 } );
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
 

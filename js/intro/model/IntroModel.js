@@ -25,7 +25,7 @@ define( require => {
   function IntroModel( tandem ) {
 
     MassesAndSpringsModel.call( this, tandem );
-    var self = this;
+    const self = this;
     this.basicsVersion = false;
 
     // Set initial springs and masses
@@ -56,11 +56,11 @@ define( require => {
     } );
 
     // Array of parameters for scene 1
-    var sameLengthModeSpringState = this.getSpringState();
+    let sameLengthModeSpringState = this.getSpringState();
 
     // Array of parameters for scene 2
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH / 2 );
-    var adjustableLengthModeSpringState = this.getSpringState();
+    let adjustableLengthModeSpringState = this.getSpringState();
 
     this.spring1.naturalRestingLengthProperty.set( MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH );
 
