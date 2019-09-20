@@ -1,4 +1,4 @@
-// Copyright 2018, University of Colorado Boulder
+// Copyright 2018-2019, University of Colorado Boulder
 
 /**
  * Profile used for colors dependent on the basics version.
