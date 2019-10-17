@@ -21,6 +21,7 @@ define( require => {
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   const Property = require( 'AXON/Property' );
@@ -41,7 +42,7 @@ define( require => {
    * @param {Object} [options]
    */
   function MassesAndSpringsModel( tandem, options ) {
-    options = _.extend( {
+    options = merge( {
       damping: 0
     }, options );
 

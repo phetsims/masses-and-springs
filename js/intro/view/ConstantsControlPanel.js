@@ -14,6 +14,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -35,7 +36,7 @@ define( require => {
    * @constructor
    */
   function ConstantsControlPanel( selectedConstantProperty, constantEnumeration, title, tandem, options ) {
-    options = _.extend( {
+    options = merge( {
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       visible: true,
       fill: 'white',

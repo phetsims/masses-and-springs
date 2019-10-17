@@ -14,6 +14,7 @@ define( require => {
   const Line = require( 'SCENERY/nodes/Line' );
   const LineArrowNode = require( 'SCENERY_PHET/LineArrowNode' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Property = require( 'AXON/Property' );
 
@@ -26,7 +27,7 @@ define( require => {
    */
   function DisplacementArrowNode( displacementProperty, visibleProperty, tandem, options ) {
 
-    options = _.extend( {
+    options = merge( {
       modelViewTransform: null,
       verticalLineVisible: true,
       symbolRepresentation: false,

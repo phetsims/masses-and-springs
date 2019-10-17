@@ -24,6 +24,7 @@ define( require => {
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   const MassNode = require( 'MASSES_AND_SPRINGS/common/view/MassNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const MutableOptionsNode = require( 'SUN/MutableOptionsNode' );
   const Node = require( 'SCENERY/nodes/Node' );
@@ -56,7 +57,7 @@ define( require => {
   function SpringScreenView( model, tandem, options ) {
     ScreenView.call( this );
 
-    options = _.extend( {
+    options = merge( {
       useSliderLabels: true,
       dampingVisible: false
     }, options );
@@ -316,7 +317,7 @@ define( require => {
     createSpringConstantPanel: function( springIndex, labels, tandem, options ) {
 
       // Additional options for compatibility with Masses and Springs: Basics
-      options = _.extend( {
+      options = merge( {
         string: this.model.basicsVersion ? springStrengthString : springConstantPatternString,
         sliderTrackSize: this.model.basicsVersion ? new Dimension2( 140, 0.1 ) : new Dimension2( 120, 0.1 ),
         yMargin: this.model.basicsVersion ? 7 : 5,

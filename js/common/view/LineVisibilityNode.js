@@ -15,6 +15,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -38,7 +39,7 @@ define( require => {
    * @constructor
    */
   function LineVisibilityNode( model, tandem, options ) {
-    options = _.extend( {
+    options = merge( {
       massEquilibrium: false,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'LineVisibilityNode' )

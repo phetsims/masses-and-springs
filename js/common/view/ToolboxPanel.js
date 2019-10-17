@@ -16,6 +16,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Panel = require( 'SUN/Panel' );
   const Range = require( 'DOT/Range' );
@@ -36,7 +37,7 @@ define( require => {
    * @constructor
    */
   function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, alignGroup, tandem, options ) {
-    options = _.extend( {
+    options = merge( {
       dragBounds: dragBounds,
       fill: MassesAndSpringsConstants.PANEL_FILL,
       xMargin: 10,

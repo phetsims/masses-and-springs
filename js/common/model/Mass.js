@@ -17,6 +17,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const NullableIO = require( 'TANDEM/types/NullableIO' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
@@ -45,7 +46,7 @@ define( require => {
 
     const self = this;
 
-    options = _.extend( {
+    options = merge( {
       adjustable: false,
       mysteryLabel: false,
       icon: false, // Determines whether this mass will be displayed as an icon.

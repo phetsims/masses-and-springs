@@ -12,6 +12,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const RectangularPushButton = require( 'SUN/buttons/RectangularPushButton' );
   const StopSignNode = require( 'SCENERY_PHET/StopSignNode' );
 
@@ -22,7 +23,7 @@ define( require => {
    * @constructor
    */
   function StopperButtonNode( tandem, options ) {
-    options = _.extend( {
+    options = merge( {
       xMargin: 3,
       yMargin: 3,
       touchAreaXDilation: 6,

@@ -13,6 +13,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const merge = require( 'PHET_CORE/merge' );
   const ParametricSpringNode = require( 'SCENERY_PHET/ParametricSpringNode' );
   const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -33,7 +34,7 @@ define( require => {
   function OscillatingSpringNode( spring, modelViewTransform2, tandem, options ) {
     const self = this;
 
-    options = _.extend( {
+    options = merge( {
       deltaPhase: 3 * Math.PI / 2,
       loops: MAP_NUMBER_OF_LOOPS( spring.lengthProperty.get() ), // {number} number of loops in the coil
       pointsPerLoop: 28, // {number} number of points per loop

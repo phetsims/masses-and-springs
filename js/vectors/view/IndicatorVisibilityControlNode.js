@@ -18,6 +18,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -42,7 +43,7 @@ define( require => {
    * @constructor
    */
   function IndicatorVisibilityControlNode( model, tandem, options ) {
-    options = _.extend( {
+    options = merge( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       tandem: tandem.createTandem( 'indicatorVisibilityControlNode' ),
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 10,

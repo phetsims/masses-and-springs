@@ -14,6 +14,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
   const Panel = require( 'SUN/Panel' );
@@ -40,7 +41,7 @@ define( require => {
   function MassValueControlPanel( mass, massNodeIcon, tandem, options ) {
     assert && assert( mass.adjustable === true, 'MassValueControlPanel should only adjust a mass that is adjustable.' );
 
-    options = _.extend( {
+    options = merge( {
       minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH,
       cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
       fill: 'white',

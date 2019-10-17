@@ -14,6 +14,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
@@ -29,7 +30,7 @@ define( require => {
    * @constructor
    */
   function SpringControlPanel( springProperty, propertyRange, title, labels, tandem, options ) {
-    options = _.extend( {
+    options = merge( {
       fill: MassesAndSpringsConstants.PANEL_FILL,
       titleFont: MassesAndSpringsConstants.TITLE_FONT,
       xMargin: 5,

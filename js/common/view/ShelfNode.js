@@ -11,6 +11,7 @@ define( require => {
   // modules
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const merge = require( 'PHET_CORE/merge' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   /**
@@ -19,7 +20,7 @@ define( require => {
    * @constructor
    */
   function ShelfNode( tandem, options ) {
-    options = _.extend( {
+    options = merge( {
       fill: '#e6c29a',
       stroke: 'black',
       rectHeight: 10,

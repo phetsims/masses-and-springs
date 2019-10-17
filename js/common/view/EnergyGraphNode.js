@@ -25,11 +25,12 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const MoveToTrashButton = require( 'SCENERY_PHET/MoveToTrashButton' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberProperty = require( 'AXON/NumberProperty' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -78,8 +79,8 @@ define( require => {
       touchAreaXDilation: 5,
       touchAreaYDilation: 5
     };
-    const zoomInButton = new ZoomButton( _.extend( { in: true }, zoomButtonOptions ) );
-    const zoomOutButton = new ZoomButton( _.extend( { in: false }, zoomButtonOptions ) );
+    const zoomInButton = new ZoomButton( merge( { in: true }, zoomButtonOptions ) );
+    const zoomOutButton = new ZoomButton( merge( { in: false }, zoomButtonOptions ) );
 
     // Zooming out means bars and zoom level gets smaller.
     zoomOutButton.addListener( function() {

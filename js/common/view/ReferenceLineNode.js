@@ -13,6 +13,7 @@ define( require => {
   const Line = require( 'SCENERY/nodes/Line' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+  const merge = require( 'PHET_CORE/merge' );
   const Property = require( 'AXON/Property' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
@@ -30,7 +31,7 @@ define( require => {
    * @constructor
    */
   function ReferenceLineNode( modelViewTransform2, spring, property, visibleProperty, options ) {
-    options = _.extend( {
+    options = merge( {
       fixedPosition: false, // flag for a line that remain at a target location
       zeroPointLine: false, // flag for a line that remains at the zero reference point of the sim
       stroke: 'black',

@@ -10,10 +10,11 @@ define( require => {
 
   // modules
   const Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const ComboBox = require( 'SUN/ComboBox' );
   const ComboBoxItem = require( 'SUN/ComboBoxItem' );
+  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Text = require( 'SCENERY/nodes/Text' );
 
   class GravityComboBox extends ComboBox {
@@ -26,7 +27,7 @@ define( require => {
      * @constructor
      */
     constructor( bodyProperty, listNodeParent, tandem, options ) {
-      options = _.extend( {
+      options = merge( {
         cornerRadius: 3,
         xMargin: 10,
         yMargin: 6,

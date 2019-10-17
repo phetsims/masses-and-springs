@@ -13,6 +13,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -31,7 +32,7 @@ define( require => {
    */
   function SpringHangerNode( springs, modelViewTransform, tandem, options ) {
 
-    options = _.extend( {
+    options = merge( {
       singleSpring: false
     }, options );
     if ( options.singleSpring === false ) {

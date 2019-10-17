@@ -19,6 +19,7 @@ define( require => {
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -50,7 +51,7 @@ define( require => {
    * @constructor
    */
   function GravityAndDampingControlNode( model, listNodeParent, tandem, options ) {
-    options = _.extend( {
+    options = merge( {
       useSliderLabels: true,
       dampingVisible: false
     }, options );
