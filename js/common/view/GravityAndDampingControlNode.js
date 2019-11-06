@@ -83,7 +83,7 @@ define( require => {
       MassesAndSpringsConstants.GRAVITY_RANGE, {
         xMargin: 0,
         yMargin: 0,
-        excludeTweakers: options.useSliderLabels,
+        includeArrowButtons: !options.useSliderLabels,
         layoutFunction: NumberControl.createLayoutFunction4( {
           sliderPadding: options.useTextSliderLabels ? 0 : 13,
           hasReadoutProperty: new DerivedProperty( [ model.bodyProperty ], function( body ) {
