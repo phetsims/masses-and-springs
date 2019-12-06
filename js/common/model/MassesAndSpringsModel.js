@@ -50,8 +50,8 @@ define( require => {
     this.basicsVersion = true;
 
     // @public {Enumeration}
-    this.forcesModeChoice = new Enumeration( [ 'FORCES', 'NET_FORCES' ] );
-    this.simSpeedChoice = new Enumeration( [ 'NORMAL', 'SLOW' ] );
+    this.forcesModeChoice = Enumeration.byKeys( [ 'FORCES', 'NET_FORCES' ] );
+    this.simSpeedChoice = Enumeration.byKeys( [ 'NORMAL', 'SLOW' ] );
 
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {

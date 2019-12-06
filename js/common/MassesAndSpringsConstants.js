@@ -75,8 +75,8 @@ define( require => {
     THUMB_HIGHLIGHT: '#71EDFF',
 
     // Enumerations
-    SCENE_MODE_ENUM: new Enumeration( [ 'SAME_LENGTH', 'ADJUSTABLE_LENGTH' ] ),
-    CONSTANT_MODE_ENUM: new Enumeration( [ 'SPRING_CONSTANT', 'SPRING_THICKNESS' ] ),
+    SCENE_MODE_ENUM: Enumeration.byKeys( [ 'SAME_LENGTH', 'ADJUSTABLE_LENGTH' ] ),
+    CONSTANT_MODE_ENUM: Enumeration.byKeys( [ 'SPRING_CONSTANT', 'SPRING_THICKNESS' ] ),
 
     /**
      * Creates line for visual representation within the panel.
