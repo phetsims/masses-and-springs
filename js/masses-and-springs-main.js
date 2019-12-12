@@ -22,7 +22,7 @@ define( require => {
   const massesAndSpringsTitleString = require( 'string!MASSES_AND_SPRINGS/masses-and-springs.title' );
 
   // constants
-  const tandem = Tandem.rootTandem;
+  const tandem = Tandem.ROOT;
 
   const simOptions = {
     credits: {
