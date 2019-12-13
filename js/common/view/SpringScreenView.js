@@ -235,7 +235,7 @@ define( require => {
         },
         bidirectional: true
       } ),
-      stepOptions: {
+      stepForwardOptions: {
         listener: function() { model.stepForward( 0.01 ); }
       },
       tandem: tandem.createTandem( 'timeControlNode' )
