@@ -15,7 +15,6 @@ define( require => {
   const ClosestDragListener = require( 'SUN/ClosestDragListener' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const DraggableRulerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableRulerNode' );
-  const DraggableTimerNode = require( 'MASSES_AND_SPRINGS/common/view/DraggableTimerNode' );
   const DynamicProperty = require( 'AXON/DynamicProperty' );
   const GravityAndDampingControlNode = require( 'MASSES_AND_SPRINGS/common/view/GravityAndDampingControlNode' );
   const HBox = require( 'SCENERY/nodes/HBox' );
@@ -38,6 +37,7 @@ define( require => {
   const ShelfNode = require( 'MASSES_AND_SPRINGS/common/view/ShelfNode' );
   const SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   const StopperButtonNode = require( 'MASSES_AND_SPRINGS/common/view/StopperButtonNode' );
+  const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
@@ -171,23 +171,18 @@ define( require => {
         useSliderLabels: options.useSliderLabels
       } );
 
-    // @public {DraggableTimerNode}
-    this.timerNode = new DraggableTimerNode(
-      this.visibleBoundsProperty.get(),
-      Vector2.ZERO,
-      model.timerSecondsProperty,
-      model.timerRunningProperty,
-      model.timerVisibleProperty,
-      function() {
+    // @private
+    this.stopwatchNode = new StopwatchNode( model.stopwatch, {
+        visibleBoundsProperty: this.visibleBoundsProperty,
+        dragEndListener: () => {
 
-        // When a node is released, check if it is over the toolbox.  If so, drop it in.
-        if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.timerNode.getGlobalBounds() ) ) {
-          model.timerVisibleProperty.set( false );
-          model.timerSecondsProperty.reset();
-          model.timerRunningProperty.reset();
-        }
-      },
-      tandem.createTandem( 'timerNode' )
+          // When a node is released, check if it is over the toolbox.  If so, drop it in.
+          if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.stopwatchNode.getGlobalBounds() ) ) {
+            model.stopwatch.reset();
+          }
+        },
+        tandem: tandem.createTandem( 'stopwatchNode' )
+      }
     );
 
     // @public {DraggableRulerNode}
@@ -208,7 +203,7 @@ define( require => {
 
     // @public {Node} Create specific layer for tools so they don't overlap the reset all button.
     this.toolsLayer = new Node( {
-      children: [ this.timerNode, this.rulerNode ],
+      children: [ this.stopwatchNode, this.rulerNode ],
       tandem: tandem.createTandem( 'massLayer' ),
       preventFit: true
     } );
@@ -246,11 +241,11 @@ define( require => {
 
     // @public {ToolboxPanel} Toolbox Panel
     this.toolboxPanel = new ToolboxPanel(
+      model.stopwatch,
       this.visibleBoundsProperty.get(),
       this.rulerNode,
-      this.timerNode,
+      this.stopwatchNode,
       model.rulerVisibleProperty,
-      model.timerVisibleProperty,
       this.rightPanelAlignGroup,
       tandem.createTandem( 'toolboxPanel' ), {
         minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 32

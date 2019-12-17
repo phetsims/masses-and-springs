@@ -11,32 +11,30 @@ define( require => {
 
   // modules
   const AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const inherit = require( 'PHET_CORE/inherit' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
   const merge = require( 'PHET_CORE/merge' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
   const Panel = require( 'SUN/Panel' );
-  const Range = require( 'DOT/Range' );
   const RulerNode = require( 'SCENERY_PHET/RulerNode' );
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  const TimerNode = require( 'SCENERY_PHET/TimerNode' );
+  const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
+  const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
   const Vector2 = require( 'DOT/Vector2' );
 
   /**
+   * @param {Stopwatch} stopwatch
    * @param {Bounds2} dragBounds
    * @param {DraggableRulerNode} rulerNode
-   * @param {DraggableTimerNode} timerNode
+   * @param {StopwatchNode} stopwatchNode
    * @param {Property.<boolean>} rulerVisibleProperty
-   * @param {Property.<boolean>} timerVisibleProperty
    * @param {AlignGroup} alignGroup
    * @param {Tandem} tandem
    * @param {Object} options
    * @constructor
    */
-  function ToolboxPanel( dragBounds, rulerNode, timerNode, rulerVisibleProperty, timerVisibleProperty, alignGroup, tandem, options ) {
+  function ToolboxPanel( stopwatch, dragBounds, rulerNode, stopwatchNode, rulerVisibleProperty, alignGroup, tandem, options ) {
     options = merge( {
       dragBounds: dragBounds,
       fill: MassesAndSpringsConstants.PANEL_FILL,
@@ -58,15 +56,7 @@ define( require => {
 
 
     // Create timer to be turned into icon
-    const secondsProperty = new NumberProperty( 0, {
-      tandem: tandem.createTandem( 'secondsProperty' ),
-      units: 'seconds',
-      range: new Range( 0, Number.POSITIVE_INFINITY )
-    } );
-    const isRunningProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'isRunningProperty' )
-    } );
-    const timer = new TimerNode( secondsProperty, isRunningProperty );
+    const timer = new StopwatchNode( new Stopwatch( { isVisible: true } ) );
     timer.scale( 0.5 );
 
     // Create ruler to be turned into icon
@@ -129,21 +119,21 @@ define( require => {
       tandem: tandem.createTandem( 'timerIcon' )
     } );
 
-    // Drag listener for event forwarding: timerIcon ---> timerNode
+    // Drag listener for event forwarding: timerIcon ---> stopwatchNode
     timerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( function( event ) {
 
       // Toggle visibility
-      timerVisibleProperty.set( true );
+      stopwatch.isVisibleProperty.value = true;
 
       // Now determine the initial position where this element should move to after it's created, which corresponds
       // to the location of the mouse or touch event.
-      const initialPosition = timerNode.globalToParentPoint( event.pointer.point )
-        .minus( new Vector2( timerNode.width / 2, timerNode.height * 0.4 ) );
+      const initialPosition = stopwatchNode.globalToParentPoint( event.pointer.point )
+        .minus( new Vector2( stopwatchNode.width / 2, stopwatchNode.height * 0.4 ) );
 
-      timerNode.positionProperty.set( initialPosition );
+      stopwatch.positionProperty.set( initialPosition );
 
-      // Sending through the startDrag from icon to timerNode causes it to receive all subsequent drag events.
-      timerNode.timerNodeMovableDragHandler.startDrag( event );
+      // Sending through the startDrag from icon to stopwatchNode causes it to receive all subsequent drag events.
+      stopwatchNode.dragListener.press( event, stopwatchNode );
     }, {
 
       // allow moving a finger (on a touchscreen) dragged across this node to interact with it
@@ -152,7 +142,7 @@ define( require => {
       tandem: tandem.createTandem( 'dragHandler' )
     } ) );
     toolbox.addChild( timerIcon );
-    timerVisibleProperty.link( function( visible ) {
+    stopwatch.isVisibleProperty.link( function( visible ) {
       timerIcon.visible = !visible;
     } );
   }

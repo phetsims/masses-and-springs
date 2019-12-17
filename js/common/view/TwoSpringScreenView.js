@@ -140,9 +140,6 @@ define( require => {
       self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
 
       // Adjusting drag bounds of draggable objects based on visible bounds.
-      self.timerNode.timerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
-        self.timerNode.width / 2, self.timerNode.height / 2, -self.timerNode.width / 2, -self.timerNode.height / 2
-      );
       self.rulerNode.rulerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
         -self.rulerNode.width / 2, self.rulerNode.height / 2, self.rulerNode.width / 2, -self.rulerNode.height / 2
       );

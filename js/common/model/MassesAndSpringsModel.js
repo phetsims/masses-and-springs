@@ -26,8 +26,8 @@ define( require => {
   const OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   const Property = require( 'AXON/Property' );
   const PropertyIO = require( 'AXON/PropertyIO' );
-  const Range = require( 'DOT/Range' );
   const Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
+  const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -81,17 +81,9 @@ define( require => {
       tandem: tandem.createTandem( 'rulerVisibleProperty' )
     } );
 
-    // @public {Property.<boolean>} determines visibility of timer node
-    this.timerVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'timerVisibleProperty' )
-    } );
-
-    // @public {Property.<number>} elapsed time shown in the timer (rounded off to the nearest second)
-    this.timerSecondsProperty = new NumberProperty( 0, {
-      range: new Range( 0, Number.POSITIVE_INFINITY ),
-      reentrant: true, // used due to extremely small rounding
-      tandem: tandem.createTandem( 'timerSecondsProperty' ),
-      units: 'seconds'
+    // @public
+    this.stopwatch = new Stopwatch( {
+      tandem: tandem.createTandem( 'stopwatch' )
     } );
 
     // @public {Property.<boolean>} determines whether timer is active or not
@@ -263,8 +255,7 @@ define( require => {
       this.playingProperty.reset();
       this.simSpeedProperty.reset();
       this.rulerVisibleProperty.reset();
-      this.timerVisibleProperty.reset();
-      this.timerSecondsProperty.reset();
+      this.stopwatch.reset();
       this.timerRunningProperty.reset();
       this.movableLineVisibleProperty.reset();
       this.naturalLengthVisibleProperty.reset();
@@ -308,8 +299,8 @@ define( require => {
 
         // Maximum y value the spring should be able to contract based on the thickness and amount of spring coils.
         const maxY = mass.springProperty.get().thicknessProperty.get() *
-                   OscillatingSpringNode.MAP_NUMBER_OF_LOOPS(
-                     mass.springProperty.get().naturalRestingLengthProperty.get() );
+                     OscillatingSpringNode.MAP_NUMBER_OF_LOOPS(
+                       mass.springProperty.get().naturalRestingLengthProperty.get() );
 
         // Max Y value in model coordinates
         const modelMaxY = UPPER_CONSTRAINT( maxY );
@@ -397,9 +388,7 @@ define( require => {
           animationDt
         );
       }
-      if ( this.timerRunningProperty.value ) {
-        this.timerSecondsProperty.set( this.timerSecondsProperty.value + dt );
-      }
+      this.stopwatch.step( dt );
 
       // Oscillate springs
       this.springs.forEach( function( spring ) {
