@@ -174,11 +174,13 @@ define( require => {
     // @private
     this.stopwatchNode = new StopwatchNode( model.stopwatch, {
         visibleBoundsProperty: this.visibleBoundsProperty,
-        dragEndListener: () => {
+        dragListenerOptions: {
+          end: () => {
 
-          // When a node is released, check if it is over the toolbox.  If so, drop it in.
-          if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.stopwatchNode.getGlobalBounds() ) ) {
-            model.stopwatch.reset();
+            // When a node is released, check if it is over the toolbox.  If so, drop it in.
+            if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.stopwatchNode.getGlobalBounds() ) ) {
+              model.stopwatch.reset();
+            }
           }
         },
         tandem: tandem.createTandem( 'stopwatchNode' )
