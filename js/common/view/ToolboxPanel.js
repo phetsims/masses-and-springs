@@ -56,7 +56,7 @@ define( require => {
 
 
     // Create timer to be turned into icon
-    const timer = new StopwatchNode( new Stopwatch( { isVisible: true } ) );
+    const timer = new StopwatchNode( new Stopwatch( { isVisible: true, tandem: Tandem.OPT_OUT } ) );
     timer.scale( 0.5 );
 
     // Create ruler to be turned into icon
