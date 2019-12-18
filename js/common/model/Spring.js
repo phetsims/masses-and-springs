@@ -90,7 +90,7 @@ define( require => {
         return -springConstant * displacement;
       },
       {
-        units: 'newtons',
+        units: 'N',
         phetioType: DerivedPropertyIO( NumberIO )
       }
     );

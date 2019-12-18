@@ -60,7 +60,7 @@ define( require => {
 
     // @public {Property.<number>} coefficient of damping applied to the system
     this.dampingProperty = new NumberProperty( options.damping, {
-      units: 'newtons',
+      units: 'N',
       tandem: tandem.createTandem( 'dampingProperty' )
     } );
 
