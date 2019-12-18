@@ -21,6 +21,7 @@ define( require => {
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const StopwatchNode = require( 'SCENERY_PHET/StopwatchNode' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const Vector2 = require( 'DOT/Vector2' );
 
   /**
