@@ -186,6 +186,7 @@ define( require => {
         tandem: tandem.createTandem( 'stopwatchNode' )
       }
     );
+    this.stopwatchNode.touchArea = this.stopwatchNode.localBounds.dilated( 10 );
 
     // @public {DraggableRulerNode}
     this.rulerNode = new DraggableRulerNode(
