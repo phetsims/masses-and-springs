@@ -41,7 +41,7 @@ define( require => {
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const TimeControlNode = require( 'SCENERY_PHET/TimeControlNode' );
   const ToolboxPanel = require( 'MASSES_AND_SPRINGS/common/view/ToolboxPanel' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -339,7 +339,7 @@ define( require => {
           sliderTrackSize: options.sliderTrackSize,
           tickLabelSpacing: options.tickLabelSpacing,
           constrainValue: function( value ) {
-            return +Util.toFixed( value, 0 );
+            return +Utils.toFixed( value, 0 );
           }
         }
       );

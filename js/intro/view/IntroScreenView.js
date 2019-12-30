@@ -28,7 +28,7 @@ define( require => {
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TwoSpringScreenView = require( 'MASSES_AND_SPRINGS/common/view/TwoSpringScreenView' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -75,7 +75,7 @@ define( require => {
         visible: false,
         centerTick: true,
         constrainValue: function( value ) {
-          return Util.roundToInterval( value, .05 );
+          return Utils.roundToInterval( value, .05 );
         }
       } );
 

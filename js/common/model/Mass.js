@@ -24,7 +24,7 @@ define( require => {
   const PropertyIO = require( 'AXON/PropertyIO' );
   const Range = require( 'DOT/Range' );
   const SpringIO = require( 'MASSES_AND_SPRINGS/common/model/SpringIO' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
   const Vector2Property = require( 'DOT/Vector2Property' );
 
@@ -211,12 +211,12 @@ define( require => {
     // Used to determine when a peak is hit.
     this.verticalVelocityProperty.lazyLink( function( oldVelocity, newVelocity ) {
       if ( self.springProperty.value ) {
-        if ( Util.sign( oldVelocity ) !== Util.sign( newVelocity ) && Util.sign( oldVelocity ) ) {
+        if ( Utils.sign( oldVelocity ) !== Utils.sign( newVelocity ) && Utils.sign( oldVelocity ) ) {
 
           // @param {number} Emitter for peek during first upwards peek
           self.springProperty.value.peakEmitter.emit( 1 );
         }
-        if ( Util.sign( oldVelocity ) !== Util.sign( newVelocity.y ) && !Util.sign( oldVelocity ) ) {
+        if ( Utils.sign( oldVelocity ) !== Utils.sign( newVelocity.y ) && !Utils.sign( oldVelocity ) ) {
 
           // @param {number} Emitter for peek during second downwards peek
           self.springProperty.value.peakEmitter.emit( -1 );

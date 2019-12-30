@@ -24,7 +24,7 @@ define( require => {
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const SunConstants = require( 'SUN/SunConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -97,7 +97,7 @@ define( require => {
         thumbFill: '#00C4DF',
         thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
         thumbTouchAreaXDilation: 6,
-        constrainValue: function( value ) { return ( Util.roundSymmetric( value / 10 ) * 10); },
+        constrainValue: function( value ) { return ( Utils.roundSymmetric( value / 10 ) * 10); },
         majorTicks: [
           {
             value: range.min,

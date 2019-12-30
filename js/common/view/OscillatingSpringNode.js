@@ -15,13 +15,13 @@ define( require => {
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const merge = require( 'PHET_CORE/merge' );
   const ParametricSpringNode = require( 'SCENERY_PHET/ParametricSpringNode' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   const LINEAR_LOOP_MAPPING = new LinearFunction( 0.1, 0.5, 2, 12 );
   const MAP_NUMBER_OF_LOOPS = function( springLength ) {
-    return Util.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) );
+    return Utils.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) );
   };
 
   /**

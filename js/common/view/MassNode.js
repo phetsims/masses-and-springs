@@ -28,7 +28,7 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
   const VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
 
@@ -149,7 +149,7 @@ define( require => {
       // Adjust the mass label for adjustable masses.
       if ( this.mass.adjustable ) {
         this.mass.massProperty.link( function( massValue ) {
-          label.setText( StringUtils.fillIn( massValueString, { mass: Util.roundSymmetric( massValue * 1000 ) } ) );
+          label.setText( StringUtils.fillIn( massValueString, { mass: Utils.roundSymmetric( massValue * 1000 ) } ) );
           label.center = self.rect.center;
         } );
       }

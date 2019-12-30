@@ -26,7 +26,7 @@ define( require => {
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const SunConstants = require( 'SUN/SunConstants' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -178,7 +178,7 @@ define( require => {
           thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
           align: 'center',
           constrainValue: function( value ) {
-            value = Util.roundSymmetric( value * 100 / 5.75 ) * 5.75;
+            value = Utils.roundSymmetric( value * 100 / 5.75 ) * 5.75;
             return value / 100;
           },
           tandem: tandem.createTandem( 'hSlider' )

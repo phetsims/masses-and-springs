@@ -17,7 +17,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
@@ -45,7 +45,7 @@ define( require => {
       minorTickMarksVisible: true,
       sliderTrackSize: new Dimension2( 120, 0.1 ),
       tickLabelSpacing: 6,
-      constrainValue: Util.roundSymmetric( springProperty.value )
+      constrainValue: Utils.roundSymmetric( springProperty.value )
     }, options );
 
     const hSliderTitle = new Text( title, { font: options.titleFont, maxWidth:150 } );
