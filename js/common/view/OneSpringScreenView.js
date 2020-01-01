@@ -213,43 +213,7 @@ define( require => {
 
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-      self.panelRightSpacing = visibleBounds.right - self.spacing;
-
-      // Alignment of layout
-      self.springSystemControlsNode.centerX = self.springCenter * 0.855; // centering springHangerNode over spring
-      self.springSystemControlsNode.top = self.spacing;
-      self.springConstantControlPanel.top = self.springSystemControlsNode.top;
-      self.springConstantControlPanel.left = self.springSystemControlsNode.right + self.spacing;
-      self.springSystemControlsNode.top = self.spacing;
-      self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
-      self.movableLineNode.centerX = self.springCenter;
-
-      if ( !model.basicsVersion ) {
-        self.energyGraphNode.leftTop = new Vector2( visibleBounds.left + self.spacing, self.springSystemControlsNode.top );
-      }
-
-      // Adjusting drag bounds of draggable objects based on visible bounds.
-      self.rulerNode.rulerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
-        -self.rulerNode.width / 2, self.rulerNode.height / 2, self.rulerNode.width / 2, -self.rulerNode.height / 2
-      );
-      self.massNodes.forEach( function( massNode ) {
-        if ( massNode.centerX > visibleBounds.maxX ) {
-          massNode.mass.positionProperty.set(
-            new Vector2(
-              self.modelViewTransform.viewToModelX( visibleBounds.maxX ),
-              massNode.mass.positionProperty.get().y
-            )
-          );
-        }
-        if ( massNode.centerX < visibleBounds.minX ) {
-          massNode.mass.positionProperty.set(
-            new Vector2(
-              self.modelViewTransform.viewToModelX( visibleBounds.minX ),
-              massNode.mass.positionProperty.get().y
-            )
-          );
-        }
-      } );
+      self.adjustViewComponents( true, visibleBounds );
     } );
   }
 

@@ -383,6 +383,75 @@ define( require => {
         } );
       optionsPanel.moveToBack();
       return optionsPanel;
+    },
+    /**
+     * Adjusting view components of panels and draggable objects based on visible bounds of the
+     * one and two spring views.
+     *
+     * @param {Boolean} singleSpringView
+     * @param {Bounds2} visibleBounds
+     * @public
+     */
+    adjustViewComponents: function( singleSpringView, visibleBounds ) {
+
+      // Handle adjustments for single spring system
+      if ( singleSpringView ) {
+        this.panelRightSpacing = visibleBounds.right - this.spacing;
+
+        // Alignment of layout
+        this.springSystemControlsNode.centerX = this.springCenter * 0.855; // centering springHangerNode over spring
+        this.springSystemControlsNode.top = this.spacing;
+        this.springConstantControlPanel.top = this.springSystemControlsNode.top;
+        this.springConstantControlPanel.left = this.springSystemControlsNode.right + this.spacing;
+        this.springSystemControlsNode.top = this.spacing;
+        this.simControlHBox.rightBottom = new Vector2( this.panelRightSpacing, this.shelf.bottom );
+        this.movableLineNode.centerX = this.springCenter;
+
+        if ( !this.model.basicsVersion ) {
+          this.energyGraphNode.leftTop = new Vector2( visibleBounds.left + this.spacing, this.springSystemControlsNode.top );
+        }
+      }
+
+      // Handle adjustments for two spring system
+      else {
+
+        // {number} Used in determining springSystemControlsNode's placement
+        const distanceBetweenSprings = (this.modelViewTransform.modelToViewX(
+          this.model.firstSpring.positionProperty.value.distance( this.model.secondSpring.positionProperty.value ) ) / 2);
+        const leftSpringXPosition = this.modelViewTransform.modelToViewX( this.model.firstSpring.positionProperty.value.x );
+
+        // Update the bounds of view elements
+        this.panelRightSpacing = visibleBounds.right - this.spacing;
+
+        // Alignment of layout
+        this.springSystemControlsNode.x = leftSpringXPosition + distanceBetweenSprings - this.springHangerNode.centerX;
+        this.springSystemControlsNode.top = this.spacing;
+        this.simControlHBox.rightBottom = new Vector2( this.panelRightSpacing, this.shelf.bottom );
+
+      }
+
+      // Adjusting drag bounds of draggable objects based on visible bounds.
+      this.rulerNode.rulerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
+        -this.rulerNode.width / 2, this.rulerNode.height / 2, this.rulerNode.width / 2, -this.rulerNode.height / 2
+      );
+      this.massNodes.forEach( function( massNode ) {
+        if ( massNode.centerX > visibleBounds.maxX ) {
+          massNode.mass.positionProperty.set(
+            new Vector2(
+              this.modelViewTransform.viewToModelX( visibleBounds.maxX ),
+              massNode.mass.positionProperty.get().y
+            )
+          );
+        }
+        if ( massNode.centerX < visibleBounds.minX ) {
+          massNode.mass.positionProperty.set(
+            new Vector2(
+              this.modelViewTransform.viewToModelX( visibleBounds.minX ),
+              massNode.mass.positionProperty.get().y
+            )
+          );
+        }
+      } );
     }
   } );
 } );

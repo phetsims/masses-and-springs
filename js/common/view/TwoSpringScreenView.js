@@ -123,38 +123,9 @@ define( require => {
       align: 'top'
     } );
 
-    // {number} Used in determining springSystemControlsNode's placement
-    const distanceBetweenSprings = (self.modelViewTransform.modelToViewX(
-      model.firstSpring.positionProperty.value.distance( model.secondSpring.positionProperty.value ) ) / 2);
-    const leftSpringXPosition = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
-
     // Adjust the floating panels to the visibleBounds of the screen.
     this.visibleBoundsProperty.link( function( visibleBounds ) {
-
-      // Update the bounds of view elements
-      self.panelRightSpacing = visibleBounds.right - self.spacing;
-
-      // Alignment of layout
-      self.springSystemControlsNode.x = leftSpringXPosition + distanceBetweenSprings - self.springHangerNode.centerX;
-      self.springSystemControlsNode.top = self.spacing;
-      self.simControlHBox.rightBottom = new Vector2( self.panelRightSpacing, self.shelf.bottom );
-
-      // Adjusting drag bounds of draggable objects based on visible bounds.
-      self.rulerNode.rulerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
-        -self.rulerNode.width / 2, self.rulerNode.height / 2, self.rulerNode.width / 2, -self.rulerNode.height / 2
-      );
-      self.massNodes.forEach( function( massNode ) {
-        if ( massNode.centerX > visibleBounds.maxX ) {
-          massNode.mass.positionProperty.set(
-            new Vector2( self.modelViewTransform.viewToModelX( visibleBounds.maxX ), massNode.mass.positionProperty.get().y )
-          );
-        }
-        if ( massNode.centerX < visibleBounds.minX ) {
-          massNode.mass.positionProperty.set(
-            new Vector2( self.modelViewTransform.viewToModelX( visibleBounds.minX ), massNode.mass.positionProperty.get().y )
-          );
-        }
-      } );
+      self.adjustViewComponents( false, visibleBounds );
     } );
   }
 
