@@ -94,7 +94,7 @@ define( require => {
           bracketLength: displacementLabels.height < 17 ? 17 : displacementLabels.height,
           bracketLineWidth: 2,
           bracketStroke: 'black',
-          bracketTipLocation: 0.475,
+          bracketTipPosition: 0.475,
           bracketEndRadius: 4,
           bracketTipRadius: 4
         } )
