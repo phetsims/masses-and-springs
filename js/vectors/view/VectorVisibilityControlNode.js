@@ -78,7 +78,7 @@ define( require => {
     // Responsible for forces aquaRadioButton
     const forcesVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
-      model.forcesModeChoice.FORCES,
+      MassesAndSpringsConstants.FORCES_MODE_CHOICE.FORCES,
       new Text( forcesString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
@@ -114,7 +114,7 @@ define( require => {
 
     const netForceVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
-      model.forcesModeChoice.NET_FORCES,
+      MassesAndSpringsConstants.FORCES_MODE_CHOICE.NET_FORCES,
       new HBox( { children: [ netForceAlignBox, netForceArrow ], spacing: contentSpacing } ),
       { radius: 7, spacing: 7 }
     );
@@ -164,7 +164,7 @@ define( require => {
     }
 
     // Property that toggles whether the gravity and spring force checkboxes are enabled
-    const enabledProperty = new BooleanProperty( model.forcesModeProperty.value === model.forcesModeChoice.FORCES, {
+    const enabledProperty = new BooleanProperty( model.forcesModeProperty.value === MassesAndSpringsConstants.FORCES_MODE_CHOICE.FORCES, {
       phetioFeatured: true
     } );
 
@@ -188,7 +188,7 @@ define( require => {
 
     // manages the mutability of the forces checkboxes dependent on the forces and net force aquaRadioButton
     model.forcesModeProperty.link( function( mode ) {
-      enabledProperty.set( mode === model.forcesModeChoice.FORCES );
+      enabledProperty.set( mode === MassesAndSpringsConstants.FORCES_MODE_CHOICE.FORCES );
     } );
 
     // Contains all checkboxes and radio buttons for vector visibility

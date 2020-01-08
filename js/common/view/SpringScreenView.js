@@ -225,10 +225,10 @@ define( require => {
     this.timeControlNode = new TimeControlNode( model.playingProperty, {
       isSlowMotionProperty: new DynamicProperty( new Property( model.simSpeedProperty ), {
         map: function( simSpeed ) {
-          return simSpeed === model.simSpeedChoice.SLOW;
+          return simSpeed === MassesAndSpringsConstants.SIM_SPEED_CHOICE.SLOW;
         },
         inverseMap: function( isSlow ) {
-          return isSlow ? model.simSpeedChoice.SLOW : model.simSpeedChoice.NORMAL;
+          return isSlow ? MassesAndSpringsConstants.SIM_SPEED_CHOICE.SLOW : MassesAndSpringsConstants.SIM_SPEED_CHOICE.NORMAL;
         },
         bidirectional: true
       } ),

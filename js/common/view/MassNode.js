@@ -259,7 +259,7 @@ define( require => {
     const updateForceVisibility = function( arrowVisibilityProperty, arrowNode ) {
       Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
         function( spring, springVectorVisibility, forcesMode ) {
-          arrowNode.visible = !!spring && springVectorVisibility && forcesMode === model.forcesModeChoice.FORCES;
+          arrowNode.visible = !!spring && springVectorVisibility && forcesMode === MassesAndSpringsConstants.FORCES_MODE_CHOICE.FORCES;
         } );
     };
 
@@ -278,7 +278,7 @@ define( require => {
     // Show/hide the net force arrow
     Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
       function( spring, forcesMode ) {
-        netForceArrow.visible = !!spring && forcesMode === model.forcesModeChoice.NET_FORCES;
+        netForceArrow.visible = !!spring && forcesMode === MassesAndSpringsConstants.FORCES_MODE_CHOICE.NET_FORCES;
       } );
 
     // Show/hide line at base of vectors
@@ -289,7 +289,7 @@ define( require => {
         model.forcesModeProperty
       ],
       function( spring, gravityForceVisible, springForceVisible, forcesMode ) {
-        forceNullLine.visible = !!spring && ( gravityForceVisible || springForceVisible || forcesMode === model.forcesModeChoice.NET_FORCES );
+        forceNullLine.visible = !!spring && ( gravityForceVisible || springForceVisible || forcesMode === MassesAndSpringsConstants.FORCES_MODE_CHOICE.NET_FORCES );
       } );
 
     /**

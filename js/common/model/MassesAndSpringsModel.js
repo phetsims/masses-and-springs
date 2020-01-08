@@ -13,7 +13,6 @@ define( require => {
   const Body = require( 'MASSES_AND_SPRINGS/common/model/Body' );
   const BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LinearFunction = require( 'DOT/LinearFunction' );
@@ -49,10 +48,6 @@ define( require => {
     // Flag used to differentiate basics and non-basics version
     this.basicsVersion = true;
 
-    // @public {Enumeration}
-    this.forcesModeChoice = Enumeration.byKeys( [ 'FORCES', 'NET_FORCES' ] );
-    this.simSpeedChoice = Enumeration.byKeys( [ 'NORMAL', 'SLOW' ] );
-
     // @public {Property.<boolean>} determines whether the sim is in a play/pause state
     this.playingProperty = new BooleanProperty( true, {
       tandem: tandem.createTandem( 'playingProperty' )
@@ -72,7 +67,9 @@ define( require => {
     } );
 
     // @public {Property.<string>} determines the speed at which the sim plays.
-    this.simSpeedProperty = new EnumerationProperty( this.simSpeedChoice, this.simSpeedChoice.NORMAL, {
+    this.simSpeedProperty = new EnumerationProperty(
+      MassesAndSpringsConstants.SIM_SPEED_CHOICE,
+      MassesAndSpringsConstants.SIM_SPEED_CHOICE.NORMAL, {
       tandem: tandem.createTandem( 'simSpeedProperty' )
     } );
 
@@ -135,9 +132,11 @@ define( require => {
     } );
 
     // @public {Property.<string>} determines mode of the vectors to be viewed
-    this.forcesModeProperty = new EnumerationProperty( this.forcesModeChoice, this.forcesModeChoice.FORCES, {
-      tandem: tandem.createTandem( 'forcesModeProperty' )
-    } );
+    this.forcesModeProperty = new EnumerationProperty(
+      MassesAndSpringsConstants.FORCES_MODE_CHOICE,
+      MassesAndSpringsConstants.FORCES_MODE_CHOICE.FORCES, {
+        tandem: tandem.createTandem( 'forcesModeProperty' )
+      } );
 
     // @public {Spring[]} Array that will contain all of the springs.
     this.springs = [];
@@ -375,7 +374,7 @@ define( require => {
       const animationDt = dt;
 
       // Change the dt value if we are playing in slow motion.
-      if ( this.simSpeedProperty.get() === this.simSpeedChoice.SLOW && this.playingProperty.get() ) {
+      if ( this.simSpeedProperty.get() === MassesAndSpringsConstants.SIM_SPEED_CHOICE.SLOW && this.playingProperty.get() ) {
         dt = dt / MassesAndSpringsConstants.SLOW_SIM_DT_RATIO;
       }
       for ( let i = 0; i < this.masses.length; i++ ) {
