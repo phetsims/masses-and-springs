@@ -21,7 +21,7 @@ define( require => {
      * @param mass
      * @returns {*}
      */
-    toStateObject( mass ) {
+    static toStateObject( mass ) {
       validate( mass, this.validator );
       if ( mass === null ) {
         return null;
