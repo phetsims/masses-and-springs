@@ -1,4 +1,4 @@
-// Copyright 2017-2019, University of Colorado Boulder
+// Copyright 2017-2020, University of Colorado Boulder
 
 /**
  * Panel that manages options for visibility of reference lines on vector screen.
@@ -94,7 +94,7 @@ define( require => {
           bracketLength: displacementLabels.height < 17 ? 17 : displacementLabels.height,
           bracketLineWidth: 2,
           bracketStroke: 'black',
-          bracketTipLocation: 0.475,
+          bracketTipPosition: 0.475,
           bracketEndRadius: 4,
           bracketTipRadius: 4
         } )
