@@ -307,7 +307,7 @@ define( require => {
      * @param {number} springIndex
      * @param {Array.<Text>} labels
      * @param {Tandem} tandem
-     * @param {object} options
+     * @param {Object} [options]
      *
      * @returns {SpringControlPanel}
      */

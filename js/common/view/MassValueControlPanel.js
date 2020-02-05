@@ -35,7 +35,7 @@ define( require => {
    * @param {Mass} mass
    * @param {Node} massNodeIcon: icon that represents the mass to be adjusted
    * @param {Tandem} tandem
-   * @param {object} options
+   * @param {Object} [options]
    * @constructor
    */
   function MassValueControlPanel( mass, massNodeIcon, tandem, options ) {

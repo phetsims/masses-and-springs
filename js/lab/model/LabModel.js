@@ -26,7 +26,7 @@ define( require => {
   /**
    * @param {Boolean} basicsVersion
    * @param {Tandem} tandem
-   * @param {object} options
+   * @param {Object} [options]
    *
    * @constructor
    */

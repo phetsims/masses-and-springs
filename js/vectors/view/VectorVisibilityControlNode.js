@@ -41,7 +41,7 @@ define( require => {
   /**
    * @param {MassesAndSpringsModel} model
    * @param {Tandem} tandem
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function VectorVisibilityControlNode( model, tandem, options ) {

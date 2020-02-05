@@ -32,7 +32,7 @@ define( require => {
    * @param {Property.<boolean>} rulerVisibleProperty
    * @param {AlignGroup} alignGroup
    * @param {Tandem} tandem
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function ToolboxPanel( stopwatch, dragBounds, rulerNode, stopwatchNode, rulerVisibleProperty, alignGroup, tandem, options ) {

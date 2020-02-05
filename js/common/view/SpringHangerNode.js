@@ -27,7 +27,7 @@ define( require => {
    * @param {Array.<Spring>} springs
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Tandem} tandem
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function SpringHangerNode( springs, modelViewTransform, tandem, options ) {

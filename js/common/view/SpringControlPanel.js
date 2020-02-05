@@ -26,7 +26,7 @@ define( require => {
    * @param {string} title - string used to title the panel
    * @param {Array.<Text>} labels - formatted as: [ minLabel, maxLabel]
    * @param {Tandem} tandem
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function SpringControlPanel( springProperty, propertyRange, title, labels, tandem, options ) {

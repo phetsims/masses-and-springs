@@ -158,7 +158,7 @@ define( require => {
      * @param {Color} color - color of the MassNode
      * @param {string} specifiedLabel - customized label for the MassNode
      * @param {Tandem} tandem
-     * @param {Object} options
+     * @param {Object} [options]
      */
     createMass: function( mass, xPosition, color, specifiedLabel, tandem, options ) {
       this.masses.push( new Mass( mass, xPosition, color, this.gravityProperty, tandem, options ) );
