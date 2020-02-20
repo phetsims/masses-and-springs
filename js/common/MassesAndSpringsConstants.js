@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
   const Line = require( 'SCENERY/nodes/Line' );
   const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
   const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
