@@ -14,6 +14,7 @@ define( require => {
   const BodyIO = require( 'MASSES_AND_SPRINGS/common/model/BodyIO' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
+  const ForcesMode = require( 'MASSES_AND_SPRINGS/common/model/ForcesMode' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LinearFunction = require( 'DOT/LinearFunction' );
   const Mass = require( 'MASSES_AND_SPRINGS/common/model/Mass' );
@@ -25,6 +26,7 @@ define( require => {
   const OscillatingSpringNode = require( 'MASSES_AND_SPRINGS/common/view/OscillatingSpringNode' );
   const Property = require( 'AXON/Property' );
   const PropertyIO = require( 'AXON/PropertyIO' );
+  const SimSpeed = require( 'MASSES_AND_SPRINGS/common/model/SimSpeed' );
   const Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
   const Stopwatch = require( 'SCENERY_PHET/Stopwatch' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -68,8 +70,8 @@ define( require => {
 
     // @public {Property.<string>} determines the speed at which the sim plays.
     this.simSpeedProperty = new EnumerationProperty(
-      MassesAndSpringsConstants.SIM_SPEED_CHOICE,
-      MassesAndSpringsConstants.SIM_SPEED_CHOICE.NORMAL, {
+      SimSpeed,
+      SimSpeed.NORMAL, {
       tandem: tandem.createTandem( 'simSpeedProperty' )
     } );
 
@@ -133,8 +135,8 @@ define( require => {
 
     // @public {Property.<string>} determines mode of the vectors to be viewed
     this.forcesModeProperty = new EnumerationProperty(
-      MassesAndSpringsConstants.FORCES_MODE_CHOICE,
-      MassesAndSpringsConstants.FORCES_MODE_CHOICE.FORCES, {
+      ForcesMode,
+      ForcesMode.FORCES, {
         tandem: tandem.createTandem( 'forcesModeProperty' )
       } );
 
@@ -374,7 +376,7 @@ define( require => {
       const animationDt = dt;
 
       // Change the dt value if we are playing in slow motion.
-      if ( this.simSpeedProperty.get() === MassesAndSpringsConstants.SIM_SPEED_CHOICE.SLOW && this.playingProperty.get() ) {
+      if ( this.simSpeedProperty.get() === SimSpeed.SLOW && this.playingProperty.get() ) {
         dt = dt / MassesAndSpringsConstants.SLOW_SIM_DT_RATIO;
       }
       for ( let i = 0; i < this.masses.length; i++ ) {

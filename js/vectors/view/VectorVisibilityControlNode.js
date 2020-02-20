@@ -13,6 +13,7 @@ define( require => {
   const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   const AquaRadioButton = require( 'SUN/AquaRadioButton' );
   const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const ForcesMode = require( 'MASSES_AND_SPRINGS/common/model/ForcesMode' );
   const ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const inherit = require( 'PHET_CORE/inherit' );
@@ -78,7 +79,7 @@ define( require => {
     // Responsible for forces aquaRadioButton
     const forcesVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
-      MassesAndSpringsConstants.FORCES_MODE_CHOICE.FORCES,
+      ForcesMode.FORCES,
       new Text( forcesString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
@@ -114,7 +115,7 @@ define( require => {
 
     const netForceVisibilityRadioButton = new AquaRadioButton(
       model.forcesModeProperty,
-      MassesAndSpringsConstants.FORCES_MODE_CHOICE.NET_FORCES,
+      ForcesMode.NET_FORCES,
       new HBox( { children: [ netForceAlignBox, netForceArrow ], spacing: contentSpacing } ),
       { radius: 7, spacing: 7 }
     );
@@ -164,7 +165,7 @@ define( require => {
     }
 
     // Property that toggles whether the gravity and spring force checkboxes are enabled
-    const enabledProperty = new BooleanProperty( model.forcesModeProperty.value === MassesAndSpringsConstants.FORCES_MODE_CHOICE.FORCES, {
+    const enabledProperty = new BooleanProperty( model.forcesModeProperty.value === ForcesMode.FORCES, {
       phetioFeatured: true
     } );
 
@@ -188,7 +189,7 @@ define( require => {
 
     // manages the mutability of the forces checkboxes dependent on the forces and net force aquaRadioButton
     model.forcesModeProperty.link( function( mode ) {
-      enabledProperty.set( mode === MassesAndSpringsConstants.FORCES_MODE_CHOICE.FORCES );
+      enabledProperty.set( mode === ForcesMode.FORCES );
     } );
 
     // Contains all checkboxes and radio buttons for vector visibility

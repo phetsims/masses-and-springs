@@ -74,12 +74,6 @@ define( require => {
     PANEL_FILL: '#EEEEEE',
     THUMB_HIGHLIGHT: '#71EDFF',
 
-    // Enumerations
-    SIM_SPEED_CHOICE: Enumeration.byKeys( [ 'NORMAL', 'SLOW' ] ),
-    FORCES_MODE_CHOICE: Enumeration.byKeys( [ 'FORCES', 'NET_FORCES' ] ),
-    SCENE_MODE_ENUM: Enumeration.byKeys( [ 'SAME_LENGTH', 'ADJUSTABLE_LENGTH' ] ),
-    CONSTANT_MODE_ENUM: Enumeration.byKeys( [ 'SPRING_CONSTANT', 'SPRING_THICKNESS' ] ),
-
     /**
      * Creates line for visual representation within the panel.
      * @param {number} length

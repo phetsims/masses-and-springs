@@ -33,6 +33,7 @@ define( require => {
   const Plane = require( 'SCENERY/nodes/Plane' );
   const Property = require( 'AXON/Property' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const SimSpeed = require( 'MASSES_AND_SPRINGS/common/model/SimSpeed' );
   const ScreenView = require( 'JOIST/ScreenView' );
   const ShelfNode = require( 'MASSES_AND_SPRINGS/common/view/ShelfNode' );
   const SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
@@ -225,10 +226,10 @@ define( require => {
     this.timeControlNode = new TimeControlNode( model.playingProperty, {
       isSlowMotionProperty: new DynamicProperty( new Property( model.simSpeedProperty ), {
         map: function( simSpeed ) {
-          return simSpeed === MassesAndSpringsConstants.SIM_SPEED_CHOICE.SLOW;
+          return simSpeed === SimSpeed.SLOW;
         },
         inverseMap: function( isSlow ) {
-          return isSlow ? MassesAndSpringsConstants.SIM_SPEED_CHOICE.SLOW : MassesAndSpringsConstants.SIM_SPEED_CHOICE.NORMAL;
+          return isSlow ? SimSpeed.SLOW : SimSpeed.NORMAL;
         },
         bidirectional: true
       } ),

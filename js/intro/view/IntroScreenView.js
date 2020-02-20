@@ -13,6 +13,7 @@ define( require => {
   const AlignBox = require( 'SCENERY/nodes/AlignBox' );
   const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   const ConstantsControlPanel = require( 'MASSES_AND_SPRINGS/intro/view/ConstantsControlPanel' );
+  const ConstantMode = require( 'MASSES_AND_SPRINGS/common/model/ConstantMode' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LineVisibilityNode = require( 'MASSES_AND_SPRINGS/common/view/LineVisibilityNode' );
@@ -23,6 +24,7 @@ define( require => {
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   const Range = require( 'DOT/Range' );
   const ReferenceLineNode = require( 'MASSES_AND_SPRINGS/common/view/ReferenceLineNode' );
+  const SceneMode = require( 'MASSES_AND_SPRINGS/common/model/SceneMode' );
   const SceneSelectionButton = require( 'MASSES_AND_SPRINGS/intro/view/SceneSelectionButton' );
   const SpringControlPanel = require( 'MASSES_AND_SPRINGS/common/view/SpringControlPanel' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -82,7 +84,7 @@ define( require => {
     // Panel that keeps thickness/spring constant at constant value
     const constantsControlPanel = new AlignBox( new ConstantsControlPanel(
       model.constantModeProperty,
-      MassesAndSpringsConstants.CONSTANT_MODE_ENUM,
+      ConstantMode,
       constantParameterString,
       tandem.createTandem( 'constantsControlPanel' ), {
         maxWidth: 160,
@@ -174,10 +176,10 @@ define( require => {
     // Link responsible for visibility of the length control panel.
     model.sceneModeProperty.lazyLink( function( mode ) {
       self.resetMassLayer();
-      if ( mode === MassesAndSpringsConstants.SCENE_MODE_ENUM.SAME_LENGTH ) {
+      if ( mode === SceneMode.SAME_LENGTH ) {
         self.springLengthControlPanel.visible = false;
       }
-      else if ( mode === MassesAndSpringsConstants.SCENE_MODE_ENUM.ADJUSTABLE_LENGTH ) {
+      else if ( mode === SceneMode.ADJUSTABLE_LENGTH ) {
         self.springLengthControlPanel.visible = true;
       }
 
@@ -189,17 +191,17 @@ define( require => {
     } );
 
     // Creation of same length icon node
-    const sameLengthIcon = new SceneSelectionButton( MassesAndSpringsConstants.SCENE_MODE_ENUM.SAME_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
+    const sameLengthIcon = new SceneSelectionButton( SceneMode.SAME_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
 
     // Creation of adjustable length icon node
-    const differentLengthIcon = new SceneSelectionButton( MassesAndSpringsConstants.SCENE_MODE_ENUM.ADJUSTABLE_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
+    const differentLengthIcon = new SceneSelectionButton( SceneMode.ADJUSTABLE_LENGTH, model.sceneModeProperty, this.modelViewTransform, tandem );
 
     //  Creation of toggled modes for scene selection
     const toggleButtonsContent = [ {
-      value: MassesAndSpringsConstants.SCENE_MODE_ENUM.SAME_LENGTH,
+      value: SceneMode.SAME_LENGTH,
       node: sameLengthIcon
     }, {
-      value: MassesAndSpringsConstants.SCENE_MODE_ENUM.ADJUSTABLE_LENGTH,
+      value: SceneMode.ADJUSTABLE_LENGTH,
       node: differentLengthIcon
     } ];
 
