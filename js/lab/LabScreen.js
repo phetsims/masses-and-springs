@@ -5,50 +5,47 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const LabModel = require( 'MASSES_AND_SPRINGS/lab/model/LabModel' );
-  const LabScreenView = require( 'MASSES_AND_SPRINGS/lab/view/LabScreenView' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  const Screen = require( 'JOIST/Screen' );
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import labHomeScreenImage from '../../images/lab_screen_icon_png.js';
+import MassesAndSpringsColorProfile from '../common/view/MassesAndSpringsColorProfile.js';
+import massesAndSpringsStrings from '../masses-and-springs-strings.js';
+import massesAndSprings from '../massesAndSprings.js';
+import LabModel from './model/LabModel.js';
+import LabScreenView from './view/LabScreenView.js';
 
-  // strings
-  const screenLabString = require( 'string!MASSES_AND_SPRINGS/screen.lab' );
+const screenLabString = massesAndSpringsStrings.screen.lab;
 
-  // image
-  const labHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/lab_screen_icon.png' );
+// image
 
-  /**
-   * @param {Tandem} tandem
-   *
-   * @constructor
-   */
-  function LabScreen( tandem ) {
+/**
+ * @param {Tandem} tandem
+ *
+ * @constructor
+ */
+function LabScreen( tandem ) {
 
-    const options = {
-      name: screenLabString,
-      backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
-      homeScreenIcon: new Image( labHomeScreenImage ),
-      tandem: tandem
-    };
+  const options = {
+    name: screenLabString,
+    backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
+    homeScreenIcon: new Image( labHomeScreenImage ),
+    tandem: tandem
+  };
 
-    Screen.call( this,
-      function() {
-        return new LabModel( tandem.createTandem( 'model' ), false );
-      },
-      function( model ) {
-        return new LabScreenView( model, tandem.createTandem( 'view' ) );
-      },
-      options
-    );
-  }
+  Screen.call( this,
+    function() {
+      return new LabModel( tandem.createTandem( 'model' ), false );
+    },
+    function( model ) {
+      return new LabScreenView( model, tandem.createTandem( 'view' ) );
+    },
+    options
+  );
+}
 
-  massesAndSprings.register( 'LabScreen', LabScreen );
+massesAndSprings.register( 'LabScreen', LabScreen );
 
-  return inherit( Screen, LabScreen );
-} );
+inherit( Screen, LabScreen );
+export default LabScreen;

@@ -5,230 +5,227 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
-  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const ForcesMode = require( 'MASSES_AND_SPRINGS/common/model/ForcesMode' );
-  const ForceVectorArrow = require( 'MASSES_AND_SPRINGS/common/view/ForceVectorArrow' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
-  const VectorArrow = require( 'MASSES_AND_SPRINGS/common/view/VectorArrow' );
-  const VerticalCheckboxGroup = require( 'SUN/VerticalCheckboxGroup' );
+import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
+import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
+import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
+import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
+import ForcesMode from '../../common/model/ForcesMode.js';
+import ForceVectorArrow from '../../common/view/ForceVectorArrow.js';
+import VectorArrow from '../../common/view/VectorArrow.js';
+import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
+import massesAndSprings from '../../massesAndSprings.js';
 
-  // strings
-  const accelerationString = require( 'string!MASSES_AND_SPRINGS/acceleration' );
-  const forcesString = require( 'string!MASSES_AND_SPRINGS/forces' );
-  const gravityString = require( 'string!MASSES_AND_SPRINGS/gravity' );
-  const netForceString = require( 'string!MASSES_AND_SPRINGS/netForce' );
-  const periodTraceString = require( 'string!MASSES_AND_SPRINGS/periodTrace' );
-  const springString = require( 'string!MASSES_AND_SPRINGS/spring' );
-  const velocityString = require( 'string!MASSES_AND_SPRINGS/velocity' );
+const accelerationString = massesAndSpringsStrings.acceleration;
+const forcesString = massesAndSpringsStrings.forces;
+const gravityString = massesAndSpringsStrings.gravity;
+const netForceString = massesAndSpringsStrings.netForce;
+const periodTraceString = massesAndSpringsStrings.periodTrace;
+const springString = massesAndSpringsStrings.spring;
+const velocityString = massesAndSpringsStrings.velocity;
 
-  // constants
-  const MAX_WIDTH = 140;
-  const DEFAULT_CONTENT_SPACING = 155;
+// constants
+const MAX_WIDTH = 140;
+const DEFAULT_CONTENT_SPACING = 155;
 
-  /**
-   * @param {MassesAndSpringsModel} model
-   * @param {Tandem} tandem
-   * @param {Object} [options]
-   * @constructor
-   */
-  function VectorVisibilityControlNode( model, tandem, options ) {
-    options = merge( {
-      showForces: true,
-      fill: MassesAndSpringsConstants.PANEL_FILL,
-      tandem: tandem.createTandem( 'vectorVisibilityControlNode' )
-    }, options );
+/**
+ * @param {MassesAndSpringsModel} model
+ * @param {Tandem} tandem
+ * @param {Object} [options]
+ * @constructor
+ */
+function VectorVisibilityControlNode( model, tandem, options ) {
+  options = merge( {
+    showForces: true,
+    fill: MassesAndSpringsConstants.PANEL_FILL,
+    tandem: tandem.createTandem( 'vectorVisibilityControlNode' )
+  }, options );
 
-    Node.call( this, options );
+  Node.call( this, options );
 
-    const velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
-    const accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
-    const gravityArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
-    const springArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
-    const netForceArrow = new ForceVectorArrow( 'black' );
+  const velocityArrow = new VectorArrow( MassesAndSpringsConstants.VELOCITY_ARROW_COLOR );
+  const accelerationArrow = new VectorArrow( MassesAndSpringsConstants.ACCELERATION_ARROW_COLOR );
+  const gravityArrow = new ForceVectorArrow( MassesAndSpringsConstants.GRAVITY_ARROW_COLOR );
+  const springArrow = new ForceVectorArrow( MassesAndSpringsConstants.SPRING_ARROW_COLOR );
+  const netForceArrow = new ForceVectorArrow( 'black' );
 
-    // Align group used for label align boxes
-    const alignGroup = new AlignGroup( { matchVertical: false } );
+  // Align group used for label align boxes
+  const alignGroup = new AlignGroup( { matchVertical: false } );
 
-    // Members of the attributed to the alignGroup are declared in order as they appear in the sim.
-    const velocityAlignBox = new AlignBox( new Text( velocityString, {
+  // Members of the attributed to the alignGroup are declared in order as they appear in the sim.
+  const velocityAlignBox = new AlignBox( new Text( velocityString, {
+    font: MassesAndSpringsConstants.TITLE_FONT,
+    maxWidth: MAX_WIDTH,
+    tandem: tandem.createTandem( 'velocityString' )
+  } ), { group: alignGroup, xAlign: 'left' } );
+
+  const accelerationAlignBox = new AlignBox( new Text( accelerationString, {
+    font: MassesAndSpringsConstants.TITLE_FONT,
+    maxWidth: MAX_WIDTH,
+    tandem: tandem.createTandem( 'accelerationString' )
+  } ), { group: alignGroup, xAlign: 'left' } );
+
+  // Responsible for forces aquaRadioButton
+  const forcesVisibilityRadioButton = new AquaRadioButton(
+    model.forcesModeProperty,
+    ForcesMode.FORCES,
+    new Text( forcesString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH,
-      tandem: tandem.createTandem( 'velocityString' )
-    } ), { group: alignGroup, xAlign: 'left' } );
+      tandem: tandem.createTandem( 'forcesString' )
+    } ),
+    { radius: 7, spacing: 7 }
+  );
 
-    const accelerationAlignBox = new AlignBox( new Text( accelerationString, {
-      font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: MAX_WIDTH,
-      tandem: tandem.createTandem( 'accelerationString' )
-    } ), { group: alignGroup, xAlign: 'left' } );
+  // Indention used for gravity and spring checkbox
+  const indentation = 22;
 
-    // Responsible for forces aquaRadioButton
-    const forcesVisibilityRadioButton = new AquaRadioButton(
-      model.forcesModeProperty,
-      ForcesMode.FORCES,
-      new Text( forcesString, {
-        font: MassesAndSpringsConstants.TITLE_FONT,
-        maxWidth: MAX_WIDTH,
-        tandem: tandem.createTandem( 'forcesString' )
-      } ),
-      { radius: 7, spacing: 7 }
-    );
+  // Sub group of check boxes indented under forces radio button
+  const gravityAlignBox = new AlignBox( new Text( gravityString, {
+    font: MassesAndSpringsConstants.TITLE_FONT,
+    maxWidth: MAX_WIDTH - indentation,
+    tandem: tandem.createTandem( 'gravityString' )
+  } ), { group: alignGroup, xAlign: 'left' } );
+  const springAlignBox = new AlignBox( new Text( springString, {
+    font: MassesAndSpringsConstants.TITLE_FONT,
+    maxWidth: MAX_WIDTH - indentation,
+    tandem: tandem.createTandem( 'springString' )
+  } ), { group: alignGroup, xAlign: 'left' } );
 
-    // Indention used for gravity and spring checkbox
-    const indentation = 22;
+  // responsible for net force aquaRadioButton
+  const netForceAlignBox = new AlignBox( new Text( netForceString, {
+    font: MassesAndSpringsConstants.TITLE_FONT,
+    maxWidth: MAX_WIDTH,
+    tandem: tandem.createTandem( 'netForceString' )
+  } ), { group: alignGroup, xAlign: 'left' } );
 
-    // Sub group of check boxes indented under forces radio button
-    const gravityAlignBox = new AlignBox( new Text( gravityString, {
-      font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: MAX_WIDTH - indentation,
-      tandem: tandem.createTandem( 'gravityString' )
-    } ), { group: alignGroup, xAlign: 'left' } );
-    const springAlignBox = new AlignBox( new Text( springString, {
-      font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: MAX_WIDTH - indentation,
-      tandem: tandem.createTandem( 'springString' )
-    } ), { group: alignGroup, xAlign: 'left' } );
+  // Max width must be set to the maxWidth of the alignGroup based on its content.
+  const contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
 
-    // responsible for net force aquaRadioButton
-    const netForceAlignBox = new AlignBox( new Text( netForceString, {
-      font: MassesAndSpringsConstants.TITLE_FONT,
-      maxWidth: MAX_WIDTH,
-      tandem: tandem.createTandem( 'netForceString' )
-    } ), { group: alignGroup, xAlign: 'left' } );
+  const netForceVisibilityRadioButton = new AquaRadioButton(
+    model.forcesModeProperty,
+    ForcesMode.NET_FORCES,
+    new HBox( { children: [ netForceAlignBox, netForceArrow ], spacing: contentSpacing } ),
+    { radius: 7, spacing: 7 }
+  );
 
-    // Max width must be set to the maxWidth of the alignGroup based on its content.
-    const contentSpacing = DEFAULT_CONTENT_SPACING - alignGroup.getMaxWidth();
+  // Handle options for checkbox group
+  let vectorVisibilityCheckboxGroup;
+  const velocityCheckboxObject = {
+    node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: contentSpacing } ),
+    property: model.velocityVectorVisibilityProperty,
+    label: velocityString
+  };
+  const accelerationCheckboxObject = {
+    node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: contentSpacing } ),
+    property: model.accelerationVectorVisibilityProperty,
+    label: accelerationString
+  };
 
-    const netForceVisibilityRadioButton = new AquaRadioButton(
-      model.forcesModeProperty,
-      ForcesMode.NET_FORCES,
-      new HBox( { children: [ netForceAlignBox, netForceArrow ], spacing: contentSpacing } ),
-      { radius: 7, spacing: 7 }
-    );
-
-    // Handle options for checkbox group
-    let vectorVisibilityCheckboxGroup;
-    const velocityCheckboxObject = {
-      node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: contentSpacing } ),
-      property: model.velocityVectorVisibilityProperty,
-      label: velocityString
-    };
-    const accelerationCheckboxObject = {
-      node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: contentSpacing } ),
-      property: model.accelerationVectorVisibilityProperty,
-      label: accelerationString
-    };
-
-    if ( !model.basicsVersion ) {
-      vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ velocityCheckboxObject, accelerationCheckboxObject ], {
-        checkboxOptions: {
-          boxWidth: 16,
-          spacing: 8
-        },
-        tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
-      } );
-    }
-
-    // Responsible for velocity and acceleration vectors checkboxes and period trace in basics version
-    else {
-      vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-        node: new Text( periodTraceString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: MAX_WIDTH,
-          tandem: tandem.createTandem( 'periodTraceString' )
-        } ),
-        property: model.firstSpring.periodTraceVisibilityProperty
-      },
-        velocityCheckboxObject,
-        accelerationCheckboxObject
-      ], {
-        checkboxOptions: {
-          boxWidth: 16,
-          spacing: 8
-        },
-        tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
-      } );
-    }
-
-    // Property that toggles whether the gravity and spring force checkboxes are enabled
-    const enabledProperty = new BooleanProperty( model.forcesModeProperty.value === ForcesMode.FORCES, {
-      phetioFeatured: true
-    } );
-
-    // Responsible for forces vectors checkboxes
-    const forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
-      property: model.gravityVectorVisibilityProperty,
-      label: gravityString
-    }, {
-      node: new HBox( { children: [ springAlignBox, springArrow ], spacing: contentSpacing - indentation } ),
-      property: model.springVectorVisibilityProperty,
-      label: springString
-    } ], {
+  if ( !model.basicsVersion ) {
+    vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ velocityCheckboxObject, accelerationCheckboxObject ], {
       checkboxOptions: {
-        enabledProperty: enabledProperty,
-        boxWidth: 16
+        boxWidth: 16,
+        spacing: 8
       },
-      xMargin: 20,
-      tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
+      tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
     } );
-
-    // manages the mutability of the forces checkboxes dependent on the forces and net force aquaRadioButton
-    model.forcesModeProperty.link( function( mode ) {
-      enabledProperty.set( mode === ForcesMode.FORCES );
-    } );
-
-    // Contains all checkboxes and radio buttons for vector visibility
-    let vectorVisibilityControlsVBox;
-
-    // groups the checkboxes and forces aquaRadioButton
-    if ( options.showForces ) {
-      vectorVisibilityControlsVBox = new VBox( {
-          children: [
-            vectorVisibilityCheckboxGroup,
-            forcesVisibilityRadioButton,
-            new AlignBox( forcesVisibilityCheckboxGroup, { leftMargin: 22 } ),
-            netForceVisibilityRadioButton
-          ],
-          spacing: 8,
-          align: 'left',
-          tandem: tandem.createTandem( 'spacingUnit' )
-        }
-      );
-    }
-    else {
-      vectorVisibilityControlsVBox = new VBox( {
-        children: [
-          vectorVisibilityCheckboxGroup
-        ],
-        align: 'left',
-        tandem: tandem.createTandem( 'spacingUnit' )
-      } );
-    }
-    const controlsHBox = new HBox( {
-      spacing: 65,
-      children: [
-        vectorVisibilityControlsVBox
-      ]
-    } );
-    this.addChild( controlsHBox );
   }
 
-  massesAndSprings.register( 'VectorVisibilityControlNode', VectorVisibilityControlNode );
+  // Responsible for velocity and acceleration vectors checkboxes and period trace in basics version
+  else {
+    vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+      node: new Text( periodTraceString, {
+        font: MassesAndSpringsConstants.TITLE_FONT,
+        maxWidth: MAX_WIDTH,
+        tandem: tandem.createTandem( 'periodTraceString' )
+      } ),
+      property: model.firstSpring.periodTraceVisibilityProperty
+    },
+      velocityCheckboxObject,
+      accelerationCheckboxObject
+    ], {
+      checkboxOptions: {
+        boxWidth: 16,
+        spacing: 8
+      },
+      tandem: tandem.createTandem( 'vectorVisibilityCheckboxGroup' )
+    } );
+  }
 
-  return inherit( Node, VectorVisibilityControlNode );
-} );
+  // Property that toggles whether the gravity and spring force checkboxes are enabled
+  const enabledProperty = new BooleanProperty( model.forcesModeProperty.value === ForcesMode.FORCES, {
+    phetioFeatured: true
+  } );
+
+  // Responsible for forces vectors checkboxes
+  const forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
+    node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
+    property: model.gravityVectorVisibilityProperty,
+    label: gravityString
+  }, {
+    node: new HBox( { children: [ springAlignBox, springArrow ], spacing: contentSpacing - indentation } ),
+    property: model.springVectorVisibilityProperty,
+    label: springString
+  } ], {
+    checkboxOptions: {
+      enabledProperty: enabledProperty,
+      boxWidth: 16
+    },
+    xMargin: 20,
+    tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
+  } );
+
+  // manages the mutability of the forces checkboxes dependent on the forces and net force aquaRadioButton
+  model.forcesModeProperty.link( function( mode ) {
+    enabledProperty.set( mode === ForcesMode.FORCES );
+  } );
+
+  // Contains all checkboxes and radio buttons for vector visibility
+  let vectorVisibilityControlsVBox;
+
+  // groups the checkboxes and forces aquaRadioButton
+  if ( options.showForces ) {
+    vectorVisibilityControlsVBox = new VBox( {
+        children: [
+          vectorVisibilityCheckboxGroup,
+          forcesVisibilityRadioButton,
+          new AlignBox( forcesVisibilityCheckboxGroup, { leftMargin: 22 } ),
+          netForceVisibilityRadioButton
+        ],
+        spacing: 8,
+        align: 'left',
+        tandem: tandem.createTandem( 'spacingUnit' )
+      }
+    );
+  }
+  else {
+    vectorVisibilityControlsVBox = new VBox( {
+      children: [
+        vectorVisibilityCheckboxGroup
+      ],
+      align: 'left',
+      tandem: tandem.createTandem( 'spacingUnit' )
+    } );
+  }
+  const controlsHBox = new HBox( {
+    spacing: 65,
+    children: [
+      vectorVisibilityControlsVBox
+    ]
+  } );
+  this.addChild( controlsHBox );
+}
+
+massesAndSprings.register( 'VectorVisibilityControlNode', VectorVisibilityControlNode );
+
+inherit( Node, VectorVisibilityControlNode );
+export default VectorVisibilityControlNode;

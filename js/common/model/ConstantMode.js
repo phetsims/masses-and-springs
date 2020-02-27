@@ -4,15 +4,11 @@
  * Enumeration for setting which parameter to keep constant in the spring system .
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import massesAndSprings from '../../massesAndSprings.js';
 
-  return massesAndSprings.register( 'ConstantMode', Enumeration.byKeys( [
-    'SPRING_CONSTANT',
-    'SPRING_THICKNESS'
-  ] ) );
-} );
+export default massesAndSprings.register( 'ConstantMode', Enumeration.byKeys( [
+  'SPRING_CONSTANT',
+  'SPRING_THICKNESS'
+] ) );

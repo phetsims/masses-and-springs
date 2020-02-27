@@ -6,84 +6,80 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
+import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
+import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
+import massesAndSprings from '../../massesAndSprings.js';
 
-  // strings
-  const springConstantString = require( 'string!MASSES_AND_SPRINGS/springConstant' );
-  const thicknessString = require( 'string!MASSES_AND_SPRINGS/thickness' );
+const springConstantString = massesAndSpringsStrings.springConstant;
+const thicknessString = massesAndSpringsStrings.thickness;
 
-  // constants
-  const TITLE_FONT = MassesAndSpringsConstants.LABEL_FONT;
-  const RADIO_BUTTON_SPACING = 4;
+// constants
+const TITLE_FONT = MassesAndSpringsConstants.LABEL_FONT;
+const RADIO_BUTTON_SPACING = 4;
 
-  /**
-   * @param {Property.<string>} selectedConstantProperty - determines which value to hold constant
-   * @param {Enumeration} constantEnumeration - Choices for constant parameter
-   * @param {string} title - string used to title the panel
-   * @param {tandem} tandem
-   * @param {Object} [options]
-   * @constructor
-   */
-  function ConstantsControlPanel( selectedConstantProperty, constantEnumeration, title, tandem, options ) {
-    options = merge( {
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      visible: true,
-      fill: 'white',
-      stroke: 'gray',
-      tandem: tandem
-    }, options );
+/**
+ * @param {Property.<string>} selectedConstantProperty - determines which value to hold constant
+ * @param {Enumeration} constantEnumeration - Choices for constant parameter
+ * @param {string} title - string used to title the panel
+ * @param {tandem} tandem
+ * @param {Object} [options]
+ * @constructor
+ */
+function ConstantsControlPanel( selectedConstantProperty, constantEnumeration, title, tandem, options ) {
+  options = merge( {
+    cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+    visible: true,
+    fill: 'white',
+    stroke: 'gray',
+    tandem: tandem
+  }, options );
 
-    Node.call( this, options );
+  Node.call( this, options );
 
-    const constantsSelectionButtonOptions = {
-      font: TITLE_FONT,
-      maxWidth: 130
-    };
+  const constantsSelectionButtonOptions = {
+    font: TITLE_FONT,
+    maxWidth: 130
+  };
 
-    const thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
-    const thicknessRadioButton = new AquaRadioButton(
-      selectedConstantProperty, constantEnumeration.SPRING_THICKNESS, thicknessText, {
-        radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
-        tandem: tandem.createTandem( 'thicknessRadioButton' )
-      } );
-
-    const constantText = new Text( springConstantString, {
-      font: TITLE_FONT,
-      tandem: tandem.createTandem( 'constantText' )
+  const thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
+  const thicknessRadioButton = new AquaRadioButton(
+    selectedConstantProperty, constantEnumeration.SPRING_THICKNESS, thicknessText, {
+      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
+      tandem: tandem.createTandem( 'thicknessRadioButton' )
     } );
-    const springConstantRadioButton = new AquaRadioButton(
-      selectedConstantProperty, constantEnumeration.SPRING_CONSTANT, constantText, {
-        radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
-        tandem: tandem.createTandem( 'springConstantRadioButton' )
-      } );
 
-    const nodeContent = new VBox( {
-      align: 'left',
-      spacing: RADIO_BUTTON_SPACING,
-      children: [
-        new Text( title, {
-          font: TITLE_FONT,
-          maxWidth: 150,
-          tandem: tandem
-        } ), springConstantRadioButton, thicknessRadioButton
-      ],
-      tandem: tandem.createTandem( 'vBox' )
+  const constantText = new Text( springConstantString, {
+    font: TITLE_FONT,
+    tandem: tandem.createTandem( 'constantText' )
+  } );
+  const springConstantRadioButton = new AquaRadioButton(
+    selectedConstantProperty, constantEnumeration.SPRING_CONSTANT, constantText, {
+      radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
+      tandem: tandem.createTandem( 'springConstantRadioButton' )
     } );
-    this.addChild( nodeContent );
-  }
 
-  massesAndSprings.register( 'ConstantsControlPanel', ConstantsControlPanel );
-  return inherit( Node, ConstantsControlPanel );
+  const nodeContent = new VBox( {
+    align: 'left',
+    spacing: RADIO_BUTTON_SPACING,
+    children: [
+      new Text( title, {
+        font: TITLE_FONT,
+        maxWidth: 150,
+        tandem: tandem
+      } ), springConstantRadioButton, thicknessRadioButton
+    ],
+    tandem: tandem.createTandem( 'vBox' )
+  } );
+  this.addChild( nodeContent );
+}
 
-} );
+massesAndSprings.register( 'ConstantsControlPanel', ConstantsControlPanel );
+inherit( Node, ConstantsControlPanel );
+export default ConstantsControlPanel;

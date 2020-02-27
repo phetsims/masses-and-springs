@@ -7,300 +7,296 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const AccordionBox = require( 'SUN/AccordionBox' );
-  const AlignBox = require( 'SCENERY/nodes/AlignBox' );
-  const AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
-  const BarChartNode = require( 'GRIDDLE/BarChartNode' );
-  const Color = require( 'SCENERY/util/Color' );
-  const ColorConstants = require( 'SUN/ColorConstants' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const Dialog = require( 'SUN/Dialog' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const InfoButton = require( 'SCENERY_PHET/buttons/InfoButton' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  const MassesAndSpringsConstants = require( 'MASSES_AND_SPRINGS/common/MassesAndSpringsConstants' );
-  const merge = require( 'PHET_CORE/merge' );
-  const MoveToTrashButton = require( 'SCENERY_PHET/MoveToTrashButton' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
-  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
-  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  const Property = require( 'AXON/Property' );
-  const Range = require( 'DOT/Range' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const RichText = require( 'SCENERY/nodes/RichText' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
-  const ZoomButton = require( 'SCENERY_PHET/buttons/ZoomButton' );
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import Range from '../../../../dot/js/Range.js';
+import BarChartNode from '../../../../griddle/js/BarChartNode.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
+import ZoomButton from '../../../../scenery-phet/js/buttons/ZoomButton.js';
+import MoveToTrashButton from '../../../../scenery-phet/js/MoveToTrashButton.js';
+import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
+import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import HStrut from '../../../../scenery/js/nodes/HStrut.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import ColorConstants from '../../../../sun/js/ColorConstants.js';
+import Dialog from '../../../../sun/js/Dialog.js';
+import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
+import massesAndSprings from '../../massesAndSprings.js';
+import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
-  // constants
-  const LEGEND_DESCRIPTION_MAX_WIDTH = 500;
-  const MAX_WIDTH = 100;
-  const ORANGE_COLOR = '#ee6f3e';
+// constants
+const LEGEND_DESCRIPTION_MAX_WIDTH = 500;
+const MAX_WIDTH = 100;
+const ORANGE_COLOR = '#ee6f3e';
 
-  // strings
-  const elasticPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/elasticPotentialEnergy' );
-  const energyGraphString = require( 'string!MASSES_AND_SPRINGS/energyGraph' );
-  const energyLegendString = require( 'string!MASSES_AND_SPRINGS/energyLegend' );
-  const eThermString = require( 'string!MASSES_AND_SPRINGS/eTherm' );
-  const eTotString = require( 'string!MASSES_AND_SPRINGS/eTot' );
-  const gravitationalPotentialEnergyString = require( 'string!MASSES_AND_SPRINGS/gravitationalPotentialEnergy' );
-  const keString = require( 'string!MASSES_AND_SPRINGS/ke' );
-  const kineticEnergyString = require( 'string!MASSES_AND_SPRINGS/kineticEnergy' );
-  const peElasString = require( 'string!MASSES_AND_SPRINGS/peElas' );
-  const peGravString = require( 'string!MASSES_AND_SPRINGS/peGrav' );
-  const thermalEnergyString = require( 'string!MASSES_AND_SPRINGS/thermalEnergy' );
-  const totalEnergyString = require( 'string!MASSES_AND_SPRINGS/totalEnergy' );
+const elasticPotentialEnergyString = massesAndSpringsStrings.elasticPotentialEnergy;
+const energyGraphString = massesAndSpringsStrings.energyGraph;
+const energyLegendString = massesAndSpringsStrings.energyLegend;
+const eThermString = massesAndSpringsStrings.eTherm;
+const eTotString = massesAndSpringsStrings.eTot;
+const gravitationalPotentialEnergyString = massesAndSpringsStrings.gravitationalPotentialEnergy;
+const keString = massesAndSpringsStrings.ke;
+const kineticEnergyString = massesAndSpringsStrings.kineticEnergy;
+const peElasString = massesAndSpringsStrings.peElas;
+const peGravString = massesAndSpringsStrings.peGrav;
+const thermalEnergyString = massesAndSpringsStrings.thermalEnergy;
+const totalEnergyString = massesAndSpringsStrings.totalEnergy;
 
-  /**
-   * @param {MassesAndSpringsModel} model
-   * @param {Tandem} tandem
-   * @constructor
-   */
-  function EnergyGraphNode( model, tandem ) {
-    const self = this;
+/**
+ * @param {MassesAndSpringsModel} model
+ * @param {Tandem} tandem
+ * @constructor
+ */
+function EnergyGraphNode( model, tandem ) {
+  const self = this;
 
-    // @private {Property.<number>} (read-write) Responsible for the zoom level in the bar graph.
-    // This is adjusted by the zoom buttons and used for the scaling Property of the barNodes.
-    this.zoomLevelProperty = new NumberProperty( 3 );
+  // @private {Property.<number>} (read-write) Responsible for the zoom level in the bar graph.
+  // This is adjusted by the zoom buttons and used for the scaling Property of the barNodes.
+  this.zoomLevelProperty = new NumberProperty( 3 );
 
-    // Creation of zoom in/out buttons
-    const zoomButtonOptions = {
-      baseColor: ColorConstants.LIGHT_BLUE,
-      xMargin: 8,
-      yMargin: 4,
-      radius: 7,
-      touchAreaXDilation: 5,
-      touchAreaYDilation: 5
-    };
-    const zoomInButton = new ZoomButton( merge( { in: true }, zoomButtonOptions ) );
-    const zoomOutButton = new ZoomButton( merge( { in: false }, zoomButtonOptions ) );
+  // Creation of zoom in/out buttons
+  const zoomButtonOptions = {
+    baseColor: ColorConstants.LIGHT_BLUE,
+    xMargin: 8,
+    yMargin: 4,
+    radius: 7,
+    touchAreaXDilation: 5,
+    touchAreaYDilation: 5
+  };
+  const zoomInButton = new ZoomButton( merge( { in: true }, zoomButtonOptions ) );
+  const zoomOutButton = new ZoomButton( merge( { in: false }, zoomButtonOptions ) );
 
-    // Zooming out means bars and zoom level gets smaller.
-    zoomOutButton.addListener( function() {
-      self.zoomLevelProperty.value -= 1;
-    } );
+  // Zooming out means bars and zoom level gets smaller.
+  zoomOutButton.addListener( function() {
+    self.zoomLevelProperty.value -= 1;
+  } );
 
-    // Zooming in means bars and zoom level gets larger.
-    zoomInButton.addListener( function() {
-      self.zoomLevelProperty.value += 1;
-    } );
+  // Zooming in means bars and zoom level gets larger.
+  zoomInButton.addListener( function() {
+    self.zoomLevelProperty.value += 1;
+  } );
 
-    // {Property.<number>} Responsible for adjusting the scaling of the barNode heights.
-    const scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
-      return Math.pow( 2, zoomLevel ) * 20;
-    } );
+  // {Property.<number>} Responsible for adjusting the scaling of the barNode heights.
+  const scaleFactorProperty = new DerivedProperty( [ this.zoomLevelProperty ], function( zoomLevel ) {
+    return Math.pow( 2, zoomLevel ) * 20;
+  } );
 
-    const clearThermalButton = new MoveToTrashButton( {
-      arrowColor: ORANGE_COLOR,
-      listener: function() {
+  const clearThermalButton = new MoveToTrashButton( {
+    arrowColor: ORANGE_COLOR,
+    listener: function() {
 
-        // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
-        // been reset. Thermal energy is the only value that is dependent on initial total energy.
-        const mass = model.firstSpring.massAttachedProperty.get();
-        if ( mass ) {
-          mass.initialTotalEnergyProperty.set( mass.kineticEnergyProperty.get() +
-                                               mass.gravitationalPotentialEnergyProperty.get() +
-                                               mass.elasticPotentialEnergyProperty.get() );
-        }
-      },
-      scale: 0.7
-    } );
-
-    // Link exists for sim duration. No need to unlink.
-    model.firstSpring.thermalEnergyProperty.link( function( value ) {
-      clearThermalButton.enabled = ( value > 0 );
-      clearThermalButton.pickable = ( value > 0 );
-    } );
-
-    const aEntry = {
-      property: model.firstSpring.kineticEnergyProperty,
-      color: PhetColorScheme.KINETIC_ENERGY
-    };
-    const bEntry = {
-      property: model.firstSpring.gravitationalPotentialEnergyProperty,
-      color: PhetColorScheme.GRAVITATIONAL_POTENTIAL_ENERGY
-    };
-    const cEntry = {
-      property: model.firstSpring.elasticPotentialEnergyProperty,
-      color: PhetColorScheme.ELASTIC_POTENTIAL_ENERGY
-    };
-    const dEntry = {
-      property: model.firstSpring.thermalEnergyProperty,
-      color: PhetColorScheme.HEAT_THERMAL_ENERGY
-    };
-
-    this.barChartNode = new BarChartNode( [
-      {
-        entries: [ aEntry ],
-        labelString: keString
-      },
-      {
-        entries: [ bEntry ],
-        labelString: peGravString
-      },
-      {
-        entries: [ cEntry ],
-        labelString: peElasString
-      },
-      {
-        entries: [ dEntry ],
-        labelString: eThermString,
-        labelNode: clearThermalButton
-      },
-      {
-        entries: [ aEntry, bEntry, cEntry, dEntry ],
-        labelString: eTotString
+      // We are setting a new initial total energy here because the thermal energy bar acts as if the system has
+      // been reset. Thermal energy is the only value that is dependent on initial total energy.
+      const mass = model.firstSpring.massAttachedProperty.get();
+      if ( mass ) {
+        mass.initialTotalEnergyProperty.set( mass.kineticEnergyProperty.get() +
+                                             mass.gravitationalPotentialEnergyProperty.get() +
+                                             mass.elasticPotentialEnergyProperty.get() );
       }
-    ], new Property( new Range( -75, 435 ) ), {
-      barOptions: {
-        totalRange: new Range( 0, 380 ),
-        scaleProperty: scaleFactorProperty,
-        xAxisOptions: {
-          stroke: 'black',
-          minPadding: 3,
-          maxExtension: 4
-        },
-        barWidth: 18
-      },
-      labelBackgroundColor: new Color( 255, 255, 255, 0.7 ),
-      barSpacing: 5
-    } );
-
-    const abbreviationGroup = new AlignGroup();
-    const descriptionGroup = new AlignGroup();
-
-    const dialogContent = new VBox( {
-      spacing: 15,
-      children: [
-        {
-          abbreviation: keString,
-          description: kineticEnergyString,
-          color: PhetColorScheme.KINETIC_ENERGY
-        },
-        {
-          abbreviation: peGravString,
-          description: gravitationalPotentialEnergyString,
-          color: PhetColorScheme.GRAVITATIONAL_POTENTIAL_ENERGY
-        }, {
-          abbreviation: peElasString,
-          description: elasticPotentialEnergyString,
-          color: PhetColorScheme.ELASTIC_POTENTIAL_ENERGY
-        }, {
-          abbreviation: eThermString,
-          description: thermalEnergyString,
-          color: PhetColorScheme.HEAT_THERMAL_ENERGY
-        }, {
-          abbreviation: eTotString,
-          description: totalEnergyString,
-          color: 'black'
-        }
-      ].map( function( itemData ) {
-        return new HBox( {
-          spacing: 20,
-          children: [
-            new AlignBox( new RichText( itemData.abbreviation, {
-              font: MassesAndSpringsConstants.LEGEND_ABBREVIATION_FONT,
-              fill: itemData.color,
-              maxWidth: MAX_WIDTH
-            } ), {
-              group: abbreviationGroup,
-              xAlign: 'left'
-            } ),
-            new AlignBox( new Text( itemData.description, {
-              font: MassesAndSpringsConstants.LEGEND_DESCRIPTION_FONT
-            } ), {
-              group: descriptionGroup,
-              xAlign: 'left',
-              maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH
-            } )
-          ]
-        } );
-      } )
-    } );
-
-    // a placeholder for the dialog - constructed lazily so that Dialog has access to
-    // sim bounds
-    let dialog = null;
-
-    // Button that pops up dialog box for the graph's legend
-    const infoButton = new InfoButton( {
-      maxHeight: 1.1 * zoomInButton.height,
-      centerY: zoomOutButton.centerY,
-      iconFill: 'rgb( 41, 106, 163 )',
-      listener: function() {
-        if ( !dialog ) {
-          dialog = new Dialog( dialogContent, {
-            ySpacing: 20,
-            bottomMargin: 20,
-            title: new Text( energyLegendString, {
-              font: new PhetFont( 22 ),
-              maxWidth: MAX_WIDTH*2
-            } )
-          } );
-        }
-
-        dialog.show();
-      }
-    } );
-
-    // Display buttons at the bottom of the graph
-    const displayButtons = new HBox( {
-      spacing: 12,
-      children: [ infoButton, new HStrut( 18 ), zoomOutButton, zoomInButton ]
-    } );
-
-    displayButtons.left = this.barChartNode.left;
-
-    // Background for bar graph
-    this.background = new Rectangle( 0, 0, 160, 520, {
-      fill: 'white',
-      stroke: 'gray',
-      lineWidth: 0.8, // Empirically determined
-      cornerRadius: 7
-    } );
-    this.barChartNode.center = this.background.center.plusXY( 0, 5 );
-
-    const chartNode = new Node( {
-      children: [ this.background, this.barChartNode ]
-    } );
-
-    const accordionBoxContent = new VBox( {
-      children: [
-        chartNode,
-        displayButtons
-      ], spacing: 4
-    } );
-
-    AccordionBox.call( this, accordionBoxContent, {
-      buttonYMargin: 4,
-      cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
-      titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH+40 } )
-    } );
-    this.maxHeight = 720;
-  }
-
-  massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
-
-  return inherit( AccordionBox, EnergyGraphNode, {
-    /**
-     * @public
-     */
-    reset: function() {
-      this.zoomLevelProperty.reset();
     },
+    scale: 0.7
+  } );
 
-    /**
-     * @public
-     */
-    update: function() {
-      this.barChartNode.update();
+  // Link exists for sim duration. No need to unlink.
+  model.firstSpring.thermalEnergyProperty.link( function( value ) {
+    clearThermalButton.enabled = ( value > 0 );
+    clearThermalButton.pickable = ( value > 0 );
+  } );
+
+  const aEntry = {
+    property: model.firstSpring.kineticEnergyProperty,
+    color: PhetColorScheme.KINETIC_ENERGY
+  };
+  const bEntry = {
+    property: model.firstSpring.gravitationalPotentialEnergyProperty,
+    color: PhetColorScheme.GRAVITATIONAL_POTENTIAL_ENERGY
+  };
+  const cEntry = {
+    property: model.firstSpring.elasticPotentialEnergyProperty,
+    color: PhetColorScheme.ELASTIC_POTENTIAL_ENERGY
+  };
+  const dEntry = {
+    property: model.firstSpring.thermalEnergyProperty,
+    color: PhetColorScheme.HEAT_THERMAL_ENERGY
+  };
+
+  this.barChartNode = new BarChartNode( [
+    {
+      entries: [ aEntry ],
+      labelString: keString
+    },
+    {
+      entries: [ bEntry ],
+      labelString: peGravString
+    },
+    {
+      entries: [ cEntry ],
+      labelString: peElasString
+    },
+    {
+      entries: [ dEntry ],
+      labelString: eThermString,
+      labelNode: clearThermalButton
+    },
+    {
+      entries: [ aEntry, bEntry, cEntry, dEntry ],
+      labelString: eTotString
+    }
+  ], new Property( new Range( -75, 435 ) ), {
+    barOptions: {
+      totalRange: new Range( 0, 380 ),
+      scaleProperty: scaleFactorProperty,
+      xAxisOptions: {
+        stroke: 'black',
+        minPadding: 3,
+        maxExtension: 4
+      },
+      barWidth: 18
+    },
+    labelBackgroundColor: new Color( 255, 255, 255, 0.7 ),
+    barSpacing: 5
+  } );
+
+  const abbreviationGroup = new AlignGroup();
+  const descriptionGroup = new AlignGroup();
+
+  const dialogContent = new VBox( {
+    spacing: 15,
+    children: [
+      {
+        abbreviation: keString,
+        description: kineticEnergyString,
+        color: PhetColorScheme.KINETIC_ENERGY
+      },
+      {
+        abbreviation: peGravString,
+        description: gravitationalPotentialEnergyString,
+        color: PhetColorScheme.GRAVITATIONAL_POTENTIAL_ENERGY
+      }, {
+        abbreviation: peElasString,
+        description: elasticPotentialEnergyString,
+        color: PhetColorScheme.ELASTIC_POTENTIAL_ENERGY
+      }, {
+        abbreviation: eThermString,
+        description: thermalEnergyString,
+        color: PhetColorScheme.HEAT_THERMAL_ENERGY
+      }, {
+        abbreviation: eTotString,
+        description: totalEnergyString,
+        color: 'black'
+      }
+    ].map( function( itemData ) {
+      return new HBox( {
+        spacing: 20,
+        children: [
+          new AlignBox( new RichText( itemData.abbreviation, {
+            font: MassesAndSpringsConstants.LEGEND_ABBREVIATION_FONT,
+            fill: itemData.color,
+            maxWidth: MAX_WIDTH
+          } ), {
+            group: abbreviationGroup,
+            xAlign: 'left'
+          } ),
+          new AlignBox( new Text( itemData.description, {
+            font: MassesAndSpringsConstants.LEGEND_DESCRIPTION_FONT
+          } ), {
+            group: descriptionGroup,
+            xAlign: 'left',
+            maxWidth: LEGEND_DESCRIPTION_MAX_WIDTH
+          } )
+        ]
+      } );
+    } )
+  } );
+
+  // a placeholder for the dialog - constructed lazily so that Dialog has access to
+  // sim bounds
+  let dialog = null;
+
+  // Button that pops up dialog box for the graph's legend
+  const infoButton = new InfoButton( {
+    maxHeight: 1.1 * zoomInButton.height,
+    centerY: zoomOutButton.centerY,
+    iconFill: 'rgb( 41, 106, 163 )',
+    listener: function() {
+      if ( !dialog ) {
+        dialog = new Dialog( dialogContent, {
+          ySpacing: 20,
+          bottomMargin: 20,
+          title: new Text( energyLegendString, {
+            font: new PhetFont( 22 ),
+            maxWidth: MAX_WIDTH * 2
+          } )
+        } );
+      }
+
+      dialog.show();
     }
   } );
+
+  // Display buttons at the bottom of the graph
+  const displayButtons = new HBox( {
+    spacing: 12,
+    children: [ infoButton, new HStrut( 18 ), zoomOutButton, zoomInButton ]
+  } );
+
+  displayButtons.left = this.barChartNode.left;
+
+  // Background for bar graph
+  this.background = new Rectangle( 0, 0, 160, 520, {
+    fill: 'white',
+    stroke: 'gray',
+    lineWidth: 0.8, // Empirically determined
+    cornerRadius: 7
+  } );
+  this.barChartNode.center = this.background.center.plusXY( 0, 5 );
+
+  const chartNode = new Node( {
+    children: [ this.background, this.barChartNode ]
+  } );
+
+  const accordionBoxContent = new VBox( {
+    children: [
+      chartNode,
+      displayButtons
+    ], spacing: 4
+  } );
+
+  AccordionBox.call( this, accordionBoxContent, {
+    buttonYMargin: 4,
+    cornerRadius: MassesAndSpringsConstants.PANEL_CORNER_RADIUS,
+    titleNode: new Text( energyGraphString, { font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: MAX_WIDTH + 40 } )
+  } );
+  this.maxHeight = 720;
+}
+
+massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
+
+export default inherit( AccordionBox, EnergyGraphNode, {
+  /**
+   * @public
+   */
+  reset: function() {
+    this.zoomLevelProperty.reset();
+  },
+
+  /**
+   * @public
+   */
+  update: function() {
+    this.barChartNode.update();
+  }
 } );

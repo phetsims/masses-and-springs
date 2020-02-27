@@ -6,45 +6,42 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const IntroModel = require( 'MASSES_AND_SPRINGS/intro/model/IntroModel' );
-  const IntroScreenView = require( 'MASSES_AND_SPRINGS/intro/view/IntroScreenView' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  const Screen = require( 'JOIST/Screen' );
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import introHomeScreenImage from '../../images/intro_screen_icon_png.js';
+import MassesAndSpringsColorProfile from '../common/view/MassesAndSpringsColorProfile.js';
+import massesAndSpringsStrings from '../masses-and-springs-strings.js';
+import massesAndSprings from '../massesAndSprings.js';
+import IntroModel from './model/IntroModel.js';
+import IntroScreenView from './view/IntroScreenView.js';
 
-  // strings
-  const screenIntroString = require( 'string!MASSES_AND_SPRINGS/screen.intro' );
+const screenIntroString = massesAndSpringsStrings.screen.intro;
 
-  // image
-  const introHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/intro_screen_icon.png' );
+// image
 
-  /**
-   * @param {Tandem} tandem
-   *
-   * @constructor
-   */
-  function IntroScreen( tandem ) {
+/**
+ * @param {Tandem} tandem
+ *
+ * @constructor
+ */
+function IntroScreen( tandem ) {
 
-    const options = {
-      name: screenIntroString,
-      backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
-      homeScreenIcon: new Image( introHomeScreenImage ),
-      tandem: tandem
-    };
+  const options = {
+    name: screenIntroString,
+    backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
+    homeScreenIcon: new Image( introHomeScreenImage ),
+    tandem: tandem
+  };
 
-    Screen.call( this,
-      function() { return new IntroModel( tandem.createTandem( 'model' ) ); },
-      function( model ) { return new IntroScreenView( model, tandem.createTandem( 'view' ) ); },
-      options
-    );
-  }
+  Screen.call( this,
+    function() { return new IntroModel( tandem.createTandem( 'model' ) ); },
+    function( model ) { return new IntroScreenView( model, tandem.createTandem( 'view' ) ); },
+    options
+  );
+}
 
-  massesAndSprings.register( 'IntroScreen', IntroScreen );
-  return inherit( Screen, IntroScreen );
-} );
+massesAndSprings.register( 'IntroScreen', IntroScreen );
+inherit( Screen, IntroScreen );
+export default IntroScreen;

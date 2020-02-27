@@ -4,50 +4,47 @@
  * main file for the "Energy" screen
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EnergyModel = require( 'MASSES_AND_SPRINGS/energy/model/EnergyModel' );
-  const EnergyScreenView = require( 'MASSES_AND_SPRINGS/energy/view/EnergyScreenView' );
-  const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  const Screen = require( 'JOIST/Screen' );
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import energyHomeScreenImage from '../../images/energy_screen_icon_png.js';
+import MassesAndSpringsColorProfile from '../common/view/MassesAndSpringsColorProfile.js';
+import massesAndSpringsStrings from '../masses-and-springs-strings.js';
+import massesAndSprings from '../massesAndSprings.js';
+import EnergyModel from './model/EnergyModel.js';
+import EnergyScreenView from './view/EnergyScreenView.js';
 
-  // strings
-  const screenEnergyString = require( 'string!MASSES_AND_SPRINGS/screen.energy' );
+const screenEnergyString = massesAndSpringsStrings.screen.energy;
 
-  // image
-  const energyHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/energy_screen_icon.png' );
+// image
 
-  /**
-   * @param {Tandem} tandem
-   *
-   * @constructor
-   */
-  function EnergyScreen( tandem ) {
+/**
+ * @param {Tandem} tandem
+ *
+ * @constructor
+ */
+function EnergyScreen( tandem ) {
 
-    const options = {
-      name: screenEnergyString,
-      backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
-      homeScreenIcon: new Image( energyHomeScreenImage ),
-      tandem: tandem
-    };
+  const options = {
+    name: screenEnergyString,
+    backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
+    homeScreenIcon: new Image( energyHomeScreenImage ),
+    tandem: tandem
+  };
 
-    Screen.call( this,
-      function() {
-        return new EnergyModel( tandem.createTandem( 'model' ) );
-      },
-      function( model ) {
-        return new EnergyScreenView( model, tandem.createTandem( 'view' ) );
-      },
-      options
-    );
-  }
+  Screen.call( this,
+    function() {
+      return new EnergyModel( tandem.createTandem( 'model' ) );
+    },
+    function( model ) {
+      return new EnergyScreenView( model, tandem.createTandem( 'view' ) );
+    },
+    options
+  );
+}
 
-  massesAndSprings.register( 'EnergyScreen', EnergyScreen );
+massesAndSprings.register( 'EnergyScreen', EnergyScreen );
 
-  return inherit( Screen, EnergyScreen );
-} );
+inherit( Screen, EnergyScreen );
+export default EnergyScreen;

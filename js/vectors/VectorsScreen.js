@@ -5,53 +5,50 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  const MassesAndSpringsColorProfile = require( 'MASSES_AND_SPRINGS/common/view/MassesAndSpringsColorProfile' );
-  const MassesAndSpringsModel = require( 'MASSES_AND_SPRINGS/common/model/MassesAndSpringsModel' );
-  const Screen = require( 'JOIST/Screen' );
-  const VectorsScreenView = require( 'MASSES_AND_SPRINGS/vectors/view/VectorsScreenView' );
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import vectorHomeScreenImage from '../../images/vectors_screen_icon_png.js';
+import MassesAndSpringsModel from '../common/model/MassesAndSpringsModel.js';
+import MassesAndSpringsColorProfile from '../common/view/MassesAndSpringsColorProfile.js';
+import massesAndSpringsStrings from '../masses-and-springs-strings.js';
+import massesAndSprings from '../massesAndSprings.js';
+import VectorsScreenView from './view/VectorsScreenView.js';
 
-  // strings
-  const screenVectorsString = require( 'string!MASSES_AND_SPRINGS/screen.vectors' );
+const screenVectorsString = massesAndSpringsStrings.screen.vectors;
 
-  // image
-  const vectorHomeScreenImage = require( 'image!MASSES_AND_SPRINGS/vectors_screen_icon.png' );
+// image
 
-  /**
-   * @param {Tandem} tandem
-   *
-   * @constructor
-   */
-  function VectorsScreen( tandem ) {
+/**
+ * @param {Tandem} tandem
+ *
+ * @constructor
+ */
+function VectorsScreen( tandem ) {
 
-    const options = {
-      name: screenVectorsString,
-      backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
-      homeScreenIcon: new Image( vectorHomeScreenImage ),
-      tandem: tandem
-    };
+  const options = {
+    name: screenVectorsString,
+    backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
+    homeScreenIcon: new Image( vectorHomeScreenImage ),
+    tandem: tandem
+  };
 
-    Screen.call( this,
-      function() {
-        const modelTandem = tandem.createTandem( 'model' );
-        const model = new MassesAndSpringsModel( modelTandem );
-        model.basicsVersion = false;
-        model.addDefaultSprings( modelTandem );
-        model.addDefaultMasses( modelTandem );
-        return model;
-      },
-      function( model ) { return new VectorsScreenView( model, tandem.createTandem( 'view' ) ); },
-      options
-    );
-  }
+  Screen.call( this,
+    function() {
+      const modelTandem = tandem.createTandem( 'model' );
+      const model = new MassesAndSpringsModel( modelTandem );
+      model.basicsVersion = false;
+      model.addDefaultSprings( modelTandem );
+      model.addDefaultMasses( modelTandem );
+      return model;
+    },
+    function( model ) { return new VectorsScreenView( model, tandem.createTandem( 'view' ) ); },
+    options
+  );
+}
 
-  massesAndSprings.register( 'VectorsScreen', VectorsScreen );
+massesAndSprings.register( 'VectorsScreen', VectorsScreen );
 
-  return inherit( Screen, VectorsScreen );
-} );
+inherit( Screen, VectorsScreen );
+export default VectorsScreen;

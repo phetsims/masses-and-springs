@@ -4,15 +4,11 @@
  * Enumeration for the speed of the sim.
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import massesAndSprings from '../../massesAndSprings.js';
 
-  return massesAndSprings.register( 'SimSpeed', Enumeration.byKeys( [
-    'NORMAL',
-    'SLOW'
-  ] ) );
-} );
+export default massesAndSprings.register( 'SimSpeed', Enumeration.byKeys( [
+  'NORMAL',
+  'SLOW'
+] ) );

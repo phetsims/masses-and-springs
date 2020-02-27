@@ -4,15 +4,11 @@
  * Enumeration for setting the scene on the first screen.
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import massesAndSprings from '../../massesAndSprings.js';
 
-  return massesAndSprings.register( 'SceneMode', Enumeration.byKeys( [
-    'SAME_LENGTH',
-    'ADJUSTABLE_LENGTH'
-  ] ) );
-} );
+export default massesAndSprings.register( 'SceneMode', Enumeration.byKeys( [
+  'SAME_LENGTH',
+  'ADJUSTABLE_LENGTH'
+] ) );

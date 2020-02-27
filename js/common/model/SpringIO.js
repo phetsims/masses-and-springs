@@ -5,39 +5,36 @@
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const massesAndSprings = require( 'MASSES_AND_SPRINGS/massesAndSprings' );
-  const ObjectIO = require( 'TANDEM/types/ObjectIO' );
-  const Spring = require( 'MASSES_AND_SPRINGS/common/model/Spring' );
-  const validate = require( 'AXON/validate' );
+import validate from '../../../../axon/js/validate.js';
+import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import massesAndSprings from '../../massesAndSprings.js';
+import Spring from './Spring.js';
 
-  class SpringIO extends ObjectIO {
+class SpringIO extends ObjectIO {
 
-    /**
-     * Encodes a Spring instance to a state.
-     *
-     * @param spring
-     * @returns {*}
-     */
-    static toStateObject( spring ) {
-      validate( spring, this.validator );
-      if ( spring === null ) {
-        return null;
-      }
-      return {
-        position: spring.positionProperty.get(),
-        id: spring.tandem.phetioID
-      };
+  /**
+   * Encodes a Spring instance to a state.
+   *
+   * @param spring
+   * @returns {*}
+   */
+  static toStateObject( spring ) {
+    validate( spring, this.validator );
+    if ( spring === null ) {
+      return null;
     }
+    return {
+      position: spring.positionProperty.get(),
+      id: spring.tandem.phetioID
+    };
   }
+}
 
-  SpringIO.documentation = 'Hangs from the ceiling and applies a force to any attached BodyIO';
-  SpringIO.validator = { valueType: Spring };
-  SpringIO.typeName = 'SpringIO';
-  ObjectIO.validateSubtype( SpringIO );
+SpringIO.documentation = 'Hangs from the ceiling and applies a force to any attached BodyIO';
+SpringIO.validator = { valueType: Spring };
+SpringIO.typeName = 'SpringIO';
+ObjectIO.validateSubtype( SpringIO );
 
-  return massesAndSprings.register( 'SpringIO', SpringIO );
-} );
+massesAndSprings.register( 'SpringIO', SpringIO );
+export default SpringIO;
