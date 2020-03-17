@@ -7,8 +7,6 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
-import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -33,7 +31,6 @@ import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import IndicatorVisibilityControlNode from '../../vectors/view/IndicatorVisibilityControlNode.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
-import SimSpeed from '../model/SimSpeed.js';
 import DraggableRulerNode from './DraggableRulerNode.js';
 import GravityAndDampingControlNode from './GravityAndDampingControlNode.js';
 import MassNode from './MassNode.js';
@@ -221,17 +218,11 @@ function SpringScreenView( model, tandem, options ) {
 
   // @public {TimeControlNode} Sim speed controls
   this.timeControlNode = new TimeControlNode( model.playingProperty, {
-    isSlowMotionProperty: new DynamicProperty( new Property( model.simSpeedProperty ), {
-      map: function( simSpeed ) {
-        return simSpeed === SimSpeed.SLOW;
-      },
-      inverseMap: function( isSlow ) {
-        return isSlow ? SimSpeed.SLOW : SimSpeed.NORMAL;
-      },
-      bidirectional: true
-    } ),
-    stepForwardOptions: {
-      listener: function() { model.stepForward( 0.01 ); }
+    timeControlSpeedProperty: model.timeControlSpeedProperty,
+    playPauseStepButtonOptions: {
+      stepForwardButtonOptions: {
+        listener: function() { model.stepForward( 0.01 ); }
+      }
     },
     tandem: tandem.createTandem( 'timeControlNode' )
   } );

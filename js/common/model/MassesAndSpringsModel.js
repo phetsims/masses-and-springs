@@ -17,6 +17,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
+import TimeControlSpeed from '../../../../scenery-phet/js/TimeControlSpeed.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import MassesAndSpringsColorProfile from '../view/MassesAndSpringsColorProfile.js';
@@ -25,7 +26,6 @@ import Body from './Body.js';
 import BodyIO from './BodyIO.js';
 import ForcesMode from './ForcesMode.js';
 import Mass from './Mass.js';
-import SimSpeed from './SimSpeed.js';
 import Spring from './Spring.js';
 
 // constants
@@ -65,12 +65,10 @@ function MassesAndSpringsModel( tandem, options ) {
     units: 'meters/second/second'
   } );
 
-  // @public {Property.<string>} determines the speed at which the sim plays.
-  this.simSpeedProperty = new EnumerationProperty(
-    SimSpeed,
-    SimSpeed.NORMAL, {
-      tandem: tandem.createTandem( 'simSpeedProperty' )
-    } );
+  // @private {EnumerationProperty.<TimeControlSpeed>} - Controls play speed of the simulation
+  this.timeControlSpeedProperty = new EnumerationProperty( TimeControlSpeed, TimeControlSpeed.NORMAL, {
+    tandem: tandem.createTandem( 'timeControlSpeedProperty' )
+  } );
 
   // @public {Property.<boolean>} determines visibility of ruler node
   this.rulerVisibleProperty = new BooleanProperty( false, {
@@ -251,7 +249,7 @@ export default inherit( Object, MassesAndSpringsModel, {
     this.gravityProperty.reset();
     this.bodyProperty.reset();
     this.playingProperty.reset();
-    this.simSpeedProperty.reset();
+    this.timeControlSpeedProperty.reset();
     this.rulerVisibleProperty.reset();
     this.stopwatch.reset();
     this.timerRunningProperty.reset();
@@ -373,7 +371,7 @@ export default inherit( Object, MassesAndSpringsModel, {
     const animationDt = dt;
 
     // Change the dt value if we are playing in slow motion.
-    if ( this.simSpeedProperty.get() === SimSpeed.SLOW && this.playingProperty.get() ) {
+    if ( this.timeControlSpeedProperty.get() === TimeControlSpeed.SLOW && this.playingProperty.get() ) {
       dt = dt / MassesAndSpringsConstants.SLOW_SIM_DT_RATIO;
     }
     for ( let i = 0; i < this.masses.length; i++ ) {
