@@ -113,7 +113,9 @@ function GravityAndDampingControlNode( model, listNodeParent, tandem, options ) 
         valuePattern: StringUtils.fillIn( gravityValueString, {
           gravity: SunConstants.VALUE_NAMED_PLACEHOLDER
         } ),
-        font: new PhetFont( { size: 14 } ),
+        textOptions: {
+          font: new PhetFont( { size: 14 } )
+        },
         useRichText: true,
         decimalPlaces: 1,
         maxWidth: MAX_WIDTH

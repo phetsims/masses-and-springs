@@ -79,7 +79,9 @@ function MassValueControlPanel( mass, massNodeIcon, tandem, options ) {
     // subcomponent options
     numberDisplayOptions: {
       valuePattern: valuePattern,
-      font: new PhetFont( 14 ),
+      textOptions: {
+        font: new PhetFont( 14 )
+      },
       maxWidth: 100,
       useRichText: true,
       decimalPlaces: 0
