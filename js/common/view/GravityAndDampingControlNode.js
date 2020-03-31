@@ -21,7 +21,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import SunConstants from '../../../../sun/js/SunConstants.js';
-import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
+import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import Body from '../model/Body.js';

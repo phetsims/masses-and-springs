@@ -12,7 +12,7 @@ import Image from '../../../scenery/js/nodes/Image.js';
 import vectorHomeScreenImage from '../../images/vectors_screen_icon_png.js';
 import MassesAndSpringsModel from '../common/model/MassesAndSpringsModel.js';
 import MassesAndSpringsColorProfile from '../common/view/MassesAndSpringsColorProfile.js';
-import massesAndSpringsStrings from '../masses-and-springs-strings.js';
+import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
 import massesAndSprings from '../massesAndSprings.js';
 import VectorsScreenView from './view/VectorsScreenView.js';
 

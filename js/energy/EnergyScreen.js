@@ -10,7 +10,7 @@ import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import energyHomeScreenImage from '../../images/energy_screen_icon_png.js';
 import MassesAndSpringsColorProfile from '../common/view/MassesAndSpringsColorProfile.js';
-import massesAndSpringsStrings from '../masses-and-springs-strings.js';
+import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
 import massesAndSprings from '../massesAndSprings.js';
 import EnergyModel from './model/EnergyModel.js';
 import EnergyScreenView from './view/EnergyScreenView.js';

@@ -21,7 +21,7 @@ import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js
 import ForcesMode from '../../common/model/ForcesMode.js';
 import ForceVectorArrow from '../../common/view/ForceVectorArrow.js';
 import VectorArrow from '../../common/view/VectorArrow.js';
-import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
+import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
 const accelerationString = massesAndSpringsStrings.acceleration;

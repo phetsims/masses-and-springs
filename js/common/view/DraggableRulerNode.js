@@ -12,7 +12,7 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import inherit from '../../../../phet-core/js/inherit.js';
 import MovableDragHandler from '../../../../scenery-phet/js/input/MovableDragHandler.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
-import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
+import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 

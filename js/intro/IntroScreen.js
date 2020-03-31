@@ -12,7 +12,7 @@ import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import introHomeScreenImage from '../../images/intro_screen_icon_png.js';
 import MassesAndSpringsColorProfile from '../common/view/MassesAndSpringsColorProfile.js';
-import massesAndSpringsStrings from '../masses-and-springs-strings.js';
+import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
 import massesAndSprings from '../massesAndSprings.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';

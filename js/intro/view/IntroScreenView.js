@@ -27,7 +27,7 @@ import MassesAndSpringsColorProfile from '../../common/view/MassesAndSpringsColo
 import ReferenceLineNode from '../../common/view/ReferenceLineNode.js';
 import SpringControlPanel from '../../common/view/SpringControlPanel.js';
 import TwoSpringScreenView from '../../common/view/TwoSpringScreenView.js';
-import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
+import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import ConstantsControlPanel from './ConstantsControlPanel.js';
 import SceneSelectionButton from './SceneSelectionButton.js';

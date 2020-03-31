@@ -19,7 +19,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
-import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
+import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import DisplacementArrowNode from './DisplacementArrowNode.js';
 

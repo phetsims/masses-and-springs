@@ -14,7 +14,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
-import massesAndSpringsStrings from '../../masses-and-springs-strings.js';
+import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
 const springConstantString = massesAndSpringsStrings.springConstant;

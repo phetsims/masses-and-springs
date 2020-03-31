@@ -13,7 +13,7 @@ import Tandem from '../../tandem/js/Tandem.js';
 import EnergyScreen from './energy/EnergyScreen.js';
 import IntroScreen from './intro/IntroScreen.js';
 import LabScreen from './lab/LabScreen.js';
-import massesAndSpringsStrings from './masses-and-springs-strings.js';
+import massesAndSpringsStrings from './massesAndSpringsStrings.js';
 import VectorsScreen from './vectors/VectorsScreen.js';
 
 const massesAndSpringsTitleString = massesAndSpringsStrings[ 'masses-and-springs' ].title;
