@@ -96,7 +96,7 @@ function GravityAndDampingControlNode( model, listNodeParent, tandem, options ) 
           } );
           questionTextNode.maxWidth = bottomBox.width * 1.25;
           questionTextNode.center = bottomBox.center;
-          questionTextNode.onStatic( 'visibility', function() {
+          questionTextNode.visibleProperty.lazyLink( function() {
             bottomBox.visible = !questionTextNode.visible;
           } );
           return bottomContent;
