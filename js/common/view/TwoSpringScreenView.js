@@ -116,7 +116,8 @@ function TwoSpringScreenView( model, tandem ) {
       this.secondSpringConstantControlPanel
     ],
     spacing: this.spacing,
-    align: 'top'
+    align: 'top',
+    excludeInvisibleChildrenFromBounds: false
   } );
 
   // Adjust the floating panels to the visibleBounds of the screen.

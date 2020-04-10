@@ -97,7 +97,8 @@ function IntroScreenView( model, tandem ) {
       this.springLengthControlPanel,
       lineSeparator,
       new AlignBox( constantsControlPanel, { group: optionsContentAlignGroup, xAlign: 'left', leftMargin: 10 } )
-    ]
+    ],
+    excludeInvisibleChildrenFromBounds: false
   } );
 
   const optionsContentAlignBox = new AlignBox( springOptionsVBox, { group: optionsContentAlignGroup } );

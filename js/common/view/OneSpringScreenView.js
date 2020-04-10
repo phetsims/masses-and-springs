@@ -184,7 +184,8 @@ function OneSpringScreenView( model, tandem, options ) {
       this.springStopperButtonNode
     ],
     spacing: this.spacing * 1.4,
-    align: 'top'
+    align: 'top',
+    excludeInvisibleChildrenFromBounds: false
   } );
 
   // Adding system controls and energy graph to scene graph

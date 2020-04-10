@@ -46,7 +46,8 @@ function ToolboxPanel( stopwatch, dragBounds, rulerNode, stopwatchNode, rulerVis
     align: 'center',
     xMargin: 500,
     spacing: 30,
-    tandem: tandem.createTandem( 'toolbox' )
+    tandem: tandem.createTandem( 'toolbox' ),
+    excludeInvisibleChildrenFromBounds: false
   } );
 
   const toolboxAlignBox = new AlignBox( toolbox, { group: alignGroup } );
