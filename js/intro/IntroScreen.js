@@ -8,6 +8,7 @@
  */
 
 import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import introHomeScreenImage from '../../images/intro_screen_icon_png.js';
@@ -19,8 +20,6 @@ import IntroScreenView from './view/IntroScreenView.js';
 
 const screenIntroString = massesAndSpringsStrings.screen.intro;
 
-// image
-
 /**
  * @param {Tandem} tandem
  *
@@ -31,7 +30,10 @@ function IntroScreen( tandem ) {
   const options = {
     name: screenIntroString,
     backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
-    homeScreenIcon: new Image( introHomeScreenImage ),
+    homeScreenIcon: new ScreenIcon( new Image( introHomeScreenImage ), {
+      maxIconWidthProportion: 1,
+      maxIconHeightProportion: 1
+    } ),
     tandem: tandem
   };
 

@@ -6,6 +6,7 @@
  */
 
 import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import energyHomeScreenImage from '../../images/energy_screen_icon_png.js';
@@ -17,8 +18,6 @@ import EnergyScreenView from './view/EnergyScreenView.js';
 
 const screenEnergyString = massesAndSpringsStrings.screen.energy;
 
-// image
-
 /**
  * @param {Tandem} tandem
  *
@@ -29,7 +28,10 @@ function EnergyScreen( tandem ) {
   const options = {
     name: screenEnergyString,
     backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
-    homeScreenIcon: new Image( energyHomeScreenImage ),
+    homeScreenIcon: new ScreenIcon( new Image( energyHomeScreenImage ), {
+      maxIconWidthProportion: 1,
+      maxIconHeightProportion: 1
+    } ),
     tandem: tandem
   };
 

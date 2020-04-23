@@ -7,6 +7,7 @@
  */
 
 import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import labHomeScreenImage from '../../images/lab_screen_icon_png.js';
@@ -18,8 +19,6 @@ import LabScreenView from './view/LabScreenView.js';
 
 const screenLabString = massesAndSpringsStrings.screen.lab;
 
-// image
-
 /**
  * @param {Tandem} tandem
  *
@@ -30,7 +29,10 @@ function LabScreen( tandem ) {
   const options = {
     name: screenLabString,
     backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
-    homeScreenIcon: new Image( labHomeScreenImage ),
+    homeScreenIcon: new ScreenIcon( new Image( labHomeScreenImage ), {
+      maxIconWidthProportion: 1,
+      maxIconHeightProportion: 1
+    } ),
     tandem: tandem
   };
 

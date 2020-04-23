@@ -7,6 +7,7 @@
  */
 
 import Screen from '../../../joist/js/Screen.js';
+import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import vectorHomeScreenImage from '../../images/vectors_screen_icon_png.js';
@@ -18,8 +19,6 @@ import VectorsScreenView from './view/VectorsScreenView.js';
 
 const screenVectorsString = massesAndSpringsStrings.screen.vectors;
 
-// image
-
 /**
  * @param {Tandem} tandem
  *
@@ -30,7 +29,10 @@ function VectorsScreen( tandem ) {
   const options = {
     name: screenVectorsString,
     backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
-    homeScreenIcon: new Image( vectorHomeScreenImage ),
+    homeScreenIcon: new ScreenIcon( new Image( vectorHomeScreenImage ), {
+      maxIconWidthProportion: 1,
+      maxIconHeightProportion: 1
+    } ),
     tandem: tandem
   };
 
