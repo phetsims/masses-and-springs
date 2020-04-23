@@ -48,17 +48,18 @@ function ConstantsControlPanel( selectedConstantProperty, constantEnumeration, t
     maxWidth: 130
   };
 
-  const thicknessText = new Text( thicknessString, constantsSelectionButtonOptions );
+  const thicknessText = new Text( thicknessString, merge( {
+    tandem: tandem.createTandem( 'thicknessText' )
+  }, constantsSelectionButtonOptions ) );
   const thicknessRadioButton = new AquaRadioButton(
     selectedConstantProperty, constantEnumeration.SPRING_THICKNESS, thicknessText, {
       radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
       tandem: tandem.createTandem( 'thicknessRadioButton' )
     } );
 
-  const constantText = new Text( springConstantString, {
-    font: TITLE_FONT,
-    tandem: tandem.createTandem( 'constantText' )
-  } );
+  const constantText = new Text( springConstantString, ( {
+    tandem: tandem.createTandem( 'constant' )
+  }, constantsSelectionButtonOptions ) );
   const springConstantRadioButton = new AquaRadioButton(
     selectedConstantProperty, constantEnumeration.SPRING_CONSTANT, constantText, {
       radius: MassesAndSpringsConstants.RADIO_BUTTON_RADIUS,
