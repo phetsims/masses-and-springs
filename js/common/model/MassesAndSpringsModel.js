@@ -144,7 +144,7 @@ function MassesAndSpringsModel( tandem, options ) {
 
 massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
 
-export default inherit( Object, MassesAndSpringsModel, {
+inherit( Object, MassesAndSpringsModel, {
 
   /**
    * Creates new mass object and pushes it into the model's mass array.
@@ -392,3 +392,5 @@ export default inherit( Object, MassesAndSpringsModel, {
     } );
   }
 } );
+
+export default MassesAndSpringsModel;

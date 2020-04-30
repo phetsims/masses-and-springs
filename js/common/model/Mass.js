@@ -297,7 +297,7 @@ function Mass( massValue, xPosition, color, gravityProperty, tandem, options ) {
 
 massesAndSprings.register( 'Mass', Mass );
 
-export default inherit( Object, Mass, {
+inherit( Object, Mass, {
 
   /**
    * Responsible for mass falling or animating without being attached to spring.
@@ -386,3 +386,5 @@ export default inherit( Object, Mass, {
     this.initialTotalEnergyProperty.reset();
   }
 } );
+
+export default Mass;

@@ -99,7 +99,7 @@ function MovableLineNode( initialPosition, length, visibleProperty, dragBounds, 
 
 massesAndSprings.register( 'MovableLineNode', MovableLineNode );
 
-export default inherit( Node, MovableLineNode, {
+inherit( Node, MovableLineNode, {
   /**
    * @public
    */
@@ -107,3 +107,5 @@ export default inherit( Node, MovableLineNode, {
     this.positionProperty.reset();
   }
 } );
+
+export default MovableLineNode;

@@ -89,7 +89,7 @@ function DraggableRulerNode( mvt, dragBounds, initialPosition, visibleProperty, 
 
 massesAndSprings.register( 'DraggableRulerNode', DraggableRulerNode );
 
-export default inherit( RulerNode, DraggableRulerNode, {
+inherit( RulerNode, DraggableRulerNode, {
 
   /**
    * @public
@@ -98,3 +98,5 @@ export default inherit( RulerNode, DraggableRulerNode, {
     this.positionProperty.reset();
   }
 } );
+
+export default DraggableRulerNode;

@@ -259,7 +259,7 @@ function SpringScreenView( model, tandem, options ) {
 
 massesAndSprings.register( 'SpringScreenView', SpringScreenView );
 
-export default inherit( ScreenView, SpringScreenView, {
+inherit( ScreenView, SpringScreenView, {
 
   /**
    * Helper function to restore initial layering of the masses to prevent them from stacking over each other.
@@ -443,3 +443,5 @@ export default inherit( ScreenView, SpringScreenView, {
     } );
   }
 } );
+
+export default SpringScreenView;

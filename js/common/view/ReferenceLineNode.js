@@ -98,7 +98,7 @@ function ReferenceLineNode( modelViewTransform2, spring, property, visibleProper
 
 massesAndSprings.register( 'ReferenceLineNode', ReferenceLineNode );
 
-export default inherit( Line, ReferenceLineNode, {
+inherit( Line, ReferenceLineNode, {
 
   /**
    * Resets the position of the line Node.
@@ -109,3 +109,5 @@ export default inherit( Line, ReferenceLineNode, {
     this.positionProperty.reset();
   }
 } );
+
+export default ReferenceLineNode;

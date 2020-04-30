@@ -217,7 +217,7 @@ function OneSpringScreenView( model, tandem, options ) {
 
 massesAndSprings.register( 'OneSpringScreenView', OneSpringScreenView );
 
-export default inherit( SpringScreenView, OneSpringScreenView, {
+inherit( SpringScreenView, OneSpringScreenView, {
   /**
    * @public
    */
@@ -235,3 +235,5 @@ export default inherit( SpringScreenView, OneSpringScreenView, {
     this.energyGraphNode.update();
   }
 } );
+
+export default OneSpringScreenView;

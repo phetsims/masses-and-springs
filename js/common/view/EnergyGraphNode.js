@@ -285,7 +285,7 @@ function EnergyGraphNode( model, tandem ) {
 
 massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
 
-export default inherit( AccordionBox, EnergyGraphNode, {
+inherit( AccordionBox, EnergyGraphNode, {
   /**
    * @public
    */
@@ -300,3 +300,5 @@ export default inherit( AccordionBox, EnergyGraphNode, {
     this.barChartNode.update();
   }
 } );
+
+export default EnergyGraphNode;

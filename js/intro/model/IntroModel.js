@@ -128,7 +128,7 @@ function IntroModel( tandem ) {
 
 massesAndSprings.register( 'IntroModel', IntroModel );
 
-export default inherit( MassesAndSpringsModel, IntroModel, {
+inherit( MassesAndSpringsModel, IntroModel, {
 
   /**
    * @override
@@ -208,3 +208,5 @@ export default inherit( MassesAndSpringsModel, IntroModel, {
     this.resetScene( false );
   }
 } );
+
+export default IntroModel;

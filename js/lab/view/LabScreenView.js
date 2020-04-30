@@ -84,7 +84,7 @@ function LabScreenView( model, tandem ) {
 }
 
 massesAndSprings.register( 'LabScreenView', LabScreenView );
-export default inherit( OneSpringScreenView, LabScreenView, {
+inherit( OneSpringScreenView, LabScreenView, {
   /**
    * @param {number} dt
    * @public
@@ -94,3 +94,5 @@ export default inherit( OneSpringScreenView, LabScreenView, {
     this.periodTraceNode.step( dt, this.model.playingProperty );
   }
 } );
+
+export default LabScreenView;

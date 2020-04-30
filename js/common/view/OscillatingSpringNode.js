@@ -91,7 +91,7 @@ function OscillatingSpringNode( spring, modelViewTransform2, tandem, options ) {
 
 massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );
 
-export default inherit( ParametricSpringNode, OscillatingSpringNode, {
+inherit( ParametricSpringNode, OscillatingSpringNode, {
   /**
    * @public
    */
@@ -102,3 +102,5 @@ export default inherit( ParametricSpringNode, OscillatingSpringNode, {
 }, {
   MAP_NUMBER_OF_LOOPS: MAP_NUMBER_OF_LOOPS
 } );
+
+export default OscillatingSpringNode;

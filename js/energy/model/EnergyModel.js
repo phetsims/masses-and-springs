@@ -36,7 +36,7 @@ function EnergyModel( tandem ) {
 
 massesAndSprings.register( 'EnergyModel', EnergyModel );
 
-export default inherit( MassesAndSpringsModel, EnergyModel, {
+inherit( MassesAndSpringsModel, EnergyModel, {
   /**
    * @public
    */
@@ -44,3 +44,5 @@ export default inherit( MassesAndSpringsModel, EnergyModel, {
     MassesAndSpringsModel.prototype.reset.call( this );
   }
 } );
+
+export default EnergyModel;

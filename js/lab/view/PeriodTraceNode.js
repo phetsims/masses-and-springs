@@ -59,7 +59,7 @@ function PeriodTraceNode( periodTrace, modelViewTransform ) {
 
 massesAndSprings.register( 'PeriodTraceNode', PeriodTraceNode );
 
-export default inherit( Node, PeriodTraceNode, {
+inherit( Node, PeriodTraceNode, {
 
   /**
    * @param {number} dt
@@ -163,3 +163,5 @@ export default inherit( Node, PeriodTraceNode, {
     }
   }
 } );
+
+export default PeriodTraceNode;

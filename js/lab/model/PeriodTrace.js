@@ -106,7 +106,7 @@ function PeriodTrace( spring, simPlaying ) {
 
 massesAndSprings.register( 'PeriodTrace', PeriodTrace );
 
-export default inherit( Object, PeriodTrace, {
+inherit( Object, PeriodTrace, {
   /**
    * Called when the trace has fully faded away.
    * @public
@@ -116,3 +116,5 @@ export default inherit( Object, PeriodTrace, {
     this.crossingProperty.reset();
   }
 } );
+
+export default PeriodTrace;

@@ -302,7 +302,7 @@ function Spring( position, initialNaturalRestingLength, dampingProperty, gravity
 
 massesAndSprings.register( 'Spring', Spring );
 
-export default inherit( Object, Spring, {
+inherit( Object, Spring, {
   /**
    * @public
    */
@@ -620,3 +620,5 @@ export default inherit( Object, Spring, {
     }
   }
 } );
+
+export default Spring;

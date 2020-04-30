@@ -79,7 +79,7 @@ function LabModel( tandem, basicsVersion, options ) {
 
 massesAndSprings.register( 'LabModel', LabModel );
 
-export default inherit( MassesAndSpringsModel, LabModel, {
+inherit( MassesAndSpringsModel, LabModel, {
   /**
    * @public
    */
@@ -88,3 +88,5 @@ export default inherit( MassesAndSpringsModel, LabModel, {
     this.gravityAccordionBoxExpandedProperty && this.gravityAccordionBoxExpandedProperty.reset();
   }
 } );
+
+export default LabModel;
