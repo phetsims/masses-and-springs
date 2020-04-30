@@ -136,19 +136,23 @@ function EnergyGraphNode( model, tandem ) {
   this.barChartNode = new BarChartNode( [
     {
       entries: [ aEntry ],
-      labelString: keString
+      labelString: keString,
+      labelColor: PhetColorScheme.KINETIC_ENERGY
     },
     {
       entries: [ bEntry ],
-      labelString: peGravString
+      labelString: peGravString,
+      labelColor: PhetColorScheme.GRAVITATIONAL_POTENTIAL_ENERGY
     },
     {
       entries: [ cEntry ],
-      labelString: peElasString
+      labelString: peElasString,
+      labelColor: PhetColorScheme.ELASTIC_POTENTIAL_ENERGY
     },
     {
       entries: [ dEntry ],
       labelString: eThermString,
+      labelColor: PhetColorScheme.HEAT_THERMAL_ENERGY,
       labelNode: clearThermalButton
     },
     {
