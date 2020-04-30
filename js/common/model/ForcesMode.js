@@ -8,7 +8,9 @@
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
-export default massesAndSprings.register( 'ForcesMode', Enumeration.byKeys( [
+const ForcesMode = Enumeration.byKeys( [
   'FORCES',
   'NET_FORCES'
-] ) );
+] );
+massesAndSprings.register( 'ForcesMode', ForcesMode );
+export default ForcesMode;

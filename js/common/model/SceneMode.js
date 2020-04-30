@@ -8,7 +8,9 @@
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
-export default massesAndSprings.register( 'SceneMode', Enumeration.byKeys( [
+const SceneMode = Enumeration.byKeys( [
   'SAME_LENGTH',
   'ADJUSTABLE_LENGTH'
-] ) );
+] );
+massesAndSprings.register( 'SceneMode', SceneMode );
+export default SceneMode;

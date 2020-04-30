@@ -8,7 +8,9 @@
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
-export default massesAndSprings.register( 'SimSpeed', Enumeration.byKeys( [
+const SimSpeed = Enumeration.byKeys( [
   'NORMAL',
   'SLOW'
-] ) );
+] );
+massesAndSprings.register( 'SimSpeed', SimSpeed );
+export default SimSpeed;

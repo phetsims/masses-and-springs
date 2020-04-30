@@ -8,7 +8,9 @@
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
-export default massesAndSprings.register( 'ConstantMode', Enumeration.byKeys( [
+const ConstantMode = Enumeration.byKeys( [
   'SPRING_CONSTANT',
   'SPRING_THICKNESS'
-] ) );
+] );
+massesAndSprings.register( 'ConstantMode', ConstantMode );
+export default ConstantMode;
