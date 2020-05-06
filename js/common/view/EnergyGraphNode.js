@@ -25,7 +25,6 @@ import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
@@ -36,6 +35,7 @@ import Dialog from '../../../../sun/js/Dialog.js';
 import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 
 // constants
 const LEGEND_DESCRIPTION_MAX_WIDTH = 500;
@@ -201,10 +201,18 @@ function EnergyGraphNode( model, tandem ) {
       return new HBox( {
         spacing: 20,
         children: [
-          new AlignBox( new RichText( itemData.abbreviation, {
-            font: MassesAndSpringsConstants.LEGEND_ABBREVIATION_FONT,
-            fill: itemData.color,
-            maxWidth: MAX_WIDTH
+          new AlignBox( new HBox( {
+            children: [
+              new Rectangle( 0, 0, 13, 13, 0, 0, {
+                fill: itemData.color,
+                stroke: 'black'
+              } ),
+              new RichText( itemData.abbreviation, {
+                font: MassesAndSpringsConstants.LEGEND_ABBREVIATION_FONT,
+                maxWidth: MAX_WIDTH
+              } )
+            ],
+            spacing: 10
           } ), {
             group: abbreviationGroup,
             xAlign: 'left'
