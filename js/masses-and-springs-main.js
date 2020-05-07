@@ -8,7 +8,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import EnergyScreen from './energy/EnergyScreen.js';
 import IntroScreen from './intro/IntroScreen.js';
@@ -31,7 +31,7 @@ const simOptions = {
   }
 };
 
-SimLauncher.launch( function() {
+simLauncher.launch( function() {
   const sim = new Sim( massesAndSpringsTitleString, [
     new IntroScreen( tandem.createTandem( 'introScreen' ) ),
     new VectorsScreen( tandem.createTandem( 'vectorsScreen' ) ),
