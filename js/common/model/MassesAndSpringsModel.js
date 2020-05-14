@@ -17,7 +17,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
-import TimeControlSpeed from '../../../../scenery-phet/js/TimeControlSpeed.js';
+import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import MassesAndSpringsColorProfile from '../view/MassesAndSpringsColorProfile.js';
@@ -65,9 +65,9 @@ function MassesAndSpringsModel( tandem, options ) {
     units: 'meters/second/second'
   } );
 
-  // @private {EnumerationProperty.<TimeControlSpeed>} - Controls play speed of the simulation
-  this.timeControlSpeedProperty = new EnumerationProperty( TimeControlSpeed, TimeControlSpeed.NORMAL, {
-    tandem: tandem.createTandem( 'timeControlSpeedProperty' )
+  // @private {EnumerationProperty.<TimeSpeed>} - Controls play speed of the simulation
+  this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+    tandem: tandem.createTandem( 'timeSpeedProperty' )
   } );
 
   // @public {Property.<boolean>} determines visibility of ruler node
@@ -249,7 +249,7 @@ inherit( Object, MassesAndSpringsModel, {
     this.gravityProperty.reset();
     this.bodyProperty.reset();
     this.playingProperty.reset();
-    this.timeControlSpeedProperty.reset();
+    this.timeSpeedProperty.reset();
     this.rulerVisibleProperty.reset();
     this.stopwatch.reset();
     this.timerRunningProperty.reset();
@@ -371,7 +371,7 @@ inherit( Object, MassesAndSpringsModel, {
     const animationDt = dt;
 
     // Change the dt value if we are playing in slow motion.
-    if ( this.timeControlSpeedProperty.get() === TimeControlSpeed.SLOW && this.playingProperty.get() ) {
+    if ( this.timeSpeedProperty.get() === TimeSpeed.SLOW && this.playingProperty.get() ) {
       dt = dt / MassesAndSpringsConstants.SLOW_SIM_DT_RATIO;
     }
     for ( let i = 0; i < this.masses.length; i++ ) {

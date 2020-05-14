@@ -27,8 +27,8 @@ import PaintColorProperty from '../../../../scenery/js/util/PaintColorProperty.j
 import ClosestDragListener from '../../../../sun/js/ClosestDragListener.js';
 import MutableOptionsNode from '../../../../sun/js/MutableOptionsNode.js';
 import Panel from '../../../../sun/js/Panel.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
+import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import IndicatorVisibilityControlNode from '../../vectors/view/IndicatorVisibilityControlNode.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import DraggableRulerNode from './DraggableRulerNode.js';
@@ -218,7 +218,7 @@ function SpringScreenView( model, tandem, options ) {
 
   // @public {TimeControlNode} Sim speed controls
   this.timeControlNode = new TimeControlNode( model.playingProperty, {
-    timeControlSpeedProperty: model.timeControlSpeedProperty,
+    timeSpeedProperty: model.timeSpeedProperty,
     playPauseStepButtonOptions: {
       stepForwardButtonOptions: {
         listener: function() { model.stepForward( 0.01 ); }
