@@ -91,7 +91,7 @@ function ToolboxPanel( stopwatch, dragBounds, rulerNode, stopwatchNode, rulerVis
     rulerVisibleProperty.set( true );
 
     // Now determine the initial position where this element should move to after it's created, which corresponds
-    // to the location of the mouse or touch event.
+    // to the position of the mouse or touch event.
     const initialPosition = rulerNode.globalToParentPoint( event.pointer.point )
       .minus( new Vector2( -rulerNode.width * 0.5, rulerNode.height * 0.4 ) );
     rulerNode.positionProperty.set( initialPosition );
@@ -125,7 +125,7 @@ function ToolboxPanel( stopwatch, dragBounds, rulerNode, stopwatchNode, rulerVis
     stopwatch.isVisibleProperty.value = true;
 
     // Now determine the initial position where this element should move to after it's created, which corresponds
-    // to the location of the mouse or touch event.
+    // to the position of the mouse or touch event.
     const initialPosition = stopwatchNode.globalToParentPoint( event.pointer.point )
       .minus( new Vector2( stopwatchNode.width / 2, stopwatchNode.height * 0.4 ) );
 

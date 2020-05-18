@@ -29,7 +29,7 @@ const LINE_LENGTH = 100;
  */
 function ReferenceLineNode( modelViewTransform2, spring, property, visibleProperty, options ) {
   options = merge( {
-    fixedPosition: false, // flag for a line that remain at a target location
+    fixedPosition: false, // flag for a line that remain at a target position
     zeroPointLine: false, // flag for a line that remains at the zero reference point of the sim
     stroke: 'black',
     label: null

@@ -457,7 +457,7 @@ inherit( Object, Spring, {
       const springExtensionValue = ( mass.massProperty.value * this.gravityProperty.value ) / this.springConstantProperty.value;
       this.displacementProperty.set( -springExtensionValue );
 
-      // place that mass at the correct location as well
+      // place that mass at the correct position as well
       mass.positionProperty.set( new Vector2(
         this.positionProperty.get().x, this.equilibriumYPositionProperty.get() + MassesAndSpringsConstants.HOOK_CENTER
       ) );
