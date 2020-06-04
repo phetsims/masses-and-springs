@@ -15,8 +15,10 @@ class BodyIO extends ObjectIO {
 
   /**
    * Encodes a Body instance to a state.
+   * @param {Body} body
    *
-   * @param body
+   * @public
+   * @override
    * @returns {*}
    */
   static toStateObject( body ) {

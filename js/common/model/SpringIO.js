@@ -15,8 +15,10 @@ class SpringIO extends ObjectIO {
 
   /**
    * Encodes a Spring instance to a state.
+   * @param {Spring} spring
    *
-   * @param spring
+   * @public
+   * @override
    * @returns {*}
    */
   static toStateObject( spring ) {

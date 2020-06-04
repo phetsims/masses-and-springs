@@ -14,8 +14,10 @@ import Mass from './Mass.js';
 class MassIO extends ObjectIO {
   /**
    * Encodes a Mass instance to a state.
+   * @param {Mass} mass
    *
-   * @param mass
+   * @public
+   * @override
    * @returns {*}
    */
   static toStateObject( mass ) {
