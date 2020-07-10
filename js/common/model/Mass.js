@@ -14,7 +14,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import inherit from '../../../../phet-core/js/inherit.js';
@@ -208,12 +207,12 @@ function Mass( massValue, xPosition, color, gravityProperty, tandem, options ) {
   // Used to determine when a peak is hit.
   this.verticalVelocityProperty.lazyLink( function( oldVelocity, newVelocity ) {
     if ( self.springProperty.value ) {
-      if ( Utils.sign( oldVelocity ) !== Utils.sign( newVelocity ) && Utils.sign( oldVelocity ) ) {
+      if ( Math.sign( oldVelocity ) !== Math.sign( newVelocity ) && Math.sign( oldVelocity ) ) {
 
         // @param {number} Emitter for peek during first upwards peek
         self.springProperty.value.peakEmitter.emit( 1 );
       }
-      if ( Utils.sign( oldVelocity ) !== Utils.sign( newVelocity.y ) && !Utils.sign( oldVelocity ) ) {
+      if ( Math.sign( oldVelocity ) !== Math.sign( newVelocity.y ) && !Math.sign( oldVelocity ) ) {
 
         // @param {number} Emitter for peek during second downwards peek
         self.springProperty.value.peakEmitter.emit( -1 );
