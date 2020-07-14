@@ -77,6 +77,9 @@ function MassesAndSpringsModel( tandem, options ) {
 
   // @public
   this.stopwatch = new Stopwatch( {
+    timePropertyOptions: {
+      range: Stopwatch.ZERO_TO_ALMOST_SIXTY
+    },
     tandem: tandem.createTandem( 'stopwatch' )
   } );
 
