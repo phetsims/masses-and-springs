@@ -170,7 +170,6 @@ function OneSpringScreenView( model, tandem, options ) {
     this.addChild( zeroHeightLine );
 
     this.resetAllButton.addListener( function() {
-      self.model.reset();
       self.movableLineNode.reset();
       self.energyGraphNode && self.energyGraphNode.reset();
     } );
