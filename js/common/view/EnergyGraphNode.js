@@ -212,7 +212,7 @@ function EnergyGraphNode( model, tandem ) {
                 maxWidth: MAX_WIDTH
               } )
             ],
-            spacing: 10
+            spacing: 14
           } ), {
             group: abbreviationGroup,
             xAlign: 'left'
@@ -244,7 +244,7 @@ function EnergyGraphNode( model, tandem ) {
           ySpacing: 20,
           bottomMargin: 20,
           title: new Text( energyLegendString, {
-            font: new PhetFont( 22 ),
+            font: new PhetFont( 28 ),
             maxWidth: MAX_WIDTH * 2
           } )
         } );
