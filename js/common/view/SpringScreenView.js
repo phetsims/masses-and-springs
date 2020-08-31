@@ -27,6 +27,7 @@ import PaintColorProperty from '../../../../scenery/js/util/PaintColorProperty.j
 import ClosestDragListener from '../../../../sun/js/ClosestDragListener.js';
 import MutableOptionsNode from '../../../../sun/js/MutableOptionsNode.js';
 import Panel from '../../../../sun/js/Panel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import IndicatorVisibilityControlNode from '../../vectors/view/IndicatorVisibilityControlNode.js';
@@ -81,8 +82,13 @@ function SpringScreenView( model, tandem, options ) {
 
   // @private {Array.<MutableOptionsNode>} Used to reference the created springs in the view.
   this.springNodes = model.springs.map( function( spring ) {
-    const springNode = new MutableOptionsNode( OscillatingSpringNode,
-      [ spring, self.modelViewTransform, tandem.createTandem( 'oscillatingSpringNode' ) ],
+    const springNode = new MutableOptionsNode( OscillatingSpringNode, [
+        spring,
+        self.modelViewTransform,
+
+        // see https://github.com/phetsims/masses-and-springs-basics/issues/67
+        Tandem.OPT_OUT
+      ],
       { leftEndLength: -10 },
       {
         frontColor: self.springFrontColorProperty,
