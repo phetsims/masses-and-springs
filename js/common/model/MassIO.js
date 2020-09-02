@@ -1,7 +1,7 @@
 // Copyright 2017-2020, University of Colorado Boulder
 
 /**
- * IO type for Mass.
+ * IO Type for Mass.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */

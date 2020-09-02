@@ -1,7 +1,7 @@
 // Copyright 2017-2020, University of Colorado Boulder
 
 /**
- * IO type for Body.
+ * IO Type for Body.
  *
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
