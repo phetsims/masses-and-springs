@@ -36,7 +36,7 @@ class SpringIO extends ObjectIO {
 SpringIO.documentation = 'Hangs from the ceiling and applies a force to any attached BodyIO';
 SpringIO.validator = { valueType: Spring };
 SpringIO.typeName = 'SpringIO';
-ObjectIO.validateSubtype( SpringIO );
+ObjectIO.validateIOType( SpringIO );
 
 massesAndSprings.register( 'SpringIO', SpringIO );
 export default SpringIO;

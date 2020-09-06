@@ -35,7 +35,7 @@ class BodyIO extends ObjectIO {
 BodyIO.validator = { valueType: Body };
 BodyIO.documentation = 'Planet which determines the force of gravity.';
 BodyIO.typeName = 'BodyIO';
-ObjectIO.validateSubtype( BodyIO );
+ObjectIO.validateIOType( BodyIO );
 
 massesAndSprings.register( 'BodyIO', BodyIO );
 export default BodyIO;

@@ -35,7 +35,7 @@ class MassIO extends ObjectIO {
 MassIO.validator = { valueType: Mass };
 MassIO.typeName = 'MassIO';
 MassIO.documentation = 'Model element for one of the masses';
-ObjectIO.validateSubtype( MassIO );
+ObjectIO.validateIOType( MassIO );
 
 massesAndSprings.register( 'MassIO', MassIO );
 export default MassIO;
