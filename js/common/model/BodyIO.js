@@ -13,7 +13,9 @@ import Body from './Body.js';
 const BodyIO = new IOType( 'BodyIO', {
   valueType: Body,
   documentation: 'Planet which determines the force of gravity.',
-  toStateObject( body ) {
+
+  // TODO: https://github.com/phetsims/tandem/issues/211 ReferenceIO
+  toStateObject: body => {
     if ( body === null ) {
       return null;
     }

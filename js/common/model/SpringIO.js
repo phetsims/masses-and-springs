@@ -14,7 +14,8 @@ const SpringIO = new IOType( 'SpringIO', {
   valueType: Spring,
   documentation: 'Hangs from the ceiling and applies a force to any attached BodyIO',
 
-  toStateObject( spring ) {
+  // TODO: https://github.com/phetsims/tandem/issues/211 ReferenceIO
+  toStateObject: spring => {
     if ( spring === null ) {
       return null;
     }

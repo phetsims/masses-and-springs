@@ -13,7 +13,8 @@ import Mass from './Mass.js';
 const MassIO = new IOType( 'MassIO', {
   documentation: 'Model element for one of the masses',
   valueType: Mass,
-  toStateObject( mass ) {
+  // TODO: https://github.com/phetsims/tandem/issues/211 ReferenceIO
+  toStateObject: mass => {
     if ( mass === null ) {
       return null;
     }
