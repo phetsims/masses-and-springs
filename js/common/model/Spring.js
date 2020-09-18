@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
@@ -88,7 +87,7 @@ function Spring( position, initialNaturalRestingLength, dampingProperty, gravity
     },
     {
       units: 'N',
-      phetioType: DerivedPropertyIO( NumberIO )
+      phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
     }
   );
 
@@ -169,7 +168,7 @@ function Spring( position, initialNaturalRestingLength, dampingProperty, gravity
       tandem: tandem.createTandem( 'lengthProperty' ),
       units: 'meters',
       range: new Range( 0, Number.POSITIVE_INFINITY ),
-      phetioType: DerivedPropertyIO( NumberIO )
+      phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
     }
   );
 
@@ -183,7 +182,7 @@ function Spring( position, initialNaturalRestingLength, dampingProperty, gravity
       tandem: tandem.createTandem( 'bottomProperty' ),
       units: 'meters',
       range: new Range( 0, Number.POSITIVE_INFINITY ),
-      phetioType: DerivedPropertyIO( NumberIO )
+      phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
     }
   );
 
