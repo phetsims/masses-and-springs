@@ -6,23 +6,15 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
-import validate from '../../../../axon/js/validate.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import Spring from './Spring.js';
 
-class SpringIO extends ObjectIO {
+const SpringIO = new IOType( 'SpringIO', {
+  valueType: Spring,
+  documentation: 'Hangs from the ceiling and applies a force to any attached BodyIO',
 
-  /**
-   * Encodes a Spring instance to a state.
-   * @param {Spring} spring
-   *
-   * @public
-   * @override
-   * @returns {*}
-   */
-  static toStateObject( spring ) {
-    validate( spring, this.validator );
+  toStateObject( spring ) {
     if ( spring === null ) {
       return null;
     }
@@ -31,12 +23,7 @@ class SpringIO extends ObjectIO {
       id: spring.tandem.phetioID
     };
   }
-}
-
-SpringIO.documentation = 'Hangs from the ceiling and applies a force to any attached BodyIO';
-SpringIO.validator = { valueType: Spring };
-SpringIO.typeName = 'SpringIO';
-ObjectIO.validateIOType( SpringIO );
+} );
 
 massesAndSprings.register( 'SpringIO', SpringIO );
 export default SpringIO;

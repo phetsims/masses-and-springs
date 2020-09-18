@@ -6,23 +6,14 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
-import validate from '../../../../axon/js/validate.js';
-import ObjectIO from '../../../../tandem/js/types/ObjectIO.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import Body from './Body.js';
 
-class BodyIO extends ObjectIO {
-
-  /**
-   * Encodes a Body instance to a state.
-   * @param {Body} body
-   *
-   * @public
-   * @override
-   * @returns {*}
-   */
-  static toStateObject( body ) {
-    validate( body, this.validator );
+const BodyIO = new IOType( 'BodyIO', {
+  valueType: Body,
+  documentation: 'Planet which determines the force of gravity.',
+  toStateObject( body ) {
     if ( body === null ) {
       return null;
     }
@@ -30,12 +21,7 @@ class BodyIO extends ObjectIO {
       body: body
     };
   }
-}
-
-BodyIO.validator = { valueType: Body };
-BodyIO.documentation = 'Planet which determines the force of gravity.';
-BodyIO.typeName = 'BodyIO';
-ObjectIO.validateIOType( BodyIO );
+} );
 
 massesAndSprings.register( 'BodyIO', BodyIO );
 export default BodyIO;
