@@ -9,41 +9,38 @@
 
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import introHomeScreenImage from '../../images/intro_screen_icon_png.js';
 import MassesAndSpringsColorProfile from '../common/view/MassesAndSpringsColorProfile.js';
-import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
 import massesAndSprings from '../massesAndSprings.js';
+import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';
 
-const screenIntroString = massesAndSpringsStrings.screen.intro;
+class IntroScreen extends Screen {
 
-/**
- * @param {Tandem} tandem
- *
- * @constructor
- */
-function IntroScreen( tandem ) {
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
 
-  const options = {
-    name: screenIntroString,
-    backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
-    homeScreenIcon: new ScreenIcon( new Image( introHomeScreenImage ), {
-      maxIconWidthProportion: 1,
-      maxIconHeightProportion: 1
-    } ),
-    tandem: tandem
-  };
+    const options = {
+      name: massesAndSpringsStrings.screen.intro,
+      backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
+      homeScreenIcon: new ScreenIcon( new Image( introHomeScreenImage ), {
+        maxIconWidthProportion: 1,
+        maxIconHeightProportion: 1
+      } ),
+      tandem: tandem
+    };
 
-  Screen.call( this,
-    function() { return new IntroModel( tandem.createTandem( 'model' ) ); },
-    function( model ) { return new IntroScreenView( model, tandem.createTandem( 'view' ) ); },
-    options
-  );
+    super(
+      function() { return new IntroModel( tandem.createTandem( 'model' ) ); },
+      function( model ) { return new IntroScreenView( model, tandem.createTandem( 'view' ) ); },
+      options
+    );
+  }
 }
 
 massesAndSprings.register( 'IntroScreen', IntroScreen );
-inherit( Screen, IntroScreen );
 export default IntroScreen;
