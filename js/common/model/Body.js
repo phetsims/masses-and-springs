@@ -8,6 +8,7 @@
  */
 
 import inherit from '../../../../phet-core/js/inherit.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
@@ -43,5 +44,20 @@ Body.JUPITER = new Body( bodyJupiterString, MassesAndSpringsConstants.JUPITER_GR
 Body.PLANET_X = new Body( bodyPlanetXString, MassesAndSpringsConstants.PLANET_X );
 Body.CUSTOM = new Body( bodyCustomString, MassesAndSpringsConstants.EARTH_GRAVITY );
 Body.BODIES = [ Body.MOON, Body.EARTH, Body.JUPITER, Body.PLANET_X, Body.CUSTOM ];
+
+Body.BodyIO = new IOType( 'BodyIO', {
+  valueType: Body,
+  documentation: 'Planet which determines the force of gravity.',
+
+  // TODO: https://github.com/phetsims/tandem/issues/215 use ReferenceIO or equivalent
+  toStateObject: body => {
+    if ( body === null ) {
+      return null;
+    }
+    return {
+      body: body
+    };
+  }
+} );
 
 export default Body;
