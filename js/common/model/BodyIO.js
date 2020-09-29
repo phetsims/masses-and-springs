@@ -14,7 +14,7 @@ const BodyIO = new IOType( 'BodyIO', {
   valueType: Body,
   documentation: 'Planet which determines the force of gravity.',
 
-  // TODO: https://github.com/phetsims/tandem/issues/211 ReferenceIO
+  // TODO: https://github.com/phetsims/tandem/issues/215 use ReferenceIO or equivalent
   toStateObject: body => {
     if ( body === null ) {
       return null;
