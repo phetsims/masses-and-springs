@@ -12,7 +12,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
@@ -135,7 +134,7 @@ function Mass( massValue, xPosition, color, gravityProperty, tandem, options ) {
   // @public {Property.<Spring|null>}  spring that the mass is attached to
   this.springProperty = new Property( null, {
     tandem: tandem.createTandem( 'springProperty' ),
-    phetioType: PropertyIO( NullableIO( SpringIO ) )
+    phetioType: Property.PropertyIO( NullableIO( SpringIO ) )
   } );
 
   // @public {Property.<number>} The force of the attached spring or 0 if unattached

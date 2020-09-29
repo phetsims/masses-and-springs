@@ -11,7 +11,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import PropertyIO from '../../../../axon/js/PropertyIO.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import inherit from '../../../../phet-core/js/inherit.js';
@@ -107,7 +106,7 @@ function MassesAndSpringsModel( tandem, options ) {
   // @public {Property.<string>} body of planet selected
   this.bodyProperty = new Property( Body.EARTH, {
     tandem: tandem.createTandem( 'bodyProperty' ),
-    phetioType: PropertyIO( BodyIO )
+    phetioType: Property.PropertyIO( BodyIO )
   } );
 
   // Visibility Properties of vectors associated with each mass
