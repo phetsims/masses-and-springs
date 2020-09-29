@@ -22,7 +22,6 @@ import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import MassesAndSpringsColorProfile from '../view/MassesAndSpringsColorProfile.js';
 import OscillatingSpringNode from '../view/OscillatingSpringNode.js';
 import Body from './Body.js';
-import BodyIO from './BodyIO.js';
 import ForcesMode from './ForcesMode.js';
 import Mass from './Mass.js';
 import Spring from './Spring.js';
@@ -106,7 +105,7 @@ function MassesAndSpringsModel( tandem, options ) {
   // @public {Property.<string>} body of planet selected
   this.bodyProperty = new Property( Body.EARTH, {
     tandem: tandem.createTandem( 'bodyProperty' ),
-    phetioType: Property.PropertyIO( BodyIO )
+    phetioType: Property.PropertyIO( Body.BodyIO )
   } );
 
   // Visibility Properties of vectors associated with each mass
