@@ -17,11 +17,12 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import Easing from '../../../../twixt/js/Easing.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
-import SpringIO from './SpringIO.js';
+import Spring from './Spring.js';
 
 // constants
 const HEIGHT_RATIO = 2.5;
@@ -134,7 +135,7 @@ function Mass( massValue, xPosition, color, gravityProperty, tandem, options ) {
   // @public {Property.<Spring|null>}  spring that the mass is attached to
   this.springProperty = new Property( null, {
     tandem: tandem.createTandem( 'springProperty' ),
-    phetioType: Property.PropertyIO( NullableIO( SpringIO ) )
+    phetioType: Property.PropertyIO( NullableIO( Spring.SpringIO ) )
   } );
 
   // @public {Property.<number>} The force of the attached spring or 0 if unattached
@@ -382,6 +383,22 @@ inherit( Object, Mass, {
     this.massProperty.reset();
     this.isAnimatingProperty.reset();
     this.initialTotalEnergyProperty.reset();
+  }
+} );
+
+// TODO: This is currently unused
+Mass.MassIO = new IOType( 'MassIO', {
+  documentation: 'Model element for one of the masses',
+  valueType: Mass,
+  // TODO: https://github.com/phetsims/tandem/issues/215 use ReferenceIO or equivalent
+  toStateObject: mass => {
+    if ( mass === null ) {
+      return null;
+    }
+    return {
+      mass: mass.mass,
+      color: mass.color
+    };
   }
 } );
 

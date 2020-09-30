@@ -18,6 +18,7 @@ import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import inherit from '../../../../phet-core/js/inherit.js';
+import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
@@ -617,6 +618,22 @@ inherit( Object, Spring, {
       this.buttonEnabledProperty.set( this.massAttachedProperty.get().verticalVelocityProperty.get() !== 0 );
       this.massAttachedProperty.get().preserveThermalEnergy = true;
     }
+  }
+} );
+
+Spring.SpringIO = new IOType( 'SpringIO', {
+  valueType: Spring,
+  documentation: 'Hangs from the ceiling and applies a force to any attached BodyIO',
+
+  // TODO: https://github.com/phetsims/tandem/issues/215 use ReferenceIO or equivalent
+  toStateObject: spring => {
+    if ( spring === null ) {
+      return null;
+    }
+    return {
+      position: spring.positionProperty.get(),
+      id: spring.tandem.phetioID
+    };
   }
 } );
 
