@@ -388,8 +388,8 @@ inherit( Object, Mass, {
 
 // TODO: This is currently unused
 Mass.MassIO = new IOType( 'MassIO', {
-  documentation: 'Model element for one of the masses',
   valueType: Mass,
+  documentation: 'Model element for one of the masses',
   // TODO: https://github.com/phetsims/tandem/issues/215 use ReferenceIO or equivalent
   toStateObject: mass => {
     if ( mass === null ) {
