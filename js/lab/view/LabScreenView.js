@@ -70,11 +70,11 @@ function LabScreenView( model, tandem ) {
   rightPanelsVBox.moveToBack();
 
   this.visibleBoundsProperty.link( function() {
-    rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphNode.top );
+    rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphAccordionBox.top );
   } );
 
   this.shelf.rectWidth = 160;
-  this.shelf.left = this.energyGraphNode.right + this.spacing;
+  this.shelf.left = this.energyGraphAccordionBox.right + this.spacing;
 
   // Move tools layer so ruler is always in front.
   this.toolsLayer.moveToFront();
@@ -90,7 +90,7 @@ inherit( OneSpringScreenView, LabScreenView, {
    * @public
    */
   step: function( dt ) {
-    this.energyGraphNode.update();
+    this.energyGraphAccordionBox.update();
     this.periodTraceNode.step( dt, this.model.playingProperty );
   }
 } );

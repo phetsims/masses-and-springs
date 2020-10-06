@@ -403,7 +403,7 @@ inherit( ScreenView, SpringScreenView, {
       this.movableLineNode.centerX = this.springCenter;
 
       if ( !this.model.basicsVersion ) {
-        this.energyGraphNode.leftTop = new Vector2( visibleBounds.left + this.spacing, this.springSystemControlsNode.top );
+        this.energyGraphAccordionBox.leftTop = new Vector2( visibleBounds.left + this.spacing, this.springSystemControlsNode.top );
       }
     }
 

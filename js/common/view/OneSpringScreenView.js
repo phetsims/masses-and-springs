@@ -20,7 +20,7 @@ import DisplacementArrowNode from '../../vectors/view/DisplacementArrowNode.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import Mass from '../model/Mass.js';
 import MassesAndSpringsModel from '../model/MassesAndSpringsModel.js';
-import EnergyGraphNode from './EnergyGraphNode.js';
+import EnergyGraphAccordionBox from './EnergyGraphAccordionBox.js';
 import MassesAndSpringsColorProfile from './MassesAndSpringsColorProfile.js';
 import MassNode from './MassNode.js';
 import MassValueControlPanel from './MassValueControlPanel.js';
@@ -118,9 +118,9 @@ function OneSpringScreenView( model, tandem, options ) {
     } );
 
   if ( !model.basicsVersion ) {
-    // @public {EnergyGraphNode} energy graph that displays energy values for the spring system.
-    this.energyGraphNode = new EnergyGraphNode( model, tandem );
-    this.addChild( this.energyGraphNode );
+    // @public {EnergyGraphAccordionBox} energy graph that displays energy values for the spring system.
+    this.energyGraphAccordionBox = new EnergyGraphAccordionBox( model, tandem );
+    this.addChild( this.energyGraphAccordionBox );
   }
 
   // Property that determines the zero height in the view.
@@ -171,7 +171,7 @@ function OneSpringScreenView( model, tandem, options ) {
 
     this.resetAllButton.addListener( function() {
       self.movableLineNode.reset();
-      self.energyGraphNode && self.energyGraphNode.reset();
+      self.energyGraphAccordionBox && self.energyGraphAccordionBox.reset();
     } );
   }
 
@@ -222,7 +222,7 @@ inherit( SpringScreenView, OneSpringScreenView, {
    */
   reset: function() {
     MassesAndSpringsModel.prototype.reset.call( this );
-    this.energyGraphNode.reset();
+    this.energyGraphAccordionBox.reset();
   },
 
   /**
@@ -231,7 +231,7 @@ inherit( SpringScreenView, OneSpringScreenView, {
    * @public
    */
   step: function() {
-    this.energyGraphNode.update();
+    this.energyGraphAccordionBox.update();
   }
 } );
 

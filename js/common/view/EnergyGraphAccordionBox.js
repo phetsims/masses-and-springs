@@ -54,7 +54,7 @@ const peGravString = massesAndSpringsStrings.peGrav;
 const thermalEnergyString = massesAndSpringsStrings.thermalEnergy;
 const totalEnergyString = massesAndSpringsStrings.totalEnergy;
 
-class EnergyGraphNode extends AccordionBox {
+class EnergyGraphAccordionBox extends AccordionBox {
 
   /**
    * @param {MassesAndSpringsModel} model
@@ -90,7 +90,7 @@ class EnergyGraphNode extends AccordionBox {
 
     // {Property.<number>} Responsible for adjusting the scaling of the barNode heights.
     const scaleFactorProperty = new DerivedProperty( [ zoomLevelProperty ],
-        zoomLevel => Math.pow( 2, zoomLevel ) * 20 );
+      zoomLevel => Math.pow( 2, zoomLevel ) * 20 );
 
     const clearThermalButton = new MoveToTrashButton( {
       arrowColor: ORANGE_COLOR,
@@ -298,6 +298,7 @@ class EnergyGraphNode extends AccordionBox {
    */
   reset() {
     this.zoomLevelProperty.reset();
+    super.reset();
   }
 
   /**
@@ -308,5 +309,5 @@ class EnergyGraphNode extends AccordionBox {
   }
 }
 
-massesAndSprings.register( 'EnergyGraphNode', EnergyGraphNode );
-export default EnergyGraphNode;
+massesAndSprings.register( 'EnergyGraphAccordionBox', EnergyGraphAccordionBox );
+export default EnergyGraphAccordionBox;

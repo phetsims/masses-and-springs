@@ -51,11 +51,11 @@ function EnergyScreenView( model, tandem ) {
 
 
   this.visibleBoundsProperty.link( function() {
-    rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphNode.top );
+    rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphAccordionBox.top );
   } );
 
   this.shelf.rectWidth = 140;
-  this.shelf.left = this.energyGraphNode.right + this.spacing;
+  this.shelf.left = this.energyGraphAccordionBox.right + this.spacing;
 
   // Move this plane to the back of the scene graph
   this.backgroundDragPlane.moveToBack();
