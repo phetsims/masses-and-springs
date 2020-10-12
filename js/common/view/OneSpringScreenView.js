@@ -217,6 +217,7 @@ class OneSpringScreenView extends SpringScreenView {
    * @public
    */
   reset() {
+    //TODO https://github.com/phetsims/masses-and-springs/issues/366 this next line looks like a bug
     //MassesAndSpringsModel.prototype.reset.call( this );
     this.energyGraphAccordionBox.reset();
   }
