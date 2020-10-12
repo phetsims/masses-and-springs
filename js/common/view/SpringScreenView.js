@@ -11,7 +11,6 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -44,238 +43,233 @@ import ToolboxPanel from './ToolboxPanel.js';
 const springConstantPatternString = massesAndSpringsStrings.springConstantPattern;
 const springStrengthString = massesAndSpringsStrings.springStrength;
 
-/**
- * @param {MassesAndSpringsModel} model
- * @param {Tandem} tandem
- * @param {Object} [options]
- * @constructor
- */
-function SpringScreenView( model, tandem, options ) {
-  ScreenView.call( this );
+class SpringScreenView extends ScreenView {
+  /**
+   * @param {MassesAndSpringsModel} model
+   * @param {Tandem} tandem
+   * @param {Object} [options]
+   */
+  constructor( model, tandem, options ) {
+    super();
 
-  options = merge( {
-    useSliderLabels: true,
-    dampingVisible: false
-  }, options );
+    options = merge( {
+      useSliderLabels: true,
+      dampingVisible: false
+    }, options );
 
-  const self = this;
+    const self = this;
 
-  // @public {Plane} Support for expanding touchAreas near massNodes.
-  this.backgroundDragPlane = new Plane();
-  const closestDragListener = new ClosestDragListener( 30, 0 );
+    // @public {Plane} Support for expanding touchAreas near massNodes.
+    this.backgroundDragPlane = new Plane();
+    const closestDragListener = new ClosestDragListener( 30, 0 );
 
-  this.backgroundDragPlane.addInputListener( closestDragListener );
+    this.backgroundDragPlane.addInputListener( closestDragListener );
 
 
-  // @public {MassesAndSpringsModel}
-  this.model = model;
+    // @public {MassesAndSpringsModel}
+    this.model = model;
 
-  const viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * ( 1 - MassesAndSpringsConstants.SHELF_HEIGHT ) );
+    const viewOrigin = new Vector2( 0, this.visibleBoundsProperty.get().height * ( 1 - MassesAndSpringsConstants.SHELF_HEIGHT ) );
 
-  // @public {ModelViewTransform2}
-  this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, 397 );
+    // @public {ModelViewTransform2}
+    this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, 397 );
 
-  // @public {PaintColorProperty} Colors for OscillatingSpringNode
-  this.springFrontColorProperty = new PaintColorProperty( 'lightGray' );
-  this.springMiddleColorProperty = new PaintColorProperty( 'gray' );
-  this.springBackColorProperty = new PaintColorProperty( 'black' );
+    // @public {PaintColorProperty} Colors for OscillatingSpringNode
+    this.springFrontColorProperty = new PaintColorProperty( 'lightGray' );
+    this.springMiddleColorProperty = new PaintColorProperty( 'gray' );
+    this.springBackColorProperty = new PaintColorProperty( 'black' );
 
-  // @private {Array.<MutableOptionsNode>} Used to reference the created springs in the view.
-  this.springNodes = model.springs.map( function( spring ) {
-    const springNode = new MutableOptionsNode( OscillatingSpringNode, [
-        spring,
+    // @private {Array.<MutableOptionsNode>} Used to reference the created springs in the view.
+    this.springNodes = model.springs.map( function( spring ) {
+      const springNode = new MutableOptionsNode( OscillatingSpringNode, [
+          spring,
+          self.modelViewTransform,
+
+          // see https://github.com/phetsims/masses-and-springs-basics/issues/67
+          Tandem.OPT_OUT
+        ],
+        { leftEndLength: -10 },
+        {
+          frontColor: self.springFrontColorProperty,
+          middleColor: self.springMiddleColorProperty,
+          backColor: self.springBackColorProperty
+        } );
+      self.addChild( springNode );
+      return springNode;
+    } );
+
+    // @protected {number} - Spacing used for the margin of layout bounds
+    this.spacing = 10;
+
+    // @public {Node} Specific layer for massNodes. Used for setting layering order of massNodes.
+    this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ), preventFit: true } );
+
+    // @public {Array.<Node>}
+    this.massNodes = [];
+
+    this.massNodes = model.masses.map( function( mass ) {
+      const massNode = new MassNode(
+        mass,
         self.modelViewTransform,
+        self.visibleBoundsProperty,
+        model,
+        tandem.createTandem( mass.massTandem.name + 'Node' ) );
+      self.massLayer.addChild( massNode );
 
-        // see https://github.com/phetsims/masses-and-springs-basics/issues/67
-        Tandem.OPT_OUT
-      ],
-      { leftEndLength: -10 },
-      {
-        frontColor: self.springFrontColorProperty,
-        middleColor: self.springMiddleColorProperty,
-        backColor: self.springBackColorProperty
+      // If the mass is on the shelf reset the mass layers.
+      mass.onShelfProperty.lazyLink( function( onShelf ) {
+        if ( onShelf ) {
+          self.resetMassLayer();
+        }
       } );
-    self.addChild( springNode );
-    return springNode;
-  } );
+      closestDragListener.addDraggableItem( {
+        startDrag: massNode.movableDragHandler.startDrag.bind( massNode.movableDragHandler ),
 
-  // @protected {number} - Spacing used for the margin of layout bounds
-  this.spacing = 10;
+        // globalPoint is the position of our pointer.
+        computeDistance: function( globalPoint ) {
 
-  // @public {Node} Specific layer for massNodes. Used for setting layering order of massNodes.
-  this.massLayer = new Node( { tandem: tandem.createTandem( 'massLayer' ), preventFit: true } );
+          // The mass position is recognized as being really far away.
+          if ( mass.userControlledProperty.value ) {
+            return Number.POSITIVE_INFINITY;
+          }
+          else {
+            const cursorViewPosition = self.globalToLocalPoint( globalPoint );
+            const massRectBounds = massNode.localToParentBounds( massNode.rect.bounds );
+            const massHookBounds = massNode.localToParentBounds( massNode.hookNode.bounds );
 
-  // @public {Array.<Node>}
-  this.massNodes = [];
-
-  this.massNodes = model.masses.map( function( mass ) {
-    const massNode = new MassNode(
-      mass,
-      self.modelViewTransform,
-      self.visibleBoundsProperty,
-      model,
-      tandem.createTandem( mass.massTandem.name + 'Node' ) );
-    self.massLayer.addChild( massNode );
-
-    // If the mass is on the shelf reset the mass layers.
-    mass.onShelfProperty.lazyLink( function( onShelf ) {
-      if ( onShelf ) {
-        self.resetMassLayer();
-      }
-    } );
-    closestDragListener.addDraggableItem( {
-      startDrag: massNode.movableDragHandler.startDrag.bind( massNode.movableDragHandler ),
-
-      // globalPoint is the position of our pointer.
-      computeDistance: function( globalPoint ) {
-
-        // The mass position is recognized as being really far away.
-        if ( mass.userControlledProperty.value ) {
-          return Number.POSITIVE_INFINITY;
-        }
-        else {
-          const cursorViewPosition = self.globalToLocalPoint( globalPoint );
-          const massRectBounds = massNode.localToParentBounds( massNode.rect.bounds );
-          const massHookBounds = massNode.localToParentBounds( massNode.hookNode.bounds );
-
-          return Math.sqrt( Math.min(
-            massRectBounds.minimumDistanceToPointSquared( cursorViewPosition ),
-            massHookBounds.minimumDistanceToPointSquared( cursorViewPosition )
-          ) );
-        }
-      }
-    } );
-
-
-    // Keeps track of the mass node to restore original Z order.
-    return massNode;
-  } );
-
-  // @public {Shelf} Add shelf for to house massNodes
-  this.shelf = new ShelfNode( tandem, {
-    rectHeight: 7
-  } );
-  this.shelf.rectY = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) - this.shelf.rectHeight;
-
-  if ( !model.basicsVersion ) {
-    this.addChild( this.shelf );
-  }
-
-  // @public {GravityAndDampingControlNode} Gravity Control Panel
-  this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
-    model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
-      maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 25,
-      dampingVisible: options.dampingVisible,
-      xMargin: 0,
-      yMargin: 0,
-      stroke: null,
-      useSliderLabels: options.useSliderLabels
-    } );
-
-  // @private
-  this.stopwatchNode = new StopwatchNode( model.stopwatch, {
-      visibleBoundsProperty: this.visibleBoundsProperty,
-      dragListenerOptions: {
-        end: () => {
-
-          // When a node is released, check if it is over the toolbox.  If so, drop it in.
-          if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.stopwatchNode.getGlobalBounds() ) ) {
-            model.stopwatch.reset();
+            return Math.sqrt( Math.min(
+              massRectBounds.minimumDistanceToPointSquared( cursorViewPosition ),
+              massHookBounds.minimumDistanceToPointSquared( cursorViewPosition )
+            ) );
           }
         }
+      } );
+
+
+      // Keeps track of the mass node to restore original Z order.
+      return massNode;
+    } );
+
+    // @public {Shelf} Add shelf for to house massNodes
+    this.shelf = new ShelfNode( tandem, {
+      rectHeight: 7
+    } );
+    this.shelf.rectY = this.modelViewTransform.modelToViewY( MassesAndSpringsConstants.FLOOR_Y ) - this.shelf.rectHeight;
+
+    if ( !model.basicsVersion ) {
+      this.addChild( this.shelf );
+    }
+
+    // @public {GravityAndDampingControlNode} Gravity Control Panel
+    this.gravityAndDampingControlNode = new GravityAndDampingControlNode(
+      model, this, tandem.createTandem( 'gravityAndDampingControlNode' ), {
+        maxWidth: MassesAndSpringsConstants.PANEL_MAX_WIDTH + 25,
+        dampingVisible: options.dampingVisible,
+        xMargin: 0,
+        yMargin: 0,
+        stroke: null,
+        useSliderLabels: options.useSliderLabels
+      } );
+
+    // @private
+    this.stopwatchNode = new StopwatchNode( model.stopwatch, {
+        visibleBoundsProperty: this.visibleBoundsProperty,
+        dragListenerOptions: {
+          end: () => {
+
+            // When a node is released, check if it is over the toolbox.  If so, drop it in.
+            if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.stopwatchNode.getGlobalBounds() ) ) {
+              model.stopwatch.reset();
+            }
+          }
+        },
+        tandem: tandem.createTandem( 'stopwatchNode' )
+      }
+    );
+
+    // @public {DraggableRulerNode}
+    this.rulerNode = new DraggableRulerNode(
+      this.modelViewTransform,
+      this.visibleBoundsProperty.get(),
+      Vector2.ZERO,
+      model.rulerVisibleProperty,
+      function() {
+
+        // When a node is released, check if it is over the toolbox.  If so, drop it in.
+        if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.rulerNode.getGlobalBounds() ) ) {
+          model.rulerVisibleProperty.set( false );
+        }
       },
-      tandem: tandem.createTandem( 'stopwatchNode' )
-    }
-  );
+      tandem.createTandem( 'rulerNode' )
+    );
 
-  // @public {DraggableRulerNode}
-  this.rulerNode = new DraggableRulerNode(
-    this.modelViewTransform,
-    this.visibleBoundsProperty.get(),
-    Vector2.ZERO,
-    model.rulerVisibleProperty,
-    function() {
+    // @public {Node} Create specific layer for tools so they don't overlap the reset all button.
+    this.toolsLayer = new Node( {
+      children: [ this.stopwatchNode, this.rulerNode ],
+      tandem: tandem.createTandem( 'massLayer' ),
+      preventFit: true
+    } );
 
-      // When a node is released, check if it is over the toolbox.  If so, drop it in.
-      if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.rulerNode.getGlobalBounds() ) ) {
-        model.rulerVisibleProperty.set( false );
+    // @public {ResetAllButton} Reset All button
+    this.resetAllButton = new ResetAllButton( {
+      listener: function() {
+        model.reset();
+
+        // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
+        self.resetMassLayer();
+      },
+      tandem: tandem.createTandem( 'resetAllButton' )
+    } );
+
+    // @public {TimeControlNode} Sim speed controls
+    this.timeControlNode = new TimeControlNode( model.playingProperty, {
+      timeSpeedProperty: model.timeSpeedProperty,
+      playPauseStepButtonOptions: {
+        stepForwardButtonOptions: {
+          listener: function() { model.stepForward( 0.01 ); }
+        }
+      },
+      tandem: tandem.createTandem( 'timeControlNode' )
+    } );
+
+    // @public {AlignGroup}
+    this.rightPanelAlignGroup = new AlignGroup( { matchVertical: false } );
+
+    // @public {ToolboxPanel} Toolbox Panel
+    this.toolboxPanel = new ToolboxPanel(
+      model.stopwatch,
+      this.visibleBoundsProperty.get(),
+      this.rulerNode,
+      this.stopwatchNode,
+      model.rulerVisibleProperty,
+      this.rightPanelAlignGroup,
+      tandem.createTandem( 'toolboxPanel' ), {
+        minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 32
       }
-    },
-    tandem.createTandem( 'rulerNode' )
-  );
+    );
 
-  // @public {Node} Create specific layer for tools so they don't overlap the reset all button.
-  this.toolsLayer = new Node( {
-    children: [ this.stopwatchNode, this.rulerNode ],
-    tandem: tandem.createTandem( 'massLayer' ),
-    preventFit: true
-  } );
+    // @public {HBox} Buttons controlling the speed of the sim, play/pause button, and the reset button
+    this.simControlHBox = new HBox( {
+      spacing: this.spacing * 6,
+      children: [ this.timeControlNode, this.resetAllButton ]
+    } );
+    this.addChild( this.simControlHBox );
 
-  // @public {ResetAllButton} Reset All button
-  this.resetAllButton = new ResetAllButton( {
-    listener: function() {
-      model.reset();
-
-      // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
-      self.resetMassLayer();
-    },
-    tandem: tandem.createTandem( 'resetAllButton' )
-  } );
-
-  // @public {TimeControlNode} Sim speed controls
-  this.timeControlNode = new TimeControlNode( model.playingProperty, {
-    timeSpeedProperty: model.timeSpeedProperty,
-    playPauseStepButtonOptions: {
-      stepForwardButtonOptions: {
-        listener: function() { model.stepForward( 0.01 ); }
-      }
-    },
-    tandem: tandem.createTandem( 'timeControlNode' )
-  } );
-
-  // @public {AlignGroup}
-  this.rightPanelAlignGroup = new AlignGroup( { matchVertical: false } );
-
-  // @public {ToolboxPanel} Toolbox Panel
-  this.toolboxPanel = new ToolboxPanel(
-    model.stopwatch,
-    this.visibleBoundsProperty.get(),
-    this.rulerNode,
-    this.stopwatchNode,
-    model.rulerVisibleProperty,
-    this.rightPanelAlignGroup,
-    tandem.createTandem( 'toolboxPanel' ), {
-      minWidth: MassesAndSpringsConstants.PANEL_MIN_WIDTH + 32
-    }
-  );
-
-  // @public {HBox} Buttons controlling the speed of the sim, play/pause button, and the reset button
-  this.simControlHBox = new HBox( {
-    spacing: this.spacing * 6,
-    children: [ this.timeControlNode, this.resetAllButton ]
-  } );
-  this.addChild( this.simControlHBox );
-
-  // @protected {Node} Layer that gets moved to the back of the scene graph to handle z-ordering of subtypes.
-  this.backLayer = new Node();
-  this.addChild( this.backLayer );
-  this.backLayer.moveToBack();
-
-}
-
-massesAndSprings.register( 'SpringScreenView', SpringScreenView );
-
-inherit( ScreenView, SpringScreenView, {
+    // @protected {Node} Layer that gets moved to the back of the scene graph to handle z-ordering of subtypes.
+    this.backLayer = new Node();
+    this.addChild( this.backLayer );
+    this.backLayer.moveToBack();
+  }
 
   /**
    * Helper function to restore initial layering of the masses to prevent them from stacking over each other.
    * @public
    */
-  resetMassLayer: function() {
+  resetMassLayer() {
     this.massNodes.forEach( function( massNode ) {
       massNode.moveToFront();
     } );
-  },
+  }
 
   /**
    * Creates a stopper button that stops the oscillation of its referenced spring.
@@ -285,7 +279,7 @@ inherit( ScreenView, SpringScreenView, {
    * @param {Tandem} tandem
    * @returns {StopperButtonNode}
    */
-  createStopperButton: function( spring, tandem ) {
+  createStopperButton( spring, tandem ) {
     return new StopperButtonNode(
       tandem.createTandem( 'secondSpringStopperButtonNode' ), {
         listener: function() {
@@ -293,7 +287,7 @@ inherit( ScreenView, SpringScreenView, {
         },
         top: this.spacing
       } );
-  },
+  }
 
   /**
    * Creates a panel that controls the designated spring's spring constant value.
@@ -306,7 +300,7 @@ inherit( ScreenView, SpringScreenView, {
    *
    * @returns {SpringControlPanel}
    */
-  createSpringConstantPanel: function( springIndex, labels, tandem, options ) {
+  createSpringConstantPanel( springIndex, labels, tandem, options ) {
 
     // Additional options for compatibility with Masses and Springs: Basics
     options = merge( {
@@ -337,7 +331,7 @@ inherit( ScreenView, SpringScreenView, {
         }
       }
     );
-  },
+  }
 
   /**
    * Creates a panel that displays visible indicators for reference lines, displacement arrow, and period trace.
@@ -348,13 +342,13 @@ inherit( ScreenView, SpringScreenView, {
    * @param {Tandem} tandem
    * @returns {IndicatorVisibilityControlNode}
    */
-  createIndicatorVisibilityPanel: function( model, displayPeriodTrace, tandem ) {
+  createIndicatorVisibilityPanel( model, displayPeriodTrace, tandem ) {
     return new IndicatorVisibilityControlNode(
       model,
       tandem.createTandem( 'indicatorVisibilityControlNode' ), {
         periodTraceOption: displayPeriodTrace
       } );
-  },
+  }
 
   /**
    * Creates a panel that displays all of the right hand panels on the screen.
@@ -365,7 +359,7 @@ inherit( ScreenView, SpringScreenView, {
    * @param {Tandem } tandem
    * @returns {Panel}
    */
-  createOptionsPanel: function( optionsContent, alignGroup, tandem ) {
+  createOptionsPanel( optionsContent, alignGroup, tandem ) {
     const optionsContentAlignBox = new AlignBox( optionsContent, { group: alignGroup } );
     const optionsPanel = new Panel(
       optionsContentAlignBox, {
@@ -378,7 +372,8 @@ inherit( ScreenView, SpringScreenView, {
       } );
     optionsPanel.moveToBack();
     return optionsPanel;
-  },
+  }
+
   /**
    * Adjusting view components of panels and draggable objects based on visible bounds of the
    * one and two spring views.
@@ -387,7 +382,7 @@ inherit( ScreenView, SpringScreenView, {
    * @param {Bounds2} visibleBounds
    * @public
    */
-  adjustViewComponents: function( singleSpringView, visibleBounds ) {
+  adjustViewComponents( singleSpringView, visibleBounds ) {
 
     // Handle adjustments for single spring system
     if ( singleSpringView ) {
@@ -448,6 +443,7 @@ inherit( ScreenView, SpringScreenView, {
       }
     } );
   }
-} );
+}
 
+massesAndSprings.register( 'SpringScreenView', SpringScreenView );
 export default SpringScreenView;
