@@ -87,7 +87,7 @@ class LabScreenView extends OneSpringScreenView {
    * @overrides
    */
   step( dt ) {
-    this.energyGraphAccordionBox.update();
+    super.step( dt );
     this.periodTraceNode.step( dt, this.model.playingProperty );
   }
 }
