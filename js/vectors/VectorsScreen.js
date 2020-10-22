@@ -34,7 +34,7 @@ class VectorsScreen extends Screen {
     };
 
     super(
-      function() {
+      () => {
         const modelTandem = tandem.createTandem( 'model' );
         const model = new MassesAndSpringsModel( modelTandem );
         model.basicsVersion = false;
@@ -42,7 +42,7 @@ class VectorsScreen extends Screen {
         model.addDefaultMasses( modelTandem );
         return model;
       },
-      function( model ) { return new VectorsScreenView( model, tandem.createTandem( 'view' ) ); },
+      model => new VectorsScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

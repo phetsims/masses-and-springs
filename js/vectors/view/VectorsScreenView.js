@@ -26,8 +26,6 @@ class VectorsScreenView extends TwoSpringScreenView {
   constructor( model, tandem ) {
 
     super( model, tandem );
-    const self = this;
-
     // Displacement arrows added for each springs
     const firstDisplacementArrowNode = new DisplacementArrowNode(
       this.springNodes[ 0 ].nodeProperty.value.spring.displacementProperty,
@@ -53,13 +51,9 @@ class VectorsScreenView extends TwoSpringScreenView {
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
     const firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
-      function( equilibriumPositionVisible, massAttached ) {
-        return !!massAttached && equilibriumPositionVisible;
-      } );
+      ( equilibriumPositionVisible, massAttached ) => !!massAttached && equilibriumPositionVisible );
     const secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.secondSpring.massAttachedProperty ],
-      function( equilibriumPositionVisible, massAttached ) {
-        return !!massAttached && equilibriumPositionVisible;
-      } );
+      ( equilibriumPositionVisible, massAttached ) => !!massAttached && equilibriumPositionVisible );
 
     // Initializes equilibrium line for first spring
     const firstMassEquilibriumLineNode = new ReferenceLineNode(
@@ -119,15 +113,15 @@ class VectorsScreenView extends TwoSpringScreenView {
     const optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolbox
-    const rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing * 0.9 } );
+    const rightPanelsVBox = new VBox( { children: [ optionsPanel, this.toolboxPanel ], spacing: this.spacing * 0.9 } );
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
 
     // Move this plane to the back of the scene graph
     this.backgroundDragPlane.moveToBack();
 
-    this.visibleBoundsProperty.link( function() {
-      rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.springSystemControlsNode.top );
+    this.visibleBoundsProperty.link( () => {
+      rightPanelsVBox.rightTop = new Vector2( this.panelRightSpacing, this.springSystemControlsNode.top );
     } );
   }
 }

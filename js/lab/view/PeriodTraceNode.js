@@ -8,7 +8,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Color from '../../../../scenery/js/util/Color.js';
@@ -18,55 +17,51 @@ import massesAndSprings from '../../massesAndSprings.js';
 const X_OFFSET = 10;
 const FADE_OUT_SPEED = 1; // the speed at which the trace fades out.
 
-/**
- * @param {PeriodTrace} periodTrace
- * @param {ModelViewTransform2} modelViewTransform
- *
- * @constructor
- */
-function PeriodTraceNode( periodTrace, modelViewTransform ) {
-  Node.call( this );
-  const self = this;
+class PeriodTraceNode extends Node {
+  /**
+   * @param {PeriodTrace} periodTrace
+   * @param {ModelViewTransform2} modelViewTransform
+   *
+   */
+  constructor( periodTrace, modelViewTransform ) {
+    super();
 
-  // @public {PeriodTrace} Model element for the period trace
-  this.periodTrace = periodTrace;
+    // @public {PeriodTrace} Model element for the period trace
+    this.periodTrace = periodTrace;
 
-  // @public {Shape}
-  this.shape = new Shape();
+    // @public {Shape}
+    this.shape = new Shape();
 
-  // @private {number} The opacity of the trace (not using Node opacity for performance reasons)
-  this.colorAlpha = 1;
+    // @private {number} The opacity of the trace (not using Node opacity for performance reasons)
+    this.colorAlpha = 1;
 
-  // @private {Property.<Color>}
-  this.traceColorProperty = new Property( new Color( 'black' ) );
+    // @private {Property.<Color>}
+    this.traceColorProperty = new Property( new Color( 'black' ) );
 
-  // @private {ModelViewTransForm}
-  this.modelViewTransform = modelViewTransform;
+    // @private {ModelViewTransForm}
+    this.modelViewTransform = modelViewTransform;
 
-  this.originalX = this.modelViewTransform.modelToViewX( periodTrace.spring.positionProperty.value.x - 0.2 );
-  this.middleX = this.originalX + X_OFFSET;
-  this.lastX = this.originalX + 2 * X_OFFSET;
+    this.originalX = this.modelViewTransform.modelToViewX( periodTrace.spring.positionProperty.value.x - 0.2 );
+    this.middleX = this.originalX + X_OFFSET;
+    this.lastX = this.originalX + 2 * X_OFFSET;
 
-  this.path = new Path( null, { stroke: this.traceColorProperty, lineWidth: 2.5 } );
-  this.addChild( this.path );
-  this.periodTrace.stateProperty.link( function( state ) {
-    if ( state === 1 ) {
-      self.traceColorProperty.value = self.traceColorProperty.value.withAlpha( 1 );
-      self.colorAlpha = 1;
-    }
-  } );
-}
+    this.path = new Path( null, { stroke: this.traceColorProperty, lineWidth: 2.5 } );
+    this.addChild( this.path );
+    this.periodTrace.stateProperty.link( state => {
+      if ( state === 1 ) {
+        this.traceColorProperty.value = this.traceColorProperty.value.withAlpha( 1 );
+        this.colorAlpha = 1;
+      }
+    } );
+  }
 
-massesAndSprings.register( 'PeriodTraceNode', PeriodTraceNode );
-
-inherit( Node, PeriodTraceNode, {
 
   /**
    * @param {number} dt
    * @param {Property.<boolean>} playingProperty: whether the sim is playing or not
    * @public
    */
-  step: function( dt, playingProperty ) {
+  step( dt, playingProperty ) {
     const spring = this.periodTrace.spring;
     const mass = spring.massAttachedProperty.value;
 
@@ -144,7 +139,7 @@ inherit( Node, PeriodTraceNode, {
       this.visible = false && spring.periodTraceVisibilityProperty.value;
       this.periodTrace.onFaded();
     }
-  },
+  }
 
   /**
    * Fades the period trace.
@@ -152,7 +147,7 @@ inherit( Node, PeriodTraceNode, {
    *
    * @private
    */
-  fade: function( dt ) {
+  fade( dt ) {
     this.colorAlpha = Math.max( 0, this.colorAlpha - FADE_OUT_SPEED * dt );
     this.traceColorProperty.value = this.traceColorProperty.value.withAlpha( this.colorAlpha );
 
@@ -162,6 +157,8 @@ inherit( Node, PeriodTraceNode, {
       this.colorAlpha = 1;
     }
   }
-} );
+}
+
+massesAndSprings.register( 'PeriodTraceNode', PeriodTraceNode );
 
 export default PeriodTraceNode;

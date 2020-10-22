@@ -9,9 +9,9 @@
  */
 
 import ColorProfile from '../../../../scenery-phet/js/ColorProfile.js';
+import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 
 // Initialize colors for each profile, by string key. If a basics color is not defined, it will take the
 // 'default' value provided.

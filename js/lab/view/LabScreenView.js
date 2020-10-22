@@ -27,8 +27,6 @@ class LabScreenView extends OneSpringScreenView {
       useSliderLabels: false,
       dampingVisible: true
     } );
-    const self = this;
-
     const vectorVisibilityControlNode = new VectorVisibilityControlNode(
       model,
       tandem.createTandem( 'vectorVisibilityControlNode' ),
@@ -63,12 +61,12 @@ class LabScreenView extends OneSpringScreenView {
     const optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolbox
-    const rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing * 0.9 } );
+    const rightPanelsVBox = new VBox( { children: [ optionsPanel, this.toolboxPanel ], spacing: this.spacing * 0.9 } );
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
 
-    this.visibleBoundsProperty.link( function() {
-      rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphAccordionBox.top );
+    this.visibleBoundsProperty.link( () => {
+      rightPanelsVBox.rightTop = new Vector2( this.panelRightSpacing, this.energyGraphAccordionBox.top );
     } );
 
     this.shelf.rectWidth = 160;

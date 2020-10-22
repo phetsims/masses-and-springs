@@ -33,12 +33,8 @@ class EnergyScreen extends Screen {
     };
 
     super(
-      function() {
-        return new EnergyModel( tandem.createTandem( 'model' ) );
-      },
-      function( model ) {
-        return new EnergyScreenView( model, tandem.createTandem( 'view' ) );
-      },
+      () => new EnergyModel( tandem.createTandem( 'model' ) ),
+      model => new EnergyScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

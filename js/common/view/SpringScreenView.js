@@ -14,9 +14,9 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
+import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
@@ -57,8 +57,6 @@ class SpringScreenView extends ScreenView {
       dampingVisible: false
     }, options );
 
-    const self = this;
-
     // @public {Plane} Support for expanding touchAreas near massNodes.
     this.backgroundDragPlane = new Plane();
     const closestDragListener = new ClosestDragListener( 30, 0 );
@@ -80,21 +78,21 @@ class SpringScreenView extends ScreenView {
     this.springBackColorProperty = new PaintColorProperty( 'black' );
 
     // @private {Array.<MutableOptionsNode>} Used to reference the created springs in the view.
-    this.springNodes = model.springs.map( function( spring ) {
+    this.springNodes = model.springs.map( spring => {
       const springNode = new MutableOptionsNode( OscillatingSpringNode, [
           spring,
-          self.modelViewTransform,
+          this.modelViewTransform,
 
           // see https://github.com/phetsims/masses-and-springs-basics/issues/67
           Tandem.OPT_OUT
         ],
         { leftEndLength: -10 },
         {
-          frontColor: self.springFrontColorProperty,
-          middleColor: self.springMiddleColorProperty,
-          backColor: self.springBackColorProperty
+          frontColor: this.springFrontColorProperty,
+          middleColor: this.springMiddleColorProperty,
+          backColor: this.springBackColorProperty
         } );
-      self.addChild( springNode );
+      this.addChild( springNode );
       return springNode;
     } );
 
@@ -107,33 +105,33 @@ class SpringScreenView extends ScreenView {
     // @public {Array.<Node>}
     this.massNodes = [];
 
-    this.massNodes = model.masses.map( function( mass ) {
+    this.massNodes = model.masses.map( mass => {
       const massNode = new MassNode(
         mass,
-        self.modelViewTransform,
-        self.visibleBoundsProperty,
+        this.modelViewTransform,
+        this.visibleBoundsProperty,
         model,
         tandem.createTandem( mass.massTandem.name + 'Node' ) );
-      self.massLayer.addChild( massNode );
+      this.massLayer.addChild( massNode );
 
       // If the mass is on the shelf reset the mass layers.
-      mass.onShelfProperty.lazyLink( function( onShelf ) {
+      mass.onShelfProperty.lazyLink( onShelf => {
         if ( onShelf ) {
-          self.resetMassLayer();
+          this.resetMassLayer();
         }
       } );
       closestDragListener.addDraggableItem( {
         startDrag: massNode.movableDragHandler.startDrag.bind( massNode.movableDragHandler ),
 
         // globalPoint is the position of our pointer.
-        computeDistance: function( globalPoint ) {
+        computeDistance: globalPoint => {
 
           // The mass position is recognized as being really far away.
           if ( mass.userControlledProperty.value ) {
             return Number.POSITIVE_INFINITY;
           }
           else {
-            const cursorViewPosition = self.globalToLocalPoint( globalPoint );
+            const cursorViewPosition = this.globalToLocalPoint( globalPoint );
             const massRectBounds = massNode.localToParentBounds( massNode.rect.bounds );
             const massHookBounds = massNode.localToParentBounds( massNode.hookNode.bounds );
 
@@ -178,7 +176,7 @@ class SpringScreenView extends ScreenView {
           end: () => {
 
             // When a node is released, check if it is over the toolbox.  If so, drop it in.
-            if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.stopwatchNode.getGlobalBounds() ) ) {
+            if ( this.toolboxPanel.getGlobalBounds().intersectsBounds( this.stopwatchNode.getGlobalBounds() ) ) {
               model.stopwatch.reset();
             }
           }
@@ -193,10 +191,10 @@ class SpringScreenView extends ScreenView {
       this.visibleBoundsProperty.get(),
       Vector2.ZERO,
       model.rulerVisibleProperty,
-      function() {
+      () => {
 
         // When a node is released, check if it is over the toolbox.  If so, drop it in.
-        if ( self.toolboxPanel.getGlobalBounds().intersectsBounds( self.rulerNode.getGlobalBounds() ) ) {
+        if ( this.toolboxPanel.getGlobalBounds().intersectsBounds( this.rulerNode.getGlobalBounds() ) ) {
           model.rulerVisibleProperty.set( false );
         }
       },
@@ -212,11 +210,11 @@ class SpringScreenView extends ScreenView {
 
     // @public {ResetAllButton} Reset All button
     this.resetAllButton = new ResetAllButton( {
-      listener: function() {
+      listener: () => {
         model.reset();
 
         // Done to preserve layering order to initial state. Prevents masses from stacking over each other.
-        self.resetMassLayer();
+        this.resetMassLayer();
       },
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
@@ -226,7 +224,7 @@ class SpringScreenView extends ScreenView {
       timeSpeedProperty: model.timeSpeedProperty,
       playPauseStepButtonOptions: {
         stepForwardButtonOptions: {
-          listener: function() { model.stepForward( 0.01 ); }
+          listener: () => { model.stepForward( 0.01 ); }
         }
       },
       tandem: tandem.createTandem( 'timeControlNode' )
@@ -266,7 +264,7 @@ class SpringScreenView extends ScreenView {
    * @public
    */
   resetMassLayer() {
-    this.massNodes.forEach( function( massNode ) {
+    this.massNodes.forEach( massNode => {
       massNode.moveToFront();
     } );
   }
@@ -282,7 +280,7 @@ class SpringScreenView extends ScreenView {
   createStopperButton( spring, tandem ) {
     return new StopperButtonNode(
       tandem.createTandem( 'secondSpringStopperButtonNode' ), {
-        listener: function() {
+        listener: () => {
           spring.stopSpring();
         },
         top: this.spacing
@@ -326,9 +324,7 @@ class SpringScreenView extends ScreenView {
         yMargin: options.yMargin,
         sliderTrackSize: options.sliderTrackSize,
         tickLabelSpacing: options.tickLabelSpacing,
-        constrainValue: function( value ) {
-          return +Utils.toFixed( value, 0 );
-        }
+        constrainValue: value => +Utils.toFixed( value, 0 )
       }
     );
   }

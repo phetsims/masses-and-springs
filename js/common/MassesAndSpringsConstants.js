@@ -75,7 +75,7 @@ const MassesAndSpringsConstants = {
    * @param {number} length
    * @returns {Line}
    */
-  LINE_SEPARATOR: function( length ) {
+  LINE_SEPARATOR( length ) {
     return new Line( 0, 0, length, 0, { stroke: 'gray' } );
   },
 
@@ -85,7 +85,7 @@ const MassesAndSpringsConstants = {
    * @param {Tandem} tandem
    * @returns {Line}
    */
-  CREATE_LINE_ICON: function( color, tandem ) {
+  CREATE_LINE_ICON( color, tandem ) {
     return new Line( 0, 0, 25, 0, {
       stroke: color,
       lineDash: [ 6, 2.5 ],

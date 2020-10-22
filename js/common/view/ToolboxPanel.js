@@ -88,7 +88,7 @@ class ToolboxPanel extends Panel {
     } );
 
     // Drag listener for event forwarding: rulerIcon ---> rulerNode
-    rulerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( function( event ) {
+    rulerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( event => {
       rulerVisibleProperty.set( true );
 
       // Now determine the initial position where this element should move to after it's created, which corresponds
@@ -108,7 +108,7 @@ class ToolboxPanel extends Panel {
     } ) );
     toolbox.addChild( rulerIcon );
 
-    rulerVisibleProperty.link( function( visible ) {
+    rulerVisibleProperty.link( visible => {
       rulerIcon.visible = !visible;
     } );
 
@@ -120,7 +120,7 @@ class ToolboxPanel extends Panel {
     } );
 
     // Drag listener for event forwarding: timerIcon ---> stopwatchNode
-    timerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( function( event ) {
+    timerIcon.addInputListener( new SimpleDragHandler.createForwardingListener( event => {
 
       // Toggle visibility
       stopwatch.isVisibleProperty.value = true;
@@ -142,7 +142,7 @@ class ToolboxPanel extends Panel {
       tandem: tandem.createTandem( 'dragHandler' )
     } ) );
     toolbox.addChild( timerIcon );
-    stopwatch.isVisibleProperty.link( function( visible ) {
+    stopwatch.isVisibleProperty.link( visible => {
       timerIcon.visible = !visible;
     } );
   }

@@ -31,7 +31,7 @@ const simOptions = {
   }
 };
 
-simLauncher.launch( function() {
+simLauncher.launch( () => {
   const sim = new Sim( massesAndSpringsTitleString, [
     new IntroScreen( tandem.createTandem( 'introScreen' ) ),
     new VectorsScreen( tandem.createTandem( 'vectorsScreen' ) ),

@@ -16,9 +16,7 @@ import massesAndSprings from '../../massesAndSprings.js';
 
 // constants
 const LINEAR_LOOP_MAPPING = new LinearFunction( 0.1, 0.5, 2, 12 );
-const MAP_NUMBER_OF_LOOPS = function( springLength ) {
-  return Utils.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) );
-};
+const MAP_NUMBER_OF_LOOPS = springLength => Utils.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) );
 
 class OscillatingSpringNode extends ParametricSpringNode {
 
@@ -72,20 +70,20 @@ class OscillatingSpringNode extends ParametricSpringNode {
     }
 
     // Link exists for sim duration. No need to unlink.
-    spring.naturalRestingLengthProperty.link( function( springLength ) {
-      self.loopsProperty.set( MAP_NUMBER_OF_LOOPS( springLength ) );
+    spring.naturalRestingLengthProperty.link( springLength => {
+      this.loopsProperty.set( MAP_NUMBER_OF_LOOPS( springLength ) );
       updateViewLength();
     } );
 
     // Link exists for sim duration. No need to unlink.
-    spring.lengthProperty.link( function() {
+    spring.lengthProperty.link( () => {
       updateViewLength();
     } );
 
     // ParametricSpringNode width update. SpringConstant determines lineWidth
     // Link exists for sim duration. No need to unlink.
-    spring.thicknessProperty.link( function( thickness ) {
-      self.lineWidthProperty.set( thickness );
+    spring.thicknessProperty.link( thickness => {
+      this.lineWidthProperty.set( thickness );
     } );
   }
 

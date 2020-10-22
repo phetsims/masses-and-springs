@@ -16,8 +16,8 @@ import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
 import Panel from '../../../../sun/js/Panel.js';
+import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import ConstantMode from '../../common/model/ConstantMode.js';
 import SceneMode from '../../common/model/SceneMode.js';
@@ -46,8 +46,6 @@ class IntroScreenView extends TwoSpringScreenView {
 
     super( model, tandem );
 
-    const self = this;
-
     // AlignGroup to align components for spring options
     const optionsContentAlignGroup = new AlignGroup( { matchVertical: false } );
 
@@ -72,9 +70,7 @@ class IntroScreenView extends TwoSpringScreenView {
         stroke: null,
         visible: false,
         centerTick: true,
-        constrainValue: function( value ) {
-          return Utils.roundToInterval( value, .05 );
-        }
+        constrainValue: value => Utils.roundToInterval( value, .05 )
       } );
 
     // Panel that keeps thickness/spring constant at constant value
@@ -120,7 +116,7 @@ class IntroScreenView extends TwoSpringScreenView {
 
     // Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
     const firstMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
-      function( equilibriumPositionVisible, massAttached ) {
+      ( equilibriumPositionVisible, massAttached ) => {
         if ( massAttached ) {
           return equilibriumPositionVisible;
         }
@@ -129,7 +125,7 @@ class IntroScreenView extends TwoSpringScreenView {
         }
       } );
     const secondMassEquilibriumVisibilityProperty = new DerivedProperty( [ model.equilibriumPositionVisibleProperty, model.secondSpring.massAttachedProperty ],
-      function( equilibriumPositionVisible, massAttached ) {
+      ( equilibriumPositionVisible, massAttached ) => {
         if ( massAttached ) {
           return equilibriumPositionVisible;
         }
@@ -171,20 +167,20 @@ class IntroScreenView extends TwoSpringScreenView {
     this.addChild( this.toolsLayer );
 
     // Link responsible for visibility of the length control panel.
-    model.sceneModeProperty.lazyLink( function( mode ) {
-      self.resetMassLayer();
+    model.sceneModeProperty.lazyLink( mode => {
+      this.resetMassLayer();
       if ( mode === SceneMode.SAME_LENGTH ) {
-        self.springLengthControlPanel.visible = false;
+        this.springLengthControlPanel.visible = false;
       }
       else if ( mode === SceneMode.ADJUSTABLE_LENGTH ) {
-        self.springLengthControlPanel.visible = true;
+        this.springLengthControlPanel.visible = true;
       }
 
       // Manages visibility of panels for spring constant and thickness
-      constantsControlPanel.visible = self.springLengthControlPanel.visible;
-      self.firstSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
-      self.secondSpringConstantControlPanel.visible = !self.springLengthControlPanel.visible;
-      springOptionsPanel.visible = self.springLengthControlPanel.visible;
+      constantsControlPanel.visible = this.springLengthControlPanel.visible;
+      this.firstSpringConstantControlPanel.visible = !this.springLengthControlPanel.visible;
+      this.secondSpringConstantControlPanel.visible = !this.springLengthControlPanel.visible;
+      springOptionsPanel.visible = this.springLengthControlPanel.visible;
     } );
 
     // Creation of same length icon node
@@ -233,7 +229,7 @@ class IntroScreenView extends TwoSpringScreenView {
 
     // Contains all of the options for the reference lines, gravity, damping, and toolbox
     const rightPanelsVBox = new VBox( {
-      children: [ optionsPanel, self.toolboxPanel, sceneRadioButtonGroup ],
+      children: [ optionsPanel, this.toolboxPanel, sceneRadioButtonGroup ],
       spacing: this.spacing * 0.9
     } );
     this.addChild( rightPanelsVBox );
@@ -242,9 +238,9 @@ class IntroScreenView extends TwoSpringScreenView {
     // Move this plane to the back of the scene graph
     this.backgroundDragPlane.moveToBack();
 
-    this.visibleBoundsProperty.link( function() {
-      rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.springSystemControlsNode.top );
-      springOptionsPanel.leftTop = self.springSystemControlsNode.leftTop.minus( new Vector2( 0, 0 ) );
+    this.visibleBoundsProperty.link( () => {
+      rightPanelsVBox.rightTop = new Vector2( this.panelRightSpacing, this.springSystemControlsNode.top );
+      springOptionsPanel.leftTop = this.springSystemControlsNode.leftTop.minus( new Vector2( 0, 0 ) );
     } );
   }
 }

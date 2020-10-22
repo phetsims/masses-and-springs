@@ -54,12 +54,8 @@ class MassValueControlPanel extends Panel {
 
     const massInGramsProperty = new DynamicProperty( new Property( mass.massProperty ), {
       bidirectional: true,
-      map: function( mass ) {
-        return mass * 1000;
-      },
-      inverseMap: function( massInGrams ) {
-        return massInGrams / 1000;
-      }
+      map: mass => mass * 1000,
+      inverseMap: massInGrams => massInGrams / 1000
     } );
 
     const trackSizeProperty = new Property( options.basics ? new Dimension2( 132, 0.1 ) : new Dimension2( 125, 0.1 ) );
@@ -96,7 +92,7 @@ class MassValueControlPanel extends Panel {
         thumbFill: '#00C4DF',
         thumbFillHighlighted: MassesAndSpringsConstants.THUMB_HIGHLIGHT,
         thumbTouchAreaXDilation: 6,
-        constrainValue: function( value ) { return ( Utils.roundSymmetric( value / 10 ) * 10 ); },
+        constrainValue: value => Utils.roundSymmetric( value / 10 ) * 10,
         majorTicks: [
           {
             value: range.min,

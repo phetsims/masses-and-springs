@@ -13,7 +13,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
@@ -31,121 +30,117 @@ const GRABBING_DISTANCE = 0.1; // {number} horizontal distance in meters from a 
 const RELEASE_DISTANCE = 0.12; // {number} horizontal distance in meters from a mass where a spring will be released
 const UPPER_CONSTRAINT = new LinearFunction( 20, 60, 1.353, 1.265 ); // Limits how much we can prime the spring.
 
-/**
- * @constructor
- *
- * @param {Tandem} tandem
- * @param {Object} [options]
- */
-function MassesAndSpringsModel( tandem, options ) {
-  options = merge( {
-    damping: 0
-  }, options );
+class MassesAndSpringsModel {
+  /**
+   * @param {Tandem} tandem
+   * @param {Object} [options]
+   */
+  constructor( tandem, options ) {
+    options = merge( {
+      damping: 0
+    }, options );
 
-  // Flag used to differentiate basics and non-basics version
-  this.basicsVersion = true;
+    // Flag used to differentiate basics and non-basics version
+    this.basicsVersion = true;
 
-  // @public {Property.<boolean>} determines whether the sim is in a play/pause state
-  this.playingProperty = new BooleanProperty( true, {
-    tandem: tandem.createTandem( 'playingProperty' )
-  } );
-
-  // @public {Property.<number>} coefficient of damping applied to the system
-  this.dampingProperty = new NumberProperty( options.damping, {
-    units: 'N',
-    tandem: tandem.createTandem( 'dampingProperty' )
-  } );
-
-  // @public {Property.<number|null>} gravitational acceleration association with the spring system
-  this.gravityProperty = new Property( MassesAndSpringsConstants.EARTH_GRAVITY, {
-    reentrant: true, // used due to extremely small rounding
-    tandem: tandem.createTandem( 'gravityProperty' ),
-    units: 'meters/second/second'
-  } );
-
-  // @private {EnumerationProperty.<TimeSpeed>} - Controls play speed of the simulation
-  this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
-    tandem: tandem.createTandem( 'timeSpeedProperty' )
-  } );
-
-  // @public {Property.<boolean>} determines visibility of ruler node
-  this.rulerVisibleProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'rulerVisibleProperty' )
-  } );
-
-  // @public
-  this.stopwatch = new Stopwatch( {
-    timePropertyOptions: {
-      range: Stopwatch.ZERO_TO_ALMOST_SIXTY
-    },
-    tandem: tandem.createTandem( 'stopwatch' )
-  } );
-
-  // @public {Property.<boolean>} determines whether timer is active or not
-  this.timerRunningProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'timerRunningProperty' )
-  } );
-
-  // @public {Property.<boolean>} determines visibility of movable line node
-  this.movableLineVisibleProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'movableLineVisibleProperty' )
-  } );
-
-  // @public {Property.<boolean>} determines visibility of equilibrium line node
-  this.equilibriumPositionVisibleProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'equilibriumPositionVisibleProperty' )
-  } );
-
-  // @public {Property.<boolean>} determines visibility of natural length line node. Note this is also used for the
-  // displacementArrowNode's visibility because they should both be visible at the same time.
-  this.naturalLengthVisibleProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
-  } );
-
-  // @public {Property.<string>} body of planet selected
-  this.bodyProperty = new Property( Body.EARTH, {
-    tandem: tandem.createTandem( 'bodyProperty' ),
-    phetioType: Property.PropertyIO( Body.BodyIO )
-  } );
-
-  // Visibility Properties of vectors associated with each mass
-  // @public {Property.<boolean>} determines the visibility of the velocity vector
-  this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
-  } );
-
-  // @public {Property.<boolean>} determines the visibility of the acceleration vector
-  this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
-  } );
-
-  // @public {Property.<boolean>} determines the visibility of the gravitational force vector
-  this.gravityVectorVisibilityProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'gravityVectorVisibilityProperty' )
-  } );
-
-  // @public {Property.<boolean>} determines the visibility of the spring force vector
-  this.springVectorVisibilityProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'springVectorVisibilityProperty' )
-  } );
-
-  // @public {Property.<string>} determines mode of the vectors to be viewed
-  this.forcesModeProperty = new EnumerationProperty(
-    ForcesMode,
-    ForcesMode.FORCES, {
-      tandem: tandem.createTandem( 'forcesModeProperty' )
+    // @public {Property.<boolean>} determines whether the sim is in a play/pause state
+    this.playingProperty = new BooleanProperty( true, {
+      tandem: tandem.createTandem( 'playingProperty' )
     } );
 
-  // @public {Spring[]} Array that will contain all of the springs.
-  this.springs = [];
+    // @public {Property.<number>} coefficient of damping applied to the system
+    this.dampingProperty = new NumberProperty( options.damping, {
+      units: 'N',
+      tandem: tandem.createTandem( 'dampingProperty' )
+    } );
 
-  // @public {Mass[]} Array that will contain all of the masses. Order of masses depends on order in array.
-  this.masses = [];
-}
+    // @public {Property.<number|null>} gravitational acceleration association with the spring system
+    this.gravityProperty = new Property( MassesAndSpringsConstants.EARTH_GRAVITY, {
+      reentrant: true, // used due to extremely small rounding
+      tandem: tandem.createTandem( 'gravityProperty' ),
+      units: 'meters/second/second'
+    } );
 
-massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
+    // @private {EnumerationProperty.<TimeSpeed>} - Controls play speed of the simulation
+    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+      tandem: tandem.createTandem( 'timeSpeedProperty' )
+    } );
 
-inherit( Object, MassesAndSpringsModel, {
+    // @public {Property.<boolean>} determines visibility of ruler node
+    this.rulerVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'rulerVisibleProperty' )
+    } );
+
+    // @public
+    this.stopwatch = new Stopwatch( {
+      timePropertyOptions: {
+        range: Stopwatch.ZERO_TO_ALMOST_SIXTY
+      },
+      tandem: tandem.createTandem( 'stopwatch' )
+    } );
+
+    // @public {Property.<boolean>} determines whether timer is active or not
+    this.timerRunningProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'timerRunningProperty' )
+    } );
+
+    // @public {Property.<boolean>} determines visibility of movable line node
+    this.movableLineVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'movableLineVisibleProperty' )
+    } );
+
+    // @public {Property.<boolean>} determines visibility of equilibrium line node
+    this.equilibriumPositionVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'equilibriumPositionVisibleProperty' )
+    } );
+
+    // @public {Property.<boolean>} determines visibility of natural length line node. Note this is also used for the
+    // displacementArrowNode's visibility because they should both be visible at the same time.
+    this.naturalLengthVisibleProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'naturalLengthVisibleProperty' )
+    } );
+
+    // @public {Property.<string>} body of planet selected
+    this.bodyProperty = new Property( Body.EARTH, {
+      tandem: tandem.createTandem( 'bodyProperty' ),
+      phetioType: Property.PropertyIO( Body.BodyIO )
+    } );
+
+    // Visibility Properties of vectors associated with each mass
+    // @public {Property.<boolean>} determines the visibility of the velocity vector
+    this.velocityVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'velocityVectorVisibilityProperty' )
+    } );
+
+    // @public {Property.<boolean>} determines the visibility of the acceleration vector
+    this.accelerationVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'accelerationVectorVisibilityProperty' )
+    } );
+
+    // @public {Property.<boolean>} determines the visibility of the gravitational force vector
+    this.gravityVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'gravityVectorVisibilityProperty' )
+    } );
+
+    // @public {Property.<boolean>} determines the visibility of the spring force vector
+    this.springVectorVisibilityProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'springVectorVisibilityProperty' )
+    } );
+
+    // @public {Property.<string>} determines mode of the vectors to be viewed
+    this.forcesModeProperty = new EnumerationProperty(
+      ForcesMode,
+      ForcesMode.FORCES, {
+        tandem: tandem.createTandem( 'forcesModeProperty' )
+      } );
+
+    // @public {Spring[]} Array that will contain all of the springs.
+    this.springs = [];
+
+    // @public {Mass[]} Array that will contain all of the masses. Order of masses depends on order in array.
+    this.masses = [];
+  }
+
 
   /**
    * Creates new mass object and pushes it into the model's mass array.
@@ -158,9 +153,9 @@ inherit( Object, MassesAndSpringsModel, {
    * @param {Tandem} tandem
    * @param {Object} [options]
    */
-  createMass: function( mass, xPosition, color, specifiedLabel, tandem, options ) {
+  createMass( mass, xPosition, color, specifiedLabel, tandem, options ) {
     this.masses.push( new Mass( mass, xPosition, color, this.gravityProperty, tandem, options ) );
-  },
+  }
 
   /**
    * Creates a new spring and adds it to the model.
@@ -169,7 +164,7 @@ inherit( Object, MassesAndSpringsModel, {
    * @param {number} x - The x coordinate of the spring, in model coordinates.
    * @param {Tandem} tandem
    */
-  createSpring: function( x, tandem ) {
+  createSpring( x, tandem ) {
     const spring = new Spring(
       new Vector2( x, MassesAndSpringsConstants.CEILING_Y ),
       MassesAndSpringsConstants.DEFAULT_SPRING_LENGTH,
@@ -178,7 +173,7 @@ inherit( Object, MassesAndSpringsModel, {
       tandem
     );
     this.springs.push( spring );
-  },
+  }
 
   /**
    * Spring set that contains two springs. Used on the Intro and Vector screens.
@@ -186,14 +181,14 @@ inherit( Object, MassesAndSpringsModel, {
    *
    * @param {Tandem} tandem
    */
-  addDefaultSprings: function( tandem ) {
+  addDefaultSprings( tandem ) {
     this.createSpring( MassesAndSpringsConstants.LEFT_SPRING_X, tandem.createTandem( 'leftSpring' ) );
     this.createSpring( MassesAndSpringsConstants.RIGHT_SPRING_X, tandem.createTandem( 'rightSpring' ) );
     this.firstSpring = this.springs[ 0 ];
     this.firstSpring.forcesOrientationProperty.set( -1 );
     this.secondSpring = this.springs[ 1 ];
     this.secondSpring.forcesOrientationProperty.set( 1 );
-  },
+  }
 
   /**
    * Mass set that contains a set of standard masses. Used for several screens in basics and non-basics version.
@@ -201,7 +196,7 @@ inherit( Object, MassesAndSpringsModel, {
    *
    * @param {Tandem} tandem
    */
-  addDefaultMasses: function( tandem ) {
+  addDefaultMasses( tandem ) {
     if ( this.basicsVersion ) {
       this.createMass( 0.250, 0.12, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass1' ) );
       this.createMass( 0.250, 0.16, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass2' ) );
@@ -240,12 +235,12 @@ inherit( Object, MassesAndSpringsModel, {
         mysteryLabel: true
       } );
     }
-  },
+  }
 
   /**
    * @public
    */
-  reset: function() {
+  reset() {
     this.dampingProperty.reset();
     this.gravityProperty.reset();
     this.bodyProperty.reset();
@@ -262,9 +257,9 @@ inherit( Object, MassesAndSpringsModel, {
     this.gravityVectorVisibilityProperty.reset();
     this.springVectorVisibilityProperty.reset();
     this.forcesModeProperty.reset();
-    this.masses.forEach( function( mass ) { mass.reset(); } );
-    this.springs.forEach( function( spring ) { spring.reset(); } );
-  },
+    this.masses.forEach( mass => { mass.reset(); } );
+    this.springs.forEach( spring => { spring.reset(); } );
+  }
 
   /**
    * Based on new dragged position of mass, try to attach or detach mass if eligible and then update position.
@@ -272,7 +267,7 @@ inherit( Object, MassesAndSpringsModel, {
    * @param {Mass} mass
    * @public
    */
-  adjustDraggedMassPosition: function( mass ) {
+  adjustDraggedMassPosition( mass ) {
     const massPosition = mass.positionProperty.get();
 
     // Attempt to detach
@@ -317,7 +312,7 @@ inherit( Object, MassesAndSpringsModel, {
     else {
 
       // Attempt to attach. Assumes springs are far enough apart where one mass can't attach to multiple springs.
-      this.springs.forEach( function( spring ) {
+      this.springs.forEach( spring => {
         if ( Math.abs( massPosition.x - spring.positionProperty.get().x ) < GRABBING_DISTANCE &&
              Math.abs( massPosition.y - spring.bottomProperty.get() ) < GRABBING_DISTANCE &&
              spring.massAttachedProperty.get() === null ) {
@@ -325,7 +320,7 @@ inherit( Object, MassesAndSpringsModel, {
         }
       } );
     }
-  },
+  }
 
   /**
    * Responsible for stepping through the model at a specified dt
@@ -333,25 +328,25 @@ inherit( Object, MassesAndSpringsModel, {
    *
    * @public
    */
-  stepForward: function( dt ) {
+  stepForward( dt ) {
 
     // steps the nominal amount used by step forward button listener
     this.modelStep( dt );
 
     // Reset the period trace for each spring.
     // See https://github.com/phetsims/masses-and-springs-basics/issues/58#issuecomment-462860440
-    this.springs.forEach( function( spring ) {
+    this.springs.forEach( spring => {
       if ( spring.periodTrace && spring.periodTrace.stateProperty.value === 4 ) {
         spring.periodTraceResetEmitter.emit();
       }
     } );
-  },
+  }
 
   /**
    * @param {number} dt
    * @public
    */
-  step: function( dt ) {
+  step( dt ) {
     // If simulationTimeStep > 0.3, ignore it - it probably means the user returned to the tab after
     // the tab or the browser was hidden for a while.
     dt = Math.min( dt, 0.3 );
@@ -359,7 +354,7 @@ inherit( Object, MassesAndSpringsModel, {
     if ( this.playingProperty.get() ) {
       this.modelStep( dt );
     }
-  },
+  }
 
   /**
    * Steps in model time.
@@ -367,8 +362,7 @@ inherit( Object, MassesAndSpringsModel, {
    * @param {number} dt
    * @private
    */
-  modelStep: function( dt ) {
-    const self = this;
+  modelStep( dt ) {
     const animationDt = dt;
 
     // Change the dt value if we are playing in slow motion.
@@ -379,7 +373,7 @@ inherit( Object, MassesAndSpringsModel, {
 
       // Fall if not hung or grabbed
       this.masses[ i ].step(
-        self.gravityProperty.value,
+        this.gravityProperty.value,
         MassesAndSpringsConstants.FLOOR_Y + MassesAndSpringsConstants.SHELF_HEIGHT,
         dt,
         animationDt
@@ -388,10 +382,12 @@ inherit( Object, MassesAndSpringsModel, {
     this.stopwatch.step( dt );
 
     // Oscillate springs
-    this.springs.forEach( function( spring ) {
+    this.springs.forEach( spring => {
       spring.step( dt );
     } );
   }
-} );
+}
+
+massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
 
 export default MassesAndSpringsModel;

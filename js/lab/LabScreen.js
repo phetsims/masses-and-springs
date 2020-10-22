@@ -34,12 +34,8 @@ class LabScreen extends Screen {
     };
 
     super(
-      function() {
-        return new LabModel( tandem.createTandem( 'model' ), false );
-      },
-      function( model ) {
-        return new LabScreenView( model, tandem.createTandem( 'view' ) );
-      },
+      () => new LabModel( tandem.createTandem( 'model' ), false ),
+      model => new LabScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

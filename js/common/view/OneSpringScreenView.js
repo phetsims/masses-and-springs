@@ -19,9 +19,9 @@ import DisplacementArrowNode from '../../vectors/view/DisplacementArrowNode.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import Mass from '../model/Mass.js';
 import EnergyGraphAccordionBox from './EnergyGraphAccordionBox.js';
-import MassesAndSpringsColorProfile from './MassesAndSpringsColorProfile.js';
 import MassNode from './MassNode.js';
 import MassValueControlPanel from './MassValueControlPanel.js';
+import MassesAndSpringsColorProfile from './MassesAndSpringsColorProfile.js';
 import MovableLineNode from './MovableLineNode.js';
 import ReferenceLineNode from './ReferenceLineNode.js';
 import SpringHangerNode from './SpringHangerNode.js';
@@ -40,10 +40,8 @@ class OneSpringScreenView extends SpringScreenView {
    */
   constructor( model, tandem, options ) {
     super( model, tandem, options );
-    const self = this;
-
     // @public {number} centerX of the spring in view coordinates
-    this.springCenter = self.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
+    this.springCenter = this.modelViewTransform.modelToViewX( model.firstSpring.positionProperty.value.x );
 
     // Spring Constant Control Panel
     const minMaxLabels = [
@@ -54,7 +52,7 @@ class OneSpringScreenView extends SpringScreenView {
     // @public {Property.<boolean>} Equilibrium of mass is dependent on the mass being attached and the visibility of the equilibrium line.
     this.equilibriumVisibilityProperty = new DerivedProperty(
       [ model.equilibriumPositionVisibleProperty, model.firstSpring.massAttachedProperty ],
-      function( equilibriumPositionVisible, massAttached ) {
+      ( equilibriumPositionVisible, massAttached ) => {
         if ( massAttached ) {
           return equilibriumPositionVisible;
         }
@@ -112,8 +110,8 @@ class OneSpringScreenView extends SpringScreenView {
     );
 
     this.model.firstSpring.buttonEnabledProperty.link(
-      function( buttonEnabled ) {
-        self.springStopperButtonNode.enabled = buttonEnabled;
+      buttonEnabled => {
+        this.springStopperButtonNode.enabled = buttonEnabled;
       } );
 
     if ( !model.basicsVersion ) {
@@ -168,9 +166,9 @@ class OneSpringScreenView extends SpringScreenView {
       zeroHeightLine.y = zeroHeightProperty.get();
       this.addChild( zeroHeightLine );
 
-      this.resetAllButton.addListener( function() {
-        self.movableLineNode.reset();
-        self.energyGraphAccordionBox && self.energyGraphAccordionBox.reset();
+      this.resetAllButton.addListener( () => {
+        this.movableLineNode.reset();
+        this.energyGraphAccordionBox && this.energyGraphAccordionBox.reset();
       } );
     }
 
@@ -208,8 +206,8 @@ class OneSpringScreenView extends SpringScreenView {
     this.addChild( this.toolsLayer );
 
     // Adjust the floating panels to the visibleBounds of the screen.
-    this.visibleBoundsProperty.link( function( visibleBounds ) {
-      self.adjustViewComponents( true, visibleBounds );
+    this.visibleBoundsProperty.link( visibleBounds => {
+      this.adjustViewComponents( true, visibleBounds );
     } );
   }
 

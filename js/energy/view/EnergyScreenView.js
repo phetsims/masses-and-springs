@@ -24,8 +24,6 @@ class EnergyScreenView extends OneSpringScreenView {
     super( model, tandem, {
       dampingVisible: true
     } );
-    const self = this;
-
     // Contains visibility options for the reference lines and displacement arrow
     const indicatorVisibilityControlNode = this.createIndicatorVisibilityPanel( model, false, tandem );
 
@@ -43,13 +41,13 @@ class EnergyScreenView extends OneSpringScreenView {
     const optionsPanel = this.createOptionsPanel( optionsVBox, this.rightPanelAlignGroup, tandem );
 
     // Contains all of the options for the reference lines, gravity, damping, and toolbox
-    const rightPanelsVBox = new VBox( { children: [ optionsPanel, self.toolboxPanel ], spacing: this.spacing * 0.9 } );
+    const rightPanelsVBox = new VBox( { children: [ optionsPanel, this.toolboxPanel ], spacing: this.spacing * 0.9 } );
     this.addChild( rightPanelsVBox );
     rightPanelsVBox.moveToBack();
 
 
-    this.visibleBoundsProperty.link( function() {
-      rightPanelsVBox.rightTop = new Vector2( self.panelRightSpacing, self.energyGraphAccordionBox.top );
+    this.visibleBoundsProperty.link( () => {
+      rightPanelsVBox.rightTop = new Vector2( this.panelRightSpacing, this.energyGraphAccordionBox.top );
     } );
 
     this.shelf.rectWidth = 140;

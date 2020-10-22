@@ -7,10 +7,9 @@
  * @author Matt Pennington (PhET Interactive Simulations)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import massesAndSprings from '../../massesAndSprings.js';
+import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
 const bodyCustomString = massesAndSpringsStrings.body.custom;
@@ -19,23 +18,22 @@ const bodyJupiterString = massesAndSpringsStrings.body.jupiter;
 const bodyMoonString = massesAndSpringsStrings.body.moon;
 const bodyPlanetXString = massesAndSpringsStrings.body.planetX;
 
-/**
- * @param {string} title - name of body.
- * @param {number|null} gravity - gravitational acceleration of body.
- * @constructor
- */
-function Body( title, gravity ) {
+class Body {
+  /**
+   * @param {string} title - name of body.
+   * @param {number|null} gravity - gravitational acceleration of body.
+   */
+  constructor( title, gravity ) {
 
-  // @public {string}
-  this.title = title;
+    // @public {string}
+    this.title = title;
 
-  // @public {number|null} gravity acceleration (m/s^2)
-  this.gravity = gravity;
+    // @public {number|null} gravity acceleration (m/s^2)
+    this.gravity = gravity;
+  }
 }
 
 massesAndSprings.register( 'Body', Body );
-
-inherit( Object, Body );
 
 // @public {Body} (read-only) body objects for gravity panel
 Body.MOON = new Body( bodyMoonString, MassesAndSpringsConstants.MOON_GRAVITY );

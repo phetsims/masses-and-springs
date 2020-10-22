@@ -31,8 +31,6 @@ class TwoSpringScreenView extends SpringScreenView {
    */
   constructor( model, tandem ) {
     super( model, tandem );
-    const self = this;
-
     // @public {SpringHangerNode} Spring Hanger Node
     this.springHangerNode = new SpringHangerNode(
       model.springs,
@@ -49,12 +47,12 @@ class TwoSpringScreenView extends SpringScreenView {
     this.secondSpringStopperButtonNode = this.createStopperButton( rightSpring, tandem );
     this.secondSpringStopperButtonNode.left = this.springHangerNode.right + this.spacing;
 
-    leftSpring.buttonEnabledProperty.link( function( enabled ) {
-      self.firstSpringStopperButtonNode.enabled = enabled;
+    leftSpring.buttonEnabledProperty.link( enabled => {
+      this.firstSpringStopperButtonNode.enabled = enabled;
     } );
 
-    rightSpring.buttonEnabledProperty.link( function( enabled ) {
-      self.secondSpringStopperButtonNode.enabled = enabled;
+    rightSpring.buttonEnabledProperty.link( enabled => {
+      this.secondSpringStopperButtonNode.enabled = enabled;
     } );
 
     // Spring Constant Control Panels
@@ -86,9 +84,8 @@ class TwoSpringScreenView extends SpringScreenView {
      * @param {Spring} spring
      * @returns {ReferenceLineNode}
      */
-    const createNaturalLineNode = function( spring ) {
-      return new ReferenceLineNode(
-        self.modelViewTransform,
+    const createNaturalLineNode = spring => new ReferenceLineNode(
+      this.modelViewTransform,
         spring,
         spring.bottomProperty,
         model.naturalLengthVisibleProperty, {
@@ -96,14 +93,13 @@ class TwoSpringScreenView extends SpringScreenView {
           fixedPosition: true
         }
       );
-    };
 
     // @public {ReferenceLineNode} Initializes natural line for springs
     this.firstNaturalLengthLineNode = createNaturalLineNode( model.firstSpring );
     this.secondNaturalLengthLineNode = createNaturalLineNode( model.secondSpring );
 
-    this.resetAllButton.addListener( function() {
-      self.movableLineNode.reset();
+    this.resetAllButton.addListener( () => {
+      this.movableLineNode.reset();
     } );
 
     // @public {HBox} Contains Panels/Nodes that hover near the spring system at the center of the screen.
@@ -121,8 +117,8 @@ class TwoSpringScreenView extends SpringScreenView {
     } );
 
     // Adjust the floating panels to the visibleBounds of the screen.
-    this.visibleBoundsProperty.link( function( visibleBounds ) {
-      self.adjustViewComponents( false, visibleBounds );
+    this.visibleBoundsProperty.link( visibleBounds => {
+      this.adjustViewComponents( false, visibleBounds );
     } );
   }
 }

@@ -17,7 +17,6 @@ import Complex from '../../../../dot/js/Complex.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import massesAndSprings from '../../massesAndSprings.js';
@@ -26,287 +25,275 @@ import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 // constants
 const DEFAULT_THICKNESS = 3; // empirically determined
 
-/**
- * @param {Vector2} position - coordinates of the top center of the spring
- * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
- * @param {Property.<number>} dampingProperty - used for viscous damping coefficient (N.s/m) of the system
- * @param {Property.<number>} gravityProperty - the gravity Property from the model
- * @param {Tandem} tandem
- *
- * @constructor
- */
-function Spring( position, initialNaturalRestingLength, dampingProperty, gravityProperty, tandem ) {
+class Spring {
+  /**
+   * @param {Vector2} position - coordinates of the top center of the spring
+   * @param {number} initialNaturalRestingLength - initial resting length of unweighted spring in m
+   * @param {Property.<number>} dampingProperty - used for viscous damping coefficient (N.s/m) of the system
+   * @param {Property.<number>} gravityProperty - the gravity Property from the model
+   * @param {Tandem} tandem
+   *
+   */
+  constructor( position, initialNaturalRestingLength, dampingProperty, gravityProperty, tandem ) {
 
-  // validate and save options
-  assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : '
-                                                     + initialNaturalRestingLength );
-  const self = this;
+    // validate and save options
+    assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : '
+                                                       + initialNaturalRestingLength );
 
-  // @public {Property.<number>} (read-write) Used to position massNode forces. Right side: 1, Left side: -1
-  this.forcesOrientationProperty = new NumberProperty( 1 );
+    // @public {Property.<number>} (read-write) Used to position massNode forces. Right side: 1, Left side: -1
+    this.forcesOrientationProperty = new NumberProperty( 1 );
 
-  // @public {Property.<number|null>} gravitational acceleration
-  this.gravityProperty = new Property( gravityProperty.value, {
-    reentrant: true // used due to extremely small rounding
-  } );
+    // @public {Property.<number|null>} gravitational acceleration
+    this.gravityProperty = new Property( gravityProperty.value, {
+      reentrant: true // used due to extremely small rounding
+    } );
 
-  // Link to manage gravity value for the spring object. Springs exists throughout sim lifetime so no need for unlink.
-  gravityProperty.link( function( gravity ) {
-    self.gravityProperty.set( gravity );
-  } );
+    // Link to manage gravity value for the spring object. Springs exists throughout sim lifetime so no need for unlink.
+    gravityProperty.link( gravity => {
+      this.gravityProperty.set( gravity );
+    } );
 
-  //  @public {Property.<number>} distance from the bottom of the spring from the natural resting position
-  this.displacementProperty = new NumberProperty( 0, {
-    tandem: tandem.createTandem( 'displacementProperty' ),
-    units: 'meters',
-    range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
-  } );
-
-  // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-  this.massEquilibriumYPositionProperty = new NumberProperty( 0,
-    {
-      tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
+    //  @public {Property.<number>} distance from the bottom of the spring from the natural resting position
+    this.displacementProperty = new NumberProperty( 0, {
+      tandem: tandem.createTandem( 'displacementProperty' ),
       units: 'meters',
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
-  // @public {Property.<number|null>} distance from of the bottom of the spring from the massEquilibriumYPosition
-  this.massEquilibriumDisplacementProperty = new Property( null );
+    // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
+    this.massEquilibriumYPositionProperty = new NumberProperty( 0,
+      {
+        tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
+        units: 'meters',
+        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
+      } );
 
-  // @public {Property.<number>} spring constant of spring
-  this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
-    tandem: tandem.createTandem( 'springConstantProperty' ),
-    units: 'newtons/meters',
-    range: new Range( 3, 60 )
-  } );
+    // @public {Property.<number|null>} distance from of the bottom of the spring from the massEquilibriumYPosition
+    this.massEquilibriumDisplacementProperty = new Property( null );
 
-  // @public {Property.<number>} spring force
-  this.springForceProperty = new DerivedProperty(
-    [ this.displacementProperty, this.springConstantProperty ],
-    function( displacement, springConstant ) {
-      return -springConstant * displacement;
-    },
-    {
-      units: 'N',
-      phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
-    }
-  );
-
-  // @public {Property.<number>} viscous damping coefficient of the system
-  this.dampingCoefficientProperty = new NumberProperty( dampingProperty.value, {
-    tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
-    units: 'newtons-second/meters',
-    range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
-  } );
-
-  // @public - position of the spring, originated at the top-center of the spring node
-  this.positionProperty = new Vector2Property( position, {
-    tandem: tandem.createTandem( 'positionProperty' )
-  } );
-
-  // @public {Property.<number>} length of the spring without mass attached
-  this.naturalRestingLengthProperty = new NumberProperty( initialNaturalRestingLength, {
-    tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
-    units: 'meters',
-    range: new Range( 0.1, 0.5 )
-  } );
-
-  // @public {Property.<number> read-only} line width of oscillating spring node
-  this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
-    tandem: tandem.createTandem( 'thicknessProperty' ),
-    range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
-  } );
-
-  // Calling this function here will set a calculated value for the thickness property.
-  this.updateThickness( this.naturalRestingLengthProperty.get(), this.springConstantProperty.get() );
-
-  // @public {Property.<boolean>} determines whether the animation for the spring is played or not
-  this.animatingProperty = new BooleanProperty( false, {
-    tandem: tandem.createTandem( 'animatingProperty' )
-  } );
-
-  // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
-  this.massAttachedProperty = new Property( null, {
-    tandem: tandem.createTandem( 'massAttachedProperty' )
-    // phetioType: Property.PropertyIO( NullableIO( MassIO ) )
-  } );
-
-  // @public {Property.<number>} Kinetic Energy of the attached Mass
-  this.kineticEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
-    derive: 'kineticEnergyProperty',
-    defaultValue: 0
-  } );
-
-  // @public {Property.<number>} Gravitational Potential Energy of the attached Mass
-  this.gravitationalPotentialEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
-    derive: 'gravitationalPotentialEnergyProperty',
-    defaultValue: 0
-  } );
-
-  // @public {Property.<number>} Elastic Potential Energy of the attached Mass
-  this.elasticPotentialEnergyProperty = new DerivedProperty(
-    [ this.springConstantProperty, this.displacementProperty ],
-    function( springConstant, displacement ) {
-      return 0.5 * springConstant * Math.pow( ( displacement ), 2 );
+    // @public {Property.<number>} spring constant of spring
+    this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
+      tandem: tandem.createTandem( 'springConstantProperty' ),
+      units: 'newtons/meters',
+      range: new Range( 3, 60 )
     } );
 
-  // @public {Property.<number>} Thermal Energy of the attached Mass
-  this.thermalEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
-    derive: 'thermalEnergyProperty',
-    defaultValue: 0
-  } );
+    // @public {Property.<number>} spring force
+    this.springForceProperty = new DerivedProperty(
+      [ this.displacementProperty, this.springConstantProperty ],
+      ( displacement, springConstant ) => -springConstant * displacement,
+      {
+        units: 'N',
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+      }
+    );
 
-  // @public {Property.<boolean>} Flag to enable the stop button for the spring.
-  this.buttonEnabledProperty = new BooleanProperty( false );
-
-  // @public {Property.<number>} (read-only) length of the spring, units = m
-  this.lengthProperty = new DerivedProperty(
-    [ this.naturalRestingLengthProperty, this.displacementProperty ],
-    function( naturalRestingLength, displacement ) {
-      return naturalRestingLength - displacement;
-    },
-    {
-      tandem: tandem.createTandem( 'lengthProperty' ),
-      units: 'meters',
-      range: new Range( 0, Number.POSITIVE_INFINITY ),
-      phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
-    }
-  );
-
-  // @public {Property.<number>} (read-only) y position of the bottom end of the spring, units = m
-  this.bottomProperty = new DerivedProperty(
-    [ this.positionProperty, this.lengthProperty ],
-    function( position, length ) {
-      return position.y - length;
-    },
-    {
-      tandem: tandem.createTandem( 'bottomProperty' ),
-      units: 'meters',
-      range: new Range( 0, Number.POSITIVE_INFINITY ),
-      phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
-    }
-  );
-
-  // Links are used to set damping Property of each spring to the damping property of the system
-  dampingProperty.link( function( newDamping ) {
-    assert && assert( newDamping >= 0, 'damping must be greater than or equal to 0: ' + newDamping );
-    self.dampingCoefficientProperty.set( newDamping );
-  } );
-
-  // @public {Property.<number>}(read-only) y position of the equilibrium position
-  this.equilibriumYPositionProperty = new NumberProperty( 0,
-    {
-      tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
-      units: 'meters',
+    // @public {Property.<number>} viscous damping coefficient of the system
+    this.dampingCoefficientProperty = new NumberProperty( dampingProperty.value, {
+      tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
+      units: 'newtons-second/meters',
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
-  // Set the equilibrium position when a mass is attached to the spring.
-  // We do a similar process in Mass.js when the mass value changes.
-  Property.multilink( [
-      this.springConstantProperty,
-      this.gravityProperty,
-      this.massAttachedProperty,
-      this.naturalRestingLengthProperty
-    ],
-    function( springConstant, gravity, mass, naturalRestingLength ) {
-      if ( mass ) {
-
-        // springExtension = mg/k
-        const springExtension = ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
-
-        //Set equilibrium y position
-        self.equilibriumYPositionProperty.set(
-          self.positionProperty.get().y - naturalRestingLength - springExtension );
-
-        // Set mass equilibrium y position
-        self.massEquilibriumYPositionProperty.set(
-          self.positionProperty.get().y - naturalRestingLength - springExtension - mass.heightProperty.value / 2
-        );
-      }
+    // @public - position of the spring, originated at the top-center of the spring node
+    this.positionProperty = new Vector2Property( position, {
+      tandem: tandem.createTandem( 'positionProperty' )
     } );
 
-  // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-  this.massEquilibriumYPositionProperty = new NumberProperty( 0,
-    {
-      tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
+    // @public {Property.<number>} length of the spring without mass attached
+    this.naturalRestingLengthProperty = new NumberProperty( initialNaturalRestingLength, {
+      tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
       units: 'meters',
+      range: new Range( 0.1, 0.5 )
+    } );
+
+    // @public {Property.<number> read-only} line width of oscillating spring node
+    this.thicknessProperty = new NumberProperty( DEFAULT_THICKNESS, {
+      tandem: tandem.createTandem( 'thicknessProperty' ),
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
-  const massCenterOfMassProperty = new DynamicProperty( this.massAttachedProperty, {
-    derive: 'centerOfMassPositionProperty',
-    defaultValue: null
-  } );
+    // Calling this function here will set a calculated value for the thickness property.
+    this.updateThickness( this.naturalRestingLengthProperty.get(), this.springConstantProperty.get() );
 
-  Property.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ],
-    function( massEquilibriumYPosition, massCenterOfMass ) {
-      if ( massCenterOfMass !== null ) {
-        self.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition );
+    // @public {Property.<boolean>} determines whether the animation for the spring is played or not
+    this.animatingProperty = new BooleanProperty( false, {
+      tandem: tandem.createTandem( 'animatingProperty' )
+    } );
+
+    // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
+    this.massAttachedProperty = new Property( null, {
+      tandem: tandem.createTandem( 'massAttachedProperty' )
+      // phetioType: Property.PropertyIO( NullableIO( MassIO ) )
+    } );
+
+    // @public {Property.<number>} Kinetic Energy of the attached Mass
+    this.kineticEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'kineticEnergyProperty',
+      defaultValue: 0
+    } );
+
+    // @public {Property.<number>} Gravitational Potential Energy of the attached Mass
+    this.gravitationalPotentialEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'gravitationalPotentialEnergyProperty',
+      defaultValue: 0
+    } );
+
+    // @public {Property.<number>} Elastic Potential Energy of the attached Mass
+    this.elasticPotentialEnergyProperty = new DerivedProperty(
+      [ this.springConstantProperty, this.displacementProperty ],
+      ( springConstant, displacement ) => 0.5 * springConstant * Math.pow( ( displacement ), 2 ) );
+
+    // @public {Property.<number>} Thermal Energy of the attached Mass
+    this.thermalEnergyProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'thermalEnergyProperty',
+      defaultValue: 0
+    } );
+
+    // @public {Property.<boolean>} Flag to enable the stop button for the spring.
+    this.buttonEnabledProperty = new BooleanProperty( false );
+
+    // @public {Property.<number>} (read-only) length of the spring, units = m
+    this.lengthProperty = new DerivedProperty(
+      [ this.naturalRestingLengthProperty, this.displacementProperty ],
+      ( naturalRestingLength, displacement ) => naturalRestingLength - displacement,
+      {
+        tandem: tandem.createTandem( 'lengthProperty' ),
+        units: 'meters',
+        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+      }
+    );
+
+    // @public {Property.<number>} (read-only) y position of the bottom end of the spring, units = m
+    this.bottomProperty = new DerivedProperty(
+      [ this.positionProperty, this.lengthProperty ],
+      ( position, length ) => position.y - length,
+      {
+        tandem: tandem.createTandem( 'bottomProperty' ),
+        units: 'meters',
+        range: new Range( 0, Number.POSITIVE_INFINITY ),
+        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+      }
+    );
+
+    // Links are used to set damping Property of each spring to the damping property of the system
+    dampingProperty.link( newDamping => {
+      assert && assert( newDamping >= 0, 'damping must be greater than or equal to 0: ' + newDamping );
+      this.dampingCoefficientProperty.set( newDamping );
+    } );
+
+    // @public {Property.<number>}(read-only) y position of the equilibrium position
+    this.equilibriumYPositionProperty = new NumberProperty( 0,
+      {
+        tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
+        units: 'meters',
+        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
+      } );
+
+    // Set the equilibrium position when a mass is attached to the spring.
+    // We do a similar process in Mass.js when the mass value changes.
+    Property.multilink( [
+        this.springConstantProperty,
+        this.gravityProperty,
+        this.massAttachedProperty,
+        this.naturalRestingLengthProperty
+      ],
+      ( springConstant, gravity, mass, naturalRestingLength ) => {
+        if ( mass ) {
+
+          // springExtension = mg/k
+          const springExtension = ( mass.massProperty.value * this.gravityProperty.value ) / this.springConstantProperty.value;
+
+          //Set equilibrium y position
+          this.equilibriumYPositionProperty.set(
+            this.positionProperty.get().y - naturalRestingLength - springExtension );
+
+          // Set mass equilibrium y position
+          this.massEquilibriumYPositionProperty.set(
+            this.positionProperty.get().y - naturalRestingLength - springExtension - mass.heightProperty.value / 2
+          );
+        }
+      } );
+
+    // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
+    this.massEquilibriumYPositionProperty = new NumberProperty( 0,
+      {
+        tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
+        units: 'meters',
+        range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
+      } );
+
+    const massCenterOfMassProperty = new DynamicProperty( this.massAttachedProperty, {
+      derive: 'centerOfMassPositionProperty',
+      defaultValue: null
+    } );
+
+    Property.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ],
+      ( massEquilibriumYPosition, massCenterOfMass ) => {
+        if ( massCenterOfMass !== null ) {
+          this.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition );
+        }
+      } );
+
+    // Set the equilibrium position when a mass is attached to the spring.
+    // We do a similar process in Mass.js when the mass value changes.
+    Property.multilink( [
+        this.springConstantProperty,
+        this.gravityProperty,
+        this.massAttachedProperty,
+        this.naturalRestingLengthProperty
+      ],
+      ( springConstant, gravity, mass, naturalRestingLength ) => {
+        if ( mass ) {
+
+          // springExtension = mg/k
+          const springExtensionValue =
+            ( mass.massProperty.value * this.gravityProperty.value ) / this.springConstantProperty.value;
+          this.massEquilibriumYPositionProperty.set(
+            this.positionProperty.get().y - naturalRestingLength - springExtensionValue - mass.heightProperty.value / 2
+          );
+        }
+      } );
+
+    this.springConstantProperty.link( springConstant => {
+      this.updateThickness( this.naturalRestingLengthProperty.get(), springConstant );
+    } );
+
+    // When the length of the spring is adjusted we need to adjust the position of the attached mass.
+    this.naturalRestingLengthProperty.link( () => {
+      if ( this.massAttachedProperty.value ) {
+        this.setMass( this.massAttachedProperty.get() );
       }
     } );
 
-  // Set the equilibrium position when a mass is attached to the spring.
-  // We do a similar process in Mass.js when the mass value changes.
-  Property.multilink( [
-      this.springConstantProperty,
-      this.gravityProperty,
-      this.massAttachedProperty,
-      this.naturalRestingLengthProperty
-    ],
-    function( springConstant, gravity, mass, naturalRestingLength ) {
-      if ( mass ) {
+    // @public {null|PeriodTrace} The spring should be aware of its period trace.
+    // See https://github.com/phetsims/masses-and-springs-basics/issues/58
+    this.periodTrace = null;
 
-        // springExtension = mg/k
-        const springExtensionValue =
-          ( mass.massProperty.value * self.gravityProperty.value ) / self.springConstantProperty.value;
-        self.massEquilibriumYPositionProperty.set(
-          self.positionProperty.get().y - naturalRestingLength - springExtensionValue - mass.heightProperty.value / 2
-        );
+    // @public {Property.<boolean>} Responsible for the visibility of the period trace. Used in a verticalCheckboxGroup
+    this.periodTraceVisibilityProperty = new BooleanProperty( false );
+
+    // @public {Emitter} used to determine when the period tracer should alternate directions
+    this.peakEmitter = new Emitter( { parameters: [ { valueType: 'number' } ] } );
+
+    // @public {Emitter} used to determine when the mass has crossed over its equilibrium position while oscillating
+    this.crossEmitter = new Emitter();
+
+    // @public {Emitter} used to determine when to reset the periodTrace state
+    this.periodTraceResetEmitter = new Emitter();
+
+    this.massEquilibriumDisplacementProperty.link( ( newValue, oldValue ) => {
+      if ( ( oldValue >= 0 ) !== ( newValue >= 0 ) && oldValue !== null && newValue !== null ) {
+        this.crossEmitter.emit();
       }
     } );
+  }
 
-  this.springConstantProperty.link( function( springConstant ) {
-    self.updateThickness( self.naturalRestingLengthProperty.get(), springConstant );
-  } );
-
-  // When the length of the spring is adjusted we need to adjust the position of the attached mass.
-  this.naturalRestingLengthProperty.link( function() {
-    if ( self.massAttachedProperty.value ) {
-      self.setMass( self.massAttachedProperty.get() );
-    }
-  } );
-
-  // @public {null|PeriodTrace} The spring should be aware of its period trace.
-  // See https://github.com/phetsims/masses-and-springs-basics/issues/58
-  this.periodTrace = null;
-
-  // @public {Property.<boolean>} Responsible for the visibility of the period trace. Used in a verticalCheckboxGroup
-  this.periodTraceVisibilityProperty = new BooleanProperty( false );
-
-  // @public {Emitter} used to determine when the period tracer should alternate directions
-  this.peakEmitter = new Emitter( { parameters: [ { valueType: 'number' } ] } );
-
-  // @public {Emitter} used to determine when the mass has crossed over its equilibrium position while oscillating
-  this.crossEmitter = new Emitter();
-
-  // @public {Emitter} used to determine when to reset the periodTrace state
-  this.periodTraceResetEmitter = new Emitter();
-
-  this.massEquilibriumDisplacementProperty.link( function( newValue, oldValue ) {
-    if ( ( oldValue >= 0 ) !== ( newValue >= 0 ) && oldValue !== null && newValue !== null ) {
-      self.crossEmitter.emit();
-    }
-  } );
-}
-
-massesAndSprings.register( 'Spring', Spring );
-
-inherit( Object, Spring, {
   /**
    * @public
    */
-  reset: function() {
+  reset() {
     this.buttonEnabledProperty.reset();
     this.gravityProperty.reset();
     this.displacementProperty.reset();
@@ -318,7 +305,7 @@ inherit( Object, Spring, {
     this.animatingProperty.reset();
     this.massEquilibriumDisplacementProperty.reset();
     this.periodTraceVisibilityProperty.reset();
-  },
+  }
 
   /**
    * Retains the properties of the spring in an object that can publicly accessed.
@@ -326,7 +313,7 @@ inherit( Object, Spring, {
    *
    * @returns {Object}
    */
-  getSpringState: function() {
+  getSpringState() {
     return {
       displacement: this.displacementProperty.get(),
       gravity: this.gravityProperty.get(),
@@ -337,7 +324,7 @@ inherit( Object, Spring, {
       springConstant: this.springConstantProperty.get(),
       thickness: this.thicknessProperty.get()
     };
-  },
+  }
 
   /**
    * Sets the properties of the spring with previously stored properties.
@@ -345,7 +332,7 @@ inherit( Object, Spring, {
    *
    * @public
    */
-  setSpringState: function( springState ) {
+  setSpringState( springState ) {
     this.displacementProperty.set( springState.displacement );
     this.gravityProperty.set( springState.gravity );
     this.dampingCoefficientProperty.set( springState.dampingCoefficient );
@@ -354,7 +341,7 @@ inherit( Object, Spring, {
     this.massAttachedProperty.set( springState.mass );
     this.springConstantProperty.set( springState.springConstant );
     this.thicknessProperty.set( springState.thickness );
-  },
+  }
 
   /**
    * Updates thickness of spring and sets its thickness Property to calculated value. This is not handled internally
@@ -364,7 +351,7 @@ inherit( Object, Spring, {
    * @param {number} length  natural resting length of spring
    * @param {number} springConstant current spring constant of spring
    */
-  updateThickness: function( length, springConstant ) {
+  updateThickness( length, springConstant ) {
 
     // We are increasing the significance of the spring constant term by adding an exponent,
     // which is empirically determined.
@@ -372,7 +359,7 @@ inherit( Object, Spring, {
                       * springConstant / this.springConstantProperty.initialValue
                       * length / this.naturalRestingLengthProperty.initialValue;
     this.thicknessProperty.set( thickness );
-  },
+  }
 
   /**
    * Updates springConstant of spring and sets its spring constant Property to calculated value. This is not handled
@@ -382,27 +369,27 @@ inherit( Object, Spring, {
    * @param length {number} current natural resting length of spring
    * @param thickness number {number} current thickness of spring
    */
-  updateSpringConstant: function( length, thickness ) {
+  updateSpringConstant( length, thickness ) {
     const springConstant = this.naturalRestingLengthProperty.initialValue / length
                            * thickness / this.thicknessProperty.initialValue
                            * this.springConstantProperty.initialValue;
 
     this.springConstantProperty.set( springConstant );
-  },
+  }
 
   /**
    * Removes mass from spring.
    *
    * @public
    */
-  removeMass: function() {
+  removeMass() {
     if ( this.massAttachedProperty.get() ) {
       this.massAttachedProperty.get().detach();
     }
     this.displacementProperty.set( 0 );
     this.massAttachedProperty.set( null );
     this.buttonEnabledProperty.set( false );
-  },
+  }
 
   /**
    * Updates the displacement Property of the spring.
@@ -411,7 +398,7 @@ inherit( Object, Spring, {
    *
    * @public
    */
-  updateDisplacement: function( yPosition, factorNaturalLength ) {
+  updateDisplacement( yPosition, factorNaturalLength ) {
     if ( factorNaturalLength ) {
       this.displacementProperty.set( this.massAttachedProperty.value.positionProperty.value.y -
                                      ( yPosition - this.naturalRestingLengthProperty.value )
@@ -422,7 +409,7 @@ inherit( Object, Spring, {
       this.displacementProperty.set( -( this.positionProperty.value.y - this.naturalRestingLengthProperty.value )
                                      + yPosition - MassesAndSpringsConstants.HOOK_CENTER );
     }
-  },
+  }
 
   /**
    * Sets mass on spring
@@ -430,7 +417,7 @@ inherit( Object, Spring, {
    *
    * @public
    */
-  setMass: function( mass ) {
+  setMass( mass ) {
     if ( this.massAttachedProperty.get() ) {
       this.massAttachedProperty.get().detach();
     }
@@ -438,7 +425,7 @@ inherit( Object, Spring, {
     this.massAttachedProperty.get().springProperty.set( this );
     this.updateDisplacement( this.positionProperty.value.y, true );
     this.massAttachedProperty.get().verticalVelocityProperty.set( 0 );
-  },
+  }
 
   /**
    * Stop spring motion by setting the displacement to the spring's extension, which is the length from the natural
@@ -446,7 +433,7 @@ inherit( Object, Spring, {
    *
    * @public
    */
-  stopSpring: function() {
+  stopSpring() {
 
     // check if mass attached on spring
     if ( this.massAttachedProperty.get() ) {
@@ -464,7 +451,7 @@ inherit( Object, Spring, {
       mass.verticalVelocityProperty.set( 0 );
       this.buttonEnabledProperty.set( false );
     }
-  },
+  }
 
   /**
    * Responsible for oscillatory motion of spring system.
@@ -524,7 +511,7 @@ inherit( Object, Spring, {
    *
    * @param {number} dt - animation time step
    */
-  step: function( dt ) {
+  step( dt ) {
     if ( this.massAttachedProperty.get() && !this.massAttachedProperty.get().userControlledProperty.get() ) {
       this.massAttachedProperty.get().preserveThermalEnergy = false;
 
@@ -619,7 +606,9 @@ inherit( Object, Spring, {
       this.massAttachedProperty.get().preserveThermalEnergy = true;
     }
   }
-} );
+}
+
+massesAndSprings.register( 'Spring', Spring );
 
 Spring.SpringIO = new IOType( 'SpringIO', {
   valueType: Spring,
