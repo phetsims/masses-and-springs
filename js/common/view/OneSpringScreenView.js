@@ -212,13 +212,6 @@ class OneSpringScreenView extends SpringScreenView {
   }
 
   /**
-   * @public
-   */
-  reset() {
-    this.energyGraphAccordionBox.reset();
-  }
-
-  /**
    * Responsible for updating the energy bar graph
    *
    * @public
