@@ -17,7 +17,7 @@ import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import ConstantMode from '../../common/model/ConstantMode.js';
 import SceneMode from '../../common/model/SceneMode.js';
@@ -199,7 +199,7 @@ class IntroScreenView extends TwoSpringScreenView {
     } ];
 
     // Creation of icons for scene selection
-    const sceneRadioButtonGroup = new RadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
+    const sceneRadioButtonGroup = new RectangularRadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
       buttonContentXMargin: 1,
       buttonContentYMargin: 1,
       right: this.gravityAndDampingControlNode.right,
