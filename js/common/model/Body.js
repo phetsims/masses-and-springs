@@ -8,6 +8,7 @@
  */
 
 import IOType from '../../../../tandem/js/types/IOType.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
@@ -46,16 +47,7 @@ Body.BODIES = [ Body.MOON, Body.EARTH, Body.JUPITER, Body.PLANET_X, Body.CUSTOM 
 Body.BodyIO = new IOType( 'BodyIO', {
   valueType: Body,
   documentation: 'Planet which determines the force of gravity.',
-
-  // TODO: https://github.com/phetsims/tandem/issues/215 use ReferenceIO or equivalent
-  toStateObject: body => {
-    if ( body === null ) {
-      return null;
-    }
-    return {
-      body: body
-    };
-  }
+  supertype: ReferenceIO( IOType.ObjectIO )
 } );
 
 export default Body;

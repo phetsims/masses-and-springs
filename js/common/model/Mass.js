@@ -16,7 +16,6 @@ import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import merge from '../../../../phet-core/js/merge.js';
-import IOType from '../../../../tandem/js/types/IOType.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import Easing from '../../../../twixt/js/Easing.js';
 import massesAndSprings from '../../massesAndSprings.js';
@@ -366,21 +365,5 @@ class Mass {
 }
 
 massesAndSprings.register( 'Mass', Mass );
-
-// TODO: This is currently unused
-Mass.MassIO = new IOType( 'MassIO', {
-  valueType: Mass,
-  documentation: 'Model element for one of the masses',
-  // TODO: https://github.com/phetsims/tandem/issues/215 use ReferenceIO or equivalent
-  toStateObject: mass => {
-    if ( mass === null ) {
-      return null;
-    }
-    return {
-      mass: mass.mass,
-      color: mass.color
-    };
-  }
-} );
 
 export default Mass;

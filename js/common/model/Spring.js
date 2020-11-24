@@ -19,6 +19,7 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
@@ -613,17 +614,7 @@ massesAndSprings.register( 'Spring', Spring );
 Spring.SpringIO = new IOType( 'SpringIO', {
   valueType: Spring,
   documentation: 'Hangs from the ceiling and applies a force to any attached BodyIO',
-
-  // TODO: https://github.com/phetsims/tandem/issues/215 use ReferenceIO or equivalent
-  toStateObject: spring => {
-    if ( spring === null ) {
-      return null;
-    }
-    return {
-      position: spring.positionProperty.get(),
-      id: spring.tandem.phetioID
-    };
-  }
+  supertype: ReferenceIO( IOType.ObjectIO )
 } );
 
 export default Spring;
