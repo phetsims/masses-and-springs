@@ -71,7 +71,7 @@ class EnergyGraphAccordionBox extends AccordionBox {
       baseColor: ColorConstants.LIGHT_BLUE,
       xMargin: 8,
       yMargin: 4,
-      radius: 7,
+      magnifyingGlassRadius: 7,
       touchAreaXDilation: 5,
       touchAreaYDilation: 5
     };
