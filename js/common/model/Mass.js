@@ -230,7 +230,7 @@ class Mass {
         this.initialTotalEnergyProperty.set( newTotalEnergy );
       }
 
-      // We can preserve thermal energy by adding any change to total energy to the initial energy,
+        // We can preserve thermal energy by adding any change to total energy to the initial energy,
       // as long as it is not in its natural oscillation
       else if ( this.preserveThermalEnergy ) {
         this.initialTotalEnergyProperty.value += newTotalEnergy - oldTotalEnergy;

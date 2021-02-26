@@ -86,13 +86,13 @@ class TwoSpringScreenView extends SpringScreenView {
      */
     const createNaturalLineNode = spring => new ReferenceLineNode(
       this.modelViewTransform,
-        spring,
-        spring.bottomProperty,
-        model.naturalLengthVisibleProperty, {
-          stroke: MassesAndSpringsColorProfile.unstretchedLengthProperty, // Naming convention pulled from basics version.
-          fixedPosition: true
-        }
-      );
+      spring,
+      spring.bottomProperty,
+      model.naturalLengthVisibleProperty, {
+        stroke: MassesAndSpringsColorProfile.unstretchedLengthProperty, // Naming convention pulled from basics version.
+        fixedPosition: true
+      }
+    );
 
     // @public {ReferenceLineNode} Initializes natural line for springs
     this.firstNaturalLengthLineNode = createNaturalLineNode( model.firstSpring );
