@@ -92,7 +92,7 @@ class Spring {
     // @public {Property.<number>} viscous damping coefficient of the system
     this.dampingCoefficientProperty = new NumberProperty( dampingProperty.value, {
       tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
-      units: '(N\u00b7s)/m',
+      units: 'N\u00b7s/m',
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
