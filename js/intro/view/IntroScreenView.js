@@ -70,7 +70,7 @@ class IntroScreenView extends TwoSpringScreenView {
         stroke: null,
         visible: false,
         centerTick: true,
-        constrainValue: value => Utils.roundToInterval( value, .05 )
+        constrainValue: value => Utils.roundToInterval( value, 0.05 )
       } );
 
     // Panel that keeps thickness/spring constant at constant value
@@ -205,7 +205,7 @@ class IntroScreenView extends TwoSpringScreenView {
       right: this.gravityAndDampingControlNode.right,
       baseColor: 'black',
       selectedLineWidth: 2,
-      deselectedLineWidth: .5,
+      deselectedLineWidth: 0.5,
       deselectedButtonOpacity: 0.25,
       orientation: 'horizontal',
       spacing: 10
