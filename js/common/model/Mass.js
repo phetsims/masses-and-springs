@@ -114,7 +114,7 @@ class Mass {
     // @public {Property.<number>} vertical velocity of mass
     this.verticalVelocityProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'verticalVelocityProperty' ),
-      units: 'meters/second',
+      units: 'm/s',
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0 )
     } );
 

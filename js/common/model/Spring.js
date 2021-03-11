@@ -57,7 +57,7 @@ class Spring {
     //  @public {Property.<number>} distance from the bottom of the spring from the natural resting position
     this.displacementProperty = new NumberProperty( 0, {
       tandem: tandem.createTandem( 'displacementProperty' ),
-      units: 'meters',
+      units: 'm',
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
@@ -65,7 +65,7 @@ class Spring {
     this.massEquilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
-        units: 'meters',
+        units: 'm',
         range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
       } );
 
@@ -75,7 +75,7 @@ class Spring {
     // @public {Property.<number>} spring constant of spring
     this.springConstantProperty = new NumberProperty( MassesAndSpringsConstants.SPRING_CONSTANT_RANGE.defaultValue, {
       tandem: tandem.createTandem( 'springConstantProperty' ),
-      units: 'newtons/meters',
+      units: 'N/m',
       range: new Range( 3, 60 )
     } );
 
@@ -92,7 +92,7 @@ class Spring {
     // @public {Property.<number>} viscous damping coefficient of the system
     this.dampingCoefficientProperty = new NumberProperty( dampingProperty.value, {
       tandem: tandem.createTandem( 'dampingCoefficientProperty' ),
-      units: 'newtons-second/meters',
+      units: '(N\u00b7s)/m',
       range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
     } );
 
@@ -104,7 +104,7 @@ class Spring {
     // @public {Property.<number>} length of the spring without mass attached
     this.naturalRestingLengthProperty = new NumberProperty( initialNaturalRestingLength, {
       tandem: tandem.createTandem( 'naturalRestingLengthProperty' ),
-      units: 'meters',
+      units: 'm',
       range: new Range( 0.1, 0.5 )
     } );
 
@@ -160,7 +160,7 @@ class Spring {
       ( naturalRestingLength, displacement ) => naturalRestingLength - displacement,
       {
         tandem: tandem.createTandem( 'lengthProperty' ),
-        units: 'meters',
+        units: 'm',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
         phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
       }
@@ -172,7 +172,7 @@ class Spring {
       ( position, length ) => position.y - length,
       {
         tandem: tandem.createTandem( 'bottomProperty' ),
-        units: 'meters',
+        units: 'm',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
         phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
       }
@@ -188,7 +188,7 @@ class Spring {
     this.equilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
-        units: 'meters',
+        units: 'm',
         range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
       } );
 
@@ -221,7 +221,7 @@ class Spring {
     this.massEquilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
-        units: 'meters',
+        units: 'm',
         range: new Range( Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY )
       } );
 

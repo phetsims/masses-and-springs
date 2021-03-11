@@ -58,7 +58,7 @@ class MassesAndSpringsModel {
     this.gravityProperty = new Property( MassesAndSpringsConstants.EARTH_GRAVITY, {
       reentrant: true, // used due to extremely small rounding
       tandem: tandem.createTandem( 'gravityProperty' ),
-      units: 'meters/second/second'
+      units: 'm/s/s'
     } );
 
     // @private {EnumerationProperty.<TimeSpeed>} - Controls play speed of the simulation
