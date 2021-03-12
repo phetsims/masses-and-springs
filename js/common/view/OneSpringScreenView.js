@@ -137,7 +137,7 @@ class OneSpringScreenView extends SpringScreenView {
     if ( !model.basicsVersion ) {
 
       // Displacement arrows added for each springs
-      var displacementArrowNode = new DisplacementArrowNode(
+      var displacementArrowNode = new DisplacementArrowNode( // eslint-disable-line no-var
         this.springNodes[ 0 ].nodeProperty.value.spring.displacementProperty,
         model.naturalLengthVisibleProperty,
         tandem,

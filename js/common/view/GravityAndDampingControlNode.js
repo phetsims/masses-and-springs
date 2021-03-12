@@ -195,7 +195,7 @@ class GravityAndDampingControlNode extends Node {
           }
         }
 
-        var contentNode = new Node( {
+        const contentNode = new Node( {
           children: [
             gravityNumberControl,
             gravityComboBox,
@@ -230,7 +230,7 @@ class GravityAndDampingControlNode extends Node {
         } );
 
         // Content to be added to parent node
-        contentNode = new Node( {
+        const contentNode = new Node( {
           children: [
             gravityNumberControl,
             gravityComboBox,
@@ -249,7 +249,7 @@ class GravityAndDampingControlNode extends Node {
     else {
 
       // Content to be added to parent node
-      contentNode = new Node( {
+      const contentNode = new Node( {
         children: [
           gravityNumberControl,
           gravityComboBox

@@ -69,7 +69,7 @@ class SpringControlPanel extends Panel {
       hSlider.addMajorTick( propertyRange.min, labels[ 0 ] );
       hSlider.addMajorTick( propertyRange.min + ( propertyRange.max - propertyRange.min ) / 2 );
       hSlider.addMajorTick( propertyRange.max, labels[ 1 ] );
-      for ( var i = 1; i < 10; i++ ) {
+      for ( let i = 1; i < 10; i++ ) {
         if ( i !== 5 && options.minorTickMarksVisible ) {
           hSlider.addMinorTick( propertyRange.min + i * ( propertyRange.max - propertyRange.min ) / 10 );
         }
@@ -78,7 +78,7 @@ class SpringControlPanel extends Panel {
     else {
       hSlider.addMajorTick( propertyRange.min, labels[ 0 ] );
       hSlider.addMajorTick( propertyRange.max, labels[ 1 ] );
-      for ( i = 1; i < 10; i++ ) {
+      for ( let i = 1; i < 10; i++ ) {
         hSlider.addMinorTick( propertyRange.min + i * ( propertyRange.max - propertyRange.min ) / 9 );
       }
     }
