@@ -38,8 +38,8 @@ class Spring {
   constructor( position, initialNaturalRestingLength, dampingProperty, gravityProperty, tandem ) {
 
     // validate and save options
-    assert && assert( initialNaturalRestingLength > 0, 'naturalRestingLength must be > 0 : '
-                                                       + initialNaturalRestingLength );
+    assert && assert( initialNaturalRestingLength > 0, `naturalRestingLength must be > 0 : ${
+                                                        initialNaturalRestingLength}` );
 
     // @public {Property.<number>} (read-write) Used to position massNode forces. Right side: 1, Left side: -1
     this.forcesOrientationProperty = new NumberProperty( 1 );
@@ -180,7 +180,7 @@ class Spring {
 
     // Links are used to set damping Property of each spring to the damping property of the system
     dampingProperty.link( newDamping => {
-      assert && assert( newDamping >= 0, 'damping must be greater than or equal to 0: ' + newDamping );
+      assert && assert( newDamping >= 0, `damping must be greater than or equal to 0: ${newDamping}` );
       this.dampingCoefficientProperty.set( newDamping );
     } );
 

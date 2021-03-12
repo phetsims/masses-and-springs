@@ -111,7 +111,7 @@ class SpringScreenView extends ScreenView {
         this.modelViewTransform,
         this.visibleBoundsProperty,
         model,
-        tandem.createTandem( mass.massTandem.name + 'Node' ) );
+        tandem.createTandem( `${mass.massTandem.name}Node` ) );
       this.massLayer.addChild( massNode );
 
       // If the mass is on the shelf reset the mass layers.

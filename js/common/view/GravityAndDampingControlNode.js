@@ -221,7 +221,7 @@ class GravityAndDampingControlNode extends Node {
 
         // Creating text that reads Damping = 0
         const dampingEqualsZeroText = new Text( StringUtils.fillIn( dampingEqualsZeroString, {
-          equalsZero: MathSymbols.EQUAL_TO + ' 0'
+          equalsZero: `${MathSymbols.EQUAL_TO} 0`
         } ), {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: MAX_WIDTH * 2,

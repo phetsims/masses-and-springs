@@ -35,8 +35,8 @@ class DraggableRulerNode extends RulerNode {
     const majorTickLabels = [ '' ];
     for ( let i = 1; i < 10; i++ ) {
       majorTickLabels.push( '' );
-      majorTickLabels.push( '' + i * 10 );
-      assert && assert( majorTickLabels[ i * 2 ] === '' + Math.floor( i * 10 ) );
+      majorTickLabels.push( `${i * 10}` );
+      assert && assert( majorTickLabels[ i * 2 ] === `${Math.floor( i * 10 )}` );
     }
     majorTickLabels.push( '' );
     majorTickLabels.push( '' );
