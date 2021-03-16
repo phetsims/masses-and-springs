@@ -39,7 +39,7 @@ class Spring {
 
     // validate and save options
     assert && assert( initialNaturalRestingLength > 0, `naturalRestingLength must be > 0 : ${
-                                                        initialNaturalRestingLength}` );
+      initialNaturalRestingLength}` );
 
     // @public {Property.<number>} (read-write) Used to position massNode forces. Right side: 1, Left side: -1
     this.forcesOrientationProperty = new NumberProperty( 1 );
