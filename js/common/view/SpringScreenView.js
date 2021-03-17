@@ -171,7 +171,7 @@ class SpringScreenView extends ScreenView {
 
     // @private
     this.stopwatchNode = new StopwatchNode( model.stopwatch, {
-      visibleBoundsProperty: this.visibleBoundsProperty,
+      dragBoundsProperty: this.visibleBoundsProperty,
       dragListenerOptions: {
         end: () => {
 
