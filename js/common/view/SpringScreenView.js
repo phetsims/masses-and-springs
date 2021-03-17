@@ -171,19 +171,18 @@ class SpringScreenView extends ScreenView {
 
     // @private
     this.stopwatchNode = new StopwatchNode( model.stopwatch, {
-        visibleBoundsProperty: this.visibleBoundsProperty,
-        dragListenerOptions: {
-          end: () => {
+      visibleBoundsProperty: this.visibleBoundsProperty,
+      dragListenerOptions: {
+        end: () => {
 
-            // When a node is released, check if it is over the toolbox.  If so, drop it in.
-            if ( this.toolboxPanel.getGlobalBounds().intersectsBounds( this.stopwatchNode.getGlobalBounds() ) ) {
-              model.stopwatch.reset();
-            }
+          // When a node is released, check if it is over the toolbox.  If so, drop it in.
+          if ( this.toolboxPanel.getGlobalBounds().intersectsBounds( this.stopwatchNode.getGlobalBounds() ) ) {
+            model.stopwatch.reset();
           }
-        },
-        tandem: tandem.createTandem( 'stopwatchNode' )
-      }
-    );
+        }
+      },
+      tandem: tandem.createTandem( 'stopwatchNode' )
+    } );
 
     // @public {DraggableRulerNode}
     this.rulerNode = new DraggableRulerNode(
