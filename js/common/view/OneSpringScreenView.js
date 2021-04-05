@@ -133,11 +133,13 @@ class OneSpringScreenView extends SpringScreenView {
       tandem.createTandem( 'movableLineNode' )
     );
 
+    let displacementArrowNode;
+
     // Masses and Springs:Basics should not include a zero height reference line
     if ( !model.basicsVersion ) {
 
       // Displacement arrows added for each springs
-      var displacementArrowNode = new DisplacementArrowNode( // eslint-disable-line no-var
+      displacementArrowNode = new DisplacementArrowNode(
         this.springNodes[ 0 ].nodeProperty.value.spring.displacementProperty,
         model.naturalLengthVisibleProperty,
         tandem,
