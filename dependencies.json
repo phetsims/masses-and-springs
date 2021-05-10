@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.11-rc.1 Sat May 08 2021 22:39:56 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# masses-and-springs 1.0.11-rc.1 Mon May 10 2021 15:46:04 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "masses-and-springs": {
-    "sha": "7f60df18eaba2ad22a43e89cd710e2b8232ff58c",
+    "sha": "be8bf8661682ce8d02dd805c14347a770eb972bb",
     "branch": "1.0"
   },
   "phet-core": {
@@ -54,15 +54,15 @@
   },
   "phetmarks": {
     "sha": "8cef56c8e8b949f42dd5b0022d3051a1acbc03bc",
-    "branch": "masses-and-springs-1.0"
+    "branch": "HEAD"
   },
   "query-string-machine": {
     "sha": "1f2322e4cab5658d4134715f00e12e5a741b2b9f",
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "5318729bc48a57f98e86631d63a47b00e7fd0bc6",
-    "branch": "HEAD"
+    "sha": "9b51c795e30ec4cc5dd029a632e87cdfa04bd8f0",
+    "branch": "masses-and-springs-1.0"
   },
   "scenery-phet": {
     "sha": "505d758e18aabfd9ec7d2bea5f24ad38819acaec",
