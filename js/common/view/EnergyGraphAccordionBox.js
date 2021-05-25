@@ -1,4 +1,4 @@
-// Copyright 2017-2020, University of Colorado Boulder
+// Copyright 2017-2021, University of Colorado Boulder
 
 /**
  * Bar graph that represents the kinetic, potential, elastic potential, thermal, and total energy of the mass attached
