@@ -79,12 +79,15 @@ class ToolboxPanel extends Panel {
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
     const rulerIcon = ruler.rasterized( {
-      // Instead of changing the rendering, we'll dynamically generate a mipmap so the ruler icon appearance looks better.
-      // See https://github.com/phetsims/masses-and-springs/issues/199.
-      mipmap: true,
-      cursor: 'pointer',
       resolution: 5,
-      tandem: tandem.createTandem( 'rulerIcon' )
+      imageOptions: {
+
+        // Instead of changing the rendering, we'll dynamically generate a mipmap so the ruler icon appearance looks better.
+        // See https://github.com/phetsims/masses-and-springs/issues/199.
+        mipmap: true,
+        cursor: 'pointer',
+        tandem: tandem.createTandem( 'rulerIcon' )
+      }
     } );
 
     // Drag listener for event forwarding: rulerIcon ---> rulerNode
@@ -114,9 +117,11 @@ class ToolboxPanel extends Panel {
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
     const timerIcon = timer.rasterized( {
-      cursor: 'pointer',
       resolution: 5,
-      tandem: tandem.createTandem( 'timerIcon' )
+      imageOptions: {
+        cursor: 'pointer',
+        tandem: tandem.createTandem( 'timerIcon' )
+      }
     } );
 
     // Drag listener for event forwarding: timerIcon ---> stopwatchNode
