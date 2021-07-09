@@ -14,7 +14,7 @@ import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import BarChartNode from '../../../../griddle/js/BarChartNode.js';
 import merge from '../../../../phet-core/js/merge.js';
-import MoveToTrashButton from '../../../../scenery-phet/js/MoveToTrashButton.js';
+import MoveToTrashButton from '../../../../scenery-phet/js/buttons/MoveToTrashButton.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
