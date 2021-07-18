@@ -10,7 +10,7 @@
     "grunt": "~1.4.0"
   },
   "phet": {
-    "colorProfiles": [ "default", "projector" ],
+    "colorProfiles": [ "default", "basics" ],
     "requirejsNamespace": "MASSES_AND_SPRINGS",
     "phetLibs": [
       "griddle",

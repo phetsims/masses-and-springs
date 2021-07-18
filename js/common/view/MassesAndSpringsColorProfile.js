@@ -8,54 +8,54 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
-import ColorProfile from '../../../../scenery-phet/js/ColorProfile.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import Color from '../../../../scenery/js/util/Color.js';
+import ProfileColorProperty from '../../../../scenery/js/util/ProfileColorProperty.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
 // Initialize colors for each profile, by string key. If a basics color is not defined, it will take the
 // 'default' value provided.
-const MassesAndSpringsColorProfile = new ColorProfile( [ 'default', 'basics' ], {
-  background: {
+const MassesAndSpringsColorProfile = {
+  backgroundProperty: new ProfileColorProperty( 'background', {
     default: Color.white,
     basics: new Color( 'rgb( 255, 250, 227 )' )
-  },
-  smallMysteryMass: {
+  } ),
+  smallMysteryMassProperty: new ProfileColorProperty( 'smallMysteryMass', {
     default: new Color( 'rgb( 246, 164, 255 )' ),
     basics: new Color( 'rgb( 185, 0, 38 )' )
-  },
-  mediumMysteryMass: {
+  } ),
+  mediumMysteryMassProperty: new ProfileColorProperty( 'mediumMysteryMass', {
     default: new Color( 'rgb( 0, 222, 224 )' ),
     basics: new Color( 'rgb( 0, 107, 161 )' )
-  },
-  largeMysteryMass: {
+  } ),
+  largeMysteryMassProperty: new ProfileColorProperty( 'largeMysteryMass', {
     default: new Color( 'rgb( 250, 186, 75)' ),
     basics: new Color( 'rgb( 0, 104, 55 )' )
-  },
-  labeledMass: {
+  } ),
+  labeledMassProperty: new ProfileColorProperty( 'labeledMass', {
     default: new Color( 'rgb( 153, 153, 153 )' ),
     basics: new Color( 'rgb( 153, 153, 153 )' )
-  },
-  adjustableMass: {
+  } ),
+  adjustableMassProperty: new ProfileColorProperty( 'adjustableMass', {
     default: new Color( 'rgb( 247, 151, 34 )' ),
     basics: new Color( 'rgb( 247, 151, 34 )' )
-  },
-  unstretchedLength: {
+  } ),
+  unstretchedLengthProperty: new ProfileColorProperty( 'unstretchedLength', {
     default: new Color( 'rgb( 65, 66, 232 )' )
-  },
-  restingPosition: {
+  } ),
+  restingPositionProperty: new ProfileColorProperty( 'restingPosition', {
     default: new Color( 'rgb( 0, 180, 0 )' )
-  },
-  movableLine: {
+  } ),
+  movableLineProperty: new ProfileColorProperty( 'movableLine', {
     default: new Color( 'rgb( 255, 0, 0 )' )
-  },
-  velocityVector: {
+  } ),
+  velocityVectorProperty: new ProfileColorProperty( 'velocityVector', {
     default: PhetColorScheme.VELOCITY
-  },
-  accelerationVector: {
+  } ),
+  accelerationVectorProperty: new ProfileColorProperty( 'accelerationVector', {
     default: PhetColorScheme.ACCELERATION
-  }
-} );
+  } )
+};
 
 massesAndSprings.register( 'MassesAndSpringsColorProfile', MassesAndSpringsColorProfile );
 
