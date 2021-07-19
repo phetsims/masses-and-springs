@@ -10,7 +10,7 @@ import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import labHomeScreenImage from '../../images/lab_screen_icon_png.js';
-import MassesAndSpringsColorProfile from '../common/view/MassesAndSpringsColorProfile.js';
+import massesAndSpringsColorProfile from '../common/view/massesAndSpringsColorProfile.js';
 import massesAndSprings from '../massesAndSprings.js';
 import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
 import LabModel from './model/LabModel.js';
@@ -25,7 +25,7 @@ class LabScreen extends Screen {
 
     const options = {
       name: massesAndSpringsStrings.screen.lab,
-      backgroundColorProperty: MassesAndSpringsColorProfile.backgroundProperty,
+      backgroundColorProperty: massesAndSpringsColorProfile.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( labHomeScreenImage ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1

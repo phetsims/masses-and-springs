@@ -10,7 +10,7 @@ import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import Line from '../../../scenery/js/nodes/Line.js';
 import massesAndSprings from '../massesAndSprings.js';
-import MassesAndSpringsColorProfile from './view/MassesAndSpringsColorProfile.js';
+import massesAndSpringsColorProfile from './view/massesAndSpringsColorProfile.js';
 
 const MassesAndSpringsConstants = {
   DEFAULT_SPRING_LENGTH: 0.5,
@@ -45,8 +45,8 @@ const MassesAndSpringsConstants = {
   SPRING_CONSTANT_RANGE: new RangeWithValue( 3, 12, 6 ),
 
   // Constants for vectors
-  VELOCITY_ARROW_COLOR: MassesAndSpringsColorProfile.velocityVectorProperty,
-  ACCELERATION_ARROW_COLOR: MassesAndSpringsColorProfile.accelerationVectorProperty,
+  VELOCITY_ARROW_COLOR: massesAndSpringsColorProfile.velocityVectorProperty,
+  ACCELERATION_ARROW_COLOR: massesAndSpringsColorProfile.accelerationVectorProperty,
   GRAVITY_ARROW_COLOR: 'rgb( 236, 63, 71 )',
   SPRING_ARROW_COLOR: 'rgb( 36, 36, 255 )',
 

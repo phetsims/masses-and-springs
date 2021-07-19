@@ -22,7 +22,7 @@ import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js
 import ConstantMode from '../../common/model/ConstantMode.js';
 import SceneMode from '../../common/model/SceneMode.js';
 import LineVisibilityNode from '../../common/view/LineVisibilityNode.js';
-import MassesAndSpringsColorProfile from '../../common/view/MassesAndSpringsColorProfile.js';
+import massesAndSpringsColorProfile from '../../common/view/massesAndSpringsColorProfile.js';
 import ReferenceLineNode from '../../common/view/ReferenceLineNode.js';
 import SpringControlPanel from '../../common/view/SpringControlPanel.js';
 import TwoSpringScreenView from '../../common/view/TwoSpringScreenView.js';
@@ -140,7 +140,7 @@ class IntroScreenView extends TwoSpringScreenView {
       model.firstSpring,
       model.firstSpring.equilibriumYPositionProperty,
       firstMassEquilibriumVisibilityProperty, {
-        stroke: MassesAndSpringsColorProfile.restingPositionProperty
+        stroke: massesAndSpringsColorProfile.restingPositionProperty
       }
     );
 
@@ -150,7 +150,7 @@ class IntroScreenView extends TwoSpringScreenView {
       model.secondSpring,
       model.secondSpring.equilibriumYPositionProperty,
       secondMassEquilibriumVisibilityProperty, {
-        stroke: MassesAndSpringsColorProfile.restingPositionProperty
+        stroke: massesAndSpringsColorProfile.restingPositionProperty
       }
     );
 

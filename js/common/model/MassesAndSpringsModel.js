@@ -18,7 +18,7 @@ import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
-import MassesAndSpringsColorProfile from '../view/MassesAndSpringsColorProfile.js';
+import massesAndSpringsColorProfile from '../view/massesAndSpringsColorProfile.js';
 import OscillatingSpringNode from '../view/OscillatingSpringNode.js';
 import Body from './Body.js';
 import ForcesMode from './ForcesMode.js';
@@ -198,40 +198,40 @@ class MassesAndSpringsModel {
    */
   addDefaultMasses( tandem ) {
     if ( this.basicsVersion ) {
-      this.createMass( 0.250, 0.12, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass1' ) );
-      this.createMass( 0.250, 0.16, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass2' ) );
-      this.createMass( 0.100, 0.30, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
-      this.createMass( 0.100, 0.33, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
-      this.createMass( 0.050, 0.425, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass1' ) );
-      this.createMass( 0.050, 0.445, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass2' ) );
+      this.createMass( 0.250, 0.12, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass1' ) );
+      this.createMass( 0.250, 0.16, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass2' ) );
+      this.createMass( 0.100, 0.30, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
+      this.createMass( 0.100, 0.33, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
+      this.createMass( 0.050, 0.425, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass1' ) );
+      this.createMass( 0.050, 0.445, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass2' ) );
 
 
       // Mystery masses
-      this.createMass( 0.200, 0.76, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeMysteryMass' ), {
+      this.createMass( 0.200, 0.76, massesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeMysteryMass' ), {
         mysteryLabel: true
       } );
-      this.createMass( 0.100, 0.69, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
+      this.createMass( 0.100, 0.69, massesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
         mysteryLabel: true
       } );
-      this.createMass( 0.075, 0.62, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
+      this.createMass( 0.075, 0.62, massesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
         mysteryLabel: true
       } );
     }
     else {
-      this.createMass( 0.250, 0.12, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass' ) );
-      this.createMass( 0.100, 0.20, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
-      this.createMass( 0.100, 0.28, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
-      this.createMass( 0.050, 0.33, MassesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass' ) );
+      this.createMass( 0.250, 0.12, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'largeMass' ) );
+      this.createMass( 0.100, 0.20, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass1' ) );
+      this.createMass( 0.100, 0.28, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'mediumMass2' ) );
+      this.createMass( 0.050, 0.33, massesAndSpringsColorProfile.labeledMassProperty, null, tandem.createTandem( 'smallMass' ) );
 
 
       // Mystery masses
-      this.createMass( 0.200, 0.63, MassesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeMysteryMass' ), {
+      this.createMass( 0.200, 0.63, massesAndSpringsColorProfile.largeMysteryMassProperty, null, tandem.createTandem( 'largeMysteryMass' ), {
         mysteryLabel: true
       } );
-      this.createMass( 0.150, 0.56, MassesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
+      this.createMass( 0.150, 0.56, massesAndSpringsColorProfile.mediumMysteryMassProperty, null, tandem.createTandem( 'mediumMysteryMass' ), {
         mysteryLabel: true
       } );
-      this.createMass( 0.075, 0.49, MassesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
+      this.createMass( 0.075, 0.49, massesAndSpringsColorProfile.smallMysteryMassProperty, null, tandem.createTandem( 'smallMysteryMass' ), {
         mysteryLabel: true
       } );
     }

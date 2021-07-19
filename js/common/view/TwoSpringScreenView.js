@@ -14,7 +14,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
-import MassesAndSpringsColorProfile from './MassesAndSpringsColorProfile.js';
+import massesAndSpringsColorProfile from './massesAndSpringsColorProfile.js';
 import MovableLineNode from './MovableLineNode.js';
 import ReferenceLineNode from './ReferenceLineNode.js';
 import SpringHangerNode from './SpringHangerNode.js';
@@ -89,7 +89,7 @@ class TwoSpringScreenView extends SpringScreenView {
       spring,
       spring.bottomProperty,
       model.naturalLengthVisibleProperty, {
-        stroke: MassesAndSpringsColorProfile.unstretchedLengthProperty, // Naming convention pulled from basics version.
+        stroke: massesAndSpringsColorProfile.unstretchedLengthProperty, // Naming convention pulled from basics version.
         fixedPosition: true
       }
     );

@@ -15,7 +15,7 @@ import massesAndSprings from '../../massesAndSprings.js';
 
 // Initialize colors for each profile, by string key. If a basics color is not defined, it will take the
 // 'default' value provided.
-const MassesAndSpringsColorProfile = {
+const massesAndSpringsColorProfile = {
   backgroundProperty: new ProfileColorProperty( 'background', {
     default: Color.white,
     basics: new Color( 'rgb( 255, 250, 227 )' )
@@ -57,6 +57,6 @@ const MassesAndSpringsColorProfile = {
   } )
 };
 
-massesAndSprings.register( 'MassesAndSpringsColorProfile', MassesAndSpringsColorProfile );
+massesAndSprings.register( 'massesAndSpringsColorProfile', massesAndSpringsColorProfile );
 
-export default MassesAndSpringsColorProfile;
+export default massesAndSpringsColorProfile;

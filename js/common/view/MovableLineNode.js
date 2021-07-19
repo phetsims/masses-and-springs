@@ -15,7 +15,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import MassesAndSpringsColorProfile from './MassesAndSpringsColorProfile.js';
+import massesAndSpringsColorProfile from './massesAndSpringsColorProfile.js';
 
 class MovableLineNode extends Node {
   /**
@@ -64,7 +64,7 @@ class MovableLineNode extends Node {
     this.addChild( bodyNode );
 
     const line = new Line( 0, 0, length, 0, {
-      stroke: MassesAndSpringsColorProfile.movableLineProperty,
+      stroke: massesAndSpringsColorProfile.movableLineProperty,
       lineDash: [ 12, 8 ],
       lineWidth: 1.5,
       cursor: 'pointer',
