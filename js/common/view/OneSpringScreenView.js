@@ -21,7 +21,7 @@ import Mass from '../model/Mass.js';
 import EnergyGraphAccordionBox from './EnergyGraphAccordionBox.js';
 import MassNode from './MassNode.js';
 import MassValueControlPanel from './MassValueControlPanel.js';
-import massesAndSpringsColorProfile from './massesAndSpringsColorProfile.js';
+import MassesAndSpringsColors from './MassesAndSpringsColors.js';
 import MovableLineNode from './MovableLineNode.js';
 import ReferenceLineNode from './ReferenceLineNode.js';
 import SpringHangerNode from './SpringHangerNode.js';
@@ -63,7 +63,7 @@ class OneSpringScreenView extends SpringScreenView {
 
     // @public {MassNode} Icon used in massValueControlPanel in both Basics and non-Basics version
     this.massNodeIcon = new MassNode(
-      new Mass( 0.0055, 0, massesAndSpringsColorProfile.adjustableMassProperty, model.gravityProperty, tandem, { icon: true } ),
+      new Mass( 0.0055, 0, MassesAndSpringsColors.adjustableMassProperty, model.gravityProperty, tandem, { icon: true } ),
       this.modelViewTransform,
       this.visibleBoundsProperty,
       model,
@@ -104,7 +104,7 @@ class OneSpringScreenView extends SpringScreenView {
       model.firstSpring,
       model.firstSpring.bottomProperty,
       model.naturalLengthVisibleProperty, {
-        stroke: massesAndSpringsColorProfile.unstretchedLengthProperty, // Naming convention pulled from basics version.
+        stroke: MassesAndSpringsColors.unstretchedLengthProperty, // Naming convention pulled from basics version.
         fixedPosition: true
       }
     );

@@ -11,7 +11,7 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import vectorHomeScreenImage from '../../images/vectors_screen_icon_png.js';
 import MassesAndSpringsModel from '../common/model/MassesAndSpringsModel.js';
-import massesAndSpringsColorProfile from '../common/view/massesAndSpringsColorProfile.js';
+import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../massesAndSprings.js';
 import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
 import VectorsScreenView from './view/VectorsScreenView.js';
@@ -25,7 +25,7 @@ class VectorsScreen extends Screen {
 
     const options = {
       name: massesAndSpringsStrings.screen.vectors,
-      backgroundColorProperty: massesAndSpringsColorProfile.backgroundProperty,
+      backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( vectorHomeScreenImage ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1

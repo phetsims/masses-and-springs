@@ -8,7 +8,7 @@
 
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import MassesAndSpringsModel from '../../common/model/MassesAndSpringsModel.js';
-import massesAndSpringsColorProfile from '../../common/view/massesAndSpringsColorProfile.js';
+import MassesAndSpringsColors from '../../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
 class EnergyModel extends MassesAndSpringsModel {
@@ -28,7 +28,7 @@ class EnergyModel extends MassesAndSpringsModel {
     this.createSpring( MassesAndSpringsConstants.SPRING_X, tandem.createTandem( 'spring' ) );
     this.firstSpring = this.springs[ 0 ];
 
-    this.createMass( 0.1, 0.72, massesAndSpringsColorProfile.adjustableMassProperty, null, tandem.createTandem( 'adjustableMass' ) );
+    this.createMass( 0.1, 0.72, MassesAndSpringsColors.adjustableMassProperty, null, tandem.createTandem( 'adjustableMass' ) );
 
     this.masses[ 0 ].adjustable = true;
   }

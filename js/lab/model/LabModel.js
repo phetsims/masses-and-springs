@@ -12,7 +12,7 @@ import Property from '../../../../axon/js/Property.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import MassesAndSpringsModel from '../../common/model/MassesAndSpringsModel.js';
-import massesAndSpringsColorProfile from '../../common/view/massesAndSpringsColorProfile.js';
+import MassesAndSpringsColors from '../../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import PeriodTrace from './PeriodTrace.js';
 
@@ -41,7 +41,7 @@ class LabModel extends MassesAndSpringsModel {
     let massValue;
     let color;
 
-    this.createMass( 0.100, massXPosition, massesAndSpringsColorProfile.adjustableMassProperty, null, tandem.createTandem( 'adjustableMass' ), {
+    this.createMass( 0.100, massXPosition, MassesAndSpringsColors.adjustableMassProperty, null, tandem.createTandem( 'adjustableMass' ), {
       adjustable: true
     } );
 

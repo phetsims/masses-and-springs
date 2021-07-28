@@ -11,7 +11,7 @@ import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import introHomeScreenImage from '../../images/intro_screen_icon_png.js';
-import massesAndSpringsColorProfile from '../common/view/massesAndSpringsColorProfile.js';
+import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../massesAndSprings.js';
 import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
 import IntroModel from './model/IntroModel.js';
@@ -26,7 +26,7 @@ class IntroScreen extends Screen {
 
     const options = {
       name: massesAndSpringsStrings.screen.intro,
-      backgroundColorProperty: massesAndSpringsColorProfile.backgroundProperty,
+      backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( introHomeScreenImage ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
