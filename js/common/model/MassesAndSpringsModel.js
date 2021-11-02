@@ -295,7 +295,7 @@ class MassesAndSpringsModel {
                      mass.springProperty.get().naturalRestingLengthProperty.get() );
 
       // Max Y value in model coordinates
-      const modelMaxY = UPPER_CONSTRAINT( maxY );
+      const modelMaxY = UPPER_CONSTRAINT.evaluate( maxY );
 
       // Update only the spring's length if we are lower than the max Y
       if ( mass.positionProperty.get().y > modelMaxY ) {

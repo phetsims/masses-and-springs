@@ -16,7 +16,7 @@ import massesAndSprings from '../../massesAndSprings.js';
 
 // constants
 const LINEAR_LOOP_MAPPING = new LinearFunction( 0.1, 0.5, 2, 12 );
-const MAP_NUMBER_OF_LOOPS = springLength => Utils.roundSymmetric( LINEAR_LOOP_MAPPING( springLength ) );
+const MAP_NUMBER_OF_LOOPS = springLength => Utils.roundSymmetric( LINEAR_LOOP_MAPPING.evaluate( springLength ) );
 
 class OscillatingSpringNode extends ParametricSpringNode {
 

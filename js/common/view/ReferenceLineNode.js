@@ -50,7 +50,7 @@ class ReferenceLineNode extends Line {
     // Helper function to derive the length as if the mass wasn't attached.
     const lengthFunction = new LinearFunction( 0.1, 0.5, 1.37, 0.97 );
 
-    let yPos = modelViewTransform2.modelToViewY( lengthFunction( spring.naturalRestingLengthProperty.value ) );
+    let yPos = modelViewTransform2.modelToViewY( lengthFunction.evaluate( spring.naturalRestingLengthProperty.value ) );
 
     // @private (read-write) - position of line in screen coordinates.
     this.positionProperty = new Vector2Property( new Vector2( xPos, yPos ) );
@@ -69,7 +69,7 @@ class ReferenceLineNode extends Line {
         if ( options.fixedPosition || !mass ) {
 
           // Y position of line in screen coordinates as if a mass isn't attached
-          yPos = modelViewTransform2.modelToViewY( lengthFunction( restingLength ) );
+          yPos = modelViewTransform2.modelToViewY( lengthFunction.evaluate( restingLength ) );
         }
         else {
 
