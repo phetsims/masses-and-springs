@@ -8,7 +8,7 @@
 
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
-import Line from '../../../scenery/js/nodes/Line.js';
+import { Line } from '../../../scenery/js/imports.js';
 import massesAndSprings from '../massesAndSprings.js';
 import MassesAndSpringsColors from './view/MassesAndSpringsColors.js';
 

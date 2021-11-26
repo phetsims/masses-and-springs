@@ -8,12 +8,12 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import AlignBox from '../../../../scenery/js/nodes/AlignBox.js';
-import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
-import HBox from '../../../../scenery/js/nodes/HBox.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
-import VBox from '../../../../scenery/js/nodes/VBox.js';
+import { AlignBox } from '../../../../scenery/js/imports.js';
+import { AlignGroup } from '../../../../scenery/js/imports.js';
+import { HBox } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import { Text } from '../../../../scenery/js/imports.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';

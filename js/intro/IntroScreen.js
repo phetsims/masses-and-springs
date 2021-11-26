@@ -9,7 +9,7 @@
 
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import Image from '../../../scenery/js/nodes/Image.js';
+import { Image } from '../../../scenery/js/imports.js';
 import introHomeScreenImage from '../../images/intro_screen_icon_png.js';
 import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../massesAndSprings.js';

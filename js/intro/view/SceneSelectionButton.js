@@ -9,9 +9,9 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import Line from '../../../../scenery/js/nodes/Line.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import { Line } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import { Rectangle } from '../../../../scenery/js/imports.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import SceneMode from '../../common/model/SceneMode.js';
 import Spring from '../../common/model/Spring.js';

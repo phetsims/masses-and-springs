@@ -8,7 +8,7 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import VBox from '../../../../scenery/js/nodes/VBox.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import OneSpringScreenView from '../../common/view/OneSpringScreenView.js';
 import massesAndSprings from '../../massesAndSprings.js';

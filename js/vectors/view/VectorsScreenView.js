@@ -9,7 +9,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import VBox from '../../../../scenery/js/nodes/VBox.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import ReferenceLineNode from '../../common/view/ReferenceLineNode.js';
 import TwoSpringScreenView from '../../common/view/TwoSpringScreenView.js';
