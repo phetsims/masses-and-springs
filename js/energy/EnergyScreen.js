@@ -8,7 +8,7 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Image } from '../../../scenery/js/imports.js';
-import energyHomeScreenImage from '../../images/energy_screen_icon_png.js';
+import energyScreenIcon_png from '../../images/energyScreenIcon_png.js';
 import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../massesAndSprings.js';
 import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
@@ -25,7 +25,7 @@ class EnergyScreen extends Screen {
     const options = {
       name: massesAndSpringsStrings.screen.energy,
       backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
-      homeScreenIcon: new ScreenIcon( new Image( energyHomeScreenImage ), {
+      homeScreenIcon: new ScreenIcon( new Image( energyScreenIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
       } ),
