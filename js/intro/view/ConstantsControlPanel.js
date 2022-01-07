@@ -26,7 +26,7 @@ const RADIO_BUTTON_SPACING = 4;
 class ConstantsControlPanel extends Node {
   /**
    * @param {Property.<string>} selectedConstantProperty - determines which value to hold constant
-   * @param {Enumeration} constantEnumeration - Choices for constant parameter
+   * @param {EnumerationDeprecated} constantEnumeration - Choices for constant parameter
    * @param {string} title - string used to title the panel
    * @param {tandem} tandem
    * @param {Object} [options]

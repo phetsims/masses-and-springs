@@ -5,10 +5,10 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
-const ForcesMode = Enumeration.byKeys( [
+const ForcesMode = EnumerationDeprecated.byKeys( [
   'FORCES',
   'NET_FORCES'
 ] );
