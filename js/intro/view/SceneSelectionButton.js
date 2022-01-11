@@ -24,7 +24,7 @@ const IMAGE_SCALE = 0.3;
 class SceneSelectionButton extends Node {
   /**
    * @param {string} springLength
-   * @param {EnumerationProperty} sceneModeProperty
+   * @param {EnumerationDeprecatedProperty} sceneModeProperty
    * @param {ModelViewTransform2} mvt
    * @param {Tandem} tandem
    */

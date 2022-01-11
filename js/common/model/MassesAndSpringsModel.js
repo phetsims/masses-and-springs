@@ -8,7 +8,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
@@ -61,8 +61,8 @@ class MassesAndSpringsModel {
       units: 'm/s/s'
     } );
 
-    // @private {EnumerationProperty.<TimeSpeed>} - Controls play speed of the simulation
-    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+    // @private {EnumerationDeprecatedProperty.<TimeSpeed>} - Controls play speed of the simulation
+    this.timeSpeedProperty = new EnumerationDeprecatedProperty( TimeSpeed, TimeSpeed.NORMAL, {
       tandem: tandem.createTandem( 'timeSpeedProperty' )
     } );
 
@@ -128,7 +128,7 @@ class MassesAndSpringsModel {
     } );
 
     // @public {Property.<string>} determines mode of the vectors to be viewed
-    this.forcesModeProperty = new EnumerationProperty(
+    this.forcesModeProperty = new EnumerationDeprecatedProperty(
       ForcesMode,
       ForcesMode.FORCES, {
         tandem: tandem.createTandem( 'forcesModeProperty' )

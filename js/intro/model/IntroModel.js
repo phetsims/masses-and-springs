@@ -7,7 +7,7 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import ConstantMode from '../../common/model/ConstantMode.js';
@@ -30,12 +30,12 @@ class IntroModel extends MassesAndSpringsModel {
     this.addDefaultMasses( tandem );
 
     // @public {Property.<string|null>} determines which spring property to keep constant in the constants panel
-    this.constantModeProperty = new EnumerationProperty( ConstantMode, ConstantMode.SPRING_CONSTANT, {
+    this.constantModeProperty = new EnumerationDeprecatedProperty( ConstantMode, ConstantMode.SPRING_CONSTANT, {
       tandem: tandem.createTandem( 'constantModeProperty' )
     } );
 
-    // @public {EnumerationProperty.<SceneModeEnum>} determines the scene selection for the intro screen
-    this.sceneModeProperty = new EnumerationProperty( SceneMode, SceneMode.SAME_LENGTH, {
+    // @public {EnumerationDeprecatedProperty.<SceneModeEnum>} determines the scene selection for the intro screen
+    this.sceneModeProperty = new EnumerationDeprecatedProperty( SceneMode, SceneMode.SAME_LENGTH, {
       tandem: tandem.createTandem( 'sceneModeProperty' )
     } );
 
