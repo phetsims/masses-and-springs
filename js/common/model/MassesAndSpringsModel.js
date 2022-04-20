@@ -9,6 +9,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
@@ -61,8 +62,8 @@ class MassesAndSpringsModel {
       units: 'm/s/s'
     } );
 
-    // @private {EnumerationDeprecatedProperty.<TimeSpeed>} - Controls play speed of the simulation
-    this.timeSpeedProperty = new EnumerationDeprecatedProperty( TimeSpeed, TimeSpeed.NORMAL, {
+    // @private Controls play speed of the simulation
+    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed.NORMAL, {
       tandem: tandem.createTandem( 'timeSpeedProperty' )
     } );
 
