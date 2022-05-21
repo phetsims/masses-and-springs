@@ -45,7 +45,6 @@ class ToolboxPanel extends Panel {
 
     const toolbox = new HBox( {
       align: 'center',
-      xMargin: 500,
       spacing: 30,
       tandem: tandem.createTandem( 'toolbox' ),
       excludeInvisibleChildrenFromBounds: false
