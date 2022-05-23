@@ -6,7 +6,7 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
@@ -61,7 +61,7 @@ class ReferenceLineNode extends Line {
     }
 
     // updates the position of the reference line as the system changes
-    Property.multilink( [ spring.massAttachedProperty, spring.naturalRestingLengthProperty, property ],
+    Multilink.multilink( [ spring.massAttachedProperty, spring.naturalRestingLengthProperty, property ],
       ( mass, restingLength, monitoredProperty ) => {
         if ( options.zeroPointLine ) {
           return;

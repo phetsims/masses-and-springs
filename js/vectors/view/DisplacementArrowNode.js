@@ -6,7 +6,7 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import LineArrowNode from '../../../../scenery-phet/js/LineArrowNode.js';
 import { Line } from '../../../../scenery/js/imports.js';
@@ -54,7 +54,7 @@ class DisplacementArrowNode extends Node {
         rotate: Math.PI
       } );
 
-      Property.multilink( [ displacementProperty, visibleProperty ], ( displacement, visible ) => {
+      Multilink.multilink( [ displacementProperty, visibleProperty ], ( displacement, visible ) => {
 
         // update the vector length
         displacementArrow.visible = ( displacement !== 0 ) && visible; // since we can't draw a zero-length arrow

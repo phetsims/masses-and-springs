@@ -8,7 +8,7 @@
  */
 
 import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import ConstantMode from '../../common/model/ConstantMode.js';
 import MassesAndSpringsModel from '../../common/model/MassesAndSpringsModel.js';
@@ -106,7 +106,7 @@ class IntroModel extends MassesAndSpringsModel {
       }
     } );
 
-    Property.multilink( [ this.constantModeProperty, this.sceneModeProperty ], ( selectedConstant, scene ) => {
+    Multilink.multilink( [ this.constantModeProperty, this.sceneModeProperty ], ( selectedConstant, scene ) => {
 
       // Only adjust thickness/springConstant on adjustableLength scene
       if ( scene === SceneMode.ADJUSTABLE_LENGTH ) {

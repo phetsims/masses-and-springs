@@ -8,6 +8,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import Emitter from '../../../../axon/js/Emitter.js';
@@ -194,7 +195,7 @@ class Spring {
 
     // Set the equilibrium position when a mass is attached to the spring.
     // We do a similar process in Mass.js when the mass value changes.
-    Property.multilink( [
+    Multilink.multilink( [
         this.springConstantProperty,
         this.gravityProperty,
         this.massAttachedProperty,
@@ -230,7 +231,7 @@ class Spring {
       defaultValue: null
     } );
 
-    Property.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ],
+    Multilink.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ],
       ( massEquilibriumYPosition, massCenterOfMass ) => {
         if ( massCenterOfMass !== null ) {
           this.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition );
@@ -239,7 +240,7 @@ class Spring {
 
     // Set the equilibrium position when a mass is attached to the spring.
     // We do a similar process in Mass.js when the mass value changes.
-    Property.multilink( [
+    Multilink.multilink( [
         this.springConstantProperty,
         this.gravityProperty,
         this.massAttachedProperty,

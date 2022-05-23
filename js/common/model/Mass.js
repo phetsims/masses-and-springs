@@ -8,6 +8,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import DynamicProperty from '../../../../axon/js/DynamicProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
@@ -248,7 +249,7 @@ class Mass {
     this.animationProgress = 0;
 
     // The mass is considered to be animating if we are not controlling it and it isn't attached to a spring.
-    Property.lazyMultilink( [ this.userControlledProperty, this.springProperty ], () => {
+    Multilink.lazyMultilink( [ this.userControlledProperty, this.springProperty ], () => {
       this.isAnimatingProperty.set( false );
     } );
 

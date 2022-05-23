@@ -8,7 +8,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -190,7 +190,7 @@ class MassNode extends Node {
       this.translation = modelViewTransform2.modelToViewPosition( position );
     } );
 
-    Property.multilink( [ mass.userControlledProperty, modelBoundsProperty ], ( ( userControlled, modelDragBounds ) => {
+    Multilink.multilink( [ mass.userControlledProperty, modelBoundsProperty ], ( ( userControlled, modelDragBounds ) => {
 
       // Masses won't jump back into the model bounds attached to spring.
       // See https://github.com/phetsims/masses-and-springs/issues/291
@@ -240,7 +240,7 @@ class MassNode extends Node {
      *
      */
     const updateArrowVisibility = ( arrowVisibilityProperty, arrowNode ) => {
-      Property.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
+      Multilink.multilink( [ mass.springProperty, arrowVisibilityProperty, mass.userControlledProperty ],
         ( spring, vectorVisibility, userControlled ) => {
           arrowNode.visible = !!spring && vectorVisibility && !userControlled;
         } );
@@ -253,7 +253,7 @@ class MassNode extends Node {
      *
      */
     const updateForceVisibility = ( arrowVisibilityProperty, arrowNode ) => {
-      Property.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
+      Multilink.multilink( [ mass.springProperty, arrowVisibilityProperty, model.forcesModeProperty ],
         ( spring, springVectorVisibility, forcesMode ) => {
           arrowNode.visible = !!spring && springVectorVisibility && forcesMode === ForcesMode.FORCES;
         } );
@@ -272,13 +272,13 @@ class MassNode extends Node {
     updateForceVisibility( model.gravityVectorVisibilityProperty, gravityForceArrow );
 
     // Show/hide the net force arrow
-    Property.multilink( [ mass.springProperty, model.forcesModeProperty ],
+    Multilink.multilink( [ mass.springProperty, model.forcesModeProperty ],
       ( spring, forcesMode ) => {
         netForceArrow.visible = !!spring && forcesMode === ForcesMode.NET_FORCES;
       } );
 
     // Show/hide line at base of vectors
-    Property.multilink( [
+    Multilink.multilink( [
         mass.springProperty,
         model.gravityVectorVisibilityProperty,
         model.springVectorVisibilityProperty,
@@ -310,7 +310,7 @@ class MassNode extends Node {
     let xOffset;
     let y2;
     let position;
-    Property.multilink( [
+    Multilink.multilink( [
       mass.verticalVelocityProperty,
       model.accelerationVectorVisibilityProperty
     ], ( velocity, accelerationVisible ) => {
@@ -321,7 +321,7 @@ class MassNode extends Node {
     } );
 
     // When gravity changes, update the gravitational force arrow
-    Property.multilink( [ mass.springProperty, mass.gravityProperty ],
+    Multilink.multilink( [ mass.springProperty, mass.gravityProperty ],
       ( spring, gravity ) => {
         const gravitationalAcceleration = mass.mass * gravity;
         position = mass.positionProperty.get();
@@ -331,7 +331,7 @@ class MassNode extends Node {
       } );
 
     // When the spring force changes, update the spring force arrow
-    Property.multilink( [ mass.springForceProperty ],
+    Multilink.multilink( [ mass.springForceProperty ],
       springForce => {
         position = mass.positionProperty.get();
         xOffset = forcesOrientation * 45;
@@ -341,7 +341,7 @@ class MassNode extends Node {
 
     // When net force changes changes, update the net force arrow
     assert && assert( mass.springProperty.get() === null, 'We currently assume that the masses don\'t start attached to the springs' );
-    Property.multilink( [
+    Multilink.multilink( [
       mass.netForceProperty,
       model.accelerationVectorVisibilityProperty,
       mass.accelerationProperty,
