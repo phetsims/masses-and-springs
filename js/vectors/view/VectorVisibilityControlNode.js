@@ -8,12 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { AlignBox } from '../../../../scenery/js/imports.js';
-import { AlignGroup } from '../../../../scenery/js/imports.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, HBox, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
@@ -179,7 +174,6 @@ class VectorVisibilityControlNode extends Node {
         enabledProperty: enabledProperty,
         boxWidth: 16
       },
-      xMargin: 20,
       tandem: tandem.createTandem( 'forcesVisibilityCheckboxGroup' )
     } );
 
