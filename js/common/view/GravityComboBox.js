@@ -47,7 +47,7 @@ class GravityComboBox extends ComboBox {
       return new ComboBoxItem( bodyLabel, body );
     } );
 
-    super( items, bodyProperty, listNodeParent, options );
+    super( bodyProperty, items, listNodeParent, options );
   }
 }
 
