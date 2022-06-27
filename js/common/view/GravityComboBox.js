@@ -9,7 +9,6 @@
 import merge from '../../../../phet-core/js/merge.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import ComboBox from '../../../../sun/js/ComboBox.js';
-import ComboBoxItem from '../../../../sun/js/ComboBoxItem.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import Body from '../model/Body.js';
@@ -44,7 +43,7 @@ class GravityComboBox extends ComboBox {
         tandem: tandem.createTandem( 'bodyLabel' )
       } );
       bodyLabel.localBounds = bodyLabel.localBounds.withX( options.xOffset );
-      return new ComboBoxItem( bodyLabel, body );
+      return { value: body, node: bodyLabel };
     } );
 
     super( bodyProperty, items, listNodeParent, options );
