@@ -148,7 +148,8 @@ class EnergyGraphAccordionBox extends AccordionBox {
       },
       {
         entries: [ dEntry ],
-        labelString: eThermString
+        labelString: eThermString,
+        labelNode: clearThermalButton
       },
       {
         entries: [ aEntry, bEntry, cEntry, dEntry ],
