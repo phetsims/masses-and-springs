@@ -200,15 +200,17 @@ class IntroScreenView extends TwoSpringScreenView {
 
     // Creation of icons for scene selection
     const sceneRadioButtonGroup = new RectangularRadioButtonGroup( model.sceneModeProperty, toggleButtonsContent, {
-      buttonContentXMargin: 1,
-      buttonContentYMargin: 1,
       right: this.gravityAndDampingControlNode.right,
-      baseColor: 'black',
-      selectedLineWidth: 2,
-      deselectedLineWidth: 0.5,
-      deselectedButtonOpacity: 0.25,
       orientation: 'horizontal',
-      spacing: 10
+      spacing: 10,
+      radioButtonOptions: {
+        xMargin: 1,
+        yMargin: 1,
+        baseColor: 'black',
+        selectedLineWidth: 2,
+        deselectedLineWidth: 0.5,
+        deselectedButtonOpacity: 0.25
+      }
     } );
 
     // Control Panel for display elements with varying visibility
