@@ -92,7 +92,7 @@ class PeriodTraceNode extends Node {
 
         const state = this.periodTrace.stateProperty.value; // 0 to 4
         if ( state === 0 ) {
-          this.visible = false && spring.periodTraceVisibilityProperty.value;
+          this.visible = false;
         }
         else {
           this.visible = spring.periodTraceVisibilityProperty.value;
@@ -136,7 +136,7 @@ class PeriodTraceNode extends Node {
 
     // Responsible for restarting the period trace.
     else {
-      this.visible = false && spring.periodTraceVisibilityProperty.value;
+      this.visible = false;
       this.periodTrace.onFaded();
     }
   }
