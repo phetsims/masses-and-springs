@@ -9,8 +9,8 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import MovableDragHandler from '../../../../scenery-phet/js/input/MovableDragHandler.js';
+import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';

@@ -10,10 +10,7 @@
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import MovableDragHandler from '../../../../scenery-phet/js/input/MovableDragHandler.js';
-import { Line } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { LinearGradient } from '../../../../scenery/js/imports.js';
+import { Line, LinearGradient, Node, Rectangle } from '../../../../scenery/js/imports.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsColors from './MassesAndSpringsColors.js';
 
