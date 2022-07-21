@@ -204,9 +204,11 @@ class IntroScreenView extends TwoSpringScreenView {
         xMargin: 1,
         yMargin: 1,
         baseColor: 'black',
-        selectedLineWidth: 2,
-        deselectedLineWidth: 0.5,
-        deselectedButtonOpacity: 0.25
+        buttonAppearanceStrategyOptions: {
+          selectedLineWidth: 2,
+          deselectedLineWidth: 0.5,
+          deselectedButtonOpacity: 0.25
+        }
       }
     } );
 
