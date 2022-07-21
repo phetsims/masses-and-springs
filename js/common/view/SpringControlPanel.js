@@ -1,4 +1,4 @@
-// Copyright 2016-2021, University of Colorado Boulder
+// Copyright 2016-2022, University of Colorado Boulder
 
 /**
  * Panel responsible for adjusting the a Property of the spring using an hslider.
