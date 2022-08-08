@@ -15,7 +15,7 @@ import Range from '../../../../dot/js/Range.js';
 import BarChartNode from '../../../../griddle/js/BarChartNode.js';
 import merge from '../../../../phet-core/js/merge.js';
 import InfoButton from '../../../../scenery-phet/js/buttons/InfoButton.js';
-import MoveToTrashButton from '../../../../scenery-phet/js/buttons/MoveToTrashButton.js';
+import MoveToTrashLegendButton from '../../../../scenery-phet/js/buttons/MoveToTrashLegendButton.js';
 import ZoomButton from '../../../../scenery-phet/js/buttons/ZoomButton.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -85,7 +85,7 @@ class EnergyGraphAccordionBox extends AccordionBox {
     const scaleFactorProperty = new DerivedProperty( [ zoomLevelProperty ],
       zoomLevel => Math.pow( 2, zoomLevel ) * 20 );
 
-    const clearThermalButton = new MoveToTrashButton( {
+    const clearThermalButton = new MoveToTrashLegendButton( {
       arrowColor: ORANGE_COLOR,
       listener: () => {
 
