@@ -86,7 +86,7 @@ class Spring {
       ( displacement, springConstant ) => -springConstant * displacement,
       {
         units: 'N',
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+        phetioValueType: NumberIO
       }
     );
 
@@ -163,7 +163,7 @@ class Spring {
         tandem: tandem.createTandem( 'lengthProperty' ),
         units: 'm',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+        phetioValueType: NumberIO
       }
     );
 
@@ -175,7 +175,7 @@ class Spring {
         tandem: tandem.createTandem( 'bottomProperty' ),
         units: 'm',
         range: new Range( 0, Number.POSITIVE_INFINITY ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+        phetioValueType: NumberIO
       }
     );
 

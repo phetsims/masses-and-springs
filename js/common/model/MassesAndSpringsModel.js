@@ -104,7 +104,7 @@ class MassesAndSpringsModel {
     // @public {Property.<string>} body of planet selected
     this.bodyProperty = new Property( Body.EARTH, {
       tandem: tandem.createTandem( 'bodyProperty' ),
-      phetioType: Property.PropertyIO( Body.BodyIO )
+      phetioValueType: Body.BodyIO
     } );
 
     // Visibility Properties of vectors associated with each mass

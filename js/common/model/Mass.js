@@ -125,7 +125,7 @@ class Mass {
     // @public {Property.<Spring|null>}  spring that the mass is attached to
     this.springProperty = new Property( null, {
       tandem: tandem.createTandem( 'springProperty' ),
-      phetioType: Property.PropertyIO( NullableIO( Spring.SpringIO ) )
+      phetioValueType: NullableIO( Spring.SpringIO )
     } );
 
     // @public {Property.<number>} The force of the attached spring or 0 if unattached
