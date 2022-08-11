@@ -126,7 +126,7 @@ class Spring {
     // @public {Property.<Mass|null> read-write} This is the Mass object that is attached to the spring
     this.massAttachedProperty = new Property( null, {
       tandem: tandem.createTandem( 'massAttachedProperty' )
-      // phetioType: Property.PropertyIO( NullableIO( MassIO ) )
+      // phetioValueType: NullableIO( MassIO )
     } );
 
     // @public {Property.<number>} Kinetic Energy of the attached Mass
