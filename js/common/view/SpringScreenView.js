@@ -116,7 +116,7 @@ class SpringScreenView extends ScreenView {
         }
       } );
       closestDragListener.addDraggableItem( {
-        startDrag: massNode.movableDragHandler.startDrag.bind( massNode.movableDragHandler ),
+        startDrag: massNode.dragListener._start.bind( massNode.movableDragHandler ),
 
         // globalPoint is the position of our pointer.
         computeDistance: globalPoint => {

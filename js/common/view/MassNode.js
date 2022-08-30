@@ -14,9 +14,8 @@ import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import MovableDragHandler from '../../../../scenery-phet/js/input/MovableDragHandler.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Color, Line, LinearGradient, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Color, DragListener, Line, LinearGradient, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
@@ -145,26 +144,30 @@ class MassNode extends Node {
       }
     }
 
+    // Handler that moves the particle in model space.
+    const onDrag = () => {
+
+      if ( this.mass.springProperty.value ) {
+        this.mass.springProperty.value.buttonEnabledProperty.set( false );
+      }
+
+      // Checks if mass should be attached/detached to spring and adjusts its position if so.
+      model.adjustDraggedMassPosition( this.mass, dragBoundsProperty.value );
+    };
+
     // @public {MovableDragHandler} (read-write)
-    this.movableDragHandler = new MovableDragHandler( this.mass.positionProperty, {
+    this.dragListener = new DragListener( {
+      positionProperty: this.mass.positionProperty,
+      useParentOffset: true,
 
       // Allow moving a finger (touch) across a node to pick it up.
-      dragBounds: modelBoundsProperty.value,
+      dragBoundsProperty: modelBoundsProperty,
       allowTouchSnag: true,
-      modelViewTransform: modelViewTransform2,
+      transform: modelViewTransform2,
       tandem: tandem.createTandem( 'dragHandler' ),
 
-      // Handler that moves the particle in model space.
-      onDrag: () => {
-
-        if ( this.mass.springProperty.value ) {
-          this.mass.springProperty.value.buttonEnabledProperty.set( false );
-        }
-
-        // Checks if mass should be attached/detached to spring and adjusts its position if so.
-        model.adjustDraggedMassPosition( this.mass, dragBoundsProperty.value );
-      },
-      startDrag: () => {
+      start: () => {
+        onDrag();
         mass.userControlledProperty.set( true );
 
         if ( this.mass.springProperty.value ) {
@@ -172,7 +175,8 @@ class MassNode extends Node {
         }
         this.moveToFront();
       },
-      endDrag: () => {
+      end: () => {
+        onDrag();
         mass.userControlledProperty.set( false );
         if ( mass.springProperty.value ) {
           mass.springProperty.value.periodTraceResetEmitter.emit();
@@ -189,14 +193,14 @@ class MassNode extends Node {
       // Masses won't jump back into the model bounds attached to spring.
       // See https://github.com/phetsims/masses-and-springs/issues/291
       if ( mass.springProperty.value && !userControlled ) {
-        this.movableDragHandler.setDragBounds( Bounds2.EVERYTHING );
+        this.dragListener.dragBounds.set( Bounds2.EVERYTHING );
       }
       else {
-        this.movableDragHandler.setDragBounds( modelDragBounds );
+        this.dragListener.dragBounds.set( modelDragBounds );
       }
     } ) );
 
-    this.addInputListener( this.movableDragHandler );
+    this.addInputListener( this.dragListener );
 
     const forceNullLine = new Line( {
       stroke: 'black',
