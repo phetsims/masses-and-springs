@@ -9,8 +9,8 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import MovableDragHandler from '../../../../scenery-phet/js/input/MovableDragHandler.js';
-import { Line, LinearGradient, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import { DragListener, Line, LinearGradient, Node, Rectangle } from '../../../../scenery/js/imports.js';
+import Property from '../../../../axon/js/Property.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsColors from './MassesAndSpringsColors.js';
 
@@ -84,8 +84,10 @@ class MovableLineNode extends Node {
       this.translation = position.minusXY( length / 2, 0 );
     } );
 
-    this.addInputListener( new MovableDragHandler( this.positionProperty, {
-      dragBounds: dragBounds, // done so reference line is only draggable on the y-axis
+    this.addInputListener( new DragListener( {
+      positionProperty: this.positionProperty,
+      useParentOffset: true,
+      dragBoundsProperty: new Property( dragBounds ), // done so reference line is only draggable on the y-axis
       tandem: tandem.createTandem( 'dragHandler' )
     } ) );
     visibleProperty.linkAttribute( this, 'visible' );
