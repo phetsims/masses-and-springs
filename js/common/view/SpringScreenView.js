@@ -411,7 +411,7 @@ class SpringScreenView extends ScreenView {
     }
 
     // Adjusting drag bounds of draggable objects based on visible bounds.
-    this.rulerNode.rulerNodeMovableDragHandler.dragBounds = visibleBounds.withOffsets(
+    this.rulerNode.rulerNodeDragListener.dragBoundsProperty = visibleBounds.withOffsets(
       -this.rulerNode.width / 2, this.rulerNode.height / 2, this.rulerNode.width / 2, -this.rulerNode.height / 2
     );
     this.massNodes.forEach( function( massNode ) {

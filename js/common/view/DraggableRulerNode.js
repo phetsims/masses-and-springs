@@ -9,8 +9,9 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import MovableDragHandler from '../../../../scenery-phet/js/input/MovableDragHandler.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
+import { DragListener } from '../../../../scenery/js/imports.js';
+import Property from '../../../../axon/js/Property.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
@@ -69,19 +70,21 @@ class DraggableRulerNode extends RulerNode {
     // @public {Property.<Boolean>} Flag used to determine if the user has dragged the ruler from its starting position.
     this.draggedProperty = new BooleanProperty( false );
 
-    // @private {MovableDragHandler} (read-only) handles ruler node drag events
-    this.rulerNodeMovableDragHandler = new MovableDragHandler( this.positionProperty, {
+    // @private {DragListener} (read-only) handles ruler node drag events
+    this.rulerNodeDragListener = new DragListener( {
+      positionProperty: this.positionProperty,
+      useParentOffset: true,
       tandem: tandem.createTandem( 'dragHandler' ),
-      dragBounds: dragBounds,
-      startDrag: () => {
+      dragBoundsProperty: new Property( dragBounds ),
+      start: () => {
         this.draggedProperty.set( true );
         this.moveToFront();
       },
-      endDrag: () => {
+      end: () => {
         endDragCallback();
       }
     } );
-    this.addInputListener( this.rulerNodeMovableDragHandler );
+    this.addInputListener( this.rulerNodeDragListener );
 
     visibleProperty.linkAttribute( this, 'visible' );
   }

@@ -155,7 +155,7 @@ class MassNode extends Node {
       model.adjustDraggedMassPosition( this.mass, dragBoundsProperty.value );
     };
 
-    // @public {MovableDragHandler} (read-write)
+    // @public {DragListener} (read-write)
     this.dragListener = new DragListener( {
       positionProperty: this.mass.positionProperty,
       useParentOffset: true,

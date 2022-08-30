@@ -12,7 +12,8 @@ import merge from '../../../../phet-core/js/merge.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
-import { AlignBox, HBox, SimpleDragHandler } from '../../../../scenery/js/imports.js';
+import { AlignBox, DragListener, HBox, SimpleDragHandler } from '../../../../scenery/js/imports.js';
+import Property from '../../../../axon/js/Property.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import massesAndSprings from '../../massesAndSprings.js';
@@ -88,7 +89,7 @@ class ToolboxPanel extends Panel {
     } );
 
     // Drag listener for event forwarding: rulerIcon ---> rulerNode
-    rulerIcon.addInputListener( SimpleDragHandler.createForwardingListener( event => {
+    rulerIcon.addInputListener( DragListener.createForwardingListener( event => {
       rulerVisibleProperty.set( true );
 
       // Now determine the initial position where this element should move to after it's created, which corresponds
@@ -98,13 +99,14 @@ class ToolboxPanel extends Panel {
       rulerNode.positionProperty.set( initialPosition );
 
       // Sending through the startDrag from icon to rulerNode causes it to receive all subsequent drag events.
-      rulerNode.rulerNodeMovableDragHandler.startDrag( event );
+      rulerNode.rulerNodeDragListener.press( event );
     }, {
 
       // allow moving a finger (on a touchscreen) dragged across this node to interact with it
       allowTouchSnag: true,
-      dragBounds: dragBounds,
-      tandem: tandem.createTandem( 'dragHandler' )
+      dragBoundsProperty: new Property( dragBounds ),
+      tandem: tandem.createTandem( 'dragHandler' ),
+      useParentOffset: true
     } ) );
     toolbox.addChild( rulerIcon );
 
