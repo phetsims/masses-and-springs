@@ -16,7 +16,7 @@ import LabScreen from './lab/LabScreen.js';
 import massesAndSpringsStrings from './massesAndSpringsStrings.js';
 import VectorsScreen from './vectors/VectorsScreen.js';
 
-const massesAndSpringsTitleString = massesAndSpringsStrings[ 'masses-and-springs' ].title;
+const massesAndSpringsTitleStringProperty = massesAndSpringsStrings[ 'masses-and-springs' ].titleStringProperty;
 
 // constants
 const tandem = Tandem.ROOT;
@@ -32,7 +32,7 @@ const simOptions = {
 };
 
 simLauncher.launch( () => {
-  const sim = new Sim( massesAndSpringsTitleString, [
+  const sim = new Sim( massesAndSpringsTitleStringProperty, [
     new IntroScreen( tandem.createTandem( 'introScreen' ) ),
     new VectorsScreen( tandem.createTandem( 'vectorsScreen' ) ),
     new EnergyScreen( tandem.createTandem( 'energyScreen' ) ),
