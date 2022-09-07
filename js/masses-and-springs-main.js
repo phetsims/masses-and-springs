@@ -13,10 +13,10 @@ import Tandem from '../../tandem/js/Tandem.js';
 import EnergyScreen from './energy/EnergyScreen.js';
 import IntroScreen from './intro/IntroScreen.js';
 import LabScreen from './lab/LabScreen.js';
-import massesAndSpringsStrings from './massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from './MassesAndSpringsStrings.js';
 import VectorsScreen from './vectors/VectorsScreen.js';
 
-const massesAndSpringsTitleStringProperty = massesAndSpringsStrings[ 'masses-and-springs' ].titleStringProperty;
+const massesAndSpringsTitleStringProperty = MassesAndSpringsStrings[ 'masses-and-springs' ].titleStringProperty;
 
 // constants
 const tandem = Tandem.ROOT;

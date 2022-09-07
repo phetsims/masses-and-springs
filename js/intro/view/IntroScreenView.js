@@ -24,14 +24,14 @@ import ReferenceLineNode from '../../common/view/ReferenceLineNode.js';
 import SpringControlPanel from '../../common/view/SpringControlPanel.js';
 import TwoSpringScreenView from '../../common/view/TwoSpringScreenView.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import ConstantsControlPanel from './ConstantsControlPanel.js';
 import SceneSelectionButton from './SceneSelectionButton.js';
 
-const constantParameterString = massesAndSpringsStrings.constantParameter;
-const lengthString = massesAndSpringsStrings.length;
-const longString = massesAndSpringsStrings.long;
-const shortString = massesAndSpringsStrings.short;
+const constantParameterString = MassesAndSpringsStrings.constantParameter;
+const lengthString = MassesAndSpringsStrings.length;
+const longString = MassesAndSpringsStrings.long;
+const shortString = MassesAndSpringsStrings.short;
 
 class IntroScreenView extends TwoSpringScreenView {
 

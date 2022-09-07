@@ -13,7 +13,7 @@ import vectorsScreenIcon_png from '../../images/vectorsScreenIcon_png.js';
 import MassesAndSpringsModel from '../common/model/MassesAndSpringsModel.js';
 import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../massesAndSprings.js';
-import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../MassesAndSpringsStrings.js';
 import VectorsScreenView from './view/VectorsScreenView.js';
 
 class VectorsScreen extends Screen {
@@ -24,7 +24,7 @@ class VectorsScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: massesAndSpringsStrings.screen.vectors,
+      name: MassesAndSpringsStrings.screen.vectors,
       backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( vectorsScreenIcon_png ), {
         maxIconWidthProportion: 1,

@@ -17,14 +17,14 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Color, DragListener, Line, LinearGradient, Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import ForcesMode from '../model/ForcesMode.js';
 import ForceVectorArrow from './ForceVectorArrow.js';
 import VectorArrow from './VectorArrow.js';
 
-const massValueString = massesAndSpringsStrings.massValue;
-const questionMarkString = massesAndSpringsStrings.questionMark;
+const massValueString = MassesAndSpringsStrings.massValue;
+const questionMarkString = MassesAndSpringsStrings.questionMark;
 
 // constants
 const ARROW_SIZE_DEFAULT = 25;

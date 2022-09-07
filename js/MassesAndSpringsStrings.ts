@@ -127,8 +127,8 @@ type StringsType = {
   'whatIsTheValueOfGravityStringProperty': TReadOnlyProperty<string>;
 };
 
-const massesAndSpringsStrings = getStringModule( 'MASSES_AND_SPRINGS' ) as StringsType;
+const MassesAndSpringsStrings = getStringModule( 'MASSES_AND_SPRINGS' ) as StringsType;
 
-massesAndSprings.register( 'massesAndSpringsStrings', massesAndSpringsStrings );
+massesAndSprings.register( 'MassesAndSpringsStrings', MassesAndSpringsStrings );
 
-export default massesAndSpringsStrings;
+export default MassesAndSpringsStrings;

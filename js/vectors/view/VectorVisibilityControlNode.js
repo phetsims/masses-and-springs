@@ -16,15 +16,15 @@ import ForcesMode from '../../common/model/ForcesMode.js';
 import ForceVectorArrow from '../../common/view/ForceVectorArrow.js';
 import VectorArrow from '../../common/view/VectorArrow.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 
-const accelerationString = massesAndSpringsStrings.acceleration;
-const forcesString = massesAndSpringsStrings.forces;
-const gravityString = massesAndSpringsStrings.gravity;
-const netForceString = massesAndSpringsStrings.netForce;
-const periodTraceString = massesAndSpringsStrings.periodTrace;
-const springString = massesAndSpringsStrings.spring;
-const velocityString = massesAndSpringsStrings.velocity;
+const accelerationString = MassesAndSpringsStrings.acceleration;
+const forcesString = MassesAndSpringsStrings.forces;
+const gravityString = MassesAndSpringsStrings.gravity;
+const netForceString = MassesAndSpringsStrings.netForce;
+const periodTraceString = MassesAndSpringsStrings.periodTrace;
+const springString = MassesAndSpringsStrings.spring;
+const velocityString = MassesAndSpringsStrings.velocity;
 
 // constants
 const MAX_WIDTH = 140;

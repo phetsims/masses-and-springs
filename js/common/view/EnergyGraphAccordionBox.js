@@ -24,7 +24,7 @@ import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import ColorConstants from '../../../../sun/js/ColorConstants.js';
 import Dialog from '../../../../sun/js/Dialog.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
 // constants
@@ -32,18 +32,18 @@ const LEGEND_DESCRIPTION_MAX_WIDTH = 500;
 const MAX_WIDTH = 100;
 const ORANGE_COLOR = '#ee6f3e';
 
-const elasticPotentialEnergyString = massesAndSpringsStrings.elasticPotentialEnergy;
-const energyGraphString = massesAndSpringsStrings.energyGraph;
-const energyLegendString = massesAndSpringsStrings.energyLegend;
-const eThermString = massesAndSpringsStrings.eTherm;
-const eTotString = massesAndSpringsStrings.eTot;
-const gravitationalPotentialEnergyString = massesAndSpringsStrings.gravitationalPotentialEnergy;
-const keString = massesAndSpringsStrings.ke;
-const kineticEnergyString = massesAndSpringsStrings.kineticEnergy;
-const peElasString = massesAndSpringsStrings.peElas;
-const peGravString = massesAndSpringsStrings.peGrav;
-const thermalEnergyString = massesAndSpringsStrings.thermalEnergy;
-const totalEnergyString = massesAndSpringsStrings.totalEnergy;
+const elasticPotentialEnergyString = MassesAndSpringsStrings.elasticPotentialEnergy;
+const energyGraphString = MassesAndSpringsStrings.energyGraph;
+const energyLegendString = MassesAndSpringsStrings.energyLegend;
+const eThermString = MassesAndSpringsStrings.eTherm;
+const eTotString = MassesAndSpringsStrings.eTot;
+const gravitationalPotentialEnergyString = MassesAndSpringsStrings.gravitationalPotentialEnergy;
+const keString = MassesAndSpringsStrings.ke;
+const kineticEnergyString = MassesAndSpringsStrings.kineticEnergy;
+const peElasString = MassesAndSpringsStrings.peElas;
+const peGravString = MassesAndSpringsStrings.peGrav;
+const thermalEnergyString = MassesAndSpringsStrings.thermalEnergy;
+const totalEnergyString = MassesAndSpringsStrings.totalEnergy;
 
 class EnergyGraphAccordionBox extends AccordionBox {
 

@@ -12,10 +12,10 @@ import { Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 
-const springConstantString = massesAndSpringsStrings.springConstant;
-const thicknessString = massesAndSpringsStrings.thickness;
+const springConstantString = MassesAndSpringsStrings.springConstant;
+const thicknessString = MassesAndSpringsStrings.thickness;
 
 // constants
 const TITLE_FONT = MassesAndSpringsConstants.LABEL_FONT;

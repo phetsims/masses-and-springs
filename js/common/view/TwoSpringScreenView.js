@@ -11,7 +11,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { HBox, Text } from '../../../../scenery/js/imports.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import MassesAndSpringsColors from './MassesAndSpringsColors.js';
 import MovableLineNode from './MovableLineNode.js';
@@ -19,8 +19,8 @@ import ReferenceLineNode from './ReferenceLineNode.js';
 import SpringHangerNode from './SpringHangerNode.js';
 import SpringScreenView from './SpringScreenView.js';
 
-const largeString = massesAndSpringsStrings.large;
-const smallString = massesAndSpringsStrings.small;
+const largeString = MassesAndSpringsStrings.large;
+const smallString = MassesAndSpringsStrings.small;
 
 class TwoSpringScreenView extends SpringScreenView {
 

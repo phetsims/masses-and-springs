@@ -10,14 +10,14 @@
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
-const bodyCustomString = massesAndSpringsStrings.body.custom;
-const bodyEarthString = massesAndSpringsStrings.body.earth;
-const bodyJupiterString = massesAndSpringsStrings.body.jupiter;
-const bodyMoonString = massesAndSpringsStrings.body.moon;
-const bodyPlanetXString = massesAndSpringsStrings.body.planetX;
+const bodyCustomString = MassesAndSpringsStrings.body.custom;
+const bodyEarthString = MassesAndSpringsStrings.body.earth;
+const bodyJupiterString = MassesAndSpringsStrings.body.jupiter;
+const bodyMoonString = MassesAndSpringsStrings.body.moon;
+const bodyPlanetXString = MassesAndSpringsStrings.body.planetX;
 
 class Body {
   /**

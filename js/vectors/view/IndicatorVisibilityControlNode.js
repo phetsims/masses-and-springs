@@ -14,14 +14,14 @@ import { AlignBox, AlignGroup, HBox, Node, Text, VBox } from '../../../../scener
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import DisplacementArrowNode from './DisplacementArrowNode.js';
 
-const displacementString = massesAndSpringsStrings.displacement;
-const massEquilibriumString = massesAndSpringsStrings.massEquilibrium;
-const movableLineString = massesAndSpringsStrings.movableLine;
-const naturalLengthString = massesAndSpringsStrings.naturalLength;
-const periodTraceString = massesAndSpringsStrings.periodTrace;
+const displacementString = MassesAndSpringsStrings.displacement;
+const massEquilibriumString = MassesAndSpringsStrings.massEquilibrium;
+const movableLineString = MassesAndSpringsStrings.movableLine;
+const naturalLengthString = MassesAndSpringsStrings.naturalLength;
+const periodTraceString = MassesAndSpringsStrings.periodTrace;
 
 // constants
 const DEFAULT_CONTENT_SPACING = 155;

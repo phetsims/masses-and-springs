@@ -10,13 +10,13 @@ import merge from '../../../../phet-core/js/merge.js';
 import { AlignBox, AlignGroup, HBox, Node, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
-const equilibriumPositionString = massesAndSpringsStrings.equilibriumPosition;
-const massEquilibriumString = massesAndSpringsStrings.massEquilibrium;
-const movableLineString = massesAndSpringsStrings.movableLine;
-const naturalLengthString = massesAndSpringsStrings.naturalLength;
+const equilibriumPositionString = MassesAndSpringsStrings.equilibriumPosition;
+const massEquilibriumString = MassesAndSpringsStrings.massEquilibrium;
+const movableLineString = MassesAndSpringsStrings.movableLine;
+const naturalLengthString = MassesAndSpringsStrings.naturalLength;
 
 // constants
 const DEFAULT_CONTENT_SPACING = 155;

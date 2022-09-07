@@ -13,7 +13,7 @@ import { Image } from '../../../scenery/js/imports.js';
 import introScreenIcon_png from '../../images/introScreenIcon_png.js';
 import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../massesAndSprings.js';
-import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../MassesAndSpringsStrings.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';
 
@@ -25,7 +25,7 @@ class IntroScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: massesAndSpringsStrings.screen.intro,
+      name: MassesAndSpringsStrings.screen.intro,
       backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( introScreenIcon_png ), {
         maxIconWidthProportion: 1,

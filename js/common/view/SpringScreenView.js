@@ -23,7 +23,7 @@ import MutableOptionsNode from '../../../../sun/js/MutableOptionsNode.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import IndicatorVisibilityControlNode from '../../vectors/view/IndicatorVisibilityControlNode.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import DraggableRulerNode from './DraggableRulerNode.js';
@@ -35,8 +35,8 @@ import SpringControlPanel from './SpringControlPanel.js';
 import StopperButtonNode from './StopperButtonNode.js';
 import ToolboxPanel from './ToolboxPanel.js';
 
-const springConstantPatternString = massesAndSpringsStrings.springConstantPattern;
-const springStrengthString = massesAndSpringsStrings.springStrength;
+const springConstantPatternString = MassesAndSpringsStrings.springConstantPattern;
+const springStrengthString = MassesAndSpringsStrings.springStrength;
 
 class SpringScreenView extends ScreenView {
   /**

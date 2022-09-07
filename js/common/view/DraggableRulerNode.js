@@ -13,10 +13,10 @@ import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import { DragListener } from '../../../../scenery/js/imports.js';
 import Property from '../../../../axon/js/Property.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
-const cmString = massesAndSpringsStrings.cm;
+const cmString = MassesAndSpringsStrings.cm;
 
 class DraggableRulerNode extends RulerNode {
 

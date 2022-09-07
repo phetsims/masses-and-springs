@@ -20,11 +20,11 @@ import { Node, Text } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import SunConstants from '../../../../sun/js/SunConstants.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
-const massString = massesAndSpringsStrings.mass;
-const massValueString = massesAndSpringsStrings.massValue;
+const massString = MassesAndSpringsStrings.mass;
+const massValueString = MassesAndSpringsStrings.massValue;
 
 class MassValueControlPanel extends Panel {
 

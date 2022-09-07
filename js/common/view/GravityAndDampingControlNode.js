@@ -20,18 +20,18 @@ import { Node, Text } from '../../../../scenery/js/imports.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import SunConstants from '../../../../sun/js/SunConstants.js';
 import massesAndSprings from '../../massesAndSprings.js';
-import massesAndSpringsStrings from '../../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import Body from '../model/Body.js';
 import GravityComboBox from './GravityComboBox.js';
 
-const dampingEqualsZeroString = massesAndSpringsStrings.dampingEqualsZero;
-const dampingString = massesAndSpringsStrings.damping;
-const gravityString = massesAndSpringsStrings.gravity;
-const gravityValueString = massesAndSpringsStrings.gravityValue;
-const lotsString = massesAndSpringsStrings.lots;
-const noneString = massesAndSpringsStrings.none;
-const whatIsTheValueOfGravityString = massesAndSpringsStrings.whatIsTheValueOfGravity;
+const dampingEqualsZeroString = MassesAndSpringsStrings.dampingEqualsZero;
+const dampingString = MassesAndSpringsStrings.damping;
+const gravityString = MassesAndSpringsStrings.gravity;
+const gravityValueString = MassesAndSpringsStrings.gravityValue;
+const lotsString = MassesAndSpringsStrings.lots;
+const noneString = MassesAndSpringsStrings.none;
+const whatIsTheValueOfGravityString = MassesAndSpringsStrings.whatIsTheValueOfGravity;
 
 // constants
 const SPACING = 7;

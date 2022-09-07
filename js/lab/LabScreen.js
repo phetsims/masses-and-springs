@@ -12,7 +12,7 @@ import { Image } from '../../../scenery/js/imports.js';
 import labScreenIcon_png from '../../images/labScreenIcon_png.js';
 import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../massesAndSprings.js';
-import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../MassesAndSpringsStrings.js';
 import LabModel from './model/LabModel.js';
 import LabScreenView from './view/LabScreenView.js';
 
@@ -24,7 +24,7 @@ class LabScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: massesAndSpringsStrings.screen.lab,
+      name: MassesAndSpringsStrings.screen.lab,
       backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( labScreenIcon_png ), {
         maxIconWidthProportion: 1,

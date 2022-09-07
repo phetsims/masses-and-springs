@@ -11,7 +11,7 @@ import { Image } from '../../../scenery/js/imports.js';
 import energyScreenIcon_png from '../../images/energyScreenIcon_png.js';
 import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
 import massesAndSprings from '../massesAndSprings.js';
-import massesAndSpringsStrings from '../massesAndSpringsStrings.js';
+import MassesAndSpringsStrings from '../MassesAndSpringsStrings.js';
 import EnergyModel from './model/EnergyModel.js';
 import EnergyScreenView from './view/EnergyScreenView.js';
 
@@ -23,7 +23,7 @@ class EnergyScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: massesAndSpringsStrings.screen.energy,
+      name: MassesAndSpringsStrings.screen.energy,
       backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( energyScreenIcon_png ), {
         maxIconWidthProportion: 1,
