@@ -45,14 +45,14 @@ class LineVisibilityNode extends Node {
     let equilibriumText = new Text( equilibriumPositionString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: TEXT_MAX_WIDTH,
-      tandem: tandem.createTandem( 'equilibriumPositionString' )
+      tandem: tandem.createTandem( 'equilibriumPositionText' )
     } );
 
     if ( options.massEquilibrium ) {
       equilibriumText = new Text( massEquilibriumString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: TEXT_MAX_WIDTH,
-        tandem: tandem.createTandem( 'equilibriumPositionString' )
+        tandem: tandem.createTandem( 'equilibriumPositionText' )
       } );
     }
 
@@ -67,7 +67,7 @@ class LineVisibilityNode extends Node {
     const movableAlignBox = new AlignBox( new Text( movableLineString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: TEXT_MAX_WIDTH,
-      tandem: tandem.createTandem( 'movableLineString' )
+      tandem: tandem.createTandem( 'movableLineText' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // Max width must be set to the maxWidth of the alignGroup based on its content.

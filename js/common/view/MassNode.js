@@ -127,7 +127,7 @@ class MassNode extends Node {
         centerX: 0,
         pickable: false,
         maxWidth: !mass.adjustable ? this.rect.width : 30, // Adjustable masses require smaller label maxWidth.
-        tandem: tandem.createTandem( 'label' )
+        tandem: tandem.createTandem( 'labelText' )
       } );
       this.addChild( label );
 

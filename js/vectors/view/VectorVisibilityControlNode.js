@@ -58,13 +58,13 @@ class VectorVisibilityControlNode extends Node {
     const velocityAlignBox = new AlignBox( new Text( velocityString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH,
-      tandem: tandem.createTandem( 'velocityString' )
+      tandem: tandem.createTandem( 'velocityText' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     const accelerationAlignBox = new AlignBox( new Text( accelerationString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH,
-      tandem: tandem.createTandem( 'accelerationString' )
+      tandem: tandem.createTandem( 'accelerationText' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // Responsible for forces aquaRadioButton
@@ -74,7 +74,7 @@ class VectorVisibilityControlNode extends Node {
       new Text( forcesString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: MAX_WIDTH,
-        tandem: tandem.createTandem( 'forcesString' )
+        tandem: tandem.createTandem( 'forcesText' )
       } ),
       { radius: 7, spacing: 7 }
     );
@@ -86,19 +86,19 @@ class VectorVisibilityControlNode extends Node {
     const gravityAlignBox = new AlignBox( new Text( gravityString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH - indentation,
-      tandem: tandem.createTandem( 'gravityString' )
+      tandem: tandem.createTandem( 'gravityText' )
     } ), { group: alignGroup, xAlign: 'left' } );
     const springAlignBox = new AlignBox( new Text( springString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH - indentation,
-      tandem: tandem.createTandem( 'springString' )
+      tandem: tandem.createTandem( 'springText' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // responsible for net force aquaRadioButton
     const netForceAlignBox = new AlignBox( new Text( netForceString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: MAX_WIDTH,
-      tandem: tandem.createTandem( 'netForceString' )
+      tandem: tandem.createTandem( 'netForceText' )
     } ), { group: alignGroup, xAlign: 'left' } );
 
     // Max width must be set to the maxWidth of the alignGroup based on its content.
@@ -140,7 +140,7 @@ class VectorVisibilityControlNode extends Node {
         node: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: MAX_WIDTH,
-          tandem: tandem.createTandem( 'periodTraceString' )
+          tandem: tandem.createTandem( 'periodTraceText' )
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       },

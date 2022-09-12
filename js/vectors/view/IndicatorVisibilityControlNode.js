@@ -68,12 +68,12 @@ class IndicatorVisibilityControlNode extends Node {
         new Text( displacementString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: 110,
-          tandem: tandem.createTandem( 'displacementString' )
+          tandem: tandem.createTandem( 'displacementText' )
         } ),
         new Text( naturalLengthString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: 110,
-          tandem: tandem.createTandem( 'naturalLengthString' )
+          tandem: tandem.createTandem( 'naturalLengthText' )
         } ) ]
     } );
 
@@ -100,12 +100,12 @@ class IndicatorVisibilityControlNode extends Node {
     const massEquilibriumAlignBox = new AlignBox( new Text( massEquilibriumString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: CONTENT_MAX_WIDTH,
-      tandem: tandem.createTandem( 'massEquilibriumString' )
+      tandem: tandem.createTandem( 'massEquilibriumText' )
     } ), { xAlign: 'left', group: alignGroup } );
     const movableLineAlignBox = new AlignBox( new Text( movableLineString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: CONTENT_MAX_WIDTH,
-      tandem: tandem.createTandem( 'movableLineString' )
+      tandem: tandem.createTandem( 'movableLineText' )
     } ), { xAlign: 'left', group: alignGroup } );
 
     // Max width must be set to the maxWidth of the alignGroup based on its content.
@@ -144,7 +144,7 @@ class IndicatorVisibilityControlNode extends Node {
         node: new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: CONTENT_MAX_WIDTH,
-          tandem: tandem.createTandem( 'periodTraceString' )
+          tandem: tandem.createTandem( 'periodTraceText' )
         } ),
         property: model.firstSpring.periodTraceVisibilityProperty
       } );
