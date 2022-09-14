@@ -24,7 +24,7 @@ class LabScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: MassesAndSpringsStrings.screen.lab,
+      name: MassesAndSpringsStrings.screen.labStringProperty,
       backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( labScreenIcon_png ), {
         maxIconWidthProportion: 1,

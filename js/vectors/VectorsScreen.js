@@ -24,7 +24,7 @@ class VectorsScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: MassesAndSpringsStrings.screen.vectors,
+      name: MassesAndSpringsStrings.screen.vectorsStringProperty,
       backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( vectorsScreenIcon_png ), {
         maxIconWidthProportion: 1,

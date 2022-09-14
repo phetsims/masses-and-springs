@@ -23,7 +23,7 @@ class EnergyScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: MassesAndSpringsStrings.screen.energy,
+      name: MassesAndSpringsStrings.screen.energyStringProperty,
       backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( energyScreenIcon_png ), {
         maxIconWidthProportion: 1,

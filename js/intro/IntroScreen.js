@@ -25,7 +25,7 @@ class IntroScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: MassesAndSpringsStrings.screen.intro,
+      name: MassesAndSpringsStrings.screen.introStringProperty,
       backgroundColorProperty: MassesAndSpringsColors.backgroundProperty,
       homeScreenIcon: new ScreenIcon( new Image( introScreenIcon_png ), {
         maxIconWidthProportion: 1,
