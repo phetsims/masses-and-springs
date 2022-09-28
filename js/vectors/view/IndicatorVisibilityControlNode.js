@@ -117,19 +117,32 @@ class IndicatorVisibilityControlNode extends Node {
 
     // Used for indicator visibility
     const checkboxContent = [ {
-      node: new HBox( {
+      createNode: tandem => new HBox( {
         children: [ componentDisplacement, componentDisplacementVBox ],
         spacing: contentSpacing
       } ),
       property: model.naturalLengthVisibleProperty
     }, {
-      node: new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: contentSpacing } ),
+      createNode: tandem => new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: contentSpacing } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
-      node: new HBox( { children: [ movableLineAlignBox, redLine ], spacing: contentSpacing } ),
+      createNode: tandem => new HBox( { children: [ movableLineAlignBox, redLine ], spacing: contentSpacing } ),
       property: model.movableLineVisibleProperty
     } ];
-    let indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( checkboxContent, {
+
+    if ( options.periodTraceOption ) {
+
+      // Push period trace content into checkboxContent
+      checkboxContent.push( {
+        createNode: tandem => new Text( periodTraceString, {
+          font: MassesAndSpringsConstants.TITLE_FONT,
+          maxWidth: CONTENT_MAX_WIDTH,
+          tandem: tandem.createTandem( 'periodTraceText' )
+        } ),
+        property: model.firstSpring.periodTraceVisibilityProperty
+      } );
+    }
+    const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( checkboxContent, {
       checkboxOptions: {
         boxWidth: 16,
         spacing: 8
@@ -137,26 +150,6 @@ class IndicatorVisibilityControlNode extends Node {
       tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
     } );
 
-    if ( options.periodTraceOption ) {
-
-      // Push period trace content into checkboxContent
-      checkboxContent.push( {
-        node: new Text( periodTraceString, {
-          font: MassesAndSpringsConstants.TITLE_FONT,
-          maxWidth: CONTENT_MAX_WIDTH,
-          tandem: tandem.createTandem( 'periodTraceText' )
-        } ),
-        property: model.firstSpring.periodTraceVisibilityProperty
-      } );
-
-      indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( checkboxContent, {
-        checkboxOptions: {
-          boxWidth: 16,
-          spacing: 8
-        },
-        tandem: tandem.createTandem( 'indicatorVisibilityCheckboxGroup' )
-      } );
-    }
     const indicatorVisibilityControlsVBox = new VBox( {
         children: [
           indicatorVisibilityCheckboxGroup

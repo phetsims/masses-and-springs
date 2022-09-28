@@ -75,15 +75,15 @@ class LineVisibilityNode extends Node {
 
     // Create checkboxes using align boxes above
     const indicatorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new HBox( { children: [ naturalLengthVisibleAlignBox, blueLine ], spacing: contentSpacing } ),
+      createNode: tandem => new HBox( { children: [ naturalLengthVisibleAlignBox, blueLine ], spacing: contentSpacing } ),
       property: model.naturalLengthVisibleProperty,
       label: naturalLengthString
     }, {
-      node: new HBox( { children: [ equilibriumAlignBox, greenLine ], spacing: contentSpacing } ),
+      createNode: tandem => new HBox( { children: [ equilibriumAlignBox, greenLine ], spacing: contentSpacing } ),
       property: model.equilibriumPositionVisibleProperty,
       label: equilibriumPositionString
     }, {
-      node: new HBox( { children: [ movableAlignBox, redLine ], spacing: contentSpacing } ),
+      createNode: tandem => new HBox( { children: [ movableAlignBox, redLine ], spacing: contentSpacing } ),
       property: model.movableLineVisibleProperty,
       label: movableLineString
     } ], {

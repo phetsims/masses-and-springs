@@ -114,12 +114,12 @@ class VectorVisibilityControlNode extends Node {
     // Handle options for checkbox group
     let vectorVisibilityCheckboxGroup;
     const velocityCheckboxObject = {
-      node: new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: contentSpacing } ),
+      createNode: tandem => new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: contentSpacing } ),
       property: model.velocityVectorVisibilityProperty,
       label: velocityString
     };
     const accelerationCheckboxObject = {
-      node: new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: contentSpacing } ),
+      createNode: tandem => new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: contentSpacing } ),
       property: model.accelerationVectorVisibilityProperty,
       label: accelerationString
     };
@@ -137,7 +137,7 @@ class VectorVisibilityControlNode extends Node {
     // Responsible for velocity and acceleration vectors checkboxes and period trace in basics version
     else {
       vectorVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-        node: new Text( periodTraceString, {
+        createNode: tandem => new Text( periodTraceString, {
           font: MassesAndSpringsConstants.TITLE_FONT,
           maxWidth: MAX_WIDTH,
           tandem: tandem.createTandem( 'periodTraceText' )
@@ -162,11 +162,11 @@ class VectorVisibilityControlNode extends Node {
 
     // Responsible for forces vectors checkboxes
     const forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      node: new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
+      createNode: tandem => new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
     }, {
-      node: new HBox( { children: [ springAlignBox, springArrow ], spacing: contentSpacing - indentation } ),
+      createNode: tandem => new HBox( { children: [ springAlignBox, springArrow ], spacing: contentSpacing - indentation } ),
       property: model.springVectorVisibilityProperty,
       label: springString
     } ], {
