@@ -32,10 +32,6 @@
         "grunt": "~1.5.3"
       },
       "phet": {
-        "colorProfiles": [
-          "default",
-          "basics"
-        ],
         "requirejsNamespace": "MASSES_AND_SPRINGS",
         "phetLibs": [
           "griddle",
@@ -47,7 +43,13 @@
           "adapted-from-phet"
         ],
         "simulation": true,
-        "supportsOutputJS": true
+        "supportsOutputJS": true,
+        "simFeatures": {
+          "colorProfiles": [
+            "default",
+            "basics"
+          ]
+        }
       },
       "eslintConfig": {
         "extends": "../chipper/eslint/sim_eslintrc.js"
