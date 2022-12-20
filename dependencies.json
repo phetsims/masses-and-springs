@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "masses-and-springs": {
-    "sha": "154db1aac4a7123ab2d91f56c03caaf148fd22fa",
+    "sha": "a25b239f21f51e222fd2f45c2ff0f7cf2dc3cc5e",
     "branch": "1.0"
   },
   "phet-core": {
@@ -61,7 +61,7 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "5fba58e59278707b79d28db78c712c07decee1a6",
+    "sha": "6a4b3c1730b476f9a626641a1d8023283cef0404",
     "branch": "HEAD"
   },
   "scenery-phet": {
