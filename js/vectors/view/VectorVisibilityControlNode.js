@@ -114,12 +114,12 @@ class VectorVisibilityControlNode extends Node {
     // Handle options for checkbox group
     let vectorVisibilityCheckboxGroup;
     const velocityCheckboxObject = {
-      createNode: tandem => new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: contentSpacing } ),
+      createNode: () => new HBox( { children: [ velocityAlignBox, velocityArrow ], spacing: contentSpacing } ),
       property: model.velocityVectorVisibilityProperty,
       label: velocityString
     };
     const accelerationCheckboxObject = {
-      createNode: tandem => new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: contentSpacing } ),
+      createNode: () => new HBox( { children: [ accelerationAlignBox, accelerationArrow ], spacing: contentSpacing } ),
       property: model.accelerationVectorVisibilityProperty,
       label: accelerationString
     };
@@ -162,11 +162,11 @@ class VectorVisibilityControlNode extends Node {
 
     // Responsible for forces vectors checkboxes
     const forcesVisibilityCheckboxGroup = new VerticalCheckboxGroup( [ {
-      createNode: tandem => new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
+      createNode: () => new HBox( { children: [ gravityAlignBox, gravityArrow ], spacing: contentSpacing - indentation } ),
       property: model.gravityVectorVisibilityProperty,
       label: gravityString
     }, {
-      createNode: tandem => new HBox( { children: [ springAlignBox, springArrow ], spacing: contentSpacing - indentation } ),
+      createNode: () => new HBox( { children: [ springAlignBox, springArrow ], spacing: contentSpacing - indentation } ),
       property: model.springVectorVisibilityProperty,
       label: springString
     } ], {

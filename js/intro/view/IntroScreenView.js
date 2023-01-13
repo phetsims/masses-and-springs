@@ -189,10 +189,10 @@ class IntroScreenView extends TwoSpringScreenView {
     //  Creation of toggled modes for scene selection
     const toggleButtonsContent = [ {
       value: SceneMode.SAME_LENGTH,
-      createNode: tandem => sameLengthIcon
+      createNode: () => sameLengthIcon
     }, {
       value: SceneMode.ADJUSTABLE_LENGTH,
-      createNode: tandem => differentLengthIcon
+      createNode: () => differentLengthIcon
     } ];
 
     // Creation of icons for scene selection

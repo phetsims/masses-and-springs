@@ -117,16 +117,16 @@ class IndicatorVisibilityControlNode extends Node {
 
     // Used for indicator visibility
     const checkboxContent = [ {
-      createNode: tandem => new HBox( {
+      createNode: () => new HBox( {
         children: [ componentDisplacement, componentDisplacementVBox ],
         spacing: contentSpacing
       } ),
       property: model.naturalLengthVisibleProperty
     }, {
-      createNode: tandem => new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: contentSpacing } ),
+      createNode: () => new HBox( { children: [ massEquilibriumAlignBox, blackLine ], spacing: contentSpacing } ),
       property: model.equilibriumPositionVisibleProperty
     }, {
-      createNode: tandem => new HBox( { children: [ movableLineAlignBox, redLine ], spacing: contentSpacing } ),
+      createNode: () => new HBox( { children: [ movableLineAlignBox, redLine ], spacing: contentSpacing } ),
       property: model.movableLineVisibleProperty
     } ];
 
