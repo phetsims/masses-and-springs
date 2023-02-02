@@ -1,5 +1,5 @@
 {
-  "comment": "# masses-and-springs 1.0.18-rc.1 Thu Feb 02 2023 13:10:50 GMT-0700 (Mountain Standard Time)",
+  "comment": "# masses-and-springs 1.0.18 Thu Feb 02 2023 13:11:48 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "masses-and-springs": {
-    "sha": "93027acd82652e326c6485021821eea61727de37",
+    "sha": "68008abd04b19e2cf6080b6ef6b9bded355d0045",
     "branch": "1.0"
   },
   "phet-core": {
