@@ -138,7 +138,7 @@ class MassNode extends Node {
       // Adjust the mass label for adjustable masses.
       if ( this.mass.adjustable ) {
         this.mass.massProperty.link( massValue => {
-          label.setText( StringUtils.fillIn( massValueString, { mass: Utils.roundSymmetric( massValue * 1000 ) } ) );
+          label.setString( StringUtils.fillIn( massValueString, { mass: Utils.roundSymmetric( massValue * 1000 ) } ) );
           label.center = this.rect.center;
         } );
       }
