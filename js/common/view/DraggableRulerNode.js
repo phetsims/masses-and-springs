@@ -74,7 +74,7 @@ class DraggableRulerNode extends RulerNode {
     this.rulerNodeDragListener = new DragListener( {
       positionProperty: this.positionProperty,
       useParentOffset: true,
-      tandem: tandem.createTandem( 'dragHandler' ),
+      tandem: tandem.createTandem( 'dragListener' ),
       dragBoundsProperty: new Property( dragBounds ),
       start: () => {
         this.draggedProperty.set( true );

@@ -105,7 +105,7 @@ class ToolboxPanel extends Panel {
       // allow moving a finger (on a touchscreen) dragged across this node to interact with it
       allowTouchSnag: true,
       dragBoundsProperty: new Property( dragBounds ),
-      tandem: tandem.createTandem( 'dragHandler' ),
+      tandem: tandem.createTandem( 'dragListener' ),
       useParentOffset: true
     } ) );
     toolbox.addChild( rulerIcon );
@@ -143,7 +143,7 @@ class ToolboxPanel extends Panel {
       // allow moving a finger (on a touchscreen) dragged across this node to interact with it
       allowTouchSnag: true,
       dragBounds: dragBounds,
-      tandem: tandem.createTandem( 'dragHandler' )
+      tandem: tandem.createTandem( 'dragListener' )
     } ) );
     toolbox.addChild( timerIcon );
     stopwatch.isVisibleProperty.link( visible => {

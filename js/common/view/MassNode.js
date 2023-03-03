@@ -164,7 +164,7 @@ class MassNode extends Node {
       dragBoundsProperty: modelBoundsProperty,
       allowTouchSnag: true,
       transform: modelViewTransform2,
-      tandem: tandem.createTandem( 'dragHandler' ),
+      tandem: tandem.createTandem( 'dragListener' ),
 
       start: () => {
         onDrag();

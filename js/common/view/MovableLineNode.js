@@ -88,7 +88,7 @@ class MovableLineNode extends Node {
       positionProperty: this.positionProperty,
       useParentOffset: true,
       dragBoundsProperty: new Property( dragBounds ), // done so reference line is only draggable on the y-axis
-      tandem: tandem.createTandem( 'dragHandler' )
+      tandem: tandem.createTandem( 'dragListener' )
     } ) );
     visibleProperty.linkAttribute( this, 'visible' );
     this.addChild( line );
