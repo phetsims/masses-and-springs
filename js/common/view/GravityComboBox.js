@@ -37,13 +37,18 @@ class GravityComboBox extends ComboBox {
 
     // {ComboBoxItem[]}
     const items = Body.BODIES.map( body => {
-      const bodyLabelText = new Text( body.title, {
-        font: options.bodyFont,
-        maxWidth: options.bodyMaxWidth,
-        tandem: tandem.createTandem( 'bodyLabelText' )
-      } );
-      bodyLabelText.localBounds = bodyLabelText.localBounds.withX( options.xOffset );
-      return { value: body, node: bodyLabelText };
+      return {
+        value: body,
+        createNode: () => {
+          const bodyLabelText = new Text( body.title, {
+            font: options.bodyFont,
+            maxWidth: options.bodyMaxWidth,
+            tandem: tandem.createTandem( 'bodyLabelText' )
+          } );
+          bodyLabelText.localBounds = bodyLabelText.localBounds.withX( options.xOffset );
+          return bodyLabelText;
+        }
+      };
     } );
 
     super( bodyProperty, items, listNodeParent, options );
