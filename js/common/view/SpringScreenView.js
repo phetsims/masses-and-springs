@@ -18,7 +18,7 @@ import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.j
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import { AlignBox, AlignGroup, HBox, Node, PaintColorProperty, Plane } from '../../../../scenery/js/imports.js';
-import ClosestDragListener from '../../../../sun/js/ClosestDragListener.js';
+import ClosestDragForwardingListener from '../../../../sun/js/ClosestDragForwardingListener.js';
 import MutableOptionsNode from '../../../../sun/js/MutableOptionsNode.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
@@ -54,9 +54,9 @@ class SpringScreenView extends ScreenView {
 
     // @public {Plane} Support for expanding touchAreas near massNodes.
     this.backgroundDragPlane = new Plane();
-    const closestDragListener = new ClosestDragListener( 30, 0 );
+    const closestDragForwardingListener = new ClosestDragForwardingListener( 30, 0 );
 
-    this.backgroundDragPlane.addInputListener( closestDragListener );
+    this.backgroundDragPlane.addInputListener( closestDragForwardingListener );
 
 
     // @public {MassesAndSpringsModel}
@@ -115,7 +115,7 @@ class SpringScreenView extends ScreenView {
           this.resetMassLayer();
         }
       } );
-      closestDragListener.addDraggableItem( {
+      closestDragForwardingListener.addDraggableItem( {
         startDrag: massNode.dragListener._start.bind( massNode.dragListener ),
 
         // globalPoint is the position of our pointer.
