@@ -7,6 +7,7 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
+import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
@@ -28,7 +29,12 @@ const simOptions = {
     team: 'Wendy Adams, Ariel Paul, Kathy Perkins',
     qualityAssurance:
       'Steele Dalton, Bryce Griebenow, Ethan Johnson, Megan Lai, Liam Mulhall, Arnab Purkayastha, Benjamin Roberts, Jacob Romero, Clara Wilson, Kathryn Woessner'
-  }
+  },
+  preferencesModel: new PreferencesModel( {
+    localizationOptions: {
+      supportsDynamicLocales: false
+    }
+  } )
 };
 
 simLauncher.launch( () => {
