@@ -20,6 +20,12 @@
       "phet",
       "adapted-from-phet"
     ],
-    "simulation": true
+    "simulation": true,
+    "screenNameKeys": [
+      "MASSES_AND_SPRINGS/screen.intro",
+      "MASSES_AND_SPRINGS/screen.vectors",
+      "MASSES_AND_SPRINGS/screen.energy",
+      "MASSES_AND_SPRINGS/screen.lab"
+    ]
   }
 }
