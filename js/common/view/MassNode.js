@@ -144,17 +144,6 @@ class MassNode extends Node {
       }
     }
 
-    // Handler that moves the particle in model space.
-    const onDrag = () => {
-
-      if ( this.mass.springProperty.value ) {
-        this.mass.springProperty.value.buttonEnabledProperty.set( false );
-      }
-
-      // Checks if mass should be attached/detached to spring and adjusts its position if so.
-      model.adjustDraggedMassPosition( this.mass, dragBoundsProperty.value );
-    };
-
     // @public {DragListener} (read-write)
     this.dragListener = new DragListener( {
       positionProperty: this.mass.positionProperty,
@@ -167,7 +156,6 @@ class MassNode extends Node {
       tandem: tandem.createTandem( 'dragListener' ),
 
       start: () => {
-        onDrag();
         mass.userControlledProperty.set( true );
 
         if ( this.mass.springProperty.value ) {
@@ -175,8 +163,18 @@ class MassNode extends Node {
         }
         this.moveToFront();
       },
+
+      drag: () => {
+
+        if ( this.mass.springProperty.value ) {
+          this.mass.springProperty.value.buttonEnabledProperty.set( false );
+        }
+
+        // Checks if mass should be attached to or detached from the spring and adjust its position if so.
+        model.adjustDraggedMassPosition( this.mass, dragBoundsProperty.value );
+      },
+
       end: () => {
-        onDrag();
         mass.userControlledProperty.set( false );
         if ( mass.springProperty.value ) {
           mass.springProperty.value.periodTraceResetEmitter.emit();
