@@ -79,7 +79,7 @@ class PeriodTraceNode extends Node {
       if ( mass && !mass.userControlledProperty.value ) {
 
         // Transforming our model positions into view positions.
-        const massEquilibrium = spring.massEquilibriumYPositionProperty.value;
+        const massEquilibrium = spring.equilibriumYPositionProperty.value;
         const equilibriumYPosition = modelViewTransform.modelToViewY( massEquilibrium );
         const firstPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.firstPeakY );
         const secondPeakYPosition = modelViewTransform.modelToViewY( massEquilibrium + this.periodTrace.secondPeakY );

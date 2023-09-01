@@ -161,7 +161,7 @@ class GravityAndDampingControlNode extends Node {
         const dampingRange = MassesAndSpringsConstants.DAMPING_RANGE;
 
         // Creating damping hSlider
-        const dampingHSlider = new HSlider( model.dampingProperty, dampingRange, {
+        const hSlider = new HSlider( model.dampingProperty, dampingRange, {
           top: dampingHSliderTitle.bottom + SPACING * 3,
           left: dampingHSliderTitle.centerX,
           majorTickLength: 10,
@@ -179,33 +179,33 @@ class GravityAndDampingControlNode extends Node {
           tandem: tandem.createTandem( 'hSlider' )
         } );
 
-        dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString, {
+        hSlider.addMajorTick( dampingRange.min, new Text( noneString, {
           font: MassesAndSpringsConstants.LABEL_FONT,
           maxWidth: MAX_WIDTH
         } ) );
-        dampingHSlider.addMajorTick( dampingRange.min + ( dampingRange.max - dampingRange.min ) / 2 );
-        dampingHSlider.addMajorTick( dampingRange.max, new Text( lotsString, {
+        hSlider.addMajorTick( dampingRange.min + ( dampingRange.max - dampingRange.min ) / 2 );
+        hSlider.addMajorTick( dampingRange.max, new Text( lotsString, {
           font: MassesAndSpringsConstants.LABEL_FONT,
           maxWidth: MAX_WIDTH
         } ) );
         for ( let i = 1; i < 6; i++ ) {
           if ( i !== 3 ) {
-            dampingHSlider.addMinorTick( dampingRange.min + i * ( dampingRange.max - dampingRange.min ) / 6 );
+            hSlider.addMinorTick( dampingRange.min + i * ( dampingRange.max - dampingRange.min ) / 6 );
           }
         }
 
-        const contentNode = new Node( {
+        const gravityPropertyVBox = new Node( {
           children: [
             gravityNumberControl,
             gravityComboBox,
             dampingHSliderTitle,
-            dampingHSlider
+            hSlider
           ],
           tandem: tandem.createTandem( 'gravityPropertyVBox' )
         } );
 
         // Content to be added to parent node
-        super( { children: [ contentNode ] } );
+        super( { children: [ gravityPropertyVBox ] } );
 
         // Alignment of Node contents for panel with damping
         gravityNumberControl.top = this.top;
@@ -213,8 +213,8 @@ class GravityAndDampingControlNode extends Node {
         gravityComboBox.top = gravityNumberControl.bottom + 10;
         gravityComboBox.centerX = gravityNumberControl.centerX;
         dampingHSliderTitle.leftTop = new Vector2( gravityNumberControl.left, gravityComboBox.bottom + 10 );
-        dampingHSlider.centerX = gravityNumberControl.centerX;
-        dampingHSlider.top = dampingHSliderTitle.bottom + 5;
+        hSlider.centerX = gravityNumberControl.centerX;
+        hSlider.top = dampingHSliderTitle.bottom + 5;
       }
       else {
 
@@ -229,7 +229,7 @@ class GravityAndDampingControlNode extends Node {
         } );
 
         // Content to be added to parent node
-        const contentNode = new Node( {
+        const gravityPropertyVBox = new Node( {
           children: [
             gravityNumberControl,
             gravityComboBox,
@@ -237,7 +237,7 @@ class GravityAndDampingControlNode extends Node {
           ],
           tandem: tandem.createTandem( 'gravityPropertyVBox' )
         } );
-        super( { children: [ contentNode ] } );
+        super( { children: [ gravityPropertyVBox ] } );
 
         // Alignment of Node contents for panel without damping on intro and vector screen
         gravityComboBox.centerX = gravityNumberControl.centerX;
@@ -248,14 +248,14 @@ class GravityAndDampingControlNode extends Node {
     else {
 
       // Content to be added to parent node
-      const contentNode = new Node( {
+      const gravityPropertyVBox = new Node( {
         children: [
           gravityNumberControl,
           gravityComboBox
         ],
         tandem: tandem.createTandem( 'gravityPropertyVBox' )
       } );
-      super( { children: [ contentNode ] } );
+      super( { children: [ gravityPropertyVBox ] } );
 
       // Alignment of Node contents for panel without damping on intro and vector screen
       gravityComboBox.centerX = gravityNumberControl.centerX;

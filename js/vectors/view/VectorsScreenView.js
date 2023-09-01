@@ -59,7 +59,7 @@ class VectorsScreenView extends TwoSpringScreenView {
     const firstMassEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.firstSpring,
-      model.firstSpring.massEquilibriumYPositionProperty,
+      model.firstSpring.equilibriumYPositionProperty,
       firstMassEquilibriumVisibilityProperty, {
         stroke: 'black'
       }
@@ -69,7 +69,7 @@ class VectorsScreenView extends TwoSpringScreenView {
     const secondMassEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.secondSpring,
-      model.secondSpring.massEquilibriumYPositionProperty,
+      model.secondSpring.equilibriumYPositionProperty,
       secondMassEquilibriumVisibilityProperty, {
         stroke: 'black'
       }

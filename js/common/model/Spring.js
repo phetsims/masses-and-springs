@@ -63,7 +63,7 @@ class Spring {
     } );
 
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-    this.massEquilibriumYPositionProperty = new NumberProperty( 0,
+    this.equilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'm',
@@ -212,14 +212,14 @@ class Spring {
             this.positionProperty.get().y - naturalRestingLength - springExtension );
 
           // Set mass equilibrium y position
-          this.massEquilibriumYPositionProperty.set(
+          this.equilibriumYPositionProperty.set(
             this.positionProperty.get().y - naturalRestingLength - springExtension - mass.heightProperty.value / 2
           );
         }
       } );
 
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-    this.massEquilibriumYPositionProperty = new NumberProperty( 0,
+    this.equilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
         units: 'm',
@@ -231,7 +231,7 @@ class Spring {
       defaultValue: null
     } );
 
-    Multilink.multilink( [ this.massEquilibriumYPositionProperty, massCenterOfMassProperty ],
+    Multilink.multilink( [ this.equilibriumYPositionProperty, massCenterOfMassProperty ],
       ( massEquilibriumYPosition, massCenterOfMass ) => {
         if ( massCenterOfMass !== null ) {
           this.massEquilibriumDisplacementProperty.set( massCenterOfMass.y - massEquilibriumYPosition );
@@ -252,7 +252,7 @@ class Spring {
           // springExtension = mg/k
           const springExtensionValue =
             ( mass.massProperty.value * this.gravityProperty.value ) / this.springConstantProperty.value;
-          this.massEquilibriumYPositionProperty.set(
+          this.equilibriumYPositionProperty.set(
             this.positionProperty.get().y - naturalRestingLength - springExtensionValue - mass.heightProperty.value / 2
           );
         }

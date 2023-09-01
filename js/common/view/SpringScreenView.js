@@ -198,7 +198,7 @@ class SpringScreenView extends ScreenView {
     // @public {Node} Create specific layer for tools so they don't overlap the reset all button.
     this.toolsLayer = new Node( {
       children: [ this.stopwatchNode, this.rulerNode ],
-      tandem: tandem.createTandem( 'massLayer' ),
+      tandem: tandem.createTandem( 'toolsLayer' ),
       preventFit: true
     } );
 
@@ -411,7 +411,7 @@ class SpringScreenView extends ScreenView {
     }
 
     // Adjusting drag bounds of draggable objects based on visible bounds.
-    this.rulerNode.rulerNodeDragListener.dragBoundsProperty = visibleBounds.withOffsets(
+    this.rulerNode.dragListener.dragBoundsProperty = visibleBounds.withOffsets(
       -this.rulerNode.width / 2, this.rulerNode.height / 2, this.rulerNode.width / 2, -this.rulerNode.height / 2
     );
     this.massNodes.forEach( function( massNode ) {

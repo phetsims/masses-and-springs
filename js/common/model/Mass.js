@@ -266,7 +266,7 @@ class Mass {
           spring.naturalRestingLengthProperty.value -
           springExtensionValue
         );
-        spring.massEquilibriumYPositionProperty.set(
+        spring.equilibriumYPositionProperty.set(
           spring.positionProperty.get().y -
           spring.naturalRestingLengthProperty.value -
           springExtensionValue -
