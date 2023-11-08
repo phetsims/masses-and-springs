@@ -17,6 +17,8 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import MassesAndSpringsColors from '../view/MassesAndSpringsColors.js';
@@ -59,6 +61,7 @@ class MassesAndSpringsModel {
     this.gravityProperty = new Property( MassesAndSpringsConstants.EARTH_GRAVITY, {
       reentrant: true, // used due to extremely small rounding
       tandem: tandem.createTandem( 'gravityProperty' ),
+      phetioValueType: NullableIO( NumberIO ),
       units: 'm/s/s'
     } );
 
