@@ -155,6 +155,8 @@ class Mass {
         // The height used is determined based on the height of the shelf the masses rest on.
         const heightFromZero = position.y - options.zeroReferencePoint - this.heightProperty.value;
         return ( mass * gravity * ( heightFromZero ) );
+      }, {
+        accessNonDependencies: true
       } );
 
     // @public {Property.<number>} Kinetic energy of the mass
@@ -184,6 +186,8 @@ class Mass {
           this.preserveThermalEnergy = true;
         }
         return initialEnergy - totalEnergy;
+      }, {
+        accessNonDependencies: true
       } );
 
     // Used to determine when a peak is hit.
