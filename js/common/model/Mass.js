@@ -156,7 +156,7 @@ class Mass {
         const heightFromZero = position.y - options.zeroReferencePoint - this.heightProperty.value;
         return ( mass * gravity * ( heightFromZero ) );
       }, {
-        accessNonDependencies: true
+        strictAxonDependencies: false
       } );
 
     // @public {Property.<number>} Kinetic energy of the mass
@@ -187,7 +187,7 @@ class Mass {
         }
         return initialEnergy - totalEnergy;
       }, {
-        accessNonDependencies: true
+        strictAxonDependencies: false
       } );
 
     // Used to determine when a peak is hit.
