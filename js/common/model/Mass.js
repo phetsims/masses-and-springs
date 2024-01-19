@@ -156,7 +156,7 @@ class Mass {
         const heightFromZero = position.y - options.zeroReferencePoint - this.heightProperty.value;
         return ( mass * gravity * ( heightFromZero ) );
       }, {
-        strictAxonDependencies: false
+        strictAxonDependencies: false //TODO https://github.com/phetsims/masses-and-springs/issues/382
       } );
 
     // @public {Property.<number>} Kinetic energy of the mass
@@ -187,7 +187,7 @@ class Mass {
         }
         return initialEnergy - totalEnergy;
       }, {
-        strictAxonDependencies: false
+        strictAxonDependencies: false //TODO https://github.com/phetsims/masses-and-springs/issues/382
       } );
 
     // Used to determine when a peak is hit.
