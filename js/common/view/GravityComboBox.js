@@ -36,14 +36,15 @@ class GravityComboBox extends ComboBox {
     }, options );
 
     // {ComboBoxItem[]}
-    const items = Body.BODIES.map( body => {
+    const items = Body.BODIES.map( ( body, i ) => {
       return {
         value: body,
         createNode: () => {
           const bodyLabelText = new Text( body.title, {
             font: options.bodyFont,
             maxWidth: options.bodyMaxWidth,
-            tandem: tandem.createTandem( 'bodyLabelText' )
+            // That i is not desirable. TODO phet-io design this, see https://github.com/phetsims/masses-and-springs/issues/383
+            tandem: tandem.createTandem( `bodyLabelText${i}` )
           } );
           bodyLabelText.localBounds = bodyLabelText.localBounds.withX( options.xOffset );
           return bodyLabelText;
