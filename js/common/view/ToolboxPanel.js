@@ -99,7 +99,7 @@ class ToolboxPanel extends Panel {
       rulerNode.positionProperty.set( initialPosition );
 
       // Sending through the startDrag from icon to rulerNode causes it to receive all subsequent drag events.
-      rulerNode.dragListener.press( event );
+      rulerNode.rulerNodeDragListener.press( event );
     }, {
 
       // allow moving a finger (on a touchscreen) dragged across this node to interact with it

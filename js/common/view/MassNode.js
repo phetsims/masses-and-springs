@@ -121,7 +121,7 @@ class MassNode extends Node {
     if ( !mass.icon ) {
       const labelString = mass.mysteryLabel ?
                           questionMarkString : StringUtils.fillIn( massValueString, { mass: mass.mass * 1000 } );
-      const labelText = new Text( labelString, {
+      const label = new Text( labelString, {
         font: new PhetFont( { size: 12, weight: 'bold' } ),
         centerY: this.rect.centerY,
         centerX: 0,
@@ -129,17 +129,17 @@ class MassNode extends Node {
         maxWidth: !mass.adjustable ? this.rect.width : 30, // Adjustable masses require smaller label maxWidth.
         tandem: tandem.createTandem( 'labelText' )
       } );
-      this.addChild( labelText );
+      this.addChild( label );
 
       mass.massProperty.link( () => {
-        labelText.center = this.rect.center;
+        label.center = this.rect.center;
       } );
 
       // Adjust the mass label for adjustable masses.
       if ( this.mass.adjustable ) {
         this.mass.massProperty.link( massValue => {
-          labelText.setString( StringUtils.fillIn( massValueString, { mass: Utils.roundSymmetric( massValue * 1000 ) } ) );
-          labelText.center = this.rect.center;
+          label.setString( StringUtils.fillIn( massValueString, { mass: Utils.roundSymmetric( massValue * 1000 ) } ) );
+          label.center = this.rect.center;
         } );
       }
     }

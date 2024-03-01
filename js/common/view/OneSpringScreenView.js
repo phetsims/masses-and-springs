@@ -91,7 +91,7 @@ class OneSpringScreenView extends SpringScreenView {
     this.massEquilibriumLineNode = new ReferenceLineNode(
       this.modelViewTransform,
       model.firstSpring,
-      model.firstSpring.equilibriumYPositionProperty,
+      model.firstSpring.massEquilibriumYPositionProperty,
       this.equilibriumVisibilityProperty, {
         stroke: 'black'
       }

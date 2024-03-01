@@ -71,7 +71,7 @@ class DraggableRulerNode extends RulerNode {
     this.draggedProperty = new BooleanProperty( false );
 
     // @private {DragListener} (read-only) handles ruler node drag events
-    this.dragListener = new DragListener( {
+    this.rulerNodeDragListener = new DragListener( {
       positionProperty: this.positionProperty,
       useParentOffset: true,
       tandem: tandem.createTandem( 'dragListener' ),
@@ -84,7 +84,7 @@ class DraggableRulerNode extends RulerNode {
         endDragCallback();
       }
     } );
-    this.addInputListener( this.dragListener );
+    this.addInputListener( this.rulerNodeDragListener );
 
     visibleProperty.linkAttribute( this, 'visible' );
   }

@@ -63,7 +63,7 @@ class ConstantsControlPanel extends Node {
         tandem: tandem.createTandem( 'springConstantRadioButton' )
       } );
 
-    const vBox = new VBox( {
+    const nodeContent = new VBox( {
       align: 'left',
       spacing: RADIO_BUTTON_SPACING,
       children: [
@@ -75,7 +75,7 @@ class ConstantsControlPanel extends Node {
       ],
       tandem: tandem.createTandem( 'vBox' )
     } );
-    this.addChild( vBox );
+    this.addChild( nodeContent );
   }
 }
 

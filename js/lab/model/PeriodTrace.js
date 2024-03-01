@@ -55,7 +55,7 @@ class PeriodTrace {
     } );
 
     // When the mass equilibrium position changes reset the trace.
-    spring.equilibriumYPositionProperty.link( () => {
+    spring.massEquilibriumYPositionProperty.link( () => {
       this.onFaded();
     } );
 
