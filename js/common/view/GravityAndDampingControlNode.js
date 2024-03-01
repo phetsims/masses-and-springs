@@ -176,7 +176,7 @@ class GravityAndDampingControlNode extends Node {
             value = Utils.roundSymmetric( value * 100 / 5.75 ) * 5.75;
             return value / 100;
           },
-          tandem: tandem.createTandem( 'hSlider' )
+          tandem: tandem.createTandem( 'dampingHSlider' )
         } );
 
         dampingHSlider.addMajorTick( dampingRange.min, new Text( noneString, {
@@ -194,6 +194,7 @@ class GravityAndDampingControlNode extends Node {
           }
         }
 
+        // eslint-disable-next-line tandem-name-should-match
         const contentNode = new Node( {
           children: [
             gravityNumberControl,
@@ -229,6 +230,7 @@ class GravityAndDampingControlNode extends Node {
         } );
 
         // Content to be added to parent node
+        // eslint-disable-next-line tandem-name-should-match
         const contentNode = new Node( {
           children: [
             gravityNumberControl,
@@ -248,6 +250,7 @@ class GravityAndDampingControlNode extends Node {
     else {
 
       // Content to be added to parent node
+      // eslint-disable-next-line tandem-name-should-match
       const contentNode = new Node( {
         children: [
           gravityNumberControl,

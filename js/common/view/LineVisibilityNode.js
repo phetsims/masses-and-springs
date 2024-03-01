@@ -42,14 +42,14 @@ class LineVisibilityNode extends Node {
     const blueLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'rgb( 65, 66, 232 )', tandem.createTandem( 'blueLine' ) );
     const redLine = MassesAndSpringsConstants.CREATE_LINE_ICON( 'red', tandem.createTandem( 'redLine' ) );
 
-    let equilibriumText = new Text( equilibriumPositionString, {
+    let equilibriumPositionText = new Text( equilibriumPositionString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: TEXT_MAX_WIDTH,
       tandem: tandem.createTandem( 'equilibriumPositionText' )
     } );
 
     if ( options.massEquilibrium ) {
-      equilibriumText = new Text( massEquilibriumString, {
+      equilibriumPositionText = new Text( massEquilibriumString, {
         font: MassesAndSpringsConstants.TITLE_FONT,
         maxWidth: TEXT_MAX_WIDTH,
         tandem: tandem.createTandem( 'equilibriumPositionText' )
@@ -63,7 +63,7 @@ class LineVisibilityNode extends Node {
     const naturalLengthVisibleAlignBox = new AlignBox( new Text( naturalLengthString, {
       font: MassesAndSpringsConstants.TITLE_FONT, maxWidth: TEXT_MAX_WIDTH
     } ), { group: alignGroup, xAlign: 'left' } );
-    const equilibriumAlignBox = new AlignBox( equilibriumText, { group: alignGroup, xAlign: 'left' } );
+    const equilibriumAlignBox = new AlignBox( equilibriumPositionText, { group: alignGroup, xAlign: 'left' } );
     const movableAlignBox = new AlignBox( new Text( movableLineString, {
       font: MassesAndSpringsConstants.TITLE_FONT,
       maxWidth: TEXT_MAX_WIDTH,

@@ -73,7 +73,7 @@ class ConstantsControlPanel extends Node {
           tandem: tandem
         } ), springConstantRadioButton, thicknessRadioButton
       ],
-      tandem: tandem.createTandem( 'vBox' )
+      tandem: tandem.createTandem( 'nodeContent' )
     } );
     this.addChild( nodeContent );
   }
