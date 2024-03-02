@@ -1,4 +1,4 @@
-// Copyright 2017-2023, University of Colorado Boulder
+// Copyright 2017-2024, University of Colorado Boulder
 
 /**
  * Panel that manages options for visibility of reference lines.
