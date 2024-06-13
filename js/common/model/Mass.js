@@ -155,8 +155,6 @@ class Mass {
         // The height used is determined based on the height of the shelf the masses rest on.
         const heightFromZero = position.y - options.zeroReferencePoint - this.heightProperty.value;
         return ( mass * gravity * ( heightFromZero ) );
-      }, {
-        strictAxonDependencies: false //TODO https://github.com/phetsims/masses-and-springs/issues/382
       } );
 
     // @public {Property.<number>} Kinetic energy of the mass
@@ -186,8 +184,6 @@ class Mass {
           this.preserveThermalEnergy = true;
         }
         return initialEnergy - totalEnergy;
-      }, {
-        strictAxonDependencies: false //TODO https://github.com/phetsims/masses-and-springs/issues/382
       } );
 
     // Used to determine when a peak is hit.
