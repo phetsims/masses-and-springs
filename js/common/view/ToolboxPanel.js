@@ -7,13 +7,13 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import { AlignBox, DragListener, HBox, SimpleDragHandler } from '../../../../scenery/js/imports.js';
-import Property from '../../../../axon/js/Property.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import massesAndSprings from '../../massesAndSprings.js';
@@ -78,13 +78,15 @@ class ToolboxPanel extends Panel {
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
     const rulerIcon = ruler.rasterized( {
       resolution: 5,
+      nodeOptions: {
+        cursor: 'pointer',
+        tandem: tandem.createTandem( 'rulerIcon' )
+      },
       imageOptions: {
 
         // Instead of changing the rendering, we'll dynamically generate a mipmap so the ruler icon appearance looks better.
         // See https://github.com/phetsims/masses-and-springs/issues/199.
-        mipmap: true,
-        cursor: 'pointer',
-        tandem: tandem.createTandem( 'rulerIcon' )
+        mipmap: true
       }
     } );
 
@@ -117,7 +119,7 @@ class ToolboxPanel extends Panel {
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
     const timerIcon = timer.rasterized( {
       resolution: 5,
-      imageOptions: {
+      nodeOptions: {
         cursor: 'pointer',
         tandem: tandem.createTandem( 'timerIcon' )
       }
