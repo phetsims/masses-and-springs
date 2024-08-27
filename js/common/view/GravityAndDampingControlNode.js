@@ -81,7 +81,9 @@ class GravityAndDampingControlNode extends Node {
         includeArrowButtons: !options.useSliderLabels,
         layoutFunction: NumberControl.createLayoutFunction4( {
           sliderPadding: options.useTextSliderLabels ? 0 : 13,
-          hasReadoutProperty: new DerivedProperty( [ model.bodyProperty ], body => !options.useSliderLabels && ( body !== Body.PLANET_X ) ),
+          numberDisplayParentNodeOptions: {
+            visibleProperty: new DerivedProperty( [ model.bodyProperty ], body => !options.useSliderLabels && ( body !== Body.PLANET_X ) )
+          },
           createBottomContent: bottomBox => {
 
             const bottomContent = new Node( {

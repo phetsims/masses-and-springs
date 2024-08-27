@@ -67,7 +67,7 @@ class MassValueControlPanel extends Panel {
       layoutFunction: NumberControl.createLayoutFunction4( {
         verticalSpacing: 8,
         arrowButtonsXSpacing: 5,
-        hasReadoutProperty: new Property( true )
+        numberDisplayParentNodeOptions: { visibleProperty: new Property( true ) }
       } ),
       delta: 1,
 
