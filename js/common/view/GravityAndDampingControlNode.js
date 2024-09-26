@@ -196,7 +196,7 @@ class GravityAndDampingControlNode extends Node {
           }
         }
 
-        // eslint-disable-next-line tandem-name-should-match
+        // eslint-disable-next-line phet/tandem-name-should-match
         const contentNode = new Node( {
           children: [
             gravityNumberControl,
@@ -232,7 +232,7 @@ class GravityAndDampingControlNode extends Node {
         } );
 
         // Content to be added to parent node
-        // eslint-disable-next-line tandem-name-should-match
+        // eslint-disable-next-line phet/tandem-name-should-match
         const contentNode = new Node( {
           children: [
             gravityNumberControl,
@@ -252,7 +252,7 @@ class GravityAndDampingControlNode extends Node {
     else {
 
       // Content to be added to parent node
-      // eslint-disable-next-line tandem-name-should-match
+      // eslint-disable-next-line phet/tandem-name-should-match
       const contentNode = new Node( {
         children: [
           gravityNumberControl,

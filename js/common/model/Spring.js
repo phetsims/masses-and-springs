@@ -63,7 +63,7 @@ class Spring {
     } );
 
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-    // eslint-disable-next-line tandem-name-should-match
+    // eslint-disable-next-line phet/tandem-name-should-match
     this.massEquilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
@@ -220,7 +220,7 @@ class Spring {
       } );
 
     // @public {Property.<number>} y position of the equilibrium position centered on mass's center of mass
-    // eslint-disable-next-line tandem-name-should-match
+    // eslint-disable-next-line phet/tandem-name-should-match
     this.massEquilibriumYPositionProperty = new NumberProperty( 0,
       {
         tandem: tandem.createTandem( 'equilibriumYPositionProperty' ),
