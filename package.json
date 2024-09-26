@@ -36,11 +36,5 @@
       "MASSES_AND_SPRINGS/screen.energy",
       "MASSES_AND_SPRINGS/screen.lab"
     ]
-  },
-  "eslintConfig": {
-    "extends": "../chipper/eslint/sim_eslintrc.js",
-    "rules": {
-      "no-view-imported-from-model": "off"
-    }
   }
 }
