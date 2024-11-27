@@ -7,10 +7,10 @@
  * @author Denzell Barnett (PhET Interactive Simulations)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import { DragListener, Line, LinearGradient, Node, Rectangle } from '../../../../scenery/js/imports.js';
-import Property from '../../../../axon/js/Property.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsColors from './MassesAndSpringsColors.js';
 
