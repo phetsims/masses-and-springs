@@ -13,7 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
 import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
-import { AlignBox, DragListener, HBox, SimpleDragHandler } from '../../../../scenery/js/imports.js';
+import { AlignBox, DragListener, HBox, rasterized, SimpleDragHandler } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import massesAndSprings from '../../massesAndSprings.js';
@@ -76,7 +76,7 @@ class ToolboxPanel extends Panel {
     ruler.scale( 0.12 );
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
-    const rulerIcon = ruler.rasterized( {
+    const rulerIcon = rasterized( ruler, {
       resolution: 5,
       nodeOptions: {
         cursor: 'pointer',
@@ -117,7 +117,7 @@ class ToolboxPanel extends Panel {
     } );
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
-    const timerIcon = timer.rasterized( {
+    const timerIcon = rasterized( timer, {
       resolution: 5,
       nodeOptions: {
         cursor: 'pointer',
