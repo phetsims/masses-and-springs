@@ -7,7 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import ComboBox from '../../../../sun/js/ComboBox.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';

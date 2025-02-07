@@ -8,7 +8,9 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import massesAndSprings from '../../massesAndSprings.js';

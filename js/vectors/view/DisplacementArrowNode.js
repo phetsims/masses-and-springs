@@ -9,7 +9,9 @@
 import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import LineArrowNode from '../../../../scenery-phet/js/LineArrowNode.js';
-import { Color, Line, Node } from '../../../../scenery/js/imports.js';
+import Line from '../../../../scenery/js/nodes/Line.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
 class DisplacementArrowNode extends Node {

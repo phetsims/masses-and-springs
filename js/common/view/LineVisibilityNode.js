@@ -7,7 +7,13 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { AlignBox, AlignGroup, HBox, Node, Text, VBox, VStrut } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';

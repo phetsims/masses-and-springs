@@ -11,7 +11,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import RulerNode from '../../../../scenery-phet/js/RulerNode.js';
-import { DragListener } from '../../../../scenery/js/imports.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';

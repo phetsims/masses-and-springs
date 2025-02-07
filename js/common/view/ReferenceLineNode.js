@@ -11,7 +11,7 @@ import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { Line } from '../../../../scenery/js/imports.js';
+import Line from '../../../../scenery/js/nodes/Line.js';
 import massesAndSprings from '../../massesAndSprings.js';
 
 // constants

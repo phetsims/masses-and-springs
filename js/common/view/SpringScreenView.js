@@ -17,7 +17,12 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import StopwatchNode from '../../../../scenery-phet/js/StopwatchNode.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
-import { AlignBox, AlignGroup, HBox, Node, PaintColorProperty, Plane } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Plane from '../../../../scenery/js/nodes/Plane.js';
+import PaintColorProperty from '../../../../scenery/js/util/PaintColorProperty.js';
 import ClosestDragForwardingListener from '../../../../sun/js/ClosestDragForwardingListener.js';
 import MutableOptionsNode from '../../../../sun/js/MutableOptionsNode.js';
 import Panel from '../../../../sun/js/Panel.js';

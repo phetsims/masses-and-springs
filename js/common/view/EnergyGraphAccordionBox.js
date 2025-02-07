@@ -19,7 +19,16 @@ import MoveToTrashLegendButton from '../../../../scenery-phet/js/buttons/MoveToT
 import ZoomButton from '../../../../scenery-phet/js/buttons/ZoomButton.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, Color, HBox, HStrut, Node, Rectangle, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import HStrut from '../../../../scenery/js/nodes/HStrut.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import ColorConstants from '../../../../sun/js/ColorConstants.js';
 import Dialog from '../../../../sun/js/Dialog.js';

@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import { Color } from '../../../../scenery/js/imports.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import MassesAndSpringsModel from '../../common/model/MassesAndSpringsModel.js';
 import MassesAndSpringsColors from '../../common/view/MassesAndSpringsColors.js';
