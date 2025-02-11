@@ -17,7 +17,7 @@ import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js
 import AlignBox from '../../../../scenery/js/layout/nodes/AlignBox.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
-import { rasterized } from '../../../../scenery/js/util/rasterized.js';
+import { rasterizeNode } from '../../../../scenery/js/util/rasterizeNode.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import massesAndSprings from '../../massesAndSprings.js';
@@ -80,7 +80,7 @@ class ToolboxPanel extends Panel {
     ruler.scale( 0.12 );
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
-    const rulerIcon = rasterized( ruler, {
+    const rulerIcon = rasterizeNode( ruler, {
       resolution: 5,
       nodeOptions: {
         cursor: 'pointer',
@@ -121,7 +121,7 @@ class ToolboxPanel extends Panel {
     } );
 
     // {Node} Create timer icon. Visible option is used only for reset() in ToolboxPanel.js
-    const timerIcon = rasterized( timer, {
+    const timerIcon = rasterizeNode( timer, {
       resolution: 5,
       nodeOptions: {
         cursor: 'pointer',
