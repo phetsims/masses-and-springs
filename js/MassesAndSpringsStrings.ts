@@ -132,4 +132,6 @@ type StringsType = {
 
 const MassesAndSpringsStrings = getStringModule( 'MASSES_AND_SPRINGS' ) as StringsType;
 
+massesAndSprings.register( 'MassesAndSpringsStrings', MassesAndSpringsStrings );
+
 export default MassesAndSpringsStrings;
