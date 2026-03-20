@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "6878acdf2910b90f6cdb0212a786406e76d81566",
+    "sha": "b5b67647b2de3663ac933f8b04b6f9345682efda",
     "branch": "HEAD"
   },
   "chipper": {
@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "masses-and-springs": {
-    "sha": "3f55f34abb4318d508162a07375d6d3ec8669fd2",
+    "sha": "90e1e8e573644d7f5ea9ce79500541d628fa1615",
     "branch": "1.0"
   },
   "phet-core": {
