@@ -8,7 +8,6 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 class PeriodTrace {
   /**
@@ -111,7 +110,5 @@ class PeriodTrace {
     this.crossingProperty.reset();
   }
 }
-
-massesAndSprings.register( 'PeriodTrace', PeriodTrace );
 
 export default PeriodTrace;

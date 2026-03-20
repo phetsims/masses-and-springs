@@ -8,7 +8,6 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 class ShelfNode extends Rectangle {
   /**
@@ -27,7 +26,5 @@ class ShelfNode extends Rectangle {
     super( options );
   }
 }
-
-massesAndSprings.register( 'ShelfNode', ShelfNode );
 
 export default ShelfNode;

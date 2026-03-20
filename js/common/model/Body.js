@@ -9,7 +9,6 @@
 
 import IOType from '../../../../tandem/js/types/IOType.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
@@ -33,8 +32,6 @@ class Body {
     this.gravity = gravity;
   }
 }
-
-massesAndSprings.register( 'Body', Body );
 
 // @public {Body} (read-only) body objects for gravity panel
 Body.MOON = new Body( bodyMoonString, MassesAndSpringsConstants.MOON_GRAVITY );

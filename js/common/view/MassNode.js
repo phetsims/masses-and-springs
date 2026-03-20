@@ -23,7 +23,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import ForcesMode from '../model/ForcesMode.js';
@@ -378,7 +377,5 @@ class MassNode extends Node {
     } );
   }
 }
-
-massesAndSprings.register( 'MassNode', MassNode );
 
 export default MassNode;

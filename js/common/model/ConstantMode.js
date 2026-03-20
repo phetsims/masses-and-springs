@@ -6,11 +6,9 @@
  */
 
 import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 const ConstantMode = EnumerationDeprecated.byKeys( [
   'SPRING_CONSTANT',
   'SPRING_THICKNESS'
 ] );
-massesAndSprings.register( 'ConstantMode', ConstantMode );
 export default ConstantMode;

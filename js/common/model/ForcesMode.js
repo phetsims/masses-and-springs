@@ -6,11 +6,9 @@
  */
 
 import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 const ForcesMode = EnumerationDeprecated.byKeys( [
   'FORCES',
   'NET_FORCES'
 ] );
-massesAndSprings.register( 'ForcesMode', ForcesMode );
 export default ForcesMode;

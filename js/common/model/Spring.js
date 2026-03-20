@@ -21,7 +21,6 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import IOType from '../../../../tandem/js/types/IOType.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import ReferenceIO from '../../../../tandem/js/types/ReferenceIO.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
 // constants
@@ -611,8 +610,6 @@ class Spring {
     }
   }
 }
-
-massesAndSprings.register( 'Spring', Spring );
 
 Spring.SpringIO = new IOType( 'SpringIO', {
   valueType: Spring,

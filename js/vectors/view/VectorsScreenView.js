@@ -13,7 +13,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import ReferenceLineNode from '../../common/view/ReferenceLineNode.js';
 import TwoSpringScreenView from '../../common/view/TwoSpringScreenView.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import DisplacementArrowNode from './DisplacementArrowNode.js';
 import VectorVisibilityControlNode from './VectorVisibilityControlNode.js';
 
@@ -126,5 +125,4 @@ class VectorsScreenView extends TwoSpringScreenView {
   }
 }
 
-massesAndSprings.register( 'VectorsScreenView', VectorsScreenView );
 export default VectorsScreenView;

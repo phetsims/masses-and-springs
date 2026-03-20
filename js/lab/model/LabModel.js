@@ -13,7 +13,6 @@ import Color from '../../../../scenery/js/util/Color.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import MassesAndSpringsModel from '../../common/model/MassesAndSpringsModel.js';
 import MassesAndSpringsColors from '../../common/view/MassesAndSpringsColors.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import PeriodTrace from './PeriodTrace.js';
 
 // constants
@@ -84,7 +83,5 @@ class LabModel extends MassesAndSpringsModel {
     this.gravityAccordionBoxExpandedProperty && this.gravityAccordionBoxExpandedProperty.reset();
   }
 }
-
-massesAndSprings.register( 'LabModel', LabModel );
 
 export default LabModel;

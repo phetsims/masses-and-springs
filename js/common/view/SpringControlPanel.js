@@ -13,7 +13,6 @@ import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
 class SpringControlPanel extends Panel {
@@ -94,5 +93,4 @@ class SpringControlPanel extends Panel {
   }
 }
 
-massesAndSprings.register( 'SpringControlPanel', SpringControlPanel );
 export default SpringControlPanel;

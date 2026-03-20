@@ -12,7 +12,6 @@ import LineArrowNode from '../../../../scenery-phet/js/LineArrowNode.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 class DisplacementArrowNode extends Node {
   /**
@@ -71,7 +70,5 @@ class DisplacementArrowNode extends Node {
     super( options );
   }
 }
-
-massesAndSprings.register( 'DisplacementArrowNode', DisplacementArrowNode );
 
 export default DisplacementArrowNode;

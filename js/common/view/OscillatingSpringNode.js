@@ -12,7 +12,6 @@ import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ParametricSpringNode from '../../../../scenery-phet/js/ParametricSpringNode.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 // constants
 const LINEAR_LOOP_MAPPING = new LinearFunction( 0.1, 0.5, 2, 12 );
@@ -100,5 +99,4 @@ class OscillatingSpringNode extends ParametricSpringNode {
 // @public
 OscillatingSpringNode.MAP_NUMBER_OF_LOOPS = MAP_NUMBER_OF_LOOPS;
 
-massesAndSprings.register( 'OscillatingSpringNode', OscillatingSpringNode );
 export default OscillatingSpringNode;

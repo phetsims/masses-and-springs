@@ -13,7 +13,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import DisplacementArrowNode from '../../vectors/view/DisplacementArrowNode.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
@@ -223,5 +222,4 @@ class OneSpringScreenView extends SpringScreenView {
   }
 }
 
-massesAndSprings.register( 'OneSpringScreenView', OneSpringScreenView );
 export default OneSpringScreenView;

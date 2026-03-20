@@ -11,7 +11,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import MassesAndSpringsColors from './MassesAndSpringsColors.js';
@@ -123,5 +122,4 @@ class TwoSpringScreenView extends SpringScreenView {
   }
 }
 
-massesAndSprings.register( 'TwoSpringScreenView', TwoSpringScreenView );
 export default TwoSpringScreenView;

@@ -20,7 +20,6 @@ import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import { rasterizeNode } from '../../../../scenery/js/util/rasterizeNode.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
 class ToolboxPanel extends Panel {
@@ -158,5 +157,4 @@ class ToolboxPanel extends Panel {
   }
 }
 
-massesAndSprings.register( 'ToolboxPanel', ToolboxPanel );
 export default ToolboxPanel;

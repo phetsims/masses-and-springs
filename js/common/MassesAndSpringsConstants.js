@@ -9,7 +9,6 @@
 import RangeWithValue from '../../../dot/js/RangeWithValue.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import Line from '../../../scenery/js/nodes/Line.js';
-import massesAndSprings from '../massesAndSprings.js';
 import MassesAndSpringsColors from './view/MassesAndSpringsColors.js';
 
 const MassesAndSpringsConstants = {
@@ -100,7 +99,5 @@ const MassesAndSpringsConstants = {
   LEFT_SPRING_X: 1.0,
   SPRING_X: 1.2
 };
-
-massesAndSprings.register( 'MassesAndSpringsConstants', MassesAndSpringsConstants );
 
 export default MassesAndSpringsConstants;

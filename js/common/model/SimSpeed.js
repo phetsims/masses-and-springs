@@ -6,11 +6,9 @@
  */
 
 import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 const SimSpeed = EnumerationDeprecated.byKeys( [
   'NORMAL',
   'SLOW'
 ] );
-massesAndSprings.register( 'SimSpeed', SimSpeed );
 export default SimSpeed;

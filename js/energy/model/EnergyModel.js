@@ -9,7 +9,6 @@
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import MassesAndSpringsModel from '../../common/model/MassesAndSpringsModel.js';
 import MassesAndSpringsColors from '../../common/view/MassesAndSpringsColors.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 class EnergyModel extends MassesAndSpringsModel {
   /**
@@ -40,7 +39,5 @@ class EnergyModel extends MassesAndSpringsModel {
     super.reset();
   }
 }
-
-massesAndSprings.register( 'EnergyModel', EnergyModel );
 
 export default EnergyModel;

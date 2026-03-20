@@ -15,7 +15,6 @@ import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsColors from './MassesAndSpringsColors.js';
 
 class MovableLineNode extends Node {
@@ -105,7 +104,5 @@ class MovableLineNode extends Node {
     this.positionProperty.reset();
   }
 }
-
-massesAndSprings.register( 'MovableLineNode', MovableLineNode );
 
 export default MovableLineNode;

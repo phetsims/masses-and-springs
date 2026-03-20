@@ -20,7 +20,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import SunConstants from '../../../../sun/js/SunConstants.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
@@ -120,5 +119,4 @@ class MassValueControlPanel extends Panel {
   }
 }
 
-massesAndSprings.register( 'MassValueControlPanel', MassValueControlPanel );
 export default MassValueControlPanel;

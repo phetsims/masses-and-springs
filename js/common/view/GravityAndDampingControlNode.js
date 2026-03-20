@@ -20,7 +20,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import SunConstants from '../../../../sun/js/SunConstants.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import Body from '../model/Body.js';
@@ -307,7 +306,5 @@ class GravityAndDampingControlNode extends Node {
     this.mutate( options );
   }
 }
-
-massesAndSprings.register( 'GravityAndDampingControlNode', GravityAndDampingControlNode );
 
 export default GravityAndDampingControlNode;

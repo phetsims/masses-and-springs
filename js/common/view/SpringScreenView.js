@@ -27,7 +27,6 @@ import ClosestDragForwardingListener from '../../../../sun/js/ClosestDragForward
 import MutableOptionsNode from '../../../../sun/js/MutableOptionsNode.js';
 import Panel from '../../../../sun/js/Panel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import IndicatorVisibilityControlNode from '../../vectors/view/IndicatorVisibilityControlNode.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
@@ -440,5 +439,4 @@ class SpringScreenView extends ScreenView {
   }
 }
 
-massesAndSprings.register( 'SpringScreenView', SpringScreenView );
 export default SpringScreenView;

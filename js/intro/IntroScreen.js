@@ -12,7 +12,6 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import introScreenIcon_png from '../../images/introScreenIcon_png.js';
 import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
-import massesAndSprings from '../massesAndSprings.js';
 import MassesAndSpringsStrings from '../MassesAndSpringsStrings.js';
 import IntroModel from './model/IntroModel.js';
 import IntroScreenView from './view/IntroScreenView.js';
@@ -42,5 +41,4 @@ class IntroScreen extends Screen {
   }
 }
 
-massesAndSprings.register( 'IntroScreen', IntroScreen );
 export default IntroScreen;

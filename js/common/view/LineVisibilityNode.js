@@ -15,7 +15,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
@@ -115,7 +114,5 @@ class LineVisibilityNode extends Node {
     this.addChild( controlBox );
   }
 }
-
-massesAndSprings.register( 'LineVisibilityNode', LineVisibilityNode );
 
 export default LineVisibilityNode;

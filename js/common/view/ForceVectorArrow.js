@@ -7,7 +7,6 @@
  */
 
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 class ForceVectorArrow extends ArrowNode {
 
@@ -26,5 +25,4 @@ class ForceVectorArrow extends ArrowNode {
   }
 }
 
-massesAndSprings.register( 'ForceVectorArrow', ForceVectorArrow );
 export default ForceVectorArrow;

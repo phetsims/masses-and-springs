@@ -12,7 +12,6 @@ import Image from '../../../scenery/js/nodes/Image.js';
 import vectorsScreenIcon_png from '../../images/vectorsScreenIcon_png.js';
 import MassesAndSpringsModel from '../common/model/MassesAndSpringsModel.js';
 import MassesAndSpringsColors from '../common/view/MassesAndSpringsColors.js';
-import massesAndSprings from '../massesAndSprings.js';
 import MassesAndSpringsStrings from '../MassesAndSpringsStrings.js';
 import VectorsScreenView from './view/VectorsScreenView.js';
 
@@ -48,5 +47,4 @@ class VectorsScreen extends Screen {
   }
 }
 
-massesAndSprings.register( 'VectorsScreen', VectorsScreen );
 export default VectorsScreen;

@@ -57,6 +57,4 @@ const MassesAndSpringsColors = {
   } )
 };
 
-massesAndSprings.register( 'MassesAndSpringsColors', MassesAndSpringsColors );
-
 export default MassesAndSpringsColors;

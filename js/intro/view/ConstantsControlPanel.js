@@ -13,7 +13,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import AquaRadioButton from '../../../../sun/js/AquaRadioButton.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 
 const springConstantString = MassesAndSpringsStrings.springConstant;
@@ -81,5 +80,4 @@ class ConstantsControlPanel extends Node {
   }
 }
 
-massesAndSprings.register( 'ConstantsControlPanel', ConstantsControlPanel );
 export default ConstantsControlPanel;

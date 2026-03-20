@@ -13,7 +13,6 @@ import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js
 import ConstantMode from '../../common/model/ConstantMode.js';
 import MassesAndSpringsModel from '../../common/model/MassesAndSpringsModel.js';
 import SceneMode from '../../common/model/SceneMode.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 class IntroModel extends MassesAndSpringsModel {
   /**
@@ -203,7 +202,5 @@ class IntroModel extends MassesAndSpringsModel {
     this.resetScene( false );
   }
 }
-
-massesAndSprings.register( 'IntroModel', IntroModel );
 
 export default IntroModel;

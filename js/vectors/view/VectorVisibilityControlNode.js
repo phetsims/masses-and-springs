@@ -20,7 +20,6 @@ import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js
 import ForcesMode from '../../common/model/ForcesMode.js';
 import ForceVectorArrow from '../../common/view/ForceVectorArrow.js';
 import VectorArrow from '../../common/view/VectorArrow.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 
 const accelerationString = MassesAndSpringsStrings.acceleration;
@@ -223,7 +222,5 @@ class VectorVisibilityControlNode extends Node {
     this.addChild( controlsHBox );
   }
 }
-
-massesAndSprings.register( 'VectorVisibilityControlNode', VectorVisibilityControlNode );
 
 export default VectorVisibilityControlNode;

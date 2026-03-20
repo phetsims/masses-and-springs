@@ -16,7 +16,6 @@ import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js
 import SceneMode from '../../common/model/SceneMode.js';
 import Spring from '../../common/model/Spring.js';
 import OscillatingSpringNode from '../../common/view/OscillatingSpringNode.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 // constants
 const IMAGE_SCALE = 0.3;
@@ -117,7 +116,5 @@ class SceneSelectionButton extends Node {
     this.addChild( secondVerticalLineNode );
   }
 }
-
-massesAndSprings.register( 'SceneSelectionButton', SceneSelectionButton );
 
 export default SceneSelectionButton;

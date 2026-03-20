@@ -26,7 +26,6 @@ import MassesAndSpringsColors from '../../common/view/MassesAndSpringsColors.js'
 import ReferenceLineNode from '../../common/view/ReferenceLineNode.js';
 import SpringControlPanel from '../../common/view/SpringControlPanel.js';
 import TwoSpringScreenView from '../../common/view/TwoSpringScreenView.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import ConstantsControlPanel from './ConstantsControlPanel.js';
 import SceneSelectionButton from './SceneSelectionButton.js';
@@ -249,5 +248,4 @@ class IntroScreenView extends TwoSpringScreenView {
   }
 }
 
-massesAndSprings.register( 'IntroScreenView', IntroScreenView );
 export default IntroScreenView;

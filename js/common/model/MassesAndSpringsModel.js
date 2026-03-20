@@ -19,7 +19,6 @@ import Stopwatch from '../../../../scenery-phet/js/Stopwatch.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import MassesAndSpringsColors from '../view/MassesAndSpringsColors.js';
 import OscillatingSpringNode from '../view/OscillatingSpringNode.js';
@@ -391,7 +390,5 @@ class MassesAndSpringsModel {
     } );
   }
 }
-
-massesAndSprings.register( 'MassesAndSpringsModel', MassesAndSpringsModel );
 
 export default MassesAndSpringsModel;

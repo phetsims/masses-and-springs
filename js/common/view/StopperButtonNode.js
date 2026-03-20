@@ -9,7 +9,6 @@
 import merge from '../../../../phet-core/js/merge.js';
 import StopSignNode from '../../../../scenery-phet/js/StopSignNode.js';
 import RectangularPushButton from '../../../../sun/js/buttons/RectangularPushButton.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
 class StopperButtonNode extends RectangularPushButton {
@@ -37,5 +36,4 @@ class StopperButtonNode extends RectangularPushButton {
   }
 }
 
-massesAndSprings.register( 'StopperButtonNode', StopperButtonNode );
 export default StopperButtonNode;

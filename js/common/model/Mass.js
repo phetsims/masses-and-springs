@@ -19,7 +19,6 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import Easing from '../../../../twixt/js/Easing.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 import Spring from './Spring.js';
 
@@ -364,7 +363,5 @@ class Mass {
     this.initialTotalEnergyProperty.reset();
   }
 }
-
-massesAndSprings.register( 'Mass', Mass );
 
 export default Mass;

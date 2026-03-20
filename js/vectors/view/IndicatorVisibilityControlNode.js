@@ -18,7 +18,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VerticalCheckboxGroup from '../../../../sun/js/VerticalCheckboxGroup.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import DisplacementArrowNode from './DisplacementArrowNode.js';
 
@@ -166,7 +165,5 @@ class IndicatorVisibilityControlNode extends Node {
     this.addChild( indicatorVisibilityControlsVBox );
   }
 }
-
-massesAndSprings.register( 'IndicatorVisibilityControlNode', IndicatorVisibilityControlNode );
 
 export default IndicatorVisibilityControlNode;

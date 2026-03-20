@@ -6,11 +6,9 @@
  */
 
 import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 const SceneMode = EnumerationDeprecated.byKeys( [
   'SAME_LENGTH',
   'ADJUSTABLE_LENGTH'
 ] );
-massesAndSprings.register( 'SceneMode', SceneMode );
 export default SceneMode;

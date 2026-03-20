@@ -32,7 +32,6 @@ import Color from '../../../../scenery/js/util/Color.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import ColorConstants from '../../../../sun/js/ColorConstants.js';
 import Dialog from '../../../../sun/js/Dialog.js';
-import massesAndSprings from '../../massesAndSprings.js';
 import MassesAndSpringsStrings from '../../MassesAndSpringsStrings.js';
 import MassesAndSpringsConstants from '../MassesAndSpringsConstants.js';
 
@@ -311,5 +310,4 @@ class EnergyGraphAccordionBox extends AccordionBox {
   }
 }
 
-massesAndSprings.register( 'EnergyGraphAccordionBox', EnergyGraphAccordionBox );
 export default EnergyGraphAccordionBox;

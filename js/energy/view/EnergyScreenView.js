@@ -11,7 +11,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import MassesAndSpringsConstants from '../../common/MassesAndSpringsConstants.js';
 import OneSpringScreenView from '../../common/view/OneSpringScreenView.js';
-import massesAndSprings from '../../massesAndSprings.js';
 
 class EnergyScreenView extends OneSpringScreenView {
 
@@ -58,5 +57,4 @@ class EnergyScreenView extends OneSpringScreenView {
   }
 }
 
-massesAndSprings.register( 'EnergyScreenView', EnergyScreenView );
 export default EnergyScreenView;
