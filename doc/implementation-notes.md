@@ -4,7 +4,7 @@ This document contains notes that will be helpful to developers and future maint
 
 ## Model
 
-Start by reading the model description in https://github.com/phetsims/masses-and-springs/blob/main/doc/model.md
+Start by reading the model description in [model.md](model.md)
 
 The main model for this simulation is 'MassesAndSpringsModel', which contains the rest of the model components. The sim
 at its core has a set of mass objects and a set of spring objects. Once a mass is dragged near a spring’s bottom end it
